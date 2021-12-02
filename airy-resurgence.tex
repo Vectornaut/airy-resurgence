@@ -1,0 +1,70 @@
+\documentclass{article}
+
+\usepackage{ajf}
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\theoremstyle{plain}
+%%\newtheorem{obs}{Observation}
+\newtheorem{prop}{Proposition}
+
+% symbology
+\newcommand{\laplace}{\mathcal{L}}
+
+\title{Resurgence of the Airy function}
+\author{Aaron Fenyes}
+
+\begin{document}
+\maketitle
+\section{The Laplace transform}
+\subsection{Regularity and decay properties}
+The Laplace transform is defined by
+\[ [\mathcal{L}\hat{\varphi}](z) = \int_0^\infty e^{-z \zeta} \hat{\varphi}(\zeta)\;d\zeta. \]
+Recall that $O(g)$ is the space of functions $\varphi$ on $\R_{> 0}$ with $|\varphi| \lesssim g$. Let $\mathcal{E}$ be the space of subexponential functions: the intersection of $O(e^{cz})$ over all $c \in \R_{> 0}$. Observe that $\laplace$ maps $\mathcal{E}$ into $O(z^{-1})$.\footnote{For holomorphic functions, this is stated in Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.}
+
+If $\hat{\varphi}$ is $L^1$ and subexponential, $\laplace \varphi$ is holomorphic on the right half-plane \textbf{(Mitschi \& Sauzin, \S 5.6)}.
+%%Observe that $\laplace \hat{\varphi}$ is in $O(z^{-1})$ whenever $|\hat{\varphi}|$ grows polynomially along $\R_{\ge 0}$.
+\subsection{Action on differential equations}
+If $\hat{\varphi}$ is subexponential, we can use differentiation under the integral to show that \textbf{[Schiff, Theorem~1.34]}
+\[ \laplace (\zeta^n \hat{\varphi}) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace \hat{\varphi}. \]
+
+%%Let $\mathcal{R}$ be the space of functions on $\R_{\ge 0}$ that approach zero as you go rightward.
+Since $\C[z] + O(z^{-1})$ is a direct sum, there's a unique linear projection $\Lambda \maps \C[z] + O(z^{-1}) \to O(z^{-1})$. It extends uniquely to holomorphic functions defined on a neighborhood of $\R_{> 0}$. Integration by parts shows that
+\[ \laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = z^n\,\laplace \hat{\varphi} + p \]
+for some $p \in \C[z]$. Hence,
+\[ \laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = \Lambda (z^n\,\laplace \hat{\varphi}) \]
+whenever $\big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} \in \mathcal{E}$. It's useful here to note that if a function's derivative is subexponential, so is the function itself.\footnote{Say $f' \in O(e^{c\zeta})$. Since constant functions are subexponential, we can assume without loss of generality that $f(0) = 0$ \textbf{[watch out: $f$ may not extend continuously to $0$]}. Then \[ |f(\zeta)| = \left|\int_0^\zeta f(\tau)\,d\tau\right| \le \int_0^\zeta |f(\tau)|\,d\tau \lesssim \int_0^\zeta e^{c\tau}\,d\tau = \tfrac{1}{c}(e^{c\zeta} - 1) \lesssim e^{c\zeta}.\]}
+
+Explicitly, integration by parts gives the formula
+\begin{align*}
+\laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} & = z^n \laplace \hat{\varphi} - \left( \hat{\varphi}(0)\,z^{n-1} + \hat{\varphi}'(0)\,z^{n-2} + \hat{\varphi}''(0)\,z^{n-3} + \ldots + \hat{\varphi}^{(n-1)}(0) \right) \\
+& = z^n\,\laplace\left[ \hat{\varphi} - \left( \hat{\varphi}(0) + \hat{\varphi}'(0)\,\zeta + \tfrac{\hat{\varphi}''(0)}{2!}\,\zeta^2 + \ldots + \tfrac{\hat{\varphi}^{(n-1)}(0)}{(n-1)!}\,\zeta^{n-1} \right) \right].
+\end{align*}
+
+\textbf{[This argument only works for holomorphic $\hat{\varphi}$, but the formula can be proven more generally using integration by parts.]} If $\hat{\varphi}$ is in $L^1 \cap O(e^{cz})$ for some $c < 0$, then $\laplace \hat{\varphi}$ is holomorphic on the half-plane $\Re(z) > c$, so it can be written as a convergent power series around zero. Thinking about how $\Lambda$ acts on power series gives the well-known explicit formula
+\begin{align*}
+\laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} & = z^n\,\laplace\left[ \hat{\varphi} - \left( \hat{\varphi}(0) + \hat{\varphi}'(0)\,\zeta + \tfrac{\hat{\varphi}''(0)}{2!}\,\zeta^2 + \ldots + \tfrac{\hat{\varphi}^{(n-1)}(0)}{(n-1)!}\,\zeta^{n-1} \right) \right] \\
+& = z^n \laplace \hat{\varphi} - \left( \hat{\varphi}(0)\,z^{n-1} + \hat{\varphi}'(0)\,z^{n-2} + \hat{\varphi}''(0)\,z^{n-3} + \ldots + \hat{\varphi}^{(n-1)}(0) \right).
+\end{align*}
+
+%%Integration by parts shows that $\laplace \frac{\partial}{\partial \zeta} \hat{\varphi} = z\,\mathcal{L}\hat{\varphi} - \hat{\varphi}(0)$. Hence,
+%%\[ \Lambda \laplace \tfrac{\partial}{\partial \zeta} \hat{\varphi} = \Lambda(z\,\mathcal{L} \hat{\varphi}) \]
+%%More generally,
+%%\[ \laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = z^n\,\mathcal{L} \hat{\varphi} - \left(z^{n-1}\,\hat{\varphi}(0) + z^{n-2}\,\big[\tfrac{\partial}{\partial \zeta} \hat{\varphi}\big](0) + \ldots + \big[\big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \hat{\varphi}\big](0)\right), \]
+%%so
+%%\[ \Lambda \laplace \left(\tfrac{\partial}{\partial z}\right)^n \hat{\varphi} = \Lambda(\zeta^n\,\mathcal{L} \hat{\varphi}). \]
+%%\begin{obs}\label{back-poly}
+%%Suppose $P$ is a differential operator with polynomial coefficients. Then $Pf$ is a polynomial if and only if $f$ is.
+%%\end{obs}
+\begin{prop}
+Let $\varphi = \laplace \hat{\varphi}$, and let $p_1, \ldots, p_r,\;q_1, \ldots, q_r$ be polynomials. Suppose $\hat{\varphi}$ is subexponential. Then
+\[ P = p_1(z)\;q_1\big({-\tfrac{\partial}{\partial z}}\big) + \ldots + p_r(z)\;q_r\big({-\tfrac{\partial}{\partial z}}\big) \]
+annihilates $\varphi$ if and only if
+\[ \hat{P} = p_1\big(\tfrac{\partial}{\partial \zeta}\big)\;q_1(\zeta) + \ldots + p_r\big(\tfrac{\partial}{\partial \zeta})\;q_r(\zeta) \]
+annihilates $\hat{\varphi}$. \textbf{[?]}
+\end{prop}
+\begin{proof}
+Suppose $\hat{P} \hat{\varphi} = 0$. Taking the Laplace transform of both sides and using the identities above, we see that $\Lambda P \varphi = 0$. In other words, $P \varphi$ is a polynomial. \textbf{[\ldots?]}
+\end{proof}
+\end{document}
