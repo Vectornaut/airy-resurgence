@@ -23,12 +23,12 @@
 \subsection{Regularity and decay properties}
 The Laplace transform is defined by
 \[ [\mathcal{L}\hat{\varphi}](z) = \int_0^\infty e^{-z \zeta} \hat{\varphi}(\zeta)\;d\zeta. \]
-Recall that $O(g)$ is the space of functions $\varphi$ on $\posreal$ with $|\varphi| \lesssim g$. A function is {\em subexponential} if it's in $O(e^{cz})$ for all $c \in \posreal$. Let $\mathcal{E}$ be the space of subexponential functions on $\posreal$ which are $L^1$ both locally and around zero. Observe that $\laplace$ maps $\mathcal{E}$ into the space of holomorphic functions on the right half-plane~\cite[\S 5.6]{diverg-resurg-i} which restrict to $O(z^{-1})$ on $\posreal$ \cite[equation~1.8]{laplace-tfm}.\footnote{The argument cited still works in our generality. For holomorphic $\hat{\varphi}$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.}
+For $a \in [0, \infty]$, recall that recall that $O_a(g)$ is the space of functions $\varphi$ on $\posreal$ with $|\varphi| \lesssim g$ in some neighborhood of $a$. A function is {\em subexponential} if it's in $O_\infty(e^{cz})$ for all $c \in \posreal$. Let $\mathcal{E}$ be the space of subexponential functions on $\posreal$ which are $L^1$ both locally and around zero. The Laplace transform maps $\mathcal{E}$ into the space of holomorphic functions on the right half-plane~\cite[\S 5.6]{diverg-resurg-i}. If a function is in $O_0(1)$, its Laplace transform is in $O_\infty(z^{-1})$ \cite[equation~1.8]{laplace-tfm}.\footnote{The argument cited still works in our generality. For holomorphic $\hat{\varphi}$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.} More generally, if a function is in $O_0(\zeta^\alpha)$, with $\alpha > -1$, its Laplace transform is in $O_\infty(z^{-(\alpha + 1)})$.
 \subsection{Action on initial value problems}
 When $\hat{\varphi} \in \mathcal{E}$, we can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
 \[ \laplace (\zeta^n \hat{\varphi}) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace \hat{\varphi}. \]
 
-When $\hat{\varphi} \in C^n$ and $\big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} \in \mathcal{E}$, integration by parts gives the formula
+When $\hat{\varphi}$ is $n$ times differentiable, its $n$th derivative is in $\mathcal{E}$, and its zeroth through $(n - 1)$st derivatives extend continuously to zero, integration by parts gives the formula
 \begin{align*}
 \laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} & = z^n \laplace \hat{\varphi} - \left( \hat{\varphi}(0)\,z^{n-1} + \hat{\varphi}'(0)\,z^{n-2} + \hat{\varphi}''(0)\,z^{n-3} + \ldots + \hat{\varphi}^{(n-1)}(0) \right) \\
 & = z^n\,\laplace\left[ \hat{\varphi} - \left( \hat{\varphi}(0) + \hat{\varphi}'(0)\,\zeta + \tfrac{\hat{\varphi}''(0)}{2!}\,\zeta^2 + \ldots + \tfrac{\hat{\varphi}^{(n-1)}(0)}{(n-1)!}\,\zeta^{n-1} \right) \right].
@@ -56,30 +56,52 @@ We can distill the most interesting part of the Airy function by writing
 where
 \[ K(z) = \frac{\sqrt{3}}{i} \int_{z^{-1/3}\Gamma_0} \exp\left[z \left(4u^3 - 3u\right)\right]\,du. \]
 Saying that $\Ai$ satisfies the Airy equation is equivalent to saying that $K$ satisfies the modified Bessel equation
-\begin{equation}\label{eqn:modbessel}
-\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \big(\tfrac{\partial}{\partial z}\big) - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = 0.
+\begin{equation}\label{eqn:mod-bessel}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = 0.
 \end{equation}
 In fact, $K$ is the modified Bessel function $K_{1/3}$~\cite[equation~9.6.1]{dlmf}.
-\subsection{Taking the Laplace transform}
-Tentatively (there's some details with initial values to work out),
-\[ \big(\zeta^2 - 1\big) \hat{K}'' + 3\zeta \hat{K}' + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\hat{K} = 0. \]
-With the change of variable $\xi = \tfrac{1}{2}(1-\zeta)$, this becomes \textbf{[...]}
+\subsection{Going to the spatial domain}
+Let's find a function $\hat{K}$ with $K = \laplace \hat{K}$, which is unique if it exists~\cite[Theorem~1.23]{laplace-tfm}. If a function $\hat{\varphi}$ satisfies the equation
+\begin{equation}\label{eqn:spatial-mod-bessel}
+\left[\big(\zeta^2 - 1\big) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0,
+\end{equation}
+its Laplace transform $\varphi = \laplace \hat{\varphi}$ satisfies the equation
+\begin{align*}
+\left[\big({-\tfrac{\partial}{\partial z}}\big)^2 - 1\right] \Big[z^2 \varphi - \Big(\hat{\varphi}(0)\,z + \hat{\varphi}'(0)\Big)\Big] + 3\big({-\tfrac{\partial}{\partial z}}\big)\Big[z\varphi - \hat{\varphi}(0)\Big] + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0 \\
+\big(\tfrac{\partial}{\partial z}\big)^2 \big[z^2 \varphi\big] - \Big[z^2 \varphi - \Big(\hat{\varphi}(0)\,z + \hat{\varphi}'(0)\Big)\Big] - 3\big(\tfrac{\partial}{\partial z}\big)\big[z\varphi\big] + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0 \\
+\Big[2 + 4z\tfrac{\partial}{\partial z} + z^2\big(\tfrac{\partial}{\partial z}\big)^2\Big]\varphi - \Big[z^2 \varphi - \Big(\hat{\varphi}(0)\,z + \hat{\varphi}'(0)\Big)\Big] - 3\Big[1 + z\tfrac{\partial}{\partial z}\Big]\varphi + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0,
+\end{align*}
+which simplifies to
+\begin{equation}\label{eqn:inhomog-mod-bessel}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = -\Big(\hat{\varphi}(0)\,z + \hat{\varphi}'(0)\Big).
+\end{equation}
+Noticing that equation~\ref{eqn:inhomog-mod-bessel} is an inhomogeneous version of equation~\ref{eqn:mod-bessel}, we
+
+This suggests that $\hat{K}$ could be a solution of equation~\ref{eqn:spatial-mod-bessel} that vanishes through first degree at $\zeta = 0$.
+
+With the change of variable $\xi = \tfrac{1}{2}(1-\zeta)$, equation~\ref{eqn:spatial-mod-bessel} becomes the hypergeometric equation
+\begin{equation}\label{eqn:hypergeom}
+\left[\xi(1 - \xi) \big(\tfrac{\partial}{\partial \xi}\big)^2 + 3(\tfrac{1}{2} - \xi) \tfrac{\partial}{\partial \xi} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0.
+\end{equation}
+\textbf{[...]}
 
 The hypergeometric function
 \[ F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) \]
-satisfies the same equation as $\hat{K}$ by definition. Using DLMF~15.10.13, we can see that
+satisfies equation~\ref{eqn:hypergeom} by definition. It has a singularity of type $\xi^{-1/2}$ at $\xi = 0$, and continues holomorphically to the rest of $\C$. Using DLMF~15.10.13, we can see that
 \[ F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big). \]
-\textbf{Our desired solution has the 0th- and 1st-degree Taylor coefficients in a particular ratio. It should be given by a constant multiple of}
+also satisies equation~\ref{eqn:hypergeom}. It has a singularity of type $(1 - \xi)^{-1/2}$ at $\xi = 1$, and continues holomorphically to the rest of $\C$.
+
+\textbf{[\ldots]} Our desired solution should be given by a constant multiple of
 \[ F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) - F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big). \]
 The quadratic transformation identity DLMF~15.8.27 then shows that
 \[ \hat{K} \propto F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big). \]
 
-Using the DLMF identities 15.10.11 and 15.10.14, we can see that the functions
+Using the DLMF identities 15.10.12 and 15.10.14, we can see that the functions
 \begin{align*}
-& (1-\xi)^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big) \\
-& (1-\xi)^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi\big)
+\xi^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big) \\
+(1-\xi)^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi\big)
 \end{align*}
-also satisfy the same hypergeometric equation as $\hat{K}$.
+also satisfy equation~\ref{eqn:hypergeom}. Numerically, these functions appear to sum to a constant multiple of $\hat{K}$.
 \subsection{Correspondence with Mari\~{n}o's series}
 Let $f_1(z)$ be the holomorphic function corresponding to Mari\~{n}o's formal power series $\varphi_1(z^{-1})$. The formal power series corresponding to $f$ will be written in the variable $z$.
 
