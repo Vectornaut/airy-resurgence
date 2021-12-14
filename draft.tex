@@ -1,0 +1,412 @@
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\documentclass[11pt,a4paper,twoside,leqno,noamsfonts]{amsart}
+           \usepackage{setspace}
+\linespread{1.34}           
+           %\onehalfspacing
+\usepackage[english]{babel}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\usepackage[utopia]{mathdesign}
+    \DeclareSymbolFont{usualmathcal}{OMS}{cmsy}{m}{n}
+    \DeclareSymbolFontAlphabet{\mathcal}{usualmathcal}
+\usepackage[a4paper,top=4cm,bottom=3cm,left=3.5cm,
+           right=3.5cm,bindingoffset=5mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{braket,caption,comment,mathtools,stmaryrd}
+\usepackage{multirow,booktabs,microtype}
+\usepackage{latexsym}
+\usepackage{todonotes}
+\usepackage{fancyhdr}
+%\renewcommand{\sectionmark}[1]{\markboth{\thesection\ #1}{}}
+\pagestyle{fancy}
+% Clear the header and footer
+\fancyhead{}
+\fancyfoot{}
+% Set the right side of the footer to be the page number
+\fancyfoot[R]{\thepage}
+\addtolength{\headheight}{\baselineskip}
+%\fancyhead[RE]{\rightmark}
+%\fancyhead[RE]{}
+\usepackage{soul} % per testo barrato
+\usepackage[colorlinks,bookmarks]{hyperref} %
+\hypersetup{colorlinks,%
+            citecolor=britishracinggreen,%
+            filecolor=black,%
+            linkcolor=cobalt,%
+            urlcolor=black}
+\setcounter{tocdepth}{2}
+%\setcounter{section}{-1}
+\numberwithin{equation}{section}
+\input{command}
+\DeclareRobustCommand{\subtitle}[1]{\\#1}
+\title[Exponential Integrals]{Exponential Integrals\\ [1ex]
+  }
+
+\author{
+Veronica Fantini 
+}
+%\address{SISSA Trieste, Via Bonomea 265, 34136 Trieste, Italy}
+%\email{ vfantini@sissa.it}
+%
+\begin{document}
+\hbadness=150
+\vbadness=150
+%
+%\begin{abstract}
+%We show how wall-crossing formulas in coupled $2d$-$4d$ systems, introduced by Gaiotto, Moore and Neitzke, can be interpreted geometrically in terms of the deformation theory of holomorphic pairs, given by a complex manifold together with a holomorphic vector bundle. The main part of the paper studies the relation between scattering diagrams and deformations of holomorphic pairs, building on recent work by Chan, Conan Leung and Ma.      
+%\end{abstract}
+%
+\maketitle
+%
+%
+%
+{
+\hypersetup{linkcolor=black}
+\tableofcontents}
+
+\section{Introduction}
+
+%\begin{example}[Airy]
+%The Airy equation is 
+%\begin{equation}
+%y''=xy
+%\end{equation}
+% and a system of solutions is given by (see DMLF) 
+%
+%\begin{align*}
+%&Ai(x)=\frac{1}{2\pi i}\int_{\infty e^{-i\pi/3}}^{\infty e^{i\pi/3}}e^{t^3/3-xt}dt\\
+%&Bi(x)=\frac{1}{2\pi}\int_{-\infty}^{\infty e^{-i\pi/3}}e^{t^3/3-xt}dt+\frac{1}{2\pi}\int_{-\infty}^{\infty e^{i\pi/3}}e^{t^3/3-xt}dt
+%\end{align*}
+%
+%
+%
+%Let $\psi(x)\defeq\sum_{n\geq 0}a_nx^{-n}$ be the asymptotic expansion of $Ai(x)$ as $x\to\infty$: from DMLF and Sauzin
+%
+%\begin{equation}
+%Ai(x)\sim \frac{e^{-2/3x^{3/2}}}{2\sqrt{\pi}x^{1/4}}\sum_{n\geq 0}(-1)^n\frac{1}{2^{n+1}\pi n!}\Gamma\left(n+\frac{5}{6}\right)\Gamma\left(n+\frac{1}{6}\right)\left(\frac{3}{2}x^{-3/2}\right)^n
+%\end{equation}
+%and $a_n\defeq (-1)^n\frac{1}{2\pi n!}\Gamma\left(n+\frac{5}{6}\right)\Gamma\left(n+\frac{1}{6}\right)\left(\frac{3}{4}\right)^n$. Analougusly, let $\varphi(x)\defeq\sum_{n\geq 0}b_nx^{-n}$ be the asymptotic expansion of $Bi(x)$ as $x\to\infty$: from DMLF and Sauzin
+%
+%\begin{equation}
+%Bi(x)\sim \frac{e^{2/3x^{3/2}}}{\sqrt{\pi}x^{1/4}}\sum_{n\geq 0}\frac{1}{2^{n+1}\pi n!}\Gamma\left(n+\frac{5}{6}\right)\Gamma\left(n+\frac{1}{6}\right)\left(\frac{3}{2}x^{-3/2}\right)^n
+%\end{equation}
+%
+%and $b_n\defeq \frac{1}{2\pi n!}\Gamma\left(n+\frac{5}{6}\right)\Gamma\left(n+\frac{1}{6}\right)\left(\frac{3}{4}\right)^n$.
+%\begin{prop}
+%$\psi(x)$ and $\varphi(x)$ are resurgent series.
+%\end{prop}
+%\begin{proof}
+%Let $\hat{\psi}(\zeta)=\frac{1}{2\pi}\sum_{n\geq 0}a_{n-1}\frac{\zeta^n}{(n-1)!}$, mathematica says 
+%\begin{equation}
+%\hat{\psi}(\zeta)=-\frac{5}{48} F_1(7/6,11/6,2,-3/4\zeta)
+%\end{equation}
+%which has a log singularity at $\zeta=-4/3$, namely 
+%\begin{equation}
+%\hat{\psi}(\zeta+4/3)=\log(\zeta)\hat{\psi}_{-4/3}(\zeta)+\text{hol.fct}
+%\end{equation}
+%where $\hat{\psi}_{-4/3}(\zeta)$ is holomorphic in a neighbourhood of the origin. In particular, $\hat{\psi}_{-4/3}(\zeta)=-\frac{1}{2}\varphi(\zeta)$.    
+%Now, let $\hat{\varphi}(\zeta)=\frac{1}{2\pi}\sum_{n\geq 0}b_{n-1}\frac{\zeta^n}{(n-1)!}$, mathematica says 
+%\begin{equation}
+%\hat{\varphi}(\zeta)=\frac{5}{48} F_1(7/6,11/6,2,3/4\zeta)
+%\end{equation}
+%which has a log singularity at $\zeta=4/3$, namely 
+%\begin{equation}
+%\hat{\varphi}(\zeta-4/3)=\log(\zeta)\hat{\varphi}_{4/3}(\zeta)+\text{hol.fct}
+%\end{equation}
+%where $\hat{\varphi}_{4/3}(\zeta)$ is holomorphic in a neighbourhood of the origin. In particular, $\hat{\varphi}_{4/3}(\zeta)=\frac{1}{2}\psi(\zeta)$.    
+%\end{proof}
+%
+%Comment on the asymptotic expansion of $Ai(x)$ and $Bi(x)$: the prepared form of the Airy equation is obtained after the change of coordinates $z=x^{3/2}$ and it reads
+%
+%\begin{equation}\label{prepform}
+%y''(z)+\frac{y'(z)}{3z}=\frac{4}{9}y(z)
+%\end{equation} 
+%
+%In particular, its Borel trasform is 
+%\begin{equation}
+%\zeta^2\hat{y}-\frac{1}{3}\ast (\zeta\hat{y})=\frac{4}{9}\hat{y}
+%\end{equation}
+%and we read the singularity of the Borel transform as solution of $z^2-4/9=0$, which are $z=\pm 2/3$. These are indeed the exponent of the exponential factor in the asymptotic of $Ai(z)$ and $Bi(z)$ respectively.  
+%
+%Alternatively, from the theory of ODE we can look for a solution of \eqref{prepform} of the form
+%\begin{equation}
+%y(z)=\sum_{k\in\Z^2}U^ke^{-k\cdot\lambda z}z^{-\tau\cdot k}w_{k}(z)
+%\end{equation} 
+%where $\lambda=(\lambda_1,\lambda_2)$ with $\lambda_i^2-4/9=0$, $\tau=(\tau_1,\tau_2)$ with $\tau_i=1/6$ and $w_k(z)\in\C[[z^{-1}]]$ is a formal series. Plugging in the ansatz in \eqref{prepform}, we fins that the only non zero solutions $w_k$ occurs for $k=(1,0)$ and $k=(0,1)$, meaning that the formal integral of the Airy equation is given by 
+%\begin{equation}
+%y(z)=U_1e^{-2/3z}z^{-1/6}w_{(1,0)}(z)+U_2e^{2/3z}z^{-1/6}w_{(0,1)}(z).
+%\end{equation}
+%The latter expression can be compared with the asymptotic behaviour of $Ai(z)+Bi(z)$ as $z\to\infty$. In particular, $w_{k}$ solves the following homogeneus equation:
+%\begin{align*}
+%\left(\partial_z^2-\frac{4}{3}\partial_z+\frac{5}{36z^2}\right)w_{(1,0)}=0\\
+%\left(\partial_z^2+\frac{4}{3}\partial_z+\frac{5}{36z^2}\right)w_{(0,1)}=0
+%\end{align*}
+%Assuming $w_{(1,0)}=1+\sum_{n\geq 1}a_n^+z^{-n}$ and $w_{(0,1)}=1+\sum_{n\geq 1}a_n^-z^{-n}$ we get \[a_n^+=(-1)^n\left(\frac{3}{4}\right)^n\frac{\Gamma(n+\frac{1}{6})\Gamma(n+\frac{5}{6})}{2\pi n!}=a_n\] and \[a_n^-=\left(\frac{3}{4}\right)^n\frac{\Gamma(n+\frac{1}{6})\Gamma(n+\frac{5}{6})}{2\pi n!}=b_n.\] 
+%
+%Now, we investigate the exponential integral
+%\begin{equation}
+%I(z)\defeq\int_{\Gamma} \exp(-z\left(\frac{x^3}{3}-x\right))dx
+%\end{equation}
+%where $\Gamma$ is a suitable countour. By simple computation we notice that $I(z)=-2\pi iz^{-1/3}Ai(x)$ (where $z=x^{3/2}$). In particular, $I(z)$ is a solution of 
+%\begin{equation}\label{eq:Iold}
+%I''-\frac{4}{9}I+\frac{I'}{z}-\frac{1}{9}\frac{I}{z^2}=0
+%\end{equation} 
+% The Borel trasform of $\hat{I}(z)$ can be computed directly from the equation \eqref{eq:I}, namely the Borel transform of equation \eqref{eq:I} is
+%\begin{equation}
+%\zeta^2 \hat{I}-\frac{4}{9}\hat{I}-1\ast\zeta\hat{I}-\frac{1}{9}\zeta\ast\hat{I}=0
+%\end{equation} 
+%\begin{equation}
+%\zeta^2 \hat{I}-\frac{4}{9}\hat{I}-\int_0^\zeta\zeta'\hat{I}(\zeta')d\zeta '-\frac{1}{9}\int_0^\zeta(\zeta-\zeta')\hat{I}(\zeta')d\zeta'=0
+%\end{equation} 
+%\begin{align*}
+%2\zeta\hat{I}+\zeta^2\hat{I}'-\frac{4}{9}\hat{I}'-\zeta\hat{I}-\frac{1}{9}\int_0^\zeta\hat{I}(\zeta')d\zeta'=0\\
+%\hat{I}+\zeta\hat{I}'+2\zeta\hat{I}'+\zeta^2\hat{I}''-\frac{4}{9}\hat{I}''-\frac{1}{9}\hat{I}=0
+%\end{align*}
+%\begin{equation}
+%(\zeta^2-\frac{4}{9})\hat{I}''+3\zeta\hat{I}'+(1-\frac{1}{9})\hat{I}=0
+%\end{equation} 
+%and for some costants $c_1,c_2\in\C$ the solutions are
+%\begin{equation}
+%\hat{I}(\zeta)=\frac{9\zeta c_1}{4\sqrt{\frac{4}{9}-\zeta^2}}+c_2
+%\end{equation}  
+%\end{example}
+%\textcolor{red}{Is $F_1(7/6,11/6,2,3/4\zeta)$ algebraic?}
+
+\section{Resurgence of exponential integrals}
+
+
+Let $X$ be a $N-\dim$ manifold, $f\colon X\to\C$ be a holomorphic Morse function with only simple critical points, and $\nu\in\Gamma(X,\Omega^N)$, and set 
+
+\begin{equation}
+I(z)\defeq\int_{\mathcal{C}}e^{-zf}\nu
+\end{equation}
+where $\mathcal{C}$ is a suitable countur such that the integralis well defined.  
+For any Morse cirtial points $x_\alpha$ of $f$, the saddle point approximation gives the following formal series 
+\begin{equation}
+I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n}.
+\end{equation}
+\begin{theorem}\label{thm:maxim} Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$
+\begin{enumerate}
+\item $\tilde{\varphi}_\alpha$ is Gevrey-1;
+\item $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ is a germ of analytic function at $\zeta=\zeta_{\alpha}=f(x_\alpha)$;
+\item the following formual holds true
+\begin{multline}\label{formula1}
+\hat{\varphi}_{\alpha}(\zeta)=\partial^{N/2}_{\zeta, \text{based at }\zeta_\alpha}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)=\Gamma(-N/2)\int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-N/2}\int_{f^{-1}(\zeta')}\frac{\nu}{df} d\zeta'
+\end{multline} 
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+Let $\alpha\in (0,1)$, then the $\alpha$-Caputo's derivative of a smooth fucntion $f$ is defined as
+\begin{equation}
+\partial_x^{\alpha}f(x)\defeq\frac{1}{\Gamma(1-\alpha)}\int_0^x(x-s)^{-\alpha}f^{'}(s)ds
+\end{equation}
+\end{definition}
+
+\begin{example}[Airy]
+Let $f(t)=\frac{t^3}{3}-t$ and \[I(z)\defeq\int_{\gamma} e^{-zf(t)}\text{dt}\]
+where $\gamma$ is a countour where the integral is well defined. 
+
+By the change of coordinates $z=x^{3/2}$, $I(z)=-2\pi iz^{-1/3}Ai(x)$ where \[Ai(x)\defeq \frac{1}{2\pi i}\int_{-\infty e^{-i\frac{\pi}{3}}}^{\infty e^{i\frac{\pi}{3}}} e^{\frac{t^3}{3}-zt}\text{dt}\] 
+hence $I(z)$ solves the following ODE\footnote{$Ai(x)$ solves the Airy equation $y''=xy$.}
+\begin{equation}\label{eq:I}
+I''(z)-\frac{4}{9}I(z)+\frac{I'(z)}{z}-\frac{1}{9}\frac{I(z)}{z^2}=0
+\end{equation}
+A formal solution of \eqref{eq:I} can be computed by making the following ansatz 
+\begin{equation}
+\tilde{I}(z)=\sum_{k\in\N^2}U^ke^{-\lambda\cdot k z}z^{-\tau\cdot k}w_k(z)
+\end{equation}
+with $U^{(k_1,k_2)}=U_1^{k_1}U_2^{k_2}$ and $U_1,U_2\in\C$ are constant parameter, $\lambda=(\frac{2}{3},-\frac{2}{3})$, $\tau=(\frac{1}{2},\frac{1}{2})$, and $\tilde{w}_k(z)\in\C[[z^{-1}]]$. In addition, we can check that the only non zero $\tilde{w}_k(z)$ occurs at $k=(1,0)$ and $k=(0,1)$, therefore
+\begin{equation}
+\tilde{I}(z)=U_1e^{-2/3z}z^{-1/2}\tilde{w}_{+}(z)+U_2e^{2/3z}z^{-1/2}\tilde{w}_{-}(z)
+\end{equation}  
+where from now on we denote $\tilde{w}_+(z)=\tilde{w}_{(1,0)}(z)$ and $\tilde{w}_-(z)=\tilde{w}_{(0,1)}(z)$. In particular, $\tilde{w}_+(z)$ and $\tilde{w}_-(z)$ are formal solution of 
+\begin{align}
+\label{eq:w+} \tilde{w}_+''-\frac{4}{3}\tilde{w}_+'+\frac{5}{36}\frac{\tilde{w}_+}{z^2}=0\\
+\label{eq:w-} \tilde{w}_-''+\frac{4}{3}\tilde{w}_-'+\frac{5}{36}\frac{\tilde{w}_-}{z^2}=0
+\end{align}
+Taking the Borel transform of \eqref{eq:w+}, \eqref{eq:w-} we get
+\begin{align*}
+&\zeta^2\hat{w}_{+}(\zeta)+\frac{4}{3}\zeta\hat{w}_{+}+\frac{5}{36}\zeta\ast\hat{w}_{+}=0\\
+&\zeta^2\hat{w}_{+}(\zeta)+\frac{4}{3}\zeta\hat{w}_{+}+\frac{5}{36}\int_0^\zeta(\zeta-\zeta')\hat{w}_{+}(\zeta')d\zeta'=0
+\end{align*}
+\begin{align*}
+&\zeta^2\hat{w}_{-}(\zeta)-\frac{4}{3}\zeta\hat{w}_{-}+\frac{5}{36}\zeta\ast\hat{w}_{-}=0\\
+&\zeta^2\hat{w}_{-}(\zeta)-\frac{4}{3}\zeta\hat{w}_{-}+\frac{5}{36}\int_0^\zeta(\zeta-\zeta')\hat{w}_{-}(\zeta')d\zeta'=0
+\end{align*}
+and taking derivatives we get
+\begin{align*}
+&\zeta(\frac{4}{3}+ \zeta)\hat{w}_{+}''+(\frac{8}{3}+4\zeta)\hat{w}_+'+\frac{77}{36}\hat{w}_{+}=0 & \\
+&\frac{4}{3}\zeta( 1+ \frac{3}{4}\zeta)\hat{w}_{+}''+(\frac{8}{3}+4\zeta)\hat{w}_+'+\frac{77}{36}\hat{w}_{+}=0 & \\
+&\qquad u(1-u)\hat{w}_+''(u)+(2-4u)\hat{w}_+'(u)-\frac{77}{36}\hat{w}_+(u)=0 & u=-\frac{3}{4}\zeta\\
+%&\qquad u(1-u)\hat{w}_-''(u)+(2-4u)\hat{w}_-'(u)-\frac{77}{36}\hat{w}_-(u) & u=\frac{3}{4}\zeta
+\end{align*} 
+\begin{align*}
+&\zeta(-\frac{4}{3}+ \zeta)\hat{w}_{-}''+(-\frac{8}{3}+4\zeta)\hat{w}_-'+\frac{77}{36}\hat{w}_{-}=0 & \\
+&\frac{4}{3}\zeta(-1+ \frac{3}{4}\zeta)\hat{w}_{-}''+(-\frac{8}{3}+4\zeta)\hat{w}_-'+\frac{77}{36}\hat{w}_{-}=0 & \\
+&\qquad u(1-u)\hat{w}_-''(u)+(2-4u)\hat{w}_-'(u)-\frac{77}{36}\hat{w}(u) & u=\frac{3}{4}\zeta
+\end{align*} 
+Notice that the latter equations are hypergeometric, hence a solution is given by 
+\begin{align}
+\label{hat+}\hat{w}_+(\zeta)=\mathit{c}_1 \, {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,-\frac{3}{4}\zeta\right)\\
+\label{hat-}\hat{w}_-(\zeta)=\mathit{c}_2 \, {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,\frac{3}{4}\zeta\right)
+\end{align}
+for some constants $\mathit{c}_1, \mathit{c}_2\in\C$ (see DMLF 15.10.2). In addition $\hat{w}_{\pm}(\zeta)$ have a log singularity respectively at $\zeta=\mp\frac{4}{3}$, therefore they are $\lbrace\mp\frac{4}{3}\rbrace $-resurgent functions.\footnote{The solution we find are equal to the ones in DMLF $\mathsection 9.7$. They also agree with slide 10 of Maxim's talk for ERC and with the series (6.121) in Sauzin's book. However they do not agree with (2.16) in Mari\~no's Diablerets.}
+
+\begin{remark}
+$\hat{w}_{+}(\zeta)$ is Laplace summable along the positive real axis, and it can be analyticaly continued on $\C\setminus -\frac{4}{3}\R_{\geq 0}$ with 
+\begin{align*}
+\hat{w}_+(\zeta+i0)-\hat{w}_+(\zeta-i0)&=\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\sum_{k\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1+\frac{3}{4}\zeta)^n &\zeta<-\frac{4}{3}\\
+&=\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\left(\frac{5}{144} (4 + 3 \zeta){}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1+\frac{3}{4}\zeta\right)\right) &\\
+&=\mathbf{-i}\,\,{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1+\frac{3}{4}\zeta\right) &\\
+&=\mathbf{-i}\hat{w}_{-}(\zeta+\frac{4}{3}) &
+\end{align*}
+Anolougusly, $\hat{w}_-(\zeta)$ is Laplace summable along the negative real axis, and it jums across the branch cut $\frac{4}{3}\R_{\geq 0}$ as 
+\begin{align*}
+\hat{w}_-(\zeta+i0)-\hat{w}_-(\zeta-i0)&=\textcolor{red}{-}\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\sum_{k\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1-\frac{3}{4}\zeta)^n & \zeta>\frac{4}{3}\\
+&=\textcolor{red}{-}\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\left(-\frac{5}{144} (-4 + 3 \zeta){}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right)\right) &\\
+&=\textcolor{red}{\mathbf{i}}\,\,{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right) &\\
+&=\textcolor{red}{\mathbf{i}}\hat{w}_{+}(\zeta-\frac{4}{3}) &
+\end{align*}
+These relations manifest the resurgence property of $\tilde{I}$, indeed near the singularities in the Borel plane of either $\hat{w}_+$ or $\hat{w}_-$, $\hat{w}_-$ and $\hat{w}_+$ respectively contribute to the jump of the former solution.  
+\end{remark}
+
+%\begin{remark}
+%In \cite{Marino-diableret}, Mari\~{n}o studies the example of the Airy function and its resurgent properties. According to his notation
+%\begin{equation}
+%Ai(x)=\frac{1}{2x^{1/4}\sqrt{\pi}}e^{-\frac{2}{3}x^{3/2}}\varphi_1(x^{-3/2})
+%\end{equation}
+%\begin{equation}
+%Bi(x)=\frac{1}{2x^{1/4}\sqrt{\pi}}e^{\frac{2}{3}x^{3/2}}\varphi_2(x^{-3/2})
+%\end{equation}
+%with \[\varphi_{1,2}(z)=\sum_{k\geq 0}\frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^k\frac{\Gamma\left(k+\frac{1}{6}\right)\Gamma\left(k+\frac{5}{6}\right)}{k!}z^k.\]
+%In particular, the Borel transform of $\varphi_1(z)$ and $\varphi_2(z)$ are respectively 
+%\begin{align}
+%\label{Marino_hat}
+%\hat{\varphi}_1(\zeta)&={}_1F_2\left(\frac{1}{6},\frac{5}{6};1;-\frac{3}{4}\zeta\right)\\
+%\label{Marino_hat2}\hat{\varphi}_2(\zeta)&={}_1F_2\left(\frac{1}{6},\frac{5}{6};1;\frac{3}{4}\zeta\right)
+%\end{align} 
+% In particular, we notice that $\hat{w}_+(\zeta)$ and $\hat{w}_-(\zeta)$ in \eqref{eq:w+}, \eqref{eq:w-} are (up to a constant) the first derivatives of
+%\begin{align*}
+%\hat{w}_+(\zeta)&\propto\frac{\dd}{\dd\zeta}\hat{\varphi}_1(\zeta)\\
+%\hat{w}_-(\zeta)&\propto\frac{\dd}{\dd\zeta}\hat{\varphi}_2(\zeta)
+%\end{align*} 
+%\end{remark}
+
+Our next goal is to prove that the Borel transform of $\tilde{I}(z)$ can be written in terms of $1/f'(f^{-1}(\zeta))$, namely formula \eqref{formula1}. First of all we define $\tilde{u}(z)\defeq z^{1/2}\tilde{I}(z)$ which is a solution of $\hat{\varphi}_{1}(\zeta)$ and $\hat{\varphi}_{2}(\zeta)$:
+
+\begin{equation}\label{eq:u}
+\tilde{u}''(z)-\frac{4}{9}\tilde{u}(z)+\frac{5}{36}\frac{\tilde{u}(z)}{z^2}=0
+\end{equation} 
+
+As a consequence, the Borel transform $\hat{u}(\zeta)$ solves 
+\begin{align*}
+&\zeta^2\hat{u}-\frac{4}{9}\hat{u}+\frac{5}{36}\zeta\ast\hat{u}\\
+&\zeta^2\hat{u}-\frac{4}{9}\hat{u}+\frac{5}{36}\int_0^\zeta(\zeta-\zeta')\hat{u}(\zeta')d\zeta'\\
+&\text{taking derivatives is equivalent to} \\
+&(\zeta^2-\frac{4}{9})\hat{u}''(\zeta)+4\zeta\hat{u}'(\zeta)+\frac{77}{36}\hat{u}(\zeta)=0
+\end{align*}
+
+and Mathematica gives the following solutions
+\begin{align*}
+\hat{u}(\zeta)&=c_1 \, {}_{1}F_{2}\left(\frac{7}{12},\frac{11}{12},\frac{1}{2},\frac{9}{4}\zeta^2\right) +\frac{3i}{2}\zeta c_2 \, {}_{1}F_{2}\left(\frac{13}{12},\frac{17}{12},\frac{3}{2},\frac{9}{4}\zeta^2\right)= &\\
+&=c_1\frac{\Gamma(\frac{13}{12})\Gamma(\frac{17}{12})}{2\sqrt{\pi}}\left({}_{1}F_{2}\left(\frac{7}{12},\frac{11}{12},\frac{1}{2},\frac{1}{2}-\frac{3}{4}\zeta\right)- {}_{1}F_{2}\left(\frac{7}{12},\frac{11}{12},\frac{1}{2},\frac{1}{2}+\frac{3}{4}\zeta\right)\right) & \text{see DMLF 15.8.27} \\
+&\qquad +\frac{3i}{2}\zeta c_2 \left(\frac{\Gamma(\frac{7}{12})\Gamma(\frac{11}{12})}{3\zeta\Gamma(-\frac{1}{2})\Gamma(2)}\right)\left( {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},{2},\frac{1}{2}-\frac{3}{4}\zeta\right)-{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},{2},\frac{1}{2}+\frac{3}{4}\zeta\right)\right)  & \text{see DMLF 15.8.28}\\
+&=\left(c_1\frac{\Gamma(\frac{13}{12})\Gamma(\frac{17}{12})}{2\sqrt{\pi}} -c_2i\frac{\Gamma(\frac{7}{12})\Gamma(\frac{11}{12})}{4\sqrt{\pi}}\right)\, {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,\frac{1}{2}-\frac{3}{4}\zeta\right)  + & \\
+&\qquad\qquad +\left(c_1\frac{\Gamma(\frac{13}{12})\Gamma(\frac{17}{12})}{2\sqrt{\pi}} +c_2i\frac{\Gamma(\frac{7}{12})\Gamma(\frac{11}{12})}{4\sqrt{\pi}}\right)\, {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,\frac{1}{2}+\frac{3}{4}\zeta\right) &  
+\end{align*}
+\begin{align*}
+\hat{u}(\zeta)&=C_1 T_{-2/3} {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,-\frac{3}{4}\zeta\right)+ C_2 T_{2/3} {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,\frac{3}{4}\zeta\right) & \\
+&=C_1 T_{-2/3}\hat{w}_+(\zeta)+C_2 T_{2/3}\hat{w}_-(\zeta) & \\
+%&=C_3 T_{-2/3}\textcolor{red}{\left(\frac{3}{2\sqrt{\zeta}}\right)^{-1}\partial^{1/2}_{\zeta} {}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},-\frac{3}{4}\zeta\right)}+ C_4\textcolor{red}{\left(\frac{3}{2\sqrt{\zeta}}\right)^{-1}\partial^{1/2}_\zeta {}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},\frac{3}{4}\zeta\right)}
+\end{align*}
+
+Using properties of Caputo's $1/2$-derivative we would like to express $\hat{w}_{\pm}(\zeta)$ as the $1/2$-derivatives of other hypergeometric series. From the integral representation of hypergeomtric functions (see DMLF 15.6.1)
+
+\begin{align*}
+{}_2F_1\left(\frac{7}{6},\frac{11}{6},2,-\frac{3}{4}\zeta\right)&=\frac{3}{5\pi}\int_0^1t^{5/6}(1-t)^{-5/6}(1+\frac{3}{4}\zeta t)^{-7/6}dt & |u|<\frac{4}{3}\\
+&=\frac{3}{5\pi}\zeta^{-1}\int_0^{\zeta}u^{5/6}(\zeta-u)^{-5/6}(1+\frac{3}{4}u)^{-7/6}du &u=\zeta t\\
+&=\frac{3}{5\pi}\int_0^{\zeta}(\zeta-u)^{-1/2}\left(\zeta^{-1/2}(1-\frac{u}{\zeta})^{-1/3}\left(\frac{u}{\zeta}\right)^{5/6}(1+\frac{3}{4}u)^{-7/6}\right)du & \\
+&=\frac{3}{5\sqrt{\pi}}\frac{1}{\Gamma(1/2)}\int_0^{\zeta}(\zeta-u)^{-1/2}\left(\zeta^{-1/2}(1-\frac{u}{\zeta})^{-1/3}\left(\frac{u}{\zeta}\right)^{5/6}(1+\frac{3}{4}u)^{-7/6}\right)du & 
+%&=\textcolor{blue}{\frac{3}{5\sqrt{\pi}}\frac{1}{\Gamma(1/2)}\int_0^{\zeta}(\zeta-u)^{-1/2}\frac{1}{f'(f^{-1}(u))} du } & \\
+%&=\textcolor{blue}{\frac{3}{5\sqrt{\pi}}\zeta^{-1}\partial_{\zeta}^{1/2}f^{-1}(\zeta)} &  
+\end{align*}
+For formula \eqref{formula1} to hold true we must have
+\begin{equation}\label{claim}
+\frac{3}{5\sqrt{\pi}}\left(\zeta^{-1/2}(1-\frac{u}{\zeta})^{-1/3}\left(\frac{u}{\zeta}\right)^{5/6}(1+\frac{3}{4}u)^{-7/6}\right)= \frac{1}{f'(f^{-1}(u))}
+\end{equation}  
+however, $\frac{1}{f'(f^{-1}(u))}$ does not depend on $\zeta$, thus \eqref{claim} is false, and the Airy exponential integral is a counter example of the formula \eqref{formula1}.   
+%thus, we would like to see $\int_0^u(\zeta-t)^{-1/3}t^{5/6}(1+\frac{3}{4}t)^{-7/6}dt$ as the product of first derivatives of an hypergeomtric function and un unknown function $g(\zeta)$
+%\begin{align*}
+%\int_0^u(\zeta-t)^{-1/3}t^{5/6}(1+\frac{3}{4}t)^{-7/6}&\textcolor{blue}{=}\int
+%\end{align*}
+
+\subsection{Second temptative formula} Let us assume that the correct formula that replaces \eqref{formula1} in Theorem \ref{thm:maxim} is 
+\begin{multline}\label{formula2}
+\hat{I}_{\alpha}(\zeta)=\partial^{N/2}_{\zeta, \text{based at }\zeta_\alpha}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)=\Gamma(-N/2)\int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-N/2}\int_{f^{-1}(\zeta')}\frac{\nu}{df} d\zeta'
+\end{multline} 
+then we compute $\hat{I}$ using properties of the Borel transform of a product:
+
+\begin{align*}
+\hat{I}(\zeta)&=\mathcal{B}(z^{-1/2})\ast\hat{u}(\zeta)\\
+&=\frac{1}{\Gamma(1/2)}\int_0^{\zeta}(\zeta-s)^{-1/2}\hat{u}(s)ds\\
+&=\frac{1}{\Gamma(1/2)}\int_0^\zeta (\zeta-s)^{-1/2}\left(T_{-2/3}\hat{w}_+(s)+T_{2/3}\hat{w}_-(s)\right)ds
+\end{align*}
+
+\begin{align*}
+&=\frac{1}{\Gamma(1/2)}\int_0^\zeta(\zeta-s)^{-1/2} \hat{w}_+(s-2/3)+\frac{1}{\Gamma(1/2)}\int_0^\zeta (\zeta-s)^{-1/2}\hat{w}_-(s+2/3)ds\\
+&=\frac{1}{\Gamma(1/2)}\int_{-2/3}^{\zeta-2/3}(\zeta-\frac{2}{3}-s)^{-1/2} \hat{w}_+(s)+\frac{1}{\Gamma(1/2)}\int_{2/3}^{\zeta+2/3} (\zeta+\frac{2}{3}-s)^{-1/2}\hat{w}_-(s)ds\\
+&=\frac{C_1}{\Gamma(1/2)}\int_{-2/3}^{\zeta-2/3}(\zeta-\frac{2}{3}-s)^{-1/2} {}_2F_1\left(\frac{7}{6},\frac{11}{6},2,-\frac{3}{4}s\right)ds+\frac{C_2}{\Gamma(1/2)}\int_{2/3}^{\zeta+2/3} (\zeta+\frac{2}{3}-s)^{-1/2}{}_2F_1\left(\frac{7}{6},\frac{11}{6},2,\frac{3}{4}s\right)ds\\
+&=\frac{C_3}{\Gamma(1/2)}\int_{-2/3}^{\zeta-2/3}(\zeta-\frac{2}{3}-s)^{-\frac{1}{2}} \frac{\partial}{\partial s}{}_2F_1\left(\frac{1}{6},\frac{5}{6},1,-\frac{3}{4}s\right)ds+\frac{C_4}{\Gamma(1/2)}\int_{2/3}^{\zeta+2/3} (\zeta+\frac{2}{3}-s)^{-\frac{1}{2}}\frac{\partial}{\partial s}{}_2F_1\left(\frac{1}{6},\frac{5}{6},1,\frac{3}{4}s\right)ds\\
+&=C_3\partial^{1/2}_{\zeta, \text{based at } -2/3}{}_2F_1\left(\frac{1}{6},\frac{5}{6},1,-\frac{3}{4}\zeta\right)+C_4\partial^{1/2}_{\zeta, \text{based at } 2/3}{}_2F_1\left(\frac{1}{6},\frac{5}{6},1,\frac{3}{4}\zeta\right)
+\end{align*}
+However, ${}_2F_1\left(\frac{1}{6},\frac{5}{6},1,\mp\frac{3}{4}\zeta\right)$ are not algebraic, hence they can not be equal to $\frac{1}{f'(f^{-1}(\zeta))}$ as it is in in Theorem \ref{thm:maxim} part II \eqref{formula2}. 
+
+%Notice that $\pm\frac{2}{3}=f(\mp 1)$, i.e. they are the critical value of $f$. Thus, we  are left to check that ${}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},\mp\frac{3}{4}\zeta\right) $ is equal to $1/f'(f^{-1}(\zeta)$. Using Mathamtica we simplify the hypergeometric function 
+%
+%\begin{equation}
+%{}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},-\frac{3}{4}\zeta\right)= \frac{2\sqrt{3}\sinh\left(\frac{2}{3}\mathrm{ArcCsch}\left(\frac{2}{\sqrt{3\zeta}}\right)\right)}{\sqrt{\zeta}\sqrt{4+3\zeta}}
+%\end{equation}
+%
+%then we did the following manipulations: we set $x=\mathrm{ArcCsch}\left(\frac{2}{\sqrt{3\zeta}}\right)$, then  
+%
+%\begin{multline}
+%\frac{2\sqrt{3}\sinh\left(\frac{2}{3}\mathrm{ArcCsch}\left(\frac{2}{\sqrt{3\zeta}}\right)\right)}{\sqrt{\zeta}\sqrt{4+3\zeta}}= \frac{3\sinh\left(\frac{2}{3}x\right)}{2\sinh(x)\sqrt{1+\sinh(x)^2}} \\
+%= \frac{3\sinh\left(\frac{2}{3}x\right)}{2\sinh(x)\cosh(x)}=\frac{3\sinh\left(\frac{2}{3}x\right)}{\sinh(2x)}=\frac{3\sinh\left(\frac{2}{3}x\right)}{3\sinh\left(\frac{2}{3}x\right)+4\sinh^3\left(\frac{2}{3}x\right)}\\
+%=\frac{1}{1+\frac{4}{3}\sinh^2\left(\frac{2}{3}x\right)}
+%\end{multline}
+%
+%With respect to the other hypergeometric function, Mathematica gives
+%
+%\begin{equation}
+%{}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},\frac{3}{4}\zeta\right)= \frac{2\sqrt{3}\sin\left(\frac{2}{3}\mathrm{ArcCsc}\left(\frac{2}{\sqrt{3\zeta}}\right)\right)}{\sqrt{\zeta}\sqrt{4-3\zeta}}
+%\end{equation}
+% now we set $x=\frac{2}{3}\mathrm{ArcCsc}\left(\frac{2}{\sqrt{3\zeta}}\right)$, then 
+% \begin{multline}
+% \frac{2\sqrt{3}\sin\left(\frac{2}{3}\mathrm{ArcCsc}\left(\frac{2}{\sqrt{3\zeta}}\right)\right)}{\sqrt{\zeta}\sqrt{4-3\zeta}}=\frac{2\sqrt{3}\sin(x)}{\frac{2}{\sqrt{3}}\sin\left(\frac{3}{2}x\right)\sqrt{4-4\sin^2\left(\frac{3}{2}x\right)}}\\
+% \frac{3\sin(x)}{2\sin\left(\frac{3}{2}x\right)\cos\left(\frac{3}{2}x\right)}=\frac{3\sin(x)}{\sin(3x)}=\frac{3\sin(x)}{3\sin(x)-4\sin^3(x)}\\
+% =\frac{1}{1-\frac{4}{3}\sin^2(x)}
+% \end{multline}
+
+
+%\begin{remark}
+%Notice that the half derivative of a simple pole gives a log singularity; indeed 
+%\begin{align*}
+%\frac{1}{1-\frac{4}{3}\sin^2(x)} \text{has simple poles at } \zeta=\frac{4}{3} \text{ and } \zeta=\infty \\
+%\frac{1}{1+\frac{4}{3}\sinh^2(x)} \text{has simple poles at } \zeta=\frac{4}{3} \text{ and } \zeta=\infty \\ 
+%\end{align*} 
+%\end{remark}
+%
+%
+%If $\tilde{I}(z)$ is Borel--Laplace summable, then for a suitable choice of $U_1,U_2$ and of a direction $\theta\in\R/2\pi i\Z$, $\mathcal{S}^{\theta}\tilde{I}(z)=I(z)$. Indeed 
+%\begin{align*}
+%I(z)&=\int_{\mathcal{C}} e^{-zf(t)}\text{dt}=\int_{\mathcal{C}_h} e^{-z\zeta}\frac{d\zeta}{f'(f^{-1}(\zeta))}=e^{-2/3z}\int_{T_{2/3}\mathcal{C}_h}e^{-z\zeta}\frac{d\zeta}{f'(f^{-1}(\zeta+2/3))}. 
+%\end{align*}
+%
+%However we are interested in resurgence properties of $\tilde{I}(z)$, thus we take its Borel transform. 
+
+  
+\end{example}
+
+\end{document}
