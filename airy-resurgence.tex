@@ -22,22 +22,22 @@
 \maketitle
 \section{The Laplace transform}
 \subsection{Analytic version}
-\subsubsection{Regularity and decay properties}
-The Laplace transform is defined by
-\[ [\mathcal{L}\hat{\varphi}](z) = \int_0^\infty e^{-z \zeta} \hat{\varphi}(\zeta)\;d\zeta. \]
-For $a \in [0, \infty]$, recall that recall that $O_a(g)$ is the space of functions $\varphi$ on $\posreal$ with $|\varphi| \lesssim g$ in some neighborhood of $a$. A function is {\em subexponential} if it's in $O_\infty(e^{cz})$ for all $c \in \posreal$. Let $\mathcal{E}$ be the space of subexponential functions on $\posreal$ which are $L^1$ both locally and around zero. The Laplace transform maps $\mathcal{E}$ into the space of holomorphic functions on the right half-plane~\cite[\S 5.6]{diverg-resurg-i}. If a function is in $O_0(1)$, its Laplace transform is in $O_\infty(z^{-1})$ \cite[equation~1.8]{laplace-tfm}.\footnote{The argument cited still works in our generality. For holomorphic $\hat{\varphi}$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.} More generally, if a function is in $O_0(\zeta^\alpha)$, with $\alpha > -1$, its Laplace transform is in $O_\infty(z^{-(\alpha + 1)})$.
+\subsubsection{Regularity and decay properties}\label{reg-decay}
+Take two copies $\R$ and $\hat{\R}$ of the real line, with standard coordinates $z$ and $\zeta$ respectively. The Laplace transform in $\zeta$ turns a function $\hat{\varphi}$ on $\hat{\R}_{\zeta > 0}$ into a function $\laplace_\zeta \hat{\varphi}$ on $\R_{z > 0}$, defined by the integral
+\[ \laplace_\zeta \hat{\varphi} = \int_0^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta. \]
+For $a \in [0, \infty]$, recall that recall that $O_{\zeta \to a}(g)$ is the space of functions $\varphi$ on $\hat{\R}_{\zeta > 0}$ with $|\varphi| \lesssim g$ in some neighborhood of $a$. A function is {\em subexponential} if it's in $O_{\zeta \to \infty}(e^{c\zeta})$ for all $c > 0$. Let $\mathcal{E}_\zeta$ be the space of subexponential functions on $\hat{\R}_{\zeta > 0}$ which are $L^1$ both locally and around $\zeta = 0$. If $\hat{\varphi}$ is in $\mathcal{E}_\zeta$, then $\varphi = \laplace_\zeta \hat{\varphi}$ is well-defined, and it extends to a holomorphic function on the right half-plane $\hat{\C}_{\Re(z) > 0}$~\cite[\S 5.6]{diverg-resurg-i}. If $\hat{\varphi}$ is in $O_{\zeta \to 0}(1)$, then $\varphi$ is in $O_{z \to \infty}(z^{-1})$~\cite[equation~1.8]{laplace-tfm}.\footnote{The argument cited still works in our generality. For holomorphic $\hat{\varphi}$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.} More generally, if $\hat{\varphi}$ is in $O_{\zeta \to 0}(\zeta^{\alpha})$, with $\alpha > -1$, then $\varphi$ is in $O_{z \to \infty}\big(z^{-(\alpha + 1)}\big)$.
 \subsubsection{Action on differential operators}\label{L-diff-op}
-When $\hat{\varphi} \in \mathcal{E}$, we can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
+When $\hat{\varphi} \in \mathcal{E}_\zeta$, we can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
 \begin{equation}\label{id:L-mult}
-\laplace (\zeta^n \hat{\varphi}) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace \hat{\varphi}.
+\laplace_\zeta (\zeta^n \hat{\varphi}) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_\zeta \hat{\varphi}.
 \end{equation}
 
 When $\hat{\varphi}$ is $n$ times differentiable, its $n$th derivative is in $\mathcal{E}$, and its zeroth through $(n - 1)$st derivatives extend continuously to zero, integration by parts gives the formula
 \begin{align}\label{id:L-diff}
-\laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} & = z^n \laplace \hat{\varphi} - \left( \hat{\varphi}(0)\,z^{n-1} + \hat{\varphi}'(0)\,z^{n-2} + \hat{\varphi}''(0)\,z^{n-3} + \ldots + \hat{\varphi}^{(n-1)}(0) \right) \\
-& = z^n\,\laplace\left[ \hat{\varphi} - \left( \hat{\varphi}(0) + \hat{\varphi}'(0)\,\zeta + \tfrac{\hat{\varphi}''(0)}{2!}\,\zeta^2 + \ldots + \tfrac{\hat{\varphi}^{(n-1)}(0)}{(n-1)!}\,\zeta^{n-1} \right) \right]. \nonumber
+\laplace_\zeta \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} & = z^n \laplace_\zeta \hat{\varphi} - \left[ \hat{\varphi}\,z^{n-1} + \hat{\varphi}'\,z^{n-2} + \hat{\varphi}''\,z^{n-3} + \ldots + \hat{\varphi}^{(n-1)} \right]_{\zeta = 0} \\
+& = z^n\,\laplace\left( \hat{\varphi} - \left[ \hat{\varphi} + \hat{\varphi}'\,\zeta + \tfrac{\hat{\varphi}''}{2!}\,\zeta^2 + \ldots + \tfrac{\hat{\varphi}^{(n-1)}}{(n-1)!}\,\zeta^{n-1} \right]_{\zeta = 0} \right). \nonumber
 \end{align}
-Note that if a function's derivative is subexponential, so is the function itself.\footnote{Say $f' \in O(e^{c\zeta})$. Then \[ \left|\int_0^\zeta f'(\tau)\,d\tau\right| \le \int_0^\zeta |f'(\tau)|\,d\tau \lesssim \int_0^\zeta e^{c\tau}\,d\tau = \tfrac{1}{c}(e^{c\zeta} - 1) \lesssim e^{c\zeta}.\] Now we know the integral on the left-hand side converges, implying that $f$ extends continuously to zero, with $|f(\zeta) - f(0)| \lesssim e^{c\zeta}$.}
+Note that if a function's derivative is subexponential, so is the function itself.\footnote{Say $f' \in O_{\zeta \to \infty}(e^{c\zeta})$. Then \[ \left|\int_0^Z f'\,d\zeta\right| \le \int_0^Z |f'|\,d\zeta \lesssim \int_0^Z e^{c\zeta}\,d\zeta = \tfrac{1}{c}(e^{cZ} - 1) \lesssim e^{cZ}.\] Now we know the integral on the left-hand side converges, implying that $f$ extends continuously to zero, with $|f - f_{\zeta = 0}| \lesssim e^{c\zeta}$.}
 
 %%In the space of holomorphic functions on the right half-plane, $\C[z] + O(z^{-1})$ is a direct sum, so there's a unique linear projection $\Lambda \maps \C[z] + O(z^{-1}) \to O(z^{-1})$. Applying $\Lambda$ to both sides of the formula above reveals that
 %%\[ \laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = \Lambda (z^n\,\laplace \hat{\varphi}). \]
@@ -45,112 +45,138 @@ Note that if a function's derivative is subexponential, so is the function itsel
 %%Say $A$ is an $n$th-order differential operator with polynomial coefficients. If we know that $A\hat{\varphi} = 0$, and we know the Taylor polynomial of $\hat{\varphi}$ at zero through degree $n - 1$, we can use the formulas above to find an inhomogeneous differential equation that $\laplace \hat{\varphi}$ must satisfy.
 \subsection{Algebraic version}
 \subsubsection{Definition}
-Let $\mathcal{P}$ be the vector space spanned by $\zeta^\alpha$ for $\alpha \in \R \smallsetminus \Z_{< 0}$. Note that $\mathcal{P} \cap \mathcal{E}$ is $\mathcal{P}_{> -1}$, the subspace spanned by $\zeta^\alpha$ with $\alpha > -1$. Since $\laplace(\zeta^\alpha) = \Gamma(\alpha+1)\,z^{-(\alpha + 1)}$ for all $\alpha > -1$, let's use the same formula to extend $\laplace$ to all of $\mathcal{P}$. This defines $\laplace$ consistently on $\mathcal{E} + \mathcal{P}$.
+Let $\mathcal{P}_\zeta$ be the vector space spanned by $\zeta^\alpha$ for $\alpha \in \R \smallsetminus \Z_{< 0}$. Note that $\mathcal{P}_\zeta \cap \mathcal{E}_\zeta$ is $\mathcal{P}_\zeta^{> -1}$, the subspace spanned by $\zeta^\alpha$ with $\alpha > -1$. Since
+\[ \laplace_\zeta(\zeta^\alpha) = \Gamma(\alpha+1)\,z^{-(\alpha + 1)} \]
+for all $\alpha > -1$, let's use the same formula to extend $\laplace_\zeta$ to all of $\mathcal{P}_\zeta$. This defines $\laplace_\zeta$ consistently on $\mathcal{E}_\zeta + \mathcal{P}_\zeta$.
 \subsubsection{Action on differential operators}\label{L-diff-op-alg}
 Observe that
-\[ \laplace(\zeta^{\alpha + 1}) = -\tfrac{\partial}{\partial z}\,\laplace(\zeta^\alpha) \]
-for $\alpha \neq -1$. This extends identity~\ref{id:L-mult} to all of $\mathcal{P}$.
+\[ \laplace_\zeta(\zeta^{\alpha + 1}) = -\tfrac{\partial}{\partial z}\,\laplace_\zeta(\zeta^\alpha) \]
+for $\alpha \neq -1$. This extends identity~\ref{id:L-mult} to all of $\mathcal{P}_\zeta$.
 
 Observe that
-\[ \laplace\tfrac{\partial}{\partial \zeta}(\zeta^\alpha) = \begin{cases}
-z\,\laplace(\zeta^\alpha) & \alpha \neq 0 \\
+\[ \laplace_\zeta\tfrac{\partial}{\partial \zeta}(\zeta^\alpha) = \begin{cases}
+z\,\laplace_\zeta(\zeta^\alpha) & \alpha \neq 0 \\
 0 & \alpha = 0,
 \end{cases} \]
-and that $0 = z\,\laplace(1) - 1$. This recovers identity~\ref{id:L-diff} for any function in $\mathcal{P}$ whose $n$th derivative is in $\mathcal{P}_{> -1}$. Although the functions in $\mathcal{P}_{< 0}$ are singular at zero, let's pretend they vanish at zero. With that convention, formula~\ref{id:L-diff} extends to all of $\mathcal{P}$.
+and that $0 = z\,\laplace_\zeta(1) - 1$. This recovers identity~\ref{id:L-diff} for any function in $\mathcal{P}_\zeta$ whose $n$th derivative is in $\mathcal{P}_\zeta^{> -1}$. Although the functions in $\mathcal{P}_\zeta^{< 0}$ are singular at zero, let's pretend they vanish at zero. With that convention, formula~\ref{id:L-diff} extends to all of $\mathcal{P}_\zeta$.
 
-Now we have the results of Section~\ref{L-diff-op} for all functions in $\mathcal{E} + \mathcal{P}$. Identity~\ref{id:L-diff} is particularly simple for functions that can be written as $\hat{\varphi}_\text{frac} + \hat{\varphi}_\text{reg}$, where $\hat{\varphi}_\text{frac} \in \mathcal{P}$ has only non-integer exponents, and the zeroth through $(n-1)$st derivatives of $\hat{\varphi}_\text{reg} \in \mathcal{E}$ vanish at zero. For these functions, all the initial values vanish, and we have
-\[ \laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n (\hat{\varphi}_\text{frac} + \hat{\varphi}_\text{reg}) = z^n \laplace (\hat{\varphi}_\text{frac} + \hat{\varphi}_\text{reg}). \]
-\subsection{Interactions with other operators}
-\subsubsection{Translation}
-Let $T_a$ be the left translation operator $[T_a f](\zeta) = f(\zeta + a)$. The Laplace transform commutes between $T_a$ and multiplication by $e^{az}$:
-\[ \laplace T_a \hat{\varphi} = e^{az} \laplace \hat{\varphi}. \]
-Consistent with Section~\ref{L-diff-op}, we have
+Now we have the results of Section~\ref{L-diff-op} for all functions in $\mathcal{E}_\zeta + \mathcal{P}_\zeta$. Identity~\ref{id:L-diff} is particularly simple when $\hat{\varphi}$ has a {\em fractional power singularity} at $\zeta = 0$. By this, I mean that $\hat{\varphi}$ can be written as $\hat{\varphi}_\text{frac} + \hat{\varphi}_\text{reg}$, where $\hat{\varphi}_\text{frac} \in \mathcal{P}_\zeta$ has only non-integer exponents, and the zeroth through $(n-1)$st derivatives of $\hat{\varphi}_\text{reg} \in \mathcal{E}_\zeta$ vanish at zero. Under this condition, all the initial value terms in the identity vanish, leaving
+\[ \laplace_\zeta \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = z^n \laplace_\zeta \hat{\varphi}. \]
+\subsection{Change of coordinates}
+Define a new coordinate $\zeta_a$ on $\hat{\R}$ so that $\zeta = a + \zeta_a$. From the calculation
 \begin{align*}
-(\zeta + a) T_a \hat{\varphi} & = T_a(\zeta \hat{\varphi}) \\
-\big(\tfrac{\partial}{\partial z} - a\big) e^{az} \varphi & = e^{az} \tfrac{\partial}{\partial z} \varphi
+\laplace_\zeta \hat{\varphi} & = \int_0^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
+& = \int_0^\infty e^{-z(a + \zeta_a)}\,\hat{\varphi}\;d\zeta_a \\
+& = e^{-az} \int_0^\infty e^{-z\zeta_a}\,\hat{\varphi}\;d\zeta_a \\
+& = e^{-az} \laplace_{\zeta_a} \hat{\varphi},
 \end{align*}
-and
+we learn that
+\[ \laplace_{\zeta_a} \hat{\varphi} = e^{az} \laplace_\zeta \hat{\varphi}. \]
+
+Define new coordinates $x$ and $\xi$ on $\R$ and $\hat{\R}$, respectively, so that $\zeta = b\xi$ and $z\,d\zeta = x\,d\xi$. Explicitly, $z = b^{-1}x$. From the calculation
 \begin{align*}
-\tfrac{\partial}{\partial \zeta} T_a & = T_a \tfrac{\partial}{\partial \zeta} \\
-z e^{az} \varphi & = e^{az} z \varphi.
+\laplace_\zeta \hat{\varphi} & = \int_0^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
+& = \int_0^\infty e^{-x\xi}\,\hat{\varphi}\;b\,d\xi \\
+& = b \laplace_\xi \hat{\varphi},
 \end{align*}
-\subsubsection{Scaling}
-Let $S^k_c$ be the homogeneous scaling operator $[S^k_c f](\zeta) = c^k f(c \zeta)$. The Laplace transform commutes between $S^1_c$ and $S^0_{c^{-1}}$:
-\[ \laplace S^1_c \hat{\varphi} = S^0_{c^{-1}} \laplace \hat{\varphi}. \]
-Consistent with Section~\ref{L-diff-op}, we have
-\begin{align*}
-c\zeta S^k_c \hat{\varphi} & = S^k_c(\zeta \hat{\varphi}) \\
-c \tfrac{\partial}{\partial z} S^k_{c^{-1}} \varphi & = S^k_{c^{-1}} \tfrac{\partial}{\partial z} \varphi.
-\end{align*}
+we learn that
+\[ \laplace_\xi \hat{\varphi} = b^{-1} \laplace_\zeta \hat{\varphi}. \]
 \section{The Airy equation}
 \subsection{Basics}
 The Airy equation is
 \begin{equation}\label{eqn:airy}
-\left[\big(\tfrac{\partial}{\partial x}\big)^2 - x\right] \psi = 0.
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - y\right] \psi = 0.
 \end{equation}
 One solution is given by the Airy function,
-\[ \Ai(x) = \frac{1}{2\pi i} \int_{\Gamma_0} \exp\left(\tfrac{1}{3}t^3 - xt\right)\,dt, \]
-where $\Gamma_0$ is a path that comes from $\infty$ at $-60^\circ$ and goes to $\infty$ at $60^\circ$. With the substitution $t = 2ux^{1/2}$, we can rewrite the Airy integral as
-\[ \Ai(x) = x^{1/2}\;\frac{1}{\pi i} \int_{x^{-1/2} \Gamma_0} \exp\left[\tfrac{2}{3}x^{3/2} \left(4u^3 - 3u\right)\right]\,du. \]
+\[ \Ai(y) = \frac{1}{2\pi i} \int_{\Gamma_0} \exp\left(\tfrac{1}{3}t^3 - yt\right)\,dt, \]
+where $\Gamma_0$ is a path that comes from $\infty$ at $-60^\circ$ and goes to $\infty$ at $60^\circ$. With the substitution $t = -2uy^{1/2}$, we can rewrite the Airy integral as
+\[ \Ai(y) = y^{1/2}\;\frac{1}{\pi i} \int_{-y^{-1/2} \Gamma_0} \exp\left[-\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du. \]
 We've rescaled the contour by a factor of two, but it still approaches $\infty$ in the desired way. Note that $4u^3 - 3u$ is the third Chebyshev polynomial.
 \subsection{Rewriting as a modified Bessel equation}
 We can distill the most interesting part of the Airy function by writing
-\[ \Ai(x) = \tfrac{1}{\pi\sqrt{3}}\,x^{1/2}\, K\big(\tfrac{2}{3} x^{3/2}\big), \]
+\[ \Ai(y) = \tfrac{1}{\pi\sqrt{3}}\,y^{1/2}\, K\big(\tfrac{2}{3} y^{3/2}\big), \]
 where
-\[ K(z) = \frac{\sqrt{3}}{i} \int_{z^{-1/3}\Gamma_0} \exp\left[z \left(4u^3 - 3u\right)\right]\,du. \]
+\[ K(z) = \frac{\sqrt{3}}{i} \int_{-z^{-1/3}\Gamma_0} \exp\left[-z \left(4u^3 - 3u\right)\right]\,du. \]
 Saying that $\Ai$ satisfies the Airy equation is equivalent to saying that $K$ satisfies the modified Bessel equation
 \begin{equation}\label{eqn:mod-bessel}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = 0.
 \end{equation}
 In fact, $K$ is the modified Bessel function $K_{1/3}$~\cite[equation~9.6.1]{dlmf}.
 
-As we'll see in Section~\ref{asymp}, $K$ is in $O_\infty(e^{-z})$. It'll be helpful to pull out the exponential decay factor and work instead with the function $\kappa$ defined by $K(z) = e^{-z} \kappa(z)$. Saying that $K$ satisfies equation~\ref{eqn:mod-bessel} is equivalent to saying that $\kappa$ satisfies the equation
+As we'll see in Section~\ref{asymp}, $K$ is in $O_{z \to \infty}(e^{-z})$. It'll be helpful to pull out the exponential decay factor and work instead with the function $\kappa$ defined by $K = e^{-z} \kappa$. Saying that $K$ satisfies equation~\ref{eqn:mod-bessel} is equivalent to saying that $\kappa$ satisfies the equation
 \begin{equation}\label{eqn:shifted-mod-bessel}
 \left[z^2 \big(\tfrac{\partial}{\partial z} + 1\big)^2 + z \big(\tfrac{\partial}{\partial z} + 1\big) - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = 0.
 \end{equation}
-%%\subsection{Asymptotic analysis}\label{asymp}
+\subsection{Asymptotic analysis}
+From \cite{dlmf}, equations 10.40.2 and 10.17.1, we get the asymptotic series
+\begin{equation}\label{bessel-asymp}
+\kappa \sim \left(\tfrac{\pi}{2}\right)^{1/2} \left[ z^{-1/2} - \frac{(\tfrac{1}{6})_1 (\tfrac{5}{6})_1}{2^1 \cdot 1!}\;z^{-3/2} + \frac{(\tfrac{1}{6})_2 (\tfrac{5}{6})_2}{2^2 \cdot 2!}\;z^{-5/2} - \frac{(\tfrac{1}{6})_3 (\tfrac{5}{6})_3}{2^3 \cdot 3!}\;z^{-7/2} + \ldots \right]
+\end{equation}
 \subsection{Going to the spatial domain}
-\subsubsection{First try}
-Let's try to find a function $\hat{K}$ with $K = \laplace \hat{K}$, which is unique if it exists~\cite[Theorem~1.23]{laplace-tfm}. If a function $\hat{\varphi}$ satisfies the equation
+\subsubsection{A good try at $\zeta = 0$}
+Let's try to find a function $\hat{K}$ with $K = \laplace_\zeta \hat{K}$, which is unique if it exists~\cite[Theorem~1.23]{laplace-tfm}. If a function $\hat{\varphi}$ satisfies the equation
 \begin{equation}\label{eqn:spatial-mod-bessel}
 \left[\big(\zeta^2 - 1\big) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0,
 \end{equation}
-its Laplace transform $\varphi = \laplace \hat{\varphi}$ satisfies the equation
+its Laplace transform $\varphi = \laplace_\zeta \hat{\varphi}$ satisfies the equation
 \begin{align*}
-\left[\big({-\tfrac{\partial}{\partial z}}\big)^2 - 1\right] \Big[z^2 \varphi - \Big(\hat{\varphi}(0)\,z + \hat{\varphi}'(0)\Big)\Big] + 3\big({-\tfrac{\partial}{\partial z}}\big)\Big[z\varphi - \hat{\varphi}(0)\Big] + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0 \\
-\big(\tfrac{\partial}{\partial z}\big)^2 \big[z^2 \varphi\big] - \Big[z^2 \varphi - \Big(\hat{\varphi}(0)\,z + \hat{\varphi}'(0)\Big)\Big] - 3\big(\tfrac{\partial}{\partial z}\big)\big[z\varphi\big] + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0 \\
-\Big[2 + 4z\tfrac{\partial}{\partial z} + z^2\big(\tfrac{\partial}{\partial z}\big)^2\Big]\varphi - \Big[z^2 \varphi - \Big(\hat{\varphi}(0)\,z + \hat{\varphi}'(0)\Big)\Big] - 3\Big[1 + z\tfrac{\partial}{\partial z}\Big]\varphi + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0,
+\left[\big({-\tfrac{\partial}{\partial z}}\big)^2 - 1\right] \Big(z^2 \varphi - \big[\hat{\varphi}\,z + \hat{\varphi}'\big]_{\zeta = 0}\Big) + 3\big({-\tfrac{\partial}{\partial z}}\big)\big[z\varphi - \hat{\varphi}\big]_{\zeta = 0} + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0 \\
+\big(\tfrac{\partial}{\partial z}\big)^2 \big[z^2 \varphi\big] - \Big(z^2 \varphi - \big[\hat{\varphi}\,z + \hat{\varphi}'\big]_{\zeta = 0}\Big) - 3\big(\tfrac{\partial}{\partial z}\big)\big[z\varphi\big] + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0 \\
+\Big[2 + 4z\tfrac{\partial}{\partial z} + z^2\big(\tfrac{\partial}{\partial z}\big)^2\Big]\varphi - \Big(z^2 \varphi - \big[\hat{\varphi}\,z + \hat{\varphi}'\big]_{\zeta = 0}\Big) - 3\Big[1 + z\tfrac{\partial}{\partial z}\Big]\varphi + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0,
 \end{align*}
 which simplifies to
 \begin{equation}\label{eqn:inhomog-mod-bessel}
-\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = -\Big(\hat{\varphi}(0)\,z + \hat{\varphi}'(0)\Big).
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = -\big[\hat{\varphi}\,z + \hat{\varphi}'\big]_{\zeta = 0}.
 \end{equation}
-Since we want $\laplace \hat{K}$ to satisfy equation~\ref{eqn:mod-bessel}, which is the homogeneous version of equation~\ref{eqn:inhomog-mod-bessel}, we might guess that $\hat{K}$ is a solution of equation~\ref{eqn:spatial-mod-bessel} that vanishes through first order at zero. Unfortunately, this would force $\hat{K}$ to be zero.
-\subsubsection{Success}
-Let's instead try to find a function $\hat{\kappa}$ with $\laplace \hat{\kappa} = \kappa$, or equivalently $\hat{\kappa} = T_1 \hat{K}$. Applying $T_1$ to both sides of equation~\ref{eqn:spatial-mod-bessel}, we get the equivalent equation
-\begin{equation}\label{eqn:shifted-spatial-mod-bessel}
-\left[\zeta(\zeta + 2) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3(\zeta + 1) \tfrac{\partial}{\partial \zeta} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] T_1 \hat{\varphi} = 0.
-\end{equation}
-If $T_1 \hat{\varphi}$ satisfies equation~\ref{eqn:shifted-spatial-mod-bessel}, $e^z \laplace \hat{\varphi}$ will satisfy an inhomogeneous version of equation~\ref{eqn:shifted-mod-bessel}, analogous to equation~\ref{eqn:inhomog-mod-bessel}. This time, though, there's a trick we can use to zero out the inhomogeneity. Equation~\ref{eqn:shifted-spatial-mod-bessel} has a regular singularity at zero, with one solution line generated by a holomorphic multiple of $\zeta^{-1/2}$. The solutions on that line can be written as $\hat{\varphi}_\text{frac} + \hat{\varphi}_\text{reg}$ as described Section~\ref{L-diff-op-alg}, so their Laplace transforms satisfy equation~\ref{eqn:shifted-mod-bessel}.
-
-Following this plan, let's find $\hat{\kappa}$ explicitly. Applying $S^1_{-2}$ to both sides of equation~\ref{eqn:shifted-spatial-mod-bessel}, we get the equivalent equation
+Since we want $\laplace_\zeta \hat{K}$ to satisfy equation~\ref{eqn:mod-bessel}, which is the homogeneous version of equation~\ref{eqn:inhomog-mod-bessel}, we might guess that $\hat{K}$ is a solution of equation~\ref{eqn:spatial-mod-bessel} that vanishes through first order at $\zeta = 0$. Unfortunately, this would force $\hat{K}$ to be zero.
+\subsubsection{Success at $\zeta = 1$}
+Define a new coordinate $\zeta_1$ on $\hat{\R}$ so that $\zeta = 1 + \zeta_1$. Since
 \begin{align*}
-\left[(-2\zeta)(-2\zeta + 2) \big({-\tfrac{1}{2}} \tfrac{\partial}{\partial \zeta}\big)^2 + 3(-2\zeta + 1) \big({-\tfrac{1}{2}}\tfrac{\partial}{\partial \zeta}\big) + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] S^1_{-2} T_1 \hat{\varphi} & = 0 \\
-\left[\zeta(\zeta - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3(\zeta - \tfrac{1}{2}) \tfrac{\partial}{\partial \zeta} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] S^1_{-2} T_1 \hat{\varphi} & = 0,
+\laplace_{\zeta_1} \hat{K} & = e^z \laplace_\zeta \hat{K} \\
+& = e^z K \\
+& = \kappa,
 \end{align*}
-which simplifies to the hypergeometric equation
+we want $\laplace_{\zeta_1} \hat{K}$ to satisfy equation~\ref{eqn:shifted-mod-bessel}. Rewrite equation~\ref{eqn:spatial-mod-bessel} as
+\begin{equation}\label{eqn:shifted-spatial-mod-bessel}
+\left[\zeta_1(\zeta_1 + 2) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(\zeta_1 + 1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0.
+\end{equation}
+If $\hat{\varphi}$ satisfies equation~\ref{eqn:shifted-spatial-mod-bessel}, $\laplace_{\zeta_1} \hat{\varphi}$ will satisfy an inhomogeneous version of equation~\ref{eqn:shifted-mod-bessel}, analogous to equation~\ref{eqn:inhomog-mod-bessel}. This time, though, there's a trick we can use to zero out the inhomogeneity. Equation~\ref{eqn:shifted-spatial-mod-bessel} has a regular singularity at $\zeta_1 = 0$, and one solution (up to scaling) is a holomorphic multiple of $\zeta_1^{-1/2}$. That solution has a fractional power singularity at $\zeta_1 = 0$, as defined in Section~\ref{L-diff-op-alg}, so its Laplace transform in $\zeta_1$ satisfies equation~\ref{eqn:shifted-mod-bessel}.
+
+Following this plan, let's find $\hat{K}$ explicitly. Defining another coordinate $\xi$ on $\hat{\R}$ so that $\zeta_1 = -2\xi$, we can rewrite equation~\ref{eqn:shifted-spatial-mod-bessel} as the hypergeometric equation
 \begin{equation}\label{eqn:hypergeom}
-\left[\zeta(1 - \zeta) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3(\tfrac{1}{2} - \zeta) \tfrac{\partial}{\partial \zeta} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] S^1_{-2} T_1 \hat{\varphi} = 0.
+\left[\xi(1 - \xi) \big(\tfrac{\partial}{\partial \xi}\big)^2 + 3(\tfrac{1}{2} - \xi) \tfrac{\partial}{\partial \xi} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0.
 \end{equation}
 %With the change of variable $\xi = \tfrac{1}{2}(1-\zeta)$, equation~\ref{eqn:spatial-mod-bessel} becomes the hypergeometric equation
-%%\begin{equation}\label{eqn:hypergeom}
-%%\left[\xi(1 - \xi) \big(\tfrac{\partial}{\partial \xi}\big)^2 + 3(\tfrac{1}{2} - \xi) \tfrac{\partial}{\partial \xi} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0.
-%%\end{equation}
+The hypergeometric function
+\[ \hat{f}_1 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) \]
+satisfies equation~\ref{eqn:hypergeom} by definition. It's not the solution we want, though, because it's holomorphic around $\xi = 0$. Using DLMF~15.10.13, we can see that
+\[ \hat{f}_0 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big). \]
+also satisies equation~\ref{eqn:hypergeom}. It has a singularity of type $\xi^{-1/2}$ at $\xi = 0$, and continues holomorphically to the rest of $\hat{\C}$. Hence, by the argument above, $f_0 = \laplace_{\zeta_1} \hat{f}_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}. \textbf{[This isn't quite right! As the decomposition below shows, $\hat{f}_0$ isn't a holomorphic multiple of $\xi^{-1/2}$. We should take the first term of the decomposition instead.]} This suggests that a constant multiple of $\hat{f}_0$ is our desired $\hat{K}$.
+
+By DLMF~15.10.17,
+\[ \hat{f}_0 = \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{2}{3}) \Gamma(\tfrac{4}{3})}\;\xi^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big) + \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})}\;\hat{f}_1. \]
+The coefficients simplify to
+\begin{align*}
+\sqrt{\pi}\;\big(\tfrac{1}{2}\sqrt{\pi}\big)\;\frac{\sin(\tfrac{2}{3} \pi)}{\pi} & = \frac{\sqrt{3}}{4} \\
+\big({-2}\sqrt{\pi}\big) \big(\tfrac{1}{2}\sqrt{\pi}\big)\;\frac{\sin(\tfrac{1}{6} \pi)}{\pi} & = -\frac{1}{2}
+\end{align*}
+respectively, giving
+\begin{align*}
+\hat{f}_0 & = \tfrac{\sqrt{3}}{4}\,\xi^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big) - \tfrac{1}{2}\,\hat{f}_1 \\
+& \in \tfrac{\sqrt{3}}{4}\,\xi^{-1/2} + O_{\xi \to 0}(1).
+\end{align*}
+In terms of $\zeta_1$, we have
+\[ \hat{f}_0 \in -i\,\tfrac{\sqrt{3}}{4} \big(\tfrac{1}{2}\big)^{1/2}\,\zeta_1^{-1/2} + O_{\zeta_1 \to 0}(1). \]
+Using the decay properties from Section~\ref{reg-decay}, we deduce that
+\[ f_0 \in -i\,\tfrac{\sqrt{3}}{4} \big(\tfrac{\pi}{2}\big)^{1/2}\,z^{-1/2} + O_{z \to \infty}(z^{-1}). \]
+Since we know that $f_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $f_0$ is a constant multiple of $\kappa$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $\kappa = i\,\tfrac{4}{\sqrt{3}}\,f_0$. We conclude that $\kappa = \laplace_{\zeta_1} \hat{K}$ for
+\[ \hat{K} = i\,\tfrac{4}{\sqrt{3}}\,F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1 + \tfrac{1}{2}\zeta_1\big). \]
+The hypergeometric function is defined by its power series around $\zeta_1 = -2$, and continued counterclockwise around the singularity at $\zeta_1 = 0$ to the ray $\zeta_1 \in (0, \infty)$.
+\section{Sketches}
+\subsection{Contour argument}
 The hypergeometric function
 \[ F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) \]
-satisfies equation~\ref{eqn:hypergeom} by definition. It has a singularity of type $\xi^{-1/2}$ at $\xi = 0$, and continues holomorphically to the rest of $\C$. Using DLMF~15.10.13, we can see that
-\[ F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big). \]
-also satisies equation~\ref{eqn:hypergeom}. It has a singularity of type $(1 - \xi)^{-1/2}$ at $\xi = 1$, and continues holomorphically to the rest of $\C$.
+satisfies equation~\ref{eqn:hypergeom} by definition. It has a singularity of type $(1 - \xi)^{-1/2}$ at $\xi = 1$, and continues holomorphically to the rest of $\hat{\C}$.
 
 Based on the calculations in the other sheet, we should have
 \[ K(z) = i \frac{2}{\sqrt{3}} \int_{\text{Hankel at } 1} e^{-z\zeta} F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big)\;d\zeta. \]
