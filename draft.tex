@@ -18,6 +18,17 @@
 \usepackage{latexsym}
 \usepackage{todonotes}
 \usepackage{fancyhdr}
+% make color grouping work nicely with math mode spacing
+% hat tip TeX.SE user Heiko Oberdiek
+% https://tex.stackexchange.com/a/261480/6934
+\makeatletter
+\renewcommand*{\@textcolor}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+\makeatother
 %\renewcommand{\sectionmark}[1]{\markboth{\thesection\ #1}{}}
 \pagestyle{fancy}
 % Clear the header and footer
@@ -436,24 +447,37 @@ C_3\partial_{\zeta,\text{based at } -2/3}^{1/2} {}_2F_1\left(\frac{1}{6},\frac{5
 C_3\partial_{\zeta}^{1/2} {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)&=-i \frac{1}{\sqrt{\zeta}}\,\,{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)
 \end{align*} 
 
-Equation 5 in Aaron is 
+Equation 5 in Aaron is
+\begin{align*}
+\left[z^2 \big(\tfrac{\partial}{\partial z} + 1\big)^2 + z \big(\tfrac{\partial}{\partial z} + 1\big) - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \kappa & = 0 \\
+\left[z^2 \Big(\big(\tfrac{\partial}{\partial z}\big)^2 + 2 \tfrac{\partial}{\partial z} + 1\Big) + z \big(\tfrac{\partial}{\partial z} + 1\big) - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \kappa & = 0 \\
+\left[z^2 \Big(\big(\tfrac{\partial}{\partial z}\big)^2 + 2 \tfrac{\partial}{\partial z}\Big) + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2 - z^2 - z\big]\right] \kappa & = 0 \\
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + (2z^2 + z) \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2 - z^2 - z\big]\right] \kappa & = 0 \\
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + (2z^2 + z) \tfrac{\partial}{\partial z} + \big(z - \tfrac{1}{9}\big)\right] \kappa & = 0,
+\end{align*}
+which can be written as
 \begin{equation}
-\left[\frac{\partial^2}{\partial z^2}+2\frac{\partial}{\partial z}+\frac{1}{z}\frac{\partial}{\partial z}-\frac{1}{9z^2}\right]\kappa=0
+\left[\frac{\partial^2}{\partial z^2}+2\frac{\partial}{\partial z}+\frac{1}{z}\frac{\partial}{\partial z}\textcolor{red}{+\frac{1}{z}}-\frac{1}{9z^2}\right]\kappa=0
 \end{equation}
 Its Borel transform is 
 \begin{align*}
-&\zeta^2\hat{\kappa}-2\zeta\hat{\kappa}+1\ast(-\zeta\hat{\kappa})-\frac{1}{9}\zeta\ast\hat{\kappa}=0 \\
-&\zeta^2\hat{\kappa}-2\zeta\hat{\kappa}-\int_{0}^\zeta s\hat{\kappa}(s)ds-\frac{1}{9}\int_0^{\zeta}(\zeta-s)\hat{\kappa}(s)ds=0 \\
+&\zeta^2\hat{\kappa}-2\zeta\hat{\kappa}+1\ast(-\zeta\hat{\kappa})\textcolor{red}{+1\ast\hat{\kappa}}-\frac{1}{9}\zeta\ast\hat{\kappa}=0 \\
+&\zeta^2\hat{\kappa}-2\zeta\hat{\kappa}-\int_{0}^\zeta s\hat{\kappa}(s)ds\textcolor{red}{+1\ast\hat{\kappa}}-\frac{1}{9}\int_0^{\zeta}(\zeta-s)\hat{\kappa}(s)ds=0 \\
 &\, \text{ taking derivatives once} \\
-& 2\zeta\hat{\kappa}+\zeta^2\hat{\kappa}'-2\hat{\kappa}-2\zeta\hat{\kappa}'-\zeta\hat{\kappa}-\frac{1}{9}\int_0^{\zeta}\hat{k}(s)ds=0\\
-& \zeta\hat{\kappa}+\zeta^2\hat{\kappa}'-2\hat{\kappa}-2\zeta\hat{\kappa}'-\frac{1}{9}\int_0^{\zeta}\hat{k}(s)ds=0\\
+& 2\zeta\hat{\kappa}+\zeta^2\hat{\kappa}'-2\hat{\kappa}-2\zeta\hat{\kappa}'-\zeta\hat{\kappa}\textcolor{red}{+\hat{\kappa}}-\frac{1}{9}\int_0^{\zeta}\hat{\kappa}(s)ds=0\\
+& \zeta\hat{\kappa}+\zeta^2\hat{\kappa}'\textcolor{red}{-\hat{\kappa}}-2\zeta\hat{\kappa}'-\frac{1}{9}\int_0^{\zeta}\hat{\kappa}(s)ds=0\\
 &\, \text{ taking derivatives once again} \\
-& \hat{\kappa}+\zeta\hat{\kappa}'+2\zeta\hat{k}'+\zeta^2\hat{\kappa}''-2\hat{\kappa}'-2\hat{\kappa}'-2\zeta\hat{\kappa}''-\frac{1}{9}\hat{\kappa}=0\\
-&(\zeta^2-2\zeta)\hat{\kappa}''+(3\zeta-4)\hat{k}'+\frac{8}{9}\hat{\kappa}=0
+& \hat{\kappa}+\zeta\hat{\kappa}'+2\zeta\hat{\kappa}'+\zeta^2\hat{\kappa}''\textcolor{red}{-\hat{\kappa}'}-2\hat{\kappa}'-2\zeta\hat{\kappa}''-\frac{1}{9}\hat{\kappa}=0\\
+&(\zeta^2-2\zeta)\hat{\kappa}''+(3\zeta\textcolor{red}{-3})\hat{\kappa}'+\frac{8}{9}\hat{\kappa}=0
 \end{align*} 
-The last equation is a hypergeomtric equation and a solution is given by 
+The last equation is the hypergeomtric equation
+\begin{align*}
+\left(4\big(\tfrac{\zeta}{2}\big)^2-4\tfrac{\zeta}{2}\right)\hat{\kappa}''+(6\tfrac{\zeta}{2}-3)\hat{\kappa}'+\tfrac{8}{9}\hat{\kappa}&=0 \\
+\tfrac{\zeta}{2}\big(\tfrac{\zeta}{2} - 1\big)(4\hat{\kappa}'')+(3\tfrac{\zeta}{2}-\tfrac{3}{2})(2\hat{\kappa}')+\big(\tfrac{2}{3}\big)\big(\tfrac{4}{3}\big)\hat{\kappa}&=0,
+\end{align*}
+and a solution is given by 
 \begin{equation}
-\hat{\kappa}(\zeta)={}_2F_1\left(\frac{2}{3},\frac{4}{3};2;\frac{\zeta}{2}\right)
+\hat{\kappa}(\zeta)={}_2F_1\left(\frac{2}{3},\frac{4}{3};\textcolor{red}{\frac{3}{2}};\frac{\zeta}{2}\right)
 \end{equation}
 However, at pag. 6 in Aaron there is a different solution, namely 
 \begin{align*}
