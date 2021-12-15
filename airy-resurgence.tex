@@ -155,29 +155,30 @@ Following this plan, let's find $\hat{K}$ explicitly. Defining another coordinat
 %With the change of variable $\xi = \tfrac{1}{2}(1-\zeta)$, equation~\ref{eqn:spatial-mod-bessel} becomes the hypergeometric equation
 The hypergeometric function
 \[ \hat{f}_1 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) \]
-satisfies equation~\ref{eqn:hypergeom} by definition. It's not the solution we want, though, because it's holomorphic around $\xi = 0$. Using DLMF~15.10.13, we can see that
-\[ \hat{f}_0 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big). \]
-also satisies equation~\ref{eqn:hypergeom}. It has a singularity of type $\xi^{-1/2}$ at $\xi = 0$, and continues holomorphically to the rest of $\hat{\C}$. Hence, by the argument above, $f_0 = \laplace_{\zeta_1} \hat{f}_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}. \textbf{[This isn't quite right! As the decomposition below shows, $\hat{f}_0$ isn't a holomorphic multiple of $\xi^{-1/2}$. We should take the first term of the decomposition instead.]} This suggests that a constant multiple of $\hat{f}_0$ is our desired $\hat{K}$.
-
-By DLMF~15.10.17,
-\[ \hat{f}_0 = \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{2}{3}) \Gamma(\tfrac{4}{3})}\;\xi^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big) + \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})}\;\hat{f}_1. \]
-The coefficients simplify to
-\begin{align*}
-\sqrt{\pi}\;\big(\tfrac{1}{2}\sqrt{\pi}\big)\;\frac{\sin(\tfrac{2}{3} \pi)}{\pi} & = \frac{\sqrt{3}}{4} \\
-\big({-2}\sqrt{\pi}\big) \big(\tfrac{1}{2}\sqrt{\pi}\big)\;\frac{\sin(\tfrac{1}{6} \pi)}{\pi} & = -\frac{1}{2}
-\end{align*}
-respectively, giving
-\begin{align*}
-\hat{f}_0 & = \tfrac{\sqrt{3}}{4}\,\xi^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big) - \tfrac{1}{2}\,\hat{f}_1 \\
-& \in \tfrac{\sqrt{3}}{4}\,\xi^{-1/2} + O_{\xi \to 0}(1).
-\end{align*}
+satisfies equation~\ref{eqn:hypergeom} by definition. It's not the solution we want, though, because it's holomorphic around $\xi = 0$. Formula~15.10.12 from \cite{dlmf} gives another solution,
+\[ \hat{f}_0 = \xi^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big), \]
+which is a holomorphic multiple of $\xi^{-1/2}$ near $\xi = 0$. By the argument above, $f_0 = \laplace_{\zeta_1} \hat{f}_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}. This suggests that a constant multiple of $\hat{f}_0$ is our desired $\hat{K}$. The power series~\cite[equation~15.2.1]{dlmf}
+\[ \hat{f}_0 = \xi^{-1/2} + \frac{(\tfrac{1}{6})_1 (\tfrac{5}{6})_1}{(\tfrac{1}{2})_1 \; 1!}\;\xi^{1/2} + \frac{(\tfrac{1}{6})_2 (\tfrac{5}{6})_2}{(\tfrac{1}{2})_2 \; 2!}\;\xi^{3/2} + \frac{(\tfrac{1}{6})_3 (\tfrac{5}{6})_3}{(\tfrac{1}{2})_3 \; 3!}\;\xi^{5/2} + \ldots \]
+converges near $\xi = 0$, showing that
+\[ \hat{f}_0 \in \xi^{-1/2} + O_{\xi \to 0}(\xi^{1/2}). \]
 In terms of $\zeta_1$, we have
-\[ \hat{f}_0 \in -i\,\tfrac{\sqrt{3}}{4} \big(\tfrac{1}{2}\big)^{1/2}\,\zeta_1^{-1/2} + O_{\zeta_1 \to 0}(1). \]
+\[ \hat{f}_0 \in -i \sqrt{2}\,\zeta_1^{-1/2} + O_{\zeta_1 \to 0}(\zeta_1^{1/2}). \]
+%%Using DLMF~15.10.13, we can see that
+%%\[ \hat{f}_0 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big). \]
+%%also satisies equation~\ref{eqn:hypergeom}.
+%%-------------------------------------------------------------
+%%By DLMF~15.10.17,
+%%\[ \hat{f}_0 = \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{2}{3}) \Gamma(\tfrac{4}{3})}\;\xi^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big) + \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})}\;\hat{f}_1. \]
+%%The coefficients simplify to
+%%\begin{align*}
+%%\sqrt{\pi}\;\big(\tfrac{1}{2}\sqrt{\pi}\big)\;\frac{\sin(\tfrac{2}{3} \pi)}{\pi} & = \frac{\sqrt{3}}{4} \\
+%%\big({-2}\sqrt{\pi}\big) \big(\tfrac{1}{2}\sqrt{\pi}\big)\;\frac{\sin(\tfrac{1}{6} \pi)}{\pi} & = -\frac{1}{2}
+%%\end{align*}
+%%respectively, giving
 Using the decay properties from Section~\ref{reg-decay}, we deduce that
-\[ f_0 \in -i\,\tfrac{\sqrt{3}}{4} \big(\tfrac{\pi}{2}\big)^{1/2}\,z^{-1/2} + O_{z \to \infty}(z^{-1}). \]
-Since we know that $f_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $f_0$ is a constant multiple of $\kappa$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $\kappa = i\,\tfrac{4}{\sqrt{3}}\,f_0$. We conclude that $\kappa = \laplace_{\zeta_1} \hat{K}$ for
-\[ \hat{K} = i\,\tfrac{4}{\sqrt{3}}\,F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1 + \tfrac{1}{2}\zeta_1\big). \]
-The hypergeometric function is defined by its power series around $\zeta_1 = -2$, and continued counterclockwise around the singularity at $\zeta_1 = 0$ to the ray $\zeta_1 \in (0, \infty)$.
+\[ f_0 \in -i \sqrt{2\pi}\,z^{-1/2} + O_{z \to \infty}(z^{-3/2}). \]
+Since we know that $f_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $f_0$ is a constant multiple of $\kappa$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $\kappa = i\,\tfrac{1}{2}\,f_0$. We conclude that $\kappa = \laplace_{\zeta_1} \hat{K}$ for
+\[ \hat{K} = \tfrac{1}{\sqrt{2}}\,\zeta_1^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
 \section{Sketches}
 \subsection{Contour argument}
 The hypergeometric function
