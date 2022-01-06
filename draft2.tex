@@ -193,7 +193,7 @@ In particular, this definition is well suited for the differential calculus in t
 \mathcal{B}\left(z^{n+\alpha}\varphi(z)\right)(\zeta)=\mathcal{B}\left(\sum_{k\geq 0}a_kz^{-k-1+n+\alpha}\right)(\zeta)=\sum_{k>n}\frac{a_k}{(k-n-\alpha)!}\zeta^{k-n-\alpha}
 \end{equation}
 
-and computitng the integral which defines the $n+\alpha$-derivative we get exaclty the same result as \eqref{mod2}.  
+and computitng the integral which defines the $n+\alpha$-derivative in \eqref{mod1} we get exaclty the same result as \eqref{mod2}.  
 
 \section{Resurgence of exponential integrals}
 
@@ -206,19 +206,28 @@ I(z)\defeq\int_{\mathcal{C}}e^{-zf}\nu
 where $\mathcal{C}$ is a suitable countur such that the integral is well defined.  
 For any Morse cirtial points $x_\alpha$ of $f$, the saddle point approximation gives the following formal series 
 \begin{equation}
-I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n}.
+I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n} \qquad \text{ as } z\to\infty
 \end{equation}
+where $\mathcal{C}_\alpha$ is a steepest descendet oath through the critical point $x_\alpha$. 
 \begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$
 \begin{enumerate}
 \item $\tilde{\varphi}_\alpha$ is Gevrey-1;
 \item $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ is a germ of analytic function at $\zeta=\zeta_{\alpha}=f(x_\alpha)$;
 \item the following formual holds true
 \begin{multline}\label{formula1}
-\hat{\varphi}_{\alpha}(\zeta)=\partial^{\textcolor{red}{3/2}}_{\zeta, \text{based at }\zeta_\alpha}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)=\Gamma(-N/2)\int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-N/2}\textcolor{red}{\partial_{\zeta'}\left(\int_{f^{-1}(\zeta')}\frac{\nu}{df}\right)} d\zeta'
+\hat{\varphi}_{\alpha}(\zeta)=\partial^{\textcolor{red}{3/2}}_{\zeta, \text{based at }\zeta_\alpha}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)=\Gamma(-1/2)\int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2}\textcolor{red}{\partial_{\zeta'}\left(\int_{f^{-1}(\zeta')}\frac{\nu}{df}\right)} d\zeta'
 \end{multline} 
 \end{enumerate}
 \end{theorem}
 \begin{proof}
+Part $(1)$: 
+
+Part $(2)$: \begin{align*}
+\hat{\varphi}_\alpha(\zeta)=\mathcal{B}(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n})(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
+(2\pi)^{1/2} \left(\delta(f_{x_\alpha}) a_0+\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}\right)
+\end{align*}
+Since $a_{n}\leq CA^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
+
 Part $(3)$: thanks to properties of Caputo's fractional derivatives, we have that the Borel transform of $\tilde{I}_{\alpha}(z)=z^{-1/2}\tilde{\varphi}_\alpha(z)$ is 
 \begin{equation}
 \partial^{1/2}_{\zeta, \text{based at }\zeta_\alpha}\hat{I}_{\alpha}(\zeta)=\hat{\varphi}_{\alpha}(\zeta).
@@ -610,10 +619,11 @@ In particular, the Borel trasforms of LHS and RHS\footnote{The conjugate variabl
 
 \begin{example}[Bessel]
 
-Let $X=\C^*$, $f(x)=x+\frac{1}{x}$ and $\nu=\frac{dx}{x}$, then 
+Let $X=\C^*$, $f(x)=x+\frac{1}{x}$ and $\nu=\frac{dx}{x}$, then the ciritcal points of $f$ are $x=\pm1$ and 
 \begin{equation}
 I(z)\defeq\int_0^{\infty}e^{-zf(x)}\frac{dx}{x}.
 \end{equation}
+
 By change of cooridnates $t=zx$
 \begin{align*}
 I(z)=\int_0^{\infty}e^{-z\left(\frac{t}{z}+\frac{z}{t}\right)}\frac{dt}{t}=\int_0^{\infty}e^{-\left(t+\frac{z^2}{t}\right)}\frac{dt}{t}=2K_0(2z) \,\qquad |\arg z|<\frac{\pi}{4}
@@ -627,7 +637,7 @@ and $K_0(z)\sim\left(\frac{\pi}{2}\right)^{1/2}e^{-z}z^{-1/2}\sum_{k\geq 0}\frac
 \label{eq:IB}
 \frac{d^2}{dz^2}I(z)+\frac{1}{z}\frac{d}{dz}I(z)-4I(z)=0.
 \end{equation} 
-The formal integral of \eqref{eq:IB} is given by a two parameter formal solution $\tilde{I}(z)$
+The formal integral of \eqref{eq:IB} is given by a two parameter formal solution $\tilde{I}_1(z)$
 \begin{equation}
 \tilde{I}(z)=\sum_{\mathbf{k}\in\N^2}U^ke^{-\mathbf{k}\cdot\lambda z}z^{-\tau\cdot \mathbf{k}}\tilde{w}_{\mathbf{k}}(z)
 \end{equation}
@@ -659,9 +669,71 @@ taking twice derivative in $\zeta$ we get
 \end{align*}
 therefore, since equation $(+), (-)$ are hypergeometric the fundamental solution is (see DLMF 15.10.2)
 \begin{align}
-\label{w+}&\hat{w}_+(\zeta)={}_2F_1\left(\frac{1}{2},\frac{1}{2};1;-\frac{\zeta}{4}\right)\\
-\label{w+}&\hat{w}_-(\zeta)={}_2F_1\left(\frac{1}{2},\frac{1}{2};1;\frac{\zeta}{4}\right)
+\label{w+}&\hat{w}_+(\zeta)={}_2F_1\left(\frac{3}{2},\frac{3}{2};2;-\frac{\zeta}{4}\right)\\
+\label{w+}&\hat{w}_-(\zeta)={}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{\zeta}{4}\right)
 \end{align}
+In particular, we notice that taking the series expansion of $\hat{w}_+$ and $\hat{w}_-$ we get numerically that
+\begin{align*}
+\hat{w}_+(\zeta-4)=\frac{1}{\pi}\log(z)\hat{w}_-(z)+\phi_{\text{reg}}\\
+\hat{w}_-(\zeta+4)=\frac{1}{\pi}\log(z)\hat{w}_+(z)+\psi_{\text{reg}}
+\end{align*}
+and analytically (thanks to 15.2.3 DLMF)
+\begin{align*}
+\hat{w}_+(\zeta+i0)-\hat{w}_+(\zeta-i0)&={}_2F_1\left(\frac{3}{2},\frac{3}{2};2;-\frac{\zeta}{4}+i0\right)-{}_2F_1\left(\frac{3}{2},\frac{3}{2};2;-\frac{\zeta}{4}-i0\right) &\qquad\zeta<-4\\
+&=-8i\left(-\frac{\zeta}{4}-1\right)^{-1}\sum_{n\geq 0}\frac{(1/2)_n(1/2)_n}{n!\Gamma(n)}\left(\frac{\zeta}{4}+1\right)^n\\
+&=8i\sum_{n\geq 0}\frac{(1/2)_n(1/2)_n}{n!\Gamma(n)}\left(\frac{\zeta}{4}+1\right)^{n-1} & \\
+&=8i\sum_{n\geq 0}\frac{(1/2)_{n+1}(1/2)_{n+1}}{(n+1)!\Gamma(n+1)}\left(\frac{\zeta}{4}+1\right)^{n} &\\
+&=\mathbf{2i}\sum_{n\geq 0}\frac{(3/2)_{n}(3/2)_{n}}{(n)!\Gamma(n+2)}\left(\frac{\zeta}{4}+1\right)^{n} & \\
+&=\mathbf{2i}{}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{\zeta}{4}+1\right)
+\end{align*}
+\begin{align*}
+\hat{w}_-(\zeta+i0)-\hat{w}_-(\zeta-i0)&={}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{\zeta}{4}+i0\right)-{}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{\zeta}{4}-i0\right)& \qquad\zeta>4\\
+&=8i\left(\frac{\zeta}{4}-1\right)^{-1}\sum_{n\geq 0}\frac{(1/2)_n(1/2)_n}{n!\Gamma(n)}\left(\frac{\zeta}{4}-1\right)^n\\
+&=-8i\sum_{n\geq 0}\frac{(1/2)_n(1/2)_n}{n!\Gamma(n)}\left(1-\frac{\zeta}{4}\right)^{n-1}\\
+&=-8i\sum_{n\geq 0}(-1)^n\frac{(1/2)_{n+1}(1/2)_{n+1}}{(n+1)!\Gamma(n+1)}\left(1-\frac{\zeta}{4}\right)^{n}\\
+&=\mathbf{-2i}\sum_{n\geq 0}(-1)^n\frac{(3/2)_{n}(3/2)_{n}}{(n)!\Gamma(n+2)}\left(1-\frac{\zeta}{4}\right)^{n}\\
+&=\mathbf{-2i}{}_2F_1\left(\frac{3}{2},\frac{3}{2};2;1-\frac{\zeta}{4}\right)
+\end{align*}
+These are evidence of the resurgent properties of $\tilde{I}_{\pm 1}(z)$. 
+
+\begin{lemma}
+The following identity holds true
+\begin{equation}
+{}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{1}{2};\frac{\zeta^2}{4}\right)=2i\frac{u}{u^2-1}\qquad \qquad \zeta=u+\frac{1}{u}
+\end{equation}
+\end{lemma}
+\begin{proof}
+From 15.4.13 DLMF, we have
+\begin{align*}
+{}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{1}{2};\frac{\zeta^2}{4}\right)&=\frac{2}{\sqrt{4-\zeta^2}} & y=\mathrm{arccsc}(\zeta/2)\\
+&=\frac{1}{\sqrt{1-\mathrm{csc}^2(y)}} & \\
+&=-i\tan(y) &   \zeta=\frac{2}{\sin(y)}
+\end{align*}
+therefore if $u=\tan\left(\frac{y}{2}\right)$, we have $\zeta=\frac{1+u^2}{u}=f(u)$ and 
+\begin{equation*}
+{}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{1}{2};\frac{\zeta^2}{4}\right)=2i\frac{u}{u^2-1}=\frac{2i}{f'(u)u}
+\end{equation*}  
+\end{proof}
+
+\begin{claim}
+\label{Bessel}
+\begin{equation}
+\hat{w}_{+}(\zeta-2)=i\pi\int_{-2}^\zeta(\zeta-\zeta')^{-1/2}2\zeta'\,\,{}_2F_1\left(\frac{3}{2},\frac{3}{2};\frac{3}{2};\frac{\zeta^2}{4}\right)d\zeta'
+\end{equation}
+\end{claim}
+\begin{proof}
+Let us first consider the RHS of \eqref{Bessel}
+\begin{align*}
+2\pi\int_{-2}^\zeta(\zeta-\zeta')^{-1/2}\zeta'\,\,{}_2F_1\left(\frac{3}{2},\frac{3}{2};\frac{3}{2};\frac{\zeta^2}{4}\right)d\zeta'&= \frac{4}{3}\int_{-2}^\zeta(\zeta-\zeta')^{-1/2}\left[{}_2F_1\left(2,2;\frac{5}{2};\frac{1}{2}+\frac{\zeta'}{4}\right)-{}_2F_1\left(2,2;\frac{5}{2};\frac{1}{2}-\frac{\zeta'}{4}\right)\right]\\
+&=
+\end{align*}
+\end{proof}
+
 \end{example}
+
+\textcolor{red}{We should check that for Hypergeomtric function the following relation holds true
+\[{}_2F_1(a,b;c;z)\propto\int_1^z(z-t)^{-1/2}\left[{}_2F_1\left(a-\frac{1}{2},b-\frac{1}{2};c-\frac{1}{2};1-t\right)-{}_2F_1\left(a-\frac{1}{2},b-\frac{1}{2};c-\frac{1}{2};1+t\right)\right]dt\]
+}
+
 
 \end{document}
