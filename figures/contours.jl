@@ -3,7 +3,7 @@ import Cairo, Fontconfig
 
 # === paths ===
 
-u_path(t) = -(0.02 + im*t)^(2/3)
+u_path(t) = 1/6 * cosh(2/3*π*im - t)
 
 ζ(u) = 4u^3 - 3u
 
@@ -32,8 +32,8 @@ u_frame = compose(context(),
 )
 u_contour = compose(u_window,
   (context(), circle(-0.25, 0, 0.015w), fill("orangered")),
-  arrowhead(u_path, 0.5, 0.04w, "black"),
-  (context(), line(reim.([u_path(t^3) for t in LinRange(-1.09, 1.09, 60)])), stroke("black")),
+  arrowhead(u_path, 2.1, 0.04w, "black"),
+  (context(), line(reim.([u_path(t) for t in LinRange(-2.65, 2.65, 60)])), stroke("black")),
   u_frame
 )
 
@@ -45,8 +45,8 @@ u_contour = compose(u_window,
 )
 ζ_contour = compose(ζ_window,
   (context(), circle(ζ(-0.25), 0, 0.015w), fill("orangered")),
-  arrowhead(t -> ζ(u_path(t)), 0.7, 0.04w, "black"),
-  (context(), line(reim.(ζ.([u_path(sign(t)*t^2) for t in LinRange(-1.03, 1.03, 60)]))), stroke("black")),
+  arrowhead(t -> ζ(u_path(t)), 2.2, 0.04w, "black"),
+  (context(), line(reim.(ζ.([u_path(t) for t in LinRange(-2.53, 2.53, 60)]))), stroke("black")),
   ζ_frame
 )
 
