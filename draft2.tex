@@ -378,7 +378,7 @@ Since $\hat{u}_+$ has a simple singularity at $\zeta=-2/3$ and $\hat{u}_-$ has a
 
 \begin{claim}\label{claim1}
 \begin{equation}
-\hat{w}_+(\zeta-2/3)=\frac{1}{\sqrt{\pi}}\int_{-2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left(\frac{1}{f'(u)}\right)ds \,\,\qquad s=f(u)
+\hat{w}_+(\zeta-2/3)=\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left(\frac{1}{f'(u)}\right)ds \,\,\qquad s=f(u)
 \end{equation}
 \end{claim}
 
@@ -402,19 +402,23 @@ Therefore, if $u\defeq -2\sin(y)$, we have $\zeta=\frac{u^3}{3}-u=f(u)$ and \[{}
 Hence claim \eqref{claim1} is equivalent to 
 \begin{claim}\label{claim 2}
 \begin{equation}
-\hat{w}_+(\zeta-2/3)=-\frac{1}{\sqrt{\pi}}\int_{-2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds
+\hat{w}_+(\zeta-2/3)=-\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds \qquad \zeta\in(2/3,+\infty)
 \end{equation}
 \end{claim}
 
 Let us study the RHS of claim \eqref{claim 2}
 \begin{align*}
-&\int_{-2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds=2\int_{-2/3}^{\zeta}(\zeta-s)^{-1/2}s\,\,{}_2F_1\left(\frac{4}{3},\frac{5}{3};\frac{3}{2};\frac{9}{4}s^2\right)ds & \\
-&= -\frac{2}{9}\int_{-2/3}^{\zeta}(\zeta-s)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};\frac{1}{2}-\frac{3s}{4}\right)ds+\frac{2}{9}\int_{-2/3}^{\zeta}(\zeta-s)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};\frac{1}{2}+\frac{3s}{4}\right)ds & 15.8.28 \text{ DLMF} \\
-&=-\frac{4i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};t\right)dt+\frac{4i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-t\right)dt & \zeta'=\frac{1}{2}-\frac{3}{4}\zeta\\
-&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-t\right)dt -\frac{9i}{32}\textcolor{gray}{\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};-\frac{1}{2};1-t\right)dt}& 15.10.21 \text{ DLMF }\\
-&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{5}{2};1-t\right)t^{-3/2}dt &  15.10.13 \text{ DLMF }
+&\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds=2\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}s\,\,{}_2F_1\left(\frac{4}{3},\frac{5}{3};\frac{3}{2};\frac{9}{4}s^2\right)ds & \\
+&= -\frac{2}{9}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};\frac{1}{2}-\frac{3s}{4}\right)ds+\frac{2}{9}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};\frac{1}{2}+\frac{3s}{4}\right)ds & 15.8.28 \text{ DLMF} \\
+&=\frac{4}{9\sqrt{3}}\int_0^x(x-y)^{-1/2}\left[{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1+y\right)-{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};y\right)\right]dy & x\in (-\infty,0) \\
+&=-\frac{\sqrt{3\pi}}{4}\Gamma(1/6)e^{-\frac{3}{2}\pi i}\int_0^x(x-y)^{-1/2}y^{-5/3}{}_2F_1\left(\frac{5}{3},\frac{1}{6};\frac{1}{3};\frac{1}{y}\right)dy & \\
+&=-\frac{\sqrt{3}\pi}{4}\frac{\Gamma(1/6)\Gamma(7/6)}{\Gamma(5/3)}e^{-\frac{3}{2}\pi i} |x|^{-7/6}{}_2F_1\left(\frac{7}{6},\frac{1}{6};\frac{1}{3};\frac{1}{x}\right) & \eqref{4.8} \\
+&=\frac{5\pi^2}{24\sqrt{3}}\frac{\Gamma(1/3)}{\Gamma(5/3)}\left({}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}-\frac{\zeta}{4}\right)-e^{-\frac{11}{6}\pi i}{}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}+\frac{\zeta}{4}\right)\right) & \zeta\in (2/3,+\infty)
+%&=-\frac{4i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};t\right)dt+\frac{4i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-t\right)dt & \zeta'=\frac{1}{2}-\frac{3}{4}\zeta\\
+%&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-t\right)dt -\frac{9i}{32}\textcolor{gray}{\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};-\frac{1}{2};1-t\right)dt}& 15.10.21 \text{ DLMF }\\
+%&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{5}{2};1-t\right)t^{-3/2}dt &  15.10.13 \text{ DLMF }
 \end{align*}
-
+however, ${}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2/3,+\infty)$. 
 %By definition ${}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};t\right)=\sum_{n\geq 0}\frac{(2/3)_n(4/3)_n}{(3/2)_n n!}t^n$, thus
 %
 %\begin{align*}
@@ -506,31 +510,33 @@ Let us study the RHS of claim \eqref{claim 2}
 %%\end{align*}
 %%
 %%However we are interested in resurgence properties of $\tilde{I}(z)$, thus we take its Borel transform. 
-\subsubsection{Comparison with Aaron}
+%\subsubsection{Comparison with Aaron}
+%
+%The Airy integral can be written in terms of the modified Bessel equation as  
+%
+%\begin{equation}
+%Ai(x)=\frac{1}{\pi\sqrt{3}}x^{1/2}K(\frac{2}{3}x^{3/2}).
+%\end{equation}
+%On the other hand we have, for $z=x^{3/2}$
+%\begin{equation}
+%Ai(x)=-\frac{z^{1/3}}{2\pi i}I(z)=-\frac{1}{2\pi i}x^{1/2}I(x^{3/2}) 
+%\end{equation} 
+%hence
+%\begin{align*}
+%-\frac{1}{2\pi i}I(x^{3/2})&=\frac{1}{\pi\sqrt{3}}K(\frac{2}{3}x^{3/2})\\
+%\frac{i}{2} I(z)&=\frac{1}{\sqrt{3}}K(\frac{2}{3}z)
+%\end{align*}
+%In particular, the Borel trasforms of LHS and RHS\footnote{The conjugate variable of $z$ is $\zeta$, hence $\hat{K}(\frac{2}{3}z)=\frac{3}{2}\hat{K}(\frac{3}{2}\zeta)$. Indeed assuming $K(z)=\sum_{n\geq 0}a_nz^{-n}$, the Borel transform of $K(\frac{2}{3}z)=\sum_{n\geq 0}a_n\left(\frac{3}{2}\right)^nz^{-n}$ is by definition \[\hat{K}(\frac{2}{3}z)=\sum_{k\geq 0}a_{n+1}\left(\frac{3}{2}\right)^{n+1}\frac{\zeta^n}{n!}=\frac{3}{2}\sum_{k\geq 0}\frac{a_{n+1}}{n!}\left(\frac{3}{2}\zeta\right)^{n}=\frac{3}{2}\hat{K}(\frac{3}{2}\zeta). \]} must be equal, i.e.
+%\begin{align*}
+%\frac{i}{2} \hat{I}(\zeta)&=\frac{\sqrt{3}}{2}\hat{K}(\frac{3}{2}\zeta)\\
+%&= \frac{\sqrt{3}}{2}\frac{1}{\sqrt{2}}(\frac{3}{2}\zeta-1)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{1}{2}-\frac{3}{4}\zeta\right)\\
+%&=\frac{\sqrt{3}}{2}(3\zeta-2)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{1}{2}-\frac{3}{4}\zeta\right)\\
+%&=\frac{\sqrt{3}}{2}T_{-2/3}\left((3\zeta)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)\right)\\
+%&=\frac{1}{2}T_{-2/3}\left(\frac{1}{\sqrt{\zeta}}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)\right)\\
+%\hat{I}(\zeta)&=-i T_{-2/3}\left(\frac{1}{\sqrt{\zeta}}\,\,{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)\right)
+%\end{align*} 
 
-The Airy integral can be written in terms of the modified Bessel equation as  
 
-\begin{equation}
-Ai(x)=\frac{1}{\pi\sqrt{3}}x^{1/2}K(\frac{2}{3}x^{3/2}).
-\end{equation}
-On the other hand we have, for $z=x^{3/2}$
-\begin{equation}
-Ai(x)=-\frac{z^{1/3}}{2\pi i}I(z)=-\frac{1}{2\pi i}x^{1/2}I(x^{3/2}) 
-\end{equation} 
-hence
-\begin{align*}
--\frac{1}{2\pi i}I(x^{3/2})&=\frac{1}{\pi\sqrt{3}}K(\frac{2}{3}x^{3/2})\\
-\frac{i}{2} I(z)&=\frac{1}{\sqrt{3}}K(\frac{2}{3}z)
-\end{align*}
-In particular, the Borel trasforms of LHS and RHS\footnote{The conjugate variable of $z$ is $\zeta$, hence $\hat{K}(\frac{2}{3}z)=\frac{3}{2}\hat{K}(\frac{3}{2}\zeta)$. Indeed assuming $K(z)=\sum_{n\geq 0}a_nz^{-n}$, the Borel transform of $K(\frac{2}{3}z)=\sum_{n\geq 0}a_n\left(\frac{3}{2}\right)^nz^{-n}$ is by definition \[\hat{K}(\frac{2}{3}z)=\sum_{k\geq 0}a_{n+1}\left(\frac{3}{2}\right)^{n+1}\frac{\zeta^n}{n!}=\frac{3}{2}\sum_{k\geq 0}\frac{a_{n+1}}{n!}\left(\frac{3}{2}\zeta\right)^{n}=\frac{3}{2}\hat{K}(\frac{3}{2}\zeta). \]} must be equal, i.e.
-\begin{align*}
-\frac{i}{2} \hat{I}(\zeta)&=\frac{\sqrt{3}}{2}\hat{K}(\frac{3}{2}\zeta)\\
-&= \frac{\sqrt{3}}{2}\frac{1}{\sqrt{2}}(\frac{3}{2}\zeta-1)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{1}{2}-\frac{3}{4}\zeta\right)\\
-&=\frac{\sqrt{3}}{2}(3\zeta-2)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{1}{2}-\frac{3}{4}\zeta\right)\\
-&=\frac{\sqrt{3}}{2}T_{-2/3}\left((3\zeta)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)\right)\\
-&=\frac{1}{2}T_{-2/3}\left(\frac{1}{\sqrt{\zeta}}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)\right)\\
-\hat{I}(\zeta)&=-i T_{-2/3}\left(\frac{1}{\sqrt{\zeta}}\,\,{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)\right)
-\end{align*} 
 %%In addition, since $\hat{I}(\zeta)=C_3\partial_{\zeta,\text{based at } -2/3}^{1/2} {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)$ is a solution of the Borel transform of equation \eqref{eq:I}; thus
 %%\begin{align*}
 %%C_3\partial_{\zeta,\text{based at } -2/3}^{1/2} {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)&=-i T_{-2/3}\left(\frac{1}{\sqrt{\zeta}}\,\,{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{3}{4}\zeta\right)\right)\\
@@ -720,22 +726,62 @@ therefore if $u=\tan\left(\frac{y}{2}\right)$, we have $\zeta=\frac{1+u^2}{u}=f(
 \begin{claim}
 \label{Bessel}
 \begin{equation}
-\hat{w}_{+}(\zeta-2)=i\pi\int_{-2}^\zeta(\zeta-\zeta')^{-1/2}2\zeta'\,\,{}_2F_1\left(\frac{3}{2},\frac{3}{2};\frac{3}{2};\frac{\zeta^2}{4}\right)d\zeta'
+\hat{w}_{+}(\zeta-2)=i\pi\int_{2}^\zeta(\zeta-\zeta')^{-1/2}2\zeta'\,\,{}_2F_1\left(\frac{3}{2},\frac{3}{2};\frac{3}{2};\frac{\zeta^2}{4}\right)d\zeta'\,\qquad \zeta\in(2,+\infty)
 \end{equation}
 \end{claim}
 \begin{proof}
 Let us first consider the RHS of \eqref{Bessel}
 \begin{align*}
-2\pi\int_{-2}^\zeta(\zeta-\zeta')^{-1/2}\zeta'\,\,{}_2F_1\left(\frac{3}{2},\frac{3}{2};\frac{3}{2};\frac{\zeta^2}{4}\right)d\zeta'&= \frac{4}{3}\int_{-2}^\zeta(\zeta-\zeta')^{-1/2}\left[{}_2F_1\left(2,2;\frac{5}{2};\frac{1}{2}+\frac{\zeta'}{4}\right)-{}_2F_1\left(2,2;\frac{5}{2};\frac{1}{2}-\frac{\zeta'}{4}\right)\right]\\
-&=
+&2\pi\int_{2}^\zeta(\zeta-\zeta')^{-1/2}\zeta'\,\,{}_2F_1\left(\frac{3}{2},\frac{3}{2};\frac{3}{2};\frac{\zeta^2}{4}\right)d\zeta'= &\\
+&\quad = \frac{4}{3}\int_{2}^\zeta(\zeta-\zeta')^{-1/2}\left[{}_2F_1\left(2,2;\frac{5}{2};\frac{1}{2}+\frac{\zeta'}{4}\right)-{}_2F_1\left(2,2;\frac{5}{2};\frac{1}{2}-\frac{\zeta'}{4}\right)\right]d\zeta' &\\
+&\quad =\frac{8}{3}\int_0^x(y-x)^{-1/2}\left[{}_2F_1\left(2,2,;\frac{5}{2};y\right)-{}_2F_1\left(2,2;\frac{5}{2};1-y\right)\right]dy & x\in (-\infty,0)\\
+&\quad =2\pi\int_0^x(x-y)^{-1/2}y^{-2}F\left(2,\frac{1}{2};1;\frac{1}{y}\right)dy & \eqref{4.8} \\
+&\quad =\pi^2|x|^{-3/2}{}_2F_1\left(\frac{3}{2},\frac{1}{2};1;\frac{1}{x}\right) & x\in (-\infty, 0)\\
+&\quad =\frac{\pi^2}{2}\left({}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}-\frac{\zeta}{4}\right)-i{}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)\right) & \zeta\in(2,+\infty)
 \end{align*}
+however ${}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2,+\infty)$. 
 \end{proof}
 
 \end{example}
 
-\textcolor{red}{We should check that for Hypergeomtric function the following relation holds true
-\[{}_2F_1(a,b;c;z)\propto\int_1^z(z-t)^{-1/2}\left[{}_2F_1\left(a-\frac{1}{2},b-\frac{1}{2};c-\frac{1}{2};1-t\right)-{}_2F_1\left(a-\frac{1}{2},b-\frac{1}{2};c-\frac{1}{2};1+t\right)\right]dt\]
-}
+
+\section{Useful identities for Gauss hypergeomtric functions}
+
+\begin{multline}
+\label{w1w3w5}
+{}_2F_1\left(a,b;c;z\right)=e^{b\pi i}\frac{\Gamma(c)\Gamma(a-c+1)}{\Gamma(a+b-c+1)\Gamma(c-b)}{}_2F_1\left(a,b;c;1-z\right)+\\
+-e^{(a+b-c)\pi i}\frac{\Gamma(c)\Gamma(a-c+1)}{\Gamma(b)\Gamma(a-b+1)}|z|^{-a}{}_2F_1\left(a,a-c+1;a-b+1;\frac{1}{z}\right)
+\end{multline}
+
+
+\begin{multline}
+\label{4.5}
+\int_0^x |y|^{a-\mu-1}{}_2F_1\left(a,b;c,y\right)(x-y)^{\mu-1}dy=\frac{\Gamma(\mu)\Gamma(a-\mu)}{\Gamma(a)}|x|^{a-1}{}_2F_1\left(a-\mu,b;c;x\right)\\
+x\in(-\infty,0)\cup(0,1), \, \Re a>\Re\mu>0
+\end{multline}
+which can be rewritten as 
+\begin{multline}
+\label{4.8}
+\int_{y>x}|y|^{-a}|x-y|^{\mu-1}{}_2F_1\left(a,b;c;y^{-1}\right)dy=\frac{\Gamma(\mu)\Gamma(a-\mu)}{\Gamma(a)}|x|^{-a+\mu}{}_2F_1\left(a-\mu,b;c;x^{-1}\right)\\
+x\in(-\infty,0)\cup(1,\infty), \, \Re a>\Re\mu>0
+\end{multline}
+%\textcolor{red}{We should check that for Hypergeomtric functions the following relation holds true
+%\[{}_2F_1(a,b;c;z-1)\propto\int_1^z(z-t)^{-1/2}\left[{}_2F_1\left(a+\frac{1}{2},b+\frac{1}{2};c+\frac{1}{2};1-t\right)-{}_2F_1\left(a+\frac{1}{2},b+\frac{1}{2};c+\frac{1}{2};t\right)\right]dt\]
+%}
+%
+%The following identities hold true
+%\begin{multline}
+%\label{a+b+c+}
+%\int_{0<\frac{y}{x}<1}|y|^{c-1}(1-y)^{a+b-c}{}_2F_1\left(a,b;c;y\right)\frac{|x-y|^{\mu-1}}{\Gamma(\mu)}dy=\\
+%\frac{\Gamma(c)}{\Gamma(c+\mu)}|x|^{c-1+\mu}(1-x)^{a+b-c+\mu}{}_2F_1\left(a+\mu,b+\mu;c+\mu;x\right)\\
+% x\in (-\infty,0)\cup(0,1), \,\Re c>0,\,\Re\mu>0
+%\end{multline}
+%
+%\begin{multline}\label{a-b-c-}
+%\int_{-\infty}^x{}_2F_1\left(a,b;c;y\right) (x-y)^{\mu-1}dy=\Gamma(\mu)\frac{\Gamma(a-\mu)}{\Gamma(a)}\frac{\Gamma(b-\mu)}{\Gamma(b)}\frac{\Gamma(c)}{\Gamma(c-\mu)}{}_2F_1\left(a-\mu,b-\mu;c-\mu;x\right)\\
+%x<1, \Re a,\Re b>\Re\mu>0
+%\end{multline}
+
 
 
 \end{document}
