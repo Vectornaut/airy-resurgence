@@ -1,5 +1,7 @@
+module Contours
+
 # for plots
-using Compose, Colors
+using Compose, Colors, Roots
 import Cairo, Fontconfig
 
 # for integral checks
@@ -8,8 +10,8 @@ import Plots
 
 # === paths ===
 
-u_path(t) = 1/6 * cosh(2/3*π*im - t)
-u_jet(t) = (u_path(t), -1/6 * sinh(2/3*pi*im - t))
+u_path(θ, off) = t -> 1/6 * exp(-im*θ/3) * (cosh(2/3*π*im - t) - off*exp(2/3*π*im))
+u_jet(θ, off) = t -> (u_path(θ, off)(t), -1/6 * exp(-im*θ/3) * sinh(2/3*π*im - t))
 
 function ζ(u)
   if length(u) == 1
@@ -41,7 +43,15 @@ function arrowhead(curve, time, size, color; eps = 1e-3)
   )
 end
 
-function plotcontours()
+taxinorm(z) = max(abs(real(z)), abs(imag(z)))
+
+# for a nice contour with θ at π or 4π, set `off` to 1.6
+function plotcontours(θ = 0, off = 0)
+  dark = RGB(0, 0.5, 0.7)
+  light = RGB(0.6, 0.9, 1.0)
+  
+  u_range = [find_zero(t -> taxinorm(u_path(θ, off)(t)) - 1.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
+  u_mark = find_zero(t -> taxinorm(u_path(θ, off)(t)) - 0.5, (0, 3), Bisection())
   u_window = context(units = UnitBox(-1, -1, 2, 2), mirror = Mirror(0, 0, 0))
   u_frame = compose(context(),
     line([(-1, 0), (1, 0)]),
@@ -50,12 +60,15 @@ function plotcontours()
     linewidth(1w/300), stroke(Gray(0.6))
   )
   u_contour = compose(u_window,
-    (context(), circle(-0.25, 0, 0.015w), fill("orangered")),
-    arrowhead(u_jet, 2.1, 0.04w, "black"),
-    (context(), line(reim.([u_path(t) for t in LinRange(-2.65, 2.65, 60)])), stroke("black")),
+    (context(), circle(-0.25, 0, 0.015w), fill(dark)),
+    (context(), circle(0.25, 0, 0.015w), fill(light)),
+    arrowhead(u_jet(θ, off), u_mark, 0.04w, "black"),
+    (context(), line(reim.([u_path(θ, off)(t) for t in LinRange(u_range..., 60)])), stroke("black")),
     u_frame
   )
   
+  ζ_range = [find_zero(t -> taxinorm(ζ(u_path(θ, off)(t))) - 6.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
+  ζ_mark = find_zero(t -> taxinorm(ζ(u_path(θ, off)(t))) - 3, (0, 3), Bisection())
   ζ_window = context(units = UnitBox(-6, -6, 12, 12), mirror = Mirror(0, 0, 0))
   ζ_frame = compose(context(),
     line([(-6, 0), (6, 0)]),
@@ -63,9 +76,10 @@ function plotcontours()
     linewidth(1w/300), stroke(Gray(0.6))
   )
   ζ_contour = compose(ζ_window,
-    (context(), circle(ζ(-0.25), 0, 0.015w), fill("orangered")),
-    arrowhead(t -> ζ(u_jet(t)), 2.2, 0.04w, "black"),
-    (context(), line(reim.(ζ.([u_path(t) for t in LinRange(-2.53, 2.53, 60)]))), stroke("black")),
+    (context(), circle(ζ(-0.25), 0, 0.015w), fill(dark)),
+    (context(), circle(ζ(0.25), 0, 0.015w), fill(light)),
+    arrowhead(t -> ζ(u_jet(θ, off)(t)), ζ_mark, 0.04w, "black"),
+    (context(), line(reim.(ζ.([u_path(θ, off)(t) for t in LinRange(ζ_range..., 60)]))), stroke("black")),
     ζ_frame
   )
   
@@ -101,16 +115,19 @@ function f1_hat(ζ0)
   (1-ξ)^(-1/2) * _₂F₁(1/6, 5/6, 1/2, 1-ξ)
 end
 
+g1_hat(ζ0) = _₂F₁(2/3, 4/3, 3/2, (1-ζ0)/2)
+g0_hat(ζ0) = _₂F₁(2/3, 4/3, 3/2, (1+ζ0)/2)
+
 besselk_sing_form(z) = t -> begin
   ζ0 = ζ(u_jet(t))
-  1/6im * exp(-z*ζ0[1]) * f0_hat(ζ0[1]) * ζ0[2]
+  1/(3im*sqrt(3)) * exp(-z*ζ0[1]) * g0_hat(ζ0[1]) * ζ0[2]
 end
 
 besselk_sing_integral(z) = quadgk(besselk_sing_form(z), -3, 3, rtol = 1e-8)
 
 besselk_holo_form(z) = t -> begin
   ζ0 = ζ(u_jet(t))
-  1/6im * exp(-z*ζ0[1]) * f1_hat(ζ0[1]) * ζ0[2]
+  1/(3im*sqrt(3)) * exp(-z*ζ0[1]) * g1_hat(ζ0[1]) * ζ0[2]
 end
 
 besselk_holo_integral(z) = quadgk(besselk_holo_form(z), -3, 3, rtol = 1e-8)
@@ -135,4 +152,6 @@ function integral_test_plot()
     real.(besselk_laplace.(mesh)),
     sqrt(pi/2) * exp.(-mesh) .* mesh.^(-1/2)
   ])
+end
+
 end

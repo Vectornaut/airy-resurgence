@@ -1,0 +1,65 @@
+\documentclass{article}
+
+\usepackage{ajf}
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\theoremstyle{plain}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+
+\title{Change of basis}
+\author{Aaron Fenyes}
+\date{}
+
+\begin{document}
+\maketitle
+The hypergeometric function
+\[ \hat{g}_1 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) \]
+satisfies equation~\ref{eqn:hypergeom} by definition. Formula~15.10.13 from \cite{dlmf} gives another solution,
+\[ \hat{g}_0 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big). \]
+Formulas 15.10.14 and 15.10.12 from \cite{dlmf} give two more solutions,
+\begin{alignat*}{2}
+\hat{f}_1 &\;=\;& (1-\xi)^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi\big) \\
+\hat{f}_0 &\;=\;& \xi^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big).
+\end{alignat*}
+
+By identities 15.10.17--18, and 15.10.21--22 from \cite{dlmf},
+\begin{align*}
+\hat{g}_0 & = \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})}\;\hat{g}_1 + \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{2}{3}) \Gamma(\tfrac{4}{3})}\;\hat{f}_0 \\
+\hat{f}_1 & = \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{1}{3}) \Gamma(-\tfrac{1}{3})}\;\hat{g}_1 + \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{5}{6}) \Gamma(\tfrac{1}{6})}\;\hat{f}_0 \\
+\hat{g}_1 & = \frac{\Gamma(\tfrac{3}{2}) \Gamma(-\tfrac{1}{2})}{\Gamma(\tfrac{5}{6}) \Gamma(\tfrac{1}{6})}\;\hat{g}_0 + \frac{\Gamma(\tfrac{3}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{2}{3}) \Gamma(\tfrac{4}{3})}\;\hat{f}_1 \\
+\hat{f}_0 & = \frac{\Gamma(\tfrac{1}{2}) \Gamma(-\tfrac{1}{2})}{\Gamma(\tfrac{1}{3}) \Gamma(-\tfrac{1}{3})}\;\hat{g}_0 + \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})}\;\hat{f}_1
+\end{align*}
+Using the factorial recurrence, Euler's reflection formula, and the known value of $\Gamma(\tfrac{1}{2})$, we find that
+\begin{align*}
+\Gamma(-\tfrac{1}{2}) & = -2\sqrt{\pi} \\
+\Gamma(\tfrac{1}{2}) & = \sqrt{\pi} \\
+\Gamma(\tfrac{3}{2}) & = \tfrac{1}{2}\sqrt{\pi} \\
+\frac{1}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})} & = \frac{\sin(\tfrac{1}{6} \pi)}{\pi} \\
+& = \frac{1}{2\pi} \\
+\frac{1}{\Gamma(\tfrac{2}{3}) \Gamma(\tfrac{4}{3})} & = \frac{1}{\Gamma(\tfrac{2}{3})\,\tfrac{1}{3} \Gamma(\tfrac{1}{3})} \\
+& = \frac{3 \sin(\tfrac{1}{3} \pi)}{\pi} \\
+& = \frac{3\sqrt{3}}{2\pi} \\
+\frac{1}{\Gamma(\tfrac{1}{3}) \Gamma(-\tfrac{1}{3})} & = \frac{1}{\Gamma(\tfrac{1}{3})\,(-3)\Gamma(\tfrac{2}{3})} \\
+& = -\frac{\sin(\tfrac{1}{3} \pi)}{3\pi} \\
+& = -\frac{1}{2\sqrt{3}\;\pi},
+\end{align*}
+letting us simplify the coefficients above:
+\begin{align*}
+\hat{g}_0 & = -\tfrac{1}{2}\,\hat{g}_1 + \tfrac{3\sqrt{3}}{4}\,\hat{f}_0 \\
+\hat{f}_1 & = \tfrac{1}{\sqrt{3}}\,\hat{g}_1 + \tfrac{1}{2}\,\hat{f}_0 \\
+\hat{g}_1 & = -\tfrac{1}{2}\,\hat{g}_0 + \tfrac{3\sqrt{3}}{4}\,\hat{f}_1 \\
+\hat{f}_0 & = \tfrac{1}{\sqrt{3}}\,\hat{g}_0 + \tfrac{1}{2}\,\hat{f}_1.
+\end{align*}
+Summing identities 15.10.17 and 15.10.21, we see that
+\[ \hat{g}_1 + \hat{g}_0 = -\tfrac{1}{2}(\hat{g}_1 + \hat{g}_0) + \tfrac{3\sqrt{3}}{4}(\hat{f}_1 + \hat{f}_0), \]
+so
+\[ \hat{g}_1 + \hat{g}_0 = \tfrac{\sqrt{3}}{2}(\hat{f}_1 + \hat{f}_0), \]
+Summing identities 15.10.18, and 15.10.22, we see that
+\[ \hat{f}_1 + \hat{f}_0 = \tfrac{1}{\sqrt{3}}(\hat{g}_1 + \hat{g}_0) + \tfrac{1}{2}(\hat{f}_1 + \hat{f}_0), \]
+confirming that
+\[ \hat{g}_1 + \hat{g}_0 = \tfrac{\sqrt{3}}{2}\,(\hat{f}_1 + \hat{f}_0). \]
+I've verified this identity numerically.
+\end{document}

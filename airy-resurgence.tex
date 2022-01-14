@@ -172,15 +172,15 @@ In terms of $\zeta_1$, we have
 \[ \hat{f}_0 \in -i \sqrt{2}\,\zeta_1^{-1/2} + O_{\zeta_1 \to 0}(\zeta_1^{1/2}). \]
 Using the decay properties from Section~\ref{reg-decay}, we deduce that
 \[ f_0 \in -i \sqrt{2\pi}\,z^{-1/2} + O_{z \to \infty}(z^{-3/2}). \]
-Since we know that $f_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $f_0$ is a constant multiple of $\kappa$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $\kappa = i\,\tfrac{1}{2}\,f_0$. We conclude that $\kappa = \laplace_{\zeta_1} \hat{K}$ for
+Since we know that $f_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $f_0$ is a constant multiple of $\kappa$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $\kappa = \tfrac{i}{2}\,f_0$. We conclude that $\kappa = \laplace_{\zeta_1} \hat{K}$ for
 \[ \hat{K} = \tfrac{1}{\sqrt{2}}\,\zeta_1^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
 \section{Sketches}
-\subsection{Contour argument}
+\subsection{Contour argument}\label{contour-argument}
 We can recast integral~\ref{integral:mod-bessel} into $\hat{\C}$ by setting $\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \Gamma$ to a contour $\gamma_z$ in $\hat{\C}$ and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/3} \Gamma$, we have
 \begin{equation}\label{integral:mod-bessel-zeta}
-K(z) = \frac{i}{\sqrt{3}} \int_{\gamma_z} e^{-z\zeta}\frac{d\zeta}{4u^2 - 1}.
+K = \frac{i}{\sqrt{3}} \int_{\gamma_z} e^{-z\zeta}\frac{d\zeta}{4u^2 - 1}.
 \end{equation}
-For $z \in (0, \infty)$, the contour $\gamma(z)$ runs clockwise around $[1, \infty)$, as shown below. Let's assume $z \in (0, \infty)$ for the rest of the section. \textbf{[Our conclusions should probably hold whenever $\operatorname{Re}(z) > 0$.]}
+For $z \in (0, \infty)$, the contour $\gamma_z$ runs clockwise around $[1, \infty)$, as shown below. Let's assume $z \in (0, \infty)$ for the rest of the section. \textbf{[Our conclusions should probably hold whenever $\operatorname{Re}(z) > 0$.]}
 \begin{center}
 \includegraphics{figures/zeta_contour.pdf} \\[1em]
 {\small The contour $\gamma_1$ in $\hat{\C}$.}
@@ -189,7 +189,7 @@ For $z \in (0, \infty)$, the contour $\gamma(z)$ runs clockwise around $[1, \inf
 It happens\footnote{How to verify this? This hypergeometric function can be written in terms of Legendre functions, but I don't know where to go from there. \textbf{Veronica:} Look at ``Special cases'' section in \cite{dlmf}, e.g. 15.4.14!} that for our desired branch of $u$,
 \[ \frac{1}{4u^2 - 1} = -F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big), \]
 so we can rewrite integral~\ref{integral:mod-bessel-zeta} as
-\[ K(z) = \frac{1}{i\sqrt{3}} \int_{\gamma_z} e^{-z\zeta} F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big)\;d\zeta. \]
+\[ K = \frac{1}{i\sqrt{3}} \int_{\gamma_z} e^{-z\zeta} F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big)\;d\zeta. \]
 This gives us an alternate route to the conclusion of Section~\ref{spatial}, which we'll follow below.
 
 In addition to the solutions $\hat{g}_1$ and $\hat{f}_0$ from Section~\ref{spatial-success}, equation~\ref{eqn:hypergeom} has the solutions
@@ -197,27 +197,54 @@ In addition to the solutions $\hat{g}_1$ and $\hat{f}_0$ from Section~\ref{spati
 \hat{g}_0 &\;=\;& & F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big) \\
 \hat{f}_1 &\;=\;& (1-\xi)^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi\big),
 \end{alignat*}
-given by formulas 15.10.13 and 15.10.14 from \cite{dlmf}. These four solutions are related by identities 15.10.18, and 15.10.22 from \cite{dlmf}:
+given by formulas 15.10.13 and 15.10.14 from \cite{dlmf}.
+
+The quadratic transformation identity 15.8.27 from \cite{dlmf} shows \textbf{[verified numerically]} that\footnote{Note that $2\Gamma(\tfrac{1}{2})\Gamma(\tfrac{3}{2}) = 2\Gamma(\tfrac{1}{2})\,\tfrac{1}{2}\Gamma(\tfrac{1}{2}) = \pi$ and $\big[\Gamma(\tfrac{5}{6})\Gamma(\tfrac{7}{6})\big]^{-1} = \big[\Gamma(\tfrac{5}{6})\,\tfrac{1}{6}\Gamma(\tfrac{1}{6})\big]^{-1} = \frac{6\sin(\tfrac{1}{6} \pi)}{\pi} = \frac{3}{\pi}$.}
+\[ F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big) = \tfrac{1}{3}(\hat{g}_1 + \hat{g}_0), \]
+so we have
+\[ K = \frac{1}{i\,3\sqrt{3}} \int_{\gamma_z} e^{-z\zeta} (\hat{g}_1 + \hat{g}_0)\;d\zeta. \]
+The solution $\hat{g}_1$ is holomorphic on $\zeta \in [1, \infty)$, so it integrates to zero. The solution $\hat{g}_0$, in contrast, is non-meromorphic at $\zeta = 1$. Along the branch cut $\zeta \in [1, \infty)$, its above-minus-below difference is $-\tfrac{3\sqrt{3}}{2}\,\hat{f}_0$,
+as given\footnote{Note that $\Gamma(\tfrac{3}{2}) \Gamma(\tfrac{1}{2})^{-1} = \tfrac{1}{2}$ and $\big[\Gamma(\tfrac{2}{3})\Gamma(\tfrac{4}{3})\big]^{-1} = \big[\Gamma(\tfrac{2}{3})\,\tfrac{1}{3}\Gamma(\tfrac{1}{3})\big]^{-1} = \frac{3\sin(\tfrac{1}{3} \pi)}{\pi} = \frac{3\sqrt{3}}{2\pi}$.} by equation~15.2.3 from \cite{dlmf}.
+Hence,
+\begin{align*}
+K & = \frac{i}{2} \int^\infty_1 e^{-z\zeta} \hat{f}_0\;d\zeta \\
+e^z K & = \frac{i}{2} \int^\infty_1 e^{-z(\zeta - 1)} \hat{f}_0\;d\zeta \\
+\kappa & = \tfrac{i}{2} \laplace_{\zeta_1} \hat{f}_0,
+\end{align*}
+just as we found in Section~\ref{spatial-success}.
+\subsection{Another solution}
+Section~\ref{contour-argument} associates the solution $K$ of equation~\ref{eqn:mod-bessel} with the solution $\hat{g}_0$ of equation~\ref{eqn:hypergeom}, which contributes the pole at $\zeta = 1$ of
+\[ \frac{du}{d\zeta} = \frac{1}{4u^2 - 1} = \tfrac{1}{3}(\hat{g}_1 + \hat{g}_0). \]
+The solution $\hat{g}_1$, which contributes the pole at $\zeta = -1$, is associated with another solution of equation~\ref{eqn:mod-bessel}.
+
+To express this other solution as a Laplace transform, following the method of Section~\ref{spatial-success}, we would use the solution
+\[ \hat{f}_1 = (1-\xi)^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi\big) \]
+of equation~\ref{eqn:hypergeom}, given by formula~15.10.14 from \cite{dlmf}. This is the only solution, up to scale, which has a fractional power singularity at $\zeta = -1$.
+
+In summary, the contour integration method of solving equation~\ref{eqn:mod-bessel} is associated with the basis
+\begin{align*}
+\hat{g}_1 & = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) \\
+\hat{g}_0 & = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; 1-\xi\big)
+\end{align*}
+of solutions for equation~\ref{eqn:hypergeom}, given by formulas 15.10.11 and 15.10.13 from \cite{dlmf}. These solutions contribute the poles at $\xi = 1$ and $\xi = 0$, respectively, of a generic solution.
+
+The Laplace transformation method of solving equation~\ref{eqn:mod-bessel}, on the other hand, is associated with the basis
+\begin{alignat*}{2}
+\hat{f}_1 &\;=\;& (1-\xi)^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi\big) \\
+\hat{f}_0 &\;=\:& \xi^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big)
+\end{alignat*}
+given by formulas 15.10.14 and 15.10.12 from \cite{dlmf}. These solutions, up to scale, are the only ones with fractional power singularities.
+
+
+Identities 15.10.18, and 15.10.22 from \cite{dlmf} give the change of basis
 \begin{alignat*}{3}
 \hat{f}_1 &\;=\;&\tfrac{1}{\sqrt{3}}\,\hat{g}_1 &\;+\;& \tfrac{1}{2}\,\hat{f}_0 \\
 \hat{f}_0 &\;=\;& \tfrac{1}{\sqrt{3}}\,\hat{g}_0 &\;+\;& \tfrac{1}{2}\,\hat{f}_1.
 \end{alignat*}
 Summing these identities, we see that
-\[ \hat{g}_1 + \hat{g}_0 = \tfrac{\sqrt{3}}{2}\,(\hat{f}_1 + \hat{f}_0). \]
-
-The quadratic transformation identity 15.8.27 from \cite{dlmf} shows \textbf{[verified numerically]} that\footnote{Note that $2\Gamma(\tfrac{1}{2})\Gamma(\tfrac{3}{2}) = 2\Gamma(\tfrac{1}{2})\,\tfrac{1}{2}\Gamma(\tfrac{1}{2}) = \pi$ and $\big[\Gamma(\tfrac{5}{6})\Gamma(\tfrac{7}{6})\big]^{-1} = \big[\Gamma(\tfrac{5}{6})\,\tfrac{1}{6}\Gamma(\tfrac{1}{6})\big]^{-1} = \frac{6\sin(\tfrac{1}{6} \pi)}{\pi} = \frac{3}{\pi}$.}
-\begin{align*}
-F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big) & = \tfrac{1}{3}(\hat{g}_1 + \hat{g}_0) \\
-& = \tfrac{1}{2\sqrt{3}}(\hat{f}_1 + \hat{f}_0)
-\end{align*}
-so we have
-\[ K(z) = \frac{1}{6i} \int_{\gamma_z} e^{-z\zeta} (\hat{f}_1 + \hat{f}_0)\;d\zeta. \]
-The solution $\hat{f}_1$ is regular on $\zeta \in [1, \infty)$, so it integrates to zero. \textbf{[This doesn't hold up numerically!]} The solution $\hat{f}_0$ looks like $(1 - \zeta)^{-1/2}$ times a function which is regular on $\zeta \in [1, \infty)$, so integrating it along $\gamma_z$ is the same as integrating it twice along the contour that goes rightward from $1$, with its value continued from above the singularity. Hence,
-\begin{align*}
-K(z) & = \frac{1}{3i} \int^\infty_1 e^{-z\zeta} \hat{f}_0\;d\zeta \\
-& = \tfrac{1}{3i} \laplace_{\zeta_1} \hat{f}_0.
-\end{align*}
-\textbf{[Constant conflicts with Section~\ref{spatial}]}
+\[ \hat{g}_1 + \hat{g}_0 = \tfrac{\sqrt{3}}{2}\,(\hat{f}_1 + \hat{f}_0), \]
+giving the alternate decomposition
+\[ \frac{du}{d\zeta} = \tfrac{1}{2\sqrt{3}}\,(\hat{f}_1 + \hat{f}_0). \]
 \subsection{Correspondence with Mari\~{n}o's series}
 Let $f_1(z)$ be the holomorphic function corresponding to Mari\~{n}o's formal power series $\varphi_1(z^{-1})$. The formal power series corresponding to $f$ will be written in the variable $z$.
 
