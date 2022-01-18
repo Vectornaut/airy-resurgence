@@ -209,7 +209,7 @@ For any Morse cirtial points $x_\alpha$ of $f$, the saddle point approximation g
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n} \qquad \text{ as } z\to\infty
 \end{equation}
 where $\mathcal{C}_\alpha$ is a steepest descendet oath through the critical point $x_\alpha$. 
-\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$
+\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$
 \begin{enumerate}
 \item $\tilde{\varphi}_\alpha$ is Gevrey-1;
 \item $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ is a germ of analytic function at $\zeta=\zeta_{\alpha}=f(x_\alpha)$;
@@ -220,10 +220,23 @@ where $\mathcal{C}_\alpha$ is a steepest descendet oath through the critical poi
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Part $(1)$: 
+Part $(1)$: Let us assume that locally $\nu=\sum_{j\geq 0}b_j^{\alpha}(t-t_{\alpha})^{j}dt$ for $|t-t_\alpha|<\varepsilon$. By the steepest descendet method, $I_\alpha(z)$ can be aproximated as $z\to\infty$ as
+\begin{align*}
+I_\alpha(\zeta)&\sim e^{-zf(x_\alpha)}\int_{-\varepsilon}^{\varepsilon}\sum_{n\geq 0}t^{2n}b_{2n}^{\alpha}e^{-zf''(x_\alpha)\frac{t^2}{2}}dt\\
+&=e^{-zf(x_\alpha)}\sum_{n\geq 0}b_{2n}^{\alpha}\int_{-\varepsilon}^{\varepsilon}t^{2n}e^{-zf''(x_{\alpha})\frac{t^2}{2}}dt\\
+&=\sqrt{2\pi}e^{-zf(x_\alpha)}z^{-1/2}\sum_{n\geq 0}\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!! z^{-n}\mathrm{Erf}\left(\frac{\sqrt{z f''(x_\alpha)}}{\sqrt{2}}\varepsilon\right)+\\
+&-2e^{-zf(x_\alpha)}\sum_{n\geq 1}b_{2n}^{\alpha}(2n-1)!!e^{-zf''(x_{\alpha})\frac{\varepsilon^2}{2}}\sum_{j=1}^n\frac{\varepsilon^{2j-1}}{(2j-1)!!}\left(f''(x_\alpha)z\right)^{n-j+1}\\
+&\sim_{\varepsilon<<1} 2\varepsilon \sqrt{2\pi}e^{-zf(x_\alpha)}z^{-1/2}\sum_{n\geq 0}\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!! z^{-n}
+\end{align*} 
+therefore \[a_{\alpha,n}\defeq 2\varepsilon\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!!\]
+
+Since, $\tfrac{1}{\varepsilon}=\limsup_{n}\sqrt[n]{b_{n}^{\alpha}}$
+
+\[|a_{\alpha,n}|\leq CA^n n!\]
+where we use $(2n-1)!!\sim \tfrac{2^n}{\sqrt{\pi n}}n!$ as $n\to \infty$.
 
 Part $(2)$: \begin{align*}
-\hat{\varphi}_\alpha(\zeta)=\mathcal{B}(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n})(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
+\hat{\varphi}_\alpha(\zeta)=\mathcal{B}\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
 (2\pi)^{1/2} \left(\delta(f_{x_\alpha}) a_0+\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}\right)
 \end{align*}
 Since $a_{n}\leq CA^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
@@ -235,7 +248,7 @@ Part $(3)$: thanks to properties of Caputo's fractional derivatives, we have tha
 In addition, we notice 
 \begin{align*}
 I_{\alpha}(z)&=\int_{\mathcal{C}_{\alpha}}e^{-zf}\nu & f=\zeta\\
-&=\int_{\mathcal{H}_{\alpha}}e^{-z\zeta}\partial_{\zeta}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)d\zeta   & \mathcal{H}_{\alpha} \text{ is Hankel countour} \\
+&=\int_{\mathcal{H}_{\alpha}}e^{-z\zeta}\partial_{\zeta}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)d\zeta   & \mathcal{H}_{\alpha} \text{ is Heckel countour} \\
 &=:\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}\hat{I}_{\alpha}(\zeta)d\zeta &
 \end{align*}
 hence 
@@ -243,9 +256,7 @@ hence
 \hat{\varphi}_{\alpha}(\zeta)=\partial^{1/2}_{\zeta, \text{based at } \zeta_\alpha}\left(\partial_{\zeta}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)\right)=\partial^{3/2}_{\zeta, \text{based at } \zeta_\alpha}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)
 \end{equation}
 \end{proof}
-Given an exponential integral
-\[ J(z) = \int_\Gamma e^{-fz} \]
-where $f$ projects $\Gamma$ to a Hankel contour, the argument above shows that $\hat{J}$ is the $\frac{3}{2}$-derivative of $(f')^{-1}$.
+
 
 
 \begin{example}[Airy]
@@ -301,16 +312,17 @@ for some constants $\mathit{c}_1, \mathit{c}_2\in\C$ (see DLMF 15.10.2). In addi
 \begin{remark}
 $\hat{w}_{+}(\zeta)$ is Laplace summable along the positive real axis, and it can be analyticaly continued on $\C\setminus -\frac{4}{3}\R_{\leq 0}$ with (see 15.2.3 DLMF)
 \begin{align*}
-\hat{w}_+(\zeta+i0)-\hat{w}_+(\zeta-i0)&=-\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\sum_{k\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1+\frac{3}{4}\zeta)^n &\zeta<-\frac{4}{3}\\
-&=-\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\left(\frac{5}{144} (4 + 3 \zeta){}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1+\frac{3}{4}\zeta\right)\right) &\\
+\hat{w}_+(\zeta+i0)-\hat{w}_+(\zeta-i0)&=-\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\sum_{n\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1+\frac{3}{4}\zeta)^n &\zeta<-\frac{4}{3}\\
+&=\frac{36}{5}i\sum_{n\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1+\frac{3}{4}\zeta)^{n-1} & \\
+&=-\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\left(\frac{5}{144} (4 + 3 \zeta)\left(1+{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1+\frac{3}{4}\zeta\right)\right)\right) &\\
 &=\mathbf{i}\,\,{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1+\frac{3}{4}\zeta\right) &\\
 &=\mathbf{i}\hat{w}_{-}(\zeta+\frac{4}{3}) &
 \end{align*}
 Anolougusly, $\hat{w}_-(\zeta)$ is Laplace summable along the negative real axis, and it jumps across the branch cut $\frac{4}{3}\R_{\geq 0}$ as 
 \begin{align*}
-\hat{w}_-(\zeta+i0)-\hat{w}_-(\zeta-i0)&=\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\sum_{k\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1-\frac{3}{4}\zeta)^n & \zeta>\frac{4}{3}\\
-&=\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\left(-\frac{5}{144} (-4 + 3 \zeta){}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right)\right) &\\
-&=-\mathbf{i}\,\,{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right) &\\
+\hat{w}_-(\zeta+i0)-\hat{w}_-(\zeta-i0)&=\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\sum_{n\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1-\frac{3}{4}\zeta)^n & \zeta>\frac{4}{3}\\
+&=\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\left(-\frac{5}{144}(-4+3\zeta){}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right)\right)  &\\
+&=-\mathbf{i}\pi\,\,{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right) &\\
 &=-\mathbf{i}\hat{w}_{+}(\zeta-\frac{4}{3}) &
 \end{align*}
 These relations manifest the resurgence property of $\tilde{I}$, indeed near the singularities in the Borel plane of either $\hat{w}_+$ or $\hat{w}_-$, $\hat{w}_-$ and $\hat{w}_+$ respectively contribute to the jump of the former solution.  
@@ -375,12 +387,12 @@ Since $\hat{u}_+$ has a simple singularity at $\zeta=-2/3$ and $\hat{u}_-$ has a
 \hat{u}_-(\zeta)&= C_2 T_{2/3} {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,\frac{3}{4}\zeta\right)= C_2 T_{2/3}\hat{w}_-(\zeta) & \\
 %&=C_3 T_{-2/3}\textcolor{red}{\left(\frac{3}{2\sqrt{\zeta}}\right)^{-1}\partial^{1/2}_{\zeta} {}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},-\frac{3}{4}\zeta\right)}+ C_4\textcolor{red}{\left(\frac{3}{2\sqrt{\zeta}}\right)^{-1}\partial^{1/2}_\zeta {}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},\frac{3}{4}\zeta\right)}
 \end{align*}
-
-\begin{claim}\label{claim1}
-\begin{equation}
-\hat{w}_+(\zeta-2/3)=\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left(\frac{1}{f'(u)}\right)ds \,\,\qquad s=f(u)
-\end{equation}
-\end{claim}
+%
+%\begin{claim}\label{claim1}
+%\begin{equation}
+%\hat{w}_+(\zeta-2/3)=\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left(\frac{1}{f'(u)}\right)ds \,\,\qquad s=f(u)
+%\end{equation}
+%\end{claim}
 
 \begin{lemma}
 The following identity holds true
@@ -399,7 +411,9 @@ The following identity holds true
 Therefore, if $u\defeq -2\sin(y)$, we have $\zeta=\frac{u^3}{3}-u=f(u)$ and \[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}\zeta^2\right)=\frac{1}{1-u^2}=-\frac{1}{f'(u)}\]
 \end{proof}
 
-Hence claim \eqref{claim1} is equivalent to 
+%Hence claim \eqref{claim1} is equivalent to
+Then equations \eqref{formula1} is equivalent to
+ 
 \begin{claim}\label{claim 2}
 \begin{equation}
 \hat{w}_+(\zeta-2/3)=-\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds \qquad \zeta\in(2/3,+\infty)
@@ -418,7 +432,9 @@ Let us study the RHS of claim \eqref{claim 2}
 %&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-t\right)dt -\frac{9i}{32}\textcolor{gray}{\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};-\frac{1}{2};1-t\right)dt}& 15.10.21 \text{ DLMF }\\
 %&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{5}{2};1-t\right)t^{-3/2}dt &  15.10.13 \text{ DLMF }
 \end{align*}
-however, ${}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2/3,+\infty)$. 
+however, ${}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2/3,+\infty)$, thus the claim holds true. 
+
+Analougusly, it can be verified for $\hat{w}_-(\zeta+2/3)$ for $\zeta\in(-\infty,-2/3)$.  
 %By definition ${}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};t\right)=\sum_{n\geq 0}\frac{(2/3)_n(4/3)_n}{(3/2)_n n!}t^n$, thus
 %
 %\begin{align*}
@@ -739,9 +755,9 @@ Let us first consider the RHS of \eqref{Bessel}
 &\quad =\pi^2|x|^{-3/2}{}_2F_1\left(\frac{3}{2},\frac{1}{2};1;\frac{1}{x}\right) & x\in (-\infty, 0)\\
 &\quad =\frac{\pi^2}{2}\left({}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}-\frac{\zeta}{4}\right)-i{}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)\right) & \zeta\in(2,+\infty)
 \end{align*}
-however ${}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2,+\infty)$. 
+however ${}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2,+\infty)$, thus the claim holds true. 
 \end{proof}
-
+Analougusly, it can be verified for $\hat{w}_-(\zeta+2)$ for $\zeta\in(-\infty,-2)$.  
 \end{example}
 
 
