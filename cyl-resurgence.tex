@@ -1,0 +1,113 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage[hmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% convenience aliases
+\newcommand{\maps}{\colon}
+
+% symbology
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\laplace}{\mathcal{L}}
+
+\title{Resurgence of a parabolic cylinder function}
+\author{Aaron Fenyes}
+
+\begin{document}
+\maketitle
+\section{Hypergeometric functions in trigonometry}
+\subsection{Chebyshev sine formulas}
+By definition, $\cos(n\phi) = T_n(\cos(\phi))$. Hence
+\begin{align*}
+\cos(n\phi - \tfrac{n}{2}\pi) & = T_n(\cos(\phi - \tfrac{\pi}{2})) \\
+\cos(n\phi) \cos(\tfrac{n}{2}\pi) + \sin(n\phi) \sin(\tfrac{n}{2}\pi) & = T_n(\sin(\phi)).
+\end{align*}
+For $n = 2k + 1$, we have
+\[ (-1)^k \sin(n\phi) = T_n(\sin(\phi)), \]
+implying also that
+\begin{align*}
+(-1)^k n \cos(n\phi) & = T_n'(\sin(\phi)) \cos(\phi) \\
+(-1)^k n T_n(\cos(\phi)) & = nU_{n-1}(\sin(\phi)) \cos(\phi) \\
+(-1)^k T_n(\cos(\phi)) & = U_{n-1}(\sin(\phi)) \cos(\phi).
+\end{align*}
+\subsection{A hypergeometric identity}
+Let $a = \tfrac{1}{2} - \tfrac{1}{2n}$, giving $1 - 2a = \tfrac{1}{n}$.
+\subsubsection{All orders}\label{all-orders}
+From \cite[equation~15.4.16]{dlmf},
+\[ F(a, 1-a, \tfrac{3}{2}; \sin(\theta)^2) = \frac{\sin((1-2a)\theta)}{(1-2a)\sin(\theta)}. \]
+so we have
+\begin{align*}
+F\left(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{3}{2}; \sin(\theta)^2\right) & = \frac{\sin(\theta/n)}{\sin(\theta)} \\
+& = \frac{1}{U_{n-1}(\cos(\theta/n))}.
+\end{align*}
+Letting $u = \cos(\theta/n)$, we get the identity
+\[ F\left(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{3}{2}; 1 - T_n(u)^2\right) = \frac{1}{U_{n-1}(u)}. \]
+
+Identity~15.10.17 from \cite{dlmf} splits the left-hand side above into
+\begin{align*}
+& \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(1 - \tfrac{1}{2n})\Gamma(1 + \tfrac{1}{2n})} F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{1}{2}; T_n(u)^2) \\
++ & \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{2} - \tfrac{1}{2n})\Gamma(\tfrac{1}{2} + \tfrac{1}{2n})} F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{3}{2}; T_n(u)^2).
+\end{align*}
+which simplifies\footnote{Calculate $\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2}) = -\pi$ and $[\Gamma(\tfrac{1}{2} - \tfrac{1}{2n})\Gamma(\tfrac{1}{2} + \tfrac{1}{2n})]^{-1} = \tfrac{1}{\pi} \sin\big((\tfrac{1}{2} + \tfrac{1}{2n})\pi\big) = \tfrac{1}{\pi} \cos\big(\tfrac{\pi}{2n}\big)$. Similarly, $\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2}) = \tfrac{\pi}{2}$ and $[\Gamma(1 - \tfrac{1}{2n})\Gamma(1 + \tfrac{1}{2n})]^{-1} = [\Gamma(1 - \tfrac{1}{2n})\,\tfrac{1}{2n} \Gamma(\tfrac{1}{2n})]^{-1} = \tfrac{2n}{\pi} \sin\big(\tfrac{\pi}{2n}\big)$.} to
+\begin{align*}
+& n \sin\big(\tfrac{\pi}{2n}\big)\,F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{1}{2}; T_n(u)^2) \\
+- & \cos\big(\tfrac{\pi}{2n}\big)\,F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{3}{2}; T_n(u)^2).
+\end{align*}
+\subsubsection{Odd order}
+From \cite[equation~15.4.14]{dlmf},
+\[ F(a, 1-a, \tfrac{1}{2}; \sin(\theta)^2) = \frac{\cos((1-2a)\theta)}{\cos(\theta)}. \]
+so we have
+\begin{align*}
+F\left(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{1}{2}; \sin(\theta)^2\right) & = \frac{\cos(\theta/n)}{\cos(\theta)} \\
+& = \frac{\cos(\theta/n)}{T_n(\cos(\theta/n))}.
+\end{align*}
+Let $u = \sin(\theta/n)$. If $n = 2k + 1$, we get the identity
+\[ F\left(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{1}{2}; T_n(u)^2\right) = \frac{(-1)^k}{U_{n-1}(u)}. \]
+\section{The Weber equation}
+\subsection{Basics}
+The Weber equation is
+\[ \left[\big(\tfrac{\partial}{\partial y}\big)^2 - \left(\tfrac{1}{4}y^2 + a\right)\right] \psi = 0. \]
+Setting $a$ to zero, we get
+\begin{equation}\label{eqn:weber}
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - \tfrac{1}{4}y^2\right] \psi = 0.
+\end{equation}
+One solution is given by the parabolic cylinder function~\cite[equation~12.7.10]{dlmf}
+\[ U(0, y) = \tfrac{1}{\sqrt{2\pi}}\,y^{1/2}\,K_{1/4}\big(\tfrac{1}{4} y^2\big). \]
+
+Combining the identity \cite[equation~10.27.4]{dlmf}
+\[ K_\nu(z) = \frac{\pi}{2 \sin(\nu \pi)}\big(I_{-\nu}(z) - I_\nu(z)\big) \]
+and the integral \cite[equation~10.32.12]{dlmf}
+\[ I_\nu(z) = \frac{1}{2\pi i} \int_{\mathcal{H}} e^{z \cosh(\phi)} e^{-\nu \phi}\;d\phi, \]
+where $\mathcal{H}$ runs clockwise around the rectangle
+\begin{align*}
+0 & < \operatorname{Re}(\phi) & |\operatorname{Im}(\phi)| & < \pi,
+\end{align*}
+we learn that
+\begin{align*}
+I_{-\nu}(z) - I_\nu(z) & = \frac{1}{\pi i} \int_{\mathcal{H}} e^{z \cosh(\phi)} \sinh(\nu \phi)\;d\phi \\
+K_\nu(z) & = \frac{1}{2i\,\sin(\nu \pi)} \int_{\mathcal{H}} e^{z \cosh(\phi)} \sinh(\nu \phi)\;d\phi.
+\end{align*}
+In particular, we have
+\[ K_{1/4}(z) = \frac{1}{i\sqrt{2}} \int_{\mathcal{H}} e^{z \cosh(\phi)} \sinh(\phi/4)\;d\phi. \]
+Setting $u = \cosh(\phi/4)$ and getting $\cosh(\phi) = 8u^4 - 8u^2 + 1$ from a table of Chebyshev polynomials, we can write
+\begin{equation}\label{integral:watson}
+K_{1/4}(z) = \frac{2\sqrt{2}}{i} \int_\Gamma \exp\left[z \left(8u^4 - 8u^2 + 1\right)\right]\,du,
+\end{equation}
+where $\Gamma$ is a path that comes from $\infty$ at $-45^\circ$ and goes to $\infty$ at $45^\circ$.
+\subsection{Contour argument}\label{contour-argument}
+We can recast integral~\ref{integral:watson} into $\hat{\C}$ by setting $-\zeta = 8u^4 - 8u^2 + 1$. Projecting $\Gamma$ to a contour $\gamma$ in $\hat{\C}$ and choosing the branch of $u$ that lifts $\gamma$ back to $\Gamma$, we have
+\begin{equation}\label{integral:watson-zeta}
+K_{1/4} = \frac{i}{\sqrt{2}} \int_\gamma e^{-z\zeta}\frac{d\zeta}{8u^3 - 4u}.
+\end{equation}
+The integrand has poles at $u = \pm\tfrac{1}{\sqrt{2}}$, and $\gamma$ runs counterclockwise around $\big[\tfrac{1}{\sqrt{2}}, \infty\big)$.
+
+Using the identity from Section~\ref{all-orders}, we can rewrite integral~\ref{integral:watson-zeta} as
+\[ K_{1/4} = \frac{i}{\sqrt{2}} \int_{\gamma_z} e^{-z\zeta} F\big(\tfrac{3}{8}, \tfrac{5}{8}; \tfrac{3}{2}; 1 - \zeta^2\big)\;d\zeta. \]
+\bibliographystyle{utphys}
+\bibliography{airy-resurgence}
+\end{document}
