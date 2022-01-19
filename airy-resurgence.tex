@@ -70,15 +70,15 @@ and that $0 = z\,\laplace_\zeta(1) - 1$. This recovers identity~\ref{id:L-diff} 
 Now we have the results of Section~\ref{L-diff-op} for all functions in $\mathcal{E}_\zeta + \mathcal{P}_\zeta$. Identity~\ref{id:L-diff} is particularly simple when $\hat{\varphi}$ has a {\em fractional power singularity} at $\zeta = 0$. By this, I mean that $\hat{\varphi}$ can be written as $\hat{\varphi}_\text{frac} + \hat{\varphi}_\text{reg}$, where $\hat{\varphi}_\text{frac} \in \mathcal{P}_\zeta$ has only non-integer exponents, and the zeroth through $(n-1)$st derivatives of $\hat{\varphi}_\text{reg} \in \mathcal{E}_\zeta$ vanish at zero. Under this condition, all the initial value terms in the identity vanish, leaving
 \[ \laplace_\zeta \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = z^n \laplace_\zeta \hat{\varphi}. \]
 \subsection{Change of coordinates}
-Define a new coordinate $\zeta_a$ on $\hat{\R}$ so that $\zeta = a + \zeta_a$. From the calculation
+Define a new coordinate $\zeta_a$ on $\hat{\R}$ so that $\zeta = a + \zeta_a$. From the calculation \textbf{[using variable starting point notation]}
 \begin{align*}
-\laplace_\zeta \hat{\varphi} & = \int_0^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
+\laplace_{\zeta, a} \hat{\varphi} & = \int_a^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
 & = \int_0^\infty e^{-z(a + \zeta_a)}\,\hat{\varphi}\;d\zeta_a \\
 & = e^{-az} \int_0^\infty e^{-z\zeta_a}\,\hat{\varphi}\;d\zeta_a \\
-& = e^{-az} \laplace_{\zeta_a} \hat{\varphi},
+& = e^{-az} \laplace_{\zeta_a, 0} \hat{\varphi},
 \end{align*}
 we learn that
-\[ \laplace_{\zeta_a} \hat{\varphi} = e^{az} \laplace_\zeta \hat{\varphi}. \]
+\[ \laplace_{\zeta_a, 0} \hat{\varphi} = e^{az} \laplace_{\zeta, a} \hat{\varphi}. \]
 
 Define new coordinates $x$ and $\xi$ on $\R$ and $\hat{\R}$, respectively, so that $\zeta = b\xi$ and $z\,d\zeta = x\,d\xi$. Explicitly, $z = b^{-1}x$. From the calculation
 \begin{align*}
@@ -128,7 +128,7 @@ From \cite{dlmf}, equations 10.40.2 and 10.17.1, we get the asymptotic series
 \end{equation}
 \subsection{Going to the spatial domain}\label{spatial}
 \subsubsection{A good try at $\zeta = 0$}
-Let's try to find a function $\hat{K}$ with $K = \laplace_\zeta \hat{K}$, which is unique if it exists~\cite[Theorem~1.23]{laplace-tfm}. If a function $\hat{\varphi}$ satisfies the equation
+Let's try to find a function $\hat{K}_0$ with $K = \laplace_\zeta \hat{K}_0$, which is unique if it exists~\cite[Theorem~1.23]{laplace-tfm}. If a function $\hat{\varphi}$ satisfies the equation
 \begin{equation}\label{eqn:spatial-mod-bessel}
 \left[\big(\zeta^2 - 1\big) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0,
 \end{equation}
@@ -142,21 +142,21 @@ which simplifies to
 \begin{equation}\label{eqn:inhomog-mod-bessel}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = -\big[\hat{\varphi}\,z + \hat{\varphi}'\big]_{\zeta = 0}.
 \end{equation}
-Since we want $\laplace_\zeta \hat{K}$ to satisfy equation~\ref{eqn:mod-bessel}, which is the homogeneous version of equation~\ref{eqn:inhomog-mod-bessel}, we might guess that $\hat{K}$ is a solution of equation~\ref{eqn:spatial-mod-bessel} that vanishes through first order at $\zeta = 0$. Unfortunately, this would force $\hat{K}$ to be zero.
+Since we want $\laplace_\zeta \hat{K}_0$ to satisfy equation~\ref{eqn:mod-bessel}, which is the homogeneous version of equation~\ref{eqn:inhomog-mod-bessel}, we might guess that $\hat{K}_0$ is a solution of equation~\ref{eqn:spatial-mod-bessel} that vanishes through first order at $\zeta = 0$. Unfortunately, this would force $\hat{K}_0$ to be zero.
 \subsubsection{Success at $\zeta = 1$}\label{spatial-success}
-Define a new coordinate $\zeta_1$ on $\hat{\R}$ so that $\zeta = 1 + \zeta_1$. Since
+Let's try instead to find a function $\hat{K}_1$ with $K = \laplace_{\zeta, 1} \hat{K}_1$. Define a new coordinate $\zeta_1$ on $\hat{\R}$ so that $\zeta = 1 + \zeta_1$. Since
 \begin{align*}
-\laplace_{\zeta_1} \hat{K} & = e^z \laplace_\zeta \hat{K} \\
+\laplace_{\zeta_1, 0} \hat{K}_1 & = e^z \laplace_{\zeta, 1} \hat{K}_1 \\
 & = e^z K \\
 & = \kappa,
 \end{align*}
-we want $\laplace_{\zeta_1} \hat{K}$ to satisfy equation~\ref{eqn:shifted-mod-bessel}. Rewrite equation~\ref{eqn:spatial-mod-bessel} as
+we want $\laplace_{\zeta_1} \hat{K}_1$ to satisfy equation~\ref{eqn:shifted-mod-bessel}. Rewrite equation~\ref{eqn:spatial-mod-bessel} as
 \begin{equation}\label{eqn:shifted-spatial-mod-bessel}
 \left[\zeta_1(\zeta_1 + 2) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(\zeta_1 + 1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0.
 \end{equation}
-If $\hat{\varphi}$ satisfies equation~\ref{eqn:shifted-spatial-mod-bessel}, $\laplace_{\zeta_1} \hat{\varphi}$ will satisfy an inhomogeneous version of equation~\ref{eqn:shifted-mod-bessel}, analogous to equation~\ref{eqn:inhomog-mod-bessel}. This time, though, there's a trick we can use to zero out the inhomogeneity. Equation~\ref{eqn:shifted-spatial-mod-bessel} has a regular singularity at $\zeta_1 = 0$, and one solution (up to scaling) is a holomorphic multiple of $\zeta_1^{-1/2}$. That solution has a fractional power singularity at $\zeta_1 = 0$, as defined in Section~\ref{L-diff-op-alg}, so its Laplace transform in $\zeta_1$ satisfies equation~\ref{eqn:shifted-mod-bessel}.
+If $\hat{\varphi}$ satisfies equation~\ref{eqn:shifted-spatial-mod-bessel}, $\laplace_{\zeta_1} \hat{\varphi}$ will satisfy an inhomogeneous version of equation~\ref{eqn:shifted-mod-bessel}, analogous to equation~\ref{eqn:inhomog-mod-bessel}. This time, though, there's a trick we can use to zero out the inhomogeneity. Equation~\ref{eqn:shifted-spatial-mod-bessel} has a regular singularity at $\zeta_1 = 0$, and one solution (up to scaling) is a holomorphic multiple of $\zeta_1^{-1/2}$.\footnote{\textbf{Explain how to see.}} That solution has a fractional power singularity at $\zeta_1 = 0$, as defined in Section~\ref{L-diff-op-alg}, so its Laplace transform in $\zeta_1$ satisfies equation~\ref{eqn:shifted-mod-bessel}.
 
-Following this plan, let's find $\hat{K}$ explicitly. Defining another coordinate $\xi$ on $\hat{\R}$ so that $\zeta_1 = -2\xi$, we can rewrite equation~\ref{eqn:shifted-spatial-mod-bessel} as the hypergeometric equation
+Following this plan, let's find $\hat{K}_1$ explicitly. Defining another coordinate $\xi$ on $\hat{\R}$ so that $\zeta_1 = -2\xi$, we can rewrite equation~\ref{eqn:shifted-spatial-mod-bessel} as the hypergeometric equation
 \begin{equation}\label{eqn:hypergeom}
 \left[\xi(1 - \xi) \big(\tfrac{\partial}{\partial \xi}\big)^2 + 3(\tfrac{1}{2} - \xi) \tfrac{\partial}{\partial \xi} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \hat{\varphi} = 0.
 \end{equation}
@@ -164,7 +164,7 @@ The hypergeometric function
 \[ \hat{g}_1 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) \]
 satisfies equation~\ref{eqn:hypergeom} by definition. It's not the solution we want, though, because it's holomorphic around $\xi = 0$. Formula~15.10.12 from \cite{dlmf} gives another solution,
 \[ \hat{f}_0 = \xi^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big), \]
-which is a holomorphic multiple of $\xi^{-1/2}$ near $\xi = 0$. By the argument above, $f_0 = \laplace_{\zeta_1} \hat{f}_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}. This suggests that a constant multiple of $\hat{f}_0$ is our desired $\hat{K}$. The power series~\cite[equation~15.2.1]{dlmf}
+which is a holomorphic multiple of $\xi^{-1/2}$ near $\xi = 0$. By the argument above, $f_0 = \laplace_{\zeta_1} \hat{f}_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}. This suggests that a constant multiple of $\hat{f}_0$ is our desired $\hat{K}_1$. The power series~\cite[equation~15.2.1]{dlmf}
 \[ \hat{f}_0 = \xi^{-1/2} + \frac{(\tfrac{1}{6})_1 (\tfrac{5}{6})_1}{(\tfrac{1}{2})_1 \; 1!}\;\xi^{1/2} + \frac{(\tfrac{1}{6})_2 (\tfrac{5}{6})_2}{(\tfrac{1}{2})_2 \; 2!}\;\xi^{3/2} + \frac{(\tfrac{1}{6})_3 (\tfrac{5}{6})_3}{(\tfrac{1}{2})_3 \; 3!}\;\xi^{5/2} + \ldots \]
 converges near $\xi = 0$, showing that
 \[ \hat{f}_0 \in \xi^{-1/2} + O_{\xi \to 0}(\xi^{1/2}). \]
@@ -172,8 +172,8 @@ In terms of $\zeta_1$, we have
 \[ \hat{f}_0 \in -i \sqrt{2}\,\zeta_1^{-1/2} + O_{\zeta_1 \to 0}(\zeta_1^{1/2}). \]
 Using the decay properties from Section~\ref{reg-decay}, we deduce that
 \[ f_0 \in -i \sqrt{2\pi}\,z^{-1/2} + O_{z \to \infty}(z^{-3/2}). \]
-Since we know that $f_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $f_0$ is a constant multiple of $\kappa$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $\kappa = \tfrac{i}{2}\,f_0$. We conclude that $\kappa = \laplace_{\zeta_1} \hat{K}$ for
-\[ \hat{K} = \tfrac{1}{\sqrt{2}}\,\zeta_1^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
+Since we know that $f_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $f_0$ is a constant multiple of $\kappa$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $\kappa = \tfrac{i}{2}\,f_0$. We conclude that $\kappa = \laplace_{\zeta_1} \hat{K}_1$ for
+\[ \hat{K}_1 = \tfrac{1}{\sqrt{2}}\,\zeta_1^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
 \section{Sketches}
 \subsection{Contour argument}\label{contour-argument}
 We can recast integral~\ref{integral:mod-bessel} into $\hat{\C}$ by setting $\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \Gamma$ to a contour $\gamma_z$ in $\hat{\C}$ and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/3} \Gamma$, we have
