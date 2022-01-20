@@ -208,8 +208,8 @@ For any Morse cirtial points $x_\alpha$ of $f$, the saddle point approximation g
 \begin{equation}
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n} \qquad \text{ as } z\to\infty
 \end{equation}
-where $\mathcal{C}_\alpha$ is a steepest descendet oath through the critical point $x_\alpha$. 
-\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$
+where $\mathcal{C}_\alpha$ is a steepest descendet path through the critical point $x_\alpha$. 
+\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$ and assume $f''(x_\alpha)\neq 0$ for every critical point $x_\alpha$. Then
 \begin{enumerate}
 \item $\tilde{\varphi}_\alpha$ is Gevrey-1;
 \item $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ is a germ of analytic function at $\zeta=\zeta_{\alpha}=f(x_\alpha)$;
@@ -248,7 +248,7 @@ Part $(3)$: thanks to properties of Caputo's fractional derivatives, we have tha
 In addition, we notice 
 \begin{align*}
 I_{\alpha}(z)&=\int_{\mathcal{C}_{\alpha}}e^{-zf}\nu & f=\zeta\\
-&=\int_{\mathcal{H}_{\alpha}}e^{-z\zeta}\partial_{\zeta}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)d\zeta   & \mathcal{H}_{\alpha} \text{ is Heckel countour} \\
+&=\int_{\mathcal{H}_{\alpha}}e^{-z\zeta}\partial_{\zeta}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)d\zeta   & \mathcal{H}_{\alpha} \text{ is Hankel countour} \\
 &=:\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}\hat{I}_{\alpha}(\zeta)d\zeta &
 \end{align*}
 hence 
@@ -400,10 +400,10 @@ The following identity holds true
 {}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}\zeta^2\right)=\frac{1}{1-u^2}\qquad \zeta=\frac{u^3}{3}-u
 \end{equation}
 \end{lemma}
-\begin{proof}
+\begin{proof}From the special case of hypergeometric function (see 15.4.14 DLMF) we have the following identity:
 \begin{align*}
-{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}\zeta^2\right)&=2\cos\left(\frac{1}{3}\arcsin\left(\frac{3}{2}\zeta\right)\right)(4-9\zeta^2)^{-1/2} & \text{Mathematica [Fullsimplify] } \\
-&=\frac{\cos(y)}{\cos(3y)} & 3y=\arcsin\left(\frac{3}{2}\zeta\right)\\
+{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}\zeta^2\right)&=%2\cos\left(\frac{1}{3}\arcsin\left(\frac{3}{2}\zeta\right)\right)(4-9\zeta^2)^{-1/2} & \text{Mathematica [Fullsimplify] } \\
+\frac{\cos(y)}{\cos(3y)} & 3y=\arcsin\left(\frac{3}{2}\zeta\right)\\
 &=\frac{\cos(y)}{\cos(2y)\cos(y)-\sin(2y)\sin(y)} & \\
 &=\frac{1}{\cos(2y)-2\sin^2(y)} & \\
 &=\frac{1}{1-4\sin^2(y)} & \zeta=2\sin(y)-\frac{8}{3}\sin^3(y)
@@ -800,18 +800,91 @@ x\in(-\infty,0)\cup(1,\infty), \, \Re a>\Re\mu>0
 
 \section{Resurgence for degree $3$ polynomials}
 
-Let $f$ be a degree $3$ polynomial, and $x_{\alpha_1},x_{\alpha_2}$ its critical points (not necessarily distinguished). Then \[I(z)=\int_{\mathcal{C}_{\alpha}}e^{-zf}dt\] is a solution of a second order ODE with regular/irregular singularity at zero/infinity. In particular, only two cases can occur: let $f(t)=a_1t^3+a_2t^2+a_3t+a_4$
+Let $f$ be a degree $3$ polynomial, and $t_{1},t_{2}$ its critical points (not necessarily distinguished):
 \begin{enumerate}
-\item if $a_2=0$, \begin{equation} I''+2a_4 I'+\left(a_4^2+\frac{4}{27}\frac{a_3^3}{a_1}\right)I+\frac{I'}{z}+\frac{a_4}{z}I-\frac{1}{9z^2}=0
+\item if $t_{1}\neq t_{2}$, then 
+\[I(z)=\int_{\mathcal{C}_{j}}e^{-zf}dt\]
+is a solution of 
+\begin{equation} I''+a I'+bI+c\frac{I'}{z}+\frac{d}{z}I+\frac{e}{z^2}I=0
 \end{equation}
-\item if $a_2=a_3=0$, $I$ solves
+where $a,b,c,d,e$ are determined in terms of $f$.
+\item if $t_{1}=t_2$, then 
+\[I(z)=\int_{\mathcal{C}_{1}}e^{-zf}dt\]
+is a solution of a first order ODE
 \begin{equation}
-I''+aI'+(aa_4-a_4^2)I+\frac{4+9e}{3}\frac{I'}{z}+\frac{a+2a_4+9a_4e}{3}\frac{I}{z}+\frac{e}{z^2}I=0
+I'+\left(a_4-\frac{a_2^3}{27a_1^2}+\frac{1}{3z}\right)I=0
 \end{equation}
-for every $a,e\in\C$, which is equivalent to say $I$ is a solution of
-\begin{equation}
-I'+\left(a_4+\frac{3}{z}\right)I=0
-\end{equation} 
-\end{enumerate}  
+\end{enumerate}
 
+\begin{proof}
+Let $f(t)=a_1t^3+a_2t^2+a_3t+a_4$ with $a_1\neq 0$, 
+\begin{align*}
+\int_{\mathcal{C}_j}e^{-fz}dt&=\int_{\mathcal{C}_j+\frac{a_2}{3a_1}}e^{-(a_1t^3+pt+q)z}dt & t\to t-\frac{a_2}{3a_1}
+\end{align*}
+where $p=a_3-\frac{a_2^2}{3a_1}$ and $q=a_4-\frac{a_2a_3}{3a_1}+\frac{2a_2^2}{27a_1^2}$.
+
+Case $(1)$: if $p\neq 0$,
+\begin{align*}
+I(z)=\int t(3a_1t^2+p)ze^{-fz}=\int(3a_1t^3+pt)ze^{-ft}=\\
+\int2a_1t^3ze^{-fz}+\int(a_1t^3+pt+q)ze^{-fz}-qzI\\
+2z\int a_1t^3e^{-fz}-zI'-qzI
+\end{align*}
+
+\begin{align*}
+2z\int a_1t^3e^{-fz}=2z^2\int\frac{t^4}{4}a_1(3a_1t^2+p)e^{-fz}=\frac{z^2}{2}\int (3a_1^2t^6+pa_1t^4)e^{-fz}=\\
+\frac{z^2}{2}\int(3a_1^2t^6+6pa_1t^4+3q^2+3p^2t^2+6pqt+6a_1qt^3)e^{-fz}+\\
++\frac{z^2}{2}\int(pa_1t^4-6pa_1t^4)e^{-fz}-\frac{z^2}{2}\int(3q^2+3p^2t^2+6pqt+6a_1qt^3)e^{-fz}\\
+=\frac{3z^2}{2}I''+\frac{3z^2}{2}q^2I+3qz^2I'-\frac{z^2}{2}p\int(3a_1t^4+pt^2)e^{-fz}-z^2p\int(a_1t^4+pt^2)e^{-fz}\\
+=\frac{3z^2}{2}I''+\frac{3z^2}{2}q^2I+3qz^2I'-\frac{5}{3}zp\int te^{-fz}-\frac{2}{3}z^2p^2\int t^2e^{-fz}
+\end{align*}
+
+hence 
+
+\begin{align}
+I=-zI'-qzI+\frac{3z^2}{2}I''+\frac{3z^2}{2}q^2I+3qz^2I'-\frac{5}{3}zp\int te^{-fz}-\frac{2}{3}z^2p^2\int t^2e^{-fz}\\
+\frac{3z^2}{2}\left(I''+q^2I+2qI'-\frac{2}{3z}I'-\frac{2q}{3z}I-\frac{2}{3z^2}I-\frac{10}{9z}p\int te^{-fz}dt-\frac{4}{9}p^2\int t^2e^{-fz}\right)=0 
+\end{align}
+
+Notice that 
+\begin{align*}
+\frac{4}{9}p^2\int t^2e^{-fz}=\frac{4}{27a_1}p^2\int(3a_1t^2+p)e^{-fz}-\frac{4}{27a_1}p^3I=-\frac{4}{27a_1}p^3I
+\end{align*}
+
+\begin{align*}
+-\frac{10}{9z}p\int te^{-fz}dt=\frac{5}{9z}\int pte^{-fz}-\frac{5}{3z}\int(pt+q)e^{-fz}+\frac{5}{3z}qI=\\
+\frac{5}{9z}\int pte^{-fz}-\frac{5}{3z}\int(pt+q+a_1t^3)e^{-fz}+\frac{5}{3z}\int a_1t^3e^{-fz}+\frac{5}{3z}qI=\\
+\frac{5}{9z}\int t(3a_1t^2+p)e^{-fz}+\frac{5}{3z}I'+\frac{5}{3z}qI\\
+=\frac{5}{9z^2}I+\frac{5}{3z}I'+\frac{5}{3z}qI
+\end{align*}
+thefore, collecting all the contributions together we find 
+
+\begin{align*}
+I''+q^2I+2qI'-\frac{2}{3z}I'-\frac{2q}{3z}I-\frac{2}{3z^2}I+\frac{5}{9z^2}I+\frac{5}{3z}I'+\frac{5}{3z}qI+\frac{4}{27a_1}p^3I=0\\
+I''+2qI'+\left(\frac{4p^3}{27a_1}+q^2\right)I+\frac{1}{z}I'+\frac{q}{z}I-\frac{1}{9z^2}I=0
+\end{align*}
+
+Case $(2)$: if $p=0$, then integrating by part we have
+\begin{align*}
+I(z)&=\int_{\mathcal{C}_1+\frac{a_2}{3a_1}}e^{-(a_1t^3+q)z}dt\\
+&=\left[te^{-(a_1t^3+q)z}\right]_{\mathcal{C}_1+\frac{a_2}{3a_1}}+\int_{\mathcal{C}_1+\frac{a_2}{3a_1}}3a_1t^3ze^{-(a_1t^3+q)z}dt\\
+&=3z\int_{\mathcal{C}_1+\frac{a_2}{3a_1}}(a_1t^3+a_4)e^{-(a_1t^3+q)z}dt-3a_4z\int_{\mathcal{C}_1+\frac{a_2}{3a_1}}e^{-(a_1t^3+q)z}dt\\
+&=-3zI'(z)-3a_4I(z)
+\end{align*}
+\end{proof}
+%  \[I(z)=\int_{\mathcal{C}_{\alpha}}e^{-zf}dt\] is a solution of a second order ODE with regular/irregular singularity at zero/infinity. In particular, only two cases can occur: let $f(t)=a_1t^3+a_2t^2+a_3t+a_4$
+%\begin{enumerate}
+%\item if $a_2=0$ and $a_3\neq 0$, \begin{equation} I''+2a_4 I'+\left(a_4^2+\frac{4}{27}\frac{a_3^3}{a_1}\right)I+\frac{I'}{z}+\frac{a_4}{z}I-\frac{1}{9z^2}=0
+%\end{equation}
+%\item if $a_2=a_3=0$, $I$ solves
+%\begin{equation}\label{eq:I,a,e}
+%I''+aI'+(aa_4-a_4^2)I+\frac{4+9e}{3}\frac{I'}{z}+\frac{a+2a_4+9a_4e}{3}\frac{I}{z}+\frac{e}{z^2}I=0
+%\end{equation}
+%for every $a,e\in\C$; in particular if $I$ is a solution of
+%\begin{equation}
+%I'+\left(a_4+\frac{1}{3z}\right)I=0
+%\end{equation}
+%then it solves equation \eqref{eq:I,a,e} for every $a,e\in\C$.   
+%\end{enumerate}  
+%We notice that in the first case (of which Airy is an example), since $a_3\neq 0$ $f(t)$ has always two distinct critical points. Wherease, if $a_3=0$ there is a single critical point at $t=0$.
+  
 \end{document}
