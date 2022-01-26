@@ -1,7 +1,7 @@
 module Contours
 
 # for plots
-using Compose, Colors, LinearAlgebra, Roots
+using Compose, Colors, Polynomials, LinearAlgebra, Roots
 import Cairo, Fontconfig
 
 # for integral checks
@@ -10,14 +10,26 @@ import Plots
 
 # === paths ===
 
-u_path(θ, off) = t -> 1/6 * exp(-im*θ/3) * (cosh(2/3*π*im - t) - dot(off, [exp(2/3*π*im), exp(-2/3*π*im)]))
-u_jet(θ, off) = t -> (u_path(θ, off)(t), -1/6 * exp(-im*θ/3) * sinh(2/3*π*im - t))
-
-function ζ(u)
-  if length(u) == 1
-    return 4u^3 - 3u
+function path_scale(n, k)
+  if k//n == 1//2
+    return 1
   else
-    return (4u[1]^3 - 3u[1], 3*(4u[1]^2 - 1)*u[2])
+    skip = mod(n, 2) == 0 ? 1 : 1/2
+    return cos(π*(1/2 - skip/3n)) / abs(cos(π*k/n))
+  end
+end
+u_path(θ, off, n = 3, k = 1) = t -> path_scale(n, k) * exp(-im*θ/n) * (cosh(π*(1-k/n)*im - t) - dot(off, [exp(π*(1-k/n)*im), exp(-π*(1-k/n)*im)]))
+u_jet(θ, off, n = 3, k = 1) = t -> (u_path(θ, off, n, k)(t), -path_scale(n, k) * exp(-im*θ/n) * sinh(π*(1-k/n)*im - t))
+
+function T_jet(n)
+  T_pt = convert(Polynomial, ChebyshevT(push!(fill(0, n), 1)))
+  T_push = derivative(T_pt)
+  u -> begin
+    if length(u) == 1
+      return T_pt(u)
+    else
+      return (T_pt(u[1]), T_push(u[1])*u[2])
+    end
   end
 end
 
@@ -45,30 +57,39 @@ end
 
 taxinorm(z) = max(abs(real(z)), abs(imag(z)))
 
-# for a nice contour with θ at π or 4π, set `off` to (1.6, 0)
-function plotcontours(θ = 0, off = (0, 0); test = true)
+function edgept(θ)
+  x = cos(θ)
+  y = sin(θ)
+  x < y ? [x/y, 1] : [1, y/x]
+end
+
+# for a nice contour with θ at π or 4π, set `off` to (1.3, 0)
+function plotcontours(θ = 0, off = (0, 0), n = 3, k = 1; test = true)
   dark = RGB(0, 0.5, 0.7)
   light = RGB(0.6, 0.9, 1.0)
   
-  u_range = [find_zero(t -> taxinorm(u_path(θ, off)(t)) - 1.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
-  u_mark = find_zero(t -> taxinorm(u_path(θ, off)(t)) - 0.5, (0, 3), Bisection())
+  ζ = T_jet(n)
+  crit = [cos(m*π/n) for m in 1:n-1]
+  crit_pos = crit[ζ.(crit) .> 0]
+  crit_neg = crit[ζ.(crit) .< 0]
+  
+  u_range = [find_zero(t -> taxinorm(u_path(θ, off, n, k)(t)) - 1.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
+  u_mark = find_zero(t -> taxinorm(u_path(θ, off, n, k)(t)) - 0.5, (0, 3), Bisection())
   u_window = context(units = UnitBox(-1, -1, 2, 2), mirror = Mirror(0, 0, 0))
   u_frame = compose(context(),
-    line([(-1, 0), (1, 0)]),
-    line([(-1/sqrt(3), -1), (1/sqrt(3), 1)]),
-    line([(1/sqrt(3), -1), (-1/sqrt(3), 1)]),
+    [line([tuple(-edgept(θ)...), tuple(edgept(θ)...)]) for θ in π/n * collect(0:n-1)]...,
     linewidth(1w/300), stroke(Gray(0.6))
   )
   u_contour = compose(u_window,
-    (context(), circle(-0.25, 0, 0.015w), fill(dark)),
-    (context(), circle(0.25, 0, 0.015w), fill(light)),
-    arrowhead(u_jet(θ, off), u_mark, 0.04w, "black"),
-    (context(), line(reim.([u_path(θ, off)(t) for t in LinRange(u_range..., 60)])), stroke("black")),
+    (context(), circle(crit_pos, fill(0, length(crit_pos)), fill(0.015w, length(crit_pos))), fill(dark)),
+    (context(), circle(crit_neg, fill(0, length(crit_neg)), fill(0.015w, length(crit_neg))), fill(light)),
+    arrowhead(u_jet(θ, off, n, k), u_mark, 0.04w, "black"),
+    (context(), line(reim.([u_path(θ, off, n, k)(t) for t in LinRange(u_range..., 60)])), stroke("black")),
     u_frame
   )
   
-  ζ_range = [find_zero(t -> taxinorm(ζ(u_path(θ, off)(t))) - 6.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
-  ζ_mark = find_zero(t -> taxinorm(ζ(u_path(θ, off)(t))) - 3, (0, 3), Bisection())
+  ζ_range = [find_zero(t -> taxinorm(ζ(u_path(θ, off, n, k)(t))) - 6.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
+  ζ_mark = find_zero(t -> taxinorm(ζ(u_path(θ, off, n, k)(t))) - 3, (0, 3), Bisection())
   ζ_window = context(units = UnitBox(-6, -6, 12, 12), mirror = Mirror(0, 0, 0))
   ζ_frame = compose(context(),
     line([(-6, 0), (6, 0)]),
@@ -76,10 +97,10 @@ function plotcontours(θ = 0, off = (0, 0); test = true)
     linewidth(1w/300), stroke(Gray(0.6))
   )
   ζ_contour = compose(ζ_window,
-    (context(), circle(ζ(-0.25), 0, 0.015w), fill(dark)),
-    (context(), circle(ζ(0.25), 0, 0.015w), fill(light)),
-    arrowhead(t -> ζ(u_jet(θ, off)(t)), ζ_mark, 0.04w, "black"),
-    (context(), line(reim.(ζ.([u_path(θ, off)(t) for t in LinRange(ζ_range..., 60)]))), stroke("black")),
+    (context(), circle(ζ(crit_pos[1]), 0, 0.015w), fill(dark)),
+    (context(), circle(ζ(crit_neg[1]), 0, 0.015w), fill(light)),
+    arrowhead(t -> ζ(u_jet(θ, off, n, k)(t)), ζ_mark, 0.04w, "black"),
+    (context(), line(reim.(ζ.([u_path(θ, off, n, k)(t) for t in LinRange(ζ_range..., 60)]))), stroke("black")),
     ζ_frame
   )
   
@@ -119,16 +140,22 @@ end
 g1_hat(ζ0) = _₂F₁(2/3, 4/3, 3/2, (1-ζ0)/2)
 g0_hat(ζ0) = _₂F₁(2/3, 4/3, 3/2, (1+ζ0)/2)
 
-besselk_sing_form(z) = t -> begin
-  ζ0 = ζ(u_jet(t))
-  1/(3im*sqrt(3)) * exp(-z*ζ0[1]) * g0_hat(ζ0[1]) * ζ0[2]
+function besselk_sing_form(z)
+  ζ = T_jet(3)
+  t -> begin
+    ζ0 = ζ(u_jet(t))
+    1/(3im*sqrt(3)) * exp(-z*ζ0[1]) * g0_hat(ζ0[1]) * ζ0[2]
+  end
 end
 
 besselk_sing_integral(z) = quadgk(besselk_sing_form(z), -3, 3, rtol = 1e-8)
 
-besselk_holo_form(z) = t -> begin
-  ζ0 = ζ(u_jet(t))
-  1/(3im*sqrt(3)) * exp(-z*ζ0[1]) * g1_hat(ζ0[1]) * ζ0[2]
+function besselk_holo_form(z)
+  ζ = T_jet(3)
+  t -> begin
+    ζ0 = ζ(u_jet(t))
+    1/(3im*sqrt(3)) * exp(-z*ζ0[1]) * g1_hat(ζ0[1]) * ζ0[2]
+  end
 end
 
 besselk_holo_integral(z) = quadgk(besselk_holo_form(z), -3, 3, rtol = 1e-8)
