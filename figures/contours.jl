@@ -1,7 +1,7 @@
 module Contours
 
 # for plots
-using Compose, Colors, Roots
+using Compose, Colors, LinearAlgebra, Roots
 import Cairo, Fontconfig
 
 # for integral checks
@@ -10,7 +10,7 @@ import Plots
 
 # === paths ===
 
-u_path(θ, off) = t -> 1/6 * exp(-im*θ/3) * (cosh(2/3*π*im - t) - off*exp(2/3*π*im))
+u_path(θ, off) = t -> 1/6 * exp(-im*θ/3) * (cosh(2/3*π*im - t) - dot(off, [exp(2/3*π*im), exp(-2/3*π*im)]))
 u_jet(θ, off) = t -> (u_path(θ, off)(t), -1/6 * exp(-im*θ/3) * sinh(2/3*π*im - t))
 
 function ζ(u)
@@ -45,8 +45,8 @@ end
 
 taxinorm(z) = max(abs(real(z)), abs(imag(z)))
 
-# for a nice contour with θ at π or 4π, set `off` to 1.6
-function plotcontours(θ = 0, off = 0)
+# for a nice contour with θ at π or 4π, set `off` to (1.6, 0)
+function plotcontours(θ = 0, off = (0, 0); test = true)
   dark = RGB(0, 0.5, 0.7)
   light = RGB(0.6, 0.9, 1.0)
   
@@ -85,8 +85,9 @@ function plotcontours(θ = 0, off = 0)
   
   # === output ===
   
-  draw(PDF("u_contour.pdf", 6cm, 6cm), u_contour)
-  draw(PDF("zeta_contour.pdf", 6cm, 6cm), ζ_contour)
+  tag = test ? "_test" : ""
+  draw(PDF(string("u_contour", tag, ".pdf"), 6cm, 6cm), u_contour)
+  draw(PDF(string("zeta_contour", tag, ".pdf"), 6cm, 6cm), ζ_contour)
 end
 
 # === contour integrals ===
