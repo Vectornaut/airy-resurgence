@@ -1,0 +1,82 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage[hmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%%\usepackage{amsthm}
+\usepackage{graphicx}
+
+%%\theoremstyle{definition}
+%%\newtheorem{defn}{Definition}
+%%\theoremstyle{plain}
+%%\newtheorem{prop}{Proposition}
+
+% convenience aliases
+\newcommand{\maps}{\colon}
+
+% symbology
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\laplace}{\mathcal{L}}
+\DeclareMathOperator{\Ai}{Ai}
+
+\title{Resurgence of the Airy function \\ and other exponential integrals}
+\author{Veronica Fantini and Aaron Fenyes}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+\subsection{Why does Borel resummation work?}
+\begin{itemize}
+\item Each resummation method for asymptotic series makes some implicit assumption that allows us to reconstruct a holomorphic function from its asymptotic behavior.
+\item The resummation method works correctly for functions which satisfy that assumption.
+\item For the modified Bessel function $K_{1/3}$, Borel resummation works because the asymptotic series encodes a second-order differential equation.
+\begin{itemize}
+\item Different aspects of this example appear in various places (Mari\~{n}o, Kawai--Takei, Sauzin). We give a detailed, unified treatment.
+\end{itemize}
+\item We can generalize this argument to all $K_{1/n}$ and their limit $K_0$.
+\item We can also generalize to all third-order exponential integrals.
+\begin{itemize}
+\item Most of them are equivalent to the $K_{1/3}$ integral, but there's also an interesting degeneration.
+\end{itemize}
+\end{itemize}
+\subsection{Fractional derivative formula}
+\begin{itemize}
+\item Theorem~\ref{thm:three-halves} says that for a certain class of exponential integrals
+\[ I(z) = \int_\Gamma e^{-zf}\;\nu, \]
+the inverse Laplace \textbf{[better to say Borel?]} transform is the $\tfrac{3}{2}$ derivative of $d\zeta/df$, where $f^* d\zeta = \nu$ \textbf{[check]}.
+\end{itemize}
+\subsection{Stokes phenomenon}
+\begin{itemize}
+\item For Bessel functions, we can see explicitly how solutions jump when the Laplace transform angle crosses a critical value.
+\item The jump comes from the branch cut difference identity for hypergeometric functions.
+\end{itemize}
+\section{The Laplace and Borel transforms}
+\subsection{The Laplace transform}
+\begin{itemize}
+\item Action on differential equations.
+\begin{itemize}
+\item Can we find a way to prove this when the differential operator spits out a function that's not integrable around zero?
+\end{itemize}
+\item Global picture?
+\end{itemize}
+\subsection{The Borel transform}
+\begin{itemize}
+\item Action on differential equations.
+\begin{itemize}
+\item No inhomogeneous terms! How is this consistent with the Laplace transform's action? Is there always an inhomogeneous solution with subexponential asymptotics?
+\end{itemize}
+\end{itemize}
+\section{Third-order exponential integrals}
+\begin{itemize}
+\item Reduce to
+\[ I(z) = \int \exp\left[-z\big(u^3 + pu + q)\right]\,du \]
+using change of coordinate.
+\item When $p \neq 0$, can reduce further to
+\[ I(z) = p^{1/2} e^{-qz} K_{1/3}(p^{3/2} z). \]
+\item As $p$ goes to zero, $I(z)$ degenerates to
+\[ \left(\tfrac{1}{2}\right)^{2/3} e^{-qz} \Gamma(\tfrac{1}{3}) z^{-1/3} = \left(\tfrac{1}{2}\right)^{2/3} e^{-qz} \laplace_{\zeta,0}(\zeta^{-2/3}) = \left(\tfrac{1}{2}\right)^{2/3} \laplace_{\zeta_{-q},q}(\zeta^{-2/3}). \]
+\end{itemize}
+\end{document}
