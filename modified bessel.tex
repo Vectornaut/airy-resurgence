@@ -1,0 +1,100 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage[hmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% convenience aliases
+\newcommand{\maps}{\colon}
+
+% symbology
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\laplace}{\mathcal{L}}
+
+\title{Resurgence of modified Bessel functions of second kind}
+\author{Veronica Fantini}
+
+\begin{document}
+\maketitle
+
+\section{Modified Bessel function of second kind}
+
+The modified Bessel function of the second kind is a solution of the equation
+\begin{equation}\label{Bessel_nu}
+w''+\frac{w'}{z}-w-\frac{\nu^2}{z^2}=0
+\end{equation}
+such that $K_{\nu}(z)\sim\sqrt{\pi/(2z)}e^{-z}$ as $z\to\infty$ in $|\arg z|<\frac{3\pi}{2}$. It has a branch point at $z=0$ for every $\nu\in\C$ and  the principal branch is analytic in $\C\setminus(-\infty,0]$. 
+\subsection{Differential equation}
+From the general theory of ODE, the formal integral solution of \eqref{Bessel_nu} is two parameter family 
+\begin{equation}
+\tilde{w}(z)=U_1e^{-z}z^{-1/2}\tilde{w}_{\nu,+}(z)+U_2e^{z}z^{-1/2}\tilde{w}_{\nu,-}(z)
+\end{equation} 
+where $\tilde{w}_{\nu,\pm}=1+\sum_{j\geq 1}a_{\pm,j}z^{-j}\in\C[\![z^{-1}]\!]$ are unique formal solutions of
+\begin{align*}
+\tilde{w}_{\nu,+}''-2\tilde{w}_{\nu,+}'+\frac{\tilde{w}_+}{4z^2}-\frac{\nu^2}{z^2}\tilde{w}_{\nu,+}=0\\
+\tilde{w}_{\nu,-}''+2\tilde{w}_{\nu,-}'+\frac{\tilde{w}_{\nu,-}}{4z^2}-\frac{\nu^2}{z^2}\tilde{w}_{\nu,-}=0
+\end{align*} 
+In particular, $K_{\nu}(z)=e^{-z}z^{-1/2}\tilde{w}_{\nu,+}(z)$. We now compute the Borel transform of $\tilde{w}_+(z)$: it is a solution of 
+\begin{align*}
+&\zeta^2\hat{w}_{\nu,+}+2t\hat{w}_{\nu,+}+\left(\frac{1}{4}-\nu^2\right)\int_0^{\zeta}(\zeta-s)\hat{w}_{\nu,+}(s)ds=0 &\\
+&\zeta^2\hat{w}_{\nu,+}''+2\zeta\hat{w}_+''+4\zeta\hat{w}_{\nu,+}'+\left(\frac{9}{4}-\nu^2\right)\hat{w}_{\nu,+}=0 & \\
+&t(1-t)\hat{w}_{\nu,+}''+(2-4t)\hat{w}_{\nu,+}'-\left(\frac{9}{4}-\nu^2\right)\hat{w}_{\nu,+}=0 & t=-\frac{\zeta}{2}
+\end{align*} 
+therefore $\hat{w}_{\nu,+}(\zeta)$ is an hypergeometric function
+\begin{equation}
+\hat{w}_{\nu,+}(\zeta)={}_2F_1\left(\frac{3}{2}-\nu,\frac{3}{2}+\nu;2;-\frac{\zeta}{2}\right)
+\end{equation}
+and it has a branch point singularities at $\zeta=-2$. By the same reasoning, 
+\begin{equation}
+\hat{w}_{\nu,-}(\zeta)={}_2F_1\left(\frac{3}{2}-\nu,\frac{3}{2}+\nu;2;\frac{\zeta}{2}\right)
+\end{equation} 
+and it has branch point at $\zeta=2$. Thanks to explicit formula for the analytic continuation of hypergeomtric functions (see \cite{dlmf} 15.2.3)
+\begin{align*}
+\hat{w}_{\nu,+}(\zeta+i0)-\hat{w}_{\nu,+}(\zeta-i0)&=\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\left(-\frac{\zeta}{2}-1\right)^{-1}{}_2F_1\left(\frac{1}{2}-\nu,\frac{1}{2}+\nu;0;1+\frac{\zeta}{2}\right) & \zeta>-2 \\
+&=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\sum_{k\geq 0}\frac{\left(\tfrac{1}{2}-\nu\right)_k\left(\tfrac{1}{2}+\nu\right)_k}{\Gamma(k)k!}\left(1+\frac{\zeta}{2}\right)^{k-1} & \\
+&=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\sum_{k\geq 1}\frac{\left(\tfrac{1}{2}-\nu\right)_k\left(\tfrac{1}{2}+\nu\right)_k}{\Gamma(k)k!}\left(1+\frac{\zeta}{2}\right)^{k-1} & \\
+&=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\sum_{k\geq 0}\frac{\Gamma\left(\tfrac{3}{2}-\nu+k\right)\Gamma\left(\tfrac{3}{2}+\nu+k\right)}{\Gamma(k+1)(k+1)!}\left(1+\frac{\zeta}{2}\right)^{k} & \\
+&=-2i\cos(\nu \pi)\,\, {}_2F_1\left(\frac{3}{2}-\nu,\frac{3}{2}+\nu;2;1+\frac{\zeta}{2}\right) & \\
+&=-2i\cos(\nu \pi)\hat{w}_{\nu,-}(\zeta+2)
+\end{align*} 
+and for $\hat{w}_{\nu,-}(\zeta)$
+\begin{align*}
+\hat{w}_{\nu,-}(\zeta+i0)-\hat{w}_{\nu,-}(\zeta-i0)&=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\left(\frac{\zeta}{2}-1\right)^{-1}{}_2F_1\left(\frac{1}{2}-\nu,\frac{1}{2}+\nu;0;1-\frac{\zeta}{2}\right) & \zeta<2 \\
+&=\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\sum_{k\geq 0}\frac{\left(\tfrac{1}{2}-\nu\right)_k\left(\tfrac{1}{2}+\nu\right)_k}{\Gamma(k)k!}\left(1-\frac{\zeta}{2}\right)^{k-1} & \\
+&=2i\cos(\nu \pi)\,\, {}_2F_1\left(\frac{3}{2}-\nu,\frac{3}{2}+\nu;2;1-\frac{\zeta}{2}\right) & \\
+&=2i\cos(\nu \pi)\hat{w}_{\nu,+}(\zeta-2)
+\end{align*}
+In addition, the previous relations computes the Stokes constants which are funtions of $\nu$ and are given by $\pm 2i\cos(\nu\pi)$.
+
+
+\subsection{Exponential integral}
+As showed by Aaron, if $T_n(u)$ and $U_n(u)$ denote the Chebyschev polynomials \footnote{$T_n(\cos(t))=\cos(nt)$ and $U_n(\cos(t))\sin(t)=\sin((n+1)t)$.} 
+
+\begin{multline}
+K_{\nu}(z)=\frac{1}{2i\nu\sin(\nu\pi)}\int_{\mathcal{C}_{\alpha}}e^{zT_{\frac{1}{\nu}}(u)}du=-\frac{1}{2i\sin(\nu\pi)}\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}\frac{d\zeta}{U_{\frac{1}{\nu}-1}(u)}=\\
+=-\frac{1}{2i\sin(\nu\pi)}\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}{}_2F_1\left(\frac{1-\nu}{2},\frac{1+\nu}{2};\frac{3}{2};1-\zeta^2\right)d\zeta
+\end{multline}
+where $\mathcal{C}_{\alpha}$ \textbf{has to be checked, but I guess } $\alpha=1$
+
+Indentity 15.10.17 from \cite{dlmf} splits the integrand above into
+\begin{align*}
+{}_2F_1\left(\frac{1-\nu}{2},\frac{1+\nu}{2};\frac{3}{2};1-\zeta^2\right)&=C_1 \, {}_2F_1\left(\frac{1-\nu}{2},\frac{1+\nu}{2};\frac{1}{2};\zeta^2\right)+C_2\zeta \,{}_2F_1\left(1-\frac{\nu}{2},1+\frac{\nu}{2};\frac{3}{2};\zeta^2\right)\\
+&=\tilde{C}_1\left[{}_2F_1\left({1-\nu},{1+\nu};\frac{3}{2};\frac{1}{2}-\frac{\zeta}{2}\right)+{}_2F_1\left({1-\nu},{1+\nu};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right)\right]+\\
+&\qquad+\tilde{C}_2\left[{}_2F_1\left({1-\nu},{1+\nu};\frac{3}{2};\frac{1}{2}-\frac{\zeta}{2}\right)+{}_2F_1\left({1-\nu},{1+\nu};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right)\right]
+\end{align*}
+therefore, collecting the contrubutions together we have 
+\begin{multline}
+K_{\nu}(z)=\frac{i}{4\sin(\nu\pi)}\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}\left[{}_2F_1\left({1-\nu},{1+\nu};\frac{3}{2};\frac{1}{2}-\frac{\zeta}{2}\right)+{}_2F_1\left({1-\nu},{1+\nu};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right)\right] d\zeta
+\end{multline}
+
+Since ${}_2F_1\left({1-\nu},{1+\nu};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right) $ is singular at $\zeta=1$, the inverse Laplace transform of $K_\nu(z)$ is 
+\[
+\hat{K}_{\nu}(\zeta)=\frac{i}{4\sin(\nu\pi)}{}_2F_1\left({1-\nu},{1+\nu};\frac{3}{2};\frac{1}{2}-\frac{\zeta}{2}\right)
+\] 
+\bibliographystyle{utphys}
+\bibliography{airy-resurgence}
+\end{document}
