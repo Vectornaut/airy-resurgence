@@ -208,8 +208,8 @@ For any Morse cirtial points $x_\alpha$ of $f$, the saddle point approximation g
 \begin{equation}
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n} \qquad \text{ as } z\to\infty
 \end{equation}
-where $\mathcal{C}_\alpha$ is a steepest descendet oath through the critical point $x_\alpha$. 
-\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$
+where $\mathcal{C}_\alpha$ is a steepest descendet path through the critical point $x_\alpha$. 
+\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$ and assume $f''(x_\alpha)\neq 0$ for every critical point $x_\alpha$. Then
 \begin{enumerate}
 \item $\tilde{\varphi}_\alpha$ is Gevrey-1;
 \item $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ is a germ of analytic function at $\zeta=\zeta_{\alpha}=f(x_\alpha)$;
@@ -220,10 +220,23 @@ where $\mathcal{C}_\alpha$ is a steepest descendet oath through the critical poi
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Part $(1)$: 
+Part $(1)$: Let us assume that locally $\nu=\sum_{j\geq 0}b_j^{\alpha}(t-t_{\alpha})^{j}dt$ for $|t-t_\alpha|<\varepsilon$. By the steepest descendet method, $I_\alpha(z)$ can be aproximated as $z\to\infty$ as
+\begin{align*}
+I_\alpha(\zeta)&\sim e^{-zf(x_\alpha)}\int_{-\varepsilon}^{\varepsilon}\sum_{n\geq 0}t^{2n}b_{2n}^{\alpha}e^{-zf''(x_\alpha)\frac{t^2}{2}}dt\\
+&=e^{-zf(x_\alpha)}\sum_{n\geq 0}b_{2n}^{\alpha}\int_{-\varepsilon}^{\varepsilon}t^{2n}e^{-zf''(x_{\alpha})\frac{t^2}{2}}dt\\
+&=\sqrt{2\pi}e^{-zf(x_\alpha)}z^{-1/2}\sum_{n\geq 0}\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!! z^{-n}\mathrm{Erf}\left(\frac{\sqrt{z f''(x_\alpha)}}{\sqrt{2}}\varepsilon\right)+\\
+&-2e^{-zf(x_\alpha)}\sum_{n\geq 1}b_{2n}^{\alpha}(2n-1)!!e^{-zf''(x_{\alpha})\frac{\varepsilon^2}{2}}\sum_{j=1}^n\frac{\varepsilon^{2j-1}}{(2j-1)!!}\left(f''(x_\alpha)z\right)^{n-j+1}\\
+&\sim_{\varepsilon<<1} 2\varepsilon \sqrt{2\pi}e^{-zf(x_\alpha)}z^{-1/2}\sum_{n\geq 0}\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!! z^{-n}
+\end{align*} 
+therefore \[a_{\alpha,n}\defeq 2\varepsilon\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!!\]
+
+Since, $\tfrac{1}{\varepsilon}=\limsup_{n}\sqrt[n]{b_{n}^{\alpha}}$
+
+\[|a_{\alpha,n}|\leq CA^n n!\]
+where we use $(2n-1)!!\sim \tfrac{2^n}{\sqrt{\pi n}}n!$ as $n\to \infty$.
 
 Part $(2)$: \begin{align*}
-\hat{\varphi}_\alpha(\zeta)=\mathcal{B}(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n})(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
+\hat{\varphi}_\alpha(\zeta)=\mathcal{B}\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
 (2\pi)^{1/2} \left(\delta(f_{x_\alpha}) a_0+\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}\right)
 \end{align*}
 Since $a_{n}\leq CA^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
@@ -243,9 +256,7 @@ hence
 \hat{\varphi}_{\alpha}(\zeta)=\partial^{1/2}_{\zeta, \text{based at } \zeta_\alpha}\left(\partial_{\zeta}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)\right)=\partial^{3/2}_{\zeta, \text{based at } \zeta_\alpha}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)
 \end{equation}
 \end{proof}
-Given an exponential integral
-\[ J(z) = \int_\Gamma e^{-fz} \]
-where $f$ projects $\Gamma$ to a Hankel contour, the argument above shows that $\hat{J}$ is the $\frac{3}{2}$-derivative of $(f')^{-1}$.
+
 
 
 \begin{example}[Airy]
@@ -289,7 +300,7 @@ and taking derivatives we get
 \begin{align*}
 &\zeta(-\frac{4}{3}+ \zeta)\hat{w}_{-}''+(-\frac{8}{3}+4\zeta)\hat{w}_-'+\frac{77}{36}\hat{w}_{-}=0 & \\
 &\frac{4}{3}\zeta(-1+ \frac{3}{4}\zeta)\hat{w}_{-}''+(-\frac{8}{3}+4\zeta)\hat{w}_-'+\frac{77}{36}\hat{w}_{-}=0 & \\
-&\qquad u(1-u)\hat{w}_-''(u)+(2-4u)\hat{w}_-'(u)-\frac{77}{36}\hat{w}(u) & u=\frac{3}{4}\zeta
+&\qquad u(1-u)\hat{w}_-''(u)+(2-4u)\hat{w}_-'(u)-\frac{77}{36}\hat{w}(u)=0 & u=\frac{3}{4}\zeta
 \end{align*} 
 Notice that the latter equations are hypergeometric, hence a solution is given by 
 \begin{align}
@@ -301,16 +312,17 @@ for some constants $\mathit{c}_1, \mathit{c}_2\in\C$ (see DLMF 15.10.2). In addi
 \begin{remark}
 $\hat{w}_{+}(\zeta)$ is Laplace summable along the positive real axis, and it can be analyticaly continued on $\C\setminus -\frac{4}{3}\R_{\leq 0}$ with (see 15.2.3 DLMF)
 \begin{align*}
-\hat{w}_+(\zeta+i0)-\hat{w}_+(\zeta-i0)&=-\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\sum_{k\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1+\frac{3}{4}\zeta)^n &\zeta<-\frac{4}{3}\\
-&=-\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\left(\frac{5}{144} (4 + 3 \zeta){}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1+\frac{3}{4}\zeta\right)\right) &\\
+\hat{w}_+(\zeta+i0)-\hat{w}_+(\zeta-i0)&=-\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\sum_{n\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1+\frac{3}{4}\zeta)^n &\zeta<-\frac{4}{3}\\
+&=\frac{36}{5}i\sum_{n\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1+\frac{3}{4}\zeta)^{n-1} & \\
+&=-\frac{36}{5}i(-\frac{3}{4}\zeta-1)^{-1}\left(\frac{5}{144} (4 + 3 \zeta)\left(1+{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1+\frac{3}{4}\zeta\right)\right)\right) &\\
 &=\mathbf{i}\,\,{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1+\frac{3}{4}\zeta\right) &\\
 &=\mathbf{i}\hat{w}_{-}(\zeta+\frac{4}{3}) &
 \end{align*}
 Anolougusly, $\hat{w}_-(\zeta)$ is Laplace summable along the negative real axis, and it jumps across the branch cut $\frac{4}{3}\R_{\geq 0}$ as 
 \begin{align*}
-\hat{w}_-(\zeta+i0)-\hat{w}_-(\zeta-i0)&=\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\sum_{k\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1-\frac{3}{4}\zeta)^n & \zeta>\frac{4}{3}\\
-&=\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\left(-\frac{5}{144} (-4 + 3 \zeta){}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right)\right) &\\
-&=-\mathbf{i}\,\,{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right) &\\
+\hat{w}_-(\zeta+i0)-\hat{w}_-(\zeta-i0)&=\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\sum_{n\geq 0}\frac{(5/6)_n(1/6)_n}{\Gamma(n)n!}(1-\frac{3}{4}\zeta)^n & \zeta>\frac{4}{3}\\
+&=\frac{36}{5}i(\frac{3}{4}\zeta-1)^{-1}\left(-\frac{5}{144}(-4+3\zeta){}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right)\right)  &\\
+&=-\mathbf{i}\pi\,\,{}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,1-\frac{3}{4}\zeta\right) &\\
 &=-\mathbf{i}\hat{w}_{+}(\zeta-\frac{4}{3}) &
 \end{align*}
 These relations manifest the resurgence property of $\tilde{I}$, indeed near the singularities in the Borel plane of either $\hat{w}_+$ or $\hat{w}_-$, $\hat{w}_-$ and $\hat{w}_+$ respectively contribute to the jump of the former solution.  
@@ -375,12 +387,12 @@ Since $\hat{u}_+$ has a simple singularity at $\zeta=-2/3$ and $\hat{u}_-$ has a
 \hat{u}_-(\zeta)&= C_2 T_{2/3} {}_{1}F_{2}\left(\frac{7}{6},\frac{11}{6},2,\frac{3}{4}\zeta\right)= C_2 T_{2/3}\hat{w}_-(\zeta) & \\
 %&=C_3 T_{-2/3}\textcolor{red}{\left(\frac{3}{2\sqrt{\zeta}}\right)^{-1}\partial^{1/2}_{\zeta} {}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},-\frac{3}{4}\zeta\right)}+ C_4\textcolor{red}{\left(\frac{3}{2\sqrt{\zeta}}\right)^{-1}\partial^{1/2}_\zeta {}_{1}F_{2}\left(\frac{2}{3},\frac{4}{3},\frac{3}{2},\frac{3}{4}\zeta\right)}
 \end{align*}
-
-\begin{claim}\label{claim1}
-\begin{equation}
-\hat{w}_+(\zeta-2/3)=\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left(\frac{1}{f'(u)}\right)ds \,\,\qquad s=f(u)
-\end{equation}
-\end{claim}
+%
+%\begin{claim}\label{claim1}
+%\begin{equation}
+%\hat{w}_+(\zeta-2/3)=\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left(\frac{1}{f'(u)}\right)ds \,\,\qquad s=f(u)
+%\end{equation}
+%\end{claim}
 
 \begin{lemma}
 The following identity holds true
@@ -388,10 +400,10 @@ The following identity holds true
 {}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}\zeta^2\right)=\frac{1}{1-u^2}\qquad \zeta=\frac{u^3}{3}-u
 \end{equation}
 \end{lemma}
-\begin{proof}
+\begin{proof}From the special case of hypergeometric function (see 15.4.14 DLMF) we have the following identity:
 \begin{align*}
-{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}\zeta^2\right)&=2\cos\left(\frac{1}{3}\arcsin\left(\frac{3}{2}\zeta\right)\right)(4-9\zeta^2)^{-1/2} & \text{Mathematica [Fullsimplify] } \\
-&=\frac{\cos(y)}{\cos(3y)} & 3y=\arcsin\left(\frac{3}{2}\zeta\right)\\
+{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}\zeta^2\right)&=%2\cos\left(\frac{1}{3}\arcsin\left(\frac{3}{2}\zeta\right)\right)(4-9\zeta^2)^{-1/2} & \text{Mathematica [Fullsimplify] } \\
+\frac{\cos(y)}{\cos(3y)} & 3y=\arcsin\left(\frac{3}{2}\zeta\right)\\
 &=\frac{\cos(y)}{\cos(2y)\cos(y)-\sin(2y)\sin(y)} & \\
 &=\frac{1}{\cos(2y)-2\sin^2(y)} & \\
 &=\frac{1}{1-4\sin^2(y)} & \zeta=2\sin(y)-\frac{8}{3}\sin^3(y)
@@ -399,7 +411,9 @@ The following identity holds true
 Therefore, if $u\defeq -2\sin(y)$, we have $\zeta=\frac{u^3}{3}-u=f(u)$ and \[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}\zeta^2\right)=\frac{1}{1-u^2}=-\frac{1}{f'(u)}\]
 \end{proof}
 
-Hence claim \eqref{claim1} is equivalent to 
+%Hence claim \eqref{claim1} is equivalent to
+Then equations \eqref{formula1} is equivalent to
+ 
 \begin{claim}\label{claim 2}
 \begin{equation}
 \hat{w}_+(\zeta-2/3)=-\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds \qquad \zeta\in(2/3,+\infty)
@@ -418,7 +432,9 @@ Let us study the RHS of claim \eqref{claim 2}
 %&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-t\right)dt -\frac{9i}{32}\textcolor{gray}{\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};-\frac{1}{2};1-t\right)dt}& 15.10.21 \text{ DLMF }\\
 %&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{5}{2};1-t\right)t^{-3/2}dt &  15.10.13 \text{ DLMF }
 \end{align*}
-however, ${}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2/3,+\infty)$. 
+however, ${}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2/3,+\infty)$, thus the claim holds true. 
+
+Analougusly, it can be verified for $\hat{w}_-(\zeta+2/3)$ for $\zeta\in(-\infty,-2/3)$.  
 %By definition ${}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};t\right)=\sum_{n\geq 0}\frac{(2/3)_n(4/3)_n}{(3/2)_n n!}t^n$, thus
 %
 %\begin{align*}
@@ -739,9 +755,9 @@ Let us first consider the RHS of \eqref{Bessel}
 &\quad =\pi^2|x|^{-3/2}{}_2F_1\left(\frac{3}{2},\frac{1}{2};1;\frac{1}{x}\right) & x\in (-\infty, 0)\\
 &\quad =\frac{\pi^2}{2}\left({}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}-\frac{\zeta}{4}\right)-i{}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)\right) & \zeta\in(2,+\infty)
 \end{align*}
-however ${}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2,+\infty)$. 
+however ${}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2,+\infty)$, thus the claim holds true. 
 \end{proof}
-
+Analougusly, it can be verified for $\hat{w}_-(\zeta+2)$ for $\zeta\in(-\infty,-2)$.  
 \end{example}
 
 
@@ -782,6 +798,198 @@ x\in(-\infty,0)\cup(1,\infty), \, \Re a>\Re\mu>0
 %x<1, \Re a,\Re b>\Re\mu>0
 %\end{multline}
 
+\section{Resurgence for degree $3$ polynomials}
 
+Let $f$ be a degree $3$ polynomial, and $t_{1},t_{2}$ its critical points (not necessarily distinguished):
+\begin{enumerate}
+\item if $t_{1}\neq t_{2}$, then 
+\[I(z)=\int_{\mathcal{C}_{j}}e^{-zf}dt\]
+is a solution of 
+\begin{equation}
+\label{eq:I for p not 0}
+ I''+a I'+bI+c\frac{I'}{z}+\frac{d}{z}I+\frac{e}{z^2}I=0
+\end{equation}
+where $a,b,c,d,e$ are determined in terms of $f$.
+\item if $t_{1}=t_2$, then 
+\[I(z)=\int_{\mathcal{C}_{1}}e^{-zf}dt\]
+is a solution of a first order ODE
+\begin{equation}
+I'+\left(a_4-\frac{a_2^3}{27a_1^2}+\frac{1}{3z}\right)I=0
+\end{equation}
+\end{enumerate}
 
+\begin{proof}
+Let $f(t)=a_1t^3+a_2t^2+a_3t+a_4$ with $a_1\neq 0$, 
+\begin{align*}
+\int_{\mathcal{C}_j}e^{-fz}dt&=\int_{\mathcal{C}_j+\frac{a_2}{3a_1}}e^{-(a_1t^3+pt+q)z}dt & t\to t-\frac{a_2}{3a_1}
+\end{align*}
+where $p=a_3-\frac{a_2^2}{3a_1}$ and $q=a_4-\frac{a_2a_3}{3a_1}+\frac{2a_2^3}{27a_1^2}$.
+
+Case $(1)$: if $p\neq 0$,
+\begin{align*}
+I(z)=\int t(3a_1t^2+p)ze^{-fz}=\int(3a_1t^3+pt)ze^{-ft}=\\
+\int2a_1t^3ze^{-fz}+\int(a_1t^3+pt+q)ze^{-fz}-qzI\\
+2z\int a_1t^3e^{-fz}-zI'-qzI
+\end{align*}
+
+\begin{align*}
+2z\int a_1t^3e^{-fz}=2z^2\int\frac{t^4}{4}a_1(3a_1t^2+p)e^{-fz}=\frac{z^2}{2}\int (3a_1^2t^6+pa_1t^4)e^{-fz}=\\
+\frac{z^2}{2}\int(3a_1^2t^6+6pa_1t^4+3q^2+3p^2t^2+6pqt+6a_1qt^3)e^{-fz}+\\
++\frac{z^2}{2}\int(pa_1t^4-6pa_1t^4)e^{-fz}-\frac{z^2}{2}\int(3q^2+3p^2t^2+6pqt+6a_1qt^3)e^{-fz}\\
+=\frac{3z^2}{2}I''+\frac{3z^2}{2}q^2I+3qz^2I'-\frac{z^2}{2}p\int(3a_1t^4+pt^2)e^{-fz}-z^2p\int(a_1t^4+pt^2)e^{-fz}\\
+=\frac{3z^2}{2}I''+\frac{3z^2}{2}q^2I+3qz^2I'-\frac{5}{3}zp\int te^{-fz}-\frac{2}{3}z^2p^2\int t^2e^{-fz}
+\end{align*}
+
+hence 
+
+\begin{align}
+I=-zI'-qzI+\frac{3z^2}{2}I''+\frac{3z^2}{2}q^2I+3qz^2I'-\frac{5}{3}zp\int te^{-fz}-\frac{2}{3}z^2p^2\int t^2e^{-fz}\\
+\frac{3z^2}{2}\left(I''+q^2I+2qI'-\frac{2}{3z}I'-\frac{2q}{3z}I-\frac{2}{3z^2}I-\frac{10}{9z}p\int te^{-fz}dt-\frac{4}{9}p^2\int t^2e^{-fz}\right)=0 
+\end{align}
+
+Notice that 
+\begin{align*}
+\frac{4}{9}p^2\int t^2e^{-fz}=\frac{4}{27a_1}p^2\int(3a_1t^2+p)e^{-fz}-\frac{4}{27a_1}p^3I=-\frac{4}{27a_1}p^3I
+\end{align*}
+
+\begin{align*}
+-\frac{10}{9z}p\int te^{-fz}dt=\frac{5}{9z}\int pte^{-fz}-\frac{5}{3z}\int(pt+q)e^{-fz}+\frac{5}{3z}qI=\\
+\frac{5}{9z}\int pte^{-fz}-\frac{5}{3z}\int(pt+q+a_1t^3)e^{-fz}+\frac{5}{3z}\int a_1t^3e^{-fz}+\frac{5}{3z}qI=\\
+\frac{5}{9z}\int t(3a_1t^2+p)e^{-fz}+\frac{5}{3z}I'+\frac{5}{3z}qI\\
+=\frac{5}{9z^2}I+\frac{5}{3z}I'+\frac{5}{3z}qI
+\end{align*}
+thefore, collecting all the contributions together we find 
+
+\begin{align*}
+I''+q^2I+2qI'-\frac{2}{3z}I'-\frac{2q}{3z}I-\frac{2}{3z^2}I+\frac{5}{9z^2}I+\frac{5}{3z}I'+\frac{5}{3z}qI+\frac{4}{27a_1}p^3I=0\\
+I''+2qI'+\left(\frac{4p^3}{27a_1}+q^2\right)I+\frac{1}{z}I'+\frac{q}{z}I-\frac{1}{9z^2}I=0
+\end{align*}
+
+Case $(2)$: if $p=0$, then integrating by part we have
+\begin{align*}
+I(z)&=\int_{\mathcal{C}_1+\frac{a_2}{3a_1}}e^{-(a_1t^3+q)z}dt\\
+&=\left[te^{-(a_1t^3+q)z}\right]_{\mathcal{C}_1+\frac{a_2}{3a_1}}+\int_{\mathcal{C}_1+\frac{a_2}{3a_1}}3a_1t^3ze^{-(a_1t^3+q)z}dt\\
+&=3z\int_{\mathcal{C}_1+\frac{a_2}{3a_1}}(a_1t^3+q)e^{-(a_1t^3+q)z}dt-3qz\int_{\mathcal{C}_1+\frac{a_2}{3a_1}}e^{-(a_1t^3+q)z}dt\\
+&=-3zI'(z)-3qzI(z)
+\end{align*}
+\end{proof}
+%  \[I(z)=\int_{\mathcal{C}_{\alpha}}e^{-zf}dt\] is a solution of a second order ODE with regular/irregular singularity at zero/infinity. In particular, only two cases can occur: let $f(t)=a_1t^3+a_2t^2+a_3t+a_4$
+%\begin{enumerate}
+%\item if $a_2=0$ and $a_3\neq 0$, \begin{equation} I''+2a_4 I'+\left(a_4^2+\frac{4}{27}\frac{a_3^3}{a_1}\right)I+\frac{I'}{z}+\frac{a_4}{z}I-\frac{1}{9z^2}=0
+%\end{equation}
+%\item if $a_2=a_3=0$, $I$ solves
+%\begin{equation}\label{eq:I,a,e}
+%I''+aI'+(aa_4-a_4^2)I+\frac{4+9e}{3}\frac{I'}{z}+\frac{a+2a_4+9a_4e}{3}\frac{I}{z}+\frac{e}{z^2}I=0
+%\end{equation}
+%for every $a,e\in\C$; in particular if $I$ is a solution of
+%\begin{equation}
+%I'+\left(a_4+\frac{1}{3z}\right)I=0
+%\end{equation}
+%then it solves equation \eqref{eq:I,a,e} for every $a,e\in\C$.   
+%\end{enumerate}  
+%We notice that in the first case (of which Airy is an example), since $a_3\neq 0$ $f(t)$ has always two distinct critical points. Wherease, if $a_3=0$ there is a single critical point at $t=0$.
+ 
+We would like to verify that for every cubic function $f$, the Borel transform of the exponential integral can be expressed by an hypergeometric function and hence deduce its resurgent properties in full generality. If $p\neq 0$, $I(z)$ is a solution of
+
+\begin{equation}
+I''+2qI'+\left(\frac{4p^3}{27a_1}+q^2\right)I+\frac{1}{z}I'+\frac{q}{z}I-\frac{1}{9z^2}I=0
+\end{equation}
+
+hence a formal solution as $z\to \infty$ is given (up to constants $U_1,U_2\in\C$) by 
+\begin{align}
+\tilde{I}_{+}(z)&\defeq U_1e^{-(q+\sqrt{\frac{4p^3}{27a_1}})z}z^{1/2}\tilde{w}_+(z)\\
+\tilde{I}_-(z)&\defeq U_2 e^{-(q-\sqrt{\frac{4p^3}{27a_1}})z}z^{1/2}\tilde{w}_-(z)
+\end{align}
+where $\tilde{w}_{\pm}(z)\in\C[\![z^{-1}]\!]$ is the formal solution of
+\begin{equation}\label{w_general}
+\tilde{w}_{\pm}''\mp 2\sqrt{\frac{4p^3}{27a_1}}\tilde{w}_{\pm}'+\frac{5}{36}\frac{\tilde{w}_{\pm}}{z^2}=0
+\end{equation}
+with $\tilde{w}_{\pm}(z)=1+\sum_{k\geq 1}a_{\pm,k}z^{-k}$.
+
+We can now compute the Borel transform of \eqref{w_general}: for $\tilde{w}_+(z)$
+
+\begin{align*}
+\zeta^2\hat{w}-2\sqrt{\frac{4p^3}{27a_1}}\zeta\hat{w}+\frac{5}{36}\int_0^{\zeta}(\zeta-\zeta')\hat{w}(\zeta')d\zeta'&=0 &\\
+\zeta^2\hat{w}'+2\zeta\hat{w}+2\sqrt{\frac{4p^3}{27a_1}}\hat{w}+2\sqrt{\frac{4p^3}{27a_1}}\zeta\hat{w}'+\frac{5}{36}\int_0^\zeta\hat{w}(\zeta')&=0 &\\
+\left(\zeta^2+2\sqrt{\frac{4p^3}{27a_1}}\zeta\right)\hat{w}''+4\left(\zeta+\sqrt{\frac{4p^3}{27a_1}}\right)\hat{w}'+\frac{77}{36}\hat{w}&=0 &\\
+t(1-t)\hat{w}''+(2-4t)\hat{w}'-\frac{77}{36}\hat{w}&=0 &\zeta=-2t\sqrt{\frac{4p^3}{27a_1}}
+\end{align*}
+
+hence \[\hat{w}_+(\zeta)={}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{3}{4p}\sqrt{\frac{3a_1}{p}}\zeta\right)\] and analougusly, \[\hat{w}_-(\zeta)={}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{3}{4p}\sqrt{\frac{3a_1}{p}}\zeta\right).\] Notice that $\hat{w}_{\pm}(\zeta)$ has a branch cut singularity respectively at $\zeta=\zeta_{\pm}\defeq\pm \sqrt{\frac{16p^3}{27a_1}}$, and thanks to the well known formulas for the analytic continuation of hypergeometric functions (see 15.2.3 DLMF), if we assume the branch cut is from $\zeta_{\pm}$ to $+\infty$
+
+\begin{align*}
+\hat{w}_-(\zeta+i0)-\hat{w}_-(\zeta-i0)&=\frac{2\pi i}{\Gamma(7/6)\Gamma(11/6)}\left(\frac{\zeta}{\zeta_+}-1\right)^{-1}\sum_{k\geq 0}\frac{(5/6)_k(1/6)_k}{\Gamma(k)k!}\left(1-\frac{\zeta}{\zeta_+}\right)^k & \zeta\in\left(\zeta_+,+\infty\right) & \\
+&=-\frac{2\pi i}{\Gamma(7/6)\Gamma(11/6)} \sum_{k\geq 0}\frac{(5/6)_k(1/6)_k}{\Gamma(k)k!}\left(1-\frac{\zeta}{\zeta_+}\right)^{k-1} & \\
+&=\mathbf{-i}\frac{1}{\Gamma(7/6)\Gamma(11/6)}\sum_{k\geq 0}\frac{\Gamma\left(\tfrac{7}{6}+k\right)\Gamma\left(\tfrac{11}{6}+k\right)}{\Gamma(2+k)\Gamma(k+1)}\left(1-\frac{\zeta}{\zeta_+}\right)^k & \\
+&=\mathbf{-i}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;1-\frac{\zeta}{\zeta_+}\right) & \\
+&=\mathbf{-i}\hat{w}_+(\zeta-\zeta_+)
+\end{align*}
+
+Similarly, if we assume that the branch cut is from $\zeta_{\pm}$ to $-\infty$ then
+
+\begin{align*}
+\hat{w}_+(\zeta+i0)-\hat{w}_+(\zeta-i0)&=-\frac{2\pi i}{\Gamma(7/6)\Gamma(11/6)}\left(\frac{\zeta}{\zeta_-}-1\right)^{-1}\sum_{k\geq 0}\frac{(5/6)_k(1/6)_k}{\Gamma(k)k!}\left(1-\frac{\zeta}{\zeta_-}\right)^k & \zeta\in\left(-\infty,\zeta_-\right) & \\
+&=\frac{2\pi i}{\Gamma(7/6)\Gamma(11/6)} \sum_{k\geq 0}\frac{(5/6)_k(1/6)_k}{\Gamma(k)k!}\left(1-\frac{\zeta}{\zeta_-}\right)^{k-1} & \\
+&=\mathbf{i}\frac{1}{\Gamma(7/6)\Gamma(11/6)}\sum_{k\geq 0}\frac{\Gamma\left(\tfrac{7}{6}+k\right)\Gamma\left(\tfrac{11}{6}+k\right)}{\Gamma(2+k)\Gamma(k+1)}\left(1-\frac{\zeta}{\zeta_-}\right)^k & \\
+&=\mathbf{i}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;1-\frac{\zeta}{\zeta_-}\right) & \\
+&=\mathbf{i}\hat{w}_-(\zeta-\zeta_-)
+\end{align*}
+
+therefore we see that the Stokes factors are given by $\pm i$ (as for Airy). 
+
+\textbf{I think it will be nice to add the geometric interpretation of Maxim in term of Lefschetz thimbles}
+
+The situation is quite different if we consider the degenerate case, where we have only a singular point: indeed there is a one parameter family of solutions of 
+\begin{equation}
+I'(z)+\left(\frac{1}{3z}+q\right)I(z)=0
+\end{equation}
+namely for $U\in\C$
+\begin{equation}
+\tilde{I}(z)=Ue^{-qz}z^{1/3}\tilde{w}(z)\,\qquad \text{ where } \tilde{w}(z)\in\C[\![z^{-1}]\!.]
+\end{equation} 
+The Borel transform of $\tilde{w}$ is a solution of 
+\begin{equation}
+\zeta\hat{w}'+\frac{\hat{w}}{3}=0
+\end{equation}
+hence, up to rescaling by a constant, \[\hat{w}(\zeta)\propto \zeta^{-1/3}=\,\, {}_2F_1\left(a,\frac{1}{3};a;1-\zeta\right)\] for every $a\in \C$. In the degenerate case we get an hypergeometric function as well, but the resurgent structure is trivial, i.e. $\hat{w}(\zeta)$ is holomorphic on the Riemann surface of $\zeta^{1/3}$. 
+ 
+
+\subsubsection{Alternative computation of the Borel transform of I}
+
+Let us first compute the Borel transform of \eqref{eq:I for p not 0} (indeed as in the proof of Theorem \ref{thm:maxim} we know that \eqref{eq:I for p not 0} admits a formal solution which is Gevrey-$1$)
+
+\begin{align*}
+\zeta^2\hat{I}-a\zeta\hat{I}+b\hat{I}-\int_0^{\zeta}\zeta'\hat{I}(\zeta')+d\int_0^{\zeta}\hat{I}(\zeta')-\frac{1}{9}\int_0^{\zeta}(\zeta-\zeta')\hat{I}(\zeta')=0\\
+2\zeta\hat{I}+\zeta^2\hat{I}'-a\hat{I}-a\zeta\hat{I}'+b\hat{I}'-\zeta\hat{I}+d\hat{I}-\frac{1}{9}\int\hat{I}(\zeta')=0\\
+(\zeta^2-a\zeta+b)\hat{I}''+(3\zeta-2a+d)\hat{I}'+\frac{8}{9}\hat{I}=0
+\end{align*}
+
+Now we denote by $\lambda_1,\lambda_2$ the distinguished (we assume that $p\neq 0$) roots of $\zeta^2-a\zeta+b$, then 
+
+\begin{align}
+& (\zeta-\lambda_1)(\zeta-\lambda_2)\hat{I}''+(3\zeta-2a+d)\hat{I}'+\frac{8}{9}\hat{I}=0 & \\
+&(t+\lambda_2-\lambda_1)t\hat{I}''+(3t+3\lambda_2-2a+d)\hat{I}'+\frac{8}{9}=0 & t=\zeta-\lambda_2 \\
+& \label{eq:I hyper} s(1-s)\hat{I}''-\left(3s+\frac{3\lambda_2-2a+d}{\lambda_1-\lambda_2}\right)\hat{I}'-\frac{8}{9}\hat{I}=0 & t=(\lambda_1-\lambda_2)s
+\end{align}
+
+where \eqref{eq:I hyper} is an hypergeometric equation\footnote{Notice that $\lambda_{1,2}=q\pm \frac{2i}{3}p\sqrt{\frac{p}{3a_1}}$, $a=2q$ and $d=q$. Hence \[\frac{2a-d-3\lambda_2}{\lambda_1-\lambda_2}=\frac{4q-q-3q-2ip\sqrt{\frac{p}{3a_1}}}{-\frac{4i}{3}p\sqrt{\frac{p}{3a_1}}}=\frac{3}{2}\]} and a solution is given by
+
+\begin{equation}
+\hat{I}_{\lambda_1}(\zeta;U_1,U_2)=U_1\,{}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};\frac{\zeta-\lambda_2}{\lambda_1-\lambda_2}\right)+U_2\left(\frac{\zeta-\lambda_2}{\lambda_1-\lambda_2}\right)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{\zeta-\lambda_2}{\lambda_1-\lambda_2}\right)
+\end{equation}  
+
+which has a branch cut at $\zeta=\lambda_1$, where $U_1,U_2$ are constants. Of course, reversing the role of $\lambda_1$ and $\lambda_2$ we find  
+
+\begin{equation}
+\hat{I}_{\lambda_2}(\zeta,;U_1,U_2)=U_1{}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};\frac{\zeta-\lambda_1}{\lambda_2-\lambda_1}\right)+U_2\left(\frac{\zeta-\lambda_1}{\lambda_2-\lambda_1}\right)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{\zeta-\lambda_1}{\lambda_2-\lambda_1}\right)
+\end{equation} 
+
+is the Borel transform of $\tilde{I}_{\lambda_2}(z)$ and it has a branch cut singularity at $\zeta=\lambda_2$. It is remarkable that  the dependece on the function $f$ is only on the location of the singularities, but it is always an hypergeometric function with the same parameters. In addition, we can compute the Stokes constants thanks to the well known formula for analyitic continuation of hypergeometric (see 15.2.3 in DLMF) 
+
+\begin{align*}
+\hat{I}_{\lambda_1}(\zeta+i0;U_1,0)-\hat{I}_{\lambda_1}(\zeta-i0;U_1,0)&=-U_1\frac{2\pi i}{\Gamma\left(\frac{2}{3}\right)\Gamma\left(\frac{4}{3}\right)}\left(\frac{\lambda_1-\zeta}{\lambda_2-\lambda_1}\right)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{\zeta-\lambda_1}{\lambda_2-\lambda_1}\right)\\
+&=\mathbf{-i}U_1\frac{2\pi i}{\Gamma\left(\frac{2}{3}\right)\Gamma\left(\frac{4}{3}\right)}\left(\frac{\zeta-\lambda_1}{\lambda_2-\lambda_1}\right)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{\zeta-\lambda_1}{\lambda_2-\lambda_1}\right)\\
+&=\mathbf{-i} \hat{I}_{\lambda_2}\left(\zeta;0,\frac{U_1}{\Gamma(2/3)\Gamma(4/3)}\right)
+\end{align*}
+    
 \end{document}
