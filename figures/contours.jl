@@ -64,7 +64,7 @@ function edgept(θ)
 end
 
 # for a nice contour with θ at π or 4π, set `off` to (1.3, 0)
-function plotcontours(θ = 0, off = (0, 0), n = 3, k = 1; test = true)
+function plotcontour(θ = 0, off = (0, 0), n = 3, k = 1; tag = "test")
   dark = RGB(0, 0.5, 0.7)
   light = RGB(0.6, 0.9, 1.0)
   
@@ -106,9 +106,14 @@ function plotcontours(θ = 0, off = (0, 0), n = 3, k = 1; test = true)
   
   # === output ===
   
-  tag = test ? "_test" : ""
-  draw(PDF(string("u_contour", tag, ".pdf"), 6cm, 6cm), u_contour)
-  draw(PDF(string("zeta_contour", tag, ".pdf"), 6cm, 6cm), ζ_contour)
+  draw(PDF(string("u_contour_", tag, ".pdf"), 6cm, 6cm), u_contour)
+  draw(PDF(string("zeta_contour_", tag, ".pdf"), 6cm, 6cm), ζ_contour)
+end
+
+function plotmiddlecontours()
+  for (n, k) in [(3, 1), (5, 3), (7, 3), (9, 5)]
+    plotcontour(0, (0, 0), n, k, tag = string(n))
+  end
 end
 
 # === contour integrals ===
