@@ -420,19 +420,64 @@ Then equations \eqref{formula1} is equivalent to
 \end{equation}
 \end{claim}
 
-Let us study the RHS of claim \eqref{claim 2}
+\textcolor{violet}{
+Using $a = \tfrac{5}{3}$, $b = \tfrac{7}{3}$, $c = \tfrac{5}{2}$:
+\begin{align*}
+w_1 & = \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{2}{3})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{6})} w_5 + \frac{\Gamma(\tfrac{5}{2}) \Gamma(-\tfrac{2}{3})}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \\
+w_3 & = \frac{1}{e^{(5/3)\pi i} - e^{(7/3)\pi i}} \left[ e^{(-1/6) \pi i} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3})} w_5 - e^{(-5/6) \pi i} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3})} w_6 \right]
+\end{align*}
+Common denominators
+\begin{align*}
+w_1 & = \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{2}{3}) \Gamma(\tfrac{1}{3})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{6}) \Gamma(\tfrac{1}{3})} w_5 + \frac{\Gamma(\tfrac{5}{2}) \Gamma(-\tfrac{2}{3}) \Gamma(\tfrac{5}{3})}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{3})} w_6 \\
+w_3 & = \frac{i}{\sqrt{3}} \left[ e^{(-1/6) \pi i} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} w_5 - e^{(-5/6) \pi i} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{5}{6}) \Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \right]
+\end{align*}
+Extract
+\begin{align*}
+w_1 & = \frac{\Gamma(\tfrac{5}{2}) \tfrac{2}{\sqrt{3}}\pi}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{6}) \Gamma(\tfrac{1}{3})} w_5 - \frac{\Gamma(\tfrac{5}{2}) \tfrac{2}{\sqrt{3}}\pi}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{3})} w_6 \\
+w_3 & = \frac{2\pi i}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \left[ e^{(-1/6) \pi i} \frac{1}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} w_5 - e^{(-5/6) \pi i} \frac{1}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \right]
+\end{align*}
+\ldots
+\begin{align*}
+w_1 & = \frac{2\pi}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \left[ \frac{1}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{6}) \Gamma(\tfrac{1}{3})} w_5 - \frac{1}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{3})} w_6 \right] \\
+w_3 & = \frac{2\pi}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \left[ e^{(1/3) \pi i} \frac{1}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} w_5 - e^{-(1/3) \pi i} \frac{1}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \right]
+\end{align*}
+Now subtract!
+\[ w_1 - w_3 = \frac{2\pi}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \left[ e^{-(1/3) \pi i} \frac{1}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} w_5 + e^{-(2/3) \pi i} \frac{1}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \right] \]
+}
+Let us study the RHS of claim \eqref{claim 2}. \textbf{Note that} $x = \tfrac{1}{2} + \tfrac{3}{4} \zeta$ and $y = \tfrac{1}{2} + \tfrac{3}{4} s$
 \begin{align*}
 &\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds=2\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}s\,\,{}_2F_1\left(\frac{4}{3},\frac{5}{3};\frac{3}{2};\frac{9}{4}s^2\right)ds & \\
-&= -\frac{2}{9}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};\frac{1}{2}-\frac{3s}{4}\right)ds+\frac{2}{9}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};\frac{1}{2}+\frac{3s}{4}\right)ds & 15.8.28 \text{ DLMF} \\
-&=\frac{4}{9\sqrt{3}}\int_0^x(x-y)^{-1/2}\left[{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1+y\right)-{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};y\right)\right]dy & x\in (-\infty,0) \\
-&=-\frac{\sqrt{3\pi}}{4}\Gamma(1/6)e^{-\frac{3}{2}\pi i}\int_0^x(x-y)^{-1/2}y^{-5/3}{}_2F_1\left(\frac{5}{3},\frac{1}{6};\frac{1}{3};\frac{1}{y}\right)dy & \\
-&=-\frac{\sqrt{3}\pi}{4}\frac{\Gamma(1/6)\Gamma(7/6)}{\Gamma(5/3)}e^{-\frac{3}{2}\pi i} |x|^{-7/6}{}_2F_1\left(\frac{7}{6},\frac{1}{6};\frac{1}{3};\frac{1}{x}\right) & \eqref{4.8} \\
-&=\frac{5\pi^2}{24\sqrt{3}}\frac{\Gamma(1/3)}{\Gamma(5/3)}\left({}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}-\frac{\zeta}{4}\right)-e^{-\frac{11}{6}\pi i}{}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}+\frac{\zeta}{4}\right)\right) & \zeta\in (2/3,+\infty)
-%&=-\frac{4i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};t\right)dt+\frac{4i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-t\right)dt & \zeta'=\frac{1}{2}-\frac{3}{4}\zeta\\
-%&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-t\right)dt -\frac{9i}{32}\textcolor{gray}{\int_{1}^{\zeta'}(\zeta'-t)^{-1/2}{}_2F_1\left(\frac{5}{3},\frac{7}{3};-\frac{1}{2};1-t\right)dt}& 15.10.21 \text{ DLMF }\\
-%&=\frac{2i}{9\sqrt{3}}\int_{1}^{\zeta'}(\zeta'-t)^{-1/2} {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{5}{2};1-t\right)t^{-3/2}dt &  15.10.13 \text{ DLMF }
+&= -\frac{2}{9} \int_{2/3}^{\zeta}(\zeta-s)^{-1/2} \left[ {}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};\frac{1}{2}-\frac{3s}{4}\right) - {}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};\frac{1}{2}+\frac{3s}{4}\right) \right] ds & 15.8.28 \text{ DLMF} \\
+&=-\frac{4}{9\sqrt{3}}\int_0^x(x-y)^{-1/2}\left[{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};1-y\right)-{}_2F_1\left(\frac{5}{3},\frac{7}{3};\frac{5}{2};y\right)\right]dy & x\in (-\infty,0) \\
+&=\frac{4}{9\sqrt{3}} \frac{2\pi}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \int_0^x(x-y)^{-1/2}\left[ e^{-(1/3) \pi i} \frac{e^{(5/3) \pi i} y^{-5/3} {}_2F_1\left(\frac{5}{3},\frac{1}{6};\frac{1}{3};\frac{1}{y}\right)}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} + e^{-(2/3) \pi i} \frac{e^{(7/3) \pi i} y^{-7/3} {}_2F_1\left(\frac{7}{3},\frac{5}{6};\frac{5}{3};\frac{1}{y}\right)}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} \right]dy & x\in (-\infty,0) \\
+&=\frac{8\pi}{27} \Gamma(\tfrac{5}{2}) \int_0^x(x-y)^{-1/2}\left[ e^{(4/3) \pi i} \frac{y^{-5/3} {}_2F_1\left(\frac{5}{3},\frac{1}{6};\frac{1}{3};\frac{1}{y}\right)}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} + e^{(5/3) \pi i} \frac{y^{-7/3} {}_2F_1\left(\frac{7}{3},\frac{5}{6};\frac{5}{3};\frac{1}{y}\right)}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} \right]dy & x\in (-\infty,0) \\
+% do the integral
+&=\frac{8\pi}{27} \Gamma(\tfrac{5}{2}) \left[ e^{(4/3) \pi i} \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{7}{6})}{\Gamma(\tfrac{5}{3})} \frac{x^{-7/6} {}_2F_1\left(\frac{7}{6},\frac{1}{6};\frac{1}{3};\frac{1}{x}\right)}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} \textcolor{red}{+} e^{(5/3) \pi i} \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{11}{6})}{\Gamma(\tfrac{7}{3})} \frac{x^{-11/6} {}_2F_1\left(\frac{11}{6},\frac{5}{6};\frac{5}{3};\frac{1}{x}\right)}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} \right] & \eqref{4.8} \\
+&=\frac{8\pi}{27} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{3})} \left[ e^{(4/3) \pi i} \frac{\Gamma(\tfrac{7}{6})}{\Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} x^{-7/6} {}_2F_1\left(\frac{7}{6},\frac{1}{6};\frac{1}{3};\frac{1}{x}\right) + e^{(5/3) \pi i} \frac{\Gamma(\tfrac{11}{6})}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} x^{-11/6} {}_2F_1\left(\frac{11}{6},\frac{5}{6};\frac{5}{3};\frac{1}{x}\right) \right] & \eqref{4.8} \\
+&=\frac{8\pi}{27} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{3})} \left[ e^{(4/3) \pi i} e^{-(7/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{11}{6}) \Gamma(\tfrac{1}{3})} \frac{\Gamma(\tfrac{11}{6})}{\Gamma(2) \Gamma(\tfrac{1}{6})} \frac{\Gamma(\tfrac{7}{6})}{\Gamma(\tfrac{5}{6})} w_5(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right. \\
+& \qquad\qquad\qquad\qquad + \left. e^{(5/3) \pi i} e^{-(11/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{5}{3})} \frac{\Gamma(\tfrac{7}{6})}{\Gamma(2) \Gamma(\tfrac{5}{6})} \frac{\Gamma(\tfrac{11}{6})}{\Gamma(\tfrac{1}{6})} w_6(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right] \\
+&=\frac{8\pi}{27} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{3})} \frac{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{11}{6})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})} \left[ e^{(1/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{11}{6}) \Gamma(\tfrac{1}{3})} w_5(\tfrac{7}{6}, \tfrac{11}{6}, 2) + e^{-(1/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{5}{3})} w_6(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right] \\
+&=\frac{8\pi}{27} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{3})} \frac{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{11}{6})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})} \left[ e^{(1/3) \pi i} e^{-(1/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{11}{6}) \Gamma(\tfrac{1}{3})} w_5(\tfrac{7}{6}, \tfrac{11}{6}, 2) + e^{(2/3) \pi i} e^{-(5/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{5}{3})} w_6(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right] \\
+&=\frac{8\pi}{27} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{3})} \frac{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{11}{6})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})} \left[ \tfrac{1}{2} \left( e^{-(1/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{11}{6}) \Gamma(\tfrac{1}{3})} w_5(\tfrac{7}{6}, \tfrac{11}{6}, 2) - e^{-(5/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{5}{3})} w_6(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right) \right. \\
+& \qquad\qquad\qquad\qquad \left. + i\tfrac{\sqrt{3}}{2} \left( e^{-(1/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{11}{6}) \Gamma(\tfrac{1}{3})} w_5(\tfrac{7}{6}, \tfrac{11}{6}, 2) + e^{-(5/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{5}{3})} w_6(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right) \right] \\
+&=\frac{8\pi}{27} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{3})} \frac{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{11}{6})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})} \left[ \tfrac{1}{2} \big(e^{(7/6) \pi i} - e^{(11/6) \pi i}\big)\,w_3(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right. \\
+& \qquad\qquad\qquad\qquad \left. - i\tfrac{\sqrt{3}}{2} \left( e^{-(7/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{11}{6}) \Gamma(\tfrac{1}{3})} \frac{\Gamma(\tfrac{5}{6}) \Gamma(\tfrac{2}{3})}{\Gamma(\tfrac{2}{3}) \Gamma(\tfrac{5}{6})} w_5(\tfrac{7}{6}, \tfrac{11}{6}, 2) + e^{-(11/6) \pi i} \frac{\Gamma(2) \Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{5}{3})} \frac{\Gamma(\tfrac{1}{6}) \Gamma(-\tfrac{2}{3})}{\Gamma(-\tfrac{2}{3}) \Gamma(\tfrac{1}{6})} w_6(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right) \right] \\
+&=\frac{8\pi}{27} \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{1}{2})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{3})} \frac{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{11}{6})}{\Gamma(\tfrac{1}{6}) \Gamma(\tfrac{5}{6})} \left[ \tfrac{1}{2} \big(e^{(7/6) \pi i} - e^{(11/6) \pi i}\big)\,w_3(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right. \\
+& \qquad\qquad\qquad\qquad \left. - i\tfrac{\sqrt{3}}{2} \left( e^{-(7/6) \pi i} \frac{\Gamma(\tfrac{2}{3})}{\Gamma(\tfrac{11}{6}) \Gamma(\tfrac{5}{6})} \frac{\sin(\tfrac{1}{3}\pi)}{\sin(\tfrac{1}{6}\pi)} w_5(\tfrac{7}{6}, \tfrac{11}{6}, 2) + e^{-(11/6) \pi i} \frac{\Gamma(-\tfrac{2}{3})}{\Gamma(\tfrac{7}{6}) \Gamma(\tfrac{1}{6})} \frac{\sin(-\tfrac{2}{3}\pi)}{\sin(\tfrac{1}{6}\pi)} w_6(\tfrac{7}{6}, \tfrac{11}{6}, 2) \right) \right] \\
 \end{align*}
 however, ${}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2/3,+\infty)$, thus the claim holds true. 
+
+\textcolor{violet}{
+Alternate calculation with $\tfrac{1}{2}$ derivative:
+\begin{align*}
+&\int_{2/3}^{\zeta}(\zeta-s)^{-1/2} {}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right) ds \\
+&= \frac{2}{3} \int_{2/3}^{\zeta}(\zeta-s)^{-1/2} \left[ {}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};\frac{1}{2}-\frac{3s}{4}\right) + {}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};\frac{1}{2}+\frac{3s}{4}\right) \right] ds & 15.8.27 \text{ DLMF} \\
+&=\frac{4}{3\sqrt{3}}\int_0^x(x-y)^{-1/2}\left[ {}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};1-y\right) + {}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};y\right)\right]dy & x\in (-\infty,0) \\
+&=\frac{2i}{3\sqrt{3}}\int_0^x(x-y)^{-1/2}\left[ \big(1+\tfrac{1}{\sqrt{3}}\big) y^{-2/3} {}_2F_1\left(\frac{2}{3}, \frac{1}{6}, \frac{1}{3};\frac{1}{y}\right) + \big(1-\tfrac{1}{\sqrt{3}}\big) y^{-4/3} {}_2F_1\left(\frac{4}{3}, \frac{5}{6}, \frac{5}{3};\frac{1}{y}\right) \right] ds \\
+&=\frac{2i}{3\sqrt{3}} \left[ \frac{\Gamma(\tfrac{1}{2})\Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{2}{3})} \big(1+\tfrac{1}{\sqrt{3}}\big) x^{-1/6} {}_2F_1\left(\frac{1}{6}, \frac{1}{6}, \frac{1}{3};\frac{1}{x}\right) + \frac{\Gamma(\tfrac{1}{2})\Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{4}{3})}\big(1-\tfrac{1}{\sqrt{3}}\big) x^{-5/6} {}_2F_1\left(\frac{5}{6}, \frac{5}{6}, \frac{5}{3};\frac{1}{x}\right) \right] ds & \eqref{4.8} \\
+&=??? & \zeta\in (2/3,+\infty)
+\end{align*}
+}
 
 Analougusly, it can be verified for $\hat{w}_-(\zeta+2/3)$ for $\zeta\in(-\infty,-2/3)$.  
 %By definition ${}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};t\right)=\sum_{n\geq 0}\frac{(2/3)_n(4/3)_n}{(3/2)_n n!}t^n$, thus
