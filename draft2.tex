@@ -208,19 +208,21 @@ For any Morse cirtial points $x_\alpha$ of $f$, the saddle point approximation g
 \begin{equation}
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n} \qquad \text{ as } z\to\infty
 \end{equation}
-where $\mathcal{C}_\alpha$ is a steepest descendet path through the critical point $x_\alpha$. 
-\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$ and assume $f''(x_\alpha)\neq 0$ for every critical point $x_\alpha$. Then
+where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point $x_\alpha$. Notice that $f \circ \mathcal{C}_\alpha$ lies in the ray $\zeta_\alpha + [0, \infty)$, where $\zeta_\alpha := f(x_\alpha)$.
+\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$ and assume $f''(x_\alpha)\neq 0$ for every critical point $x_\alpha$. Then:
 \begin{enumerate}
-\item $\tilde{\varphi}_\alpha$ is Gevrey-1;
-\item $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ is a germ of analytic function at $\zeta=\zeta_{\alpha}=f(x_\alpha)$;
-\item the following formual holds true
-\begin{multline}\label{formula1}
-\hat{\varphi}_{\alpha}(\zeta)=\partial^{\textcolor{red}{3/2}}_{\zeta, \text{based at }\zeta_\alpha}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)=\Gamma(-1/2)\int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2}\textcolor{red}{\partial_{\zeta'}\left(\int_{f^{-1}(\zeta')}\frac{\nu}{df}\right)} d\zeta'
-\end{multline} 
+\item The series $\tilde{\varphi}_\alpha$ is Gevrey-1.
+\item The series $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ converges near $\zeta=\zeta_{\alpha}$.
+\item For any $\zeta$ on the ray going rightward from $\zeta_\alpha$, we have
+\begin{align*}\label{formula1}
+\hat{\varphi}_{\alpha}(\zeta) & = \partial^{\textcolor{red}{3/2}}_{\zeta \text{ from }\zeta_\alpha}\left(\int_{\mathcal{C}_\alpha(\zeta)} \nu \right) \\
+& = \Gamma\big(-\tfrac{1}{2}\big)\int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2}\textcolor{red}{\partial_{\zeta'}\left(\left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta')}^{\operatorname{end} \mathcal{C}_\alpha(\zeta')} \right)}\,d\zeta',
+\end{align*}
+where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $f^{-1}([\zeta_\alpha, \zeta])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $f^{-1}(\zeta)$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Part $(1)$: Let us assume that locally $\nu=\sum_{j\geq 0}b_j^{\alpha}(t-t_{\alpha})^{j}dt$ for $|t-t_\alpha|<\varepsilon$. By the steepest descendet method, $I_\alpha(z)$ can be aproximated as $z\to\infty$ as
+Part~(1): Let us assume that locally $\nu=\sum_{j\geq 0}b_j^{\alpha}(t-t_{\alpha})^{j}dt$ for $|t-t_\alpha|<\varepsilon$. By the steepest descent method, $I_\alpha(z)$ can be aproximated as $z\to\infty$ as
 \begin{align*}
 I_\alpha(\zeta)&\sim e^{-zf(x_\alpha)}\int_{-\varepsilon}^{\varepsilon}\sum_{n\geq 0}t^{2n}b_{2n}^{\alpha}e^{-zf''(x_\alpha)\frac{t^2}{2}}dt\\
 &=e^{-zf(x_\alpha)}\sum_{n\geq 0}b_{2n}^{\alpha}\int_{-\varepsilon}^{\varepsilon}t^{2n}e^{-zf''(x_{\alpha})\frac{t^2}{2}}dt\\
@@ -235,26 +237,34 @@ Since, $\tfrac{1}{\varepsilon}=\limsup_{n}\sqrt[n]{b_{n}^{\alpha}}$
 \[|a_{\alpha,n}|\leq CA^n n!\]
 where we use $(2n-1)!!\sim \tfrac{2^n}{\sqrt{\pi n}}n!$ as $n\to \infty$.
 
-Part $(2)$: \begin{align*}
+Part~(2): \begin{align*}
 \hat{\varphi}_\alpha(\zeta)=\mathcal{B}\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
 (2\pi)^{1/2} \left(\delta(f_{x_\alpha}) a_0+\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}\right)
 \end{align*}
 Since $a_{n}\leq CA^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
 
-Part $(3)$: thanks to properties of Caputo's fractional derivatives, we have that the Borel transform of $\tilde{I}_{\alpha}(z)=z^{-1/2}\tilde{\varphi}_\alpha(z)$ is 
+Part~(3): thanks to properties of Caputo's fractional derivatives, we have that the Borel transform of $\tilde{I}_{\alpha}(z)=z^{-1/2}\tilde{\varphi}_\alpha(z)$ is 
 \begin{equation}
-\partial^{1/2}_{\zeta, \text{based at }\zeta_\alpha}\hat{I}_{\alpha}(\zeta)=\hat{\varphi}_{\alpha}(\zeta).
-\end{equation} 
-In addition, we notice 
-\begin{align*}
-I_{\alpha}(z)&=\int_{\mathcal{C}_{\alpha}}e^{-zf}\nu & f=\zeta\\
-&=\int_{\mathcal{H}_{\alpha}}e^{-z\zeta}\partial_{\zeta}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)d\zeta   & \mathcal{H}_{\alpha} \text{ is Hankel countour} \\
-&=:\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}\hat{I}_{\alpha}(\zeta)d\zeta &
-\end{align*}
-hence 
-\begin{equation}
-\hat{\varphi}_{\alpha}(\zeta)=\partial^{1/2}_{\zeta, \text{based at } \zeta_\alpha}\left(\partial_{\zeta}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)\right)=\partial^{3/2}_{\zeta, \text{based at } \zeta_\alpha}\left(\int_{f^{-1}(\zeta_\alpha)}^{f^{-1}(\zeta)}\nu\right)
+\partial^{1/2}_{\zeta \text{ from }\zeta_\alpha}\hat{I}_{\alpha}(\zeta) = \hat{\varphi}_{\alpha}(\zeta).
 \end{equation}
+%%Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. Noticing that $f \circ \mathcal{C}^\pm_\alpha$ are both injective, we can recast the integral $I_\alpha$ into the $f$ plane.
+%%\[ I_{\alpha}(z) = \int_{\mathcal{C}^-_{\alpha}} e^{-zf} \nu + \int_{\mathcal{C}^+_{\alpha}} e^{-zf} \nu \]
+Let's recast the integral $I_\alpha$ into the $f$ plane. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. As $\zeta$ goes rightward from $\zeta_\alpha$, the start and end points of $\mathcal{C}_\alpha(\zeta)$ sweep backward along $\mathcal{C}^-_\alpha(\zeta)$ and forward along $\mathcal{C}^+_\alpha(\zeta)$, respectively. Hence, we have
+\begin{align*}
+I_\alpha(z) & = \int_{\mathcal{C}_{\alpha}} e^{-zf} \nu \\
+& = \int_{\zeta_\alpha}^\infty e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}\,d\zeta.
+\end{align*}
+Noticing that the right-hand side is a Laplace transform, we learn that
+\[ \hat{I}_\alpha(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}. \]
+Observing that
+\[ \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}, \]
+we conclude that
+\[ \hat{I}_\alpha(\zeta) = \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right)\,d\zeta. \]
+Hence
+\begin{align*}
+\hat{\varphi}_{\alpha}(\zeta) & = \partial^{1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_\alpha \\
+& = \partial^{3/2}_{\zeta \text{ from }\zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right)\,d\zeta.
+\end{align*}
 \end{proof}
 
 
@@ -839,7 +849,7 @@ Analougusly, it can be verified for $\hat{w}_-(\zeta+2)$ for $\zeta\in(-\infty,-
 \int_0^x |y|^{a-\mu-1}{}_2F_1\left(a,b;c,y\right)(x-y)^{\mu-1}dy=\frac{\Gamma(\mu)\Gamma(a-\mu)}{\Gamma(a)}|x|^{a-1}{}_2F_1\left(a-\mu,b;c;x\right)\\
 x\in(-\infty,0)\cup(0,1), \, \Re a>\Re\mu>0
 \end{multline}
-which can be rewritten as 
+which can be rewritten as \textbf{(\texttt{arXiv:1504.08144}, formula~4.8)}
 \begin{multline}
 \label{4.8}
 \int_{y>x}|y|^{-a}|x-y|^{\mu-1}{}_2F_1\left(a,b;c;y^{-1}\right)dy=\frac{\Gamma(\mu)\Gamma(a-\mu)}{\Gamma(a)}|x|^{-a+\mu}{}_2F_1\left(a-\mu,b;c;x^{-1}\right)\\
