@@ -218,24 +218,75 @@ where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point
 \hat{\varphi}_{\alpha}(\zeta) & = \partial^{\textcolor{red}{3/2}}_{\zeta \text{ from }\zeta_\alpha}\left(\int_{\mathcal{C}_\alpha(\zeta)} \nu \right) \\
 & = \Gamma\big(-\tfrac{1}{2}\big)\int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2}\textcolor{red}{\partial_{\zeta'}\left(\left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta')}^{\operatorname{end} \mathcal{C}_\alpha(\zeta')} \right)}\,d\zeta',
 \end{align*}
-where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $f^{-1}([\zeta_\alpha, \zeta])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $f^{-1}(\zeta)$.
+where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $f^{-1}([\zeta_\alpha, \zeta])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textbf{[Be careful about the orientation of $\mathcal{C}_\alpha$.]}
+\item
 \end{enumerate}
 \end{theorem}
 \begin{proof}
+Part~(1): Let's write $\approx$ when two functions are asymptotic (at all orders around the base point \textbf{[is this the right condition?]}), and $\sim$ when a function is asymptotic to a formal power series (at the truncation order of each partial sum).
+
+Since $f$ is Morse, we can find a holomorphic chart $\tau$ around $x_\alpha$ with $\tfrac{1}{2} \tau^2 = f - \zeta_\alpha$. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0, \infty)$ on $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$, respectively. \textbf{[We should explicitly spell out and check the conditions that make this possible. I think we're implicitly orienting $\mathcal{C}_\alpha$ so that $\tau$ in the upper half-plane.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
+\[ \nu = \sum_{n \ge 0} b_n^\alpha \tau^n\,d\tau \]
+that converges in some disk $|\tau| < \varepsilon$.
+
+By the steepest descent method,
+\[ e^{-z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
+as $z \to \infty$. \textbf{[I need to learn how this works! Do we get asymptoticity at all orders? ---Aaron]} Plugging in the Taylor series above, we get
+\begin{align*}
+e^{-z\zeta_\alpha} I_\alpha(z) & \approx \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_n^\alpha \tau^n\,d\tau \\
+& = \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^\alpha \tau^{2n}\,d\tau.
+\end{align*}
+By the dominated convergence theorem,\footnote{Notice that the sum over $k$ is empty when $n = 0$. Following convention, we extend the double factorial to all odd integers by its recurrence relation, giving $(-1)!! = 1$.}
+\begin{align*}
+e^{-z\zeta_\alpha} I_\alpha(z) & \approx \sum_{n \ge 0} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \\
+& = \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha \left[ \sqrt{2\pi}\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big) - 2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \N_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \right].
+\end{align*}
+
+The annoying $e^{-z\varepsilon^2/2}$ correction terms are dwarfed by their $z^{-(n+1/2)}$ counterparts when $z$ is large. These terms are crucial, however, for the convergence of the sum. To see why, consider their absolute sum $C_\text{exp}$. When $z \in [0, \infty)$,
+\begin{align*}
+C_\text{exp} & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left| b_{2n}^\alpha \sum_{\substack{k \in \N_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \right| \\
+& = 2e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| \sum_{\substack{k \in \N_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \\
+& \ge -2\varepsilon e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| z^n,
+\end{align*}
+which diverges for typical $f$ and $\nu$.
+
+This argument suggests that no matter how tiny the correction terms get, we can't expect to swat them all aside. We can, however, set aside any finite set of them. For each cutoff $N$, the tail
+\[ \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \]
+is in $o_{z \to \infty}(z^{-N})$ \textbf{[check]}, and the absolute sum
+\begin{align*}
+C_\text{exp}^N & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n = 1}^{N-1} (2n-1)!!\,\left| b_{2n}^\alpha \sum_{\substack{k \in \N_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \right| \\
+& \le 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n = 1}^{N-1} (2n-1)!!\,\left|b_{2n}^\alpha\right| \sum_{\substack{k \in \N_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} |z|^{n-k+1} \\
+& \ge -2\varepsilon e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| z^n,
+\end{align*}
+is in $o_{z \to \infty}(z^{-m})$ for every $m$ \textbf{[check]}. Hence,
+\[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
+The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows, allowing the simpler estimate
+\[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)}. \]
+Call the right-hand side $\tilde{I}_\alpha$. We now see that $a_{\alpha,n} = (2n-1)!!\,b_{2n}^\alpha$ in the statement of the theorem. \textbf{[Resolve discrepancy with previous calculation.]} Note that \textbf{[explain formally what it means to center at $\zeta_\alpha$]}
+\begin{align*}
+\mathcal{B}_{\zeta_\alpha}(\tilde{I}_\alpha) & = \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \Gamma\big(n+\tfrac{1}{2}\big)\,b_{2n}^\alpha\,\frac{(\zeta - \zeta_\alpha)^{n-1/2}}{\Gamma\big(n+\tfrac{1}{2}\big)} \\
+& = \sum_{n \ge 0} 2^{n+1/2}\,b_{2n}^\alpha\,(\zeta - \zeta_\alpha)^{n-1/2}.
+\end{align*}
+
+We know from the definition of $\varepsilon$ that $\left|b_n^\alpha\right| \varepsilon^n \lesssim 1$. Recalling that $(2n - 1)!! \approx (\pi n)^{-1/2}\,2^n\,n!$ as $n \to \infty$, we deduce that $|a_{\alpha,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{\varphi}_\alpha$ is Gevrey-1.
+
+\color{violet}
 Part~(1): Let us assume that locally $\nu=\sum_{j\geq 0}b_j^{\alpha}(t-t_{\alpha})^{j}dt$ for $|t-t_\alpha|<\varepsilon$. By the steepest descent method, $I_\alpha(z)$ can be aproximated as $z\to\infty$ as
 \begin{align*}
 I_\alpha(\zeta)&\sim e^{-zf(x_\alpha)}\int_{-\varepsilon}^{\varepsilon}\sum_{n\geq 0}t^{2n}b_{2n}^{\alpha}e^{-zf''(x_\alpha)\frac{t^2}{2}}dt\\
 &=e^{-zf(x_\alpha)}\sum_{n\geq 0}b_{2n}^{\alpha}\int_{-\varepsilon}^{\varepsilon}t^{2n}e^{-zf''(x_{\alpha})\frac{t^2}{2}}dt\\
 &=\sqrt{2\pi}e^{-zf(x_\alpha)}z^{-1/2}\sum_{n\geq 0}\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!! z^{-n}\mathrm{Erf}\left(\frac{\sqrt{z f''(x_\alpha)}}{\sqrt{2}}\varepsilon\right)+\\
 &-2e^{-zf(x_\alpha)}\sum_{n\geq 1}b_{2n}^{\alpha}(2n-1)!!e^{-zf''(x_{\alpha})\frac{\varepsilon^2}{2}}\sum_{j=1}^n\frac{\varepsilon^{2j-1}}{(2j-1)!!}\left(f''(x_\alpha)z\right)^{n-j+1}\\
-&\sim_{\varepsilon<<1} 2\varepsilon \sqrt{2\pi}e^{-zf(x_\alpha)}z^{-1/2}\sum_{n\geq 0}\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!! z^{-n}
+&\sim_{\textcolor{red}{\varepsilon \ll 1}} 2\varepsilon \sqrt{2\pi}e^{-zf(x_\alpha)}z^{-1/2}\sum_{n\geq 0}\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!! z^{-n}
 \end{align*} 
 therefore \[a_{\alpha,n}\defeq 2\varepsilon\frac{b_{2n}^{\alpha}}{(f''(x_{\alpha}))^{n+1/2}}(2n-1)!!\]
+\textbf{[The value of $\varepsilon$ shouldn't affect the asymptotic series! I think we want the limit $z \to \infty$ rather than $\varepsilon \ll 1$.]}
 
 Since, $\tfrac{1}{\varepsilon}=\limsup_{n}\sqrt[n]{b_{n}^{\alpha}}$
 
 \[|a_{\alpha,n}|\leq CA^n n!\]
 where we use $(2n-1)!!\sim \tfrac{2^n}{\sqrt{\pi n}}n!$ as $n\to \infty$.
+\color{black}
 
 Part~(2): \begin{align*}
 \hat{\varphi}_\alpha(\zeta)=\mathcal{B}\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
@@ -244,12 +295,12 @@ Part~(2): \begin{align*}
 Since $a_{n}\leq CA^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
 
 Part~(3): thanks to properties of Caputo's fractional derivatives, we have that the Borel transform of $\tilde{I}_{\alpha}(z)=z^{-1/2}\tilde{\varphi}_\alpha(z)$ is 
-\begin{equation}
-\partial^{1/2}_{\zeta \text{ from }\zeta_\alpha}\hat{I}_{\alpha}(\zeta) = \hat{\varphi}_{\alpha}(\zeta).
+\begin{equation}\label{formal-half-deriv}
+\partial^{1/2}_{\zeta \text{ from }\zeta_\alpha}\mathcal{B}(\tilde{I}_{\alpha})(\zeta) = \hat{\varphi}_{\alpha}(\zeta).
 \end{equation}
 %%Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. Noticing that $f \circ \mathcal{C}^\pm_\alpha$ are both injective, we can recast the integral $I_\alpha$ into the $f$ plane.
 %%\[ I_{\alpha}(z) = \int_{\mathcal{C}^-_{\alpha}} e^{-zf} \nu + \int_{\mathcal{C}^+_{\alpha}} e^{-zf} \nu \]
-Let's recast the integral $I_\alpha$ into the $f$ plane. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. As $\zeta$ goes rightward from $\zeta_\alpha$, the start and end points of $\mathcal{C}_\alpha(\zeta)$ sweep backward along $\mathcal{C}^-_\alpha(\zeta)$ and forward along $\mathcal{C}^+_\alpha(\zeta)$, respectively. Hence, we have
+Let's recast the integral $I_\alpha$ into the $f$ plane. As $\zeta$ goes rightward from $\zeta_\alpha$, the start and end points of $\mathcal{C}_\alpha(\zeta)$ sweep backward along $\mathcal{C}^-_\alpha(\zeta)$ and forward along $\mathcal{C}^+_\alpha(\zeta)$, respectively. Hence, we have
 \begin{align*}
 I_\alpha(z) & = \int_{\mathcal{C}_{\alpha}} e^{-zf} \nu \\
 & = \int_{\zeta_\alpha}^\infty e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}\,d\zeta.
@@ -260,14 +311,26 @@ Observing that
 \[ \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}, \]
 we conclude that
 \[ \hat{I}_\alpha(\zeta) = \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right)\,d\zeta. \]
-Hence
+
+We can rewrite our Taylor series for $\nu$ as
+\begin{align*}
+\nu & = \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{n/2}\,\frac{df}{[2(f - \zeta_\alpha)]^{1/2}} \\
+& = \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{(n - 1)/2}\,df,
+\end{align*}
+taking the positive branch of the square root on $\mathcal{C}^+_\alpha$ and the negative branch on $\mathcal{C}^-_\alpha$. Plugging this into our expression for $\hat{I}_\alpha$, we learn that
+\begin{align*}
+\hat{I}_\alpha(\zeta) & = \left[ \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{(n - 1)/2} \right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)} \\
+& = \sum_{n \ge 0} b_n^\alpha \Big( [2(\zeta - \zeta_\alpha)]^{(n - 1)/2} - (-1)^{n-1}[2(\zeta - \zeta_\alpha)]^{(n - 1)/2} \Big) \\
+& = \sum_{n \ge 0} 2 b_{2n}^\alpha [2(\zeta - \zeta_\alpha)]^{n - 1/2} \\
+& = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^\alpha (\zeta - \zeta_\alpha)^{n - 1/2} \\
+& = \mathcal{B}_{\zeta_\alpha}(\tilde{I}_\alpha).
+\end{align*}
+We already knew, from the general theory of the Borel transform, that the sum of $\mathcal{B}_{\zeta_\alpha}(\tilde{I}_\alpha)$ would be asymptotic to $\hat{I}_\alpha$. We've now shown that the sum of $\mathcal{B}_{\zeta_\alpha}(\tilde{I}_\alpha)$ is actually equal to $\hat{I}_\alpha$, strengthening the formal series identity~\ref{formal-half-deriv} to the analytic identity
 \begin{align*}
 \hat{\varphi}_{\alpha}(\zeta) & = \partial^{1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_\alpha \\
 & = \partial^{3/2}_{\zeta \text{ from }\zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right)\,d\zeta.
 \end{align*}
 \end{proof}
-
-
 
 \begin{example}[Airy]
 Let $f(t)=\frac{t^3}{3}-t$ and \[I(z)\defeq\int_{\gamma} e^{-zf(t)}\text{dt}\]
@@ -431,7 +494,7 @@ Then equations \eqref{formula1} is equivalent to
 \end{equation}
 \end{claim}
 
-\textcolor{violet}{
+\color{violet}
 Using $a = \tfrac{5}{3}$, $b = \tfrac{7}{3}$, $c = \tfrac{5}{2}$:
 \begin{align*}
 w_1 & = \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{2}{3})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{6})} w_5 + \frac{\Gamma(\tfrac{5}{2}) \Gamma(-\tfrac{2}{3})}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \\
@@ -454,7 +517,7 @@ w_3 & = \frac{2\pi}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \left[ e^{(1/3) \pi i} \frac{
 \end{align*}
 Now subtract!
 \[ w_1 - w_3 = \frac{2\pi}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \left[ e^{-(1/3) \pi i} \frac{1}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} w_5 + e^{-(2/3) \pi i} \frac{1}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \right] \]
-}
+\color{black}
 Let us study the RHS of claim \eqref{claim 2}. \textbf{Note that $x = \tfrac{1}{2} - \tfrac{3}{4} \zeta$ and $y = \tfrac{1}{2} - \tfrac{3}{4} s$.
 \begin{align*}
 &\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds \\
