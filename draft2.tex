@@ -181,19 +181,24 @@ Veronica Fantini
 %\textcolor{red}{Is $F_1(7/6,11/6,2,3/4\zeta)$ algebraic?}
 
 \section{Fractional derivatives and Borel transform}
+For $\nu \in (-\infty, 1)$, the fractional integral $\partial^{\nu-1}_{x \text{ from } 0}$ is defined by
+\[ \partial^{\nu-1}_{x \text{ from } 0} f(x) \defeq \frac{1}{\Gamma(1-\nu)} \int_0^x (x-x')^{-\nu} f(x')\,dx'. \]
+It obeys the expected semigroup law \textbf{[Lazarevi\'{c}, \S 1.3]}
+\begin{align*}
+\partial^{\mu-1}_{x \text{ from } 0} \partial^{\nu-1}_{x \text{ from } 0} & = \partial^{(\mu-1)+(\nu-1)}_{x \text{ from } 0} & \mu, \nu \in (-\infty, 1),
+\end{align*}
+and agrees with ordinary repeated integration when $\nu$ is an integer \textbf{[Lazarevi\'{c}, equation~35]}.
+
+For $\alpha \in (0, 1)$ and integers $n \ge -1$, fractional derivatives $\partial^{n+\alpha}_{x \text{ from } 0}$ are defined by composing $\partial^{\alpha-1}_{x \text{ from } 0}$ with powers of $\tfrac{\partial}{\partial x}$. However, $\partial^{\alpha-1}_{x \text{ from } 0}$ and $\tfrac{\partial}{\partial x}$ don't commute: their commutator is an initial value operator \textbf{[check, clarify]}. Various ordering conventions give various definitions of $\partial^{n+\alpha}_{x \text{ from } 0} f(x)$, which differ by operators that act on the germ of $f$ at zero \textbf{[Lazarevi\'{c}, \S 1.3---original source Podlubny]}. We'll use the {\em Riemann-Liouville} convention.
 \begin{definition}
-For $\alpha \in (0, 1)$, the fractional integral $\partial^{\alpha-1}_{x \text{ from } 0}$ is defined by
-\[ \partial^{\alpha-1}_{x \text{ from } 0} f(x) \defeq \frac{1}{\Gamma(1-\alpha)} \int_0^x (x-x')^{-\alpha} f(x')\,dx'. \]
-\end{definition}
-Fractional derivatives $\partial^{n+\alpha}_{x \text{ from } 0}$ are defined for integers $n \ge -1$ by composing the fractional integral with powers of $\tfrac{\partial}{\partial x}$. However, $\partial^{\alpha-1}_{x \text{ from } 0}$ and $\tfrac{\partial}{\partial x}$ don't commute: their commutator is an initial value operator \textbf{[check, clarify]}. Various ordering conventions give various definitions of $\partial^{n+\alpha}_{x \text{ from } 0} f(x)$, which differ by operators that depend on the germ of $f$ at zero \textbf{[Lazarevi\'{c}, \S 1.3---original source Podlubny]}. We'll use the {\em Riemann-Liouville} convention.
-\begin{definition}
-For $\alpha \in (0, 1)$ and $n \ge -1$ integer, the {\em Riemann-Liouville fractional derivative} $\partial^{n+\alpha}_{x \text{ from } 0}$ is defined by
+For $\alpha \in (0, 1)$ and integers $n \ge -1$, the {\em Riemann-Liouville fractional derivative} $\partial^{n+\alpha}_{x \text{ from } 0}$ is defined by
 \[ \partial^{n+\alpha}_{x \text{ from } 0} \defeq \left(\tfrac{\partial}{\partial x}\right)^{n+1} \partial^{\alpha-1}_{x \text{ from } 0}. \]
 \end{definition}
-Each convention brings its own annoyances to interactions with the Borel transform.\footnote{See Remark~\ref{rmk:caputo} for more.} The Riemann-Liouville convention will be the least annoying for our purposes.
+Each convention brings its own annoyances to interactions with the Borel transform.\footnote{See Remark~\ref{rmk:caputo} for examples.} The Riemann-Liouville convention will be the least annoying for our purposes. Here's what's nice about it.
 \begin{theorem}
-Take a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$. For $\alpha \in (0, 1)$ and $n \ge -1$, we have
+Given a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$, we have
 \[ \partial^{n+\alpha}_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^{n+\alpha} \varphi \right](\zeta) \]
+for all $\alpha \in (0, 1)$ and $n \ge -1$.
 \end{theorem}
 
 \begin{lemma}
@@ -219,7 +224,7 @@ for $n = -1$. If \eqref{frac-diff-laplace} holds for $n = m$, it also holds for 
 \tfrac{\partial}{\partial \zeta} \left(\tfrac{\partial}{\partial \zeta}\right)^{m+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) & = \tfrac{\partial}{\partial \zeta} \left( \frac{\zeta^{k-(m+\alpha)}}{\big(k-(m+\alpha)\big)\,\Gamma\big(k-(m+\alpha)\big)} \right) \\
 & = \frac{\zeta^{k-(m+1+\alpha)}}{\Gamma\big(k-(m+\alpha)\big)}
 \end{align*}
-Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired result quickly follows. The condition $\alpha \in (0, 1)$ saves us from the trouble we'd run into if $k-(m+\alpha)$ were in $\Z_{\le 0}$. This is how we avoid the initial value corrections that appear in integer-order derivatives of Borel transforms.
+Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired result quickly follows. The condition $\alpha \in (0, 1)$ saves us from the trouble we'd run into if $k-(m+\alpha)$ were in $\Z_{\le 0}$. This is how we avoid the initial value corrections that appear in ordinary derivatives of Borel transforms.
 \end{proof}
 \color{MidnightBlue}
 \begin{definition}
