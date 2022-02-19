@@ -38,7 +38,14 @@
 \setcounter{tocdepth}{2}
 %\setcounter{section}{-1}
 \numberwithin{equation}{section}
+
+% Veronica's custom commands
 \input{command}
+
+% Laplace and Borel transforms
+\newcommand{\laplace}{\mathcal{L}}
+\newcommand{\borel}{\mathcal{B}}
+
 \DeclareRobustCommand{\subtitle}[1]{\\#1}
 \title[Exponential Integrals]{Exponential Integrals\\ [1ex]
   }
@@ -86,7 +93,7 @@ Veronica Fantini
 %\begin{equation}
 %Ai(x)\sim \frac{e^{-2/3x^{3/2}}}{2\sqrt{\pi}x^{1/4}}\sum_{n\geq 0}(-1)^n\frac{1}{2^{n+1}\pi n!}\Gamma\left(n+\frac{5}{6}\right)\Gamma\left(n+\frac{1}{6}\right)\left(\frac{3}{2}x^{-3/2}\right)^n
 %\end{equation}
-%and $a_n\defeq (-1)^n\frac{1}{2\pi n!}\Gamma\left(n+\frac{5}{6}\right)\Gamma\left(n+\frac{1}{6}\right)\left(\frac{3}{4}\right)^n$. Analougusly, let $\varphi(x)\defeq\sum_{n\geq 0}b_nx^{-n}$ be the asymptotic expansion of $Bi(x)$ as $x\to\infty$: from DLMF and Sauzin
+%and $a_n\defeq (-1)^n\frac{1}{2\pi n!}\Gamma\left(n+\frac{5}{6}\right)\Gamma\left(n+\frac{1}{6}\right)\left(\frac{3}{4}\right)^n$. Analogously, let $\varphi(x)\defeq\sum_{n\geq 0}b_nx^{-n}$ be the asymptotic expansion of $Bi(x)$ as $x\to\infty$: from DLMF and Sauzin
 %
 %\begin{equation}
 %Bi(x)\sim \frac{e^{2/3x^{3/2}}}{\sqrt{\pi}x^{1/4}}\sum_{n\geq 0}\frac{1}{2^{n+1}\pi n!}\Gamma\left(n+\frac{5}{6}\right)\Gamma\left(n+\frac{1}{6}\right)\left(\frac{3}{2}x^{-3/2}\right)^n
@@ -174,7 +181,47 @@ Veronica Fantini
 %\textcolor{red}{Is $F_1(7/6,11/6,2,3/4\zeta)$ algebraic?}
 
 \section{Fractional derivatives and Borel transform}
+\begin{definition}
+For $\alpha \in (0, 1)$, the fractional integral $\partial^{\alpha-1}_{x \text{ from } 0}$ is defined by
+\[ \partial^{\alpha-1}_{x \text{ from } 0} f(x) \defeq \frac{1}{\Gamma(1-\alpha)} \int_0^x (x-x')^{-\alpha} f(x')\,dx'. \]
+\end{definition}
+Fractional derivatives $\partial^{n+\alpha}_{x \text{ from } 0}$ are defined for integers $n \ge -1$ by composing the fractional integral with powers of $\tfrac{\partial}{\partial x}$. However, $\partial^{\alpha-1}_{x \text{ from } 0}$ and $\tfrac{\partial}{\partial x}$ don't commute: their commutator is an initial value operator \textbf{[check, clarify]}. Various ordering conventions give various definitions of $\partial^{n+\alpha}_{x \text{ from } 0} f(x)$, which differ by operators that depend on the germ of $f$ at zero \textbf{[Lazarevi\'{c}, \S 1.3---original source Podlubny]}. We'll use the {\em Riemann-Liouville} convention.
+\begin{definition}
+For $\alpha \in (0, 1)$ and $n \ge -1$ integer, the {\em Riemann-Liouville fractional derivative} $\partial^{n+\alpha}_{x \text{ from } 0}$ is defined by
+\[ \partial^{n+\alpha}_{x \text{ from } 0} \defeq \left(\tfrac{\partial}{\partial x}\right)^{n+1} \partial^{\alpha-1}_{x \text{ from } 0}. \]
+\end{definition}
+Each convention brings its own annoyances to interactions with the Borel transform.\footnote{See Remark~\ref{rmk:caputo} for more.} The Riemann-Liouville convention will be the least annoying for our purposes.
+\begin{theorem}
+Take a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$. For $\alpha \in (0, 1)$ and $n \ge -1$, we have
+\[ \partial^{n+\alpha}_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^{n+\alpha} \varphi \right](\zeta) \]
+\end{theorem}
 
+\begin{lemma}
+For $\alpha \in (0, 1)$ and $n \ge -1$,
+\[ \partial^{n+\alpha}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) = \left[ \borel z^{n+\alpha} z^{-(k+1)} \right](\zeta) \]
+\end{lemma}
+\begin{proof}
+First, evaluate
+\begin{align*}
+\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
+& = \frac{1}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (\zeta-\zeta t)^{-\alpha} (\zeta t)^k\,\zeta\,dt \\
+& = \frac{\zeta^{k-(\alpha-1)}}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (1-t)^{-\alpha} t^k\,dt \\
+& = \frac{\zeta^{k-(\alpha-1)}}{\Gamma(k-\alpha)}
+%%& = \left[ \borel z^{-[k-(\alpha-1)+1]} \right](\zeta) \\
+%%& = \left[ \borel z^{\alpha-1} z^{-[k+1]} \right](\zeta)
+\end{align*}
+by reducing the integral to Euler's beta function \textbf{[DLMF 5.12.1]}. This establishes that
+\begin{equation}\label{frac-diff-laplace}
+\left(\tfrac{\partial}{\partial \zeta}\right)^{n+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) = \frac{\zeta^{k-(n+\alpha)}}{\Gamma\big(k-(n+\alpha)+1\big)}
+\end{equation}
+for $n = -1$. If \eqref{frac-diff-laplace} holds for $n = m$, it also holds for $n = m+1$, because
+\begin{align*}
+\tfrac{\partial}{\partial \zeta} \left(\tfrac{\partial}{\partial \zeta}\right)^{m+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) & = \tfrac{\partial}{\partial \zeta} \left( \frac{\zeta^{k-(m+\alpha)}}{\big(k-(m+\alpha)\big)\,\Gamma\big(k-(m+\alpha)\big)} \right) \\
+& = \frac{\zeta^{k-(m+1+\alpha)}}{\Gamma\big(k-(m+\alpha)\big)}
+\end{align*}
+Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired result quickly follows. The condition $\alpha \in (0, 1)$ saves us from the trouble we'd run into if $k-(m+\alpha)$ were in $\Z_{\le 0}$. This is how we avoid the initial value corrections that appear in integer-order derivatives of Borel transforms.
+\end{proof}
+\color{MidnightBlue}
 \begin{definition}
 Let $\alpha\in (0,1)$ and $n\in\N$, then the $n+\alpha$-Caputo's derivative of a smooth fucntion $f$ is defined as
 \begin{equation}
@@ -182,7 +229,7 @@ Let $\alpha\in (0,1)$ and $n\in\N$, then the $n+\alpha$-Caputo's derivative of a
 \end{equation}
 \end{definition}
 
-In particular, this definition is well suited for the differential calculus in the convolutive model $\left(\C[\![\zeta]\!], \ast\right)$. Let $\varphi(z)\defeq\sum_{k\geq 0}a_kz^{-k-1}\in\C[\![z^{-1}]\!]$ be Gevrey $1$, then assuming $a_k=0$ for every $k<n$, the Borel transform of $z^{n+\alpha}\varphi(z)$ can be computed in two different ways:
+In particular, this definition is well suited for the differential calculus in the convolutive model $\left(\C[\![\zeta]\!], \ast\right)$. Let $\varphi(z)\defeq\sum_{k\geq 0}a_kz^{-k-1}\in\C[\![z^{-1}]\!]$ be Gevrey $1$, then assuming $a_k=0$ for every $k<n$, the Borel transform of $z^{n+\alpha}\varphi(z)$ can be computed in two different ways: \textbf{[Can we do this when $\varphi$ isn't in $o(z^n)$?]}
 \begin{multline}
 \label{mod1}
 \mathcal{B}\left(z^{n+\alpha}\varphi(z)\right)(\zeta)=\mathcal{B}(z^{\alpha+n})\ast\hat{\varphi}(\zeta)=\int_0^{\zeta}\frac{(\zeta-s)^{-1-n-\alpha}}{(-1-n-\alpha)!}\sum_{k\geq 0}\frac{a_k}{k!}s^{k}ds\\
@@ -193,13 +240,10 @@ In particular, this definition is well suited for the differential calculus in t
 \mathcal{B}\left(z^{n+\alpha}\varphi(z)\right)(\zeta)=\mathcal{B}\left(\sum_{k\geq 0}a_kz^{-k-1+n+\alpha}\right)(\zeta)=\sum_{k>n}\frac{a_k}{(k-n-\alpha)!}\zeta^{k-n-\alpha}
 \end{equation}
 
-and computitng the integral which defines the $n+\alpha$-derivative in \eqref{mod1} we get exaclty the same result as \eqref{mod2}.  
-
+and computitng the integral which defines the $n+\alpha$-derivative in \eqref{mod1} we get exaclty the same result as \eqref{mod2}.
+\color{black}
 \section{Resurgence of exponential integrals}
-
-
-Let $X$ be a $N-\dim$ manifold, $f\colon X\to\C$ be a holomorphic Morse function with only simple critical points, and $\nu\in\Gamma(X,\Omega^N)$, and set 
-
+Let $X$ be a $N-\dim$ manifold, $f\colon X\to\C$ be a holomorphic Morse function with only simple critical points, and $\nu\in\Gamma(X,\Omega^N)$, and set
 \begin{equation}
 I(z)\defeq\int_{\mathcal{C}}e^{-zf}\nu
 \end{equation}
@@ -215,10 +259,10 @@ where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point
 \item The series $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ converges near $\zeta=\zeta_{\alpha}$.
 \item For any $\zeta$ on the ray going rightward from $\zeta_\alpha$, we have
 \begin{align*}\label{formula1}
-\hat{\varphi}_{\alpha}(\zeta) & = \partial^{\textcolor{red}{3/2}}_{\zeta \text{ from }\zeta_\alpha}\left(\int_{\mathcal{C}_\alpha(\zeta)} \nu \right) \\
-& = \Gamma\big(-\tfrac{1}{2}\big)\int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2}\textcolor{red}{\partial_{\zeta'}\left(\left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta')}^{\operatorname{end} \mathcal{C}_\alpha(\zeta')} \right)}\,d\zeta',
+\hat{\varphi}_{\alpha}(\zeta) & = \partial^{\textcolor{red}{3/2}}_{\zeta \text{ from }\zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right) \\
+& = \textcolor{red}{\left(\tfrac{\partial}{\partial \zeta}\right)^2}\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2} \textcolor{red}{\left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right)}\,d\zeta',
 \end{align*}
-where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $f^{-1}([\zeta_\alpha, \zeta])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textbf{[Be careful about the orientation of $\mathcal{C}_\alpha$.]}
+where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $f^{-1}([\zeta_\alpha, \zeta])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textbf{[The integral over $\mathcal{C}_\alpha(\zeta)$ needs to satisfy some condition near $\zeta = 0$ for this to hold. Figure out what that is! Also, be careful about the orientation of $\mathcal{C}_\alpha$.]}
 \item
 \end{enumerate}
 \end{theorem}
@@ -490,11 +534,11 @@ Then equations \eqref{formula1} is equivalent to
 \begin{claim}\label{claim 2}
 \textbf{[There should be a way to predict the correct normalization of the LHS.]}
 \begin{equation}
-\hat{w}_+(\zeta-2/3)=-\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds \qquad \zeta\in(2/3,+\infty)
+\hat{w}_+(\zeta-2/3)=-\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s} \left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]\,ds \qquad \zeta\in(2/3,+\infty)
 \end{equation}
 \end{claim}
 
-\color{violet}
+\color{Turquoise}
 Using $a = \tfrac{5}{3}$, $b = \tfrac{7}{3}$, $c = \tfrac{5}{2}$:
 \begin{align*}
 w_1 & = \frac{\Gamma(\tfrac{5}{2}) \Gamma(\tfrac{2}{3})}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{5}{6})} w_5 + \frac{\Gamma(\tfrac{5}{2}) \Gamma(-\tfrac{2}{3})}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \\
@@ -517,7 +561,7 @@ w_3 & = \frac{2\pi}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \left[ e^{(1/3) \pi i} \frac{
 \end{align*}
 Now subtract!
 \[ w_1 - w_3 = \frac{2\pi}{\sqrt{3}} \Gamma(\tfrac{5}{2}) \left[ e^{-(1/3) \pi i} \frac{1}{\Gamma(\tfrac{7}{3}) \Gamma(\tfrac{1}{3}) \Gamma(\tfrac{5}{6})} w_5 + e^{-(2/3) \pi i} \frac{1}{\Gamma(\tfrac{5}{3}) \Gamma(\tfrac{5}{3}) \Gamma(\tfrac{1}{6})} w_6 \right] \]
-\color{black}
+\color{MidnightBlue}
 Let us study the RHS of claim \eqref{claim 2}. \textbf{Note that $x = \tfrac{1}{2} - \tfrac{3}{4} \zeta$ and $y = \tfrac{1}{2} - \tfrac{3}{4} s$.
 \begin{align*}
 &\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s}\left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]ds \\
@@ -559,7 +603,7 @@ Using DLMF~15.10.25, we see this is
 \end{align*}
 This matches $-\sqrt{\pi}$ times the LHS of claim~\eqref{claim 2} \textbf{(up to scaling)}.
 
-\textcolor{violet}{
+\color{violet}
 Alternate calculation with $\tfrac{1}{2}$ derivative:
 \begin{align*}
 &\int_{2/3}^{\zeta}(\zeta-s)^{-1/2} {}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right) ds \\
@@ -569,9 +613,9 @@ Alternate calculation with $\tfrac{1}{2}$ derivative:
 &=\frac{2i}{3\sqrt{3}} \left[ \frac{\Gamma(\tfrac{1}{2})\Gamma(\tfrac{1}{6})}{\Gamma(\tfrac{2}{3})} \big(1+\tfrac{1}{\sqrt{3}}\big) x^{-1/6} {}_2F_1\left(\frac{1}{6}, \frac{1}{6}, \frac{1}{3};\frac{1}{x}\right) + \frac{\Gamma(\tfrac{1}{2})\Gamma(\tfrac{5}{6})}{\Gamma(\tfrac{4}{3})}\big(1-\tfrac{1}{\sqrt{3}}\big) x^{-5/6} {}_2F_1\left(\frac{5}{6}, \frac{5}{6}, \frac{5}{3};\frac{1}{x}\right) \right] ds & \eqref{4.8} \\
 &=??? & \zeta\in (2/3,+\infty)
 \end{align*}
-}
+\color{black}
 
-Analougusly, it can be verified for $\hat{w}_-(\zeta+2/3)$ for $\zeta\in(-\infty,-2/3)$.  
+Analogously, it can be verified for $\hat{w}_-(\zeta+2/3)$ for $\zeta\in(-\infty,-2/3)$.  
 %By definition ${}_2F_1\left(\frac{2}{3},\frac{4}{3};\frac{3}{2};t\right)=\sum_{n\geq 0}\frac{(2/3)_n(4/3)_n}{(3/2)_n n!}t^n$, thus
 %
 %\begin{align*}
