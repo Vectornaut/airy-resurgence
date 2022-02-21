@@ -43,7 +43,7 @@ vec2 mul(vec2 z, vec2 w) {
     return mul(z) * w;
 }
 
-// --- approximate error function ---
+// --- pixel sampling ---
 
 const float A1 = 0.278393;
 const float A2 = 0.230389;
@@ -52,9 +52,29 @@ const float A4 = 0.078108;
 
 // Abramowitz and Stegun, equation 7.1.27
 float erfc_appx(float t) {
-  float p = 1. + A1*(t + A2*(t + A3*(t + A4*t)));
+  float r = abs(t);
+  float p = 1. + A1*(r + A2*(r + A3*(r + A4*r)));
   float p_sq = p*p;
-  return 1. / (p_sq*p_sq);
+  float erfc_r = 1. / (p_sq*p_sq);
+  return t < 0. ? (2. - erfc_r) : erfc_r;
+}
+
+// how much of a pixel's sampling distribution falls on the negative side of an
+// edge. `disp` is the pixel's displacement from the edge in pattern space
+float neg_part(float pattern_disp, float scaling, float r_px) {
+  // find the displacement to the edge in the screen tangent space
+  float screen_disp = pattern_disp / scaling;
+  
+  // integrate our pixel's sampling distribution on the screen tangent space to
+  // find out how much of the pixel falls on the negative side of the edge
+  return 0.5*erfc_appx(screen_disp / r_px);
+}
+
+// find the color of a pixel near an edge between two colored regions.
+// `neg` and `pos` are the colors on the negative and positive sides of the
+// edge. `disp` is the displacement from the edge
+vec3 edge_mix(vec3 neg, vec3 pos, float pattern_disp, float scaling, float r_px) {
+  return mix(pos, neg, neg_part(pattern_disp, scaling, r_px));
 }
 
 // --- antialiased stripe pattern ---
@@ -71,22 +91,14 @@ vec3 stripe(jet2 f, float r_px) {
     
     // find the displacement to the nearest stripe edge in the pattern space
     jet21 y = proj_y(f);
-    y.pt += 0.5;
     jet21 t = dmod(y, float(N)); // the pattern coordinate
-    int n = int(t.pt); // the index of the nearest stripe edge
-    float pattern_disp = t.pt - (float(n) + 0.5);
+    float edge = round(t.pt); // the position of the nearest stripe edge
+    float pattern_disp = t.pt - edge;
+    int n = int(edge)%N; // the index of the color below the edge
+    float scaling = length(t.push);
     
-    // the edges of the stripes on the screen are level sets of the pattern
-    // coordinate `t`. linearizing, we get stripes on the screen tangent space,
-    // whose edges are level sets of `t.push`. find the distance to the nearest
-    // stripe edge in the screen tangent space
-    float screen_dist = abs(pattern_disp) / length(t.push);
-    
-    // now we can integrate our pixel's sampling distribution on the screen
-    // tangent space to find out how much of the pixel falls on the other side
-    // of the nearest edge
-    float overflow = 0.5*erfc_appx(screen_dist / r_px);
-    return mix(colors[n], colors[(n+1)%N], pattern_disp < 0. ? overflow : 1.-overflow);
+    // sample nearest colors
+    return edge_mix(colors[n], colors[(n+1)%N], pattern_disp, scaling, r_px);
 }
 
 // --- test image ---
