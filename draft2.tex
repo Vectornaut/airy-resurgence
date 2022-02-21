@@ -185,35 +185,61 @@ For $\nu \in (-\infty, 1)$, the fractional integral $\partial^{\nu-1}_{x \text{ 
 \[ \partial^{\nu-1}_{x \text{ from } 0} f(x) \defeq \frac{1}{\Gamma(1-\nu)} \int_0^x (x-x')^{-\nu} f(x')\,dx'. \]
 It obeys the expected semigroup law \textbf{[Lazarevi\'{c}, \S 1.3]}
 \begin{align*}
-\partial^{\mu-1}_{x \text{ from } 0} \partial^{\nu-1}_{x \text{ from } 0} & = \partial^{(\mu-1)+(\nu-1)}_{x \text{ from } 0} & \mu, \nu \in (-\infty, 1),
+\partial^{\lambda}_{x \text{ from } 0}\,\partial^{\mu}_{x \text{ from } 0} & = \partial^{\lambda+\mu}_{x \text{ from } 0} & \lambda, \mu \in (-\infty, 0),
 \end{align*}
 and agrees with ordinary repeated integration when $\nu$ is an integer \textbf{[Lazarevi\'{c}, equation~35]}.
 
-For $\alpha \in (0, 1)$ and integers $n \ge -1$, fractional derivatives $\partial^{n+\alpha}_{x \text{ from } 0}$ are defined by composing $\partial^{\alpha-1}_{x \text{ from } 0}$ with powers of $\tfrac{\partial}{\partial x}$. However, $\partial^{\alpha-1}_{x \text{ from } 0}$ and $\tfrac{\partial}{\partial x}$ don't commute: their commutator is an initial value operator \textbf{[check, clarify]}. Various ordering conventions give various definitions of $\partial^{n+\alpha}_{x \text{ from } 0} f(x)$, which differ by operators that act on the germ of $f$ at zero \textbf{[Lazarevi\'{c}, \S 1.3---original source Podlubny]}. We'll use the {\em Riemann-Liouville} convention.
+For $\alpha \in (0, 1)$ and integers $n \ge 0$, fractional derivatives $\partial^{n+\alpha}_{x \text{ from } 0}$ are defined by composing $\partial^{\alpha-1}_{x \text{ from } 0}$ with powers of $\tfrac{\partial}{\partial x}$. However, $\partial^{\alpha-1}_{x \text{ from } 0}$ and $\tfrac{\partial}{\partial x}$ don't commute: their commutator is an initial value operator \textbf{[check, clarify]}. Various ordering conventions give various definitions of $\partial^{n+\alpha}_{x \text{ from } 0} f(x)$, which differ by operators that act on the germ of $f$ at zero \textbf{[Lazarevi\'{c}, \S 1.3---original source Podlubny]}. We'll use the {\em Riemann-Liouville} convention.
 \begin{definition}
-For $\alpha \in (0, 1)$ and integers $n \ge -1$, the {\em Riemann-Liouville fractional derivative} $\partial^{n+\alpha}_{x \text{ from } 0}$ is defined by
+For $\alpha \in (0, 1)$ and integers $n \ge 0$, the {\em Riemann-Liouville fractional derivative} $\partial^{n+\alpha}_{x \text{ from } 0}$ is defined by
 \[ \partial^{n+\alpha}_{x \text{ from } 0} \defeq \left(\tfrac{\partial}{\partial x}\right)^{n+1} \partial^{\alpha-1}_{x \text{ from } 0}. \]
 \end{definition}
-Each convention brings its own annoyances to interactions with the Borel transform.\footnote{See Remark~\ref{rmk:caputo} for examples.} The Riemann-Liouville convention will be the least annoying for our purposes. Here's what's nice about it.
+The symbol $\partial^\mu_{\zeta \text{ from } 0}$ is now defined for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$. It denotes a fractional integral when $\mu$ is negative, and a fractional derivative when $\mu$ is a positive non-integer.
+
+The Riemann-Liouville fractional derivative is a left inverse of the fractional integral, in the sense that $\partial^\lambda_{x \text{ from } 0}\,\partial^{-\lambda}_{x \text{ from } 0}$ for all $\lambda \in (0, \infty)$. This extends the semigroup law:
+\begin{align*}
+\partial^{\lambda}_{x \text{ from } 0}\,\partial^{\mu}_{x \text{ from } 0} & = \partial^{\lambda+\mu}_{x \text{ from } 0} & \lambda \in \R \smallsetminus \{0, 1, 2, 3, \ldots\},\quad\mu \in (-\infty, 0).
+\end{align*}
+
+Each convention for the fractional derivative brings its own annoyances to interactions with the Borel transform.\footnote{See Remark~\ref{rmk:caputo} for examples.} The Riemann-Liouville derivative will be the least annoying for our purposes. Here's what's nice about it.
 \begin{theorem}
 Given a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$, we have
-\[ \partial^{n+\alpha}_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^{n+\alpha} \varphi \right](\zeta) \]
-for all $\alpha \in (0, 1)$ and $n \ge -1$.
+\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^\mu \varphi \right](\zeta) \]
+for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$.
 \end{theorem}
+\color{Turquoise}
+Here's how we'll use this later. By definition, $\tilde{I}_p(z) = z^{-1/2}\tilde{\varphi}_p(z)$, so the theorem gives
+\begin{align*}
+\left[ \borel_{\zeta_\alpha} \tilde{I}_p \right](\zeta) & = \left[ \borel_{\zeta_\alpha} z^{-1/2} \tilde{\varphi}_p \right](\zeta) \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \left[ \borel \tilde{\varphi}_p \right](\zeta) \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_p(\zeta).
+\end{align*}
+Once we show that $\borel \tilde{I}_p = \hat{I}_p$, we have
+\begin{align*}
+\hat{I}_p(\zeta) & = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_p(\zeta) \\
+\partial^{-1}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_p(\zeta) & = \partial^{-3/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_p(\zeta)
+\end{align*}
+thanks to the semigroup law. Once we show that
+\[ \hat{I}_p(\zeta) = \tfrac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_p(\zeta)} \nu \right), \]
+we can deduce that
+\[ \partial^{-1}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_p(\zeta) = \int_{\mathcal{C}_p(\zeta)} \nu - \int_{\mathcal{C}_p(0)} \nu. \]
+The path $\mathcal{C}_p(0)$ is a point, so the initial value term vanishes, and we can conclude that
+\[ \int_{\mathcal{C}_p(\zeta)} \nu = \partial^{-3/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_p(\zeta). \]
+Finally, recalling that the Riemann-Liouville fractional derivative is a left inverse of the fractional integral, we see that
+\[ \partial^{3/2}_{\zeta \text{ from } \zeta_\alpha} \int_{\mathcal{C}_p(\zeta)} \nu = \hat{\varphi}_p(\zeta). \]
+\color{black}
 
 \begin{lemma}
-For $\alpha \in (0, 1)$ and $n \ge -1$,
-\[ \partial^{n+\alpha}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) = \left[ \borel z^{n+\alpha} z^{-(k+1)} \right](\zeta) \]
+For any non-integer $\mu \in (0, \infty)$ and any integer $k \ge 0$,
+\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) = \left[ \borel z^\mu z^{-(k+1)} \right](\zeta). \]
 \end{lemma}
 \begin{proof}
-First, evaluate
+We'll show that for any $\alpha \in (0, 1)$ and any integer $n \ge 0$, the claim holds with $\mu = n + \alpha$. First, evaluate
 \begin{align*}
 \partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
 & = \frac{1}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (\zeta-\zeta t)^{-\alpha} (\zeta t)^k\,\zeta\,dt \\
 & = \frac{\zeta^{k-(\alpha-1)}}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (1-t)^{-\alpha} t^k\,dt \\
-& = \frac{\zeta^{k-(\alpha-1)}}{\Gamma(k-\alpha)}
-%%& = \left[ \borel z^{-[k-(\alpha-1)+1]} \right](\zeta) \\
-%%& = \left[ \borel z^{\alpha-1} z^{-[k+1]} \right](\zeta)
+& = \frac{\zeta^{k-(\alpha-1)}}{\Gamma\big(k-(\alpha-1)+1\big)}
 \end{align*}
 by reducing the integral to Euler's beta function \textbf{[DLMF 5.12.1]}. This establishes that
 \begin{equation}\label{frac-diff-laplace}
