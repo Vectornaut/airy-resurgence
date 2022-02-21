@@ -12,6 +12,10 @@ struct jet21 {
     vec2 push;
 };
 
+jet2 scale(float a, jet2 f) {
+    return jet2(a*f.pt, a*f.push);
+}
+
 jet21 proj_y(jet2 f) {
     return jet21(f.pt.y, vec2(f.push[0].y, f.push[1].y));
 }
@@ -87,14 +91,14 @@ vec3 stripe(jet2 f, float r_px) {
 
 // --- test image ---
 
-const float VIEW = 3.;
+const float VIEW = 1.5;
 
 jet2 f(jet2 z) {
     vec2 pt = z.pt;
     vec2 pt_sq = mul(pt, pt);
     return jet2(
-        mul(pt, mul(ONE/3., pt_sq) - ONE),
-        mul(pt_sq - ONE) * z.push
+        mul(pt, 4.*pt_sq - 3.*ONE),
+        3.*mul(4.*pt_sq - ONE) * z.push
     );
 }
 
@@ -102,10 +106,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     // find screen point
     float small_dim = min(iResolution.x, iResolution.y);
     float r_px = VIEW / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
-    jet2 z = jet2(r_px * (2.*fragCoord - iResolution.xy), mat2(1.));
+    jet2 u = jet2(r_px * (2.*fragCoord - iResolution.xy), mat2(1.));
     
     // get pixel color
-    /*vec3 color = stripe(mul(z, z), r_px);*/
-    vec3 color = stripe(f(z), r_px);
+    vec3 color = stripe(scale(2./3., f(u)), r_px);
     fragColor = vec4(color, 1.);
 }
