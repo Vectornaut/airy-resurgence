@@ -202,7 +202,7 @@ The Riemann-Liouville fractional derivative is a left inverse of the fractional 
 \end{align*}
 
 Each convention for the fractional derivative brings its own annoyances to interactions with the Borel transform.\footnote{See Remark~\ref{rmk:caputo} for examples.} The Riemann-Liouville derivative will be the least annoying for our purposes. Here's what's nice about it.
-\begin{theorem}
+\begin{theorem}\label{thm:frac-diff-borel}
 Given a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$, we have
 \[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^\mu \varphi \right](\zeta) \]
 for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$.
@@ -286,19 +286,19 @@ I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\de
 where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point $x_\alpha$. Notice that $f \circ \mathcal{C}_\alpha$ lies in the ray $\zeta_\alpha + [0, \infty)$, where $\zeta_\alpha := f(x_\alpha)$.
 \begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$ and assume $f''(x_\alpha)\neq 0$ for every critical point $x_\alpha$. Then:
 \begin{enumerate}
-\item The series $\tilde{\varphi}_\alpha$ is Gevrey-1.
-\item The series $\hat{\varphi}(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ converges near $\zeta=\zeta_{\alpha}$.
-\item For any $\zeta$ on the ray going rightward from $\zeta_\alpha$, we have
+\item\label{int:series-gevrey} The series $\tilde{\varphi}_\alpha$ is Gevrey-1.
+\item\label{int:resum-converges} The series $\hat{\varphi}_\alpha(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ converges near $\zeta=\zeta_{\alpha}$.
+\item\label{int:resum-valid} If you continue the sum of $\hat{\phi}_\alpha$ along the ray going rightward from $\zeta_\alpha$, and take its Laplace transform along that ray, you'll recover $z^{1/2} I_\alpha$.
+\item\label{int:deriv-formula} For any $\zeta$ on the ray going rightward from $\zeta_\alpha$, we have
 \begin{align*}\label{formula1}
 \hat{\varphi}_{\alpha}(\zeta) & = \partial^{\textcolor{red}{3/2}}_{\zeta \text{ from }\zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right) \\
-& = \textcolor{red}{\left(\tfrac{\partial}{\partial \zeta}\right)^2}\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2} \textcolor{red}{\left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right)}\,d\zeta',
+& = \textcolor{red}{\left(\tfrac{\partial}{\partial \zeta}\right)^2}\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2} \textcolor{red}{\left( \int_{\mathcal{C}_\alpha(\zeta')} \nu \right)}\,d\zeta',
 \end{align*}
-where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $f^{-1}([\zeta_\alpha, \zeta])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textbf{[The integral over $\mathcal{C}_\alpha(\zeta)$ needs to satisfy some condition near $\zeta = 0$ for this to hold. Figure out what that is! Also, be careful about the orientation of $\mathcal{C}_\alpha$.]}
-\item
+where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $f^{-1}([\zeta_\alpha, \zeta])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textbf{[Be careful about the orientation of $\mathcal{C}_\alpha$.]}
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Part~(1): Let's write $\approx$ when two functions are asymptotic (at all orders around the base point \textbf{[is this the right condition?]}), and $\sim$ when a function is asymptotic to a formal power series (at the truncation order of each partial sum).
+Part~\eqref{int:series-gevrey}: Let's write $\approx$ when two functions are asymptotic (at all orders around the base point \textbf{[is this the right condition?]}), and $\sim$ when a function is asymptotic to a formal power series (at the truncation order of each partial sum).
 
 Since $f$ is Morse, we can find a holomorphic chart $\tau$ around $x_\alpha$ with $\tfrac{1}{2} \tau^2 = f - \zeta_\alpha$. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0, \infty)$ on $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$, respectively. \textbf{[We should explicitly spell out and check the conditions that make this possible. I think we're implicitly orienting $\mathcal{C}_\alpha$ so that $\tau$ in the upper half-plane.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
 \[ \nu = \sum_{n \ge 0} b_n^\alpha \tau^n\,d\tau \]
@@ -339,7 +339,7 @@ The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink 
 \[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)}. \]
 Call the right-hand side $\tilde{I}_\alpha$. We now see that $a_{\alpha,n} = (2n-1)!!\,b_{2n}^\alpha$ in the statement of the theorem. \textbf{[Resolve discrepancy with previous calculation.]} Note that \textbf{[explain formally what it means to center at $\zeta_\alpha$]}
 \begin{align*}
-\mathcal{B}_{\zeta_\alpha}(\tilde{I}_\alpha) & = \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \Gamma\big(n+\tfrac{1}{2}\big)\,b_{2n}^\alpha\,\frac{(\zeta - \zeta_\alpha)^{n-1/2}}{\Gamma\big(n+\tfrac{1}{2}\big)} \\
+\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & = \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \Gamma\big(n+\tfrac{1}{2}\big)\,b_{2n}^\alpha\,\frac{(\zeta - \zeta_\alpha)^{n-1/2}}{\Gamma\big(n+\tfrac{1}{2}\big)} \\
 & = \sum_{n \ge 0} 2^{n+1/2}\,b_{2n}^\alpha\,(\zeta - \zeta_\alpha)^{n-1/2}.
 \end{align*}
 
@@ -363,29 +363,21 @@ Since, $\tfrac{1}{\varepsilon}=\limsup_{n}\sqrt[n]{b_{n}^{\alpha}}$
 where we use $(2n-1)!!\sim \tfrac{2^n}{\sqrt{\pi n}}n!$ as $n\to \infty$.
 \color{black}
 
-Part~(2): \begin{align*}
+Part~\eqref{int:resum-converges}: \begin{align*}
 \hat{\varphi}_\alpha(\zeta)=\mathcal{B}\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
 (2\pi)^{1/2} \left(\delta(f_{x_\alpha}) a_0+\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}\right)
 \end{align*}
 Since $a_{n}\leq CA^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
 
-Part~(3): thanks to properties of Caputo's fractional derivatives, we have that the Borel transform of $\tilde{I}_{\alpha}(z)=z^{-1/2}\tilde{\varphi}_\alpha(z)$ is 
-\begin{equation}\label{formal-half-deriv}
-\partial^{1/2}_{\zeta \text{ from }\zeta_\alpha}\mathcal{B}(\tilde{I}_{\alpha})(\zeta) = \hat{\varphi}_{\alpha}(\zeta).
-\end{equation}
-%%Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. Noticing that $f \circ \mathcal{C}^\pm_\alpha$ are both injective, we can recast the integral $I_\alpha$ into the $f$ plane.
-%%\[ I_{\alpha}(z) = \int_{\mathcal{C}^-_{\alpha}} e^{-zf} \nu + \int_{\mathcal{C}^+_{\alpha}} e^{-zf} \nu \]
-Let's recast the integral $I_\alpha$ into the $f$ plane. As $\zeta$ goes rightward from $\zeta_\alpha$, the start and end points of $\mathcal{C}_\alpha(\zeta)$ sweep backward along $\mathcal{C}^-_\alpha(\zeta)$ and forward along $\mathcal{C}^+_\alpha(\zeta)$, respectively. Hence, we have
+Part~\eqref{int:resum-valid}: Let's recast the integral $I_\alpha$ into the $f$ plane. As $\zeta$ goes rightward from $\zeta_\alpha$, the start and end points of $\mathcal{C}_\alpha(\zeta)$ sweep backward along $\mathcal{C}^-_\alpha(\zeta)$ and forward along $\mathcal{C}^+_\alpha(\zeta)$, respectively. Hence, we have
 \begin{align*}
 I_\alpha(z) & = \int_{\mathcal{C}_{\alpha}} e^{-zf} \nu \\
 & = \int_{\zeta_\alpha}^\infty e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}\,d\zeta.
 \end{align*}
 Noticing that the right-hand side is a Laplace transform, we learn that
-\[ \hat{I}_\alpha(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}. \]
-Observing that
-\[ \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}, \]
-we conclude that
-\[ \hat{I}_\alpha(\zeta) = \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right)\,d\zeta. \]
+\begin{equation}\label{thimble-difference}
+\hat{I}_\alpha(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}.
+\end{equation}
 
 We can rewrite our Taylor series for $\nu$ as
 \begin{align*}
@@ -398,13 +390,37 @@ taking the positive branch of the square root on $\mathcal{C}^+_\alpha$ and the 
 & = \sum_{n \ge 0} b_n^\alpha \Big( [2(\zeta - \zeta_\alpha)]^{(n - 1)/2} - (-1)^{n-1}[2(\zeta - \zeta_\alpha)]^{(n - 1)/2} \Big) \\
 & = \sum_{n \ge 0} 2 b_{2n}^\alpha [2(\zeta - \zeta_\alpha)]^{n - 1/2} \\
 & = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^\alpha (\zeta - \zeta_\alpha)^{n - 1/2} \\
-& = \mathcal{B}_{\zeta_\alpha}(\tilde{I}_\alpha).
+& = \mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha.
 \end{align*}
-We already knew, from the general theory of the Borel transform, that the sum of $\mathcal{B}_{\zeta_\alpha}(\tilde{I}_\alpha)$ would be asymptotic to $\hat{I}_\alpha$. We've now shown that the sum of $\mathcal{B}_{\zeta_\alpha}(\tilde{I}_\alpha)$ is actually equal to $\hat{I}_\alpha$, strengthening the formal series identity~\ref{formal-half-deriv} to the analytic identity
+We already knew, from the general theory of the Borel transform, that the sum of $\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha$ would be asymptotic to $\hat{I}_\alpha$. We've now shown that the sum of $\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha$ is actually equal to $\hat{I}_\alpha$.
+
+Theorem~\ref{thm:frac-diff-borel} tells us that
 \begin{align*}
-\hat{\varphi}_{\alpha}(\zeta) & = \partial^{1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_\alpha \\
-& = \partial^{3/2}_{\zeta \text{ from }\zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right)\,d\zeta.
+\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & \defeq \mathcal{B}_{\zeta_\alpha} z^{-1/2} \tilde{\varphi}_\alpha \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \mathcal{B} \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha.
 \end{align*}
+It follows, from our conclusion above, that
+\begin{equation}\label{shifted-resum-valid}
+\hat{I}_\alpha(\zeta) = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha.
+\end{equation}
+Taking the Laplace transform of both sides and applying \textbf{the inverse of Theorem~\ref{thm:frac-diff-borel} that works for shifted analytic functions}, we see that
+\begin{align*}
+I_\alpha(z) & = \laplace_{\zeta, \zeta_\alpha} \left[ \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha \right] \\
+& = z^{-1/2} \laplace_{\zeta, \zeta_\alpha} \hat{\varphi}_\alpha,
+\end{align*}
+as we claimed.
+
+Part~\eqref{int:deriv-formula}: Since fractional integrals form a semigroup, equation~\eqref{shifted-resum-valid} implies that
+\[ \partial^{-1}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_\alpha(\zeta) = \partial^{-3/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha. \]
+Rewriting equation~\eqref{thimble-difference} as
+\[ \hat{I}_\alpha(\zeta) = \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right), \]
+we can see that
+\[ \partial^{-1}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_\alpha(\zeta) = \int_{\mathcal{C}_\alpha(\zeta)} \nu - \int_{\mathcal{C}_\alpha(0)} \nu. \]
+The initial value term vanishes, because the path $\mathcal{C}_\alpha(0)$ is a point. Hence,
+\[ \int_{\mathcal{C}_\alpha(\zeta)} \nu = \partial^{-3/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha(\zeta). \]
+Recalling that the Riemann-Liouville fractional derivative is a left inverse of the fractional integral, we conclude that
+\[ \partial^{3/2}_{\zeta \text{ from } \zeta_\alpha} \left( \int_{\mathcal{C}_p(\zeta)} \nu \right) = \hat{\varphi}_p(\zeta). \]
 \end{proof}
 
 \begin{example}[Airy]
