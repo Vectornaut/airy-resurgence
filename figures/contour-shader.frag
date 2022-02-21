@@ -20,10 +20,6 @@ jet21 proj_y(jet2 f) {
     return jet21(f.pt.y, vec2(f.push[0].y, f.push[1].y));
 }
 
-jet21 dmod(jet21 t, float period) {
-    return jet21(mod(t.pt, period), t.push);
-}
-
 // --- complex arithmetic ---
 
 const vec2 ONE = vec2(1., 0.);
@@ -91,11 +87,10 @@ vec3 stripe(jet2 f, float r_px) {
     
     // find the displacement to the nearest stripe edge in the pattern space
     jet21 y = proj_y(f);
-    jet21 t = dmod(y, float(N)); // the pattern coordinate
-    float edge = round(t.pt); // the position of the nearest stripe edge
-    float pattern_disp = t.pt - edge;
+    float edge = round(y.pt); // the position of the nearest stripe edge
+    float pattern_disp = y.pt - edge;
     int n = int(edge)%N; // the index of the color below the edge
-    float scaling = length(t.push);
+    float scaling = length(y.push);
     
     // sample nearest colors
     return edge_mix(colors[n], colors[(n+1)%N], pattern_disp, scaling, r_px);
