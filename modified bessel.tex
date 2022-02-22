@@ -23,22 +23,25 @@
 
 \section{Modified Bessel function of second kind}
 
-The modified Bessel function of the second kind is a solution of the equation
+The modified Bessel function of the second kind $K_\nu(z)$ is a solution of the equation
 \begin{equation}\label{Bessel_nu}
 w''+\frac{w'}{z}-w-\frac{\nu^2}{z^2}=0
 \end{equation}
-such that $K_{\nu}(z)\sim\sqrt{\pi/(2z)}e^{-z}$ as $z\to\infty$ in $|\arg z|<\frac{3\pi}{2}$. It has a branch point at $z=0$ for every $\nu\in\C$ and  the principal branch is analytic in $\C\setminus(-\infty,0]$. 
+such that $K_{\nu}(z)\sim\sqrt{\pi/(2z)}e^{-z}$ as $z\to\infty$ in $|\arg z|<\frac{3\pi}{2}$\footnote{A system of solution of Bessel equation is given by $I_\nu(z)$ and $K_\nu(z)$. In particular, their asymptotic behaviour as $z\to\infty$ is given by \begin{align}
+\tilde{I}_\nu(z)&=\frac{1}{\sqrt{2\pi}}e^zz^{-1/2}\sum_{k\geq 0}\frac{\left(\frac{1}{2}-\nu\right)_k\left(\frac{1}{2}+\nu\right)_k}{2^kk!}z^{-k}\\
+\tilde{K}_{\nu}(z)&=\sqrt{\frac{\pi}{2}}e^{-z}z^{-1/2}\sum_{k\geq 0}\frac{\left(\frac{1}{2}-\nu\right)_k\left(\frac{1}{2}+\nu\right)_k}{(-2)^kk!}z^{-k}
+\end{align}}. It has a branch point at $z=0$ for every $\nu\in\C$ and  the principal branch is analytic in $\C\setminus(-\infty,0]$. 
 \subsection{Differential equation}
-From the general theory of ODE, the formal integral solution of \eqref{Bessel_nu} is two parameter family 
+From the general theory of ODE, the formal integral solution of \eqref{Bessel_nu} is two parameters family 
 \begin{equation}
 \tilde{w}(z)=U_1e^{-z}z^{-1/2}\tilde{w}_{\nu,+}(z)+U_2e^{z}z^{-1/2}\tilde{w}_{\nu,-}(z)
 \end{equation} 
-where $\tilde{w}_{\nu,\pm}=1+\sum_{j\geq 1}a_{\pm,j}z^{-j}\in\C[\![z^{-1}]\!]$ are unique formal solutions of
+where $\tilde{w}_{\nu,\pm}=\sum_{j\geq 0}a_{\pm,j}z^{-j}\in\C[\![z^{-1}]\!]$ are unique formal solutions of
 \begin{align*}
-\tilde{w}_{\nu,+}''-2\tilde{w}_{\nu,+}'+\frac{\tilde{w}_+}{4z^2}-\frac{\nu^2}{z^2}\tilde{w}_{\nu,+}=0\\
+\tilde{w}_{\nu,+}''-2\tilde{w}_{\nu,+}'+\frac{\tilde{w}_{\nu,+}}{4z^2}-\frac{\nu^2}{z^2}\tilde{w}_{\nu,+}=0\\
 \tilde{w}_{\nu,-}''+2\tilde{w}_{\nu,-}'+\frac{\tilde{w}_{\nu,-}}{4z^2}-\frac{\nu^2}{z^2}\tilde{w}_{\nu,-}=0
 \end{align*} 
-In particular, $K_{\nu}(z)=e^{-z}z^{-1/2}\tilde{w}_{\nu,+}(z)$. We now compute the Borel transform of $\tilde{w}_+(z)$: it is a solution of 
+In particular, $\tilde{K}_{\nu}(z)=\sqrt{\frac{\pi}{2}}e^{-z}z^{-1/2}\tilde{w}_{\nu,+}(z)$ and $\tilde{I}_\nu(z)=\frac{1}{\sqrt{2\pi}}e^zz^{-1/2}\tilde{w}_{\nu,-}(z)$ (once we choose $a_{\pm,0}=1$). We now compute the Borel transform of $\tilde{w}_+(z)$\footnote{We do not consider constant term of $\tilde{w}_{\nu,\pm}$, i.e. $\mathcal{B}:\C[\![z^{-1}]\!]\to \C[\zeta]$.} it is a solution of 
 \begin{align*}
 &\zeta^2\hat{w}_{\nu,+}+2t\hat{w}_{\nu,+}+\left(\frac{1}{4}-\nu^2\right)\int_0^{\zeta}(\zeta-s)\hat{w}_{\nu,+}(s)ds=0 &\\
 &\zeta^2\hat{w}_{\nu,+}''+2\zeta\hat{w}_+''+4\zeta\hat{w}_{\nu,+}'+\left(\frac{9}{4}-\nu^2\right)\hat{w}_{\nu,+}=0 & \\
@@ -54,11 +57,12 @@ and it has a branch point singularities at $\zeta=-2$. By the same reasoning,
 \end{equation} 
 and it has branch point at $\zeta=2$. Thanks to explicit formula for the analytic continuation of hypergeomtric functions (see \cite{dlmf} 15.2.3)
 \begin{align*}
-\hat{w}_{\nu,+}(\zeta+i0)-\hat{w}_{\nu,+}(\zeta-i0)&=\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\left(-\frac{\zeta}{2}-1\right)^{-1}{}_2F_1\left(\frac{1}{2}-\nu,\frac{1}{2}+\nu;0;1+\frac{\zeta}{2}\right) & \zeta>-2 \\
+\hat{w}_{\nu,+}(\zeta+i0)-\hat{w}_{\nu,+}(\zeta-i0)&=\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\left(-\frac{\zeta}{2}-1\right)^{-1}{}_2F_1\left(\frac{1}{2}+\nu,\frac{1}{2}-\nu;0;1+\frac{\zeta}{2}\right) & \zeta>-2 \\
 &=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\sum_{k\geq 0}\frac{\left(\tfrac{1}{2}-\nu\right)_k\left(\tfrac{1}{2}+\nu\right)_k}{\Gamma(k)k!}\left(1+\frac{\zeta}{2}\right)^{k-1} & \\
 &=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\sum_{k\geq 1}\frac{\left(\tfrac{1}{2}-\nu\right)_k\left(\tfrac{1}{2}+\nu\right)_k}{\Gamma(k)k!}\left(1+\frac{\zeta}{2}\right)^{k-1} & \\
-&=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\sum_{k\geq 0}\frac{\Gamma\left(\tfrac{3}{2}-\nu+k\right)\Gamma\left(\tfrac{3}{2}+\nu+k\right)}{\Gamma(k+1)(k+1)!}\left(1+\frac{\zeta}{2}\right)^{k} & \\
-&=-2i\cos(\nu \pi)\,\, {}_2F_1\left(\frac{3}{2}-\nu,\frac{3}{2}+\nu;2;1+\frac{\zeta}{2}\right) & \\
+&=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\frac{1}{\Gamma\left(\frac{1}{2}-\nu\right)\Gamma\left(\frac{1}{2}+\nu\right)}\sum_{k\geq 1}\frac{\Gamma\left(\tfrac{1}{2}-\nu+k\right)\Gamma\left(\tfrac{1}{2}+\nu+k\right)}{\Gamma(k)k!}\left(1+\frac{\zeta}{2}\right)^{k-1} & \\
+&=-\frac{2\pi i}{\Gamma(\tfrac{3}{2}-\nu)\Gamma(\tfrac{3}{2}+\nu)}\frac{1}{\Gamma\left(\frac{1}{2}-\nu\right)\Gamma\left(\frac{1}{2}+\nu\right)}\sum_{k\geq 0}\frac{\Gamma\left(\tfrac{3}{2}-\nu+k\right)\Gamma\left(\tfrac{3}{2}+\nu+k\right)}{\Gamma(k+1)(k+1)!}\left(1+\frac{\zeta}{2}\right)^{k} & \\
+&=-\frac{2\pi i}{\Gamma\left(\frac{1}{2}-\nu\right)\Gamma\left(\frac{1}{2}+\nu\right)}\,\, {}_2F_1\left(\frac{3}{2}-\nu,\frac{3}{2}+\nu;2;1+\frac{\zeta}{2}\right) & \\
 &=-2i\cos(\nu \pi)\hat{w}_{\nu,-}(\zeta+2)
 \end{align*} 
 and for $\hat{w}_{\nu,-}(\zeta)$
@@ -74,10 +78,12 @@ In addition, the previous relations computes the Stokes constants which are funt
 \subsection{Exponential integral}
 As showed by Aaron, if $T_n(u)$ and $U_n(u)$ denote the Chebyschev polynomials \footnote{$T_n(\cos(t))=\cos(nt)$ and $U_n(\cos(t))\sin(t)=\sin((n+1)t)$.} 
 
-\begin{multline}
-K_{\nu}(z)=\frac{1}{2i\nu\sin(\nu\pi)}\int_{\mathcal{C}_{\alpha}}e^{zT_{\frac{1}{\nu}}(u)}du=-\frac{1}{2i\sin(\nu\pi)}\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}\frac{d\zeta}{U_{\frac{1}{\nu}-1}(u)}=\\
-=-\frac{1}{2i\sin(\nu\pi)}\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}{}_2F_1\left(\frac{1-\nu}{2},\frac{1+\nu}{2};\frac{3}{2};1-\zeta^2\right)d\zeta
-\end{multline}
+\begin{align*}
+K_{\nu}(z)&=\frac{1}{2 i\sin(\nu \pi)}\int_{\mathcal{C}_{\alpha}}e^{z\cosh(t)}\sinh(\nu t) dt & u=\cosh(\nu t)\\
+&=-\frac{1}{2i\nu\sin(\nu\pi)}\int_{\mathcal{C}_{\alpha}}e^{zT_{\frac{1}{\nu}}(u)}du & \zeta=T_{\frac{1}{\nu}}(u)\\
+&=\frac{1}{2i\sin(\nu\pi)}\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}\frac{d\zeta}{U_{\frac{1}{\nu}-1}(u)}\\
+&=-\frac{1}{2i\sin(\nu\pi)}\int_{\mathcal{H}_{\alpha}}e^{-\zeta z}{}_2F_1\left(\frac{1-\nu}{2},\frac{1+\nu}{2};\frac{3}{2};1-\zeta^2\right)d\zeta
+\end{align*}
 where $\mathcal{C}_{\alpha}$ \textbf{has to be checked, but I guess } $\alpha=1$
 
 Indentity 15.10.17 from \cite{dlmf} splits the integrand above into
