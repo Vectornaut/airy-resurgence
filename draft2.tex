@@ -42,9 +42,10 @@
 % Veronica's custom commands
 \input{command}
 
-% Laplace and Borel transforms
+% symbology
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\borel}{\mathcal{B}}
+\DeclareMathOperator{\Ai}{Ai}
 
 \DeclareRobustCommand{\subtitle}[1]{\\#1}
 \title[Exponential Integrals]{Exponential Integrals\\ [1ex]
@@ -424,13 +425,13 @@ Recalling that the Riemann-Liouville fractional derivative is a left inverse of 
 \end{proof}
 
 \begin{example}[Airy]
-Let $f(t)=\frac{t^3}{3}-t$ and \[I(z)\defeq\int_{\gamma} e^{-zf(t)}\text{dt}\]
-where $\gamma$ is a countour where the integral is well defined. 
-
-By the change of coordinates $z=x^{3/2}$, $I(z)=-2\pi iz^{-1/3}Ai(x)$ where \[Ai(x)\defeq \frac{1}{2\pi i}\int_{-\infty e^{-i\frac{\pi}{3}}}^{\infty e^{i\frac{\pi}{3}}} e^{\frac{t^3}{3}-zt}\text{dt}\] 
-hence $I(z)$ solves the following ODE\footnote{$Ai(x)$ solves the Airy equation $y''=xy$.}
+%%Let $f(t)=\frac{t^3}{3}-t$ and \[I(z)\defeq\int_{\gamma} e^{-zf(t)}\text{dt}\]
+%%where $\gamma$ is a countour where the integral is well defined.
+By definition,
+\[ \Ai(x) \defeq \frac{1}{2\pi i}\int_{-\infty e^{-i\frac{\pi}{3}}}^{\infty e^{i\frac{\pi}{3}}} e^{t^3/3 - \textcolor{red}{x} t}\,dt. \]
+Define $I(z)$ by the change of coordinates $z=x^{3/2}$, $I(z)=-2\pi iz^{-1/3}\Ai(x)$. This new function satisfies the ODE\footnote{$\Ai(x)$ solves the Airy equation $y''=xy$.}
 \begin{equation}\label{eq:I}
-I''(z)-\frac{4}{9}I(z)+\frac{I'(z)}{z}-\frac{1}{9}\frac{I(z)}{z^2}=0
+I''(z)-\frac{4}{9}I(z)+\frac{I'(z)}{z}-\frac{1}{9}\frac{I(z)}{z^2} = 0.
 \end{equation}
 A formal solution of \eqref{eq:I} can be computed by making the following ansatz 
 \begin{equation}
@@ -584,6 +585,50 @@ Then equations \eqref{formula1} is equivalent to
 \hat{w}_+(\zeta-2/3)=-\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s} \left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]\,ds \qquad \zeta\in(2/3,+\infty)
 \end{equation}
 \end{claim}
+\begin{proof}
+With the substitution $t = -2ux^{1/2}$, we can rewrite the Airy integral as
+\[ \Ai(x) = x^{1/2}\;\frac{i}{\pi} \int_{x^{-1/2} \mathcal{C}_+} \exp\left[-\tfrac{2}{3}x^{3/2} \left(4u^3 - 3u\right)\right]\,du, \]
+where $\mathcal{C}_+$ is the path $\theta \mapsto \cosh(\theta - \tfrac{2}{3}\pi i)$. This leads to the expression
+\[ I_+(z) = \int_{\mathcal{C}_+} \exp\left[-\tfrac{2}{3} z \left(4u^3 - 3u\right)\right]\,du. \]
+In our general picture of exponential integrals, $f = \tfrac{2}{3}(4u^3 - 3u)$ and $\nu = du$. Hence,
+\begin{align*}
+\int_{\mathcal{C}_+(\zeta)} \nu & = \int_{\mathcal{C}_+(\zeta)} du \\
+& = u \Big|_{\operatorname{start} \mathcal{C}_+(\zeta)}^{\operatorname{end} \mathcal{C}_+(\zeta)}.
+\end{align*}
+Since $4u^3 - 3u$ is the third Chebyshev polynomial, and $\cosh$ is $2\pi$-periodic in the imaginary direction, the start and end points of $\mathcal{C}_+(\zeta)$ are characterized by
+\begin{align*}
+u & = \cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
+\zeta & = \tfrac{2}{3} \cosh(3\theta),
+\end{align*}
+so
+\begin{align*}
+\int_{\mathcal{C}_+(\zeta)} \nu & = \cosh(\theta - \tfrac{2}{3}\pi i) - \cosh(-\theta - \tfrac{2}{3}\pi i) \\
+& = \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& \quad - \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& = 2\sinh(\theta) \sinh(-\tfrac{2}{3}\pi i) \\
+& = -\sinh(\theta)
+\end{align*}
+with $\tfrac{3}{2} \zeta = \cosh(3\theta)$. Let $\xi = \tfrac{1}{2}(1 - \tfrac{3}{2}\zeta)$, and notice that $\xi = -\sinh(\tfrac{3}{2} \theta)^2$ at the start and end points. The identity \textbf{[DLMF~15.4.16]}
+\[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
+then shows us that
+\[ -\int_{\mathcal{C}_+(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
+
+Now we can evaluate the half-integral of $\int_{\mathcal{C}_+} \nu$ using Bateman's fractional integral formula for hypergeometric functions~\textbf{[Koornwinder, \S 4.1]}.
+\begin{align*}
+\partial^{-1/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_+(\zeta')} \nu \right)\,d\zeta' \\
+& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi (\xi' - \xi)^{-1/2} \Big[ -\tfrac{2}{3} (-\xi)^{1/2}\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big) \Big] \,\big( -\tfrac{4}{3}\,d\xi' \big) \\
+& = -\frac{8}{9} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
+& = \frac{4}{9} \sqrt{\pi}\,\xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
+\end{align*}
+Finally, we differentiate twice using \textbf{[DLMF 15.5.4]} and \textbf{[DLMF 15.5.1]}.
+\begin{align*}
+\partial^{-3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(-\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ \frac{4}{9} \sqrt{\pi}\,\xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = \tfrac{\sqrt{\pi}}{4} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = \tfrac{\sqrt{\pi}}{4}\,\tfrac{\partial}{\partial \xi} \left[ F\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = \tfrac{\sqrt{\pi}}{4}\,\tfrac{\partial}{\partial \xi} \left[ F\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = \tfrac{\sqrt{\pi}\,5}{4 \cdot 36}\,F\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
+\end{align*}
+\end{proof}
 
 \color{Turquoise}
 Using $a = \tfrac{5}{3}$, $b = \tfrac{7}{3}$, $c = \tfrac{5}{2}$:
