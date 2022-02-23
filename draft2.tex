@@ -785,9 +785,9 @@ Let $X=\C^*$, $f(x)=x+\frac{1}{x}$ and $\nu=\frac{dx}{x}$, then the ciritcal poi
 I(z)\defeq\int_0^{\infty}e^{-zf(x)}\frac{dx}{x}.
 \end{equation}
 
-By change of cooridnates $t=zx$
+Let $\pi\colon\tilde{\C}\to \C^*$ be the universal cover of $\C^*$, where $\pi(u)=e^u$, then on $\tilde{\C}$, $I(z)$ turns into
 \begin{align*}
-I(z)=\int_0^{\infty}e^{-z\left(\frac{t}{z}+\frac{z}{t}\right)}\frac{dt}{t}=\int_0^{\infty}e^{-\left(t+\frac{z^2}{t}\right)}\frac{dt}{t}=2K_0(2z) \,\qquad |\arg z|<\frac{\pi}{4}
+I(z)=\int_{-\infty}^{\infty}e^{-2z\cosh(u)}du=2\int_0^{\infty}e^{-2z\cosh(u)}du=2K_0(2z) \,\qquad |\arg z|<\frac{\pi}{2}
 \end{align*}
 where $K_0(z)$ is the modified Bessel function (see definition 10.32.10 DLMF). In particular, since $K_0(z)$ solves 
 \begin{equation}
@@ -798,7 +798,7 @@ and $K_0(z)\sim\left(\frac{\pi}{2}\right)^{1/2}e^{-z}z^{-1/2}\sum_{k\geq 0}\frac
 \label{eq:IB}
 \frac{d^2}{dz^2}I(z)+\frac{1}{z}\frac{d}{dz}I(z)-4I(z)=0.
 \end{equation} 
-The formal integral of \eqref{eq:IB} is given by a two parameter formal solution $\tilde{I}_1(z)$
+The formal integral of \eqref{eq:IB} is given by a two parameter formal solution $\tilde{I}(z)$
 \begin{equation}
 \tilde{I}(z)=\sum_{\mathbf{k}\in\N^2}U^ke^{-\mathbf{k}\cdot\lambda z}z^{-\tau\cdot \mathbf{k}}\tilde{w}_{\mathbf{k}}(z)
 \end{equation}
@@ -811,24 +811,26 @@ The only non zero $\tilde{w}_{\mathbf{k}}(z)$ occurs for $\mathbf{k}=(1,0)$ and 
 \begin{equation}
 \tilde{I}(z)=U_1 e^{-2z}z^{-1/2}\tilde{w}_{(1,0)}(z)+U_2e^{2z}z^{-1/2}\tilde{w}_{(0,1)}(z)
 \end{equation}
-and according to our convention, we define
+and we define
 \begin{align}
 \label{IB+} &\tilde{I}_{1}(z)\defeq e^{-2z}z^{-1/2}\tilde{w}_{(1,0)}(z)\\
 \label{IB-} &\tilde{I}_{-1}(z)\defeq e^{2z}z^{-1/2}\tilde{w}_{(0,1)}(z).
 \end{align}
 We set $\tilde{w}_{(1,0)}=\tilde{w}_+$ and $\tilde{w}_{(0,1)}=\tilde{w}_-$, then their Borel transforms are solutions respectively of the following equations 
+\begin{align}
+\zeta^2\hat{w}_+(\zeta)+4\zeta\hat{w}_+(\zeta)+\frac{1}{4}\zeta\ast\hat{w}_+(\zeta)=0\\
+\zeta^2\hat{w}_-(\zeta)-4\zeta\hat{w}_-(\zeta)+\frac{1}{4}\zeta\ast\hat{w}_-(\zeta)=0
+\end{align}
+taking twice derivative in $\zeta$ we get respectively for $\hat{w}_+(\zeta)$ and $\hat{w}_-(\zeta)$
 \begin{align*}
-(+)\quad &\zeta^2\hat{w}_+(\zeta)+4\zeta\hat{w}_+(\zeta)+\frac{1}{4}\zeta\ast\hat{w}_+(\zeta)=0\\
-(-)\quad &\zeta^2\hat{w}_+(\zeta)-4\zeta\hat{w}_+(\zeta)+\frac{1}{4}\zeta\ast\hat{w}_+(\zeta)=0
+&(\zeta^2+4\zeta)\frac{d^2}{d\zeta^2}\hat{w}_++4(\zeta-1)\frac{d}{d\zeta}\hat{w}_++\frac{9}{4}\hat{w}_+=0 &\\
+(+)\quad &\xi(1-\xi)\frac{d^2}{d\xi^2}\hat{w}_++(1-4\xi)\frac{d}{d\xi}\hat{w}_+-\frac{9}{4}\hat{w}_+=0 & \xi=-\frac{\zeta}{4} 
 \end{align*}
-taking twice derivative in $\zeta$ we get
 \begin{align*}
-(+)\quad &(\zeta^2+4\zeta)\frac{d^2}{d\zeta^2}\hat{w}_++4(\zeta-1)\frac{d}{d\zeta}\hat{w}_++\frac{9}{4}\hat{w}_+=0 &\\
-(-)\quad &(\zeta^2-4\zeta)\frac{d^2}{d\zeta^2}\hat{w}_-+4(\zeta+1)\frac{d}{d\zeta}\hat{w}_++\frac{9}{4}\hat{w}_-=0 &\\
-(+)\quad &\xi(1-\xi)\frac{d^2}{d\xi^2}\hat{w}_++(1-4\xi)\frac{d}{d\xi}\hat{w}_+-\frac{9}{4}\hat{w}_+=0 & \xi=-\frac{\zeta}{4} \\
+&(\zeta^2-4\zeta)\frac{d^2}{d\zeta^2}\hat{w}_-+4(\zeta+1)\frac{d}{d\zeta}\hat{w}_++\frac{9}{4}\hat{w}_-=0 &\\
 (-)\quad &\xi(1-\xi)\frac{d^2}{d\xi^2}\hat{w}_-+(1-4\xi)\frac{d}{d\xi}\hat{w}_--\frac{9}{4}\hat{w}_-=0 & \xi=\frac{\zeta}{4}
 \end{align*}
-therefore, since equation $(+), (-)$ are hypergeometric the fundamental solution is (see DLMF 15.10.2)
+Since equation $(+), (-)$ are hypergeometric, the fundamental solutions are respectively (see DLMF 15.10.2)
 \begin{align}
 \label{w+}&\hat{w}_+(\zeta)={}_2F_1\left(\frac{3}{2},\frac{3}{2};2;-\frac{\zeta}{4}\right)\\
 \label{w+}&\hat{w}_-(\zeta)={}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{\zeta}{4}\right)
@@ -855,58 +857,59 @@ and analytically (thanks to 15.2.3 DLMF)
 &=\mathbf{-2i}\sum_{n\geq 0}(-1)^n\frac{(3/2)_{n}(3/2)_{n}}{(n)!\Gamma(n+2)}\left(1-\frac{\zeta}{4}\right)^{n}\\
 &=\mathbf{-2i}{}_2F_1\left(\frac{3}{2},\frac{3}{2};2;1-\frac{\zeta}{4}\right)
 \end{align*}
-These are evidence of the resurgent properties of $\tilde{I}_{\pm 1}(z)$. 
+These are evidence of the resurgent properties of $\tilde{I}_{\pm 1}(z)$. \textbf{Hopefully, the latter identities show that the Stokes constants can be computed via Alien calculus and they are equal to $\pm 2$.  } 
 
-\begin{lemma}
-The following identity holds true
+Now we show that the fractional derivative formula holds in this example: first we write a parametrization of the integration path in the Borel plane. Let $\mathcal{C}_p=\R$, $p\in \pi\Z$, be the contour of integration in $\tilde{\C}$ which is parametrized as 
+
+\begin{align*}
+{C}_p\colon \R & \to \tilde{\C} \\
+\theta & \to \theta+i p
+\end{align*} 
+
+Then in the Borel plane $\C_\zeta$, where $\zeta=2\cosh(u)$, the path $\mathcal{C}_0$ is parametrized as  
+\begin{align*}
+\mathcal{C}_0\colon\R &\to \C_\zeta \\
+\theta & \to 2\cosh(\theta)
+\end{align*}
+
+\begin{figure}
+\caption{Integration path in the $u$-plane and in the Borel plane $\zeta=2\cosh(u)$. }
+\end{figure} 
+
+\textbf{Check Aaron notation}
+
 \begin{equation}
-{}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{1}{2};\frac{\zeta^2}{4}\right)=2i\frac{u}{u^2-1}\qquad \qquad \zeta=u+\frac{1}{u}
+\int_{\mathcal{C}_0(\zeta)}\pi^*(\nu)=\int_{\mathcal{C}_0(\zeta)}du=\Big[ u\Big]^{\mathrm{end}\mathcal{C}_0(\zeta)}_{\mathrm{start}\mathcal{C}_0(\zeta)}=2\mathrm{arc}\cosh\left(\frac{\zeta}{2}\right)
 \end{equation}
-\end{lemma}
-\begin{proof}
-From 15.4.13 DLMF, we have
-\begin{align*}
-{}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{1}{2};\frac{\zeta^2}{4}\right)&=\frac{2}{\sqrt{4-\zeta^2}} & y=\mathrm{arccsc}(\zeta/2)\\
-&=\frac{1}{\sqrt{1-\mathrm{csc}^2(y)}} & \\
-&=-i\tan(y) &   \zeta=\frac{2}{\sin(y)}
-\end{align*}
-therefore if $u=\tan\left(\frac{y}{2}\right)$, we have $\zeta=\frac{1+u^2}{u}=f(u)$ and 
-\begin{equation*}
-{}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{1}{2};\frac{\zeta^2}{4}\right)=2i\frac{u}{u^2-1}=\frac{2i}{f'(u)u}
-\end{equation*}  
-\end{proof}
 
-\begin{claim}
-\label{Bessel}
-\begin{equation}
-\hat{w}_{+}(\zeta-2)=i\pi\int_{2}^\zeta(\zeta-\zeta')^{-1/2}2\zeta'\,\,{}_2F_1\left(\frac{3}{2},\frac{3}{2};\frac{3}{2};\frac{\zeta'^2}{4}\right)d\zeta'\,\qquad \zeta\in(2,+\infty)
-\end{equation}
-\end{claim}
-\begin{proof}
-Let us first consider the RHS of \eqref{Bessel}. Note $x=\frac{1}{2}-\frac{\zeta}{4}$ and $y=\frac{1}{2}-\frac{\zeta'}{4}$
+We can now write $\int_{\mathcal{C}_0(\zeta)}\pi^*(\nu)$ as an hypergeometric function thanks to identity 14.4.4 \cite{DLMF}: set $\xi=\frac{1}{2}\left(\frac{1}{2}\zeta-1\right)=\frac{1}{2}\left(\cosh(\theta)-1\right)=\sinh^2\left(\frac{\theta}{2}\right)$, then 
+
 \begin{align*}
-&2\int_{2}^\zeta(\zeta-\zeta')^{-1/2}\zeta'\,\,{}_2F_1\left(\frac{3}{2},\frac{3}{2};\frac{3}{2};\frac{\zeta'^2}{4}\right)d\zeta'= &\\
-&\quad =- \frac{2}{3\pi}\int_{2}^\zeta(\zeta-\zeta')^{-1/2}\left[{}_2F_1\left(2,2;\frac{5}{2};\frac{1}{2}+\frac{\zeta'}{4}\right)-{}_2F_1\left(2,2;\frac{5}{2};\frac{1}{2}-\frac{\zeta'}{4}\right)\right]d\zeta' & 15.8.28 \text{ DLMF}\\
-&\quad =- \frac{4}{3\pi}\int_0^x(y-x)^{-1/2}\left[{}_2F_1\left(2,2,;\frac{5}{2};1-y\right)-{}_2F_1\left(2,2;\frac{5}{2};y\right)\right]dy & x\in (-\infty,0)\\
-&\quad = -\frac{4}{3\pi}\int_0^xe^{-(1/2)\pi i}(x-y)^{-1/2}\left[\frac{3\pi}{4}e^{-(1/2)\pi i}y^{-2}{}_2F_1\left(2,\frac{1}{2};1;\frac{1}{y}\right)\right]dy & 15.10.30 \text{ DLMF} \\
-&\quad = -\int_0^x e^{-(1/2)\pi i}(x-y)^{-1/2}e^{-(1/2)\pi i}y^{-2}{}_2F_1\left(2,\frac{1}{2};1;\frac{1}{y}\right)dy & \\
-&\quad = -\int_0^x(x-y)^{-1/2} |y|^{-2}{}_2F_1\left(2,\frac{1}{2};1;\frac{1}{y}\right)dy & \\
-&\quad = -\int_0^x e^{-(1/2)\pi i}|x-y|^{-1/2} |y|^{-2}{}_2F_1\left(2,\frac{1}{2};1;\frac{1}{y}\right)dy & \\
-&\quad = -e^{-(1/2)\pi i}\frac{\Gamma\left(\frac{1}{2}\right)\Gamma\left(\frac{3}{2}\right)}{\Gamma(2)}|x|^{-3/2}{}_2F_1\left(\frac{3}{2},\frac{1}{2};1;\frac{1}{x}\right) & \eqref{4.8} \\
-&\quad = -e^{-(1/2)\pi i}\frac{\pi}{2}{}_2F_1\left(\frac{3}{2},\frac{1}{2};1;\frac{1}{x}\right) &  \\
-&\quad =-\frac{\pi}{2}w_6(3/2,3/2,2) & \\
-&\quad =-\frac{\pi}{2}\frac{\Gamma\left(3/2\right)\Gamma(1)}{\Gamma(2)\Gamma(3/2)}e^{(c-a)\pi i}\left(w_1(a,b,c)-e^{a\pi i}\frac{\Gamma(2)\Gamma(1/2)}{\Gamma(2)\Gamma(1/2)}w_3\right)
+\sinh\left(\frac{\theta}{2}\right)\,\,{}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{3}{2};\sinh^2\left(\frac{\theta}{2}\right)\right)&=i\frac{\theta}{2} \\
+\xi^{1/2}{}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{3}{2};-\xi\right)&=i\frac{\theta}{2}\\
+ &=\frac{i}{2}\left(\frac{1}{2}\mathrm{arcosh}\left(\frac{\zeta}{2}\right)\right)\\
+ &=\frac{i}{4}\int_{\mathcal{C}_0(\zeta)}\pi^*(\nu)
 \end{align*}
 
-\textcolor{violet}{ From DLMF 15.10.17
+The $3/2$-derivative of $\int_{\mathcal{C}_0(\zeta)}\pi^*(\nu)$ can be computed as follows: we compute the $-1/2$-derivatve and then we differentiate twice
+
 \begin{align*}
-w_3(a,b,c)&=\frac{\Gamma\left(1-c\right)\Gamma\left(a+b-c+1\right)}{\Gamma\left(a-c+1\right)\Gamma\left(b-c+1\right)}w_1(a,b,c)+\frac{\Gamma\left(c-1\right)\Gamma\left(a+b-c+1\right)}{\Gamma\left(a\right)\Gamma\left(b\right)}w_2(a,b,c)\\
-w_3(2,2,\frac{5}{2})&=w_1(2,2,\frac{5}{2})+\frac{3\pi}{8}w_2(2,2,\frac{5}{2})\\
+\partial_{\zeta}^{-1/2}\left(\int_{\mathcal{C}_0(\zeta)}\pi^*(\nu)\right)&=\frac{1}{\Gamma\left(\frac{1}{2}\right)}\int_2^\zeta (\zeta-\zeta')^{-1/2}\left(\int_{\mathcal{C}_0(\zeta)}\pi^*(\nu)\right)d\zeta'\\
+&=\frac{1}{\Gamma\left(\frac{1}{2}\right)}\int_0^{\xi}\frac{1}{2}(\xi-\xi')^{-1/2}(-4i)\xi'^{1/2} {}_2F_1\left(\frac{1}{2},\frac{1}{2};\frac{3}{2};-\xi'\right) 4d\xi'\\
+&=-8i\frac{\Gamma\left(\frac{3}{2}\right)}{\Gamma(2)}\xi \,\,{}_2F_1\left(\frac{1}{2},\frac{1}{2};2,-\xi\right)
+\end{align*} 
+
+\begin{align*}
+\partial_\zeta^{3/2}\left(\int_{\mathcal{C}_0(\zeta)}\pi^*(\nu)\right)&=\partial_\zeta^2\left(-8i\frac{\Gamma\left(\frac{3}{2}\right)}{\Gamma(2)}\xi \,\,{}_2F_1\left(\frac{1}{2},\frac{1}{2};2,-\xi\right)\right) & \\
+&=\frac{1}{16}\partial_\xi^2\left(-8i\frac{\Gamma\left(\frac{3}{2}\right)}{\Gamma(2)}\xi \,\,{}_2F_1\left(\frac{1}{2},\frac{1}{2};2,-\xi\right)\right) & \partial_\xi=4\partial_\zeta\\
+&=+\frac{i}{2}\Gamma\left(\frac{3}{2}\right)\partial_\xi\left({}_2F_1\left(\frac{1}{2},\frac{1}{2};1,-\xi\right)\right) & \textbf{DLMF} 15.5.4\\
+&=-\frac{i}{8}\Gamma\left(\frac{3}{2}\right){}_2F_1\left(\frac{3}{2},\frac{3}{2};2,-\xi\right) & \\
+&=-\frac{i\sqrt{\pi}}{16}{}_2F_1\left(\frac{3}{2},\frac{3}{2};2,\frac{1}{2}-\frac{\zeta}{4}\right) & \\
+&=-\frac{i\sqrt{\pi}}{16} \hat{w}_+(\zeta-2) &
 \end{align*}
-}
-however ${}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{1}{2}+\frac{\zeta}{4}\right)$ has a branch cut at $\zeta\in(2,+\infty)$, thus the claim holds true. 
-\end{proof}
-Analougusly, it can be verified for $\hat{w}_-(\zeta+2)$ for $\zeta\in(-\infty,-2)$.  
+
+
+%Analougusly, it can be verified for $\hat{w}_-(\zeta+2)$ for $\zeta\in(-\infty,-2)$.  
 \end{example}
 
 
