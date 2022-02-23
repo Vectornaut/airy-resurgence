@@ -324,7 +324,7 @@ C_\text{exp} & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n \ge 1} (2n-1)
 & = 2e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| \sum_{\substack{k \in \N_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \\
 & \ge -2\varepsilon e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| z^n,
 \end{align*}
-which diverges for typical $f$ and $\nu$.
+which diverges for typical $f$ and $\nu$. \textbf{[Does it? Veronica points out that we expect $b_{2n}$ to shrink at least as fast as $(n!)^{-1}$.]}
 
 This argument suggests that no matter how tiny the correction terms get, we can't expect to swat them all aside. We can, however, set aside any finite set of them. For each cutoff $N$, the tail
 \[ \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \]
@@ -398,7 +398,7 @@ We already knew, from the general theory of the Borel transform, that the sum of
 Theorem~\ref{thm:frac-diff-borel} tells us that
 \begin{align*}
 \mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & \defeq \mathcal{B}_{\zeta_\alpha} z^{-1/2} \tilde{\varphi}_\alpha \\
-& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \mathcal{B} \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \mathcal{B} \tilde{\varphi}_\alpha \\
 & = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha.
 \end{align*}
 It follows, from our conclusion above, that
@@ -425,10 +425,8 @@ Recalling that the Riemann-Liouville fractional derivative is a left inverse of 
 \end{proof}
 
 \begin{example}[Airy]
-%%Let $f(t)=\frac{t^3}{3}-t$ and \[I(z)\defeq\int_{\gamma} e^{-zf(t)}\text{dt}\]
-%%where $\gamma$ is a countour where the integral is well defined.
 By definition,
-\[ \Ai(x) \defeq \frac{1}{2\pi i}\int_{-\infty e^{-i\frac{\pi}{3}}}^{\infty e^{i\frac{\pi}{3}}} e^{t^3/3 - \textcolor{red}{x} t}\,dt. \]
+\[ \Ai(x) \defeq \frac{1}{2\pi i}\int_{-\infty e^{-i\frac{\pi}{3}}}^{\infty e^{i\frac{\pi}{3}}} e^{t^3/3 - xt}\,dt. \]
 Define $I(z)$ by the change of coordinates $z=x^{3/2}$, $I(z)=-2\pi iz^{-1/3}\Ai(x)$. This new function satisfies the ODE\footnote{$\Ai(x)$ solves the Airy equation $y''=xy$.}
 \begin{equation}\label{eq:I}
 I''(z)-\frac{4}{9}I(z)+\frac{I'(z)}{z}-\frac{1}{9}\frac{I(z)}{z^2} = 0.
@@ -580,15 +578,14 @@ Therefore, if $u\defeq -2\sin(y)$, we have $\zeta=\frac{u^3}{3}-u=f(u)$ and \[{}
 Then equations \eqref{formula1} is equivalent to
  
 \begin{claim}\label{claim 2}
-\textbf{[There should be a way to predict the correct normalization of the LHS.]}
-\begin{equation}
-\hat{w}_+(\zeta-2/3)=-\frac{1}{\sqrt{\pi}}\int_{2/3}^{\zeta}(\zeta-s)^{-1/2}\textcolor{red}{\partial_s} \left[{}_2F_1\left(\frac{1}{3},\frac{2}{3};\frac{1}{2};\frac{9}{4}s^2\right)\right]\,ds \qquad \zeta\in(2/3,+\infty)
-\end{equation}
+\textbf{[There should be a way to predict the correct normalization of the RHS.]}
+\[ \partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) = i \tfrac{\sqrt{\pi}}{6}\,\tfrac{5}{36}\,\hat{w}_+(\zeta-2/3), \]
+consistent with Theorem~\ref{thm:maxim}~\eqref{int:deriv-formula}.
 \end{claim}
 \begin{proof}
 With the substitution $t = -2ux^{1/2}$, we can rewrite the Airy integral as
 \[ \Ai(x) = x^{1/2}\;\frac{i}{\pi} \int_{x^{-1/2} \mathcal{C}_+} \exp\left[-\tfrac{2}{3}x^{3/2} \left(4u^3 - 3u\right)\right]\,du, \]
-where $\mathcal{C}_+$ is the path $\theta \mapsto \cosh(\theta - \tfrac{2}{3}\pi i)$. This leads to the expression
+where $\mathcal{C}_+$ is the path $\theta \mapsto \cosh(\theta - \tfrac{2}{3}\pi i)$. When $x \in [0, \infty)$, this leads to the expression
 \[ I_+(z) = \int_{\mathcal{C}_+} \exp\left[-\tfrac{2}{3} z \left(4u^3 - 3u\right)\right]\,du. \]
 In our general picture of exponential integrals, $f = \tfrac{2}{3}(4u^3 - 3u)$ and $\nu = du$. Hence,
 \begin{align*}
@@ -606,28 +603,29 @@ so
 & = \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
 & \quad - \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
 & = 2\sinh(\theta) \sinh(-\tfrac{2}{3}\pi i) \\
-& = -\sinh(\theta)
+& = -i\sqrt{3}\,\sinh(\theta)
 \end{align*}
 with $\tfrac{3}{2} \zeta = \cosh(3\theta)$. Let $\xi = \tfrac{1}{2}(1 - \tfrac{3}{2}\zeta)$, and notice that $\xi = -\sinh(\tfrac{3}{2} \theta)^2$ at the start and end points. The identity \textbf{[DLMF~15.4.16]}
 \[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
 then shows us that
-\[ -\int_{\mathcal{C}_+(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
+\[ \frac{i}{\sqrt{3}} \int_{\mathcal{C}_+(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
 
 Now we can evaluate the half-integral of $\int_{\mathcal{C}_+} \nu$ using Bateman's fractional integral formula for hypergeometric functions~\textbf{[Koornwinder, \S 4.1]}.
 \begin{align*}
 \partial^{-1/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_+(\zeta')} \nu \right)\,d\zeta' \\
-& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi (\xi' - \xi)^{-1/2} \Big[ -\tfrac{2}{3} (-\xi)^{1/2}\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big) \Big] \,\big( -\tfrac{4}{3}\,d\xi' \big) \\
-& = -\frac{8}{9} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
-& = \frac{4}{9} \sqrt{\pi}\,\xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
+& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi \tfrac{2}{\sqrt{3}} (\xi' - \xi)^{-1/2} \Big[ \tfrac{i}{\sqrt{3}}\,\tfrac{2}{3} (-\xi)^{1/2}\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big) \Big] \,\big( -\tfrac{4}{3}\,d\xi' \big) \\
+& = i \frac{16}{27} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
+& = i \frac{8}{27} \sqrt{\pi}\,\xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
 \end{align*}
 Finally, we differentiate twice using \textbf{[DLMF 15.5.4]} and \textbf{[DLMF 15.5.1]}.
 \begin{align*}
-\partial^{-3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(-\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ \frac{4}{9} \sqrt{\pi}\,\xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = \tfrac{\sqrt{\pi}}{4} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = \tfrac{\sqrt{\pi}}{4}\,\tfrac{\partial}{\partial \xi} \left[ F\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
-& = \tfrac{\sqrt{\pi}}{4}\,\tfrac{\partial}{\partial \xi} \left[ F\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
-& = \tfrac{\sqrt{\pi}\,5}{4 \cdot 36}\,F\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
+\partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(-\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ i \frac{8}{27} \sqrt{\pi}\,\xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = i \tfrac{\sqrt{\pi}}{6} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\,F\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = i \tfrac{\sqrt{\pi}}{6}\,\tfrac{\partial}{\partial \xi} \left[ F\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = i \tfrac{\sqrt{\pi}}{6}\,\tfrac{\partial}{\partial \xi} \left[ F\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = i \tfrac{\sqrt{\pi}}{6}\,\tfrac{5}{36}\,F\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
 \end{align*}
+\textbf{[Check comparison with Mari\~{n}o's result more carefully?]}
 \end{proof}
 
 \color{Turquoise}
