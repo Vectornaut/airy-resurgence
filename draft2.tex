@@ -197,15 +197,28 @@ C_\text{exp} & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n \ge 1} (2n-1)
 \end{align*}
 which diverges for typical $f$ and $\nu$. \textbf{[Does it? Veronica points out that we expect $b_{2n}$ to shrink at least as fast as $(n!)^{-1}$.]}
 
-This argument suggests that no matter how tiny the correction terms get, we can't expect to swat them all aside. We can, however, set aside any finite set of them. For each cutoff $N$, the tail
+This argument suggests that no matter how tiny the correction terms get, we can't expect to swat them all aside. We can, however, set aside any finite set of them. \color{violet}\textbf{[Use Miller's proof of Watson's lemma in place of the following argument, which has a few soft spots.]} For each cutoff $N$, the tail
 \[ \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \]
+
+\color{CarnationPink}
+For each cutoff $N$, the tail error \textbf{[check]}
+\begin{align*}
+\left| \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \right| & \le \sum_{n \ge N} \left| b_{2n}^\alpha \right| \int_{-\varepsilon}^\varepsilon e^{-|z|\tau^2/2} \tau^{2n}\,d\tau \\
+& \le \sum_{n \ge N} \left| b_{2n}^\alpha \right| \int_{-\infty}^\infty e^{-|z|\tau^2/2} \tau^{2n}\,d\tau \\
+& = \sqrt{2\pi} \sum_{n \ge N} (2n-1)!!\,\left| b_{2n}^\alpha \right| |z|^{-(n+1/2)} \\
+& \lesssim \sum_{n \ge N} (2n-1)!!\,\varepsilon^{-2n} |z|^{-(n+1/2)} \\
+& = \varepsilon \sum_{n \ge N} (2n-1)!!\,\big(\varepsilon^{-1}\big)^{2n+1} \big(|z|^{-1/2}\big)^{2n+1} \\
+& = \varepsilon \sum_{n \ge N} (2n-1)!!\,\big(\varepsilon^{-1} |z|^{-1/2}\big)^{2n+1} \\
+& = \textbf{uh-oh!}
+\end{align*}
+\color{violet}
 is in $o_{z \to \infty}(z^{-N})$ \textbf{[check]}, and the absolute sum
 \begin{align*}
 C_\text{exp}^N & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n = 1}^{N-1} (2n-1)!!\,\left| b_{2n}^\alpha \sum_{\substack{k \in \N_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \right| \\
 & \le 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n = 1}^{N-1} (2n-1)!!\,\left|b_{2n}^\alpha\right| \sum_{\substack{k \in \N_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} |z|^{n-k+1} \\
 & \ge -2\varepsilon e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| z^n,
 \end{align*}
-is in $o_{z \to \infty}(z^{-m})$ for every $m$ \textbf{[check]}. Hence,
+is in $o_{z \to \infty}(z^{-m})$ for every $m$ \textbf{[check]}.\color{black} Hence,
 \[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
 The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows, allowing the simpler estimate
 \[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)}. \]
