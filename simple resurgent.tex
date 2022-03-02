@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage[hmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+% convenience aliases
+\newcommand{\maps}{\colon}
+
+% symbology
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\laplace}{\mathcal{L}}
+\include{command2}
+
+\title{Resurgence of modified Bessel functions of second kind}
+\author{Veronica Fantini}
+
+\begin{document}
+\maketitle
+
+\section{Simple resurgent functions}
+
+We are in the same assumption of Theorem 3.1: our aim is to prove that $\hat{\varphi}_{\alpha}(\zeta)$ is a simple resurgent function: we expect it is a consequence of the half derivatives formula. In the proof of Theorem 3.1 we have seen
+
+\begin{align}
+&\hat{\varphi}_{\alpha}(\zeta)=\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\hat{I}_{\alpha} \\
+&\hat{I}_{\alpha}(\zeta)=\sum_{n\geq 0}a_n^{\alpha}(\zeta-\zeta_{\alpha})^{n-1/2}\,\qquad a_n\defeq 2^{n+1/2}b_{2n}^{\alpha}
+\end{align}
+
+\begin{align*}
+\hat{\varphi}_{\alpha}(\zeta)&=\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{-1/2}a_0^{\alpha}+(\zeta-\zeta_\alpha)^{1/2}\sum_{n\geq 0}a_{n+1}^{\alpha}(\zeta-\zeta_{\alpha})^{n}\right]\\
+&=a_0^{\alpha}\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{-1/2}\right]+\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{1/2}\right]\sum_{n\geq 0}a_{n+1}^{\alpha}(\zeta-\zeta_{\alpha})^{n}\\
+&\qquad+(\zeta-\zeta_\alpha)^{1/2}\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[\sum_{n\geq 0}a_{n+1}^{\alpha}(\zeta-\zeta_{\alpha})^{n}\right]\\
+&=a_0^{\alpha}\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{-1/2}\right]+\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{1/2}\right]\sum_{n\geq 0}a_{n+1}^{\alpha}(\zeta-\zeta_{\alpha})^{n}\\
+&\qquad +(\zeta-\zeta_\alpha)^{1/2}\sum_{n\geq 0}a_{n+1}^{\alpha}\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_{\alpha})^{n}\right]\\
+&=a_0^{\alpha}\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{-1/2}\right]+\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{1/2}\right]\sum_{n\geq 0}a_{n+1}^{\alpha}(\zeta-\zeta_{\alpha})^{n}\\
+&\qquad +(\zeta-\zeta_\alpha)^{1/2}\sum_{n\geq 0}a_{n+1}^{\alpha}\left[\sqrt{\pi}\tfrac{\Gamma(n+1)}{\Gamma(n+\tfrac{1}{2})}(\zeta-\zeta_{\alpha})^{n-1/2}\right]\\
+&=a_0^{\alpha}\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{-1/2}\right]+\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{1/2}\right]\sum_{n\geq 0}a_{n+1}^{\alpha}(\zeta-\zeta_{\alpha})^{n}\\
+&\qquad +\sqrt{\pi}\sum_{n\geq 0}a_{n+1}^{\alpha}\tfrac{\Gamma(n+1)}{\Gamma(n+\tfrac{1}{2})}(\zeta-\zeta_{\alpha})^{n}
+\end{align*}
+
+Notice that $\sum_{n\geq 0}a_{n+1}^{\alpha}\tfrac{\Gamma(n+1)}{\Gamma(n+\tfrac{1}{2})}(\zeta-\zeta_{\alpha})^{n}$ has a finite radius of convergence, hence the second series is a germ of holomorphic function. We are left with the half--derivative of $(\zeta-\zeta_\alpha)^{\pm 1/2}$:
+
+\begin{align*}
+\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{1/2}\right]&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\partial_\zeta\left[\int_{\zeta_\alpha}^{\zeta}(\zeta-\zeta')^{-1/2}(\zeta'-\zeta_\alpha)^{1/2}d\zeta'\right]\\
+&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\partial_{\zeta}\left[\left[-2(\zeta-\zeta')^{1/2}(\zeta'-\zeta_\alpha)^{1/2}\right]_{\zeta_\alpha}^{\zeta}+\int_{\zeta_\alpha}^{\zeta}2(\zeta-\zeta')^{1/2}\frac{1}{2}(\zeta'-\zeta_{\alpha})^{-1/2}d\zeta'\right]\\
+&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\partial_{\zeta}\left[\int_{\zeta_\alpha}^{\zeta}(\zeta-\zeta')^{1/2}(\zeta'-\zeta_{\alpha})^{-1/2}d\zeta'\right]\\
+&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\int_{\zeta_\alpha}^{\zeta}\frac{1}{2}(\zeta-\zeta')^{-1/2}(\zeta'-\zeta_\alpha)^{-1/2}d\zeta'\\
+&=\frac{1}{2\Gamma\left(\tfrac{1}{2}\right)}\int_{\zeta_\alpha}^{\zeta}(\zeta\zeta'-\zeta\zeta_\alpha-\zeta'^2+\zeta'\zeta_\alpha)^{-1/2}d\zeta'\\
+&=\frac{1}{2\Gamma\left(\tfrac{1}{2}\right)}\int_{\zeta_\alpha}^{\zeta}\left(\frac{(\zeta-\zeta_\alpha)^2}{4}-\left(\zeta'-\frac{\zeta+\zeta_\alpha}{2}\right)^2\right)^{-1/2}d\zeta'\\
+&=\frac{1}{2\Gamma\left(\tfrac{1}{2}\right)}\int_{-\tfrac{\zeta-\zeta_{\alpha}}{2}}^{\tfrac{\zeta-\zeta_{\alpha}}{2}}\frac{1}{\sqrt{\tfrac{(\zeta-\zeta_{\alpha})^2}{4}-y^2}}dy\\
+&=\frac{1}{2\Gamma\left(\tfrac{1}{2}\right)}\left[\arcsin\left(\tfrac{4y}{(\zeta-\zeta_{\alpha})^2}\right)\right]_{-\tfrac{\zeta-\zeta_{\alpha}}{2}}^{\tfrac{\zeta-\zeta_{\alpha}}{2}}\\
+&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\arcsin\left(\tfrac{2}{\zeta-\zeta_\alpha}\right)\\
+&=\frac{i}{\Gamma\left(\tfrac{1}{2}\right)}\left(\log(\zeta-\zeta_{\alpha})-\log(2i+\sqrt{(\zeta-\zeta_\alpha)^2-4})\right)
+\end{align*}
+
+\begin{align*}
+\partial_{\zeta \text{ from } \zeta_\alpha}^{1/2}\left[(\zeta-\zeta_\alpha)^{-1/2}\right]&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\partial_\zeta\left[\int_{\zeta_\alpha}^{\zeta}(\zeta-\zeta')^{-1/2}(\zeta'-\zeta_\alpha)^{-1/2}d\zeta'\right]\\
+&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\partial_{\zeta}\left[\int_{\zeta_\alpha}^{\zeta}(\zeta\zeta'-\zeta\zeta_\alpha-\zeta'^2+\zeta'\zeta_\alpha)^{-1/2}d\zeta'\right]\\
+&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\partial_{\zeta}\left[\int_{\zeta_\alpha}^{\zeta}\left(\frac{(\zeta-\zeta_\alpha)^2}{4}-\left(\zeta'-\frac{\zeta+\zeta_\alpha}{2}\right)^2\right)^{-1/2}d\zeta'\right]\\
+&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\partial_{\zeta}\left[\int_{-\tfrac{\zeta-\zeta_{\alpha}}{2}}^{\tfrac{\zeta-\zeta_{\alpha}}{2}}\frac{1}{\sqrt{\tfrac{(\zeta-\zeta_{\alpha})^2}{4}-y^2}}dy\right]\\
+&=\frac{1}{\Gamma\left(\tfrac{1}{2}\right)}\partial_{\zeta}\left[\left[\arcsin\left(\tfrac{4y}{(\zeta-\zeta_{\alpha})^2}\right)\right]_{-\tfrac{\zeta-\zeta_{\alpha}}{2}}^{\tfrac{\zeta-\zeta_{\alpha}}{2}}\right]\\
+&=\frac{2}{\Gamma\left(\tfrac{1}{2}\right)}\partial_{\zeta}\left[\arcsin\left(\tfrac{2}{\zeta-\zeta_\alpha}\right)\right]\\
+&=-\frac{4}{\Gamma\left(\tfrac{1}{2}\right)}\frac{1}{(\zeta-\zeta_\alpha)\sqrt{(\zeta-\zeta_{\alpha})^2-4}}
+\end{align*}
+
+Therefore, collecting all the contributions we get
+
+\begin{align*}
+\hat{\varphi}_{\alpha}(\zeta)&=-\frac{4a_0^{\alpha}}{\Gamma\left(\tfrac{1}{2}\right)}\frac{1}{(\zeta-\zeta_\alpha)\sqrt{(\zeta-\zeta_{\alpha})^2-4}}-\frac{i}{\Gamma\left(\tfrac{1}{2}\right)}\log(2i+\sqrt{(\zeta-\zeta_\alpha)^2-4})\sum_{n\geq 0}a_{n+1}^{\alpha}(\zeta-\zeta_{\alpha})^{n}\\
+&\qquad +\frac{i}{\Gamma\left(\tfrac{1}{2}\right)}\log(\zeta-\zeta_{\alpha})\sum_{n\geq 0}a_{n+1}^{\alpha}(\zeta-\zeta_{\alpha})^{n}+\sqrt{\pi}\sum_{n\geq 0}a_{n+1}^{\alpha}\tfrac{\Gamma(n+1)}{\Gamma(n+\tfrac{1}{2})}(\zeta-\zeta_{\alpha})^{n}
+\end{align*}
+
+
+\bibliographystyle{utphys}
+\bibliography{airy-resurgence}
+\end{document}
