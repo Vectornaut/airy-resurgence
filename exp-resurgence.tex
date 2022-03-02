@@ -40,7 +40,7 @@
 \subsection{Why does Borel resummation work?}
 Borel resummation is a way of turning a formal power series
 \[ \series{\varphi} = z^\sigma \left( \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \frac{\varphi_3}{z^4} + \ldots \right), \]
-with $\sigma \in [0, 1)$, into a function which is asymptotic to $\series{\varphi}$ as $z \to \infty$. Different functions can be asymptotic to the same power series, and Borel resummation picks one of them, performing an implicit regularization~\textbf{[arXiv:1705.03071, or maybe arXiv:1412.6614]}. When a function matches its Borel sum, we'll say it's {\em Borel regular}. Several familiar kinds of regularity imply Borel regularity, and shed light on why it occurs.
+with $\sigma \in [0, 1)$, into a function which is asymptotic to $\series{\varphi}$ as $z \to \infty$. Different functions can be asymptotic to the same power series, and Borel resummation picks one of them, performing an implicit regularization~\textbf{[arXiv:1705.03071, or maybe arXiv:1412.6614]}. When a function matches the Borel sum of its asymptotic series, we'll say it's {\em Borel regular}. Several familiar kinds of regularity imply Borel regularity, and shed light on why it occurs.
 %%Knowing that a function is Borel regular gives us extra information about it---enough to reconstruct it from its asymptotic series. What's the nature of this extra information?
 %%Since different functions can be asymptotic to the same power series, Borel resummation must involve an {\em implicit regularization}, restricting its range to a class of functions which are uniquely determined by their formal power series.
 \begin{itemize}
@@ -52,6 +52,14 @@ of its asymptotic series. Watson showed a century ago that the function is Borel
 \[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
 over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 \item \textbf{Satisfying a singular differential equation}
+
+\begin{itemize}
+\item Think about conditions where this works.
+\item Maybe the correct place is the setting of Ecalle's formal integral. See \S 5.2.2.1 of Delabaere's {\em Divergent Series, Summability and Resurgence III}.
+\item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform.
+\item If the Borel-transformed equation has a subexponential solution $\hat{f}$ which is ``shifted holomorphic'' (we called this having a ``fractional power singularity'' in {\tt airy-resugence}), then $\laplace \hat{f}$ satisfies the original equation, because there are no boundary terms.
+\item Draw diagram showing formal vs. holomorphic solutions in time vs. frequency domains.
+\end{itemize}
 \item \textbf{Being a thimble integral}
 
 Let $X$ be a translation surface---a Riemann surface carrying a holomorphic 1-form $\nu$. Suppose $X$ is of {\em meromorphic type}, meaning that we got it by puncturing a compact Riemann surface $\bar{X}$ at finitely many points, and $\nu$ has a pole at each puncture. A {\em translation coordinate} on $X$ is a local coordinate whose derivative is $\nu$.
