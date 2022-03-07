@@ -90,18 +90,51 @@ For $\alpha \in (0, 1)$ and integers $n \ge 0$, the {\em Riemann-Liouville fract
 \end{definition}
 The symbol $\partial^\mu_{\zeta \text{ from } 0}$ is now defined for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$. It denotes a fractional integral when $\mu$ is negative, and a fractional derivative when $\mu$ is a positive non-integer.
 
-The Riemann-Liouville fractional derivative is a left inverse of the fractional integral, in the sense that $\partial^\lambda_{x \text{ from } 0}\,\partial^{-\lambda}_{x \text{ from } 0}$ for all $\lambda \in (0, \infty)$. This extends the semigroup law:
+The Riemann-Liouville fractional derivative is a left inverse of the fractional integral, in the sense that $\partial^\lambda_{x \text{ from } 0}\,\partial^{-\lambda}_{x \text{ from } 0}=\text{Id}$ for all $\lambda \in (0, \infty)$. This extends the semigroup law:
 \begin{align*}
 \partial^{\lambda}_{x \text{ from } 0}\,\partial^{\mu}_{x \text{ from } 0} & = \partial^{\lambda+\mu}_{x \text{ from } 0} & \lambda \in \R \smallsetminus \{0, 1, 2, 3, \ldots\},\quad\mu \in (-\infty, 0).
 \end{align*}
 
 Each convention for the fractional derivative brings its own annoyances to interactions with the Borel transform.\footnote{See Remark~\ref{rmk:caputo} for examples.} The Riemann-Liouville derivative will be the least annoying for our purposes. Here's what's nice about it.
-\begin{theorem}\label{thm:frac-diff-borel}
-Given a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$, we have
-\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^\mu \varphi \right](\zeta) \]
-for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$.
-\end{theorem}
+
+\subsection{Borel transform}
+\color{black}
+We breifly recall some basic facts on Borel transform and its properties (more details can be founded at \cite{MS}, \cite{MDiablerets}, \cite{}, \cite{}). The Borel transform $\mathcal{B}$ is a linear map from formal power seires in the time domain $\C_z$ to the space domain $\C_{\zeta}$: \begin{align*}\mathcal{B}(z^{-n-1})&\defeq\tfrac{\zeta^n}{n!} \qquad, \text{ if } n\geq 0 \\
+\mathcal{B}(1)&\defeq\delta 
+\end{align*} 
+
+where $\delta$ is the element $(1,0)\in\C\times\C[\![\zeta]\!]$\footnote{In the physical literature (\cite{MDiablerets}\cite{SGM}) many authors adopt a different convention, namely they define $\mathbb{B}(z^{-n})\defeq \tfrac{\zeta^n}{n!}$. However, we find more natural the mathematical convention as the Laplace transform is the inverse of $\mathcal{B}$ under suitable growth conditions. }, and $\mathcal{B}$ extends formally by linearity to  
+
+\begin{align*}
+\mathcal{B}\colon \C[\![z^{-1}]\!] & \to \C\delta\oplus\C[\![\zeta\!]] \\
+\sum_{n\geq 0}a_n z^{-n} & \to  a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}
+\end{align*}
+
+Notice that we are at the level of formal series, so there are no convergence assumptions. However, there is a special class of formal series that behaves well under Borel transform, meaning that its Borel transform gives a holomorphic fucntion at the origin in $\C_{\zeta}$. These are the so called Gevrey-$1$ series: $f(z)=\sum_{n\geq 0}a_nz^{-n}$ is Gevrey-$1$ if there exists $A>0$ such that $|a_n|\leq A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis Gevrey-$k$ series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. }    
+
 \begin{lemma}
+Let $f(z)=\sum_{n\geq 0}a_nz^{-n}$, $f(z)$ is Gevrey-$1$ if and only if $\hat{f}(\zeta)\defeq\mathcal{B}(f)\in\C\lbrace\zeta\rbrace$.  
+\end{lemma}
+In particular, we deduce from the lemma that the Borel transform is an isomorphism between Gevrey-$1$ series and $\C\delta\oplus\C\lbrace\zeta\rbrace$. 
+
+For what follows, it is convenient to extend the definition of $\mathcal{B}$ to fractional power of $z$, replacing the factorial with the Gamma function: 
+\begin{align*}
+\mathcal{B}(z^{-\alpha})\defeq \frac{\zeta^{\alpha-1}}{\Gamma(\alpha)} & \qquad \text{ if } \alpha\in\R\setminus\Z_{\leq 0}
+\end{align*} 
+
+\subsubsection{Properties of the Borel transform}
+We now recall some properties of the Borel transform: let $f(z)=\sum_{n\geq 0}a_nz^{-n}$ and denote by $\hat{f}(\zeta)\defeq\mathcal{B}(f(z))$
+
+\begin{itemize}
+\item[(i)] \emph{[fractional derivative]} if $\alpha\in\R\setminus\Z_{\leq 0}$, $\mathcal{B}\left(z^\alpha f(z)\right)=\partial_{\zeta}^{\alpha}\hat{f}(\zeta)$
+\item[(ii)] \emph{[fractional integral]} if $\alpha\in\R\setminus\Z_{\geq 0}$, $\mathcal{B}\left(z^\alpha f(z)\right)=\partial_{\zeta}^{\alpha}\hat{f}(\zeta)$
+\item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(z^nf(z))=\partial_\zeta^n\hat{f}(\zeta)$ 
+\item[(iv)] $\mathcal{B}\left(\partial_z^{n} f(z)\right)=(-\zeta)^n\hat{f}(\zeta)$, for every $n\geq 0$
+\item[(v)] $\mathcal{B}(f(z-c))=e^{-c\zeta}\hat{f}(\zeta)$
+\item[(vi)] if $g(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(f(z)g(z))=\int_0^{\zeta}d\zeta \hat{f}(\zeta-\zeta')\hat{g}(\zeta')=:\hat{f}\ast \hat{g}$, where $\hat{g}(\zeta)=\mathcal{B}(g(z))$.
+\end{itemize} 
+
+\begin{lemma}\label{lem:frac-deriv-Borel}
 For any non-integer $\mu \in (0, \infty)$ and any integer $k \ge 0$,
 \[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) = \left[ \borel z^\mu z^{-(k+1)} \right](\zeta). \]
 \end{lemma}
@@ -124,6 +157,98 @@ for $n = -1$. If \eqref{frac-diff-laplace} holds for $n = m$, it also holds for 
 \end{align*}
 Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired result quickly follows. The condition $\alpha \in (0, 1)$ saves us from the trouble we'd run into if $k-(m+\alpha)$ were in $\Z_{\le 0}$. This is how we avoid the initial value corrections that appear in ordinary derivatives of Borel transforms.
 \end{proof}
+
+
+
+
+\begin{proof}
+(i) follows from Lemma \ref{lem:frac-deriv-Borel}. 
+
+(ii) Notice that for $\alpha\in\R\setminus\Z_{\geq 0}$ the fractional integral $\partial_\zeta^{\alpha}\zeta^{k}=\zeta^{k-\alpha}\tfrac{k!}{\Gamma(k-\alpha+1)}$, hence \[\borel (z^\alpha f(z))=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{k!}\tfrac{k!}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k \tfrac{1}{k!}\partial_\zeta^{\alpha}\zeta^k=\partial_\zeta^\alpha\hat{f}(\zeta).\]
+
+(iii) $z^nf(z)=\sum_{k\geq 0}a_kz^{-(k-n)-1} $ and by assumption $k-n\geq 0$, hence by defintion \[\borel (z^n f(z))=\sum_{k\geq n} a_k\tfrac{\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\tfrac{k!\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\partial_\zeta^n\zeta^k=\partial_\zeta^n\hat{f}(\zeta).\] 
+
+(vi) $\partial_z^n f(z)=\sum_{k\geq 0}a_k(-1)^{n}z^{-k-n-1}\tfrac{\Gamma(k+n+1)}{k!}$, hence \[\borel (z^\alpha f(z))=\sum_{k\geq 0}a_k(-1)^{n}\tfrac{\zeta^{k+n}}{\Gamma(k+n+1)}\tfrac{\Gamma(k+n+1)}{k!}=(-\zeta)^{n}\hat{f}(\zeta).\]
+
+(v) see Lemma 5.10 \cite{MS16}. 
+
+(vi) see Definition 5.12 and Lemma 5.14 \cite{MS16}. 
+\end{proof}
+
+\begin{remark}
+We notice that properties (i) and (ii) are special cases of property (vi), indeed we can use the convolution product 
+\begin{align*}
+\borel (z^\alpha f(z))&=\borel (z^\alpha)\ast \hat{f}(\zeta)\\
+&=\frac{\zeta^{-\alpha-1}}{\Gamma(-\alpha)}\ast\hat{f}(\zeta)\\
+&=\int_0^\zeta \frac{(\zeta')^{-\alpha-1}}{\Gamma(-\alpha)}\sum_{k\geq 0}a_k\frac{(\zeta-\zeta')^k}{k!}d\zeta'\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\int_0^1(t\zeta)^{-\alpha-1}(\zeta-t\zeta)^k\zeta dt\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\int_0^1 t^{-\alpha-1}(1-t)^k dt\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\frac{\Gamma(k+1)\Gamma(-\alpha)}{\Gamma(k-\alpha+1)}\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\partial_\zeta^{\alpha} \zeta^k \\
+&=\partial_\zeta^\alpha\hat{f}(\zeta)
+\end{align*}
+\end{remark}
+
+\subsection{Laplace transform}
+ \textbf{Copy from Aaron}
+ 
+
+\subsection{Borel--Laplace summability}
+
+\[
+\begin{tikzcd}
+\C\oplus z^{-1}\C[\![z^{-1}]\!]_1\arrow[rr,"\borel"]& & \C\delta\oplus \C\lbrace\zeta\rbrace\cap\mathcal{N}\arrow[dl,"\mathcal{L}"]\\
+& s \arrow[lu, "\text{Gevrey asymptotic}"] & 
+\end{tikzcd}
+\]
+
+\subsection{Resurgence}
+
+Alternative to Borel--Laplace summability, J. Ecalle introduced the theory of resurgence: divergent power series that are Gevrey-$1$ become germs of holomorphic functions at the origin in the Borel plane. Being divergent, they have singularities in Borel plane and the aim is to investigate the type of singularities and the analytic continuation of the germ. Indeed a formal series is resurgent if it admits an \textit{endless} analytic continuation.
+
+\begin{definition}
+A germ of analytic functions $\hat{f}$ at the origin is \emph{endlessly continuable }on $\C$ if for all $L>0$, there exists a finite set $\Omega\subset\C$ of singularities, such that $\hat{f}$ can be analytically continued along all paths whose length is less than $L$, avoiding the singularities $\Omega$.
+\end{definition}
+ 
+
+\[
+\begin{tikzcd}
+\C\oplus z^{-1}\C[\![z^{-1}]\!]_1\arrow[r,"\borel"]& \C\delta\oplus \C\lbrace\zeta\rbrace\arrow[rr,"\text{analytic cont.} "] & & \mathcal{R}_{\Omega}\arrow[r, "\pi"]& \widetilde{\C\setminus\Omega}
+\end{tikzcd}
+\]
+
+
+Among resurgent series, the class of simple resurgent series is caracterized by having a special type of singularities: 
+
+\begin{definition}
+A holomorphic function $\hat{f}$ in an open disk $D\subset \C_{\zeta}$ has a simple singularity at $\omega$, adherent to $D$, if there exist $\alpha\in\C$ and a germs of analytic functions at
+the origin $\hat{\Phi}(\zeta)\in\C\lbrace\zeta\rbrace$, such that
+\begin{equation}
+\hat{f}(\zeta)=\frac{\alpha}{2\pi i(\zeta-\omega)}+\frac{1}{2\pi i}\log(\zeta-\omega)\hat{\Phi}(\zeta-\omega)+\text{hol. fct.}
+\end{equation}
+for all $\zeta\in D$ close enough to $\omega$. The constant $\alpha$ is called the residuum and $\hat{\Phi}$ the minor.
+\end{definition}
+
+The holomorphic function $\hat{\Phi}$ associated with the logarithmic singularity can be obtained by considering the analytic continuation of $\hat{f}$ across the logarithmic branch cut
+\begin{equation}
+\hat{\Phi}(\zeta)=\hat{f}(\zeta+\omega)-\hat{f}(\zeta e^{-2\pi i}+\omega)
+\end{equation}
+where with $\hat{f}(\zeta e^{-2\pi i}+\omega)$ is the analytic continuation of $\hat{f}$ along the circular
+path $\omega+\zeta e^{-2\pi i t}$ with $t\in [0,1]$.
+ 
+\begin{definition}[\cite{Sauzin_notes} Definition 7]
+A simple resurgent function is a resurgent function $c\delta +\hat{f}(\zeta)$ such that, for each $\omega\in\Omega$ and for each path $\gamma$ which starts from the origin $0\in\C_{\zeta}$, lies in $\C\setminus\Omega$ and has its extremity in the disc of radius $\pi$ centred at $\omega$, the branch $\text{cont}_\gamma\hat{f}$ has a simple singularity at $\omega$.
+\end{definition}  
+ 
+\color{orange}
+
+
+\begin{theorem}\label{thm:frac-diff-borel}
+Given a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$, we have
+\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^\mu \varphi \right](\zeta) \]
+for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$.
+\end{theorem}
+
 \color{MidnightBlue}
 \begin{definition}
 Let $\alpha\in (0,1)$ and $n\in\N$, then the $n+\alpha$-Caputo's derivative of a smooth fucntion $f$ is defined as
@@ -155,7 +280,7 @@ For any Morse cirtial points $x_\alpha$ of $f$, the saddle point approximation g
 \begin{equation}
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n} \qquad \text{ as } z\to\infty
 \end{equation}
-where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point $x_\alpha$. Notice that $f \circ \mathcal{C}_\alpha$ lies in the ray $\zeta_\alpha + [0, \infty)$, where $\zeta_\alpha := f(x_\alpha)$.
+where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point $x_\alpha$. Notice that $f \circ \mathcal{C}_\alpha$ lies in the ray $\zeta_\alpha +[0, \infty)$, where $\zeta_\alpha := f(x_\alpha)$.
 \begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$ and assume $f''(x_\alpha)\neq 0$ for every critical point $x_\alpha$. Then:
 \begin{enumerate}
 \item\label{int:series-gevrey} The series $\tilde{\varphi}_\alpha$ is Gevrey-1.
