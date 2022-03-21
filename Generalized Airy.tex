@@ -1,0 +1,143 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage[hmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+% convenience aliases
+\newcommand{\maps}{\colon}
+
+% symbology
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\laplace}{\mathcal{L}}
+\include{command2}
+
+\title{Resurgence of modified Bessel functions of second kind}
+\author{Veronica Fantini}
+
+\begin{document}
+\maketitle
+
+\section{Generalized Airy}
+
+Let $p\geq 0$,  
+
+\begin{equation}
+I(z)\defeq\int_{e^{-i\tfrac{\pi}{3}}\infty}^{e^{i\tfrac{\pi}{3}}\infty}e^{-z(\frac{t^3}{3}-t)}\frac{dt}{t^p}
+\end{equation}
+
+Since $I(z)=z^{(p-1)/3}\mathrm{A}_1(z,p)$ which is a solution of 
+
+\begin{equation}
+\left[\partial_z^3-z\partial_z+(p-1)\right]\mathrm{A}_1(z,p)=0
+\end{equation}
+ it follows that $I(z)$ is a solution of 
+\begin{equation}\label{eq:I}
+\partial_z^3I-\frac{4}{9}\partial_zI+\frac{2-p}{z}\partial_z^2I-\frac{4(1-p)}{9}\frac{I}{z}-\frac{1+3p-3p^2}{9}\frac{\partial_zI}{z^2}+\frac{3+p-3p^2-p^3}{27}\frac{I}{z^3}=0
+\end{equation}
+ In particular, the formal integral solution of \eqref{eq:I} is a three parameter family 
+
+\begin{equation}
+\tilde{I}(z)=\sum_{\mathbf{k}\in\N^3}U^\mathbf{k}e^{-\tfrac{2}{3}(k_2-k_3)z}z^{-\tfrac{1}{2}(k_2+k_3)-(1-p)k_1}\tilde{w}_{\mathbf{k}}(z)
+\end{equation} 
+
+where $\tilde{w}_\mathbf{k}(z)\in\C[\![z^{-1]\!]}$ is a formal solution of 
+\begin{equation}
+\left[P_3(\partial,\mathbf{k})+\frac{1}{t}P_2(\partial,\mathbf{k})+\frac{1}{t^2}P_1(\partial,\mathbf{k})+\frac{1}{t^3}P_0(\partial,\mathbf{k})\right]\tilde{w}_{\mathbf{k}}(z)=0
+\end{equation}
+
+\begin{align*}
+P_0(\partial,\mathbf{k})&=\frac{1}{9}+\frac{1}{9}k_1-k_1^2-k_1^3+\frac{1}{18}k_2 -k_1k_2-\frac{3}{2}k_1^2k_2-\frac{1}{4}k_2^2-\frac{3}{4}k_1k_2^2-\frac{1}{8}k_2^3+\frac{p^3}{3}k_1+\\
+&\,\,+\frac{1}{18}k_3-k_1k_3-\frac{3}{2}k_1^2 k_3-\frac{1}{2}k_2k_3-\frac{3}{2}k_1k_2k_3-\frac{3}{8}k_2^2k_3-\frac{1}{4}k_3^2-k_1^2 p^3+k_1^3 p^3+\\
+&\,\,-\frac{3}{4}k_1k_3^2-\frac{3}{8}k_2k_3^2-\frac{1}{8}k_3^3+\frac{p}{27}-\frac{7}{9}k_1 p+k_1^2 p+3k_1^3 p-\frac{p}{3}k_2+3 k_1^2k_2 p-\frac{p}{4}k_2^2+\\
+&\,\,\frac{3}{4}k_1k_2^2 p-\frac{p}{3}k_3+3 k_1^2k_3 p-\frac{p}{2}k_2k_3+\frac{3}{2}k_1k_2k_3p-\frac{p}{4}k_3^2+\frac{3}{4}k_1k_3^2 p-\frac{p^2}{9}+\frac{p^2}{3}k_1+\\
+&\,\,+k_1^2 p^2 -3k_1^3 p^2-\frac{p^2}{6}k_2+k_1k_2 p^2-\frac{3}{2}k_1^2k_2 p^2-\frac{p^2}{6}k_3+k_1k_3 p^2-\frac{3}{2}k_1^2k_3 p^2-\frac{p^3}{27}\\
+P_1(\partial,\mathbf{k})&=(-\frac{1}{9}-k_1+3k_1^2-\frac{1}{2}k_2+3k_1 k_2+\frac{3}{4}k_2^2-\frac{1}{2}k_3+3k_1k_3+\frac{3}{2}k_2k_3+\frac{3}{4}k_3^2-\frac{p}{3}+\\
+&\,\,+3 k_1p-6k_1^2 p+k_2 p -3 k_1k_2 p+k_3 p-3 k_1k_3 p+\frac{p^2}{3}-2k_1 p^2 +3k_1^2p^2 )\partial_z +\\
+&\,\,+\frac{2}{27}k_2 +\frac{2}{3}k_1k_2-2k_1^2k_2+\frac{1}{3}k_2^2-2 k_1k_2^2-\frac{1}{2}k_2^3-\frac{2}{27}k_3-\frac{2}{3}k_1k_3+\\
+&\,\,+2k_1^2k_3-\frac{1}{2}k_2^2k_3-\frac{1}{3}k_3^2+2k_1k_3^2+\frac{1}{2}k_2k_3^2+\frac{1}{2}k_3^3+\frac{2}{9}k_2 p-2k_1k_2 p\\
+&\,\,+4 k_1^2k_2 p-\frac{2}{3}k_2^2 p+2k_1k_2^2 p-\frac{2}{9}k_3 p+2 k_1k_3 p-4k_1^2k_3 p+\frac{2}{3}k_3^2 p-2k_1k_3^2 p-\frac{2}{9}k_2 p^2+\\
+&\,\,+\frac{4}{3}k_1k_2p^2-2k_1^2k_2p^2+\frac{2}{9}k_3p^2-\frac{4}{3}k_1k_3p^2+2k_1^2k_3p^2\\
+P_2(\partial,\mathbf{k})&=(2-3k_1-\frac{3}{2}(k_2+k_3)-p+3k_1p)\partial^2_z +\\
+&\,\, (-\frac{8}{3} k_2+ 4k_1k_2 +2k_2^2 +\frac{8}{3}k_3-4k_1k_3-2k_3^2+\frac{4}{3}k_2 p-4k_1k_2 p-\frac{4}{3}k_3 p+4k_1k_3 p) \partial_z +\\
+&\,\,-\frac{4}{9}+\frac{4}{9} k_1+\frac{2}{9} k2 +\frac{8}{9}k_2^2 -\frac{4}{3}k_1 k_2^2-\frac{2}{3}k_2^3+\frac{2}{9} k_3-\frac{16}{9} k_2 k_3+\frac{8}{3}k_1k_2 k_3+\frac{2}{3}k_2^2+\frac{8}{9}k_3^2-\frac{4}{3}k_1k_3^2+\\
+&\,\,+\frac{2}{3}k_2k_3^2-\frac{2}{3}k_3^3+\frac{4}{9}p-\frac{4}{9}k_1p-\frac{4}{9}k_2^2 p+\frac{4}{3} k_1 k_2^2 p +\frac{8}{9}k_2k_3 p-\frac{8}{3} k_1 k_2 k_3p-\frac{4}{9}k_3^2 p+\frac{4}{3}k_1 k_3^2 p \\
+P_3(\partial,\mathbf{k})&=\partial_z^3-2(k_2-k_3)\partial_z^2+\frac{4}{3}(k_2-k_3)^2\partial_z-\frac{4}{9}\partial_z+\frac{8}{27}(k_2-k_3)(1-k_2+k_3)(1+k_2-k_3)
+\end{align*}
+
+
+
+Since $\tilde{w}_{\mathbf{k}}(z)=\sum_{j\geq 0}a_{\mathbf{k},j}z^{-j}$ there only  few values of $\mathbf{k}\in\N^3$ such that $\tilde{w}_{\mathbf{k}}\neq 0$, hence the formal integral solution of \eqref{eq:I} reduces to 
+
+\begin{equation}
+\tilde{I}(z)=U_1z^{p-1}\tilde{w}_1(z)+U_2e^{-\tfrac{2}{3}z}z^{-1/2}\tilde{w}_2(z)+U_3e^{\tfrac{2}{3}z}\tilde{w}_3(z)
+\end{equation}
+
+where $\tilde{w}_1, \tilde{w}_2$ and $\tilde{w}_3$ are the unique (we fix $a_{k,0}=1$ for $k=1,2,3$) solutions of 
+
+\begin{multline}\label{w1}
+\left[\partial_z^3-\frac{4}{9}\partial_z-\frac{1-2p}{z}\partial_z^2+\frac{17-30p+12p^2}{9z^2}\partial_z+\frac{8}{27}\frac{p^3-6p^2+11p-6}{z^3}\right]\tilde{w}_1(z)=0
+\end{multline}
+
+
+\begin{multline}\label{w2}
+\left[\partial_z^3-2\partial_z^2+\frac{8}{9}\partial_z+\frac{1-2p}{2z}\partial_z^2-\frac{2-4p}{3z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
+\left.-\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{w}_2(z)=0
+\end{multline}
+
+\begin{multline}\label{w3}
+\left[\partial_z^3+2\partial_z^2+\frac{8}{9}\partial_z+\frac{1-2p}{2z}\partial_z^2+\frac{2-4p}{3z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
+\left.+\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{w}_3(z)=0
+\end{multline}
+
+We first study the equation \eqref{w1}: its unique formal solution $\tilde{w}_1(z)$ has the following coefficients (we compute them with Mathematica)
+
+\begin{equation}
+a_{1,2j}=\frac{\Gamma\left(1+3j-p\right)}{3^j\Gamma(1+j)\Gamma(1-p)} \,\qquad j\geq 0
+\end{equation}
+
+Notice that $a_{1,j}$ are well defined only for $p\in\C\setminus\lbrace 1,2,3,...\rbrace$. However, for $p=1,2,3$ the solution is well defined and constant $\tilde{w}_1(z)=1$. Therefore the Borel transform of $\tilde{w}_1(z)$ is 
+\begin{equation}
+\hat{w}_1(\zeta)=\begin{cases}
+\delta & \text{if } p=1,2,3 \\
+\delta+\zeta\frac{\Gamma(4-p)}{3\Gamma(1-p)}{}_3F_2\left(\frac{4-p}{3},\frac{5-p}{3},2-\frac{p}{3};\frac{3}{2},2;\frac{9}{4}\zeta^2\right) & \text{if } p\in\C\setminus\lbrace 1,2,3,...\rbrace
+\end{cases}
+\end{equation}
+
+In particular, the generalized hypergeometric series has a branch cut singularity at $\zeta=\pm\tfrac{3}{2}$. We expect that $\tilde{w}_1(z)$ is a simple resurgent fuction such that 
+\begin{align*}
+\hat{w}_1(\zeta+\tfrac{2}{3})&=\delta+\frac{C}{2\pi i\zeta}+\frac{1}{2\pi i}\log(\zeta)\hat{w}_2(\zeta)+\text{hol. fct.}\\
+\hat{w}_1(\zeta-\tfrac{2}{3})&=\delta+\frac{C}{2\pi i\zeta}+\frac{1}{2\pi i}\log(\zeta)\hat{w}_3(\zeta)+\text{hol. fct.}
+\end{align*}
+
+Indeed, in [\textbf{D.B. Karp and E.G. Prilepkina} formula 3.1 (see also \textsf{https://arxiv.org/pdf/2110.12219.pdf} equation 27)] the authors compute the analytic continuation of generalized hypergeomtric functions across the branch cut
+\begin{equation}
+{}_qF_{q-1}\left(\mathbf{a};\mathbf{b};x+i0\right)-{}_qF_{q-1}\left(\mathbf{a};\mathbf{b};x-i0\right)=2\pi i\frac{\Gamma(\mathbf{b}-d+1)}{\Gamma(\mathbf{a}-d+1)}x^{d-1}G_{q,q}^{q,0}\left(d,\mathbf{b};\mathbf{a};\frac{1}{x}\right)
+\end{equation}
+
+which specifies to 
+
+\begin{align*}
+\frac{3}{2}\zeta&\left({}_3F_2\left(\frac{4-p}{3},\frac{5-p}{3},2-\frac{p}{3};\frac{3}{2},2;\frac{9}{4}\zeta^2+i0\right)-{}_3F_2\left(\frac{4-p}{3},\frac{5-p}{3},2-\frac{p}{3};\frac{3}{2},2;\frac{9}{4}\zeta^2-i0\right)\right)=\\
+&=2\pi i\frac{\Gamma(\mathbf{b}+\tfrac{1}{2})}{\Gamma(\mathbf{a}+\tfrac{1}{2})}G_{3,3}^{3,0}\left(\frac{1}{2},\frac{3}{2},2;\frac{4-p}{3},\frac{5-p}{3},2-\frac{p}{3};\frac{4}{9}\zeta^{-2}\right)\\
+&=2\pi i\frac{\Gamma(\mathbf{b}+\tfrac{1}{2})}{\Gamma(\mathbf{a}+\tfrac{1}{2})}G_{3,3}^{0,3}\left(\frac{p-1}{3},\frac{p-2}{3},\frac{p}{3}-1;\frac{1}{2},-\frac{1}{2},-1;\frac{9}{4}\zeta^{2}\right)
+\end{align*}
+
+When $p=1,2,3$ the solution is a trivial resurgent function, it is constant.
+
+
+Let us now consider the formal solution $\tilde{w}_2(z)$ and $\tilde{w}_3(z)$. The recursive relation for $a_{2,j},a_{3,j}$ have not a simple expressions as it is for $a_{1,j}$. However, we compute numerically their first coefficients:
+
+\begin{align*}
+ &j=1 & 2 & 3& 4& 5& 6& 7 \\
+a_{2,j}& & & & & & & \\
+a_{3,j}& & & & & & & 
+\end{align*}    
+
+\bibliographystyle{utphys}
+\bibliography{airy-resurgence}
+\end{document}

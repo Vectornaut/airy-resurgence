@@ -122,17 +122,27 @@ For what follows, it is convenient to extend the definition of $\mathcal{B}$ to 
 \mathcal{B}(z^{-\alpha})\defeq \frac{\zeta^{\alpha-1}}{\Gamma(\alpha)} & \qquad \text{ if } \alpha\in\R\setminus\Z_{\leq 0}
 \end{align*} 
 
+However, if $f(z)=\sum_{n\geq 0}a_nz^{-n}$ is a Gevrey-$1$ series, then the Borel transform of $\mathcal{B}(z^{-\alpha}f)(\zeta)$ is a germ of meromorphic function at the oringin: indeed 
+\begin{align*}
+\mathcal{B}(z^{\alpha}f)(\zeta)&=\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
+&=a_0\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}+\sum_{n\geq 0}a_{n+1}\frac{\zeta^{n+\alpha}}{\Gamma(1+n+\alpha)}
+\end{align*}
+
+In particular, if $\alpha\in (1,+\infty)$, then $\mathcal{B}(z^{\alpha}f)(\zeta)$ is actually a germ of holomorphic functions on the Riemann surface of $\zeta
+^{\alpha-1}$, otherwise if $\alpha\in (-\infty,1)$ then $\mathcal{B}(z^{\alpha}f)(\zeta)$ is a meromorphic functions on the Riemann surface where $\zeta^{\alpha-1}$ defines an analytic coordinate. The case of interest for usa in the following is when $\alpha=\tfrac{1}{2}$, hence if $a_0\neq 0$, the Borel trasform will be merorphic at the origin and definied on the Riemann surface of the square root.     
+
 \subsubsection{Properties of the Borel transform}
 We now recall some properties of the Borel transform: let $f(z)=\sum_{n\geq 0}a_nz^{-n}$ and denote by $\hat{f}(\zeta)\defeq\mathcal{B}(f(z))$
 
 \begin{itemize}
-\item[(i)] \emph{[fractional derivative]} if $\alpha\in\R\setminus\Z_{\leq 0}$, $\mathcal{B}\left(z^\alpha f(z)\right)=\partial_{\zeta}^{\alpha}\hat{f}(\zeta)$
-\item[(ii)] \emph{[fractional integral]} if $\alpha\in\R\setminus\Z_{\geq 0}$, $\mathcal{B}\left(z^\alpha f(z)\right)=\partial_{\zeta}^{\alpha}\hat{f}(\zeta)$
+\item[(i)] \emph{[fractional derivative]} if $\alpha\in\R_{\geq 0}$, $\mathcal{B}\left(z^\alpha f(z)\right)=\partial_{\zeta}^{\alpha}\hat{f}(\zeta)$
+\item[(ii)] \emph{[fractional integral]} if $\alpha\in\R_{<0}\setminus\Z_{\geq 0}$, $\mathcal{B}\left(z^\alpha f(z)\right)=\partial_{\zeta}^{\alpha}\hat{f}(\zeta)$
 \item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(z^nf(z))=\partial_\zeta^n\hat{f}(\zeta)$ 
 \item[(iv)] $\mathcal{B}\left(\partial_z^{n} f(z)\right)=(-\zeta)^n\hat{f}(\zeta)$, for every $n\geq 0$
 \item[(v)] $\mathcal{B}(f(z-c))=e^{-c\zeta}\hat{f}(\zeta)$
-\item[(vi)] if $g(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(f(z)g(z))=\int_0^{\zeta}d\zeta \hat{f}(\zeta-\zeta')\hat{g}(\zeta')=:\hat{f}\ast \hat{g}$, where $\hat{g}(\zeta)=\mathcal{B}(g(z))$.
+\item[(vi)] if $g(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(f(z)g(z))=\int_0^{\zeta}d\zeta' \hat{f}(\zeta-\zeta')\hat{g}(\zeta')=:\hat{f}\ast \hat{g}$, where $\hat{g}(\zeta)=\mathcal{B}(g(z))$.
 \end{itemize} 
+
 
 \begin{lemma}\label{lem:frac-deriv-Borel}
 For any non-integer $\mu \in (0, \infty)$ and any integer $k \ge 0$,
@@ -240,35 +250,35 @@ path $\omega+\zeta e^{-2\pi i t}$ with $t\in [0,1]$.
 A simple resurgent function is a resurgent function $c\delta +\hat{f}(\zeta)$ such that, for each $\omega\in\Omega$ and for each path $\gamma$ which starts from the origin $0\in\C_{\zeta}$, lies in $\C\setminus\Omega$ and has its extremity in the disc of radius $\pi$ centred at $\omega$, the branch $\text{cont}_\gamma\hat{f}$ has a simple singularity at $\omega$.
 \end{definition}  
  
-\color{orange}
+%\color{orange}
+%
+%
+%\begin{theorem}\label{thm:frac-diff-borel}
+%Given a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$, we have
+%\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^\mu \varphi \right](\zeta) \]
+%for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$.
+%\end{theorem}
 
-
-\begin{theorem}\label{thm:frac-diff-borel}
-Given a Gevrey-$1$ formal series $\varphi(z) = \sum_{k \ge 0}a_kz^{-(k+1)}$, we have
-\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \varphi \right](\zeta) = \left[ \borel z^\mu \varphi \right](\zeta) \]
-for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$.
-\end{theorem}
-
-\color{MidnightBlue}
-\begin{definition}
-Let $\alpha\in (0,1)$ and $n\in\N$, then the $n+\alpha$-Caputo's derivative of a smooth fucntion $f$ is defined as
-\begin{equation}
-\partial_x^{n+\alpha}f(x)\defeq\frac{1}{\Gamma(1-\alpha)}\int_0^x(x-s)^{-\alpha}f^{(n+1)}(s)ds
-\end{equation}
-\end{definition}
-
-In particular, this definition is well suited for the differential calculus in the convolutive model $\left(\C[\![\zeta]\!], \ast\right)$. Let $\varphi(z)\defeq\sum_{k\geq 0}a_kz^{-k-1}\in\C[\![z^{-1}]\!]$ be Gevrey $1$, then assuming $a_k=0$ for every $k<n$, the Borel transform of $z^{n+\alpha}\varphi(z)$ can be computed in two different ways: \textbf{[Can we do this when $\varphi$ isn't in $o(z^n)$?]}
-\begin{multline}
-\label{mod1}
-\mathcal{B}\left(z^{n+\alpha}\varphi(z)\right)(\zeta)=\mathcal{B}(z^{\alpha+n})\ast\hat{\varphi}(\zeta)=\int_0^{\zeta}\frac{(\zeta-s)^{-1-n-\alpha}}{(-1-n-\alpha)!}\sum_{k\geq 0}\frac{a_k}{k!}s^{k}ds\\
-=\frac{1}{(-\alpha)!}\int_0^{\zeta}(\zeta-s)^{-\alpha}\sum_{k\geq 0}\frac{a_k}{(k-n-1)!}s^{k-n-1}ds=\partial_{\zeta}^{n+\alpha}\hat{\varphi}(\zeta)
-\end{multline}
-\begin{equation}
-\label{mod2}
-\mathcal{B}\left(z^{n+\alpha}\varphi(z)\right)(\zeta)=\mathcal{B}\left(\sum_{k\geq 0}a_kz^{-k-1+n+\alpha}\right)(\zeta)=\sum_{k>n}\frac{a_k}{(k-n-\alpha)!}\zeta^{k-n-\alpha}
-\end{equation}
-
-and computitng the integral which defines the $n+\alpha$-derivative in \eqref{mod1} we get exaclty the same result as \eqref{mod2}.
+%\color{MidnightBlue}
+%\begin{definition}
+%Let $\alpha\in (0,1)$ and $n\in\N$, then the $n+\alpha$-Caputo's derivative of a smooth fucntion $f$ is defined as
+%\begin{equation}
+%\partial_x^{n+\alpha}f(x)\defeq\frac{1}{\Gamma(1-\alpha)}\int_0^x(x-s)^{-\alpha}f^{(n+1)}(s)ds
+%\end{equation}
+%\end{definition}
+%
+%In particular, this definition is well suited for the differential calculus in the convolutive model $\left(\C[\![\zeta]\!], \ast\right)$. Let $\varphi(z)\defeq\sum_{k\geq 0}a_kz^{-k-1}\in\C[\![z^{-1}]\!]$ be Gevrey $1$, then assuming $a_k=0$ for every $k<n$, the Borel transform of $z^{n+\alpha}\varphi(z)$ can be computed in two different ways: \textbf{[Can we do this when $\varphi$ isn't in $o(z^n)$?]}
+%\begin{multline}
+%\label{mod1}
+%\mathcal{B}\left(z^{n+\alpha}\varphi(z)\right)(\zeta)=\mathcal{B}(z^{\alpha+n})\ast\hat{\varphi}(\zeta)=\int_0^{\zeta}\frac{(\zeta-s)^{-1-n-\alpha}}{(-1-n-\alpha)!}\sum_{k\geq 0}\frac{a_k}{k!}s^{k}ds\\
+%=\frac{1}{(-\alpha)!}\int_0^{\zeta}(\zeta-s)^{-\alpha}\sum_{k\geq 0}\frac{a_k}{(k-n-1)!}s^{k-n-1}ds=\partial_{\zeta}^{n+\alpha}\hat{\varphi}(\zeta)
+%\end{multline}
+%\begin{equation}
+%\label{mod2}
+%\mathcal{B}\left(z^{n+\alpha}\varphi(z)\right)(\zeta)=\mathcal{B}\left(\sum_{k\geq 0}a_kz^{-k-1+n+\alpha}\right)(\zeta)=\sum_{k>n}\frac{a_k}{(k-n-\alpha)!}\zeta^{k-n-\alpha}
+%\end{equation}
+%
+%and computitng the integral which defines the $n+\alpha$-derivative in \eqref{mod1} we get exaclty the same result as \eqref{mod2}.
 \color{black}
 \section{Resurgence of exponential integrals}
 Let $X$ be a $N-\dim$ manifold, $f\colon X\to\C$ be a holomorphic Morse function with only simple critical points, and $\nu\in\Gamma(X,\Omega^N)$, and set
