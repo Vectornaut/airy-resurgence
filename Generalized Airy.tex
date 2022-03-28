@@ -24,76 +24,231 @@
 
 \section{Generalized Airy}
 
-Let $p\geq 0$,  
-
-\begin{equation}
-I(z)\defeq\int_{e^{-i\tfrac{\pi}{3}}\infty}^{e^{i\tfrac{\pi}{3}}\infty}e^{-z(\frac{t^3}{3}-t)}\frac{dt}{t^p}
-\end{equation}
-
-Since $I(z)=z^{(p-1)/3}\mathrm{A}_1(z,p)$ which is a solution of 
-
-\begin{equation}
-\left[\partial_z^3-z\partial_z+(p-1)\right]\mathrm{A}_1(z,p)=0
-\end{equation}
- it follows that $I(z)$ is a solution of 
-\begin{equation}\label{eq:I}
-\partial_z^3I-\frac{4}{9}\partial_zI+\frac{2-p}{z}\partial_z^2I-\frac{4(1-p)}{9}\frac{I}{z}-\frac{1+3p-3p^2}{9}\frac{\partial_zI}{z^2}+\frac{3+p-3p^2-p^3}{27}\frac{I}{z^3}=0
-\end{equation}
- In particular, the formal integral solution of \eqref{eq:I} is a three parameter family 
-
-\begin{equation}
-\tilde{I}(z)=\sum_{\mathbf{k}\in\N^3}U^\mathbf{k}e^{-\tfrac{2}{3}(k_2-k_3)z}z^{-\tfrac{1}{2}(k_2+k_3)-(1-p)k_1}\tilde{w}_{\mathbf{k}}(z)
-\end{equation} 
-
-where $\tilde{w}_\mathbf{k}(z)\in\C[\![z^{-1]\!]}$ is a formal solution of 
-\begin{equation}
-\left[P_3(\partial,\mathbf{k})+\frac{1}{t}P_2(\partial,\mathbf{k})+\frac{1}{t^2}P_1(\partial,\mathbf{k})+\frac{1}{t^3}P_0(\partial,\mathbf{k})\right]\tilde{w}_{\mathbf{k}}(z)=0
-\end{equation}
+In \cite{Reid} \cite{Drazin-Reid} the authors introduce generalized Airy functions $A_k(z), B_0(z), B_k(z)$, $k=1,2,3$ as approximate solutions of the Orr--Sommerfield fluid equation. They are defined as countour integral (\cite{DLMF} \S 9.13(ii))
 
 \begin{align*}
-P_0(\partial,\mathbf{k})&=\frac{1}{9}+\frac{1}{9}k_1-k_1^2-k_1^3+\frac{1}{18}k_2 -k_1k_2-\frac{3}{2}k_1^2k_2-\frac{1}{4}k_2^2-\frac{3}{4}k_1k_2^2-\frac{1}{8}k_2^3+\frac{p^3}{3}k_1+\\
-&\,\,+\frac{1}{18}k_3-k_1k_3-\frac{3}{2}k_1^2 k_3-\frac{1}{2}k_2k_3-\frac{3}{2}k_1k_2k_3-\frac{3}{8}k_2^2k_3-\frac{1}{4}k_3^2-k_1^2 p^3+k_1^3 p^3+\\
-&\,\,-\frac{3}{4}k_1k_3^2-\frac{3}{8}k_2k_3^2-\frac{1}{8}k_3^3+\frac{p}{27}-\frac{7}{9}k_1 p+k_1^2 p+3k_1^3 p-\frac{p}{3}k_2+3 k_1^2k_2 p-\frac{p}{4}k_2^2+\\
-&\,\,\frac{3}{4}k_1k_2^2 p-\frac{p}{3}k_3+3 k_1^2k_3 p-\frac{p}{2}k_2k_3+\frac{3}{2}k_1k_2k_3p-\frac{p}{4}k_3^2+\frac{3}{4}k_1k_3^2 p-\frac{p^2}{9}+\frac{p^2}{3}k_1+\\
-&\,\,+k_1^2 p^2 -3k_1^3 p^2-\frac{p^2}{6}k_2+k_1k_2 p^2-\frac{3}{2}k_1^2k_2 p^2-\frac{p^2}{6}k_3+k_1k_3 p^2-\frac{3}{2}k_1^2k_3 p^2-\frac{p^3}{27}\\
-P_1(\partial,\mathbf{k})&=(-\frac{1}{9}-k_1+3k_1^2-\frac{1}{2}k_2+3k_1 k_2+\frac{3}{4}k_2^2-\frac{1}{2}k_3+3k_1k_3+\frac{3}{2}k_2k_3+\frac{3}{4}k_3^2-\frac{p}{3}+\\
-&\,\,+3 k_1p-6k_1^2 p+k_2 p -3 k_1k_2 p+k_3 p-3 k_1k_3 p+\frac{p^2}{3}-2k_1 p^2 +3k_1^2p^2 )\partial_z +\\
-&\,\,+\frac{2}{27}k_2 +\frac{2}{3}k_1k_2-2k_1^2k_2+\frac{1}{3}k_2^2-2 k_1k_2^2-\frac{1}{2}k_2^3-\frac{2}{27}k_3-\frac{2}{3}k_1k_3+\\
-&\,\,+2k_1^2k_3-\frac{1}{2}k_2^2k_3-\frac{1}{3}k_3^2+2k_1k_3^2+\frac{1}{2}k_2k_3^2+\frac{1}{2}k_3^3+\frac{2}{9}k_2 p-2k_1k_2 p\\
-&\,\,+4 k_1^2k_2 p-\frac{2}{3}k_2^2 p+2k_1k_2^2 p-\frac{2}{9}k_3 p+2 k_1k_3 p-4k_1^2k_3 p+\frac{2}{3}k_3^2 p-2k_1k_3^2 p-\frac{2}{9}k_2 p^2+\\
-&\,\,+\frac{4}{3}k_1k_2p^2-2k_1^2k_2p^2+\frac{2}{9}k_3p^2-\frac{4}{3}k_1k_3p^2+2k_1^2k_3p^2\\
-P_2(\partial,\mathbf{k})&=(2-3k_1-\frac{3}{2}(k_2+k_3)-p+3k_1p)\partial^2_z +\\
-&\,\, (-\frac{8}{3} k_2+ 4k_1k_2 +2k_2^2 +\frac{8}{3}k_3-4k_1k_3-2k_3^2+\frac{4}{3}k_2 p-4k_1k_2 p-\frac{4}{3}k_3 p+4k_1k_3 p) \partial_z +\\
-&\,\,-\frac{4}{9}+\frac{4}{9} k_1+\frac{2}{9} k2 +\frac{8}{9}k_2^2 -\frac{4}{3}k_1 k_2^2-\frac{2}{3}k_2^3+\frac{2}{9} k_3-\frac{16}{9} k_2 k_3+\frac{8}{3}k_1k_2 k_3+\frac{2}{3}k_2^2+\frac{8}{9}k_3^2-\frac{4}{3}k_1k_3^2+\\
-&\,\,+\frac{2}{3}k_2k_3^2-\frac{2}{3}k_3^3+\frac{4}{9}p-\frac{4}{9}k_1p-\frac{4}{9}k_2^2 p+\frac{4}{3} k_1 k_2^2 p +\frac{8}{9}k_2k_3 p-\frac{8}{3} k_1 k_2 k_3p-\frac{4}{9}k_3^2 p+\frac{4}{3}k_1 k_3^2 p \\
-P_3(\partial,\mathbf{k})&=\partial_z^3-2(k_2-k_3)\partial_z^2+\frac{4}{3}(k_2-k_3)^2\partial_z-\frac{4}{9}\partial_z+\frac{8}{27}(k_2-k_3)(1-k_2+k_3)(1+k_2-k_3)
+\mathrm{A}_k(z,p)&=\frac{1}{2\pi i}\int_{\Gamma_k}e^{zt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad k=1,2,3\,\, p\in\C \\
+\mathrm{B}_0(z,p)&=\frac{1}{2\pi i}\int_{\Gamma_0}e^{zt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad p\in\Z \\
+\mathrm{B}_k(z,p)&=\int_{\gamma_k}e^{zt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad k=1,2,3\,\, p\in\Z 
 \end{align*}
+where the countours $\Gamma_k, \Gamma_0, \gamma_k$ are represented in Figure \ref{fig.countours} 
 
+\begin{figure}
+%\includegraphics[scale=0.5]{countours}
+\end{figure}
 
-
-Since $\tilde{w}_{\mathbf{k}}(z)=\sum_{j\geq 0}a_{\mathbf{k},j}z^{-j}$ there only  few values of $\mathbf{k}\in\N^3$ such that $\tilde{w}_{\mathbf{k}}\neq 0$, hence the formal integral solution of \eqref{eq:I} reduces to 
+Each generalize Airy functions is a solution of
 
 \begin{equation}
-\tilde{I}(z)=U_1z^{p-1}\tilde{w}_1(z)+U_2e^{-\tfrac{2}{3}z}z^{-1/2}\tilde{w}_2(z)+U_3e^{\tfrac{2}{3}z}\tilde{w}_3(z)
+\left[\partial_z^3-z\partial_z+(p-1)\right]f(z,p)=0
+\end{equation} 
+
+and if $p=0$ they reduced to the classical Airy functions: $\mathrm{Ai}(z)=\mathrm{A}_1(z,0)$ and $\mathrm{Bi}(z)=\mathrm{B}_1(z,0)$.
+
+We define the following exponential integral: let $p\geq 0$, $f(t)=\tfrac{t^3}{3}-t$ and $\nu_p=\tfrac{dt}{t^p}$. The critical points of $f$ are $\pm\tfrac{2}{3}$ (as for the classical Airy case), however the volume form $\nu_p$ is meromorphic    
+
+\begin{equation}
+I_\alpha(z,p)\defeq\frac{1}{2\pi i}\int_{\mathcal{C}_{\alpha}}e^{-z(\tfrac{t^3}{3}-t)}\frac{dt}{t^p}
 \end{equation}
 
-where $\tilde{w}_1, \tilde{w}_2$ and $\tilde{w}_3$ are the unique (we fix $a_{k,0}=1$ for $k=1,2,3$) solutions of 
+where $\mathcal{C}_\alpha$ is the path through the point $\alpha$, starting and ending at infinity (as in Figure \ref{fig:path for I}). In particular, $I_{+}(z,p)=z^{\tfrac{p-1}{3}}\mathrm{A}_1(z^{2/3},p)$: 
+
+\begin{align*}
+I_{+}(z,p)&=\frac{1}{2\pi i}\int_{\mathcal{C}_{+}}e^{-z(\tfrac{t^3}{3}-t)}\frac{dt}{t^p} &\\
+&=\frac{z^{(p-1)/2}}{2\pi i}\int_{z^{-1/3}\mathcal{C}_{+}}e^{-z(z^{-1}\tfrac{s^3}{3}-z^{-1/3}s)}\frac{ds}{s^p} & t=z^{-\tfrac{1}{3}}s\\
+&=\frac{z^{(p-1)/3}}{2\pi i}\int_{z^{-1/3}\mathcal{C}_{+}}e^{-\left(\tfrac{s^3}{3}-z^{2/3}s\right)}\frac{ds}{s^p} & \\
+&=z^{(p-1)/3}\mathrm{A}_1(z^{2/3},p)
+\end{align*}
+
+It follows that $I_+(z)$ is a solution of
+ 
+\begin{equation}\label{eq:I}
+\left[\partial_z^3-\frac{4}{9}\partial_z+\frac{2-p}{z}\partial_z^2-\frac{4(1-p)}{9z}-\frac{1+3p-3p^2}{9}\frac{\partial_z}{z^2}+\frac{3+p-3p^2-p^3}{27z^3}\right]I_+(z,p)=0
+\end{equation}
+
+From the general theory of linear ODE, the formal integral solution of \eqref{eq:I} is a linear combinations of three generators 
+
+%\begin{equation}
+%\tilde{I}_+(z,p)=\sum_{\mathbf{k}\in\N^3}U^\mathbf{k}e^{-\tfrac{2}{3}(k_2-k_3)z}z^{-\tfrac{1}{2}(k_2+k_3)-(1-p)k_1}\tilde{W}_{\mathbf{k}}(z)
+%\end{equation} 
+%
+%where $\tilde{W}_\mathbf{k}(z)\in\C[\![z^{-1}]\!]$ is a formal solution of 
+%\begin{equation}
+%\left[P_3(\partial,\mathbf{k})+\frac{1}{t}P_2(\partial,\mathbf{k})+\frac{1}{t^2}P_1(\partial,\mathbf{k})+\frac{1}{t^3}P_0(\partial,\mathbf{k})\right]\tilde{W}_{\mathbf{k}}(z)=0
+%\end{equation}
+%
+%\begin{align*}
+%P_0(\partial,\mathbf{k})&=\frac{1}{9}+\frac{1}{9}k_1-k_1^2-k_1^3+\frac{1}{18}k_2 -k_1k_2-\frac{3}{2}k_1^2k_2-\frac{1}{4}k_2^2-\frac{3}{4}k_1k_2^2-\frac{1}{8}k_2^3+\frac{p^3}{3}k_1+\\
+%&\,\,+\frac{1}{18}k_3-k_1k_3-\frac{3}{2}k_1^2 k_3-\frac{1}{2}k_2k_3-\frac{3}{2}k_1k_2k_3-\frac{3}{8}k_2^2k_3-\frac{1}{4}k_3^2-k_1^2 p^3+k_1^3 p^3+\\
+%&\,\,-\frac{3}{4}k_1k_3^2-\frac{3}{8}k_2k_3^2-\frac{1}{8}k_3^3+\frac{p}{27}-\frac{7}{9}k_1 p+k_1^2 p+3k_1^3 p-\frac{p}{3}k_2+3 k_1^2k_2 p-\frac{p}{4}k_2^2+\\
+%&\,\,\frac{3}{4}k_1k_2^2 p-\frac{p}{3}k_3+3 k_1^2k_3 p-\frac{p}{2}k_2k_3+\frac{3}{2}k_1k_2k_3p-\frac{p}{4}k_3^2+\frac{3}{4}k_1k_3^2 p-\frac{p^2}{9}+\frac{p^2}{3}k_1+\\
+%&\,\,+k_1^2 p^2 -3k_1^3 p^2-\frac{p^2}{6}k_2+k_1k_2 p^2-\frac{3}{2}k_1^2k_2 p^2-\frac{p^2}{6}k_3+k_1k_3 p^2-\frac{3}{2}k_1^2k_3 p^2-\frac{p^3}{27}\\
+%P_1(\partial,\mathbf{k})&=(-\frac{1}{9}-k_1+3k_1^2-\frac{1}{2}k_2+3k_1 k_2+\frac{3}{4}k_2^2-\frac{1}{2}k_3+3k_1k_3+\frac{3}{2}k_2k_3+\frac{3}{4}k_3^2-\frac{p}{3}+\\
+%&\,\,+3 k_1p-6k_1^2 p+k_2 p -3 k_1k_2 p+k_3 p-3 k_1k_3 p+\frac{p^2}{3}-2k_1 p^2 +3k_1^2p^2 )\partial_z +\\
+%&\,\,+\frac{2}{27}k_2 +\frac{2}{3}k_1k_2-2k_1^2k_2+\frac{1}{3}k_2^2-2 k_1k_2^2-\frac{1}{2}k_2^3-\frac{2}{27}k_3-\frac{2}{3}k_1k_3+\\
+%&\,\,+2k_1^2k_3-\frac{1}{2}k_2^2k_3-\frac{1}{3}k_3^2+2k_1k_3^2+\frac{1}{2}k_2k_3^2+\frac{1}{2}k_3^3+\frac{2}{9}k_2 p-2k_1k_2 p\\
+%&\,\,+4 k_1^2k_2 p-\frac{2}{3}k_2^2 p+2k_1k_2^2 p-\frac{2}{9}k_3 p+2 k_1k_3 p-4k_1^2k_3 p+\frac{2}{3}k_3^2 p-2k_1k_3^2 p-\frac{2}{9}k_2 p^2+\\
+%&\,\,+\frac{4}{3}k_1k_2p^2-2k_1^2k_2p^2+\frac{2}{9}k_3p^2-\frac{4}{3}k_1k_3p^2+2k_1^2k_3p^2\\
+%P_2(\partial,\mathbf{k})&=(2-3k_1-\frac{3}{2}(k_2+k_3)-p+3k_1p)\partial^2_z +\\
+%&\,\, (-\frac{8}{3} k_2+ 4k_1k_2 +2k_2^2 +\frac{8}{3}k_3-4k_1k_3-2k_3^2+\frac{4}{3}k_2 p-4k_1k_2 p-\frac{4}{3}k_3 p+4k_1k_3 p) \partial_z +\\
+%&\,\,-\frac{4}{9}+\frac{4}{9} k_1+\frac{2}{9} k2 +\frac{8}{9}k_2^2 -\frac{4}{3}k_1 k_2^2-\frac{2}{3}k_2^3+\frac{2}{9} k_3-\frac{16}{9} k_2 k_3+\frac{8}{3}k_1k_2 k_3+\frac{2}{3}k_2^2+\frac{8}{9}k_3^2-\frac{4}{3}k_1k_3^2+\\
+%&\,\,+\frac{2}{3}k_2k_3^2-\frac{2}{3}k_3^3+\frac{4}{9}p-\frac{4}{9}k_1p-\frac{4}{9}k_2^2 p+\frac{4}{3} k_1 k_2^2 p +\frac{8}{9}k_2k_3 p-\frac{8}{3} k_1 k_2 k_3p-\frac{4}{9}k_3^2 p+\frac{4}{3}k_1 k_3^2 p \\
+%P_3(\partial,\mathbf{k})&=\partial_z^3-2(k_2-k_3)\partial_z^2+\frac{4}{3}(k_2-k_3)^2\partial_z-\frac{4}{9}\partial_z+\frac{8}{27}(k_2-k_3)(1-k_2+k_3)(1+k_2-k_3)
+%\end{align*}
+%
+%
+%
+%Since $\tilde{W}_{\mathbf{k}}(z)=\sum_{j\geq 0}a_{\mathbf{k},j}z^{-j}$ there only  few values of $\mathbf{k}\in\N^3$ such that $\tilde{W}_{\mathbf{k}}\neq 0$, hence the formal integral solution of \eqref{eq:I} reduces to 
+
+\begin{equation}
+\tilde{I}_+(z,p)=U_1z^{p-1}\tilde{W}_1(z)+U_2e^{-\tfrac{2}{3}z}z^{-1/2}\tilde{W}_2(z)+U_3e^{\tfrac{2}{3}z}z^{-1/2}\tilde{W}_3(z)
+\end{equation}
+
+where $\tilde{W}_1, \tilde{W}_2$ and $\tilde{W}_3$ are formal power seirs $\tilde{W}_{\mathbf{k}}(z)=\sum_{j\geq 0}a_{\mathbf{k},j}z^{-j}$, which are the unique (we fix $a_{k,0}=1$ for $k=1,2,3$) solution of 
 
 \begin{multline}\label{w1}
-\left[\partial_z^3-\frac{4}{9}\partial_z-\frac{1-2p}{z}\partial_z^2+\frac{17-30p+12p^2}{9z^2}\partial_z+\frac{8}{27}\frac{p^3-6p^2+11p-6}{z^3}\right]\tilde{w}_1(z)=0
+\left[\partial_z^3-\frac{4}{9}\partial_z-\frac{1-2p}{z}\partial_z^2+\frac{17-30p+12p^2}{9z^2}\partial_z+\frac{8}{27}\frac{p^3-6p^2+11p-6}{z^3}\right]\tilde{W}_1(z)=0
 \end{multline}
 
 
 \begin{multline}\label{w2}
 \left[\partial_z^3-2\partial_z^2+\frac{8}{9}\partial_z+\frac{1-2p}{2z}\partial_z^2-\frac{2-4p}{3z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
-\left.-\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{w}_2(z)=0
+\left.-\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_2(z)=0
 \end{multline}
 
 \begin{multline}\label{w3}
 \left[\partial_z^3+2\partial_z^2+\frac{8}{9}\partial_z+\frac{1-2p}{2z}\partial_z^2+\frac{2-4p}{3z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
-\left.+\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{w}_3(z)=0
+\left.+\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_3(z)=0
+\end{multline}
+Let us first study equation \eqref{w1}: its Borel transform is
+
+\begin{multline*}
+-\zeta^3\tilde{w}_1+\frac{4}{9}\zeta\tilde{w}_1-(1-2p)\int_0^\zeta\tilde{w}_1(t)t^2dt+\frac{(17-30p+12p^2)}{9}\int_0^\zeta(-t\tilde{w}_1(t))(\zeta-t)dt+\\
++\frac{8}{27}(p^3-6p^2+11p-6)\int_0^\zeta\tilde{w}_1(t)\frac{(\zeta-t)^2}{2}dt=0
+\end{multline*}
+
+We differentiate three times, getting 
+
+\begin{multline*}
+\left(\frac{4}{9}\zeta-\zeta^3\right)\tilde{w}_1^{(3)}(\zeta)+\left(\frac{4}{3}-2(5-p)\zeta^2\right)\tilde{w}_1''(\zeta)-\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\tilde{w}_1'(\zeta)+\\
++\frac{8}{27}\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\left(p-\frac{5}{2}\right)\tilde{w}_1(\zeta)=0
+\end{multline*}
+
+we set $y=\tfrac{9}{4}\zeta^2$
+
+%\begin{multline}
+%\left[-4y(y-1)(2y\partial_y^3+3\partial_y^2)+3(4y\partial_y^2+2\partial_y)-2(5-p)y(4y\partial_y^2+2\partial_y)+\right.\\
+%\left.-2y\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\partial_y+\frac{8}{27}\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\left(p-\frac{5}{2}\right)\right]\tilde{w}_1(y)=0
+%\end{multline}
+\begin{multline}\label{eq:hw1}
+y^2(1-y)\tilde{w}_1^{(3)}(y)+y\left(\left(p-\frac{13}{2}\right)y+3\right)\tilde{w}_1''(y)-\left(y\left(\frac{305}{36}-\frac{1}{3}(10-p)p\right)-\frac{3}{4}\right)\tilde{w}_1'(y)+\\
++\frac{1}{27}\left(p-\frac{5}{2}\right)\tilde{w}_1(y)=0
 \end{multline}
 
+which is a generalized hypergeomtric equation (~16.8.5 \cite{DLMF}) with parameters
+
+\begin{align*}
+\mathbf{a}_0=\left(\frac{3}{2}-\frac{p}{3};\frac{7}{6}-\frac{p}{3};\frac{5}{6}-\frac{p}{3}\right) & \qquad\qquad \mathbf{b}_0=\left(\frac{1}{2};\frac{3}{2}\right)
+\end{align*}
+
+therefore, we define $\hat{w}_1(y)=c_1\,\,{}_3F_2\left(\mathbf{a}_0;\mathbf{b}_0;y\right)$. 
+
+Then we look at equation \eqref{w2}: its Borel transform is
+
+\begin{multline}
+-\zeta^3\tilde{w}_2(\zeta)-2\zeta^2\tilde{w}_2(\zeta)-\frac{8}{9}\zeta\tilde{w}_2(\zeta)+\frac{1-2p}{2}\int_0^\zeta t^2\tilde{w}_2(t)dt-\frac{2-4p}{3}\int_0^\zeta(-t\tilde{w}_2(t))dt+\\
++\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)(-t\tilde{w}_2(t))dt
+-\frac{5+24p+12p^2}{54}\int_0^\zeta(\zeta-t)\tilde{w}_2(t)dt +\\
+-\left(\frac{5}{54}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\int_0^\zeta\frac{(\zeta-t)^2}{2}\tilde{w}_2(t)dt=0
+\end{multline} 
+
+and taking three derivatives it simplifies to 
+
+\begin{multline}
+\left[\left(\zeta^3+2\zeta^2+\frac{8}{9}\zeta\right)\partial_\zeta^3 +\frac{8}{3}\partial_\zeta^2+\left(\frac{17}{2}+p\right)\zeta\left(\zeta+\frac{4}{3}\right)\partial_\zeta^2+\right.\\
+\left. \left(\frac{p^2}{3}+\frac{14}{3}p+\frac{581}{36}\right)\left(\zeta+\frac{2}{3}\right)\partial_\zeta+\frac{1}{27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(\zeta)=0
+\end{multline}
+
+define $y=\zeta\left(\zeta+\frac{4}{3}\right)$
+
+\begin{multline}\label{eq1}
+\left[y\left(y+\frac{4}{9}\right)^2\partial_y^3+2\left(\frac{3}{2}y+\frac{4}{3}+\frac{y}{2}\left(\frac{17}{2}+p\right)\right)\left(y+\frac{4}{9}\right)\partial_y^2+\left(\frac{2}{3}+\frac{y}{4}\left(\frac{17}{2}+p\right)\right)\partial_y\right.\\
+\left.+\frac{1}{4}\left(\frac{p^3}{3}+\frac{14}{3}p+\frac{581}{36}\right)\left(y+\frac{4}{9}\right)\partial_y+\frac{1}{8\cdot 27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(y)=0
+\end{multline}
+
+which now looks like a generalized hypergeometric equation. Indeed setting $t=\tfrac{9}{4}y+1$, \eqref{eq1} reads
+
+\begin{multline}
+\left[t^2(1-t)\partial_t^3-t\left(\big(\frac{23}{4}+\frac{p}{2}\big)t-\frac{p}{2}-\frac{11}{4}\right)\partial_t^2-\left(-\frac{5}{8}-\frac{p}{4}+t\Big(\frac{887}{144}+\frac{17}{12}p+\frac{p^2}{12}\Big)\right)\partial_t +\right.\\
+\left. -\frac{1}{8\cdot 27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(t)=0
+\end{multline}
+hence a solution is given by the generalized hypergeometric function ${}_3F_2\left(\mathbf{a};\mathbf{b};y\right)$ with parameters
+
+\begin{align*}
+\mathbf{a}=\left(\frac{5}{4}+\frac{p}{6};\frac{7}{12}+\frac{p}{6};\frac{11}{12}+\frac{p}{6}\right) & \qquad\qquad \mathbf{b}=\left(\frac{1}{2};\frac{5}{4}+\frac{p}{2}\right)
+\end{align*}
+
+and we denote $\hat{w}_2(\zeta)=c_2\,\, {}_3F_2\left(\mathbf{a};\mathbf{b};\left(\tfrac{3}{2}\zeta+1\right)^2\right)$. The equation \eqref{w3} differes from \eqref{w2} for few signs: we find that its Borel transform is 
+
+\begin{multline}
+-\zeta^3\tilde{w}_2(\zeta)+2\zeta^2\tilde{w}_2(\zeta)-\frac{8}{9}\zeta\tilde{w}_2(\zeta)+\frac{1-2p}{2}\int_0^\zeta t^2\tilde{w}_2(t)dt+\frac{2-4p}{3}\int_0^\zeta(-t\tilde{w}_2(t))dt+\\
++\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)(-t\tilde{w}_2(t))dt
++\frac{5+24p+12p^2}{54}\int_0^\zeta(\zeta-t)\tilde{w}_2(t)dt +\\
+-\left(\frac{5}{54}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\int_0^\zeta\frac{(\zeta-t)^2}{2}\tilde{w}_2(t)dt=0
+\end{multline}
+
+and differentiating three times we find a generalized hypergeometric equation with paramters $\mathbf{a},\mathbf{b}$ in the variable $y=\left(\tfrac{3}{2}\zeta-1\right)^2$, i.e. $\hat{w}_3(\zeta)= c_3\,\, {}_3F_2\left(\mathbf{a};\mathbf{b};\left(\tfrac{3}{2}\zeta-1\right)^2\right)$. In particular, 
+
+\begin{equation}
+\hat{w}_3(\zeta)=C_{23}\hat{w}_2(\zeta-\tfrac{4}{3})
+\end{equation}
+
+
+\begin{remark}
+We notice that if $p=\tfrac{1}{2}$ then $\hat{w}_1(\zeta), \hat{w}_2(\zeta)$ and $\hat{w}_3(\zeta)$ are generalized hypergeometric functions with the same coefficients:
+\begin{align*}
+\mathbf{a}_0=\left(\frac{3}{2}-\frac{1}{6},\frac{7}{6}-\frac{1}{6},\frac{5}{6}-\frac{1}{6}\right)=\left(\frac{4}{3},1,\frac{2}{3}\right) & \qquad\qquad \mathbf{b}_0=\left(\frac{1}{2},\frac{3}{2}\right) \\
+\mathbf{a}=\left(\frac{5}{4}+\frac{1}{12},\frac{7}{12}+\frac{1}{12},\frac{11}{12}+\frac{1}{12}\right)=\left(\frac{4}{3},\frac{2}{3},1\right) & \qquad\qquad \mathbf{b}=\left(\frac{1}{2},\frac{5}{4}+\frac{1}{4}\right)=\left(\frac{1}{2},\frac{3}{2}\right)
+\end{align*}
+
+hence for $p=\frac{1}{2}$ 
+
+\begin{equation}
+\hat{w}_1(\zeta)=C_{12}\hat{w}_2(\zeta-\tfrac{2}{3})=C_{13}\hat{w}_3(\zeta+\tfrac{2}{3})
+\end{equation}
+\end{remark}
+
+
+\subsection{Analytic continuation}
+
+In [\textbf{D.B. Karp and E.G. Prilepkina} formula 3.1 (see also \textsf{https://arxiv.org/pdf/2110.12219.pdf} equation 27)] the authors compute the analytic continuation of generalized hypergeomtric functions across the branch cut
+\begin{equation}
+{}_qF_{q-1}\left(\mathbf{a};\mathbf{b};x+i0\right)-{}_qF_{q-1}\left(\mathbf{a};\mathbf{b};x-i0\right)=2\pi i\frac{\Gamma(\mathbf{b})}{\Gamma(\mathbf{a})}G_{q,q}^{q,0}\left(1,\mathbf{b};\mathbf{a};\frac{1}{x}\right).
+\end{equation}
+
+We first consider $\hat{w}_1(\zeta)=c_1\,\, {}_3F_2\left(\mathbf{a}_0;\mathbf{b}_0;\tfrac{9}{4}\zeta^2\right)$, it has a branch cut at $\zeta\in [\tfrac{2}{3},+\infty)$ and another for $\zeta\in (-\infty,-\tfrac{2}{3}]$. The jumps can be computed as follows 
+
+\begin{align*}
+{}_3F_2\left(\mathbf{a}_0;\mathbf{b}_0;y+i0\right)-{}_3F_2\left(\mathbf{a}_0;\mathbf{b}_0;y-i0\right)&=2\pi i\frac{\Gamma(\mathbf{b}_0)}{\Gamma(\mathbf{a}_0)}G_{3,3}^{3,0}\left(1,\mathbf{b}_0;\mathbf{a}_0;\frac{1}{y}\right)\\
+&=2\pi i \frac{\Gamma(\mathbf{b}_0)}{\Gamma(\mathbf{a}_0)}G_{3,3}^{0,3}\left(1-\mathbf{a}_0;0,1-\mathbf{b}_0;y\right)\\
+&=2\pi i \frac{\Gamma(\mathbf{b}_0)}{\Gamma(\mathbf{a}_0)}G_{3,3}^{0,3}\left(\mathbf{a}_0';0,\frac{1}{2},-\frac{1}{2};y\right)\\
+&=2\pi i \frac{\Gamma(\mathbf{b_0})}{\Gamma(\mathbf{a}_0)}G_{3,3}^{0,3}\left(\mathbf{a}_0';\mathbf{b}_0';y\right)
+\end{align*}
+
+Notice that equation \eqref{eq:hw1} is also the differential equation for Meijer G-funtion $G_{3,3}^{3,0}(\mathbf{a}'_0;\mathbf{b}'_0;y)$ where 
+
+\begin{align*}
+\mathbf{a}_0'=\left(\frac{p}{3}-\frac{1}{2};\frac{p}{3}-\frac{1}{6};\frac{p}{3}+\frac{1}{6}\right) & \qquad\qquad \mathbf{b}_0'=\left(0;\frac{1}{2};-\frac{1}{2}\right)
+\end{align*}
+
+\subsubsection{$\mathbf{\hat{w}_2(\zeta)}$ and $\mathbf{\hat{w}_3(\zeta)}$}
+
+We consider $\hat{w}_2(\zeta)$, it has a branch cut at $\zeta\in [0,+\infty)$ and $\zeta\in(-\infty,-\tfrac{4}{3}]$,  
+
+ 
+
+
+\color{red}
 We first study the equation \eqref{w1}: its unique formal solution $\tilde{w}_1(z)$ has the following coefficients (we compute them with Mathematica)
 
 \begin{equation}
@@ -114,12 +269,13 @@ In particular, the generalized hypergeometric series has a branch cut singularit
 \hat{w}_1(\zeta-\tfrac{2}{3})&=\delta+\frac{C}{2\pi i\zeta}+\frac{1}{2\pi i}\log(\zeta)\hat{w}_3(\zeta)+\text{hol. fct.}
 \end{align*}
 
-Indeed, in [\textbf{D.B. Karp and E.G. Prilepkina} formula 3.1 (see also \textsf{https://arxiv.org/pdf/2110.12219.pdf} equation 27)] the authors compute the analytic continuation of generalized hypergeomtric functions across the branch cut
+
+In [\textbf{D.B. Karp and E.G. Prilepkina} formula 3.1 (see also \textsf{https://arxiv.org/pdf/2110.12219.pdf} equation 27)] the authors compute the analytic continuation of generalized hypergeomtric functions across the branch cut
 \begin{equation}
 {}_qF_{q-1}\left(\mathbf{a};\mathbf{b};x+i0\right)-{}_qF_{q-1}\left(\mathbf{a};\mathbf{b};x-i0\right)=2\pi i\frac{\Gamma(\mathbf{b}-d+1)}{\Gamma(\mathbf{a}-d+1)}x^{d-1}G_{q,q}^{q,0}\left(d,\mathbf{b};\mathbf{a};\frac{1}{x}\right)
 \end{equation}
 
-which specifies to 
+which in our case becomes 
 
 \begin{align*}
 \frac{3}{2}\zeta&\left({}_3F_2\left(\frac{4-p}{3},\frac{5-p}{3},2-\frac{p}{3};\frac{3}{2},2;\frac{9}{4}\zeta^2+i0\right)-{}_3F_2\left(\frac{4-p}{3},\frac{5-p}{3},2-\frac{p}{3};\frac{3}{2},2;\frac{9}{4}\zeta^2-i0\right)\right)=\\
@@ -136,7 +292,11 @@ Let us now consider the formal solution $\tilde{w}_2(z)$ and $\tilde{w}_3(z)$. T
  &j=1 & 2 & 3& 4& 5& 6& 7 \\
 a_{2,j}& & & & & & & \\
 a_{3,j}& & & & & & & 
-\end{align*}    
+\end{align*}  
+\color{black}
+
+Then we look at the Borel transform of $\tilde{W}_2, \tilde{W}_3$: their equations have some symmetries in the coefficients, namely they differ by a sing in the even degree coefficients.  
+  
 
 \bibliographystyle{utphys}
 \bibliography{airy-resurgence}
