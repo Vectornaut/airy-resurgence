@@ -7,6 +7,11 @@
 \usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage[svgnames]{xcolor} %% for revisions
+\usepackage{xparse} %% for squiggly underlines
+\usepackage{tikz} %% for squiggly underlines
+
+% TikZ libraries
+\usetikzlibrary{decorations.pathmorphing} %% for squiggly underlines
 
 %%\theoremstyle{definition}
 %%\newtheorem{defn}{Definition}
@@ -20,10 +25,40 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\newcommand{\freqdom}{\undersquiggle{\C}}
+\newcommand{\spacedom}{\dot{\C}}
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
 \DeclareMathOperator{\Ai}{Ai}
+
+% frougon's squiggly underlines
+% https://tex.stackexchange.com/a/532011/6934
+\makeatletter
+% Command from egreg (https://tex.stackexchange.com/a/499972/73317)
+\newcommand{\math@param}[3]{%
+  \fontdimen#3
+  \ifx#1\displaystyle\textfont#2
+  \else\ifx#1\textstyle\textfont#2
+  \else\ifx#1\scriptstyle\scriptfont#2
+  \else\scriptscriptfont#2 \fi\fi\fi
+}
+
+\newdimen\@squiggle@yshift
+\NewDocumentCommand{\undersquiggle}{m}{\mathord{\mathpalette\@undersquiggle{#1}}}
+
+\newcommand*{\@undersquiggle}[2]{%
+  \begin{tikzpicture}[baseline=(n.base)]
+  \node (n) [inner sep=0]
+    {\global\@squiggle@yshift=-0.5\math@param{#1}{2}{5}%
+     $\m@th #1#2$};
+    \draw[decorate, decoration={snake, amplitude=0.3pt, segment length=2pt}]
+      ([yshift=\@squiggle@yshift]n.south west) -- ([yshift=\@squiggle@yshift]n.south east);
+  \end{tikzpicture}%
+}
+\makeatother
 
 \title{Resurgence of the Airy function}
 \author{Aaron Fenyes}
@@ -33,9 +68,18 @@
 \section{The Laplace transform}
 \subsection{Analytic version}
 \subsubsection{Regularity and decay properties}\label{reg-decay}
-Take two copies $\R$ and $\hat{\R}$ of the real line, with standard coordinates $z$ and $\zeta$ respectively. The Laplace transform in $\zeta$ turns a function $\hat{\varphi}$ on $\hat{\R}_{\zeta > 0}$ into a function $\laplace_\zeta \hat{\varphi}$ on $\R_{z > 0}$, defined by the integral
-\[ \laplace_\zeta \hat{\varphi} = \int_0^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta. \]
-For $a \in [0, \infty]$, recall that recall that $O_{\zeta \to a}(g)$ is the space of functions $\varphi$ on $\hat{\R}_{\zeta > 0}$ with $|\varphi| \lesssim g$ in some neighborhood of $a$. A function is {\em subexponential} if it's in $O_{\zeta \to \infty}(e^{c\zeta})$ for all $c > 0$. Let $\mathcal{E}_\zeta$ be the space of subexponential functions on $\hat{\R}_{\zeta > 0}$ which are $L^1$ both locally and around $\zeta = 0$. If $\hat{\varphi}$ is in $\mathcal{E}_\zeta$, then $\varphi = \laplace_\zeta \hat{\varphi}$ is well-defined, and it extends to a holomorphic function on the right half-plane $\C_{\operatorname{Re}(z) > 0}$~\cite[\S 5.6]{diverg-resurg-i}. If $\hat{\varphi}$ is in $O_{\zeta \to 0}(1)$, then $\varphi$ is in $O_{z \to \infty}(z^{-1})$~\cite[equation~1.8]{laplace-tfm}.\footnote{The argument cited still works in our generality. For holomorphic $\hat{\varphi}$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.} More generally, if $\hat{\varphi}$ is in $O_{\zeta \to 0}(\zeta^{\alpha})$, with $\alpha > -1$, then $\varphi$ is in $O_{z \to \infty}\big(z^{-(\alpha + 1)}\big)$.
+Take two copies of the complex plane: the {\em frequency domain} $\freqdom$ and the {\em spatial domain} $\spacedom$, with standard coordinates $z$ and $\zeta$ respectively. The Laplace transform in $\zeta$ based at $\zeta = \alpha$ turns a function $f$ on $\zeta \in \alpha + (0, \infty)$ into a function $\laplace_{\zeta, \alpha} f$ on $z \in (0, \infty)$, defined by the integral
+\[ \laplace_{\zeta, \alpha} f = \int_\alpha^{\alpha + \infty} e^{-z \zeta}\,f\;d\zeta. \]
+For $\rho \in [0, \infty]$, recall that a function $f$ is in $O_{\zeta \to \rho}(g)$ if $|f| \lesssim g$ on some neighborhood\footnote{An open neighborhood in $\freqdom$ intersected with the domain of $f$.} of $\zeta = \rho$. A function is {\em subexponential} if it's in $O_{\zeta \to \infty}(e^{c\zeta})$ for all $c > 0$. Let $\mathcal{E}_{\zeta, \alpha}$ be the space of subexponential functions on $\zeta \in \alpha + (0, \infty)$ which are locally integrable throughout $\zeta \in \alpha + [0, \infty)$. If $f$ is in $\mathcal{E}_{\zeta, \alpha}$, then $\laplace_{\zeta, \alpha} f$ is well-defined, and it extends to a holomorphic function on $\Re(z) > 0$~\cite[\S 5.6]{diverg-resurg-i}.
+
+For the Laplace transform based at $\zeta = 0$
+
+The asymptotics of $f$ at $\zeta = \alpha$ control the asymptotics of $\laplace_{\zeta, \alpha} f$ at $z = \infty$. Once we see how this works for $\alpha = 0$, Section~\ref{translation} will do the rest. Let $F = \laplace_{\zeta, 0} f$. Equation~1.8 of \ref{laplace-tfm} shows\footnote{The argument cited still works in our generality. For holomorphic $f$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.} that
+\[ f \in O_{\zeta \to 0}(1) \quad\Longrightarrow\quad F \in O_{z \to \infty}\left(\frac{1}{z}\right). \]
+More generally, for $\tau > -1$ \textbf{[prove or cite]},
+\[ f \in O_{\zeta \to 0}(\zeta^\tau) \quad\Longrightarrow\quad F \in O_{z \to \infty}\left(\frac{1}{z^{1 + \tau}}\right). \]
+Exact power law asymptotics relate similarly \textbf{[prove or cite]}:
+\[ f \sim \zeta^\tau \text{ at } \zeta = 0 \quad\Longrightarrow\quad F \sim \frac{\Gamma(1+\tau)}{z^{1+\tau}} \text{ at } z = \infty. \]
 \subsubsection{Action on integral operators}\label{L-int-op}
 When $\hat{\varphi} \in \mathcal{E}_\zeta$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
 \begin{equation}%%\label{id:L-mult}
@@ -222,11 +266,11 @@ which is easier to solve. Unfortunately, a solution of equation~\ref{diff-eq:spa
 This is great news, because equation~\ref{diff-eq:spatial-mod-bessel} has a regular singularity at each root of $\zeta^2 - 1$, and the Frobenius method often gives a slight solution at each regular singular point. We can see the regular singularities by moving the derivatives to the right:
 \[ \left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v = 0. \]
 
-In Sections \ref{pos-root}\,--\,\ref{neg-root}, we'll see this approach succeed. For each root $\alpha$, we'll find a solution $v_\alpha$ of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = \alpha$. This not only gives us solutions of equation~\ref{eqn:reg-mod-bessel}, but also tells us something about their asymptotics. Recall from Section~\ref{translation} that
+In Sections \ref{pos-root}\,--\,\ref{neg-root}, we'll see this approach succeed. For each root $\alpha$, we'll find a solution $v_\alpha$ of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = \alpha$. Calling its order $\tau_\alpha$, we'll normalize it so that $v_\alpha \sim \zeta^{\tau_\alpha}$ at $\zeta = \alpha$. We know $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\ref{eqn:reg-mod-bessel}, and we can even work out its asymptotics. We know from Section~\ref{translation} that
 \[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} V_\alpha, \]
-where $V_\alpha = \laplace_{\zeta_\alpha, 0} v_\alpha$ and $\zeta = \alpha + \zeta_\alpha$. Observing that the order $\tau_\alpha$ of $v_\alpha$ is greater than $-1$, we can work out that $V_\alpha$ is in $o_{z \to \infty}(z^{-1-\tau_\alpha})$ \textbf{[recall definition of $o$]}. Now we can write our solution as
+where $V_\alpha = \laplace_{\zeta_\alpha, 0} v_\alpha$ and $\zeta = \alpha + \zeta_\alpha$, and we know from Section~\ref{reg-decay} that $V_\alpha \sim \Gamma(1 + \tau_\alpha)\,z^{-1 - \tau_\alpha}$ at $z = \infty$. Now we can write our solution as
 \[ e^{-\alpha z} z^{-\tau_\alpha} W_\alpha, \]
-where $W_\alpha = z^{\tau_\alpha} V_\alpha$ is in $o_{z \to \infty}(z^{-1})$.
+where $W_\alpha = z^{\tau_\alpha} V_\alpha$ is asymptotic to $\Gamma(1 + \tau_\alpha)\,z^{-1}$ at $z = \infty$.
 \color{Peru}
 \begin{align*}
 \left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (\zeta - 1)(\zeta + 1) - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \right] v & = 0
@@ -243,7 +287,7 @@ where $W_\alpha = z^{\tau_\alpha} V_\alpha$ is in $o_{z \to \infty}(z^{-1})$.
 %%\[ \left[ \big[ \zeta_\alpha (\zeta_\alpha + 2\alpha) + \alpha^2 - 1 \big] + \fracderiv{-1}{\zeta_\alpha}{0} \circ \big[ \zeta_\alpha + \alpha \big] - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta_\alpha}{0} \right] w = 0. \]
 %%\end{equation}
 \subsubsection{Focus on $\zeta = 1$}\label{pos-root}
-Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\hat{\R}$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\ref{diff-eq:spatial-mod-bessel} looks like
+Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\spacedom$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\ref{diff-eq:spatial-mod-bessel} looks like
 \begin{equation}%%\label{diff-eq:spatial-mod-bessel-pos}
 \left[\zeta_1(2 + \zeta_1) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(1 + \zeta_1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0.
 \end{equation}
@@ -256,7 +300,7 @@ Looking through the twenty-four expressions for Kummer's six solutions, we find 
 v_1 &=\;& \hphantom{-i\sqrt{2}}\,\xi_1^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi_1\big) \\
 &=\;& -i\sqrt{2}\,\zeta_1^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big)
 \end{alignat*}
-From the argument in Section~\ref{big-idea}, we know that $\laplace_{\zeta, 1} v_1$ satisfies equation~\ref{eqn:mod-bessel}, and can be written as $e^{-z} V_1$, where $V_1 = \laplace_{\zeta_1, 0} v_1$. Observing that $v_1$ has order $-1/2$, we learn that $V_1 = z^{1/2} W_1$ for some $W_1 \in o_{z \to \infty}(z^{-1})$.
+From the argument in Section~\ref{big-idea}, we know that $\laplace_{\zeta, 1} v_1$ satisfies equation~\ref{eqn:mod-bessel}, and can be written as $e^{-z} V_1$, where $V_1 = \laplace_{\zeta_1, 0} v_1$. Observing that $v_1$ has order $-1/2$, we learn that $V_1 = z^{1/2} W_1$ with $W_1 \sim \Gamma\big(\tfrac{1}{2}\big)\,z^{-1}$ at $z = \infty$.
 \subsubsection{Focus on $\zeta = -1$}\label{neg-root}
 Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = -1$. In the rescaled coordinate from Section~\ref{pos-root}, this is the point $\xi_1 = 1$. Looking again through Kummer's table of solutions, we find another expression \cite[formula~15.10.14]{dlmf} which is manifestly slight and locally integrable at $\xi_1 = 1$:
 \begin{alignat*}{2}
