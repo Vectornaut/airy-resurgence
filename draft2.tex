@@ -98,22 +98,35 @@ The Riemann-Liouville fractional derivative is a left inverse of the fractional 
 Each convention for the fractional derivative brings its own annoyances to interactions with the Borel transform.\footnote{See Remark~\ref{rmk:caputo} for examples.} The Riemann-Liouville derivative will be the least annoying for our purposes. Here's what's nice about it.
 
 \subsection{Borel transform}
-\color{black}
-We breifly recall some basic facts on Borel transform and its properties (more details can be founded at \cite{MS}, \cite{MDiablerets}, \cite{}, \cite{}). The Borel transform $\mathcal{B}$ is a linear map from formal power seires in the time domain $\C_z$ to the space domain $\C_{\zeta}$: \begin{align*}\mathcal{B}(z^{-n-1})&\defeq\tfrac{\zeta^n}{n!} \qquad, \text{ if } n\geq 0 \\
+
+We breifly recall some basic facts on Borel transform and its properties (more details can be founded in \cite{MS}, \cite{MDiablerets}, \cite{}, \cite{}). 
+
+The Borel transform $\mathcal{B}$ is a linear map from formal power seires in the time domain $\C_z$ to the space domain $\C_{\zeta}$ such that  \begin{align*}\mathcal{B}(z^{-n-1})&\defeq\tfrac{\zeta^n}{n!} \qquad, \text{ if } n\geq 0 \\
 \mathcal{B}(1)&\defeq\delta 
 \end{align*} 
 
-where $\delta$ is the element $(1,0)\in\C\times\C[\![\zeta]\!]$\footnote{In the physical literature (\cite{MDiablerets}\cite{SGM}) many authors adopt a different convention, namely they define $\mathbb{B}(z^{-n})\defeq \tfrac{\zeta^n}{n!}$. However, we find more natural the mathematical convention as the Laplace transform is the inverse of $\mathcal{B}$ under suitable growth conditions. }, and $\mathcal{B}$ extends formally by linearity to  
+where $\delta$ is the element $(1,0)\in\C\times\C[\![\zeta]\!]$\footnote{Sometimes, in physics it is common to adopt a differnt convention, i.e. $\mathcal{B}(z^{-n})\defeq \tfrac{\zeta^n}{n!}$ (see\cite{MDiablerets}\cite{SGM}, for example). However, we find natural for our pourposes the mathematical convention, as the Laplace transform is the inverse of $\mathcal{B}$ under suitable growth conditions. }, and $\mathcal{B}$ extends formally by linearity to  
 
 \begin{align*}
 \mathcal{B}\colon \C[\![z^{-1}]\!] & \to \C\delta\oplus\C[\![\zeta\!]] \\
 \sum_{n\geq 0}a_n z^{-n} & \to  a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}
 \end{align*}
 
-Notice that we are at the level of formal series, so there are no convergence assumptions. However, there is a special class of formal series that behaves well under Borel transform, meaning that its Borel transform gives a holomorphic fucntion at the origin in $\C_{\zeta}$. These are the so called Gevrey-$1$ series: $f(z)=\sum_{n\geq 0}a_nz^{-n}$ is Gevrey-$1$ if there exists $A>0$ such that $|a_n|\leq A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis Gevrey-$k$ series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. }    
+Notice that we are at the level of formal series, so there are no convergence assumptions. However, there is a special class of formal series that behaves well under Borel transform, meaning that its Borel transform gives a germ of holomorphic fucntions at the origin in $\C_{\zeta}$. These formal series are the so called Gevrey-$1$ series: $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}$ is Gevrey-$1$ if there exists $A>0$ such that $|a_n|\leq A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis Gevrey-$k$ series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. The Borel transform can be generalized in order to obatin germs of holomorphic function for higher Gevrey series. }  
+
+\begin{notation*}
+We want to distinghuish between formal series and holomorphic functions, as well as between the Borel plane (spatial domain) and the $z$-plane (time domain). Therefore we adopt the following notation:
+\begin{itemize}
+\item $\Phi(z)$: upper-case letters are holomorphic functions in the $z$-plane;
+\item $\tilde{\Phi}(z)$: \textit{tilde} stands for formal series, so an upper-case letter with \textit{tilde} is a formal series in the $z$-plane;
+\item $\phi(\zeta)$: lower-case letter are holomorphic functions in the Borel plane (time domain). We follow the convention for Laplace transform of holomorphic functions, namely $\mathcal{L}(\phi(\zeta)((z)=\Phi(z)$. 
+\item $\tilde{\phi}(\zeta)$: lower-case letter with \textit{tilde} are formal series in the Borel plane. As we will see, the Borel transform of $\tilde{\Phi}(z)$ is $\mathcal{B}(\tilde{\Phi})(\zeta)=:\tilde{\phi}(\zeta)$; 
+\item $\hat{\phi}(\zeta)$: lower-case letters with \textit{hat} are the sum of the formal series $\tilde{\phi}(\zeta)$, when it exists.  
+\end{itemize}
+\end{notation*}  
 
 \begin{lemma}
-Let $f(z)=\sum_{n\geq 0}a_nz^{-n}$, $f(z)$ is Gevrey-$1$ if and only if $\hat{f}(\zeta)\defeq\mathcal{B}(f)\in\C\lbrace\zeta\rbrace$.  
+Let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}$, it is Gevrey-$1$ if and only if \[\hat{\phi}(\zeta)=\tilde{\phi}(\zeta)\defeq\mathcal{B}(\tilde{\Phi})\in\C\lbrace\zeta\rbrace.\]  
 \end{lemma}
 In particular, we deduce from the lemma that the Borel transform is an isomorphism between Gevrey-$1$ series and $\C\delta\oplus\C\lbrace\zeta\rbrace$. 
 
@@ -121,48 +134,48 @@ For what follows, it is convenient to extend the definition of $\mathcal{B}$ to 
 \begin{align*}
 \mathcal{B}(z^{-\alpha})\defeq \frac{\zeta^{\alpha-1}}{\Gamma(\alpha)} & \qquad \text{ if } \alpha\in\R\setminus\Z_{\leq 0}
 \end{align*} 
-
-However, if $f(z)=\sum_{n\geq 0}a_nz^{-n}$ is a Gevrey-$1$ series, then the Borel transform of $\mathcal{B}(z^{-\alpha}f)(\zeta)$ is a germ of meromorphic function at the oringin: indeed 
+\color{VioletRed}
+However, if $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}$ is a Gevrey-$1$ series, then the Borel transform of $\mathcal{B}(z^{-\alpha}\Phi)(\zeta)$ is a germ of meromorphic function at the oringin: indeed 
 \begin{align*}
-\mathcal{B}(z^{\alpha}f)(\zeta)&=\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
+\mathcal{B}(z^{\alpha}\tilde{\Phi})(\zeta)&=\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
 &=a_0\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}+\sum_{n\geq 0}a_{n+1}\frac{\zeta^{n+\alpha}}{\Gamma(1+n+\alpha)}
 \end{align*}
 
 In particular, if $\alpha\in (1,+\infty)$, then $\mathcal{B}(z^{\alpha}f)(\zeta)$ is actually a germ of holomorphic functions on the Riemann surface of $\zeta
 ^{\alpha-1}$, otherwise if $\alpha\in (-\infty,1)$ then $\mathcal{B}(z^{\alpha}f)(\zeta)$ is a meromorphic functions on the Riemann surface where $\zeta^{\alpha-1}$ defines an analytic coordinate. The case of interest for usa in the following is when $\alpha=\tfrac{1}{2}$, hence if $a_0\neq 0$, the Borel trasform will be merorphic at the origin and definied on the Riemann surface of the square root.     
-
+\color{black}
 \subsubsection{Properties of the Borel transform}
-We now recall some properties of the Borel transform: let $f(z)=\sum_{n\geq 0}a_nz^{-n}$ and denote by $\hat{f}(\zeta)\defeq\mathcal{B}(f(z))$
+We now recall some properties of the Borel transform: let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}$ and denote by $\tilde{\phi}(\zeta)\defeq\mathcal{B}(\tilde{\Phi}(z))$
 
 \begin{itemize}
-\item[(i)] \emph{[fractional derivative]} if $\alpha\in\R_{\geq 0}$, $\mathcal{B}\left(z^\alpha f(z)\right)=\partial_{\zeta}^{\alpha}\hat{f}(\zeta)$
-\item[(ii)] \emph{[fractional integral]} if $\alpha\in\R_{<0}\setminus\Z_{\geq 0}$, $\mathcal{B}\left(z^\alpha f(z)\right)=\partial_{\zeta}^{\alpha}\hat{f}(\zeta)$
-\item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(z^nf(z))=\partial_\zeta^n\hat{f}(\zeta)$ 
-\item[(iv)] $\mathcal{B}\left(\partial_z^{n} f(z)\right)=(-\zeta)^n\hat{f}(\zeta)$, for every $n\geq 0$
-\item[(v)] $\mathcal{B}(f(z-c))=e^{-c\zeta}\hat{f}(\zeta)$
-\item[(vi)] if $g(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(f(z)g(z))=\int_0^{\zeta}d\zeta' \hat{f}(\zeta-\zeta')\hat{g}(\zeta')=:\hat{f}\ast \hat{g}$, where $\hat{g}(\zeta)=\mathcal{B}(g(z))$.
+\item[(i)] \emph{[fractional derivative]} if $\alpha\in\R_{\geq 0}$, $\mathcal{B}\left(z^\alpha \tilde{\Phi}(z)\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}(\zeta)$
+\item[(ii)] \emph{[fractional integral]} if $\alpha\in\R_{<0}\setminus\Z_{\geq 0}$, $\mathcal{B}\left(z^\alpha \tilde{\Phi}(z)\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}(\zeta)$
+\item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(z^n\tilde{\Phi}(z))=\partial_\zeta^n\tilde{\phi}(\zeta)$ 
+\item[(iv)] $\mathcal{B}\left(\partial_z^{n} \tilde{\Phi}(z)\right)=(-\zeta)^n\tilde{\phi}(\zeta)$, for every $n\geq 0$
+\item[(v)] $\mathcal{B}(\tilde{\Phi}(z-c))=e^{-c\zeta}\tilde{\phi}(\zeta)$
+\item[(vi)] if $\tilde{\Psi}(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(\tilde{\Phi}(z)\tilde{\Psi}(z))=\int_0^{\zeta}d\zeta' \tilde{\phi}(\zeta-\zeta')\tilde{\psi}(\zeta')=:\tilde{\phi}\ast \tilde{\psi}$, where $\tilde{\psi}(\zeta)=\mathcal{B}(\tilde{\Psi}(z))$.
 \end{itemize} 
 
 
 \begin{lemma}\label{lem:frac-deriv-Borel}
 For any non-integer $\mu \in (0, \infty)$ and any integer $k \ge 0$,
-\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) = \left[ \borel z^\mu z^{-(k+1)} \right](\zeta). \]
+\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] =  \borel \left(z^\mu z^{-(k+1)}\right)(\zeta). \]
 \end{lemma}
 \begin{proof}
 We'll show that for any $\alpha \in (0, 1)$ and any integer $n \ge 0$, the claim holds with $\mu = n + \alpha$. First, evaluate
 \begin{align*}
-\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
+\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
 & = \frac{1}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (\zeta-\zeta t)^{-\alpha} (\zeta t)^k\,\zeta\,dt \\
 & = \frac{\zeta^{k-(\alpha-1)}}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (1-t)^{-\alpha} t^k\,dt \\
 & = \frac{\zeta^{k-(\alpha-1)}}{\Gamma\big(k-(\alpha-1)+1\big)}
 \end{align*}
 by reducing the integral to Euler's beta function \textbf{[DLMF 5.12.1]}. This establishes that
 \begin{equation}\label{frac-diff-laplace}
-\left(\tfrac{\partial}{\partial \zeta}\right)^{n+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) = \frac{\zeta^{k-(n+\alpha)}}{\Gamma\big(k-(n+\alpha)+1\big)}
+\left(\tfrac{\partial}{\partial \zeta}\right)^{n+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] = \frac{\zeta^{k-(n+\alpha)}}{\Gamma\big(k-(n+\alpha)+1\big)}
 \end{equation}
 for $n = -1$. If \eqref{frac-diff-laplace} holds for $n = m$, it also holds for $n = m+1$, because
 \begin{align*}
-\tfrac{\partial}{\partial \zeta} \left(\tfrac{\partial}{\partial \zeta}\right)^{m+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel z^{-(k+1)} \right](\zeta) & = \tfrac{\partial}{\partial \zeta} \left( \frac{\zeta^{k-(m+\alpha)}}{\big(k-(m+\alpha)\big)\,\Gamma\big(k-(m+\alpha)\big)} \right) \\
+\tfrac{\partial}{\partial \zeta} \left(\tfrac{\partial}{\partial \zeta}\right)^{m+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] & = \tfrac{\partial}{\partial \zeta} \left( \frac{\zeta^{k-(m+\alpha)}}{\big(k-(m+\alpha)\big)\,\Gamma\big(k-(m+\alpha)\big)} \right) \\
 & = \frac{\zeta^{k-(m+1+\alpha)}}{\Gamma\big(k-(m+\alpha)\big)}
 \end{align*}
 Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired result quickly follows. The condition $\alpha \in (0, 1)$ saves us from the trouble we'd run into if $k-(m+\alpha)$ were in $\Z_{\le 0}$. This is how we avoid the initial value corrections that appear in ordinary derivatives of Borel transforms.
@@ -171,14 +184,17 @@ Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired resul
 
 
 
-\begin{proof}
+\begin{proof} 
+
+We are going to prove properties (i)--(vi). 
+
 (i) follows from Lemma \ref{lem:frac-deriv-Borel}. 
 
-(ii) Notice that for $\alpha\in\R\setminus\Z_{\geq 0}$ the fractional integral $\partial_\zeta^{\alpha}\zeta^{k}=\zeta^{k-\alpha}\tfrac{k!}{\Gamma(k-\alpha+1)}$, hence \[\borel (z^\alpha f(z))=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{k!}\tfrac{k!}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k \tfrac{1}{k!}\partial_\zeta^{\alpha}\zeta^k=\partial_\zeta^\alpha\hat{f}(\zeta).\]
+(ii) Notice that for $\alpha\in\R\setminus\Z_{\geq 0}$ the fractional integral $\partial_\zeta^{\alpha}\zeta^{k}=\zeta^{k-\alpha}\tfrac{k!}{\Gamma(k-\alpha+1)}$, hence \[\borel (z^\alpha \tilde{\Phi}(z))=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{k!}\tfrac{k!}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k \tfrac{1}{k!}\partial_\zeta^{\alpha}\zeta^k=\partial_\zeta^\alpha\tilde{\phi}(\zeta).\]
 
-(iii) $z^nf(z)=\sum_{k\geq 0}a_kz^{-(k-n)-1} $ and by assumption $k-n\geq 0$, hence by defintion \[\borel (z^n f(z))=\sum_{k\geq n} a_k\tfrac{\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\tfrac{k!\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\partial_\zeta^n\zeta^k=\partial_\zeta^n\hat{f}(\zeta).\] 
+(iii) $z^n\tilde{\Phi}(z)=\sum_{k\geq 0}a_kz^{-(k-n)-1} $ and by assumption $k-n\geq 0$, hence by defintion \[\borel (z^n \tilde{\Phi}(z))=\sum_{k\geq n} a_k\tfrac{\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\tfrac{k!\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\partial_\zeta^n\zeta^k=\partial_\zeta^n\tilde{\phi}(\zeta).\] 
 
-(vi) $\partial_z^n f(z)=\sum_{k\geq 0}a_k(-1)^{n}z^{-k-n-1}\tfrac{\Gamma(k+n+1)}{k!}$, hence \[\borel (z^\alpha f(z))=\sum_{k\geq 0}a_k(-1)^{n}\tfrac{\zeta^{k+n}}{\Gamma(k+n+1)}\tfrac{\Gamma(k+n+1)}{k!}=(-\zeta)^{n}\hat{f}(\zeta).\]
+(vi) $\partial_z^n \tilde{\Phi}(z)=\sum_{k\geq 0}a_k(-1)^{n}z^{-k-n-1}\tfrac{\Gamma(k+n+1)}{k!}$, hence \[\borel (z^\alpha \tilde{\Phi}(z))=\sum_{k\geq 0}a_k(-1)^{n}\tfrac{\zeta^{k+n}}{\Gamma(k+n+1)}\tfrac{\Gamma(k+n+1)}{k!}=(-\zeta)^{n}\tilde{\phi}(\zeta).\]
 
 (v) see Lemma 5.10 \cite{MS16}. 
 
@@ -188,22 +204,83 @@ Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired resul
 \begin{remark}
 We notice that properties (i) and (ii) are special cases of property (vi), indeed we can use the convolution product 
 \begin{align*}
-\borel (z^\alpha f(z))&=\borel (z^\alpha)\ast \hat{f}(\zeta)\\
-&=\frac{\zeta^{-\alpha-1}}{\Gamma(-\alpha)}\ast\hat{f}(\zeta)\\
+\borel (z^\alpha \tilde{\Phi}(z))&=\borel (z^\alpha)\ast \tilde{\phi}(\zeta)\\
+&=\frac{\zeta^{-\alpha-1}}{\Gamma(-\alpha)}\ast\tilde{\phi}(\zeta)\\
 &=\int_0^\zeta \frac{(\zeta')^{-\alpha-1}}{\Gamma(-\alpha)}\sum_{k\geq 0}a_k\frac{(\zeta-\zeta')^k}{k!}d\zeta'\\
 &=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\int_0^1(t\zeta)^{-\alpha-1}(\zeta-t\zeta)^k\zeta dt\\
 &=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\int_0^1 t^{-\alpha-1}(1-t)^k dt\\
 &=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\frac{\Gamma(k+1)\Gamma(-\alpha)}{\Gamma(k-\alpha+1)}\\
 &=\sum_{k\geq 0}\frac{a_k}{k!}\partial_\zeta^{\alpha} \zeta^k \\
-&=\partial_\zeta^\alpha\hat{f}(\zeta)
+&=\partial_\zeta^\alpha\tilde{\phi}(\zeta)
 \end{align*}
 \end{remark}
 
-\subsection{Laplace transform}
- \textbf{Copy from Aaron}
+\section{Laplace transform}
+
+\subsection{Analytic version}
+\textcolor{LimeGreen}{Check notation with Aaron}
+\subsubsection{Regularity and decay properties}\label{reg-decay}
+Take two copies $\R$ and $\hat{\R}$ of the real line, with standard coordinates $z$ and $\zeta$ respectively. The Laplace transform in $\zeta$ turns a function $\hat{\varphi}$ on $\hat{\R}_{\zeta > 0}$ into a function $\laplace_\zeta \hat{\varphi}$ on $\R_{z > 0}$, defined by the integral
+\[ \laplace_\zeta \hat{\varphi} = \int_0^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta. \]
+For $a \in [0, \infty]$, recall that recall that $O_{\zeta \to a}(g)$ is the space of functions $\varphi$ on $\hat{\R}_{\zeta > 0}$ with $|\varphi| \lesssim g$ in some neighborhood of $a$. A function is {\em subexponential} if it's in $O_{\zeta \to \infty}(e^{c\zeta})$ for all $c > 0$. Let $\mathcal{E}_\zeta$ be the space of subexponential functions on $\hat{\R}_{\zeta > 0}$ which are $L^1$ both locally and around $\zeta = 0$. If $\hat{\varphi}$ is in $\mathcal{E}_\zeta$, then $\varphi = \laplace_\zeta \hat{\varphi}$ is well-defined, and it extends to a holomorphic function on the right half-plane $\C_{\operatorname{Re}(z) > 0}$~\cite[\S 5.6]{diverg-resurg-i}. If $\hat{\varphi}$ is in $O_{\zeta \to 0}(1)$, then $\varphi$ is in $O_{z \to \infty}(z^{-1})$~\cite[equation~1.8]{laplace-tfm}.\footnote{The argument cited still works in our generality. For holomorphic $\hat{\varphi}$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.} More generally, if $\hat{\varphi}$ is in $O_{\zeta \to 0}(\zeta^{\alpha})$, with $\alpha > -1$, then $\varphi$ is in $O_{z \to \infty}\big(z^{-(\alpha + 1)}\big)$.
+\subsubsection{Action on differential operators}\label{L-diff-op}
+When $\hat{\varphi} \in \mathcal{E}_\zeta$, we can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
+\begin{equation}\label{id:L-mult}
+\laplace_\zeta (\zeta^n \hat{\varphi}) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_\zeta \hat{\varphi}.
+\end{equation}
+
+When $\hat{\varphi}$ is $n$ times differentiable, its $n$th derivative is in $\mathcal{E}$, and its zeroth through $(n - 1)$st derivatives extend continuously to zero, integration by parts gives the formula
+\begin{align}\label{id:L-diff}
+\laplace_\zeta \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} & = z^n \laplace_\zeta \hat{\varphi} - \left[ \hat{\varphi}\,z^{n-1} + \hat{\varphi}'\,z^{n-2} + \hat{\varphi}''\,z^{n-3} + \ldots + \hat{\varphi}^{(n-1)} \right]_{\zeta = 0} \\
+& = z^n\,\laplace\left( \hat{\varphi} - \left[ \hat{\varphi} + \hat{\varphi}'\,\zeta + \tfrac{\hat{\varphi}''}{2!}\,\zeta^2 + \ldots + \tfrac{\hat{\varphi}^{(n-1)}}{(n-1)!}\,\zeta^{n-1} \right]_{\zeta = 0} \right). \nonumber
+\end{align}
+Note that if a function's derivative is subexponential, so is the function itself.\footnote{Say $f' \in O_{\zeta \to \infty}(e^{c\zeta})$. Then \[ \left|\int_0^Z f'\,d\zeta\right| \le \int_0^Z |f'|\,d\zeta \lesssim \int_0^Z e^{c\zeta}\,d\zeta = \tfrac{1}{c}(e^{cZ} - 1) \lesssim e^{cZ}.\] Now we know the integral on the left-hand side converges, implying that $f$ extends continuously to zero, with $|f - f_{\zeta = 0}| \lesssim e^{c\zeta}$.}
+
+%%In the space of holomorphic functions on the right half-plane, $\C[z] + O(z^{-1})$ is a direct sum, so there's a unique linear projection $\Lambda \maps \C[z] + O(z^{-1}) \to O(z^{-1})$. Applying $\Lambda$ to both sides of the formula above reveals that
+%%\[ \laplace \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = \Lambda (z^n\,\laplace \hat{\varphi}). \]
+
+%%Say $A$ is an $n$th-order differential operator with polynomial coefficients. If we know that $A\hat{\varphi} = 0$, and we know the Taylor polynomial of $\hat{\varphi}$ at zero through degree $n - 1$, we can use the formulas above to find an inhomogeneous differential equation that $\laplace \hat{\varphi}$ must satisfy.
+\subsection{Algebraic version}
+
+Let $\mathcal{P}_\zeta$ be the vector space spanned by $\zeta^\alpha$ for $\alpha \in \R \smallsetminus \Z_{< 0}$. Note that $\mathcal{P}_\zeta \cap \mathcal{E}_\zeta$ is $\mathcal{P}_\zeta^{> -1}$, the subspace spanned by $\zeta^\alpha$ with $\alpha > -1$. Since
+\[ \laplace_\zeta(\zeta^\alpha) = \Gamma(\alpha+1)\,z^{-(\alpha + 1)} \]
+for all $\alpha > -1$, let's use the same formula to extend $\laplace_\zeta$ to all of $\mathcal{P}_\zeta$. This defines $\laplace_\zeta$ consistently on $\mathcal{E}_\zeta + \mathcal{P}_\zeta$.
+\subsubsection{Action on differential operators}\label{L-diff-op-alg}
+Observe that
+\[ \laplace_\zeta(\zeta^{\alpha + 1}) = -\tfrac{\partial}{\partial z}\,\laplace_\zeta(\zeta^\alpha) \]
+for $\alpha \neq -1$. This extends identity~\ref{id:L-mult} to all of $\mathcal{P}_\zeta$.
+
+Observe that
+\[ \laplace_\zeta\tfrac{\partial}{\partial \zeta}(\zeta^\alpha) = \begin{cases}
+z\,\laplace_\zeta(\zeta^\alpha) & \alpha \neq 0 \\
+0 & \alpha = 0,
+\end{cases} \]
+and that $0 = z\,\laplace_\zeta(1) - 1$. This recovers identity~\ref{id:L-diff} for any function in $\mathcal{P}_\zeta$ whose $n$th derivative is in $\mathcal{P}_\zeta^{> -1}$. Although the functions in $\mathcal{P}_\zeta^{< 0}$ are singular at zero, let's pretend they vanish at zero. With that convention, formula~\ref{id:L-diff} extends to all of $\mathcal{P}_\zeta$.
+
+Now we have the results of Section~\ref{L-diff-op} for all functions in $\mathcal{E}_\zeta + \mathcal{P}_\zeta$. Identity~\ref{id:L-diff} is particularly simple when $\hat{\varphi}$ has a {\em fractional power singularity} at $\zeta = 0$. By this, I mean that $\hat{\varphi}$ can be written as $\hat{\varphi}_\text{frac} + \hat{\varphi}_\text{reg}$, where $\hat{\varphi}_\text{frac} \in \mathcal{P}_\zeta$ has only non-integer exponents, and the zeroth through $(n-1)$st derivatives of $\hat{\varphi}_\text{reg} \in \mathcal{E}_\zeta$ vanish at zero. Under this condition, all the initial value terms in the identity vanish, leaving
+\[ \laplace_\zeta \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = z^n \laplace_\zeta \hat{\varphi}. \]
+\subsubsection{Change of coordinates}
+Define a new coordinate $\zeta_a$ on $\hat{\R}$ so that $\zeta = a + \zeta_a$. From the calculation \textbf{[using variable starting point notation]}
+\begin{align*}
+\laplace_{\zeta, a} \hat{\varphi} & = \int_a^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
+& = \int_0^\infty e^{-z(a + \zeta_a)}\,\hat{\varphi}\;d\zeta_a \\
+& = e^{-az} \int_0^\infty e^{-z\zeta_a}\,\hat{\varphi}\;d\zeta_a \\
+& = e^{-az} \laplace_{\zeta_a, 0} \hat{\varphi},
+\end{align*}
+we learn that
+\[ \laplace_{\zeta_a, 0} \hat{\varphi} = e^{az} \laplace_{\zeta, a} \hat{\varphi}. \]
+
+Define new coordinates $x$ and $\xi$ on $\R$ and $\hat{\R}$, respectively, so that $\zeta = b\xi$ and $z\,d\zeta = x\,d\xi$. Explicitly, $z = b^{-1}x$. From the calculation
+\begin{align*}
+\laplace_\zeta \hat{\varphi} & = \int_0^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
+& = \int_0^\infty e^{-x\xi}\,\hat{\varphi}\;b\,d\xi \\
+& = b \laplace_\xi \hat{\varphi},
+\end{align*}
+we learn that
+\[ \laplace_\xi \hat{\varphi} = b^{-1} \laplace_\zeta \hat{\varphi}. \]
  
 
-\subsection{Borel--Laplace summability}
+\section{Borel--Laplace summability and Resurgence}
 
 \[
 \begin{tikzcd}
@@ -214,7 +291,7 @@ We notice that properties (i) and (ii) are special cases of property (vi), indee
 
 \subsection{Resurgence}
 
-Alternative to Borel--Laplace summability, J. Ecalle introduced the theory of resurgence: divergent power series that are Gevrey-$1$ become germs of holomorphic functions at the origin in the Borel plane. Being divergent, they have singularities in Borel plane and the aim is to investigate the type of singularities and the analytic continuation of the germ. Indeed a formal series is resurgent if it admits an \textit{endless} analytic continuation.
+Alternative to Borel--Laplace summability, J. Ecalle introduced the theory of resurgence: divergent power series that are Gevrey-$1$ become germs of holomorphic functions at the origin in the Borel plane. Being divergent, they have singularities in Borel plane and the aim of resurgence theory is to investigate the type of singularities and the analytic continuation of the germ. Indeed a formal series is resurgent if it admits an \textit{endless} analytic continuation.
 
 \begin{definition}
 A germ of analytic functions $\hat{f}$ at the origin is \emph{endlessly continuable }on $\C$ if for all $L>0$, there exists a finite set $\Omega\subset\C$ of singularities, such that $\hat{f}$ can be analytically continued along all paths whose length is less than $L$, avoiding the singularities $\Omega$.
@@ -234,14 +311,14 @@ Among resurgent series, the class of simple resurgent series is caracterized by 
 A holomorphic function $\hat{f}$ in an open disk $D\subset \C_{\zeta}$ has a simple singularity at $\omega$, adherent to $D$, if there exist $\alpha\in\C$ and a germs of analytic functions at
 the origin $\hat{\Phi}(\zeta)\in\C\lbrace\zeta\rbrace$, such that
 \begin{equation}
-\hat{f}(\zeta)=\frac{\alpha}{2\pi i(\zeta-\omega)}+\frac{1}{2\pi i}\log(\zeta-\omega)\hat{\Phi}(\zeta-\omega)+\text{hol. fct.}
+\hat{f}(\zeta)=\frac{\alpha}{2\pi i(\zeta-\omega)}+\frac{1}{2\pi i}\log(\zeta-\omega)\hat{\phi}(\zeta-\omega)+\text{hol. fct.}
 \end{equation}
-for all $\zeta\in D$ close enough to $\omega$. The constant $\alpha$ is called the residuum and $\hat{\Phi}$ the minor.
+for all $\zeta\in D$ close enough to $\omega$. The constant $\alpha$ is called the residuum and $\hat{\phi}$ the minor.
 \end{definition}
 
-The holomorphic function $\hat{\Phi}$ associated with the logarithmic singularity can be obtained by considering the analytic continuation of $\hat{f}$ across the logarithmic branch cut
+The holomorphic function $\hat{\phi}$ associated with the logarithmic singularity can be obtained by considering the analytic continuation of $\hat{f}$ across the logarithmic branch cut
 \begin{equation}
-\hat{\Phi}(\zeta)=\hat{f}(\zeta+\omega)-\hat{f}(\zeta e^{-2\pi i}+\omega)
+\hat{\phi}(\zeta)=\hat{f}(\zeta+\omega)-\hat{f}(\zeta e^{-2\pi i}+\omega)
 \end{equation}
 where with $\hat{f}(\zeta e^{-2\pi i}+\omega)$ is the analytic continuation of $\hat{f}$ along the circular
 path $\omega+\zeta e^{-2\pi i t}$ with $t\in [0,1]$.
@@ -280,7 +357,8 @@ A simple resurgent function is a resurgent function $c\delta +\hat{f}(\zeta)$ su
 %
 %and computitng the integral which defines the $n+\alpha$-derivative in \eqref{mod1} we get exaclty the same result as \eqref{mod2}.
 \color{black}
-\section{Resurgence of exponential integrals}
+\section{Exponential integrals}
+\subsection{Borel }
 Let $X$ be a $N-\dim$ manifold, $f\colon X\to\C$ be a holomorphic Morse function with only simple critical points, and $\nu\in\Gamma(X,\Omega^N)$, and set
 \begin{equation}
 I(z)\defeq\int_{\mathcal{C}}e^{-zf}\nu
