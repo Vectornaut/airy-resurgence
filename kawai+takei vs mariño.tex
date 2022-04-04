@@ -1,0 +1,44 @@
+\documentclass{article}
+
+\usepackage{ajf}
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\theoremstyle{plain}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+
+\DeclareMathOperator{\Ai}{Ai}
+
+\title{Airy function: Kawai+Takei vs. Mari\~{n}o}
+\author{Aaron Fenyes}
+
+\begin{document}
+\maketitle
+Kawai and Takei want to solve
+\[ \left[\left(\frac{d}{dx}\right)^2 - \eta^2 x \right] \psi(x, \eta) = 0. \]
+They define $\psi_B(x, y)$ as the inverse Laplace transform of $\psi(x, \eta)$ with respect to $\eta$.
+
+With $w = x \eta^{2/3}$, the equation above is equivalent to
+\[ \left[\left(\frac{d}{dw}\right)^2 - w \right] \psi(w \eta^{-2/3}, \eta) = 0. \]
+Proof: substitute back to get
+\begin{align*}
+\left[\eta^{-4/3} \left(\frac{d}{dx}\right)^2 - \eta^{2/3} x \right] \psi(x, \eta) = 0 \\
+\left[\eta^{-4/3} \left(\frac{d}{dx}\right)^2 - \eta^{-4/3} \eta^2 x \right] \psi(x, \eta) = 0 \\
+\eta^{-4/3} \left[\left(\frac{d}{dx}\right)^2 - \eta^2 x \right] \psi(x, \eta) = 0.
+\end{align*}
+Hence, $\psi(w \eta^{-2/3}, \eta) = k(\eta) \Ai(w)$ is a solution for any holomorphic function $k$.
+
+%y = x eta^(2/3)
+%d/dy^2 = eta^(-4/3) d/dx^2
+%eta^(4/3) d/dy^2 = d/dx^2
+%
+%eta^2 x = eta^2 y eta^(-2/3)
+%        = eta^(4/3) y
+%
+%[(d/dy)^2 - y] psi(x, eta) = 0
+%
+%psi(x, eta) = Ai(y) is a solution
+%psi(eta^(-2/3) y, eta) = Ai(y)
+\end{document}
