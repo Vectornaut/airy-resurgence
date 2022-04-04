@@ -407,7 +407,7 @@ C_\text{exp} & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n \ge 1} (2n-1)
 \end{align*}
 which diverges for typical $f$ and $\nu$. \textbf{[Does it? Veronica points out that we expect $b_{2n}$ to shrink at least as fast as $(n!)^{-1}$.]}
 
-This argument suggests that no matter how tiny the correction terms get, we can't expect to swat them all aside. We can, however, set aside any finite set of them. \color{violet}\textbf{[Use Miller's proof of Watson's lemma in place of the following argument, which has a few soft spots.]} For each cutoff $N$, the tail
+This argument suggests that no matter how tiny the correction terms get, we can't expect to swat them all aside. We can, however, set aside any finite set of them. \color{violet}\textbf{[Use Miller's proof of Watson's lemma in place of the following argument, which has a few soft spots. See also Loday-Richaud, \S 5.1.5, Theorem~5.1.3]} For each cutoff $N$, the tail
 \[ \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \]
 
 \color{CarnationPink}
@@ -500,7 +500,9 @@ Recalling that the Riemann-Liouville fractional derivative is a left inverse of 
 \[ \partial^{3/2}_{\zeta \text{ from } \zeta_\alpha} \left( \int_{\mathcal{C}_p(\zeta)} \nu \right) = \hat{\varphi}_p(\zeta). \]
 \end{proof}
 
-\begin{example}[Airy]
+
+
+\section{Airy exponential integral}
 By definition,
 \[ \Ai(x) \defeq \frac{1}{2\pi i}\int_{-\infty e^{-i\frac{\pi}{3}}}^{\infty e^{i\frac{\pi}{3}}} e^{t^3/3 - xt}\,dt. \]
 Define $I(z)$ by the change of coordinates $z=x^{3/2}$, $I(z)=-2\pi iz^{-1/3}\Ai(x)$. This new function satisfies the ODE\footnote{$\Ai(x)$ solves the Airy equation $y''=xy$.}
@@ -769,9 +771,52 @@ These relations manifest the resurgence property of $\tilde{I}$, indeed near the
 \end{remark}
 
 \color{black}
-\end{example}
+\subsection{Comparison with other Airy examples}
 
-\begin{example}[Bessel]
+\subsubsection{Different Borel transform convention} In physics, sometimes it happens that authors find more convenient a different definition of the Borel transform which does not involve the \textit{delta} element for the unit: they define $\mathcal{B}_{\textit{phys}}\colon \C [\![ z^{-1}]\!] \to \C \lbrace \zeta\rbrace$ such that $\mathcal{B}_{\textit{phys}}(z^{-n})\defeq \tfrac{\zeta^n}{n!}$. It is also commun to deal with formal power series in small parameters, like $\Phi(\hbar)=\sum_{n\geq 0} a_n\hbar^n$ as $\hbar\to 0$. Then the Borel transform of $\Phi$ is defined as $\phi(\zeta)=\sum_{n\geq 0}a_n\tfrac{\zeta^n}{n!}$. In \cite{Diablerets}, the author study the resurgent properties of the Airy functions: his starting point is the formal solution of Airy differential equation
+\begin{align*}
+\tilde{\Phi}_{\mathrm{Ai}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{-\tfrac{2}{3}x^{3/2}}\tilde{W}_1(x^{-3/2})\\
+\tilde{\Phi}_{\mathrm{Bi}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{\tfrac{2}{3}x^{3/2}}\tilde{W}_2(x^{-3/2})
+\end{align*}  
+where 
+\begin{align*}
+\tilde{W}_{1,2}(\hbar)=\sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\hbar^n
+\end{align*}
+Notice that $\tilde{W}_{1,2}(\hbar)$ are proportional to $\tilde{W}_{\pm}(z)$ with $z=\hbar^{-1}$. However, their Borel transforms are two different hypergeometric functions:
+\begin{align*}
+w_{1,2}(\zeta)&\defeq\mathcal{B}_{\textit{phys}}(\tilde{W}_{1,2})(\zeta)\\
+&=\sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^n}{n!}\\
+&={}_2F_1\left(\frac{1}{6},\frac{5}{6};1;\mp\frac{3}{4}\zeta\right) \\
+\mathcal{B}(\tilde{W}_{1,2})(\zeta)&=\frac{1}{2\pi}\delta+\sum_{n=1}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n-1}}{(n-1)!}\\
+&=\frac{1}{2\pi}\delta+\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n+1}\frac{\Gamma(n+1+\frac{5}{6})\Gamma(n+1+\frac{1}{6})}{(n+1)!}\frac{\zeta^{n}}{n!}\\
+&=\frac{1}{2\pi}\delta\mp\frac{3}{4}\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{11}{6})\Gamma(n+\frac{7}{6})}{\Gamma(n+2)}\frac{\zeta^{n}}{n!}\\
+&=\frac{1}{2\pi}\delta\mp\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)%\\
+%&=\frac{1}{2\pi}\delta\mp \frac{5}{48}\frac{1}{c_{1,2}}w_{\pm}(\zeta)
+%w_{\pm}(\zeta)&=c_{1,2}\,\,{}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right) &\qquad \text{see \eqref{eq:hat+}\eqref{eq:hat-}}
+\end{align*}
+%That ambiguity comes from the different definitions of Borel transforms: 
+%\begin{align*}
+%\mathcal{B}(\tilde{W}_{1,2})(\zeta)&=\frac{1}{2\pi}\delta+\sum_{n=1}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n-1}}{(n-1)!}\\
+%&=\frac{1}{2\pi}\delta+\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n+1}\frac{\Gamma(n+1+\frac{5}{6})\Gamma(n+1+\frac{1}{6})}{(n+1)!}\frac{\zeta^{n}}{n!}\\
+%&=\frac{1}{2\pi}\delta\mp\frac{3}{4}\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{11}{6})\Gamma(n+\frac{7}{6})}{\Gamma(n+2)}\frac{\zeta^{n}}{n!}\\
+%&=\frac{1}{2\pi}\delta\mp\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)%\\
+%%&=\frac{1}{2\pi}\delta\mp \frac{5}{48}\frac{1}{c_{1,2}}w_{\pm}(\zeta)
+%\end{align*}  
+
+Comparing $\mathcal{B}(\tilde{W}_{1,2})(\zeta)$ with $w_{\pm}$ in \eqref{hat+}\eqref{hat-}, they differ only by a constant which multiplies the $\delta$.
+
+\subsubsection{Integral formula for hypergeometric functions}
+
+In \cite{MS16} the author studies summability and resurgent properties of solutions of the Airy equation. He defines the formal series $\Phi(z)\defeq \sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{1}{2}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}z^{-n}$ such that 
+
+\begin{equation}
+\Phi_{\mathrm{Ai}}(w)=\frac{1}{2\sqrt{\pi}}w^{-1/4}e^{-\tfrac{2}{3}w^{3/2}}\mathcal{L}\circ\mathcal{B}\left(\tilde{\Phi}_1\left(\frac{2}{3}w^{3/2}\right)\right)
+\end{equation}
+
+Notice $\tilde{W}_1(\tfrac{2}{3}\hbar)=\tilde{\Phi}(z)$ for $\hbar=z^{-1}$. 
+  
+
+\section{Bessel 0}
 
 Let $X=\C^*$, $f(x)=x+\frac{1}{x}$ and $\nu=\frac{dx}{x}$, then the ciritcal points of $f$ are $x=\pm1$ and 
 \begin{equation}
@@ -825,8 +870,8 @@ taking twice derivative in $\zeta$ we get respectively for $\hat{w}_+(\zeta)$ an
 \end{align*}
 Since equation $(+), (-)$ are hypergeometric, the fundamental solutions are respectively (see DLMF 15.10.2)
 \begin{align}
-\label{w+}&\hat{w}_+(\zeta)=c_1\,\, {}_2F_1\left(\frac{3}{2},\frac{3}{2};2;-\frac{\zeta}{4}\right)\\
-\label{w+}&\hat{w}_-(\zeta)=c_2\,\, {}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{\zeta}{4}\right)
+\label{wB+}&\hat{w}_+(\zeta)=c_1\,\, {}_2F_1\left(\frac{3}{2},\frac{3}{2};2;-\frac{\zeta}{4}\right)\\
+\label{wB-}&\hat{w}_-(\zeta)=c_2\,\, {}_2F_1\left(\frac{3}{2},\frac{3}{2};2;\frac{\zeta}{4}\right)
 \end{align}
 
 Now we show that the fractional derivative formula holds in this example: first we write a parametrization of the integration path in the Borel plane. Let $\mathcal{C}_p=\R$, $p\in \pi\Z$, be the contour of integration in $\tilde{\C}$ which is parametrized as 
@@ -948,7 +993,7 @@ Let us redefine $\hat{w}_{+}(\zeta)\defeq -i\tfrac{\sqrt{\pi}}{16} {}_2F_1\left(
 &=\mathbf{+2}\hat{w}_+(\zeta-2)
 \end{align*}
 These are evidence of the resurgent properties of $\tilde{I}_{\pm 1}(z)$. \textbf{With the correct normalization, the latter identities show that the Stokes constants can be computed via Alien calculus and they are equal to $\pm 2$.  }  
-\end{example}
+
 
 
 \section{Useful identities for Gauss hypergeomtric functions}
