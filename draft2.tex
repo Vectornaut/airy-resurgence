@@ -219,20 +219,25 @@ We notice that properties (i) and (ii) are special cases of property (vi), indee
 \subsection{Introduction}
 Classically, the Laplace transform turns functions on the position domain into functions on the frequency domain. In the study of Borel summation and resurgence, it's useful to see the position domain as a {\em translation surface} $B$, and the frequency domain as one of its cotangent spaces. Roughly speaking, the Laplace transform lifts holomorphic functions on $B$ to holomorphic functions on $T^* B$.
 \subsection{Translation surfaces, briefly}
-A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\textbf{[Zorich, ``Flat Surfaces''?]}. A translation chart is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$. \textcolor{VioletRed}{The zeros of $\lambda$ can be called {\em branch points}.} We'll require $B$ to be finite-type and $\lambda$ to have a pole at each puncture. This kind of translation surface has a ``cylindrical end'' \textbf{(figure)} at each puncture where $\lambda$ has order $-1$, and a ``$|2n|$-planar end'' \textbf{(figure)} at each puncture where $\lambda$ has order $n-1 < -1$~\textbf{[Gupta, ``Meromorphic quadratic differentials with half-plane structures,'' \S 2.5] (or cite Aaron's article, which will hopefully present the same background in the translation surface context)}.
+\subsubsection{Definition}
+A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\textbf{[Zorich, ``Flat Surfaces''?]}. A translation chart is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$. We'll require $B$ to be finite-type and $\lambda$ to have a pole at each puncture. This kind of translation surface has a ``cylindrical end'' \textbf{(figure)} at each puncture where $\lambda$ has order $-1$, and a ``$|2n|$-planar end'' \textbf{(figure)} at each puncture where $\lambda$ has order $n-1 < -1$~\textbf{[Gupta, ``Meromorphic quadratic differentials with half-plane structures,'' \S 2.5] (or cite Aaron's article, which will hopefully present the same background in the translation surface context)}.
+\subsubsection{Direction}\label{transl:dir}
+The translation structure gives $B$ a notion of direction as well as distance. Away from the zeros of $\lambda$, which we'll call {\em branch points}, we can talk about moving upward, rightward, or at any angle, just as we would on $\C$. At a branch point of cone angle $2\pi n$, we can also talk about moving upward, rightward, or at any angle in $\R/2\pi\Z$, but here there are $n$ directions that fit each description. To make this more concrete, note that around any point $b \in B$, there's a unique holomorphic function $\zeta_b$ that vanishes at $b$ and has $d\zeta_b = \lambda$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] there's a unique translation parameter $\zeta_b$ that vanishes at $b$.} This function is a translation chart when $b$ is an ordinary point, and an $n$-fold branched covering when $b$ is a branch point of cone angle $2\pi n$. In either case, $\zeta_b \in e^{i\theta} [0, \infty)$ is a ray or a set of rays leaving $b$ at angle $\theta \in \R/2\pi\Z$.
 
-The translation structure of $B$ gives us an isomorphism $z \maps T^*B_b \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*B_b^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$. At an ordinary point, we can define $z$ simply as the map
+Near each branch point $b$, let's fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1}{n} \omega_b^n$, where $2\pi n$ is the cone angle at $b$. This lets us label each direction at $b$ with an ``extended angle'' in $\R/2\pi n\Z$. Of course, there are $n$ different choices for $\omega_b$.
+\subsubsection{Frequency}\label{transl-freq}
+The translation structure also gives us an isomorphism $z \maps T^*B_b \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*B_b^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$. At an ordinary point, we can define $z$ simply as the map
 \begin{align*}
 z \maps T^*B_b & \to \C \\
-\lambda(b) & \mapsto 1.
+\lambda\big|_b & \mapsto 1.
 \end{align*}
-To get a definition that generalizes to branch points, though, it's worth taking a fancier point of view. Recall that $T^*B_b = \van_b / \van_b^2$, where $\van_b$ is the ideal of holomorphic functions that vanish at $b$. Observing that $(f + \van_b)^n$ lies within $f^n + \van_b^{n+1}$ for any $f \in \van_b$, we can identify $T^*B_b^{\otimes n}$ with $\van_b^n / \van_b^{n+1}$ for $n \ge 1$. Around any point $b \in B$, there's a unique holomorphic function $\zeta_b$ that vanishes at $b$ and has $d\zeta_b = \lambda$. When $b$ is an ordinary point, $\zeta_b$ is a translation chart, and it represents a nonzero element of $\van_b / \van_b^2$: the cotangent vector $\lambda(b)$. In general, $\zeta_b$ represents a nonzero element of $\van_b^n / \van_b^{n+1}$, where $2\pi n$ is the cone angle at $b$, and $z$ is the isomorphism
+To get a definition that generalizes to branch points, though, it's worth taking a fancier point of view. Recall that $T^*B_b = \van_b / \van_b^2$, where $\van_b$ is the ideal of holomorphic functions that vanish at $b$. Observing that $(f + \van_b)^n$ lies within $f^n + \van_b^{n+1}$ for any $f \in \van_b$, we can identify $T^*B_b^{\otimes n}$ with $\van_b^n / \van_b^{n+1}$ for $n \ge 1$. When $b$ is an ordinary point, the function $\zeta_b$ defined in Section~\ref{transl:dir} represents a nonzero element of $\van_b / \van_b^2$: the cotangent vector $\lambda\big|_b$. In general, $\zeta_b$ represents a nonzero element of $\van_b^n / \van_b^{n+1}$, where $2\pi n$ is the cone angle at $b$. We define $z$ as the isomorphism
 \begin{align*}
 z \maps \van_b^n / \van_b^{n+1} & \to \C \\
 \zeta_b + \van^{n+1} & \mapsto 1.
 \end{align*}
 
-Near each branch point $b$, let's fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1}{n} \omega_b^n$, where $2\pi n$ is again the cone angle at $b$. This gives us an isomorphism
+When $b$ is a branch point, the coordinate $\omega_b$ we chose in Section~\ref{transl:dir} gives us an isomorphism
 \begin{align*}
 w_b \maps T^*B_b & \to \C \\
 \omega_b + \van^2 & \mapsto 1
@@ -245,6 +250,40 @@ T^*B_b \arrow[u,"\blankbox^n"] \arrow[r,"w"'] & \C \arrow[u,"\blankbox^n"']
 \end{tikzcd}
 \end{center}
 commute.
+\subsubsection{Boundary}
+\textbf{Discuss the visual boundary, citing Lemma~3.1 of Dankwart's thesis \textit{On the large-scale geometry of flat surfaces} for the description of geodesics.}
+\subsection{The Laplace transform}
+\subsubsection{Over an ordinary point}%%\label{laplace:ordinary}
+Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an extended angle $\theta \in \R$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] Pick a translation parameter $\zeta$.} The {\em Laplace transform} $\laplace_\zeta^\theta$ turns a local holomorphic function $f$ on $B$ into a local holomorphic function on $T^*B$. When $b \in B$ is an ordinary point, $\laplace_\zeta^\theta f$ is defined on $T^*B_b$ by the formula
+\begin{equation}\label{laplace:int}
+\laplace_\zeta^\theta f\big|_b = \int_{\Gamma_b^\theta} e^{-z\zeta} f\,d\zeta,
+\end{equation}
+where $z$ is the frequency function defined in Section~\ref{transl:freq} and $\Gamma_b^\theta$ is the ray that leaves $b$ at angle $\theta$.
+
+To make sense of this formula, we ask for the following conditions.
+\begin{itemize}
+\item The base point $b$ is in the domain of $\zeta$. Once we have this, we can continue $\zeta$ along the whole ray $\Gamma_b^\theta$.
+\item The ray $\Gamma_b^\theta$ avoids the branch points after leaving $b$.
+\item The integral converges. We guarantee this by asking for a pair of simpler conditions.
+\begin{itemize}
+\item With respect to the flat metric, $f$ grows subexponentially along $\Gamma_b^\theta$~\textbf{[define]}, and is locally integrable throughout.
+\item The value of $z$ is in the half-plane $H_{-\theta}$ centered around the ray $e^{-i\theta} [0, \infty)$.
+%%defined as $e^{-i\theta}$ times the right half-plane.
+\end{itemize}
+\end{itemize}
+%%When $b \in B$ is an ordinary point, there's a unique ray $\Gamma_b^\theta$ leaving $b$ at angle $\theta$. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, we can say the same when $b$ is a branch point.
+
+%%Pick a point $b \in B$ and an extended angle $\theta \in \R/2\pi n\Z$, where $2\pi n$ is the cone angle at $b$. Pick a translation chart $\zeta$ whose domain includes the beginning of the ray that leaves $b$ at angle $\theta$. Since $b$ might be a branch point, we don't require the domain of $\zeta$ to include $b$ itself. Make sure the ray $\Gamma_b^\theta$ described above doesn't hit a branch point.
+\subsubsection{Over a branch point}
+When $b$ is a branch point, we can still use formula~\ref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T^*B_b$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T^*B_b^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\ref{laplace:int}. The half-plane $z \in H_{-\theta}$ in $T^*B_b^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T^*B_b$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
+
+%%We only define $\laplace_\zeta^\theta f$ on one of them: the sector $w_b \in \R\exp\Big(-\tfrac{\theta}{n} + \big(-\tfrac{\pi}{2n}, \tfrac{\pi}{2n}\big)\Big)$.
+
+%%the sector where the phase of $w_b$ is in $\tfrac{1}{n}\big(-\theta + (-\frac{\pi}{2}, \frac{\pi}{2})\big)$.
+
+%%$w_b \in \R \exp\big(\frac{1}{n}(-\theta - \frac{\pi}{2}, -\theta + \frac{\pi}{2})\big)$
+
+%%We define $\laplace_\zeta^\theta f$ on the one where $e^{i\theta/n} w_b$ is closest to the positive real axis.
 \section{Borel--Laplace summability and Resurgence}
 
 \[
