@@ -47,7 +47,7 @@ The asymptotics of $f$ at the starting point of $\Gamma_{\zeta, \alpha}$ control
 More generally, for $\tau > -1$ \textbf{[prove or cite]},
 \[ f \in O_{\zeta, 0 \leftarrow}(\zeta^\tau) \quad\Longrightarrow\quad F \in O_{z, 0 \rightarrow}\left(\frac{1}{z^{1 + \tau}}\right). \]
 Exact power law asymptotics relate similarly \textbf{[prove or cite]}:
-\[ f \sim \zeta^\tau \text{ at the starting point of } \Gamma_{\zeta, 0} \quad\Longrightarrow\quad F \sim \frac{\Gamma(1+\tau)}{z^{1+\tau}} \text{ at the infinite end of } \Gamma_{z, 0}. \]
+\[ f \sim \zeta^\tau \text{ at the start of } \Gamma_{\zeta, 0} \quad\Longrightarrow\quad F \sim \frac{\Gamma(1+\tau)}{z^{1+\tau}} \text{ at the end of } \Gamma_{z, 0}. \]
 \subsubsection{Action on integral operators}\label{L-int-op}
 When $\hat{\varphi} \in \mathcal{E}_\zeta$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
 \begin{equation}%%\label{id:L-mult}
@@ -84,25 +84,25 @@ and that $0 = z\,\laplace_\zeta(1) - 1$. This recovers identity~\ref{id:L-diff} 
 Now we have the results of Section~\ref{L-diff-op} for all functions in $\mathcal{E}_\zeta + \mathcal{P}_\zeta$. Identity~\ref{id:L-diff} is particularly simple when $\hat{\varphi}$ has a {\em fractional power singularity} at $\zeta = 0$. By this, I mean that $\hat{\varphi}$ can be written as $\hat{\varphi}_\text{frac} + \hat{\varphi}_\text{reg}$, where $\hat{\varphi}_\text{frac} \in \mathcal{P}_\zeta$ has only non-integer exponents, and the zeroth through $(n-1)$st derivatives of $\hat{\varphi}_\text{reg} \in \mathcal{E}_\zeta$ vanish at zero. Under this condition, all the initial value terms in the identity vanish, leaving
 \[ \laplace_\zeta \big(\tfrac{\partial}{\partial \zeta}\big)^n \hat{\varphi} = z^n \laplace_\zeta \hat{\varphi}. \]
 \color{black}
-\subsection{Change of coordinates}\label{translation}
-Define a new coordinate $\zeta_a$ on $\hat{\R}$ so that $\zeta = a + \zeta_a$. From the calculation \textbf{[using variable starting point notation]}
+\subsection{Change of translation chart}\label{translation}
+Define a new coordinate $\zeta_\alpha$ on $\C$ so that $\zeta = \alpha + \zeta_\alpha$. From the calculation
 \begin{align*}
-\laplace_{\zeta, a} \hat{\varphi} & = \int_a^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
-& = \int_0^\infty e^{-z(a + \zeta_a)}\,\hat{\varphi}\;d\zeta_a \\
-& = e^{-az} \int_0^\infty e^{-z\zeta_a}\,\hat{\varphi}\;d\zeta_a \\
-& = e^{-az} \laplace_{\zeta_a, 0} \hat{\varphi},
+\laplace_{\zeta, a} \hat{\varphi} & = \int_{\Gamma_{\zeta, \alpha}} e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
+& = \int_{\Gamma_{\zeta_\alpha, 0}} e^{-z(\alpha + \zeta_\alpha)}\,\hat{\varphi}\;d\zeta_\alpha \\
+& = e^{-\alpha z} \int_{\Gamma_{\zeta_\alpha, 0}} e^{-z\zeta_\alpha}\,\hat{\varphi}\;d\zeta_\alpha \\
+& = e^{-\alpha z} \laplace_{\zeta_\alpha, 0} \hat{\varphi},
 \end{align*}
 we learn that
-\[ \laplace_{\zeta_a, 0} \hat{\varphi} = e^{az} \laplace_{\zeta, a} \hat{\varphi}. \]
-
-Define new coordinates $x$ and $\xi$ on $\R$ and $\hat{\R}$, respectively, so that $\zeta = b\xi$ and $z\,d\zeta = x\,d\xi$. Explicitly, $z = b^{-1}x$. From the calculation
+\[ \laplace_{\zeta_\alpha, 0} \hat{\varphi} = e^{\alpha z} \laplace_{\zeta, \alpha} \hat{\varphi}. \]
+\subsection{Rescaling of translation structure}
+The coordinate $\xi$ given by $\zeta = m\xi$ defines a new translation structure on $\C$. The corresponding frequency variable $x \maps T^*\C \to \C$ is given by $d\xi \mapsto 1$, so we have $z = m^{-1} x$. From the calculation
 \begin{align*}
-\laplace_\zeta \hat{\varphi} & = \int_0^\infty e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
-& = \int_0^\infty e^{-x\xi}\,\hat{\varphi}\;b\,d\xi \\
-& = b \laplace_\xi \hat{\varphi},
+\laplace_{\zeta, 0} \hat{\varphi} & = \int_{\Gamma_{\zeta, 0}} e^{-z \zeta}\,\hat{\varphi}\;d\zeta \\
+& = \int_{\Gamma_{\xi, 0}} e^{-x\xi}\,\hat{\varphi}\;m\,d\xi \\
+& = m \laplace_{\xi, 0} \hat{\varphi},
 \end{align*}
 we learn that
-\[ \laplace_\xi \hat{\varphi} = b^{-1} \laplace_\zeta \hat{\varphi}. \]
+\[ \laplace_{\xi, 0} \hat{\varphi} = m^{-1} \laplace_{\zeta, 0} \hat{\varphi}. \]
 \section{Shifting integro-differential equations}\label{shifting}
 Consider holomorphic functions on a simply connected open set that touches but doesn't contain $\zeta = 0$. A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as
 \begin{equation}\label{eqn:slight-defn}
