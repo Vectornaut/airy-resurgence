@@ -8,10 +8,6 @@
 \usepackage{graphicx}
 \usepackage[svgnames]{xcolor} %% for revisions
 \usepackage{xparse} %% for squiggly underlines
-\usepackage{tikz} %% for squiggly underlines
-
-% TikZ libraries
-\usetikzlibrary{decorations.pathmorphing} %% for squiggly underlines
 
 %%\theoremstyle{definition}
 %%\newtheorem{defn}{Definition}
@@ -27,38 +23,10 @@
 \newcommand{\C}{\mathbb{C}}
 \let\Re\relax
 \DeclareMathOperator{\Re}{Re}
-\newcommand{\freqdom}{\undersquiggle{\C}}
-\newcommand{\spacedom}{\dot{\C}}
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
 \DeclareMathOperator{\Ai}{Ai}
-
-% frougon's squiggly underlines
-% https://tex.stackexchange.com/a/532011/6934
-\makeatletter
-% Command from egreg (https://tex.stackexchange.com/a/499972/73317)
-\newcommand{\math@param}[3]{%
-  \fontdimen#3
-  \ifx#1\displaystyle\textfont#2
-  \else\ifx#1\textstyle\textfont#2
-  \else\ifx#1\scriptstyle\scriptfont#2
-  \else\scriptscriptfont#2 \fi\fi\fi
-}
-
-\newdimen\@squiggle@yshift
-\NewDocumentCommand{\undersquiggle}{m}{\mathord{\mathpalette\@undersquiggle{#1}}}
-
-\newcommand*{\@undersquiggle}[2]{%
-  \begin{tikzpicture}[baseline=(n.base)]
-  \node (n) [inner sep=0]
-    {\global\@squiggle@yshift=-0.5\math@param{#1}{2}{5}%
-     $\m@th #1#2$};
-    \draw[decorate, decoration={snake, amplitude=0.3pt, segment length=2pt}]
-      ([yshift=\@squiggle@yshift]n.south west) -- ([yshift=\@squiggle@yshift]n.south east);
-  \end{tikzpicture}%
-}
-\makeatother
 
 \title{Resurgence of the Airy function}
 \author{Aaron Fenyes}
@@ -68,18 +36,18 @@
 \section{The Laplace transform}
 \subsection{Analytic version}
 \subsubsection{Regularity and decay properties}\label{reg-decay}
-Take two copies of the complex plane: the {\em frequency domain} $\freqdom$ and the {\em spatial domain} $\spacedom$, with standard coordinates $z$ and $\zeta$ respectively. The Laplace transform in $\zeta$ based at $\zeta = \alpha$ turns a function $f$ on $\zeta \in \alpha + (0, \infty)$ into a function $\laplace_{\zeta, \alpha} f$ on $z \in (0, \infty)$, defined by the integral
-\[ \laplace_{\zeta, \alpha} f = \int_\alpha^{\alpha + \infty} e^{-z \zeta}\,f\;d\zeta. \]
-For $\rho \in [0, \infty]$, recall that a function $f$ is in $O_{\zeta \to \rho}(g)$ if $|f| \lesssim g$ on some neighborhood\footnote{An open neighborhood in $\freqdom$ intersected with the domain of $f$.} of $\zeta = \rho$. A function is {\em subexponential} if it's in $O_{\zeta \to \infty}(e^{c\zeta})$ for all $c > 0$. Let $\mathcal{E}_{\zeta, \alpha}$ be the space of subexponential functions on $\zeta \in \alpha + (0, \infty)$ which are locally integrable throughout $\zeta \in \alpha + [0, \infty)$. If $f$ is in $\mathcal{E}_{\zeta, \alpha}$, then $\laplace_{\zeta, \alpha} f$ is well-defined, and it extends to a holomorphic function on $\Re(z) > 0$~\cite[\S 5.6]{diverg-resurg-i}.
+Let $\zeta$ be the standard coordinate on $\C$, and let $z \maps T^*\C \to \C$ be the fiberwise-linear map $d\zeta \mapsto 1$ (see ``The Geometry of the Laplace Transform'' in {\tt draft2}). The Laplace transform in $\zeta$ turns a function $\hat{\varphi}$ on $\C$ into a function $\laplace_\zeta \hat{\varphi}$ on $T^*\C$, defined on the cotangent space of $\zeta = \alpha$ by the integral
+\[ \laplace_\zeta \hat{\varphi} \big|_{\zeta = \alpha} = \int_{\Gamma_{\zeta, \alpha}} e^{-z \zeta}\,\hat{\varphi}\;d\zeta, \]
+where $\Gamma_{\zeta, \alpha}$ is the rightward ray starting at $\zeta = \alpha$ (compare {\tt draft2}).
 
-For the Laplace transform based at $\zeta = 0$
+Let's say a function $f$ is in $O_{\zeta, \alpha \leftarrow}(g)$ or $O_{\zeta, \alpha \rightarrow}(g)$, respectively, if $|f| \lesssim g$ on some neighborhood of the starting point or infinite end of $\Gamma_{\zeta, \alpha}$. A function is {\em subexponential} along $\Gamma_{\zeta, \alpha}$ if it's in $O_{\zeta, \alpha \rightarrow}(e^{c\zeta})$ for all $c > 0$. Let $\mathcal{E}_{\zeta, \alpha}$ be the space of functions which are subexponential on $\Gamma_{\zeta, \alpha}$, integrable at the starting point, and locally integrable throughout. If $f$ is in $\mathcal{E}_{\zeta, \alpha}$, then $\laplace_{\zeta, \alpha} f$ is well-defined and holomorphic for $\Re(z) > 0$ on the part of $T^*\C$ that lies over $\Gamma_{\zeta, \alpha}$~\cite[\S 5.6]{diverg-resurg-i}.
 
-The asymptotics of $f$ at $\zeta = \alpha$ control the asymptotics of $\laplace_{\zeta, \alpha} f$ at $z = \infty$. Once we see how this works for $\alpha = 0$, Section~\ref{translation} will do the rest. Let $F = \laplace_{\zeta, 0} f$. Equation~1.8 of \ref{laplace-tfm} shows\footnote{The argument cited still works in our generality. For holomorphic $f$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.} that
-\[ f \in O_{\zeta \to 0}(1) \quad\Longrightarrow\quad F \in O_{z \to \infty}\left(\frac{1}{z}\right). \]
+The asymptotics of $f$ at the starting point of $\Gamma_{\zeta, \alpha}$ control the asymptotics of $\laplace_{\zeta, \alpha} f$ at the infinite end of $\Gamma_{z, 0}$. Once we see how this works for $\alpha = 0$, Section~\ref{translation} will do the rest. Let $F = \laplace_{\zeta, 0} f$. Equation~1.8 of \ref{laplace-tfm} shows\footnote{The argument cited still works in our generality. For holomorphic $f$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textbf{(Sternin \& Shatalov)}.} that
+\[ f \in O_{\zeta, 0 \leftarrow}(1) \quad\Longrightarrow\quad F \in O_{z, 0 \rightarrow}\left(\frac{1}{z}\right). \]
 More generally, for $\tau > -1$ \textbf{[prove or cite]},
-\[ f \in O_{\zeta \to 0}(\zeta^\tau) \quad\Longrightarrow\quad F \in O_{z \to \infty}\left(\frac{1}{z^{1 + \tau}}\right). \]
+\[ f \in O_{\zeta, 0 \leftarrow}(\zeta^\tau) \quad\Longrightarrow\quad F \in O_{z, 0 \rightarrow}\left(\frac{1}{z^{1 + \tau}}\right). \]
 Exact power law asymptotics relate similarly \textbf{[prove or cite]}:
-\[ f \sim \zeta^\tau \text{ at } \zeta = 0 \quad\Longrightarrow\quad F \sim \frac{\Gamma(1+\tau)}{z^{1+\tau}} \text{ at } z = \infty. \]
+\[ f \sim \zeta^\tau \text{ at the starting point of } \Gamma_{\zeta, 0} \quad\Longrightarrow\quad F \sim \frac{\Gamma(1+\tau)}{z^{1+\tau}} \text{ at the infinite end of } \Gamma_{z, 0}. \]
 \subsubsection{Action on integral operators}\label{L-int-op}
 When $\hat{\varphi} \in \mathcal{E}_\zeta$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
 \begin{equation}%%\label{id:L-mult}
@@ -287,7 +255,7 @@ makes $W_\alpha$ is asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
 %%\[ \left[ \big[ \zeta_\alpha (\zeta_\alpha + 2\alpha) + \alpha^2 - 1 \big] + \fracderiv{-1}{\zeta_\alpha}{0} \circ \big[ \zeta_\alpha + \alpha \big] - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta_\alpha}{0} \right] w = 0. \]
 %%\end{equation}
 \subsubsection{Focus on $\zeta = 1$}\label{pos-root}
-Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\spacedom$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\ref{diff-eq:spatial-mod-bessel} looks like
+Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\ref{diff-eq:spatial-mod-bessel} looks like
 \begin{equation}%%\label{diff-eq:spatial-mod-bessel-pos}
 \left[\zeta_1(2 + \zeta_1) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(1 + \zeta_1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0.
 \end{equation}
