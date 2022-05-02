@@ -313,6 +313,32 @@ Using the decay properties from Section~\ref{reg-decay}, we deduce that
 Since we know that $F_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $F_0$ is a constant multiple of $K_1$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $K_1 = \tfrac{i}{2}\,F_0$. We conclude that $K_1 = \laplace_{\zeta_1} k_1$ for
 \[ k_1 = \tfrac{1}{\sqrt{2}}\,\zeta_1^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
 \color{black}
+\section{The Airy-Lucas equation}
+\subsection{Basics}
+The Airy-Lucas equation is
+\begin{equation}\label{eqn:airy-lucas}
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - (m-1) y^{-1} \tfrac{\partial}{\partial y} - y^{n-2}\right] \psi = 0
+\end{equation}
+with $n \in \{3, 4, 5, \ldots\}$ and $m \in \{1, 2, \ldots, r-1\}$. A few solutions are given by the Airy-Lucas functions~\textcolor{magenta}{[Charbonnier et al., equation~3.6]}
+\[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \left\{\begin{array}{ll}1 & j \text{ even} \\ i & j \text{ odd}\end{array}\right\} \frac{y^{m/2}}{\pi} \int_{\Lambda^{(j)}} \exp\left[\tfrac{2}{n} y^{n/2}\,T_n(u)\right]\,U_{m-1}(u)\,du, \]
+where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n}\pi\big)$.
+\subsection{Rewriting as a \textcolor{DarkCyan}{modified Bessel (?)} equation}
+We can distill the most interesting parts of the Airy-Lucas function by writing
+\[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \textcolor{magenta}{\text{const.}}\,y^{\textcolor{DarkCyan}{m/2}}\,K\big(\tfrac{2}{n} y^{n/2}\big), \]
+where
+\begin{equation}
+K(z) = \textcolor{magenta}{\text{const.}} \int_{z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z T_n(u)\right]\,U_{m-1}(u)\,du.
+\end{equation}
+Saying that $\widehat{\Ai}^{(k)}_{n, m-1}$ satisfies the Airy equation is equivalent to saying that $K$ satisfies the \textcolor{DarkCyan}{modified Bessel (?)} equation
+\begin{equation}%%\label{eqn:mod-bessel}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\textcolor{DarkCyan}{\tfrac{m}{n} (?)}\big)^2 + z^2\big]\right] \varphi = 0.
+\end{equation}
+In fact, as we'll see in Section~\textcolor{magenta}{?}, $K$ is the modified Bessel function $K_{\textcolor{DarkCyan}{m/n}}$.
+
+Like we did in equation~\ref{eqn:reg-mod-bessel}, we can rewrite the modified Bessel equation above as
+\begin{equation}%%\label{eqn:reg-mod-bessel}
+\left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\textcolor{DarkCyan}{\tfrac{m}{n}}\big)^2 z^{-2} \right] \varphi = 0.
+\end{equation}
 \section{Sketches}
 \subsection{Contour argument}\label{contour-argument}
 We can recast integral~\ref{integral:mod-bessel} into the $\zeta$ plane by setting $\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \Gamma$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/3} \Gamma$, we have
