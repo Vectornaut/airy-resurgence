@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{eqnarray}
 \usepackage{graphicx}
 \usepackage[svgnames]{xcolor} %% for revisions
 \usepackage{xparse} %% for squiggly underlines
@@ -383,7 +384,18 @@ or equivalently
 \begin{equation}%%\label{eqn:mod-bessel}
 \left[ \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{-1} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-2)} z^{-(n-2)} \big({-}\tfrac{\partial}{\partial z}\big) - c_n^{(n-1)} z^{-(n-1)} \right] \varphi = 0.
 \end{equation}
-The coefficients are straightforward to calculate, but their pattern is hard to describe. For now, we can at least say with confidence that
+The coefficients are straightforward to calculate, but their pattern is hard to describe. Peter Taylor suggests writing
+\[ c_n^{(k)} = (n+1)^{\underline{k+2}}\;R^{(k)} / n^k, \]
+for $k > 1$, where the underlined power denotes the falling factorial. Then we get
+\begin{equationarray*}{*{11}{c}}
+R^{(2)} & = & \tfrac{1}{24} \\
+R^{(3)} & = & \tfrac{1}{48} n \\
+R^{(4)} & = & \tfrac{73}{5760} n^2 & + & \tfrac{1}{1152} n & - & \tfrac{1}{2880} \\
+R^{(5)} & = & \tfrac{11}{1280} n^{3} & + & \tfrac{1}{768} n^{2} & - & \tfrac{1}{1920} n \\
+R^{(6)} & = & \tfrac{3625}{580608} n^{4} & + & \tfrac{61}{41472} n^{3} & - & \tfrac{181}{322560} n^{2} & - & \tfrac{1}{41472} n & + & \tfrac{1}{181440} \end{equationarray*}
+Searching for 580608 in the OEIS reveals that the leading coefficients are ``fractions appearing in a generalization of Carleman's inequality,'' listed in the OEIS as {\tt A249276} and {\tt A249277}.
+\paragraph{Old scratch work}
+For now, we can at least say with confidence that
 \begin{align*}
 c_3^{(1)} & = 1 & c_{n+1}^{(1)} & = \frac{n}{n-1}\,c_{n}^{(1)} & c_n^{(1)} & = \frac{1}{n} \left(\begin{matrix} n \\ 2 \end{matrix}\right)
 \end{align*}
