@@ -213,56 +213,15 @@ float line_part(float width, float pattern_disp, float scaling, float r_px) {
   return 0.5*(lower - upper);
 }
 
-/*float line_mix(float stroke, float bg, float width, float pattern_disp, float scaling, float r_px) {
-  return mix(bg, stroke, line_part(width, pattern_disp, scaling, r_px));
-}*/
-
 vec3 line_mix(vec3 stroke, vec3 bg, float width, float pattern_disp, float scaling, float r_px) {
   return mix(bg, stroke, line_part(width, pattern_disp, scaling, r_px));
 }
 
-/*vec4 line_mix(vec4 stroke, vec4 bg, float width, float pattern_disp, float scaling, float r_px) {
-  return mix(bg, stroke, line_part(width, pattern_disp, scaling, r_px));
-}*/
-
-// --- antialiased stripe pattern ---
+// --- contour coloring ---
 
 const int N = 4;
 
-/*vec3 stripe(jet2 f, float r_px) {
-    // set up stripe colors
-    vec3 colors [N];
-    colors[0] = vec3(0.82, 0.77, 0.71);
-    colors[1] = vec3(0.18, 0.09, 0.00);
-    colors[2] = vec3(0.02, 0.36, 0.51);
-    colors[3] = vec3(0.24, 0.62, 0.67);
-    
-    // find the displacement to the nearest stripe edge in the pattern space
-    jet21 y = proj_y(f);
-    y.pt += 0.5;
-    jet21 t = dmod(y, float(N)); // the pattern coordinate
-    int n = int(t.pt); // the index of the nearest stripe edge
-    float pattern_disp = t.pt - (float(n) + 0.5);
-    
-    // the edges of the stripes on the screen are level sets of the pattern
-    // coordinate `t`. linearizing, we get stripes on the screen tangent space,
-    // whose edges are level sets of `t.push`. find the distance to the nearest
-    // stripe edge in the screen tangent space
-    float screen_dist = abs(pattern_disp) / length(t.push);
-    
-    // now we can integrate our pixel's sampling distribution on the screen
-    // tangent space to find out how much of the pixel falls on the other side
-    // of the nearest edge
-    float overflow = 0.5*erfc_appx(screen_dist / r_px);
-    return mix(colors[n], colors[(n+1)%N], pattern_disp < 0. ? overflow : 1.-overflow);
-}*/
-
 const float GRAT = 0.5;
-
-/*const vec3 lower_bg = vec3(0.18, 0.09, 0.00);
-const vec3 upper_bg = vec3(0.82, 0.77, 0.71);
-const vec3 lower_band = mix(lower_main, upper_main, 0.3);
-const vec3 upper_band = mix(lower_main, upper_main, 0.8);*/
 
 const vec2 axis = 0.5*vec2(1., sqrt(3.));
 
@@ -270,11 +229,11 @@ vec3 surface_color(float end_zone, jet2 zeta, float r_px) {
     jet21 y = proj_y(zeta);
     float scaling = length(y.push);
     
-    // paint surface blue where exp(-f) is small and orange where it's large
+    // paint the surface blue where exp(-f) is small and orange where it's large
     float growth = edge_mix(-1.,0., zeta.pt.x + end_zone, scaling, r_px);
     growth = edge_mix(growth, 1., zeta.pt.x - end_zone, scaling, r_px);
     
-    // paint surface light in upper half-plane and dark in the lower half-plane
+    // paint the surface light in upper half-plane and dark in the lower half-plane
     float width = min(2., 0.05 / (scaling * r_px));
     vec3 color = edge_mix(lab2rgb(vec3(70., 38.4*growth*axis)), lab2rgb(vec3(80., 29.8*growth*axis)), y.pt, scaling, r_px);
     if (y.pt < -0.5*GRAT) {
@@ -293,7 +252,7 @@ vec3 contour_color(vec2 position, float angle, vec3 pen_color, vec3 bg, jet2 zet
     return line_mix(pen_color, bg, width, t.pt, length(t.push), r_px);
 }
 
-// --- test image ---
+// --- contour plots ---
 
 jet2 chebyshev(jet2 z, int n) {
     jet2 curr = z;
