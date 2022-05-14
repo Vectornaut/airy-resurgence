@@ -375,51 +375,30 @@ where
 \begin{equation}
 K(z) = \textcolor{magenta}{\text{const.}} \int_{\textcolor{magenta}{\text{const.}(n)} z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du.
 \end{equation}
-\color{DarkCyan}
 Saying that $\widetilde{\Ai}^{(k)}_n$ satisfies the higher Airy equation is equivalent to saying that $K$ satisfies an equation of the form
 \begin{equation}%%\label{eqn:mod-bessel}
-\left[ z^{n-1} \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{n-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{n-3} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-2)} z \big({-}\tfrac{\partial}{\partial z}\big) - c_n^{(n-1)} \right] \varphi = 0,
+\left[ \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{-1} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-1)} z^{-(n-1)} \right] \varphi = 0.
 \end{equation}
-or equivalently
-\begin{equation}%%\label{eqn:mod-bessel}
-\left[ \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{-1} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-2)} z^{-(n-2)} \big({-}\tfrac{\partial}{\partial z}\big) - c_n^{(n-1)} z^{-(n-1)} \right] \varphi = 0.
-\end{equation}
-The coefficients are straightforward to calculate, but their pattern is hard to describe. Peter Taylor suggests writing
-\[ c_n^{(k)} = (n+1)^{\underline{k+2}}\;R^{(k)} / n^k, \]
-for $k > 1$, where the underlined power denotes the falling factorial. Then we get
+The sub-leading coefficients are the triangular numbers
+\[ c_n^{(1)} = \frac{n(n-1)}{2}. \]
+\color{DarkCyan}
+The later coefficients can be written as\footnote{Many thanks to Peter Taylor for noticing this [\url{https://mathoverflow.net/q/422337/1096}].}
+\[ c_n^{(k)} = \frac{b_n^{(k)}}{n^k}\,(n+1)^{\underline{k+2}} \]
+in terms of the polynomials
 \begin{equationarray*}{*{11}{c}}
-R^{(2)} & = & \tfrac{1}{24} \\
-R^{(3)} & = & \tfrac{1}{48} n \\
-R^{(4)} & = & \tfrac{73}{5760} n^2 & + & \tfrac{1}{1152} n & - & \tfrac{1}{2880} \\
-R^{(5)} & = & \tfrac{11}{1280} n^{3} & + & \tfrac{1}{768} n^{2} & - & \tfrac{1}{1920} n \\
-R^{(6)} & = & \tfrac{3625}{580608} n^{4} & + & \tfrac{61}{41472} n^{3} & - & \tfrac{181}{322560} n^{2} & - & \tfrac{1}{41472} n & + & \tfrac{1}{181440} \end{equationarray*}
-Searching for 580608 in the OEIS reveals that the leading coefficients are ``fractions appearing in a generalization of Carleman's inequality,'' listed in the OEIS as {\tt A249276} and {\tt A249277}.
-\paragraph{Old scratch work}
-For now, we can at least say with confidence that
-\begin{align*}
-c_3^{(1)} & = 1 & c_{n+1}^{(1)} & = \frac{n}{n-1}\,c_{n}^{(1)} & c_n^{(1)} & = \frac{1}{n} \left(\begin{matrix} n \\ 2 \end{matrix}\right)
-\end{align*}
-and
-\[ c_n^{(2)} = \frac{1}{n^2} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) \]
-and
-\begin{align*}
-c_n^{(3)} & = \frac{5}{2} \cdot \frac{1}{n^2} \left(\begin{matrix} n+1 \\ 5 \end{matrix}\right) \\
-c_4^{(3)} & = \frac{1}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) (2n-5)(n-2) = \frac{3 \cdot 2}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) = \frac{1 \cdot 1}{(n-1)^2} \frac{(n+2)(n+1)n}{4!} \\
-c_5^{(3)} & = \frac{1}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) (2n-5)(n-3) = \frac{5 \cdot 2}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) = \frac{3 \cdot 1}{(n-1)^2} \frac{(n+2)(n+1)n}{4!} \sim \frac{3}{1} \cdot \frac{6}{3} \\
-c_6^{(3)} & = \frac{1}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) (2n-7)(n-3) = \frac{5 \cdot 3}{n^3} \left(\begin{matrix} n+2 \\ 4 \end{matrix}\right) = \frac{3 \cdot 2}{(n-1)^2} \frac{(n+2)(n+1)n}{4!} \sim \frac{2}{1} \cdot \frac{7}{4} \\
-c_7^{(3)} & = \frac{1}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) (2n-7)(n-4) = \frac{7 \cdot 3}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) \sim \frac{5}{3} \cdot \frac{8}{5} \\
-c_8^{(3)} & = \frac{1}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) (2n-9)(n-4) = \frac{7 \cdot 4}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) \sim \frac{3}{2} \cdot \frac{9}{6} \\
-c_9^{(3)} & = \frac{1}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) (2n-9)(n-5) = \frac{9 \cdot 4}{n^3} \left(\begin{matrix} n+1 \\ 4 \end{matrix}\right) \sim \frac{7}{5} \cdot \frac{10}{7} \\
-n^2 c_{n+1}^{(3)} & = \frac{n+3}{n-2} (n-1)^2 c_n^{(3)} \\
-c_{n+1}^{(3)} & = \frac{n+3}{n-2} \left(\frac{n-1}{n}\right)^2 c_n^{(3)} \\
-(n+1)^3 c_{n+1}^{(3)} & = \frac{n+3}{n-2} \left(\frac{n-1}{n}\right)^2 \left(\frac{n+1}{n}\right)^3 n^3 c_n^{(3)} = \frac{(n+3)(n+1)}{n(n-2)} \left(\frac{n^2 - 1}{n^2}\right)^2 \\
-c_4^{(3)} & = \frac{5}{32}
-\end{align*}
-and
-\begin{align*}
-c_n^{(n-1)} & = \frac{1}{n^{n-1}}\,(n-2)(2n-3)(3n-4) \cdots [(n-2)n - (n-1)] \\
-& = \frac{1}{n} \left(1 - \frac{2}{n}\right) \left(2 - \frac{3}{n}\right) \left(3 - \frac{4}{n}\right) \cdots \left((n-2) - \frac{n-1}{n}\right).
-\end{align*}
+b_n^{(2)} & = & \tfrac{1}{24} \\
+b_n^{(3)} & = & \tfrac{1}{48} n \\
+b_n^{(4)} & = & \tfrac{73}{5760} n^2 & + & \tfrac{1}{1152} n & - & \tfrac{1}{2880} \\
+b_n^{(5)} & = & \tfrac{11}{1280} n^{3} & + & \tfrac{1}{768} n^{2} & - & \tfrac{1}{1920} n \\
+b_n^{(6)} & = & \tfrac{3625}{580608} n^{4} & + & \tfrac{61}{41472} n^{3} & - & \tfrac{181}{322560} n^{2} & - & \tfrac{1}{41472} n & + & \tfrac{1}{181440}. \end{equationarray*}
+Searching for 580608 in the OEIS turns up the leading coefficients $\beta^{(k)}$ of these polynomials, which are listed as {\tt A249276} and {\tt A249277}. They're defined by the identity [Yang, ``Approximations for Constant $e$ and Their Applications'']
+\[ \frac{1}{e} \left(\frac{n}{n-1}\right)^{n-1} = 1 - \frac{1/2}{n} - \frac{\beta^{(2)}}{n^2} - \frac{\beta^{(3)}}{n^3} - \frac{\beta^{(4)}}{n^4} - \frac{\beta^{(5)}}{n^5} - \ldots, \]
+which tells us that
+\[ \frac{1}{e} \left(\frac{n}{n-1}\right)^{n-1} = 1 - \frac{1/2}{n} - \frac{b_n^{(2)}}{n^2} - \frac{b_n^{(3)}}{n^4} - \left[\frac{b_n^{(4)}}{n^6} + o\left(\frac{1}{n^5}\right)\right] - \left[\frac{b_n^{(5)}}{n^8} + o\left(\frac{1}{n^6}\right)\right] - \ldots. \]
+The last coefficient can be written as
+\[ c_n^{(n-1)} = \left(\frac{n-1}{n}\right)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}}, \]
+giving
+\[ b_n^{(n-1)} = (n-1)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}} \Big/ (n+1)^{\underline{n+1}}. \]
 \color{black}
 \section{Sketches}
 \subsection{Contour argument}\label{contour-argument}
