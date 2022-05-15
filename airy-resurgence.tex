@@ -327,7 +327,7 @@ where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n
 We can distill the most interesting parts of the Airy-Lucas function by writing
 \[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \textcolor{magenta}{\text{const.}}\,y^{\textcolor{DarkCyan}{m/2}}\,K\big(\tfrac{2}{n} y^{n/2}\big), \]
 where
-\begin{equation}
+\begin{equation}\label{integral:mod-bessel-rational}
 K(z) = \textcolor{magenta}{\text{const.}} \int_{z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z T_n(u)\right]\,U_{m-1}(u)\,du.
 \end{equation}
 Saying that $\widehat{\Ai}^{(k)}_{n, m-1}$ satisfies the Airy-Lucas equation is equivalent to saying that $K$ satisfies the \textcolor{DarkCyan}{modified Bessel (?)} equation
@@ -470,6 +470,37 @@ Summing these identities, we see that
 \[ g_1 + g_0 = \tfrac{\sqrt{3}}{2}\,(f_1 + f_0), \]
 giving the alternate decomposition
 \[ \frac{du}{d\zeta} = \tfrac{1}{2\sqrt{3}}\,(f_1 + f_0). \]
+\subsection{Lifting to a countable cover}
+Formula~\ref{integral:mod-bessel-rational} expresses the modified Bessel function $K_{m/n}$ as an exponential integral on a finite cover of $\C$. Lifting to a countable cover reveals this formula as a special case of a general integral formula for modified Bessel functions.
+
+Setting $u = \cosh(t/n)$ and recalling that
+\begin{align*}
+\cosh(n\tau) & := T_n(\cosh(\tau)) \\
+\sinh(m\tau) & := U_{m-1}(\cosh(\tau)) \sinh(\tau),
+\end{align*}
+we can rewrite formula~\ref{integral:mod-bessel-rational} as \textcolor{magenta}{[switching to the conventional sign for the projection map, so $\Lambda^{(3)}$ now comes from $\infty$ at $-60^\circ$ and goes to $\infty$ at $60^\circ$]}
+\begin{align}
+\notag K_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
+\notag & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\textcolor{magenta}{\Omega}} \exp\left[z \cosh(t)\right]\,U_{m-1}(\cosh(t/n))\,\sinh(t/n)\,d(t/n) \\
+\label{integral:mod-bessel-lifted} & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\textcolor{magenta}{\Omega}} \exp\left[z \cosh(t)\right]\,\sinh\big(\tfrac{m}{n}\,t\big)\,dt.
+\end{align}
+For any $\nu \in \C \smallsetminus \Z$, formulas~10.27.4 and 10.32.12 from \cite{dlmf} tell us that
+\begin{align}
+\notag K_\nu(z) & = \frac{\pi}{\sin(\nu \pi)} \cdot \frac{1}{2}\big[ I_{-\nu}(z) - I_\nu(z) \big] \\
+\notag & = \frac{1}{2i \sin(\nu \pi)} \int_\Omega \exp\left[z \cosh(t)\right]\,\frac{1}{2}\left[e^{\nu t} - e^{-\nu t}\right]\,dt \\
+\label{intgral:mod-bessel-general} & = \frac{1}{2 \sinh(\nu\,i\pi)} \int_\Omega \exp\left[z \cosh(t)\right]\,\sinh(\nu t)\,dt,
+\end{align}
+where $\Omega$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$. The integral converges when $z$ is in the right half-plane. We get formula~\ref{integral:mod-bessel-lifted} when we choose a rational parameter $\nu = m/n$.
+
+When $\nu$ goes to $0$, formula~\ref{integral:mod-bessel-lifted} becomes
+\[ K_\nu(z) = \frac{1}{2\pi i} \int_\Omega \exp\left[z \cosh(t)\right]\,t\,dt. \]
+Choosing $\Omega$ to be the unit-speed path that runs from $\infty$ leftward to $-i\pi$, upward to $i\pi$, and rightward back to $\infty$, we can rewrite this formula as
+\begin{align*}
+K_\nu(z) & = \frac{1}{2\pi i} \int_0^\infty \exp\left[-z \cosh(t)\right]\,2\pi i\,dt \\
+& = \int_0^\infty \exp\left[-z \cosh(t)\right]\,dt \\
+& = \int_1^\infty \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s},
+\end{align*}
+with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}.
 \subsection{Correspondence with Mari\~{n}o's series}
 Let $F_1(z)$ be the holomorphic function corresponding to Mari\~{n}o's formal power series $\varphi_1(z^{-1})$. The formal power series corresponding to $F_1$ will be written in the variable $z$.
 

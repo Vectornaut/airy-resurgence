@@ -265,12 +265,20 @@ jet2 chebyshev(jet2 z, int n) {
     return curr;
 }
 
+jet2 dcosh(jet2 z) {
+    vec2 cs_x = vec2(cosh(z.pt.x), sinh(z.pt.x));
+    vec2 cs_y = vec2(cos(z.pt.y), sin(z.pt.y));
+    vec2 cosh_z = vec2(cs_x.x * cs_y.x, cs_x.y * cs_y.y);
+    vec2 sinh_z = vec2(cs_x.y * cs_y.x, cs_x.x * cs_y.y);
+    return jet2(cosh_z, mul(sinh_z) * z.push);
+}
+
 jet2 alg_cosh(jet2 z) {
     vec2 pt = z.pt;
-    return jet2(
+    return scale(0.5, jet2(
         pt + rcp(pt),
         mat2(1.) - mul(rcp(mul(pt, pt)))
-    );
+    ));
 }
 
 vec3 chebyshev_plot(int n, float angle, float view, vec2 fragCoord) {
@@ -280,8 +288,22 @@ vec3 chebyshev_plot(int n, float angle, float view, vec2 fragCoord) {
     jet2 u = jet2(r_px * (2.*fragCoord - iResolution.xy), mat2(1.));
     
     // get pixel color
-    jet2 zeta = chebyshev(u, n);
+    jet2 zeta = scale(-1., chebyshev(u, n));
     vec3 color = surface_color(0.75*pow(1.5, float(n)), zeta, r_px);
+    color = contour_color( ONE, angle, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
+    color = contour_color(-ONE, angle, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+    return color;
+}
+
+vec3 cosh_plot(float angle, float view, vec2 fragCoord) {
+    // find screen point
+    float small_dim = min(iResolution.x, iResolution.y);
+    float r_px = view / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
+    jet2 u = jet2(r_px * (2.*fragCoord - iResolution.xy), mat2(1.));
+    
+    // get pixel color
+    jet2 zeta = dcosh(u);
+    vec3 color = surface_color(535.5, zeta, r_px);
     color = contour_color( ONE, angle, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
     color = contour_color(-ONE, angle, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
     return color;
@@ -295,9 +317,9 @@ vec3 alg_cosh_plot(float angle, float view, vec2 fragCoord) {
     
     // get pixel color
     jet2 zeta = alg_cosh(u);
-    vec3 color = surface_color(2., zeta, r_px);
-    color = contour_color( 2.*ONE, angle, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
-    color = contour_color(-2.*ONE, angle, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+    vec3 color = surface_color(1.1, zeta, r_px);
+    color = contour_color( ONE, angle, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
+    color = contour_color(-ONE, angle, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
     return color;
 }
 
@@ -307,6 +329,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     // try setting the first argument of chebyshev_plot to 1, 2, 3, 4, 5...
     float angle = 4.*PI*(iMouse.x / iResolution.x + 1./3.);
     vec3 color = chebyshev_plot(5, angle, 0.8, fragCoord);
+    /*vec3 color = cosh_plot(angle, 2.75*PI, fragCoord);*/
     /*vec3 color = alg_cosh_plot(angle, 1.2, fragCoord);*/
     fragColor = vec4(sRGB(color), 1.);
 }
