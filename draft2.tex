@@ -48,6 +48,7 @@
 \newcommand{\van}{\mathfrak{m}}
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\borel}{\mathcal{B}}
+\newcommand{\laplacepde}{\mathcal{D}}
 \DeclareMathOperator{\Ai}{Ai}
 
 \DeclareRobustCommand{\subtitle}[1]{\\#1}
@@ -268,22 +269,22 @@ To make sense of this formula, we ask for the following conditions.
 \begin{itemize}
 \item With respect to the flat metric, $f$ grows subexponentially along $\Gamma_b^\theta$~\textbf{[define]}, and is locally integrable throughout.
 \item The value of $z$ is in the half-plane $H_{-\theta}$ centered around the ray $e^{-i\theta} [0, \infty)$.
-%%defined as $e^{-i\theta}$ times the right half-plane.
 \end{itemize}
 \end{itemize}
-%%When $b \in B$ is an ordinary point, there's a unique ray $\Gamma_b^\theta$ leaving $b$ at angle $\theta$. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, we can say the same when $b$ is a branch point.
-
-%%Pick a point $b \in B$ and an extended angle $\theta \in \R/2\pi n\Z$, where $2\pi n$ is the cone angle at $b$. Pick a translation chart $\zeta$ whose domain includes the beginning of the ray that leaves $b$ at angle $\theta$. Since $b$ might be a branch point, we don't require the domain of $\zeta$ to include $b$ itself. Make sure the ray $\Gamma_b^\theta$ described above doesn't hit a branch point.
 \subsubsection{Over a branch point}
 When $b$ is a branch point, we can still use formula~\ref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T^*B_b$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T^*B_b^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\ref{laplace:int}. The half-plane $z \in H_{-\theta}$ in $T^*B_b^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T^*B_b$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
+\subsubsection{Differential equation}
+If $\zeta$ is a translation chart for $B$, the functions $\zeta, z$ are Darboux coordinates on the part of $T^*B$ that lies over the domain of $\zeta$. In these coordinates, we can write down the partial differential operator
+\begin{equation}%%\label{laplace:op}
+\laplacepde_\zeta = \left(\frac{\partial}{\partial z} - \zeta\right) \frac{\partial}{\partial \zeta}.
+\end{equation}
+The multiplication by $\zeta$ is the only part of $\laplacepde_\zeta$ that depends on which $\zeta$ we choose.
 
-%%We only define $\laplace_\zeta^\theta f$ on one of them: the sector $w_b \in \R\exp\Big(-\tfrac{\theta}{n} + \big(-\tfrac{\pi}{2n}, \tfrac{\pi}{2n}\big)\Big)$.
-
-%%the sector where the phase of $w_b$ is in $\tfrac{1}{n}\big(-\theta + (-\frac{\pi}{2}, \frac{\pi}{2})\big)$.
-
-%%$w_b \in \R \exp\big(\frac{1}{n}(-\theta - \frac{\pi}{2}, -\theta + \frac{\pi}{2})\big)$
-
-%%We define $\laplace_\zeta^\theta f$ on the one where $e^{i\theta/n} w_b$ is closest to the positive real axis.
+Now we can pose a boundary value problem for each angle $\theta \in \R/2\pi\Z$.
+\begin{problem}
+Find a local holomorphic function $F$ on $T^*B$ that satisfies the equation $\laplacepde_\zeta F = 0$ and approaches zero when continued at fixed $z$ along rays of angle $\theta$.
+\end{problem}
+The Laplace transform $\laplace_\zeta^\theta$ turns local holomorphic functions on $B$ into solutions of this problem. In fact, it produces all the solutions \textbf{[check argument]}.
 \section{Borel--Laplace summability and Resurgence}
 
 \[
@@ -461,6 +462,9 @@ Noticing that the right-hand side is a Laplace transform, we learn that
 \begin{equation}\label{thimble-difference}
 \hat{I}_\alpha(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}.
 \end{equation}
+\color{Aquamarine}
+In Ecalle's formalism, $\frac{\nu}{df}$ and $\hat{I}_\alpha$ are a major and a minor of the singularity $\overset{\triangledown}{I}_\alpha$. [Can we say: $\frac{\nu}{df}$ is a major representing the singularity $\overset{\triangledown}{I}_\alpha$? Or something even simpler?]
+\color{black}
 
 We can rewrite our Taylor series for $\nu$ as
 \begin{align*}
