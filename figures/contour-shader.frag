@@ -244,9 +244,9 @@ vec3 surface_color(float end_zone, jet2 zeta, float r_px) {
     return color;
 }
 
-vec3 contour_color(vec2 position, float angle, vec3 pen_color, vec3 bg, jet2 zeta, float r_px) {
+vec3 contour_color(vec2 crit_val, float angle, vec3 pen_color, vec3 bg, jet2 zeta, float r_px) {
     vec2 phase_rcp = vec2(cos(-angle), sin(-angle));
-    jet2 dis = mul(-phase_rcp, add(zeta, -position));
+    jet2 dis = mul(-phase_rcp, add(zeta, -crit_val));
     jet21 t = proj_x(csqrt(dis));
     float width = max(6., 0.008*min(iResolution.x, iResolution.y));
     return line_mix(pen_color, bg, width, t.pt, length(t.push), r_px);
@@ -279,6 +279,16 @@ jet2 alg_cosh(jet2 z) {
         pt + rcp(pt),
         mat2(1.) - mul(rcp(mul(pt, pt)))
     ));
+}
+
+// (n-1)^(n-1)*z^n - n*z
+jet2 circle_poly(jet2 z, int n) {
+    jet2 lead = z;
+    for (int k = 0; k < n-2; k++) {
+        lead = mul(z, lead);
+    }
+    float nf = float(n);
+    return mul(z, add(scale(pow(nf-1., nf-1.), lead), -nf*ONE));
 }
 
 vec3 chebyshev_plot(int n, float angle, float view, vec2 fragCoord) {
@@ -325,11 +335,32 @@ vec3 alg_cosh_plot(float angle, float view, vec2 fragCoord) {
 
 const float PI = 3.141592653589793;
 
+vec3 circle_plot(int n, float angle, float view, vec2 fragCoord) {
+    float p = float(n-1);
+    
+    // find screen point
+    float small_dim = min(iResolution.x, iResolution.y);
+    float r_px = (view / p) / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
+    jet2 u = jet2(r_px * (2.*fragCoord - iResolution.xy), mat2(1.));
+    
+    // get pixel color
+    jet2 zeta = circle_poly(u, n);
+    vec3 color = surface_color(2.53, zeta, r_px);
+    for (int k = 0; k < n-1; k++) {
+        float crit_angle = 2.*PI*float(k)/p;
+        vec2 crit_val = -vec2(cos(crit_angle), sin(crit_angle));
+        vec3 label = lab2rgb(vec3(49., 29.*crit_val));
+        color = contour_color(crit_val, angle, label, color, zeta, r_px);
+    }
+    return color;
+}
+
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     // try setting the first argument of chebyshev_plot to 1, 2, 3, 4, 5...
     float angle = 4.*PI*(iMouse.x / iResolution.x + 1./3.);
-    vec3 color = chebyshev_plot(5, angle, 0.8, fragCoord);
+    /*vec3 color = chebyshev_plot(5, angle, 0.8, fragCoord);*/
     /*vec3 color = cosh_plot(angle, 2.75*PI, fragCoord);*/
     /*vec3 color = alg_cosh_plot(angle, 1.2, fragCoord);*/
+    vec3 color = circle_plot(5, angle, 1.6, fragCoord);
     fragColor = vec4(sRGB(color), 1.);
 }
