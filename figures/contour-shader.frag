@@ -225,6 +225,14 @@ const float GRAT = 0.5;
 
 const vec2 axis = 0.5*vec2(1., sqrt(3.));
 
+vec2 newton_step(jet2 f) {
+    return -inverse(f.push) * f.pt;
+}
+
+vec2 newton_step(jet21 f, float speed) {
+    return (-speed * f.pt / dot(f.push, f.push)) * f.push;
+}
+
 vec3 surface_color(float end_zone, jet2 zeta, float r_px) {
     jet21 y = proj_y(zeta);
     float scaling = length(y.push);
@@ -263,6 +271,17 @@ jet2 chebyshev(jet2 z, int n) {
         prev = temp;
     }
     return curr;
+}
+
+jet2 chebyshev_deriv(jet2 z, int n) {
+    jet2 curr = scale(2., z);
+    jet2 prev = jet2(ONE, mat2(0.));
+    for (int k = 1; k < n-1; k++) {
+        jet2 temp = curr;
+        curr = add(mul(scale(2., z), curr), scale(-1., prev));
+        prev = temp;
+    }
+    return scale(float(n), curr);
 }
 
 jet2 dcosh(jet2 z) {
@@ -335,6 +354,43 @@ vec3 alg_cosh_plot(float angle, float view, vec2 fragCoord) {
 
 const float PI = 3.141592653589793;
 
+float newton_mask(vec2 crit_val, float angle, int n, vec2 u, float tol, int step_max) {
+    vec2 phase_rcp = vec2(cos(-angle), sin(-angle));
+    jet2 crit = jet2(u, mat2(1.));
+    /*for (int step_cnt = 0; step_cnt < step_max; step_cnt++) {
+        jet2 f = chebyshev_deriv(crit, n);
+        if (abs(f.pt.x) < tol && abs(f.pt.y) < tol) break;
+        crit = add(crit, newton_step(f));
+    }*/
+    for (int step_cnt = 0; step_cnt < step_max; step_cnt++) {
+        jet2 zeta = chebyshev(crit, n);
+        /*jet2 dis = mul(-phase_rcp, add(zeta, -crit_val));
+        if (abs(dis.pt.x) < tol && abs(dis.pt.y) < tol) break;
+        crit = add(crit, newton_step(dis));*/
+        jet21 dis_h = proj_x(mul(-phase_rcp, add(zeta, -crit_val)));
+        if (abs(dis_h.pt) < tol) break;
+        crit = add(crit, newton_step(dis_h, 0.1));
+    }
+    /*float last_root = 1.;
+    for (int k = 0; k < n; k++) {
+        float curr_root = cos(PI*float(k+1)/float(n));
+        if (mix(last_root, curr_root, 0.5) < root.pt.x) {
+            return vec3(1. - float(k)/float(n+1), 0., float(k)/float(n+1));
+        }
+        last_root = curr_root;
+    }*/
+    return crit.pt.x < 0.25 ? 1. : 0.;
+}
+
+float newton_plot(vec2 crit_val, float angle, int n, float view, vec2 fragCoord) {
+    // find screen point
+    float small_dim = min(iResolution.x, iResolution.y);
+    float r_px = view / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
+    vec2 u = r_px * (2.*fragCoord - iResolution.xy);
+    
+    return newton_mask(crit_val, angle, n, u, 0.01, 20);
+}
+
 vec3 circle_plot(int n, float angle, float view, vec2 fragCoord) {
     float p = float(n-1);
     
@@ -358,9 +414,10 @@ vec3 circle_plot(int n, float angle, float view, vec2 fragCoord) {
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     // try setting the first argument of chebyshev_plot to 1, 2, 3, 4, 5...
     float angle = 4.*PI*(iMouse.x / iResolution.x + 1./3.);
-    /*vec3 color = chebyshev_plot(5, angle, 0.8, fragCoord);*/
+    vec3 color = chebyshev_plot(3, angle, 0.8, fragCoord);
     /*vec3 color = cosh_plot(angle, 2.75*PI, fragCoord);*/
     /*vec3 color = alg_cosh_plot(angle, 1.2, fragCoord);*/
-    vec3 color = circle_plot(5, angle, 1.6, fragCoord);
+    /*vec3 color = circle_plot(5, angle, 1.6, fragCoord);*/
+    color = mix(color, vec3(0.), 0.8*(1. - newton_plot(ONE, angle, 3, 0.8, fragCoord)));
     fragColor = vec4(sRGB(color), 1.);
 }
