@@ -292,22 +292,21 @@ jet2 critigon(jet2 z, int n) {
 
 // --- root finding ---
 
-vec2 newton_step(jet21 f, float speed) {
-    return (-speed * f.pt / dot(f.push, f.push)) * f.push;
+vec2 newton_step(jet21 f) {
+    return (-f.pt / dot(f.push, f.push)) * f.push;
 }
 
 const int CHEBYSHEV = 0;
 const int CRITIGON = 1;
 
-bool flows_to_crit_pt(
+vec2 horizontal_flow(
     vec2 start_pt,
-    vec2 crit_val,
+    vec2 target_val,
     vec2 phase_rcp,
     int fn_name,
     int fn_index,
     float speed,
-    float pt_tol,
-    float push_tol_sq,
+    float tol,
     int step_max
 ) {
     jet2 u = jet2(start_pt, mat2(1.));
@@ -319,18 +318,19 @@ bool flows_to_crit_pt(
         
         // find the horizontal displacement to the target critical value. if
         // we're close enough, stop. if not, step closer
-        jet21 dis_h = proj_x(mul(-phase_rcp, add(zeta, -crit_val)));
-        if (abs(dis_h.pt) < pt_tol) {
+        jet21 dis_h = proj_x(mul(-phase_rcp, add(zeta, -target_val)));
+        if (abs(dis_h.pt) < tol) {
             break;
         } else {
-            u = add(u, newton_step(dis_h, speed));
+            u = add(u, speed * newton_step(dis_h));
         }
     }
-    /*return dot(u.push[0], u.push[0]) < push_tol_sq;*/
-    return u.pt.x < 0.25;
+    return u.pt;
 }
 
 // --- contour plots ---
+
+const float PI = 3.141592653589793;
 
 vec3 chebyshev_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     // find screen point
@@ -345,7 +345,12 @@ vec3 chebyshev_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     // color contours
     color = contour_color( ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
     color = contour_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
-    if (!flows_to_crit_pt(u.pt, ONE, phase_rcp, CHEBYSHEV, n, 0.1, 0.01, 0.0001, 20)) {
+    vec2 flowed = horizontal_flow(u.pt, ONE, phase_rcp, CHEBYSHEV, n, 0.1, 0.01, 40);
+    float penultimate = 0.5*(1. + cos(2.*PI/float(n)));
+    if (
+        (n % 2 == 0 && abs(flowed.x) > penultimate) ||
+        (n % 2 == 1 && flowed.x > penultimate)
+    ) {
         color = mix(color, vec3(0.), 0.8);
     }
     
@@ -383,66 +388,30 @@ vec3 alg_cosh_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
     return color;
 }
 
-const float PI = 3.141592653589793;
-
-float newton_mask(vec2 crit_val, float angle, int n, vec2 u, float tol, int step_max) {
-    vec2 phase_rcp = vec2(cos(-angle), sin(-angle));
-    jet2 crit = jet2(u, mat2(1.));
-    /*for (int step_cnt = 0; step_cnt < step_max; step_cnt++) {
-        jet2 f = chebyshev_deriv(crit, n);
-        if (abs(f.pt.x) < tol && abs(f.pt.y) < tol) break;
-        crit = add(crit, newton_step(f));
-    }*/
-    for (int step_cnt = 0; step_cnt < step_max; step_cnt++) {
-        jet2 zeta = chebyshev(crit, n);
-        /*jet2 dis = mul(-phase_rcp, add(zeta, -crit_val));
-        if (abs(dis.pt.x) < tol && abs(dis.pt.y) < tol) break;
-        crit = add(crit, newton_step(dis));*/
-        jet21 dis_h = proj_x(mul(-phase_rcp, add(zeta, -crit_val)));
-        if (abs(dis_h.pt) < tol) break;
-        crit = add(crit, newton_step(dis_h, 0.1));
-    }
-    /*float last_root = 1.;
-    for (int k = 0; k < n; k++) {
-        float curr_root = cos(PI*float(k+1)/float(n));
-        if (mix(last_root, curr_root, 0.5) < root.pt.x) {
-            return vec3(1. - float(k)/float(n+1), 0., float(k)/float(n+1));
-        }
-        last_root = curr_root;
-    }*/
-    vec2 crit_dis = crit.pt - ONE;
-    return dot(crit_dis, crit_dis) < 0.5 ? 1. : 0.;
-}
-
-float newton_plot(vec2 crit_val, float angle, int n, float view, vec2 fragCoord) {
-    // find screen point
-    float small_dim = min(iResolution.x, iResolution.y);
-    float r_px = view / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
-    vec2 u = r_px * (2.*fragCoord - iResolution.xy);
-    
-    return newton_mask(crit_val, angle, n, u, 0.01, 20);
-}
-
 vec3 critigon_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
-    float p = float(n-1);
+    float crit_dens = 1. / float(n-1);
+    float crit_angle = 2.*PI*crit_dens;
+    vec2 root = vec2(cos(crit_angle), sin(crit_angle));
+    vec2 crit_pt_disp = crit_dens*(root - ONE);
+    float crit_pt_sep_sq = dot(crit_pt_disp, crit_pt_disp);
     
     // find screen point
     float small_dim = min(iResolution.x, iResolution.y);
-    float r_px = (view / p) / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
+    float r_px = view * crit_dens / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
     jet2 u = jet2(r_px * (2.*fragCoord - iResolution.xy), mat2(1.));
     
     // get pixel color
     jet2 zeta = critigon(u, n);
     vec3 color = surface_color(2.53, zeta, r_px);
+    vec2 crit_val = -root;
     for (int k = 0; k < n-1; k++) {
-        float crit_angle = 2.*PI*float(k)/p;
-        vec2 crit_val = -vec2(cos(crit_angle), sin(crit_angle));
         vec3 label = lab2rgb(vec3(49., 29.*crit_val));
         color = contour_color(crit_val, phase_rcp, label, color, zeta, r_px);
+        crit_val = mul(root, crit_val);
     }
-    if (!flows_to_crit_pt(u.pt, -ONE, phase_rcp, CRITIGON, n, 0.2, 0.01, 0.0001, 30)) {
-        color = mix(color, vec3(0.), 0.8);
-    }
+    vec2 flowed = horizontal_flow(u.pt, ONE, phase_rcp, CRITIGON, n, 0.1, 0.01, 40);
+    vec2 flow_disp = flowed + crit_dens*ONE;
+    if (dot(flow_disp, flow_disp) > crit_pt_sep_sq) color = mix(color, vec3(0.), 0.8);
     
     return color;
 }
@@ -451,10 +420,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     // try setting the first argument of chebyshev_plot to 1, 2, 3, 4, 5...
     float angle = 4.*PI*(iMouse.x / iResolution.x + 1./3.);
     vec2 phase_rcp = vec2(cos(-angle), sin(-angle));
-    vec3 color = chebyshev_plot(3, phase_rcp, 0.8, fragCoord);
+    vec3 color = chebyshev_plot(5, phase_rcp, 0.8, fragCoord);
     /*vec3 color = cosh_plot(phase_rcp, 2.75*PI, fragCoord);*/
     /*vec3 color = alg_cosh_plot(phase_rcp, 1.2, fragCoord);*/
     /*vec3 color = critigon_plot(5, phase_rcp, 1.6, fragCoord);*/
-    /*color = mix(color, vec3(0.), 0.8*(1. - newton_plot(ONE, angle, 3, 0.8, fragCoord)));*/
     fragColor = vec4(sRGB(color), 1.);
 }
