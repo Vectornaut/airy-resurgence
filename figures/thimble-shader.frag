@@ -217,7 +217,7 @@ vec3 line_mix(vec3 stroke, vec3 bg, float width, float pattern_disp, float scali
   return mix(bg, stroke, line_part(width, pattern_disp, scaling, r_px));
 }
 
-// --- contour coloring ---
+// --- thimble coloring ---
 
 const int N = 4;
 
@@ -244,7 +244,7 @@ vec3 surface_color(float end_zone, jet2 zeta, float r_px) {
     return color;
 }
 
-vec3 contour_color(vec2 crit_val, vec2 phase_rcp, vec3 pen_color, vec3 bg, jet2 zeta, float r_px) {
+vec3 thimble_color(vec2 crit_val, vec2 phase_rcp, vec3 pen_color, vec3 bg, jet2 zeta, float r_px) {
     jet2 dis = mul(phase_rcp, add(zeta, -crit_val));
     jet21 t = proj_x(csqrt(dis));
     float width = max(6., 0.008*min(iResolution.x, iResolution.y));
@@ -328,7 +328,7 @@ vec2 horizontal_flow(
     return u.pt;
 }
 
-// --- contour plots ---
+// --- thimble plots ---
 
 const float PI = 3.141592653589793;
 
@@ -343,20 +343,20 @@ vec3 chebyshev_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     vec3 color = surface_color(0.75*pow(1.5, float(n)), zeta, r_px);
     
     // color thimbles over 1
-    /*color = contour_color(ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);*/
+    /*color = thimble_color(ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);*/
     float penultimate = cos(PI/float(n));
     vec2 flowed = horizontal_flow(u.pt, ONE, phase_rcp, CHEBYSHEV, n, 0.1, 0.01, 40);
     if (-penultimate < flowed.x || n % 2 == 0) {
         /*color = mix(color, vec3(0.40, 0.00, 0.10), 0.8);*/
-        color = contour_color(ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
+        color = thimble_color(ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
     }
     
     // color thimbles over -1
-    /*color = contour_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);*/
+    /*color = thimble_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);*/
     flowed = horizontal_flow(u.pt, -ONE, phase_rcp, CHEBYSHEV, n, 0.1, 0.01, 40);
     if ((-penultimate < flowed.x || n % 2 == 1) && flowed.x < penultimate) {
         /*color = mix(color, vec3(0.05, 0.00, 0.10), 0.8);*/
-        color = contour_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+        color = thimble_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
     }
     
     return color;
@@ -372,9 +372,9 @@ vec3 cosh_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
     jet2 zeta = dcosh(u);
     vec3 color = surface_color(535.5, zeta, r_px);
     
-    // color contours
-    color = contour_color( ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
-    color = contour_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+    // color thimbles
+    color = thimble_color( ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
+    color = thimble_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
     
     return color;
 }
@@ -388,8 +388,8 @@ vec3 alg_cosh_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
     // get pixel color
     jet2 zeta = alg_cosh(u);
     vec3 color = surface_color(1.1, zeta, r_px);
-    color = contour_color( ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
-    color = contour_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+    color = thimble_color( ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
+    color = thimble_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
     return color;
 }
 
@@ -408,15 +408,19 @@ vec3 critigon_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     // get pixel color
     jet2 zeta = scale(-1., critigon(u, n));
     vec3 color = surface_color(2.53, zeta, r_px);
-    vec2 crit_val = -root;
+    vec2 crit_val = (n % 2 == 0 ? 1. : -1.) * root;
     for (int k = 0; k < n-1; k++) {
-        vec3 label = lab2rgb(vec3(49., 29.*crit_val));
-        color = contour_color(crit_val, phase_rcp, label, color, zeta, r_px);
+        /*vec3 label = lab2rgb(vec3(49., 29.*crit_val));
+        color = thimble_color(crit_val, phase_rcp, label, color, zeta, r_px);*/
+        vec2 flowed = horizontal_flow(u.pt, crit_val, phase_rcp, CRITIGON, n, 0.1, 0.01, 40);
+        vec2 flow_disp = flowed - crit_dens*crit_val;
+        if (dot(flow_disp, flow_disp) < crit_pt_sep_sq) {
+            vec3 label = lab2rgb(vec3(49., 29.*crit_val));
+            color = thimble_color(crit_val, phase_rcp, label, color, zeta, r_px);
+            /*if (k == 0) color = mix(color, label, 0.8);*/
+        }
         crit_val = mul(root, crit_val);
     }
-    vec2 flowed = horizontal_flow(u.pt, ONE, phase_rcp, CRITIGON, n, 0.1, 0.01, 40);
-    vec2 flow_disp = flowed + crit_dens*ONE;
-    if (dot(flow_disp, flow_disp) > crit_pt_sep_sq) color = mix(color, vec3(0.), 0.8);
     
     return color;
 }
@@ -425,9 +429,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     // try setting the first argument of chebyshev_plot to 1, 2, 3, 4, 5...
     float angle = 4.*PI*(iMouse.x / iResolution.x + 1./3.);
     vec2 phase_rcp = vec2(cos(-angle), sin(-angle));
-    vec3 color = chebyshev_plot(5, phase_rcp, 0.8, fragCoord);
+    /*vec3 color = chebyshev_plot(5, phase_rcp, 0.8, fragCoord);*/
     /*vec3 color = cosh_plot(phase_rcp, 2.75*PI, fragCoord);*/
     /*vec3 color = alg_cosh_plot(phase_rcp, 1.2, fragCoord);*/
-    /*vec3 color = critigon_plot(5, phase_rcp, 1.6, fragCoord);*/
+    vec3 color = critigon_plot(5, phase_rcp, 1.6, fragCoord);
     fragColor = vec4(sRGB(color), 1.);
 }
