@@ -245,7 +245,7 @@ vec3 surface_color(float end_zone, jet2 zeta, float r_px) {
 }
 
 vec3 contour_color(vec2 crit_val, vec2 phase_rcp, vec3 pen_color, vec3 bg, jet2 zeta, float r_px) {
-    jet2 dis = mul(-phase_rcp, add(zeta, -crit_val));
+    jet2 dis = mul(phase_rcp, add(zeta, -crit_val));
     jet21 t = proj_x(csqrt(dis));
     float width = max(6., 0.008*min(iResolution.x, iResolution.y));
     return line_mix(pen_color, bg, width, t.pt, length(t.push), r_px);
@@ -313,12 +313,12 @@ vec2 horizontal_flow(
     for (int step_cnt = 0; step_cnt < step_max; step_cnt++) {
         // evaluate the map
         jet2 zeta;
-        if (fn_name == CHEBYSHEV) zeta = chebyshev(u, fn_index);
-        else if (fn_name == CRITIGON) zeta = critigon(u, fn_index);
+        if (fn_name == CHEBYSHEV) zeta = scale(-1., chebyshev(u, fn_index));
+        else zeta = scale(-1., critigon(u, fn_index));
         
         // find the horizontal displacement to the target critical value. if
         // we're close enough, stop. if not, step closer
-        jet21 dis_h = proj_x(mul(-phase_rcp, add(zeta, -target_val)));
+        jet21 dis_h = proj_x(mul(phase_rcp, add(zeta, -target_val)));
         if (abs(dis_h.pt) < tol) {
             break;
         } else {
@@ -342,16 +342,21 @@ vec3 chebyshev_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     jet2 zeta = scale(-1., chebyshev(u, n));
     vec3 color = surface_color(0.75*pow(1.5, float(n)), zeta, r_px);
     
-    // color contours
-    color = contour_color( ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
-    color = contour_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+    // color thimbles over 1
+    /*color = contour_color(ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);*/
+    float penultimate = cos(PI/float(n));
     vec2 flowed = horizontal_flow(u.pt, ONE, phase_rcp, CHEBYSHEV, n, 0.1, 0.01, 40);
-    float penultimate = 0.5*(1. + cos(2.*PI/float(n)));
-    if (
-        (n % 2 == 0 && abs(flowed.x) > penultimate) ||
-        (n % 2 == 1 && flowed.x > penultimate)
-    ) {
-        color = mix(color, vec3(0.), 0.8);
+    if (-penultimate < flowed.x || n % 2 == 0) {
+        /*color = mix(color, vec3(0.40, 0.00, 0.10), 0.8);*/
+        color = contour_color(ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
+    }
+    
+    // color thimbles over -1
+    /*color = contour_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);*/
+    flowed = horizontal_flow(u.pt, -ONE, phase_rcp, CHEBYSHEV, n, 0.1, 0.01, 40);
+    if ((-penultimate < flowed.x || n % 2 == 1) && flowed.x < penultimate) {
+        /*color = mix(color, vec3(0.05, 0.00, 0.10), 0.8);*/
+        color = contour_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
     }
     
     return color;
@@ -401,7 +406,7 @@ vec3 critigon_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     jet2 u = jet2(r_px * (2.*fragCoord - iResolution.xy), mat2(1.));
     
     // get pixel color
-    jet2 zeta = critigon(u, n);
+    jet2 zeta = scale(-1., critigon(u, n));
     vec3 color = surface_color(2.53, zeta, r_px);
     vec2 crit_val = -root;
     for (int k = 0; k < n-1; k++) {
