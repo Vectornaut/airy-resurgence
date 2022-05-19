@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage[svgnames]{xcolor} %% for revision coloring
 
 % convenience aliases
 \newcommand{\maps}{\colon}
@@ -22,12 +23,17 @@
 \maketitle
 \section{Hypergeometric functions in trigonometry}
 \subsection{Chebyshev sine formulas}
-By definition, $\cos(n\phi) = T_n(\cos(\phi))$. Hence
+By definition,
+\begin{align*}
+\cos(n\phi) & = T_n(\cos(\phi)) \\
+\sin(n\phi) & = U_{n-1}(\cos(\phi))\,\sin(\phi).
+\end{align*}
+Furthermore,
 \begin{align*}
 \cos(n\phi - \tfrac{n}{2}\pi) & = T_n(\cos(\phi - \tfrac{\pi}{2})) \\
 \cos(n\phi) \cos(\tfrac{n}{2}\pi) + \sin(n\phi) \sin(\tfrac{n}{2}\pi) & = T_n(\sin(\phi)).
 \end{align*}
-For $n = 2k + 1$, we have
+Thus, for $n = 2k + 1$, we have
 \[ (-1)^k \sin(n\phi) = T_n(\sin(\phi)), \]
 implying also that
 \begin{align*}
@@ -42,22 +48,32 @@ From \cite[equation~15.4.16]{dlmf},
 \[ F(a, 1-a, \tfrac{3}{2}; \sin(\theta)^2) = \frac{\sin((1-2a)\theta)}{(1-2a)\sin(\theta)}. \]
 so we have
 \begin{align*}
-F\left(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{3}{2}; \sin(\theta)^2\right) & = \frac{\sin(\theta/n)}{\sin(\theta)} \\
-& = \frac{1}{U_{n-1}(\cos(\theta/n))}.
+F\left(\tfrac{1}{2} - \tfrac{m}{2n}, \tfrac{1}{2} + \tfrac{m}{2n}, \tfrac{3}{2}; \sin(\theta)^2\right) & = \frac{\sin(\tfrac{m}{n}\,\theta)}{\tfrac{m}{n} \sin(\theta)} \\
+& = \frac{n}{m} \cdot \frac{\sin(m\,\theta/n)}{\sin(\theta/n)} \cdot \frac{\sin(\theta/n)}{\sin(\theta)} \\
+& = \frac{n}{m} \cdot \frac{U_{m-1}(\cos(\theta/n))}{U_{n-1}(\cos(\theta/n))}.
 \end{align*}
 Letting $u = \cos(\theta/n)$, we get the identity
-\[ F\left(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{3}{2}; 1 - T_n(u)^2\right) = \frac{1}{U_{n-1}(u)}. \]
+\[ F\left(\tfrac{1}{2} - \tfrac{m}{2n}, \tfrac{1}{2} + \tfrac{m}{2n}, \tfrac{3}{2}; 1 - T_n(u)^2\right) = \frac{n}{m} \cdot \frac{U_{m-1}(u)}{U_{n-1}(u)}. \]
+From our reasoning so far, we can only conclude the identity holds when $\pm T_n(u)$ is in the right half-plane.
 
-Identity~15.10.17 from \cite{dlmf} splits the left-hand side above into
+Identity~15.10.17 \textcolor{magenta}{[or, better, 15.8.4]} from \cite{dlmf} splits the left-hand side above into
 \begin{align*}
-& \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(1 - \tfrac{1}{2n})\Gamma(1 + \tfrac{1}{2n})} F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{1}{2}; T_n(u)^2) \\
-+ & \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{2} - \tfrac{1}{2n})\Gamma(\tfrac{1}{2} + \tfrac{1}{2n})} F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{3}{2}; T_n(u)^2).
+& \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(1 - \tfrac{m}{2n})\Gamma(1 + \tfrac{m}{2n})} F(\tfrac{1}{2} - \tfrac{m}{2n}, \tfrac{1}{2} + \tfrac{m}{2n}, \tfrac{1}{2}; T_n(u)^2) \\
+\pm & \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{2} - \tfrac{m}{2n})\Gamma(\tfrac{1}{2} + \tfrac{m}{2n})}\,T_n(u)\,F(1 - \tfrac{m}{2n}, 1 + \tfrac{m}{2n}, \tfrac{3}{2}; T_n(u)^2),
 \end{align*}
-which simplifies\footnote{Calculate $\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2}) = -\pi$ and $[\Gamma(\tfrac{1}{2} - \tfrac{1}{2n})\Gamma(\tfrac{1}{2} + \tfrac{1}{2n})]^{-1} = \tfrac{1}{\pi} \sin\big((\tfrac{1}{2} + \tfrac{1}{2n})\pi\big) = \tfrac{1}{\pi} \cos\big(\tfrac{\pi}{2n}\big)$. Similarly, $\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2}) = \tfrac{\pi}{2}$ and $[\Gamma(1 - \tfrac{1}{2n})\Gamma(1 + \tfrac{1}{2n})]^{-1} = [\Gamma(1 - \tfrac{1}{2n})\,\tfrac{1}{2n} \Gamma(\tfrac{1}{2n})]^{-1} = \tfrac{2n}{\pi} \sin\big(\tfrac{\pi}{2n}\big)$.} to
+\textcolor{DarkCyan}{where the sign must be chosen so that $\pm T_n(u)$ is in the right half-plane (?)}. Applying identityies 15.8.27--28 from \cite{dlmf} turns this into
 \begin{align*}
-& n \sin\big(\tfrac{\pi}{2n}\big)\,F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{1}{2}; T_n(u)^2) \\
-- & \cos\big(\tfrac{\pi}{2n}\big)|T_n(u)|\,F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{3}{2}; T_n(u)^2).
+& \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}T_n(u)) + \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \pm \tfrac{1}{2}T_n(u)) \\
++ & \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}T_n(u)) - \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \pm \tfrac{1}{2}T_n(u)).
 \end{align*}
+After cancellation, we conclude that
+\[ F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}T_n(u)) = \frac{n}{m} \cdot \frac{U_{m-1}(u)}{U_{n-1}(u)} \]
+\textcolor{DarkCyan}{when $\pm T_n(u)$ is in the right half-plane (?)}.
+%%which simplifies\footnote{Calculate $\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2}) = -\pi$ and $[\Gamma(\tfrac{1}{2} - \tfrac{1}{2n})\Gamma(\tfrac{1}{2} + \tfrac{1}{2n})]^{-1} = \tfrac{1}{\pi} \sin\big((\tfrac{1}{2} + \tfrac{1}{2n})\pi\big) = \tfrac{1}{\pi} \cos\big(\tfrac{\pi}{2n}\big)$. Similarly, $\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2}) = \tfrac{\pi}{2}$ and $[\Gamma(1 - \tfrac{1}{2n})\Gamma(1 + \tfrac{1}{2n})]^{-1} = [\Gamma(1 - \tfrac{1}{2n})\,\tfrac{1}{2n} \Gamma(\tfrac{1}{2n})]^{-1} = \tfrac{2n}{\pi} \sin\big(\tfrac{\pi}{2n}\big)$.} to \textcolor{magenta}{[$m = 1$]}
+%%\begin{align*}
+%%& n \sin\big(\tfrac{\pi}{2n}\big)\,F(\tfrac{1}{2} - \tfrac{1}{2n}, \tfrac{1}{2} + \tfrac{1}{2n}, \tfrac{1}{2}; T_n(u)^2) \\
+%%- & \cos\big(\tfrac{\pi}{2n}\big)\,|T_n(u)|\,F(1 - \tfrac{1}{2n}, 1 + \tfrac{1}{2n}, \tfrac{3}{2}; T_n(u)^2).
+%%\end{align*}
 \subsubsection{Odd order}
 From \cite[equation~15.4.14]{dlmf},
 \[ F(a, 1-a, \tfrac{1}{2}; \sin(\theta)^2) = \frac{\cos((1-2a)\theta)}{\cos(\theta)}. \]
