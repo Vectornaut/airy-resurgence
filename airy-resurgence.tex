@@ -486,14 +486,17 @@ For $z \in (0, \infty)$, the contour $\gamma_z$ runs \textcolor{magenta}{counter
 
 The integrand is non-meromorphic at $\zeta = 1$. Along the branch cut $\zeta \in [1, \infty)$, its above-minus-below difference is
 \begin{align*}
-& -(2\pi i)\tfrac{n}{2\pi m} \sin(\tfrac{m}{n} \pi)\,(-\tfrac{1}{2}\zeta - \tfrac{1}{2})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta) \\
-= & -\tfrac{n}{m} \sinh(\tfrac{m}{n}\,i\pi)\,(-\tfrac{1}{2}\zeta - \tfrac{1}{2})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta),
+& -(2\pi i)\tfrac{n}{2\pi m} \sin(\tfrac{m}{n} \pi)\,(\pm\tfrac{1}{2}\zeta - \tfrac{1}{2})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta) \\
+= & -\tfrac{n}{m} \sinh(\tfrac{m}{n}\,i\pi)\,(\pm\tfrac{1}{2}\zeta - \tfrac{1}{2})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta),
 \end{align*}
 as given\footnote{Note that $\Gamma(\tfrac{3}{2}) \Gamma(\tfrac{1}{2})^{-1} = \tfrac{1}{2}$ and $\big[\Gamma(1 - \tfrac{m}{n})\Gamma(1 + \tfrac{m}{n})\big]^{-1} = \big[\Gamma(1 - \tfrac{m}{n})\,\tfrac{m}{n}\Gamma(\tfrac{m}{n})\big]^{-1} = \tfrac{n}{m\pi} \sin(\tfrac{m}{n} \pi)$.} by equation~15.2.3 from \cite{dlmf}. Hence, $K_{m/n}$ turns out to be the Laplace transform along $(1, \infty)$ of
-\[ \tfrac{1}{2}\,(-\tfrac{1}{2}\zeta - \tfrac{1}{2})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta). \]
+\[ \tfrac{1}{2}\,(-\tfrac{1}{2}\zeta - \tfrac{1}{2})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2} + \tfrac{1}{2}\zeta). \]
 \color{DarkCyan}
 Guessing the branch of the square root for consistency with the numerically checked result in Section~\ref{contour-argument}, we get
-\[ \tfrac{i}{2}\,(\tfrac{1}{2} + \tfrac{1}{2}\zeta)^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta). \]
+\[ \tfrac{i}{2}\,(\tfrac{1}{2} + \tfrac{1}{2}\zeta)^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2} + \tfrac{1}{2}\zeta). \]
+In other words, $K_{m/n} = \tfrac{i}{2} \laplace_{\zeta, -1} v_{-1}$ with
+\[ v_{-1} = \sqrt{2}\,\zeta_{-1}^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2}\zeta_{-1}), \]
+where $\zeta = -1 + \zeta_{-1}$.
 \color{black}
 \subsection{Lifting to a countable cover}
 Formula~\ref{integral:mod-bessel-rational} expresses the modified Bessel function $K_{m/n}$ as an exponential integral on a finite cover of $\C$. Lifting to a countable cover reveals this formula as a special case of a general integral formula for modified Bessel functions.
@@ -526,6 +529,45 @@ K_\nu(z) & = \frac{1}{2\pi i} \int_0^\infty \exp\left[-z \cosh(t)\right]\,2\pi i
 & = \int_1^\infty \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s},
 \end{align*}
 with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}.
+\subsection{Link to dihedral triangulations}
+At $\xi = \infty$, the function $F(a, b, c, \xi)$ is slight, with normal form $(-\xi^{-1})^a f_1 + (-\xi^{-1})^b f_2$~\cite[identity~15.8.2]{dlmf}. At $\xi = 0$, it's holomorphic with order $0$, and at $\xi = 1$ it has the form $h + (1-\xi)^{c-a-b} f$, where $h$ is holomorphic with order $0$~\cite[identity~15.8.4]{dlmf},
+
+For example, at $\zeta = \infty$, the function
+\[ u_{-1} = F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, 1 - \tfrac{1}{2} \zeta_{-1}) \]
+is slight, with normal form $(1/\zeta_{-1})^{1 - m/n} f_1 + (1/\zeta_{-1})^{1 + m/n} f_2$~\cite[identity~15.8.3]{dlmf}. At $\zeta = 1$, it's holomorphic with order $0$. At $\zeta = -1$, it has the form $h + \zeta_{-1}^{-1/2} f$, where $h$ is holomorphic with order $0$.
+
+On the other hand, the function
+\[ v_{-1} = \sqrt{2}\,\zeta_{-1}^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2}\zeta_{-1}) \]
+is slight at $\zeta = \pm 1$ with order $-\tfrac{1}{2}$, and slight at $\infty$ with order $1 - \tfrac{m}{n}$.
+
+Hence, the ratio $u_{-1} / v_{-1}$ looks like a holomorphic multiple of $\zeta_1^{1/2}$ near $\zeta = 1$, a holomorphic function plus a holomorphic multiple of $\zeta_{-1}^{1/2}$ near $\zeta = -1$, and a holomorphic function plus a holomorphic multiple of $(1/\zeta_{-1})^{2m/n}$ near $\zeta = \infty$. This is consistent with $u_{-1}/v_{-1}$ being a conformal map that sends the upper half-plane to a triangle with interior angle $\pi/2$ at the images of $\zeta = \pm 1$ and interior angle $2\pi\,\tfrac{m}{n}$ at the image of $\infty$.
+
+\color{orange}
+In DLMF notation, let's try
+\begin{align*}
+u_1 & = F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \xi_{-1}) \\
+& = w_1(\xi_{-1}) \\
+u_{-1} & = w_3(\xi_{-1}) \\
+v_{-1} & = w_2(\xi_{-1}) \\
+v_1 & = -i\sqrt{2}\,\zeta_1^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, -\tfrac{1}{2}\zeta_1) \\
+& = (-\tfrac{1}{2}\zeta_1)^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, -\tfrac{1}{2}\zeta_1) \\
+& = (1 - \tfrac{1}{2}\zeta_{-1})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, 1 - \tfrac{1}{2}\zeta_{-1}) \\
+& = (1 - \xi_{-1})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, 1 - \xi_{-1}) \\
+& = w_4(\xi_{-1}),
+\end{align*}
+where $\xi_{-1} = \tfrac{1}{2}\zeta_{-1}$.
+
+\color{RoyalBlue}
+Let's guess that we're working with the map $\phi / \psi$ with
+\begin{align*}
+\phi & = \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{2} - \tfrac{m}{2n})\Gamma(\tfrac{1}{2} + \tfrac{m}{2n})}\,(\mp \zeta)\,F(1 - \tfrac{m}{2n}, 1 + \tfrac{m}{2n}, \tfrac{3}{2}; \zeta^2) \\
+& = \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \pm \tfrac{1}{2}\zeta) - \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta) \\
+& = \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, -\tfrac{1}{2}\zeta_1) - \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2}\zeta_{-1}) \quad\text{[choosing negative sign]} \\
+\psi & = \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(1 - \tfrac{m}{2n})\Gamma(1 + \tfrac{m}{2n})} F(\tfrac{1}{2} - \tfrac{m}{2n}, \tfrac{1}{2} + \tfrac{m}{2n}, \tfrac{1}{2}; \zeta^2) \\
+& = \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \pm \tfrac{1}{2}\zeta) + \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta) \\
+& = \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, -\tfrac{1}{2}\zeta_1) + \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2}\zeta_{-1}) \quad\text{[choosing negative sign]} \\
+\end{align*}
+\color{black}
 \subsection{Correspondence with Mari\~{n}o's series}
 Let $F_1(z)$ be the holomorphic function corresponding to Mari\~{n}o's formal power series $\varphi_1(z^{-1})$. The formal power series corresponding to $F_1$ will be written in the variable $z$.
 
