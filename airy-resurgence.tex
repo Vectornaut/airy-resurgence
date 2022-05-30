@@ -178,13 +178,6 @@ where $P$ is a polynomial, $Q$ is a polynomial of one degree lower, and $R$ is a
 \begin{equation}\label{eqn:reg-mod-bessel}
 \left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\tfrac{1}{3}\big)^2 z^{-2} \right] \varphi = 0.
 \end{equation}
-
-\color{violet}
-As we'll see in Section~\ref{asymp}, $K$ is in $O_{z \to \infty}(e^{-z})$. It'll be helpful to pull out the exponential decay factor and work instead with the function $K_1$ defined by $K = e^{-z} K_1$. Saying that $K$ satisfies equation~\ref{eqn:mod-bessel} is equivalent to saying that $K_1$ satisfies the equation
-\begin{equation}\label{eqn:shifted-mod-bessel}
-\left[z^2 \big(\tfrac{\partial}{\partial z} + 1\big)^2 + z \big(\tfrac{\partial}{\partial z} + 1\big) - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = 0.
-\end{equation}
-\color{black}
 \subsection{Asymptotic analysis}
 Equation~\ref{eqn:mod-bessel} has a regular singularity at $z = 0$ and an irregular singularity at $z = \infty$. From the general theory of such equations, we know that the space of trans-series solutions has a basis of trans-monomials
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,\series{W}_\alpha \mid \alpha^2 - 1 = 0 \} \]
@@ -197,24 +190,6 @@ The holomorphic analysis in Section~\ref{spatial} will give us holomorphic solut
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,W_\alpha \mid \alpha^2 - 1 = 0 \}, \]
 which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We'll see in Section~\ref{bessel-regularity} that each $z^{\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{\tau_\alpha}\,\series{W}_\alpha$.
 \subsection{Going to the spatial domain}\label{spatial}
-\color{violet}
-\subsubsection{A good try at $\zeta = 0$}
-Let's try to find a function $k_0$ with $K = \laplace_\zeta k_0$, which is unique if it exists~\cite[Theorem~1.23]{laplace-tfm}. If a function $\varphi$ satisfies the equation
-\begin{equation}%%\label{eqn:spatial-mod-bessel}
-\left[\big(\zeta^2 - 1\big) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \varphi = 0,
-\end{equation}
-its Laplace transform $\varphi = \laplace_\zeta \varphi$ satisfies the equation
-\begin{align*}
-\left[\big({-\tfrac{\partial}{\partial z}}\big)^2 - 1\right] \Big(z^2 \varphi - \big[\varphi\,z + \varphi'\big]_{\zeta = 0}\Big) + 3\big({-\tfrac{\partial}{\partial z}}\big)\big[z\varphi - \varphi\big]_{\zeta = 0} + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0 \\
-\big(\tfrac{\partial}{\partial z}\big)^2 \big[z^2 \varphi\big] - \Big(z^2 \varphi - \big[\varphi\,z + \varphi'\big]_{\zeta = 0}\Big) - 3\big(\tfrac{\partial}{\partial z}\big)\big[z\varphi\big] + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0 \\
-\Big[2 + 4z\tfrac{\partial}{\partial z} + z^2\big(\tfrac{\partial}{\partial z}\big)^2\Big]\varphi - \Big(z^2 \varphi - \big[\varphi\,z + \varphi'\big]_{\zeta = 0}\Big) - 3\Big[1 + z\tfrac{\partial}{\partial z}\Big]\varphi + \big[1 - \big(\tfrac{1}{3}\big)^2\big] \varphi & = 0,
-\end{align*}
-which simplifies to
-\begin{equation}\label{eqn:inhomog-mod-bessel}
-\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = -\big[\varphi\,z + \varphi'\big]_{\zeta = 0}.
-\end{equation}
-Since we want $\laplace_\zeta k_0$ to satisfy equation~\ref{eqn:mod-bessel}, which is the homogeneous version of equation~\ref{eqn:inhomog-mod-bessel}, we might guess that $k_0$ is a solution of equation~\ref{eqn:spatial-mod-bessel} that vanishes through first order at $\zeta = 0$. Unfortunately, this would force $k_0$ to be zero.
-\color{black}
 \subsubsection{The big idea}\label{big-idea}
 We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\ref{eqn:reg-mod-bessel}. We'll succeed when $\alpha^2 - 1 = 0$, and we'll see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
 
@@ -280,39 +255,6 @@ In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{
 If we'd followed the routine from Section~\ref{pos-root}, rewriting equation~\ref{diff-eq:spatial-mod-bessel} in the coordinate $\zeta_{-1}$ and then rewriting it again in a more recognizable form, we would've arrived at the hypergeometric equation
 \[ \left[\xi_{-1} (1 - \xi_{-1}) \big(\tfrac{\partial}{\partial \xi_{-1}}\big)^2 + 3(\tfrac{1}{2} - \xi_{-1}) \tfrac{\partial}{\partial \xi_{-1}} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0, \]
 where $\zeta_{-1} = 2\xi_{-1}$. This is the same as what we'd get by substituting $\xi_{-1}$ for $\xi_1$ in Section~\ref{pos-root}! In other words, the holomorphic map that pulls $\xi_{-1}$ back to $\xi_1$
-\color{black}
-\color{violet}
-\subsubsection{Success at $\zeta = 1$}\label{spatial-success}
-Let's try instead to find a function $k_1$ with $K = \laplace_{\zeta, 1} k_1$ \textcolor{magenta}{[This would be called $K_1$ in our new notation.]}. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. Since
-\begin{align*}
-\laplace_{\zeta_1, 0} k_1 & = e^z \laplace_{\zeta, 1} k_1 \\
-& = e^z K \\
-& = K_1,
-\end{align*}
-we want $\laplace_{\zeta_1} k_1$ to satisfy equation~\ref{eqn:shifted-mod-bessel}. Rewrite equation~\ref{eqn:spatial-mod-bessel} as
-\begin{equation}\label{eqn:shifted-spatial-mod-bessel}
-\left[\zeta_1(\zeta_1 + 2) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(\zeta_1 + 1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \varphi = 0.
-\end{equation}
-If $\varphi$ satisfies equation~\ref{eqn:shifted-spatial-mod-bessel}, $\laplace_{\zeta_1} \varphi$ will satisfy an inhomogeneous version of equation~\ref{eqn:shifted-mod-bessel}, analogous to equation~\ref{eqn:inhomog-mod-bessel}. This time, though, there's a trick we can use to zero out the inhomogeneity. Equation~\ref{eqn:shifted-spatial-mod-bessel} has a regular singularity at $\zeta_1 = 0$, and one solution (up to scaling) is a holomorphic multiple of $\zeta_1^{-1/2}$.\footnote{\textcolor{magenta}{Explain how to see.}} That solution has a fractional power singularity at $\zeta_1 = 0$, as defined in Section~\ref{L-diff-op-alg}, so its Laplace transform in $\zeta_1$ satisfies equation~\ref{eqn:shifted-mod-bessel}.
-
-Following this plan, let's find $k_1$ explicitly. Defining another coordinate $\xi$ on $\C$ so that $\zeta_1 = -2\xi$, we can rewrite equation~\ref{eqn:shifted-spatial-mod-bessel} as the hypergeometric equation
-\begin{equation}\label{eqn:hypergeom}
-\left[\xi(1 - \xi) \big(\tfrac{\partial}{\partial \xi}\big)^2 + 3(\tfrac{1}{2} - \xi) \tfrac{\partial}{\partial \xi} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] \varphi = 0.
-\end{equation}
-The hypergeometric function
-\[ g_1 = F\big(\tfrac{2}{3}, \tfrac{4}{3}; \tfrac{3}{2}; \xi\big) \]
-satisfies equation~\ref{eqn:hypergeom} by definition. It's not the solution we want, though, because it's holomorphic around $\xi = 0$. Formula~15.10.12 from \cite{dlmf} gives another solution,
-\[ f_0 = \xi^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi\big), \]
-which is a holomorphic multiple of $\xi^{-1/2}$ near $\xi = 0$. By the argument above, $F_0 = \laplace_{\zeta_1} f_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}. This suggests that a constant multiple of $f_0$ is our desired $k_1$. The power series~\cite[equation~15.2.1]{dlmf}
-\[ f_0 = \xi^{-1/2} + \frac{(\tfrac{1}{6})_1 (\tfrac{5}{6})_1}{(\tfrac{1}{2})_1 \; 1!}\;\xi^{1/2} + \frac{(\tfrac{1}{6})_2 (\tfrac{5}{6})_2}{(\tfrac{1}{2})_2 \; 2!}\;\xi^{3/2} + \frac{(\tfrac{1}{6})_3 (\tfrac{5}{6})_3}{(\tfrac{1}{2})_3 \; 3!}\;\xi^{5/2} + \ldots \]
-converges near $\xi = 0$, showing that
-\[ f_0 \in \xi^{-1/2} + O_{\xi \to 0}(\xi^{1/2}). \]
-In terms of $\zeta_1$, we have
-\[ f_0 \in -i \sqrt{2}\,\zeta_1^{-1/2} + O_{\zeta_1 \to 0}(\zeta_1^{1/2}). \]
-Using the decay properties from Section~\ref{reg-decay}, we deduce that
-\[ F_0 \in -i \sqrt{2\pi}\,z^{-1/2} + O_{z \to \infty}(z^{-3/2}). \]
-Since we know that $F_0$ satisfies equation~\ref{eqn:shifted-mod-bessel}, this confirms that $F_0$ is a constant multiple of $K_1$, which is the only subexponential solution of equation~\ref{eqn:shifted-mod-bessel} (up to scaling). Comparing with series~\ref{bessel-asymp}, we see that $K_1 = \tfrac{i}{2}\,F_0$. We conclude that $K_1 = \laplace_{\zeta_1} k_1$ for
-\[ k_1 = \tfrac{1}{\sqrt{2}}\,\zeta_1^{-1/2} F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
 \color{black}
 \section{The Airy-Lucas equation}
 \subsection{Basics}
