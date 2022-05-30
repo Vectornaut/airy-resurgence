@@ -58,34 +58,6 @@ When $\varphi \in \mathcal{E}_\zeta$, you can use differentiation under the inte
 for all integers $n \ge 0$. You can also use a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, to show that $\fracderiv{-\lambda}{\zeta}{a} \varphi \in \mathcal{E}_\zeta$ and
 \[ \laplace_{\zeta, a}\,\fracderiv{-\lambda}{\zeta}{a} \varphi = z^{-\lambda} \laplace_{\zeta, a} \varphi \]
 for all $\lambda \in (0, \infty)$.
-
-\color{violet}
-When $\varphi$ is $n$ times differentiable, its $n$th derivative is in $\mathcal{E}$, and its zeroth through $(n - 1)$st derivatives extend continuously to zero, integration by parts gives the formula
-\begin{align}\label{id:L-diff}
-\laplace_\zeta \big(\tfrac{\partial}{\partial \zeta}\big)^n \varphi & = z^n \laplace_\zeta \varphi - \left[ \varphi\,z^{n-1} + \varphi'\,z^{n-2} + \varphi''\,z^{n-3} + \ldots + \varphi^{(n-1)} \right]_{\zeta = 0} \\
-& = z^n\,\laplace\left( \varphi - \left[ \varphi + \varphi'\,\zeta + \tfrac{\varphi''}{2!}\,\zeta^2 + \ldots + \tfrac{\varphi^{(n-1)}}{(n-1)!}\,\zeta^{n-1} \right]_{\zeta = 0} \right). \nonumber
-\end{align}
-Note that if a function's derivative is subexponential, so is the function itself.\footnote{Say $f' \in O_{\zeta \to \infty}(e^{c\zeta})$. Then \[ \left|\int_0^Z f'\,d\zeta\right| \le \int_0^Z |f'|\,d\zeta \lesssim \int_0^Z e^{c\zeta}\,d\zeta = \tfrac{1}{c}(e^{cZ} - 1) \lesssim e^{cZ}.\] Now we know the integral on the left-hand side converges, implying that $f$ extends continuously to zero, with $|f - f_{\zeta = 0}| \lesssim e^{c\zeta}$.}
-\subsection{Algebraic version}
-\subsubsection{Definition}
-Let $\mathcal{P}_\zeta$ be the vector space spanned by $\zeta^\alpha$ for $\alpha \in \R \smallsetminus \Z_{< 0}$. Note that $\mathcal{P}_\zeta \cap \mathcal{E}_\zeta$ is $\mathcal{P}_\zeta^{> -1}$, the subspace spanned by $\zeta^\alpha$ with $\alpha > -1$. Since
-\[ \laplace_\zeta(\zeta^\alpha) = \Gamma(\alpha+1)\,z^{-(\alpha + 1)} \]
-for all $\alpha > -1$, let's use the same formula to extend $\laplace_\zeta$ to all of $\mathcal{P}_\zeta$. This defines $\laplace_\zeta$ consistently on $\mathcal{E}_\zeta + \mathcal{P}_\zeta$.
-\subsubsection{Action on differential operators}\label{L-diff-op-alg}
-Observe that
-\[ \laplace_\zeta(\zeta^{\alpha + 1}) = -\tfrac{\partial}{\partial z}\,\laplace_\zeta(\zeta^\alpha) \]
-for $\alpha \neq -1$. This extends identity~\ref{id:L-mult} to all of $\mathcal{P}_\zeta$.
-
-Observe that
-\[ \laplace_\zeta\tfrac{\partial}{\partial \zeta}(\zeta^\alpha) = \begin{cases}
-z\,\laplace_\zeta(\zeta^\alpha) & \alpha \neq 0 \\
-0 & \alpha = 0,
-\end{cases} \]
-and that $0 = z\,\laplace_\zeta(1) - 1$. This recovers identity~\ref{id:L-diff} for any function in $\mathcal{P}_\zeta$ whose $n$th derivative is in $\mathcal{P}_\zeta^{> -1}$. Although the functions in $\mathcal{P}_\zeta^{< 0}$ are singular at zero, let's pretend they vanish at zero. With that convention, formula~\ref{id:L-diff} extends to all of $\mathcal{P}_\zeta$.
-
-Now we have the results of Section~\ref{L-diff-op} for all functions in $\mathcal{E}_\zeta + \mathcal{P}_\zeta$. Identity~\ref{id:L-diff} is particularly simple when $\varphi$ has a {\em fractional power singularity} \textcolor{magenta}{[new terminology: when $\varphi$ is {\em slight}]} at $\zeta = 0$. By this, I mean that $\varphi$ can be written as $\varphi_\text{frac} + \varphi_\text{reg}$, where $\varphi_\text{frac} \in \mathcal{P}_\zeta$ has only non-integer exponents, and the zeroth through $(n-1)$st derivatives of $\varphi_\text{reg} \in \mathcal{E}_\zeta$ vanish at zero. Under this condition, all the initial value terms in the identity vanish, leaving
-\[ \laplace_\zeta \big(\tfrac{\partial}{\partial \zeta}\big)^n \varphi = z^n \laplace_\zeta \varphi. \]
-\color{black}
 \subsection{Change of translation chart}\label{translation}
 Define a new coordinate $\zeta_\alpha$ on $\C$ so that $\zeta = \alpha + \zeta_\alpha$. From the calculation
 \begin{align*}
