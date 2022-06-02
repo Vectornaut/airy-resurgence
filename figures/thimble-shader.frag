@@ -35,6 +35,34 @@ vec3 lab2rgb(in vec3 c)
     return rgb;
 }
 
+// --- chromasphere ---
+// adapted from endolith's complex_colormap code
+// https://github.com/endolith/complex_colormap/tree/master/complex_colormap
+
+// endolith created this palette for phase plots of complex functions, like the
+// ones in this article. (the article uses a different palette---possibly based
+// on a CMYK color wheel?)
+// https://www.ams.org/notices/201106/rtx110600768p.pdf
+
+// at each lightness `l`, we want to use a constant-chroma color wheel with the
+// most saturated colors an RGB monitor can display. this function approximates
+// the radius of that color wheel using an efficient piecewise-linear formula
+float appx_chromawheel(in float l) {
+    if (l <= 0.0 || 100.0 <= l) return 0.0;
+    float lpts [5];
+    float cpts [5];
+    lpts[0] =   0.0; lpts[1] =   9.2; lpts[2] =  73.8; lpts[3] =  90.0; lpts[4] = 100.0;
+    cpts[0] =   0.0; cpts[1] =  10.8; cpts[2] =  39.9; cpts[3] =  12.5; cpts[4] =   0.0;
+    float lbot; float ltop;
+    float cbot; float ctop;
+    if      (l < lpts[1]) { lbot = lpts[0]; ltop = lpts[1]; cbot = cpts[0]; ctop = cpts[1]; }
+    else if (l < lpts[2]) { lbot = lpts[1]; ltop = lpts[2]; cbot = cpts[1]; ctop = cpts[2]; }
+    else if (l < lpts[3]) { lbot = lpts[2]; ltop = lpts[3]; cbot = cpts[2]; ctop = cpts[3]; }
+    else                  { lbot = lpts[3]; ltop = lpts[4]; cbot = cpts[3]; ctop = cpts[4]; }
+    float t = (l - lbot) / (ltop - lbot);
+    return (1.0-t)*cbot + t*ctop;
+}
+
 // --- automatic differentiation ---
 
 // a 1-jet of a map R^2 --> R^2, with image point `pt` and derivative `push`
@@ -230,16 +258,18 @@ vec3 surface_color(float end_zone, jet2 zeta, float r_px) {
     float scaling = length(y.push);
     
     // paint the surface blue where exp(-f) is small and orange where it's large
-    float growth = edge_mix(-1.,0., zeta.pt.x + end_zone, scaling, r_px);
-    growth = edge_mix(growth, 1., zeta.pt.x - end_zone, scaling, r_px);
+    float growth = edge_mix(0., 1., -zeta.pt.x + end_zone, scaling, r_px);
     
     // paint the surface light in upper half-plane and dark in the lower half-plane
     float width = min(2., 0.05 / (scaling * r_px));
-    vec3 color = edge_mix(lab2rgb(vec3(70., 38.4*growth*axis)), lab2rgb(vec3(80., 29.8*growth*axis)), y.pt, scaling, r_px);
+    float shading = mix(0.59, 1., growth);
+    vec3 grid = lab2rgb(vec3(90., -4., -9.));
+    const float check = 0.92;
+    vec3 color = lab2rgb(vec3(edge_mix(shading*check*95., shading*95., y.pt, scaling, r_px), 0., 0.));
     if (y.pt < -0.5*GRAT) {
-        color = line_mix(lab2rgb(vec3(60., 33.9*growth*axis)), color, width, mod(y.pt - 0.5*GRAT, GRAT) - 0.5*GRAT, scaling, r_px);
+        color = line_mix(lab2rgb(vec3(shading*check*90., -4., -9.)), color, width, mod(y.pt - 0.5*GRAT, GRAT) - 0.5*GRAT, scaling, r_px);
     } else if (0.5*GRAT < y.pt) {
-        color = line_mix(lab2rgb(vec3(88., 16.8*growth*axis)), color, width, mod(y.pt - 0.5*GRAT, GRAT) - 0.5*GRAT, scaling, r_px);
+        color = line_mix(lab2rgb(vec3(shading*90., -4., -9.)), color, width, mod(y.pt - 0.5*GRAT, GRAT) - 0.5*GRAT, scaling, r_px);
     }
     return color;
 }
@@ -332,7 +362,10 @@ vec2 horizontal_flow(
 
 const float PI = 3.141592653589793;
 
-vec3 chebyshev_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
+const vec3 blue_lab = vec3(62., -15., -38.);
+const vec3 aqua_lab = vec3(40., 30., -71.);
+
+vec3 airy_lucas_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     // find screen point
     float small_dim = min(iResolution.x, iResolution.y);
     float r_px = view / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
@@ -343,26 +376,26 @@ vec3 chebyshev_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     vec3 color = surface_color(0.75*pow(1.5, float(n)), zeta, r_px);
     
     // color thimbles over 1
-    /*color = thimble_color(ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);*/
+    /*color = thimble_color(ONE, phase_rcp, lab2rgb(blue_lab), color, zeta, r_px);*/
     float penultimate = cos(PI/float(n));
     vec2 flowed = horizontal_flow(u.pt, ONE, phase_rcp, CHEBYSHEV, n, 0.1, 0.01, 40);
     if (-penultimate < flowed.x || n % 2 == 0) {
-        /*color = mix(color, vec3(0.40, 0.00, 0.10), 0.8);*/
-        color = thimble_color(ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
+        /*color = mix(color, lab2rgb(blue_lab), 0.8);*/
+        color = thimble_color(ONE, phase_rcp, lab2rgb(blue_lab), color, zeta, r_px);
     }
     
     // color thimbles over -1
-    /*color = thimble_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);*/
+    /*color = thimble_color(-ONE, phase_rcp, lab2rgb(aqua_lab), color, zeta, r_px);*/
     flowed = horizontal_flow(u.pt, -ONE, phase_rcp, CHEBYSHEV, n, 0.1, 0.01, 40);
     if ((-penultimate < flowed.x || n % 2 == 1) && flowed.x < penultimate) {
-        /*color = mix(color, vec3(0.05, 0.00, 0.10), 0.8);*/
-        color = thimble_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+        /*color = mix(color, lab2rgb(aqua_lab), 0.8);*/
+        color = thimble_color(-ONE, phase_rcp, lab2rgb(aqua_lab), color, zeta, r_px);
     }
     
     return color;
 }
 
-vec3 cosh_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
+vec3 bessel_zero_unrolled_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
     // find screen point
     float small_dim = min(iResolution.x, iResolution.y);
     float r_px = view / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
@@ -373,13 +406,13 @@ vec3 cosh_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
     vec3 color = surface_color(535.5, zeta, r_px);
     
     // color thimbles
-    color = thimble_color( ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
-    color = thimble_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+    color = thimble_color( ONE, phase_rcp, lab2rgb(blue_lab), color, zeta, r_px);
+    color = thimble_color(-ONE, phase_rcp, lab2rgb(aqua_lab), color, zeta, r_px);
     
     return color;
 }
 
-vec3 alg_cosh_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
+vec3 bessel_zero_cylinder_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
     // find screen point
     float small_dim = min(iResolution.x, iResolution.y);
     float r_px = view / small_dim; // the inner radius of a pixel in the Euclidean metric of the screen
@@ -388,12 +421,12 @@ vec3 alg_cosh_plot(vec2 phase_rcp, float view, vec2 fragCoord) {
     // get pixel color
     jet2 zeta = alg_cosh(u);
     vec3 color = surface_color(1.1, zeta, r_px);
-    color = thimble_color( ONE, phase_rcp, vec3(0.40, 0.00, 0.10), color, zeta, r_px);
-    color = thimble_color(-ONE, phase_rcp, vec3(0.05, 0.00, 0.10), color, zeta, r_px);
+    color = thimble_color( ONE, phase_rcp, lab2rgb(blue_lab), color, zeta, r_px);
+    color = thimble_color(-ONE, phase_rcp, lab2rgb(aqua_lab), color, zeta, r_px);
     return color;
 }
 
-vec3 critigon_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
+vec3 higher_airy_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
     float crit_dens = 1. / float(n-1);
     float crit_angle = 2.*PI*crit_dens;
     vec2 root = vec2(cos(crit_angle), sin(crit_angle));
@@ -415,7 +448,8 @@ vec3 critigon_plot(int n, vec2 phase_rcp, float view, vec2 fragCoord) {
         vec2 flowed = horizontal_flow(u.pt, crit_val, phase_rcp, CRITIGON, n, 0.1, 0.01, 40);
         vec2 flow_disp = flowed - crit_dens*crit_val;
         if (dot(flow_disp, flow_disp) < crit_pt_sep_sq) {
-            vec3 label = lab2rgb(vec3(49., 29.*crit_val));
+            float lite = mix(65., 80., float(k)*crit_dens);
+            vec3 label = lab2rgb(vec3(lite, appx_chromawheel(lite)*crit_val));
             color = thimble_color(crit_val, phase_rcp, label, color, zeta, r_px);
             /*if (k == 0) color = mix(color, label, 0.8);*/
         }
@@ -429,9 +463,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     // try setting the first argument of chebyshev_plot to 1, 2, 3, 4, 5...
     float angle = 4.*PI*(iMouse.x / iResolution.x + 1./3.);
     vec2 phase_rcp = vec2(cos(-angle), sin(-angle));
-    /*vec3 color = chebyshev_plot(5, phase_rcp, 0.8, fragCoord);*/
-    /*vec3 color = cosh_plot(phase_rcp, 2.75*PI, fragCoord);*/
-    /*vec3 color = alg_cosh_plot(phase_rcp, 1.2, fragCoord);*/
-    vec3 color = critigon_plot(5, phase_rcp, 1.6, fragCoord);
+    vec3 color = airy_lucas_plot(3, phase_rcp, 0.8, fragCoord);
+    /*vec3 color = bessel_zero_unrolled_plot(phase_rcp, 2.75*PI, fragCoord);*/
+    /*vec3 color = bessel_zero_cylinder_plot(phase_rcp, 1.2, fragCoord);*/
+    /*vec3 color = higher_airy_plot(6, phase_rcp, 2., fragCoord);*/
     fragColor = vec4(sRGB(color), 1.);
 }
