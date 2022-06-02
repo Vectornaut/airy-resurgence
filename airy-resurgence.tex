@@ -27,6 +27,7 @@
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
+\newcommand{\holoL}[1]{\mathcal{H}L^{#1}}
 \DeclareMathOperator{\Ai}{Ai}
 
 \title{Resurgence of the Airy function}
@@ -78,7 +79,26 @@ Let's rescale the translation structure of $\C$, expanding displacements by a fa
 we learn that
 \[ \laplace_{\xi, 0} \varphi = \mu\,\laplace_{\zeta, 0} \varphi. \]
 Note that $\laplace_{\xi, 0}$ is defined in the new translation structure on $\C$, while $\laplace_{\zeta, 0}$ is defined in the old translation structure. We can still compare them, because they both turn complex-valued functions on $\C$ into holomorphic functions on $T^*\C$.
-\section{Shifting integro-differential equations}\label{shifting}
+\section{Integro-differential equations}
+\subsection{Existence of solutions}
+\subsubsection{Function spaces for contour integration}
+Take a simply connected open set $\Omega$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. Let $\mathcal{S} \subset \holoL{\infty}(\Omega)$ be the union of $O_{\zeta, 0 \leftarrow}(\zeta^\tau)$ over all $\tau > 0$.
+
+If you give a Riemann surface a metric which is compatible with its conformal structure, you get a norm on each tangent space. A {\em density} on a Riemann surface is a norm that arises in this way. Given a density $\rho$ on $\Omega$, let $\ell_\rho$ be the continuous function on $\Omega$ that measures distance from $\zeta = 0$ with respect to $\rho$. The value of $\ell_\rho$ at $a \in \Omega$ is the infimal length of a rectifiable path that runs from $\zeta = 0$ to $a$ within $\Omega$. Keep in mind that $\Omega$ touches but doesn't contain $\zeta = 0$, and $\ell_\rho$ is only well-defined when $\rho$ puts $\zeta = 0$ at finite distance from the points in $\Omega$. \textcolor{magenta}{[...]}
+
+\color{gray}
+A bounded holomorphic map
+\begin{align*}
+\Omega & \to \holoL{1}(\Omega) \\
+\alpha & \mapsto g_\alpha
+\end{align*}
+defines a bounded linear operator
+\[ \mathcal{G}f\big|_{\zeta = \alpha} = \int_0^\alpha  g_\alpha f \]
+on $\holoL{\infty}(\Omega)$. Noting that
+\color{black}
+
+%%with\footnote{We're using the operator norm on the left-hand side and the $L^1$ norm on the right-hand side.} $\|\mathcal{G}\| = \sup_{\alpha \in \Omega} \|g_\alpha\|_1$.
+\subsection{Order shifting}\label{shifting}
 Consider holomorphic functions on a simply connected open set that touches but doesn't contain $\zeta = 0$. A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as
 \begin{equation}\label{eqn:slight-defn}
 \zeta^{\alpha_1} f_1 + \ldots + \zeta^{\alpha_r} f_r + g
