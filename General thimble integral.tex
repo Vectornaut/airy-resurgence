@@ -1,0 +1,255 @@
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\documentclass[11pt,a4paper,twoside,leqno,noamsfonts]{amsart}
+           \usepackage{setspace}
+\linespread{1.34}           
+           %\onehalfspacing
+\usepackage[english]{babel}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\usepackage[utopia]{mathdesign}
+    \DeclareSymbolFont{usualmathcal}{OMS}{cmsy}{m}{n}
+    \DeclareSymbolFontAlphabet{\mathcal}{usualmathcal}
+\usepackage[a4paper,top=4cm,bottom=3cm,left=3.5cm,
+           right=3.5cm,bindingoffset=5mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{braket,caption,comment,mathtools,stmaryrd}
+\usepackage{multirow,booktabs,microtype}
+\usepackage{latexsym}
+\usepackage{todonotes}
+\usepackage{fancyhdr}
+%\renewcommand{\sectionmark}[1]{\markboth{\thesection\ #1}{}}
+\pagestyle{fancy}
+% Clear the header and footer
+\fancyhead{}
+\fancyfoot{}
+% Set the right side of the footer to be the page number
+\fancyfoot[R]{\thepage}
+\addtolength{\headheight}{\baselineskip}
+%\fancyhead[RE]{\rightmark}
+%\fancyhead[RE]{}
+\usepackage{soul} % per testo barrato
+\usepackage[colorlinks,bookmarks]{hyperref} %
+\hypersetup{colorlinks,%
+            citecolor=britishracinggreen,%
+            filecolor=black,%
+            linkcolor=cobalt,%
+            urlcolor=black}
+\setcounter{tocdepth}{2}
+%\setcounter{section}{-1}
+\numberwithin{equation}{section}
+
+% Veronica's custom commands
+\input{command}
+
+% symbology
+\newcommand{\blankbox}{{\fboxsep 0pt \colorbox{lightgray}{\phantom{$h$}}}}
+\newcommand{\maps}{\colon}
+\newcommand{\van}{\mathfrak{m}}
+\newcommand{\laplace}{\mathcal{L}}
+\newcommand{\borel}{\mathcal{B}}
+\newcommand{\laplacepde}{\mathcal{D}}
+\DeclareMathOperator{\Ai}{Ai}
+
+\DeclareRobustCommand{\subtitle}[1]{\\#1}
+\title[General thimbles integrals]{General thimbles integrals\\ [1ex]
+  }
+
+\author{
+Veronica Fantini 
+}
+\begin{document}
+\maketitle
+
+
+\section{Proof of Borel regularity}
+
+We are going to prove Theorem 5.1 {\tt draft2}. 
+Let $X$ be a $N-\dim$ manifold, $f\colon X\to\C$ be a holomorphic Morse function with simple critical points, and $\nu\in\Gamma(X,\Omega^N)$, and set
+\begin{equation}
+I(z)\defeq\int_{\mathcal{C}}e^{-zf}\nu
+\end{equation}
+where $\mathcal{C}$ is a suitable contour such that the integral is well defined. Indeed, $I(z)$ represents a pairing between a relative homology class $\mathcal{C}\in H_{N}^{B}(X,zf)$ and a cohomology class $\nu\in H_{dR}^N(X,zf)$ (see Section 1.3.1 Thimble integrals in the introduction). 
+Let us restrict to one dimensional $X$. For any Morse critical points $x_\alpha$\footnote{By Morse critical points we mean non--degenerate isolated critical points.} of $f$, the saddle point approximation allows to compute the asymptotic expansion of $I_\alpha(z)$ 
+\begin{equation}\label{exp-int}
+I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}\sqrt{2\pi} z^{-1/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n} \qquad \text{ as } \operatorname{Re} (ze^{i\theta})\to\infty
+\end{equation}
+where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point $x_\alpha$ and $\theta$ is chosen such that $f(x_\beta)\notin f(x_\alpha)+[0,e^{i\theta}\infty)$ for $\beta\neq\alpha$\footnote{Such a $\theta$ exists because $f$ has a finite number of critical points.}. Notice that $f \circ \mathcal{C}_\alpha$ lies in the ray $\zeta_\alpha +[0, e^{i\theta}\infty)$, where $\zeta_\alpha := f(x_\alpha)$.
+
+\begin{theorem}\label{thm:maxim} Let $N=1$. Let ${I}_{\alpha}(z)$ defined as in \eqref{exp-int} for every critical point $x_\alpha$. Then $\tilde{I}_\alpha$ is Borel regular for $\operatorname{Re}(ze^{i\theta})>0$:
+\begin{enumerate}
+\item\label{int:series-gevrey} The series $\tilde{I}_\alpha(z)=e^{-zf(x_\alpha)}\sqrt{2\pi} z^{-1/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n}$ is Gevrey-1.
+\item\label{int:resum-converges} The series $\tilde{\iota}_\alpha(\zeta)\defeq\mathcal{B}(\tilde{I}_\alpha)$ converges near $\zeta=\zeta_{\alpha}$.
+\item\label{int:resum-valid} If you continue the sum of $\tilde{\iota}_\alpha$ along the ray going rightward from $\zeta_\alpha$ in the direction $\theta$, and take its Laplace transform along that ray, you'll recover $I_\alpha$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+\begin{enumerate}
+\item We may drop the assumption of non degenerate critical points for $f$, however the asymptotic expansion of $I_\alpha(z)$ will depend on the order $m$ such that $f^{(m)}(x_\alpha)\neq 0$ and $f^{(j)}(x_\alpha)=0$ for every $j=1,...,m-1$ (see [Zorich] Theorem 1 Section 19.2.5).  
+\item in [Malgrange74] (see also Chapter 5 of [Mistergard Phd thesis] for a general review), the author computes the asymptotic expansion of exponential integrals for $N>1$ which get logarithmic terms like 
+\[\tilde{I}(z)=\sum_{j\in A} \sum_{n\geq 0}\sum_{q=0}^{N-1}a_{n,q,j}z^{-n-j}(\log z)^q,\] for $A\subset\Q_{\geq 0}$ finite. Due to the presence of logarithmic terms, the definition of Borel transform has to be further extended  (see [Mistergard phd] Definition pag 5) and the study of Borel regularity becomes more involved.   
+\end{enumerate}
+\end{remark}
+\begin{proof}
+Part~\eqref{int:series-gevrey}: Since $f$ is Morse, we can find a holomorphic chart $\tau$ around $x_\alpha$ with $\tfrac{1}{2} \tau^2 = f - \zeta_\alpha$. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty e^{i\theta}, 0]$ and $[0, e^{i\theta}\infty)$ on $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$, respectively. \textbf{[We should explicitly spell out and check the conditions that make this possible. I think we're implicitly orienting $\mathcal{C}_\alpha$ so that $\tau$ in the upper half-plane.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
+\[ \nu = \sum_{n \ge 0} b_n^\alpha \tau^n\,d\tau \]
+that converges in some disk $|\tau| < \varepsilon$.
+
+
+In coordinates $\tau $ the integral $I_\alpha(z)$ can be approximated as 
+\[ I_\alpha(z) \sim  e^{-z\zeta_\alpha}\int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
+as $\operatorname{Re}(ze^{i\theta}) \to \infty$ (see Lemma 1 in Section 19.2.2  Zorich). \textbf{[I need to learn how this works! Do we get asymptoticity at all orders? ---Aaron]} Plugging in the Taylor series above, we get
+\begin{align*}
+ I_\alpha(z) & \sim e^{-z\zeta_\alpha}\int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_n^\alpha \tau^n\,d\tau \\
+& = e^{-z\zeta_\alpha}\int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^\alpha \tau^{2n}\,d\tau\\
+& = 2e^{-z\zeta_\alpha}\int_{0}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^\alpha \tau^{2n}\,d\tau.
+\end{align*}
+
+
+By Watson's Lemma (see Lemma 4 Section 19.2.2 Zorich)
+
+\begin{align*}
+I_\alpha(z) &\sim e^{-z\zeta_\alpha}\sum_{n \ge 0} b_{2n}^\alpha \Gamma\left(n+\tfrac{1}{2}\right)2^{n+1/2}z^{-n-1/2}\\
+&= e^{-z\zeta_\alpha}\sqrt{2\pi}\sum_{n \ge 0} b_{2n}^\alpha (2n-1)!!z^{-n-1/2}
+\end{align*}
+
+
+%By the dominated convergence theorem,\footnote{Notice that the sum over $k$ is empty when $n = 0$.}
+%\begin{align*}
+%I_\alpha(z) & \approx e^{-z\zeta_\alpha} \sum_{n \ge 0} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \\
+%& = e^{-z\zeta_\alpha} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha \left[ \sqrt{2\pi}\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big) - 2e^{-z\varepsilon^2/2} \sum_{k=1}^n \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \right].
+%\end{align*}
+
+%The annoying $e^{-z\varepsilon^2/2}$ correction terms are dwarfed by their $z^{-(n+1/2)}$ counterparts when $z$ is large. These terms are crucial, however, for the convergence of the sum. To see why, consider their absolute sum $C_\text{exp}$. When $z \in [0, \infty)$,
+%\begin{align*}
+%C_\text{exp} & = -2e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left| b_{2n}^\alpha \sum_{k=1}^n \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-(n-k+1)} \right| \\
+%& =-2e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| \sum_{k=1}^n \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-(n-k+1)} \\
+%& \ge -2\varepsilon e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| nz^{-n},
+%\end{align*}
+%which diverges for typical $f$ and $\nu$. \textbf{[Does it? Veronica points out that we expect $b_{2n}$ to shrink at least as fast as $(n!)^{-1}$.]}
+
+%This argument suggests that no matter how tiny the correction terms get, we can't expect to swat them all aside. We can, however, set aside any finite set of them. \color{violet}\textbf{[Use Miller's proof of Watson's lemma in place of the following argument, which has a few soft spots. See also Loday-Richaud, \S 5.1.5, Theorem~5.1.3]} For each cutoff $N$, the tail
+%\[ \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \]
+%
+%\color{CarnationPink}
+%For each cutoff $N$, the tail error \textbf{[check]}
+%\begin{align*}
+%\left| \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \right| & \le \sum_{n \ge N} \left| b_{2n}^\alpha \right| \int_{-\varepsilon}^\varepsilon e^{-|z|\tau^2/2} \tau^{2n}\,d\tau \\
+%& \le \sum_{n \ge N} \left| b_{2n}^\alpha \right| \int_{-\infty}^\infty e^{-|z|\tau^2/2} \tau^{2n}\,d\tau \\
+%& = \sqrt{2\pi} \sum_{n \ge N} (2n-1)!!\,\left| b_{2n}^\alpha \right| |z|^{-(n+1/2)} \\
+%& \lesssim \sum_{n \ge N} (2n-1)!!\,\varepsilon^{-2n} |z|^{-(n+1/2)} \\
+%& = \varepsilon \sum_{n \ge N} (2n-1)!!\,\big(\varepsilon^{-1}\big)^{2n+1} \big(|z|^{-1/2}\big)^{2n+1} \\
+%& = \varepsilon \sum_{n \ge N} (2n-1)!!\,\big(\varepsilon^{-1} |z|^{-1/2}\big)^{2n+1} \\
+%& = \textbf{uh-oh!}
+%\end{align*}
+%\color{violet}
+%is in $o_{z \to \infty}(z^{-N})$ \textbf{[check]}, and the absolute sum
+%\begin{align*}
+%C_\text{exp}^N & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n = 1}^{N-1} (2n-1)!!\,\left| b_{2n}^\alpha \sum_{k=1}^n \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-(n-k+1)} \right| \\
+%& \le 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n = 1}^{N-1} (2n-1)!!\,\left|b_{2n}^\alpha\right| \sum_{k=1}^n \frac{\varepsilon^{2k-1}}{(2k-1)!!} |z|^{-(n-k+1)} \\
+%& \leq 2\varepsilon e^{-\operatorname{Re}(z)\varepsilon^2/2}\sum_{n=1}^{N-1}(2n-1)!!|b_{2n}^\alpha|n z^{-n}\\
+%%& \ge -2\varepsilon e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| z^{-n},
+%\end{align*}
+%is in $o_{z \to \infty}(z^{-m})$ for every $m$ \textbf{[check]}.\color{black} Hence,
+%\[  I_\alpha(z) \sim e^{-z\zeta_\alpha}\sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
+%The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows, allowing the simpler estimate
+%\[  I_\alpha(z) \sim e^{-z\zeta_\alpha}\sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)}. \]
+Call the right-hand side $\tilde{I}_\alpha$. We now see that $a_{\alpha,n} = (2n-1)!!\,b_{2n}^\alpha$ in the statement of the theorem. We know from the definition of $\varepsilon$ that $\left|b_n^\alpha\right| \varepsilon^n \lesssim 1$. Recalling that $(2n - 1)!! \sim (\pi n)^{-1/2}\,4^n\,n!$ as $n \to \infty$, we deduce that $|a_{\alpha,n}| \lesssim \left(\tfrac{4}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{I}_\alpha$ is Gevrey-1.%
+
+
+
+Part~\eqref{int:resum-converges}: note that \textbf{[explain formally what it means to center at $\zeta_\alpha$]}
+\begin{align*}
+\tilde{\iota}_{\alpha}\defeq \mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & = \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,\frac{(\zeta - \zeta_\alpha)^{n-1/2}}{\Gamma\big(n+\tfrac{1}{2}\big)} 
+\end{align*}
+
+Since ${(2n-1)!!}=\pi^{-1/2} 2^n{\Gamma\left(n+\tfrac{1}{2}\right)}$ and $|b_n^\alpha|\epsilon^n\lesssim 1$, then $\tilde{\iota}_{\alpha}(\zeta)$ has a finite radius of convergence. 
+
+%\begin{multline*}
+%\tilde{\varphi}_\alpha(\zeta)=\mathcal{B}\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_{\alpha,0}+\sum_{n\geq 0}a_{\alpha,n+1}\frac{\zeta^n}{n!}\right)\\
+%=(2\pi)^{1/2} \left(\delta(f_{x_\alpha}) a_{\alpha,0}+\sum_{n\geq 0}a_{\alpha,n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}\right)
+%\end{multline*}
+%Since $|a_{\alpha,n}|\leq C_\alpha A_\alpha^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
+
+Part~\eqref{int:resum-valid}: Let's recast the integral $I_\alpha$ into the $f$ plane. As $\zeta$ goes rightward from $\zeta_\alpha$, the start and end points of $\mathcal{C}_\alpha(\zeta)$ sweep backward along $\mathcal{C}^-_\alpha(\zeta)$ and forward along $\mathcal{C}^+_\alpha(\zeta)$, respectively. Hence, we have
+\begin{align*}
+I_\alpha(z) & = \int_{\mathcal{C}_{\alpha}} e^{-zf} \nu \\
+&=\int_{\mathcal{H}_{\alpha}}e^{-z\zeta}\left(\int_{f^{-1}(\zeta)}\frac{\nu}{df}\right)d\zeta \\
+& = \int_{\zeta_\alpha}^{e^{i\theta}\infty} e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}\,d\zeta.
+\end{align*}
+where $\mathcal{H}_{\alpha}$ is the Hanckel contour through the point $\zeta_{\alpha}$ (see Figure \cite{fig.paths}) with ends in the $\theta$ direction.
+\begin{figure}
+\caption{The contour $\mathcal{C}_\alpha$, its image under $f$ which is the Hankel contour $\mathcal{H}_{\alpha}=f(\mathcal{C}_{\alpha})$ and the ray $[\zeta_\alpha,+\infty]$. }
+\end{figure}   
+Noticing that the last integral is a Laplace transform for the initial choice of $\theta$, we learn that
+\begin{equation}\label{thimble-difference}
+\hat{\iota}_\alpha(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}.
+\end{equation}
+In Ecalle's formalism, $\int_{f^{-1}(\zeta)}\frac{\nu}{df}$ and $\hat{\iota}_\alpha$ are respectively a major and a minor of the singularity $\overset{\triangledown}{\iota}_\alpha$ and they differ by an holomorphic function (we will see this in the examples Section Airy, Bessel). 
+
+
+We can rewrite our Taylor series for $\nu$ as
+\begin{align*}
+\nu & = \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{n/2}\,\frac{df}{[2(f - \zeta_\alpha)]^{1/2}} \\
+& = \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{(n - 1)/2}\,df,
+\end{align*}
+taking the positive branch of the square root on $\mathcal{C}^+_\alpha$ and the negative branch on $\mathcal{C}^-_\alpha$. Plugging this into our expression for $\hat{\iota}_\alpha$, we learn that
+\begin{align*}
+\hat{\iota}_\alpha(\zeta) & = \left[ \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{(n - 1)/2} \right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)} \\
+& = \sum_{n \ge 0} b_n^\alpha \Big( [2(\zeta - \zeta_\alpha)]^{(n - 1)/2} - (-1)^{n-1}[2(\zeta - \zeta_\alpha)]^{(n - 1)/2} \Big) \\
+& = \sum_{n \ge 0} 2 b_{2n}^\alpha [2(\zeta - \zeta_\alpha)]^{n - 1/2} \\
+& = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^\alpha (\zeta - \zeta_\alpha)^{n - 1/2} \\
+& = \mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha.
+\end{align*}
+We have now shown that the sum of $\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha$ is actually equal to $\hat{\iota}_\alpha$ as $\zeta\in\zeta_\alpha+[0,e^{i\theta}\infty)$.
+\end{proof}
+
+\begin{remark}
+Different choices of admissible $\theta$ correspond to different choices of thimbles $[\mathcal{C}_{\alpha}]\in H_N^{B}(X,zf)$, but the Borel transform of $\tilde{I}_{\alpha}$ does not depend on $\theta$. However, if $\theta_*\defeq\arg(\zeta_{\alpha}-\zeta_{\beta})$ and $\theta_{\pm}\defeq\theta_*\pm\delta$ for small $\delta$, then $I_{\alpha}(z)$ jumps on the intersection between $\operatorname{Re}(e^{i\theta_+}z)>0$ and $\operatorname{Re}(e^{i\theta_-}z)>0$. This is known as the Stokes phenomenon (see Section resurgence thimbles integrals).  
+\end{remark}
+
+\section{$3/2$ derivative formula}
+
+In Theorem \ref{thm:maxim} we have seen that the asymptotic behaviour of $I_\alpha(z)$ has a fractional power contribution namely $\tilde{I}_{\alpha}(z)=e^{-z\zeta_\alpha}z^{-1/2}\sqrt{2\pi}\sum_{n\geq 0}a_{\alpha,n}z^{-n}$, hence we have used the extended notion of Borel transform to deal with fractional powers. Now we will focus on the formal series $\tilde{\Phi}_\alpha(z)\defeq e^{-z\zeta_\alpha}\sqrt{2\pi}\sum_{n\geq 0}a_{\alpha,n}z^{-n}=z^{1/2}\tilde{I}_\alpha(z)$ which does not contain any fractional power and we prove a fractional derivative formula which relates the Borel transform s $\hat{\varphi}_\alpha(\zeta)$ and $\hat{\iota}_{\alpha}(\zeta)$. Moreover we show that the $\hat{\varphi}_{\alpha}(\zeta)$ depends on $\nu$ and $df$ as well as $\hat{\iota}_{\alpha}(\zeta)$ does. 
+
+\begin{corollary}\label{int:deriv-formula} 
+Under the same assumptions of Theorem \ref{thm:maxim}, for any $\zeta$ on the ray going rightward from $\zeta_\alpha$ in the direction of $\theta$, we have
+\begin{multline}\label{formula1}
+\hat{\varphi}_{\alpha}(\zeta)=\partial^{\textcolor{red}{3/2}}_{\zeta \text{ from }\zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)}\nu \right)=\textcolor{red}{\left(\tfrac{\partial}{\partial \zeta}\right)^2}\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2} \textcolor{red}{\left( \int_{\mathcal{C}_\alpha(\zeta')} \nu \right)}\,d\zeta',
+\end{multline}
+where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $e^{-i\theta}f^{-1}([\zeta_\alpha, \zeta ])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $e^{-i\theta}f^{-1}(\zeta)$. \textbf{[Be careful about the orientation of $\mathcal{C}_\alpha$.]}
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:frac-diff-borel} tells us that
+\begin{align*}
+\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & = \mathcal{B}_{\zeta_\alpha} z^{-1/2} \tilde{\varphi}_\alpha \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \mathcal{B} \tilde{\varphi}_\alpha \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha.
+\end{align*}
+It follows, from the proof of part $3$ of Theorem \ref{thm:maxim}, that
+\begin{equation}\label{shifted-resum-valid}
+\hat{\iota}_\alpha(\zeta) = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha.
+\end{equation}
+Since fractional integrals form a semigroup, equation~\eqref{shifted-resum-valid} implies that
+\[ \partial^{-1}_{\zeta \text{ from } \zeta_\alpha} \hat{\iota}_\alpha(\zeta) = \partial^{-3/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha. \]
+Rewriting equation~\eqref{thimble-difference} as
+\[ \hat{\iota}_\alpha(\zeta) = \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right), \]
+we can see that
+\[ \partial^{-1}_{\zeta \text{ from } \zeta_\alpha} \hat{\iota}_\alpha(\zeta) = \int_{\mathcal{C}_\alpha(\zeta)} \nu - \int_{\mathcal{C}_\alpha(0)} \nu. \]
+The initial value term vanishes, because the path $\mathcal{C}_\alpha(0)$ is a point. Hence,
+\[ \int_{\mathcal{C}_\alpha(\zeta)} \nu = \partial^{-3/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha(\zeta). \]
+Recalling that the Riemann-Liouville fractional derivative is a left inverse of the fractional integral, we conclude that
+\[ \partial^{3/2}_{\zeta \text{ from } \zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right) = \hat{\varphi}_\alpha(\zeta). \]
+\end{proof}
+
+
+\subsection{Singularities} 
+From equation \eqref{shifted-resum-valid} we see that singularities of $\hat{\iota}_{\alpha}(\zeta)$ in the Borel plane comes from either poles of $\nu$ or zeros of $df$. Instead, the fractional derivatives formula tells that singularities of $\hat{\varphi}_\alpha$ are given by convolutions of $\zeta^{-1/2}/\Gamma(1/2)$ with $\hat{\iota}_{\alpha}$. Since $\zeta^{-1/2}/\Gamma(1/2)$ is singular at $\zeta=0$ the set of singularities of $\hat{\varphi}_{\alpha}(\zeta)$ is exactly the same as the one of $\hat{\iota}_{\alpha}(\zeta)$. However, the type of singularities will change and we expect $\hat{\varphi}_{\alpha}(\zeta)$ to have only simple singularities.  
+
+
+\section{Contour argument}
+
+
+\end{document}
