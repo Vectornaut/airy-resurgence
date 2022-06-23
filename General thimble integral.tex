@@ -56,7 +56,7 @@
   }
 
 \author{
-Veronica Fantini 
+Veronica Fantini, Aaron Fenyes
 }
 \begin{document}
 \maketitle
@@ -86,7 +86,7 @@ where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point
 
 \begin{remark}
 \begin{enumerate}
-\item We may drop the assumption of non degenerate critical points for $f$, however the asymptotic expansion of $I_\alpha(z)$ will depend on the order $m$ such that $f^{(m)}(x_\alpha)\neq 0$ and $f^{(j)}(x_\alpha)=0$ for every $j=1,...,m-1$ (see [Zorich] Theorem 1 Section 19.2.5).  
+\item We may drop the assumption of non degenerate critical points for $f$, however the asymptotic expansion of $I_\alpha(z)$ will depend on the order $m$ such that $f^{(m)}(x_\alpha)\neq 0$ and $f^{(j)}(x_\alpha)=0$ for every $j=1,...,m-1$ \cite[Theorem 1 Section 19.2.5]{math-analysis-ii}.
 \item in [Malgrange74] (see also Chapter 5 of [Mistergard Phd thesis] for a general review), the author computes the asymptotic expansion of exponential integrals for $N>1$ which get logarithmic terms like 
 \[\tilde{I}(z)=\sum_{j\in A} \sum_{n\geq 0}\sum_{q=0}^{N-1}a_{n,q,j}z^{-n-j}(\log z)^q,\] for $A\subset\Q_{\geq 0}$ finite. Due to the presence of logarithmic terms, the definition of Borel transform has to be further extended  (see [Mistergard phd] Definition pag 5) and the study of Borel regularity becomes more involved.   
 \end{enumerate}
@@ -99,7 +99,7 @@ that converges in some disk $|\tau| < \varepsilon$.
 
 In coordinates $\tau $ the integral $I_\alpha(z)$ can be approximated as 
 \[ I_\alpha(z) \sim  e^{-z\zeta_\alpha}\int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
-as $\operatorname{Re}(ze^{i\theta}) \to \infty$ (see Lemma 1 in Section 19.2.2  Zorich). \textbf{[I need to learn how this works! Do we get asymptoticity at all orders? ---Aaron]} Plugging in the Taylor series above, we get
+as $\operatorname{Re}(ze^{i\theta}) \to \infty$ \cite[Lemma 1 in Section 19.2.2]{math-analysis-ii}). Plugging in the Taylor series above, we get
 \begin{align*}
  I_\alpha(z) & \sim e^{-z\zeta_\alpha}\int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_n^\alpha \tau^n\,d\tau \\
 & = e^{-z\zeta_\alpha}\int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^\alpha \tau^{2n}\,d\tau\\
@@ -107,7 +107,7 @@ as $\operatorname{Re}(ze^{i\theta}) \to \infty$ (see Lemma 1 in Section 19.2.2  
 \end{align*}
 
 
-By Watson's Lemma (see Lemma 4 Section 19.2.2 Zorich)
+By Watson's Lemma~\cite[Lemma 4, \S 19.2.2]{math-analysis-ii}
 
 \begin{align*}
 I_\alpha(z) &\sim e^{-z\zeta_\alpha}\sum_{n \ge 0} b_{2n}^\alpha \Gamma\left(n+\tfrac{1}{2}\right)2^{n+1/2}z^{-n-1/2}\\
@@ -175,10 +175,10 @@ Since ${(2n-1)!!}=\pi^{-1/2} 2^n{\Gamma\left(n+\tfrac{1}{2}\right)}$ and $|b_n^\
 Part~\eqref{int:resum-valid}: Let's recast the integral $I_\alpha$ into the $f$ plane. As $\zeta$ goes rightward from $\zeta_\alpha$, the start and end points of $\mathcal{C}_\alpha(\zeta)$ sweep backward along $\mathcal{C}^-_\alpha(\zeta)$ and forward along $\mathcal{C}^+_\alpha(\zeta)$, respectively. Hence, we have
 \begin{align*}
 I_\alpha(z) & = \int_{\mathcal{C}_{\alpha}} e^{-zf} \nu \\
-&=\int_{\mathcal{H}_{\alpha}}e^{-z\zeta}\left(\int_{f^{-1}(\zeta)}\frac{\nu}{df}\right)d\zeta \\
+& = \int_{\mathcal{H}_{\alpha}} e^{-z\zeta} \left.\frac{\nu}{df}\right|_{f^{-1}(\zeta)}\,d\zeta \\
 & = \int_{\zeta_\alpha}^{e^{i\theta}\infty} e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}\,d\zeta.
 \end{align*}
-where $\mathcal{H}_{\alpha}$ is the Hanckel contour through the point $\zeta_{\alpha}$ (see Figure \cite{fig.paths}) with ends in the $\theta$ direction.
+where $\mathcal{H}_{\alpha}$ is the Hankel contour through the point $\zeta_{\alpha}$ (see Figure \cite{fig.paths}) with ends in the $\theta$ direction.
 \begin{figure}
 \caption{The contour $\mathcal{C}_\alpha$, its image under $f$ which is the Hankel contour $\mathcal{H}_{\alpha}=f(\mathcal{C}_{\alpha})$ and the ray $[\zeta_\alpha,+\infty]$. }
 \end{figure}   
@@ -272,5 +272,9 @@ As noticed in proof of Theorem \ref{thm:maxim}, the integral $I_{\alpha}(z)$ can
 \item[$(ii)$] the Hankel contour integral of the major $\overset{\triangledown}{\iota}_\alpha(\zeta)$
 \end{enumerate}
 and $\overset{\triangledown}{\iota}_\alpha(\zeta)=\hat{
-\iota}_{\alpha}(\zeta)+\text{hol.fct.}$. In the applications we have evidence that $\overset{\triangledown}{\iota}_\alpha(\zeta)$ is an algebraic hypergeometric function and when there are only two critical values, it decomposes as a sum of two germs of holomorphic functions at each critical values respectively (see {\tt airy-resurgence} Section 6.1, 6.3).    
+\iota}_{\alpha}(\zeta)+\text{hol.fct.}$. In the applications we have evidence that $\overset{\triangledown}{\iota}_\alpha(\zeta)$ is an algebraic hypergeometric function and when there are only two critical values, it decomposes as a sum of two germs of holomorphic functions at each critical values respectively (see {\tt airy-resurgence} Section 6.1, 6.3).
+
+\bibliographystyle{amsplain}
+\bibliography{airy-resurgence.bib}
+
 \end{document}
