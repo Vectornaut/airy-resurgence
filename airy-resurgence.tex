@@ -18,6 +18,9 @@
 % convenience aliases
 \newcommand{\maps}{\colon}
 
+% group action
+\newcommand{\acts}{\mathbin{\raisebox{\depth}{\rotatebox{-90}{$\circlearrowright$}}}}
+
 % symbology
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
@@ -81,23 +84,31 @@ we learn that
 Note that $\laplace_{\xi, 0}$ is defined in the new translation structure on $\C$, while $\laplace_{\zeta, 0}$ is defined in the old translation structure. We can still compare them, because they both turn complex-valued functions on $\C$ into holomorphic functions on $T^*\C$.
 \section{Integro-differential equations}
 \subsection{Existence of solutions}
-\subsubsection{Function spaces for contour integration}
-Take a simply connected open set $\Omega$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. Let $\mathcal{S} \subset \holoL{\infty}(\Omega)$ be the union of $O_{\zeta, 0 \leftarrow}(\zeta^\tau)$ over all $\tau > 0$.
+\subsubsection{Algebraic integral operators}
+Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. Let $\mathcal{S} \subset \holoL{\infty}(\Omega)$ be the union of $O_{\zeta, 0 \leftarrow}(\zeta^\tau)$ over all $\tau > 0$.
 
-If you give a Riemann surface a metric which is compatible with its conformal structure, you get a norm on each tangent space. A {\em density} on a Riemann surface is a norm that arises in this way. Given a density $\rho$ on $\Omega$, let $\ell_\rho$ be the continuous function on $\Omega$ that measures distance from $\zeta = 0$ with respect to $\rho$. The value of $\ell_\rho$ at $a \in \Omega$ is the infimal length of a rectifiable path that runs from $\zeta = 0$ to $a$ within $\Omega$. Keep in mind that $\Omega$ touches but doesn't contain $\zeta = 0$, and $\ell_\rho$ is only well-defined when $\rho$ puts $\zeta = 0$ at finite distance from the points in $\Omega$. \textcolor{magenta}{[...]}
+We'll study integral operators $\mathcal{G} \acts \holoL{\infty}(\Omega)$ of the form
+\[ [\mathcal{G}f](a) = \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta, \]
+where the kernel $g$ is an algebraic function over $\C^2$ which can be singular on $\Delta$, the diagonal.\footnote{Thanks to Alex Takeda for suggesting this.} To avoid ambiguity, we fix a branch of $g$ to use at the start of the integration path. The domain of $g$ is a covering of $\C^2$ which can be branched over $\Delta$. Continuing $g$ around $\Delta$ changes its phase by a root of unity, leaving its absolute value the same \textbf{[check]}. That makes $|g|$ a well-defined function on $\C^2 \smallsetminus \Delta$, which we can use to bound $\|\mathcal{G}\|$.
 
-\color{gray}
-A bounded holomorphic map
+For each $a \in \C$, the expression $|g(a, \cdot)\,d\zeta|$ defines a {\em density} on $\Omega \smallsetminus \{a\}$---a norm on the tangent bundle which is compatible with the conformal structure. The square of a density is a Riemannian metric. Let $\ell_{g, \Omega}(a)$ be the distance from $\zeta = 0$ to $a$ with respect to the density $|g(a, \cdot)\,d\zeta|$ on $\Omega \smallsetminus \{a\}$. The bound
 \begin{align*}
-\Omega & \to \holoL{1}(\Omega) \\
-\alpha & \mapsto g_\alpha
+\big|[\mathcal{G}f](a)\big| & \le \left| \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta \right| \\
+& \le \int_{\zeta = 0}^{a} |f|\,|g(a, \cdot)\,d\zeta| \\
+& \le \|f\|_\infty \int_{\zeta = 0}^{a} |g(a, \cdot)\,d\zeta|
 \end{align*}
-defines a bounded linear operator
-\[ \mathcal{G}f\big|_{\zeta = \alpha} = \int_0^\alpha  g_\alpha f \]
-on $\holoL{\infty}(\Omega)$. Noting that
-\color{black}
-
-%%with\footnote{We're using the operator norm on the left-hand side and the $L^1$ norm on the right-hand side.} $\|\mathcal{G}\| = \sup_{\alpha \in \Omega} \|g_\alpha\|_1$.
+holds for any integration path. Taking the infimum over all paths, we see that
+\[ \big|[\mathcal{G}f](a)\big| \le \ell_{g, \Omega}(a)\,\|f\|_\infty. \]
+so $\|\mathcal{G}\| \le \sup_{a \in \Omega} \ell_{g, \Omega}(a)$. Crucially, we can always make $\|\mathcal{G}\|$ a contraction by restricting $\Omega$.
+\subsubsection{The example of fractional integrals}
+Setting $g(a, a') = (\zeta(a) - \zeta(a'))^{-\nu}$ with $\nu \in (-\infty, 1)$, we get the fractional integral $\partial^{\nu-1}_{\zeta \text{ from } 0}$. The density $|\zeta(a) - \zeta|^{-\nu}\,|d\zeta|$ is rotationally symmetric around $a$, so the shortest path from $\zeta = 0$ to $a$ is a straight line with respect to $|d\zeta|$ \textcolor{magenta}{[check]}. It follows that
+\begin{align*}
+\ell_{g, \Omega}(a) & = \int_0^{|\zeta(a)|} t^{-\nu}\,dt \\
+& = \tfrac{1}{1-\nu} |\zeta(a)|^{1-\nu},
+\end{align*}
+so
+\[ \|\partial^{\nu-1}_{\zeta \text{ from } 0}\| \le \sup_\Omega \tfrac{1}{1-\nu} |\zeta|^{1-\nu}. \]
+In particular, $\partial^{\nu-1}_{\zeta \text{ from } 0}$ is a contraction of $\holoL{\infty}(\Omega)$ whenever $\|\zeta\|_\infty < (1-\nu)^{1/(1-\nu)}$.
 \subsection{Order shifting}\label{shifting}
 Consider holomorphic functions on a simply connected open set that touches but doesn't contain $\zeta = 0$. A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as
 \begin{equation}\label{eqn:slight-defn}
