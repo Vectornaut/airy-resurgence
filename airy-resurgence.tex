@@ -108,7 +108,91 @@ Setting $g(a, a') = (\zeta(a) - \zeta(a'))^{-\lambda-1}$ with $\lambda \in (-\in
 \end{align*}
 so
 \[ \|\partial^\lambda_{\zeta \text{ from } 0}\| \le \sup_\Omega {(-\tfrac{1}{\lambda}) |\zeta|^{-\lambda}}. \]
-In particular, when $\|\zeta\|_\infty < 1$, the operator $\partial^\lambda_{\zeta \text{ from } 0}$ is a contraction of $\holoL{\infty}(\Omega)$ for all $\lambda \in (-\infty, 0)$.
+In particular, when $\Omega$ is small enough that $\|\zeta\|_\infty < 1$, the operator $\partial^\lambda_{\zeta \text{ from } 0}$ is a contraction of $\holoL{\infty}(\Omega)$ for all $\lambda \in (-\infty, -1]$.
+\subsubsection{Fractional integral equations near a regular singular point}
+Consider an integral operator $\mathcal{J}$ of the form
+\[ p + \partial^{-1}_{\zeta \text{ from } 0} \circ q + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda, \]
+where:
+\begin{itemize}
+\item $\Lambda$ is a countable subset of $(-\infty, -1)$.
+\item $p$, $q$, and $r_\lambda$ are functions in $\holoL{\infty}(\Omega)$ that extend holomorphically over $\zeta = 0$.
+\item $p$ has a first-order zero at $\zeta = 0$.
+\end{itemize}
+
+\textcolor{DodgerBlue}{We want to solve the equation $\mathcal{J}f = 0$. Let's look for a solution of the form $f = \zeta^{\tau-1} + \tilde{f}$ with $\tau \in (0, \infty)$ and $\tilde{f} \in \holoL{\infty}(\Omega)$.}
+
+\color{SeaGreen}
+\begin{prop}\label{prop:frac-mollify}
+If $f$ is in $O_{\zeta, 0 \leftarrow}(\zeta^\alpha)$ with $\alpha \in (-1, \infty)$, then $\partial^\lambda_{\zeta \text{ from } 0}\,f$ is in $O_{\zeta, 0 \leftarrow}(\zeta^{\alpha-\lambda})$ for all $\lambda \in (-\infty, 0)$.
+\end{prop}
+\color{magenta}
+\begin{proof}
+??????
+\end{proof}
+\color{SeaGreen}
+\begin{prop}\label{prop:frac-int-growth}
+For any $f \in \holoL{\infty}(\Omega)$ and $\lambda \in (-\infty, 0)$, the bound
+\[ \big|\partial^\lambda_{\zeta \text{ from } 0}\,f\big| \le (-\tfrac{1}{\lambda}) |\zeta|^{-\lambda} \|f\|_\infty \]
+holds pointwise throughout $\Omega$.
+\end{prop}
+\color{magenta}
+\begin{proof}
+??????
+\end{proof}
+\color{black}
+
+Let $p'_0$ and $q_0$ be the values of $\tfrac{\partial}{\partial \zeta} p$ and $q$, respectively, at $\zeta = 0$. Since $p$, $q$, and $r_\lambda$ extend holomorphically over $\zeta = 0$, and $p$ vanishes at $\zeta = 0$, we can write
+\begin{alignat*}{2}
+p & = p'_0 \zeta &\;+\;& \tilde{p} \zeta^2 \\
+q & = q_0 &\;+\;& \tilde{q} \zeta \\
+\textcolor{orange}{r_\lambda} & = r_{\lambda,0} &\;+\;& \tilde{r}_\lambda \zeta,
+\end{alignat*}
+where $\tilde{p}, \tilde{q} \in \holoL{\infty}(\Omega)$ extend holomorphically over $\zeta = 0$ too. For any $\tau \in (0, \infty)$,
+\begin{align*}
+\mathcal{J} \zeta^{\tau-1} & = p'_0 \zeta^\tau + \tilde{p} \zeta^{\tau+1} + \partial^{-1}_{\zeta \text{ from } 0}\big(q_0 \zeta^{\tau-1}\big) + \partial^{-1}_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big) + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \big(r_\lambda \zeta^{\tau-1}\big) \\
+& = (p'_0 + q_0/\tau)\zeta^\tau + \tilde{p} \zeta^{\tau+1} + \partial^{-1}_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big) + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \big(r_\lambda \zeta^{\tau-1}\big).
+\end{align*}
+Setting $\tau = -q_o / p'_0$ makes the first term vanish, leaving
+\begin{align*}
+\mathcal{J} \zeta^{\tau-1} & = \textcolor{SeaGreen}{\tilde{p} \zeta^{\tau+1} + \partial^{-1}_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big) + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \big(r_\lambda \zeta^{\tau-1}\big).} \\
+\mathcal{J} \zeta^{\tau-1} & = \tilde{p} \zeta^{\tau+1} + \partial^{-1}_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big) + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \big(r_{\lambda,0} \zeta^{\tau-1} + \tilde{r}_\lambda \zeta^\tau\big) \\
+& \textcolor{orange}{= \tilde{p} \zeta^{\tau+1} + \partial^{-1}_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big) + \sum_{\lambda \in \Lambda} \left[ r_{\lambda,0} \tfrac{\Gamma(\tau)}{\Gamma(\tau-\lambda)} \zeta^{\tau-1-\lambda} + \partial^\lambda_{\zeta \text{ from } 0} \big(\tilde{r}_\lambda \zeta^\tau\big) \right]} \\
+& \textcolor{orange}{= \tilde{p} \zeta^{\tau+1} + \sum_{\lambda \in \Lambda} \left[ r_{\lambda,0} \tfrac{\Gamma(\tau)}{\Gamma(\tau-\lambda)} \zeta^{\tau-(\lambda+1)} \right] + \left[ \partial^{-1}_{\zeta \text{ from } 0} \circ \tilde{q} + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ \tilde{r}_\lambda \right] \zeta^\tau.}
+\end{align*}
+Now we can rewrite the equation $\mathcal{J}(\zeta^{\tau-1} + \tilde{f}) = 0$ as
+\begin{align*}
+\mathcal{J} \zeta^{\tau-1} + \left[ p + \partial^{-1}_{\zeta \text{ from } 0} \circ q + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda \right] \tilde{f} & = 0 \\
+\mathcal{J} \zeta^{\tau-1} + \left[ \partial^{-1}_{\zeta \text{ from } 0} \circ q + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda \right] \tilde{f} & = -p\tilde{f}.
+\end{align*}
+Observing that
+\[ \frac{1}{p} = \frac{\zeta^{-1}}{p_0 + \tilde{p} \zeta}, \]
+we have
+\begin{align*}
+\frac{1}{p}\,\mathcal{J} \zeta^{\tau-1} & = \frac{1}{p_0 + \tilde{p} \zeta} \left[ \tilde{p} \zeta^\tau + \zeta^{-1}\,\partial^{-1}_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big) + \sum_{\lambda \in \Lambda} \left[ r_{\lambda,0} \tfrac{\Gamma(\tau+1)}{\Gamma(\tau-\lambda+1)} \zeta^{\tau-(\lambda+\textcolor{magenta}{2})} + \zeta^{-1}\,\partial^\lambda_{\zeta \text{ from } 0} \big(\tilde{r}_\lambda \zeta^\tau\big) \right] \right] \\
+\frac{1}{p}\,\mathcal{J} \zeta^{\tau-1} & = \frac{1}{p_0 + \tilde{p} \zeta} \left[ \tilde{p} \zeta^\tau + \sum_{\lambda \in \Lambda} \left[ r_{\lambda,0} \tfrac{\Gamma(\tau+1)}{\Gamma(\tau-\lambda+1)} \zeta^{\tau-(\lambda+\textcolor{magenta}{2})} \right] \right] + \frac{1}{p_0 + \tilde{p} \zeta} \left[ \zeta^{-1}\,\partial^{-1}_{\zeta \text{ from } 0} \circ \tilde{q} + \sum_{\lambda \in \Lambda} \zeta^{-1}\,\partial^\lambda_{\zeta \text{ from } 0} \circ \tilde{r}_\lambda \right] \zeta^\tau
+\end{align*}
+Proposition~\ref{prop:frac-int-growth} guarantees that
+\[ \big|\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big)\big| \le |\zeta|\,\big\|\tilde{q} \zeta^\tau\big\|_\infty, \]
+so
+\begin{align*}
+\big|\zeta^{-1}\,\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big)\big| & \le |\zeta|^{-1} \big|\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big)\big| \\
+& \le \big\|\tilde{q} \zeta^\tau\big\|_\infty \\
+& \le \|\tilde{q}\|_\infty\,\big\|\zeta^\tau\big\|_\infty.
+\end{align*}
+Similarly,
+\[ \big|\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{r}_\lambda \zeta^\tau\big)\big| \le (-\tfrac{1}{\lambda}) |\zeta|^{-\lambda} \big\|\tilde{r}_\lambda \zeta^\tau\big\|_\infty, \]
+so
+\begin{align*}
+\big|\zeta^{-1}\,\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{r}_\lambda \zeta^\tau\big)\big| & \le |\zeta|^{-1} \big|\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{r}_\lambda \zeta^\tau\big)\big| \\
+& \le (-\tfrac{1}{\lambda}) |\zeta|^{-(\lambda+1)} \big\|\tilde{r}_\lambda \zeta^\tau\big\|_\infty \\
+& \le \|\tilde{r}_\lambda\|_\infty\,\big\|\zeta^{-(\lambda+1)}\big\|_\infty\,\big\|\zeta^\tau\big\|_\infty \\
+& = \|\tilde{r}_\lambda\|_\infty\,\big\|\zeta^{\tau-(\lambda+1)}\big\|_\infty.
+\end{align*}
+In short,
+\begin{align*}
+\big\|\zeta^{-1}\,\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big)\big\|_\infty & \le \|\tilde{q}\|_\infty\,\big\|\zeta^\tau\big\|_\infty \\
+\big\|\zeta^{-1}\,\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{r}_\lambda \zeta^\tau\big)\big\|_\infty & \le \|\tilde{r}_\lambda\|_\infty\,\big\|\zeta^{\tau-(\lambda+1)}\big\|_\infty
+\end{align*}
 \subsection{Order shifting}\label{shifting}
 Consider holomorphic functions on a simply connected open set that touches but doesn't contain $\zeta = 0$. A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as
 \begin{equation}\label{eqn:slight-defn}
