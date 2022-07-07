@@ -30,7 +30,7 @@
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
-\newcommand{\holoL}[1]{\mathcal{H}L^{#1}}
+\newcommand{\holoL}[1]{\mathcal{H}L^{#1}} %% may no longer be needed
 \DeclareMathOperator{\Ai}{Ai}
 
 \title{Resurgence of the Airy function}
@@ -84,6 +84,47 @@ we learn that
 Note that $\laplace_{\xi, 0}$ is defined in the new translation structure on $\C$, while $\laplace_{\zeta, 0}$ is defined in the old translation structure. We can still compare them, because they both turn complex-valued functions on $\C$ into holomorphic functions on $T^*\C$.
 \section{Integro-differential equations}
 \subsection{Existence of solutions}
+\subsubsection{Algebraic integral operators}
+Let $D \subset \C$ be an open disk of radius $R$ whose boundary $\partial D$ contains $\zeta = 0$. The Hardy space $H^p(D)$ is the space of holomorphic functions on $D$ which converge pointwise, almost everywhere, to $L^p$ functions on $\partial D$~\cite[Theorem~3.8]{intro-harmonic}. Its norm $\|\cdot\|_p$ is the $L^p$ norm on $\partial D$ with respect to the rotation-invariant probability measure.
+
+We'll study integral operators $\mathcal{G} \acts H^p(D)$ of the form
+\[ [\mathcal{G}f](a) = \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta, \]
+where the kernel $g$ is an algebraic function over $\C^2$ which can be singular on $\Delta$, the diagonal.\footnote{Thanks to Alex Takeda for suggesting this.} To avoid ambiguity, we fix a branch of $g$ to use at the start of the integration path. The domain of $g$ is a covering of $\C^2$ which can be branched over $\Delta$. Continuing $g$ around $\Delta$ changes its phase by a root of unity, leaving its absolute value the same \textbf{[check]}. That makes $|g|$ a well-defined function on $\C^2 \smallsetminus \Delta$, which we can use to bound $\|\mathcal{G}\|$.
+
+\color{SeaGreen}
+Assume $p \le q$.
+
+Functions that extend continuously to $\partial D$ are dense in $H^p(D)$ \textcolor{magenta}{[check]}.
+\color{black}
+
+\begin{align*}
+\|\mathcal{G}f\|_p^p & = \int_{a \in \partial D} \left|\int_{\zeta(a') = 0}^{a} g(a, a')\,f(a')\,d\zeta(a') \right|^p\,\frac{|d\zeta(a)|}{2\pi R} \\
+& \le \int_{a \in \partial D} \left(\int_{\zeta(a') = 0}^{a} |g(a, a')\,f(a')|\,|d\zeta(a')| \right)^p\,\frac{|d\zeta(a)|}{2\pi R} \\
+\end{align*}
+Since $\zeta = 0$ and $a$ are both in $\partial D$, and we're assuming that $f$ extends continuously to $\partial D$, we can compute $[\mathcal{G}f](a)$ using an integration path that runs along $\partial D$.
+\begin{align*}
+\|\mathcal{G}f\|_p^p & \le \int_{a \in \partial D} \left(\int_{a' \in \partial D} |g(a, a')\,f(a')|\,|d\zeta(a')| \right)^p\,\frac{|d\zeta(a)|}{2\pi R} \\
+& = \int_{a \in \partial D} \left(2\pi R \int_{a' \in \partial D} |g(a, a')\,f(a')|\,\frac{|d\zeta(a')|}{2\pi R} \right)^p\,\frac{|d\zeta(a)|}{2\pi R} \\
+& = (2\pi R)^p \int_{a \in \partial D} \|g(a, \cdot)\,f\|_1^p\;\frac{|d\zeta(a)|}{2\pi R}.
+\end{align*}
+Then, by H\"{o}lder's inequality,
+\begin{align*}
+\|\mathcal{G}f\|_p^p & \le (2\pi R)^p \int_{a \in \partial D} \|g(a, \cdot)\|_q^p\;\|f\|_p^p\;\frac{|d\zeta(a)|}{2\pi R} \\
+& \le \|f\|_p^p\;(2\pi R)^p \int_{a \in \partial D} \|g(a, \cdot)\|_q^p\;\frac{|d\zeta(a)|}{2\pi R} \\
+& \le \|f\|_p^p\;(2\pi R)^p \int_{a \in \partial D} \left( \int_{a' \in \partial D} |g(a, a')|^q\,\frac{|d\zeta(a')|}{2\pi R} \right)^{p/q}\,\frac{|d\zeta(a)|}{2\pi R}.
+\end{align*}
+Since we're assuming $p \le q$, we can apply Jensen's inequality to the concave function $(\cdot)^{p/q}$ and conclude that
+\begin{align*}
+\|\mathcal{G}f\|_p^p & \le \|f\|_p^p\;(2\pi R)^p \left( \int_{a \in \partial D} \int_{a' \in \partial D} |g(a, a')|^q\,\frac{|d\zeta(a')|}{2\pi R}\,\frac{|d\zeta(a)|}{2\pi R} \right)^{p/q} \\
+& = \|f\|_p^p\;(2\pi R)^p\,\|g\|_q^p,
+\end{align*}
+which simplifies to
+\[ \|\mathcal{G}f\|_p \le \|f\|_p\;2\pi R\,\|g\|_q. \]
+That means
+\[ \|\mathcal{G}\| \le 2\pi R\,\|g\|_q, \]
+where the norm of $g$ is taken with respect to the rotation-invariant probability measure on $(\partial D)^2$.
+
+\color{DodgerBlue}
 \subsubsection{Algebraic integral operators}
 Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. Let $\mathcal{S} \subset \holoL{\infty}(\Omega)$ be the union of $O_{\zeta, 0 \leftarrow}(\zeta^\tau)$ over all $\tau > 0$.
 
@@ -139,7 +180,7 @@ holds pointwise throughout $\Omega$.
 \begin{proof}
 ??????
 \end{proof}
-\color{black}
+\color{DodgerBlue}
 
 Let $p'_0$ and $q_0$ be the values of $\tfrac{\partial}{\partial \zeta} p$ and $q$, respectively, at $\zeta = 0$. Since $p$, $q$, and $r_\lambda$ extend holomorphically over $\zeta = 0$, and $p$ vanishes at $\zeta = 0$, we can write
 \begin{alignat*}{2}
@@ -193,6 +234,7 @@ In short,
 \big\|\zeta^{-1}\,\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{q} \zeta^\tau\big)\big\|_\infty & \le \|\tilde{q}\|_\infty\,\big\|\zeta^\tau\big\|_\infty \\
 \big\|\zeta^{-1}\,\partial^\lambda_{\zeta \text{ from } 0}\big(\tilde{r}_\lambda \zeta^\tau\big)\big\|_\infty & \le \|\tilde{r}_\lambda\|_\infty\,\big\|\zeta^{\tau-(\lambda+1)}\big\|_\infty
 \end{align*}
+\color{black}
 \subsection{Order shifting}\label{shifting}
 Consider holomorphic functions on a simply connected open set that touches but doesn't contain $\zeta = 0$. A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as
 \begin{equation}\label{eqn:slight-defn}
