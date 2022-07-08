@@ -97,9 +97,21 @@ Assume $p \le q$.
 Functions that extend continuously to $\partial D$ are dense in $H^p(D)$ \textcolor{magenta}{[check]}.
 \color{black}
 
+\color{DarkBlue}
 \begin{align*}
-\|\mathcal{G}f\|_p^p & = \int_{a \in \partial D} \left|\int_{\zeta(a') = 0}^{a} g(a, a')\,f(a')\,d\zeta(a') \right|^p\,\frac{|d\zeta(a)|}{2\pi R} \\
-& \le \int_{a \in \partial D} \left(\int_{\zeta(a') = 0}^{a} |g(a, a')\,f(a')|\,|d\zeta(a')| \right)^p\,\frac{|d\zeta(a)|}{2\pi R} \\
+\|\mathcal{G}f\|_1 & = \int_{a \in \partial D} \left| \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta \right|\,\frac{|d\zeta(a)|}{2\pi R} \\
+& \le \int_{a \in \partial D} \left( \int_{\zeta = 0}^{a} |f|\,|g(a, \cdot)\,d\zeta| \right)\,\frac{|d\zeta(a)|}{2\pi R} \\
+& \le \left( \sup_D |f| \right) \int_{a \in \partial D} \left( \int_{\zeta = 0}^{a} |g(a, \cdot)\,d\zeta| \right)\,\frac{|d\zeta(a)|}{2\pi R}.
+\end{align*}
+By the maximum principle, $\sup_D |f| = \sup_{\partial D} |f|$, so
+\[ \|\mathcal{G}f\|_1 \le \|f\|_\infty \int_{a \in \partial D} \left( \int_{\zeta = 0}^{a} |g(a, \cdot)\,d\zeta| \right)\,\frac{|d\zeta(a)|}{2\pi R}. \]
+Taking the infimum over all the integration paths we could use to evaluate $[\mathcal{G}f](a)$, we see that
+\[ \|\mathcal{G}f\|_1 \le \|f\|_\infty \int_{a \in \partial D} \ell_{g, D}(a)\,\frac{|d\zeta(a)|}{2\pi R}. \]
+\color{black}
+
+\begin{align*}
+\|\mathcal{G}f\|_p^p & = \int_{a \in \partial D} \left| \int_{\zeta(a') = 0}^{a} g(a, a')\,f(a')\,d\zeta(a') \right|^p\,\frac{|d\zeta(a)|}{2\pi R} \\
+& \le \int_{a \in \partial D} \left( \int_{\zeta(a') = 0}^{a} |g(a, a')\,f(a')|\,|d\zeta(a')| \right)^p\,\frac{|d\zeta(a)|}{2\pi R} \\
 \end{align*}
 Since $\zeta = 0$ and $a$ are both in $\partial D$, and we're assuming that $f$ extends continuously to $\partial D$, we can compute $[\mathcal{G}f](a)$ using an integration path that runs along $\partial D$.
 \begin{align*}
@@ -124,32 +136,46 @@ That means
 \[ \|\mathcal{G}\| \le 2\pi R\,\|g\|_q, \]
 where the norm of $g$ is taken with respect to the rotation-invariant probability measure on $(\partial D)^2$.
 
-\color{DodgerBlue}
+\color{DarkBlue}
 \subsubsection{Algebraic integral operators}
-Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. Let $\mathcal{S} \subset \holoL{\infty}(\Omega)$ be the union of $O_{\zeta, 0 \leftarrow}(\zeta^\tau)$ over all $\tau > 0$.
+Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. Multiplying by $\zeta^{-\sigma}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\holoL{\infty, \sigma}(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma} = \|\zeta^\sigma f\|_\infty$, so that
+\begin{align*}
+\holoL{\infty}(\Omega) & \to \holoL{\infty, \sigma}(\Omega) \\
+\phi & \mapsto \zeta^{-\sigma} \phi
+\end{align*}
+is an isometry.
 
-We'll study integral operators $\mathcal{G} \acts \holoL{\infty}(\Omega)$ of the form
+%%Let $\mathcal{S} \subset \holoL{\infty}(\Omega)$ be the union of $O_{\zeta, 0 \leftarrow}(\zeta^\tau)$ over all $\tau > 0$.
+
+We'll study integral operators $\mathcal{G} \acts \holoL{\infty, \sigma}(\Omega)$ of the form
 \[ [\mathcal{G}f](a) = \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta, \]
 where the kernel $g$ is an algebraic function over $\C^2$ which can be singular on $\Delta$, the diagonal.\footnote{Thanks to Alex Takeda for suggesting this.} To avoid ambiguity, we fix a branch of $g$ to use at the start of the integration path. The domain of $g$ is a covering of $\C^2$ which can be branched over $\Delta$. Continuing $g$ around $\Delta$ changes its phase by a root of unity, leaving its absolute value the same \textbf{[check]}. That makes $|g|$ a well-defined function on $\C^2 \smallsetminus \Delta$, which we can use to bound $\|\mathcal{G}\|$.
 
-For each $a \in \C$, the expression $|g(a, \cdot)\,d\zeta|$ defines a {\em density} on $\Omega \smallsetminus \{a\}$---a norm on the tangent bundle which is compatible with the conformal structure. The square of a density is a Riemannian metric. Let $\ell_{g, \Omega}(a)$ be the distance from $\zeta = 0$ to $a$ with respect to the density $|g(a, \cdot)\,d\zeta|$ on $\Omega \smallsetminus \{a\}$. The bound
+For each $a \in \C$, the expression $|g(a, \cdot)\,d\zeta|$ defines a {\em density} on $\Omega \smallsetminus \{a\}$---a norm on the tangent bundle which is compatible with the conformal structure. The square of a density is a Riemannian metric. Let $\ell_{g, \sigma, \Omega}(a)$ be the distance from $\zeta = 0$ to $a$ with respect to the density $|\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\sigma} d\zeta|$ on $\Omega \smallsetminus \{a\}$. The bound
 \begin{align*}
-\big|[\mathcal{G}f](a)\big| & \le \left| \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta \right| \\
-& \le \int_{\zeta = 0}^{a} |f|\,|g(a, \cdot)\,d\zeta| \\
-& \le \|f\|_\infty \int_{\zeta = 0}^{a} |g(a, \cdot)\,d\zeta|
+\big|[\zeta^\sigma \mathcal{G}f](a)\big| & \le \left| \zeta(a)^\sigma \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta \right| \\
+& \le \int_{\zeta = 0}^{a} |\zeta^\sigma f|\,|\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\sigma}\,d\zeta| \\
+& \le \|f\|_{\infty, \sigma} \int_{\zeta = 0}^{a} |\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\sigma}\,d\zeta|
 \end{align*}
 holds for any integration path. Taking the infimum over all paths, we see that
-\[ \big|[\mathcal{G}f](a)\big| \le \ell_{g, \Omega}(a)\,\|f\|_\infty. \]
-so $\|\mathcal{G}\| \le \sup_{a \in \Omega} \ell_{g, \Omega}(a)$. Crucially, we can always make $\|\mathcal{G}\|$ a contraction by restricting $\Omega$.
+\[ \big|[\mathcal{G}f](a)\big| \le \ell_{g, \sigma, \Omega}(a)\,\|f\|_\infty. \]
+so $\|\mathcal{G}\| \le \sup_{a \in \Omega} \ell_{g, \sigma, \Omega}(a)$. Crucially, we can always make $\|\mathcal{G}\|$ a contraction by restricting $\Omega$.
 \subsubsection{The example of fractional integrals}
-Setting $g(a, a') = (\zeta(a) - \zeta(a'))^{-\lambda-1}$ with $\lambda \in (-\infty, 0)$, we get the fractional integral $\partial^\lambda_{\zeta \text{ from } 0}$. The density $|\zeta(a) - \zeta|^{-\lambda-1}\,|d\zeta|$ is rotationally symmetric around $a$, so the shortest path from $\zeta = 0$ to $a$ is a straight line with respect to $|d\zeta|$ \textcolor{magenta}{[check]}. It follows that
+Setting
+\[ g(a, a') = \zeta(a)^\rho\,(\zeta(a) - \zeta(a'))^{-\lambda-1}\,\zeta(a')^\mu \]
+with $\lambda \in (-\infty, 0)$, we get the operator
+\[ \zeta^\rho \circ \partial^\lambda_{\zeta \text{ from } 0} \circ \zeta^\mu. \]
+The shortest path from $\zeta = 0$ to $a$ with respect to $|\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\sigma}\,d\zeta|$ is the same as the shortest path with respect to $|d\zeta|$ \textcolor{magenta}{[check]}. It follows that
 \begin{align*}
-\ell_{g, \Omega}(a) & = \int_0^{|\zeta(a)|} t^{-\lambda-1}\,dt \\
-& = -\tfrac{1}{\lambda} |\zeta(a)|^{-\lambda},
+\ell_{g, \sigma, \Omega}(a) & = \int_0^{|\zeta(a)|} |\zeta(a)|^{\rho+\sigma}\,(|\zeta(a)| - r)^{-\lambda-1}\,r^{\mu-\sigma}\,dr \\
+& = |\zeta(a)|^{\rho+\sigma} \int_0^1 \,(|\zeta(a)| - |\zeta(a)| t)^{-\lambda-1}\,(|\zeta(a)| t)^{\mu-\sigma}\,|\zeta(a)|\,dt \\
+& = |\zeta(a)|^{\rho+\sigma-\lambda-1+\mu-\sigma+1} \int_0^1 \,(1-t)^{-\lambda-1}\,t^{\mu-\sigma}\,dt \\
+& = |\zeta(a)|^{\rho-\lambda} \int_0^1 \,(1-t)^{-\lambda-1}\,t^{\mu-\sigma}\,dt \\
+& = |\zeta(a)|^{\rho-\lambda+\mu}\,B(-\lambda, \mu-\sigma+1),
 \end{align*}
-so
-\[ \|\partial^\lambda_{\zeta \text{ from } 0}\| \le \sup_\Omega {(-\tfrac{1}{\lambda}) |\zeta|^{-\lambda}}. \]
-In particular, when $\Omega$ is small enough that $\|\zeta\|_\infty < 1$, the operator $\partial^\lambda_{\zeta \text{ from } 0}$ is a contraction of $\holoL{\infty}(\Omega)$ for all $\lambda \in (-\infty, -1]$.
+where $B$ is the beta function. Hence, on $\holoL{\infty, \sigma}(\Omega)$,
+\[ \|\zeta^\rho \circ \partial^\lambda_{\zeta \text{ from } 0} \circ \zeta^\mu\| \le B(-\lambda,\mu-\sigma+1)\,\sup_\Omega |\zeta|^{\rho-\lambda+\mu}. \]
+In particular, when $\Omega$ is small enough that \textcolor{magenta}{[???]}, the operator on the left-hand side is a contraction of $\holoL{\infty, \sigma}(\Omega)$ for all $\lambda \in (-\infty, -\rho]$.
 \subsubsection{Fractional integral equations near a regular singular point}
 Consider an integral operator $\mathcal{J}$ of the form
 \[ p + \partial^{-1}_{\zeta \text{ from } 0} \circ q + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda, \]
@@ -159,6 +185,30 @@ where:
 \item $p$, $q$, and $r_\lambda$ are functions in $\holoL{\infty}(\Omega)$ that extend holomorphically over $\zeta = 0$.
 \item $p$ has a first-order zero at $\zeta = 0$.
 \end{itemize}
+
+\textcolor{Indigo}{We want to solve the equation $\mathcal{J}f = 0$. Let's look for a solution of the form $f = \zeta^{\tau-1}(1 + \tilde{f})$ with $\tau \in (0, \infty)$ and $\tilde{f} \in \holoL{\infty}(\Omega)$.}
+
+Let $p'_0$ and $q_0$ be the values of $\tfrac{\partial}{\partial \zeta} p$ and $q$, respectively, at $\zeta = 0$. Since $p$, $q$, and $r_\lambda$ extend holomorphically over $\zeta = 0$, and $p$ vanishes at $\zeta = 0$, we can write
+\begin{alignat*}{2}
+p & = p'_0 \zeta &\;+\;& \tilde{p} \zeta^2 \\
+q & = q_0 &\;+\;& \tilde{q} \zeta
+\end{alignat*}
+where $\tilde{p}, \tilde{q} \in \holoL{\infty}(\Omega)$ extend holomorphically over $\zeta = 0$ too. Then we have
+\begin{align*}
+\mathcal{J} & = (p_0'\zeta + \tilde{p}\zeta^2) + (q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \partial^{-1}_{\zeta \text{ from } 0} \circ \zeta \circ \tilde{q}) + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda \\
+& = p'_0\zeta + q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \zeta \circ \tilde{\mathcal{J}},
+\end{align*}
+where
+\[ \tilde{\mathcal{J}} = \tilde{p}\zeta + (\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} \circ \zeta) \circ \tilde{q} + \sum_{\lambda \in \Lambda} (\zeta^{-1} \circ \partial^\lambda_{\zeta \text{ from } 0}) \circ r_\lambda. \]
+For any $\tau \in (0, \infty)$,
+\[ \mathcal{J} \zeta^{\tau-1} = (p'_0 + q_0/\tau)\,\zeta^\tau + [\zeta \circ \tilde{\mathcal{J}}]\,\zeta^{\tau-1}. \]
+Setting $\tau = -q_o / p'_0$ makes the first term vanish, leaving
+\[ \mathcal{J} \zeta^{\tau-1} = [\zeta \circ \tilde{\mathcal{J}}]\,\zeta^{\tau-1}. \]
+The equation $\mathcal{J}f = 0$ then becomes
+\begin{align*}
+\mathcal{J}\zeta^{\tau-1} + \mathcal{J}(\zeta^{\tau-1}\zeta\tilde{f}) & = 0 \\
+\tilde{\mathcal{J}}\zeta^{\tau-1} + [\mathcal{J} \circ \zeta](\zeta^{\tau-1}\tilde{f}) & = 0 \\
+\end{align*}
 
 \textcolor{DodgerBlue}{We want to solve the equation $\mathcal{J}f = 0$. Let's look for a solution of the form $f = \zeta^{\tau-1} + \tilde{f}$ with $\tau \in (0, \infty)$ and $\tilde{f} \in \holoL{\infty}(\Omega)$.}
 
