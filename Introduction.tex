@@ -69,7 +69,7 @@ Veronica Fantini and  Aaron Fenyes
 
 \subsection{Motivation}
 
-\subsection{What are exponential integrals}
+\subsection{What are exponential integrals}\label{what-are-exp-inte}
 
 Let $X$ be an $n$-dimensional algebraic variety, we consider exponential integrals of the form 
 \begin{equation}
@@ -79,11 +79,11 @@ I(z)=\int_{\mathcal{C}}e^{-zf}\nu
 where $f\colon X\to \C$ is an algebraic function, $\nu\in\Gamma(X,\Omega^n)$, $z\in\C$ and $\mathcal{C}$ is an $n$-cycle of integration such that the integral is well defined. Assuming $\theta\defeq\arg(z)$ fixed, we define for every $c>0$ 
 \begin{align*}
 S^+_c\defeq\lbrace \zeta\in\C\vert \mathrm{Re}(\zeta e^{i\theta})\geq c\rbrace\\
-S^-_c\defeq\lbrace \zeta\in\C\vert \mathrm{Re}(\zeta e^{i\theta})\leq c\rbrace.
+S^-_c\defeq\lbrace \zeta\in\C\vert \mathrm{Re}(\zeta e^{i\theta})\leq c\rbrace
 \end{align*}
-and we define $H_\bullet(X,zf)$ as the relative homology groups, namely \[H_{\bullet}(X,zf)=H_{\bullet}\left(X,f^{-1}(S_c^+);\Z\right)\] for $c$ large enough so that $f^{-1}(S_c^+)$ does not contain singular values of $f$ (i.e. points $\zeta_\alpha\defeq f(x_\alpha)$ where $df(x_\alpha)=0$ \footnote{In dimension $n>1$ there are other singular values due to the fact that $f$ is not proper. However under suitable assumptions it is possible to overcome this issue (see \cite{pham} part $1$, $\S 2$).}). Then we assume $[\mathcal{C}]\in H_n(X,zf)$. 
+and we define $H_\bullet(X,zf)$ as the relative homology groups, namely \[H_{\bullet}(X,zf)\defeq H_{\bullet}\left(X,f^{-1}(S_c^+);\Z\right)\] for $c$ large enough so that $f^{-1}(S_c^+)$ does not contain critical values of $f$ (i.e. points $\zeta_\alpha\defeq f(x_\alpha)$ where $df(x_\alpha)=0$ \footnote{In dimension $n>1$ there are other critical values due to the fact that $f$ is not proper. However under suitable assumptions it is possible to overcome this issue (see \cite{pham} part $1$, $\S 2$).}). Then we assume $[\mathcal{C}]\in H_n(X,zf)$. 
 
-Notice that $I(z)$ only depends on the class of $\mathcal{C}$ and on the class of $[\nu]\in H_{dR}^n(X,zf)\defeq\mathbb{H}^n\left(X,(\Omega^\bullet_X,d_W\defeq e^{zf}\circ d\circ e^{-zf})\right)$: indeed let $\mathcal{C}'=\mathcal{C}+\partial\gamma\in [\mathcal{C}]$,
+Notice that $I(z)$ only depends on $[\mathcal{C}]\in H_n(X,zf)$ and on $[\nu]\in H_{dR}^n(X,zf)\defeq\mathbb{H}^n\left(X,(\Omega^\bullet_X,d_W\defeq e^{zf}\circ d\circ e^{-zf})\right)$: indeed let $\mathcal{C}'=\mathcal{C}+\partial\gamma\in [\mathcal{C}]$,
 \begin{align*}
 \int_{\mathcal{C}'}e^{-zf}\nu=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\partial\gamma}e^{-zf}\nu=\int_{\mathcal{C}}e^{-zf}\nu
 \end{align*} 
@@ -92,49 +92,81 @@ because $e^{-zf}$ is rapidly decaying at $\partial\gamma$. Similarly, if $\nu'=\
 \int_{\mathcal{C}}e^{-zf}\nu'=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\mathcal{C}}e^{-zf}d_{W}\eta=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\mathcal{C}}d(e^{-zf}\eta)=\\
 =\int_{\mathcal{C}}e^{-zf}\nu+\int_{\partial\mathcal{C}}e^{-zf}\eta=\int_{\mathcal{C}}e^{-zf}\nu.
 \end{multline*}
-Moreover, for $\theta$ generic, i.e. $\theta\neq\arg(\zeta_\alpha-\zeta_\beta)$ and $\alpha\neq\beta$, there is a decomposition of $H_\bullet(X,zf)$ as direct sum over the singular values of $f$ of the homology relative to these singular values (see \cite{pham}\cite{KKP}): 
+Moreover, for $\theta$ generic, i.e. when $\theta\neq\arg(\zeta_\alpha-\zeta_\beta)$ and $\alpha\neq\beta$, there is a decomposition of $H_\bullet(X,zf)$ as direct sum over the critical values of $f$ of the homology relative to these critical values (see \cite{pham}\cite{KKP}): 
 \begin{align}\label{decomposition H_B}
 H_\bullet(X,zf)=\bigoplus_{\alpha}H_\bullet\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)
 \end{align}     
 where $B_\alpha(\varepsilon)\defeq\lbrace \zeta \in\C\big\vert\,\, |\zeta-\zeta_\alpha|<\varepsilon\rbrace$ and $S_\alpha^+(\theta,\varepsilon)\defeq B_\alpha(\varepsilon)\cap\lbrace \mathrm{Re}(\zeta e^{i\theta})\geq \tfrac{\varepsilon}{2}\rbrace$ (see Figure \ref{fig:relative_homology}).
-\begin{figure}
+\begin{figure}[h]
+\includegraphics[scale=0.5]{Cattura}
+\includegraphics[scale=0.3]{Cattura2}
 \caption{Relative homology}\label{fig:relative_homology}
 \end{figure}
+
+Let $\theta=0$ (if $\theta\neq 0$ we consider $xe^{i\theta/2}$), locally in a neighbourhood of a critcal point $x_\alpha$ we can choose a coordinate system $x_1,...,x_n$ such that $f(x)-f(x_\alpha)=x_1^2+...+x_n^2$. Then $\mathrm{Re}(f)$ is a Morse function with simple, isolated and non degenerate critical points. We choose a Riemannian metric $g$ on $X$ and we define the Lefschetz thimbles $\mathcal{C}_{\alpha,z}$ as the steepstet descendet path issuing from a critcal point $x_\alpha$ (see \cite{Witten}): 
+\begin{equation}
+\mathcal{C}_{\alpha,z}=\lbrace x\in X\,\big\vert \, \lim_{t\to -\infty} x(t)=x_\alpha\rbrace
+\end{equation}
+where $x(t)$ is the solution of the gradient flow equation \[\frac{\dd x_i(t)}{\dd t}=-g_{ij}x_j(t)\] and $x_i(0)=x_i$ \footnote{An equivalent definition is given by F. Pham in \cite{pham}.}. 
+
+\begin{figure}[h]
+\includegraphics[scale=0.075]{veer-left_matching}
+\includegraphics[scale=0.075]{veer-right_matching}
+\caption{Lefschetz thimbles for the Airy integral $f(t)=t^3/3-t$ at $\theta=?$ (left) and $\theta=??$ (right). }\label{Lefschetz_thimbles}
+\end{figure}
+
+Notice that $[\mathcal{C}_{\alpha,z}]\in H_n(X,zf)$ and they generate the relative homology for every critical values $H_n\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)$. In fact,  
+
+\begin{itemize}
+\item $H_k\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)$ is isomorphic to $H_{k-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha))$, where $B_\alpha
+^M(\varepsilon)$ is an open ball centred at $x_\alpha$ of radius $\varepsilon$ such that for every $\varepsilon'<\varepsilon$ $B_\alpha(\varepsilon')$ is transverse to $f^{-1}(\zeta_\alpha)$. 
+\item $H_{k-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha))=0$ if $k\neq n$ and $H_{n-1}(B_\alpha^M(\varepsilon)\,\cap f^{-1}(\zeta-\zeta_\alpha))=\Z^\mu$, where $\mu$ is the Milnor number;   
+\end{itemize}
+
+hence $H_n\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)$ has rank $\mu$. In addition from singularity theory we know that the set of vanishing cycles $\partial\mathcal{C}_{\alpha,z}$ forms a basis of $H_{n-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha)) $ (see Theorem 2.1 \cite{Arnold}).    
+
+  
+
+\color{magenta}
 We furthermore assume the following:
 \begin{assumption}\label{assumption_on_f}
 The map $f\colon X\to\C$ has isolated, simple and non degenerate critical values $\zeta_\alpha$. 
 \end{assumption}
 
-which guarantees that 
-\begin{itemize}
-\item $H_k\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)$ is isomorphic to $H_{k-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha))$, where $B_\alpha
-^M(\varepsilon)$ is an open ball centred at $x_\alpha$ of radius $\varepsilon$ such that for every $\varepsilon'<\varepsilon$ $B_\alpha(\varepsilon')$ is transverse to $f^{-1}(\zeta_\alpha)$. 
-\item $H_{k-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha))=0$ if $k\neq n$ and $H_{n-1}(B_\alpha^M(\varepsilon)\,\cap f^{-1}(\zeta-\zeta_\alpha))=\Z^\mu$, where $\mu$ is called the Milnor number.   
-\end{itemize}
-
-where \textcolor{magenta}{ $\mathcal{C}_\alpha$ is a steepest descent path through the critical point $x_\alpha$ and $\theta$ is chosen such that $f(x_\beta)\notin f(x_\alpha)+[0,e^{i\theta}\infty)$ for $\beta\neq\alpha$}\footnote{Such a $\theta$ exists because $f$ has a finite number of critical points.}.
-\color{magenta}
-Let $\theta=0$, locally in a neighbourhood of a critcal point $x_\alpha$ we can choose a coordinate system $x_1,...,x_n$ such that $f(x)-f(x_\alpha)=x_1^2+...+x_n^2$. Then $\mathrm{Re}(f)$ is a Morse function with simple, isolated and non degenerate critical points. We choose a Riemannian metric $g$ on $X$ and we define the Lefschetz thimbles $\Gamma_{\alpha,z}$ as the steepstet descendet path issuing from a critcal point $x_\alpha$ (see \cite{pham}\cite{Witten}): denote $x'=\mathrm{Re}(x)$ and $x''=\mathrm{Im}(x)$, then 
-\begin{equation}
-\mathcal{C}_{\alpha,z}\defeq\lbrace x\in X\vert x_1''=x_2''=...=x_n''=0, x_1'^2+...+x_n'^2\leq \zeta-\zeta_\alpha\rbrace
-\end{equation}
-\begin{figure}
-\caption{Lefschetz thimbles}\label{Lefschetz_thimbles}
-\end{figure}
-In addition, they generate the relative homology for every critical values \textbf{Why?}. If $\theta\neq 0$ we consider $xe^{i\theta/2}$. 
-
-\textbf{[add duality]}  
+  
 \color{black}
 
-Therefore for $\theta$ generic, the integral $I(z)$ can be decomposed as sum over Lefschetz thimbles: we denote 
+Since for $\theta$ generic the $\mathcal{C}_{\alpha,z}$ are a basis for the relative homology $H_n(X,zf)$, the integral $I(z)$ can be decomposed as sum over Lefschetz thimbles: we denote 
 \begin{equation}\label{int_alpha}
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_{\alpha,z}}e^{-zf}\nu
 \end{equation}
-and we refer to $I_{\alpha}(z)$ as a thimble integral. Then as a consequence of Pham's duality result ($\S 5$ \cite{pham}), for every $[\mathcal{C}]\in H_n(X,zf)$
+and we refer to $I_{\alpha}(z)$ as a thimble integral. Then  for every $[\mathcal{C}]\in H_n(X,zf)$
 \begin{align*}
-I(z)=\sum_{\alpha}(-1)^{n(n-1)/2}\langle \mathcal{C}_{\alpha,\theta+\pi},\mathcal{C}\rangle I_{\alpha}(z). 
+I(z)=\sum_{\alpha}n_\alpha I_{\alpha}(z). 
 \end{align*}
+Moreover the coeficients $n_\alpha$ can be computed via intersection theory (see $\S 5$ \cite{pham}, $\S 3.1.5$ \cite{Witten}). When $X$ is not compact the intersection paring is defined introducing dual cycles: let 
+\begin{align*}
+\mathcal{K}_{\alpha,z}\defeq\lbrace x\in X\,\big\vert\, \lim_{t\to -\infty} x(t)=x_\alpha \rbrace
+\end{align*} 
+where $x(t)$ solve the upward flow equation
+\begin{align*}
+\frac{\dd x_i(t)}{\dd t}= g_{ij}x_j(t) \qquad \text{ with } x_i(0)=x_i
+\end{align*}
+then $\mathcal{K}_{\alpha,z}\in H_{n}(X,f^{-1}(S^-_c);\Z)$ for $c$ large enough and they define a basis (for $\theta$ generic). Furthermore, $\mathcal{K}_{\alpha,z}$ and $\mathcal{C}_{\alpha,z}$ intersect transversely at the critical point $x_\alpha$, hence they define a non degenerate pairing 
+\begin{align*}
+\langle -, -\rangle\colon H_n&(X,f^{-1}(S^+_c);\Z)\otimes H_n(X,f^{-1}(S^-_c);\Z)\to \Z \\
+& \qquad \mathcal{C} \qquad\quad , \qquad\qquad \mathcal{K} \qquad \to \quad \langle\mathcal{C} , \, \mathcal{K}\rangle. 
+\end{align*}
+Now looking at the intersection of $\mathcal{C}\in H_n(X,zf)$ with the basis $\mathcal{K}_{\alpha,z}$ we can compute the constants $n_\alpha$ in terms of intersection pairing:
+\begin{align*}
+\langle \mathcal{C},\mathcal{K}_{\alpha,z}\rangle=\sum_{\beta}n_\beta\langle \mathcal{C}_{\beta,z},\mathcal{K}_{\alpha,z}\rangle=n_\alpha
+\end{align*}
+\color{magenta}
+ORIENTATION? 
 
+$n_\alpha=(-1)^{n(n-1)/2}\langle \mathcal{C}_{\alpha,\theta+\pi},\mathcal{C}\rangle$ 
+
+\color{black}
 
 \subsection{Borel regularity}
 
@@ -188,8 +220,8 @@ So far we have considered $\theta=\arg(z)$ fixed and generic (i.e. $\theta\neq\a
 \end{theorem}  
 
     
-\subsubsection{Thimbles integrals [Kontsevich]: geometric computation of Stokes constants}
-
+\subsubsection{Geometric computation of Stokes constants}
+As we discuss in $\S$\ref{what-are-exp-inte}, at $\theta$ generic, the relative homology groups $H_n(X,zf)$ admits a decomposition in terms of the homology relative to each critical values $H_n(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon)))$. As $\theta$ varies, without crossing a Stokes line, $H_n(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon)))$ defines a rank $\mu$ local system over $\mathbb{S}^1$  
 
 
 \subsubsection{ ODE and fractional derivative formula [draft2]}
@@ -210,11 +242,12 @@ Let $X$ be a $n$-dimensional algebraic variety, $f\colon X\to\C$ be an algebraic
 \begin{equation}
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu
 \end{equation}
-where $\mathcal{C}_{\alpha,z}$ is a Lefschetz thimble $[\mathcal{C}_{\alpha,z}]\in H_n(X,zf) $ for $\arg(z)$ generic. 
+where $\mathcal{C}_{\alpha,z}$ is a Lefschetz thimble $[\mathcal{C}_{\alpha,z}]\in H_n(X,zf)$ for $\theta=\arg(z)$ generic. 
 
 
 %Indeed, $I(z)$ represents the pairing between a relative homology class $[\mathcal{C}]\in H_{n}^{B}(X,zf)$ and a cohomology class $[\nu]\in H_{dR}^n(X,zf)$ (see Section 1.3.1 Thimble integrals in the introduction). 
-Let us restrict to one dimensional $X$. For any critical points $x_\alpha$ (satisfying the previous assumptions) of $f$, the saddle point approximation allows to compute the asymptotic expansion of $I_\alpha(z)$ 
+Let us restrict to one dimensional $X$. In particular,  $\mathcal{C}_\alpha$ is a steepest descent path through the critical point $x_\alpha$ and generic $\theta$ are such that $f(x_\beta)\notin f(x_\alpha)+[0,e^{i\theta}\infty)$ for $\beta\neq\alpha$. 
+For any critical points $x_\alpha$ (satisfying the previous assumptions), the saddle point approximation allows to compute the asymptotic expansion of $I_\alpha(z)$ 
 \begin{equation}\label{exp-int}
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}\sqrt{2\pi} z^{-1/2}\sum_{k\geq 0}a_{\alpha,k}z^{-k} \qquad \text{ as } \operatorname{Re} (ze^{i\theta})\to\infty.
 \end{equation}
