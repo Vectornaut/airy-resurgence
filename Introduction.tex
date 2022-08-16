@@ -83,31 +83,42 @@ S^-_c\defeq\lbrace \zeta\in\C\vert \mathrm{Re}(\zeta e^{i\theta})\leq c\rbrace
 \end{align*}
 and we define $H_\bullet(X,zf)$ as the relative homology groups, namely \[H_{\bullet}(X,zf)\defeq H_{\bullet}\left(X,f^{-1}(S_c^+);\Z\right)\] for $c$ large enough so that $f^{-1}(S_c^+)$ does not contain critical values of $f$ (i.e. points $\zeta_\alpha\defeq f(x_\alpha)$ where $df(x_\alpha)=0$ \footnote{In dimension $n>1$ there are other critical values due to the fact that $f$ is not proper. However under suitable assumptions it is possible to overcome this issue (see \cite{pham} part $1$, $\S 2$).}). Then we assume $[\mathcal{C}]\in H_n(X,zf)$. 
 
-Notice that $I(z)$ only depends on $[\mathcal{C}]\in H_n(X,zf)$ and on $[\nu]\in H_{dR}^n(X,zf)\defeq\mathbb{H}^n\left(X,(\Omega^\bullet_X,d_W\defeq e^{zf}\circ d\circ e^{-zf})\right)$: indeed let $\mathcal{C}'=\mathcal{C}+\partial\gamma\in [\mathcal{C}]$,
-\begin{align*}
-\int_{\mathcal{C}'}e^{-zf}\nu=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\partial\gamma}e^{-zf}\nu=\int_{\mathcal{C}}e^{-zf}\nu
-\end{align*} 
-because $e^{-zf}$ is rapidly decaying at $\partial\gamma$. Similarly, if $\nu'=\nu+d_W\eta\in [\nu]$
+\color{Aquamarine}
+Notice that $I(z)$ only depends on $[\mathcal{C}]\in H_n(X,zf)$ and on $[\nu]\in H_{dR}^n(X,zf)\defeq\mathbb{H}^n\left(X,(\Omega^\bullet_X,d_W\defeq e^{zf}\circ d\circ e^{-zf})\right)$: indeed let $\mathcal{C}'=\mathcal{C}+\partial\Gamma_1+\Gamma_2\in [\mathcal{C}]$ with $\Gamma_2\in X\cap f^{-1}(S_c^-)$,
+\begin{multline*}
+\int_{\mathcal{C}'}e^{-zf}\nu=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\partial\Gamma_1}e^{-zf}\nu+\int_{\Gamma_2}e^{-zf}\nu
+=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\Gamma_1}d\left(e^{-zf}\nu\right)=\\
+=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\Gamma_1}e^{-zf}d_W\nu=\int_{\mathcal{C}}e^{-zf}\nu
+\end{multline*} 
+because $e^{-zf}$ is rapidly decaying at $\Gamma_2$. Similarly, if $\nu'=\nu+d_W\eta\in [\nu]\in H_{dR}^n(X,zf)$
 \begin{multline*}
 \int_{\mathcal{C}}e^{-zf}\nu'=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\mathcal{C}}e^{-zf}d_{W}\eta=\int_{\mathcal{C}}e^{-zf}\nu+\int_{\mathcal{C}}d(e^{-zf}\eta)=\\
 =\int_{\mathcal{C}}e^{-zf}\nu+\int_{\partial\mathcal{C}}e^{-zf}\eta=\int_{\mathcal{C}}e^{-zf}\nu.
 \end{multline*}
-Moreover, for $\theta$ generic, i.e. when $\theta\neq\arg(\zeta_\alpha-\zeta_\beta)$ and $\alpha\neq\beta$, there is a decomposition of $H_\bullet(X,zf)$ as direct sum over the critical values of $f$ of the homology relative to these critical values (see \cite{pham}\cite{KKP}): 
-\begin{align}\label{decomposition H_B}
-H_\bullet(X,zf)=\bigoplus_{\alpha}H_\bullet\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)
-\end{align}     
-where $B_\alpha(\varepsilon)\defeq\lbrace \zeta \in\C\big\vert\,\, |\zeta-\zeta_\alpha|<\varepsilon\rbrace$ and $S_\alpha^+(\theta,\varepsilon)\defeq B_\alpha(\varepsilon)\cap\lbrace \mathrm{Re}(\zeta e^{i\theta})\geq \tfrac{\varepsilon}{2}\rbrace$ (see Figure \ref{fig:relative_homology}).
+
+Therefore the exponential integral defines a non--degenerate  paring \[\int\colon H_k(X,zf)\otimes_\Z\C\,\times\, H^k_{dR}(X,zf)\to \C_z. \]
+Moreover, for $\theta$ generic, i.e. when $\theta\neq\arg(\zeta_\alpha-\zeta_\beta)$, there is a decomposition of $H_\bullet(X,zf)$ as direct sum over the critical values of $f$ of the homology relative to these critical values (see \cite{pham}\cite{KKP}): let \[H_\bullet^{\theta,\alpha}(X,f)\defeq H_\bullet\left(f^{-1}(B_\alpha(\varepsilon))\cap \,f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)\] where $B_\alpha(\varepsilon))\defeq\lbrace \zeta \in\C\big\vert\,\, |\zeta-\zeta_\alpha|<\varepsilon\rbrace$ and $S_\alpha^+(\theta,\varepsilon)\defeq B_\alpha(\varepsilon)\cap\lbrace \mathrm{Re}(\zeta e^{i\theta})\geq \tfrac{\varepsilon}{2}\rbrace$ (Figure \ref{fig:ball}).
 \begin{figure}[h]
 \includegraphics[scale=0.5]{Cattura}
+\caption{Representation of $B_\alpha(\varepsilon)$ and the half-moon $S_\alpha^+(\theta,\varepsilon)$.}\label{fig:ball} 
+\end{figure}
+
+Then the decomposition is 
+\begin{align}\label{decomposition H_B}
+H_\bullet(X,zf)=\bigoplus_{\alpha}H_\bullet^{\theta,\alpha}(X,f)
+\end{align}     
+and the idea of the proof is sketched in Figure \ref{fig:relative_homology}.
+\begin{figure}[h]
+%\includegraphics[scale=0.5]{Cattura}
 \includegraphics[scale=0.3]{Cattura2}
 \caption{Relative homology}\label{fig:relative_homology}
 \end{figure}
 
-Let $\theta=0$ (if $\theta\neq 0$ we consider $xe^{i\theta/2}$), locally in a neighbourhood of a critcal point $x_\alpha$ we can choose a coordinate system $x_1,...,x_n$ such that $f(x)-f(x_\alpha)=x_1^2+...+x_n^2$. Then $\mathrm{Re}(f)$ is a Morse function with simple, isolated and non degenerate critical points. We choose a Riemannian metric $g$ on $X$ and we define the Lefschetz thimbles $\mathcal{C}_{\alpha,z}$ as the steepstet descendet path issuing from a critcal point $x_\alpha$ (see \cite{Witten}): 
+Let $\theta$ be generic, locally in a neighbourhood of a critcal point $x_\alpha$ we can choose a (real) coordinate system $\xi_1,...,\xi_{2n}$ such that \[e^{i\theta}\left(f(x)-f(x_\alpha)\right)=\sum_{j=1}^n(\xi_j+i\xi_{j+1})^2.\] Then $\mathrm{Re}(e^{i\theta}f)$ is a Morse function with simple, isolated and non degenerate critical points (which are the cirtical points of $f$). We choose a Riemannian metric $g$ on $X$ and we define the \textit{Lefschetz thimbles} $\mathcal{C}_{\alpha,z}$ as the steepstet descendent path issuing from a critcal point $x_\alpha$ (see \cite{Witten}): 
 \begin{equation}
-\mathcal{C}_{\alpha,z}=\lbrace x\in X\,\big\vert \, \lim_{t\to -\infty} x(t)=x_\alpha\rbrace
+\mathcal{C}_{\alpha,z}=\lbrace x=(x_1,...,x_{2n})\in X\,\big\vert \, \lim_{t\to -\infty} x(t)=x_\alpha\rbrace
 \end{equation}
-where $x(t)$ is the solution of the gradient flow equation \[\frac{\dd x_i(t)}{\dd t}=-g_{ij}x_j(t)\] and $x_i(0)=x_i$ \footnote{An equivalent definition is given by F. Pham in \cite{pham}.}. 
+where $x(t)$ is the solution of the gradient flow equation \[\frac{\dd x_i(t)}{\dd t}=-g_{ij}\frac{\partial}{\partial \xi_j}\mathrm{Re}f(x(t))\] and $x_i(0)=x_i$ \footnote{An equivalent definition is given by F. Pham in \cite{pham}.}. 
 
 \begin{figure}[h]
 \includegraphics[scale=0.075]{veer-left_matching}
@@ -115,28 +126,18 @@ where $x(t)$ is the solution of the gradient flow equation \[\frac{\dd x_i(t)}{\
 \caption{Lefschetz thimbles for the Airy integral $f(t)=t^3/3-t$ at $\theta=?$ (left) and $\theta=??$ (right). }\label{Lefschetz_thimbles}
 \end{figure}
 
-Notice that $[\mathcal{C}_{\alpha,z}]\in H_n(X,zf)$ and they generate the relative homology for every critical values $H_n\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)$. In fact,  
+Notice that $[\mathcal{C}_{\alpha,z}]\in H_n(X,zf)$ and they generate the relative homology. In fact,  
 
 \begin{itemize}
-\item $H_k\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)$ is isomorphic to $H_{k-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha))$, where $B_\alpha
+\item $H_k^{\theta,\alpha}(X,f)$ is isomorphic to $H_{k-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha))$, where $B_\alpha
 ^M(\varepsilon)$ is an open ball centred at $x_\alpha$ of radius $\varepsilon$ such that for every $\varepsilon'<\varepsilon$ $B_\alpha(\varepsilon')$ is transverse to $f^{-1}(\zeta_\alpha)$. 
-\item $H_{k-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha))=0$ if $k\neq n$ and $H_{n-1}(B_\alpha^M(\varepsilon)\,\cap f^{-1}(\zeta-\zeta_\alpha))=\Z^\mu$, where $\mu$ is the Milnor number;   
+\item $H_{k-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha))=0$ if $k\neq n$ and $H_{n-1}(B_\alpha^M(\varepsilon)\,\cap f^{-1}(\zeta-\zeta_\alpha))=\Z^\mu$, where $\mu$ is the Milnor number \footnote{The Milnor number counts how many pre-image of a critical value are critical points, or equivalently how many Lefschetz thimbles are in the pre-image of $f^{-1}(\zeta_\alpha+\R_{\geq 0}e^{i\theta})$.};   
 \end{itemize}
 
-hence $H_n\left(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon))\right)$ has rank $\mu$. In addition from singularity theory we know that the set of vanishing cycles $\partial\mathcal{C}_{\alpha,z}$ forms a basis of $H_{n-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha)) $ (see Theorem 2.1 \cite{Arnold}).    
+hence $H_n^{\theta,\alpha}(X,f)$ has rank $\mu$. In addition from singularity theory we know that the set of vanishing cycles $\partial\mathcal{C}_{\alpha,z}$ forms a basis of $H_{n-1}(B_\alpha^M(\varepsilon)\cap f^{-1}(\zeta-\zeta_\alpha)) $ (see Theorem 2.1 \cite{Arnold}).    
 
   
-
-\color{magenta}
-We furthermore assume the following:
-\begin{assumption}\label{assumption_on_f}
-The map $f\colon X\to\C$ has isolated, simple and non degenerate critical values $\zeta_\alpha$. 
-\end{assumption}
-
-  
-\color{black}
-
-Since for $\theta$ generic the $\mathcal{C}_{\alpha,z}$ are a basis for the relative homology $H_n(X,zf)$, the integral $I(z)$ can be decomposed as sum over Lefschetz thimbles: we denote 
+Since for $\theta$ generic the collection of the Lefschetz thimbles $\mathcal{C}_{\alpha,z}\in H_n^{\theta,\alpha}(X,f)$ (for all $\alpha$ and fixed $\theta$)are a basis for the relative homology $H_n(X,zf)$, the integral $I(z)$ can be decomposed as sum over Lefschetz thimbles: we denote 
 \begin{equation}\label{int_alpha}
 I_{\alpha}(z)\defeq\int_{\mathcal{C}_{\alpha,z}}e^{-zf}\nu
 \end{equation}
@@ -150,17 +151,33 @@ Moreover the coeficients $n_\alpha$ can be computed via intersection theory (see
 \end{align*} 
 where $x(t)$ solve the upward flow equation
 \begin{align*}
-\frac{\dd x_i(t)}{\dd t}= g_{ij}x_j(t) \qquad \text{ with } x_i(0)=x_i
+\frac{\dd x_i(t)}{\dd t}= g_{ij}\frac{\partial}{\partial \xi_j}\mathrm{Re}f(x(t)) \qquad \text{ with } x_i(0)=x_i
 \end{align*}
 then $\mathcal{K}_{\alpha,z}\in H_{n}(X,f^{-1}(S^-_c);\Z)$ for $c$ large enough and they define a basis (for $\theta$ generic). Furthermore, $\mathcal{K}_{\alpha,z}$ and $\mathcal{C}_{\alpha,z}$ intersect transversely at the critical point $x_\alpha$, hence they define a non degenerate pairing 
 \begin{align*}
 \langle -, -\rangle\colon H_n&(X,f^{-1}(S^+_c);\Z)\otimes H_n(X,f^{-1}(S^-_c);\Z)\to \Z \\
 & \qquad \mathcal{C} \qquad\quad , \qquad\qquad \mathcal{K} \qquad \to \quad \langle\mathcal{C} , \, \mathcal{K}\rangle. 
 \end{align*}
+\color{magenta}
+Should I mention the Betti--DeRham iso? 
+
+\color{black}
+
+
 Now looking at the intersection of $\mathcal{C}\in H_n(X,zf)$ with the basis $\mathcal{K}_{\alpha,z}$ we can compute the constants $n_\alpha$ in terms of intersection pairing:
 \begin{align*}
-\langle \mathcal{C},\mathcal{K}_{\alpha,z}\rangle=\sum_{\beta}n_\beta\langle \mathcal{C}_{\beta,z},\mathcal{K}_{\alpha,z}\rangle=n_\alpha
+\langle \mathcal{C},\mathcal{K}_{\alpha,z}\rangle=\langle \sum_\beta n_\beta\mathcal{C}_{\beta,z},\mathcal{K}_{\alpha,z}\rangle=\sum_{\beta}n_\beta\langle \mathcal{C}_{\beta,z},\mathcal{K}_{\alpha,z}\rangle=\sum_{\beta}n_\beta\delta_{\alpha\beta}=n_\alpha
 \end{align*}
+
+hence $n_\alpha$ are integers. However, there are examples in which $n_\alpha\in\C$ (see modified Bessel): indeed if there exists a group $G$ that leaves $f$ invariant, namely
+\begin{align*}
+f(g.x)=f(x)\,\,\forall g\in G
+\end{align*} 
+then different critical points can be mapped to the same critical value. It follows that for every $x_j$ in the orbit of $x_\alpha$, the thimbles $\mathcal{C}_{j,z}=f^{-1}(\zeta_\alpha+ \R_{\geq 0} e^{i\theta})$ are $\C$-linear dependent.
+ 
+% $H_\bullet(X,zf)$ such that the orbits of $\mathcal{C}_{\alpha,z}\in H_n^{\theta,\alpha}(X,f)$ contains the Lefschetz thimbles $\mathcal{C}_{j,z}\in H_n^{\theta,z}(X,zf)$ for every $j$ such that $f(x_j)=\zeta_\alpha$. When it happens, $\mathcal{C}_{j,z}$ and $\mathcal{C}_{\alpha,z}$ are $\C$- linear dependent, hence the coefficients $n_j$ are complex valued. 
+
+
 \color{magenta}
 ORIENTATION? 
 
@@ -221,10 +238,122 @@ So far we have considered $\theta=\arg(z)$ fixed and generic (i.e. $\theta\neq\a
 
     
 \subsubsection{Geometric computation of Stokes constants}
-As we discuss in $\S$\ref{what-are-exp-inte}, at $\theta$ generic, the relative homology groups $H_n(X,zf)$ admits a decomposition in terms of the homology relative to each critical values $H_n(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon)))$. As $\theta$ varies, without crossing a Stokes line, $H_n(f^{-1}(B_\alpha(\varepsilon))\cap f^{-1}(S_\alpha^+(\theta,\varepsilon)))$ defines a rank $\mu$ local system over $\mathbb{S}^1$  
+As we discuss in $\S$\ref{what-are-exp-inte}, at $\theta$ generic, the relative homology groups $H_n(X,zf)$ admits a decomposition in terms of the homology relative to each critical values $H_n^{\theta,\alpha}(X,f)$. As $\theta$ varies, $H_n^{\theta,\alpha}(X,f)$ defines a rank $\mu$ local system over $\mathbb{S}^1$ which has non trivial monodromy at the singular points $\theta=\arg(\zeta_\alpha-\zeta_\beta)$. Our goal is to compute these monodromy matrices: on a Stokes ray $\ell_{\alpha\beta}=\zeta_\alpha+e^{i\theta}\R$ the imaginary part of $\zeta_j\in\ell_{\alpha\beta}$ is constant and we order the critical values as $\mathrm{Re}(\zeta_1)<\mathrm{Re}(\zeta_2)<...<\mathrm{Re}(\zeta_j)$. Then the monodromy matrices are upper triangular and the off diagonal terms are the so called Stokes constants. 
+In order to compute the Stokes constants we follow Kontsevich's proposal in \cite{Maxim_lectures} which is in terms of intersection numbers of thimbles. 
+
+
+\begin{figure}[h]
+\includegraphics[scale=0.065]{veer-left_matching}
+\includegraphics[scale=0.26]{thimble-degenerate}
+\includegraphics[scale=0.065]{veer-right_matching}
+\includegraphics[scale=0.33]{borel-left}
+\includegraphics[scale=0.33]{borel-left}
+\includegraphics[scale=0.33]{borel-left}
+\end{figure}    
 
 
 \subsubsection{ ODE and fractional derivative formula [draft2]}
+
+From an analytic perspective, Stokes phenomena occurs studying the analytic continuation of germs of holomorphic function in the Borel plane. Indeed, Borel transform of divergent series usually have singularities and the aim of resurgence theory is to investigate the analytic continuation away from the singularities. We will mainly refer to J. Ecalle's orginal papers \cite{EcalleI}\cite{EcalleII}\cite{EcalleIII} as well as the following introductive reviews by different authors \cite{Schiappa}\cite{Dorigoni}\cite{diablerets}\cite{MS16}\cite{sauzin_Gamma}.  
+
+Among the most common type of singularities of $\hat{\iota}(\zeta)\in\C\lbrace\zeta\rbrace$ there are simple singularities and fractional power singularities: 
+\begin{itemize}
+\item $\hat{\iota}(\zeta)$ has a simple singularity at $\omega\in\C$ if there exist a constant $C_\omega\in\C$ and a germ of holomorphic function at the origin $\hat{\phi}_\omega(\zeta)\in\C\lbrace\zeta\rbrace$ such that in a neighbourhood of $\omega$
+\begin{align*}
+\hat{\iota}(\zeta-\omega)=\frac{C_\omega}{2\pi i \zeta}+\frac{\mathrm{Log}(\zeta)}{2\pi i}\hat{\phi}_{\omega}(\zeta)+\text{ hol. fct.}
+\end{align*} 
+and $\mathrm{Log}(\zeta)$ is any branch of the logarithm;
+\item $\hat{\iota}(\zeta)$ has a fractional power singularity at $\omega\in\C$ if there exist $\mu\in\Q\setminus\Z$ and a germ of holomorphic function at the origin $\hat{\phi}_\omega(\zeta)\in\C\lbrace\zeta\rbrace$ such that in a neighbourhood of $\omega$
+\begin{align*}
+\hat{\iota}(\zeta-\omega)=\zeta^{\mu}\hat{\phi}_\omega(\zeta)+ \text{ hol. fct.}
+\end{align*}
+\end{itemize} 
+
+From the type of singularities we can study the analytic continuation of $\hat{\iota}$; for instance in both the previous examples we look for singularities of the germ $\hat{\phi}_\omega(\zeta)$ iterating the same procedure. In general, this iterative procedure may be infinite as at every step we may found new singularities, however resurgence function are endlessly analytic continuable, meaning that at each step they admit only finitely many singularities. There are also examples where the resurgence structure of germs is easier because there are only finitely many singularities, as it happens for exponential integrals and for solutions of linear ODEs. In particular, in the former case the singularities are the critical values of the potential $f$ while in the latter they are determined from the equation written in the \textit{prepared form}. In both cases the singularities are fractional power singularities but for exponential integrals (as a corollary of Theorem \ref{thm:borel integrals}) we will prove a fractional derivative formula which expresses the non-fractional singularity $\hat{\varphi}_\alpha(\zeta)$ in terms of the Borel transform  $\hat{\iota}_\alpha(\zeta)$:
+
+\begin{corollary}[see Corollary \ref{int:deriv-formula}]\label{cor:deriv-formula} 
+Under the same assumptions of Theorem \ref{thm:borel integrals}, for any $\zeta$ on the ray going rightward from $\zeta_\alpha$ in the direction of $\theta$, we have
+\begin{multline}
+\hat{\varphi}_{\alpha}(\zeta)=\partial^{3/2}_{\zeta \text{ from }\zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)}\nu \right)={\left(\tfrac{\partial}{\partial \zeta}\right)^2}\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2} {\left( \int_{\mathcal{C}_\alpha(\zeta')} \nu \right)}\,d\zeta',
+\end{multline}
+where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $e^{-i\theta}f^{-1}([\zeta_\alpha, \zeta ])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $e^{-i\theta}f^{-1}(\zeta)$. 
+\end{corollary}
+
+Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. Moreover, in the examples, $\hat{\varphi}_\alpha(\zeta)$ turn out be an hypergeometric function of type ${}_pF_{p-1}$ where $p$ is the number of critical points. 
+We expect that hypergeometric functions play a special role in resurgence theory as they may always appear when there are only finitely many singularities. In addition,  \textbf{Aaron-> what do you expect to be true in terms of the algebraic hypergeometric?} 
+
+
+%Another difficulty of studying the analytic continuation of a germ is that often we only know its series expansion $\tilde{\iota}(\zeta)$ and not its sum $\hat{\iota}(\zeta)$ which  
+
+Once we know the location of singularities hence the analytic continuation of the germ, the Stokes constant are determined either by comparing the behaviour across a branch cut or the residue at a simple pole. We discuss the two cases separately: let $\hat{\iota}(\zeta)\in\C\lbrace\zeta\rbrace$ be a germ at the origin with a log singularity at $\omega\in\C$
+
+\begin{equation}
+\hat{\iota}(\zeta-\omega)=\frac{\mathrm{Log}(\zeta)}{2\pi i}\hat{\phi}_{\omega}(\zeta)+\text{ hol. fct.}
+\end{equation} 
+
+with $\hat{\phi}_{\omega}(\zeta)\in\C\lbrace\zeta\rbrace$. If  $\hat{\phi}_{\omega}(\zeta)$ has no singularities for $\mathrm{Re}(\zeta)\geq \mathrm{Re}(\omega)$, then $\hat{\iota}$ has a branch cut for $\zeta=\omega+\R_{\geq 0}$  and its analytic continuation is easily computed
+
+\begin{align*}
+\hat{\iota}(\zeta-\omega+i\epsilon)-\hat{\iota}(\zeta-\omega-i\epsilon)&=\frac{\mathrm{Log}(\zeta+i\epsilon)}{2\pi i}\hat{\phi}_\omega(\zeta+i\epsilon)-\frac{\mathrm{Log}(\zeta-i\epsilon)}{2\pi i}\hat{\phi}_\omega(\zeta-i\epsilon)\\
+&=\frac{\mathrm{Log}(\zeta-i\epsilon)+2\pi i}{2\pi i}\hat{\phi}_\omega(\zeta)-\frac{\mathrm{Log}(\zeta-i\epsilon)}{2\pi i}\hat{\phi}_\omega(\zeta)\\
+&=\hat{\phi}_\omega(\zeta). 
+\end{align*} 
+We can deduce that the log singularity is represented by $\hat{\phi}_{\omega}(\zeta)$ also called \textit{minor} in Ecalle formalism. 
+
+Similarly, if $\hat{\iota}$ has fractional power singularity $\mu\in\C\setminus\Z$ and $\hat{\phi}_{\omega}$ has no singularities in $\omega+\R_{\geq 0}$, across the branch cut $\omega+\R_{\geq 0}$ 
+
+\begin{align*}
+\hat{\iota}(\zeta-\omega+i\epsilon)-\hat{\iota}(\zeta-\omega-i\epsilon)&=(\zeta+i\epsilon)^{\mu}\hat{\phi}_\omega(\zeta+i\epsilon)- (\zeta-i\epsilon)^{\mu}\hat{\phi}_\omega(\zeta-i\epsilon)\\
+&=e^{2\pi i\mu}(\zeta-i\epsilon)^\mu\hat{\phi}_\omega(\zeta)-(\zeta-i\epsilon)^{\mu}\hat{\phi}_\omega(\zeta)\\
+&=(e^{2\pi i\mu}-1)(\zeta-i\epsilon)^{\mu}\hat{\phi}_{\omega}(\zeta).
+\end{align*} 
+In this case, a \textit{minor} is given by $(e^{2\pi i\mu}-1)(\zeta-i\epsilon)^{\mu}\hat{\phi}_{\omega}(\zeta)$. 
+
+In Ecalle formalism, pole singularities are usually denoted by the symbol $\delta^{(k)}$ where $k$ represent the order of the pole:
+\begin{align*}
+\delta\defeq\mathrm{sing}_0\left(\frac{1}{2\pi i\zeta}\right) \qquad\qquad \delta^{(k)}\defeq\mathrm{sing}_0\left(\frac{(-1)^kk!}{2\pi i\zeta^{k+1}}\right),\quad k\geq 0
+\end{align*}
+where $\mathrm{sing}_0$ denotes the quotient map by germs of holomorphic functions. According to that notation, simple singularities are denoted by 
+\begin{equation}
+\overset{\triangledown}\iota(\zeta)=C_\omega\delta+\hat{\varphi}_{\omega}(\zeta).
+\end{equation}  
+
+\color{green}
+
+parla Stokes constant in generale
+
+\color{black}
+
+Let us focus on the Stokes phenomena for exponential integrals: let $\zeta_{\alpha_i}$, $i=1,...,N$ be the critical values of $f$ and $x_1,...,x_d$ be the critical points (where $d$ might be grater than $N$). For each critical point, the asymptotic behaviour of $I_{j}(z)$ is given by a formal power series $\tilde{I}_{j}(z)$ whose Borel transform is a germ of holomorphic functions at $f(x_j)=\zeta_{\alpha_i}$ for some $i$. In addition, $\hat{\iota}_{j}(\zeta)$ has singularities in the Borel plane exactly at points $\zeta_{\alpha_l}$ for $l\neq i$. Hence, if we define $R_{jk}\defeq |\zeta_{\alpha_i}-\zeta_{\alpha_l}|$ for $k$ such that $f(x_k)=\zeta_{\alpha_l}$ and we order $\zeta_{\alpha_l}$ so that $R_{jk_1}\leq R_{jk_2}\leq ...\leq R_{jk_N}$ in a neighbourhood of $\zeta_{\alpha_l}$ we expect  
+
+\begin{equation}
+\hat{\iota}_j(\zeta-\zeta_{\alpha_l})=\sum_{r: R_{jk_1}=R_{jk_r}}S_{jk_r}\hat{\iota}_{k_r}(\zeta) 
+\end{equation}  
+where $S_{jk}$ are constants. Notice that there might be more values of $k$ such that $f(x_k)=\zeta_{\alpha_l}$ for a fixed $l$; hence the constants $S_{jk}$ are defined only after a choice of normalization. \textbf{Discuss with Aaron what is the best choice; should we fix a basis of critical points and relate the thimbles with the same image via the action of some group? How this affect the constants?}   
+
+
+Going back to the $z-$ plane, from the analysis on the Borel plane we deduce the following: let ...
+
+we can also compute the Stokes constants via direct computation of the analytic continuation of the Borel--Laplace sum of $\tilde{I}_{j}(z)$ for every $j$ such that $\zeta_j\in\ell_{\alpha\beta}$. This is about computing the difference between $\mathcal{L}_{\theta_\pm}\hat{\iota}_{j}\defeq\int_{ 
+\zeta_j}^{e^{i\theta_\pm}\infty}e^{-z\zeta}\hat{\iota}_{j}(\zeta)d\zeta$ such that $\theta_\pm=\arg(\zeta_\alpha-\zeta_\beta)\pm\epsilon$, $\epsilon <\!\!< 1$ does not contain other singularities of $\hat{\iota}_j(\zeta)$. Following the convention of \cite{Dorigoni}\cite{Schiappa} we define the Stokes automorphisms $\mathfrak{S}_\theta$ associated to the critical direction $\theta$ as 
+
+\begin{align*}
+\mathcal{L}_{\theta_+}=\mathcal{L}_{\theta_-}\circ\mathfrak{S}_{\theta}
+\end{align*}
+which measures the jump between the Borel--Laplace sum of $\tilde{I}_j(z)$ across the ray $\ell_{\alpha\beta}$. In addition it can be expressed in terms of the so called \textit{Alien derivatives} $\Delta_{\zeta_{j}}$ for every $\zeta_{j}\in\ell_{\alpha\beta}$ which are derivations on the algebra of resurgent functions
+
+\begin{align*}
+\Delta_{\zeta_j}\colon 
+\end{align*} 
+
+in particular, if $\hat{\iota}_j(\zeta)$ is a resurgent function 
+Then 
+
+\begin{align*}
+\mathfrak{S}_{\theta}= \exp\left(\right)
+\end{align*}
+
+
 
 \subsubsection{If hypergeometric functions appear in a large class of examples: integral formulas for hypergeometric functions }
 
@@ -383,6 +512,13 @@ taking the positive branch of the square root on $\mathcal{C}^+_\alpha$ and the 
 We have now shown that the sum of $\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha$ is actually equal to $\hat{\iota}_\alpha$ as $\zeta\in\zeta_\alpha+[0,e^{i\theta}\infty)$.
 \end{proof}
 
+\color{Aquamarine}
+\begin{remark}
+There is an ambiguity in the proof: on one side, when we choose a coordinates $\tau$ and we write the asymptotic expansion $\tilde{I}_j(z)$ of a thimble integral $I_j(z)$, it only depends on $f(x_j)$. So if $f(x_j)=f(x_k)=\zeta_\alpha$, then $\tilde{I}_j(z)=\tilde{I}_k(z)\doteq\tilde{I}_\alpha(z)$. Consequently their Borel transform is the same: $\tilde{\iota}_j(\zeta)=\tilde{\iota}_k(\zeta)\doteq\tilde{\iota}_\alpha(\zeta)$. However, in the second part of the proof, the Borel transform of $I_j(z)$ is computed from the Laplace integral and its definition depends on the ends of the thimble $\mathcal{C}_j$. So a question arises naturally, what is the relation between ends of thimbles which are mapped to the same path in the Borel plane? 
+\end{remark}   
+
+\color{black}
+
 \begin{remark}
 Different choices of admissible $\theta$ correspond to different choices of thimbles $[\mathcal{C}_{\alpha}]\in H_n^{B}(X,zf)$, but the Borel transform of $\tilde{I}_{\alpha}$ does not depend on $\theta$. However, if $\theta_*\defeq\arg(\zeta_{\alpha}-\zeta_{\beta})$ and $\theta_{\pm}\defeq\theta_*\pm\delta$ for small $\delta$, then $I_{\alpha}(z)$ jumps on the intersection between $\operatorname{Re}(e^{i\theta_+}z)>0$ and $\operatorname{Re}(e^{i\theta_-}z)>0$. This is known as the Stokes phenomenon (see Section resurgence thimbles integrals).  
 \end{remark}
@@ -453,6 +589,33 @@ and $\overset{\triangledown}{\iota}_\alpha(\zeta)=\hat{
 \iota}_{\alpha}(\zeta)+\text{hol.fct.}$. In the applications we have evidence that $\overset{\triangledown}{\iota}_\alpha(\zeta)$ is an algebraic hypergeometric function and when there are only two critical values, it decomposes as a sum of two germs of holomorphic functions at each critical values respectively (see {\tt airy-resurgence} Section 6.1, 6.3). 
 
 \section{Stokes phenomenon for thimble integrals}
+
+
+\subsection{How to find singularities in the Borel plane}
+
+\begin{lemma}
+Let $\tilde{\Phi}(z)$ be a solution of a linear ODE
+\begin{equation}
+P(\partial_z)+z^{-1}Q_1(\partial_z)+...+z^{-d+1}Q_{d-1}(\partial_z)+z^{-d}Q_d(\partial_z)=0
+\end{equation}
+with $P(-)$ a degree $d$ polynomial and $Q_j(-)$ a degree $d-j$ polynomial. Then $\hat{\phi}(\zeta)$ is resurgent in $\C\setminus\lbrace \lambda\in\C \vert  P(\lambda)=0\rbrace$.  
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{remark}
+For non linear ODEs, the previous result is not valid anymore, because non linear terms propagate singularities via convolution. 
+\end{remark}
+
+\begin{lemma}Let $I(z)$ be an exponential integral and $\tilde{I}_j(z)\in z^{1/2}\C_1[\![z^{-1}]\!]$ be its asymptotic behaviour at the critical point $x_j$ as $\mathrm{Re}(z)\to e^{i\theta}\infty$. Then $\hat{\iota}_j(\zeta)$ has singularities at the critical values $\zeta_\alpha$. 
+\end{lemma}
+
+\subsection{Stokes factors from geometric computations}
+
+Let $I_j(z)$ be a thimble integral labeled by the set of thimbles, one for each critical points and let $\zeta_{\alpha_i}$ be the critical values of $f$. Recall that Stokes rays $\ell_{il}$ are defined along the direction $\arg(\zeta_{\alpha_i}-\zeta_{\alpha_l})$ and 
+
 
 \section{Examples}   
 
