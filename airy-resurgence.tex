@@ -194,11 +194,11 @@ where:
 \item $q$ is a function in $\holoL{\infty}(\Omega)$ that extends holomorphically over $\zeta = 0$.
 \item $r_\lambda$ are functions in $\holoL{\infty}(\Omega)$.
 %%\item $p$ and $q$ extend holomorphically over $\zeta = 0$.
-\item $\Lambda$ is a countable subset of $(-\infty, -1)$.
+\item $\Lambda$ is a countable subset of $(-\infty, -1)$ whose supremum is less than $-1$.
 \end{itemize}
 Our demand that $p$ and $q$ have convergent power series at $\zeta = 0$ can probably be relaxed; having convergent Novikov series, for example, should be enough. We could also probably replace $\partial^{-1}_{\zeta \text{ from } 0}$ with $\partial^{-1+\delta}_{\zeta \text{ from } 0} \circ \zeta^\delta$ for some $\delta \in [0, 1)$, or adjust the $\partial^\lambda_{\zeta \text{ from } 0}$ similarly.
 
-\textcolor{Indigo}{We want to solve the equation $\mathcal{J}f = 0$. Let's look for a solution of the form $f = \zeta^{\tau-1} + \tilde{f}$ with $\tau \in (0, \infty)$ and $\tilde{f} \in \holoL{\infty, \tau}(\Omega)$.}
+\textcolor{Indigo}{We want to solve the equation $\mathcal{J}f = 0$. Let's look for a solution of the form $f = \zeta^{\tau-1} + \tilde{f}$ with $\tau \in (0, \infty)$ and $\tilde{f} \in \holoL{\infty, 1-\tau-\epsilon}(\Omega)$ for some $\epsilon \in (0, 1]$. When $\epsilon$ is small enough that $\Lambda \subset (-\infty, -1 - \epsilon]$, we'll see that we can always find such a solution, as long as we're willing to shrink $\Omega$. In fact, there's exactly one such solution. \textcolor{magenta}{[Add convergence conditions for $\partial^\lambda$ terms.]}}
 
 Let $p'_0$ and $q_0$ be the values of $\tfrac{\partial}{\partial \zeta} p$ and $q$, respectively, at $\zeta = 0$. We're assuming that $p$ and $q$ extend holomorphically over $\zeta = 0$, and the additional assumption that $p \in \holoL{\infty, -1}(\Omega)$ implies that $p$ has a first-order zero at $\zeta = 0$.
 
@@ -216,44 +216,64 @@ For any $\tau \in (0, \infty)$,
 Setting $\tau = -q_o / p'_0$ makes the first term vanish, leaving
 \[ \mathcal{J} \zeta^{\tau-1} = \tilde{\mathcal{J}} \zeta^{\tau-1}. \]
 Then the equation $\mathcal{J}f = 0$ becomes
-\begin{align*}
-0 & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \mathcal{J}\tilde{f} \\
-0 & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \left[ p'_0\zeta + q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \right]\tilde{f} \\
--p'_0\zeta\tilde{f} & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \left[ q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \right]\tilde{f} \\
-\tilde{f} & = \left[ -\tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\,\zeta^{\tau-1} + \left[ \tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} - \tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\tilde{f} \\
-\end{align*}
+\begin{align}
+0 & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \mathcal{J}\tilde{f} \nonumber \\
+0 & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \left[ p'_0\zeta + q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \right]\tilde{f} \nonumber \\
+-p'_0\zeta\tilde{f} & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \left[ q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \right]\tilde{f} \nonumber \\
+\tilde{f} & = \left[ -\tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\,\zeta^{\tau-1} + \left[ \tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} - \tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\tilde{f}. \label{fixed-pt}
+\end{align}
 
 \color{Indigo}
 \begin{center}
 \begin{tikzcd}[column sep=25mm, row sep=2mm]
 & & \holoL{\infty, \rho-1}(\Omega) \\
-\holoL{\infty, \rho}(\Omega) \arrow[r, "\tilde{p}", "\|\tilde{p}\|_{\infty, -2}"'] & \holoL{\infty, \rho-2}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty"'] \arrow[rd, hook, "\|\zeta\|_\infty^2"'] \\
-& & \holoL{\infty, \rho}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "\tilde{p}", "\|\tilde{p}\|_{\infty, -2}"'] & \holoL{\infty, \rho-2}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty"'] \arrow[rd, hook, "\|\zeta\|_\infty^{1-\epsilon}"'] \\
+& & \holoL{\infty, \rho-1-\epsilon}(\Omega) \\
 & & & \holoL{\infty, \rho-1}(\Omega) \\
 \holoL{\infty, \rho}(\Omega) \arrow[r, "\tilde{q}", "\|\tilde{q}\|_{\infty, -1}"'] & \holoL{\infty, \rho-1}(\Omega) \arrow[r, "\partial^{-1}", "{B(1, 2-\rho) = \frac{1}{2-\rho}}"'] & \holoL{\infty, \rho-2}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty"'] \arrow[rd, hook, "\|\zeta\|_\infty^2"'] \\
 & & & \holoL{\infty, \rho}(\Omega) \\
 & & & \holoL{\infty, \rho-1}(\Omega) \\
-\holoL{\infty, \rho}(\Omega) \arrow[r, "r_\lambda", "\|r_\lambda\|_\infty"'] & \holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^\lambda", "{B(-\lambda, 1-\rho)}"'] & \holoL{\infty, \rho+\lambda}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty^{-1-\lambda}"'] \arrow[rd, hook, "\|\zeta\|_\infty^{-\lambda}"'] \\
-& & & \holoL{\infty, \rho}(\Omega)
+\holoL{\infty, \rho}(\Omega) \arrow[r, "r_\lambda", "\|r_\lambda\|_\infty"'] & \holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^\lambda", "{B(-\lambda, 1-\rho)}"'] & \holoL{\infty, \rho+\lambda}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty^{-1-\lambda}"'] \arrow[rd, hook, "\|\zeta\|_\infty^{-1-\epsilon-\lambda}"'] \\
+& & & \holoL{\infty, \rho-1-\epsilon}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^{-1}", "{B(1, 1-\rho) = \frac{1}{1-\rho}}"'] & \holoL{\infty, \rho-1}(\Omega) \arrow[r, "\zeta^{-1}", "\|\zeta^{-1}\|_{\infty, 1} = 1"'] & \holoL{\infty, \rho}(\Omega) \\
 \end{tikzcd}
 \end{center}
 \color{DarkBlue}
 
 From \textbf{[our previous discussion]}, we can work out that
 \begin{align*}
-\tilde{\mathcal{J}} & \maps \mathcal{H}L^{\infty, 1-\tau}(\Omega) \to \mathcal{H}L^{\infty, -\tau}(\Omega)\;\text{with} \\
-\|\tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, \tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}
+\tilde{\mathcal{J}} & \maps \mathcal{H}L^{\infty, 1-\tau}(\Omega) \to \mathcal{H}L^{\infty, -\tau-\epsilon}(\Omega)\;\text{with} \\
+\|\tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M^{1-\epsilon} + \sum_{\lambda \in \Lambda} B(-\lambda, \tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\epsilon-\lambda}
 \end{align*}
 and
 \begin{align*}
-\tilde{\mathcal{J}} & \maps \mathcal{H}L^{\infty, -\tau}(\Omega) \to \mathcal{H}L^{\infty, -1-\tau}(\Omega)\;\text{with} \\
-\|\tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{2+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, 1+\tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}.
+\tilde{\mathcal{J}} & \maps \mathcal{H}L^{\infty, 1-\tau-\epsilon}(\Omega) \to \mathcal{H}L^{\infty, -\tau-\epsilon}(\Omega)\;\text{with} \\
+\|\tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau+\epsilon}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, \tau+\epsilon)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}.
 \end{align*}
 Since $\|\zeta^{-1}\|_{\infty, 1} = 1$, it follows that
+\begin{align}
+\zeta^{-1} \circ \tilde{\mathcal{J}} & \maps \mathcal{H}L^{\infty, 1-\tau}(\Omega) \to \mathcal{H}L^{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \nonumber \\
+\|\zeta^{-1} \circ \tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M^{1-\epsilon} + \sum_{\lambda \in \Lambda} B(-\lambda, \tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\epsilon-\lambda} \label{bound:mollify}
+\end{align}
+and
+\begin{align}
+\zeta^{-1} \circ \tilde{\mathcal{J}} & \acts \mathcal{H}L^{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \nonumber \\
+\|\zeta^{-1} \circ \tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau+\epsilon}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, \tau+\epsilon)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}. \label{bound:perturb}
+\end{align}
+We can also see that
+\begin{align}
+\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} & \acts \mathcal{H}L^{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \nonumber \\
+\|\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0}\| & = \tfrac{\tau}{\tau+\epsilon} < 1 \label{bound:contract}.
+\end{align}
+
+Now, let's return to equation~\ref{fixed-pt}, which tells us that $f = \zeta^{\tau-1} + \tilde{f}$ satisfies $\mathcal{J}f = 0$ when \textbf{[and only when?]} $\tilde{f}$ is a fixed point of the affine map $\mathcal{A}(\cdot) + b$, where
 \begin{align*}
-\zeta^{-1} \circ \tilde{\mathcal{J}} & \maps \mathcal{H}L^{\infty, -\tau}(\Omega) \to \mathcal{H}L^{\infty, -\tau}(\Omega)\;\text{with} \\
-\|\zeta^{-1} \circ \tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{2+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, 1+\tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}.
+\mathcal{A} & = \tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} - \tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \\
+b & = \left[ -\tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\,\zeta^{\tau-1}
 \end{align*}
+Choosing $\epsilon \in (0, 1]$ so that $\Lambda \subset (-\infty, -1 - \epsilon]$ has given us the domain and codomain statements in bounds \ref{bound:mollify} and \ref{bound:perturb}, which tell us that $\mathcal{A}(\cdot) + b$ sends $\mathcal{H}L^{\infty, 1-\tau-\epsilon}(\Omega)$ into itself. We'll show that when $\Omega$ is small enough, $\mathcal{A}(\cdot) + b$ contracts $\mathcal{H}L^{\infty, 1-\tau-\epsilon}(\Omega)$, and thus---by the contraction mapping theorem---has a unique fixed point.
+
+An affine map is a contraction if and only if its linear part is a contraction. We know from bound~\ref{bound:contract} that $\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0}$ contracts $\mathcal{H}L^{\infty, 1-\tau-\epsilon}(\Omega)$. Since the supremum of $\Lambda$ is less than $-1$, all the powers of $M = \|\zeta\|_\infty$ in bound~\ref{bound:perturb} are positive. Thus, by shrinking $\Omega$, we can make the norm of $\zeta^{-1} \circ \tilde{\mathcal{J}}$ on $\mathcal{H}L^{\infty, 1-\tau-\epsilon}(\Omega)$ as small as we want---small enough to make $\mathcal{A}$ a contraction.
 
 \textcolor{DodgerBlue}{We want to solve the equation $\mathcal{J}f = 0$. Let's look for a solution of the form $f = \zeta^{\tau-1} + \tilde{f}$ with $\tau \in (0, \infty)$ and $\tilde{f} \in \holoL{\infty}(\Omega)$.}
 
