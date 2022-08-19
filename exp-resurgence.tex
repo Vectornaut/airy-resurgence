@@ -44,13 +44,13 @@ You can often find a formal power series
 with $\sigma \in [0, 1)$, that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example, you might rewrite the integral
 \color{SeaGreen}
 \begin{align*}
-\zeta_\alpha & = -1 \\
+\zeta_\alpha & = \textcolor{orange}{\pm}1 \\
 \tfrac{1}{2} \tau^2 & = f - \zeta_\alpha \\
-& = 4u^3 - 3u + 1 \\
-\tau & = 0 \text{ and } u_\tau = 0 \text{ at } u = \tfrac{1}{2} \\
-\tfrac{1}{2} \tau^2 & = 6w^2 + 4w^3 \text{ with } u := \tfrac{1}{2} + w \\
-I_\alpha(z) & = e^{z\zeta_\alpha} \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \\
-& = e^{-z} \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu
+& = 4u^3 - 3u \textcolor{orange}{\mp} 1 \\
+\tau & = 0 \text{ and } u_\tau = 0 \text{ at } u = \textcolor{orange}{\mp}\tfrac{1}{2} \\
+\tfrac{1}{2} \tau^2 & = \textcolor{orange}{\mp}6w^2 + 4w^3 \text{ with } u := \textcolor{orange}{\mp}\tfrac{1}{2} + w \\
+I_\alpha(z) & = e^{\textcolor{magenta}{-}z\zeta_\alpha} \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \\
+& = e^{\textcolor{orange}{\mp}z} \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu
 \end{align*}
 \begin{align*}
 w & = \sum_{n = 1}^\infty a_n \tau^n \\
@@ -60,24 +60,32 @@ w^3 & = \sum_{n = 3}^\infty \left( \sum_{k + k' + k'' = n} a_k a_{k'} a_{k''} \r
 & = a_1^3 \tau^3 + 3 a_1^2 a_2 \tau^4 + (3a_1 a_2^2 + 3 a_1^2 a_3) \tau^5 + (3 a_1^2 a_4 + 6 a_1 a_2 a_3 + a_2^3) \tau^6 + \ldots
 \end{align*}
 \begin{align*}
-\tau^2 & = 12w^2 + 8w^3\\
-\tau^2 & = 12 a_1^2 \tau^2 & 1 & = 12 a_1^2 \\
-0 & = 24 a_1 a_2 \tau^3 + 8a_1^3 \tau^3 & 0 & = 36 a_2 + 12 a_1^2 \\
+\tau^2 & = \textcolor{orange}{\mp}12w^2 + 8w^3\\
+\tau^2 & = \textcolor{orange}{\mp}12 a_1^2 \tau^2 & 1 & = \textcolor{orange}{\mp}12 a_1^2 \\
+0 & = \textcolor{orange}{\mp}24 a_1 a_2 \tau^3 + 8a_1^3 \tau^3 & 0 & = \textcolor{orange}{\mp}36 a_2 + 12 a_1^2 \\
 & & -1 & = 36 a_2 \\
-0 & = (24a_1 a_3 + 12 a_2^2) \tau^4 + 24 a_1^2 a_2 \tau^4 & 0 & = 24 a_1 a_3 + 12 a_2^2 + 24 a_1^2 a_2 \\
-& & & = 24 a_1 a_3 + 12 a_2^2 + 2 a_2 \\
+0 & = \textcolor{orange}{\mp}(24a_1 a_3 + 12 a_2^2) \tau^4 + 24 a_1^2 a_2 \tau^4 & 0 & = \textcolor{orange}{\mp}24 a_1 a_3 \textcolor{orange}{\mp} 12 a_2^2 + 24 a_1^2 a_2 \\
+& & & = \textcolor{orange}{\mp}24 a_1 a_3 \textcolor{orange}{\mp} 12 a_2^2 \textcolor{orange}{\mp} 2 a_2 \\
 & & & = 24 a_1 a_3 + \frac{1}{3 \cdot 36} - \frac{1}{18} \\
 & & \frac{5}{108} & = 24 a_1 a_3 \\
 & & \frac{5}{216} a_1 & = a_3 \\
-0 & = (24 a_1 a_4 + 24 a_2 a_3) \tau^5 + (24 a_1 a_2^2 + 24 a_1^2 a_3) \tau^5 & 0 & = 24 a_1 a_4 + 24 a_2 a_3 + 24 a_1 a_2^2 + 2 a_3 \\
-& & & = 24 a_1 a_4 + \frac{5}{9} a_2 a_1 + 24 a_1 a_2^2 + \frac{5}{108} a_1 \\
-& & 0 & = 24 a_4 + \frac{5}{9} a_2 + 24 a_2^2 + \frac{5}{108} \\
-& & 0 & = 24 a_4 - \frac{5}{324} + \frac{1}{54} + \frac{5}{108} \\
-& & -\frac{4}{81} & = 24 a_4 \\
-& & -\frac{1}{486} & = a_4 \\
+0 & = \textcolor{orange}{\mp}(24 a_1 a_4 + 24 a_2 a_3) \tau^5 + (24 a_1 a_2^2 + 24 a_1^2 a_3) \tau^5 & 0 & = \textcolor{orange}{\mp}24 a_1 a_4 \textcolor{orange}{\mp} 24 a_2 a_3 + 24 a_1 a_2^2 \textcolor{orange}{\mp} 2 a_3 \\
+& & & = 24 a_1 a_4 + \frac{5}{9} a_2 a_1 \textcolor{orange}{\mp} 24 a_1 a_2^2 + \frac{5}{108} a_1 \\
+& & 0 & = 24 a_4 + \frac{5}{9} a_2 \textcolor{orange}{\mp} 24 a_2^2 + \frac{5}{108} \\
+& & 0 & = 24 a_4 - \frac{5}{324} \textcolor{orange}{\mp} \frac{1}{54} + \frac{5}{108} \\
+& & \left\{ -\frac{1}{81} \right\}_{\textcolor{orange}{\zeta = -1}} \left\{ -\frac{4}{81} \right\}_{\textcolor{orange}{\zeta = 1}} & = 24 a_4 \\
+& & \left\{ -\frac{1}{1944} \right\}_{\textcolor{orange}{\zeta = -1}} \left\{ -\frac{1}{486} \right\}_{\textcolor{orange}{\zeta = 1}} & = a_4
 \end{align*}
 \begin{align*}
-a_1 & = \frac{1}{\sqrt{12}} \\
+0 & = \textcolor{orange}{\mp}12(2 a_1 a_5 + 2 a_2 a_4 + a_3^2) \tau^6 + 8(3 a_1^2 a_4 + 6 a_1 a_2 a_3 + a_2^3) \tau^6 \\
+0 & = \textcolor{orange}{\mp}24 a_1 a_5 \textcolor{orange}{\mp} 24 a_2 a_4 \textcolor{orange}{\mp} 12 a_3^2 + 24 a_1^2 a_4 + 48 a_1 a_2 a_3 + 8 a_2^3\\
+0 & = \textcolor{orange}{\mp}24 a_1 a_5 \textcolor{orange}{\mp} 24 a_2 a_4 \textcolor{orange}{\mp} \left(\frac{5}{216}\right)^2 12 a_1^2 \textcolor{orange}{\mp} 2 a_4 + \frac{5 \cdot 48}{216} a_1^2 a_2 + 8 a_2^3 \\
+0 & = \textcolor{orange}{\mp}24 a_1 a_5 \textcolor{orange}{\mp} 24 a_2 a_4 + \left(\frac{5}{216}\right)^2 \textcolor{orange}{\mp} 2 a_4 \textcolor{orange}{\mp} \frac{5}{54} a_2 + 8 a_2^3 \\
+\left\{ \frac{77}{15552} \right\}_{\textcolor{orange}{\zeta = 1}} & = 24 a_1 a_5 \\
+\left\{ \frac{77}{31104} a_1 \right\}_{\textcolor{orange}{\zeta = 1}} & = a_5
+\end{align*}
+\begin{align*}
+a_1 & = \textcolor{orange}{\{i, 1\}}\frac{1}{\sqrt{12}} \\
 2 a_2 & = -\frac{1}{18} \\
 3 a_3 & = \frac{5}{72\sqrt{12}} \\
 4 a_4 & = -\frac{2}{243} \\
@@ -91,7 +99,7 @@ du & = dw = w_\tau\,d\tau \\
 \[ \Phi(z) = \int_{\Lambda} \exp\left[-z \left(4u^3 - 3u\right)\right]\,du \]
 as
 \[ e^z \int_{\Lambda} e^{-z\tau^2/2} \left[ 1 - \frac{1}{3} \left(\frac{\tau}{\sqrt{12}}\right) + \frac{5}{6} \left(\frac{\tau}{\sqrt{12}}\right)^2 - \frac{32}{27} \left(\frac{\tau}{\sqrt{12}}\right)^3 + \ldots \right] \frac{d\tau}{\sqrt{12}} \]
-using the substitution $\tfrac{1}{2} \tau^2 = 4u^3 - 3u + 1$.
+using the substitution $\tfrac{1}{2} \tau^2 = 4u^3 - 3u \textcolor{orange}{\mp} 1$.
 \begin{itemize}
 \item You can often find a formal power series $\tilde{\Phi} = \ldots$ that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example\ldots
 \begin{itemize}
