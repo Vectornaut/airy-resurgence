@@ -7,7 +7,7 @@
 \usepackage{bm} %% for putting series names in bold
 %%\usepackage{amsthm}
 %%\usepackage{graphicx}
-\usepackage{tikz-cd}
+
 %% colors
 \usepackage[svgnames]{xcolor}
 
@@ -23,6 +23,31 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{rotating}
+\newcommand*{\isoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\sim\)}"
+]}
+\usetikzlibrary{matrix,shapes,arrows,decorations.pathmorphing}
+\tikzset{commutative diagrams/arrow style=math font}
+\tikzset{commutative diagrams/.cd,
+mysymbol/.style={start anchor=center,end anchor=center,draw=none}}
+\newcommand\MySymb[2][\square]{%
+  \arrow[mysymbol]{#2}[description]{#1}}
+\tikzset{
+shift up/.style={
+to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikztonodes}
+}
+}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+                     =}
+\newcommand*{\defeqin}{\mathrel{\vcenter{\lineskiplimit0pt\baselineskip0.5ex
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+                     =}                     
+
 %%\let\Re\relax
 %%\DeclareMathOperator{\Re}{Re}
 \DeclareMathOperator{\Ai}{Ai}
@@ -30,7 +55,7 @@
 \newcommand{\borel}{\mathcal{B}}
 \newcommand{\deriv}[3]{\partial^{#1}_{#2 \text{ from } #3}}
 \newcommand{\series}[1]{#1_\bullet}
-\input{command}
+%\input{command}
 \title{Resurgence of the Airy function \\ and other exponential integrals}
 \author{Veronica Fantini and Aaron Fenyes}
 
@@ -188,7 +213,7 @@ using change of coordinate.
 \item Some have been discussed many times, using different approaches and conventions. We'll try to give an idea of how all these different treatments fit together. $\bullet$ The Airy function (Marino, Sauzin). $\bullet$ The anharmonic oscillator (Bender--Wu, Schiappa).
 \item Others haven't been discussed much.
 \end{itemize}
-\item \textcolor{magenta}{To understand, for example, the Ecalle formalism, you can start with these toy examples, which illustrate what's going on, but can also be studied in a more elementary way. [How do we work this into the introduction?]}
+\item \textcolor{magenta}{To understand, for example, the Ecalle formalism, you can start with these toy examples, which illustrate what's going on, but can also be studied in a more elementary way. [How do we work this into the introduction?]} Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interests in math and physics as a powerful alternative to Borel summability. Resurgence of lienar ODEs have been studied (see Costin slides for ReNewQuantum). Many results are also known for non linear ODEs (see Schiappa PI, Costin PI). For algebraic exponential integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see Maxim's slides ReNewQuantum), however for more general exponential integrals (see examples in Maxim's talk) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of exponential integrals show some features of resurgence and they are toy model to get a feeling on \'Ecalle formalism.       
 \item \textcolor{magenta}{The examples give a place to compare more complicated formalisms like the Picard-Lefshetz (Morse theory) or Ecalle formalisms? [How do we work this into the introduction?]}
 \end{itemize}
 \item Exponential integrals
@@ -219,7 +244,11 @@ using change of coordinate.
 \item what does it mean being Borel regular?
 \item when does it happen?
 \begin{itemize}
-\item Recall Watson condition (old)
+\item Recall Watson condition (old): Let $R_N$ be the difference between a function and the partial sum
+\[ \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \ldots + \frac{\varphi_{N-2}}{z^{N-1}} \]
+of its asymptotic series. Watson showed a century ago that the function is Borel regular whenever there's a constant $c \in (0, \infty)$ with
+\[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
+over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 \item State new Borel regularity results
 \begin{itemize}
 \item Linear, homogeneous ODE with regular singularity at 0 and irregular singularity at infinity [P.Ramis ?, Loday-Richaud ?, big idea in {\tt airy-resurgence}]
@@ -233,6 +262,10 @@ I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu \arrow[r,"\sim"]\arrow[dd
 \end{equation}
 \item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
 \item fractional derivative formula
+\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
+\item in the examples, $\hat{\varphi}_\alpha(\zeta)$ turn out be an hypergeometric function of type ${}_pF_{p-1}$ where $p$ is the number of critical values. 
+\item We expect that hypergeometric functions play a special role in resurgence theory as they may always appear when there are only finitely many singularities.
+\item \textcolor{magenta}{maybe we can say more about algebraic hypergeomtric functions}
 \end{itemize}
 \end{itemize}
 \end{itemize}
