@@ -7,5 +7,5 @@ w = sum(a[n-1]*t^n for n in range(1, cutoff+1)) + O(t^(cutoff+1))
 rel = t^2 + 12*w^2 - 8*w^3
 rel_ideal = R.ideal(rel.coefficients())
 sol = rel_ideal.groebner_basis()
-w_sol = a[0]*t + sum(sol[-n].coefficients()[-1]*sol[-n].monomials()[-1]*t^(n+1) for n in range(1,cutoff))
+w_sol = a[0]*t + sum(-sol[-n].coefficients()[-1]*sol[-n].monomials()[-1]*t^(n+1) for n in range(1,cutoff))
 jac = w_sol.derivative()
