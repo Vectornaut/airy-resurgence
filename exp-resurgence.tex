@@ -62,11 +62,20 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \begin{document}
 \maketitle
 \section{Introduction}
-\subsection{Motivation}
-\subsubsection{Setting}
-You can often find a formal power series
-\[ \series{\Phi} = z^\sigma \left( \frac{c_0}{z} + \frac{c_1}{z^2} + \frac{c_2}{z^3} + \frac{c_3}{z^4} + \ldots \right), \]
-with $\sigma \in [0, 1)$, that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example, you might rewrite the integral
+\subsection{Setting \textcolor{orange}{[change title?]}}
+You can often find a formal power series \textcolor{magenta}{[check whether this exponent is $\tau$ on the nose or $\tau$ plus a constant]}
+\[ \series{\Phi} = z^\tau \left( \frac{c_0}{z} + \frac{c_1}{z^2} + \frac{c_2}{z^3} + \frac{c_3}{z^4} + \ldots \right), \]
+with $\tau \in [0, 1)$, that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example, if you want to understand how the solutions of the holomorphic ordinary differential equation (ODE)
+\begin{center}
+\textbf{[shifted Bessel matching example above]},
+\end{center}
+behave near $z = \infty$, you might start by looking for ``transmonomial'' solutions $e^{\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above.
+
+you might start by trying to construct a formal power series solution instead. Observing that the leading term must be a multiple of $z^{-1/2}$ and then extending term by term, you again \textcolor{magenta}{[check]} get series~\eqref{series:bessel-ex}.
+
+%%%
+
+For example, you might rewrite the integral
 \color{DodgerBlue}
 \[ \Phi(z) = \int_{\Lambda} \exp\left[-\tfrac{1}{12} z \left(4u^3 - 3u\right)\right]\,du \]
 \color{black}
@@ -82,12 +91,7 @@ using the substitution $\tfrac{1}{2} \tau^2 = \tfrac{1}{3} u^3 - \tfrac{1}{4} u 
 \begin{equation}
 e^{z/12} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{6} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{216} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{3888} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel-ex}
 \end{equation}
-which has zero radius of convergence, but still makes sense as a formal power series. As another example, if you want to construct a holomorphic function $\Phi$ that satisfies the ordinary differential equation (ODE)
-\begin{center}
-\textbf{[shifted Bessel matching example above]},
-\end{center}
-you might start by trying to construct a formal power series solution instead. Observing that the leading term must be a multiple of $z^{-1/2}$ and then extending term by term, you again \textcolor{magenta}{[check]} get series~\eqref{series:bessel-ex}.
-
+which has zero radius of convergence, but still makes sense as a formal power series.
 \begin{itemize}
 \item You can often find a formal power series $\tilde{\Phi} = \ldots$ that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example\ldots
 \begin{itemize}
@@ -109,7 +113,7 @@ you might start by trying to construct a formal power series solution instead. O
 \item (In both of the cases that we study, the Borel sum of $\tilde{\Phi}$ is always taken at a zero of $\lambda$, rather than an arbitrary point in $B$. For ODEs, our treatment explains why the zeroes of $\lambda$ play a special role.)
 \end{itemize}
 \end{itemize}
-\subsubsection{Goals}
+\subsection{Goals}
 \begin{itemize}
 \item The central goal of this paper is to lay out two kinds of problems where we can prove that the Borel sum of a formal power series solution is always an actual solution.
 \begin{itemize}
@@ -131,6 +135,42 @@ you might start by trying to construct a formal power series solution instead. O
 \end{itemize}
 \item \textcolor{magenta}{To understand, for example, the Ecalle formalism, you can start with these toy examples, which illustrate what's going on, but can also be studied in a more elementary way. [How do we work this into the introduction?]} Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interests in math and physics as a powerful alternative to Borel summability. Resurgence of lienar ODEs have been studied (see Costin slides for ReNewQuantum). Many results are also known for non linear ODEs (see Schiappa PI, Costin PI). For algebraic exponential integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see Maxim's slides ReNewQuantum), however for more general exponential integrals (see examples in Maxim's talk) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of exponential integrals show some features of resurgence and they are toy model to get a feeling on \'Ecalle formalism.       
 \item \textcolor{magenta}{The examples give a place to compare more complicated formalisms like the Picard-Lefshetz (Morse theory) or Ecalle formalisms? [How do we work this into the introduction?]}
+\end{itemize}
+\subsection{Results}
+
+\color{orange}
+\begin{itemize}
+\item what does it mean being Borel regular?
+\item when does it happen?
+\begin{itemize}
+\item State new Borel regularity results
+\begin{itemize}
+\item Linear, homogeneous ODE with regular singularity at 0 and irregular singularity at infinity [big idea in {\tt airy-resurgence}]
+\begin{itemize}
+\item Contextualize with previous work of P. Ramis
+\item Also contextualize with Loday-Richaud
+\end{itemize}
+\item \emph{Borel regularity} for \textbf{thimbles integrals} can be stated a the commutativity of the following diagram:
+\begin{equation}
+\begin{tikzcd}
+I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu \arrow[r,"\sim"]\arrow[dd, swap, "\mathcal{L}^\theta "] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
+& \\
+\hat{\iota}_\alpha(\zeta)\arrow[r,equal,swap, "\text{sum}"] & \tilde{\iota}_{\alpha}(\zeta) 
+\end{tikzcd}
+\end{equation}
+\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
+\item fractional derivative formula
+\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
+\item in the examples, $\hat{\varphi}_\alpha(\zeta)$ turn out be an hypergeometric function of type ${}_pF_{p-1}$ where $p$ is the number of critical values. 
+\item We expect that hypergeometric functions play a special role in resurgence theory as they may always appear when there are only finitely many singularities.
+\item \textcolor{magenta}{maybe we can say more about algebraic hypergeomtric functions}
+\end{itemize}
+\item Recall Watson condition (old): Let $R_N$ be the difference between a function and the partial sum
+\[ \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \ldots + \frac{\varphi_{N-2}}{z^{N-1}} \]
+of its asymptotic series. Watson showed a century ago that the function is Borel regular whenever there's a constant $c \in (0, \infty)$ with
+\[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
+over all orders $N$ and all $z$ in a wide enough wedge around infinity.
+\end{itemize}
 \end{itemize}
 \color{DarkBlue}
 \subsection{Why does Borel resummation work?}
@@ -262,37 +302,6 @@ using change of coordinate.
 \item it is a toy example of resurgent series because there are only finitely many singularities in the Borel plane
 \item we have to compute the \textbf{Stokes constants} relative to the singular points in $B$ to fully understand $B$. There are two methods to compute Stokes constants: $\bullet$ geometric: using intersection theory of thimbles (Picard--Lefschtez, Witten, Maxim), $\bullet$ analytic: using \'Ecalle formalism   
 \end{itemize} 
-\end{itemize}
-%%\end{itemize}
-\item Borel regularity
-\begin{itemize}
-\item what does it mean being Borel regular?
-\item when does it happen?
-\begin{itemize}
-\item Recall Watson condition (old): Let $R_N$ be the difference between a function and the partial sum
-\[ \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \ldots + \frac{\varphi_{N-2}}{z^{N-1}} \]
-of its asymptotic series. Watson showed a century ago that the function is Borel regular whenever there's a constant $c \in (0, \infty)$ with
-\[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
-over all orders $N$ and all $z$ in a wide enough wedge around infinity.
-\item State new Borel regularity results
-\begin{itemize}
-\item Linear, homogeneous ODE with regular singularity at 0 and irregular singularity at infinity [P.Ramis ?, Loday-Richaud ?, big idea in {\tt airy-resurgence}]
-\item \emph{Borel regularity} for \textbf{thimbles integrals} can be stated a the commutativity of the following diagram:
-\begin{equation}
-\begin{tikzcd}
-I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu \arrow[r,"\sim"]\arrow[dd, swap, "\mathcal{L}^\theta "] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
-& \\
-\hat{\iota}_\alpha(\zeta)\arrow[r,equal,swap, "\text{sum}"] & \tilde{\iota}_{\alpha}(\zeta) 
-\end{tikzcd}
-\end{equation}
-\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
-\item fractional derivative formula
-\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
-\item in the examples, $\hat{\varphi}_\alpha(\zeta)$ turn out be an hypergeometric function of type ${}_pF_{p-1}$ where $p$ is the number of critical values. 
-\item We expect that hypergeometric functions play a special role in resurgence theory as they may always appear when there are only finitely many singularities.
-\item \textcolor{magenta}{maybe we can say more about algebraic hypergeomtric functions}
-\end{itemize}
-\end{itemize}
 \end{itemize}
 \item what are exponential integrals? \textcolor{gray}{has to be done}
 \begin{itemize}
