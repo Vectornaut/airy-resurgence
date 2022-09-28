@@ -1,0 +1,121 @@
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\documentclass[11pt,a4paper,twoside,leqno,noamsfonts]{amsart}
+           \usepackage{setspace}
+\linespread{1.34}           
+           %\onehalfspacing
+\usepackage[english]{babel}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\usepackage[utopia]{mathdesign}
+    \DeclareSymbolFont{usualmathcal}{OMS}{cmsy}{m}{n}
+    \DeclareSymbolFontAlphabet{\mathcal}{usualmathcal}
+\usepackage[a4paper,top=4cm,bottom=3cm,left=3.5cm,
+           right=3.5cm,bindingoffset=5mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{braket,caption,comment,mathtools,stmaryrd}
+\usepackage{multirow,booktabs,microtype}
+\usepackage{latexsym}
+\usepackage{todonotes}
+\usepackage{fancyhdr}
+%\renewcommand{\sectionmark}[1]{\markboth{\thesection\ #1}{}}
+\pagestyle{fancy}
+% Clear the header and footer
+\fancyhead{}
+\fancyfoot{}
+% Set the right side of the footer to be the page number
+\fancyfoot[R]{\thepage}
+\addtolength{\headheight}{\baselineskip}
+%\fancyhead[RE]{\rightmark}
+%\fancyhead[RE]{}
+\usepackage{soul} % per testo barrato
+\usepackage[colorlinks,bookmarks]{hyperref} %
+\hypersetup{colorlinks,%
+            citecolor=britishracinggreen,%
+            filecolor=black,%
+            linkcolor=cobalt,%
+            urlcolor=black}
+\setcounter{tocdepth}{2}
+%\setcounter{section}{-1}
+\numberwithin{equation}{section}
+
+% Veronica's custom commands
+\input{command}
+
+% symbology
+\newcommand{\blankbox}{{\fboxsep 0pt \colorbox{lightgray}{\phantom{$h$}}}}
+\newcommand{\maps}{\colon}
+\newcommand{\van}{\mathfrak{m}}
+\newcommand{\laplace}{\mathcal{L}}
+\newcommand{\borel}{\mathcal{B}}
+\newcommand{\laplacepde}{\mathcal{D}}
+\DeclareMathOperator{\Ai}{Ai}
+
+\DeclareRobustCommand{\subtitle}[1]{\\#1}
+
+\title{Resurgence of the Airy function \\ and other exponential integrals}
+\author{Veronica Fantini and Aaron Fenyes}
+
+\begin{document}
+\maketitle
+\section{Hypergeometric functions as Borel transform of second order ODE (\textit{series normales de \emph{I}er ordre})}
+
+Let us consider the following linear second order ODE
+
+\begin{equation}\label{eq}
+\big[P(\tfrac{\partial}{\partial z})+\tfrac{1}{z}Q(\tfrac{\partial}{\partial z})+\tfrac{1}{z}R(\tfrac{1}{z})\big]f(z)=0
+\end{equation}
+with $\deg P=2$, $\deg Q=1$ and $R=O(\tfrac{1}{z})$. We denote by $\alpha_1,\alpha_2$ the roots of $P(\lambda)$ and we assume they are distinct. Furthermore we assume $\tau_j:=\frac{Q(-\alpha_j)}{P'(-\alpha_j)}\neq 0$. The latter assumption guarantees the formal solution $\tilde{f}$ being slight, while the former assumption implies there will be two independent solutions. 
+
+Under the previous assumptions we prove that the Borel transformed solution $\hat{f}(\zeta_j)$ is a Gauss hypergeometric function, $\zeta_j=\zeta-\alpha_j$.
+
+\begin{prop}
+Let $P(\lambda)=\lambda^2+a_1\lambda+a_0$, $Q(\lambda)=b_1\lambda+b_0$ and $R(\tfrac{1}{z})=\tfrac{c_1}{z}$ satisfying the previous assumptions. Then 
+\begin{align}
+\hat{f}(\zeta_1)&=\left(1-\frac{\zeta_1}{\alpha_2-\alpha_1}\right)^{c-1} \, {}_2F_1\left(a,b;c;1-\frac{\zeta_1}{\alpha_2-\alpha_1} \right)\\
+\hat{f}(\zeta_2)&=\left(1-\frac{\zeta_2}{\alpha_1-\alpha_2}\right)^{c-1} \, {}_2F_1\left(a,b;c;1-\frac{\zeta_2}{\alpha_1-\alpha_2} \right)
+\end{align}
+where the coefficients $a,b,c$ depend on the parameter of $P,Q,R$. 
+\end{prop}
+
+\begin{proof}
+We start by taking the Borel transform of \eqref{eq}:
+\begin{align}\label{eq:B}
+(\zeta^2-a_1\zeta+a_0)\hat{f}(\zeta)+\int_0^\zeta b_1(-\zeta')\hat{f}(\zeta')d\zeta'+b_0\int_0^\zeta\hat{f}(\zeta')d\zeta'+c_1\int_0^\zeta(\zeta-\zeta')\hat{f}(\zeta')d\zeta'=0
+\end{align} 
+then we differentiate twice in order to have a differential equation which can be easier recognized as a hypergeometric equation. Since $\tilde{F}$ is slight and locally integrable at $0$ by assumption, Proposition 1 {\tt Resurgent Airy doc by Aaron} tells we are not loosing information taking derivatives, and that $\hat{f}(\zeta)$ is a solution of \eqref{eq:B} if and only if it is a solution of \eqref{eq:B_deriv}
+\begin{align}
+\label{eq:B_deriv}
+\big[(\zeta^2-a_1\zeta+a_0)\partial_\zeta^2+(4\zeta-b_1\zeta-2a_1+b_0)\partial_\zeta+(c_1+2-b_1)\big]\hat{f}(\zeta)=0
+\end{align}
+We introduce some notation to simplify the computations, we denote by $\beta_1=4-b_1$, $\beta_0=b_0-2a_1$, $\gamma=c_1+2-b_1$ so \eqref{eq:B_deriv} turns into
+\begin{align*}
+\big[(\zeta-\alpha_1)(\zeta-\alpha_2)\partial_\zeta^2+(\beta_1\zeta+\beta_0)\partial_\zeta+\gamma\big]\hat{f}(\zeta)=0
+\end{align*}
+We consider the following change of coordinates $\zeta=\alpha_2-(\alpha_2-\alpha_1)\xi$\footnote{$\partial_\zeta=(\alpha_1-\alpha_2)^{-1}\partial_\xi$ and $\partial_\zeta^2=(\alpha_1-\alpha_2)^{-2}\partial_\xi^2$}
+\begin{align*}
+&\big[(\alpha_2-(\alpha_2-\alpha_1)\xi-\alpha_1)(\alpha_2-(\alpha_2-\alpha_1)\xi-\alpha_2)(\alpha_1-\alpha_2)^{-2}\partial_\xi^2+(\beta_1(\alpha_2-(\alpha_2-\alpha_1)\xi)+\beta_0)(\alpha_1-\alpha_2)^{-1}\partial_\xi+\gamma\big]\hat{f}(\xi)=0\\
+&\big[(\alpha_2-\alpha_1)(1-\xi)(\alpha_1-\alpha_2)\xi(\alpha_1-\alpha_2)^{-2}\partial_\xi^2+(\beta_1\alpha_2-\beta_1(\alpha_2-\alpha_1)\xi+\beta_0)(\alpha_1-\alpha_2)^{-1}\partial_\xi+\gamma\big]\hat{f}(\xi)=0\\
+&\big[-(1-\xi)\xi\partial_\xi^2+((\beta_1\alpha_2+\beta_0)(\alpha_1-\alpha_2)^{-1}+\beta_1\xi)\partial_\xi+\gamma\big]\hat{f}(\xi)=0\\
+&\big[(1-\xi)\xi\partial_\xi^2-((\beta_1\alpha_2+\beta_0)(\alpha_1-\alpha_2)^{-1}+\beta_1\xi)\partial_\xi-\gamma\big]\hat{f}(\xi)=0
+\end{align*}
+
+The latter equation is an hypergeometric equation of parameters 
+\begin{align*}
+&C=(\beta_1\alpha_2+\beta_0)(\alpha_2-\alpha_1)^{-1}\\
+&A+B+1=\beta_1=4-b_1 \Rightarrow A+B=3-b_1\\
+&AB=\gamma=c_1+2-b_1
+\end{align*}
+and a solution is given by 
+\begin{align*}
+%\hat{f}(\xi)=(1-\xi)^{C-A-B} {}_2F_1(C-A,C-B;C;\xi)\\
+\hat{f}(\xi)&=\xi^{1-C} {}_2F_1(A-C+1,B-C+1;2-C;\xi)\\
+&=\left(\frac{\alpha_2-\zeta}{\alpha_2-\alpha_1}\right)^{1-C} {}_2F_1\left(A-C+1,B-C+1;2-C;\frac{\alpha_2-\zeta}{\alpha_2-\alpha_1}\right)\\
+&=\left(1-\frac{\zeta_1}{\alpha_2-\alpha_1}\right)^{1-C} {}_2F_1\left(A-C+1,B-C+1;2-C;1-\frac{\zeta_1}{\alpha_2-\alpha_1}\right)
+\end{align*} 
+
+\end{proof}
+
+\bibliographystyle{plain}
+\bibliography{airy-resurgence}
+\end{document}
