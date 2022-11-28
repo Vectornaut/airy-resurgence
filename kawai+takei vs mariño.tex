@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\usepackage{ajf}
+%\usepackage{ajf}
 \usepackage{amsthm}
 
 \theoremstyle{definition}
@@ -8,8 +8,13 @@
 \theoremstyle{plain}
 \newtheorem{prop}{Proposition}
 \newtheorem{thm}{Theorem}
-
-\DeclareMathOperator{\Ai}{Ai}
+\usepackage{url}
+\usepackage[hmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+%\DeclareMathOperator{\Ai}{Ai}
 
 \title{Airy function: Kawai+Takei vs. Mari\~{n}o}
 \author{Aaron Fenyes}
@@ -24,11 +29,71 @@ With $w = x \eta^{2/3}$, the equation above is equivalent to
 \[ \left[\left(\frac{d}{dw}\right)^2 - w \right] \psi(w \eta^{-2/3}, \eta) = 0. \]
 Proof: substitute back to get
 \begin{align*}
-\left[\eta^{-4/3} \left(\frac{d}{dx}\right)^2 - \eta^{2/3} x \right] \psi(x, \eta) = 0 \\
-\left[\eta^{-4/3} \left(\frac{d}{dx}\right)^2 - \eta^{-4/3} \eta^2 x \right] \psi(x, \eta) = 0 \\
-\eta^{-4/3} \left[\left(\frac{d}{dx}\right)^2 - \eta^2 x \right] \psi(x, \eta) = 0.
+\left[\eta^{-4/3} \left(\frac{d}{dx}\right)^2 - \eta^{2/3} x\right] \psi(x, \eta) = 0 \\
+\left[\eta^{-4/3} \left(\frac{d}{dx}\right)^2 - \eta^{-4/3}\eta^2 x \right] \psi(x, \eta) = 0 \\
+\eta^{-4/3} \left[\left(\frac{d}{dx}\right)^2 - \eta^2 x\right] \psi(x, \eta) = 0.
 \end{align*}
-Hence, $\psi(w \eta^{-2/3}, \eta) = k(\eta) \Ai(w)$ is a solution for any holomorphic function $k$.
+Hence, $\psi(w \eta^{-2/3}, \eta) = k(\eta) \mathsf{Ai}(w)$ is a solution for any holomorphic function $k$.
+
+
+\section{Veronica's change of coordinates}
+
+Kawai and Takei study the WKB analysis of the equation
+
+\begin{equation}
+\label{WKB_Airy} 
+\left[\left(\frac{d}{dx}\right)^2 - \eta^2 x \right] \psi(x, \eta) = 0 
+\end{equation}
+as $\eta\to\infty$. They define $\psi_B(x, y)$ as the inverse Laplace transform of $\psi(x, \eta)$ with respect to $\eta$. In the coordinates $t=yx^{-3/2}$ they find an explicit formula for $\psi_B(x,y)$ in terms of Gauss hypergeometric functions:
+\begin{align*}
+\psi_{+,B}(x,y)&=\frac{1}{x}\phi_+(t)=\frac{\sqrt{3}}{2\sqrt{\pi}}\frac{1}{x}s^{-1/2}\, {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};s\right)\\
+\psi_{-,B}(x,y)&=\frac{1}{x}\phi_-(t)=\frac{\sqrt{3}}{2\sqrt{\pi}}\frac{1}{x}(1-s)^{-1/2}\, {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};1-s\right)
+\end{align*}
+where $s=3t/4+1/2$. 
+The same hypergeometric functions have been computed in Section ?? as the Borel transform of the formal solutions of the Airy equation
+
+\begin{equation}
+\label{Airy}
+\left[\left(\frac{d}{dw}\right)^2 -  w \right] f(w) = 0.
+\end{equation}
+
+Although the two equations look closely related (they are equivalent by the change of coordinates $w=x\eta^{2/3}$), the Borel transform of $\psi$ is computed with respect to $\eta x^{3/2}$ (which is the conjugate variable of $t$) while the Borel transform of $f(w)$ is computed with respect to $w$. So we need to find a different change of coordinates to explain why the Borel transforms of $\psi(x,\eta)$ and $f(w)$ are given by the same hypergeometric function. 
+
+First of all notice that if $\eta$ and $y$ are conjugate variables under Borel transform, meaning 
+\begin{align*}
+\sum_{n\geq 0}a_n\eta^{-n-1}  \overset{\mathcal{B}}{\longrightarrow} \sum_{n\geq 0}\frac{a_n}{n!} y^{n} 
+\end{align*} 
+then $t=yx^{-3/2}$ is the conjugate variable of $q=\eta x^{3/2}$ up to correction by a factor of $x^{-3/2}$
+\begin{align*}
+\sum_{n\geq 0}a_nq^{-n-1}=\sum_{n\geq 0}a_nx^{-3/2(n+1)}\eta^{-n-1}  \overset{\mathcal{B}}{\longrightarrow} \sum_{n\geq 0}\frac{a_nx^{-3/2(n+1)}}{n!} y^{n}=x^{-3/2}\sum_{n\geq 0}\frac{a_n}{n!} t^{n}. 
+\end{align*}
+In addition, $\psi_{B,\pm}(x,y)=\frac{1}{x}\phi_{\pm}(t)$, therefore we expect that $\psi(x,\eta)=x^{1/2}\Phi(q)$. Assume that $\psi(x,y)$ is a solution of \eqref{WKB_Airy}, then $\Phi(q)$ solves 
+\begin{equation}
+\label{eq_Phi}
+\left[\left(\frac{d}{dx}\right)^2+x^{-1}\frac{d}{dx}-\frac{1}{4}x^{-2} - \eta^2 x \right] \Phi(q) = 0
+\end{equation}
+
+\begin{proof}
+\begin{align*}
+&\left[\left(\frac{d}{dx}\right)^2 - \eta^2 x \right] \psi(x, \eta) = 0\\
+&\left[\left(\frac{d}{dx}\right)^2 - \eta^2 x \right] x^{1/2}\Phi(q) = 0\\
+&\frac{d}{dx}\left[\frac{1}{2}x^{-1/2}\Phi+x^{1/2}\frac{d}{dx}\Phi\right]-\eta^2x^{3/2}\Phi=0\\
+&-\frac{1}{4}x^{-3/2}\Phi+\frac{1}{2}x^{-1/2}\frac{d}{dx}\Phi+\frac{1}{2}x^{-1/2}\frac{d}{dx}\Phi+x^{1/2}\left(\frac{d}{dx}\right)^2\Phi-\eta^2x^{3/2}\Phi=0\\
+&\left[x^{1/2}\left(\frac{d}{dx}\right)^2+x^{-1/2}\frac{d}{dx}-\frac{1}{4}x^{-3/2}-\eta^2x^{3/2}\right]\Phi=0\\
+&\left[\left(\frac{d}{dx}\right)^2+x^{-1}\frac{d}{dx}-\frac{1}{4}x^{-2}-\eta^2x\right]\Phi=0
+\end{align*}
+\end{proof}
+Now rewrite \eqref{eq_Phi} in the coordinates $q=\eta x^{3/2}$: 
+\begin{align*}
+&\left[\left(\frac{d}{dx}\right)^2+x^{-1}\frac{d}{dx}-\frac{1}{4}x^{-2}-\eta^2x\right]\Phi=0\\
+&\left[\frac{9}{4}\eta^2x\left(\frac{d}{dq}\right)^2+\frac{3}{4}\eta x^{-1/2}\frac{d}{dq}+x^{-1}\cdot\frac{3}{2}\, \eta\,  x^{1/2}\frac{d}{dq}-\frac{1}{4}x^{-2}-\eta^2x\right]\Phi=0\\
+&\left[\eta^2x\left(\frac{d}{dq}\right)^2+\frac{1}{3}\eta x^{-1/2}\frac{d}{dq}+\frac{2}{3}\, \eta\,  x^{-1/2}\frac{d}{dq}-\frac{1}{9}x^{-2}-\frac{4}{9}\eta^2x\right]\Phi=0\\
+&\left[\eta^2\left(\frac{d}{dq}\right)^2+\eta x^{-3/2}\frac{d}{dq}-\frac{1}{9}x^{-3}-\frac{4}{9}\eta^2\right]\Phi=0\\
+&\left[\left(\frac{d}{dq}\right)^2+\eta^{-1} x^{-3/2}\frac{d}{dq}-\frac{1}{9}\eta^{-2}x^{-3}-\frac{4}{9}\right]\Phi=0\\
+&\left[\left(\frac{d}{dq}\right)^2+q^{-1}\frac{d}{dq}-\frac{1}{9}q^{-2}-\frac{4}{9}\right]\Phi=0
+\end{align*}
+
+therefore $\Phi(q)$ is a solution of the transform Airy equation (see draft2).  
 
 %y = x eta^(2/3)
 %d/dy^2 = eta^(-4/3) d/dx^2

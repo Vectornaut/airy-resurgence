@@ -1,0 +1,419 @@
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\documentclass[11pt,a4paper,twoside,leqno,noamsfonts]{amsart}
+           \usepackage{setspace}
+\linespread{1.34}           
+           %\onehalfspacing
+\usepackage[english]{babel}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\usepackage[utopia]{mathdesign}
+    \DeclareSymbolFont{usualmathcal}{OMS}{cmsy}{m}{n}
+    \DeclareSymbolFontAlphabet{\mathcal}{usualmathcal}
+\usepackage[a4paper,top=4cm,bottom=3cm,left=3.5cm,
+           right=3.5cm,bindingoffset=5mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{braket,caption,comment,mathtools,stmaryrd}
+\usepackage{multirow,booktabs,microtype}
+\usepackage{latexsym}
+\usepackage{todonotes}
+\usepackage{fancyhdr}
+%\renewcommand{\sectionmark}[1]{\markboth{\thesection\ #1}{}}
+\pagestyle{fancy}
+% Clear the header and footer
+\fancyhead{}
+\fancyfoot{}
+% Set the right side of the footer to be the page number
+\fancyfoot[R]{\thepage}
+\addtolength{\headheight}{\baselineskip}
+%\fancyhead[RE]{\rightmark}
+%\fancyhead[RE]{}
+\usepackage{soul} % per testo barrato
+\usepackage[colorlinks,bookmarks]{hyperref} %
+\hypersetup{colorlinks,%
+            citecolor=britishracinggreen,%
+            filecolor=black,%
+            linkcolor=cobalt,%
+            urlcolor=black}
+\setcounter{tocdepth}{2}
+%\setcounter{section}{-1}
+\numberwithin{equation}{section}
+
+% Veronica's custom commands
+\input{command}
+
+% symbology
+\newcommand{\blankbox}{{\fboxsep 0pt \colorbox{lightgray}{\phantom{$h$}}}}
+\newcommand{\maps}{\colon}
+\newcommand{\van}{\mathfrak{m}}
+\newcommand{\laplace}{\mathcal{L}}
+\newcommand{\borel}{\mathcal{B}}
+\newcommand{\laplacepde}{\mathcal{D}}
+\DeclareMathOperator{\Ai}{Ai}
+
+\DeclareRobustCommand{\subtitle}[1]{\\#1}
+
+\title{Resurgence and Borel regularity for ODEs \\ Seminar at Matamzee}
+\author{Veronica Fantini}
+
+\begin{document}
+\maketitle
+\section{What is resurgence}
+
+Theory of resurgence was introduced by Ecalle in the '80 and it deals with divergent power series
+
+\begin{equation}
+\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n-1}\in\C[\![z^{-1}]\!], \quad \text{ with } a_n\sim n!
+\end{equation} 
+
+they have zero radius of convergence. 
+
+
+\subsection{Paradigma of Borel--Laplace sum}
+
+
+\[
+\begin{tikzcd}
+\C[\![z^{-1}]\!]\ni\tilde{\Phi}\defeq\sum_{n\geq 0}a_nz^{-n-1} \arrow[rr, "\mathcal{B}"] & & \tilde{\phi}(\zeta)=\sum_{n\geq 0}\frac{a_n}{n!}\zeta^{n}\in\C\lbrace\zeta\rbrace
+\end{tikzcd}
+\]
+\textcolor{magenta}{[make drawings of the Borel plane]}
+
+Study the analytic continuation of $\tilde{\phi}(\zeta)$ and if $\hat{\phi}(\zeta)$ \textbf{behaves well} you can go back to the $z$-plane via Laplace transform 
+
+\[
+\begin{tikzcd}
+\C[\![z^{-1}]\!]\ni\tilde{\Phi}\defeq\sum_{n\geq 0}a_nz^{-n-1} \arrow[rr, "\mathcal{B}"] & & \tilde{\phi}(\zeta)=\sum_{n\geq 0}\frac{a_n}{n!}\zeta^{n}\in\C\lbrace\zeta\rbrace\arrow[ld,"\mathcal{L}^\theta "]\\
+& \Phi\in\mathcal{O}(H_\theta) &
+\end{tikzcd}
+\]
+
+\textcolor{magenta}{[make drawings of the $z$-plane]}
+
+The relation with $\tilde{F}$ is via asymptotic expansion as $\Re ze^{i\theta}\to \infty$
+
+\[
+\begin{tikzcd}
+\C[\![z^{-1}]\!]\ni\tilde{\Phi}\defeq\sum_{n\geq 0}a_nz^{-n-1} \arrow[rr, "\mathcal{B}"] & & \tilde{\phi}(\zeta)=\sum_{n\geq 0}\frac{a_n}{n!}\zeta^{n}\in\C\lbrace\zeta\rbrace\arrow[ld,"\mathcal{L}^\theta "]\\
+& \Phi\in\mathcal{O}(H_\theta)\arrow[lu,dashed, "\text{asymptotics}"] &
+\end{tikzcd}
+\]
+
+The Laplace transform is defined 
+
+\begin{equation}
+F(z)\cong\mathcal{L}^{\theta}f(z)=\int_0^{+\infty e^{i\theta}}e^{-z\zeta}f(\zeta)d\zeta
+\end{equation}
+for $\theta\in [0,2\pi)$ and $F\in\mathcal{O}(H_\theta)$ if and only if $|f|\leq Ae^{-c|z|}$ for every $z$ in a tubular neighbourhood. In general one has to check 
+\begin{itemize}
+\item $\hat{f}$ can be defined through infinity;
+\item $\hat{f}$ has the right decaying at $\infty$. \textcolor{red}{HARDER}
+\end{itemize}
+
+For the first one, we have to study the singularities of $\hat{f}$. 
+
+\subsubsection{Ecalle's resurgent function}
+
+$f\in\C\lbrace \zeta\rbrace$ is resurgent if it endlessly analytically continuable, i.e.
+
+\textcolor{magenta}{[draw picture]}
+
+He defined the \textbf{theory of singularities} and \textbf{relaxed the definition of Laplace transform} to deal with log- singularities, square root, poles, etc.
+
+Examples of (\textit{minor} of) singularities 
+\begin{align*}
+\overset{\vee}{I}_c(\zeta)\defeq\frac{\zeta^{c-1}}{(1-e^{-2\pi ic})\Gamma(c)}\quad c\in\C\setminus\Z_{>0}\\
+\overset{\vee}{I}_c(\zeta)\defeq\frac{\zeta^{c-1}}{2\pi i \Gamma(c)}\log\zeta \quad c\in\Z_{>0}
+\end{align*}  
+
+\textcolor{magenta}{draw singularity in a row (like Painlev\'e)}
+
+\subsubsection{The role of $\theta$}
+
+Varying $\theta$, as long as $|\theta-\theta'|<\pi$, $\mathcal{L}^\theta f=\mathcal{L}^{\theta'}$ on $H_\theta\cap H_{\theta'}$. More generally, they disagree
+
+\begin{align*}
+\mathcal{L}^\theta-\mathcal{L}^{\theta'}=S_{\theta\theta'}\mathcal{L}^{\theta'}\quad S_{\theta\theta'}\in\C
+\end{align*}
+
+These phenomena is called the Stokes phenomena. Computing the Stokes constant is crucial to understand the structure of $F$, and Ecalle developed the\textit{ Alien calculus} to study the  Stokes phenomena.   
+
+Summarizing: the core of resurgence theory is 
+\begin{enumerate}
+\item study the Borel plane;
+\item compute the Stokes constants. 
+\end{enumerate} 
+
+\textcolor{blue}{stress that resurgence is about Borel plane, but knows about the $z$-plane.}
+
+\subsection{Motivation: why divergent series?}
+
+\begin{itemize}
+\item \textbf{thimbles integrals}:
+
+\textcolor{Orchid}{COOL}: if $f$ is algebraic, $I(z)$ is a period, i.e. it is a geometric object studied (Deligne, Malgrange, Pham, Kontsevich--Soibelman $\sim$ generalization when $f$ is local coordinate for 1-form $f=\int \alpha$) and the resurgence of $\tilde{I}$ has a geometric nature 
+\begin{itemize}
+\item critical values of $f$ $\sim$ singularity in the Borel plane
+\item Picard--Lefschetz theory $\sim$ Stokes phenomena
+\item gradient lines $\sim$ Stokes indexes
+\end{itemize}
+\item \textbf{ODEs} with irregular singularity at $\infty$: they admits formal solutions, and if the ODE is regular enough M.A.E.T. assures the existence of a holomorphic solution asymptotic to the formal one. 
+\begin{itemize}
+\item non linear ODEs have interesting behaviours (maybe be resonant)
+\end{itemize}
+\item \textbf{q--difference equation}: like ODEs, 
+\begin{equation}
+n! \rightsquigarrow q^{n(n+1)/2}\,\, |q|>1
+\end{equation}
+there is a dictionary between ODEs and q-difference equation. 
+\end{itemize}
+
+\section{ODEs}
+\subsection{Which class of ODEs we consider}
+\begin{equation}\label{eq}
+[P(\partial/\partial_z)+\frac{1}{z}Q(\partial/\partial_z)+\sum_{j=2}^dz^{-j}R_j(\partial/\partial_z)]\Phi(z)=0
+\end{equation}
+with
+\begin{itemize}
+\item $P(\lambda)$ a degree $d$ polynomial
+\item $Q(\lambda)$ a degree $d-1$ polynomial 
+\item $R_j(\lambda)$ are degree $d-j$ polynomials 
+\end{itemize}
+they are defined by Poincar\'e as \textit{series normal de Ier ordre}. As a general fact, if $P(-\lambda)$ has simple roots $\alpha_1,...,\alpha_d$ then \eqref{eq} admits $d$ formal solution of the form
+\begin{equation}
+\tilde{\Phi}_j(z)=e^{-\alpha_jz}z^{-\tau_j}\tilde{\phi}_j(z)\in e^{-\alpha_jz}z^{-\tau_j}\C[\![z^{-1}]\!][\log(z)]
+\end{equation}  
+where $\tau_j=-Q(\alpha_j)/P'(\alpha_j)$. 
+
+The M.A.E.T theorem, guarantees under suitable assumptions on the ODE, the existence of an holomorphic solution $\Phi_j(z)$ asymptotic to $\tilde{\Phi}_j$ in a suitable sector. 
+
+Our goal is to prove that $\Phi_j(z)\propto\mathcal{L}_{\zeta_j}^{\theta}\mathcal{B}\tilde{\Phi}_j$ for some angle $\theta$.
+
+Equivalently said, Borel--Laplace summability picks an actual solution of the ODE.
+
+\subsection{Borel regularity for ODEs}
+
+\[
+\begin{tikzcd}
+& P\left(\frac{\partial}{\partial_z}\right)+\frac{1}{z}Q\left(\frac{\partial}{\partial_z}\right)+\sum_{j=2}^dz^{-j}R_j\left(\frac{\partial}{\partial_z}\right) & \\
+\Phi_j\arrow[ru,red] & & \tilde{\Phi}_j\arrow[lu]\arrow[dd, "\mathcal{B}"] \\
+& & \\
+\hat{\phi}_j\arrow[uu,  "\mathcal{L}_{\zeta,\alpha_j}^\theta"]& & \tilde{\phi}_j(\zeta)\arrow[ll,"\text{sum}"] 
+\end{tikzcd}
+\]
+a priori it is not guarantee that $\mathsf{L}_{\zeta,\alpha_j}^\theta\mathcal{B}\tilde{\Phi}_j$ is a solution of \eqref{eq}, because different functions may have the same asymptotic. 
+
+Idea of the proof is based on the following diagram: 
+
+\[
+\begin{tikzcd}
+& P\left(\frac{\partial}{\partial_z}\right)+\frac{1}{z}Q\left(\frac{\partial}{\partial_z}\right)+\sum_{j=2}^dz^{-j}R_j\left(\frac{\partial}{\partial_z}\right)\arrow[dd,"\mathcal{B}"] & \\
+\Phi_j\arrow[ru,red] & & \tilde{\Phi}_j\arrow[lu]\arrow[dd, "\mathcal{B}"] \\
+&P(-\zeta)+\partial_\zeta^{-1}\circ Q(-\zeta)+\sum_{j=2}^d \partial_\zeta^{-j}\circ R_j(-\zeta) & \\
+\hat{\phi}_j\arrow[uu,  "\mathcal{L}_{\zeta,\alpha_j}^\theta"]& & \tilde{\phi}_j(\zeta)\arrow[ll,"\text{sum}"]\arrow[ul] 
+\end{tikzcd}
+\]
+
+there exists a solution $\tilde{\phi}_j(\zeta)$ which is also slight, and in suitable coordinates it is a convergent series in $\overset{\vee}{I}_{n+\tau_j}(\zeta_j)$.  
+\[
+\begin{tikzcd}
+& P\left(\frac{\partial}{\partial_z}\right)+\frac{1}{z}Q\left(\frac{\partial}{\partial_z}\right)+\sum_{j=2}^dz^{-j}R_j\left(\frac{\partial}{\partial_z}\right)\arrow[dd,"\mathcal{B}"] & \\
+\Phi_j\arrow[ru,red] & & \tilde{\Phi}_j\arrow[lu]\arrow[dd, "\mathcal{B}"] \\
+&P(-\zeta)+\partial_\zeta^{-1}\circ Q(-\zeta)+\sum_{j=2}^d \partial_\zeta^{-j}\circ R_j(-\zeta)\arrow[uu,"\mathcal{L}"] & \\
+\hat{\phi}_j\arrow[uu,  "\mathcal{L}_{\zeta,\alpha_j}^\theta"]& & \tilde{\phi}_j(\zeta)\arrow[ll,"\text{sum}"] \arrow[ul] 
+\end{tikzcd}
+\]
+
+the Laplace transform along a Hankel contour gives an inverse for $\mathcal{B}$. 
+
+[repeat again the idea: a solution of \eqref{eq} is Borel regular, because its Borel--Laplace sum gives an actual solution.]
+
+\begin{remark}
+\textbf{[Extend the definition of $\mathcal{B}$ and $\mathcal{L}$]}
+\begin{itemize}
+\item As far as $\Gamma(\tau)$ is well defined, we can allow $\tau\in\R$ and extend the definition of $\mathcal{B}$. 
+\item Ecalle's theory of singularity introduces a generalized Laplace transform which take as contour a Hankel contour rather than a straight line. This is not the only generalization of Laplace transform Ecalle introduced. 
+\end{itemize}
+\end{remark}
+
+\subsection{Proof of Borel regularity}
+\begin{itemize}
+\item Borel transform the $\text{ODE}_z$ and we get $\text{IE}_\zeta$. 
+\begin{itemize}
+ \item IE are not easy to be solved so usually in the application we differentiate them to get an $\text{ODE}_\zeta$. If $\hat{\phi}$ is slight we don't loose informations by differentiating.
+\end{itemize}
+\item by Prop 1, there exists a solution $\hat{\phi}(\zeta_j)$ 
+\begin{align*}
+\hat{\phi}(\zeta_j)&=\zeta_j^{\tau_j-1}+\tilde{g}_j & \tilde{g}_j\in\mathcal{HL}^{\infty,1-\tau_j-\epsilon}\\
+&=\sum_{k\geq 0}a_k\zeta_j^{\tau_j-1+k} +\text{h.f.} & \\
+&=(1-e^{-2\pi i\tau_j})\sum_{n\geq 0}\tilde{a}_n\overset{\vee}{I}_{\tau_j+n}(\zeta_j) & \quad \tilde{a}_n=a_n\Gamma(\tau_j+n), \\
+& & \overset{\vee}{I}_c(\xi)=\frac{\xi^{c-1}}{(1-e^{-2\pi ic})\Gamma(c)}\\
+\end{align*}
+\item $\hat{\phi}(\zeta_j) $ is a germ of meromorphic function
+\begin{align*}
+\limsup_{n\to\infty}\sqrt[n]{\frac{|\tilde{a}_n|}{\Gamma(\tau_j+n)(1-e^{-2\pi i(\tau_j+n)}}}&=\limsup_{n\to\infty}\sqrt[n]{\frac{{a}_n\Gamma(\tau_j+n)}{\Gamma(\tau_j+n)(1-e^{-2\pi i(\tau_j+n)}}}=\\
+&=\limsup_{n\to\infty}\sqrt[n]{\frac{{a}_n}{(1-e^{-2\pi i(\tau_j+n)}}}<+\infty
+\end{align*}
+ where in the last step we use 
+ \begin{multline}
+ \infty+>||\tilde{g}_j \zeta_j^{\tau_j+\epsilon-1}||_\infty=||\sum_{n\geq 1}\zeta_j^{\tau_j-1+n}\zeta_j^{-(\tau_j+\epsilon)+1} ||_\infty=||\sum_{n\geq 1}a_n\zeta_j^{n-\varepsilon}||_\infty
+ \end{multline}
+ \item by Ecalle definition of Laplace transform [see Sauzin], $\hat{\phi}(\zeta_j)$ has a well defined Laplace transform which is asymptotic to $\sum_{n\geq 0}\tilde{a}_nz^{-\tau_j-n}(1-e^{-2\pi i \tau_j})=(1-e^{-2\pi i \tau_j})\sum_{n\geq 0}a_n\Gamma(\tau_j+n)z^{-\tau_j-n}$
+ \begin{align*}
+ (1-e^{-2\pi i \tau_j})\sum_{n\geq 0}a_n\Gamma(\tau_j+n)z^{-\tau_j-n}\sim \mathcal{L}_{\zeta_j}^\theta\hat{\phi}_j=e^{\alpha_jz}\mathcal{L}_{\zeta,\alpha_j}^\theta\hat{\phi}
+ \end{align*}
+ hence 
+ \begin{equation}
+ \mathcal{L}_{\zeta,\alpha_j}^\theta\hat{\phi} \sim e^{-\alpha_jz}z^{-\tau_j} \sum_{n\geq 0}a_n\Gamma(\tau_j+n)z^{-n}\propto \tilde{\Phi}_j(z)
+ \end{equation}
+\end{itemize}
+
+\subsection{Corollary: construct an explicit holomorphic solution predicted by M.A.E.T.}
+
+\begin{corollary}
+The holomorphic solution which exists by M.A.E.T. can be characterized as the Borel--Laplace sum of $\tilde{\Phi}_j$.  
+\end{corollary}
+
+
+\section{q-difference equations}
+
+\subsection{Formal solutions vs actual solutions: paradigma of $q$-Borel Laplace summability}
+
+\subsubsection{From ODEs to $q$- difference equations}
+
+\begin{center}
+\begin{tabular}{c|c}
+\hline
+ODE     & $q$-difference, $|q|>1$ \\
+\hline
+$\sum_{n\geq 0}^d a_{n}(z)\frac{\partial^n}{\partial z^n}\Phi=a\in\mathbb{C}(z)$ and $a_n\in\mathbb{C} (z)$    & $\sum_{n\geq 0} a_{q,n}\sigma_q^n f=a_q\in\mathbb{C}(x)$ and $a_{q,n}\in\mathbb{C}(x)$ \\
+& \\
+$z^2\Phi'(z)+\Phi(z)=z$ & $x\sigma_q f(x)+f(x)=x$\\
+$\tilde{\Phi}(z)=\sum_{n\geq 0}(-1)^{n+1} n!z^{-n-1}$ & $\hat{f}(x)=\sum_{n\geq 0}(-1)^{n}q^{n(n+1)/2}x^{n+1}$ \\
+& \\
+\hline
+General notation & \\
+\hline
+$z\frac{d}{dz}$ & $\sigma_qf(x)=f(qx)$ \\
+$\frac{d}{dz}$ & $\delta_q f(x)=\frac{f(qx)-f(x)}{(q-1)x}$ \\
+$n!$ & $q^{n(n+1)/2}$ \\
+$e^z$ & $e_q(x)=\log(1/q)\Theta_q(x)$
+\end{tabular}
+
+\end{center}
+
+\begin{remark} Why $n!$ corresponds to $q^{-n(n+1)/2}$
+\begin{equation}
+\Gamma(n)=\int_0^{+\infty}e^{-t}t^n\frac{dt}{t}
+\end{equation}
+
+\begin{equation}
+q^{-n(n-1)/2}=\int_0^{+\infty}\frac{t^n}{e_q(t)}\frac{dt}{t}
+\end{equation}
+\end{remark}
+
+There is also another interesting relation between $q$- factorial and $n!$
+
+\begin{equation}
+[n]_q!= \frac{(q;q)_n}{(1-q)^n} \rightarrow_{q\to 1} n!
+\end{equation}
+
+\[
+\begin{tikzcd}
+\hat{f}(x)=\sum_{n\geq 0}a_n x^n\in\mathbb{C}[\![x]\!]_{(q;1)} \arrow[rr,"\mathcal{B}_{(q;1)}"] & & \varphi(\xi)=\sum_{n\geq 0}a_n q^{-n(n-1)/2}\xi^n\arrow[dl,"\mathsf{L}^{[\lambda]}_{q;1}"]\\
+&f(x)\arrow[lu,dashed ,"\text{asymptotics}"] &
+\end{tikzcd}
+\]
+
+\subsection{Borel regularity: Dreyfus's theorem}
+
+Let $\mathcal{B}_{\mu}$ be the $q$- Borel transform for $q$-Gevrey $\mu$ series
+\begin{equation}
+    \mathcal{B}_{\mu}\colon\sum_{n\geq 0}a_nx^n\to \sum_{n\geq 0}a_n q^{-n(n-1)/(2\mu)}\xi^n
+\end{equation}
+and let $\mathsf{L}_{\mu,\kappa}^{[\lambda]}$ be the $q$- Laplace transform with parameters $\mu\in\Q_{>0}$, $\kappa\in\N^*$ ($\mathsf{L}_{q;1}^{[\lambda]}:=\mathsf{L}_{1,1}^{[\lambda]}$)
+\begin{equation}
+    \mathsf{L}_{\mu,\kappa}^{[\lambda]}\varphi(x)=\frac{\mu}{\kappa}\sum_{l\in \kappa^{-1}\mathbb{Z}}\frac{\varphi(q^l\lambda)}{\Theta_{q^{1/\mu}}(\frac{q^{1/\mu+l}\lambda}{x})}\quad \lambda\in\C^*/q^{\kappa^{-1}\Z}
+\end{equation}
+Let $\mathbb{H}_{\mu,\kappa}^{[\lambda]}$ be the space of functions $\varphi\in\mathcal{M}(\C^*)$, such that there exists $\varepsilon>0$, $\Omega\subset \C$ connected 
+\begin{itemize}
+\item $\bigcup_{l\in\kappa^{-1}\Z}\lbrace x\in\C^* | |x-\lambda q^{l}|<\varepsilon |\lambda q^l|\rbrace\subset\Omega$
+\item $\varphi$ can be continued analytically in $\Omega$ with $q^{1/\mu}$ exponential growth
+\[|\varphi(\xi)|<C|\Theta_{|q|^{1/\mu}}(A|\xi|)|\] 
+\end{itemize} 
+
+For every $\varphi(\xi)\in\mathbb{H}_{\mu,\kappa}^{[\lambda]}$, $\mathsf{L}_{\mu,\kappa}^[\lambda]\varphi(x)\in$. 
+
+Under suitable assumptions on the $q$-difference equation, the following result holds true 
+\begin{theorem}
+Let $\hat{h}$ be a formal power series solution of a linear q-difference equation with coefficients in $\mathbb{C}(x)$. There exist $\kappa_1,...,\kappa_r\in\mathbb{Q}_{>0}$, $n,K\in\mathbb{N}^*$ and a finite set $\Sigma\subset\mathbb{C}^*/ q^{n^{-1}\mathbb{Z}}$, we may compute from the q-difference equation, such that for all $\lambda\in (\mathbb{C}^*/q^{n^{-1}\mathbb{Z}})\setminus\mathbb{Z} $,
+\[
+\mathsf{S}^{[\lambda]}(\hat{h}):=\mathsf{L}^{[\lambda]}_{\kappa_r,n}\circ\mathsf{L}^{[\lambda]}_{\kappa_{r-1},K}\circ...\circ\mathsf{L}^{[\lambda]}_{\kappa_1,K}\circ\mathcal{B}_{\kappa_1}\circ...\circ\mathcal{B}_{\kappa_r}\hat{h}\]
+is meromorphic on $\mathbb{C}^*$, and is solution of the same equation as $\hat{h}$. Moreover, $\mathsf{S}^{[\lambda]}(\hat{h})$ is asymptotic to $\hat{h}$ and, for $|x|$ close to $0$ it has poles of order at most $1$ that are contained in $\lambda q^{n-1}, n\in\mathbb{Z}$. 
+\end{theorem}
+
+Idea of the proof: let $P(\hat{f})=\big[\sum_{n=0}^ma_n\sigma_q^n\big]\hat{f}$
+
+\[
+\begin{tikzcd}
+& P\hat{f}=a\arrow[dd] & \\
+f(x)\arrow[ru,red] & &\hat{f}(x)\arrow[lu]\arrow[dd, "\mathcal{B}_{\kappa_1}\circ...\circ\mathcal{B}_{\kappa_r}"] \\
+& q-\text{difference equation} & \\
+\varphi(\xi)\in\mathbb{H}^{[\lambda]}_{\kappa_1,K}, \text{ for some }\lambda \arrow[uu,  "\mathsf{L}^{[\lambda]}_{\kappa_r,n}\circ...\circ\mathsf{L}^{[\lambda]}_{\kappa_1,K}"]& & \varphi(\xi)\in\C\lbrace\xi\rbrace, \text{ of slope } 0 \arrow[ll,Leftrightarrow]\arrow[ul] 
+\end{tikzcd}
+\]
+
+\subsection{Summary}
+
+\begin{center}
+\begin{tabular}{c|c}
+\hline
+\textbf{Formal series} & \\
+\hline
+$\tilde{\Phi}(z)=\sum_{n\geq 0} a_n z^{-n-1}\in\mathbb{C}[\![z^{-1}]\!]_1$     &  $\hat{f}(x)=\sum_{n\geq 0}a_n x^n\in\mathbb{C}[\![x]\!]_{(q;1)}$ \\
+& \\
+\hline
+\textbf{Borel transform} & \\
+\hline
+  $\tilde{\phi}(\zeta)=\sum_{n\geq0}a_n\frac{\zeta^n}{n!}\in\mathbb{C}\lbrace \zeta\rbrace$   & $\varphi(\xi)=\sum_{n\geq 0}a_n q^{n(n-1)/2}\xi^n \in\mathbb{C}(\!(\xi)\!)$\\
+  & \\
+  \hline
+  \textbf{Laplace transform} & \\
+  \hline
+ $\mathcal{L}_\zeta^{\theta}\hat{\phi}(z)=\int_0^{+e^{i\theta}\infty} e^{-z\zeta}\hat{\phi}(\zeta)d\zeta\in\mathcal{O}(H_\theta)$ & $\mathcal{L}^{\theta}_{q;1}\varphi(x)=\int_0^{e^{i\theta} \infty}\frac{\varphi(\xi)}{e_q(\frac{\xi}{x})}d\xi $ \\
+ & $\Theta$ function: $\Theta_q(x)=\sum_{n\in\mathbb{Z}}q^{-n(n+1)/2}x^n$\\
+ & $\mathsf{L}_{q;1}^{[\lambda]}\varphi(x)=\sum_{n\geq 0}\frac{\varphi(\lambda q^n)}{\Theta_q(\frac{\lambda q^n}{x})}\in\mathcal{O}(H^{\lambda}),\, \lambda\in\mathbb{C}^*$\\
+ & $H^{\lambda}=D_r^*\setminus\lbrace -\lambda q^n, n\in\mathbb{Z}\rbrace$ \\
+ & \\
+ \hline
+ \textbf{Domain of definition} & \\
+ \hline 
+ $\hat{\phi}(\zeta)$ s.t. $\exists C,a>0 $ & $\varphi(\xi)$ s.t. $\exists C,a>0 $\\
+ $|\hat{\phi}(\zeta)|<Ce^{a|\zeta|}$, $\zeta\in S_{\delta}$ & $|\varphi(\xi)|<C|\xi|^aq^{\frac{1}{2}\left(\frac{\log|\xi|}{\log q}\right)^2}$, $\xi\in S_{\delta}\cap\C^*$ \\
+ $S_\delta$ is an half-strip& \\
+ & $\varphi(\xi)\in\mathbb{H}_{\mu,\kappa}^{[\lambda]}$\\
+ & \\
+ \hline
+ \textbf{Gevrey asymptotics} & \\
+ \hline
+$\mathcal{L}_{\zeta}^{\theta}\hat{\phi}(z)\sim_1 \tilde{\Phi}(z)$ & $\mathsf{L}_{q;1}^{[\lambda]}\varphi(x)\sim_{q;1} \hat{f}(x)$ \\
+& \\
+\hline
+\textbf{Stokes phenomena} & \\
+\hline 
+ varying $\theta$, $\mathcal{L}^{\theta}$ jumps & varying $\mu\not\equiv_{q}\lambda$, $\mathsf{L}_{q;1}^{[\mu]}$ jumps\\
+ & \\
+ \hline
+ \textbf{Borel regularity} & \\
+ \hline
+ M.A.E.T: existence of hol. solutions & [Praagman, 86]: existence of merom. solutions \\
+ F.,Feynes : BL sum gives an actual solution & [Dreyfus, 14]: q--BL gives an actual solution \\
+ \textit{slight functions} & \textit{slope} $0$ operators \\
+\end{tabular}
+\end{center}
+
+
+
+\bibliographystyle{plain}
+\bibliography{airy-resurgence}
+\end{document}
