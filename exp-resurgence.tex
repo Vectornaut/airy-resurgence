@@ -63,13 +63,17 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \maketitle
 \section{Introduction}
 \subsection{Setting \textcolor{orange}{[change title?]}}
-You can often find a formal power series \textcolor{magenta}{[check whether this exponent is $\tau$ on the nose or $\tau$ plus a constant]}
-\[ \series{\Phi} = z^\tau \left( \frac{c_0}{z} + \frac{c_1}{z^2} + \frac{c_2}{z^3} + \frac{c_3}{z^4} + \ldots \right), \]
-with $\tau \in [0, 1)$, that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example, if you want to understand how the solutions of the holomorphic ordinary differential equation (ODE)
-\begin{center}
-\textbf{[shifted Bessel matching example above]},
-\end{center}
-behave near $z = \infty$, you might start by looking for ``transmonomial'' solutions $e^{\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above.
+You can often find a formal power series \textcolor{magenta}{[double-check that this matches the $\tau$ from the position domain]}
+\[ \series{\Phi} = \frac{c_0}{z^\tau} + \frac{c_1}{z^{\tau+1}} + \frac{c_2}{z^{\tau+2}} + \frac{c_3}{z^{\tau+3}} + \ldots, \]
+with $\tau \in (0, 1]$, that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example, if you want to understand how the solutions of the holomorphic ordinary differential equation (ODE)
+\begin{equation}
+\text{\bf [one-third Bessel equation, rescaled to match integral example]} \label{eqn:bessel-rescaled}
+\end{equation}
+behave near $z = \infty$, you might start by looking for formal {\em transmonomial} solutions $e^{-\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above. Setting $\alpha = -\tfrac{1}{12}$ and $\tau = \tfrac{1}{2}$ gives a well-behaved recurrence relation for $\series{\Phi}$, which produces the solution
+\begin{equation}
+e^{z/12} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{6} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{216} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{3888} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel-ex}
+\end{equation}
+and its constant multiples.
 
 you might start by trying to construct a formal power series solution instead. Observing that the leading term must be a multiple of $z^{-1/2}$ and then extending term by term, you again \textcolor{magenta}{[check]} get series~\eqref{series:bessel-ex}.
 
@@ -89,7 +93,7 @@ using the substitution $\tfrac{1}{2} \tau^2 = \tfrac{1}{3} u^3 - \tfrac{1}{4} u 
 \[ e^{z/12} z^{1/2} \left[ \frac{(-1)!!}{z} + \frac{5}{6} \cdot \frac{1!!}{z^2} + \frac{385}{216} \cdot \frac{3!!}{z^3} + \frac{17017}{3888} \cdot \frac{5!!}{z^4} + \ldots \right] \]
 \color{black}
 \begin{equation}
-e^{z/12} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{6} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{216} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{3888} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel-ex}
+e^{z/12} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{6} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{216} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{3888} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] %%\label{series:bessel-ex}
 \end{equation}
 which has zero radius of convergence, but still makes sense as a formal power series.
 \begin{itemize}
