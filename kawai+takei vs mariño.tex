@@ -216,5 +216,25 @@ Furthermore, the modified Bessel equation \eqref{eq:Bessel 1/4} has another holo
 \begin{equation}
 \tilde{I}_{1/4}(z)=\frac{1}{\sqrt{\pi}}e^{z}\sum_{n= 0}^{\infty}(-1)^n\frac{\left(\frac{1}{4}\right)_n\left(\frac{3}{4}\right)_n}{n!}\left(2z\right)^{-n-1/2}
 \end{equation}
+\section{Physical picture}
+Here are some vague physical ideas about why the change of coordinates described above works. They're pretty incoherent, and they should all be taken with a grain of salt.
 
+Consider an equation of the form
+\begin{equation}\label{eq:deformed-airy-lucas}
+\left[\left(\frac{\partial}{\partial x}\right)^2-\eta^2x^{n-2}(1 + f) - \lambda\eta\right] \psi = 0,
+\end{equation}
+where $n \in \{3, 4, 5, 6, \ldots\}$ and the function $f$ goes to zero as $x \to \infty$. It's reasonable to look for trans-series solutions with the exponential factor $e^{\pm z}$, where $z = \tfrac{2}{n} \eta x^{n/2}$,
+%% \[ e^{\pm z} z^{1-4/n} \big(\text{series in}\;1/z\big) \]
+because \textcolor{magenta}{(I don't think the following calculation works)}
+\begin{align*}
+\left[\left(\frac{\partial}{\partial x}\right)^2-\eta^2x^{n+2}\right] e^{\pm z} & = -\big(\tfrac{n}{2} - 1\big) \eta x^{n/2 - 2} e^{\pm z} \\
+& = -\big(\tfrac{n}{2} - 1\big) \eta \big(\tfrac{n}{2} \eta^{-1} z\big)^{1 - 4/n} e^{\pm z} \\
+& = -\big(\tfrac{n}{2} - 1\big) \big(\tfrac{n}{2}\big)^{1- 4/n} \eta^{4/n} z^{1 - 4/n} e^{\pm z} \\
+& = \ldots
+\end{align*}
+The corresponding holomorphic solutions should have the same exponential decay. The $e^z$ and $e^{-z}$ solutions are usually linearly independent, but they can become linearly dependent when $\lambda\eta$ is in the spectrum of the rest of the operator acting on $L^2(\mathbb{R})$. In this case, we should get a solution in $O_{z \to -\infty}(e^z) \cap O_{z \to \infty}(e^{-z})$, which decays exponentially in both directions. You can see this explicitly for the $n = 2$ case: each eigenvector of the harmonic oscillator Hamiltonian is $e^{-\eta x^2/2}$ times a polynomial in $x$. The exponential decay of the eigenvectors sets a natural length scale, and $z$ measures distance with respect to it.
+
+When $f = 0$ and $\lambda = 0$, rescalings of $x$ and $\eta$ that keep $z$ fixed have no effect on the equation. Thus, any rescaling of $x$ has the same effect on the equation as a corresponding rescaling of $\eta$. This scale-invariance is why taking the Borel transforms with respect to $\tfrac{2}{n} x^{n/2}$ and $\eta$ give the same result.
+
+The $|x| \to \infty$ limit, $f$ is very small by assumption, so we're approximately in the scale-invariant situation described above. In the $\eta \to \infty$ limit, the eigenvectors of the Hamiltonian get very narrow, so it's similar to making $|x|$ large whie keeping $\eta$ fixed. This should mean once again that we can neglect $f$. The upshot is that both the $|x| \to \infty$ limit and the $\eta \to \infty$ limit take us toward the scale-invariant situation where the two Borel transforms give the same result.
 \end{document}
