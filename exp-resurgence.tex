@@ -66,7 +66,8 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \begin{document}
 \maketitle
 \section{Introduction}
-\subsection{Setting \textcolor{orange}{[change title?]}}
+\subsection{The unreasonable effectiveness of Borel summation}\label{intro:summation}
+%%\subsection{A familiar process: Borel summation}\label{intro:summation}
 You can often find a formal power series \textcolor{magenta}{[double-check that this matches the $\tau$ from the position domain]}
 \[ \series{\Phi} = \frac{c_0}{z^\tau} + \frac{c_1}{z^{\tau+1}} + \frac{c_2}{z^{\tau+2}} + \frac{c_3}{z^{\tau+3}} + \ldots, \]
 with $\tau \in (0, 1]$, that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example, if you want to understand how the solutions of the holomorphic ordinary differential equation (ODE)
@@ -97,14 +98,14 @@ using the substitution $\tfrac{1}{2} \tau^2 = \tfrac{1}{3} u^3 - \tfrac{1}{4} u 
 Once you have the formal solution $\series{\Phi}$, you might try to get an actual solution by applying {\em Borel summation}, which turns a formal power series into a function asymptotic to it. Borel summation works in three steps.
 \begin{enumerate}
 \item Thinking of $z$ as a ``frequency variable,'' we take the formal inverse Laplace transform of $\series{\Phi}$, producing a formal power series $\series{\phi}$ in a new ``position variable'' $\zeta$.
-\item With luck, $\series{\phi}$ has a positive radius of convergence. In this case, we say $\series{\Phi}$ is {\em $1$-Gevrey}. We sum $\series{\phi}$ to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$.
+\item With luck, $\series{\phi}$ has a positive radius of convergence. In this case, we say $\series{\Phi}$ is {\em $1$-Gevrey}. We sum $\series{\phi}$ to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. \textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
 \item With more luck, $\hat{\phi}$ grows slowly enough along an infinite ray $b + e^{i\theta}[0, \infty)$ \textcolor{magenta}{[change, explain, or link to notation]} for its Laplace transform $\laplace_b^\theta \hat{\phi}$ \textcolor{magenta}{[link to definition]} to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\laplace_b^\theta \hat{\phi}$ its {\em Borel sum} at $b$.
 \end{enumerate}
 The Borel summation process is summarized in the following diagram.
 \begin{center}
 \begin{tikzcd}
 & \text{problem} & \\
-\Phi \arrow[ru, dotted, no head, tail] & & \series{\Phi} \arrow[lu, no head, tail, "\parbox{15mm}{\centering\footnotesize formally solves}"'] \arrow[dd, mapsto, "\mathcal{B}"] \\
+\hat{\Phi} \arrow[ru, dotted, no head, tail] & & \series{\Phi} \arrow[lu, no head, tail, "\parbox{15mm}{\centering\footnotesize formally solves}"'] \arrow[dd, mapsto, "\mathcal{B}"] \\
 & & \\
 \hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \tilde{\phi}(\zeta) \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
@@ -131,6 +132,36 @@ The Borel summation process is summarized in the following diagram.
 \item (In both of the cases that we study, the Borel sum of $\tilde{\Phi}$ is always taken at a zero of $\lambda$, rather than an arbitrary point in $B$. For ODEs, our treatment explains why the zeroes of $\lambda$ play a special role.)
 \end{itemize}
 \end{itemize}
+\subsection{A new perspective: Borel regularity}
+\begin{itemize}
+\item The central goal of this paper is to present a new perspective on Borel summation which helps explain why it works for at least two kinds of problems.
+\begin{itemize}
+\item The first problem is evaluating a certain kind of exponential integral: a one-dimensional {\em thimble integral}.
+\item The second problem is solving a certain kind of ODE.
+\item These two problems are closely linked. By playing with derivatives of an exponential integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of exponential integral solutions.
+\end{itemize}
+\item Suppose you have a holomorphic function $\Phi$ which is asymptotic to a formal power series $\series{\Phi}$ as $z$ goes to $\infty$ along a given ray.
+\item If $\series{\Phi}$ is Borel-summable, as described in Section~\ref{intro:summation}, its Borel sum is a new holomorphic function.
+%%\item {\em A priori}, we should expect $\hat{\Phi}$ to be different from $\Phi$, because we lose information in passing from $\Phi$ to its asymptotic series.
+%%\item Taking the Borel sum of the asymptotic series of $\Phi$ is a regularization process, because it smooths away some perturbations---the ones that are asymptotic to zero along the given ray. We'll call it {\em Borel regularization}.
+%%\item Taking the Borel sum of the asymptotic series of $\Phi$ can be seen as a regularization process, because taking asymptotics erases information. We'll call this process {\em Borel regularization}.
+\item Since different functions can be asymptotic to the same power series, taking the Borel sum of the asymptotic series of $\Phi$ must smooth away some details. We'll therefore call this process {\em Borel regularization}.
+\item We'll say $\Phi$ is {\em Borel-regularizable} if it's asymptotic to a Borel-summable power series.
+\item We'll say $\Phi$ is {\em Borel regular} if it's Borel-regularizable and Borel regularization leaves it unchanged.
+\item We have the following vector space inclusions:
+\[ \text{Borel regular functions} \subset \text{Borel-regularizable functions} \subset \text{holomorphic functions}. \]
+\item Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson's theorem on Borel summability'') tells us that for a function $\Phi$ with a well-defined inverse Laplace transform $\phi$, the following conditions are equivalent \textcolor{magenta}{[double check]}:
+\begin{itemize}
+\item $\Phi$ is Borel regular.
+\item $\Phi$ is approximated well, in a certain sense (a weak version of being ``Gevrey-asymptotic''), by its asymptotic series.
+\item $\phi$ grows at most exponentially along the Laplace transform ray.
+\end{itemize}
+\item When its domain is restricted to the space of Gevrey power series, Borel summation is invertible. \textcolor{magenta}{[Need to find a good reference for this, because a small change in the statement would mess up our conclusion. Does \texttt{arXiv:2112.08792}, \S A.2 have the statement we want?]} Thus, Borel regularization acts as a projection operator on the space of Borel-regularizable functions.
+\item Borel regularity can help explain why Borel summation is so effective at solving certain kinds of problems, like the ones in Section~\ref{intro:summation}.
+\item The formal solutions of a problem are typically supposed to generalize the actual solutions, in the sense that they include the asymptotic series of the actual solutions.
+\item In this case, every Borel regular solution can be found by taking the Borel sum of a formal solution.
+\item \ldots
+\end{itemize}
 \subsection{Goals}
 \begin{itemize}
 \item The central goal of this paper is to lay out two kinds of problems where we can prove that the Borel sum of a formal power series solution is always an actual solution.
@@ -144,7 +175,12 @@ The Borel summation process is summarized in the following diagram.
 \item (Super-motivation: why do the zeroes of $\lambda$ play a special role?) As part of the treatment, we've made use of some new perspectives on the Laplace transform.
 \begin{itemize}
 \item \textbf{Geometric picture.} The spatial domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_b^\theta$ is $T^* B_b$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example.
-\item \textbf{A new dictionary for ODEs.} The Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it's much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. This clarifies why we take the Borel sums at zeroes of $\lambda$ when we're trying to solve an ODE.\textcolor{black}{[Veronica---I dont't see why]}
+\item \textbf{A new dictionary for ODEs.} The Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it's much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. This clarifies why we take the Borel sums at zeroes of $\lambda$ when we're trying to solve an ODE. \textcolor{orange}{[Veronica---I dont't see why]}
+\end{itemize}
+\item Our picture helps explain why it's useful to work on the Borel plane (the position domain).
+\begin{itemize}
+\item Integral equations are more regular than differential equations.
+\item A thimble integral in the frequency domain can be recast as the Laplace transform of a function in the position domain.
 \end{itemize}
 \item Illustrate with detailed treatments of several examples.
 \begin{itemize}
@@ -165,7 +201,8 @@ The Borel summation process is summarized in the following diagram.
 \begin{itemize}
 \item Linear, homogeneous ODE with regular singularity at 0 and irregular singularity at infinity [big idea in {\tt airy-resurgence}]
 \begin{itemize}
-\item Contextualize with previous work of P. Ramis
+\item Contextualize with previous work of Braaksma (``Multisummability and Stokes multipliers of linear meromorphic differential equations'')
+\item Also contextualize with Balser, Braaksma, Sibuya, and Ramis (``Multisummability of formal power series solutions of linear ordinary differential equations'')
 \item Also contextualize with Loday-Richaud
 \end{itemize}
 \item \emph{Borel regularity} for \textbf{thimbles integrals} can be stated a the commutativity of the following diagram:
@@ -204,7 +241,7 @@ Let $R_N$ be the difference between a function and the partial sum
 \[ \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \ldots + \frac{\varphi_{N-2}}{z^{N-1}} \]
 of its asymptotic series. Watson showed a century ago that the function is Borel regular whenever there's a constant $c \in (0, \infty)$ with
 \[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
-over all orders $N$ and all $z$ in a wide enough wedge around infinity.
+over all orders $N$ and all $z$ in a wide enough wedge around infinity (Sokal, ``An improvement of Watson's theorem on Borel summability''; Hardy, {\em Divergent Series}, Theorem~136; Watson, ``A theory of asymptotic series,'' \S 8?).
 \item \textbf{Satisfying a singular differential equation}
 
 \begin{itemize}
