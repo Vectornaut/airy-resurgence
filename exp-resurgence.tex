@@ -150,7 +150,11 @@ The Borel summation process is summarized in the following diagram.
 \item We'll say $\Phi$ is {\em Borel regular} if it's Borel-regularizable and Borel regularization leaves it unchanged.
 \item We have the following vector space inclusions:
 \[ \text{Borel regular functions} \subset \text{Borel-regularizable functions} \subset \text{holomorphic functions}. \]
-\item Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson's theorem on Borel summability'') tells us that for a function $\Phi$ with a well-defined inverse Laplace transform $\phi$, the following conditions are equivalent \textcolor{magenta}{[double check]}:
+\item Borel regular functions have been characterized in the literature before; Watson showed a century ago \textcolor{orange}{[Watson]} that a function $\Phi$ is Borel regular whenever there's a constant $c \in (0, \infty)$ with
+\[ |\Phi(z)-\sum_{k=0}^Nc_kz^{-k}| \le c^{N+1} N!|z|^{-N} \]
+over all orders $N$ and all $z$ in a wide enough wedge around infinity. 
+
+Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson's theorem on Borel summability'') tells us that for a function $\Phi$ with a well-defined inverse Laplace transform $\phi$, the following conditions are equivalent \textcolor{magenta}{[double check]}:
 \begin{itemize}
 \item $\Phi$ is Borel regular.
 \item $\Phi$ is approximated well, in a certain sense (a weak version of being ``Gevrey-asymptotic''), by its asymptotic series.
@@ -232,6 +236,9 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 \end{itemize}
 \color{DarkBlue}
 \subsection{Why does Borel resummation work?}
+
+\color{gray}
+
 Borel resummation is a way of turning a formal power series
 \[ \series{\varphi} = z^\sigma \left( \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \frac{\varphi_3}{z^4} + \ldots \right), \]
 with $\sigma \in [0, 1)$, into a function which is asymptotic to $\series{\varphi}$ as $z \to \infty$. Different functions can be asymptotic to the same power series, and Borel resummation picks one of them, performing an implicit regularization~\textbf{[arXiv:1705.03071, or maybe arXiv:1412.6614]}. When a function matches the Borel sum of its asymptotic series, we'll say it's {\em Borel regular}. Several familiar kinds of regularity imply Borel regularity, and shed light on why it occurs.
@@ -245,6 +252,8 @@ Let $R_N$ be the difference between a function and the partial sum
 of its asymptotic series. Watson showed a century ago that the function is Borel regular whenever there's a constant $c \in (0, \infty)$ with
 \[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
 over all orders $N$ and all $z$ in a wide enough wedge around infinity (Sokal, ``An improvement of Watson's theorem on Borel summability''; Hardy, {\em Divergent Series}, Theorem~136; Watson, ``A theory of asymptotic series,'' \S 8?).
+\color{DarkBlue}
+
 \item \textbf{Satisfying a singular differential equation}
 
 \begin{itemize}
@@ -253,7 +262,19 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity (Sokal, `
 \item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform.
 \item If the Borel-transformed equation has a subexponential solution $\hat{f}$ which is ``shifted holomorphic'' (we called this having a ``fractional power singularity'' in {\tt airy-resurgence}), then $\laplace \hat{f}$ satisfies the original equation, because there are no boundary terms.
 \item Draw diagram showing formal vs. holomorphic solutions in time vs. frequency domains.
+
+\begin{center}
+\begin{tikzcd}
+& & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
+\Phi\arrow[rru,dashed] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red] & & & \tilde{\Phi}\arrow[llu,"formal",swap]\arrow[dd,"\mathcal{B}"]\\
+& & IE & & \\
+\phi\arrow[rru]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\phi}}\arrow[ur]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\phi}\arrow[llu]
+\end{tikzcd}
+\end{center}
+
+where the arrow in red are a consequence of multisummability. In addition, we can distinguish on the right hand side of the diagram the formal solutions and on the left hand side the holomorphic ones. On the upper part of the diagram the functions in the $z$-plane while on the lower part the functions in the Borel plane $\zeta$-plane. 
 \end{itemize}
+
 \item \textbf{Being a thimble integral}
 
 Let $X$ be a translation surface---a Riemann surface carrying a holomorphic 1-form $\nu$. Suppose $X$ is of {\em meromorphic type}, meaning that we got it by puncturing a compact Riemann surface $\overline{X}$ at finitely many points, and $\nu$ has a pole at each puncture. A {\em translation coordinate} on $X$ is a local coordinate whose derivative is $\nu$.
