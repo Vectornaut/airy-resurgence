@@ -166,7 +166,10 @@ Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson'
 \item In this case, every Borel regular solution can be found by taking the Borel sum of a formal solution.
 \item \ldots
 \end{itemize}
-\subsection{Goals}
+
+
+
+\subsection{Goals and Results}
 
 \color{gray}
 \begin{itemize}
@@ -257,15 +260,24 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity (Sokal, `
 \item \textbf{Satisfying a singular differential equation}
 
 \begin{itemize}
-\item Think about conditions where this works. We restrict to ODEs with irregular singularity at $\infty$ and of Poincaré rank $1$: 
+\item This is the setup. We restrict to ODEs with irregular singularity at $\infty$ and of Poincaré rank $1$: 
 \begin{equation}\label{eq:ODE}
 \big[ P(\partial_z)+\frac{1}{z}Q(\partial_z)+R(z^{-1})\big]\Psi=0
 \end{equation}
-where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R(z^{-1})=O(z^{-2})$. Furthermore we assume $P$ has simple zeros $P(\alpha_j)=0$, $j=1,...,d$ and $Q(\alpha_j)\neq 0$. Under these assumptions, \eqref{eq:ODE} admits a basis of formal solutions: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form  
+where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R(z^{-1})=O(z^{-2})$ [Looking at the existence theorem in {\tt airy.resurgence 2.1.3} we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well]. Furthermore we assume $P$ has simple zeros $P(\alpha_j)=0$, $j=1,...,d$ and $Q(\alpha_j)\neq 0$. 
+\item (backgrounds) Under these assumptions, 
+\begin{itemize}
+\item \eqref{eq:ODE} admits a basis of formal solutions: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form  
 \begin{equation}
 \label{formal solution}
 \tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{F}_j(z)\in e^{-\alpha_j z }\C[\![z^{-\tau_j}]\!]
 \end{equation}
+Notice that this basis is distinguished only up to scaling, so we have a distinguished frame in the space of formal solutions. 
+\item \eqref{formal solution} is Borel-Laplace summable and its Borel-Laplace sum $\Psi_j$ satisfies the original equation \eqref{eq:ODE}
+\item as a consequence, the distinguished frame of formal solutions become a distinguished frame of analytic solutions $\Psi_1,...,\Psi_d$.  
+\end{itemize}
+\item Can we see there exists a distinguished basis in a purely analytic way? YES. The reason is the existence theorem gives for every $\alpha_j$ a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$.
+\item why Borel summations of $\tilde{\Psi_1},...,\tilde{\Psi_d}$ finds this solutions? because they are an analytic frame of Borel regular functions. 
 \item Maybe the correct place is the setting of Ecalle's formal integral. See \S 5.2.2.1 of Delabaere's {\em Divergent Series, Summability and Resurgence III}.
 \item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform. [Follows from Aaron's argument in Airy resurgence, even if Aaron works with more general ODEs]
 \item If the Borel-transformed equation has a subexponential solution $\hat{f}$ which is ``shifted holomorphic'' (we called this having a ``fractional power singularity'' in {\tt airy-resurgence}), then $\laplace \hat{f}$ satisfies the original equation, because there are no boundary terms.
@@ -280,7 +292,12 @@ where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree 
 \end{tikzcd}
 \end{center}
 
-where the arrow in red are a consequence of multisummability. In addition, we can distinguish on the right hand side of the diagram the formal solutions and on the left hand side the holomorphic ones. On the upper part of the diagram the functions in the $z$-plane while on the lower part the functions in the Borel plane $\zeta$-plane. 
+where the arrow in red are a consequence of multisummability. In addition, we can distinguish on the right hand side of the diagram the formal solutions and on the left hand side the holomorphic ones. On the upper part of the diagram the functions in the $z$-plane while on the lower part the functions in the Borel plane $\zeta$-plane.
+\item here is the way 
+there are many ways to see this porblem have a distinguished base of solutions, Poincar\'e see it formally in the $z$-plane, Ecalle figured it out how to see it formally in the Borel plane, our results shows how to see it analytically in  the Borel plane.
+\item  M.A.E.T. says you can start in formal $z$-plane but it is not really constructive (see Balser chap 14); going from formal $\zeta$ to analytic is constructive and it's essentially Borel-Laplace summation. Our method uses just Laplace transform. 
+\item How do we know we are picking the same frame? from properties of Laplace transform we get solution asymptotics to Poincar\'e frame. From uniqueness result we get a frame equivalent to Ecalle's frame. 
+\item multi-summability is a regularity result starting form the formal solution in the $z$-plane. Borel regularity is instead based on the analytic solution in the $z$-plane. The argument we gave about getting the same frame is what proves Borel regularity of $\Psi_j$.   
 \end{itemize}
 
 \item \textbf{Being a thimble integral}
