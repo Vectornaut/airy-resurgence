@@ -4,13 +4,18 @@
 \usepackage[hmargin=1.5in]{geometry}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{stmaryrd} %% needed for mapsto arrows in commutative diagrams
 \usepackage{bm} %% for putting series names in bold
 %%\usepackage{amsthm}
-%%\usepackage{graphicx}
-
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{xparse} 
+%\usepackage{eqnarray}
 %% colors
 \usepackage[svgnames]{xcolor}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
 
 %% editing
 \newcommand{\done}[1]{\textcolor{gray}{#1}}
@@ -22,6 +27,8 @@
 
 % convenience aliases
 \newcommand{\maps}{\colon}
+\newcommand{\acts}{\mathbin{\raisebox{\depth}{\rotatebox{-90}{$\circlearrowright$}}}}
+
 
 % symbology
 \newcommand{\Z}{\mathbb{Z}}
@@ -32,6 +39,14 @@
 \usepackage{rotating}
 \newcommand*{\isoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\sim\)}"
 ]}
+
+\newcommand{\series}[1]{\tilde{#1}}
+\newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
+\newcommand{\holoL}[1]{\mathcal{H}L^{#1}} %% may no longer be needed
+\newcommand{\blankbox}{{\fboxsep 0pt \colorbox{lightgray}{\phantom{$h$}}}}
+\newcommand{\laplacepde}{\mathcal{D}}
+\newcommand{\van}{\mathfrak{m}}
+\DeclareMathOperator{\Ai}{Ai}
 \usetikzlibrary{matrix,shapes,arrows,decorations.pathmorphing}
 \tikzset{commutative diagrams/arrow style=math font}
 \tikzset{commutative diagrams/.cd,
@@ -54,11 +69,27 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 %%\let\Re\relax
 %%\DeclareMathOperator{\Re}{Re}
-\DeclareMathOperator{\Ai}{Ai}
+
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\borel}{\mathcal{B}}
 \newcommand{\deriv}[3]{\partial^{#1}_{#2 \text{ from } #3}}
-\newcommand{\series}{\tilde}
+
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{problem}[definition]{Problem}
+\newtheorem{example}[definition]{Example}
+\newtheorem{fact}[definition]{Fact}
+\newtheorem{aside}[definition]{Aside}
+\newtheorem{prop}[definition]{Proposition}
+\newtheorem{question}[definition]{Question}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{lemma}[definition]{Lemma}
+%\newtheorem{conjecture}[definition]{Conjecture}
+\newtheorem{claim}[definition]{Claim}
+%\newtheorem{exercise}[definition]{Exercise}
+\newtheorem*{notation*}{Notation}
 
 \title{Resurgence of the Airy function \\ and other exponential integrals}
 \author{Veronica Fantini and Aaron Fenyes}
@@ -350,6 +381,109 @@ the inverse Laplace \textbf{[better to say Borel?]} transform is the $\tfrac{3}{
 \item Possible interpretation of the Stokes factors as intersections numbers in Morse--Novikov theory \textbf{[ask Maxim]}
 \end{itemize}
 \section{The Laplace and Borel transforms}
+\subsection{The geometry of the Laplace transform}
+
+Classically, the Laplace transform turns functions on the position domain into functions on the frequency domain. In the study of Borel summation and resurgence, it's useful to see the position domain as a {\em translation surface} $B$, and the frequency domain as one of its cotangent spaces. Roughly speaking, the Laplace transform lifts holomorphic functions on $B$ to holomorphic functions on $T^* B$.
+\subsubsection{Translation surfaces, briefly}
+
+A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\textbf{[Zorich, ``Flat Surfaces''?]}. A translation chart is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$. We'll require $B$ to be finite-type and $\lambda$ to have a pole at each puncture. This kind of translation surface has a ``cylindrical end'' \textbf{(figure)} at each puncture where $\lambda$ has order $-1$, and a ``$|2n|$-planar end'' \textbf{(figure)} at each puncture where $\lambda$ has order $n-1 < -1$~\textbf{[Gupta, ``Meromorphic quadratic differentials with half-plane structures,'' \S 2.5] (or cite Aaron's article, which will hopefully present the same background in the translation surface context)}.
+\subsubsection{Direction}\label{transl:dir}
+The translation structure gives $B$ a notion of direction as well as distance. Away from the zeros of $\lambda$, which we'll call {\em branch points}, we can talk about moving upward, rightward, or at any angle, just as we would on $\C$. At a branch point of cone angle $2\pi n$, we can also talk about moving upward, rightward, or at any angle in $\R/2\pi\Z$, but here there are $n$ directions that fit each description. To make this more concrete, note that around any point $b \in B$, there's a unique holomorphic function $\zeta_b$ that vanishes at $b$ and has $d\zeta_b = \lambda$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] there's a unique translation parameter $\zeta_b$ that vanishes at $b$.} This function is a translation chart when $b$ is an ordinary point, and an $n$-fold branched covering when $b$ is a branch point of cone angle $2\pi n$. In either case, $\zeta_b \in e^{i\theta} [0, \infty)$ is a ray or a set of rays leaving $b$ at angle $\theta \in \R/2\pi\Z$.
+
+Near each branch point $b$, let's fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1}{n} \omega_b^n$, where $2\pi n$ is the cone angle at $b$. This lets us label each direction at $b$ with an ``extended angle'' in $\R/2\pi n\Z$. Of course, there are $n$ different choices for $\omega_b$.
+\subsubsection{Frequency}\label{transl-freq}
+The translation structure also gives us an isomorphism $z \maps T^*B_b \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*B_b^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$. At an ordinary point, we can define $z$ simply as the map
+\begin{align*}
+z \maps T^*B_b & \to \C \\
+\lambda\big|_b & \mapsto 1.
+\end{align*}
+To get a definition that generalizes to branch points, though, it's worth taking a fancier point of view. Recall that $T^*B_b = \van_b / \van_b^2$, where $\van_b$ is the ideal of holomorphic functions that vanish at $b$. Observing that $(f + \van_b)^n$ lies within $f^n + \van_b^{n+1}$ for any $f \in \van_b$, we can identify $T^*B_b^{\otimes n}$ with $\van_b^n / \van_b^{n+1}$ for $n \ge 1$. When $b$ is an ordinary point, the function $\zeta_b$ defined in Section~\ref{transl:dir} represents a nonzero element of $\van_b / \van_b^2$: the cotangent vector $\lambda\big|_b$. In general, $\zeta_b$ represents a nonzero element of $\van_b^n / \van_b^{n+1}$, where $2\pi n$ is the cone angle at $b$. We define $z$ as the isomorphism
+\begin{align*}
+z \maps \van_b^n / \van_b^{n+1} & \to \C \\
+\zeta_b + \van^{n+1} & \mapsto 1.
+\end{align*}
+
+When $b$ is a branch point, the coordinate $\omega_b$ we chose in Section~\ref{transl:dir} gives us an isomorphism
+\begin{align*}
+w_b \maps T^*B_b & \to \C \\
+\omega_b + \van^2 & \mapsto 1
+\end{align*}
+that makes the diagram
+\begin{center}
+\begin{tikzcd}
+T^*B_b^{\otimes n} \arrow[r,"z"] & \C \\
+T^*B_b \arrow[u,"\blankbox^n"] \arrow[r,"w"'] & \C \arrow[u,"\blankbox^n"']
+\end{tikzcd}
+\end{center}
+commute.
+\subsubsection{Boundary}
+\textbf{Discuss the visual boundary, citing Lemma~3.1 of Dankwart's thesis \textit{On the large-scale geometry of flat surfaces} for the description of geodesics.}
+
+\subsubsection{The Laplace transform over an ordinary point}%%\label{laplace:ordinary}
+Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an extended angle $\theta \in \R$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] Pick a translation parameter $\zeta$.} The {\em Laplace transform} $\laplace_\zeta^\theta$ turns a local holomorphic function $f$ on $B$ into a local holomorphic function on $T^*B$. When $b \in B$ is an ordinary point, $\laplace_\zeta^\theta f$ is defined on $T^*B_b$ by the formula
+\begin{equation}\label{laplace:int}
+\laplace_\zeta^\theta f\big|_b = \int_{\Gamma_b^\theta} e^{-z\zeta} f\,d\zeta,
+\end{equation}
+where $z$ is the frequency function defined in Section~\ref{transl:freq} and $\Gamma_b^\theta$ is the ray that leaves $b$ at angle $\theta$.
+
+To make sense of this formula, we ask for the following conditions.
+\begin{itemize}
+\item The base point $b$ is in the domain of $\zeta$. Once we have this, we can continue $\zeta$ along the whole ray $\Gamma_b^\theta$.
+\item The ray $\Gamma_b^\theta$ avoids the branch points after leaving $b$.
+\item The integral converges. We guarantee this by asking for a pair of simpler conditions.
+\begin{itemize}
+\item With respect to the flat metric, $f$ grows subexponentially along $\Gamma_b^\theta$~\textbf{[define]}, and is locally integrable throughout.
+\item The value of $z$ is in the half-plane $H_{-\theta}$ centered around the ray $e^{-i\theta} [0, \infty)$.
+\end{itemize}
+\end{itemize}
+\subsubsection{The Laplace transform over a branch point}
+When $b$ is a branch point, we can still use formula~\ref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T^*B_b$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T^*B_b^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\ref{laplace:int}. The half-plane $z \in H_{-\theta}$ in $T^*B_b^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T^*B_b$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
+
+\subsection{The Laplace transform: analytic version}
+\subsubsection{Regularity and decay properties}\label{reg-decay}
+%Let $\zeta$ be the standard coordinate on $\C$, and let $z \maps T^*\C \to \C$ be the fiberwise-linear map $d\zeta \mapsto 1$ (see ``The Geometry of the Laplace Transform'' in {\tt draft2}). The Laplace transform in $\zeta$ turns a function $\varphi$ on $\C$ into a function $\laplace_\zeta \varphi$ on $T^*\C$, defined on the cotangent space of $\zeta = \alpha$ by the integral
+%\[ \laplace_\zeta \varphi \big|_{\zeta = \alpha} = \int_{\Gamma_{\zeta, \alpha}} e^{-z \zeta}\,\varphi\;d\zeta, \]
+where $\Gamma_{\zeta, \alpha}$ is the rightward ray starting at $\zeta = \alpha$ (compare {\tt draft2}). \textcolor{magenta}{We'll use the shorthand $\laplace_{\zeta, \alpha} f := \laplace_\zeta f \big|_{\zeta = \alpha}$ throughout this document [but maybe we should get rid of it].}
+
+Let's say a function $f$ is in $O_{\zeta, \alpha \leftarrow}(g)$ or $O_{\zeta, \alpha \rightarrow}(g)$, respectively, if $|f| \lesssim g$ on some neighborhood of the starting point or infinite end of $\Gamma_{\zeta, \alpha}$. A function is {\em subexponential} along $\Gamma_{\zeta, \alpha}$ if it's in $O_{\zeta, \alpha \rightarrow}(e^{c\zeta})$ for all $c > 0$. Let $\mathcal{E}_{\zeta, \alpha}$ be the space of functions which are subexponential on $\Gamma_{\zeta, \alpha}$, integrable at the starting point, and locally integrable throughout. If $f$ is in $\mathcal{E}_{\zeta, \alpha}$, then $\laplace_{\zeta, \alpha} f$ is well-defined and holomorphic for $\Re(z) > 0$ on the part of $T^*\C$ that lies over $\Gamma_{\zeta, \alpha}$~\cite[\S 5.6]{diverg-resurg-i}.
+
+The asymptotics of $f$ at the starting point of $\Gamma_{\zeta, \alpha}$ control the asymptotics of $\laplace_{\zeta, \alpha} f$ at the infinite end of $\Gamma_{z, 0}$. Once we see how this works for $\alpha = 0$, Section~\ref{translation} will do the rest. Let $F = \laplace_{\zeta, 0} f$. Equation~1.8 of \ref{laplace-tfm} shows\footnote{The argument cited still works in our generality. For holomorphic $f$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textcolor{magenta}{(Sternin \& Shatalov)}.} that
+\[ f \in O_{\zeta, 0 \leftarrow}(1) \quad\Longrightarrow\quad F \in O_{z, 0 \rightarrow}\left(\frac{1}{z}\right). \]
+More generally, for $\tau > -1$ \textcolor{magenta}{[prove or cite]},
+\[ f \in O_{\zeta, 0 \leftarrow}(\zeta^\tau) \quad\Longrightarrow\quad F \in O_{z, 0 \rightarrow}\left(\frac{1}{z^{1 + \tau}}\right). \]
+Exact power law asymptotics relate similarly \textcolor{magenta}{[prove or cite]}:
+\[ f \sim \zeta^\tau \text{ at the start of } \Gamma_{\zeta, 0} \quad\Longrightarrow\quad F \sim \frac{\Gamma(1+\tau)}{z^{1+\tau}} \text{ at the end of } \Gamma_{z, 0}. \]
+\textcolor{magenta}{[The big-$O$ asymptotics dictionary is interesting, but we might not need it. Consider dropping.]}
+\subsubsection{Action on integral operators}\label{L-int-op}
+When $\varphi \in \mathcal{E}_\zeta$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
+\begin{equation}%%\label{id:L-mult}
+\laplace_\zeta (\zeta^n \varphi) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_\zeta \varphi.
+\end{equation}
+for all integers $n \ge 0$. You can also use a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, to show that $\fracderiv{-\lambda}{\zeta}{a} \varphi \in \mathcal{E}_\zeta$ and
+\[ \laplace_{\zeta, a}\,\fracderiv{-\lambda}{\zeta}{a} \varphi = z^{-\lambda} \laplace_{\zeta, a} \varphi \]
+for all $\lambda \in (0, \infty)$.
+\subsubsection{Change of translation chart}\label{translation}
+Define a new coordinate $\zeta_\alpha$ on $\C$ so that $\zeta = \alpha + \zeta_\alpha$. From the calculation
+\begin{align*}
+\laplace_{\zeta, a} \varphi & = \int_{\Gamma_{\zeta, \alpha}} e^{-z \zeta}\,\varphi\;d\zeta \\
+& = \int_{\Gamma_{\zeta_\alpha, 0}} e^{-z(\alpha + \zeta_\alpha)}\,\varphi\;d\zeta_\alpha \\
+& = e^{-\alpha z} \int_{\Gamma_{\zeta_\alpha, 0}} e^{-z\zeta_\alpha}\,\varphi\;d\zeta_\alpha \\
+& = e^{-\alpha z} \laplace_{\zeta_\alpha, 0} \varphi,
+\end{align*}
+we learn that
+\[ \laplace_{\zeta_\alpha, 0} \varphi = e^{\alpha z} \laplace_{\zeta, \alpha} \varphi. \]
+\subsubsection{Rescaling of translation structure}
+Let's rescale the translation structure of $\C$, expanding displacements by a factor of $\mu \in (0, \infty)$. The coordinate $\xi = \mu\zeta$ is a chart for the new translation structure. The corresponding frequency coordinate $x \maps T^*\C \to \C$ is given by $d\xi \mapsto 1$, so $x = \mu^{-1} z$. From the calculation
+\begin{align*}
+\laplace_{\xi, 0} \varphi & = \int_{\Gamma_{\xi, 0}} e^{-x\xi}\,\varphi\;d\xi \\
+& = \int_{\Gamma_{\zeta, 0}} e^{-z \zeta}\,\varphi\;\mu\,d\zeta \\
+& = \mu\,\laplace_{\zeta, 0} \varphi
+\end{align*}
+we learn that
+\[ \laplace_{\xi, 0} \varphi = \mu\,\laplace_{\zeta, 0} \varphi. \]
+Note that $\laplace_{\xi, 0}$ is defined in the new translation structure on $\C$, while $\laplace_{\zeta, 0}$ is defined in the old translation structure. We can still compare them, because they both turn complex-valued functions on $\C$ into holomorphic functions on $T^*\C$.
+
+\color{gray}
 \subsection{The Laplace transform}
 \begin{itemize}
 \item Action on differential equations.
@@ -358,13 +492,198 @@ the inverse Laplace \textbf{[better to say Borel?]} transform is the $\tfrac{3}{
 \end{itemize}
 \item Global picture?
 \end{itemize}
+\color{black}
+
+
 \subsection{The Borel transform}
+\color{gray}
 \begin{itemize}
 \item Action on differential equations.
 \begin{itemize}
 \item No inhomogeneous terms! How is this consistent with the Laplace transform's action? Is there always an inhomogeneous solution with subexponential asymptotics?
 \end{itemize}
 \end{itemize}
+\color{black}
+
+The Borel transform $\mathcal{B}$ is a linear map from formal power seires in the time domain $\C_z$ to the space domain $\C_{\zeta}$ such that  \begin{align*}\mathcal{B}(z^{-n-1})&\defeq\tfrac{\zeta^n}{n!} \qquad, \text{ if } n\geq 0 \\
+\mathcal{B}(1)&\defeq\delta 
+\end{align*} 
+
+where $\delta$ is the element $(1,0)\in\C\times\C[\![\zeta]\!]$\footnote{Sometimes, in physics it is common to adopt a differnt convention, i.e. $\mathcal{B}(z^{-n})\defeq \tfrac{\zeta^n}{n!}$ (see\cite{MDiablerets}\cite{SGM}, for example). However, we find natural for our purposes the mathematical convention, as the Laplace transform is the inverse of $\mathcal{B}$ under suitable growth conditions. }, and by linearity   
+
+\begin{align*}
+\mathcal{B}\colon \C[\![z^{-1}]\!] & \to \C\delta\oplus\C[\![\zeta]\!] \\
+\sum_{n\geq 0}a_n z^{-n} & \to  a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}
+\end{align*}
+
+Notice that we are at the level of formal series, so there are no convergence assumptions. However, there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic fucntions at the origin in $\C_{\zeta}$. These formal series are the so called Gevrey-$1$ series: \[\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C[\![z^{-1}]\!]_1\] is Gevrey-$1$ if there exists $A>0$ such that $|a_n|\leq A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis Gevrey-$k$ series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. The Borel transform can be generalized in order to obatin germs of holomorphic function for higher Gevrey series. }  
+
+\begin{notation*}
+We want to distinghuish between formal series and holomorphic functions, as well as between the Borel plane (time domain) and the $z$-plane (spatial domain). Therefore we adopt the following notation:
+\begin{itemize}
+\item $\Phi(z)$: upper-case letters are holomorphic functions in the $z$-plane;
+\item $\tilde{\Phi}(z)$: \textit{tilde} stands for formal series, so an upper-case letter with \textit{tilde} is a formal series in the $z$-plane;
+\item $\phi(\zeta)$: lower-case letter are holomorphic functions in the Borel plane. We follow the convention for Laplace transform of holomorphic functions, namely $\mathcal{L}(\phi(\zeta)((z)=\Phi(z)$. 
+\item $\tilde{\phi}(\zeta)$: lower-case letter with \textit{tilde} are formal series in the Borel plane. As we will see, the Borel transform of $\tilde{\Phi}(z)$ is $\mathcal{B}(\tilde{\Phi})(\zeta)=:\tilde{\phi}(\zeta)$; 
+\item $\hat{\phi}(\zeta)$: lower-case letters with \textit{hat} are the sum of the formal series $\tilde{\phi}(\zeta)$, when it exists.  
+\end{itemize}
+\end{notation*}  
+
+\begin{lemma}
+Let $\tilde{\Phi}(z)\in\C[\![z^{-1}]\!]$. Then, $\tilde{\Phi}\in\C[\![z^{-1}]\!]_1$ is Gevrey-1 if and only if $\mathcal{B}(\tilde{\Phi})\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
+\end{lemma}
+In particular, we deduce from the lemma that the Borel transform is an isomorphism between Gevrey-$1$ series and $\C\delta\oplus\C\lbrace\zeta\rbrace$. 
+
+The inverse of $\mathcal{B}$ is what we call a \textbf{formal Laplace transform}.
+
+\textcolor{magenta}{[add definition of convolution product and $\mathcal{B}$ being an algebra isomorphisms]}
+
+
+\subsubsection{Generalization of the Borel transform}
+The definition of $\mathcal{B}$ can be easily extended to fractional power of $z$, replacing the factorial with the Gamma function: 
+\begin{align*}
+\mathcal{B}(z^{-\alpha})\defeq \frac{\zeta^{\alpha-1}}{\Gamma(\alpha)} & \qquad \text{ if } \alpha\in\R\setminus\Z_{\leq 0}
+\end{align*}
+and then extending by linearity.
+
+If $\alpha\in\mathbb{R}\setminus\Z$ is not an integer, then $\mathcal{B}$ is an isomorphisms from Gevrey-$1$ formal power series $\C[\![z^{-\alpha}]\!]_1$ to the germs of holomorphic functions $\C{\zeta^{\alpha-1}}$, with inverse given by the formal Laplace transform. Indeed, let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C[\![z^{-\alpha}]\!]_1$ with $|a_n|\leq A^n n!$ and $A>0$ then  
+\begin{align*}
+\mathcal{B}(z^{-\alpha}\tilde{\Phi})(\zeta)&=\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)=a_0\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}+\sum_{n\geq 0}a_{n+1}\frac{\zeta^{n+\alpha}}{\Gamma(1+n+\alpha)}
+\end{align*}  
+
+and \[\left|\frac{a_{n+1}}{\Gamma(1+n+\alpha)}\right|\leq A^{n+1}\frac{\Gamma(n+2)}{|\Gamma(n+1+\alpha)|} \]
+\textcolor{magenta}{Under which conditions it doesn't grow faster than factorial?}
+
+
+
+\subsubsection{Properties of the Borel transform}
+We now recall some properties of the Borel transform: let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}$ and denote by $\tilde{\phi}(\zeta)\defeq\mathcal{B}(\tilde{\Phi}(z))$
+
+\textcolor{orange}{[check notation]}
+
+\begin{itemize}
+\item[(i)] \emph{[fractional derivative]} if $\alpha\in\R_{\geq 0}$, $\mathcal{B}\left(z^\alpha \tilde{\Phi}(z)\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}(\zeta)$
+\item[(ii)] \emph{[fractional integral]} if $\alpha\in\R_{<0}\setminus\Z_{\geq 0}$, $\mathcal{B}\left(z^\alpha \tilde{\Phi}(z)\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}(\zeta)$
+\item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(z^n\tilde{\Phi}(z))=\partial_\zeta^n\tilde{\phi}(\zeta)$ 
+\item[(iv)] $\mathcal{B}\left(\partial_z^{n} \tilde{\Phi}(z)\right)=(-\zeta)^n\tilde{\phi}(\zeta)$, for every $n\geq 0$
+\item[(v)] $\mathcal{B}(\tilde{\Phi}(z-c))=e^{-c\zeta}\tilde{\phi}(\zeta)$
+\item[(vi)] if $\tilde{\Psi}(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(\tilde{\Phi}(z)\tilde{\Psi}(z))=\int_0^{\zeta}d\zeta' \tilde{\phi}(\zeta-\zeta')\tilde{\psi}(\zeta')=:\tilde{\phi}\ast \tilde{\psi}$, where $\tilde{\psi}(\zeta)=\mathcal{B}(\tilde{\Psi}(z))$.
+\end{itemize} 
+
+
+\begin{lemma}\label{lem:frac-deriv-Borel}
+For any non-integer $\mu \in (0, \infty)$ and any integer $k \ge 0$,
+\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] =  \borel \left(z^\mu z^{-(k+1)}\right)(\zeta). \]
+\end{lemma}
+\begin{proof}
+We'll show that for any $\alpha \in (0, 1)$ and any integer $n \ge 0$, the claim holds with $\mu = n + \alpha$. First, evaluate
+\begin{align*}
+\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
+& = \frac{1}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (\zeta-\zeta t)^{-\alpha} (\zeta t)^k\,\zeta\,dt \\
+& = \frac{\zeta^{k-(\alpha-1)}}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (1-t)^{-\alpha} t^k\,dt \\
+& = \frac{\zeta^{k-(\alpha-1)}}{\Gamma\big(k-(\alpha-1)+1\big)}
+\end{align*}
+by reducing the integral to Euler's beta function \textbf{[DLMF 5.12.1]}. This establishes that
+\begin{equation}\label{frac-diff-laplace}
+\left(\tfrac{\partial}{\partial \zeta}\right)^{n+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] = \frac{\zeta^{k-(n+\alpha)}}{\Gamma\big(k-(n+\alpha)+1\big)}
+\end{equation}
+for $n = -1$. If \eqref{frac-diff-laplace} holds for $n = m$, it also holds for $n = m+1$, because
+\begin{align*}
+\tfrac{\partial}{\partial \zeta} \left(\tfrac{\partial}{\partial \zeta}\right)^{m+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] & = \tfrac{\partial}{\partial \zeta} \left( \frac{\zeta^{k-(m+\alpha)}}{\big(k-(m+\alpha)\big)\,\Gamma\big(k-(m+\alpha)\big)} \right) \\
+& = \frac{\zeta^{k-(m+1+\alpha)}}{\Gamma\big(k-(m+\alpha)\big)}
+\end{align*}
+Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired result quickly follows. The condition $\alpha \in (0, 1)$ saves us from the trouble we'd run into if $k-(m+\alpha)$ were in $\Z_{\le 0}$. This is how we avoid the initial value corrections that appear in ordinary derivatives of Borel transforms.
+\end{proof}
+
+
+
+
+\begin{proof} 
+
+We are going to prove properties (i)--(vi). 
+
+(i) follows from Lemma \ref{lem:frac-deriv-Borel}. 
+
+(ii) Notice that for $\alpha\in\R\setminus\Z_{\geq 0}$ the fractional integral $\partial_\zeta^{\alpha}\zeta^{k}=\zeta^{k-\alpha}\tfrac{k!}{\Gamma(k-\alpha+1)}$, hence \[\borel (z^\alpha \tilde{\Phi}(z))=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{k!}\tfrac{k!}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k \tfrac{1}{k!}\partial_\zeta^{\alpha}\zeta^k=\partial_\zeta^\alpha\tilde{\phi}(\zeta).\]
+
+(iii) $z^n\tilde{\Phi}(z)=\sum_{k\geq 0}a_kz^{-(k-n)-1} $ and by assumption $k-n\geq 0$, hence by defintion \[\borel (z^n \tilde{\Phi}(z))=\sum_{k\geq n} a_k\tfrac{\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\tfrac{k!\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\partial_\zeta^n\zeta^k=\partial_\zeta^n\tilde{\phi}(\zeta).\] 
+
+(vi) $\partial_z^n \tilde{\Phi}(z)=\sum_{k\geq 0}a_k(-1)^{n}z^{-k-n-1}\tfrac{\Gamma(k+n+1)}{k!}$, hence \[\borel (z^\alpha \tilde{\Phi}(z))=\sum_{k\geq 0}a_k(-1)^{n}\tfrac{\zeta^{k+n}}{\Gamma(k+n+1)}\tfrac{\Gamma(k+n+1)}{k!}=(-\zeta)^{n}\tilde{\phi}(\zeta).\]
+
+(v) see Lemma 5.10 \cite{MS16}. 
+
+(vi) see Definition 5.12 and Lemma 5.14 \cite{MS16}. 
+\end{proof}
+
+\begin{remark}
+We notice that properties (i) and (ii) are special cases of property (vi), indeed we can use the convolution product 
+\begin{align*}
+\borel (z^\alpha \tilde{\Phi}(z))&=\borel (z^\alpha)\ast \tilde{\phi}(\zeta)\\
+&=\frac{\zeta^{-\alpha-1}}{\Gamma(-\alpha)}\ast\tilde{\phi}(\zeta)\\
+&=\int_0^\zeta \frac{(\zeta')^{-\alpha-1}}{\Gamma(-\alpha)}\sum_{k\geq 0}a_k\frac{(\zeta-\zeta')^k}{k!}d\zeta'\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\int_0^1(t\zeta)^{-\alpha-1}(\zeta-t\zeta)^k\zeta dt\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\int_0^1 t^{-\alpha-1}(1-t)^k dt\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\frac{\Gamma(k+1)\Gamma(-\alpha)}{\Gamma(k-\alpha+1)}\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\partial_\zeta^{\alpha} \zeta^k \\
+&=\partial_\zeta^\alpha\tilde{\phi}(\zeta)
+\end{align*}
+\end{remark}
+
+\subsection{Differential equation}
+\textcolor{orange}{Should we keep this section?}
+If $\zeta$ is a translation chart for $B$, the functions $\zeta, z$ are Darboux coordinates on the part of $T^*B$ that lies over the domain of $\zeta$. In these coordinates, we can write down the partial differential operator
+\begin{equation}%%\label{laplace:op}
+\laplacepde_\zeta = \left(\frac{\partial}{\partial z} - \zeta\right) \frac{\partial}{\partial \zeta}.
+\end{equation}
+The multiplication by $\zeta$ is the only part of $\laplacepde_\zeta$ that depends on which $\zeta$ we choose.
+
+Now we can pose a boundary value problem for each angle $\theta \in \R/2\pi\Z$: find a local holomorphic function $F$ on $T^*B$ that satisfies the equation $\laplacepde_\zeta F = 0$ and approaches zero when continued at fixed $z$ along rays of angle $\theta$.
+%\end{problem}
+The Laplace transform $\laplace_\zeta^\theta$ turns local holomorphic functions on $B$ into solutions of this problem. \textcolor{orange}{In fact, it produces all the solutions \textbf{[check argument]}.[Veronica: I don't understand--why it produces all the solutions?]}
+
+\subsubsection{Order shifting}\label{shifting}
+\textcolor{orange}{[why the name order shifting?]}
+Consider holomorphic functions on a simply connected open set that touches but doesn't contain $\zeta = 0$. A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as \textcolor{magenta}{[rephrase in terms of $\holoL{\infty, \rho}$]}
+\begin{equation}\label{eqn:slight-defn}
+\zeta^{\alpha_1} f_1 + \ldots + \zeta^{\alpha_r} f_r + g
+\end{equation}
+where $f_1, \ldots, f_r$ are regular, $\alpha_1, \ldots, \alpha_r \in \R \smallsetminus \Z$, and $g, g', g'', \ldots$ go to zero at $\zeta = 0$.
+
+Locally integrable slight functions play a special role in Laplace transform methods for linear differential equations. This is because differential equations in the frequency domain arise most naturally from integral equations in the spatial domain, but we'd like to work with differential equations in the spatial domain too. In the space of locally integrable slight functions, differential and integral equations enjoy their simplest equivalence.
+\begin{prop}\label{prop:shifting}
+When $\psi$ is slight and locally integrable at $\zeta = 0$,
+\[ \left[ \sum_{k = 0}^n \big(\tfrac{\partial}{\partial \zeta}\big)^k \circ h_k + \sum_{k = 1}^m \fracderiv{-k}{\zeta}{0} \circ h_{-k} \right] \psi = 0, \]
+if and only if
+\[ \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k + \sum_{k = 0}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi = 0, \]
+where $h_n, \ldots, h_{-m}$ are regular functions.
+\end{prop}
+To prove this result, we'll need a little background.
+
+Each slight function has a unique {\em normal form}: an expression of the form (\ref{eqn:slight-defn}) where $\alpha_1, \ldots, \alpha_r$ are distinct modulo $\Z$ and $f_1, \ldots, f_r$ are non-vanishing at $\zeta = 0$. The {\em order} of a slight function is the smallest power $\alpha_k$ in its normal form. If there are no $\zeta^\alpha f$ terms, we say the order is $\infty$. A slight function vanishes at $\zeta = 0$ if and only if its order is positive, and it's locally integrable at $\zeta = 0$ if and only if its order is greater than $-1$.
+
+Multiplication by a regular function and differentiation with respect to $\zeta$ both preserve the space of slight functions. Integration from $\zeta = 0$ preserves the space of locally integrable slight functions. Thus, in general, integro-differential operators with regular coefficients send locally integrable slight functions to slight functions. Each basic operation has a simple effect on a slight function's order. Multiplication by $\zeta^n f$, where $f$ is regular and non-vanishing at $\zeta = 0$, adds $n$ to the order. Differentiation and integration add $-1$ and $1$, respectively.
+\begin{proof}[Proof of Proposition~\ref{prop:shifting}]
+The reverse implication holds without any special condition on $\psi$, because $\tfrac{\partial}{\partial \zeta}\;\fracderiv{-1}{\zeta}{0}$ acts as the identity on all differentiable functions.
+
+To prove the forward implication, rewrite the first equation in the statement as
+\begin{equation}\label{eqn:diff-int-split}
+\tfrac{\partial}{\partial \zeta} \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k \right] \psi = -\left[ h_0 + \sum_{k = 1}^m \fracderiv{-k}{\zeta}{0} \circ h_{-k} \right] \psi.
+\end{equation}
+The function
+\[ \phi = \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k \right] \psi \]
+is slight. Looking at the right-hand side of equation~\ref{eqn:diff-int-split}, we can see that $\phi'$ is slight and locally integrable, so its order is greater than $-1$. Hence, $\phi$ has positive order, which means it vanishes at $\zeta = 0$.
+
+Integrating both sides of equation~\ref{eqn:diff-int-split}, we get
+\[ \fracderiv{-1}{\zeta}{0}\;\tfrac{\partial}{\partial \zeta}\;\phi = -\left[ \fracderiv{-1}{\zeta}{0} \circ h_0 + \sum_{k = 1}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi. \]
+Since $\fracderiv{-1}{\zeta}{0}\;\tfrac{\partial}{\partial \zeta}$ acts as the identity on functions that vanish at $\zeta = 0$, this simplifies to
+\[ \phi = -\left[ \sum_{k = 0}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi, \]
+which rearranges to the second equation in the statement.
+\end{proof}
+
+\section{Proof of main results}
+\subsection{Borel regularity for ODEs}
+\subsection{Borel regularity for thimble integrals}
+
 \section{Third-order exponential integrals}
 \begin{itemize}
 \item Reduce to
@@ -534,6 +853,144 @@ where $Q_k$ has degree $n-k$. \textcolor{gray}{has to be done}
 \end{itemize}
 \end{enumerate}
 \end{enumerate}
+
+\color{black}
+
+\appendix
+
+\section{Integro-differential equations}
+\subsection{Existence of solutions}
+\subsubsection{Algebraic integral operators}
+Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. For any $\sigma \in \R$, multiplying by $\zeta^{-\sigma}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\holoL{\infty, \sigma}(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma} = \|\zeta^\sigma f\|_\infty$, so that
+\begin{align*}
+\holoL{\infty}(\Omega) & \to \holoL{\infty, \sigma}(\Omega) \\
+\phi & \mapsto \zeta^{-\sigma} \phi
+\end{align*}
+is an isometry. More generally,
+\begin{align*}
+\holoL{\infty, \rho}(\Omega) & \to \holoL{\infty, \rho+\delta}(\Omega) \\
+f & \mapsto \zeta^{-\delta} f
+\end{align*}
+is an isometry for all $\rho \in \R$ and $\delta \in [0, \infty)$. This reduces to the previous statement when $\rho = 0$. For each $\delta \in [0, \infty)$, the functions in $\holoL{\infty, \rho}(\Omega)$ belong to $\holoL{\infty, \rho+\delta}(\Omega)$ too, and the inclusion map $\holoL{\infty, \rho}(\Omega) \hookrightarrow \holoL{\infty, \rho+\delta}(\Omega)$ has norm $\|\zeta^\delta\|_\infty$. Conceptually, $\|\zeta^\delta\|_\infty$ measures of the size of $\Omega$, so let's write it as $M^\delta$ with $M = \|\zeta\|_\infty$.
+
+Since $\holoL{\infty}(\Omega)$ is a Banach algebra, the function space $\holoL{\infty, \infty}(\Omega) := \bigcup_{\sigma \in \R} \holoL{\infty, \sigma}(\Omega)$ is a graded algebra, with a different norm on each grade. For each $\rho, \delta \in \R$, multiplication by a function $m \in \holoL{\infty, \delta}(\Omega)$ gives a map $\holoL{\infty, \rho}(\Omega) \to \holoL{\infty, \rho+\delta}(\Omega)$ with norm $\|m\|_{\infty, \delta}$.
+
+We'll study integral operators $\mathcal{G} \maps \holoL{\infty, \rho}(\Omega) \to \holoL{\infty, \sigma}(\Omega)$ of the form
+\[ [\mathcal{G}f](a) = \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta, \]
+where the kernel $g$ is an algebraic function over $\C^2$ which can be singular on $\Delta$, the diagonal.\footnote{Thanks to Alex Takeda for suggesting this.} To avoid ambiguity, we fix a branch of $g$ to use at the start of the integration path. The domain of $g$ is a covering of $\C^2$ which can be branched over $\Delta$. Continuing $g$ around $\Delta$ changes its phase by a root of unity, leaving its absolute value the same \textbf{[check]}. That makes $|g|$ a well-defined function on $\C^2 \smallsetminus \Delta$, which we can use to bound $\|\mathcal{G}\|$.
+
+For each $a \in \C$, the expression $|g(a, \cdot)\,d\zeta|$ defines a {\em density} on $\Omega \smallsetminus \{a\}$---a norm on the tangent bundle which is compatible with the conformal structure. The square of a density is a Riemannian metric. Let $\ell^{\sigma, \rho}_{g, \Omega}(a)$ be the distance from $\zeta = 0$ to $a$ with respect to the density $|\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\rho}\,d\zeta|$ on $\Omega \smallsetminus \{a\}$. The bound
+\begin{align*}
+\big|[\zeta^\sigma \mathcal{G}f](a)\big| & \le \left| \zeta(a)^\sigma \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta \right| \\
+& \le \int_{\zeta = 0}^{a} |\zeta^\sigma f|\,|\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\rho}\,d\zeta| \\
+& \le \|f\|_{\infty, \sigma} \int_{\zeta = 0}^{a} |\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\rho}\,d\zeta|
+\end{align*}
+holds for any integration path. Taking the infimum over all paths, we see that
+\[ \big|[\mathcal{G}f](a)\big| \le \ell^{\sigma, \rho}_{g, \Omega}(a)\,\|f\|_\infty. \]
+so $\|\mathcal{G}\| \le \sup_{a \in \Omega} \ell^{\sigma, \rho}_{g, \Omega}(a)$. Crucially, we can always make $\|\mathcal{G}\|$ a contraction by restricting $\Omega$.
+\subsubsection{The example of fractional integrals}
+Setting $g(a, a') = (\zeta(a) - \zeta(a'))^{-\lambda-1}$ with $\lambda \in (-\infty, 0)$, we get the fractional integral $\partial^\lambda_{\zeta \text{ from } 0}$. The shortest path from $\zeta = 0$ to $a$ with respect to $|\zeta(a)^{\rho+\lambda}\,g(a, \cdot)\,\zeta^{-\rho}\,d\zeta|$ is the same as the shortest path with respect to $|d\zeta|$ \textcolor{magenta}{[check]}. It follows that
+\begin{align*}
+\ell^{\sigma, \rho}_{g, \Omega}(a) & = \int_0^{|\zeta(a)|} |\zeta(a)|^{\rho+\lambda}\,(|\zeta(a)| - r)^{-\lambda-1}\,r^{-\rho}\,dr \\
+& = |\zeta(a)|^{\rho+\lambda} \int_0^1 \,(|\zeta(a)| - |\zeta(a)| t)^{-\lambda-1}\,(|\zeta(a)| t)^{-\rho}\,|\zeta(a)|\,dt \\
+& = |\zeta(a)|^{\rho+\lambda-\lambda-1-\rho+1} \int_0^1 \,(1-t)^{-\lambda-1}\,t^{-\rho}\,dt \\
+& = \int_0^1 \,(1-t)^{-\lambda-1}\,t^{-\rho}\,dt \\
+& = B(-\lambda,\,1-\rho).
+\end{align*}
+The beta function $B$ can be written more explicitly as
+\[ B(-\lambda,\,1-\rho) = \frac{\Gamma(-\lambda)\,\Gamma(1-\rho)}{\Gamma(1-\lambda-\rho)}. \]
+Now we can see that for each $\lambda \in (-\infty, 0)$ and $\rho \in \R$, the fractional integral $\partial^\lambda_{\zeta \text{ from } 0}$ maps $\holoL{\infty, \rho}(\Omega)$ into $\holoL{\infty, \rho+\lambda}(\Omega)$, with norm $\|\partial^\lambda_{\zeta \text{ from } 0}\| \le B(-\lambda,\,1-\rho)$.
+\subsubsection{Fractional integral equations near a regular singular point}
+\textcolor{SeaGreen}{\textbf{Angeliki:} Maybe Kato--Rellich perturbation theory can give existence immediately. It might not give uniqueness, though.}
+
+Consider an integral operator $\mathcal{J}$ of the form
+\[ p + \partial^{-1}_{\zeta \text{ from } 0} \circ q + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda, \]
+where:
+\begin{itemize}
+\item $p$ is a function in $\holoL{\infty, -1}(\Omega)$ that extends holomorphically over $\zeta = 0$, and its derivative at $\zeta = 0$ is non-zero.
+\item $q$ is a function in $\holoL{\infty}(\Omega)$ that extends holomorphically over $\zeta = 0$.
+\item $r_\lambda$ are functions in $\holoL{\infty}(\Omega)$.
+\item $\Lambda$ is a countable subset of $(-\infty, -1)$ whose supremum is less than $-1$.
+\end{itemize}
+Our demand that $p$ and $q$ have convergent power series at $\zeta = 0$ can probably be relaxed; having convergent Novikov series, for example, should be enough. We could also probably replace $\partial^{-1}_{\zeta \text{ from } 0}$ with $\partial^{-1+\delta}_{\zeta \text{ from } 0} \circ \zeta^\delta$ for some $\delta \in [0, 1)$, or adjust the $\partial^\lambda_{\zeta \text{ from } 0}$ similarly.
+
+We want to solve the equation $\mathcal{J}f = 0$. Let's look for a solution of the form $f = \zeta^{\tau-1} + \tilde{f}$ with $\tau \in (0, \infty)$ and $\tilde{f} \in \holoL{\infty, 1-\tau-\epsilon}(\Omega)$ for some $\epsilon \in (0, 1]$. When $\epsilon$ is small enough that $\Lambda \subset (-\infty, -1 - \epsilon]$, we'll see that we can always find such a solution, as long as we're willing to shrink $\Omega$. In fact, there's exactly one such solution. \textcolor{magenta}{[Add convergence conditions for $\partial^\lambda$ terms.]}
+
+Let $p'_0$ and $q_0$ be the values of $\tfrac{\partial}{\partial \zeta} p$ and $q$, respectively, at $\zeta = 0$. We're assuming that $p$ and $q$ extend holomorphically over $\zeta = 0$, and the additional assumption that $p \in \holoL{\infty, -1}(\Omega)$ implies that $p$ has a first-order zero at $\zeta = 0$.
+
+Since $p$ and $q$ extend holomorphically over $\zeta = 0$, and $p$ vanishes at $\zeta = 0$, we can write
+\begin{alignat*}{2}
+p & = p'_0 \zeta &\;+\;& \tilde{p} \\
+q & = q_0 &\;+\;& \tilde{q}
+\end{alignat*}
+with $\tilde{p} \in \holoL{\infty, -2}(\Omega)$ and $\tilde{q} \in \holoL{\infty, -1}(\Omega)$. Then we have
+\[ \mathcal{J} = p'_0\zeta + q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \]
+with
+\[ \tilde{\mathcal{J}} = \tilde{p} + \partial^{-1}_{\zeta \text{ from } 0} \circ \tilde{q} + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda \]
+For any $\tau \in (0, \infty)$,
+\[ \mathcal{J} \zeta^{\tau-1} = (p'_0 + q_0/\tau)\,\zeta^\tau + \tilde{\mathcal{J}} \zeta^{\tau-1}. \]
+Setting $\tau = -q_0 / p'_0$ makes the first term vanish, leaving
+\[ \mathcal{J} \zeta^{\tau-1} = \tilde{\mathcal{J}} \zeta^{\tau-1}. \]
+Then the equation $\mathcal{J}f = 0$ becomes
+\begin{align}
+0 & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \mathcal{J}\tilde{f} \nonumber \\
+0 & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \left[ p'_0\zeta + q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \right]\tilde{f} \nonumber \\
+-p'_0\zeta\tilde{f} & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \left[ q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \right]\tilde{f} \nonumber \\
+\tilde{f} & = \left[ -\tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\,\zeta^{\tau-1} + \left[ \tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} - \tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\tilde{f}. \label{fixed-pt}
+\end{align}
+
+\color{Indigo}
+\begin{center}
+\begin{tikzcd}[column sep=25mm, row sep=2mm]
+& & \holoL{\infty, \rho-1}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "\tilde{p}", "\|\tilde{p}\|_{\infty, -2}"'] & \holoL{\infty, \rho-2}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty"'] \arrow[rd, hook, "\|\zeta\|_\infty^{1-\epsilon}"'] \\
+& & \holoL{\infty, \rho-1-\epsilon}(\Omega) \\
+& & & \holoL{\infty, \rho-1}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "\tilde{q}", "\|\tilde{q}\|_{\infty, -1}"'] & \holoL{\infty, \rho-1}(\Omega) \arrow[r, "\partial^{-1}", "{B(1, 2-\rho) = \frac{1}{2-\rho}}"'] & \holoL{\infty, \rho-2}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty"'] \arrow[rd, hook, "\|\zeta\|_\infty^2"'] \\
+& & & \holoL{\infty, \rho}(\Omega) \\
+& & & \holoL{\infty, \rho-1}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "r_\lambda", "\|r_\lambda\|_\infty"'] & \holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^\lambda", "{B(-\lambda, 1-\rho)}"'] & \holoL{\infty, \rho+\lambda}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty^{-1-\lambda}"'] \arrow[rd, hook, "\|\zeta\|_\infty^{-1-\epsilon-\lambda}"'] \\
+& & & \holoL{\infty, \rho-1-\epsilon}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^{-1}", "{B(1, 1-\rho) = \frac{1}{1-\rho}}"'] & \holoL{\infty, \rho-1}(\Omega) \arrow[r, "\zeta^{-1}", "\|\zeta^{-1}\|_{\infty, 1} = 1"'] & \holoL{\infty, \rho}(\Omega) \\
+\end{tikzcd}
+\end{center}
+\color{black}
+
+From \textbf{[our previous discussion]}, we can work out that
+\begin{align*}
+\tilde{\mathcal{J}} & \maps \holoL{\infty, 1-\tau}(\Omega) \to \holoL{\infty, -\tau-\epsilon}(\Omega)\;\text{with} \\
+\|\tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M^{1-\epsilon} + \sum_{\lambda \in \Lambda} B(-\lambda, \tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\epsilon-\lambda}
+\end{align*}
+and
+\begin{align*}
+\tilde{\mathcal{J}} & \maps \holoL{\infty, 1-\tau-\epsilon}(\Omega) \to \holoL{\infty, -\tau-\epsilon}(\Omega)\;\text{with} \\
+\|\tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau+\epsilon}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, \tau+\epsilon)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}.
+\end{align*}
+Since $\|\zeta^{-1}\|_{\infty, 1} = 1$, it follows that
+\begin{align*}
+\zeta^{-1} \circ \tilde{\mathcal{J}} & \maps \holoL{\infty, 1-\tau}(\Omega) \to \holoL{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \\
+\|\zeta^{-1} \circ \tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M^{1-\epsilon} + \sum_{\lambda \in \Lambda} B(-\lambda, \tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\epsilon-\lambda} \label{bound:mollify}
+\end{align*}
+and
+\begin{align}
+\zeta^{-1} \circ \tilde{\mathcal{J}} & \acts \holoL{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \nonumber \\
+\|\zeta^{-1} \circ \tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau+\epsilon}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, \tau+\epsilon)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}. \label{bound:perturb}
+\end{align}
+We can also see that
+\begin{align}
+\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} & \acts \holoL{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with}   \nonumber \\
+\|\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0}\| & = \tfrac{\tau}{\tau+\epsilon} < 1 \label{bound:contract}.
+\end{align}
+
+Now, let's return to equation~\ref{fixed-pt}, which tells us that $f = \zeta^{\tau-1} + \tilde{f}$ satisfies $\mathcal{J}f = 0$ when \textcolor{magenta}{[and only when?]} $\tilde{f}$ is a fixed point of the affine map $\mathcal{A}(\cdot) + b$, where
+\begin{align*}
+\mathcal{A} & = \tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} - \tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}}  \\
+b & = \left[ -\tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\,\zeta^{\tau-1}
+\end{align*}
+Choosing $\epsilon \in (0, 1]$ so that $\Lambda \subset (-\infty, -1 - \epsilon]$ has given us the domain and codomain statements in bounds \ref{bound:mollify} and \ref{bound:perturb}, which tell us that $\mathcal{A}(\cdot) + b$ sends $\holoL{\infty, 1-\tau-\epsilon}(\Omega)$ into itself. We'll show that when $\Omega$ is small enough, $\mathcal{A}(\cdot) + b$ contracts $\holoL{\infty, 1-\tau-\epsilon}(\Omega)$, and thus---by the contraction mapping theorem---has a unique fixed point.
+
+An affine map is a contraction if and only if its linear part is a contraction. We know from bound~\ref{bound:contract} that $\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0}$ contracts $\holoL{\infty, 1-\tau-\epsilon}(\Omega)$. Since the supremum of $\Lambda$ is less than $-1$, all the powers of $M = \|\zeta\|_\infty$ in bound~\ref{bound:perturb} are positive. Thus, by shrinking $\Omega$, we can make the norm of $\zeta^{-1} \circ \tilde{\mathcal{J}}$ on $\holoL{\infty, 1-\tau-\epsilon}(\Omega)$ as small as we want---small enough to make $\mathcal{A}$ a contraction.
+%\input{chapters/appendix}
 
 \bibliographystyle{plain}
 \bibliography{airy-resurgence}
