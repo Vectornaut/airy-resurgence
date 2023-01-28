@@ -213,10 +213,16 @@ Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson'
 \end{itemize}
 \color{black}
 \item Clearly separate the parts of the theory that deal with holomorphic functions and formal power series.
+\begin{itemize}
+\item we can do that also for thimble integrals (this is part 4 of Thm 5.1 in {\tt draft2.pdf})
+\end{itemize}
 \item (Super-motivation: why do the zeroes of $\lambda$ play a special role?) As part of the treatment, we've made use of some new perspectives on the Laplace transform.
 \begin{itemize}
 \item \textbf{Geometric picture.} The spatial domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_b^\theta$ is $T^* B_b$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example.
-\item \textbf{A new dictionary for ODEs.} The Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it's much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. This clarifies why we take the Borel sums at zeroes of $\lambda$ when we're trying to solve an ODE. \textcolor{orange}{[Veronica---I dont't see why]}
+\item \textbf{A new dictionary for ODEs.} The Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it's much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. 
+\begin{itemize}
+\item This clarifies why we take the Borel sums at zeroes of $\lambda$ when we're trying to solve an ODE.
+\end{itemize}
 \end{itemize}
 \item Our picture helps explain why it's useful to work on the Borel plane (the position domain).
 \begin{itemize}
@@ -225,11 +231,20 @@ Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson'
 \end{itemize}
 \item Illustrate with detailed treatments of several examples.
 \begin{itemize}
+\item Contour argument (thimble integrals)
+\item solving integral equation (ODE)
+\item How thimble integrals and ODE are related in our examples?
+\end{itemize}
+\begin{itemize}
 \item Some have been discussed many times, using different approaches and conventions. We'll try to give an idea of how all these different treatments fit together. $\bullet$ The Airy function (Marino, Sauzin). $\bullet$ The anharmonic oscillator (Bender--Wu, Schiappa).
 \item Others haven't been discussed much.
 \end{itemize}
 \item Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interests in math and physics as a powerful alternative to Borel summability. Resurgence of lienar ODEs have been studied (see Costin slides for ReNewQuantum). Many results are also known for non linear ODEs (see Schiappa PI, Costin PI). For algebraic exponential integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see Maxim's slides ReNewQuantum), however for more general exponential integrals (see examples in Maxim's talk) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of exponential integrals show some features of resurgence and they are toy model to get a feeling on \'Ecalle formalism.       
 \item \textcolor{magenta}{The examples give a place to compare more complicated formalisms like the Picard-Lefshetz (Morse theory) or Ecalle formalisms? [How do we work this into the introduction?]}
+\begin{itemize}
+\item thimble integrals are geometric in the sense of being pairing between homology and cohomology 
+\item computation of Stokes constants via Picard--Lefschetz theory
+\end{itemize}
 \end{itemize}
 \subsection{Results}
 
@@ -307,11 +322,15 @@ Notice that this basis is distinguished only up to scaling, so we have a disting
 \item \eqref{formal solution} is Borel-Laplace summable and its Borel-Laplace sum $\Psi_j$ satisfies the original equation \eqref{eq:ODE}
 \item as a consequence, the distinguished frame of formal solutions become a distinguished frame of analytic solutions $\Psi_1,...,\Psi_d$.  
 \end{itemize}
-\item Can we see there exists a distinguished basis in a purely analytic way? YES. The reason is the existence theorem gives for every $\alpha_j$ a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$.
+\item Can we see there exists a distinguished basis in a purely analytic way? YES. [Thm 1]% The reason is the existence theorem gives for every $\alpha_j$ a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$.
 \item why Borel summations of $\tilde{\Psi_1},...,\tilde{\Psi_d}$ finds this solutions? because they are an analytic frame of Borel regular functions. 
-\item Maybe the correct place is the setting of Ecalle's formal integral. See \S 5.2.2.1 of Delabaere's {\em Divergent Series, Summability and Resurgence III}.
+\begin{itemize}
+\item {[Thm 1]}: for every $\alpha_j$ there exists a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$. (proof based on existence theorem \ref{frac_int_exist})
+\item {[Thm 2]}: The Borel sum of the formal solutions $\tilde{\Psi}_j$ are the same as the Laplace transform of the solutions of Thm 1. 
+\item Cor of Thm 2: the Laplace transform of solutions of Thm 1 are Borel regular.   
+\end{itemize}
 \item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform. [Follows from Aaron's argument in Airy resurgence, even if Aaron works with more general ODEs]
-\item If the Borel-transformed equation has a subexponential solution $\hat{f}$ which is ``shifted holomorphic'' (we called this having a ``fractional power singularity'' in {\tt airy-resurgence}), then $\laplace \hat{f}$ satisfies the original equation, because there are no boundary terms.
+\color{DarkBlue}
 \item Draw diagram showing formal vs. holomorphic solutions in time vs. frequency domains.
 
 \begin{center}
@@ -332,6 +351,12 @@ there are many ways to see this porblem have a distinguished base of solutions, 
 \end{itemize}
 
 \item \textbf{Being a thimble integral}
+
+\begin{itemize}
+\item take asymptotic expansion of integral via saddle point approximation and then study the Borel Laplace sum of the divergent series
+\item see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform)
+\item {[Thm 4]} 1-dim thimbles integrals are Borel regular.
+\end{itemize}
 
 Let $X$ be a translation surface---a Riemann surface carrying a holomorphic 1-form $\nu$. Suppose $X$ is of {\em meromorphic type}, meaning that we got it by puncturing a compact Riemann surface $\overline{X}$ at finitely many points, and $\nu$ has a pole at each puncture. A {\em translation coordinate} on $X$ is a local coordinate whose derivative is $\nu$.
 
@@ -900,7 +925,7 @@ Setting $g(a, a') = (\zeta(a) - \zeta(a'))^{-\lambda-1}$ with $\lambda \in (-\in
 The beta function $B$ can be written more explicitly as
 \[ B(-\lambda,\,1-\rho) = \frac{\Gamma(-\lambda)\,\Gamma(1-\rho)}{\Gamma(1-\lambda-\rho)}. \]
 Now we can see that for each $\lambda \in (-\infty, 0)$ and $\rho \in \R$, the fractional integral $\partial^\lambda_{\zeta \text{ from } 0}$ maps $\holoL{\infty, \rho}(\Omega)$ into $\holoL{\infty, \rho+\lambda}(\Omega)$, with norm $\|\partial^\lambda_{\zeta \text{ from } 0}\| \le B(-\lambda,\,1-\rho)$.
-\subsubsection{Fractional integral equations near a regular singular point}
+\subsubsection{Fractional integral equations near a regular singular point}\label{frac_int_exist}
 \textcolor{SeaGreen}{\textbf{Angeliki:} Maybe Kato--Rellich perturbation theory can give existence immediately. It might not give uniqueness, though.}
 
 Consider an integral operator $\mathcal{J}$ of the form
@@ -973,7 +998,7 @@ Since $\|\zeta^{-1}\|_{\infty, 1} = 1$, it follows that
 \end{align*}
 and
 \begin{align}
-\zeta^{-1} \circ \tilde{\mathcal{J}} & \acts \holoL{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \nonumber \\
+\zeta^{-1} \circ \tilde{\mathcal{J}} & \acts \holoL{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \\%\nonumber \\
 \|\zeta^{-1} \circ \tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau+\epsilon}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, \tau+\epsilon)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}. \label{bound:perturb}
 \end{align}
 We can also see that
