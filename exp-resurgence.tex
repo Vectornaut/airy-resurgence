@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+%\usepackage{eqnarray}
 \usepackage{stmaryrd} %% needed for mapsto arrows in commutative diagrams
 \usepackage{bm} %% for putting series names in bold
 %%\usepackage{amsthm}
@@ -708,6 +709,147 @@ which rearranges to the second equation in the statement.
 \section{Proof of main results}
 \subsection{Borel regularity for ODEs}
 \subsection{Borel regularity for thimble integrals}
+
+
+\section{Examples}
+
+\subsection{Modifield Bessel equation}
+
+\subsection{Airy}
+
+The Airy equation is
+\begin{equation}\label{eqn:airy}
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - y\right] \psi = 0.
+\end{equation}
+One solution is given by the Airy function,
+\[ \Ai(y) = \frac{i}{2\pi} \int_{\Gamma} \exp\left(-\tfrac{1}{3}t^3 + yt\right)\,dt, \]
+where $\Gamma$ is a path that comes from $\infty$ at $120^\circ$ and goes to $\infty$ at $-120^\circ$.
+\begin{center}
+\includegraphics{figures/u_contour_3.pdf} \\[1em]
+{\small The contour $\Gamma$ in the $u$ plane.}
+\end{center}
+With the substitution $t = 2uy^{1/2}$, we can rewrite the Airy integral as
+\[ \Ai(y) = y^{1/2}\;\frac{i}{\pi} \int_{y^{-1/2} \Gamma} \exp\left[-\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du. \]
+We've rescaled the contour by a factor of two, but it still approaches $\infty$ in the desired way. Note that $4u^3 - 3u$ is the third Chebyshev polynomial.
+\subsubsection{Rewriting as a modified Bessel equation}
+We can distill the most interesting part of the Airy function by writing
+\[ \Ai(y) = \tfrac{1}{\pi\sqrt{3}}\,y^{1/2}\,K\big(\tfrac{2}{3} y^{3/2}\big), \]
+where
+\begin{equation}\label{integral:mod-bessel}
+K(z) = i\sqrt{3} \int_{z^{-1/3}\Gamma} \exp\left[-z \left(4u^3 - 3u\right)\right]\,du.
+\end{equation}
+Saying that $\Ai$ satisfies the Airy equation is equivalent to saying that $K$ satisfies the modified Bessel equation
+\begin{equation}\label{eqn:mod-bessel}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \varphi = 0.
+\end{equation}
+In fact, $K$ is the modified Bessel function $K_{1/3}$~\cite[equation~9.6.1]{dlmf}.
+
+The method we'll demonstrate in Section~\ref{spatial} works for any differential equation
+\[ \left[ P\big(\tfrac{\partial}{\partial z}\big) + z^{-1} Q\big(\tfrac{\partial}{\partial z}\big) + z^{-2} R(z^{-1}) \right] \varphi = 0, \]
+where $P$ is a polynomial, $Q$ is a polynomial of one degree lower, and $R$ is an entire function. Let's put equation~\ref{eqn:mod-bessel} in that form:
+\begin{equation}\label{eqn:reg-mod-bessel}
+\left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\tfrac{1}{3}\big)^2 z^{-2} \right] \varphi = 0.
+\end{equation}
+
+\textcolor{orange}{[copy the result of Bessel with parameter $\nu=1/3$.]}
+
+
+\subsection{Airy--Lucas}
+The Airy-Lucas equation is
+\begin{equation}\label{eqn:airy-lucas}
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - (m-1) y^{-1} \tfrac{\partial}{\partial y} - y^{n-2}\right] \psi = 0
+\end{equation}
+with $n \in \{3, 4, 5, \ldots\}$ and $m \in \{1, 2, \ldots, r-1\}$. A few solutions are given by the Airy-Lucas functions~\textcolor{magenta}{[Charbonnier et al., equation~3.6]}
+\[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \left\{\begin{array}{ll}1 & j \text{ even} \\ i & j \text{ odd}\end{array}\right\} \frac{y^{m/2}}{\pi} \int_{\Lambda^{(j)}} \exp\left[\tfrac{2}{n} y^{n/2}\,T_n(u)\right]\,U_{m-1}(u)\,du, \]
+where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n}\pi\big)$.
+\subsubsection{Rewriting as a \textcolor{DarkCyan}{modified Bessel (?)} equation}
+We can distill the most interesting parts of the Airy-Lucas function by writing
+\[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \textcolor{magenta}{\text{const.}}\,y^{\textcolor{DarkCyan}{m/2}}\,K\big(\tfrac{2}{n} y^{n/2}\big), \]
+where
+\begin{equation}\label{integral:mod-bessel-rational}
+K(z) = \textcolor{magenta}{\text{const.}} \int_{z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z T_n(u)\right]\,U_{m-1}(u)\,du.
+\end{equation}
+Saying that $\widehat{\Ai}^{(k)}_{n, m-1}$ satisfies the Airy-Lucas equation is equivalent to saying that $K$ satisfies the \textcolor{DarkCyan}{modified Bessel (?)} equation
+\begin{equation}%%\label{eqn:mod-bessel}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\textcolor{DarkCyan}{\tfrac{m}{n} (?)}\big)^2 + z^2\big]\right] \varphi = 0.
+\end{equation}
+In fact, as we'll see in Section~\textcolor{magenta}{?}, $K$ is the modified Bessel function $K_{\textcolor{DarkCyan}{m/n}}$.
+
+Like we did in equation~\ref{eqn:reg-mod-bessel}, we can rewrite the modified Bessel equation above as
+\begin{equation}%%\label{eqn:reg-mod-bessel}
+\left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\textcolor{DarkCyan}{\tfrac{m}{n}}\big)^2 z^{-2} \right] \varphi = 0.
+\end{equation}
+
+\textcolor{orange}{[copy the result of Bessel with parameter $\nu=m/n$.]}
+
+\subsection{Higher Airy}
+
+The higher Airy equation is
+\begin{equation}\label{eqn:airy-lucas}
+\left[\big({-}\tfrac{\partial}{\partial y}\big)^{n-1} - y\right] \psi = 0
+\end{equation}
+with $n \in \{3, 4, 5, \ldots\}$. A few solutions are given by the hyper-Airy functions~\textcolor{magenta}{[Charbonnier et al., equation~3.6]}
+
+\color{Peru}
+With
+\begin{align*}
+z & = (-1)^{n-1} \tfrac{n-1}{n} y^{n/(n-1)} & w & = (-1)^n (n-1) y^{1/(n-1)} u,
+\end{align*}
+we have
+\begin{align*}
+\widetilde{\Ai}^{(k)}_n(y) & = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[\tfrac{1}{n}w^n - yw\right]\,dw \\
+& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[\tfrac{1}{n}w \left(w^{n-1} - ny\right)\right]\,dw \\
+& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[\tfrac{1}{n}w \big((n-1)^{n-1} yu^{n-1} - ny\big)\right]\,dw \\
+& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[\tfrac{1}{n}yw \big((n-1)^{n-1} u^{n-1} - n\big)\right]\,dw \\
+& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[(-1)^n \tfrac{n-1}{n} y^{n/(n-1)} u\big((n-1)^{n-1} u^{n-1} - n\big)\right]\,dw \\
+& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,dw \\
+& = (-1)^n (n-1) \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} y^{1/(n-1)}\int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du \\
+& = (-1)^n (n-1) \frac{\exp\left(\pi ik \big(1 - \tfrac{1}{n-1}\big)\right)}{2\pi i} y^{1/(n-1)}\int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du \\
+& = (-1)^{n+k} (n-1) \frac{\exp\big({-}\pi i \tfrac{k}{n-1}\big)}{2\pi i} y^{1/(n-1)}\int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du \\
+\end{align*}
+\color{black}
+\[ \widetilde{\Ai}^{(k)}_n(y) = (-1)^{n+k} (n-1) \frac{\exp\big({-}\pi i \tfrac{k}{n-1}\big)}{2\pi i} y^{1/(n-1)}\int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du \\, \]
+where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n}\pi\big)$.
+\subsubsection{Rewriting as a \textcolor{magenta}{(???)} equation}
+We can distill the most interesting parts of the hyper-Airy function by writing
+\[ \widetilde{\Ai}^{(k)}_n(y) = \textcolor{magenta}{\text{const.}}\,y^{1/(n-1)}\,K\left((-1)^n\,\tfrac{n-1}{n}\,y^{n/(n-1)}\right), \]
+where
+\begin{equation}
+K(z) = \textcolor{magenta}{\text{const.}} \int_{\textcolor{magenta}{\text{const.}(n)} z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du.
+\end{equation}
+Saying that $\widetilde{\Ai}^{(k)}_n$ satisfies the higher Airy equation is equivalent to saying that $K$ satisfies an equation of the form
+\begin{equation}%%\label{eqn:mod-bessel}
+\left[ \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{-1} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-1)} z^{-(n-1)} \right] \varphi = 0.
+\end{equation}
+The sub-leading coefficients are the triangular numbers
+\[ c_n^{(1)} = \frac{n(n-1)}{2}. \]
+\color{DarkCyan}
+The later coefficients can be written as\footnote{Many thanks to Peter Taylor for noticing this [\url{https://mathoverflow.net/q/422337/1096}].}
+\[ c_n^{(k)} = \frac{b_n^{(k)}}{n^k}\,(n+1)^{\underline{k+2}} \]
+in terms of the polynomials
+
+\begin{align*}
+b_n^{(2)} & = & \tfrac{1}{24} \\
+b_n^{(3)} & = & \tfrac{1}{48} n \\
+b_n^{(4)} & = & \tfrac{73}{5760} n^2 & + & \tfrac{1}{1152} n & - & \tfrac{1}{2880} \\
+b_n^{(5)} & = & \tfrac{11}{1280} n^{3} & + & \tfrac{1}{768} n^{2} & - & \tfrac{1}{1920} n \\
+b_n^{(6)} & = & \tfrac{3625}{580608} n^{4} & + & \tfrac{61}{41472} n^{3} & - & \tfrac{181}{322560} n^{2} & - & \tfrac{1}{41472} n & + & \tfrac{1}{181440}. 
+\end{align*}
+
+
+Searching for 580608 in the OEIS turns up the leading coefficients $\beta^{(k)}$ of these polynomials, which are listed as {\tt A249276} and {\tt A249277}. They're defined by the identity [Yang, ``Approximations for Constant $e$ and Their Applications'']
+\[ \frac{1}{e} \left(\frac{n}{n-1}\right)^{n-1} = 1 - \frac{1/2}{n} - \frac{\beta^{(2)}}{n^2} - \frac{\beta^{(3)}}{n^3} - \frac{\beta^{(4)}}{n^4} - \frac{\beta^{(5)}}{n^5} - \ldots, \]
+which tells us that
+\[ \frac{1}{e} \left(\frac{n}{n-1}\right)^{n-1} = 1 - \frac{1/2}{n} - \frac{b_n^{(2)}}{n^2} - \frac{b_n^{(3)}}{n^4} - \left[\frac{b_n^{(4)}}{n^6} + o\left(\frac{1}{n^5}\right)\right] - \left[\frac{b_n^{(5)}}{n^8} + o\left(\frac{1}{n^6}\right)\right] - \ldots. \]
+The last coefficient can be written as
+\[ c_n^{(n-1)} = \left(\frac{n-1}{n}\right)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}}, \]
+giving
+\[ b_n^{(n-1)} = (n-1)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}} \Big/ (n+1)^{\underline{n+1}}. \]
+\color{black}
+
+\textcolor{red}{[What about doing degree 3 or 4 example/ degree 2 is again Bessel?]}
+
+\subsection{Generalized Airy}
 
 \section{Third-order exponential integrals}
 \begin{itemize}
