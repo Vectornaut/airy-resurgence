@@ -818,7 +818,7 @@ where
 K(z) = \textcolor{magenta}{\text{const.}} \int_{\textcolor{magenta}{\text{const.}(n)} z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du.
 \end{equation}
 Saying that $\widetilde{\Ai}^{(k)}_n$ satisfies the higher Airy equation is equivalent to saying that $K$ satisfies an equation of the form
-\begin{equation}%%\label{eqn:mod-bessel}
+\begin{equation}\label{eqn:higher-Airy}
 \left[ \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{-1} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-1)} z^{-(n-1)} \right] \varphi = 0.
 \end{equation}
 The sub-leading coefficients are the triangular numbers
@@ -847,7 +847,79 @@ giving
 \[ b_n^{(n-1)} = (n-1)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}} \Big/ (n+1)^{\underline{n+1}}. \]
 \color{black}
 
-\textcolor{red}{[What about doing degree 3 or 4 example/ degree 2 is again Bessel?]}
+\subsubsection{Higher Airy of degree $3$}
+Setting $n=4$, equation \ref{eqn:higher-Airy} turns into 
+
+\begin{equation}\label{eqn:reg-higher3}
+\left[\frac{\partial^3}{\partial z^3}+1+\frac{6}{z}\frac{\partial^2}{\partial z^2}-\frac{35}{8}\frac{1}{z^2}\frac{\partial}{\partial z}+\frac{315}{16}\frac{1}{z^3}\right]\varphi=0
+\end{equation}
+
+We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\ref{eqn:reg-higher3}. We'll succeed when $\alpha^3 + 1 = 0$.%, and we'll see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
+
+We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\ref{eqn:reg-higher3} if and only if $v$ satisfies the integral equation
+\begin{equation}\label{int-eq:higher3}
+\left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] v = 0.
+\end{equation}
+It's tempting to differentiate both sides of this equation until we get
+\begin{equation}\label{diff-eq:higher3}
+\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ \big[ \zeta^2 - 1 \big] - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \right] v = 0,
+\end{equation}
+which is easier to solve. Unfortunately, a solution of equation~\ref{diff-eq:spatial-mod-bessel} won't satisfy equation~\ref{int-eq:spatial-mod-bessel} in general. However, as we learned in Section~\ref{shifting}, a solution of equation~\ref{diff-eq:spatial-mod-bessel} {\em will} satisfy equation~\ref{int-eq:spatial-mod-bessel} if it's slight and locally integrable at $\zeta = \alpha$.
+
+This is great news, because equation~\ref{diff-eq:spatial-mod-bessel} has a regular singularity at each root of $\zeta^2 - 1$, and the Frobenius method often gives a slight solution at each regular singular point. We can see the regular singularities by moving the derivatives to the right:
+\[ \left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v = 0. \]
+
+In Sections \ref{pos-root}\,--\,\ref{neg-root}, we'll see this approach succeed. For each root $\alpha$, we'll find a solution $v_\alpha$ of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = \alpha$. We know the function $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\ref{eqn:reg-mod-bessel}, and we can even find its asymptotics from the order $\tau_\alpha$ of $v_\alpha$. We learned in Section~\ref{translation} that
+\[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} V_\alpha \]
+where $V_\alpha = \laplace_{\zeta_\alpha, 0} v_\alpha$ and $\zeta = \alpha + \zeta_\alpha$. We can see from Section~\ref{reg-decay} that $V_\alpha$ is asymptotic to a scalar multiple of $z^{-1 - \tau_\alpha}$ at $z = \infty$, so the further decomposition
+\[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} z^{-\tau_\alpha} W_\alpha, \]
+makes $W_\alpha$ is asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
+\color{Peru}
+\begin{align*}
+\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (\zeta - 1)(\zeta + 1) - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \right] v & = 0
+\end{align*}
+\color{Sienna}
+\begin{align*}
+\left[ \big[ 2 + 2(2\zeta) \tfrac{\partial}{\partial \zeta} + (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 \big] - \big[ 1 + \zeta \tfrac{\partial}{\partial \zeta} \big] - \big(\tfrac{1}{3}\big)^2 \right] v & = 0 \\
+\left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v & = 0 \\
+\left[ (\zeta - 1)(\zeta + 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v & = 0
+\end{align*}
+\color{black}
+%%In terms of the coordinate $\zeta_\alpha$ with $\zeta = \alpha + \zeta_\alpha$, this equation is written
+%%\begin{equation}\label{eqn:centered-mod-bessel}
+%%\[ \left[ \big[ \zeta_\alpha (\zeta_\alpha + 2\alpha) + \alpha^2 - 1 \big] + \fracderiv{-1}{\zeta_\alpha}{0} \circ \big[ \zeta_\alpha + \alpha \big] - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta_\alpha}{0} \right] w = 0. \]
+%%\end{equation}
+\subsubsection{Focus on $\zeta = 1$}\label{pos-root}
+Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\ref{diff-eq:spatial-mod-bessel} looks like
+\begin{equation}%%\label{diff-eq:spatial-mod-bessel-pos}
+\left[\zeta_1(2 + \zeta_1) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(1 + \zeta_1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0.
+\end{equation}
+With another change of coordinate, given by $\zeta_1 = -2\xi_1$, we can rewrite equation~\ref{diff-eq:spatial-mod-bessel} as the hypergeometric equation
+\begin{equation}\label{diff-eq:hypergeom-pos}
+\left[\xi_1 (1 - \xi_1) \big(\tfrac{\partial}{\partial \xi_1}\big)^2 + 3(\tfrac{1}{2} - \xi_1) \tfrac{\partial}{\partial \xi_1} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0.
+\end{equation}
+Looking through the twenty-four expressions for Kummer's six solutions, we find one \cite[formula~15.10.12]{dlmf} which is manifestly slight and locally integrable at $\xi_1 = 0$:
+\begin{alignat*}{2}
+v_1 &=\;& \hphantom{-i\sqrt{2}}\,\xi_1^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi_1\big) \\
+&=\;& -i\sqrt{2}\,\zeta_1^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big)
+\end{alignat*}
+From the argument in Section~\ref{big-idea}, we know that $\laplace_{\zeta, 1} v_1$ satisfies equation~\ref{eqn:mod-bessel}, and can be written as $e^{-z} V_1$, where $V_1 = \laplace_{\zeta_1, 0} v_1$. Since $v_1$ has order $-1/2$, the decomposition $V_1 = z^{1/2} W_1$ makes $W_1$ asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
+\subsubsection{Focus on $\zeta = -1$}\label{neg-root}
+Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = -1$. In the rescaled coordinate from Section~\ref{pos-root}, this is the point $\xi_1 = 1$. Looking again through Kummer's table of solutions, we find another expression \cite[formula~15.10.14]{dlmf} which is manifestly slight and locally integrable at $\xi_1 = 1$:
+\begin{alignat*}{2}
+v_{-1} &=\;& (1-\xi_1)^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi_1\big) \\
+&=\;& \sqrt{2}\,\zeta_{-1}^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big)
+\end{alignat*}
+where $\zeta_{-1}$ is the coordinate with $\zeta = -1 + \zeta_{-1}$. From the argument in Section~\ref{big-idea}, we know that $\laplace_{\zeta, -1} v_{-1}$ satisfies equation~\ref{eqn:mod-bessel}, and can be written as $e^z V_{-1}$, where $V_{-1} = \laplace_{\zeta_{-1}, 0} v_{-1}$. Since $v_{-1}$, like our other solution, has order $-1/2$, the same decomposition $V_{-1} = z^{1/2} W_{-1}$ makes $W_{-1}$ asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
+
+In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{o}bius transformation that pulls $\zeta$ back to $-\zeta$. Kummer's solutions typically come from six different hypergeometric equations, which are related by the M\"{o}bius transformations that permute their singularities. In our case, though, exchanging $1$ with $-1$ keeps equation~\ref{diff-eq:spatial-mod-bessel} the same.
+
+\color{DodgerBlue}
+If we'd followed the routine from Section~\ref{pos-root}, rewriting equation~\ref{diff-eq:spatial-mod-bessel} in the coordinate $\zeta_{-1}$ and then rewriting it again in a more recognizable form, we would've arrived at the hypergeometric equation
+\[ \left[\xi_{-1} (1 - \xi_{-1}) \big(\tfrac{\partial}{\partial \xi_{-1}}\big)^2 + 3(\tfrac{1}{2} - \xi_{-1}) \tfrac{\partial}{\partial \xi_{-1}} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0, \]
+where $\zeta_{-1} = 2\xi_{-1}$. This is the same as what we'd get by substituting $\xi_{-1}$ for $\xi_1$ in Section~\ref{pos-root}! In other words, the holomorphic map that pulls $\xi_{-1}$ back to $\xi_1$
+
+
 
 \subsection{Generalized Airy}
 
