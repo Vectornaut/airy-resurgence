@@ -1,4 +1,4 @@
-c\documentclass{article}
+\documentclass{article}
 
 \usepackage{url}
 \usepackage[hmargin=1.5in]{geometry}
@@ -721,14 +721,14 @@ The Airy equation is
 \left[\big(\tfrac{\partial}{\partial y}\big)^2 - y\right] \psi = 0.
 \end{equation}
 One solution is given by the Airy function,
-\[ \Ai(y) = \frac{i}{2\pi} \int_{\Gamma} \exp\left(-\tfrac{1}{3}t^3 + yt\right)\,dt, \]
-where $\Gamma$ is a path that comes from $\infty$ at $120^\circ$ and goes to $\infty$ at $-120^\circ$.
+\[ \Ai(y) = \frac{1}{2\pi i} \int_{\Gamma} \exp\left(\tfrac{1}{3}t^3 - yt\right)\,dt, \]
+where $\Gamma$ is a path that comes from $\infty$ at $-60^\circ$ and goes to $\infty$ at $60^\circ$.
 \begin{center}
 \includegraphics{figures/u_contour_3.pdf} \\[1em]
 {\small The contour $\Gamma$ in the $u$ plane.}
 \end{center}
 With the substitution $t = 2uy^{1/2}$, we can rewrite the Airy integral as
-\[ \Ai(y) = y^{1/2}\;\frac{i}{\pi} \int_{y^{-1/2} \Gamma} \exp\left[-\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du. \]
+\[ \Ai(y) = y^{1/2}\;\frac{1}{\pi i} \int_{y^{-1/2} \Gamma} \exp\left[\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du. \]
 We've rescaled the contour by a factor of two, but it still approaches $\infty$ in the desired way. Note that $4u^3 - 3u$ is the third Chebyshev polynomial.
 \begin{itemize}
 \item By considering other Chebyshev polynomials, we can situate the Airy function within the family of {\em Airy-Lucas functions}.
@@ -750,7 +750,7 @@ We can distill the most interesting parts of the Airy-Lucas function by writing
 \[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \textcolor{magenta}{\text{const.}}\,y^{\textcolor{DarkCyan}{m/2}}\,K\big(\tfrac{2}{n} y^{n/2}\big), \]
 where
 \begin{equation}\label{integral:mod-bessel-rational}
-K(z) = \textcolor{magenta}{\text{const.}} \int_{z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z T_n(u)\right]\,U_{m-1}(u)\,du.
+K(z) = \textcolor{magenta}{\text{const.}} \int_{z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du.
 \end{equation}
 Saying that $\widehat{\Ai}^{(k)}_{n, m-1}$ satisfies the Airy-Lucas equation is equivalent to saying that $K$ satisfies the \textcolor{DarkCyan}{modified Bessel (?)} equation
 \begin{equation}%%\label{eqn:mod-bessel}
@@ -1320,7 +1320,7 @@ In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{
 %where $\zeta_{-1} = 2\xi_{-1}$. This is the same as what we get by substituting $\xi_{-1}$ for $\xi_1$ in Section~\ref{pos-root}! In other words, the holomorphic map that pulls $\xi_{-1}$ back to $\xi_1$.
 
 \subsection{Contour argument for the Airy function}\label{contour-argument}
-We can recast integral~\ref{integral:mod-bessel} into the $\zeta$ plane by setting $\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \Gamma$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/3} \Gamma$, we have
+We can recast integral~\ref{integral:mod-bessel} into the $\zeta$ plane by setting $-\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \Gamma$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/3} \Gamma$, we have
 \begin{equation}\label{integral:mod-bessel-zeta}
 K = \frac{i}{\sqrt{3}} \int_{\gamma_z} e^{-z\zeta}\frac{d\zeta}{4u^2 - 1}.
 \end{equation}

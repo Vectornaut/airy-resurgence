@@ -18,17 +18,17 @@ function path_scale(n, k)
     return cos(π*(1/2 - skip/3n)) / abs(cos(π*k/n))
   end
 end
-u_path(θ, off, n = 3, k = 1) = t -> path_scale(n, k) * exp(-im*θ/n) * (cosh(π*(1-k/n)*im - t) - dot(off, [exp(π*(1-k/n)*im), exp(-π*(1-k/n)*im)]))
-u_jet(θ, off, n = 3, k = 1) = t -> (u_path(θ, off, n, k)(t), -path_scale(n, k) * exp(-im*θ/n) * sinh(π*(1-k/n)*im - t))
+u_path(θ, off, n = 3, k = 1) = t -> path_scale(n, k) * exp(-im*θ/n) * (cosh(π*(k/n)*im + t) - dot(off, [exp(π*(k/n)*im), exp(-π*(k/n)*im)]))
+u_jet(θ, off, n = 3, k = 1) = t -> (u_path(θ, off, n, k)(t), path_scale(n, k) * exp(-im*θ/n) * sinh(π*(k/n)*im + t))
 
 function T_jet(n)
   T_pt = convert(Polynomial, ChebyshevT(push!(fill(0, n), 1)))
   T_push = derivative(T_pt)
   u -> begin
     if length(u) == 1
-      return T_pt(u)
+      return -T_pt(u)
     else
-      return (T_pt(u[1]), T_push(u[1])*u[2])
+      return (-T_pt(u[1]), -T_push(u[1])*u[2])
     end
   end
 end
