@@ -743,6 +743,8 @@ with $n \in \{3, 4, 5, \ldots\}$ and $m \in \{1, 2, \ldots, r-1\}$. A few soluti
 \[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \left\{\begin{array}{ll}1 & j \text{ even} \\ i & j \text{ odd}\end{array}\right\} \frac{y^{m/2}}{\pi} \int_{\Lambda^{(j)}} \exp\left[\tfrac{2}{n} y^{n/2}\,T_n(u)\right]\,U_{m-1}(u)\,du, \]
 where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n}\pi\big)$.
 
+\subsubsection{Asymptotic analysis}
+
 \subsubsection{Rewriting as a modified Bessel $\frac{m}{n}$ equation}
 We can distill the most interesting parts of the Airy-Lucas function by writing
 \[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \textcolor{magenta}{\text{const.}}\,y^{{m/2}}\,K\big(\tfrac{2}{n} y^{n/2}\big), \]
@@ -894,6 +896,11 @@ In other words, $K_{m/n} = \tfrac{i}{2} \laplace_{\zeta, -1} v_{-1}$ with
 \[ v_{-1} = \sqrt{2}\,\zeta_{-1}^{-1/2} F(\tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2}\zeta_{-1}), \]
 where $\zeta = -1 + \zeta_{-1}$.
 \color{black}
+
+
+\subsection{Modified Bessel}
+
+
 \subsubsection{Lifting to a countable cover}
 Formula~\ref{integral:mod-bessel-rational} expresses the modified Bessel function $K_{m/n}$ as an exponential integral on a finite cover of $\C$. Lifting to a countable cover reveals this formula as a special case of a general integral formula for modified Bessel functions.
 
@@ -914,152 +921,18 @@ For any $\nu \in \C \smallsetminus \Z$, formulas~10.27.4 and 10.32.12 from \cite
 \notag & = \frac{1}{2i \sin(\nu \pi)} \int_\Omega \exp\left[z \cosh(t)\right]\,\frac{1}{2}\left[e^{\nu t} - e^{-\nu t}\right]\,dt \\
 \label{intgral:mod-bessel-general} & = \frac{1}{2 \sinh(\nu\,i\pi)} \int_\Omega \exp\left[z \cosh(t)\right]\,\sinh(\nu t)\,dt,
 \end{align}
-where $\Omega$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$. The integral converges when $z$ is in the right half-plane. We get formula~\ref{integral:mod-bessel-lifted} when we choose a rational parameter $\nu = m/n$.
+where $\Omega$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$. The integral converges when $z$ is in the right half-plane. We get formula~\eqref{integral:mod-bessel-lifted} when we choose a rational parameter $\nu = m/n$.
 
-When $\nu$ goes to $0$, formula~\ref{integral:mod-bessel-lifted} becomes
-\[ K_\nu(z) = \frac{1}{2\pi i} \int_\Omega \exp\left[z \cosh(t)\right]\,t\,dt. \]
+When $\nu$ goes to $0$, formula~\eqref{integral:mod-bessel-lifted} becomes
+\[ K_0(z) = \frac{1}{2\pi i} \int_\Omega \exp\left[z \cosh(t)\right]\,t\,dt. \]
 Choosing $\Omega$ to be the unit-speed path that runs from $\infty$ leftward to $-i\pi$, upward to $i\pi$, and rightward back to $\infty$, we can rewrite this formula as
 \begin{align*}
-K_\nu(z) & = \frac{1}{2\pi i} \int_0^\infty \exp\left[-z \cosh(t)\right]\,2\pi i\,dt \\
+K_0(z) & = \frac{1}{2\pi i} \int_0^\infty \exp\left[-z \cosh(t)\right]\,2\pi i\,dt \\
 & = \int_0^\infty \exp\left[-z \cosh(t)\right]\,dt \\
 & = \int_1^\infty \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s},
 \end{align*}
 with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}.
-\subsubsection{Link to dihedral triangulations}
-Here are the local normal forms of Kummer's first and second solutions. In the table, $[\bullet]$ denotes a local holomorphic function of order $0$ \cite[identities 15.8.2--4]{dlmf}, and
-\begin{align*}
-a' & = a+(1-c) \\
-b' & = b+(1-c) \\
-c' & = 2-c
-\end{align*}
-\begin{center}
-\begin{tabular}{c|c|c|c}
-Function & $0$ & $1$ & $\infty$ \\ \hline
-$F(a, b, c, \xi)$ & $[\bullet]$ & $[\bullet] + (1-\xi)^{c-a-b} [\bullet]$ & $(1/\xi)^a [\bullet] + (1/\xi)^b [\bullet]$ \\
-$\xi^{1-c} F(a', b', c', \xi)$ & $\xi^{1-c} [\bullet]$ & $[\bullet] + (1-\xi)^{c-a-b} [\bullet]$ & $(1/\xi)^a [\bullet] + (1/\xi)^b [\bullet]$
-\end{tabular}
-\end{center}
 
-For example, at $\zeta = \infty$, the function
-\[ u_{-1} = F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, 1 - \tfrac{1}{2} \zeta_{-1}) \]
-is slight, with normal form $(1/\zeta_{-1})^{1 - m/n} f_1 + (1/\zeta_{-1})^{1 + m/n} f_2$~\cite[identity~15.8.3]{dlmf}. At $\zeta = 1$, it's holomorphic with order $0$. At $\zeta = -1$, it has the form $h + \zeta_{-1}^{-1/2} f$, where $h$ is holomorphic with order $0$.
-
-On the other hand, the function
-\[ v_{-1} = \sqrt{2}\,\zeta_{-1}^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, \tfrac{1}{2}\zeta_{-1}) \]
-is slight at $\zeta = \pm 1$ with order $-\tfrac{1}{2}$, and slight at $\infty$ with order $1 - \tfrac{m}{n}$.
-
-Hence, the ratio $u_{-1} / v_{-1}$ looks like a holomorphic multiple of $\zeta_1^{1/2}$ near $\zeta = 1$, a holomorphic function plus a holomorphic multiple of $\zeta_{-1}^{1/2}$ near $\zeta = -1$, and a holomorphic function plus a holomorphic multiple of $(1/\zeta_{-1})^{2m/n}$ near $\zeta = \infty$. This is consistent with $u_{-1}/v_{-1}$ being a conformal map that sends the upper half-plane to a triangle with interior angle $\pi/2$ at the images of $\zeta = \pm 1$ and interior angle $2\pi\,\tfrac{m}{n}$ at the image of $\infty$.
-
-\color{ForestGreen}
-Let's try to get the small tetrahedral tiling by setting
-\begin{align*}
-1 - c & = \tfrac{1}{3} \\
-c - a - b & = \tfrac{1}{3} \\
-b - a & = \tfrac{1}{2},
-\end{align*}
-so $(a, b, c) = (-\tfrac{1}{12}, \tfrac{5}{12}, \tfrac{2}{3})$. The general hypergeometric equation is
-\begin{align*}
-\left[\xi_1 (1 - \xi_1) \big(\tfrac{\partial}{\partial \xi_1}\big)^2 + \big[c - (a+b+1)\xi_1\big] \tfrac{\partial}{\partial \xi_1} - ab\right] & v = 0 \\
-\left[-\tfrac{1}{2}\zeta_1 (1 + \tfrac{1}{2}\zeta_1) 4 \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + \big[c + \tfrac{1}{2}(a+b+1)\zeta_1\big] (-2) \tfrac{\partial}{\partial \zeta_1} - ab\right] & v = 0 \\
-\left[-\zeta_1 (2 + \zeta_1) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 - \big[2c + (a+b+1)\zeta_1\big] \tfrac{\partial}{\partial \zeta_1} - ab\right] & v = 0 \\
-\left[(1 - \zeta)(1 + \zeta) \big(\tfrac{\partial}{\partial \zeta}\big)^2 - \big[2c + (a+b+1)(\zeta - 1)\big] \tfrac{\partial}{\partial \zeta} - ab\right] & v = 0 \\
-\left[(1 - \zeta^2)\big(\tfrac{\partial}{\partial \zeta}\big)^2 - \big[(c - a - b) + (c - 1) + (a+b+1)\zeta\big] \tfrac{\partial}{\partial \zeta} - ab\right] & v = 0 \\
-\left[(1 - \zeta^2)\big(\tfrac{\partial}{\partial \zeta}\big)^2 - \big[\mu - \lambda + (a+b+1)\zeta\big] \tfrac{\partial}{\partial \zeta} - ab\right] & v = 0 \\
-\left[\big[\tfrac{\partial}{\partial \zeta} \circ (1 - \zeta^2) + 2\zeta\big] \tfrac{\partial}{\partial \zeta} - (\mu - \lambda) \tfrac{\partial}{\partial \zeta} - (a+b+1)\big[\tfrac{\partial}{\partial \zeta} \circ \zeta - 1\big] - ab\right] & v = 0 \\
-\left[\tfrac{\partial}{\partial \zeta} \circ \big[ \tfrac{\partial}{\partial \zeta} \circ (1 - \zeta^2) + 2\zeta \big] + 2\big[\tfrac{\partial}{\partial \zeta} \circ \zeta - 1\big] - (\mu - \lambda) \tfrac{\partial}{\partial \zeta} - (a+b+1)\big[\tfrac{\partial}{\partial \zeta} \circ \zeta - 1\big] - ab\right] & v = 0 \\
-\left[\big[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (1 - \zeta^2) + 4 \tfrac{\partial}{\partial \zeta} \circ \zeta - 2 \big] - (\mu - \lambda) \tfrac{\partial}{\partial \zeta} - (a+b+1) \tfrac{\partial}{\partial \zeta} \circ \zeta + \big[ (a+b+1) - ab \big]\right] & v = 0 \\
-\left[\big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (1 - \zeta^2) - (\mu - \lambda) \tfrac{\partial}{\partial \zeta} + (3-a-b) \tfrac{\partial}{\partial \zeta} \circ \zeta + \big[ {-}1 + a + b - ab \big]\right] & v = 0 \\
-\left[\big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (1 - \zeta^2) - (\mu - \lambda) \tfrac{\partial}{\partial \zeta} + (3-a-b) \tfrac{\partial}{\partial \zeta} \circ \zeta - (a-1)(b-1)\right] & v = 0 \\
-\left[\big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (\zeta^2 - 1) + (\mu - \lambda) \tfrac{\partial}{\partial \zeta} + (a+b-3) \tfrac{\partial}{\partial \zeta} \circ \zeta + (a-1)(b-1)\right] & v = 0,
-\end{align*}
-For the tetrahedral tiling, we get
-\[ \left[\big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ \big(\zeta^2 - 1\big) - \tfrac{8}{3} \tfrac{\partial}{\partial \zeta} \circ \zeta + \tfrac{7 \cdot 13}{12^2}\right] v = 0, \]
-which comes from the integral equation
-\[ \left[\big(\zeta^2 - 1\big) - \tfrac{8}{3}\,\fracderiv{-1}{\zeta}{\alpha} \circ \zeta + \tfrac{7 \cdot 13}{12^2}\,\fracderiv{-2}{\zeta}{\alpha}\right] v = 0. \]
-In the frequency domain, this equation becomes
-\[ \left[\big[\big(\tfrac{\partial}{\partial z}\big)^2 - 1\big] + \tfrac{8}{3}\,z^{-1} \tfrac{\partial}{\partial z} + \tfrac{7 \cdot 13}{12^2}\,z^{-2}\right] \laplace_{\zeta, \alpha} v = 0. \]
-\color{black}
-\color{SpringGreen}
-Set
-\[ \laplace_{\zeta, \alpha} v = \int_\Lambda e^{-zf}\,p\,du. \]
-Observe that
-\[ \big[\big(\tfrac{\partial}{\partial z}\big)^2 - 1\big] \int_\Lambda e^{-zf}\,p\,du = \int_\Lambda e^{-zf}\,(f^2 - 1)p\,du \]
-and
-\begin{align*}
-z^{-1} \tfrac{\partial}{\partial z} \int_\Lambda e^{-zf}\,p\,du & = z^{-1} \int_\Lambda e^{-zf}\,(-fp)\,du \\
-& = -z^{-1} \int_\Lambda e^{-zf}\,(-zf')q_1\,du \\
-& = \int_\Lambda e^{-zf}\,f'q_1\,du
-\end{align*}
-where $q_1' = -fp$.
-and
-\begin{align*}
-z^{-2} \int_\Lambda e^{-zf}\,p\,du
-& = -z^{-2} \int_\Lambda e^{-zf}\,(-zf')p_1\,du \\
-& = z^{-1} \int_\Lambda e^{-zf}\,f'p_1\,du \\
-& = -z^{-1} \int_\Lambda e^{-zf}\,(-zf')p_2\,du \\
-& = \int_\Lambda e^{-zf}\,f'p_2\,du \\
-\end{align*}
-with $p_1' = p$ and $p_2' = f'p_1$.
-\[ \left[\big[\big(\tfrac{\partial}{\partial z}\big)^2 - 1\big] + \tfrac{8}{3}\,z^{-1} \tfrac{\partial}{\partial z} + \tfrac{7 \cdot 13}{12^2}\,z^{-2}\right] \laplace_{\zeta, \alpha} v = 0. \]
-\color{black}
-
-\color{orange}
-In DLMF notation, let's try
-\begin{align*}
-u_1 & = F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \xi_{-1}) \\
-& = w_1(\xi_{-1}) \\
-u_{-1} & = w_3(\xi_{-1}) \\
-v_{-1} & = w_2(\xi_{-1}) \\
-v_1 & = -i\sqrt{2}\,\zeta_1^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, -\tfrac{1}{2}\zeta_1) \\
-& = (-\tfrac{1}{2}\zeta_1)^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, -\tfrac{1}{2}\zeta_1) \\
-& = (1 - \tfrac{1}{2}\zeta_{-1})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, 1 - \tfrac{1}{2}\zeta_{-1}) \\
-& = (1 - \xi_{-1})^{-1/2} F(\tfrac{1}{2} + \tfrac{m}{n}, \tfrac{1}{2} - \tfrac{m}{n}, \tfrac{1}{2}, 1 - \xi_{-1}) \\
-& = w_4(\xi_{-1}),
-\end{align*}
-where $\xi_{-1} = \tfrac{1}{2}\zeta_{-1}$.
-
-\color{RoyalBlue}
-Let's guess that we're working with the map $\phi / \psi$ with
-\begin{align*}
-\phi & = \frac{\Gamma(-\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(\tfrac{1}{2} - \tfrac{m}{2n})\Gamma(\tfrac{1}{2} + \tfrac{m}{2n})}\,(\mp \zeta)\,F(1 - \tfrac{m}{2n}, 1 + \tfrac{m}{2n}, \tfrac{3}{2}; \zeta^2) \\
-& = \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \pm \tfrac{1}{2}\zeta) - \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta) \\
-& = \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, -\tfrac{1}{2}\zeta_1) - \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2}\zeta_{-1}) \quad\text{[choosing negative sign]} \\
-\psi & = \frac{\Gamma(\tfrac{1}{2}) \Gamma(\tfrac{3}{2})}{\Gamma(1 - \tfrac{m}{2n})\Gamma(1 + \tfrac{m}{2n})} F(\tfrac{1}{2} - \tfrac{m}{2n}, \tfrac{1}{2} + \tfrac{m}{2n}, \tfrac{1}{2}; \zeta^2) \\
-& = \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \pm \tfrac{1}{2}\zeta) + \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \mp \tfrac{1}{2}\zeta) \\
-& = \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, -\tfrac{1}{2}\zeta_1) + \tfrac{1}{2} F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2}\zeta_{-1}) \quad\text{[choosing negative sign]} \\
-\end{align*}
-\color{black}
-\subsubsection{Comparison with Ghate and Venkataramana}
-\begin{align*}
-\mu_\text{GV} & = 1 - \left\{\frac{k_1}{d}\right\} - \left\{\frac{k_3}{d}\right\} & \lambda & = 1 - c \\
-\nu_\text{GV} & = 1 - \left\{\frac{k_2}{d}\right\} - \left\{\frac{k_3}{d}\right\} & \mu & = c - a - b \\
-\lambda_\text{GV} & = 1 - \left\{\frac{k_1}{d}\right\} - \left\{\frac{k_2}{d}\right\} & \nu & = b - a
-\end{align*}
-The hyperelliptic curve in Section~4 is
-\[ y^d = (x - \alpha_1)^{k_1} (x - \alpha_2)^{k_2} (x - \alpha_3)^{k_3}. \]
-
-Dihedral case (Theorem~2):
-\begin{align*}
-\frac{k_1}{d} & = \frac{p}{2m} \\
-\frac{k_2}{d} & = \frac{p}{2m} \\
-\frac{k_3}{d} & = \frac{m - p}{2m}
-\end{align*}
-Note that $\lambda = p'/m$ with $p + p' = m$. The hyperelliptic curve is
-\[ y^d = (x - \alpha_1)^{k_1} (x - \alpha_2)^{k_2} (x - \alpha_3)^{k_3}. \]
-Cosines appear in Section~2.3: $x_j = \exp(2\pi i\,\tfrac{k_j}{d})$, and we work in the totally real field $\mathbb{Q}(\cos(\frac{2\pi}{m}))$.
-
-Airy case:
-\begin{align*}
-\frac{k_1}{d} & = \frac{1}{3} \\
-\frac{k_2}{d} & = \frac{1}{3} \\
-\frac{k_3}{d} & = \frac{1}{6},
-\end{align*}
-so $(k_1, k_2, k_3, d) = (2, 2, 1, 6)$, and the hyperelliptic curve is
-\[ y^6 = (x - \alpha_1)^2 (x - \alpha_2)^2 (x - \alpha_3). \]
-
-\subsection{Modified Bessel}
-
-\textcolor{magenta}{[For this, we lift to a countable cover; see {\tt airy-resurgence.tex}, currently \S 6.4]}
 
 \subsection{Higher Airy}
 
@@ -1091,29 +964,31 @@ we have
 where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n}\pi\big)$.
 \subsubsection{Rewriting as a \textcolor{magenta}{(???)} equation}
 We can distill the most interesting parts of the hyper-Airy function by writing
-\[ \widetilde{\Ai}^{(k)}_n(y) = \textcolor{magenta}{\text{const.}}\,y^{1/(n-1)}\,K\left((-1)^n\,\tfrac{n-1}{n}\,y^{n/(n-1)}\right), \]
+\[ \widetilde{\Ai}^{(k)}_n(y) = \textcolor{magenta}{\text{const.}}\,y^{1/(n-1)}\,K^{(k)}\left((-1)^n\,\tfrac{n-1}{n}\,y^{n/(n-1)}\right), \]
 where
 \begin{equation}
-K(z) = \textcolor{magenta}{\text{const.}} \int_{\textcolor{magenta}{\text{const.}(n)} z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du.
+K^{(k)}(z) = \textcolor{magenta}{\text{const.}} \int_{\textcolor{magenta}{\text{const.}(n)} z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du.
 \end{equation}
 Saying that $\widetilde{\Ai}^{(k)}_n$ satisfies the higher Airy equation is equivalent to saying that $K$ satisfies an equation of the form
 \begin{equation}\label{eqn:higher-Airy}
-\left[ \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{-1} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-1)} z^{-(n-1)} \right] \varphi = 0.
+\left[ \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{-1} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-1)} z^{-(n-1)} \right] K^{(k)} = 0.
 \end{equation}
-The sub-leading coefficients are the triangular numbers
-\[ c_n^{(1)} = \frac{n(n-1)}{2}. \]
-\color{DarkCyan}
+The sub-leading coefficients are 
+\[ c_n^{(1)} = \frac{n-1}{2}. \]
+
 The later coefficients can be written as\footnote{Many thanks to Peter Taylor for noticing this [\url{https://mathoverflow.net/q/422337/1096}].}
-\[ c_n^{(k)} = \frac{b_n^{(k)}}{n^k}\,(n+1)^{\underline{k+2}} \]
+\[ c_n^{(k)} = \frac{b_n^{(k)}}{n^k}\,\frac{\Gamma(n+2)}{\Gamma(n-k)} \]
 in terms of the polynomials
 
-\begin{align*}
-b_n^{(2)} & = & \tfrac{1}{24} \\
-b_n^{(3)} & = & \tfrac{1}{48} n \\
-b_n^{(4)} & = & \tfrac{73}{5760} n^2 & + & \tfrac{1}{1152} n & - & \tfrac{1}{2880} \\
-b_n^{(5)} & = & \tfrac{11}{1280} n^{3} & + & \tfrac{1}{768} n^{2} & - & \tfrac{1}{1920} n \\
-b_n^{(6)} & = & \tfrac{3625}{580608} n^{4} & + & \tfrac{61}{41472} n^{3} & - & \tfrac{181}{322560} n^{2} & - & \tfrac{1}{41472} n & + & \tfrac{1}{181440}. 
-\end{align*}
+\begin{tabular}{llllllllllll}
+$b_n^{(2)}$ & = & $\frac{1}{24}$ \\
+$b_n^{(3)}$ & = & $\frac{1}{48} n$ \\
+$b_n^{(4)}$ & = & $\frac{73}{5760} n^2$ & + & $\frac{1}{1152} n$ & - & $\frac{1}{2880}$ \\
+$b_n^{(5)}$ & = & $\frac{11}{1280} n^{3}$ & + & $\frac{1}{768} n^{2}$ & - & $\frac{1}{1920} n$ \\
+$b_n^{(6)}$ & = & $\frac{3625}{580608} n^{4}$ & + & $\frac{61}{41472} n^{3}$ & - & $\frac{181}{322560} n^{2}$ & - & $\frac{1}{41472} n$ & + & $\frac{1}{181440}$. 
+\end{tabular}
+
+\vspace{5mm}
 
 
 Searching for 580608 in the OEIS turns up the leading coefficients $\beta^{(k)}$ of these polynomials, which are listed as {\tt A249276} and {\tt A249277}. They're defined by the identity [Yang, ``Approximations for Constant $e$ and Their Applications'']
@@ -1121,9 +996,32 @@ Searching for 580608 in the OEIS turns up the leading coefficients $\beta^{(k)}$
 which tells us that
 \[ \frac{1}{e} \left(\frac{n}{n-1}\right)^{n-1} = 1 - \frac{1/2}{n} - \frac{b_n^{(2)}}{n^2} - \frac{b_n^{(3)}}{n^4} - \left[\frac{b_n^{(4)}}{n^6} + o\left(\frac{1}{n^5}\right)\right] - \left[\frac{b_n^{(5)}}{n^8} + o\left(\frac{1}{n^6}\right)\right] - \ldots. \]
 The last coefficient can be written as
-\[ c_n^{(n-1)} = \left(\frac{n-1}{n}\right)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}}, \]
+\[ c_n^{(n-1)} =\left(\frac{n-1}{n}\right)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}}, 
+\]
 giving
-\[ b_n^{(n-1)} = (n-1)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}} \Big/ (n+1)^{\underline{n+1}}. \]
+\[ b_n^{(n-1)} = (n-1)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}} \Big/ \Gamma(n+2). \]
+
+\subsubsection{Building a frame of analytic solutions}
+
+We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:higher-Airy}. We'll succeed when $\alpha^{n-1} - 1 = 0$, and we'll see that $K^{(k)}$ is a scalar multiple of $\laplace_{\zeta, \alpha_k} v_k$ with $\alpha_k=e^{2\pi i \tfrac{k}{n-1}}$.
+
+We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha_k} v$ satisfies the differential equation~\eqref{eqn:higher-Airy} if and only if $v$ satisfies the integral equation
+\begin{equation}\label{int-eq:spatial-higher-Airy}
+\left[ \big[ \zeta^{n-1} - 1 \big] - c_n^{(1)} \partial_{\zeta,\alpha_k}^{-1}\circ \zeta^{n-2} - c_n^{(2)} \partial_{\zeta,\alpha_k}^{-2} \circ\zeta^{n-3} - \ldots - c_n^{(n-1)} \partial_{\zeta,\alpha_k}^{-(n-1)} \right] v = 0.
+\end{equation}
+
+Since equation \eqref{eqn:higher-Airy} is written in form \eqref{eqn:standard ODE} and the coefficient $c_n^{(1)}$ is explicitly known, we deduce that equation \eqref{int-eq:spatial-higher-Airy} admits a slight solution at $\zeta={\alpha_k} $ of order $\tau_{\alpha_k}=\frac{1}{2}$. In particular, $v$ is a solution of \eqref{int-eq:spatial-higher-Airy} if and only if it solves the following differential equation
+ 
+\begin{equation}\label{diff-eq:spatial-higher-Airy}
+\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \circ\big[ \zeta^{n-1} - 1 \big] - c_n^{(1)} \partial_{\zeta,\alpha_k}^{n-2}\circ \zeta^{n-2} - c_n^{(2)} \partial_{\zeta,\alpha_k}^{n-3} \circ\zeta^{n-3} - \ldots - c_n^{(n-1)} \right] v = 0.
+\end{equation}
+
+Using the Liebniz rule for the differential, we get 
+
+\begin{itemize}
+\item $\big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \circ\big[ \zeta^{n-1} - 1 \big]=\sum_{j=0}^{n-1} (n-1 j) v^{(n-j-1)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]=(\zeta^{n-1} - 1)\partial_{\zeta}^{n-1}v+ (n-1)^2\zeta^{n-2} \partial_\zeta^{n-2}v +...+(n-1)! v $
+\end{itemize}
+
 \color{DarkBlue}
 
 \subsubsection{Higher Airy of degree $3$}
@@ -1546,7 +1444,7 @@ The holomorphic analysis in Section~\ref{spatial} will give us holomorphic solut
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,W_\alpha \mid \alpha^2 - 1 = 0 \}, \]
 which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We will see in Section~\ref{bessel-regularity} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is an evidence of Theorem~\ref{thm:1}
 
-\subsection{Building a distinguished frame of analytic solution}
+\subsection{Building a distinguished frame of analytic solutions}
 \subsubsection{Going to the spatial domain}\label{spatial}
 %\subsubsection{The big idea}\label{big-idea}
 We are going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel}. We will succeed when $\alpha^2 - 1 = 0$, and we will see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
