@@ -92,7 +92,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 %\newtheorem{exercise}[definition]{Exercise}
 \newtheorem*{notation*}{Notation}
 
-\title{Resurgence of the Airy function \\ and other exponential integrals}
+\title{Borel regularity for ODEs and exponential integrals}
 \author{Veronica Fantini and Aaron Fenyes}
 
 \begin{document}
@@ -370,7 +370,7 @@ is a holomorphic function on the right half-plane parametrized by $z$, and it tu
 
 In higher-dimensional complex manifolds, integrals over Lefschetz thimbles are still Borel regular~\textbf{[``Exponential integrals, Lefschetz thimbles and linear resurgence''][``Exponential Integral'' lectures?]}. This fact plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation and related techniques to assign values to these integrals \textbf{[Costin \& Kruskal, ``On optimal truncation...'']}.
 
-\color{Turquoise}
+\color{DarkTurquoise}
 Choose a path $\gamma \maps \R \to X$ whose projection $f \circ \gamma$ starts out going leftward out of a puncture, ends up going rightward into a puncture, and never touches a critical value of $f$. Choose a translation coordinate $\zeta$ on $B$ and continue it along $f \circ \gamma$, noting that it may become multi-valued if $f \circ \gamma$ intersects itself. This data defines the {\em exponential integral}
 \[ I = \int_\gamma e^{-z f^*\zeta} \nu, \]
 a holomorphic function on the right half-plane parametrized by $z$. It turns out \textbf{[we hope]} that we can get $I$ by summing $e^{-\alpha_p z} I_p$ over various critical points---as long as none of the $\Gamma_p$ run into each other. \textbf{[We get jumps at phases where the $\Gamma_p$ do hit each other.]} The constants $\alpha_p$ are values of $\zeta$, continued to the critical points along certain paths.
@@ -712,6 +712,154 @@ which rearranges to the second equation in the statement.
 \subsection{Borel regularity for thimble integrals}
 
 
+Let $X$ be a $N-\dim$ manifold, $f\colon X\to\C$ be a holomorphic Morse function with only simple critical points, and $\nu\in\Gamma(X,\Omega^N)$, and set
+\begin{equation}\label{exp-int}
+I(z)\defeq\int_{\mathcal{C}}e^{-zf}\nu
+\end{equation}
+where $\mathcal{C}$ is a suitable countur such that the integral is well defined.  
+For any Morse cirtial points $x_\alpha$ of $f$, the saddle point approximation gives the following formal series 
+\begin{equation}
+I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu\sim \tilde{I}_{\alpha}\defeq e^{-zf(x_\alpha)}(2\pi)^{N/2} z^{-N/2}\sum_{n\geq 0}a_{\alpha,n}z^{-n} \qquad \text{ as } z\to\infty
+\end{equation}
+where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point $x_\alpha$. Notice that $f \circ \mathcal{C}_\alpha$ lies in the ray $\zeta_\alpha +[0, \infty)$, where $\zeta_\alpha := f(x_\alpha)$.
+\begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$ and assume $f''(x_\alpha)\neq 0$ for every critical point $x_\alpha$. Then:
+\begin{enumerate}
+\item\label{int:series-gevrey} The series $\tilde{\varphi}_\alpha$ is Gevrey-1.
+\item\label{int:resum-converges} The series $\hat{\varphi}_\alpha(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ converges near $\zeta=\zeta_{\alpha}$.
+\item\label{int:resum-valid} If you continue the sum of $\hat{\phi}_\alpha$ along the ray going rightward from $\zeta_\alpha$, and take its Laplace transform along that ray, you'll recover $z^{1/2} I_\alpha$.
+\item\label{int:deriv-formula} For any $\zeta$ on the ray going rightward from $\zeta_\alpha$, we have
+\begin{multline}\label{formula1}
+\hat{\varphi}_{\alpha}(\zeta)=\partial^{\textcolor{red}{3/2}}_{\zeta \text{ from }\zeta_\alpha} \left( \int_{\mathcal{C}_\alpha(\zeta)}\nu \right)=\textcolor{red}{\left(\tfrac{\partial}{\partial \zeta}\right)^2}\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\zeta_\alpha}^\zeta (\zeta-\zeta')^{-1/2} \textcolor{red}{\left( \int_{\mathcal{C}_\alpha(\zeta')} \nu \right)}\,d\zeta',
+\end{multline}
+where $\mathcal{C}_\alpha(\zeta)$ is the part of $\mathcal{C}_\alpha$ that goes through $f^{-1}([\zeta_\alpha, \zeta])$. Notice that $\mathcal{C}_\alpha(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textbf{[Be careful about the orientation of $\mathcal{C}_\alpha$.]}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Part~\eqref{int:series-gevrey}: Let's write $\approx$ when two functions are asymptotic (at all orders around the base point \textbf{[is this the right condition?]}), and $\sim$ when a function is asymptotic to a formal power series (at the truncation order of each partial sum).
+
+Since $f$ is Morse, we can find a holomorphic chart $\tau$ around $x_\alpha$ with $\tfrac{1}{2} \tau^2 = f - \zeta_\alpha$. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_\alpha$ that go from the past to $x_\alpha$ and from $x_\alpha$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0, \infty)$ on $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$, respectively. \textbf{[We should explicitly spell out and check the conditions that make this possible. I think we're implicitly orienting $\mathcal{C}_\alpha$ so that $\tau$ in the upper half-plane.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
+\[ \nu = \sum_{n \ge 0} b_n^\alpha \tau^n\,d\tau \]
+that converges in some disk $|\tau| < \varepsilon$.
+
+By the steepest descent method,
+%%\[ e^{-z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
+\[ e^{\textcolor{magenta}{+}z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
+as $z \to \infty$. \textbf{[I need to learn how this works! Do we get asymptoticity at all orders? ---Aaron]} Plugging in the Taylor series above, we get
+\begin{align*}
+e^{-z\zeta_\alpha} I_\alpha(z) & \approx \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_n^\alpha \tau^n\,d\tau \\
+& = \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^\alpha \tau^{2n}\,d\tau.
+\end{align*}
+By the dominated convergence theorem,\footnote{Notice that the sum over $k$ is empty when $n = 0$. Following convention, we extend the double factorial to all odd integers by its recurrence relation, giving $(-1)!! = 1$.}
+\begin{align*}
+e^{-z\zeta_\alpha} I_\alpha(z) & \approx \sum_{n \ge 0} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \\
+& = \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha \left[ \sqrt{2\pi}\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big) - 2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \right].
+\end{align*}
+
+The annoying $e^{-z\varepsilon^2/2}$ correction terms are dwarfed by their $z^{-(n+1/2)}$ counterparts when $z$ is large. These terms are crucial, however, for the convergence of the sum. To see why, consider their absolute sum $C_\text{exp}$. When $z \in [0, \infty)$,
+\begin{align*}
+C_\text{exp} & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left| b_{2n}^\alpha \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \right| \\
+& = 2e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \\
+& \ge -2\varepsilon e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| z^n,
+\end{align*}
+which diverges for typical $f$ and $\nu$. \textbf{[Does it? Veronica points out that we expect $b_{2n}$ to shrink at least as fast as $(n!)^{-1}$.]}
+
+This argument suggests that no matter how tiny the correction terms get, we can't expect to swat them all aside. We can, however, set aside any finite set of them. \color{violet}\textbf{[Use Miller's proof of Watson's lemma in place of the following argument, which has a few soft spots. See also Loday-Richaud, \S 5.1.5, Theorem~5.1.3]} For each cutoff $N$, the tail
+\[ \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \]
+
+\color{Purple}
+For each cutoff $N$, the tail error \textbf{[check]}
+\begin{align*}
+\left| \sum_{n \ge N} b_{2n}^\alpha \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \right| & \le \sum_{n \ge N} \left| b_{2n}^\alpha \right| \int_{-\varepsilon}^\varepsilon e^{-|z|\tau^2/2} \tau^{2n}\,d\tau \\
+& \le \sum_{n \ge N} \left| b_{2n}^\alpha \right| \int_{-\infty}^\infty e^{-|z|\tau^2/2} \tau^{2n}\,d\tau \\
+& = \sqrt{2\pi} \sum_{n \ge N} (2n-1)!!\,\left| b_{2n}^\alpha \right| |z|^{-(n+1/2)} \\
+& \lesssim \sum_{n \ge N} (2n-1)!!\,\varepsilon^{-2n} |z|^{-(n+1/2)} \\
+& = \varepsilon \sum_{n \ge N} (2n-1)!!\,\big(\varepsilon^{-1}\big)^{2n+1} \big(|z|^{-1/2}\big)^{2n+1} \\
+& = \varepsilon \sum_{n \ge N} (2n-1)!!\,\big(\varepsilon^{-1} |z|^{-1/2}\big)^{2n+1} \\
+& = \textbf{uh-oh!}
+\end{align*}
+\color{violet}
+is in $o_{z \to \infty}(z^{-N})$ \textbf{[check]}, and the absolute sum
+\begin{align*}
+C_\text{exp}^N & = 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n = 1}^{N-1} (2n-1)!!\,\left| b_{2n}^\alpha \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{n-k+1} \right| \\
+& \le 2e^{-\operatorname{Re}(z)\varepsilon^2/2} \sum_{n = 1}^{N-1} (2n-1)!!\,\left|b_{2n}^\alpha\right| \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} |z|^{n-k+1} \\
+& \ge -2\varepsilon e^{-z\varepsilon^2/2} \sum_{n \ge 1} (2n-1)!!\,\left|b_{2n}^\alpha\right| z^n,
+\end{align*}
+is in $o_{z \to \infty}(z^{-m})$ for every $m$ \textbf{[check]}.\color{black} Hence,
+\[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
+The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows, allowing the simpler estimate
+\[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)}. \]
+Call the right-hand side $\tilde{I}_\alpha$. We now see that $a_{\alpha,n} = (2n-1)!!\,b_{2n}^\alpha$ in the statement of the theorem. \textbf{[Resolve discrepancy with previous calculation.]} Note that \textbf{[explain formally what it means to center at $\zeta_\alpha$]}
+\begin{align*}
+\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & = \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \Gamma\big(n+\tfrac{1}{2}\big)\,b_{2n}^\alpha\,\frac{(\zeta - \zeta_\alpha)^{n-1/2}}{\Gamma\big(n+\tfrac{1}{2}\big)} \\
+& = \sum_{n \ge 0} 2^{n+1/2}\,b_{2n}^\alpha\,(\zeta - \zeta_\alpha)^{n-1/2}.
+\end{align*}
+
+We know from the definition of $\varepsilon$ that $\left|b_n^\alpha\right| \varepsilon^n \lesssim 1$. Recalling that $(2n - 1)!! \approx (\pi n)^{-1/2}\,2^n\,n!$ as $n \to \infty$, we deduce that $|a_{\alpha,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{\varphi}_\alpha$ is Gevrey-1.
+
+Part~\eqref{int:resum-converges}: \begin{align*}
+\hat{\varphi}_\alpha(\zeta)=\mathcal{B}\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
+(2\pi)^{1/2} \left(\delta(f_{x_\alpha}) a_0+\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}\right)
+\end{align*}
+Since $a_{n}\leq CA^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
+
+Part~\eqref{int:resum-valid}: Let's recast the integral $I_\alpha$ into the $f$ plane. As $\zeta$ goes rightward from $\zeta_\alpha$, the start and end points of $\mathcal{C}_\alpha(\zeta)$ sweep backward along $\mathcal{C}^-_\alpha(\zeta)$ and forward along $\mathcal{C}^+_\alpha(\zeta)$, respectively. Hence, we have
+\begin{align*}
+I_\alpha(z) & = \int_{\mathcal{C}_{\alpha}} e^{-zf} \nu \\
+& = \int_{\zeta_\alpha}^\infty e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}\,d\zeta.
+\end{align*}
+Noticing that the right-hand side is a Laplace transform, we learn that
+\begin{equation}\label{thimble-difference}
+\hat{I}_\alpha(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)}.
+\end{equation}
+\color{Aquamarine}
+In Ecalle's formalism, $\frac{\nu}{df}$ and $\hat{I}_\alpha$ are a major and a minor of the singularity $\overset{\triangledown}{I}_\alpha$. [Can we say: $\frac{\nu}{df}$ is a major representing the singularity $\overset{\triangledown}{I}_\alpha$? Or something even simpler?]
+\color{black}
+
+We can rewrite our Taylor series for $\nu$ as
+\begin{align*}
+\nu & = \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{n/2}\,\frac{df}{[2(f - \zeta_\alpha)]^{1/2}} \\
+& = \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{(n - 1)/2}\,df,
+\end{align*}
+taking the positive branch of the square root on $\mathcal{C}^+_\alpha$ and the negative branch on $\mathcal{C}^-_\alpha$. Plugging this into our expression for $\hat{I}_\alpha$, we learn that
+\begin{align*}
+\hat{I}_\alpha(\zeta) & = \left[ \sum_{n \ge 0} b_n^\alpha [2(f - \zeta_\alpha)]^{(n - 1)/2} \right]_{\operatorname{start} \mathcal{C}_\alpha(\zeta)}^{\operatorname{end} \mathcal{C}_\alpha(\zeta)} \\
+& = \sum_{n \ge 0} b_n^\alpha \Big( [2(\zeta - \zeta_\alpha)]^{(n - 1)/2} - (-1)^{n-1}[2(\zeta - \zeta_\alpha)]^{(n - 1)/2} \Big) \\
+& = \sum_{n \ge 0} 2 b_{2n}^\alpha [2(\zeta - \zeta_\alpha)]^{n - 1/2} \\
+& = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^\alpha (\zeta - \zeta_\alpha)^{n - 1/2} \\
+& = \mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha.
+\end{align*}
+We already knew, from the general theory of the Borel transform, that the sum of $\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha$ would be asymptotic to $\hat{I}_\alpha$. We've now shown that the sum of $\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha$ is actually equal to $\hat{I}_\alpha$.
+
+Theorem~\ref{thm:frac-diff-borel} tells us that
+\begin{align*}
+\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & \defeq \mathcal{B}_{\zeta_\alpha} z^{-1/2} \tilde{\varphi}_\alpha \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \mathcal{B} \tilde{\varphi}_\alpha \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha.
+\end{align*}
+It follows, from our conclusion above, that
+\begin{equation}\label{shifted-resum-valid}
+\hat{I}_\alpha(\zeta) = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha.
+\end{equation}
+Taking the Laplace transform of both sides and applying \textbf{the inverse of Theorem~\ref{thm:frac-diff-borel} that works for shifted analytic functions}, we see that
+\begin{align*}
+I_\alpha(z) & = \laplace_{\zeta, \zeta_\alpha} \left[ \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha \right] \\
+& = z^{-1/2} \laplace_{\zeta, \zeta_\alpha} \hat{\varphi}_\alpha,
+\end{align*}
+as we claimed.
+
+Part~\eqref{int:deriv-formula}: Since fractional integrals form a semigroup, equation~\eqref{shifted-resum-valid} implies that
+\[ \partial^{-1}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_\alpha(\zeta) = \partial^{-3/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha. \]
+Rewriting equation~\eqref{thimble-difference} as
+\[ \hat{I}_\alpha(\zeta) = \partial_\zeta \left( \int_{\mathcal{C}_\alpha(\zeta)} \nu \right), \]
+we can see that
+\[ \partial^{-1}_{\zeta \text{ from } \zeta_\alpha} \hat{I}_\alpha(\zeta) = \int_{\mathcal{C}_\alpha(\zeta)} \nu - \int_{\mathcal{C}_\alpha(0)} \nu. \]
+The initial value term vanishes, because the path $\mathcal{C}_\alpha(0)$ is a point. Hence,
+\[ \int_{\mathcal{C}_\alpha(\zeta)} \nu = \partial^{-3/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha(\zeta). \]
+Recalling that the Riemann-Liouville fractional derivative is a left inverse of the fractional integral, we conclude that
+\[ \partial^{3/2}_{\zeta \text{ from } \zeta_\alpha} \left( \int_{\mathcal{C}_p(\zeta)} \nu \right) = \hat{\varphi}_p(\zeta). \]
+\end{proof}
+
+
 \section{Examples}
 
 \subsection{Airy}
@@ -744,6 +892,8 @@ with $n \in \{3, 4, 5, \ldots\}$ and $m \in \{1, 2, \ldots, r-1\}$. A few soluti
 where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n}\pi\big)$.
 
 \subsubsection{Asymptotic analysis}
+
+\textcolor{lime}{[Use Poincar\'e algorithm to compute the asymptotic expansion]}
 
 \subsubsection{Rewriting as a modified Bessel $\frac{m}{n}$ equation}
 We can distill the most interesting parts of the Airy-Lucas function by writing
@@ -826,7 +976,7 @@ where $\zeta_{-1}$ is the coordinate with $\zeta = -1 + \zeta_{-1}$. From the ar
 
 In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{o}bius transformation that pulls $\zeta$ back to $-\zeta$. Kummer's solutions typically come from six different hypergeometric equations, which are related by the M\"{o}bius transformations that permute their singularities. In our case, though, exchanging $1$ with $-1$ keeps equation~\eqref{diff-eq:spatial-mod-bessel-AL} the same.
 
-\color{Turquoise}
+\color{DarkTurquoise}
 \subsubsection{Borel regularity}\label{bessel-regularity-AL}
 Recall that $\tilde{W}_1$ is a formal solution of \eqref{eqn:reg-mod-bessel-AL}
 
@@ -900,9 +1050,48 @@ where $\zeta = -1 + \zeta_{-1}$.
 
 \subsection{Modified Bessel}
 
+The modified Bessel equation is a generalization of equation~\eqref{eqn:mod-bessel-AL} where $\frac{m}{n}$ is replaced by a complex parameter $\mu$
 
-\subsubsection{Lifting to a countable cover}
-Formula~\ref{integral:mod-bessel-rational} expresses the modified Bessel function $K_{m/n}$ as an exponential integral on a finite cover of $\C$. Lifting to a countable cover reveals this formula as a special case of a general integral formula for modified Bessel functions.
+\begin{equation}\label{eqn:mod-bessel}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\mu^2 + z^2\big]\right] \varphi = 0
+\end{equation}
+
+and a basis of solutions is given by the modified Bessel functions (see formulas~10.27.4 and 10.32.12 from \cite{dlmf}) 
+
+\begin{align*}
+I_{\mu}(z)&=\frac{1}{2\pi i}\int_{\Omega} e^{z\cosh t - \mu t} dt \\
+K_{\mu}(z)&=\frac{\pi}{\sin(\mu \pi)}\cdot \frac{1}{2}[ I_{-\mu}(z) - I_{\mu}(z)]
+\end{align*} 
+
+where $\Omega$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$.
+
+\begin{figure}[h]
+\caption{Add figure path $\Omega$}
+\end{figure}
+
+On the one hand, this new condition does not really affect the argument we present in Section~\ref{bessel-regularity-AL}, so we briefly state the main results: 
+
+\begin{itemize}
+ \item \textbf{Asymptotic analysis}: equation~\eqref{eqn:mod-bessel} admits a basis of formal solutions $K_{\mu}\sim e^{-z} z^{-1/2} \tilde{W}_{\mu, 1}$ and $I_{\mu} \sim e^z z^{-1/2} \tilde{W}_{\mu, 2}$ with 
+ \begin{align*}
+ \tilde{W}_{\mu,1} &= 1- \frac{\big(\tfrac{1}{2}-\mu\big)\big(\frac{1}{2}+\mu\big)}{2 \cdot 1!} z^{-1} + \frac{\big(\tfrac{1}{2}-\mu\big)_2\big(\frac{1}{2}+\mu\big)_2}{2^2 \cdot 2!} z^{-2} - \frac{\big(\tfrac{1}{2}-\mu\big)_3\big(\frac{1}{2}+\mu\big)_3}{2^3 \cdot 3!} z^{-3}+...\\
+ \tilde{W}_{\mu,2} &= 1+\frac{\big(\tfrac{1}{2}-\mu\big)\big(\frac{1}{2}+\mu\big)}{2 \cdot 1!} z^{-1} + \frac{\big(\tfrac{1}{2}-\mu\big)_2\big(\frac{1}{2}+\mu\big)_2}{2^2 \cdot 2!} z^{-2}+ \frac{\big(\tfrac{1}{2}-\mu\big)_3\big(\frac{1}{2}+\mu\big)_3}{2^3 \cdot 3!} z^{-3} + ...
+\end{align*}   
+ \item  \textbf{Frame of analytic solutions}: there exist two functions $v_{\mu, 1}, v_{\mu, -1}$ such that $\mathcal{L}_{\alpha}v_{\mu, \alpha}$ satisfies equation~\eqref{eqn:mod-bessel} and they are explicitly 
+
+\begin{align*}
+v_{\mu, 1}&=-i\sqrt{2}\,\zeta_{1}^{-1/2}  {}_2F_1\big(\tfrac{1}{2}-\mu, \tfrac{1}{2}+\mu; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{1}\big)\\
+v_{\mu, -1}&=\sqrt{2}\,\zeta_{-1}^{-1/2}  {}_2F_1\big(\tfrac{1}{2}-\mu, \tfrac{1}{2}+\mu; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big)
+\end{align*}
+\item \textbf{Borel regularity} \textcolor{Lime}{[Check with Aaron how to phrase it]} 
+\end{itemize}
+
+On the other hand, the contour argument we describe in Section~\ref{contour-argument-AL} has to be generalized, as we will discuss in the following Section~\ref{countable-cover}. 
+
+
+
+\subsubsection{Lifting to a countable cover}\label{countable-cover}
+Formula~\eqref{integral:mod-bessel-rational} expresses the modified Bessel function $K_{m/n}$ as an exponential integral on a finite cover of $\C$. Lifting to a countable cover reveals this formula as a special case of a general integral formula for modified Bessel functions.
 
 Setting $u = \cosh(t/n)$ and recalling that
 \begin{align*}
@@ -915,15 +1104,15 @@ we can rewrite formula~\ref{integral:mod-bessel-rational} as \textcolor{magenta}
 \notag & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\textcolor{magenta}{\Omega}} \exp\left[z \cosh(t)\right]\,U_{m-1}(\cosh(t/n))\,\sinh(t/n)\,d(t/n) \\
 \label{integral:mod-bessel-lifted} & = \frac{1}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\textcolor{magenta}{\Omega}} \exp\left[z \cosh(t)\right]\,\sinh\big(\tfrac{m}{n}\,t\big)\,dt.
 \end{align}
-For any $\nu \in \C \smallsetminus \Z$, formulas~10.27.4 and 10.32.12 from \cite{dlmf} tell us that
+For any $\mu \in \C \smallsetminus \Z$, 
 \begin{align}
-\notag K_\nu(z) & = \frac{\pi}{\sin(\nu \pi)} \cdot \frac{1}{2}\big[ I_{-\nu}(z) - I_\nu(z) \big] \\
-\notag & = \frac{1}{2i \sin(\nu \pi)} \int_\Omega \exp\left[z \cosh(t)\right]\,\frac{1}{2}\left[e^{\nu t} - e^{-\nu t}\right]\,dt \\
-\label{intgral:mod-bessel-general} & = \frac{1}{2 \sinh(\nu\,i\pi)} \int_\Omega \exp\left[z \cosh(t)\right]\,\sinh(\nu t)\,dt,
+\notag K_\mu(z) & = \frac{\pi}{\sin(\mu \pi)} \cdot \frac{1}{2}\big[ I_{-\mu}(z) - I_\mu(z) \big] \\
+\notag & = \frac{1}{2i \sin(\mu \pi)} \int_\Omega \exp\left[z \cosh(t)\right]\,\frac{1}{2}\left[e^{\mu t} - e^{-\mu t}\right]\,dt \\
+\label{intgral:mod-bessel-general} & = \frac{1}{2 \sinh(\mu\,i\pi)} \int_\Omega \exp\left[z \cosh(t)\right]\,\sinh(\mu t)\,dt,
 \end{align}
-where $\Omega$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$. The integral converges when $z$ is in the right half-plane. We get formula~\eqref{integral:mod-bessel-lifted} when we choose a rational parameter $\nu = m/n$.
+where $\Omega$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$. The integral converges when $z$ is in the right half-plane. We get formula~\eqref{integral:mod-bessel-lifted} when we choose a rational parameter $\mu = m/n$.
 
-When $\nu$ goes to $0$, formula~\eqref{integral:mod-bessel-lifted} becomes
+When $\mu$ goes to $0$, formula~\eqref{integral:mod-bessel-lifted} becomes
 \[ K_0(z) = \frac{1}{2\pi i} \int_\Omega \exp\left[z \cosh(t)\right]\,t\,dt. \]
 Choosing $\Omega$ to be the unit-speed path that runs from $\infty$ leftward to $-i\pi$, upward to $i\pi$, and rightward back to $\infty$, we can rewrite this formula as
 \begin{align*}
@@ -1013,92 +1202,209 @@ We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha_k} v$ satis
 Since equation \eqref{eqn:higher-Airy} is written in form \eqref{eqn:standard ODE} and the coefficient $c_n^{(1)}$ is explicitly known, we deduce that equation \eqref{int-eq:spatial-higher-Airy} admits a slight solution at $\zeta={\alpha_k} $ of order $\tau_{\alpha_k}=\frac{1}{2}$. In particular, $v$ is a solution of \eqref{int-eq:spatial-higher-Airy} if and only if it solves the following differential equation
  
 \begin{equation}\label{diff-eq:spatial-higher-Airy}
-\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \circ\big[ \zeta^{n-1} - 1 \big] - c_n^{(1)} \partial_{\zeta,\alpha_k}^{n-2}\circ \zeta^{n-2} - c_n^{(2)} \partial_{\zeta,\alpha_k}^{n-3} \circ\zeta^{n-3} - \ldots - c_n^{(n-1)} \right] v = 0.
+\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \circ\big[ \zeta^{n-1} - 1 \big] - c_n^{(1)} \big(\tfrac{\partial}{\partial \zeta}\big)^{n-2}\circ \zeta^{n-2} - c_n^{(2)} \big(\tfrac{\partial}{\partial \zeta}\big)^{n-3} \circ\zeta^{n-3} - \ldots - c_n^{(n-1)} \right] v = 0.
 \end{equation}
 
 Using the Liebniz rule for the differential, we get 
 
-\begin{itemize}
-\item $\big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \circ\big[ \zeta^{n-1} - 1 \big]=\sum_{j=0}^{n-1} (n-1 j) v^{(n-j-1)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]=(\zeta^{n-1} - 1)\partial_{\zeta}^{n-1}v+ (n-1)^2\zeta^{n-2} \partial_\zeta^{n-2}v +...+(n-1)! v $
-\end{itemize}
+\color{Peru}
 
-\color{DarkBlue}
+\begin{align*}
+\big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \circ\big[ \zeta^{n-1} - 1 \big]v&=\sum_{j=0}^{n-1} \binom{n-1}{j} v^{(n-j-1)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]\\
+&=(\zeta^{n-1} - 1)\partial_{\zeta}^{n-1}v+ (n-1)^2\zeta^{n-2} \partial_\zeta^{n-2}v +\\
+&\qquad \sum_{j=2}^{n-1} \binom{n-2}{j} v^{(n-j-1)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]+(n-1)! v\\
+\big(\tfrac{\partial}{\partial {\zeta}}\big)^{n-2}\circ \zeta^{n-2}v&=\zeta^{n-2}\partial_\zeta^{n-2}v+\sum_{j=1}^{n-3} \binom{n-2}{j} v^{(n-j-2)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]+(n-2)!v \\
+\big(\tfrac{\partial}{\partial \zeta}\big)^{n-3} \circ\zeta^{n-3}v&=\sum_{j=0}^{n-4} \binom{n-3}{j} v^{(n-j-3)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]+(n-3)!v\\
+\tfrac{\partial}{\partial \zeta} \circ\zeta v&=\zeta \partial_\zeta v+v
+\end{align*}
+
+\color{black}
+\begin{equation}\label{diff-eq:spatial-mod-higher-Airy}
+\left[ (\zeta^{n-1} - 1)\partial_{\zeta}^{n-1}+ \big[(n-1)^2-c_n^{(1)}\big]\zeta^{n-2} \partial_\zeta^{n-2}+...+\big[(n-1)!-c_n^{(1)}(n-2)!-...-c_n^{(n-1)}\big] \right] v = 0.
+\end{equation}
+
+Let's find a solution of equation~\ref{diff-eq:spatial-mod-higher-Airy} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\ref{diff-eq:spatial-mod-higher-Airy} looks like
+\begin{multline}\label{diff-eq:spatial-mod-higher-Airy-1}
+\left[\zeta_1(n-1+...+(n-1)\zeta_1^{n-3} + \zeta_1^{n-2}) \big(\tfrac{\partial}{\partial \zeta_1}\big)^{n-1} + \big[(n-1)^2-c_n^{(1)}\big](1+\zeta_1)^{n-2} \tfrac{\partial}{\partial \zeta_1}^{n-2} + ... \right.\\
+ \left. +\big[(n-1)!-c_n^{(1)}(n-2)!-...-c_n^{(n-1)}\big]\right] v = 0.
+\end{multline}
+
+
 
 \subsubsection{Higher Airy of degree $3$}
 Setting $n=4$, equation \ref{eqn:higher-Airy} turns into 
 
 \begin{equation}\label{eqn:reg-higher3}
-\left[\frac{\partial^3}{\partial z^3}+1+\frac{6}{z}\frac{\partial^2}{\partial z^2}-\frac{35}{8}\frac{1}{z^2}\frac{\partial}{\partial z}+\frac{315}{16}\frac{1}{z^3}\right]\varphi=0
+\left[\frac{\partial^3}{\partial z^3}+1+\frac{3}{2z}\frac{\partial^2}{\partial z^2}-\frac{5}{16}\frac{1}{z^2}\frac{\partial}{\partial z}+\frac{5}{32}\frac{1}{z^3}\right]\varphi=0
 \end{equation}
 
-We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\ref{eqn:reg-higher3}. We'll succeed when $\alpha^3 + 1 = 0$.%, and we'll see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
+and going to the spatial domain, $\mathcal{L}_{\zeta,\alpha_k}$ satisfies equation~\eqref{eqn:reg-higher3} if and only if $v$ satisfies 
 
-We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\ref{eqn:reg-higher3} if and only if $v$ satisfies the integral equation
-\begin{equation}\label{int-eq:higher3}
-\left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] v = 0.
+
+\begin{equation}\label{diff-eq:spatial-higher3}
+\left[(\zeta^3-1)\partial_\zeta^3-\frac{15}{2}\zeta^2\partial_\zeta^2-\frac{187}{16}\zeta\partial_\zeta+\frac{81}{32}\right]\varphi=0
 \end{equation}
-It's tempting to differentiate both sides of this equation until we get
-\begin{equation}\label{diff-eq:higher3}
-\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ \big[ \zeta^2 - 1 \big] - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \right] v = 0,
-\end{equation}
-which is easier to solve. Unfortunately, a solution of equation~\ref{diff-eq:spatial-mod-bessel} won't satisfy equation~\ref{int-eq:spatial-mod-bessel} in general. However, as we learned in Section~\ref{shifting}, a solution of equation~\ref{diff-eq:spatial-mod-bessel} {\em will} satisfy equation~\ref{int-eq:spatial-mod-bessel} if it's slight and locally integrable at $\zeta = \alpha$.
 
-This is great news, because equation~\ref{diff-eq:spatial-mod-bessel} has a regular singularity at each root of $\zeta^2 - 1$, and the Frobenius method often gives a slight solution at each regular singular point. We can see the regular singularities by moving the derivatives to the right:
-\[ \left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v = 0. \]
-
-In Sections \ref{pos-root}\,--\,\ref{neg-root}, we'll see this approach succeed. For each root $\alpha$, we'll find a solution $v_\alpha$ of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = \alpha$. We know the function $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\ref{eqn:reg-mod-bessel}, and we can even find its asymptotics from the order $\tau_\alpha$ of $v_\alpha$. We learned in Section~\ref{translation} that
-\[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} V_\alpha \]
-where $V_\alpha = \laplace_{\zeta_\alpha, 0} v_\alpha$ and $\zeta = \alpha + \zeta_\alpha$. We can see from Section~\ref{reg-decay} that $V_\alpha\in z^{-\tau_\alpha}\C[\![z^{-1}]\!]$, so we further decompose
-\[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} z^{-\tau_\alpha} W_\alpha, \]
-with $W_\alpha\in\C[\![z^{-1}]\!]$.
-\color{Peru}
-\begin{align*}
-\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (\zeta - 1)(\zeta + 1) - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \right] v & = 0
-\end{align*}
-\color{Sienna}
-\begin{align*}
-\left[ \big[ 2 + 2(2\zeta) \tfrac{\partial}{\partial \zeta} + (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 \big] - \big[ 1 + \zeta \tfrac{\partial}{\partial \zeta} \big] - \big(\tfrac{1}{3}\big)^2 \right] v & = 0 \\
-\left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v & = 0 \\
-\left[ (\zeta - 1)(\zeta + 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v & = 0
-\end{align*}
-\color{black}
-%%In terms of the coordinate $\zeta_\alpha$ with $\zeta = \alpha + \zeta_\alpha$, this equation is written
-%%\begin{equation}\label{eqn:centered-mod-bessel}
-%%\[ \left[ \big[ \zeta_\alpha (\zeta_\alpha + 2\alpha) + \alpha^2 - 1 \big] + \fracderiv{-1}{\zeta_\alpha}{0} \circ \big[ \zeta_\alpha + \alpha \big] - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta_\alpha}{0} \right] w = 0. \]
-%%\end{equation}
-\subsubsection{Focus on $\zeta = 1$}\label{pos-root}
-Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\ref{diff-eq:spatial-mod-bessel} looks like
+Let's find a solution of equation~\eqref{diff-eq:spatial-higher3} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\eqref{diff-eq:spatial-higher3} looks like
 \begin{equation}%%\label{diff-eq:spatial-mod-bessel-pos}
-\left[\zeta_1(2 + \zeta_1) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(1 + \zeta_1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0.
+\left[\zeta_1(3 + 3\zeta_1 + \zeta_1^2) \big(\tfrac{\partial}{\partial \zeta_1}\big)^3 - \frac{15}{2}(1 + 2\zeta_1 + \zeta_1^2) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 -\frac{187}{16}(1+\zeta_1)\tfrac{\partial}{\partial \zeta_1} + \frac{81}{32}\right] v = 0.
 \end{equation}
-With another change of coordinate, given by $\zeta_1 = -2\xi_1$, we can rewrite equation~\ref{diff-eq:spatial-mod-bessel} as the hypergeometric equation
-\begin{equation}\label{diff-eq:hypergeom-pos}
-\left[\xi_1 (1 - \xi_1) \big(\tfrac{\partial}{\partial \xi_1}\big)^2 + 3(\tfrac{1}{2} - \xi_1) \tfrac{\partial}{\partial \xi_1} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0.
-\end{equation}
-Looking through the twenty-four expressions for Kummer's six solutions, we find one \cite[formula~15.10.12]{dlmf} which is manifestly slight and locally integrable at $\xi_1 = 0$:
-\begin{alignat*}{2}
-v_1 &=\;& \hphantom{-i\sqrt{2}}\,\xi_1^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \xi_1\big) \\
-&=\;& -i\sqrt{2}\,\zeta_1^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big)
-\end{alignat*}
-From the argument in Section~\ref{big-idea}, we know that $\laplace_{\zeta, 1} v_1$ satisfies equation~\ref{eqn:mod-bessel}, and can be written as $e^{-z} V_1$, where $V_1 = \laplace_{\zeta_1, 0} v_1$. Since $v_1$ has order $-1/2$, the decomposition $V_1 = z^{1/2} W_1$ makes $W_1$ asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
-\subsubsection{Focus on $\zeta = -1$}\label{neg-root}
-Let's find a solution of equation~\ref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = -1$. In the rescaled coordinate from Section~\ref{pos-root}, this is the point $\xi_1 = 1$. Looking again through Kummer's table of solutions, we find another expression \cite[formula~15.10.14]{dlmf} which is manifestly slight and locally integrable at $\xi_1 = 1$:
-\begin{alignat*}{2}
-v_{-1} &=\;& (1-\xi_1)^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi_1\big) \\
-&=\;& \sqrt{2}\,\zeta_{-1}^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big)
-\end{alignat*}
-where $\zeta_{-1}$ is the coordinate with $\zeta = -1 + \zeta_{-1}$. From the argument in Section~\ref{big-idea}, we know that $\laplace_{\zeta, -1} v_{-1}$ satisfies equation~\ref{eqn:mod-bessel}, and can be written as $e^z V_{-1}$, where $V_{-1} = \laplace_{\zeta_{-1}, 0} v_{-1}$. Since $v_{-1}$, like our other solution, has order $-1/2$, the same decomposition $V_{-1} = z^{1/2} W_{-1}$ makes $W_{-1}$ asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
 
-In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{o}bius transformation that pulls $\zeta$ back to $-\zeta$. Kummer's solutions typically come from six different hypergeometric equations, which are related by the M\"{o}bius transformations that permute their singularities. In our case, though, exchanging $1$ with $-1$ keeps equation~\ref{diff-eq:spatial-mod-bessel} the same.
+\textcolor{DarkBlue}{[Find solutions using hypergeometric functions]}
 
-\color{DodgerBlue}
-If we'd followed the routine from Section~\ref{pos-root}, rewriting equation~\ref{diff-eq:spatial-mod-bessel} in the coordinate $\zeta_{-1}$ and then rewriting it again in a more recognizable form, we would've arrived at the hypergeometric equation
-\[ \left[\xi_{-1} (1 - \xi_{-1}) \big(\tfrac{\partial}{\partial \xi_{-1}}\big)^2 + 3(\tfrac{1}{2} - \xi_{-1}) \tfrac{\partial}{\partial \xi_{-1}} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0, \]
-where $\zeta_{-1} = 2\xi_{-1}$. This is the same as what we'd get by substituting $\xi_{-1}$ for $\xi_1$ in Section~\ref{pos-root}! In other words, the holomorphic map that pulls $\xi_{-1}$ back to $\xi_1$.
-
-\color{black}
+\subsubsection{Contour argument for higher Airy of degree $3$}
 
 \subsection{Generalized Airy}
+
+In \cite{Reid} \cite{Drazin-Reid} the authors introduce generalized Airy functions $A_k(z), B_0(z), B_k(z)$, $k=1,2,3$ as approximate solutions of the Orr--Sommerfield fluid equation. They are defined as countour integral (\cite{DLMF} \S 9.13(ii))
+
+\begin{align*}
+\mathrm{A}_k(z,p)&=\frac{1}{2\pi i}\int_{\Gamma_k}e^{zt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad k=1,2,3\,\, p\in\C \\
+\mathrm{B}_0(z,p)&=\frac{1}{2\pi i}\int_{\Gamma_0}e^{zt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad p\in\Z \\
+\mathrm{B}_k(z,p)&=\int_{\gamma_k}e^{zt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad k=1,2,3\,\, p\in\Z 
+\end{align*}
+where the countours $\Gamma_k, \Gamma_0, \gamma_k$ are represented in Figure \ref{fig.countours} 
+
+\begin{figure}
+%\includegraphics[scale=0.5]{countours}
+\end{figure}
+
+Each generalize Airy functions is a solution of
+
+\begin{equation}
+\left[\partial_z^3-z\partial_z+(p-1)\right]f(z,p)=0
+\end{equation} 
+
+and if $p=0$ they reduced to the classical Airy functions: $\mathrm{Ai}(z)=\mathrm{A}_1(z,0)$ and $\mathrm{Bi}(z)=\mathrm{B}_1(z,0)$.
+
+We define the following exponential integral: let $p\geq 0$, $f(t)=\tfrac{t^3}{3}-t$ and $\nu_p=\tfrac{dt}{t^p}$. The critical points of $f$ are $\pm\tfrac{2}{3}$ (as for the classical Airy case), however the volume form $\nu_p$ is meromorphic    
+
+\begin{equation}
+I_\alpha(z,p)\defeq\frac{1}{2\pi i}\int_{\mathcal{C}_{\alpha}}e^{-z(\tfrac{t^3}{3}-t)}\frac{dt}{t^p}
+\end{equation}
+
+where $\mathcal{C}_\alpha$ is the path through the point $\alpha$, starting and ending at infinity (as in Figure \ref{fig:path for I}). In particular, $I_{+}(z,p)=z^{\tfrac{p-1}{3}}\mathrm{A}_1(z^{2/3},p)$: 
+
+\begin{align*}
+I_{+}(z,p)&=\frac{1}{2\pi i}\int_{\mathcal{C}_{+}}e^{-z(\tfrac{t^3}{3}-t)}\frac{dt}{t^p} &\\
+&=\frac{z^{(p-1)/2}}{2\pi i}\int_{z^{-1/3}\mathcal{C}_{+}}e^{-z(z^{-1}\tfrac{s^3}{3}-z^{-1/3}s)}\frac{ds}{s^p} & t=z^{-\tfrac{1}{3}}s\\
+&=\frac{z^{(p-1)/3}}{2\pi i}\int_{z^{-1/3}\mathcal{C}_{+}}e^{-\left(\tfrac{s^3}{3}-z^{2/3}s\right)}\frac{ds}{s^p} & \\
+&=z^{(p-1)/3}\mathrm{A}_1(z^{2/3},p)
+\end{align*}
+
+It follows that $I_+(z)$ is a solution of
+ 
+\begin{equation}\label{eq:I}
+\left[\partial_z^3-\frac{4}{9}\partial_z+\frac{2-p}{z}\partial_z^2-\frac{4(1-p)}{9z}-\frac{1+3p-3p^2}{9}\frac{\partial_z}{z^2}+\frac{3+p-3p^2-p^3}{27z^3}\right]I_+(z,p)=0
+\end{equation}
+
+From the general theory of linear ODE, the formal integral solution of \eqref{eq:I} is a linear combinations of three generators 
+\begin{equation}
+\tilde{I}_+(z,p)=U_1z^{p-1}\tilde{W}_1(z)+U_2e^{-\tfrac{2}{3}z}z^{-1/2}\tilde{W}_2(z)+U_3e^{\tfrac{2}{3}z}z^{-1/2}\tilde{W}_3(z)
+\end{equation}
+
+where $\tilde{W}_1, \tilde{W}_2$ and $\tilde{W}_3$ are formal power seirs $\tilde{W}_{\mathbf{k}}(z)=\sum_{j\geq 0}a_{\mathbf{k},j}z^{-j}$, which are the unique (we fix $a_{k,0}=1$ for $k=1,2,3$) solution of 
+
+\begin{multline}\label{w1}
+\left[\partial_z^3-\frac{4}{9}\partial_z-\frac{1-2p}{z}\partial_z^2+\frac{17-30p+12p^2}{9z^2}\partial_z+\frac{8}{27}\frac{p^3-6p^2+11p-6}{z^3}\right]\tilde{W}_1(z)=0
+\end{multline}
+
+
+\begin{multline}\label{w2}
+\left[\partial_z^3-2\partial_z^2+\frac{8}{9}\partial_z+\frac{1-2p}{2z}\partial_z^2-\frac{2-4p}{3z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
+\left.-\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_2(z)=0
+\end{multline}
+
+\begin{multline}\label{w3}
+\left[\partial_z^3+2\partial_z^2+\frac{8}{9}\partial_z+\frac{1-2p}{2z}\partial_z^2+\frac{2-4p}{3z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
+\left.+\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_3(z)=0
+\end{multline}
+Let us first study equation \eqref{w1}: its Borel transform is
+
+\begin{multline*}
+-\zeta^3\tilde{w}_1+\frac{4}{9}\zeta\tilde{w}_1-(1-2p)\int_0^\zeta\tilde{w}_1(t)t^2dt+\frac{(17-30p+12p^2)}{9}\int_0^\zeta(-t\tilde{w}_1(t))(\zeta-t)dt+\\
++\frac{8}{27}(p^3-6p^2+11p-6)\int_0^\zeta\tilde{w}_1(t)\frac{(\zeta-t)^2}{2}dt=0
+\end{multline*}
+
+We differentiate three times, getting 
+
+\begin{multline*}
+\left(\frac{4}{9}\zeta-\zeta^3\right)\tilde{w}_1^{(3)}(\zeta)+\left(\frac{4}{3}-2(5-p)\zeta^2\right)\tilde{w}_1''(\zeta)-\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\tilde{w}_1'(\zeta)+\\
++\frac{8}{27}\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\left(p-\frac{5}{2}\right)\tilde{w}_1(\zeta)=0
+\end{multline*}
+
+we set $y=\tfrac{9}{4}\zeta^2$
+
+%\begin{multline}
+%\left[-4y(y-1)(2y\partial_y^3+3\partial_y^2)+3(4y\partial_y^2+2\partial_y)-2(5-p)y(4y\partial_y^2+2\partial_y)+\right.\\
+%\left.-2y\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\partial_y+\frac{8}{27}\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\left(p-\frac{5}{2}\right)\right]\tilde{w}_1(y)=0
+%\end{multline}
+\begin{multline}\label{eq:hw1}
+y^2(1-y)\tilde{w}_1^{(3)}(y)+y\left(\left(p-\frac{13}{2}\right)y+3\right)\tilde{w}_1''(y)-\left(y\left(\frac{305}{36}-\frac{1}{3}(10-p)p\right)-\frac{3}{4}\right)\tilde{w}_1'(y)+\\
++\frac{1}{27}\left(p-\frac{5}{2}\right)\tilde{w}_1(y)=0
+\end{multline}
+
+which is a generalized hypergeomtric equation (~16.8.5 \cite{DLMF}) with parameters
+
+\begin{align*}
+\mathbf{a}_0=\left(\frac{3}{2}-\frac{p}{3};\frac{7}{6}-\frac{p}{3};\frac{5}{6}-\frac{p}{3}\right) & \qquad\qquad \mathbf{b}_0=\left(\frac{1}{2};\frac{3}{2}\right)
+\end{align*}
+
+therefore, $\tilde{w}_1(y)=c_1\,\,{}_3F_2\left(\mathbf{a}_0;\mathbf{b}_0;y\right)+R(\zeta)$ for some function $R(\zeta)$ which can be determined from the integral equation.
+
+  
+
+Then we look at equation \eqref{w2}: its Borel transform is
+
+\begin{multline}
+-\zeta^3\tilde{w}_2(\zeta)-2\zeta^2\tilde{w}_2(\zeta)-\frac{8}{9}\zeta\tilde{w}_2(\zeta)+\frac{1-2p}{2}\int_0^\zeta t^2\tilde{w}_2(t)dt-\frac{2-4p}{3}\int_0^\zeta(-t\tilde{w}_2(t))dt+\\
++\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)(-t\tilde{w}_2(t))dt
+-\frac{5+24p+12p^2}{54}\int_0^\zeta(\zeta-t)\tilde{w}_2(t)dt +\\
+-\left(\frac{5}{54}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\int_0^\zeta\frac{(\zeta-t)^2}{2}\tilde{w}_2(t)dt=0
+\end{multline} 
+
+and taking three derivatives it simplifies to 
+
+\begin{multline}
+\left[\left(\zeta^3+2\zeta^2+\frac{8}{9}\zeta\right)\partial_\zeta^3 +\frac{8}{3}\partial_\zeta^2+\left(\frac{17}{2}+p\right)\zeta\left(\zeta+\frac{4}{3}\right)\partial_\zeta^2+\right.\\
+\left. \left(\frac{p^2}{3}+\frac{14}{3}p+\frac{581}{36}\right)\left(\zeta+\frac{2}{3}\right)\partial_\zeta+\frac{1}{27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(\zeta)=0
+\end{multline}
+
+define $y=\zeta\left(\zeta+\frac{4}{3}\right)$
+
+\begin{multline}\label{eq1}
+\left[y\left(y+\frac{4}{9}\right)^2\partial_y^3+2\left(\frac{3}{2}y+\frac{4}{3}+\frac{y}{2}\left(\frac{17}{2}+p\right)\right)\left(y+\frac{4}{9}\right)\partial_y^2+\left(\frac{2}{3}+\frac{y}{4}\left(\frac{17}{2}+p\right)\right)\partial_y\right.\\
+\left.+\frac{1}{4}\left(\frac{p^3}{3}+\frac{14}{3}p+\frac{581}{36}\right)\left(y+\frac{4}{9}\right)\partial_y+\frac{1}{8\cdot 27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(y)=0
+\end{multline}
+
+which now looks like a generalized hypergeometric equation. Indeed setting $t=\tfrac{9}{4}y+1$, \eqref{eq1} reads
+
+\begin{multline}
+\left[t^2(1-t)\partial_t^3-t\left(\big(\frac{23}{4}+\frac{p}{2}\big)t-\frac{p}{2}-\frac{11}{4}\right)\partial_t^2-\left(-\frac{5}{8}-\frac{p}{4}+t\Big(\frac{887}{144}+\frac{17}{12}p+\frac{p^2}{12}\Big)\right)\partial_t +\right.\\
+\left. -\frac{1}{8\cdot 27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(t)=0
+\end{multline}
+hence a solution is given by the generalized hypergeometric function ${}_3F_2\left(\mathbf{a};\mathbf{b};y\right)$ with parameters
+
+\begin{align*}
+\mathbf{a}=\left(\frac{5}{4}+\frac{p}{6};\frac{7}{12}+\frac{p}{6};\frac{11}{12}+\frac{p}{6}\right) & \qquad\qquad \mathbf{b}=\left(\frac{1}{2};\frac{5}{4}+\frac{p}{2}\right)
+\end{align*}
+
+and we denote $\hat{w}_2(\zeta)=c_2\,\, {}_3F_2\left(\mathbf{a};\mathbf{b};\left(\tfrac{3}{2}\zeta+1\right)^2\right)$. The equation \eqref{w3} differes from \eqref{w2} for few signs: we find that its Borel transform is 
+
+\begin{multline}
+-\zeta^3\tilde{w}_2(\zeta)+2\zeta^2\tilde{w}_2(\zeta)-\frac{8}{9}\zeta\tilde{w}_2(\zeta)+\frac{1-2p}{2}\int_0^\zeta t^2\tilde{w}_2(t)dt+\frac{2-4p}{3}\int_0^\zeta(-t\tilde{w}_2(t))dt+\\
++\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)(-t\tilde{w}_2(t))dt
++\frac{5+24p+12p^2}{54}\int_0^\zeta(\zeta-t)\tilde{w}_2(t)dt +\\
+-\left(\frac{5}{54}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\int_0^\zeta\frac{(\zeta-t)^2}{2}\tilde{w}_2(t)dt=0
+\end{multline}
+
+and differentiating three times we find a generalized hypergeometric equation with parameters $\mathbf{a},\mathbf{b}$ in the variable $y=\left(\tfrac{3}{2}\zeta-1\right)^2$, i.e. $\hat{w}_3(\zeta)= c_3\,\, {}_3F_2\left(\mathbf{a};\mathbf{b};\left(\tfrac{3}{2}\zeta-1\right)^2\right)$. In particular, 
+
+\begin{equation}
+\hat{w}_3(\zeta)=C_{23}\hat{w}_2(\zeta-\tfrac{4}{3})
+\end{equation}
+
+\color{DarkTurquoise}
 
 \section{Third-order exponential integrals}
 \begin{itemize}
@@ -1815,6 +2121,106 @@ q&=\frac{2}{3}\eta x^{3/2}=\eta\int_0^x\sqrt{x'}dx'=\eta\int_{0}^xS_{-1}(x')dx'.
 \end{align*}
 We expect that the change of coordinates $q=\eta\int_0^{x}S_{-1}(x')dx'$ would explain the analogies between the Borel transform of the WKB solution of a Schrodinger equation and the Borel transform of the associated ODE.  
 \end{remark} 
+
+\section{Application of the integral formula}
+
+In Theorem \eqref{thm:maxim} we prove that the Borel transform of $\tilde{\varphi}_{\alpha}$ can be computed by the fractional derivative formula~\eqref{int:deriv-formula}. \color{olive} 
+
+
+By general theory it is expected that Stokes constants are integers, and numerically this can be verified only when a suitable normalization is chosen. Indeed as we have seen, if we consider exponential integrals the Borel transform can be computed in different ways: from the ODE, from the contour argument and from the integral formula. When computed from the ODE, there is an ambiguity in the choice of the constant, while with the contour argument and the fractional integral formula the ambiguity is solved. We will see this for the modified Bessel equation. 
+
+This method allows to uniquely determined the constants $U_1,U_2$ that appear in the formal integral solution $\tilde{I}(z)$. Indeed, $\tilde{I}$ is a solution of an homogeneous linear ODE and $\tilde{I}_+(z)=U_1e^{-2/3z}z^{-1/2}\tilde{W}_+(z)$ for a particular choice of $U_1$. %In order to compute the Stokes constants we will first use the fractional derivative formula to compute the correct normalization of \[\hat{w}_\pm(\zeta)=\delta\mp \frac{5}{48}{}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right).\]   
+\begin{lemma}\label{claim 2}
+The following formula holds true
+\[ \partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) = -i \frac{\sqrt{\pi}}{2}\,\hat{w}_+(\zeta-2/3), \]
+for any $\zeta\in [2/3,+\infty)$.
+\end{lemma}
+\begin{proof}
+In our general picture of exponential integrals, for $I_+(z)$ the thimble $\mathcal{C}_+$ is parametrized as the path $\theta \mapsto \cosh(\theta - \tfrac{2}{3}\pi i)$, $f = \tfrac{2}{3}(4u^3 - 3u)$ and $\nu = du$. Hence,
+\begin{align*}
+\int_{\mathcal{C}_+(\zeta)} \nu & = \int_{\mathcal{C}_+(\zeta)} du \\
+& = u \Big|_{\operatorname{start} \mathcal{C}_+(\zeta)}^{\operatorname{end} \mathcal{C}_+(\zeta)}.
+\end{align*}
+Since $4u^3 - 3u$ is the third Chebyshev polynomial, and $\cosh$ is $2\pi$-periodic in the imaginary direction, the start and end points of $\mathcal{C}_+(\zeta)$ are characterized by
+\begin{align*}
+u & = \cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
+\zeta & = \tfrac{2}{3} \cosh(3\theta),
+\end{align*}
+so
+\begin{align*}
+\int_{\mathcal{C}_+(\zeta)} \nu & = \cosh(\theta - \tfrac{2}{3}\pi i) - \cosh(-\theta - \tfrac{2}{3}\pi i) \\
+& = \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& \quad - \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& = 2\sinh(\theta) \sinh(-\tfrac{2}{3}\pi i) \\
+& = -i\sqrt{3}\,\sinh(\theta)
+\end{align*}
+with $\tfrac{3}{2} \zeta = \cosh(3\theta)$. Let $\xi = \tfrac{1}{2}(1 - \tfrac{3}{2}\zeta)$, and notice that $\xi = -\sinh(\tfrac{3}{2} \theta)^2$ at the start and end points. The identity \textbf{[DLMF~15.4.16]}
+\[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
+then shows us that
+\[ \frac{i}{\sqrt{3}} \int_{\mathcal{C}_+(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
+
+Now we can evaluate the half-integral of $\int_{\mathcal{C}_+} \nu$ using Bateman's fractional integral formula for hypergeometric functions~\textbf{[Koornwinder, \S 4.1]}.
+\begin{align*}
+\partial^{-1/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_+(\zeta')} \nu \right)\,d\zeta' \\
+& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi \tfrac{\sqrt{3}}{2} (\xi' - \xi)^{-1/2} \Big[ -{i}{\sqrt{3}}\,\tfrac{2}{3} (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big) \Big] \,\big( -\tfrac{4}{3}\,d\xi' \big) \\
+& = -i \frac{4}{3} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
+& = i \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
+\end{align*}
+Finally, we differentiate twice using \textbf{[DLMF 15.5.4]} and \textbf{[DLMF 15.5.1]}.
+\begin{align*}
+\partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(-\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ i \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = i \tfrac{3\sqrt{\pi}}{8} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = i \tfrac{3\sqrt{\pi}}{8}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = i \tfrac{\sqrt{\pi}}{8}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
+\end{align*}
+\end{proof}
+Analogously, we can compute the correct constants for $\hat{w}_-(\zeta)$:
+
+\begin{lemma}\label{claim 3}
+For any $\zeta\in (-\infty,-2/3]$
+\[ \partial^{3/2}_{\zeta \text{ from } -2/3} \left( \int_{\mathcal{C}_-(\zeta)} \nu \right) = - \frac{\sqrt{\pi}}{2}\,\hat{w}_-(\zeta+2/3). \]
+\end{lemma}
+\begin{proof}
+Let $\mathcal{C}_-$ is the path $\theta \mapsto -\cosh(\theta - \tfrac{2}{3}\pi i)$, when $x \in [0, \infty)$ 
+\[ I_-(z) = \int_{\mathcal{C}_-} \exp\left[-\tfrac{2}{3} z \left(4u^3 - 3u\right)\right]\,du. \]
+In our general picture of exponential integrals, $f = \tfrac{2}{3}(4u^3 - 3u)$ and $\nu = du$. Hence,
+\begin{align*}
+\int_{\mathcal{C}_-(\zeta)} \nu & = \int_{\mathcal{C}_-(\zeta)} du \\
+& = u \Big|_{\operatorname{start} \mathcal{C}_-(\zeta)}^{\operatorname{end} \mathcal{C}_-(\zeta)}.
+\end{align*}
+The start and end points of $\mathcal{C}_-(\zeta)$ are characterized by
+\begin{align*}
+u & = -\cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
+\zeta & = -\tfrac{2}{3} \cosh(3\theta),
+\end{align*}
+so
+\begin{align*}
+\int_{\mathcal{C}_-(\zeta)} \nu & =- \cosh(\theta - \tfrac{2}{3}\pi i) + \cosh(-\theta - \tfrac{2}{3}\pi i) \\
+& =- \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& \quad + \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& = 2\sinh(\theta) \sinh(\tfrac{2}{3}\pi i) \\
+& = i\sqrt{3}\,\sinh(\theta)
+\end{align*}
+with $\tfrac{3}{2} \zeta = -\cosh(3\theta)$. Let $\xi = \tfrac{1}{2}(1 + \tfrac{3}{2}\zeta)$, and notice that $\xi =- \sinh(\tfrac{3}{2} \theta)^2$ at the start and end points. The identity \textbf{[DLMF~15.4.16]}
+\[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
+then shows us that
+\[ -\frac{i}{\sqrt{3}} \int_{\mathcal{C}_-(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
+
+Now we can evaluate the half-integral of $\int_{\mathcal{C}_-} \nu$ using Bateman's fractional integral formula for hypergeometric functions~\textbf{[Koornwinder, \S 4.1]}.
+\begin{align*}
+\partial^{-1/2}_{\zeta \text{ from } -2/3} \left( \int_{\mathcal{C}_-(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{-2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_-(\zeta')} \nu \right)\,d\zeta' \\
+& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi \tfrac{\sqrt{3}}{2} (\xi - \xi')^{-1/2} \Big[{i}{\sqrt{3}}\,\tfrac{2}{3} (-\xi')^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi' \big) \Big] \,\big( \tfrac{4}{3}\,d\xi' \big) \\
+& =  \frac{4}{3} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
+& = - \frac{2}{3} \sqrt{\pi}\,\xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
+\end{align*}
+Finally, we differentiate twice using \textbf{[DLMF 15.5.4]} and \textbf{[DLMF 15.5.1]}.
+\begin{align*}
+\partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ - \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = - \tfrac{3\sqrt{\pi}}{8} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = - \tfrac{3\sqrt{\pi}}{8}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = - \tfrac{\sqrt{\pi}}{8}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
+\end{align*}
+\end{proof}
 
 \bibliographystyle{plain}
 \bibliography{airy-resurgence}
