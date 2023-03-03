@@ -285,7 +285,7 @@ of its asymptotic series. Watson showed a century ago that the function is Borel
 over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 \end{itemize}
 \end{itemize}
-\color{DarkBlue}
+
 \subsection{Why does Borel resummation work?}
 
 \color{gray}
@@ -303,7 +303,7 @@ Let $R_N$ be the difference between a function and the partial sum
 of its asymptotic series. Watson showed a century ago that the function is Borel regular whenever there's a constant $c \in (0, \infty)$ with
 \[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
 over all orders $N$ and all $z$ in a wide enough wedge around infinity (Sokal, ``An improvement of Watson's theorem on Borel summability''; Hardy, {\em Divergent Series}, Theorem~136; Watson, ``A theory of asymptotic series,'' \S 8?).
-\color{DarkBlue}
+\color{black}
 
 \item \textbf{Satisfying a singular differential equation}
 
@@ -332,7 +332,7 @@ Notice that this basis is distinguished only up to scaling, so we have a disting
 \item Cor of Thm 2: the Laplace transform of solutions of Thm 1 are Borel regular.   
 \end{itemize}
 \item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform. [Follows from Aaron's argument in Airy resurgence, even if Aaron works with more general ODEs]
-\color{DarkBlue}
+
 \item Draw diagram showing formal vs. holomorphic solutions in time vs. frequency domains.
 
 \begin{center}
@@ -352,14 +352,37 @@ there are many ways to see this porblem have a distinguished base of solutions, 
 \item multi-summability is a regularity result starting form the formal solution in the $z$-plane. Borel regularity is instead based on the analytic solution in the $z$-plane. The argument we gave about getting the same frame is what proves Borel regularity of $\Psi_j$.   
 \end{itemize}
 
+\color{DarkBlue}
+
 \item \textbf{Being a thimble integral}
 
 \begin{itemize}
-\item take asymptotic expansion of integral via saddle point approximation and then study the Borel Laplace sum of the divergent series
-\item see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform)
-\item {[Thm 4]} 1-dim thimbles integrals are Borel regular.
+\item This is the setup. Let $X$ be an algebraic variety of dimension $N$, $f\colon X\to \mathbb{C}$ be a holomorphic Morse function with only simple critical points and $\nu\in\Gamma(X,\Omega^N)$.
+\begin{itemize}
+\item recall theory of homology and cohomology to define the thimbles integrals. Pham has briefly discussed it, but apparently was introduced by Malgrange, Milnor and ?.  
+\end{itemize} 
+\item background: Pham prove Borel regularity for exponential integral in N-dimension and without assuming Morse critical points (but only isolated). His proof is geometric [it may be useful to add it in Appendix]. 
+\item \textcolor{red}{We give an analytic proof analogous of Pham.}
+\item I think we should separate what can we do in general for N-dimensional integral and what is special for the $1$-dimensional one. 
+\item {[Thm 4]} 1-dim thimbles integrals are Borel regular, namely the commutativity of the following diagram
+\begin{equation}
+\begin{tikzcd}
+I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu \arrow[r,"\sim"]\arrow[dd, swap, "\mathcal{L}^\theta "] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
+& \\
+\hat{\iota}_\alpha(\zeta)\arrow[r,equal,swap, "\text{sum}"] & \tilde{\iota}_{\alpha}(\zeta) 
+\end{tikzcd}
+\end{equation}
+\begin{itemize}
+\item on the one hand take asymptotic expansion of integral via saddle point approximation and then study the Borel Laplace sum of the divergent series [from left upper corners clockwise]
+\item on the other hand \textcolor{red}{see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform).}
+\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
+\item A corollary of [Thm 4] is the fractional derivative formula.
+\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
+\end{itemize}
+\item From the result of Pham we can deduce Stokes constants are always integers as they are intersection numbers (use same argument of Maxim). Prove integrality of Stokes constants using the fractional integral formula vs differential equation (see example in Appendix C) 
 \end{itemize}
 
+\color{DarkGreen}
 Let $X$ be a translation surface---a Riemann surface carrying a holomorphic 1-form $\nu$. Suppose $X$ is of {\em meromorphic type}, meaning that we got it by puncturing a compact Riemann surface $\overline{X}$ at finitely many points, and $\nu$ has a pole at each puncture. A {\em translation coordinate} on $X$ is a local coordinate whose derivative is $\nu$.
 
 Take another meromorphic-type translation surface $B$ and a holomorphic Morse\footnote{This condition means that the critical points of $f$ are isolated (the compactness of $\overline{X}$ guarantees this) and the 2-jet of $f$ is non-zero at every critical point.} map $f \maps \overline{X} \to \overline{B}$ \textcolor{magenta}{that sends punctures to punctures [actually, don't require this; the Orr--Sommerfeld integrals, for example, don't satisfy it]}. Suppose every singularity of $B$ is a critical value of $f$. \textbf{[Typical usage of ``Borel plane'' seems ambiguous, so maybe we can use ``Borel plane'' for $B$ and ``Borel cover'' for the Riemann surface of the Borel-transformed series. How to handle the Orr–Sommerfeld functions (DLMF~\S 9.13)? We know $f = 4u^3 - 3u$ is the pullback of a translation coordinate, but we also need a puncture at $f(0)$\ldots]} For each critical point $p$, let $\Gamma_p$ be the ray going rightward from $f(p)$, and let $\zeta_p$ be the translation coordinate around $\Gamma_p$ which vanishes at $f(p)$. These are well-defined as long as $\Gamma_p$ misses the critical values of $f$. The preimage $f^{-1}(\Gamma_p)$ is a bunch of disjoint curves, as long as $\Gamma_p$ misses the other critical values of $f$. The {\em Lefschetz thimble} $\Lambda_p$ is the component of $f^{-1}(\Gamma_p)$ that goes through $p$, oriented so that shifting it to its left would make its projection run clockwise around $\Gamma_p$. The {\em thimble integral}
