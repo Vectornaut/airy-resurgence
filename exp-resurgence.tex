@@ -318,7 +318,7 @@ where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree 
 \item \eqref{eq:ODE} admits a basis of formal solutions: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form  
 \begin{equation}
 \label{formal solution}
-\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{F}_j(z)\in e^{-\alpha_j z }\C[\![z^{-\tau_j}]\!]
+\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{F}_j(z)\in e^{-\alpha_j z } z^{-\tau_j}\,\C \llbracket z^{-\tau_j} \rrbracket
 \end{equation}
 Notice that this basis is distinguished only up to scaling, so we have a distinguished frame in the space of formal solutions. 
 \item \eqref{formal solution} is Borel-Laplace summable and its Borel-Laplace sum $\Psi_j$ satisfies the original equation \eqref{eq:ODE}
@@ -554,19 +554,33 @@ Note that $\laplace_{\xi, 0}$ is defined in the new translation structure on $\C
 \end{itemize}
 \end{itemize}
 \color{black}
+The Borel transform is a linear map from formal power series in the {\em frequency variable} $z$ to formal power series in the {\em position variable} $\zeta$, defined by
+\begin{align*}
+\borel \maps \C \llbracket z^{-1} \rrbracket & \to \C\delta \oplus \C \llbracket \zeta \rrbracket \\
+1 & \mapsto \delta\vphantom{\frac{1}{1}} \\
+z^{-n-1} & \mapsto \frac{\zeta^n}{n!}\qquad\text{when } n \ge 0
+\end{align*}
+In general, by linearity,
+\begin{align*}
+\mathcal{B}\big[a_0 + a_1 z^{-1} + a_2 z^{-2} + a_3 z^{-3} + a_4 z^{-4} + \ldots \big] = a_0\delta + a_1 + a_2 \zeta + a_3 \frac{\zeta^2}{2!} + a_4 \frac{\zeta^3}{3!} + \ldots.
+\end{align*}
+The motivation for adding the formal ``convolution unit'' $\delta$ to the codomain is discussed \textcolor{magenta}{[in the convolution product section]}.
 
+\color{DarkTurquoise}
 The Borel transform $\mathcal{B}$ is a linear map from formal power seires in the time domain $\C_z$ to the space domain $\C_{\zeta}$ such that  \begin{align*}\mathcal{B}(z^{-n-1})&\defeq\tfrac{\zeta^n}{n!} \qquad, \text{ if } n\geq 0 \\
 \mathcal{B}(1)&\defeq\delta 
 \end{align*} 
 
 where $\delta$ is the element $(1,0)\in\C\times\C[\![\zeta]\!]$\footnote{Sometimes, in physics it is common to adopt a differnt convention, i.e. $\mathcal{B}(z^{-n})\defeq \tfrac{\zeta^n}{n!}$ (see\cite{MDiablerets}\cite{SGM}, for example). However, we find natural for our purposes the mathematical convention, as the Laplace transform is the inverse of $\mathcal{B}$ under suitable growth conditions. }, and by linearity   
-
 \begin{align*}
 \mathcal{B}\colon \C[\![z^{-1}]\!] & \to \C\delta\oplus\C[\![\zeta]\!] \\
 \sum_{n\geq 0}a_n z^{-n} & \to  a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}
 \end{align*}
+\color{black}
 
-Notice that we are at the level of formal series, so there are no convergence assumptions. However, there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic fucntions at the origin in $\C_{\zeta}$. These formal series are the so called Gevrey-$1$ series: \[\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C[\![z^{-1}]\!]_1\] is Gevrey-$1$ if there exists $A>0$ such that $|a_n|\leq A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis Gevrey-$k$ series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. The Borel transform can be generalized in order to obatin germs of holomorphic function for higher Gevrey series. }  
+Notice that we are at the level of formal series, so there are no convergence assumptions. However, there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic fucntions at the origin in $\C_{\zeta}$. These formal series are the so called Gevrey-$1$ series:
+\[\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1\]
+is Gevrey-$1$ if there exists $A>0$ such that $|a_n|\leq A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis Gevrey-$k$ series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. The Borel transform can be generalized in order to obatin germs of holomorphic function for higher Gevrey series. }  
 
 \begin{notation*}
 We want to distinghuish between formal series and holomorphic functions, as well as between the Borel plane (time domain) and the $z$-plane (spatial domain). Therefore we adopt the following notation:
@@ -580,7 +594,7 @@ We want to distinghuish between formal series and holomorphic functions, as well
 \end{notation*}  
 
 \begin{lemma}
-Let $\tilde{\Phi}(z)\in\C[\![z^{-1}]\!]$. Then, $\tilde{\Phi}\in\C[\![z^{-1}]\!]_1$ is Gevrey-1 if and only if $\mathcal{B}(\tilde{\Phi})\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
+Let $\tilde{\Phi}(z)\in\C \llbracket z^{-1} \rrbracket$. Then, $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket_1$ is Gevrey-1 if and only if $\mathcal{B}(\tilde{\Phi})\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
 \end{lemma}
 In particular, we deduce from the lemma that the Borel transform is an isomorphism between Gevrey-$1$ series and $\C\delta\oplus\C\lbrace\zeta\rbrace$. 
 
@@ -596,7 +610,7 @@ The definition of $\mathcal{B}$ can be easily extended to fractional power of $z
 \end{align*}
 and then extending by linearity.
 
-If $\alpha\in\mathbb{R}\setminus\Z$ is not an integer, then $\mathcal{B}$ is an isomorphisms from Gevrey-$1$ formal power series $\C[\![z^{-\alpha}]\!]_1$ to the germs of holomorphic functions $\C{\zeta^{\alpha-1}}$, with inverse given by the formal Laplace transform. Indeed, let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C[\![z^{-\alpha}]\!]_1$ with $|a_n|\leq A^n n!$ and $A>0$ then  
+If $\alpha\in\mathbb{R}\setminus\Z$ is not an integer, then $\mathcal{B}$ is an isomorphisms from Gevrey-$1$ formal power series $\C \llbracket z^{-\alpha} \rrbracket_1$ to the germs of holomorphic functions $\C \lbrace \zeta^{\alpha-1} \rbrace$, with inverse given by the formal Laplace transform. Indeed, let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-\alpha} \rrbracket_1$ with $|a_n|\leq A^n n!$ and $A>0$ then  
 \begin{align*}
 \mathcal{B}(z^{-\alpha}\tilde{\Phi})(\zeta)&=\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)=a_0\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}+\sum_{n\geq 0}a_{n+1}\frac{\zeta^{n+\alpha}}{\Gamma(1+n+\alpha)}
 \end{align*}  
@@ -614,10 +628,10 @@ We now recall some properties of the Borel transform: let $\tilde{\Phi}(z)=\sum_
 \begin{itemize}
 \item[(i)] \emph{[fractional derivative]} if $\alpha\in\R_{\geq 0}$, $\mathcal{B}\left(z^\alpha \tilde{\Phi}(z)\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}(\zeta)$
 \item[(ii)] \emph{[fractional integral]} if $\alpha\in\R_{<0}\setminus\Z_{\geq 0}$, $\mathcal{B}\left(z^\alpha \tilde{\Phi}(z)\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}(\zeta)$
-\item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(z^n\tilde{\Phi}(z))=\partial_\zeta^n\tilde{\phi}(\zeta)$ 
+\item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C \llbracket z^{-1} \rrbracket$, then $\mathcal{B}(z^n\tilde{\Phi}(z))=\partial_\zeta^n\tilde{\phi}(\zeta)$ 
 \item[(iv)] $\mathcal{B}\left(\partial_z^{n} \tilde{\Phi}(z)\right)=(-\zeta)^n\tilde{\phi}(\zeta)$, for every $n\geq 0$
 \item[(v)] $\mathcal{B}(\tilde{\Phi}(z-c))=e^{-c\zeta}\tilde{\phi}(\zeta)$
-\item[(vi)] if $\tilde{\Psi}(z)\in z^{-1}\C[\![z^{-1}]\!]$, then $\mathcal{B}(\tilde{\Phi}(z)\tilde{\Psi}(z))=\int_0^{\zeta}d\zeta' \tilde{\phi}(\zeta-\zeta')\tilde{\psi}(\zeta')=:\tilde{\phi}\ast \tilde{\psi}$, where $\tilde{\psi}(\zeta)=\mathcal{B}(\tilde{\Psi}(z))$.
+\item[(vi)] if $\tilde{\Psi}(z)\in z^{-1}\C \llbracket z^{-1} \rrbracket$, then $\mathcal{B}(\tilde{\Phi}(z)\tilde{\Psi}(z))=\int_0^{\zeta}d\zeta' \tilde{\phi}(\zeta-\zeta')\tilde{\psi}(\zeta')=:\tilde{\phi}\ast \tilde{\psi}$, where $\tilde{\psi}(\zeta)=\mathcal{B}(\tilde{\Psi}(z))$.
 \end{itemize} 
 
 
@@ -1762,7 +1776,7 @@ Like we did in equation~\ref{eqn:reg-mod-bessel-AL}, we can rewrite the modified
 \subsection{Asymptotic analysis}
 From the general theory of ODE of Poincar\'e rank $1$, we know that the space of trans-series solutions of ~\eqref{eqn:reg-mod-bessel} has a basis of trans-monomials
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,\series{W}_\alpha \mid \alpha^2 - 1 = 0 \} \]
-where the $\series{W}_\alpha\in\C[\![z^{-1}]\!]$ are formal power series in $z^{-1}$. From equations 10.40.2 and 10.17.1 of \cite{dlmf}, we learn that $K \sim \left(\tfrac{\pi}{2}\right)^{1/2} e^{-z} z^{-1/2}\,\series{W}_1$, with
+where the $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket$ are formal power series in $z^{-1}$. From equations 10.40.2 and 10.17.1 of \cite{dlmf}, we learn that $K \sim \left(\tfrac{\pi}{2}\right)^{1/2} e^{-z} z^{-1/2}\,\series{W}_1$, with
 \begin{equation}\label{bessel-asymp}
 \series{W}_1 = 1 - \frac{(\tfrac{1}{6})_1 (\tfrac{5}{6})_1}{2^1 \cdot 1!}\;z^{-1} + \frac{(\tfrac{1}{6})_2 (\tfrac{5}{6})_2}{2^2 \cdot 2!}\;z^{-2} - \frac{(\tfrac{1}{6})_3 (\tfrac{5}{6})_3}{2^3 \cdot 3!}\;z^{-3} + \ldots
 \end{equation}
@@ -1951,9 +1965,27 @@ giving the alternate decomposition
 
 
 
-\subsection{Comparison with other Airy examples}
+\subsection{Comparison with other treatments of the Airy equation \\ \textcolor{DarkTurquoise}{Comparison with other Airy examples}}
 
-\subsubsection{Different Borel transform convention} In the physic literature it is common that authors adopt a different definition of the Borel transform which does not involve the \textit{delta} element for the unit: they define $\mathcal{B}_{\textit{phys}}\colon \C [\![ z^{-1}]\!] \to \C \lbrace \zeta\rbrace$ such that $\mathcal{B}_{\textit{phys}}(z^{-n})\defeq \tfrac{\zeta^n}{n!}$. It is also commun to consider formal power series in small parameters, like $\tilde{\Phi}(\hbar)=\sum_{n\geq 0} a_n\hbar^n$ where $\hbar\to 0$ rather than formal series at $\infty$. Then the Borel transform of $\tilde{\Phi}$ is defined as $\tilde{\phi}(\zeta)=\sum_{n\geq 0}a_n\tfrac{\zeta^n}{n!}$. In \cite{Diablerets}, the author studies, as example of resurgent functions, the Airy functions. His starting point are the formal solutions of Airy differential equation
+\subsubsection{Different Borel transform convention} Physicists often use a different version of the Borel transform:
+\begin{align*}
+\mathcal{B}_{\textit{phys}} \maps \C \llbracket z^{-1} \rrbracket & \to \C \llbracket \zeta \rrbracket \\
+z^{-n} & \mapsto \frac{\zeta^n}{n!}.
+\end{align*}
+This version avoids sending $1$ to the convolution unit $\delta$, at the cost of no longer mapping multiplication to convolution or inverting the formal Laplace transform. It's sometimes convenient to $\mathcal{B}_\textit{phys}(f) = \borel(z^{-1} f)$.
+
+For problems involving a small parameter $\hbar$ rather than a large parameter $z$, physicists also define
+\begin{align*}
+\mathcal{B}_{\textit{phys}} \maps \C \llbracket \hbar \rrbracket & \to \C \llbracket \zeta \rrbracket \\
+\hbar^n & \mapsto \frac{\zeta^n}{n!}.
+\end{align*}
+From a combinatorial perspective, this is just the transformation that sends an ordinary generating function to the corresponding exponential generating function.
+
+In \cite{Diablerets}, the author studies the Airy functions as example of resurgent functions. He starts with the formal trans-monomial solutions of Airy equation:
+
+\color{DarkTurquoise}
+In the physic literature it is common that authors adopt a different definition of the Borel transform which does not involve the \textit{delta} element for the unit: they define $\mathcal{B}_{\textit{phys}}\colon \C [\![ z^{-1}]\!] \to \C \lbrace \zeta\rbrace$ such that $\mathcal{B}_{\textit{phys}}(z^{-n})\defeq \tfrac{\zeta^n}{n!}$. It is also commun to consider formal power series in small parameters, like $\tilde{\Phi}(\hbar)=\sum_{n\geq 0} a_n\hbar^n$ where $\hbar\to 0$ rather than formal series at $\infty$. Then the Borel transform of $\tilde{\Phi}$ is defined as $\tilde{\phi}(\zeta)=\sum_{n\geq 0}a_n\tfrac{\zeta^n}{n!}$. In \cite{Diablerets}, the author studies, as example of resurgent functions, the Airy functions. His starting point are the formal solutions of Airy differential equation
+\color{black}
 \begin{align*}
 \tilde{\Phi}_{\mathrm{Ai}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{-\tfrac{2}{3}x^{3/2}}\tilde{W}_1(x^{-3/2})\\
 \tilde{\Phi}_{\mathrm{Bi}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{\tfrac{2}{3}x^{3/2}}\tilde{W}_2(x^{-3/2})
@@ -1992,7 +2024,7 @@ and comparing the two solutions we notice that up to the factor of $\delta$
 \begin{equation}\label{Borel-W12}
 \mathcal{B}(\tilde{W}_{1,2})(\zeta)-\frac{1}{2\pi}\delta=\mp \frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)=\frac{d}{d\zeta}\mathcal{B}_{\textit{phys}}(\tilde{W}_{1,2})(\zeta) 
 \end{equation}
-More generally, if $\tilde{\Phi}(z)\in z^{-1}\C[\![z^{-1}]\!]$, i.e. it has no constant term, then 
+More generally, if $\tilde{\Phi}(z)\in z^{-1}\C \llbracket z^{-1} \rrbracket$, i.e. it has no constant term, then 
 
 \begin{equation}
 \frac{d}{d\zeta}\circ\mathcal{B}_{\textit{phys}}\tilde{\Phi}=\mathcal{B}\tilde{\Phi}.
