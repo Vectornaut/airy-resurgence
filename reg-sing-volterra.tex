@@ -1,0 +1,187 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage[hmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eqnarray}
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor} %% for revisions
+\usepackage{xparse} %% for squiggly underlines
+\usepackage{tikz-cd} %% for term norm scratch work
+
+%%\theoremstyle{definition}
+%%\newtheorem{defn}{Definition}
+\theoremstyle{plain}
+\newtheorem{prop}{Proposition}
+
+% convenience aliases
+\newcommand{\maps}{\colon}
+
+% group action
+\newcommand{\acts}{\mathbin{\raisebox{\depth}{\rotatebox{-90}{$\circlearrowright$}}}}
+
+% symbology
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\newcommand{\laplace}{\mathcal{L}}
+\newcommand{\series}[1]{\tilde{#1}}
+\newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
+\newcommand{\holoL}[1]{\mathcal{H}L^{#1}} %% may no longer be needed
+\DeclareMathOperator{\Ai}{Ai}
+
+\title{Regular singular Volterra equations on complex domains}
+\author{Aaron Fenyes}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+\subsection{Motivation}
+In its most basic form, the Laplace transform $\laplace$ turns $L^1$ functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. Through identities like
+\begin{align*}
+\frac{\partial}{\partial z} \laplace \varphi & = \laplace(z\varphi) \\
+\laplace k\;\laplace f & = k * \varphi \\
+z^{-\lambda} \laplace \varphi & = \laplace\,\fracderiv{-\lambda}{}{} \varphi,
+\end{align*}
+where $\fracderiv{-\lambda}{}{}$ is the Riemann-Liouville fractional integral of order $\lambda \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on differential equations.
+
+If we complexify the position variable $\zeta$, the functions on the position domain whose Laplace transforms satisfy a given differential equation will often extend holomorphically. \textbf{[...]}
+\subsection{Main result}
+\section{Integro-differential equations {[from {\tt airy-resurgence}]}}
+\subsection{Existence of solutions}
+\subsubsection{Algebraic integral operators}
+Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. For any $\sigma \in \R$, multiplying by $\zeta^{-\sigma}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\holoL{\infty, \sigma}(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma} = \|\zeta^\sigma f\|_\infty$, so that
+\begin{align*}
+\holoL{\infty}(\Omega) & \to \holoL{\infty, \sigma}(\Omega) \\
+\phi & \mapsto \zeta^{-\sigma} \phi
+\end{align*}
+is an isometry. More generally,
+\begin{align*}
+\holoL{\infty, \rho}(\Omega) & \to \holoL{\infty, \rho+\delta}(\Omega) \\
+f & \mapsto \zeta^{-\delta} f
+\end{align*}
+is an isometry for all $\rho \in \R$ and $\delta \in [0, \infty)$. This reduces to the previous statement when $\rho = 0$. For each $\delta \in [0, \infty)$, the functions in $\holoL{\infty, \rho}(\Omega)$ belong to $\holoL{\infty, \rho+\delta}(\Omega)$ too, and the inclusion map $\holoL{\infty, \rho}(\Omega) \hookrightarrow \holoL{\infty, \rho+\delta}(\Omega)$ has norm $\|\zeta^\delta\|_\infty$. Conceptually, $\|\zeta^\delta\|_\infty$ measures of the size of $\Omega$, so let's write it as $M^\delta$ with $M = \|\zeta\|_\infty$.
+
+Since $\holoL{\infty}(\Omega)$ is a Banach algebra, the function space $\holoL{\infty, \infty}(\Omega) := \bigcup_{\sigma \in \R} \holoL{\infty, \sigma}(\Omega)$ is a graded algebra, with a different norm on each grade. For each $\rho, \delta \in \R$, multiplication by a function $m \in \holoL{\infty, \delta}(\Omega)$ gives a map $\holoL{\infty, \rho}(\Omega) \to \holoL{\infty, \rho+\delta}(\Omega)$ with norm $\|m\|_{\infty, \delta}$.
+
+We'll study integral operators $\mathcal{G} \maps \holoL{\infty, \rho}(\Omega) \to \holoL{\infty, \sigma}(\Omega)$ of the form
+\[ [\mathcal{G}f](a) = \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta, \]
+where the kernel $g$ is an algebraic function over $\C^2$ which can be singular on $\Delta$, the diagonal.\footnote{Thanks to Alex Takeda for suggesting this.} To avoid ambiguity, we fix a branch of $g$ to use at the start of the integration path. The domain of $g$ is a covering of $\C^2$ which can be branched over $\Delta$. Continuing $g$ around $\Delta$ changes its phase by a root of unity, leaving its absolute value the same \textbf{[check]}. That makes $|g|$ a well-defined function on $\C^2 \smallsetminus \Delta$, which we can use to bound $\|\mathcal{G}\|$.
+
+For each $a \in \C$, the expression $|g(a, \cdot)\,d\zeta|$ defines a {\em density} on $\Omega \smallsetminus \{a\}$---a norm on the tangent bundle which is compatible with the conformal structure. The square of a density is a Riemannian metric. Let $\ell^{\sigma, \rho}_{g, \Omega}(a)$ be the distance from $\zeta = 0$ to $a$ with respect to the density $|\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\rho}\,d\zeta|$ on $\Omega \smallsetminus \{a\}$. The bound
+\begin{align*}
+\big|[\zeta^\sigma \mathcal{G}f](a)\big| & \le \left| \zeta(a)^\sigma \int_{\zeta = 0}^{a} g(a, \cdot)\,f\,d\zeta \right| \\
+& \le \int_{\zeta = 0}^{a} |\zeta^\sigma f|\,|\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\rho}\,d\zeta| \\
+& \le \|f\|_{\infty, \sigma} \int_{\zeta = 0}^{a} |\zeta(a)^\sigma\,g(a, \cdot)\,\zeta^{-\rho}\,d\zeta|
+\end{align*}
+holds for any integration path. Taking the infimum over all paths, we see that
+\[ \big|[\mathcal{G}f](a)\big| \le \ell^{\sigma, \rho}_{g, \Omega}(a)\,\|f\|_\infty. \]
+so $\|\mathcal{G}\| \le \sup_{a \in \Omega} \ell^{\sigma, \rho}_{g, \Omega}(a)$. Crucially, we can always make $\|\mathcal{G}\|$ a contraction by restricting $\Omega$.
+\subsubsection{The example of fractional integrals}
+Setting $g(a, a') = (\zeta(a) - \zeta(a'))^{-\lambda-1}$ with $\lambda \in (-\infty, 0)$, we get the fractional integral $\partial^\lambda_{\zeta \text{ from } 0}$. The shortest path from $\zeta = 0$ to $a$ with respect to $|\zeta(a)^{\rho+\lambda}\,g(a, \cdot)\,\zeta^{-\rho}\,d\zeta|$ is the same as the shortest path with respect to $|d\zeta|$ \textcolor{magenta}{[check]}. It follows that
+\begin{align*}
+\ell^{\sigma, \rho}_{g, \Omega}(a) & = \int_0^{|\zeta(a)|} |\zeta(a)|^{\rho+\lambda}\,(|\zeta(a)| - r)^{-\lambda-1}\,r^{-\rho}\,dr \\
+& = |\zeta(a)|^{\rho+\lambda} \int_0^1 \,(|\zeta(a)| - |\zeta(a)| t)^{-\lambda-1}\,(|\zeta(a)| t)^{-\rho}\,|\zeta(a)|\,dt \\
+& = |\zeta(a)|^{\rho+\lambda-\lambda-1-\rho+1} \int_0^1 \,(1-t)^{-\lambda-1}\,t^{-\rho}\,dt \\
+& = \int_0^1 \,(1-t)^{-\lambda-1}\,t^{-\rho}\,dt \\
+& = B(-\lambda,\,1-\rho).
+\end{align*}
+The beta function $B$ can be written more explicitly as
+\[ B(-\lambda,\,1-\rho) = \frac{\Gamma(-\lambda)\,\Gamma(1-\rho)}{\Gamma(1-\lambda-\rho)}. \]
+Now we can see that for each $\lambda \in (-\infty, 0)$ and $\rho \in \R$, the fractional integral $\partial^\lambda_{\zeta \text{ from } 0}$ maps $\holoL{\infty, \rho}(\Omega)$ into $\holoL{\infty, \rho+\lambda}(\Omega)$, with norm $\|\partial^\lambda_{\zeta \text{ from } 0}\| \le B(-\lambda,\,1-\rho)$.
+\subsubsection{Fractional integral equations near a regular singular point}
+\textcolor{SeaGreen}{\textbf{Angeliki:} Maybe Kato--Rellich perturbation theory can give existence immediately. It might not give uniqueness, though.}
+
+Consider an integral operator $\mathcal{J}$ of the form
+\[ p + \partial^{-1}_{\zeta \text{ from } 0} \circ q + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda, \]
+where:
+\begin{itemize}
+\item $p$ is a function in $\holoL{\infty, -1}(\Omega)$ that extends holomorphically over $\zeta = 0$, and its derivative at $\zeta = 0$ is non-zero.
+\item $q$ is a function in $\holoL{\infty}(\Omega)$ that extends holomorphically over $\zeta = 0$.
+\item $r_\lambda$ are functions in $\holoL{\infty}(\Omega)$.
+\item $\Lambda$ is a countable subset of $(-\infty, -1)$ whose supremum is less than $-1$.
+\end{itemize}
+Our demand that $p$ and $q$ have convergent power series at $\zeta = 0$ can probably be relaxed; having convergent Novikov series, for example, should be enough. We could also probably replace $\partial^{-1}_{\zeta \text{ from } 0}$ with $\partial^{-1+\delta}_{\zeta \text{ from } 0} \circ \zeta^\delta$ for some $\delta \in [0, 1)$, or adjust the $\partial^\lambda_{\zeta \text{ from } 0}$ similarly.
+
+We want to solve the equation $\mathcal{J}f = 0$. Let's look for a solution of the form $f = \zeta^{\tau-1} + \tilde{f}$ with $\tau \in (0, \infty)$ and $\tilde{f} \in \holoL{\infty, 1-\tau-\epsilon}(\Omega)$ for some $\epsilon \in (0, 1]$. When $\epsilon$ is small enough that $\Lambda \subset (-\infty, -1 - \epsilon]$, we'll see that we can always find such a solution, as long as we're willing to shrink $\Omega$. In fact, there's exactly one such solution. \textcolor{magenta}{[Add convergence conditions for $\partial^\lambda$ terms.]}
+
+Let $p'_0$ and $q_0$ be the values of $\tfrac{\partial}{\partial \zeta} p$ and $q$, respectively, at $\zeta = 0$. We're assuming that $p$ and $q$ extend holomorphically over $\zeta = 0$, and the additional assumption that $p \in \holoL{\infty, -1}(\Omega)$ implies that $p$ has a first-order zero at $\zeta = 0$.
+
+Since $p$ and $q$ extend holomorphically over $\zeta = 0$, and $p$ vanishes at $\zeta = 0$, we can write
+\begin{alignat*}{2}
+p & = p'_0 \zeta &\;+\;& \tilde{p} \\
+q & = q_0 &\;+\;& \tilde{q}
+\end{alignat*}
+with $\tilde{p} \in \holoL{\infty, -2}(\Omega)$ and $\tilde{q} \in \holoL{\infty, -1}(\Omega)$. Then we have
+\[ \mathcal{J} = p'_0\zeta + q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \]
+with
+\[ \tilde{\mathcal{J}} = \tilde{p} + \partial^{-1}_{\zeta \text{ from } 0} \circ \tilde{q} + \sum_{\lambda \in \Lambda} \partial^\lambda_{\zeta \text{ from } 0} \circ r_\lambda \]
+For any $\tau \in (0, \infty)$,
+\[ \mathcal{J} \zeta^{\tau-1} = (p'_0 + q_0/\tau)\,\zeta^\tau + \tilde{\mathcal{J}} \zeta^{\tau-1}. \]
+Setting $\tau = -q_0 / p'_0$ makes the first term vanish, leaving
+\[ \mathcal{J} \zeta^{\tau-1} = \tilde{\mathcal{J}} \zeta^{\tau-1}. \]
+Then the equation $\mathcal{J}f = 0$ becomes
+\begin{align}
+0 & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \mathcal{J}\tilde{f} \nonumber \\
+0 & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \left[ p'_0\zeta + q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \right]\tilde{f} \nonumber \\
+-p'_0\zeta\tilde{f} & = \tilde{\mathcal{J}}\zeta^{\tau-1} + \left[ q_0\,\partial^{-1}_{\zeta \text{ from } 0} + \tilde{\mathcal{J}} \right]\tilde{f} \nonumber \\
+\tilde{f} & = \left[ -\tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\,\zeta^{\tau-1} + \left[ \tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} - \tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\tilde{f}. \label{fixed-pt}
+\end{align}
+
+\color{Indigo}
+\begin{center}
+\begin{tikzcd}[column sep=25mm, row sep=2mm]
+& & \holoL{\infty, \rho-1}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "\tilde{p}", "\|\tilde{p}\|_{\infty, -2}"'] & \holoL{\infty, \rho-2}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty"'] \arrow[rd, hook, "\|\zeta\|_\infty^{1-\epsilon}"'] \\
+& & \holoL{\infty, \rho-1-\epsilon}(\Omega) \\
+& & & \holoL{\infty, \rho-1}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "\tilde{q}", "\|\tilde{q}\|_{\infty, -1}"'] & \holoL{\infty, \rho-1}(\Omega) \arrow[r, "\partial^{-1}", "{B(1, 2-\rho) = \frac{1}{2-\rho}}"'] & \holoL{\infty, \rho-2}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty"'] \arrow[rd, hook, "\|\zeta\|_\infty^2"'] \\
+& & & \holoL{\infty, \rho}(\Omega) \\
+& & & \holoL{\infty, \rho-1}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "r_\lambda", "\|r_\lambda\|_\infty"'] & \holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^\lambda", "{B(-\lambda, 1-\rho)}"'] & \holoL{\infty, \rho+\lambda}(\Omega) \arrow[ru, hook, "\|\zeta\|_\infty^{-1-\lambda}"'] \arrow[rd, hook, "\|\zeta\|_\infty^{-1-\epsilon-\lambda}"'] \\
+& & & \holoL{\infty, \rho-1-\epsilon}(\Omega) \\
+\holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^{-1}", "{B(1, 1-\rho) = \frac{1}{1-\rho}}"'] & \holoL{\infty, \rho-1}(\Omega) \arrow[r, "\zeta^{-1}", "\|\zeta^{-1}\|_{\infty, 1} = 1"'] & \holoL{\infty, \rho}(\Omega) \\
+\end{tikzcd}
+\end{center}
+\color{gray}
+
+From \textbf{[our previous discussion]}, we can work out that
+\begin{align*}
+\tilde{\mathcal{J}} & \maps \holoL{\infty, 1-\tau}(\Omega) \to \holoL{\infty, -\tau-\epsilon}(\Omega)\;\text{with} \\
+\|\tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M^{1-\epsilon} + \sum_{\lambda \in \Lambda} B(-\lambda, \tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\epsilon-\lambda}
+\end{align*}
+and
+\begin{align*}
+\tilde{\mathcal{J}} & \maps \holoL{\infty, 1-\tau-\epsilon}(\Omega) \to \holoL{\infty, -\tau-\epsilon}(\Omega)\;\text{with} \\
+\|\tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau+\epsilon}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, \tau+\epsilon)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}.
+\end{align*}
+Since $\|\zeta^{-1}\|_{\infty, 1} = 1$, it follows that
+\begin{align}
+\zeta^{-1} \circ \tilde{\mathcal{J}} & \maps \holoL{\infty, 1-\tau}(\Omega) \to \holoL{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \nonumber \\
+\|\zeta^{-1} \circ \tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau}\,\|\tilde{q}\|_{\infty, -1} \right) M^{1-\epsilon} + \sum_{\lambda \in \Lambda} B(-\lambda, \tau)\,\|r_\lambda\|_{\infty}\,M^{-1-\epsilon-\lambda} \label{bound:mollify}
+\end{align}
+and
+\begin{align}
+\zeta^{-1} \circ \tilde{\mathcal{J}} & \acts \holoL{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \nonumber \\
+\|\zeta^{-1} \circ \tilde{\mathcal{J}}\| & \le \left(\|\tilde{p}\|_{\infty, -2} + \tfrac{1}{1+\tau+\epsilon}\,\|\tilde{q}\|_{\infty, -1} \right) M + \sum_{\lambda \in \Lambda} B(-\lambda, \tau+\epsilon)\,\|r_\lambda\|_{\infty}\,M^{-1-\lambda}. \label{bound:perturb}
+\end{align}
+We can also see that
+\begin{align}
+\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} & \acts \holoL{\infty, 1-\tau-\epsilon}(\Omega)\;\text{with} \nonumber \\
+\|\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0}\| & = \tfrac{\tau}{\tau+\epsilon} < 1 \label{bound:contract}.
+\end{align}
+
+Now, let's return to equation~\ref{fixed-pt}, which tells us that $f = \zeta^{\tau-1} + \tilde{f}$ satisfies $\mathcal{J}f = 0$ when \textcolor{magenta}{[and only when?]} $\tilde{f}$ is a fixed point of the affine map $\mathcal{A}(\cdot) + b$, where
+\begin{align*}
+\mathcal{A} & = \tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0} - \tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \\
+b & = \left[ -\tfrac{1}{p'_0}\,\zeta^{-1} \circ \tilde{\mathcal{J}} \right]\,\zeta^{\tau-1}
+\end{align*}
+Choosing $\epsilon \in (0, 1]$ so that $\Lambda \subset (-\infty, -1 - \epsilon]$ has given us the domain and codomain statements in bounds \ref{bound:mollify} and \ref{bound:perturb}, which tell us that $\mathcal{A}(\cdot) + b$ sends $\holoL{\infty, 1-\tau-\epsilon}(\Omega)$ into itself. We'll show that when $\Omega$ is small enough, $\mathcal{A}(\cdot) + b$ contracts $\holoL{\infty, 1-\tau-\epsilon}(\Omega)$, and thus---by the contraction mapping theorem---has a unique fixed point.
+
+An affine map is a contraction if and only if its linear part is a contraction. We know from bound~\ref{bound:contract} that $\tau\,\zeta^{-1} \circ \partial^{-1}_{\zeta \text{ from } 0}$ contracts $\holoL{\infty, 1-\tau-\epsilon}(\Omega)$. Since the supremum of $\Lambda$ is less than $-1$, all the powers of $M = \|\zeta\|_\infty$ in bound~\ref{bound:perturb} are positive. Thus, by shrinking $\Omega$, we can make the norm of $\zeta^{-1} \circ \tilde{\mathcal{J}}$ on $\holoL{\infty, 1-\tau-\epsilon}(\Omega)$ as small as we want---small enough to make $\mathcal{A}$ a contraction.
+\end{document}
