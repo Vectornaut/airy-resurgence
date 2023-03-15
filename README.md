@@ -15,7 +15,7 @@
 ### General results
 - Prove Theorem 2 (from outline)
 - Ask Fredrick whether existence and uniqueness appendix might be publishable on its own
-  - (Veronica) Get in touch
+  - ~(Veronica) Get in touch~
   - (Aaron) Send summary of existence and uniqueness results
 ### Examples
 - Airy-Lucas
