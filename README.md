@@ -3,7 +3,7 @@
 ## To-do list
 
 ### Conventions
-- (Veronica) Change the computation with Sauzin to be in line with convention
+- ~(Veronica) Change the computation with Sauzin to be in line with convention~
 - (Aaron) Finish switching the Airy and Airy-Lucas sections to the literature sign convention
 ### Proofreading
 - (Aaron) Understand new material in "A new perspective: Borel regularity"
@@ -15,7 +15,7 @@
 ### General results
 - Prove Theorem 2 (from outline)
 - Ask Fredrick whether existence and uniqueness appendix might be publishable on its own
-  - (Veronica) Get in touch
+  - ~(Veronica) Get in touch~
   - (Aaron) Send summary of existence and uniqueness results
 ### Examples
 - Airy-Lucas
