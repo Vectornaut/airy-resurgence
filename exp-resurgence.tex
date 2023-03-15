@@ -951,10 +951,6 @@ with $n \in \{3, 4, 5, \ldots\}$ and $m \in \{1, 2, \ldots, r-1\}$. A few soluti
 \[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \left\{\begin{array}{ll}1 & j \text{ even} \\ i & j \text{ odd}\end{array}\right\} \frac{y^{m/2}}{\pi} \int_{\Lambda^{(j)}} \exp\left[\tfrac{2}{n} y^{n/2}\,T_n(u)\right]\,U_{m-1}(u)\,du, \]
 where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n}\pi\big)$.
 
-\subsubsection{Asymptotic analysis}
-
-\textcolor{lime}{[Use Poincar\'e algorithm to compute the asymptotic expansion]}
-
 \subsubsection{Rewriting as a modified Bessel $\frac{m}{n}$ equation}
 We can distill the most interesting parts of the Airy-Lucas function by writing
 \[ \widehat{\Ai}^{(k)}_{n, m-1}(y) = \textcolor{magenta}{\text{const.}}\,y^{{m/2}}\,K\big(\tfrac{2}{n} y^{n/2}\big), \]
@@ -973,7 +969,18 @@ Let's put equation~\eqref{eqn:mod-bessel-AL} in the form \eqref{eqn:standard ODE
 \left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big({\tfrac{m}{n}}\big)^2 z^{-2} \right] K = 0.
 \end{equation}
 
+\subsubsection{Asymptotic analysis}
 
+From the general theory of ODE of Poincar\'e rank $1$, we know that the space of trans-series solutions of ~\eqref{eqn:reg-mod-bessel-AL} has a basis of trans-monomials
+\[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,\series{W}_\alpha \mid \alpha^2 - 1 = 0 \} \]
+where the $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket$ are formal power series in $z^{-1}$ and $\tau_\alpha=1/2$. From equations 10.40.2 and 10.17.1 of \cite{dlmf}, we learn that $K(z) \sim \left(\tfrac{\pi}{2}\right)^{1/2} e^{-z} z^{-1/2}\,\series{W}_1$, with
+\begin{equation}\label{bessel-asymp-AL}
+\series{W}_1 = 1 - \frac{(\tfrac{1}{2}-\tfrac{m}{n})_1 (\tfrac{1}{2}+\frac{m}{n})_1}{2^1 \cdot 1!}\;z^{-1} + \frac{(\tfrac{1}{2}-\tfrac{m}{n})_2 (\tfrac{1}{2}+\tfrac{m}{n})_2}{2^2 \cdot 2!}\;z^{-2} - \frac{(\tfrac{1}{2}+\tfrac{m}{n})_3 (\tfrac{1}{2}+\tfrac{m}{n})_3}{2^3 \cdot 3!}\;z^{-3} + \ldots
+\end{equation}
+
+The holomorphic analysis in Section~\ref{big-idea} will give us holomorphic solutions
+\[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,W_\alpha \mid \alpha^2 - 1 = 0 \}, \]
+which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We will see in Section~\ref{bessel-regularity-AL} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is an evidence of Theorem~\ref{thm:1}.
 %\subsection{Going to the spatial domain}\label{spatial-AL}
 \subsubsection{The big idea}\label{big-idea}
 We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel-AL}. We'll succeed when $\alpha^2 - 1 = 0$, and we'll see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
@@ -1349,97 +1356,102 @@ Each generalize Airy functions is a solution of
 
 and if $p=0$ they reduced to the classical Airy functions: $\mathrm{Ai}(z)=\mathrm{A}_1(z,0)$ and $\mathrm{Bi}(z)=\mathrm{B}_1(z,0)$.
 
-We define the following exponential integral: let $p\geq 0$, $f(t)=\tfrac{t^3}{3}-t$ and $\nu_p=\tfrac{dt}{t^p}$. The critical points of $f$ are $\pm\tfrac{2}{3}$ (as for the classical Airy case), however the volume form $\nu_p$ is meromorphic    
+We define the following exponential integral: let $p\geq 0$, $f(t)=4t^3-3t$ and $\nu_p=\tfrac{dt}{t^p}$. The critical points of $f$ are $\pm\tfrac{1}{2}$ (as for the classical Airy case), however the volume form $\nu_p$ is meromorphic    
 
 \begin{equation}
-I_\alpha(z,p)\defeq\frac{1}{2\pi i}\int_{\mathcal{C}_{\alpha}}e^{-z(\tfrac{t^3}{3}-t)}\frac{dt}{t^p}
+I_\alpha(z,p)\defeq\frac{1}{2\pi i}\int_{\mathcal{C}_{\alpha}}e^{-z(4t^3-3t)}\frac{dt}{t^p}
 \end{equation}
 
-where $\mathcal{C}_\alpha$ is the path through the point $\alpha$, starting and ending at infinity (as in Figure \ref{fig:path for I}). In particular, $I_{+}(z,p)=z^{\tfrac{p-1}{3}}\mathrm{A}_1(z^{2/3},p)$: 
+where $\mathcal{C}_\alpha$ is the path through the point $\alpha$, starting and ending at infinity (as in Figure \ref{fig:path for I}). In particular, $I_{+}(z,p)=(12 z)^{\tfrac{p-1}{3}}\mathrm{A}_1((\tfrac{3}{2}z)^{2/3},p)$: 
 
 \begin{align*}
-I_{+}(z,p)&=\frac{1}{2\pi i}\int_{\mathcal{C}_{+}}e^{-z(\tfrac{t^3}{3}-t)}\frac{dt}{t^p} &\\
-&=\frac{z^{(p-1)/2}}{2\pi i}\int_{z^{-1/3}\mathcal{C}_{+}}e^{-z(z^{-1}\tfrac{s^3}{3}-z^{-1/3}s)}\frac{ds}{s^p} & t=z^{-\tfrac{1}{3}}s\\
-&=\frac{z^{(p-1)/3}}{2\pi i}\int_{z^{-1/3}\mathcal{C}_{+}}e^{-\left(\tfrac{s^3}{3}-z^{2/3}s\right)}\frac{ds}{s^p} & \\
-&=z^{(p-1)/3}\mathrm{A}_1(z^{2/3},p)
+I_{+}(z,p)&=\frac{1}{2\pi i}\int_{\mathcal{C}_{+}}e^{-z(4t^3-3t)}\frac{dt}{t^p} &\\
+&=\frac{1}{2\pi i}(12 z)^{(p-1)/3}\int_{z^{-1/3}\mathcal{C}_{+}}e^{-z(z^{-1}\frac{s^3}{3}-3 (12 z)^{-1/3}s)}\frac{ds}{s^p} & t=(12 z)^{-\tfrac{1}{3}}s\\
+&=\frac{1}{2\pi i}(12 z)^{(p-1)/3}\int_{z^{-1/3}\mathcal{C}_{+}}e^{-\left(\frac{s^3}{3}-(\tfrac{3}{2} z)^{2/3}s\right)}\frac{ds}{s^p} & \\
+&=(12 z)^{(p-1)/3}\mathrm{A}_1((\tfrac{3}{2}z)^{2/3},p)
 \end{align*}
 
 It follows that $I_+(z)$ is a solution of
- 
+
+
 \begin{equation}\label{eq:I}
-\left[\partial_z^3-\frac{4}{9}\partial_z+\frac{2-p}{z}\partial_z^2-\frac{4(1-p)}{9z}-\frac{1+3p-3p^2}{9}\frac{\partial_z}{z^2}+\frac{3+p-3p^2-p^3}{27z^3}\right]I_+(z,p)=0
+\left[\partial_z^3-\partial_z+\frac{2-p}{z}\partial_z^2+\frac{p-1}{z}+\frac{-1-3p+3p^2}{9}\frac{\partial_z}{z^2}+\frac{3+p-3p^2-p^3}{27z^3}\right]I_+(z,p)=0
 \end{equation}
 
 From the general theory of linear ODE, the formal integral solution of \eqref{eq:I} is a linear combinations of three generators 
 \begin{equation}
-\tilde{I}_+(z,p)=U_1z^{p-1}\tilde{W}_1(z)+U_2e^{-\tfrac{2}{3}z}z^{-1/2}\tilde{W}_2(z)+U_3e^{\tfrac{2}{3}z}z^{-1/2}\tilde{W}_3(z)
+\tilde{I}_+(z,p)=U_1z^{p-1}\tilde{W}_1(z)+U_2e^{-z}z^{-1/2}\tilde{W}_2(z)+U_3e^{z}z^{-1/2}\tilde{W}_3(z)
 \end{equation}
-
+ 
 where $\tilde{W}_1, \tilde{W}_2$ and $\tilde{W}_3$ are formal power seirs $\tilde{W}_{\mathbf{k}}(z)=\sum_{j\geq 0}a_{\mathbf{k},j}z^{-j}$, which are the unique (we fix $a_{k,0}=1$ for $k=1,2,3$) solution of 
 
 \begin{multline}\label{w1}
-\left[\partial_z^3-\frac{4}{9}\partial_z-\frac{1-2p}{z}\partial_z^2+\frac{17-30p+12p^2}{9z^2}\partial_z+\frac{8}{27}\frac{p^3-6p^2+11p-6}{z^3}\right]\tilde{W}_1(z)=0
+\left[\partial_z^3-\partial_z-\frac{1-2p}{z}\partial_z^2+\frac{17-30p+12p^2}{9z^2}\partial_z+\frac{8}{27}\frac{p^3-6 p^2+ 11p- 6}{z^3}\right]\tilde{W}_1(z)=0
 \end{multline}
 
 
 \begin{multline}\label{w2}
-\left[\partial_z^3-2\partial_z^2+\frac{8}{9}\partial_z+\frac{1-2p}{2z}\partial_z^2-\frac{2-4p}{3z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
-\left.-\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_2(z)=0
+\left[\partial_z^3-3\partial_z^2+2\partial_z+\frac{1-2p}{2z}\partial_z^2-\frac{1-2p}{z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
+\left.-\frac{5+24p+12p^2}{36z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_2(z)=0
 \end{multline}
 
 \begin{multline}\label{w3}
-\left[\partial_z^3+2\partial_z^2+\frac{8}{9}\partial_z+\frac{1-2p}{2z}\partial_z^2+\frac{2-4p}{3z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
-\left.+\frac{5+24p+12p^2}{54z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_3(z)=0
+\left[\partial_z^3+3\partial_z^2+2\partial_z+\frac{1-2p}{2z}\partial_z^2+\frac{1-2p}{z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
+\left.+\frac{5+24p+12p^2}{36z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_3(z)=0
 \end{multline}
+
+
 Let us first study equation \eqref{w1}: its Borel transform is
 
 \begin{multline*}
--\zeta^3\tilde{w}_1+\frac{4}{9}\zeta\tilde{w}_1-(1-2p)\int_0^\zeta\tilde{w}_1(t)t^2dt+\frac{(17-30p+12p^2)}{9}\int_0^\zeta(-t\tilde{w}_1(t))(\zeta-t)dt+\\
+-\zeta^3\tilde{w}_1+\zeta\tilde{w}_1-(1-2p)\int_0^\zeta\tilde{w}_1(t)t^2dt+\frac{(17-30p+12p^2)}{9}\int_0^\zeta(-t\tilde{w}_1(t))(\zeta-t)dt+\\
 +\frac{8}{27}(p^3-6p^2+11p-6)\int_0^\zeta\tilde{w}_1(t)\frac{(\zeta-t)^2}{2}dt=0
 \end{multline*}
 
 We differentiate three times, getting 
 
 \begin{multline*}
-\left(\frac{4}{9}\zeta-\zeta^3\right)\tilde{w}_1^{(3)}(\zeta)+\left(\frac{4}{3}-2(5-p)\zeta^2\right)\tilde{w}_1''(\zeta)-\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\tilde{w}_1'(\zeta)+\\
+\left(\zeta-\zeta^3\right)\tilde{w}_1^{(3)}(\zeta)+\left(3-2(5-p)\zeta^2\right)\tilde{w}_1''(\zeta)-\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\zeta\tilde{w}_1'(\zeta)+\\
 +\frac{8}{27}\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\left(p-\frac{5}{2}\right)\tilde{w}_1(\zeta)=0
 \end{multline*}
 
-we set $y=\tfrac{9}{4}\zeta^2$
+we set $y=\zeta^2$
 
 %\begin{multline}
 %\left[-4y(y-1)(2y\partial_y^3+3\partial_y^2)+3(4y\partial_y^2+2\partial_y)-2(5-p)y(4y\partial_y^2+2\partial_y)+\right.\\
 %\left.-2y\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\partial_y+\frac{8}{27}\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\left(p-\frac{5}{2}\right)\right]\tilde{w}_1(y)=0
 %\end{multline}
 \begin{multline}\label{eq:hw1}
-y^2(1-y)\tilde{w}_1^{(3)}(y)+y\left(\left(p-\frac{13}{2}\right)y+3\right)\tilde{w}_1''(y)-\left(y\left(\frac{305}{36}-\frac{1}{3}(10-p)p\right)-\frac{3}{4}\right)\tilde{w}_1'(y)+\\
-+\frac{1}{27}\left(p-\frac{5}{2}\right)\tilde{w}_1(y)=0
+y^2(1-y)\tilde{w}_1^{(3)}(y)+y\left((p-\frac{13}{2})y+3\right)\tilde{w}_1''(y)-\left(y\left(\frac{305}{36}-\frac{10}{3}p+\frac{p^2}{3}\right)-\frac{3}{4}\right)\tilde{w}_1'(y)+\\
++\frac{1}{27}\left(p-\frac{5}{2}\right)\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\tilde{w}_1(y)=0
 \end{multline}
 
 which is a generalized hypergeomtric equation (~16.8.5 \cite{DLMF}) with parameters
+
+
 
 \begin{align*}
 \mathbf{a}_0=\left(\frac{3}{2}-\frac{p}{3};\frac{7}{6}-\frac{p}{3};\frac{5}{6}-\frac{p}{3}\right) & \qquad\qquad \mathbf{b}_0=\left(\frac{1}{2};\frac{3}{2}\right)
 \end{align*}
 
-therefore, $\tilde{w}_1(y)=c_1\,\,{}_3F_2\left(\mathbf{a}_0;\mathbf{b}_0;y\right)+R(\zeta)$ for some function $R(\zeta)$ which can be determined from the integral equation.
+therefore, $\tilde{w}_1(y)=c_1\,\,{}_3F_2\left(\mathbf{a}_0;\mathbf{b}_0;y\right)$. 
 
   
 
 Then we look at equation \eqref{w2}: its Borel transform is
 
 \begin{multline}
--\zeta^3\tilde{w}_2(\zeta)-2\zeta^2\tilde{w}_2(\zeta)-\frac{8}{9}\zeta\tilde{w}_2(\zeta)+\frac{1-2p}{2}\int_0^\zeta t^2\tilde{w}_2(t)dt-\frac{2-4p}{3}\int_0^\zeta(-t\tilde{w}_2(t))dt+\\
+-\zeta^3\tilde{w}_2(\zeta)-3\zeta^2\tilde{w}_2(\zeta)-2\zeta\tilde{w}_2(\zeta)+\frac{1-2p}{2}\int_0^\zeta t^2\tilde{w}_2(t)dt-(1-2p)\int_0^\zeta(-t\tilde{w}_2(t))dt+\\
 +\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)(-t\tilde{w}_2(t))dt
--\frac{5+24p+12p^2}{54}\int_0^\zeta(\zeta-t)\tilde{w}_2(t)dt +\\
+-\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)\tilde{w}_2(t)dt +\\
 -\left(\frac{5}{54}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\int_0^\zeta\frac{(\zeta-t)^2}{2}\tilde{w}_2(t)dt=0
 \end{multline} 
 
 and taking three derivatives it simplifies to 
 
 \begin{multline}
-\left[\left(\zeta^3+2\zeta^2+\frac{8}{9}\zeta\right)\partial_\zeta^3 +\frac{8}{3}\partial_\zeta^2+\left(\frac{17}{2}+p\right)\zeta\left(\zeta+\frac{4}{3}\right)\partial_\zeta^2+\right.\\
-\left. \left(\frac{p^2}{3}+\frac{14}{3}p+\frac{581}{36}\right)\left(\zeta+\frac{2}{3}\right)\partial_\zeta+\frac{1}{27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(\zeta)=0
+\left[\left(\zeta^3+3\zeta^2+2\zeta\right)\partial_\zeta^3 +6\partial_\zeta^2+\left(p-\frac{17}{2}\right)\zeta\left(\zeta+\frac{1}{2}\right)\partial_\zeta^2+\right.\\
+\left. \left(\frac{p^2}{3}+\frac{14}{3}p+\frac{581}{36}\right)\left(\zeta+1\right)\partial_\zeta+\frac{1}{27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(\zeta)=0
 \end{multline}
 
 define $y=\zeta\left(\zeta+\frac{4}{3}\right)$
@@ -1574,8 +1586,8 @@ where $P$ is a polynomial, $Q$ is a polynomial of one degree lower, and $R$ is a
 \begin{itemize}
 \color{DarkCyan}
 \item More generally, for $P$ of degree $n$, we should be able to handle
-\[ \left[ P\big(\tfrac{\partial}{\partial z}\big) + z^{-1} Q_1\big(\tfrac{\partial}{\partial z}\big) + z^{-2} Q_2\big(\tfrac{\partial}{\partial z}\big) + \ldots + z^{-(n-1)} Q_{n-1}\big(\tfrac{\partial}{\partial z}\big) + z^{-n} R(z^{-1}) \right] \Phi = 0, \]
-where $Q_k$ has degree $n-k$. \textcolor{gray}{has to be done}
+\[ \left[ P\big(\tfrac{\partial}{\partial z}\big) + z^{-1} Q\big(\tfrac{\partial}{\partial z}\big) + z^{-2} R_2\big(\tfrac{\partial}{\partial z}\big) + \ldots + z^{-(n-1)} R_{n-1}\big(\tfrac{\partial}{\partial z}\big) + z^{-n} R(z^{-1}) \right] \Phi = 0, \]
+where $R_k$ has degree $n-k$. \textcolor{gray}{has to be done}
 \begin{itemize}
 \item We want the most general ODE with a regular singularity at $z = 0$ and its only other singularity, typically irregular, at $z = \infty$. \textcolor{gray}{has to be done}
 \item The singularity at $\infty$ should only be regular for an Euler equation. \textcolor{gray}{has to be done}
@@ -1820,7 +1832,7 @@ where the $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket$ are formal power 
 
 The holomorphic analysis in Section~\ref{spatial} will give us holomorphic solutions
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,W_\alpha \mid \alpha^2 - 1 = 0 \}, \]
-which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We will see in Section~\ref{bessel-regularity} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is an evidence of Theorem~\ref{thm:1}
+which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We will see in Section~\ref{bessel-regularity} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is an evidence of Theorem~\ref{thm:1}.
 
 \subsection{Building a distinguished frame of analytic solutions}
 \subsubsection{Going to the spatial domain}\label{spatial}
