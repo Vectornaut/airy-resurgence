@@ -23,7 +23,7 @@
   - (Aaron) Copy the hypergeomtric function identity used in the contour argument into an appendix
   - ~(Veronica) Copy in asymptotic analysis~
   - Show how the proof of Theorem 2 works by going through it in this special case
-    - (Veronica) Construct *W̃*<sub>1</sub> and *W̃*<sub>&minus;1</sub> in the "Asymptotic analysis" section
+    - ~(Veronica) Construct *W̃*<sub>1</sub> and *W̃*<sub>&minus;1</sub> in the "Asymptotic analysis" section~
     - (Aaron) Revise the "Borel regularity" section to mirror the proof of Theorem 2
     - (Aaron) Confirm the uniqueness argument by showing explicitly that ṽ<sub>1</sub> sums to a multiple of v<sub>1</sub>
 - General modified Bessel
