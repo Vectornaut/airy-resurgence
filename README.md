@@ -3,7 +3,7 @@
 ## To-do list
 
 ### Conventions
-- (Veronica) Change the computation with Sauzin to be in line with convention
+- ~(Veronica) Change the computation with Sauzin to be in line with convention~
 - (Aaron) Finish switching the Airy and Airy-Lucas sections to the literature sign convention
 ### Proofreading
 - (Aaron) Understand new material in "A new perspective: Borel regularity"
