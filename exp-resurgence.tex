@@ -11,7 +11,8 @@
 %%\usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
-\usepackage{xparse} 
+\usepackage{xparse}
+\usepackage{enumitem}
 %\usepackage{eqnarray}
 %% colors
 \usepackage[svgnames]{xcolor}
@@ -21,8 +22,8 @@
 %% editing
 \newcommand{\done}[1]{\textcolor{gray}{#1}}
 
-%%\theoremstyle{definition}
-%%\newtheorem{defn}{Definition}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
 %%\theoremstyle{plain}
 %%\newtheorem{prop}{Proposition}
 
@@ -73,6 +74,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\borel}{\mathcal{B}}
+\newcommand{\aexp}{\ae}
 \newcommand{\deriv}[3]{\partial^{#1}_{#2 \text{ from } #3}}
 
 
@@ -132,25 +134,47 @@ Once you have the formal solution $\series{\Phi}$, you might try to get an actua
 \begin{enumerate}
 \item Thinking of $z$ as a ``frequency variable,'' we take the Borel transform (also known as formal inverse Laplace transform) of $\series{\Phi}$, producing a formal power series $\series{\phi}$ in a new ``position variable'' $\zeta$.
 \item If $\series{\phi}$ has a positive radius of convergence we say $\series{\Phi}$ is {\em $1$-Gevrey}. We sum $\series{\phi}$ to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. \textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
-\item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $b + e^{i\theta}[0, \infty)$ \textcolor{magenta}{[change, explain, or link to notation]} its Laplace transform $\laplace_b^\theta \hat{\phi}$ \textcolor{magenta}{[link to definition]} turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\laplace_b^\theta \hat{\phi}$ its {\em Borel sum} at $b$. By definition, the Borel sum is asymptotic to $\tilde{\Phi}$. 
+\item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $b + e^{i\theta}[0, \infty)$ \textcolor{magenta}{[change, explain, or link to notation]} its Laplace transform $\laplace_b^\theta \hat{\phi}$ \textcolor{magenta}{[link to definition]} turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\laplace_b^\theta \hat{\phi}$ its {\em Borel sum} at $b$. 
+\end{enumerate}
+The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship, which is best described in the language of {\em Gevrey asymptoticity}. \textcolor{magenta}{[Do we need to extend these definitions, and the associated theorems, to cover slight series? Hopefully it wouldn't be too hard, but it would be a pain.]}
+\begin{defn}
+On an open sector $\Omega$ around $\infty$, a power series
+\begin{equation}\label{series:asymp-defn}
+\frac{a_1}{z} + \frac{a_2}{z^2} + \frac{a_3}{z^3} + \frac{a_4}{z^4} + \ldots
+\end{equation}
+is {\em asymptotic} to a holomorphic function $F$ if
+\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{z \to \infty}\big(|z|^{-n}\big) \]
+over all orders $n$.
+
+The {\em asymptotic expansion} map $\aexp^\theta$ sends a holomorphic function that vanishes at $\infty$ to the unique power series of the form \eqref{series:asymp-defn} which is asymptotic to it on the half-plane $\Re e^{i\theta}z > 0$ \textcolor{orange}{[Theorem~C.11, Nikolaev, ``Existence and uniqueness\ldots'']}.
+\end{defn}
+\begin{defn}
+On an open sector $\Omega$ around $\infty$, a power series of the form \eqref{series:asymp-defn} is {\em uniformly $1$-Gevrey-asymptotic} to a holomorphic function $F$ if there's a constant $A \in (0, \infty)$ for which
+\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \lesssim \frac{A^n n!}{|z|^n} \]
+over all orders $n$ and all $z \in \Omega$. We'll use $\lesssim$ throughout the paper to mean ``bounded by a constant multiple of.''
+\end{defn}
+To compare the Borel sum $\hat{\Phi}$ with the original series $\series{\Phi}$, let's take it one more step, sending it back into the world of formal power series by taking its asymptotic expansion.
+
+\begin{enumerate}[start=4]
+\item By construction, $\aexp^\theta \hat{\Phi} = \series{\Phi}$. It turns out that $\series{\Phi}$ is not only asymptotic to $\hat{\Phi}$, but {\em \textcolor{magenta}{uniformly} $1$-Gevrey}-asymptotic~\cite[Corollary~5.23]{diverg-resurg-i}.
 \end{enumerate}
 
 The Borel summation process is summarized in the following diagram:
 \begin{center}
 \begin{tikzcd}
 & \text{problem} & \\
-\hat{\Phi} \arrow[ru, dotted, no head, tail]\arrow[rr,red,dashed,"\text{\footnotesize Gevrey asymptotics}"'] & & \series{\Phi} \arrow[lu, no head, tail, "\parbox{15mm}{\centering\footnotesize formally solves}"'] \arrow[dd, mapsto, "\mathcal{B}"] \\
+\hat{\Phi} \arrow[ru, dotted, no head, tail] \arrow[rr, mapsto, "\aexp^\theta", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[lu, no head, tail, "\parbox{10mm}{\centering\scriptsize formally solves}"'] \arrow[dd, mapsto, "\mathcal{B}"] \\
 & & \\
 \hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \tilde{\phi} \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
 \end{center}
 
-we read the diagram from the upper-right corner with the formal solution $\tilde{\Phi}$, then, moving clockwise, we take the Borel transform $\mathcal{B}$ which produces a germ of holomorphic function at the origin. If we can sum it and its sum $\hat{\phi}$ has a controlled behaviour along a ray going to infinity, we can take the Laplace transform $\hat{\Phi}=\mathcal{L}_b^{\theta}\hat{\phi}$ which produces a holomorphic function asymptotic to $\tilde{\Phi}$ in a given half plane. A priori it is not guaranteed that $\hat{\Phi}$ solves our original problem, as different functions can be asymptotic to the same power series, and Borel summation picks one of them. However, in many cases, it picks correctly, producing an actual solution to your problem.
-
-The question of how that happens is the starting point for this paper.
-
-In both of the cases that we study, the Borel sum of $\tilde{\Phi}$ is always taken at a zero of $\lambda$, rather than an arbitrary point in $B$. For ODEs, our treatment explains why the zeroes of $\lambda$ play a special role.
- 
+You can't be sure {\em a priori} that $\hat{\Phi}$ solves your original problem, even if you know that $\series{\Phi}$ is asymptotic to an actual solution. After all, $\series{\Phi}$ is asymptotic to lots of functions; Borel summation just picks one of them. In many cases, however, Borel summation picks correctly, delivering an actual solution to your problem. The question of how that happens is the starting point for this paper.
+\color{DarkTurquoise}
+\begin{itemize}
+\item In both of the cases that we study, the Borel sum of $\tilde{\Phi}$ is always taken at a zero of $\lambda$, rather than an arbitrary point in $B$. For ODEs, our treatment explains why the zeroes of $\lambda$ play a special role.
+\end{itemize}
+\color{black}
 %\color{gray}
 %\begin{itemize}
 %\item \done{You can often find a formal power series $\tilde{\Phi} = \ldots$ that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example\ldots}
@@ -175,41 +199,64 @@ In both of the cases that we study, the Borel sum of $\tilde{\Phi}$ is always ta
 %\end{itemize}
 %\color{black}
 \subsection{A new perspective: Borel regularity}
-
-We consider a new diagram: we start reading it from the upper-left corner, namely we assume there exists a holomorphic function $\Phi$ which is asymptotic to a formal power series $\series{\Phi}$ as $\Re e^{i\theta}z$ goes to $\infty$ in the direction of $\theta$
+\subsubsection{Introducing Borel regularity}
+\begin{itemize}
+\item Start instead with a holomorphic solution $\Phi$.
+\item Taking its asymptotic expansion along the half-plane $\Re e^{i\theta}z > 0$, we get a formal power series $\series{\Phi}$.
+\end{itemize}
+\textcolor{Tan}{We consider a new diagram: we start reading it from the upper-left corner, namely we assume there exists a holomorphic function $\Phi$ which is asymptotic to a formal power series $\series{\Phi}$ as $\Re e^{i\theta}z$ goes to $\infty$ in the direction of $\theta$}
 
 \begin{center}
 \begin{tikzcd}
-& \text{Problem} & \\
-\Phi \arrow[ru, no head, tail,swap,"\parbox{15mm}{\centering\footnotesize solves}"' ]\arrow[rrd,dashed,swap,"\parbox{15mm}{\centering\footnotesize asymptotics}"']& & \\
-\hat{\Phi} \arrow[rr,red,dashed,"\text{\footnotesize Gevrey asymptotics}"'] & & \series{\Phi} \arrow[dd, mapsto, "\mathcal{B}"] \\
+& \text{problem} & \\
+\Phi \arrow[ru, no head, tail, swap, "\text{solves}"' ] \arrow[rrd, mapsto, "\aexp^{\theta}"]& & \\
+\hat{\Phi} \arrow[rr, "\aexp^{\theta}", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[luu, no head, tail, swap, "\parbox{10mm}{\centering\scriptsize formally solves}"] \arrow[dd, mapsto, "\mathcal{B}"] \\
 & & \\
-\hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \tilde{\phi} \arrow[ll, mapsto, "\text{sum}"] 
+\hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \series{\phi} \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
 \end{center}
+If $\series{\Phi}$ is Borel-summable, as described in Section~\ref{intro:summation}, its Borel sum $\hat{\Phi}$ is a new holomorphic function.
+Since different functions can be asymptotic to the same power series, taking the Borel sum of the asymptotic series of $\Phi$ must smooth away some details. We'll therefore call this process {\em Borel regularization}. Explicitly, Borel regularization works in four steps.
+\begin{enumerate}
+\item Take the asymptotic expansion $\series{\Phi} = \aexp^\theta \Phi$.
+\item Take the Borel transform $\series{\phi} = \borel \series{\Phi}$.
+\item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before. This is possible, by definition, if $\series{\Phi}$ is $1$-Gevrey.
+\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable. \textbf{[Should we be allowed to take the Laplace transform at another points $b \in B$ instead?]}
+\end{enumerate}
+We'll say a function is {\em Borel-regularizable} if its asymptotic expansion is Borel-summable, ensuring that we can carry out the last two steps.
 
-\textcolor{red}{[explain difference between Poincar\'e asymptotics and Gevrey asymptotics]}
+Defining a regularization process picks out a class of regular functions: the ones that are invariant under regularization. We'll say a function is {\em Borel regular} if it's Borel-regularizable and Borel regularization leaves it unchanged. In other words, $\Phi$ is Borel regular if $\hat{\Phi} = \Phi$.
+\subsubsection{Borel regularity as a good approximation condition}
+Borel regular functions can be characterized as functions that are approximated well, asymptotically, by polynomials. Watson showed a century ago \textcolor{orange}{[Watson]} that a function $F$ that vanishes at $\infty$ is Borel regular whenever there's an obtuse-angled sector around $\infty$ and a pair of constants $C, A \in (0, \infty)$ for which
+\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \le \frac{C A^n n!}{|z|^n} \]
+over all orders $n$ and all $z$ in the sector.
 
-Reading the diagram clockwise, if $\series{\Phi}$ is Borel-summable, as described in Section~\ref{intro:summation}, its Borel sum $\hat{\Phi}$ is a new holomorphic function.
-Since different functions can be asymptotic to the same power series, taking the Borel sum of the asymptotic series of $\Phi$ must smooth away some details. We'll therefore call this process {\em Borel regularization}. We'll say $\Phi$ is {\em Borel-regularizable} if it's asymptotic to a Borel-summable power series (namely if we can draw the square in the lower part of the diagram). 
-
-The natural question is then about the relationship between $\hat{\Phi}$ and $\Phi$: we say $\Phi$ is {\em Borel regular} if it is Borel-regularizable and Borel regularization leaves it unchanged, i.e. $\Phi$ is {\em Borel regular} if $\Phi\propto \hat{\Phi}$.
-
-
-Borel regular functions have been characterized in the literature before; Watson showed a century ago \textcolor{orange}{[Watson]} that a function $\Phi$ is Borel regular whenever there's a constant $c \in (0, \infty)$ with
+\textcolor{gray}{Borel regular functions have been characterized in the literature before; Watson showed a century ago \textcolor{orange}{[Watson]} that a function $\Phi$ is Borel regular whenever there's a constant $c \in (0, \infty)$ with
 \[ |\Phi(z)-\sum_{k=0}^Nc_kz^{-k}| \le c^{N+1} N!|z|^{-N} \]
-over all orders $N$ and all $z$ in a wide enough sector around infinity. 
+over all orders $N$ and all $z$ in a wide enough sector around infinity.}
 
 Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson's theorem on Borel summability'', see a proof in Nikita, ``Exact Solutions for the Singularly Perturbed Riccati Equation and Exact WKB Analysis'' Theorem~B.15) tells us that a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\mathcal{B}\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
+\subsubsection{Borel regularity sometimes explains why Borel summation works}
+The idea of Borel regularity can help us understand why Borel summation is so effective in some situations. Roughly speaking, Borel summation works well for problems with Borel regular solutions that stand out asymptotically \textcolor{magenta}{[this may need refining]}.
 
-Using our new perspective on Borel summation, the central goal of this paper is to explain why it works for at least two kinds of problems: 
+The central goal of this paper is to explain, from this perspective, why Borel summation works well for the two kinds of problems exemplified in Section~\ref{intro:summation}.
 \begin{enumerate}
-\item the first problem is solving a certain kind of ODE as \eqref{eqn:bessel-rescaled-1}. We will mainly focus on Poincar\'e rank $1$ ODEs
+\item \color{DarkTurquoise}
+Solving a linear ODE of Poincar\'{e} rank~$1$. One example is Equation~\eqref{eqn:bessel-rescaled-1}. The general example is the equation $\mathcal{P} \Phi = 0$ for a differential operator of the form
+\[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \big], \]
+where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are entire functions of exponential type.
+
+We'll restrict our attention to the case where the roots of $P$ are distinct.
+
+The form of $\mathcal{P}$ derives from Equation~2.2.3 \textcolor{orange}{(p.~105)} of \cite{EcalleIII}, which encompasses both linear and nonlinear ODEs of Poincar\'{e} rank~$1$. Borel summation still works well for the nonlinear ones, raising the question of whether our analysis generalizes.
+
+\color{Tan}
+the first problem is solving a certain kind of ODE as \eqref{eqn:bessel-rescaled-1}. We will mainly focus on Poincar\'e rank $1$ ODEs
 \begin{equation}\label{eqn:standard ODE}
 \Big[ P(\partial_z)+\frac{1}{z}Q_1(\partial_z)+\sum_{j=2}^d z^{-j}R_j(\partial_z)\Big]\Psi=0
 \end{equation}
-where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_j$ is a degree $d-j$ polynomial. 
-
+where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_j$ is a degree $d-j$ polynomial.
+\color{black}
 \item the second problem is evaluating a certain kind of exponential integral: a one-dimensional {\em thimble integral}
 
 \begin{equation}
@@ -377,10 +424,15 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity (Sokal, `
 \begin{equation}\label{eqn:standard ODE}
 \Big[ P(\partial_z)+\frac{1}{z}Q_1(\partial_z)+\sum_{j=2}^d z^{-j}R_j(\partial_z)\Big]\Psi=0
 \end{equation}
-where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_j$ is a degree $d-j$ polynomial [Looking at the existence theorem in {\tt airy.resurgence 2.1.3} we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well]. Furthermore we assume $P$ has simple zeros $P(\alpha_j)=0$, $j=1,...,d$ and $Q(\alpha_j)\neq 0$. 
+where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_j$ is a degree $d-j$ polynomial. \textcolor{magenta}{[Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]} Furthermore we assume $P$ has simple zeros $P(\alpha_j)=0$, $j=1,...,d$ and $Q(\alpha_j)\neq 0$.
+\item \color{DarkTurquoise}
+I think we can go more general? If I'm not mistaken, \'{E}calle's equation form \cite[Equation~2.2.3, p.~105]{EcalleIII} covers operators like
+\[ P(\partial_z) + \frac{1}{z} Q_1(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b], \]
+where $P$ and $Q$ are as above, and $R_0, \ldots, R_d$ are holomorphic functions on $\C$.
+\color{black}
 \item (backgrounds) Under these assumptions, 
 \begin{itemize}
-\item \eqref{eqn:standard ODE} admits a basis of formal solutions: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form  
+\item \eqref{eqn:standard ODE} admits a basis of formal solutions: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form \cite{int-irreg} \cite[Proposition~2.2.7, p.~111]{EcalleIII}
 \begin{equation}
 \label{formal solution}
 \tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{F}_j(z)\in e^{-\alpha_j z } z^{-\tau_j}\,\C \llbracket z^{-\tau_j} \rrbracket
