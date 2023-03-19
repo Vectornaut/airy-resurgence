@@ -22,8 +22,8 @@
 %% editing
 \newcommand{\done}[1]{\textcolor{gray}{#1}}
 
-%%\theoremstyle{definition}
-%%\newtheorem{defn}{Definition}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
 %%\theoremstyle{plain}
 %%\newtheorem{prop}{Proposition}
 
@@ -136,17 +136,27 @@ Once you have the formal solution $\series{\Phi}$, you might try to get an actua
 \item If $\series{\phi}$ has a positive radius of convergence we say $\series{\Phi}$ is {\em $1$-Gevrey}. We sum $\series{\phi}$ to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. \textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
 \item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $b + e^{i\theta}[0, \infty)$ \textcolor{magenta}{[change, explain, or link to notation]} its Laplace transform $\laplace_b^\theta \hat{\phi}$ \textcolor{magenta}{[link to definition]} turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\laplace_b^\theta \hat{\phi}$ its {\em Borel sum} at $b$. 
 \end{enumerate}
-The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship.
+The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship, which is best described in the language of {\em Gevrey asymptoticity}. \textcolor{magenta}{[Do we need to extend these definitions, and the associated theorems, to cover slight series? Hopefully it wouldn't be too hard, but it would be a pain.]}
+\begin{defn}
+On an open sector $\Omega$ around $\infty$, a power series
+\begin{equation}\label{series:asymp-defn}
+\frac{a_1}{z} + \frac{a_2}{z^2} + \frac{a_3}{z^3} + \frac{a_4}{z^4} + \ldots
+\end{equation}
+is {\em asymptotic} to a holomorphic function $F$ if
+\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{z \to \infty}\big(|z|^{-n}\big) \]
+over all orders $n$.
+
+The {\em asymptotic expansion} map $\aexp^\theta$ sends a holomorphic function that vanishes at $\infty$ to the unique power series of the form \eqref{series:asymp-defn} which is asymptotic to it on the half-plane $\Re e^{i\theta}z > 0$ \textcolor{orange}{[Theorem~C.11, Nikolaev, ``Existence and uniqueness\ldots'']}.
+\end{defn}
+\begin{defn}
+On an open sector $\Omega$ around $\infty$, a power series of the form \eqref{series:asymp-defn} is {\em uniformly $1$-Gevrey-asymptotic} to a holomorphic function $F$ if there's a constant $A \in (0, \infty)$ for which
+\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \lesssim \frac{A^n n!}{|z|^n} \]
+over all orders $n$ and all $z \in \Omega$. We'll use $\lesssim$ throughout the paper to mean ``bounded by a constant multiple of.''
+\end{defn}
+To compare the Borel sum $\hat{\Phi}$ with the original series $\series{\Phi}$, let's take it one more step, sending it back into the world of formal power series by taking its asymptotic expansion.
+
 \begin{enumerate}[start=4]
-\item By construction, taking the asymptotic expansion of $\hat{\Phi}$ along the half-plane $\Re e^{i\theta}z > 0$ gives back $\series{\Phi}$. In other words, $\aexp^\theta \hat{\Phi} = \series{\Phi}$, in the notation of \textcolor{orange}{[Theorem~C.11, Nikolaev, ``Existence and uniqueness\ldots'']}.
-
-The asymptotic expansion map $\aexp^\theta$ sends each function $F$ to the unique formal power series $a_0 + a_1 z + a_2 z^2 + \ldots$ for which
-\[ |F - (a_0 + a_1 z + \ldots + a_n z^n)| \in o\big(|z|^n\big), \]
-as $\Re e^{i\theta} z$ grows, over all orders $n$. \textcolor{magenta}{[Wait, don't we want a series in $z^{-1}$?]}
-
-It turns out that $\series{\Phi}$ is not only asymptotic to $\hat{\Phi}$, but {\em \textcolor{magenta}{uniformly} $1$-Gevrey}-asymptotic~\cite[Corollary~5.23]{diverg-resurg-i}: there are constants $C, A \in (0, \infty)$ for which
-\[ |F - (a_0 + a_1 z + \ldots + a_{n-1} z^{n-1})| \le C A^n n!\,|z|^n, \]
-on the half-plane $\Re e^{i\theta}z > 0$, over all orders $n$. \textcolor{magenta}{[I think this condition is actually \textbf{uniform} $1$-Gevrey asymptoticity on the half-plane, as defined in \cite[Definition~5.21]{diverg-resurg-i}. Note that Mitschi and Sauzin actually say ``uniformly'' in Corollary~5.23.]}
+\item By construction, $\aexp^\theta \hat{\Phi} = \series{\Phi}$. It turns out that $\series{\Phi}$ is not only asymptotic to $\hat{\Phi}$, but {\em \textcolor{magenta}{uniformly} $1$-Gevrey}-asymptotic~\cite[Corollary~5.23]{diverg-resurg-i}.
 \end{enumerate}
 
 The Borel summation process is summarized in the following diagram:
@@ -159,12 +169,12 @@ The Borel summation process is summarized in the following diagram:
 \end{tikzcd}
 \end{center}
 
-We can't be sure {\em a priori} that $\hat{\Phi}$ solves our original problem. \textbf{[\ldots]} Different functions can be asymptotic to the same power series, and Borel summation picks one of them. However, in many cases, it picks correctly, producing an actual solution to your problem.
-
-The question of how that happens is the starting point for this paper.
-
-In both of the cases that we study, the Borel sum of $\tilde{\Phi}$ is always taken at a zero of $\lambda$, rather than an arbitrary point in $B$. For ODEs, our treatment explains why the zeroes of $\lambda$ play a special role.
- 
+You can't be sure {\em a priori} that $\hat{\Phi}$ solves your original problem, even if you know that $\series{\Phi}$ is asymptotic to an actual solution. After all, $\series{\Phi}$ is asymptotic to lots of functions; Borel summation just picks one of them. In many cases, however, Borel summation picks correctly, delivering an actual solution to your problem. The question of how that happens is the starting point for this paper.
+\color{DarkTurquoise}
+\begin{itemize}
+\item In both of the cases that we study, the Borel sum of $\tilde{\Phi}$ is always taken at a zero of $\lambda$, rather than an arbitrary point in $B$. For ODEs, our treatment explains why the zeroes of $\lambda$ play a special role.
+\end{itemize}
+\color{black}
 %\color{gray}
 %\begin{itemize}
 %\item \done{You can often find a formal power series $\tilde{\Phi} = \ldots$ that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example\ldots}
@@ -234,7 +244,7 @@ The central goal of this paper is to explain, from this perspective, why Borel s
 \item \color{DarkTurquoise}
 Solving a linear ODE of Poincar\'{e} rank~$1$. One example is Equation~\eqref{eqn:bessel-rescaled-1}. The general example is the equation $\mathcal{P} \Phi = 0$ for a differential operator of the form
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \big], \]
-where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are holomorphic functions on $\C$.
+where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are entire functions of exponential type.
 
 We'll restrict our attention to the case where the roots of $P$ are distinct.
 
