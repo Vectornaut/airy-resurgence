@@ -170,11 +170,7 @@ The Borel summation process is summarized in the following diagram:
 \end{center}
 
 You can't be sure {\em a priori} that $\hat{\Phi}$ solves your original problem, even if you know that $\series{\Phi}$ is asymptotic to an actual solution. After all, $\series{\Phi}$ is asymptotic to lots of functions; Borel summation just picks one of them. In many cases, however, Borel summation picks correctly, delivering an actual solution to your problem. The question of how that happens is the starting point for this paper.
-\color{DarkTurquoise}
-\begin{itemize}
-\item In both of the cases that we study, the Borel sum of $\tilde{\Phi}$ is always taken at a zero of $\lambda$, rather than an arbitrary point in $B$. For ODEs, our treatment explains why the zeroes of $\lambda$ play a special role.
-\end{itemize}
-\color{black}
+
 %\color{gray}
 %\begin{itemize}
 %\item \done{You can often find a formal power series $\tilde{\Phi} = \ldots$ that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example\ldots}
@@ -231,10 +227,6 @@ Borel regular functions can be characterized as functions that are approximated 
 \[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \le \frac{C A^n n!}{|z|^n} \]
 over all orders $n$ and all $z$ in the sector.
 
-\textcolor{gray}{Borel regular functions have been characterized in the literature before; Watson showed a century ago \textcolor{orange}{[Watson]} that a function $\Phi$ is Borel regular whenever there's a constant $c \in (0, \infty)$ with
-\[ |\Phi(z)-\sum_{k=0}^Nc_kz^{-k}| \le c^{N+1} N!|z|^{-N} \]
-over all orders $N$ and all $z$ in a wide enough sector around infinity.}
-
 Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson's theorem on Borel summability'', see a proof in Nikita, ``Exact Solutions for the Singularly Perturbed Riccati Equation and Exact WKB Analysis'' Theorem~B.15) tells us that a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\mathcal{B}\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
 \subsubsection{Borel regularity sometimes explains why Borel summation works}
 The idea of Borel regularity can help us understand why Borel summation is so effective in some situations. Roughly speaking, Borel summation works well for problems with Borel regular solutions that stand out asymptotically \textcolor{magenta}{[this may need refining]}.
@@ -262,7 +254,7 @@ where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree 
 \begin{equation}
 I(z)\defeq\int_{\Lambda}\exp\big[-z f\big] \nu
 \end{equation}
-where $f\colon X\to \mathbb{C}$ is an algebraic map, $X$ is $1$-dimensional complex algebraic variety, $\nu\in\Omega^1(X)$ is holomorphic $1$-form in $X$ and $\Lambda$ is a suitable contour such that $I(z)$ is a holomorphic function of $z$.  
+where $f\colon X\to \mathbb{C}$ is a Morse function, $X$ is $1$-dimensional complex algebraic variety, $\nu\in\Omega^1(X)$ is holomorphic $1$-form in $X$ and $\Lambda$ is a suitable contour such that $I(z)$ is a holomorphic function of $z$.  
 \end{enumerate}
 
 These two problems are closely linked. By playing with derivatives of an exponential integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of exponential integral solutions.
@@ -455,9 +447,9 @@ Notice that this basis is distinguished only up to scaling, so we have a disting
 \begin{center}
 \begin{tikzcd}
 & & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
-\Phi\arrow[rru,dashed] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red] & & & \tilde{\Phi}\arrow[llu,"formal",swap]\arrow[dd,"\mathcal{B}"]\\
+\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\mathcal{B}"]\\
 & & IE & & \\
-\phi\arrow[rru]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\phi}}\arrow[ur]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\phi}\arrow[llu]
+\phi\arrow[rru, no head, tail]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\phi}\arrow[llu, no head, tail]
 \end{tikzcd}
 \end{center}
 
@@ -481,12 +473,17 @@ there are many ways to see this problem have a distinguished base of solutions, 
 \item background: Pham prove Borel regularity for exponential integral in N-dimension and without assuming Morse critical points (but only isolated). His proof is geometric [it may be useful to add it in Appendix]. 
 \item \textcolor{red}{We give an analytic proof analogous of Pham.}
 \item I think we should separate what can we do in general for N-dimensional integral and what is special for the $1$-dimensional one. 
-\item {[Thm 4]} 1-dim thimbles integrals are Borel regular, namely the commutativity of the following diagram
+\item {[Thm 4]} 1-dim thimbles integrals are Borel regular, namely let 
+\begin{equation}
+I_{\alpha}(z)\defeq\int_{\Lambda_\alpha}e^{-zf}\nu
+\end{equation}
+
+then the following diagram is commutative
 \begin{equation}
 \begin{tikzcd}
-I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu \arrow[r,"\sim"]\arrow[dd, swap, "\mathcal{L}^\theta "] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
+I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
 & \\
-\hat{\iota}_\alpha(\zeta)\arrow[r,equal,swap, "\text{sum}"] & \tilde{\iota}_{\alpha}(\zeta) 
+\hat{\iota}_\alpha(\zeta)\arrow[uu, "\mathcal{L}^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
 \end{tikzcd}
 \end{equation}
 \begin{itemize}
