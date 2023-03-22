@@ -79,15 +79,10 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 
 \newtheorem{definition}{Definition}[section]
-\newtheorem{problem}[definition]{Problem}
-\newtheorem{example}[definition]{Example}
-\newtheorem{fact}[definition]{Fact}
-\newtheorem{aside}[definition]{Aside}
 \newtheorem{prop}[definition]{Proposition}
-\newtheorem{question}[definition]{Question}
 \newtheorem{remark}[definition]{Remark}
-\newtheorem{theorem}[definition]{Theorem}
-\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[definition]{Lemma}
 %\newtheorem{conjecture}[definition]{Conjecture}
 \newtheorem{claim}[definition]{Claim}
@@ -156,7 +151,7 @@ over all orders $n$ and all $z \in \Omega$. We'll use $\lesssim$ throughout the 
 To compare the Borel sum $\hat{\Phi}$ with the original series $\series{\Phi}$, let's take it one more step, sending it back into the world of formal power series by taking its asymptotic expansion.
 
 \begin{enumerate}[start=4]
-\item By construction, $\aexp^\theta \hat{\Phi} = \series{\Phi}$. It turns out that $\series{\Phi}$ is not only asymptotic to $\hat{\Phi}$, but {\em \textcolor{magenta}{uniformly} $1$-Gevrey}-asymptotic~\cite[Corollary~5.23]{diverg-resurg-i}.
+\item By construction, $\aexp^\theta \hat{\Phi} = \series{\Phi}$. It turns out that $\series{\Phi}$ is not only asymptotic to $\hat{\Phi}$, but {\em {uniformly} $1$-Gevrey}-asymptotic~\cite[Corollary~5.23]{diverg-resurg-i}.
 \end{enumerate}
 
 The Borel summation process is summarized in the following diagram:
@@ -233,8 +228,7 @@ The idea of Borel regularity can help us understand why Borel summation is so ef
 
 The central goal of this paper is to explain, from this perspective, why Borel summation works well for the two kinds of problems exemplified in Section~\ref{intro:summation}.
 \begin{enumerate}
-\item \color{DarkTurquoise}
-Solving a linear ODE of Poincar\'{e} rank~$1$. One example is Equation~\eqref{eqn:bessel-rescaled-1}. The general example is the equation $\mathcal{P} \Phi = 0$ for a differential operator of the form
+\item Solving a linear ODE as the one in example Equation~\eqref{eqn:bessel-rescaled-1}. The general example is the equation $\mathcal{P} \Phi = 0$ for a differential operator of the form
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \big], \]
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are entire functions of exponential type.
 
@@ -242,13 +236,6 @@ We'll restrict our attention to the case where the roots of $P$ are distinct.
 
 The form of $\mathcal{P}$ derives from Equation~2.2.3 \textcolor{orange}{(p.~105)} of \cite{EcalleIII}, which encompasses both linear and nonlinear ODEs of Poincar\'{e} rank~$1$. Borel summation still works well for the nonlinear ones, raising the question of whether our analysis generalizes.
 
-\color{Tan}
-the first problem is solving a certain kind of ODE as \eqref{eqn:bessel-rescaled-1}. We will mainly focus on Poincar\'e rank $1$ ODEs
-\begin{equation}\label{eqn:standard ODE}
-\Big[ P(\partial_z)+\frac{1}{z}Q_1(\partial_z)+\sum_{j=2}^d z^{-j}R_j(\partial_z)\Big]\Psi=0
-\end{equation}
-where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_j$ is a degree $d-j$ polynomial.
-\color{black}
 \item the second problem is evaluating a certain kind of exponential integral: a one-dimensional {\em thimble integral}
 
 \begin{equation}
@@ -259,7 +246,7 @@ where $f\colon X\to \mathbb{C}$ is a Morse function, $X$ is $1$-dimensional comp
 
 These two problems are closely linked. By playing with derivatives of an exponential integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of exponential integral solutions.
 
-Notice that our starting point is quite different: we assume $\Phi$ is a holomorphic functions such that it is either a thimble integral or it solves an ODE with irregular singularity at $\infty$. Then we prove $\Phi$ is Borel regular and in both cases, our proves follow the heuristic of the diagram above. We will give precise statements in the following section.
+%Notice that our starting point is quite different: we assume $\Phi$ is a holomorphic functions such that it is either a thimble integral or it solves an ODE with irregular singularity at $\infty$. Then we prove $\Phi$ is Borel regular and in both cases, our proves follow the heuristic of the diagram above. We will give precise statements in the following section.
 
        
 
@@ -294,64 +281,197 @@ Notice that our starting point is quite different: we assume $\Phi$ is a holomor
 
 \subsection{Goals and Results}
 
+First of all we want to clearly separate the parts of the theory that deal with holomorphic functions and formal series. Indeed, for ODEs, we can build an analytic frame of solutions with an explicit growth behaviour (see Theorem~\ref{thm1}), while for thimble integrals we can write an explicit analytic function whose Laplace transform is the thimble integral itself (see part 4 of Theorem~\ref{thm:maxim}). 
 
+Second of all, we want to explain why it is useful to work in the Borel plane (the spatial domain): on the hand integral equations are more regular than differential equations. On the other hand, a thimble integral in the frequency domain can be recast as the Laplace transform of a function in the spatial domain. 
 
-We summarize our main goals and results in this section: first of all we want to clearly separate the parts of the theory that deal with holomorphic functions and formal series. Indeed, for ODEs, we can build an analytic frame of solutions with an explicit growth behaviour (see Theorem~\ref{thm1} ), while for thimble integrals we can write an explicit analytic function whose Laplace transform is the thimble integral itself (see part 4 of Theorem~\ref{thm:maxim}). 
+\subsubsection{Why does Borel resummation work for solutions of irregular singular ODEs?}
 
-Second of all, we want to explain why it is useful to work in the Borel plane (the spatial domain); on the hand integral equations are more regular than differential equations.On the other hand, a thimble integral in the frequency domain can be recast as the Laplace transform of a function in the spatial domain. 
+We restrict to ODEs with irregular singularity at $\infty$ \textcolor{magenta}{and of Poincar\'e rank $1$}: 
+\begin{equation}\label{eqn:standard ODE}
+P(\partial_z) + \frac{1}{z} Q_1(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b]
+\end{equation}
+where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_0, \ldots, R_d$ are holomorphic functions on $\C$ \footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]}. Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$ and $Q(-\alpha_j)\neq 0$.
 
-As part of the treatment, we have made use of some new perspectives on the Laplace transform. Indeed, the Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it is much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. In particular, working with integral equations in the spatial domain will be our main strategy to prove Borel regularity for ODEs (see Theorem~\ref{thm1}). 
+Under these assumptions, \eqref{eqn:standard ODE} admits a basis of formal solutions \cite{int-irreg} \cite[Proposition~2.2.7, p.~111]{EcalleIII}: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form 
+\begin{equation}
+\label{formal solution}
+\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{F}_j(z)\in e^{-\alpha_j z } z^{-\tau_j}\,\C \llbracket z^{-\tau_j} \rrbracket
+\end{equation}
+Notice that this basis is distinguished only up to scaling, so we have a distinguished frame in the space of formal solutions. 
+
+Classically it has been proved that the formal solutions $\series{\Psi}_j$ \eqref{formal solution} are Borel-Laplace summable and their Borel-Laplace sum $\hat{\Psi}_j$ satisfies the original equation \eqref{eqn:standard ODE} \cite{Ramis?}\textcolor{magenta}{[Check references]}. Therefore, the distinguished frame of formal solutions become a distinguished frame of analytic solutions $\hat{\Psi}_1,...,\hat{\Psi}_d$.       
+
+However, can we find a distinguished basis of solutions in a purely analytic way? This should be possible as the coefficients of the ODE are regular enough. In fact, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotics to a formal frame \textcolor{magenta}{[reference-see Sauzin-Mitchi or Delabere book]}, but it is not a constructive method (see Balser chap. 14). Conversely, we can explicitly built a distinguished basis of analytic solutions: 
+
+\begin{theorem}\label{thm1}
+In the previous set-up, for every $\alpha_j$ there exists a unique solution in the $\zeta$-plane which blows-up as $\zeta^{\tau_j-1}$ at $\alpha_j$: set $\zeta_j=\zeta-\alpha_j$,  
+
+\[{\psi}_j(\zeta_j)=\textcolor{magenta}{\zeta_j^{\tau_j-1}}+f_j\] .
+\end{theorem}
+\textcolor{magenta}{[verify the exponent, is it $\tau_j-1$ or $\tau_j$? What are the conditions for $f_j$?]}
+
+At this point, we may ask what is the relationship between the two frame of analytic solutions, namely the Borel sum $\hat{\Psi}_j$ of the formal solutions $\series{\Psi}_j$ and the Laplace transform of $\psi_j$. Our main result says they are actually the same, hence proving Borel summation works. 
+ 
+\begin{theorem}\label{thm2}
+Let $\Psi_j\defeq\mathcal{L}_{\zeta_j}^{\theta}\psi_j$ be the Laplace transform of $\psi_j$ solutions constructed in Theorem~\ref{thm1}. The following results hold true
+\begin{enumerate}
+\item $\Psi_j$ is asymptotic to $\series{\Psi}_j$;
+\item the Borel sum of $\series{\Psi}_j$ is the same as $\Psi_j$
+\end{enumerate}
+\end{theorem}
+
+In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}.  
+
+In the following diagram we sketch the main step of the proof of Theorem~\ref{thm2}: on the right hand side of the diagram, we have the formal solution $\series{\Psi }_j$ and its Borel transform $\series{\psi}_j$. Then, the theory of multi-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
+
+\begin{center}
+\begin{tikzcd}
+& & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
+\Psi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Psi}}\arrow[ur,red, no head, tail] & & & \tilde{\Psi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\mathcal{B}"]\\
+& & IE & & \\
+\psi\arrow[rru, no head, tail]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\psi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\psi}\arrow[llu, no head, tail]
+\end{tikzcd}
+\end{center} 
+
+Conversely, on the left hand side, we have the unique (up to scaling) analytic function $\psi_j$ of Theorem~\ref{thm1} which solves the integral equation (IE) obtained as the inverse Laplace transform of the (ODE).   
+
+The key step, is then comparing $\psi_j$ and $\hat{\psi}_j$. First, using properties of the Borel transform, it is easy to show that $\series{\psi}_j$ is a formal solution of the integral equation (IE), hence its sum $\hat{\psi}_j$ must be a solution too. In addition, from the explicit formula for $\tilde{\Psi}_j$, we can show that $\hat{\psi}_j$ grows as $\zeta^{-\tau_j+1}$ near $\zeta=\alpha_j$
+therefore, by our uniqueness result~\ref{thm1}, we conclude that $\psi_j$ and $\hat{\psi}_j$ must coincide up to scaling by a constant. 
+
+As a consequence, by properties of the Laplace transform, $\Psi_j\defeq\mathcal{L}_{\zeta_j}^{\theta}\psi_j$ is an analytic solution of the (ODE) and it is asymptotic to $\series{\Psi}_j$. Furthermore, $\Psi_j$ is proportional to $\hat{\Psi}_j$.   
+
+\begin{remark}
+There are many ways to built a frame of solutions for these kind of ODE: formally in the $z$-plane Poincar\'e gave an explicit solution \cite{int-irreg}. Formally in the $\zeta$-plane \'Ecalle figured out how to find a frame of formal solutions of the Borel transformed ODE \textcolor{magenta}{[add reference]}. It can indeed been seen as a consequence of ``resurgence'' of the ODE. Our results show how to built a frame of solutions, analytically in the Borel plane. Furthermore, it shows we are picking the same frame: from the properties of the Laplace transform we get an analytic frame asymptotic to Poincar\'e frame $\series{\Psi}_j$. From the uniqueness result of Theorem~\ref{thm1}, we get a frame of analytic solutions equivalent to \'Ecalle's ones. 
+\end{remark} 
+
+\begin{remark}
+Although, in our proof we use multi-summability to ensure that the Borel sum of the formal solution $\series{\Psi}_j$ exists and it solves the ODE, the approach of Borel regularity is different as it is based on the analytic solution in the frequency domain ($z$-plane). \textcolor{magenta}{[Is it possible to prove Borel regularity without proving Borel summability? For instance, can we argue that $\psi_j$ being the unique solution of (IE) with a certain behaviour is enough to say that it is the sum of $\series{\psi}_j$? Check carefully the argument of multi-summability]} 
+\end{remark}
+
+\color{gray}
+\begin{itemize}
+\item Can we see there exists a distinguished basis in a purely analytic way? YES. [Thm 1]% The reason is the existence theorem gives for every $\alpha_j$ a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$.
+\item why Borel summations of $\tilde{\Psi_1},...,\tilde{\Psi_d}$ finds this solutions? because they are an analytic frame of Borel regular functions. 
+\end{itemize}
+\begin{itemize}
+\item {[Thm 1]}: for every $\alpha_j$ there exists a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$. (proof based on existence theorem \ref{frac_int_exist})
+\item {[Thm 2]}: The Borel sum of the formal solutions $\tilde{\Psi}_j$ are the same as the Laplace transform of the solutions of Thm 1. 
+\item Cor of Thm 2: the Laplace transform of solutions of Thm 1 are Borel regular.   
+\item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform. [Follows from Aaron's argument in Airy resurgence, even if Aaron works with more general ODEs]
+
+\item Draw diagram showing formal vs. holomorphic solutions in time vs. frequency domains.
+
+\begin{center}
+\begin{tikzcd}
+& & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
+\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\mathcal{B}"]\\
+& & IE & & \\
+\phi\arrow[rru, no head, tail]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\phi}\arrow[llu, no head, tail]
+\end{tikzcd}
+\end{center}
+
+where the arrow in red are a consequence of multisummability. In addition, we can distinguish on the right hand side of the diagram the formal solutions and on the left hand side the holomorphic ones. On the upper part of the diagram the functions in the $z$-plane while on the lower part the functions in the Borel plane $\zeta$-plane.
+\item  
+there are many ways to see this problem have a distinguished base of solutions, Poincar\'e see it formally in the $z$-plane, \textcolor{red}{Ecalle figured it out how to see it formally in the Borel plane}, our results shows how to see it analytically in  the Borel plane.
+\item  M.A.E.T. says you can start in formal $z$-plane but it is not really constructive (see Balser chap 14); going from formal $\zeta$ to analytic is constructive and it's essentially Borel-Laplace summation. Our method uses just Laplace transform. 
+\item How do we know we are picking the same frame? from properties of Laplace transform we get solution asymptotics to Poincar\'e frame. From uniqueness result we get a frame equivalent to Ecalle's frame. 
+\item multi-summability is a regularity result starting form the formal solution in the $z$-plane. Borel regularity is instead based on the analytic solution in the $z$-plane. The argument we gave about getting the same frame is what proves Borel regularity of $\Psi_j$.   
+\end{itemize}
+
+\color{DarkBlue}
+
+\subsubsection{Why does Borel resummation work for thimbles integrals?}
+
+\begin{itemize}
+\item This is the setup. Let $X$ be an algebraic variety of dimension $N$, $f\colon X\to \mathbb{C}$ be a holomorphic Morse function with only simple critical points and $\nu\in\Gamma(X,\Omega^N)$.
+\begin{itemize}
+\item recall theory of homology and cohomology to define the thimbles integrals. Pham has briefly discussed it, but apparently was introduced by Malgrange, Milnor and ?.  
+\end{itemize} 
+\item background: Pham prove Borel regularity for exponential integral in N-dimension and without assuming Morse critical points (but only isolated). His proof is geometric [it may be useful to add it in Appendix]. 
+\item \textcolor{red}{We give an analytic proof analogous of Pham.}
+\item I think we should separate what can we do in general for N-dimensional integral and what is special for the $1$-dimensional one. 
+\item {[Thm 4]} 1-dim thimbles integrals are Borel regular, namely let 
+\begin{equation}
+I_{\alpha}(z)\defeq\int_{\Lambda_\alpha}e^{-zf}\nu
+\end{equation}
+
+then the following diagram is commutative
+\begin{equation}
+\begin{tikzcd}
+I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
+& \\
+\hat{\iota}_\alpha(\zeta)\arrow[uu, "\mathcal{L}^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
+\end{tikzcd}
+\end{equation}
+\begin{itemize}
+\item on the one hand take asymptotic expansion of integral via saddle point approximation and then study the Borel Laplace sum of the divergent series [from left upper corners clockwise]
+\item on the other hand \textcolor{red}{see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform).}
+\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
+\item A corollary of [Thm 4] is the fractional derivative formula.
+\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
+\end{itemize}
+\item From the result of Pham we can deduce Stokes constants are always integers as they are intersection numbers (use same argument of Maxim). See also the argument of KS21 sec 6.2 in the framework of analytic WCFs. Prove integrality of Stokes constants using the fractional integral formula vs differential equation (see example in Appendix C) 
+\end{itemize}
+
+\color{black}
+
+\subsubsection{Other results}
+
+As part of the treatment, we have made use of some new perspectives on the Laplace transform (see Section~\ref{sec:Laplace-Borel-general}). Indeed, the Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it is much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. In particular, working with integral equations in the spatial domain will be our main strategy to prove Borel regularity for ODEs (see Theorem~\ref{thm1}). 
 
 Furthermore, we introduce a geometric picture where the spatial domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_b^\theta$ is $T^* B_b$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example. \textcolor{magenta}{[where do we do that?]} \textcolor{orange}{Explain why this new perspective is useful} 
 
 We will illustrate our main results with detailed treatments of several examples: we will mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals (the Airy--Lucas functions, modified Bessel function, Airy function, the anharmonic oscillator...). Then, on the one hand we explicitly solves the integral equation associated to the ODE, building a frame of analytic solutions as Laplace transform of the solutions of the integral equation. On the other hand, our \textit{contour argument} shows how to rewrite explicitly thimble integrals as a Laplace transform. Borel regularity will be evident from the explicit computations.
-Some examples have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we will make a comparison with (Marino, Sauzin, Takei). The anharmonic oscillator was also discussed by (Bender--Wu, Schiappa). Other example haven't been discussed much, as for Airy--Lucas functions.  
-Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interests in math and physics as a powerful alternative to Borel summability. Resurgence of lienar ODEs have been studied (see Costin slides for ReNewQuantum). Many results are also known for non linear ODEs (see Schiappa PI, Costin PI). For algebraic thimble integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see Maxim's slides ReNewQuantum, KS paper analytic WCS), however for more general exponential integrals (see examples in Maxim's talk) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of 1-dimensional integrals show some features of resurgence and they are toy model to get a feeling on \'Ecalle formalism. 
+Some examples have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we will make a comparison with (Marino, Sauzin, Takei). The anharmonic oscillator was also discussed by (Bender--Wu, Schiappa). Other example haven't been discussed much, as for Airy--Lucas functions. 
 
-\color{gray}
-\begin{itemize}
-\item The central goal of this paper is to lay out two kinds of problems where we can prove that the Borel sum of a formal power series solution is always an actual solution.
-\begin{itemize}
-\item The first problem is evaluating a certain kind of exponential integral: a one-dimensional {\em thimble integral}.
-\item The second problem is solving a certain kind of ODE.
-\item These two problems are closely linked. By playing with derivatives of an exponential integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of exponential integral solutions.
-\item \textcolor{magenta}{(Does this touch the Picard-Lefshetz perspective? Betti / de Rham relationship: ODE is a connection, and exponential integrals give flat sections?)}
-\end{itemize}
+ 
+Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interests in math and physics as a powerful alternative to Borel summability. Resurgence of lienar ODEs have been studied (see Costin slides for ReNewQuantum, \cite{EcalleIII}). Many results are also known for non linear ODEs (see Schiappa PI, Costin PI). For algebraic thimble integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see Maxim's slides ReNewQuantum, KS paper analytic WCS), however for more general exponential integrals (see examples in Maxim's talk) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of 1-dimensional integrals show some features of resurgence and they are toy model to get a feeling on \'Ecalle formalism. 
 
-\item Clearly separate the parts of the theory that deal with holomorphic functions and formal power series.
-\begin{itemize}
-\item we can do that also for thimble integrals (this is part 4 of Thm 5.1 in {\tt draft2.pdf})
-\end{itemize}
-\item (Super-motivation: why do the zeroes of $\lambda$ play a special role?) As part of the treatment, we've made use of some new perspectives on the Laplace transform.
-\begin{itemize}
-\item \textbf{Geometric picture.} The spatial domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_b^\theta$ is $T^* B_b$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example.
-\item \textbf{A new dictionary for ODEs.} The Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it's much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. 
-\begin{itemize}
-\item This clarifies why we take the Borel sums at zeroes of $\lambda$ when we're trying to solve an ODE.
-\end{itemize}
-\end{itemize}
-\item Our picture helps explain why it's useful to work on the Borel plane (the position domain).
-\begin{itemize}
-\item Integral equations are more regular than differential equations.
-\item A thimble integral in the frequency domain can be recast as the Laplace transform of a function in the position domain.
-\end{itemize}
-\item Illustrate with detailed treatments of several examples.
-\begin{itemize}
-\item Contour argument (thimble integrals)
-\item solving integral equation (ODE)
-\item How thimble integrals and ODE are related in our examples?
-\end{itemize}
-\begin{itemize}
-\item Some have been discussed many times, using different approaches and conventions. We'll try to give an idea of how all these different treatments fit together. $\bullet$ The Airy function (Marino, Sauzin). $\bullet$ The anharmonic oscillator (Bender--Wu, Schiappa).
-\item Others haven't been discussed much.
-\end{itemize}
-\item Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interests in math and physics as a powerful alternative to Borel summability. Resurgence of lienar ODEs have been studied (see Costin slides for ReNewQuantum). Many results are also known for non linear ODEs (see Schiappa PI, Costin PI). For algebraic exponential integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see Maxim's slides ReNewQuantum), however for more general exponential integrals (see examples in Maxim's talk) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of exponential integrals show some features of resurgence and they are toy model to get a feeling on \'Ecalle formalism.       
-\item \textcolor{magenta}{The examples give a place to compare more complicated formalisms like the Picard-Lefshetz (Morse theory) or Ecalle formalisms? [How do we work this into the introduction?]}
-\begin{itemize}
-\item thimble integrals are geometric in the sense of being pairing between homology and cohomology 
-\item computation of Stokes constants via Picard--Lefschetz theory
-\end{itemize}
-\end{itemize}
+%\color{gray}
+%\begin{itemize}
+%\item The central goal of this paper is to lay out two kinds of problems where we can prove that the Borel sum of a formal power series solution is always an actual solution.
+%\begin{itemize}
+%\item The first problem is evaluating a certain kind of exponential integral: a one-dimensional {\em thimble integral}.
+%\item The second problem is solving a certain kind of ODE.
+%\item These two problems are closely linked. By playing with derivatives of an exponential integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of exponential integral solutions.
+%\item \textcolor{magenta}{(Does this touch the Picard-Lefshetz perspective? Betti / de Rham relationship: ODE is a connection, and exponential integrals give flat sections?)}
+%\end{itemize}
+%
+%\item Clearly separate the parts of the theory that deal with holomorphic functions and formal power series.
+%\begin{itemize}
+%\item we can do that also for thimble integrals (this is part 4 of Thm 5.1 in {\tt draft2.pdf})
+%\end{itemize}
+%\item (Super-motivation: why do the zeroes of $\lambda$ play a special role?) As part of the treatment, we've made use of some new perspectives on the Laplace transform.
+%\begin{itemize}
+%\item \textbf{Geometric picture.} The spatial domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_b^\theta$ is $T^* B_b$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example.
+%\item \textbf{A new dictionary for ODEs.} The Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it's much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. 
+%\begin{itemize}
+%\item This clarifies why we take the Borel sums at zeroes of $\lambda$ when we're trying to solve an ODE.
+%\end{itemize}
+%\end{itemize}
+%\item Our picture helps explain why it's useful to work on the Borel plane (the position domain).
+%\begin{itemize}
+%\item Integral equations are more regular than differential equations.
+%\item A thimble integral in the frequency domain can be recast as the Laplace transform of a function in the position domain.
+%\end{itemize}
+%\item Illustrate with detailed treatments of several examples.
+%\begin{itemize}
+%\item Contour argument (thimble integrals)
+%\item solving integral equation (ODE)
+%\item How thimble integrals and ODE are related in our examples?
+%\end{itemize}
+%\begin{itemize}
+%\item Some have been discussed many times, using different approaches and conventions. We'll try to give an idea of how all these different treatments fit together. $\bullet$ The Airy function (Marino, Sauzin). $\bullet$ The anharmonic oscillator (Bender--Wu, Schiappa).
+%\item Others haven't been discussed much.
+%\end{itemize}
+%\item Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interests in math and physics as a powerful alternative to Borel summability. Resurgence of lienar ODEs have been studied (see Costin slides for ReNewQuantum). Many results are also known for non linear ODEs (see Schiappa PI, Costin PI). For algebraic exponential integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see Maxim's slides ReNewQuantum), however for more general exponential integrals (see examples in Maxim's talk) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of exponential integrals show some features of resurgence and they are toy model to get a feeling on \'Ecalle formalism.       
+%\item \textcolor{magenta}{The examples give a place to compare more complicated formalisms like the Picard-Lefshetz (Morse theory) or Ecalle formalisms? [How do we work this into the introduction?]}
+%\begin{itemize}
+%\item thimble integrals are geometric in the sense of being pairing between homology and cohomology 
+%\item computation of Stokes constants via Picard--Lefschetz theory
+%\end{itemize}
+%\end{itemize}
 \subsection{Results}
 
 \color{orange}
@@ -390,111 +510,111 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 \end{itemize}
 \end{itemize}
 
-\subsection{Why does Borel resummation work?}
-
-\color{gray}
-
-Borel resummation is a way of turning a formal power series
-\[ \series{\varphi} = z^\sigma \left( \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \frac{\varphi_3}{z^4} + \ldots \right), \]
-with $\sigma \in [0, 1)$, into a function which is asymptotic to $\series{\varphi}$ as $z \to \infty$. Different functions can be asymptotic to the same power series, and Borel resummation picks one of them, performing an implicit regularization~\textbf{[arXiv:1705.03071, or maybe arXiv:1412.6614]}. When a function matches the Borel sum of its asymptotic series, we'll say it's {\em Borel regular}. Several familiar kinds of regularity imply Borel regularity, and shed light on why it occurs.
-%%Knowing that a function is Borel regular gives us extra information about it---enough to reconstruct it from its asymptotic series. What's the nature of this extra information?
-%%Since different functions can be asymptotic to the same power series, Borel resummation must involve an {\em implicit regularization}, restricting its range to a class of functions which are uniquely determined by their formal power series.
-\begin{itemize}
-\item \textbf{Having a good asymptotic approximation}
-
-Let $R_N$ be the difference between a function and the partial sum
-\[ \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \ldots + \frac{\varphi_{N-2}}{z^{N-1}} \]
-of its asymptotic series. Watson showed a century ago that the function is Borel regular whenever there's a constant $c \in (0, \infty)$ with
-\[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
-over all orders $N$ and all $z$ in a wide enough wedge around infinity (Sokal, ``An improvement of Watson's theorem on Borel summability''; Hardy, {\em Divergent Series}, Theorem~136; Watson, ``A theory of asymptotic series,'' \S 8?).
-\color{black}
-
-\item \textbf{Satisfying a singular differential equation}
-
-\begin{itemize}
-\item This is the setup. We restrict to ODEs with irregular singularity at $\infty$ and of Poincaré rank $1$: 
-\begin{equation}\label{eqn:standard ODE}
-\Big[ P(\partial_z)+\frac{1}{z}Q_1(\partial_z)+\sum_{j=2}^d z^{-j}R_j(\partial_z)\Big]\Psi=0
-\end{equation}
-where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_j$ is a degree $d-j$ polynomial. \textcolor{magenta}{[Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]} Furthermore we assume $P$ has simple zeros $P(\alpha_j)=0$, $j=1,...,d$ and $Q(\alpha_j)\neq 0$.
-\item \color{DarkTurquoise}
-I think we can go more general? If I'm not mistaken, \'{E}calle's equation form \cite[Equation~2.2.3, p.~105]{EcalleIII} covers operators like
-\[ P(\partial_z) + \frac{1}{z} Q_1(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b], \]
-where $P$ and $Q$ are as above, and $R_0, \ldots, R_d$ are holomorphic functions on $\C$.
-\color{black}
-\item (backgrounds) Under these assumptions, 
-\begin{itemize}
-\item \eqref{eqn:standard ODE} admits a basis of formal solutions: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form \cite{int-irreg} \cite[Proposition~2.2.7, p.~111]{EcalleIII}
-\begin{equation}
-\label{formal solution}
-\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{F}_j(z)\in e^{-\alpha_j z } z^{-\tau_j}\,\C \llbracket z^{-\tau_j} \rrbracket
-\end{equation}
-Notice that this basis is distinguished only up to scaling, so we have a distinguished frame in the space of formal solutions. 
-\item \eqref{formal solution} is Borel-Laplace summable and its Borel-Laplace sum $\Psi_j$ satisfies the original equation \eqref{eqn:standard ODE}
-\item as a consequence, the distinguished frame of formal solutions become a distinguished frame of analytic solutions $\Psi_1,...,\Psi_d$.  
-\end{itemize}
-\item Can we see there exists a distinguished basis in a purely analytic way? YES. [Thm 1]% The reason is the existence theorem gives for every $\alpha_j$ a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$.
-\item why Borel summations of $\tilde{\Psi_1},...,\tilde{\Psi_d}$ finds this solutions? because they are an analytic frame of Borel regular functions. 
-\begin{itemize}
-\item {[Thm 1]}: for every $\alpha_j$ there exists a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$. (proof based on existence theorem \ref{frac_int_exist})
-\item {[Thm 2]}: The Borel sum of the formal solutions $\tilde{\Psi}_j$ are the same as the Laplace transform of the solutions of Thm 1. 
-\item Cor of Thm 2: the Laplace transform of solutions of Thm 1 are Borel regular.   
-\end{itemize}
-\item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform. [Follows from Aaron's argument in Airy resurgence, even if Aaron works with more general ODEs]
-
-\item Draw diagram showing formal vs. holomorphic solutions in time vs. frequency domains.
-
-\begin{center}
-\begin{tikzcd}
-& & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
-\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\mathcal{B}"]\\
-& & IE & & \\
-\phi\arrow[rru, no head, tail]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\phi}\arrow[llu, no head, tail]
-\end{tikzcd}
-\end{center}
-
-where the arrow in red are a consequence of multisummability. In addition, we can distinguish on the right hand side of the diagram the formal solutions and on the left hand side the holomorphic ones. On the upper part of the diagram the functions in the $z$-plane while on the lower part the functions in the Borel plane $\zeta$-plane.
-\item  
-there are many ways to see this problem have a distinguished base of solutions, Poincar\'e see it formally in the $z$-plane, \textcolor{red}{Ecalle figured it out how to see it formally in the Borel plane}, our results shows how to see it analytically in  the Borel plane.
-\item  M.A.E.T. says you can start in formal $z$-plane but it is not really constructive (see Balser chap 14); going from formal $\zeta$ to analytic is constructive and it's essentially Borel-Laplace summation. Our method uses just Laplace transform. 
-\item How do we know we are picking the same frame? from properties of Laplace transform we get solution asymptotics to Poincar\'e frame. From uniqueness result we get a frame equivalent to Ecalle's frame. 
-\item multi-summability is a regularity result starting form the formal solution in the $z$-plane. Borel regularity is instead based on the analytic solution in the $z$-plane. The argument we gave about getting the same frame is what proves Borel regularity of $\Psi_j$.   
-\end{itemize}
-
-\color{DarkBlue}
-
-\item \textbf{Being a thimble integral}
-
-\begin{itemize}
-\item This is the setup. Let $X$ be an algebraic variety of dimension $N$, $f\colon X\to \mathbb{C}$ be a holomorphic Morse function with only simple critical points and $\nu\in\Gamma(X,\Omega^N)$.
-\begin{itemize}
-\item recall theory of homology and cohomology to define the thimbles integrals. Pham has briefly discussed it, but apparently was introduced by Malgrange, Milnor and ?.  
-\end{itemize} 
-\item background: Pham prove Borel regularity for exponential integral in N-dimension and without assuming Morse critical points (but only isolated). His proof is geometric [it may be useful to add it in Appendix]. 
-\item \textcolor{red}{We give an analytic proof analogous of Pham.}
-\item I think we should separate what can we do in general for N-dimensional integral and what is special for the $1$-dimensional one. 
-\item {[Thm 4]} 1-dim thimbles integrals are Borel regular, namely let 
-\begin{equation}
-I_{\alpha}(z)\defeq\int_{\Lambda_\alpha}e^{-zf}\nu
-\end{equation}
-
-then the following diagram is commutative
-\begin{equation}
-\begin{tikzcd}
-I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
-& \\
-\hat{\iota}_\alpha(\zeta)\arrow[uu, "\mathcal{L}^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
-\end{tikzcd}
-\end{equation}
-\begin{itemize}
-\item on the one hand take asymptotic expansion of integral via saddle point approximation and then study the Borel Laplace sum of the divergent series [from left upper corners clockwise]
-\item on the other hand \textcolor{red}{see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform).}
-\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
-\item A corollary of [Thm 4] is the fractional derivative formula.
-\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
-\end{itemize}
-\item From the result of Pham we can deduce Stokes constants are always integers as they are intersection numbers (use same argument of Maxim). See also the argument of KS21 sec 6.2 in the framework of analytic WCFs. Prove integrality of Stokes constants using the fractional integral formula vs differential equation (see example in Appendix C) 
-\end{itemize}
+%\subsection{Why does Borel resummation work?}
+%
+%\color{gray}
+%
+%Borel resummation is a way of turning a formal power series
+%\[ \series{\varphi} = z^\sigma \left( \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \frac{\varphi_3}{z^4} + \ldots \right), \]
+%with $\sigma \in [0, 1)$, into a function which is asymptotic to $\series{\varphi}$ as $z \to \infty$. Different functions can be asymptotic to the same power series, and Borel resummation picks one of them, performing an implicit regularization~\textbf{[arXiv:1705.03071, or maybe arXiv:1412.6614]}. When a function matches the Borel sum of its asymptotic series, we'll say it's {\em Borel regular}. Several familiar kinds of regularity imply Borel regularity, and shed light on why it occurs.
+%%%Knowing that a function is Borel regular gives us extra information about it---enough to reconstruct it from its asymptotic series. What's the nature of this extra information?
+%%%Since different functions can be asymptotic to the same power series, Borel resummation must involve an {\em implicit regularization}, restricting its range to a class of functions which are uniquely determined by their formal power series.
+%\begin{itemize}
+%\item \textbf{Having a good asymptotic approximation}
+%
+%Let $R_N$ be the difference between a function and the partial sum
+%\[ \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \ldots + \frac{\varphi_{N-2}}{z^{N-1}} \]
+%of its asymptotic series. Watson showed a century ago that the function is Borel regular whenever there's a constant $c \in (0, \infty)$ with
+%\[ |R_N| \le \frac{c^{N+1} N!}{|z|^N} \]
+%over all orders $N$ and all $z$ in a wide enough wedge around infinity (Sokal, ``An improvement of Watson's theorem on Borel summability''; Hardy, {\em Divergent Series}, Theorem~136; Watson, ``A theory of asymptotic series,'' \S 8?).
+%\color{black}
+%
+%\item \textbf{Satisfying a singular differential equation}
+%
+%\begin{itemize}
+%\item This is the setup. We restrict to ODEs with irregular singularity at $\infty$ and of Poincaré rank $1$: 
+%\begin{equation}\label{eqn:standard ODE}
+%\Big[ P(\partial_z)+\frac{1}{z}Q_1(\partial_z)+\sum_{j=2}^d z^{-j}R_j(\partial_z)\Big]\Psi=0
+%\end{equation}
+%where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_j$ is a degree $d-j$ polynomial. \textcolor{magenta}{[Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]} Furthermore we assume $P$ has simple zeros $P(\alpha_j)=0$, $j=1,...,d$ and $Q(\alpha_j)\neq 0$.
+%\item \color{DarkTurquoise}
+%I think we can go more general? If I'm not mistaken, \'{E}calle's equation form \cite[Equation~2.2.3, p.~105]{EcalleIII} covers operators like
+%\[ P(\partial_z) + \frac{1}{z} Q_1(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b], \]
+%where $P$ and $Q$ are as above, and $R_0, \ldots, R_d$ are holomorphic functions on $\C$.
+%\color{black}
+%\item (backgrounds) Under these assumptions, 
+%\begin{itemize}
+%\item \eqref{eqn:standard ODE} admits a basis of formal solutions: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form \cite{int-irreg} \cite[Proposition~2.2.7, p.~111]{EcalleIII}
+%\begin{equation}
+%\label{formal solution}
+%\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{F}_j(z)\in e^{-\alpha_j z } z^{-\tau_j}\,\C \llbracket z^{-\tau_j} \rrbracket
+%\end{equation}
+%Notice that this basis is distinguished only up to scaling, so we have a distinguished frame in the space of formal solutions. 
+%\item \eqref{formal solution} is Borel-Laplace summable and its Borel-Laplace sum $\Psi_j$ satisfies the original equation \eqref{eqn:standard ODE}
+%\item as a consequence, the distinguished frame of formal solutions become a distinguished frame of analytic solutions $\Psi_1,...,\Psi_d$.  
+%\end{itemize}
+%\item Can we see there exists a distinguished basis in a purely analytic way? YES. [Thm 1]% The reason is the existence theorem gives for every $\alpha_j$ a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$.
+%\item why Borel summations of $\tilde{\Psi_1},...,\tilde{\Psi_d}$ finds this solutions? because they are an analytic frame of Borel regular functions. 
+%\begin{itemize}
+%\item {[Thm 1]}: for every $\alpha_j$ there exists a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$. (proof based on existence theorem \ref{frac_int_exist})
+%\item {[Thm 2]}: The Borel sum of the formal solutions $\tilde{\Psi}_j$ are the same as the Laplace transform of the solutions of Thm 1. 
+%\item Cor of Thm 2: the Laplace transform of solutions of Thm 1 are Borel regular.   
+%\end{itemize}
+%\item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform. [Follows from Aaron's argument in Airy resurgence, even if Aaron works with more general ODEs]
+%
+%\item Draw diagram showing formal vs. holomorphic solutions in time vs. frequency domains.
+%
+%\begin{center}
+%\begin{tikzcd}
+%& & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
+%\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\mathcal{B}"]\\
+%& & IE & & \\
+%\phi\arrow[rru, no head, tail]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\phi}\arrow[llu, no head, tail]
+%\end{tikzcd}
+%\end{center}
+%
+%where the arrow in red are a consequence of multisummability. In addition, we can distinguish on the right hand side of the diagram the formal solutions and on the left hand side the holomorphic ones. On the upper part of the diagram the functions in the $z$-plane while on the lower part the functions in the Borel plane $\zeta$-plane.
+%\item  
+%there are many ways to see this problem have a distinguished base of solutions, Poincar\'e see it formally in the $z$-plane, \textcolor{red}{Ecalle figured it out how to see it formally in the Borel plane}, our results shows how to see it analytically in  the Borel plane.
+%\item  M.A.E.T. says you can start in formal $z$-plane but it is not really constructive (see Balser chap 14); going from formal $\zeta$ to analytic is constructive and it's essentially Borel-Laplace summation. Our method uses just Laplace transform. 
+%\item How do we know we are picking the same frame? from properties of Laplace transform we get solution asymptotics to Poincar\'e frame. From uniqueness result we get a frame equivalent to Ecalle's frame. 
+%\item multi-summability is a regularity result starting form the formal solution in the $z$-plane. Borel regularity is instead based on the analytic solution in the $z$-plane. The argument we gave about getting the same frame is what proves Borel regularity of $\Psi_j$.   
+%\end{itemize}
+%
+%\color{DarkBlue}
+%
+%\item \textbf{Being a thimble integral}
+%
+%\begin{itemize}
+%\item This is the setup. Let $X$ be an algebraic variety of dimension $N$, $f\colon X\to \mathbb{C}$ be a holomorphic Morse function with only simple critical points and $\nu\in\Gamma(X,\Omega^N)$.
+%\begin{itemize}
+%\item recall theory of homology and cohomology to define the thimbles integrals. Pham has briefly discussed it, but apparently was introduced by Malgrange, Milnor and ?.  
+%\end{itemize} 
+%\item background: Pham prove Borel regularity for exponential integral in N-dimension and without assuming Morse critical points (but only isolated). His proof is geometric [it may be useful to add it in Appendix]. 
+%\item \textcolor{red}{We give an analytic proof analogous of Pham.}
+%\item I think we should separate what can we do in general for N-dimensional integral and what is special for the $1$-dimensional one. 
+%\item {[Thm 4]} 1-dim thimbles integrals are Borel regular, namely let 
+%\begin{equation}
+%I_{\alpha}(z)\defeq\int_{\Lambda_\alpha}e^{-zf}\nu
+%\end{equation}
+%
+%then the following diagram is commutative
+%\begin{equation}
+%\begin{tikzcd}
+%I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
+%& \\
+%\hat{\iota}_\alpha(\zeta)\arrow[uu, "\mathcal{L}^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
+%\end{tikzcd}
+%\end{equation}
+%\begin{itemize}
+%\item on the one hand take asymptotic expansion of integral via saddle point approximation and then study the Borel Laplace sum of the divergent series [from left upper corners clockwise]
+%\item on the other hand \textcolor{red}{see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform).}
+%\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
+%\item A corollary of [Thm 4] is the fractional derivative formula.
+%\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
+%\end{itemize}
+%\item From the result of Pham we can deduce Stokes constants are always integers as they are intersection numbers (use same argument of Maxim). See also the argument of KS21 sec 6.2 in the framework of analytic WCFs. Prove integrality of Stokes constants using the fractional integral formula vs differential equation (see example in Appendix C) 
+%\end{itemize}
 
 \color{DarkGreen}
 Let $X$ be a translation surface---a Riemann surface carrying a holomorphic 1-form $\nu$. Suppose $X$ is of {\em meromorphic type}, meaning that we got it by puncturing a compact Riemann surface $\overline{X}$ at finitely many points, and $\nu$ has a pole at each puncture. A {\em translation coordinate} on $X$ is a local coordinate whose derivative is $\nu$.
@@ -512,7 +632,7 @@ Choose a path $\gamma \maps \R \to X$ whose projection $f \circ \gamma$ starts o
 \[ I = \int_\gamma e^{-z f^*\zeta} \nu, \]
 a holomorphic function on the right half-plane parametrized by $z$. It turns out \textbf{[we hope]} that we can get $I$ by summing $e^{-\alpha_p z} I_p$ over various critical points---as long as none of the $\Gamma_p$ run into each other. \textbf{[We get jumps at phases where the $\Gamma_p$ do hit each other.]} The constants $\alpha_p$ are values of $\zeta$, continued to the critical points along certain paths.
 \color{black}
-\end{itemize}
+%\end{itemize}
 \begin{itemize}
 \item Each resummation method for asymptotic series makes some implicit assumption that allows us to reconstruct a holomorphic function from its asymptotic behaviour.
 \item The resummation method works correctly for functions which satisfy that assumption.
@@ -544,7 +664,7 @@ the inverse Laplace \textbf{[better to say Borel?]} transform is the $\tfrac{3}{
 \item The jump comes from the branch cut difference identity for hypergeometric functions.
 \item Possible interpretation of the Stokes factors as intersections numbers in Morse--Novikov theory \textbf{[ask Maxim]}
 \end{itemize}
-\section{The Laplace and Borel transforms}
+\section{The Laplace and Borel transforms}\label{sec:Laplace-Borel-general}
 \subsection{The geometry of the Laplace transform}
 
 Classically, the Laplace transform turns functions on the position domain into functions on the frequency domain. In the study of Borel summation and resurgence, it's useful to see the position domain as a {\em translation surface} $B$, and the frequency domain as one of its cotangent spaces. Roughly speaking, the Laplace transform lifts holomorphic functions on $B$ to holomorphic functions on $T^* B$.
