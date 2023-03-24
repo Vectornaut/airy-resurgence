@@ -388,8 +388,8 @@ there are many ways to see this problem have a distinguished base of solutions, 
 \begin{itemize}
 \item recall theory of homology and cohomology to define the thimbles integrals. Pham has briefly discussed it, but apparently was introduced by Malgrange, Milnor and ?.  
 \end{itemize} 
-\item background: Pham prove Borel regularity for exponential integral in N-dimension and without assuming Morse critical points (but only isolated). His proof is geometric [it may be useful to add it in Appendix]. 
-\item \textcolor{red}{We give an analytic proof analogous of Pham.}
+\item background: Pham studied the asymptotic behaviour of thimble integrals and we may interpret his result as a prof of Borel regularity in the algebraic setting, namely assuming $f$ a polynomial with distinct critical points (not necessary non--degenerate), $X=\C^N$, $\nu=g(x)dx_1\wedge...\wedge dx_N$ with $g(x)$ a polynomial. His proof uses microlocal analysis and classical results due to Varchenko. In the same algebraic setting, Malgrange states the Borel regularity result Theorem 6 \cite{Malgrange22} 
+\item \textcolor{red}{We give an explicit proof of Borel regularity beyond the polynomial case. Indeed I think we can simply assume $f$ holomorphic and proper.}
 \item I think we should separate what can we do in general for N-dimensional integral and what is special for the $1$-dimensional one. 
 \item {[Thm 4]} 1-dim thimbles integrals are Borel regular, namely let 
 \begin{equation}
@@ -409,10 +409,33 @@ I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{
 \item on the other hand \textcolor{red}{see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform).}
 \item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
 \item A corollary of [Thm 4] is the fractional derivative formula.
-\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
+\item \textcolor{red}{As a consequence of Thm 2.4 Pham}, if $f$ and $\nu$ are algebraic, we get that $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities 
+\begin{equation}
+mmm
+\end{equation} 
 \end{itemize}
-\item From the result of Pham we can deduce Stokes constants are always integers as they are intersection numbers (use same argument of Maxim). See also the argument of KS21 sec 6.2 in the framework of analytic WCFs. Prove integrality of Stokes constants using the fractional integral formula vs differential equation (see example in Appendix C) 
+\item \text{[Cor]:} combining our result and the result of Maxim [IHES lectures] (generalizing Pham) we can deduce that Stokes constants for the Borel--Laplace sum of $\tilde{I}_j(z)$ are always integers as they are intersection numbers (use same argument of Maxim). See also the argument of KS21 sec 6.2 in the framework of analytic WCFs. 
+\begin{itemize}
+\item Prove integrality of Stokes constants using the fractional integral formula vs differential equation (see example in Appendix C) 
 \end{itemize}
+\end{itemize}
+
+\color{DarkGreen}
+We will restrict to $1$-dimensional thimble integrals, and in this special case we will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform.  
+Let $X$ be a translation surface---a Riemann surface carrying a holomorphic 1-form $\nu$. Suppose $X$ is of {\em meromorphic type}, meaning that we got it by puncturing a compact Riemann surface $\overline{X}$ at finitely many points, and $\nu$ has a pole at each puncture. A {\em translation coordinate} on $X$ is a local coordinate whose derivative is $\nu$.
+
+Take another meromorphic-type translation surface $B$ and a holomorphic Morse\footnote{This condition means that the critical points of $f$ are isolated (the compactness of $\overline{X}$ guarantees this) and the 2-jet of $f$ is non-zero at every critical point.} map $f \maps \overline{X} \to \overline{B}$ \textcolor{magenta}{that sends punctures to punctures [actually, don't require this; the Orr--Sommerfeld integrals, for example, don't satisfy it]}. Suppose every singularity of $B$ is a critical value of $f$. \textbf{[Typical usage of ``Borel plane'' seems ambiguous, so maybe we can use ``Borel plane'' for $B$ and ``Borel cover'' for the Riemann surface of the Borel-transformed series. How to handle the Orr–Sommerfeld functions (DLMF~\S 9.13)? We know $f = 4u^3 - 3u$ is the pullback of a translation coordinate, but we also need a puncture at $f(0)$\ldots]} For each critical point $p$, let $\Gamma_p$ be the ray going rightward from $f(p)$, and let $\zeta_p$ be the translation coordinate around $\Gamma_p$ which vanishes at $f(p)$. These are well-defined as long as $\Gamma_p$ misses the critical values of $f$. The preimage $f^{-1}(\Gamma_p)$ is a bunch of disjoint curves, as long as $\Gamma_p$ misses the other critical values of $f$. The \textcolor{red}{\em Lefschetz thimble} $\Lambda_p$ is the component of $f^{-1}(\Gamma_p)$ that goes through $p$, oriented so that shifting it to its left would make its projection run clockwise around $\Gamma_p$. \textcolor{red}{Can we say that in $1$-dimension there the two definitions of thimble integrals are actually the same?} The {\em thimble integral}
+\[ I_p = \int_{\Lambda_p} e^{-z f^*\zeta_p} \nu \]
+is a holomorphic function on the right half-plane parametrized by $z$, and it turns out to be Borel regular.
+
+\textbf{[Talk about exponential integrals and their decomposition into thimble integrals.]}
+
+In higher-dimensional complex manifolds, integrals over Lefschetz thimbles \textcolor{red}{[I'm not so sure]} are still Borel regular~\textbf{[``Exponential integrals, Lefschetz thimbles and linear resurgence''][``Exponential Integral'' lectures?]}. This fact plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation, resurgence and related techniques to assign values to these integrals \textbf{[Costin \& Kruskal, ``On optimal truncation...''],[Delabere \& Howls, Howls, Dingle]}.
+
+\color{DarkTurquoise}
+Choose a path $\gamma \maps \R \to X$ whose projection $f \circ \gamma$ starts out going leftward out of a puncture, ends up going rightward into a puncture, and never touches a critical value of $f$. Choose a translation coordinate $\zeta$ on $B$ and continue it along $f \circ \gamma$, noting that it may become multi-valued if $f \circ \gamma$ intersects itself. This data defines the {\em exponential integral}
+\[ I = \int_\gamma e^{-z f^*\zeta} \nu, \]
+a holomorphic function on the right half-plane parametrized by $z$. It turns out \textbf{[we hope]} that we can get $I$ by summing $e^{-\alpha_p z} I_p$ over various critical points---as long as none of the $\Gamma_p$ run into each other. \textbf{[We get jumps at phases where the $\Gamma_p$ do hit each other.]} The constants $\alpha_p$ are values of $\zeta$, continued to the critical points along certain paths.
 
 \color{black}
 
@@ -616,21 +639,7 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 %\item From the result of Pham we can deduce Stokes constants are always integers as they are intersection numbers (use same argument of Maxim). See also the argument of KS21 sec 6.2 in the framework of analytic WCFs. Prove integrality of Stokes constants using the fractional integral formula vs differential equation (see example in Appendix C) 
 %\end{itemize}
 
-\color{DarkGreen}
-Let $X$ be a translation surface---a Riemann surface carrying a holomorphic 1-form $\nu$. Suppose $X$ is of {\em meromorphic type}, meaning that we got it by puncturing a compact Riemann surface $\overline{X}$ at finitely many points, and $\nu$ has a pole at each puncture. A {\em translation coordinate} on $X$ is a local coordinate whose derivative is $\nu$.
 
-Take another meromorphic-type translation surface $B$ and a holomorphic Morse\footnote{This condition means that the critical points of $f$ are isolated (the compactness of $\overline{X}$ guarantees this) and the 2-jet of $f$ is non-zero at every critical point.} map $f \maps \overline{X} \to \overline{B}$ \textcolor{magenta}{that sends punctures to punctures [actually, don't require this; the Orr--Sommerfeld integrals, for example, don't satisfy it]}. Suppose every singularity of $B$ is a critical value of $f$. \textbf{[Typical usage of ``Borel plane'' seems ambiguous, so maybe we can use ``Borel plane'' for $B$ and ``Borel cover'' for the Riemann surface of the Borel-transformed series. How to handle the Orr–Sommerfeld functions (DLMF~\S 9.13)? We know $f = 4u^3 - 3u$ is the pullback of a translation coordinate, but we also need a puncture at $f(0)$\ldots]} For each critical point $p$, let $\Gamma_p$ be the ray going rightward from $f(p)$, and let $\zeta_p$ be the translation coordinate around $\Gamma_p$ which vanishes at $f(p)$. These are well-defined as long as $\Gamma_p$ misses the critical values of $f$. The preimage $f^{-1}(\Gamma_p)$ is a bunch of disjoint curves, as long as $\Gamma_p$ misses the other critical values of $f$. The {\em Lefschetz thimble} $\Lambda_p$ is the component of $f^{-1}(\Gamma_p)$ that goes through $p$, oriented so that shifting it to its left would make its projection run clockwise around $\Gamma_p$. The {\em thimble integral}
-\[ I_p = \int_{\Lambda_p} e^{-z f^*\zeta_p} \nu \]
-is a holomorphic function on the right half-plane parametrized by $z$, and it turns out \textbf{[we hope]} to be Borel regular.
-
-\textbf{[Talk about exponential integrals and their decomposition into thimble integrals.]}
-
-In higher-dimensional complex manifolds, integrals over Lefschetz thimbles are still Borel regular~\textbf{[``Exponential integrals, Lefschetz thimbles and linear resurgence''][``Exponential Integral'' lectures?]}. This fact plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation and related techniques to assign values to these integrals \textbf{[Costin \& Kruskal, ``On optimal truncation...'']}.
-
-\color{DarkTurquoise}
-Choose a path $\gamma \maps \R \to X$ whose projection $f \circ \gamma$ starts out going leftward out of a puncture, ends up going rightward into a puncture, and never touches a critical value of $f$. Choose a translation coordinate $\zeta$ on $B$ and continue it along $f \circ \gamma$, noting that it may become multi-valued if $f \circ \gamma$ intersects itself. This data defines the {\em exponential integral}
-\[ I = \int_\gamma e^{-z f^*\zeta} \nu, \]
-a holomorphic function on the right half-plane parametrized by $z$. It turns out \textbf{[we hope]} that we can get $I$ by summing $e^{-\alpha_p z} I_p$ over various critical points---as long as none of the $\Gamma_p$ run into each other. \textbf{[We get jumps at phases where the $\Gamma_p$ do hit each other.]} The constants $\alpha_p$ are values of $\zeta$, continued to the critical points along certain paths.
 \color{black}
 %\end{itemize}
 \begin{itemize}
