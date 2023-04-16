@@ -143,10 +143,10 @@ over all orders $n$.
 
 The {\em asymptotic expansion} map $\aexp^\theta$ sends a holomorphic function that vanishes at $\infty$ to the unique power series of the form \eqref{series:asymp-defn} which is asymptotic to it on the half-plane $\Re e^{i\theta}z > 0$ \textcolor{orange}{[Theorem~C.11, Nikolaev, ``Existence and uniqueness\ldots'']}.
 \end{defn}
-\begin{defn}
+\begin{defn}\label{def:unif-gevrey-asymp}
 On an open sector $\Omega$ around $\infty$, a power series of the form \eqref{series:asymp-defn} is {\em uniformly $1$-Gevrey-asymptotic} to a holomorphic function $F$ if there's a constant $A \in (0, \infty)$ for which
 \[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \lesssim \frac{A^n n!}{|z|^n} \]
-over all orders $n$ and all $z \in \Omega$. We'll use $\lesssim$ throughout the paper to mean ``bounded by a constant multiple of.''
+over all orders $n$ and all $z \in \Omega$. We'll use $\lesssim$ throughout the paper to mean ``bounded by a constant multiple of,'' with the same constant over all the specified variables.
 \end{defn}
 To compare the Borel sum $\hat{\Phi}$ with the original series $\series{\Phi}$, let's take it one more step, sending it back into the world of formal power series by taking its asymptotic expansion.
 
@@ -209,7 +209,7 @@ You can't be sure {\em a priori} that $\hat{\Phi}$ solves your original problem,
 If $\series{\Phi}$ is Borel-summable, as described in Section~\ref{intro:summation}, its Borel sum $\hat{\Phi}$ is a new holomorphic function.
 Since different functions can be asymptotic to the same power series, taking the Borel sum of the asymptotic series of $\Phi$ must smooth away some details. We'll therefore call this process {\em Borel regularization}. Explicitly, Borel regularization works in four steps.
 \begin{enumerate}
-\item Take the asymptotic expansion $\series{\Phi} = \aexp^\theta \Phi$.
+\item Take the asymptotic expansion $\series{\Phi} = \aexp^{-\theta} \Phi$.
 \item Take the Borel transform $\series{\phi} = \borel \series{\Phi}$.
 \item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before. This is possible, by definition, if $\series{\Phi}$ is $1$-Gevrey.
 \item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable. \textbf{[Should we be allowed to take the Laplace transform at another points $b \in B$ instead?]}
@@ -218,23 +218,49 @@ We'll say a function is {\em Borel-regularizable} if its asymptotic expansion is
 
 Defining a regularization process picks out a class of regular functions: the ones that are invariant under regularization. We'll say a function is {\em Borel regular} if it's Borel-regularizable and Borel regularization leaves it unchanged. In other words, $\Phi$ is Borel regular if $\hat{\Phi} = \Phi$.
 \subsubsection{Borel regularity as a good approximation condition}
-Borel regular functions can be characterized as functions that are approximated well, asymptotically, by polynomials. Watson showed a century ago \textcolor{orange}{[Watson]} that a function $F$ that vanishes at $\infty$ is Borel regular whenever there's an obtuse-angled sector around $\infty$ and a pair of constants $C, A \in (0, \infty)$ for which
-\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \le \frac{C A^n n!}{|z|^n} \]
-over all orders $n$ and all $z$ in the sector.
+Borel regular functions can be characterized as functions that are approximated well, asymptotically, by polynomials. Watson showed a century ago \textcolor{orange}{[Watson]} that a function $F$ that vanishes at $\infty$ is Borel regular whenever its asymptotic expansion is uniformly $1$-Gevrey-asymptotic to it on an obtuse-angled sector around $\infty$ (see Definition~\ref{def:unif-gevrey-asymp}).
 
-Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson's theorem on Borel summability'', see a proof in Nikita, ``Exact Solutions for the Singularly Perturbed Riccati Equation and Exact WKB Analysis'' Theorem~B.15) tells us that a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\mathcal{B}\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
-\subsubsection{Borel regularity sometimes explains why Borel summation works}
+Watson's theorem was soon improved by Nevanlinna (see a modern proof in Nikolaev, ``Exact Solutions for the Singularly Perturbed Riccati Equation and Exact WKB Analysis'' Theorem~B.15), and improved again later by Sokal (Sokal, ``An improvement of Watson's theorem on Borel summability''). These improvements tell us that the obtuse-angled sector around $\infty$ in the statement above can be replaced with an open disk whose boundary touches $\infty$---that is, an open half-plane which doesn't contain $0$, and may be displaced from $0$ by some distance $c$.
+\begin{center}
+\begin{tikzpicture}
+\newcommand{\size}{3}
+\pgfmathsetmacro{\outsize}{sqrt(2)*\size}
+\newcommand{\ang}{35}
+\newcommand{\dis}{1.2}
+\begin{scope}
+  \clip (-\size, -\size) rectangle (\size, \size);
+  \fill[violet!20, rotate=-\ang] (\dis, -\outsize) rectangle (\outsize, \outsize);
+  \begin{scope}[violet]
+    \draw (0, 0) -- (-\ang:\outsize);
+    \draw[rotate=-\ang] (\dis, -0.1) -- (\dis, 0.1);
+    \draw[shorten <=0.6mm, shorten >=0.6mm] (0:0.5) arc (0:-\ang:0.5) node[midway, anchor=180-\ang/2] {$-\theta$};
+    \node[anchor=90-\ang, inner sep=2mm] at (-\ang:\dis) {$c$};
+  \end{scope}
+\end{scope}
+%%\begin{scope}[violet]
+%%  \draw (0, 0) -- (center);
+%%  \fill (center) circle (0.05);
+%%\end{scope}
+\draw[->] (-\size, 0) -- (\size, 0);
+\draw[->] (0, -\size) -- (0, \size);
+\node[anchor=north east] at (\size, \size) {$z$};
+\end{tikzpicture}
+\end{center}
+When the half-plane extends along the $-\theta$ direction, the sum $\hat{f}$ of the Borel transform of $\aexp^{-\theta} F$ has an absolutely convergent Laplace transform along the $\theta$ direction. In fact, we have $|\hat{f}| \lesssim e^{c |\zeta|}$ uniformly over all $\zeta$ in a constant-radius neighborhood of the ray $e^{i\theta}[0, \infty)$. 
+
+%%a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\mathcal{B}\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
+\subsubsection{Borel regularity sometimes explains why Borel summation works}\label{borel-reg:explanatory-power}
 The idea of Borel regularity can help us understand why Borel summation is so effective in some situations. Roughly speaking, Borel summation works well for problems with Borel regular solutions that stand out asymptotically \textcolor{magenta}{[this may need refining]}.
 
 The central goal of this paper is to explain, from this perspective, why Borel summation works well for the two kinds of problems exemplified in Section~\ref{intro:summation}.
 \begin{enumerate}
-\item Solving a linear ODE as the one in example Equation~\eqref{eqn:bessel-rescaled-1}. The general example is the equation $\mathcal{P} \Phi = 0$ for a differential operator of the form
+\item Solving a linear ODE of level~$1$ \cite[\S 2.1]{EcalleIII}\textcolor{DarkTurquoise}{\cite[Definition~5.5]{diverg-resurg-iii}}. One example is Equation~\eqref{eqn:bessel-rescaled-1}. The general example is the equation $\mathcal{P} \Phi = 0$ given by a differential operator of the form
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \big], \]
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are entire functions of exponential type.
 
 We'll restrict our attention to the case where the roots of $P$ are distinct.
 
-The form of $\mathcal{P}$ derives from Equation~2.2.3 \textcolor{orange}{(p.~105)} of \cite{EcalleIII}, which encompasses both linear and nonlinear ODEs of Poincar\'{e} rank~$1$. Borel summation still works well for the nonlinear ones, raising the question of whether our analysis generalizes.
+The form of $\mathcal{P}$ derives from Equation~2.2.3 \textcolor{orange}{(p.~105)} of \cite{EcalleIII}, which encompasses both linear and nonlinear ODEs of level $1$. Borel summation still works well for the nonlinear ones, raising the question of whether our analysis generalizes.
 
 \item the second problem is evaluating a certain kind of exponential integral: a one-dimensional {\em thimble integral}
 
@@ -283,33 +309,65 @@ These two problems are closely linked. By playing with derivatives of an exponen
 
 First of all we want to clearly separate the parts of the theory that deal with holomorphic functions and formal series. Indeed, for ODEs, we can build an analytic frame of solutions with an explicit growth behaviour (see Theorem~\ref{thm1}), while for thimble integrals we can write an explicit analytic function whose Laplace transform is the thimble integral itself (see part 4 of Theorem~\ref{thm:maxim}). 
 
-Second of all, we want to explain why it is useful to work in the Borel plane (the spatial domain): on the hand integral equations are more regular than differential equations. On the other hand, a thimble integral in the frequency domain can be recast as the Laplace transform of a function in the spatial domain. 
+Second of all, we want to explain why it is useful to work in the Borel plane (the spatial domain): on the one hand integral equations are more regular than differential equations. On the other hand, a thimble integral in the frequency domain can be recast as the Laplace transform of a function in the spatial domain. 
 
-\subsubsection{Why does Borel resummation work for solutions of irregular singular ODEs?}
-
-We restrict to ODEs with irregular singularity at $\infty$ \textcolor{magenta}{and of Poincar\'e rank $1$}: 
+\subsubsection{Why does Borel summation work for solutions of certain level-$1$ ODEs?}
+As described in Section~\ref{borel-reg:explanatory-power}, we consider a linear level-$1$ ODE $\mathcal{P}\Phi = 0$ given by a differential operator of the form
 \begin{equation}\label{eqn:standard ODE}
-P(\partial_z) + \frac{1}{z} Q_1(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b]
+\mathcal{P} = P(\partial_z) + \frac{1}{z} Q_1(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b],
 \end{equation}
-where $P(\lambda)$ is a (monic) degree $d$ polynomial, $Q(\lambda)$ is a degree $d-1$ polynomial and $R_0, \ldots, R_d$ are holomorphic functions on $\C$ \footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]}. Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$ and $Q(-\alpha_j)\neq 0$.
+where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are entire functions of exponential type\footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]}. Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ \textcolor{magenta}{[Verify this more carefully! It seems like there should be $2(d-1)$ Stokes sectors, as described below]}.
 
-Under these assumptions, \eqref{eqn:standard ODE} admits a basis of formal solutions \cite{int-irreg} \cite[Proposition~2.2.7, p.~111]{EcalleIII}: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^*$, then the formal solutions $\tilde{\Psi}_1,...,\tilde{\Psi}_d$ are of the form 
+\color{DarkTurquoise}
+In \cite[Proposition~2.2.7]{EcalleIII}, where
+\begin{align*}
+P(\lambda) & = P_0 + P_1 \lambda + \ldots + P_d \lambda^d \\
+Q(\lambda) & = Q_0 + Q_1 \lambda + \ldots + Q_{d-1} \lambda^{d-1}
+\end{align*}
+(with the coefficients renamed to avoid a conflict with the zeros $\alpha_j$), the recurrence that gives the solution simplifies
+\begin{align*} b_q & = P_q + Q_q z^{-1} - \frac{\partial}{\partial x^{(q)}} b(z, x, x^{(1)}, \ldots x^{(d)}) \\
+& = P_q + Q_q z^{-1} - R_q(z^{-1}).
+\end{align*}
+
+Following the argument of Delabaere Lemma~6.2, we can prove that $\series{F}_j(z)$ is $1$-Gevrey by taking the formal Borel transform of the ODE it satisfies and showing it is regular singular at $\zeta=0$. 
+
+Roughly speaking, factoring out $e^{-\alpha_j z}$ removes the constant term of $P$, and factoring out $z^{-\tau_j}$ changes $Q$ to give factorial growth instead of gamma function growth (?).
+
+\begin{align*}
+\mathcal{P} & = \sum_j^d f_j \frac{\partial}{\partial z}^j \\
+& = \sum_j^d f_j \left(-\frac{1}{w^2} \frac{\partial}{\partial w}\right)^j\\
+&=  \sum_j^d \tilde{f}_j \frac{\partial}{\partial w}^j
+\end{align*}
+where $w=1/z$.  if $\tilde{f}_j $ has a pole of order at most $d-j$ at 0 then it's regular singular, otherwise it's irregular. The relevant term should be
+\[ \left(\frac{P_d}{w^{2d}} + \frac{R_d(w)}{w^{2d-2}}\right) \left(\frac{\partial}{\partial w}\right)^d , \]
+corresponding to the quadratic differential $dw^2/w^{2d}$, whose trajectories form $2(d-1)$ half-planes around $\infty$ (see Bridgeland \& Smith's ``Quadratic differential as stability conditions,'' Figure~10).
+
+From the Bessel equation, for example, we get
+\begin{align*}
+(-w^{-2}\partial_w)^2&=-w^{-2}\partial_w(-w^{-2}\partial_w)\\
+&=-w^{-2}(2w^{-3}\partial_w-w^{-2}\partial_w^2)\\
+&=-2w^{-5}\partial_w+w^{-4}\partial_w^2,
+\end{align*}
+giving two half-planes around $\infty$, as expected.
+\color{black}
+
+Under these assumptions, $\mathcal{P}\Phi = 0$ admits a basis of formal solutions \cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}: let $\tau_j:=Q(-\alpha_j)/P'(-\alpha_j)\in\mathbb{Q}^\times$, then the formal solutions $\series{\Psi}_1,...,\series{\Psi}_d$ are of the form 
 \begin{equation}
 \label{formal solution}
-\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{F}_j(z)\in e^{-\alpha_j z } z^{-\tau_j}\,\C \llbracket z^{-\tau_j} \rrbracket
+\series{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\series{F}_j(z)\in e^{-\alpha_j z } z^{-\tau_j}\,\C \llbracket z^{-1} \rrbracket
 \end{equation}
 Notice that this basis is distinguished only up to scaling, so we have a distinguished frame in the space of formal solutions. 
 
-Classically it has been proved that the formal solutions $\series{\Psi}_j$ \eqref{formal solution} are Borel-Laplace summable and their Borel-Laplace sum $\hat{\Psi}_j$ satisfies the original equation \eqref{eqn:standard ODE} \cite{Ramis?}\textcolor{magenta}{[Check references]}. Therefore, the distinguished frame of formal solutions become a distinguished frame of analytic solutions $\hat{\Psi}_1,...,\hat{\Psi}_d$.       
+Classically it has been proved that the formal solutions $\series{\Psi}_j$ \eqref{formal solution} are Borel-Laplace summable and their Borel-Laplace sums $\hat{\Psi}_j$ satisfy the original equation $\mathcal{P}\hat{\Psi}_j=0$ \cite{Ramis?}\textcolor{magenta}{[Check references]}. Therefore, the distinguished frame of formal solutions becomes a distinguished frame of analytic solutions $\hat{\Psi}_1,...,\hat{\Psi}_d$.       
 
-However, can we find a distinguished basis of solutions in a purely analytic way? This should be possible as the coefficients of the ODE are regular enough. In fact, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotics to a formal frame \textcolor{magenta}{[reference-see Sauzin-Mitchi or Delabere book]}, but it is not a constructive method (see Balser chap. 14). Conversely, we can explicitly built a distinguished basis of analytic solutions: 
+However, can we find a distinguished basis for solutions in a purely analytic way? This should be possible as the coefficients of the ODE are regular enough. In fact, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotics to a formal frame \textcolor{magenta}{[reference-see Sauzin-Mitchi or Delabere book]}, but it is not a constructive method (see Balser chap. 14). Conversely, we can explicitly build a distinguished basis of analytic solutions: 
 
 \begin{theorem}\label{thm1}
 In the previous set-up, for every $\alpha_j$ there exists a unique solution in the $\zeta$-plane which blows-up as $\zeta^{\tau_j-1}$ at $\alpha_j$: set $\zeta_j=\zeta-\alpha_j$,  
 
 \[{\psi}_j(\zeta_j)=\textcolor{magenta}{\zeta_j^{\tau_j-1}}+f_j\] .
 \end{theorem}
-\textcolor{magenta}{[verify the exponent, is it $\tau_j-1$ or $\tau_j$? What are the conditions for $f_j$?]}
+\textcolor{magenta}{[Paste in statement from {\tt reg-sing-volterra}. Verify the exponent: is it $\tau_j-1$ or $\tau_j$? What are the conditions for $f_j$?]}
 
 At this point, we may ask what is the relationship between the two frame of analytic solutions, namely the Borel sum $\hat{\Psi}_j$ of the formal solutions $\series{\Psi}_j$ and the Laplace transform of $\psi_j$. Our main result says they are actually the same, hence proving Borel summation works. 
  
@@ -323,7 +381,7 @@ Let $\Psi_j\defeq\mathcal{L}_{\zeta_j}^{\theta}\psi_j$ be the Laplace transform 
 
 In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}.  
 
-In the following diagram we sketch the main step of the proof of Theorem~\ref{thm2}: on the right hand side of the diagram, we have the formal solution $\series{\Psi }_j$ and its Borel transform $\series{\psi}_j$. Then, the theory of multi-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
+In the following diagram, we sketch the main step of the proof of Theorem~\ref{thm2}: on the right-hand side of the diagram, we have the formal solution $\series{\Psi }_j$ and its Borel transform $\series{\psi}_j$. Then, the theory of multi-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
 
 \begin{center}
 \begin{tikzcd}
@@ -334,19 +392,19 @@ In the following diagram we sketch the main step of the proof of Theorem~\ref{th
 \end{tikzcd}
 \end{center} 
 
-Conversely, on the left hand side, we have the unique (up to scaling) analytic function $\psi_j$ of Theorem~\ref{thm1} which solves the integral equation (IE) obtained as the inverse Laplace transform of the (ODE).   
+Conversely, on the left-hand side, we have the unique (up to scaling) analytic function $\psi_j$ of Theorem~\ref{thm1} which solves the integral equation (IE) obtained as the inverse Laplace transform of the (ODE).   
 
-The key step, is then comparing $\psi_j$ and $\hat{\psi}_j$. First, using properties of the Borel transform, it is easy to show that $\series{\psi}_j$ is a formal solution of the integral equation (IE), hence its sum $\hat{\psi}_j$ must be a solution too. In addition, from the explicit formula for $\tilde{\Psi}_j$, we can show that $\hat{\psi}_j$ grows as $\zeta^{-\tau_j+1}$ near $\zeta=\alpha_j$
+The key step is then comparing $\psi_j$ and $\hat{\psi}_j$. First, using properties of the Borel transform, it is easy to show that $\series{\psi}_j$ is a formal solution of the integral equation (IE), hence its sum $\hat{\psi}_j$ must be a solution too. In addition, from the explicit formula for $\tilde{\Psi}_j$, we can show that $\hat{\psi}_j$ grows as $\zeta^{-\tau_j+1}$ near $\zeta=\alpha_j$
 therefore, by our uniqueness result~\ref{thm1}, we conclude that $\psi_j$ and $\hat{\psi}_j$ must coincide up to scaling by a constant. 
 
 As a consequence, by properties of the Laplace transform, $\Psi_j\defeq\mathcal{L}_{\zeta_j}^{\theta}\psi_j$ is an analytic solution of the (ODE) and it is asymptotic to $\series{\Psi}_j$. Furthermore, $\Psi_j$ is proportional to $\hat{\Psi}_j$.   
 
 \begin{remark}
-There are many ways to built a frame of solutions for these kind of ODE: formally in the $z$-plane Poincar\'e gave an explicit solution \cite{int-irreg}. Formally in the $\zeta$-plane \'Ecalle figured out how to find a frame of formal solutions of the Borel transformed ODE \textcolor{magenta}{[add reference]}. It can indeed been seen as a consequence of ``resurgence'' of the ODE. Our results show how to built a frame of solutions, analytically in the Borel plane. Furthermore, it shows we are picking the same frame: from the properties of the Laplace transform we get an analytic frame asymptotic to Poincar\'e frame $\series{\Psi}_j$. From the uniqueness result of Theorem~\ref{thm1}, we get a frame of analytic solutions equivalent to \'Ecalle's ones. 
+There are many ways to build a frame of solutions for these kinds of ODEs: formally in the $z$-plane Poincar\'e gave an explicit solution \cite{int-irreg}. Formally in the $\zeta$-plane \'Ecalle figured out how to find a frame of formal solutions of the Borel transformed ODE \textcolor{magenta}{[add reference]}. It can indeed be seen as a consequence of ``resurgence'' of the ODE. Our results show how to build a frame of solutions, analytically in the Borel plane. Furthermore, it shows we are picking the same frame: from the properties of the Laplace transform we get an analytic frame asymptotic to Poincar\'e frame $\series{\Psi}_j$. From the uniqueness result of Theorem~\ref{thm1}, we get a frame of analytic solutions equivalent to \'Ecalle's ones. 
 \end{remark} 
 
 \begin{remark}
-Although, in our proof we use multi-summability to ensure that the Borel sum of the formal solution $\series{\Psi}_j$ exists and it solves the ODE, the approach of Borel regularity is different as it is based on the analytic solution in the frequency domain ($z$-plane). \textcolor{magenta}{[Is it possible to prove Borel regularity without proving Borel summability? For instance, can we argue that $\psi_j$ being the unique solution of (IE) with a certain behaviour is enough to say that it is the sum of $\series{\psi}_j$? Check carefully the argument of multi-summability]} 
+Although, in our proof, we use multi-summability to ensure that the Borel sum of the formal solution $\series{\Psi}_j$ exists and it solves the ODE, the approach of Borel regularity is different as it is based on the analytic solution in the frequency domain ($z$-plane). \textcolor{magenta}{[Is it possible to prove Borel regularity without proving Borel summability? For instance, can we argue that $\psi_j$ being the unique solution of (IE) with a certain behavior is enough to say that it is the sum of $\series{\psi}_j$? Check carefully the argument of multi-summability]} 
 \end{remark}
 
 \color{gray}
