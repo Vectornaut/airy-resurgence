@@ -314,9 +314,9 @@ Second of all, we want to explain why it is useful to work in the Borel plane (t
 \subsubsection{Why does Borel summation work for solutions of certain level-$1$ ODEs?}
 As described in Section~\ref{borel-reg:explanatory-power}, we consider a linear level-$1$ ODE $\mathcal{P}\Phi = 0$ given by a differential operator of the form
 \begin{equation}\label{eqn:standard ODE}
-\mathcal{P} = P(\partial_z) + \frac{1}{z} Q_1(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b],
+\mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b],
 \end{equation}
-where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are entire functions of exponential type\footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]}. Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ \textcolor{magenta}{[Verify this more carefully! It seems like there should be $2(d-1)$ Stokes sectors, as described below]}.
+where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are entire functions of exponential type\footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]}. Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$, $P'(-\alpha_j)\neq 0$ for $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ \textcolor{magenta}{[Verify this more carefully! It seems like there should be $2(d-1)$ Stokes sectors, as described below]}.
 
 \color{DarkTurquoise}
 In \cite[Proposition~2.2.7]{EcalleIII}, where
@@ -362,21 +362,23 @@ Classically it has been proved that the formal solutions $\series{\Psi}_j$ \eqre
 
 However, can we find a distinguished basis for solutions in a purely analytic way? This should be possible as the coefficients of the ODE are regular enough. In fact, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotics to a formal frame \textcolor{magenta}{[reference-see Sauzin-Mitchi or Delabere book]}, but it is not a constructive method (see Balser chap. 14). Conversely, we can explicitly build a distinguished basis of analytic solutions: 
 
-\begin{theorem}\label{thm1}
-In the previous set-up, for every $\alpha_j$ there exists a unique solution in the $\zeta$-plane which blows-up as $\zeta^{\tau_j-1}$ at $\alpha_j$: set $\zeta_j=\zeta-\alpha_j$,  
+\begin{theorem}[see Theorem \ref{thm1-dim}]\label{thm1}
+In the previous set-up, for every $\alpha_j$ we set $\zeta_j=\zeta-\alpha_j$. Then, there exists a unique solution of $\hat{P}_j\psi_j=0$ with 
 
-\[{\psi}_j(\zeta_j)=\textcolor{magenta}{\zeta_j^{\tau_j-1}}+f_j\] .
+\begin{equation}
+\hat{P}_j:=P(\zeta_j)+\partial_{\zeta_j}^{-1}\circ Q(\zeta_j)+\partial_{\zeta_j}^{-2}\circ\left[R_0(\partial_{\zeta_j}^{-1})+R_1(\partial_{\zeta_j}^{-1})\circ (-\zeta_j)+...+R_d(\partial_{\zeta_j}^{-1})\circ (-\zeta_j)^d\right]
+\end{equation}
+
+such that $\psi_j$ blows-up as $\zeta^{\tau_j-1}$ at $\alpha_j$:
+${\psi}_j(\zeta_j)=\zeta_j^{-\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega)$. 
 \end{theorem}
-\textcolor{magenta}{[Paste in statement from {\tt reg-sing-volterra}. Verify the exponent: is it $\tau_j-1$ or $\tau_j$? What are the conditions for $f_j$?]}
+
 
 At this point, we may ask what is the relationship between the two frame of analytic solutions, namely the Borel sum $\hat{\Psi}_j$ of the formal solutions $\series{\Psi}_j$ and the Laplace transform of $\psi_j$. Our main result says they are actually the same, hence proving Borel summation works. 
  
 \begin{theorem}\label{thm2}
-Let $\Psi_j\defeq\mathcal{L}_{\zeta_j}^{\theta}\psi_j$ be the Laplace transform of $\psi_j$ solutions constructed in Theorem~\ref{thm1}. The following results hold true
-\begin{enumerate}
-\item $\Psi_j$ is asymptotic to $\series{\Psi}_j$;
-\item the Borel sum of $\series{\Psi}_j$ is the same as $\Psi_j$
-\end{enumerate}
+For every $j=1,...,d$ the solution $\psi_j(\zeta_j)$ of Theorem \ref{thm1} admits a well defined Laplace transform $\Psi_j:=\mathcal{L}_{\zeta_j}^{\theta_j}$ for some direction $\theta_j$.
+Furthermore, $\tilde{\Psi}_j$ is Borel summable and its Borel sum is proportional to $\Psi_j$. 
 \end{theorem}
 
 In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}.  
@@ -1035,6 +1037,56 @@ which rearranges to the second equation in the statement.
 
 \section{Proof of main results}
 \subsection{Borel regularity for ODEs}
+
+
+\begin{theorem}\label{thm1-dim}
+Let $\mathcal{P}$ be a linear differential operator 
+\begin{equation}
+\mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b],
+\end{equation}
+
+\begin{itemize}
+\item $P$ is a monic degree-$d$ polynomial with simple zeros at $-\alpha_j$ for $j=1,...,d$ and such that $P'(-\alpha_j)\neq 0$ for every $j=1,...,d$;
+\item $Q$ is a degree-$(d-1)$ polynomial and $Q(-\alpha_j)\neq 0$ for all $j=1,...,d$;
+\item $R_0, \ldots, R_d$ are entire functions of exponential type
+\end{itemize}
+
+Then, there exists a unique solution of $\hat{P}_j\psi_j=0$ with $\zeta_j=\zeta-\alpha_j$ and
+
+\begin{equation}
+\hat{P}_j:=P(-\zeta_j)+\partial_{\zeta_j}^{-1}\circ Q(-\zeta_j)+\partial_{\zeta_j}^{-2}\circ\left[R_0(\partial_{\zeta_j}^{-1})+R_1(\partial_{\zeta_j}^{-1})\circ (-\zeta_j)+...+R_d(\partial_{\zeta_j}^{-1})\circ (-\zeta_j)^d\right]
+\end{equation}
+
+such that $\psi_j$ blows-up as $\zeta^{\tau_j-1}$ at $\alpha_j$:
+${\psi}_j(\zeta_j)=\zeta_j^{-\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega)$. 
+\end{theorem}
+\begin{proof}
+It is enough to show that $\hat{P}_j$ satisfies the assumptions of Theorem 2.1.3 of {\tt regular singular Volterra equations}.  In fact, $P(-\zeta_j)$ is a polynomial, also defined at $\zeta_j=0$ and by assumption $P'(0)\neq 0$. $Q$ is also a polynomial defined at $\zeta_j=0$. Finally, assuming $R_k(z)=\sum_{j\geq 0} R_{k,j}z^j$ 
+
+\begin{align*}
+&\partial_{\zeta_j}^{-2}\circ\left[R_0(\partial_{\zeta_j}^{-1})+R_1(\partial_{\zeta_j}^{-1})\circ (-\zeta_j)+...+R_d(\partial_{\zeta_j}^{-1})\circ (-\zeta_j)^d\right]=\sum_{\lambda\leq -2} \partial_{\zeta_j}^\lambda\circ r_\lambda \\
+&\text{ with }r_\lambda=\sum_{k=0}^d R_{k,\lambda}(-\zeta_j)^k.
+\end{align*}
+
+%In particular, $\Lambda=(-\infty,-2]$.
+
+Therefore, there exists a unique solution \[\psi_j(\zeta_j)=\zeta_j^{-\tau_j-1}+f_j(\zeta_j) \text{ with } \tau_j=\frac{Q(\zeta_j=0)}{P'(\zeta_j=0)}=\frac{Q(-\alpha_j)}{P'(-\alpha_j)}\] and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega)$.  
+ 
+\end{proof}
+
+\begin{theorem}\label{thm2-dim}
+For every $j=1,...,d$ let $\psi_j(\zeta_j)$ be the unique solution of $\hat{P}_j\psi_j=0$ as in in Theorem \ref{thm1-dim}. Then $\psi_j(\zeta_j)$ admits a well defined Laplace transform $\Psi_j:=\mathcal{L}_{\zeta_j}^{\theta_j}$ for some direction $\theta_j$.
+Furthermore, $\tilde{\Psi}_j$ is Borel summable and its Borel sum is proportional to $\Psi_j$. 
+\end{theorem}
+\begin{proof}
+We divide the proof in the following steps:
+\begin{itemize}
+\item[$(a)$] prove that $\psi_j(\zeta_j)$ admits Laplace transform 
+\item[$(b)$] let $\hat{\psi}_j$ be the sum of the germ $\tilde{\psi}_j:=\mathcal{B}\Psi_j$; prove that $\hat{\psi}_j \propto \psi_j$ 
+\item[$(c)$] prove that $\mathcal{L}_{\zeta_j}^{\theta_j}\circ\mathcal{B}\series{\Psi}_j\propto \Psi_j $. 
+\end{itemize}
+\end{proof}
+
 \subsection{Borel regularity for thimble integrals}
 
 
