@@ -6,12 +6,14 @@
 - ~(Veronica) Change the computation with Sauzin to be in line with convention~
 - (Aaron) Finish switching the Airy and Airy-Lucas sections to the literature sign convention
 ### Proofreading
+- (Aaron) Look over "Why does Borel summation work for solutions of certain level-1 ODEs?"
 - (Aaron) Understand new material in "A new perspective: Borel regularity"
 - (Aaron) Proofread copied-in sections about Laplace transform
 - (Aaron) Check the Bessel equation in the spatial domain that corresponds to the Airy-Lucas equation in the frequency domain
 - (Aaron) Look over general modified Bessel example
 ### Introduction
-- (Veronica) Turn Nevanlinna-Watson bullet points into prose
+- (Aaron) Draw position domain picture for Watson-Nevanlinna-Sokal theorem.
+- ~(Veronica) Turn Nevanlinna-Watson bullet points into prose~
 ### General results
 - Prove Theorem 2 (from outline)
 - Ask Fredrick whether existence and uniqueness appendix might be publishable on its own
