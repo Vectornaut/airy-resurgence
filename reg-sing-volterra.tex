@@ -12,9 +12,10 @@
 \usepackage{tikz-cd} %% for term norm scratch work
 
 %%\theoremstyle{definition}
-%%\newtheorem{defn}{Definition}
+\newtheorem{defn}{Definition}
 \theoremstyle{plain}
-\newtheorem{prop}{Proposition}
+%%\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
 
 % convenience aliases
 \newcommand{\maps}{\colon}
@@ -41,7 +42,7 @@
 \begin{document}
 \maketitle
 \section{Introduction}
-\subsection{Motivation}
+\subsection{Motivation}\label{motivation}
 In its most basic form, the Laplace transform $\laplace$ turns $L^1$ functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. Through identities like
 \begin{align*}
 \frac{\partial}{\partial z} \laplace \varphi & = \laplace(z\varphi) \\
@@ -52,7 +53,65 @@ where $\fracderiv{-\lambda}{}{}$ is the Riemann-Liouville fractional integral of
 
 If we complexify the position variable $\zeta$, the functions on the position domain whose Laplace transforms satisfy a given differential equation will often extend holomorphically. \textbf{[...]}
 \subsection{Main result}
+\begin{defn}\label{fin-order}
+Consider a Volterra operator $\mathcal{V}$ of the form
+\[ [\mathcal{V}\varphi](a) = m(a)\,\varphi(a) + \int_{\zeta = 0}^{a} k(a, \cdot)\,\varphi\,d\zeta. \]
+We'll say $\mathcal{V}$ is {\em effectively finite-order} over a domain $\Omega$ if there are some $c, c' \in (0, \infty)$ for which
+\begin{itemize}
+\item $|m(a)| \lesssim e^{c|\zeta(a)|}$ over all $a \in \Omega$
+\item $|k(a, a')| \lesssim e^{c|\zeta(a)| + c'|\zeta(a')|}$ over all $a, a' \in \Omega$
+\end{itemize}
+and at one of the following holds:
+\begin{enumerate}
+\item\label{case:0th-order} $m$ isn't the zero function.
+\item\label{case:pos-order} $m$ is the zero function, and there's some $\lambda \in (0, \infty)$ for which
+\[ |k(a, a')| \in O_\text{\rm diag}\big( |\zeta(a) - \zeta(a')|^{\lambda-1} \big), \]
+where {\rm ``diag''} means the diagonal in $\Omega^2$.
+\end{enumerate}
+We'll say $\mathcal{V}$ has order $0$ in case~\ref{case:0th-order}, and order at least $\lambda$ in case~\ref{case:pos-order}.
+\end{defn}
+\textcolor{DarkTurquoise}{The result below might not be stated perfectly, but it gives at least a rough sense of what I expect. It's an improved version of the result stated in Section~\ref{frac_int_exist}, which is copied from {\tt airy-resurgence}. Note that {\tt airy-resurgence} uses the opposite sign convention for the parameter $\sigma$ in $\holoL{\infty, \sigma}$.}
+\begin{thm}
+Let $\Omega$ be an acute-angled sector around $0$ in the complex plane. \textcolor{DarkTurquoise}{I don't think it's really necessary for $\Omega$ to have a sharp point at $0$, but the condition of being an acute-angled sector is sufficient and easy to state.}
+
+Consider a Volterra operator
+\[ \mathcal{V} = p + \partial^{-1} \circ q + \mathcal{R} \]
+over $\Omega$ which can be decomposed, as shown above, into the sum of a zeroth-order part $p$, a first-order part $\partial^{-1} \circ q$, and an effectively higher-order part $\mathcal{R}$. To be precise, $\mathcal{R}$ is supposed to be an integral operator of the form
+\[ [\mathcal{R}\varphi](a) = \int_{\zeta = 0}^{a} k(a, \cdot)\,\varphi\,d\zeta \]
+which is effectively finite-order over $\Omega$ in the sense of Definition~\ref{fin-order}, with order at least $1 + \epsilon$ for some $\epsilon \in (0, \infty)$.
+
+Assume, furthermore, that:
+\begin{itemize}
+\item There's some $c \in (0, \infty)$ for which
+$|p(a)| \lesssim e^{c|\zeta(a)|}$ and $|q(a)| \lesssim e^{c|\zeta(a)|}$ over all $a \in \Omega$.
+\item $p$ and $q$ extend holomorphically over $\zeta = 0$.
+\item $p$ has a simple zero at $\zeta = 0$.
+\end{itemize}
+Let $p_1$ and $q_0$ be the values of $\tfrac{\partial}{\partial \zeta} p$ and $q$, respectively, at $\zeta = 0$.
+
+Under these conditions, let's try to solve the regular singular Volterra equation
+\[ \mathcal{V}f = 0. \]
+The leading-order part of the equation,
+\[ \big[p_1 \zeta + \partial^{-1} \circ q_0\big]f = 0, \]
+has $\zeta^{\tau-1}$ as a solution, where $\tau = p_1/q_0$. If we guess that the function spaces defined in Section~\ref{fn-spaces} are well suited for this problem, we might hope for the full equation to have a solution of the form
+\[ f = \zeta^{\tau-1} + f_*, \]
+where $f_* \in \holoL{\infty, 1-\tau-\epsilon}_Z(\Omega)$ for some $Z \in \C$. When $Z\Omega$ is in the right half-plane and $|Z|$ is large enough, there is in fact a unique solution of this form.
+\end{thm}
+\section{Function spaces for holomorphic Volterra operators}\label{fn-spaces}
+Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. For any $\sigma \in \R$ and $Z \in \C$, multiplying by $\zeta^\sigma e^{\Re(Z\zeta)}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\holoL{\infty, \sigma}_Z(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma; Z} = \|\zeta^{-\sigma} e^{-\Re(Z\zeta)} f\|_\infty$, so that
+\begin{align*}
+\holoL{\infty}(\Omega) & \to \holoL{\infty, \sigma}(\Omega) \\
+\phi & \mapsto \zeta^{-\sigma} \phi
+\end{align*}
+is an isometry. More generally,
+\begin{align*}
+\holoL{\infty, \rho}_Z(\Omega) & \to \holoL{\infty, \rho+\delta}_Z(\Omega) \\
+f & \mapsto \zeta^\delta f
+\end{align*}
+is an isometry for all $\rho, \delta \in \R$ and $Z \in \C$. This reduces to the previous statement when $\rho = 0$ and $Z = 0$.
+%------------------------------------------------------------------------
 \section{Integro-differential equations {[from {\tt airy-resurgence}]}}
+\textcolor{DarkTurquoise}{\textbf{Note that {\tt airy-resurgence} uses the opposite sign convention for the parameter $\sigma$ in $\holoL{\infty, \sigma}$.}}
 \subsection{Existence of solutions}
 \subsubsection{Algebraic integral operators}
 Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. For any $\sigma \in \R$, multiplying by $\zeta^{-\sigma}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\holoL{\infty, \sigma}(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma} = \|\zeta^\sigma f\|_\infty$, so that
@@ -94,7 +153,7 @@ Setting $g(a, a') = (\zeta(a) - \zeta(a'))^{-\lambda-1}$ with $\lambda \in (-\in
 The beta function $B$ can be written more explicitly as
 \[ B(-\lambda,\,1-\rho) = \frac{\Gamma(-\lambda)\,\Gamma(1-\rho)}{\Gamma(1-\lambda-\rho)}. \]
 Now we can see that for each $\lambda \in (-\infty, 0)$ and $\rho \in \R$, the fractional integral $\partial^\lambda_{\zeta \text{ from } 0}$ maps $\holoL{\infty, \rho}(\Omega)$ into $\holoL{\infty, \rho+\lambda}(\Omega)$, with norm $\|\partial^\lambda_{\zeta \text{ from } 0}\| \le B(-\lambda,\,1-\rho)$.
-\subsubsection{Fractional integral equations near a regular singular point}
+\subsubsection{Fractional integral equations near a regular singular point}\label{frac_int_exist}
 \textcolor{SeaGreen}{\textbf{Angeliki:} Maybe Kato--Rellich perturbation theory can give existence immediately. It might not give uniqueness, though.}
 
 Consider an integral operator $\mathcal{J}$ of the form
@@ -148,7 +207,7 @@ Then the equation $\mathcal{J}f = 0$ becomes
 \holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^{-1}", "{B(1, 1-\rho) = \frac{1}{1-\rho}}"'] & \holoL{\infty, \rho-1}(\Omega) \arrow[r, "\zeta^{-1}", "\|\zeta^{-1}\|_{\infty, 1} = 1"'] & \holoL{\infty, \rho}(\Omega) \\
 \end{tikzcd}
 \end{center}
-\color{gray}
+\color{black}
 
 From \textbf{[our previous discussion]}, we can work out that
 \begin{align*}
