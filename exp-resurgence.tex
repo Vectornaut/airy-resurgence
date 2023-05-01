@@ -89,7 +89,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 %\newtheorem{exercise}[definition]{Exercise}
 \newtheorem*{notation*}{Notation}
 
-\title{Borel regularity for ODEs and exponential integrals}
+\title{Borel regularity for ODEs and thimble integrals}
 \author{Veronica Fantini and Aaron Fenyes}
 
 \begin{document}
@@ -825,6 +825,17 @@ Define a new coordinate $\zeta_\alpha$ on $\C$ so that $\zeta = \alpha + \zeta_\
 \end{align*}
 we learn that
 \[ \laplace_{\zeta_\alpha, 0} \varphi = e^{\alpha z} \laplace_{\zeta, \alpha} \varphi. \]
+
+\color{magenta}
+
+Write explicit definition $\mathcal{L}_{\zeta_{\alpha},0}^{\theta}\varphi$ specifying the argument of $\varphi$ in the integration. 
+
+\begin{equation}
+\mathcal{L}_{\zeta_\alpha,0}^{\theta}\varphi:=\int_{\Gamma_{\zeta_\alpha,0}^{\theta}}e^{-z\zeta_\alpha}\varphi(\zeta_\alpha-\alpha)d\zeta_\alpha
+\end{equation}
+
+\color{black}
+
 \subsubsection{Rescaling of translation structure}
 Let's rescale the translation structure of $\C$, expanding displacements by a factor of $\mu \in (0, \infty)$. The coordinate $\xi = \mu\zeta$ is a chart for the new translation structure. The corresponding frequency coordinate $x \maps T^*\C \to \C$ is given by $d\xi \mapsto 1$, so $x = \mu^{-1} z$. From the calculation
 \begin{align*}
@@ -1046,17 +1057,18 @@ Let $\mathcal{P}$ be a linear differential operator
 \end{equation}
 
 \begin{itemize}
-\item $P$ is a monic degree-$d$ polynomial with simple zeros at $-\alpha_j$ for $j=1,...,d$ and such that $P'(-\alpha_j)\neq 0$ for every $j=1,...,d$;
+\item $P$ is a monic degree-$d$ polynomial with simple zeros at $\alpha_j$ for $j=1,...,d$ and such that $P'(-\alpha_j)\neq 0$ for every $j=1,...,d$;
 \item $Q$ is a degree-$(d-1)$ polynomial and $Q(-\alpha_j)\neq 0$ for all $j=1,...,d$;
 \item $R_0, \ldots, R_d$ are entire functions of exponential type
 \end{itemize}
 
 Then, there exists a unique solution of $\hat{P}_j\psi_j=0$ with $\zeta_j=\zeta-\alpha_j$ and
 
+\color{brown}
 \begin{equation}
 \hat{P}_j:=P(-\zeta_j)+\partial_{\zeta_j}^{-1}\circ Q(-\zeta_j)+\partial_{\zeta_j}^{-2}\circ\left[R_0(\partial_{\zeta_j}^{-1})+R_1(\partial_{\zeta_j}^{-1})\circ (-\zeta_j)+...+R_d(\partial_{\zeta_j}^{-1})\circ (-\zeta_j)^d\right]
 \end{equation}
-
+\color{black}
 such that $\psi_j$ blows-up as $\zeta^{\tau_j-1}$ at $\alpha_j$:
 ${\psi}_j(\zeta_j)=\zeta_j^{-\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega)$. 
 \end{theorem}
@@ -1074,17 +1086,44 @@ Therefore, there exists a unique solution \[\psi_j(\zeta_j)=\zeta_j^{-\tau_j-1}+
  
 \end{proof}
 
+
+
 \begin{theorem}\label{thm2-dim}
 For every $j=1,...,d$ let $\psi_j(\zeta_j)$ be the unique solution of $\hat{P}_j\psi_j=0$ as in in Theorem \ref{thm1-dim}. Then $\psi_j(\zeta_j)$ admits a well defined Laplace transform $\Psi_j:=\mathcal{L}_{\zeta_j}^{\theta_j}$ for some direction $\theta_j$.
-Furthermore, $\tilde{\Psi}_j$ is Borel summable and its Borel sum is proportional to $\Psi_j$. 
+Furthermore, let $\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}$ be the formal solution of $\mathcal{P}\Psi=0$ with $a_{j,0}=1$ for every $j=1,...,d$. Then $\series{\Psi}_j(z)$ is Borel summable and its Borel sum is proportional to $\Psi_j$. 
 \end{theorem}
 \begin{proof}
 We divide the proof in the following steps:
 \begin{itemize}
 \item[$(a)$] prove that $\psi_j(\zeta_j)$ admits Laplace transform 
-\item[$(b)$] let $\hat{\psi}_j$ be the sum of the germ $\tilde{\psi}_j:=\mathcal{B}\Psi_j$; prove that $\hat{\psi}_j \propto \psi_j$ 
+\item[$(b)$] let $\hat{\psi}_j$ be the sum of the germ $\series{\psi}_j:=\mathcal{B}\series{\Psi}_j$; prove that $\hat{\psi}_j \propto \psi_j$ 
 \item[$(c)$] prove that $\mathcal{L}_{\zeta_j}^{\theta_j}\circ\mathcal{B}\series{\Psi}_j\propto \Psi_j $. 
 \end{itemize}
+
+Step $(c)$ clearly follows from steps $(a)$ and $(b)$. We now prove step $(b)$: first notice that if $\series{\Psi}_j$ solves $\mathcal{P}\Psi=0$ then $\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}$ is a solution of $\mathcal{P}_j\Psi=0$ with
+
+\begin{equation}
+\mathcal{P}_j:=P(-\alpha_j+\partial_z)+\frac{1}{z}Q(-\alpha_j+\partial_z)+\frac{1}{z^2}\sum_{r=0}^dR_r(z^{-1})(-\alpha_j+\partial_z)^r
+\end{equation} 
+
+\color{brown}
+Then taking the (formal) Borel transform:for every $j=1,...,d$ we denote $\zeta_j=\zeta-\alpha_j$ and we consider the Borel transform of $\mathcal{P}\series{\Psi}_j$ in the coordinate $\zeta_j$ 
+
+
+\begin{multline*}
+\mathcal{B}\left(\mathcal{P}\series{\Psi}_j\right)=\mathcal{B}\left(\mathcal{P}_j\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}\right)=\\
+\left[P(-\alpha_j-\zeta_j)+\partial_{\zeta_j}^{-1}\circ Q(-\alpha_j-\zeta_j)+\partial_{\zeta_j}^{-2}\circ \sum_{r=0}^dR_r(\partial_{\zeta_j}^{-1})\circ (-\alpha_j-\zeta_j)^r\right]\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}\zeta_j^{n+\tau_j-1}\\
+\left[P(-\zeta)+\partial_{\zeta_j}^{-1}\circ Q(-\zeta)+\partial_{\zeta_j}^{-2}\circ \sum_{r=0}^dR_r(\partial_{\zeta_j}^{-1})\circ (-\zeta)^r\right]\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}\zeta_j^{n+\tau_j-1}
+\end{multline*}
+%where 
+%
+%\begin{align*}
+%\series{\psi}_j(\zeta_j):=\mathcal{B}\series{\Psi}_j(\zeta_j)&=\mathcal{B}\left(e^{-\alpha_j z}z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}\right)(\zeta_j)=\mathcal{B}\left(z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}\right)(\zeta-\alpha_j)\\
+%&=\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}(\zeta-\alpha_j)^{n+\tau_j-1}
+%\end{align*}
+
+Hence, the Borel transform of $\series{\Psi}_j$ is a solution of $\hat{P}_j\series{\psi}_j$=0.  from the properties of the Borel transform we deduce that $\hat{P}\series{\psi}_j=0$ first notice that $\series{\psi}_j$ is a solution of 
+\color{black}
 \end{proof}
 
 \subsection{Borel regularity for thimble integrals}
