@@ -141,7 +141,7 @@ is {\em asymptotic} to a holomorphic function $F$ if
 \[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{z \to \infty}\big(|z|^{-n}\big) \]
 over all orders $n$.
 
-The {\em asymptotic expansion} map $\aexp^\theta$ sends a holomorphic function that vanishes at $\infty$ to the unique power series of the form \eqref{series:asymp-defn} which is asymptotic to it on the half-plane $\Re e^{i\theta}z > 0$ \textcolor{orange}{[Theorem~C.11, Nikolaev, ``Existence and uniqueness\ldots'']}.
+The {\em asymptotic expansion} map $\text{\ae}^\theta$ sends a holomorphic function that vanishes at $\infty$ to the unique power series of the form \eqref{series:asymp-defn} which is asymptotic to it on the half-plane $\Re e^{i\theta}z > 0$ \textcolor{orange}{[Theorem~C.11, Nikolaev, ``Existence and uniqueness\ldots'']}.
 \end{defn}
 \begin{defn}\label{def:unif-gevrey-asymp}
 On an open sector $\Omega$ around $\infty$, a power series of the form \eqref{series:asymp-defn} is {\em uniformly $1$-Gevrey-asymptotic} to a holomorphic function $F$ if there's a constant $A \in (0, \infty)$ for which
@@ -151,14 +151,14 @@ over all orders $n$ and all $z \in \Omega$. We'll use $\lesssim$ throughout the 
 To compare the Borel sum $\hat{\Phi}$ with the original series $\series{\Phi}$, let's take it one more step, sending it back into the world of formal power series by taking its asymptotic expansion.
 
 \begin{enumerate}[start=4]
-\item By construction, $\aexp^\theta \hat{\Phi} = \series{\Phi}$. It turns out that $\series{\Phi}$ is not only asymptotic to $\hat{\Phi}$, but {\em {uniformly} $1$-Gevrey}-asymptotic~\cite[Corollary~5.23]{diverg-resurg-i}.
+\item By construction, $\text{\ae}^\theta \hat{\Phi} = \series{\Phi}$. It turns out that $\series{\Phi}$ is not only asymptotic to $\hat{\Phi}$, but {\em {uniformly} $1$-Gevrey}-asymptotic~\cite[Corollary~5.23]{diverg-resurg-i}.
 \end{enumerate}
 
 The Borel summation process is summarized in the following diagram:
 \begin{center}
 \begin{tikzcd}
 & \text{problem} & \\
-\hat{\Phi} \arrow[ru, dotted, no head, tail] \arrow[rr, mapsto, "\aexp^\theta", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[lu, no head, tail, "\parbox{10mm}{\centering\scriptsize formally solves}"'] \arrow[dd, mapsto, "\mathcal{B}"] \\
+\hat{\Phi} \arrow[ru, dotted, no head, tail] \arrow[rr, mapsto, "\text{\ae}^\theta", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[lu, no head, tail, "\parbox{10mm}{\centering\scriptsize formally solves}"'] \arrow[dd, mapsto, "\borel"] \\
 & & \\
 \hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \tilde{\phi} \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
@@ -200,8 +200,8 @@ You can't be sure {\em a priori} that $\hat{\Phi}$ solves your original problem,
 \begin{center}
 \begin{tikzcd}
 & \text{problem} & \\
-\Phi \arrow[ru, no head, tail, swap, "\text{solves}"' ] \arrow[rrd, mapsto, "\aexp^{\theta}"]& & \\
-\hat{\Phi} \arrow[rr, "\aexp^{\theta}", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[luu, no head, tail, swap, "\parbox{10mm}{\centering\scriptsize formally solves}"] \arrow[dd, mapsto, "\mathcal{B}"] \\
+\Phi \arrow[ru, no head, tail, swap, "\text{solves}"' ] \arrow[rrd, mapsto, "\text{\ae}^{\theta}"]& & \\
+\hat{\Phi} \arrow[rr, "\text{\ae}^{\theta}", "\text{($1$-Gevrey)}"] & & \series{\Phi} \arrow[luu, no head, tail, swap, "\parbox{10mm}{\centering\scriptsize formally solves}"] \arrow[dd, mapsto, "\borel"] \\
 & & \\
 \hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \series{\phi} \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
@@ -209,7 +209,7 @@ You can't be sure {\em a priori} that $\hat{\Phi}$ solves your original problem,
 If $\series{\Phi}$ is Borel-summable, as described in Section~\ref{intro:summation}, its Borel sum $\hat{\Phi}$ is a new holomorphic function.
 Since different functions can be asymptotic to the same power series, taking the Borel sum of the asymptotic series of $\Phi$ must smooth away some details. We'll therefore call this process {\em Borel regularization}. Explicitly, Borel regularization works in four steps.
 \begin{enumerate}
-\item Take the asymptotic expansion $\series{\Phi} = \aexp^{-\theta} \Phi$.
+\item Take the asymptotic expansion $\series{\Phi} = \text{\ae}^{-\theta} \Phi$.
 \item Take the Borel transform $\series{\phi} = \borel \series{\Phi}$.
 \item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before. This is possible, by definition, if $\series{\Phi}$ is $1$-Gevrey.
 \item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable. \textbf{[Should we be allowed to take the Laplace transform at another points $b \in B$ instead?]}
@@ -246,9 +246,9 @@ Watson's theorem was soon improved by Nevanlinna (see a modern proof in Nikolaev
 \node[anchor=north east] at (\size, \size) {$z$};
 \end{tikzpicture}
 \end{center}
-When the half-plane extends along the $-\theta$ direction, the sum $\hat{f}$ of the Borel transform of $\aexp^{-\theta} F$ has an absolutely convergent Laplace transform along the $\theta$ direction. In fact, we have $|\hat{f}| \lesssim e^{c |\zeta|}$ uniformly over all $\zeta$ in a constant-radius neighborhood of the ray $e^{i\theta}[0, \infty)$. 
+When the half-plane extends along the $-\theta$ direction, the sum $\hat{f}$ of the Borel transform of $\text{\ae}^{-\theta} F$ has an absolutely convergent Laplace transform along the $\theta$ direction. In fact, we have $|\hat{f}| \lesssim e^{c |\zeta|}$ uniformly over all $\zeta$ in a constant-radius neighborhood of the ray $e^{i\theta}[0, \infty)$. 
 
-%%a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\mathcal{B}\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
+%%a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\borel\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
 \subsubsection{Borel regularity sometimes explains why Borel summation works}\label{borel-reg:explanatory-power}
 The idea of Borel regularity can help us understand why Borel summation is so effective in some situations. Roughly speaking, Borel summation works well for problems with Borel regular solutions that stand out asymptotically \textcolor{magenta}{[this may need refining]}.
 
@@ -296,7 +296,7 @@ These two problems are closely linked. By playing with derivatives of an exponen
 %\item $\Phi$ is approximated well, in a certain sense (a weak version of being ``Gevrey-asymptotic''), by its asymptotic series.
 %\item $\phi$ grows at most exponentially along the Laplace transform ray.
 %\end{itemize}
-%\item When its domain is restricted to the space of Gevrey power series, Borel summation is invertible. \textcolor{magenta}{[Need to find a good reference for this, because a small change in the statement would mess up our conclusion. Does \texttt{arXiv:2112.08792}, \S A.2 have the statement we want?]} Thus, Borel regularization acts as a projection operator on the space of Borel-regularizable functions.\textcolor{orange}{[Veronica: Do you mean that if $\Phi\sim\tilde{\Phi}$ and $\tilde{\Phi}$ is Gevrey and Borel summable, then $\Phi=\mathcal{L}\circ\mathcal{B}\tilde{\Phi}$ (i.e. it is Borel regular)? P.Ramis proved that if $\Phi$ is Gevrey asymptotic to $\tilde{\Phi}$, then $\tilde{\Phi}$ is of Gevrey type. In addition, every Gevrey type series $\tilde{\Phi}$ is the Gevrey asymptotics of a holomorphic function. When it is defined, the Borel sum of $\tilde{\Phi}$ is the natural holomorphic function asymptotic to $\tilde{\Phi}$.]}
+%\item When its domain is restricted to the space of Gevrey power series, Borel summation is invertible. \textcolor{magenta}{[Need to find a good reference for this, because a small change in the statement would mess up our conclusion. Does \texttt{arXiv:2112.08792}, \S A.2 have the statement we want?]} Thus, Borel regularization acts as a projection operator on the space of Borel-regularizable functions.\textcolor{orange}{[Veronica: Do you mean that if $\Phi\sim\tilde{\Phi}$ and $\tilde{\Phi}$ is Gevrey and Borel summable, then $\Phi=\laplace\circ\borel\tilde{\Phi}$ (i.e. it is Borel regular)? P.Ramis proved that if $\Phi$ is Gevrey asymptotic to $\tilde{\Phi}$, then $\tilde{\Phi}$ is of Gevrey type. In addition, every Gevrey type series $\tilde{\Phi}$ is the Gevrey asymptotics of a holomorphic function. When it is defined, the Borel sum of $\tilde{\Phi}$ is the natural holomorphic function asymptotic to $\tilde{\Phi}$.]}
 %\item Borel regularity can help explain why Borel summation is so effective at solving certain kinds of problems, like the ones in Section~\ref{intro:summation}.
 %\item The formal solutions of a problem are typically supposed to generalize the actual solutions, in the sense that they include the asymptotic series of the actual solutions.
 %\item In this case, every Borel regular solution can be found by taking the Borel sum of a formal solution.
@@ -314,7 +314,7 @@ Second of all, we want to explain why it is useful to work in the Borel plane (t
 \subsubsection{Why does Borel summation work for solutions of certain level-$1$ ODEs?}
 As described in Section~\ref{borel-reg:explanatory-power}, we consider a linear level-$1$ ODE $\mathcal{P}\Phi = 0$ given by a differential operator of the form
 \begin{equation}\label{eqn:standard ODE}
-\mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b],
+\mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \big],
 \end{equation}
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_d$ are entire functions of exponential type\footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]}. Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$, $P'(-\alpha_j)\neq 0$ for $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ \textcolor{magenta}{[Verify this more carefully! It seems like there should be $2(d-1)$ Stokes sectors, as described below]}.
 
@@ -376,7 +376,7 @@ ${\psi}_j(\zeta_j)=\zeta_j^{-\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\ta
 At this point, we may ask what is the relationship between the two frame of analytic solutions, namely the Borel sum $\hat{\Psi}_j$ of the formal solutions $\series{\Psi}_j$ and the Laplace transform of $\psi_j$. Our main result says they are actually the same, hence proving Borel summation works. 
  
 \begin{theorem}\label{thm2}
-For every $j=1,...,d$ the solution $\psi_j(\zeta_j)$ of Theorem \ref{thm1} admits a well defined Laplace transform $\Psi_j:=\mathcal{L}_{\zeta_j}^{\theta_j}$ for some direction $\theta_j$.
+For every $j=1,...,d$ the solution $\psi_j(\zeta_j)$ of Theorem \ref{thm1} admits a well defined Laplace transform $\Psi_j:=\laplace_{\zeta_j}^{\theta_j}$ for some direction $\theta_j$.
 Furthermore, $\tilde{\Psi}_j$ is Borel summable and its Borel sum is proportional to $\Psi_j$. 
 \end{theorem}
 
@@ -386,10 +386,10 @@ In the following diagram, we sketch the main step of the proof of Theorem~\ref{t
 
 \begin{center}
 \begin{tikzcd}
-& & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
-\Psi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Psi}}\arrow[ur,red, no head, tail] & & & \tilde{\Psi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\mathcal{B}"]\\
+& & ODE\arrow[dd,"\borel"]\arrow[dd,"\laplace^{-1}",swap] & & \\
+\Psi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Psi}}\arrow[ur,red, no head, tail] & & & \tilde{\Psi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\borel"]\\
 & & IE & & \\
-\psi\arrow[rru, no head, tail]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\psi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\psi}\arrow[llu, no head, tail]
+\psi\arrow[rru, no head, tail]\arrow[uu,"\laplace"]& \textcolor{red}{\hat{\psi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\laplace"]& & & \tilde{\psi}\arrow[llu, no head, tail]
 \end{tikzcd}
 \end{center} 
 
@@ -398,7 +398,7 @@ Conversely, on the left-hand side, we have the unique (up to scaling) analytic f
 The key step is then comparing $\psi_j$ and $\hat{\psi}_j$. First, using properties of the Borel transform, it is easy to show that $\series{\psi}_j$ is a formal solution of the integral equation (IE), hence its sum $\hat{\psi}_j$ must be a solution too. In addition, from the explicit formula for $\tilde{\Psi}_j$, we can show that $\hat{\psi}_j$ grows as $\zeta^{-\tau_j+1}$ near $\zeta=\alpha_j$
 therefore, by our uniqueness result~\ref{thm1}, we conclude that $\psi_j$ and $\hat{\psi}_j$ must coincide up to scaling by a constant. 
 
-As a consequence, by properties of the Laplace transform, $\Psi_j\defeq\mathcal{L}_{\zeta_j}^{\theta}\psi_j$ is an analytic solution of the (ODE) and it is asymptotic to $\series{\Psi}_j$. Furthermore, $\Psi_j$ is proportional to $\hat{\Psi}_j$.   
+As a consequence, by properties of the Laplace transform, $\Psi_j\defeq\laplace_{\zeta_j}^{\theta}\psi_j$ is an analytic solution of the (ODE) and it is asymptotic to $\series{\Psi}_j$. Furthermore, $\Psi_j$ is proportional to $\hat{\Psi}_j$.   
 
 \begin{remark}
 There are many ways to build a frame of solutions for these kinds of ODEs: formally in the $z$-plane Poincar\'e gave an explicit solution \cite{int-irreg}. Formally in the $\zeta$-plane \'Ecalle figured out how to find a frame of formal solutions of the Borel transformed ODE \textcolor{magenta}{[add reference]}. It can indeed be seen as a consequence of ``resurgence'' of the ODE. Our results show how to build a frame of solutions, analytically in the Borel plane. Furthermore, it shows we are picking the same frame: from the properties of the Laplace transform we get an analytic frame asymptotic to Poincar\'e frame $\series{\Psi}_j$. From the uniqueness result of Theorem~\ref{thm1}, we get a frame of analytic solutions equivalent to \'Ecalle's ones. 
@@ -423,10 +423,10 @@ Although, in our proof, we use multi-summability to ensure that the Borel sum of
 
 \begin{center}
 \begin{tikzcd}
-& & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
-\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\mathcal{B}"]\\
+& & ODE\arrow[dd,"\borel"]\arrow[dd,"\laplace^{-1}",swap] & & \\
+\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\borel"]\\
 & & IE & & \\
-\phi\arrow[rru, no head, tail]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\phi}\arrow[llu, no head, tail]
+\phi\arrow[rru, no head, tail]\arrow[uu,"\laplace"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\laplace"]& & & \tilde{\phi}\arrow[llu, no head, tail]
 \end{tikzcd}
 \end{center}
 
@@ -458,15 +458,15 @@ I_{\alpha}(z)\defeq\int_{\Lambda_\alpha}e^{-zf}\nu
 then the following diagram is commutative
 \begin{equation}
 \begin{tikzcd}
-I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
+I_{\alpha}(z) \arrow[r,"\text{\ae}^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\borel"]\\
 & \\
-\hat{\iota}_\alpha(\zeta)\arrow[uu, "\mathcal{L}^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
+\hat{\iota}_\alpha(\zeta)\arrow[uu, "\laplace^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
 \end{tikzcd}
 \end{equation}
 \begin{itemize}
 \item on the one hand take asymptotic expansion of integral via saddle point approximation and then study the Borel Laplace sum of the divergent series [from left upper corners clockwise]
 \item on the other hand \textcolor{red}{see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform).}
-\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
+\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\laplace^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
 \item A corollary of [Thm 4] is the fractional derivative formula.
 \item \textcolor{red}{As a consequence of Thm 2.4 Pham}, if $f$ and $\nu$ are algebraic, we get that $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities 
 \begin{equation}
@@ -558,12 +558,12 @@ Recently, resurgence theory (first developed by \'Ecalle in the '80) has attract
 
 \color{orange}
 \begin{itemize}
-\item what does it mean being Borel regular?
+\item what does it mean to be Borel regular?
 \item when does it happen?
 \begin{itemize}
 \item State new Borel regularity results
 \begin{itemize}
-\item Linear, homogeneous ODE with regular singularity at 0 and irregular singularity at infinity [big idea in {\tt airy-resurgence}]
+\item Linear, homogeneous ODE with a regular singularity at 0 and irregular singularity at infinity [big idea in {\tt airy-resurgence}]
 \begin{itemize}
 \item Contextualize with previous work of Braaksma (``Multisummability and Stokes multipliers of linear meromorphic differential equations'')
 \item Also contextualize with Balser, Braaksma, Sibuya, and Ramis (``Multisummability of formal power series solutions of linear ordinary differential equations'')
@@ -572,17 +572,17 @@ Recently, resurgence theory (first developed by \'Ecalle in the '80) has attract
 \item \emph{Borel regularity} for \textbf{thimbles integrals} can be stated a the commutativity of the following diagram:
 \begin{equation}
 \begin{tikzcd}
-I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu \arrow[r,"\sim"]\arrow[dd, swap, "\mathcal{L}^\theta "] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
+I_{\alpha}(z)\defeq\int_{\mathcal{C}_\alpha}e^{-zf}\nu \arrow[r,"\sim"]\arrow[dd, swap, "\laplace^\theta "] & \tilde{I}_{\alpha}(z)\arrow[dd,"\borel"]\\
 & \\
 \hat{\iota}_\alpha(\zeta)\arrow[r,equal,swap, "\text{sum}"] & \tilde{\iota}_{\alpha}(\zeta) 
 \end{tikzcd}
 \end{equation}
-\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
+\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behavior in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\laplace^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
 \item fractional derivative formula
 \item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
 \item in the examples, $\hat{\varphi}_\alpha(\zeta)$ turn out be an hypergeometric function of type ${}_pF_{p-1}$ where $p$ is the number of critical values. 
 \item We expect that hypergeometric functions play a special role in resurgence theory as they may always appear when there are only finitely many singularities.
-\item \textcolor{magenta}{maybe we can say more about algebraic hypergeomtric functions}
+\item \textcolor{magenta}{maybe we can say more about algebraic hypergeometric functions}
 \end{itemize}
 \item Recall Watson condition (old): Let $R_N$ be the difference between a function and the partial sum
 \[ \frac{\varphi_0}{z} + \frac{\varphi_1}{z^2} + \frac{\varphi_2}{z^3} + \ldots + \frac{\varphi_{N-2}}{z^{N-1}} \]
@@ -648,10 +648,10 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 %
 %\begin{center}
 %\begin{tikzcd}
-%& & ODE\arrow[dd,"\mathcal{B}"]\arrow[dd,"\mathcal{L}^{-1}",swap] & & \\
-%\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\mathcal{B}"]\\
+%& & ODE\arrow[dd,"\borel"]\arrow[dd,"\laplace^{-1}",swap] & & \\
+%\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\borel"]\\
 %& & IE & & \\
-%\phi\arrow[rru, no head, tail]\arrow[uu,"\mathcal{L}"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\mathcal{L}"]& & & \tilde{\phi}\arrow[llu, no head, tail]
+%\phi\arrow[rru, no head, tail]\arrow[uu,"\laplace"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\laplace"]& & & \tilde{\phi}\arrow[llu, no head, tail]
 %\end{tikzcd}
 %\end{center}
 %
@@ -683,15 +683,15 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 %then the following diagram is commutative
 %\begin{equation}
 %\begin{tikzcd}
-%I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\mathcal{B}"]\\
+%I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\borel"]\\
 %& \\
-%\hat{\iota}_\alpha(\zeta)\arrow[uu, "\mathcal{L}^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
+%\hat{\iota}_\alpha(\zeta)\arrow[uu, "\laplace^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
 %\end{tikzcd}
 %\end{equation}
 %\begin{itemize}
 %\item on the one hand take asymptotic expansion of integral via saddle point approximation and then study the Borel Laplace sum of the divergent series [from left upper corners clockwise]
 %\item on the other hand \textcolor{red}{see that the thimble integral is a generalized Laplace transform (which in certain cases can be rewritten as a usual Laplace transform).}
-%\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\mathcal{L}^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
+%\item A priori, the Laplace transform of $\hat{\iota}_\alpha(\zeta)$ and $I_{\alpha}(z)$ have the same asymptotic behaviour in a given sector (indeed taking the asymptotic of $I_\alpha(z)$ we \textit{loose} information); however Borel regularity guarantees that $I_{\alpha}(z)=\laplace^{\theta}\hat{\iota}_{\alpha}$ in a given sector.
 %\item A corollary of [Thm 4] is the fractional derivative formula.
 %\item Conjecturally, we expect $\hat{\varphi}_\alpha(\zeta)$ to have simple singularities. 
 %\end{itemize}
@@ -702,8 +702,8 @@ over all orders $N$ and all $z$ in a wide enough wedge around infinity.
 \color{black}
 %\end{itemize}
 \begin{itemize}
-\item Each resummation method for asymptotic series makes some implicit assumption that allows us to reconstruct a holomorphic function from its asymptotic behaviour.
-\item The resummation method works correctly for functions which satisfy that assumption.
+\item Each resummation method for asymptotic series makes some implicit assumption that allows us to reconstruct a holomorphic function from its asymptotic behavior.
+\item The resummation method works correctly for functions that satisfy that assumption.
 \item For the modified Bessel function $K_{1/3}$, Borel resummation works because the asymptotic series encodes a second-order differential equation.
 \begin{itemize}
 \item Different aspects of this example appear in various places (Mari\~{n}o, Kawai--Takei, Sauzin). We give a detailed, unified treatment.
@@ -723,7 +723,7 @@ the inverse Laplace \textbf{[better to say Borel?]} transform is the $\tfrac{3}{
 \item the asymptotic expansion of $I(z)$ is a resurgent function.
 \item Is it always a \emph{simple} resurgent function?
 \begin{itemize}
-\item \textbf{Maxim belies it is in general, and indeed in our examples we get simple resurgent functions. But how to prove it in general?}
+\item \textbf{Maxim belies it is in general, and indeed in our examples, we get simple resurgent functions. But how to prove it in general?}
 \end{itemize} 
 \end{itemize}
 \subsection{Stokes phenomenon}
@@ -791,6 +791,7 @@ To make sense of this formula, we ask for the following conditions.
 \subsubsection{The Laplace transform over a branch point}
 When $b$ is a branch point, we can still use formula~\ref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T^*B_b$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T^*B_b^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\ref{laplace:int}. The half-plane $z \in H_{-\theta}$ in $T^*B_b^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T^*B_b$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
 
+
 \subsection{The Laplace transform: analytic version}
 \subsubsection{Regularity and decay properties}\label{reg-decay}
 %Let $\zeta$ be the standard coordinate on $\C$, and let $z \maps T^*\C \to \C$ be the fiberwise-linear map $d\zeta \mapsto 1$ (see ``The Geometry of the Laplace Transform'' in {\tt draft2}). The Laplace transform in $\zeta$ turns a function $\varphi$ on $\C$ into a function $\laplace_\zeta \varphi$ on $T^*\C$, defined on the cotangent space of $\zeta = \alpha$ by the integral
@@ -799,7 +800,7 @@ where $\Gamma_{\zeta, \alpha}$ is the rightward ray starting at $\zeta = \alpha$
 
 Let's say a function $f$ is in $O_{\zeta, \alpha \leftarrow}(g)$ or $O_{\zeta, \alpha \rightarrow}(g)$, respectively, if $|f| \lesssim g$ on some neighborhood of the starting point or infinite end of $\Gamma_{\zeta, \alpha}$. A function is {\em subexponential} along $\Gamma_{\zeta, \alpha}$ if it's in $O_{\zeta, \alpha \rightarrow}(e^{c\zeta})$ for all $c > 0$. Let $\mathcal{E}_{\zeta, \alpha}$ be the space of functions which are subexponential on $\Gamma_{\zeta, \alpha}$, integrable at the starting point, and locally integrable throughout. If $f$ is in $\mathcal{E}_{\zeta, \alpha}$, then $\laplace_{\zeta, \alpha} f$ is well-defined and holomorphic for $\Re(z) > 0$ on the part of $T^*\C$ that lies over $\Gamma_{\zeta, \alpha}$~\cite[\S 5.6]{diverg-resurg-i}.
 
-The asymptotics of $f$ at the starting point of $\Gamma_{\zeta, \alpha}$ control the asymptotics of $\laplace_{\zeta, \alpha} f$ at the infinite end of $\Gamma_{z, 0}$. Once we see how this works for $\alpha = 0$, Section~\ref{translation} will do the rest. Let $F = \laplace_{\zeta, 0} f$. Equation~1.8 of \ref{laplace-tfm} shows\footnote{The argument cited still works in our generality. For holomorphic $f$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textcolor{magenta}{(Sternin \& Shatalov)}.} that
+The asymptotics of $f$ at the starting point of $\Gamma_{\zeta, \alpha}$ control the asymptotics of $\laplace_{\zeta, \alpha} f$ at the infinite end of $\Gamma_{z, 0}$. Once we see how this works for $\alpha = 0$, Section~\ref{translation} will do the rest. Let $F = \laplace_{\zeta, 0} f$. Equation~1.8 of \cite{laplace-tfm} shows\footnote{The argument cited still works in our generality. For holomorphic $f$, one can also use Equation 1.5 of {\em Borel-Laplace Transform and Asymptotic Theory} \textcolor{magenta}{(Sternin \& Shatalov)}.} that
 \[ f \in O_{\zeta, 0 \leftarrow}(1) \quad\Longrightarrow\quad F \in O_{z, 0 \rightarrow}\left(\frac{1}{z}\right). \]
 More generally, for $\tau > -1$ \textcolor{magenta}{[prove or cite]},
 \[ f \in O_{\zeta, 0 \leftarrow}(\zeta^\tau) \quad\Longrightarrow\quad F \in O_{z, 0 \rightarrow}\left(\frac{1}{z^{1 + \tau}}\right). \]
@@ -807,7 +808,7 @@ Exact power law asymptotics relate similarly \textcolor{magenta}{[prove or cite]
 \[ f \sim \zeta^\tau \text{ at the start of } \Gamma_{\zeta, 0} \quad\Longrightarrow\quad F \sim \frac{\Gamma(1+\tau)}{z^{1+\tau}} \text{ at the end of } \Gamma_{z, 0}. \]
 \textcolor{magenta}{[The big-$O$ asymptotics dictionary is interesting, but we might not need it. Consider dropping.]}
 \subsubsection{Action on integral operators}\label{L-int-op}
-When $\varphi \in \mathcal{E}_\zeta$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
+When $\varphi \in \mathcal{E}_\zeta$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm} 
 \begin{equation}%%\label{id:L-mult}
 \laplace_\zeta (\zeta^n \varphi) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_\zeta \varphi.
 \end{equation}
@@ -823,17 +824,11 @@ Define a new coordinate $\zeta_\alpha$ on $\C$ so that $\zeta = \alpha + \zeta_\
 & = e^{-\alpha z} \laplace_{\zeta_\alpha, 0} \varphi,
 \end{align*}
 we learn that
-\[ \laplace_{\zeta_\alpha, 0} \varphi = e^{\alpha z} \laplace_{\zeta, \alpha} \varphi. \]
-
-\color{magenta}
-
-Write explicit definition $\mathcal{L}_{\zeta_{\alpha},0}^{\theta}\varphi$ specifying the argument of $\varphi$ in the integration. 
 
 \begin{equation}
-\mathcal{L}_{\zeta_\alpha,0}^{\theta}\varphi:=\int_{\Gamma_{\zeta_\alpha,0}^{\theta}}e^{-z\zeta_\alpha}\varphi(\zeta_\alpha-\alpha)d\zeta_\alpha
+    \label{change-chart}
+    \laplace_{\zeta_\alpha, 0} \varphi = e^{\alpha z} \laplace_{\zeta, \alpha} \varphi.
 \end{equation}
-
-\color{black}
 
 \subsubsection{Rescaling of translation structure}
 Let's rescale the translation structure of $\C$, expanding displacements by a factor of $\mu \in (0, \infty)$. The coordinate $\xi = \mu\zeta$ is a chart for the new translation structure. The corresponding frequency coordinate $x \maps T^*\C \to \C$ is given by $d\xi \mapsto 1$, so $x = \mu^{-1} z$. From the calculation
@@ -846,111 +841,208 @@ we learn that
 \[ \laplace_{\xi, 0} \varphi = \mu\,\laplace_{\zeta, 0} \varphi. \]
 Note that $\laplace_{\xi, 0}$ is defined in the new translation structure on $\C$, while $\laplace_{\zeta, 0}$ is defined in the old translation structure. We can still compare them, because they both turn complex-valued functions on $\C$ into holomorphic functions on $T^*\C$.
 
-\color{gray}
-\subsection{The Laplace transform}
-\begin{itemize}
-\item Action on differential equations.
-\begin{itemize}
-\item Can we find a way to prove this when the differential operator spits out a function that's not integrable around zero?
-\end{itemize}
-\item Global picture?
-\end{itemize}
-\color{black}
 
+\subsection{The geometry of the Borel transform}
 
-\subsection{The Borel transform}
-\color{gray}
-\begin{itemize}
-\item Action on differential equations.
-\begin{itemize}
-\item No inhomogeneous terms! How is this consistent with the Laplace transform's action? Is there always an inhomogeneous solution with subexponential asymptotics?
-\end{itemize}
-\end{itemize}
-\color{black}
-The Borel transform is a linear map from formal power series in the {\em frequency variable} $z$ to formal power series in the {\em position variable} $\zeta$, defined by
-\begin{align*}
-\borel \maps \C \llbracket z^{-1} \rrbracket & \to \C\delta \oplus \C \llbracket \zeta \rrbracket \\
+The Borel transform $\borel\textcolor{orange}{_\zeta}$ turns formal power series in $z^{-1}$---which represent functions defined all non-singular cotangent spaces---into formal power series in $\zeta$. More precisely,   $\borel_\zeta$ is a $\C$-linear map 
+  \begin{align*}
+\borel\textcolor{orange}{_\zeta} \maps \C \llbracket z^{-1} \rrbracket & \to \C\delta \oplus \C \llbracket \zeta \rrbracket \\
 1 & \mapsto \delta\vphantom{\frac{1}{1}} \\
 z^{-n-1} & \mapsto \frac{\zeta^n}{n!}\qquad\text{when } n \ge 0
 \end{align*}
+where $\delta$ is a ``convolution unit'', namely $\phi\ast \delta= \delta\ast \phi= \phi$ (see convolution below \textcolor{magenta}{[add convolution]}).
 In general, by linearity,
 \begin{align*}
-\mathcal{B}\big[a_0 + a_1 z^{-1} + a_2 z^{-2} + a_3 z^{-3} + a_4 z^{-4} + \ldots \big] = a_0\delta + a_1 + a_2 \zeta + a_3 \frac{\zeta^2}{2!} + a_4 \frac{\zeta^3}{3!} + \ldots.
+\borel\textcolor{orange}{_\zeta}\big[a_0 + a_1 z^{-1} + a_2 z^{-2} + a_3 z^{-3} + a_4 z^{-4} + \ldots \big] = a_0\delta + a_1 + a_2 \zeta + a_3 \frac{\zeta^2}{2!} + a_4 \frac{\zeta^3}{3!} + \ldots.
 \end{align*}
-The motivation for adding the formal ``convolution unit'' $\delta$ to the codomain is discussed \textcolor{magenta}{[in the convolution product section]}.
 
-Notice that we are at the level of formal series, so there are no convergence assumptions. However, there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic fucntions at the origin in $\C_{\zeta}$. These formal series are the so called Gevrey-$1$ series:
-\[\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1\]
+It follows that $\borel_\zeta$ is a formal inverse of the $\laplace_{\zeta, 0}$: let $\varphi=\sum_{n=0}^{\infty}a_n \zeta^n$
+\begin{align*}
+    \borel_\zeta \laplace_{\zeta}\varphi&=\borel_\zeta \left[\int_{\Gamma_{\zeta,0}}e^{-z\zeta} \varphi d\zeta\right]\\
+    &=\borel_\zeta\left[\sum_{n=0}^{\infty}a_n \int_{\Gamma_{\zeta,0}} e^{-z\zeta}\zeta^n d\zeta\right]\\
+    &=\borel_\zeta\left[\sum_{n=0}^{\infty}a_n z^{-n-1}n! \right]\\
+    &=\sum_{n=0}^{\infty}a_n \frac{\zeta^n}{n!}
+\end{align*}
+where in the second step we formally interchange the integral and the sum. 
+
+\subsubsection{Action on transseries}
+
+A transseries is a generalization of usual power series, whose building blocks (called trans-monomials) are of the form $e^{\alpha_n z}\varphi_n$ where $a_n$ is a sequence of complex numbers such that $0=a_0 e^{-i\theta}< a_1 e^{-i\theta}<...<a_n e^{-i\theta}<...$ and $\varphi_n\in\C\llbracket z^{-1}\rrbracket$: 
+
+\[T_{\alpha,\varphi}:=\sum_{n=0}^{\infty} e^{\alpha_n z} \varphi_n(z) \]
+
+The main feature of $T_{\alpha,\varphi}$ is that its asymptotics as $\text{ Re } e^{i\theta}z \to +\infty$ is $\varphi_0$. In fact, they play a crucial role in the theory of ODEs with irregular singularities. 
+
+It is natural to ask whether we can extend the definition of $\borel_\zeta$ to transseries. Indeed it is possible by formalizing the change of variable identity that relates $\laplace_{\zeta, \alpha}$ to $\laplace_{\zeta_\alpha, 0}$ (see Section \ref{translation} identity \eqref{change-chart}). 
+
+We extend the Borel transform to trans-series, defining $\borel\textcolor{orange}{_\zeta} \maps e^{-\alpha z} \C\llbracket z^{-1} \rrbracket \to \C\llbracket \zeta \rrbracket$ as the formal inverse of $\laplace_{\zeta, \alpha}$.
+
+Let $\varphi=\sum_{n=0}^{\infty}a_n\zeta^n$, then from identity \eqref{change-chart}
+
+  \begin{align*}
+      \borel_\zeta\laplace_{\zeta,\alpha}\varphi=\borel_\zeta\left[e^{-\alpha z
+      }\laplace_{\zeta_\alpha,0}\varphi\right]
+  \end{align*}
+We compute the left-hand-side
+  \begin{align*}
+      \borel_\zeta\laplace_{\zeta,\alpha}\varphi&=\borel_\zeta\int_{\Gamma_{\zeta,\alpha}}e^{-z\zeta}\varphi d\zeta\\
+      &=\borel_\zeta\left[\sum_{n=0}^{\infty}a_n \int_{\alpha}^{\infty}e^{-z\zeta} \zeta^nd\zeta\right]\\
+      &=\borel_\zeta\left[\sum_{n=0}^{\infty}a_n e^{-z\alpha}\sum_{k=0}^n \frac{n!}{(n-k)!}\alpha^{n-k}z^{-k-1}\right]\\
+      &=\sum_{n=0}^{\infty}a_n \sum_{k=0}^n \frac{n!}{(n-k)!}\alpha^{n-k}\borel_\zeta(e^{-z\alpha}z^{-k-1})
+  \end{align*}
+  and the right-hand-side
+  \begin{align*}
+      \borel_\zeta\left[e^{-\alpha z
+      }\laplace_{\zeta_\alpha}\varphi\right]&=\borel_\zeta\left[e^{-\alpha z
+      }\int_{\Gamma_{\zeta_\alpha,0}} e^{-\zeta_\alpha z} \varphi d\zeta\right]\\
+      &=\borel_\zeta\left[
+      \int_{\Gamma_{\zeta_\alpha,0}} e^{-\zeta z} \varphi d\zeta\right]\\
+      &=\borel_\zeta\left[
+      \sum_{n=0}^{\infty}a_n\int_{0}^{\infty} e^{-\zeta z} \zeta^n d\zeta\right]\\
+      &=\borel_\zeta\left[
+      \sum_{n=0}^{\infty}a_n z^{-n-1}n! \right]\\
+      &= \sum_{n=0}^{\infty}a_n \zeta^n
+  \end{align*}
+In particular, we get \[\borel_{\zeta}\laplace_{\zeta,\alpha}\varphi=\varphi\]
+
+\[ \sum_{n=0}^{\infty}a_n \sum_{k=0}^n \frac{n!}{(n-k)!}\alpha^{n-k}\borel_\zeta(e^{-z\alpha}z^{-k-1})=\sum_{n=0}^{\infty}a_n \zeta^n\]
+
+Then, comparing term by term in powers of $\zeta$ in the second identity we get 
+  \begin{align*}
+      \sum_{k=0}^n \frac{n!}{(n-k)!}\alpha^{n-k}\borel_\zeta(e^{-z\alpha}z^{-k-1})&=\zeta^n\\
+      \sum_{k=0}^n {n\choose k} \alpha^{n-k} \borel_\zeta(e^{-z\alpha} k! z^{-k-1})&=\sum_{k=0}^n {n\choose k} \alpha^{n-k}(\zeta-\alpha)^k
+  \end{align*}
+  and we deduce \[\borel_\zeta(e^{-z\alpha}z^{-k-1})=\frac{1}{k!}(\zeta-\alpha)^k.\]
+\begin{itemize}
+    \item In other words, when $\borel_\zeta$ acts on formal power series, it formally inverts $\laplace_\zeta$ on the cotangent fiber over $0$. \textcolor{magenta}{When it acts on other trans-monomials, it formally inverts $\laplace_\zeta$ on other cotangent fibers. [Not quite\ldots figure out how to make this precise.] }
+  \end{itemize}
+
+
+\subsubsection{Change of translation chart} 
+
+Following Section \ref{translation}, we introduce $\borel_{\zeta_\alpha}$
+as the formal inverse of $\laplace_{\zeta_\alpha}$ on the cotangent fibre over $0$. Explicitly, from identity \eqref{change-chart}
+  \begin{align*}
+      \borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\varphi\right]&=\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\varphi
+  \end{align*}
+  now the LHS reads
+  \begin{align*}
+      \borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\varphi\right]&=\borel_{\zeta_\alpha}\left[e^{z\alpha} \int_{\Gamma_{\zeta,\alpha}}e^{-z\zeta}\varphi d\zeta\right]\\
+      &=\borel_{\zeta_\alpha}\left[e^{z\alpha} \sum_{n=0}^{\infty}a_n\int_{\Gamma_{\zeta,\alpha}}e^{-z\zeta}\zeta^n d\zeta\right]\\
+      &=\borel_{\zeta_\alpha}\left[e^{z\alpha} \sum_{n=0}^{\infty}a_ne^{-z\alpha}\sum_{k=0}^{n}\frac{n!}{(n-k)!}\alpha^{n-k}z^{-k-1}\right]\\
+      &=\borel_{\zeta_\alpha}\left[\sum_{n=0}^{\infty}a_n \sum_{k=0}^{n}\frac{n!}{(n-k)!}\alpha^{n-k}  z^{-k-1}\right]
+  \end{align*}
+  the RHS is 
+  \begin{align*}
+      \borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\varphi&=\borel_{\zeta_\alpha}\left[\int_{\Gamma_{\zeta_\alpha,0}}e^{-z\zeta_\alpha}\varphi d\zeta\right]\\
+      &=\borel_{\zeta_\alpha}\left[e^{z\alpha}\int_{\Gamma_{\zeta_\alpha,0}}e^{-z\zeta}\varphi d\zeta\right]\\
+      &=\borel_{\zeta_\alpha}\left[e^{z\alpha}\sum_{n=0}^{\infty}\int_{\Gamma_{\zeta_\alpha,0}}e^{-z\zeta}\zeta^n d\zeta\right]\\
+      &=\borel_{\zeta_\alpha}\left[e^{z\alpha}\sum_{n=0}^{\infty}a_nz^{-n-1}n!\right]\\
+      &= \borel_{\zeta_\alpha}\left[\sum_{n=0}^{\infty}a_n n!e^{z\alpha}z^{-n-1}\right]
+      \end{align*}
+     If we require $\borel_{\zeta_\alpha}$ to be $\C$-linear, we deduce 
+      \[\borel_{\zeta_\alpha}\left[e^{z\alpha}z^{-n-1}\right]=\frac{\zeta^n}{n!}=\frac{(\zeta_\alpha+\alpha)^n}{n!}\]
+       \[\borel_{\zeta_\alpha}\left[z^{-k-1}\right]=\frac{\zeta_\alpha^k}{k!}\]
+ Therefore, we learn that $\borel_{\zeta_\alpha}$ is a $\C$-linear map from formal power series in the frequency variable $z$ to formal power series in the position variable $\zeta_\alpha$, it is defined by 
+ \begin{align*}
+     \borel_{\zeta_\alpha}\colon z^{-1}\C\llbracket z^{-1}\rrbracket &\to \C\llbracket \zeta_\alpha \rrbracket  \\
+     z^{-n-1}& \mapsto \frac{\zeta_\alpha^n}{n!} \qquad \text{ when } n\geq 0
+ \end{align*}
+ Furthermore, its action extends to trans-monomials: $\borel_{\zeta_\alpha}e^{z\alpha}\C\llbracket z^{-1}\rrbracket\to \C\llbracket \zeta_\alpha \rrbracket$ as the formal inverse of $\laplace_{\zeta_\alpha,-\alpha}$. 
+
+ \textcolor{magenta}{I think we should add a remark, saying that on $B$ there is no special coordinate, and this reflects on the fact that $\borel$ is defined equivalently for every choice of coordinates.}
+ 
+
+\subsection{The Borel transform}
+%\color{gray}
+%\begin{itemize}
+%\item Action on differential equations.
+%\begin{itemize}
+%\item No inhomogeneous terms! How is this consistent with the Laplace transform's action? Is there always an inhomogeneous solution with subexponential asymptotics?
+%\end{itemize}
+%\end{itemize}
+%\color{black}
+
+%The Borel transform is a linear map from formal power series in the {\em frequency variable} $z$ to formal power series in the {\em position variable} $\zeta$, defined by
+%\begin{align*}
+%\borel\textcolor{orange}{_\zeta} \maps \C \llbracket z^{-1} \rrbracket & \to \C\delta \oplus \C \llbracket \zeta \rrbracket \\
+%1 & \mapsto \delta\vphantom{\frac{1}{1}} \\
+%z^{-n-1} & \mapsto \frac{\zeta^n}{n!}\qquad\text{when } n \ge 0
+%\end{align*}
+%In general, by linearity,
+%\begin{align*}
+%\borel\textcolor{orange}{_\zeta}\big[a_0 + a_1 z^{-1} + a_2 z^{-2} + a_3 z^{-3} + a_4 z^{-4} + \ldots \big] = a_0\delta + a_1 + a_2 \zeta + a_3 \frac{\zeta^2}{2!} + a_4 \frac{\zeta^3}{3!} + \ldots.
+%\end{align*}
+%The motivation for adding the formal ``convolution unit'' $\delta$ to the codomain is discussed \textcolor{magenta}{[in the convolution product section]}.
+
+So far, our discussion was at the level of formal series, however there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic functions at the origin in $\C_{\zeta}$. These formal series are the so-called Gevrey-$1$ series:
+\[\tilde{\Phi}=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1\]
 is Gevrey-$1$ if there exists $A>0$ such that $|a_n|\leq A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis Gevrey-$k$ series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. The Borel transform can be generalized in order to obatin germs of holomorphic function for higher Gevrey series. }  
 
 \begin{notation*}
-We want to distinghuish between formal series and holomorphic functions, as well as between the Borel plane (time domain) and the $z$-plane (spatial domain). Therefore we adopt the following notation:
+We want to distinguish between formal series and holomorphic functions, as well as between the spatial domain (Borel plane) and the frequency domain ($z$-plane). Therefore we adopt the following notation:
 \begin{itemize}
-\item $\Phi(z)$: upper-case letters are holomorphic functions in the $z$-plane;
-\item $\tilde{\Phi}(z)$: \textit{tilde} stands for formal series, so an upper-case letter with \textit{tilde} is a formal series in the $z$-plane;
-\item $\phi(\zeta)$: lower-case letter are holomorphic functions in the Borel plane. We follow the convention for Laplace transform of holomorphic functions, namely $\mathcal{L}(\phi(\zeta)((z)=\Phi(z)$. 
-\item $\tilde{\phi}(\zeta)$: lower-case letter with \textit{tilde} are formal series in the Borel plane. As we will see, the Borel transform of $\tilde{\Phi}(z)$ is $\mathcal{B}(\tilde{\Phi})(\zeta)=:\tilde{\phi}(\zeta)$; 
-\item $\hat{\phi}(\zeta)$: lower-case letters with \textit{hat} are the sum of the formal series $\tilde{\phi}(\zeta)$, when it exists.  
+\item $\Phi$: upper-case letters are holomorphic functions on the frequency domain;
+\item $\tilde{\Phi}$: \textit{tilde} stands for formal series, so an upper-case letter with \textit{tilde} is a formal series in the frequency domain;
+\item $\phi$: lower-case letters are holomorphic functions on the frequency domain. Since the Laplace transform $\laplace_{\zeta, 0}$ turns functions on the spatial domain into functions on the frequency domain, we might write $\laplace_{\zeta,0}\phi=\Phi$.
+\item $\tilde{\phi}$: lower-case letter with \textit{tilde} are formal series in the Borel plane. As we will see, the Borel transform of $\tilde{\Phi}$ is $\borel\textcolor{orange}{_\zeta} \tilde{\Phi}=:\tilde{\phi}$; 
+\item $\hat{\phi}$: lower-case letters with \textit{hat} are the sum of the formal series $\tilde{\phi}$, when it exists.  
 \end{itemize}
 \end{notation*}  
 
 \begin{lemma}
-Let $\tilde{\Phi}(z)\in\C \llbracket z^{-1} \rrbracket$. Then, $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket_1$ is Gevrey-1 if and only if $\mathcal{B}(\tilde{\Phi})\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
+Let $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket$. Then, $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket_1$ is Gevrey-1 if and only if $\borel\textcolor{orange}{_\zeta}\tilde{\Phi}\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
 \end{lemma}
 In particular, we deduce from the lemma that the Borel transform is an isomorphism between Gevrey-$1$ series and $\C\delta\oplus\C\lbrace\zeta\rbrace$. 
 
-The inverse of $\mathcal{B}$ is what we call a \textbf{formal Laplace transform}.
+The inverse of $\borel\textcolor{orange}{_\zeta}$ is what we call a \textbf{formal Laplace transform}.
 
-\textcolor{magenta}{[add definition of convolution product and $\mathcal{B}$ being an algebra isomorphisms]}
+\textcolor{magenta}{[add definition of convolution product and $\borel$ being an algebra isomorphisms]}
 
 
-\subsubsection{Generalization of the Borel transform}
-The definition of $\mathcal{B}$ can be easily extended to fractional power of $z$, replacing the factorial with the Gamma function: 
+\subsubsection{Action on power series with fractional exponents}
+The definition of the Borel transform can be easily extended to fractional power of $z$, replacing the factorial with the Gamma function: 
 \begin{align*}
-\mathcal{B}(z^{-\alpha})\defeq \frac{\zeta^{\alpha-1}}{\Gamma(\alpha)} & \qquad \text{ if } \alpha\in\R\setminus\Z_{\leq 0}
+\borel\textcolor{orange}{_\zeta}(z^{-\alpha})\defeq \frac{\zeta^{\alpha-1}}{\Gamma(\alpha)} & \qquad \text{ if } \alpha\in\R\setminus\Z_{\leq 0}
 \end{align*}
 and then extending by linearity.
 
-If $\alpha\in\mathbb{R}\setminus\Z$ is not an integer, then $\mathcal{B}$ is an isomorphisms from Gevrey-$1$ formal power series $\C \llbracket z^{-\alpha} \rrbracket_1$ to the germs of holomorphic functions $\C \lbrace \zeta^{\alpha-1} \rbrace$, with inverse given by the formal Laplace transform. Indeed, let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-\alpha} \rrbracket_1$ with $|a_n|\leq A^n n!$ and $A>0$ then  
+If $\alpha\in\mathbb{R}\setminus\Z$, then $\borel$ is an isomorphisms from Gevrey-$1$ formal power series $\C \llbracket z^{-\alpha} \rrbracket_1$ to the germs of holomorphic functions $\C \lbrace \zeta^{\alpha-1} \rbrace$, with inverse given by the formal Laplace transform. Indeed, let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-\alpha} \rrbracket_1$ with $|a_n|\leq A^n n!$ and $A>0$ then  
 \begin{align*}
-\mathcal{B}(z^{-\alpha}\tilde{\Phi})(\zeta)&=\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)=a_0\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}+\sum_{n\geq 0}a_{n+1}\frac{\zeta^{n+\alpha}}{\Gamma(1+n+\alpha)}
+\borel\textcolor{orange}{_\zeta} (z^{-\alpha}\tilde{\Phi})&=\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)=a_0\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}+\sum_{n\geq 0}a_{n+1}\frac{\zeta^{n+\alpha}}{\Gamma(1+n+\alpha)}
 \end{align*}  
 
 and \[\left|\frac{a_{n+1}}{\Gamma(1+n+\alpha)}\right|\leq A^{n+1}\frac{\Gamma(n+2)}{|\Gamma(n+1+\alpha)|} \]
 \textcolor{magenta}{Under which conditions it doesn't grow faster than factorial?}
 
-
-
 \subsubsection{Properties of the Borel transform}
-We now recall some properties of the Borel transform: let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}$ and denote by $\tilde{\phi}(\zeta)\defeq\mathcal{B}(\tilde{\Phi}(z))$
-
-\textcolor{orange}{[check notation]}
+We now recall some properties of the Borel transform: let $\tilde{\Phi}=\sum_{n\geq 0}a_nz^{-n}$ and $\tilde{\phi}\defeq\borel\textcolor{orange}{_\zeta}\tilde{\Phi}$
 
 \begin{itemize}
-\item[(i)] \emph{[fractional derivative]} if $\alpha\in\R_{\geq 0}$, $\mathcal{B}\left(z^\alpha \tilde{\Phi}(z)\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}(\zeta)$
-\item[(ii)] \emph{[fractional integral]} if $\alpha\in\R_{<0}\setminus\Z_{\geq 0}$, $\mathcal{B}\left(z^\alpha \tilde{\Phi}(z)\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}(\zeta)$
-\item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C \llbracket z^{-1} \rrbracket$, then $\mathcal{B}(z^n\tilde{\Phi}(z))=\partial_\zeta^n\tilde{\phi}(\zeta)$ 
-\item[(iv)] $\mathcal{B}\left(\partial_z^{n} \tilde{\Phi}(z)\right)=(-\zeta)^n\tilde{\phi}(\zeta)$, for every $n\geq 0$
-\item[(v)] $\mathcal{B}(\tilde{\Phi}(z-c))=e^{-c\zeta}\tilde{\phi}(\zeta)$
-\item[(vi)] if $\tilde{\Psi}(z)\in z^{-1}\C \llbracket z^{-1} \rrbracket$, then $\mathcal{B}(\tilde{\Phi}(z)\tilde{\Psi}(z))=\int_0^{\zeta}d\zeta' \tilde{\phi}(\zeta-\zeta')\tilde{\psi}(\zeta')=:\tilde{\phi}\ast \tilde{\psi}$, where $\tilde{\psi}(\zeta)=\mathcal{B}(\tilde{\Psi}(z))$.
+\item[(i)] \emph{[fractional derivative]} if $\alpha\in\R_{\geq 0}$, $\borel_\zeta\left(z^\alpha \tilde{\Phi}\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}$
+\item[(ii)] \emph{[fractional integral]} if $\alpha\in\R_{<0}\setminus\Z_{\geq 0}$, $\borel_\zeta\left(z^\alpha \tilde{\Phi}\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}$
+\item[(iii)] if $n\in\Z$ and $z^nf(z)\in z^{-1}\C \llbracket z^{-1} \rrbracket$, then $\borel_\zeta (z^n\tilde{\Phi})=\partial_\zeta^n\tilde{\phi}$ 
+\item[(iv)] $\borel_\zeta\left(\partial_z^{n} \tilde{\Phi}\right)=(-\zeta)^n\tilde{\phi}$, for every $n\geq 0$
+\item[(v)] $\borel_{\zeta}(\tilde{\Phi}(z-c))=e^{-c\zeta}\tilde{\phi}$
+\item[(vi)] if $\tilde{\Psi}\in z^{-1}\C \llbracket z^{-1} \rrbracket$, then $\borel_\zeta(\tilde{\Phi}\tilde{\Psi})=\int_0^{\zeta}d\zeta' \tilde{\phi}(\zeta-\zeta')\tilde{\psi}(\zeta')=:\tilde{\phi}\ast \tilde{\psi}$, where $\tilde{\psi}=\borel_{\zeta}\tilde{\Psi}$.
 \end{itemize} 
 
 
 \begin{lemma}\label{lem:frac-deriv-Borel}
 For any non-integer $\mu \in (0, \infty)$ and any integer $k \ge 0$,
-\[ \partial^\mu_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] =  \borel \left(z^\mu z^{-(k+1)}\right)(\zeta). \]
+\[ \partial^\mu_{\zeta } \left[ \borel_\zeta \left(z^{-(k+1)}\right) \right] =  \borel_\zeta \left(z^\mu z^{-(k+1)}\right). \]
 \end{lemma}
 \begin{proof}
 We'll show that for any $\alpha \in (0, 1)$ and any integer $n \ge 0$, the claim holds with $\mu = n + \alpha$. First, evaluate
 \begin{align*}
-\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
+\partial^{\alpha-1}_{\zeta } \left[ \borel_\zeta \left(z^{-(k+1)}\right) \right] & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
 & = \frac{1}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (\zeta-\zeta t)^{-\alpha} (\zeta t)^k\,\zeta\,dt \\
 & = \frac{\zeta^{k-(\alpha-1)}}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (1-t)^{-\alpha} t^k\,dt \\
 & = \frac{\zeta^{k-(\alpha-1)}}{\Gamma\big(k-(\alpha-1)+1\big)}
 \end{align*}
-by reducing the integral to Euler's beta function \textbf{[DLMF 5.12.1]}. This establishes that
+by reducing the integral to Euler's beta function (see 5.12.1 in \cite{dlmf}). This establishes that
 \begin{equation}\label{frac-diff-laplace}
-\left(\tfrac{\partial}{\partial \zeta}\right)^{n+1}\,\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] = \frac{\zeta^{k-(n+\alpha)}}{\Gamma\big(k-(n+\alpha)+1\big)}
+\left(\tfrac{\partial}{\partial \zeta}\right)^{n+1}\,\partial^{\alpha-1}_{\zeta } \left[ \borel \left(z^{-(k+1)}\right)(\zeta) \right] = \frac{\zeta^{k-(n+\alpha)}}{\Gamma\big(k-(n+\alpha)+1\big)}
 \end{equation}
 for $n = -1$. If \eqref{frac-diff-laplace} holds for $n = m$, it also holds for $n = m+1$, because
 \begin{align*}
@@ -969,11 +1061,11 @@ We are going to prove properties (i)--(vi).
 
 (i) follows from Lemma \ref{lem:frac-deriv-Borel}. 
 
-(ii) Notice that for $\alpha\in\R\setminus\Z_{\geq 0}$ the fractional integral $\partial_\zeta^{\alpha}\zeta^{k}=\zeta^{k-\alpha}\tfrac{k!}{\Gamma(k-\alpha+1)}$, hence \[\borel (z^\alpha \tilde{\Phi}(z))=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{k!}\tfrac{k!}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k \tfrac{1}{k!}\partial_\zeta^{\alpha}\zeta^k=\partial_\zeta^\alpha\tilde{\phi}(\zeta).\]
+(ii) Notice that for $\alpha\in\R\setminus\Z_{\geq 0}$ the fractional integral $\partial_\zeta^{\alpha}\zeta^{k}=\zeta^{k-\alpha}\tfrac{k!}{\Gamma(k-\alpha+1)}$, hence \[\borel_\zeta (z^\alpha \tilde{\Phi})=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k\tfrac{\zeta^{k-\alpha}}{k!}\tfrac{k!}{\Gamma(k-\alpha+1)}=\sum_{k\geq 0}a_k \tfrac{1}{k!}\partial_\zeta^{\alpha}\zeta^k=\partial_\zeta^\alpha\tilde{\phi}.\]
 
-(iii) $z^n\tilde{\Phi}(z)=\sum_{k\geq 0}a_kz^{-(k-n)-1} $ and by assumption $k-n\geq 0$, hence by defintion \[\borel (z^n \tilde{\Phi}(z))=\sum_{k\geq n} a_k\tfrac{\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\tfrac{k!\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\partial_\zeta^n\zeta^k=\partial_\zeta^n\tilde{\phi}(\zeta).\] 
+(iii) $z^n\tilde{\Phi}=\sum_{k\geq 0}a_kz^{-(k-n)-1} $ and by assumption $k-n\geq 0$, hence by defintion \[\borel_\zeta (z^n \tilde{\Phi})=\sum_{k\geq n} a_k\tfrac{\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\tfrac{k!\zeta^{k-n}}{(k-n)!}=\sum_{k\geq n} a_k\tfrac{1}{k!}\partial_\zeta^n\zeta^k=\partial_\zeta^n\tilde{\phi}.\] 
 
-(vi) $\partial_z^n \tilde{\Phi}(z)=\sum_{k\geq 0}a_k(-1)^{n}z^{-k-n-1}\tfrac{\Gamma(k+n+1)}{k!}$, hence \[\borel (z^\alpha \tilde{\Phi}(z))=\sum_{k\geq 0}a_k(-1)^{n}\tfrac{\zeta^{k+n}}{\Gamma(k+n+1)}\tfrac{\Gamma(k+n+1)}{k!}=(-\zeta)^{n}\tilde{\phi}(\zeta).\]
+(vi) $\partial_z^n \tilde{\Phi}=\sum_{k\geq 0}a_k(-1)^{n}z^{-k-n-1}\tfrac{\Gamma(k+n+1)}{k!}$, hence \[\borel_\zeta (z^\alpha \tilde{\Phi})=\sum_{k\geq 0}a_k(-1)^{n}\tfrac{\zeta^{k+n}}{\Gamma(k+n+1)}\tfrac{\Gamma(k+n+1)}{k!}=(-\zeta)^{n}\tilde{\phi}.\]
 
 (v) see Lemma 5.10 \cite{MS16}. 
 
@@ -983,14 +1075,14 @@ We are going to prove properties (i)--(vi).
 \begin{remark}
 We notice that properties (i) and (ii) are special cases of property (vi), indeed we can use the convolution product 
 \begin{align*}
-\borel (z^\alpha \tilde{\Phi}(z))&=\borel (z^\alpha)\ast \tilde{\phi}(\zeta)\\
-&=\frac{\zeta^{-\alpha-1}}{\Gamma(-\alpha)}\ast\tilde{\phi}(\zeta)\\
+\borel_\zeta (z^\alpha \tilde{\Phi})&=\borel_\zeta (z^\alpha)\ast \tilde{\phi}\\
+&=\frac{\zeta^{-\alpha-1}}{\Gamma(-\alpha)}\ast\tilde{\phi}\\
 &=\int_0^\zeta \frac{(\zeta')^{-\alpha-1}}{\Gamma(-\alpha)}\sum_{k\geq 0}a_k\frac{(\zeta-\zeta')^k}{k!}d\zeta'\\
 &=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\int_0^1(t\zeta)^{-\alpha-1}(\zeta-t\zeta)^k\zeta dt\\
 &=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\int_0^1 t^{-\alpha-1}(1-t)^k dt\\
 &=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\frac{\Gamma(k+1)\Gamma(-\alpha)}{\Gamma(k-\alpha+1)}\\
 &=\sum_{k\geq 0}\frac{a_k}{k!}\partial_\zeta^{\alpha} \zeta^k \\
-&=\partial_\zeta^\alpha\tilde{\phi}(\zeta)
+&=\partial_\zeta^\alpha\tilde{\phi}
 \end{align*}
 \end{remark}
 
@@ -1052,7 +1144,7 @@ which rearranges to the second equation in the statement.
 \begin{theorem}\label{thm1-dim}
 Let $\mathcal{P}$ be a linear differential operator 
 \begin{equation}
-\mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \b],
+\mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_d(z^{-1})\,\partial_z^d \big],
 \end{equation}
 
 \begin{itemize}
@@ -1088,15 +1180,15 @@ Therefore, there exists a unique solution \[\psi_j(\zeta_j)=\zeta_j^{-\tau_j-1}+
 
 
 \begin{theorem}\label{thm2-dim}
-For every $j=1,...,d$ let $\psi_j(\zeta_j)$ be the unique solution of $\hat{P}_j\psi_j=0$ as in in Theorem \ref{thm1-dim}. Then $\psi_j(\zeta_j)$ admits a well defined Laplace transform $\Psi_j:=\mathcal{L}_{\zeta_j}^{\theta_j}$ for some direction $\theta_j$.
+For every $j=1,...,d$ let $\psi_j(\zeta_j)$ be the unique solution of $\hat{P}_j\psi_j=0$ as in in Theorem \ref{thm1-dim}. Then $\psi_j(\zeta_j)$ admits a well defined Laplace transform $\Psi_j:=\laplace_{\zeta_j}^{\theta_j}$ for some direction $\theta_j$.
 Furthermore, let $\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}$ be the formal solution of $\mathcal{P}\Psi=0$ with $a_{j,0}=1$ for every $j=1,...,d$. Then $\series{\Psi}_j(z)$ is Borel summable and its Borel sum is proportional to $\Psi_j$. 
 \end{theorem}
 \begin{proof}
 We divide the proof in the following steps:
 \begin{itemize}
 \item[$(a)$] prove that $\psi_j(\zeta_j)$ admits Laplace transform 
-\item[$(b)$] let $\hat{\psi}_j$ be the sum of the germ $\series{\psi}_j:=\mathcal{B}\series{\Psi}_j$; prove that $\hat{\psi}_j \propto \psi_j$ 
-\item[$(c)$] prove that $\mathcal{L}_{\zeta_j}^{\theta_j}\circ\mathcal{B}\series{\Psi}_j\propto \Psi_j $. 
+\item[$(b)$] let $\hat{\psi}_j$ be the sum of the germ $\series{\psi}_j:=\borel\series{\Psi}_j$; prove that $\hat{\psi}_j \propto \psi_j$ 
+\item[$(c)$] prove that $\laplace_{\zeta_j}^{\theta_j}\circ\borel\series{\Psi}_j\propto \Psi_j $. 
 \end{itemize}
 
 Step $(c)$ clearly follows from steps $(a)$ and $(b)$. We now prove step $(b)$: first notice that if $\series{\Psi}_j$ solves $\mathcal{P}\Psi=0$ then $\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}$ is a solution of $\mathcal{P}_j\Psi=0$ with
@@ -1110,14 +1202,14 @@ Then taking the (formal) Borel transform:for every $j=1,...,d$ we denote $\zeta_
 
 
 \begin{multline*}
-\mathcal{B}\left(\mathcal{P}\series{\Psi}_j\right)=\mathcal{B}\left(\mathcal{P}_j\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}\right)=\\
+\borel\left(\mathcal{P}\series{\Psi}_j\right)=\borel\left(\mathcal{P}_j\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}\right)=\\
 \left[P(-\alpha_j-\zeta_j)+\partial_{\zeta_j}^{-1}\circ Q(-\alpha_j-\zeta_j)+\partial_{\zeta_j}^{-2}\circ \sum_{r=0}^dR_r(\partial_{\zeta_j}^{-1})\circ (-\alpha_j-\zeta_j)^r\right]\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}\zeta_j^{n+\tau_j-1}\\
 \left[P(-\zeta)+\partial_{\zeta_j}^{-1}\circ Q(-\zeta)+\partial_{\zeta_j}^{-2}\circ \sum_{r=0}^dR_r(\partial_{\zeta_j}^{-1})\circ (-\zeta)^r\right]\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}\zeta_j^{n+\tau_j-1}
 \end{multline*}
 %where 
 %
 %\begin{align*}
-%\series{\psi}_j(\zeta_j):=\mathcal{B}\series{\Psi}_j(\zeta_j)&=\mathcal{B}\left(e^{-\alpha_j z}z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}\right)(\zeta_j)=\mathcal{B}\left(z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}\right)(\zeta-\alpha_j)\\
+%\series{\psi}_j(\zeta_j):=\borel\series{\Psi}_j(\zeta_j)&=\borel\left(e^{-\alpha_j z}z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}\right)(\zeta_j)=\borel\left(z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}\right)(\zeta-\alpha_j)\\
 %&=\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}(\zeta-\alpha_j)^{n+\tau_j-1}
 %\end{align*}
 
@@ -1141,7 +1233,7 @@ where $\mathcal{C}_\alpha$ is a steepest descent path through the critical point
 \begin{theorem}\label{thm:maxim} Let $N=1$. Let $\tilde{\varphi}_{\alpha}(z)\defeq e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}$ and assume $f''(x_\alpha)\neq 0$ for every critical point $x_\alpha$. Then:
 \begin{enumerate}
 \item\label{int:series-gevrey} The series $\tilde{\varphi}_\alpha$ is Gevrey-1.
-\item\label{int:resum-converges} The series $\hat{\varphi}_\alpha(\zeta)\defeq\mathcal{B}(\tilde{\varphi})$ converges near $\zeta=\zeta_{\alpha}$.
+\item\label{int:resum-converges} The series $\hat{\varphi}_\alpha(\zeta)\defeq\borel(\tilde{\varphi})$ converges near $\zeta=\zeta_{\alpha}$.
 \item\label{int:resum-valid} If you continue the sum of $\hat{\phi}_\alpha$ along the ray going rightward from $\zeta_\alpha$, and take its Laplace transform along that ray, you'll recover $z^{1/2} I_\alpha$.
 \item\label{int:deriv-formula} For any $\zeta$ on the ray going rightward from $\zeta_\alpha$, we have
 \begin{multline}\label{formula1}
@@ -1206,14 +1298,14 @@ The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink 
 \[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)}. \]
 Call the right-hand side $\tilde{I}_\alpha$. We now see that $a_{\alpha,n} = (2n-1)!!\,b_{2n}^\alpha$ in the statement of the theorem. \textbf{[Resolve discrepancy with previous calculation.]} Note that \textbf{[explain formally what it means to center at $\zeta_\alpha$]}
 \begin{align*}
-\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & = \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \Gamma\big(n+\tfrac{1}{2}\big)\,b_{2n}^\alpha\,\frac{(\zeta - \zeta_\alpha)^{n-1/2}}{\Gamma\big(n+\tfrac{1}{2}\big)} \\
+\borel_{\zeta_\alpha} \tilde{I}_\alpha & = \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \Gamma\big(n+\tfrac{1}{2}\big)\,b_{2n}^\alpha\,\frac{(\zeta - \zeta_\alpha)^{n-1/2}}{\Gamma\big(n+\tfrac{1}{2}\big)} \\
 & = \sum_{n \ge 0} 2^{n+1/2}\,b_{2n}^\alpha\,(\zeta - \zeta_\alpha)^{n-1/2}.
 \end{align*}
 
 We know from the definition of $\varepsilon$ that $\left|b_n^\alpha\right| \varepsilon^n \lesssim 1$. Recalling that $(2n - 1)!! \approx (\pi n)^{-1/2}\,2^n\,n!$ as $n \to \infty$, we deduce that $|a_{\alpha,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{\varphi}_\alpha$ is Gevrey-1.
 
 Part~\eqref{int:resum-converges}: \begin{align*}
-\hat{\varphi}_\alpha(\zeta)=\mathcal{B}\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
+\hat{\varphi}_\alpha(\zeta)=\borel\left(e^{-zf(x_\alpha)}(2\pi)^{1/2} \sum_{n\geq 0}a_{\alpha,n}z^{-n}\right)(\zeta)=T_{f(x_\alpha)}(2\pi)^{1/2} \left(\delta a_0+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
 (2\pi)^{1/2} \left(\delta(f_{x_\alpha}) a_0+\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}\right)
 \end{align*}
 Since $a_{n}\leq CA^nn!$, the series $\sum_{n\geq 0}a_{n+1}\frac{(\zeta-f(x_\alpha))^n}{n!}$ has a finite radius of convergence. 
@@ -1242,14 +1334,14 @@ taking the positive branch of the square root on $\mathcal{C}^+_\alpha$ and the 
 & = \sum_{n \ge 0} b_n^\alpha \Big( [2(\zeta - \zeta_\alpha)]^{(n - 1)/2} - (-1)^{n-1}[2(\zeta - \zeta_\alpha)]^{(n - 1)/2} \Big) \\
 & = \sum_{n \ge 0} 2 b_{2n}^\alpha [2(\zeta - \zeta_\alpha)]^{n - 1/2} \\
 & = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^\alpha (\zeta - \zeta_\alpha)^{n - 1/2} \\
-& = \mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha.
+& = \borel_{\zeta_\alpha} \tilde{I}_\alpha.
 \end{align*}
-We already knew, from the general theory of the Borel transform, that the sum of $\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha$ would be asymptotic to $\hat{I}_\alpha$. We've now shown that the sum of $\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha$ is actually equal to $\hat{I}_\alpha$.
+We already knew, from the general theory of the Borel transform, that the sum of $\borel_{\zeta_\alpha} \tilde{I}_\alpha$ would be asymptotic to $\hat{I}_\alpha$. We've now shown that the sum of $\borel_{\zeta_\alpha} \tilde{I}_\alpha$ is actually equal to $\hat{I}_\alpha$.
 
 Theorem~\ref{thm:frac-diff-borel} tells us that
 \begin{align*}
-\mathcal{B}_{\zeta_\alpha} \tilde{I}_\alpha & \defeq \mathcal{B}_{\zeta_\alpha} z^{-1/2} \tilde{\varphi}_\alpha \\
-& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \mathcal{B} \tilde{\varphi}_\alpha \\
+\borel_{\zeta_\alpha} \tilde{I}_\alpha & \defeq \borel_{\zeta_\alpha} z^{-1/2} \tilde{\varphi}_\alpha \\
+& = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \borel \tilde{\varphi}_\alpha \\
 & = \partial^{-1/2}_{\zeta \text{ from } \zeta_\alpha} \hat{\varphi}_\alpha.
 \end{align*}
 It follows, from our conclusion above, that
@@ -1295,7 +1387,7 @@ With the substitution $t = 2uy^{1/2}$, we can rewrite the Airy integral as
 \[ \Ai(y) = y^{1/2}\;\frac{1}{\pi i} \int_{y^{-1/2} \Gamma} \exp\left[\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du. \]
 We have rescaled the contour by a factor of two, but it still approaches $\infty$ in the desired way. Note that $4u^3 - 3u$ is the third Chebyshev polynomial.
 
-By considering other Chebyshev polynomials, we can situate the Airy function within the family of {\em Airy-Lucas functions}, so we will go straight to the general case. However, since the Airy function is a classic example in the study of Borel summation and resurgence, it may be useful to see it on its own. For this reason, in Appendix~\cite{airy-appendix} we give a detailed treatment of the Airy function, specializing the general argument of all Airy-Lucas functions. 
+By considering other Chebyshev polynomials, we can situate the Airy function within the family of {\em Airy-Lucas functions}, so we will go straight to the general case. However, since the Airy function is a classic example in the study of Borel summation and resurgence, it may be useful to see it on its own. For this reason, in Appendix~\ref{airy-appendix} we give a detailed treatment of the Airy function, specializing the general argument of all Airy-Lucas functions. 
 
 
 \subsection{Airy--Lucas}
@@ -1427,16 +1519,16 @@ We can confirm the conclusion of Section~\ref{bessel-regularity-AL} using our ex
 \end{align*}
 Computing
 \begin{align*}
-\mathcal{B}\big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big] & = \mathcal{B}\left[ \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(-\frac{1}{2}\right)^k z^{-k-\frac{1}{2}} \right] \\
+\borel\big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big] & = \borel\left[ \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(-\frac{1}{2}\right)^k z^{-k-\frac{1}{2}} \right] \\
 & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^{k-\frac{1}{2}}}{\Gamma\big(k+\frac{1}{2}\big)} \\
 & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^{k-\frac{1}{2}}}{\Gamma\big(\frac{1}{2}\big) \left(\frac{1}{2}\right)_k} \\
 & = \frac{\zeta_1^{-\frac{1}{2}}}{\Gamma\big(\frac{1}{2}\big)} \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{\left(\frac{1}{2}\right)_k} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^k}{k!},
 \end{align*}
-we see that $\mathcal{B}\big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big]$ sums to
+we see that $\borel\big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big]$ sums to
 \[ \tfrac{1}{\Gamma(1/2)}\,\zeta_1^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
 Looking back at Section~\ref{pos-root-AL}, we recognize this as a scalar multiple of $v_1$.
 
-Through a similar calculation, we see that $\mathcal{B}\big[ e^z z^{-1/2}\,\tilde{W}_{-1} \big]$ sums to
+Through a similar calculation, we see that $\borel\big[ e^z z^{-1/2}\,\tilde{W}_{-1} \big]$ sums to
 \[ \tfrac{1}{\Gamma(1/2)}\,\zeta_{-1}^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big). \]
 Looking back at Section~\ref{neg-root-AL}, we recognize this as a scalar multiple of $v_{-1}$.
 \subsubsection{Contour argument for Airy-Lucas functions}\label{contour-argument-AL}
@@ -1498,7 +1590,7 @@ On the one hand, this new condition does not really affect the argument we prese
  \tilde{W}_{\mu,1} &= 1- \frac{\big(\tfrac{1}{2}-\mu\big)\big(\frac{1}{2}+\mu\big)}{2 \cdot 1!} z^{-1} + \frac{\big(\tfrac{1}{2}-\mu\big)_2\big(\frac{1}{2}+\mu\big)_2}{2^2 \cdot 2!} z^{-2} - \frac{\big(\tfrac{1}{2}-\mu\big)_3\big(\frac{1}{2}+\mu\big)_3}{2^3 \cdot 3!} z^{-3}+...\\
  \tilde{W}_{\mu,2} &= 1+\frac{\big(\tfrac{1}{2}-\mu\big)\big(\frac{1}{2}+\mu\big)}{2 \cdot 1!} z^{-1} + \frac{\big(\tfrac{1}{2}-\mu\big)_2\big(\frac{1}{2}+\mu\big)_2}{2^2 \cdot 2!} z^{-2}+ \frac{\big(\tfrac{1}{2}-\mu\big)_3\big(\frac{1}{2}+\mu\big)_3}{2^3 \cdot 3!} z^{-3} + ...
 \end{align*}   
- \item  \textbf{Frame of analytic solutions}: there exist two functions $v_{\mu, 1}, v_{\mu, -1}$ such that $\mathcal{L}_{\alpha}v_{\mu, \alpha}$ satisfies equation~\eqref{eqn:mod-bessel} and they are explicitly 
+ \item  \textbf{Frame of analytic solutions}: there exist two functions $v_{\mu, 1}, v_{\mu, -1}$ such that $\laplace_{\alpha}v_{\mu, \alpha}$ satisfies equation~\eqref{eqn:mod-bessel} and they are explicitly 
 
 \begin{align*}
 v_{\mu, 1}&=-i\sqrt{2}\,\zeta_{1}^{-1/2}  {}_2F_1\big(\tfrac{1}{2}-\mu, \tfrac{1}{2}+\mu; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{1}\big)\\
@@ -1547,7 +1639,7 @@ with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}.
 \subsection{Higher Airy}
 
 The higher Airy equation is
-\begin{equation}\label{eqn:airy-lucas}
+\begin{equation}\label{eqn:higher-airy}
 \left[\big({-}\tfrac{\partial}{\partial y}\big)^{n-1} - y\right] \psi = 0
 \end{equation}
 with $n \in \{3, 4, 5, \ldots\}$. A few solutions are given by the hyper-Airy functions~\textcolor{magenta}{[Charbonnier et al., equation~3.6]}
@@ -1659,7 +1751,7 @@ Setting $n=4$, equation \ref{eqn:higher-Airy} turns into
 \left[\frac{\partial^3}{\partial z^3}+1+\frac{3}{2z}\frac{\partial^2}{\partial z^2}-\frac{5}{16}\frac{1}{z^2}\frac{\partial}{\partial z}+\frac{5}{32}\frac{1}{z^3}\right]\varphi=0
 \end{equation}
 
-and going to the spatial domain, $\mathcal{L}_{\zeta,\alpha_k}$ satisfies equation~\eqref{eqn:reg-higher3} if and only if $v$ satisfies 
+and going to the spatial domain, $\laplace_{\zeta,\alpha_k}$ satisfies equation~\eqref{eqn:reg-higher3} if and only if $v$ satisfies 
 
 
 \begin{equation}\label{diff-eq:spatial-higher3}
@@ -1691,7 +1783,7 @@ K^{(k)}(z)&=\textcolor{magenta}{const.} \int_{\textcolor{magenta}{const.}z^{-1/4
 
 \subsection{Generalized Airy}
 
-In \cite{Reid} \cite{Drazin-Reid} the authors introduce generalized Airy functions $A_k(z), B_0(z), B_k(z)$, $k=1,2,3$ as approximate solutions of the Orr--Sommerfield fluid equation. They are defined as countour integral (\cite{DLMF} \S 9.13(ii))
+In \cite{Reid} \cite{Drazin-Reid} the authors introduce generalized Airy functions $A_k(z), B_0(z), B_k(z)$, $k=1,2,3$ as approximate solutions of the Orr--Sommerfield fluid equation. They are defined as countour integral (\cite{dlmf} \S 9.13(ii))
 
 \begin{align*}
 \mathrm{A}_k(z,p)&=\frac{1}{2\pi i}\int_{\Gamma_k}e^{zt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad k=1,2,3\,\, p\in\C \\
@@ -1782,7 +1874,7 @@ y^2(1-y)\tilde{w}_1^{(3)}(y)+y\left((p-\frac{13}{2})y+3\right)\tilde{w}_1''(y)-\
 +\frac{1}{27}\left(p-\frac{5}{2}\right)\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\tilde{w}_1(y)=0
 \end{multline}
 
-which is a generalized hypergeomtric equation (~16.8.5 \cite{DLMF}) with parameters
+which is a generalized hypergeomtric equation (~16.8.5 \cite{dlmf}) with parameters
 
 
 
@@ -2164,7 +2256,7 @@ where
 K(z) = i\sqrt{3} \int_{z^{-1/3}\Gamma} \exp\left[-z \left(4u^3 - 3u\right)\right]\,du.
 \end{equation}
 Saying that $\Ai$ satisfies the Airy equation is equivalent to saying that $K$ satisfies the modified Bessel equation
-\begin{equation}\label{eqn:mod-bessel}
+\begin{equation}\label{eqn:mod-bessel-1/3}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] K = 0.
 \end{equation}
 In fact, $K$ is the modified Bessel function $K_{1/3}$~\cite[equation~9.6.1]{dlmf}.
@@ -2265,7 +2357,7 @@ Recall that $\tilde{W}_1$ is a formal solution of \eqref{eqn:reg-mod-bessel}
 \begin{equation}
 \tilde{W}_1(z)=\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{(-1)^n}{2^n}z^{-n}.
 \end{equation}
-Our goal is to prove that the Borel sum of $z^{-1/2}\tilde{W}_1$ is proportional to $V_1=\mathcal{L}_{\zeta_1,0}v_1$. 
+Our goal is to prove that the Borel sum of $z^{-1/2}\tilde{W}_1$ is proportional to $V_1=\laplace_{\zeta_1,0}v_1$. 
 %
 %\subsubsection{Borel sum of $\tilde{W}_1$}
 %
@@ -2282,12 +2374,12 @@ Our goal is to prove that the Borel sum of $z^{-1/2}\tilde{W}_1$ is proportional
 Let us compute the Borel transform of $z^{-1/2}\tilde{W}_1$: notice that the appropriate coordinate is $\zeta_1$ 
 
 \begin{align*}
-\mathcal{B}\left[z^{-1/2}\tilde{W}_1(z)\right](\zeta_1)&=\mathcal{B}\left[\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{(-1)^n}{2^n}z^{-n-\frac{1}{2}} \right](\zeta_1)\\
+\borel\left[z^{-1/2}\tilde{W}_1(z)\right](\zeta_1)&=\borel\left[\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{(-1)^n}{2^n}z^{-n-\frac{1}{2}} \right](\zeta_1)\\
 &=\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{(-1)^n}{2^n}\frac{\zeta_1^{n-\frac{1}{2}}}{\Gamma(n+\frac{1}{2})}\\
 &=\zeta_1^{-1/2}\,\, {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{\zeta_1}{2}\right)
 \end{align*}
 
-Comparing with the solution $v_1$ computed in Section~\ref{pos-root} we notice that \[v_1(\zeta_1)\propto \mathcal{B}\left[z^{-1/2}\tilde{W}_1\right](\zeta_1)\]
+Comparing with the solution $v_1$ computed in Section~\ref{pos-root} we notice that \[v_1(\zeta_1)\propto \borel\left[z^{-1/2}\tilde{W}_1\right](\zeta_1)\]
 therefore the Borel Laplace sum of $z^{-1/2}\tilde{W}_1$ is proportional to $V_1$. In particular, both $K$ and $e^{-z}V_1$ are analytic solutions of the Airy equation~\eqref{eqn:bessel-rescaled} and they have the same asymptotics at $\infty$ up to a multiplicative constant. 
 
 Similarly, if we consider the formal power series
@@ -2296,7 +2388,7 @@ Similarly, if we consider the formal power series
 \tilde{W}_{-1}(z)=\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{1}{2^n}z^{-n}
 \end{equation}
 
-analogous computations give that $v_{-1}(\zeta_{-1})\propto\mathcal{B}\left[z^{-1/2}\tilde{W}_{-1}\right](\zeta_{-1})$.
+analogous computations give that $v_{-1}(\zeta_{-1})\propto\borel\left[z^{-1/2}\tilde{W}_{-1}\right](\zeta_{-1})$.
 
 \subsection{Contour argument for the Airy function}\label{contour-argument}
 Generalizing from Section~\ref{contour-argument-AL}, we can recast integral~\eqref{integral:mod-bessel} into the $\zeta$ plane by setting $-\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \Gamma$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/3} \Gamma$, we have
@@ -2374,14 +2466,14 @@ giving the alternate decomposition
 
 \subsubsection{Different Borel transform convention} Physicists often use a different version of the Borel transform:
 \begin{align*}
-\mathcal{B}_{\textit{phys}} \maps \C \llbracket z^{-1} \rrbracket & \to \C \llbracket \zeta \rrbracket \\
+\borel_{\textit{phys}} \maps \C \llbracket z^{-1} \rrbracket & \to \C \llbracket \zeta \rrbracket \\
 z^{-n} & \mapsto \frac{\zeta^n}{n!}.
 \end{align*}
-This version avoids sending $1$ to the convolution unit $\delta$, at the cost of no longer mapping multiplication to convolution or inverting the formal Laplace transform. It's sometimes convenient to $\mathcal{B}_\textit{phys}(f) = \borel(z^{-1} f)$.
+This version avoids sending $1$ to the convolution unit $\delta$, at the cost of no longer mapping multiplication to convolution or inverting the formal Laplace transform. It's sometimes convenient to $\borel_\textit{phys}(f) = \borel(z^{-1} f)$.
 
 For problems involving a small parameter $\hbar$ rather than a large parameter $z$, physicists also define
 \begin{align*}
-\mathcal{B}_{\textit{phys}} \maps \C \llbracket \hbar \rrbracket & \to \C \llbracket \zeta \rrbracket \\
+\borel_{\textit{phys}} \maps \C \llbracket \hbar \rrbracket & \to \C \llbracket \zeta \rrbracket \\
 \hbar^n & \mapsto \frac{\zeta^n}{n!}.
 \end{align*}
 From a combinatorial perspective, this is just the transformation that sends an ordinary generating function to the corresponding exponential generating function.
@@ -2397,15 +2489,15 @@ where
 \tilde{W}_{1,2}(\hbar)=\sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\hbar^n.
 \end{align*}
 %Notice that $\tilde{W}_{1,2}(\hbar)$ are proportional to $\tilde{W}_{\pm}(z)$ with $z=\hbar^{-1}$. However, their Borel transforms are two different hypergeometric functions:
-Then, by applying the two definitions of the Borel transform $\mathcal{B}_{\textit{phys}}$ and $\mathcal{B}$, on the one hand we have  
+Then, by applying the two definitions of the Borel transform $\borel_{\textit{phys}}$ and $\borel$, on the one hand we have  
 \begin{align*}
-w_{1,2}(\zeta)&\defeq\mathcal{B}_{\textit{phys}}(\tilde{W}_{1,2})(\zeta)\\
+w_{1,2}(\zeta)&\defeq\borel_{\textit{phys}}(\tilde{W}_{1,2})(\zeta)\\
 &=\sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^n}{n!}\\
 &={}_2F_1\left(\frac{1}{6},\frac{5}{6};1;\mp\frac{3}{4}\zeta\right) 
 \end{align*}
 on the other hand, we find
 \begin{align*}
-\mathcal{B}(\tilde{W}_{1,2})(\zeta)&=\frac{1}{2\pi}\delta+\sum_{n=1}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n-1}}{(n-1)!}\\
+\borel(\tilde{W}_{1,2})(\zeta)&=\frac{1}{2\pi}\delta+\sum_{n=1}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n-1}}{(n-1)!}\\
 &=\frac{1}{2\pi}\delta+\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n+1}\frac{\Gamma(n+1+\frac{5}{6})\Gamma(n+1+\frac{1}{6})}{(n+1)!}\frac{\zeta^{n}}{n!}\\
 &=\frac{1}{2\pi}\delta\mp\frac{3}{4}\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{11}{6})\Gamma(n+\frac{7}{6})}{\Gamma(n+2)}\frac{\zeta^{n}}{n!}\\
 &=\frac{1}{2\pi}\delta\mp\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)%\\
@@ -2414,7 +2506,7 @@ on the other hand, we find
 \end{align*}
 %That ambiguity comes from the different definitions of Borel transforms: 
 %\begin{align*}
-%\mathcal{B}(\tilde{W}_{1,2})(\zeta)&=\frac{1}{2\pi}\delta+\sum_{n=1}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n-1}}{(n-1)!}\\
+%\borel(\tilde{W}_{1,2})(\zeta)&=\frac{1}{2\pi}\delta+\sum_{n=1}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n-1}}{(n-1)!}\\
 %&=\frac{1}{2\pi}\delta+\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n+1}\frac{\Gamma(n+1+\frac{5}{6})\Gamma(n+1+\frac{1}{6})}{(n+1)!}\frac{\zeta^{n}}{n!}\\
 %&=\frac{1}{2\pi}\delta\mp\frac{3}{4}\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{11}{6})\Gamma(n+\frac{7}{6})}{\Gamma(n+2)}\frac{\zeta^{n}}{n!}\\
 %&=\frac{1}{2\pi}\delta\mp\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)%\\
@@ -2424,19 +2516,19 @@ on the other hand, we find
 and comparing the two solutions we notice that up to the factor of $\delta$
 
 \begin{equation}\label{Borel-W12}
-\mathcal{B}(\tilde{W}_{1,2})(\zeta)-\frac{1}{2\pi}\delta=\mp \frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)=\frac{d}{d\zeta}\mathcal{B}_{\textit{phys}}(\tilde{W}_{1,2})(\zeta) 
+\borel(\tilde{W}_{1,2})(\zeta)-\frac{1}{2\pi}\delta=\mp \frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)=\frac{d}{d\zeta}\borel_{\textit{phys}}(\tilde{W}_{1,2})(\zeta) 
 \end{equation}
 More generally, if $\tilde{\Phi}(z)\in z^{-1}\C \llbracket z^{-1} \rrbracket$, i.e. it has no constant term, then 
 
 \begin{equation}
-\frac{d}{d\zeta}\circ\mathcal{B}_{\textit{phys}}\tilde{\Phi}=\mathcal{B}\tilde{\Phi}.
+\frac{d}{d\zeta}\circ\borel_{\textit{phys}}\tilde{\Phi}=\borel\tilde{\Phi}.
 \end{equation}
-In particular, $\frac{d}{d\zeta}\circ\mathcal{B}_{\textit{phys}}\left[z^{-1/2}\tilde{W}_{1}\right]\left(\frac{2}{3}\zeta\right)=v_1(\zeta)$. 
+In particular, $\frac{d}{d\zeta}\circ\borel_{\textit{phys}}\left[z^{-1/2}\tilde{W}_{1}\right]\left(\frac{2}{3}\zeta\right)=v_1(\zeta)$. 
 
-%Recall that $v_1$ (computed in Section~\ref{pos-root}) is proportional to the Borel transform of $ z^{-1/2}\tilde{W}_1(z)$ (see Section~\ref{bessel-regularity}). We want to compare $v_1$ with the \textit{physic} Borel transform $\mathcal{B}_{\textit{phys}}$ of $z^{-1/2}\tilde{W}_1$:
+%Recall that $v_1$ (computed in Section~\ref{pos-root}) is proportional to the Borel transform of $ z^{-1/2}\tilde{W}_1(z)$ (see Section~\ref{bessel-regularity}). We want to compare $v_1$ with the \textit{physic} Borel transform $\borel_{\textit{phys}}$ of $z^{-1/2}\tilde{W}_1$:
 %
 %\begin{align*}
-%\mathcal{B}_{\textit{phys}}(z^{-1/2}\tilde{W}_{1})\left(\frac{2}{3}\zeta\right)&=\sum_{n=0}^{\infty}\frac{1}{2\pi}\left(-\frac{1}{2}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n+\frac{1}{2}}}{\Gamma(n+3/2)}\\
+%\borel_{\textit{phys}}(z^{-1/2}\tilde{W}_{1})\left(\frac{2}{3}\zeta\right)&=\sum_{n=0}^{\infty}\frac{1}{2\pi}\left(-\frac{1}{2}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n+\frac{1}{2}}}{\Gamma(n+3/2)}\\
 %&=\frac{1}{2\pi}\zeta^{-1/2}\sum_{n=0}^{\infty}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!\Gamma(n+3/2)}\left(-\frac{\zeta}{2}\right)^{n+1}\\
 %&=\frac{1}{2\pi}\zeta^{1/2}\,\, {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{3}{2};-\frac{\zeta}{2}\right) 
 %\end{align*}
@@ -2468,15 +2560,15 @@ are formal solutions of the Airy equation. Notice that compared to Marino's form
 By looking for solutions of the Borel transformed equation, he wrote the Borel transform of $\tilde{\Phi}_{\pm}$ as a convolution product: 
 
 \begin{align*}
-\hat{\phi}_+(\zeta):=\mathcal{B}\tilde{\Phi}_+=\delta+\frac{d}{d\zeta}\hat{\chi}(\zeta)  \qquad \hat{\phi}_-(\zeta):=\mathcal{B}\tilde{\Phi}_-=\delta-\frac{d}{d\zeta}\hat{\chi}(-\zeta)
+\hat{\phi}_+(\zeta):=\borel\tilde{\Phi}_+=\delta+\frac{d}{d\zeta}\hat{\chi}(\zeta)  \qquad \hat{\phi}_-(\zeta):=\borel\tilde{\Phi}_-=\delta-\frac{d}{d\zeta}\hat{\chi}(-\zeta)
 \end{align*}
  where $\hat{\chi}(\zeta)=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6}\ast \zeta^{-5/6}$.
 
 %Notice that $\tilde{W}_{1,2}(\tfrac{2}{3}\hbar)=\tilde{\Phi}_{\pm}(z)$ for $\hbar=z^{-1}$, hence 
 %
 %\begin{align*}
-%\tilde{\phi}_{+}(\zeta)&=\mathcal{B}\tilde{W}_{1}(\tfrac{2}{3}\zeta)=\frac{1}{2\pi}\delta-\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right) \\
-%\tilde{\phi}_{-}(\zeta)&=\mathcal{B}\tilde{W}_{2}(\tfrac{2}{3}\zeta)=\frac{1}{2\pi}\delta+\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right) 
+%\tilde{\phi}_{+}(\zeta)&=\borel\tilde{W}_{1}(\tfrac{2}{3}\zeta)=\frac{1}{2\pi}\delta-\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right) \\
+%\tilde{\phi}_{-}(\zeta)&=\borel\tilde{W}_{2}(\tfrac{2}{3}\zeta)=\frac{1}{2\pi}\delta+\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right) 
 %\end{align*}
 %which up to a constant factor for $\delta$, they agree with our results. 
 
@@ -2498,7 +2590,7 @@ where in the last step we use the Euler formula for hypergeometric functions \fo
 \hat{\phi}_+(\zeta)&=\delta-\frac{1}{2}\frac{5}{36}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right)=\delta-\frac{2}{3}\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right)\\
 \hat{\phi}_-(\zeta)&=\delta+\frac{1}{2}\frac{5}{36}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right)=\delta+\frac{2}{3}\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right)
 \end{align*} 
-and up to a multiplicative constant they match our computations for $\mathcal{B}(\tilde{W}_{1,2})$ (see equation~\eqref{Borel-W12}).
+and up to a multiplicative constant they match our computations for $\borel(\tilde{W}_{1,2})$ (see equation~\eqref{Borel-W12}).
 The main advantage of writing Gauss hypergeometric functions as a convolution product relies on Ecalle's singularity theory. Indeed $(2\zeta+\zeta^2)^{-1/6}$ extends analytically to the universal cover of $\C\setminus\lbrace 0,-2\rbrace$ and the convolution with $\zeta^{-5/6}$ does not change the set of singularities (see \textbf{Sauzin notes}). Furthermore, the author proves that $\hat{\phi}_{\pm}(\zeta)$ are simple resurgent functions (see Lemma 6.106 \cite{MS}). %Therefore, from the expression of $\chi(\zeta)$ as a convolution product, the resurgent properties of $\tilde{\phi}_{\pm}(\zeta)$ are evident.  
 
 \subsubsection{Comparison with exact WKB}
@@ -2526,11 +2618,11 @@ Although the two equations look closely related (they are equivalent by the chan
 
 First of all notice that if $\eta$ and $y$ are conjugate variables under Borel transform, meaning 
 \begin{align*}
-\sum_{n\geq 0}a_n\eta^{-n-1}  \overset{\mathcal{B}}{\longrightarrow} \sum_{n\geq 0}\frac{a_n}{n!} y^{n} 
+\sum_{n\geq 0}a_n\eta^{-n-1}  \overset{\borel}{\longrightarrow} \sum_{n\geq 0}\frac{a_n}{n!} y^{n} 
 \end{align*} 
 then $t=\frac{3}{2}yx^{-3/2}$ is the conjugate variable of $q=\frac{2}{3}\eta x^{3/2}$ up to correction by a factor of $\frac{3}{2}x^{-3/2}$
 \begin{align*}
-\sum_{n\geq 0}a_nq^{-n-1}=\sum_{n\geq 0}a_nx^{-3/2(n+1)}\left(\frac{2}{3}\eta\right)^{-n-1}  \overset{\mathcal{B}}{\longrightarrow} \sum_{n\geq 0}\frac{a_nx^{-3/2(n+1)}}{n!}\left(\frac{3}{2}\right)^{n+1}  y^{n}=\frac{3}{2}x^{-3/2}\sum_{n\geq 0}\frac{a_n}{n!} t^{n}. 
+\sum_{n\geq 0}a_nq^{-n-1}=\sum_{n\geq 0}a_nx^{-3/2(n+1)}\left(\frac{2}{3}\eta\right)^{-n-1}  \overset{\borel}{\longrightarrow} \sum_{n\geq 0}\frac{a_nx^{-3/2(n+1)}}{n!}\left(\frac{3}{2}\right)^{n+1}  y^{n}=\frac{3}{2}x^{-3/2}\sum_{n\geq 0}\frac{a_n}{n!} t^{n}. 
 \end{align*}
 In addition, $\psi_{B,\pm}(x,y)=\frac{1}{x}\phi_{\pm}(t)$, therefore we expect that $\psi(x,\eta)=x^{1/2}\Phi(q)$. Assume that $\psi(x,y)$ is a solution of \eqref{WKB_Airy}, then $\Phi(q)$ solves 
 \begin{equation}
