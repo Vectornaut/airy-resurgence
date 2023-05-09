@@ -158,7 +158,7 @@ The Borel summation process is summarized in the following diagram:
 \begin{center}
 \begin{tikzcd}
 & \text{problem} & \\
-\hat{\Phi} \arrow[ru, dotted, no head, tail] \arrow[rr, mapsto, "\text{\ae}^\theta", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[lu, no head, tail, "\parbox{10mm}{\centering\scriptsize formally solves}"'] \arrow[dd, mapsto, "\borel"] \\
+\hat{\Phi} \arrow[ru, dotted, no head, tail] \arrow[rr, mapsto, "\aexp^\theta", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[lu, no head, tail, "\parbox{10mm}{\centering\scriptsize formally solves}"'] \arrow[dd, mapsto, "\borel"] \\
 & & \\
 \hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \tilde{\phi} \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
@@ -200,8 +200,8 @@ You can't be sure {\em a priori} that $\hat{\Phi}$ solves your original problem,
 \begin{center}
 \begin{tikzcd}
 & \text{problem} & \\
-\Phi \arrow[ru, no head, tail, swap, "\text{solves}"' ] \arrow[rrd, mapsto, "\text{\ae}^{\theta}"]& & \\
-\hat{\Phi} \arrow[rr, "\text{\ae}^{\theta}", "\text{($1$-Gevrey)}"] & & \series{\Phi} \arrow[luu, no head, tail, swap, "\parbox{10mm}{\centering\scriptsize formally solves}"] \arrow[dd, mapsto, "\borel"] \\
+\Phi \arrow[ru, no head, tail, swap, "\text{solves}"' ] \arrow[rrd, mapsto, "\aexp^{\theta}"]& & \\
+\hat{\Phi} \arrow[rr, "\aexp^{\theta}", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[luu, no head, tail, swap, "\parbox{10mm}{\centering\scriptsize formally solves}"] \arrow[dd, mapsto, "\borel"] \\
 & & \\
 \hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \series{\phi} \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
@@ -458,7 +458,7 @@ I_{\alpha}(z)\defeq\int_{\Lambda_\alpha}e^{-zf}\nu
 then the following diagram is commutative
 \begin{equation}
 \begin{tikzcd}
-I_{\alpha}(z) \arrow[r,"\text{\ae}^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\borel"]\\
+I_{\alpha}(z) \arrow[r,"\ae^\theta"] & \tilde{I}_{\alpha}(z)\arrow[dd,"\borel"]\\
 & \\
 \hat{\iota}_\alpha(\zeta)\arrow[uu, "\laplace^\theta_\alpha "] & \tilde{\iota}_{\alpha}(\zeta) \arrow[l, "\text{sum}"]
 \end{tikzcd}
@@ -790,8 +790,15 @@ To make sense of this formula, we ask for the following conditions.
 \end{itemize}
 \subsubsection{The Laplace transform over a branch point}
 When $b$ is a branch point, we can still use formula~\ref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T^*B_b$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T^*B_b^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\ref{laplace:int}. The half-plane $z \in H_{-\theta}$ in $T^*B_b^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T^*B_b$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
-
-
+\subsection{The geometry of the Borel transform}
+\begin{itemize}
+  \item The Borel transform $\borel\textcolor{orange}{_\zeta}$ turns formal power series in $z^{-1}$---which represent functions defined all non-singular cotangent spaces---into formal power series in $\zeta$. It's a formal inverse of the $\laplace_{\zeta, 0}$.
+  \item Formalizing the change of variable identity that relates $\laplace_{\zeta, \alpha}$ to $\laplace_{\zeta_\alpha, 0}$, we can extend the Borel transform to trans-series, defining $\borel\textcolor{orange}{_\zeta} \maps e^{-\alpha z} \C\llbracket z^{-1} \rrbracket \to \C\llbracket \zeta \rrbracket$ as the formal inverse of $\laplace_{\zeta, \alpha}$.
+  \begin{itemize}
+    \item In other words, when $\borel_\zeta$ acts on formal power series, it formally inverts $\laplace_\zeta$ on the cotangent fiber over $0$. \textcolor{magenta}{When it acts on other trans-monomials, it formally inverts $\laplace_\zeta$ on other cotangent fibers. [Not quite\ldots figure out how to make this precise.] }
+  \end{itemize}
+  \item consequently, $\borel_{\zeta_\alpha}$ acts on trans-monomials $e^{z\alpha}\C\llbracket z^{-1}\rrbracket$ and it formally inverts $\laplace_{\zeta_\alpha}$ on the cotangent fibre over $0$. 
+\end{itemize}
 \subsection{The Laplace transform: analytic version}
 \subsubsection{Regularity and decay properties}\label{reg-decay}
 %Let $\zeta$ be the standard coordinate on $\C$, and let $z \maps T^*\C \to \C$ be the fiberwise-linear map $d\zeta \mapsto 1$ (see ``The Geometry of the Laplace Transform'' in {\tt draft2}). The Laplace transform in $\zeta$ turns a function $\varphi$ on $\C$ into a function $\laplace_\zeta \varphi$ on $T^*\C$, defined on the cotangent space of $\zeta = \alpha$ by the integral
@@ -824,12 +831,10 @@ Define a new coordinate $\zeta_\alpha$ on $\C$ so that $\zeta = \alpha + \zeta_\
 & = e^{-\alpha z} \laplace_{\zeta_\alpha, 0} \varphi,
 \end{align*}
 we learn that
-
 \begin{equation}
     \label{change-chart}
     \laplace_{\zeta_\alpha, 0} \varphi = e^{\alpha z} \laplace_{\zeta, \alpha} \varphi.
 \end{equation}
-
 \subsubsection{Rescaling of translation structure}
 Let's rescale the translation structure of $\C$, expanding displacements by a factor of $\mu \in (0, \infty)$. The coordinate $\xi = \mu\zeta$ is a chart for the new translation structure. The corresponding frequency coordinate $x \maps T^*\C \to \C$ is given by $d\xi \mapsto 1$, so $x = \mu^{-1} z$. From the calculation
 \begin{align*}
@@ -840,12 +845,10 @@ Let's rescale the translation structure of $\C$, expanding displacements by a fa
 we learn that
 \[ \laplace_{\xi, 0} \varphi = \mu\,\laplace_{\zeta, 0} \varphi. \]
 Note that $\laplace_{\xi, 0}$ is defined in the new translation structure on $\C$, while $\laplace_{\zeta, 0}$ is defined in the old translation structure. We can still compare them, because they both turn complex-valued functions on $\C$ into holomorphic functions on $T^*\C$.
-
-
 \subsection{The geometry of the Borel transform}
 
-The Borel transform $\borel\textcolor{orange}{_\zeta}$ turns formal power series in $z^{-1}$---which represent functions defined all non-singular cotangent spaces---into formal power series in $\zeta$. More precisely,   $\borel_\zeta$ is a $\C$-linear map 
-  \begin{align*}
+The Borel transform $\borel\textcolor{orange}{_\zeta}$ turns formal power series in $z^{-1}$---which represent functions defined all non-singular cotangent spaces---into formal power series in $\zeta$. More precisely, $\borel_\zeta$ is a $\C$-linear map 
+\begin{align*}
 \borel\textcolor{orange}{_\zeta} \maps \C \llbracket z^{-1} \rrbracket & \to \C\delta \oplus \C \llbracket \zeta \rrbracket \\
 1 & \mapsto \delta\vphantom{\frac{1}{1}} \\
 z^{-n-1} & \mapsto \frac{\zeta^n}{n!}\qquad\text{when } n \ge 0
@@ -999,7 +1002,6 @@ The inverse of $\borel\textcolor{orange}{_\zeta}$ is what we call a \textbf{form
 
 \textcolor{magenta}{[add definition of convolution product and $\borel$ being an algebra isomorphisms]}
 
-
 \subsubsection{Action on power series with fractional exponents}
 The definition of the Borel transform can be easily extended to fractional power of $z$, replacing the factorial with the Gamma function: 
 \begin{align*}
@@ -1017,7 +1019,6 @@ and \[\left|\frac{a_{n+1}}{\Gamma(1+n+\alpha)}\right|\leq A^{n+1}\frac{\Gamma(n+
 
 \subsubsection{Properties of the Borel transform}
 We now recall some properties of the Borel transform: let $\tilde{\Phi}=\sum_{n\geq 0}a_nz^{-n}$ and $\tilde{\phi}\defeq\borel\textcolor{orange}{_\zeta}\tilde{\Phi}$
-
 \begin{itemize}
 \item[(i)] \emph{[fractional derivative]} if $\alpha\in\R_{\geq 0}$, $\borel_\zeta\left(z^\alpha \tilde{\Phi}\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}$
 \item[(ii)] \emph{[fractional integral]} if $\alpha\in\R_{<0}\setminus\Z_{\geq 0}$, $\borel_\zeta\left(z^\alpha \tilde{\Phi}\right)=\partial_{\zeta}^{\alpha}\tilde{\phi}$
@@ -1035,7 +1036,7 @@ For any non-integer $\mu \in (0, \infty)$ and any integer $k \ge 0$,
 \begin{proof}
 We'll show that for any $\alpha \in (0, 1)$ and any integer $n \ge 0$, the claim holds with $\mu = n + \alpha$. First, evaluate
 \begin{align*}
-\partial^{\alpha-1}_{\zeta } \left[ \borel_\zeta \left(z^{-(k+1)}\right) \right] & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
+\partial^{\alpha-1}_{\zeta \text{ from } 0} \left[ \borel_\zeta \left(z^{-(k+1)}\right) \right] & = \frac{1}{\Gamma(1-\alpha)} \int_0^\zeta (\zeta-\zeta')^{-\alpha} \frac{{\zeta'}^k}{\Gamma(k+1)}\,d\zeta' \\
 & = \frac{1}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (\zeta-\zeta t)^{-\alpha} (\zeta t)^k\,\zeta\,dt \\
 & = \frac{\zeta^{k-(\alpha-1)}}{\Gamma(1-\alpha)\,\Gamma(k+1)} \int_0^1 (1-t)^{-\alpha} t^k\,dt \\
 & = \frac{\zeta^{k-(\alpha-1)}}{\Gamma\big(k-(\alpha-1)+1\big)}
