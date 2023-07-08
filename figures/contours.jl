@@ -18,8 +18,10 @@ function path_scale(n, k)
     return cos(π*(1/2 - skip/3n)) / abs(cos(π*k/n))
   end
 end
-u_path(θ, off, n = 3, k = 1) = t -> path_scale(n, k) * exp(-im*θ/n) * (cosh(π*(k/n)*im + t) - dot(off, [exp(π*(k/n)*im), exp(-π*(k/n)*im)]))
-u_jet(θ, off, n = 3, k = 1) = t -> (u_path(θ, off, n, k)(t), path_scale(n, k) * exp(-im*θ/n) * sinh(π*(k/n)*im + t))
+##u_path(θ, off, n = 3, k = 1) = t -> path_scale(n, k) * exp(-im*θ/n) * (cosh(π*(k/n)*im + t) - dot(off, [exp(π*(k/n)*im), exp(-π*(k/n)*im)]))
+##[TO DO] find a convenient family of u paths that all project to the same ζ path
+u_path(θ, off, n = 3, k = 1) = t -> exp(-im*θ/n) * cosh((π*k*im + (2k < n ? 1 : -1)*((π/3)*im/(1+t^2/12) + t)) / n)
+u_jet(θ, off, n = 3, k = 1) = t -> (u_path(θ, off, n, k)(t), exp(-im*θ/(2k < n ? 1 : -1)*n) * ((2k < n ? 1 : -1)*((π/3)*im * (-t/6) / (1+t^2/12)^2 + 1))/n * sinh((π*k*im + (2k < n ? 1 : -1)*((π/3)*im/(1+t^2/12) + t)) / n))
 
 function T_jet(n)
   T_pt = convert(Polynomial, ChebyshevT(push!(fill(0, n), 1)))
@@ -64,7 +66,7 @@ function edgept(θ)
 end
 
 # for a nice contour with θ at π or 4π, set `off` to (1.3, 0)
-function plotcontour(θ = 0, off = (0, 0), n = 3, k = 1; tag = "test")
+function plotcontour(θ = 0, off = (0, 0), n = 3, lifts = [1]; tag = "test")
   dark = RGB(0, 0.5, 0.7)
   light = RGB(0.6, 0.9, 1.0)
   
@@ -73,41 +75,51 @@ function plotcontour(θ = 0, off = (0, 0), n = 3, k = 1; tag = "test")
   crit_pos = crit[ζ.(crit) .> 0]
   crit_neg = crit[ζ.(crit) .< 0]
   
-  u_range = [find_zero(t -> taxinorm(u_path(θ, off, n, k)(t)) - 1.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
-  u_mark = find_zero(t -> taxinorm(u_path(θ, off, n, k)(t)) - 0.5, (0, 3), Bisection())
-  u_window = context(units = UnitBox(-1, -1, 2, 2), mirror = Mirror(0, 0, 0))
+  view = 1.2
+  u_window = context(units = UnitBox(-view, -view, 2view, 2view), mirror = Mirror(0, 0, 0))
   u_frame = compose(context(),
-    [line([tuple(-edgept(θ)...), tuple(edgept(θ)...)]) for θ in π/n * collect(0:n-1)]...,
+    [line([tuple(-view*edgept(θ)...), tuple(view*edgept(θ)...)]) for θ in π/n * collect(0:n-1)]...,
     linewidth(1w/300), stroke(Gray(0.6))
   )
-  u_contour = compose(u_window,
+  u_contours = []
+  u_arrows = []
+  for k in lifts
+    ##u_range = [find_zero(t -> taxinorm(u_path(θ, off, n, k)(t)) - 1.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
+    u_range = [find_zero(t -> taxinorm(u_path(θ, off, n, k)(t)) - 1.01view, search, Bisection()) for search in [(-12, 0), (0, 12)]]
+    ##u_mark = find_zero(t -> taxinorm(u_path(θ, off, n, k)(t)) - 0.8view, (0, u_range[2]), Bisection())
+    push!(u_contours, reim.([u_path(θ, off, n, k)(t) for t in LinRange(u_range..., 60)]))
+    push!(u_arrows, arrowhead(u_jet(θ, off, n, k), 0.6u_range[2], 0.04w, "black"))
+  end
+  ##[TO DO] vectorize `arrowhead` and apply it across all lifts
+  u_plot = compose(u_window,
     (context(), circle(crit_pos, fill(0, length(crit_pos)), fill(0.015w, length(crit_pos))), fill(dark)),
     (context(), circle(crit_neg, fill(0, length(crit_neg)), fill(0.015w, length(crit_neg))), fill(light)),
-    arrowhead(u_jet(θ, off, n, k), u_mark, 0.04w, "black"),
-    (context(), line(reim.([u_path(θ, off, n, k)(t) for t in LinRange(u_range..., 60)])), stroke("black")),
+    (context(), u_arrows...),
+    (context(), line(u_contours), stroke("black")),
     u_frame
   )
   
-  ζ_range = [find_zero(t -> taxinorm(ζ(u_path(θ, off, n, k)(t))) - 6.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
-  ζ_mark = find_zero(t -> taxinorm(ζ(u_path(θ, off, n, k)(t))) - 3, (0, 3), Bisection())
+  ζ_range = [find_zero(t -> taxinorm(ζ(u_path(θ, off, n, lifts[1])(t))) - 6.01, search, Bisection()) for search in [(-3, 0), (0, 3)]]
+  ζ_mark = find_zero(t -> taxinorm(ζ(u_path(θ, off, n, lifts[1])(t))) - 3, (0, 3), Bisection())
   ζ_window = context(units = UnitBox(-6, -6, 12, 12), mirror = Mirror(0, 0, 0))
   ζ_frame = compose(context(),
     line([(-6, 0), (6, 0)]),
     line([(0, -6), (0, 6)]),
     linewidth(1w/300), stroke(Gray(0.6))
   )
-  ζ_contour = compose(ζ_window,
+  ζ_contour = reim.(ζ.([u_path(θ, off, n, lifts[1])(t) for t in LinRange(ζ_range..., 60)]))
+  ζ_plot = compose(ζ_window,
     (context(), circle(ζ(crit_pos[1]), 0, 0.015w), fill(dark)),
     (context(), circle(ζ(crit_neg[1]), 0, 0.015w), fill(light)),
-    arrowhead(t -> ζ(u_jet(θ, off, n, k)(t)), ζ_mark, 0.04w, "black"),
-    (context(), line(reim.(ζ.([u_path(θ, off, n, k)(t) for t in LinRange(ζ_range..., 60)]))), stroke("black")),
+    arrowhead(t -> ζ(u_jet(θ, off, n, lifts[1])(t)), ζ_mark, 0.04w, "black"),
+    (context(), line(ζ_contour), stroke("black")),
     ζ_frame
   )
   
   # === output ===
   
-  draw(PDF(string("u_contour_", tag, ".pdf"), 6cm, 6cm), u_contour)
-  draw(PDF(string("zeta_contour_", tag, ".pdf"), 6cm, 6cm), ζ_contour)
+  draw(PDF(string("u_contour_", tag, ".pdf"), 6cm, 6cm), u_plot)
+  draw(PDF(string("zeta_contour_", tag, ".pdf"), 6cm, 6cm), ζ_plot)
 end
 
 function plotmiddlecontours()
