@@ -33,7 +33,11 @@
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
 \newcommand{\holoL}[1]{\mathcal{H}L^{#1}} %% may no longer be needed
+\newcommand{\expHoloL}[2]{\mathcal{H}L^{#1}_{#2}} %% may no longer be needed
 \DeclareMathOperator{\Ai}{Ai}
+
+% drafting environments
+\newenvironment{verify}{\color{ForestGreen}}{\color{black}}
 
 \title{Regular singular Volterra equations on complex domains}
 \author{Aaron Fenyes}
@@ -98,18 +102,40 @@ has $\zeta^{\tau-1}$ as a solution, where $\tau = p_1/q_0$. If we guess that the
 where $f_* \in \holoL{\infty, 1-\tau-\epsilon}_Z(\Omega)$ for some $Z \in \C$. When $Z\Omega$ is in the right half-plane and $|Z|$ is large enough, there is in fact a unique solution of this form.
 \end{thm}
 \section{Function spaces for holomorphic Volterra operators}\label{fn-spaces}
-Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. For any $\sigma \in \R$ and $Z \in \C$, multiplying by $\zeta^\sigma e^{\Re(Z\zeta)}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\holoL{\infty, \sigma}_Z(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma; Z} = \|\zeta^{-\sigma} e^{-\Re(Z\zeta)} f\|_\infty$, so that
+\subsection{Weighted holomorphic $L^\infty$ spaces}
+Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. For any $\sigma \in \R$ and $Z \in \C$, multiplying by $\zeta^\sigma e^{\Re(Z\zeta)}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\expHoloL{\infty, \sigma}{Z}(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma; Z} = \|\zeta^{-\sigma} e^{-\Re(Z\zeta)} f\|_\infty$, so that
 \begin{align*}
-\holoL{\infty}(\Omega) & \to \holoL{\infty, \sigma}(\Omega) \\
-\phi & \mapsto \zeta^{-\sigma} \phi
+\holoL{\infty}(\Omega) & \to \expHoloL{\infty, \sigma}{Z}(\Omega) \\
+\varphi & \mapsto \zeta^\sigma e^{\Re(Z\zeta)} \varphi
 \end{align*}
 is an isometry. More generally,
 \begin{align*}
-\holoL{\infty, \rho}_Z(\Omega) & \to \holoL{\infty, \rho+\delta}_Z(\Omega) \\
+\expHoloL{\infty, \rho}{Z}(\Omega) & \to \expHoloL{\infty, \rho+\delta}{Z}(\Omega) \\
 f & \mapsto \zeta^\delta f
 \end{align*}
 is an isometry for all $\rho, \delta \in \R$ and $Z \in \C$. This reduces to the previous statement when $\rho = 0$ and $Z = 0$.
+\subsection{Graded algebra structure}
+For each $\delta \in [0, \infty)$, the functions in $\holoL{\infty, \rho}(\Omega)$ belong to $\holoL{\infty, \rho-\delta}(\Omega)$ too, and the inclusion map $\holoL{\infty, \rho}(\Omega) \hookrightarrow \holoL{\infty, \rho-\delta}(\Omega)$ has norm $\|\zeta^\delta\|_\infty$.
+\begin{verify}
+\begin{align*}
+\|f\|_{\infty, \rho+\delta, Z} & = \|\zeta^{-(\rho-\delta)} e^{-\Re(Z\zeta)} f\|_\infty \\
+& = \|\zeta^\delta \zeta^{-\rho} e^{-\Re(Z\zeta)} f\|_\infty \\
+& = \|\zeta^\delta\|_\infty\,\|\zeta^{-\rho} e^{-\Re(Z\zeta)} f\|_\infty & \text{(Banach algebra)} \\
+& \le \|\zeta^\delta\|_\infty\,\|f\|_{\infty, \rho; Z}
+\end{align*}
+\end{verify}
+Since $\holoL{\infty}(\Omega)$ is a Banach algebra, the function space $\expHoloL{\infty, -\infty}{Z}(\Omega) := \bigcup_{\sigma \in \R} \expHoloL{\infty, \sigma}{Z}(\Omega)$ is a graded algebra, with a different norm on each grade. For each $\rho, \delta \in \R$, multiplication by a function $m \in \holoL{\infty, \delta}(\Omega)$ gives a map $\holoL{\infty, \rho}(\Omega) \to \holoL{\infty, \rho+\delta}(\Omega)$ with norm $\|m\|_{\infty, \delta}$.
+\subsection{Norms of effectively finite-order operators}
+\begin{itemize}
+\item Say $|m(a)| \lesssim e^{c|\zeta(a)|}$ over all $a \in \Omega$. For any $f \in \expHoloL{\infty, \rho}{Z}$,
+\begin{align*}
+\|mf\|_{\infty, \sigma; Z} =
+\end{align*}
+\end{itemize}
+
+which is effectively finite-order over $\Omega$ in the sense of Definition~\ref{fin-order}, with order at least $1 + \epsilon$ for some $\epsilon \in (0, \infty)$.
 %------------------------------------------------------------------------
+\color{SteelBlue}
 \section{Integro-differential equations {[from {\tt airy-resurgence}]}}
 \textcolor{DarkTurquoise}{\textbf{Note that {\tt airy-resurgence} uses the opposite sign convention for the parameter $\sigma$ in $\holoL{\infty, \sigma}$.}}
 \subsection{Existence of solutions}
@@ -207,7 +233,7 @@ Then the equation $\mathcal{J}f = 0$ becomes
 \holoL{\infty, \rho}(\Omega) \arrow[r, "\partial^{-1}", "{B(1, 1-\rho) = \frac{1}{1-\rho}}"'] & \holoL{\infty, \rho-1}(\Omega) \arrow[r, "\zeta^{-1}", "\|\zeta^{-1}\|_{\infty, 1} = 1"'] & \holoL{\infty, \rho}(\Omega) \\
 \end{tikzcd}
 \end{center}
-\color{black}
+\color{SteelBlue}
 
 From \textbf{[our previous discussion]}, we can work out that
 \begin{align*}
