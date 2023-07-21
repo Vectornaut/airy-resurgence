@@ -42,3 +42,6 @@
   - Try plugging <i>&zeta;</i>&nbsp;=&nbsp;27<i>u</i><sup>4</sup>&nbsp;&minus;&nbsp;4<i>u</i> into a generic hypergeometric series in <i>&zeta;</i> and comparing with the power series of 1&nbsp;/&nbsp;4(27<i>u</i><sup>3</sup>&nbsp;&minus;&nbsp;1)
 ### Comparisons
 - ~(Veronica) Write out the comparison with Mariño in the desired way~
+### Changes from draft for Tu
+- The sentence that starts "The Borel transform maps..."
+- Thimble integral proof
