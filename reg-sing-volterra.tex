@@ -202,6 +202,7 @@ The space $\singexp{\sigma}{\Lambda}(\Omega)$ is complete.
 \subsubsection{Asymptotics}
 \subsubsection{Image under $\softpart$}
 \subsection{Finding spaces where $\volterra$ is a contraction}
+\subsubsection{Overview}
 In this section, we'll prove the following proposition.
 \begin{prop}\label{get-contraction}
 For each $\rho \in (\tau, \tau + \epsilon)$, we can ensure that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}$ by making $\Lambda$ big enough.
@@ -217,28 +218,62 @@ for all $a, a' \in \near$. By choosing a small enough positive radius $R$, we ca
 
 
 Take any function $\varphi \in \singexp{\rho}{\Lambda}(\domain)$. In Section~\ref{near-bound}, we'll bound $|\zeta|^{-(\rho-1)}\,e^{-\Lambda|\zeta|}\,|\volterra\varphi|$ by $\tfrac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}$ on $\near$. In Section~\ref{far-bound}, we'll see that by making $\Lambda$ big enough, we can bound $|\zeta|^{-(\rho-1)}\,e^{-\Lambda|\zeta|}\,|\volterra\varphi|$ by an arbitrarily small constant multiple of $\|\varphi\|_{\rho-1, \Lambda}$ on $\far$. Together, these results show that $\|\volterra \varphi\|_{\rho-1, \Lambda} \le \tfrac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}$ when $\Lambda$ is large enough. Since we set $\sigma < \rho$, this proves Proposition~\ref{get-contraction}.
-\subsubsection{Near the origin}\label{near-bound}
-For each $a \in \domain$, we have
+\subsubsection{First steps}\label{first-steps}
+The first steps of our calculation are the same throughout $\domain$. For each $a \in \domain$, we have
 \[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|} \int_0^{\zeta(a)} |k(a, \cdot)\,\varphi\;d\zeta| \]
 for any choice of integration path.\footnote{The absolute value of a $1$-form, like $|k(a, \cdot)\,\varphi\;d\zeta|$, is a density on $\C$---a norm on tangent vectors.} The norm on $\singexp{\rho-1}{\Lambda}(\domain)$ is designed to give the bound $|\varphi| \le |\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}$, so
 \begin{align*}
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|} \int_0^{\zeta(a)} |k(a, \cdot)|\,|\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}\;|d\zeta| \\
 & = \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} |k(a, \cdot)|\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|
 \end{align*}
-Now, suppose that $a \in \near$. Then inequality~\eqref{near-limit} tells us that
+What we do next depends on whether $a$ is in $\near$ or $\far$.
+\subsubsection{Near the origin}\label{near-bound}
+Suppose that $a \in \near$. Then inequality~\eqref{near-limit} tells us that
 \begin{align*}
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le
 \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} \frac{\sigma}{|\zeta(a)|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta| \\
 & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} \left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;\left|\frac{d\zeta}{\zeta(a)}\right|
 \end{align*}
-for any integration path that stays within $\near$. Taking advantage of the fact that $\near$ is a sector of a disk, let's use the straight-line path $\zeta = t \zeta(a)$, with $t \in (0, 1]$.
+for any integration path that stays within $\near$. Taking advantage of the fact that $\near$ is a sector of a disk, let's use the straight path $\zeta = t \zeta(a)$, with $t \in (0, 1]$.
 \begin{align*}
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
 & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\;dt \\
 & = \frac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}.
 \end{align*}
-Since we set $\sigma < \rho$, this brings us halfway to proving that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}$.
+Since we set $\sigma < \rho$, this brings us halfway to proving Proposition~\ref{get-contraction}.
 \subsubsection{Away from the origin}\label{far-bound}
+Going back to the end of Section~\ref{first-steps}, suppose that $a \in \far$. We know from \textcolor{orange}{[difference bound]} that we can find a constant $M$ for which
+\[ |k(a, \cdot)| \le M e^{\lambda |\zeta(a) - \zeta|} \]
+for all $a \in \far$. Note that only the first argument of $k$ has its domain restricted; this bound holds throughout $\domain$ in the second argument. Applying this bound, we learn that
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} M e^{\lambda |\zeta(a) - \zeta|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|. \]
+Let's again use the straight integration path $\zeta = t \zeta(a)$, with $t \in (0, 1]$. Along this path, $|\zeta(a) - \zeta| = |\zeta(a)| - |\zeta|$, allowing us to combine the exponential factors in our bound:
+\begin{align*}
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \|\varphi\|_{\rho-1, \Lambda} \int_0^1 M e^{\lambda |\zeta(a)|(1 - t)}\,t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
+& \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)|\zeta(a)|(1 - t)}\;dt.
+\end{align*}
+Let's set $\Lambda > \lambda$, ensuring that the exponential factor shrinks as $|\zeta(a)|$ grows. Then we can make our bound uniform over all $a \in \far$, since $|\zeta(a)| \ge R$ for these points:
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)R(1 - t)}\;dt. \]
+
+We can make this bound as small as we want by increasing $\Lambda$. To see this in the trickiest case, where $\rho < 1$, it helps to look at the beginning and of the integration separately. At the beginning---for $t \in \big(0, \tfrac{1}{5}\big]$, say---we can use a worst-case estimate on the exponential factor:
+\begin{align*}
+\int_0^{1/5} t^{\rho-1}\,e^{-(\Lambda - \lambda)R(1 - t)}\;dt & \le e^{-\frac{4}{5}(\Lambda - \lambda)R} \int_0^{1/5} t^{\rho-1}\;dt \\
+& = e^{-\frac{4}{5}(\Lambda - \lambda)R}\,\tfrac{1}{\rho} \big(\tfrac{1}{5}\big)^\rho.
+\end{align*}
+At the end, we instead use a worst-case estimate on $t^{1-\rho}$:
+\begin{align*}
+\int_{1/5}^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)R(1 - t)}\;dt & \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \int_{1/5}^1 e^{-(\Lambda - \lambda)R(1 - t)}\;dt \\
+& = \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)R}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \lambda)R} \right] \\
+& \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)R}.
+\end{align*}
+\textcolor{ForestGreen}{[Consider just writing ``const.'' instead of explicit constants.]}
+
+We now know that by setting $\Lambda > \lambda$ and then increasing $\Lambda$ as needed, we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. This completes our proof of Proposition~\ref{get-contraction}.
+%%Let's again integrate along a straight path, where the fact that $|\zeta(a) - \zeta| = |\zeta(a)| - |\zeta|$ allows us to combine the exponential factors in our bound:
+%%\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} \left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-(\Lambda - \lambda)(|\zeta(a)| - |\zeta|)}\;|d\zeta|. \]
+%%This time, we'll use the parameterization $\zeta = s \frac{\zeta(a)}{|\zeta(a)|}$, with $s \in (0, |\zeta(a)|]$:
+%%\begin{align*}
+%%|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^{|\zeta(a)|} \left(\frac{s}{|\zeta(a)|}\right)^{\rho-1}\,e^{-(\Lambda - \lambda)(|\zeta(a)| - |\zeta|)}\;|d\zeta|.
+%%\end{align*}
 %------------------------------------------------------------------------
 \color{SteelBlue}
 \section{Integro-differential equations {[from {\tt airy-resurgence}]}}
