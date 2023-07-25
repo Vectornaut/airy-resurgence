@@ -16,6 +16,7 @@
 \theoremstyle{plain}
 \newtheorem{prop}{Proposition}
 \newtheorem{thm}{Theorem}
+\newtheorem{rmk}{Remark}
 
 % convenience aliases
 \newcommand{\maps}{\colon}
@@ -44,6 +45,11 @@
 \newcommand{\volterra}{\mathcal{V}}
 \newcommand{\hardpart}{\mathcal{V}_\text{hard}}
 \newcommand{\softpart}{\mathcal{V}_\text{soft}}
+
+% domain
+\newcommand{\domain}{\Omega}
+\newcommand{\near}{\Omega_\text{near}}
+\newcommand{\far}{\Omega_\text{far}}
 
 % drafting environments
 \newenvironment{verify}{\color{ForestGreen}}{\color{black}}
@@ -195,9 +201,44 @@ The space $\singexp{\sigma}{\Lambda}(\Omega)$ is complete.
 \subsubsection{Construction}
 \subsubsection{Asymptotics}
 \subsubsection{Image under $\softpart$}
-\subsection{Making $\volterra$ a contraction}
-\subsubsection{Near the origin}
-\subsubsection{Away from the origin}
+\subsection{Finding spaces where $\volterra$ is a contraction}
+In this section, we'll prove the following proposition.
+\begin{prop}\label{get-contraction}
+For each $\rho \in (\tau, \tau + \epsilon)$, we can ensure that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}$ by making $\Lambda$ big enough.
+\end{prop}
+\begin{rmk}
+For the argument we'll use, ``big enough'' always requires $\Lambda > \lambda$, and may require $\Lambda \gg \lambda$.
+\end{rmk}
+First, pick some $\sigma \in (\tau, \rho)$.\footnote{If you'd like, you can fix a choice of $\sigma$---for example, taking $\sigma = \frac{1}{2}(\tau + \rho)$.} By \textcolor{orange}{[limit property]}, we can find a neighborhood $\near \subset \domain$ of $\zeta = 0$ with the property that
+\begin{equation}\label{near-limit}
+|k(a, a')| \le \frac{\sigma}{|\zeta(a)|}
+\end{equation}
+for all $a, a' \in \near$. By choosing a small enough positive radius $R$, we can take $\near$ to be the part of $\domain$ where $|\zeta| < R$. Complementarily, let $\far$ be the part of $\domain$ where $R \le |\zeta|$.
+
+
+Take any function $\varphi \in \singexp{\rho}{\Lambda}(\domain)$. In Section~\ref{near-bound}, we'll bound $|\zeta|^{-(\rho-1)}\,e^{-\Lambda|\zeta|}\,|\volterra\varphi|$ by $\tfrac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}$ on $\near$. In Section~\ref{far-bound}, we'll see that by making $\Lambda$ big enough, we can bound $|\zeta|^{-(\rho-1)}\,e^{-\Lambda|\zeta|}\,|\volterra\varphi|$ by an arbitrarily small constant multiple of $\|\varphi\|_{\rho-1, \Lambda}$ on $\far$. Together, these results show that $\|\volterra \varphi\|_{\rho-1, \Lambda} \le \tfrac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}$ when $\Lambda$ is large enough. Since we set $\sigma < \rho$, this proves Proposition~\ref{get-contraction}.
+\subsubsection{Near the origin}\label{near-bound}
+For each $a \in \domain$, we have
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|} \int_0^{\zeta(a)} |k(a, \cdot)\,\varphi\;d\zeta| \]
+for any choice of integration path.\footnote{The absolute value of a $1$-form, like $|k(a, \cdot)\,\varphi\;d\zeta|$, is a density on $\C$---a norm on tangent vectors.} The norm on $\singexp{\rho-1}{\Lambda}(\domain)$ is designed to give the bound $|\varphi| \le |\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}$, so
+\begin{align*}
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|} \int_0^{\zeta(a)} |k(a, \cdot)|\,|\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}\;|d\zeta| \\
+& = \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} |k(a, \cdot)|\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|
+\end{align*}
+Now, suppose that $a \in \near$. Then inequality~\eqref{near-limit} tells us that
+\begin{align*}
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le
+\|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} \frac{\sigma}{|\zeta(a)|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta| \\
+& \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} \left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;\left|\frac{d\zeta}{\zeta(a)}\right|
+\end{align*}
+for any integration path that stays within $\near$. Taking advantage of the fact that $\near$ is a sector of a disk, let's use the straight-line path $\zeta = t \zeta(a)$, with $t \in (0, 1]$.
+\begin{align*}
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
+& \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\;dt \\
+& = \frac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}.
+\end{align*}
+Since we set $\sigma < \rho$, this brings us halfway to proving that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}$.
+\subsubsection{Away from the origin}\label{far-bound}
 %------------------------------------------------------------------------
 \color{SteelBlue}
 \section{Integro-differential equations {[from {\tt airy-resurgence}]}}
