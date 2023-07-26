@@ -71,7 +71,7 @@ z^{-\lambda} \laplace \varphi & = \laplace\,\fracderiv{-\lambda}{}{} \varphi,
 where $\fracderiv{-\lambda}{}{}$ is the Riemann-Liouville fractional integral of order $\lambda \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on differential equations.
 
 If we complexify the position variable $\zeta$, the functions on the position domain whose Laplace transforms satisfy a given differential equation will often extend holomorphically. \textbf{[...]}
-\subsection{Main result}
+\subsection{Main results}
 %%\begin{defn}\label{fin-order}
 %%Consider a Volterra operator $\mathcal{V}$ of the form
 %%\[ [\mathcal{V}\varphi](a) = m(a)\,\varphi(a) + \int_{\zeta = 0}^{a} k(a, \cdot)\,\varphi\,d\zeta. \]
@@ -89,7 +89,15 @@ If we complexify the position variable $\zeta$, the functions on the position do
 %%\end{enumerate}
 %%We'll say $\mathcal{V}$ has order $0$ in case~\ref{case:0th-order}, and order at least $\lambda$ in case~\ref{case:pos-order}.
 %%\end{defn}
+The
+\begin{thm}
+
+\end{thm}
+\begin{thm}
+\textcolor{DarkTurquoise}{Existence and uniqueness for deformed operator}
+\end{thm}
 \textcolor{DarkTurquoise}{The result below might not be stated perfectly, but it gives at least a rough sense of what I expect. It's an improved version of the result stated in Section~\ref{frac_int_exist}, which is copied from {\tt airy-resurgence}. Note that {\tt airy-resurgence} uses the opposite sign convention for the parameter $\sigma$ in $\holoL{\infty, \sigma}$.}
+\color{RoyalBlue}
 \begin{thm}
 Let $\Omega$ be an acute-angled open sector around $\zeta = 0$ in the complex plane. \textcolor{DarkTurquoise}{I don't think it's really necessary for $\Omega$ to have a sharp point at $0$, but the condition of being an acute-angled sector is sufficient and easy to state.} Over $\Omega$, consider a Volterra operator
 \[ \mathcal{V} = p + \partial^{-1} \circ q + \mathcal{R}, \]
@@ -120,6 +128,7 @@ has a unique solution in the affine subspace
 \[ \zeta^{\tau-1} + \holoL{\infty, \tau-1+\epsilon}_\Lambda(\Omega) \]
 of the function space $\holoL{\infty, \tau-1}_\Lambda(\Omega)$, defined in Section~\ref{fn-spaces}.
 \end{thm}
+\color{black}
 %%\begin{thm}
 %%Let $\Omega$ be an acute-angled sector around $0$ in the complex plane. \textcolor{DarkTurquoise}{I don't think it's really necessary for $\Omega$ to have a sharp point at $0$, but the condition of being an acute-angled sector is sufficient and easy to state.}
 
@@ -275,6 +284,63 @@ We now know that by setting $\Lambda > \lambda$ and then increasing $\Lambda$ as
 %%|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^{|\zeta(a)|} \left(\frac{s}{|\zeta(a)|}\right)^{\rho-1}\,e^{-(\Lambda - \lambda)(|\zeta(a)| - |\zeta|)}\;|d\zeta|.
 %%\end{align*}
 %------------------------------------------------------------------------
+
+\subsection{The test function is in $\singexp{\tau-1}{\lambda}(\Omega)$}
+
+\begin{prop}
+    Let $f_0$ be the solution of \textcolor{orange}{Volterra simplified equation}, namely 
+
+\begin{equation}\label{eqn:test_solution}
+    f_0(a)=\frac{p(b)}{p(a)} \exp\left[-\int_{\zeta(b)}^{\zeta(a)}\frac{q}{p} d\zeta\right]
+\end{equation}
+for a point $\zeta(b)\in\Omega$. Then $f_0\in\singexp{\tau-1}{\lambda}(\Omega)$. 
+\end{prop}
+
+\begin{proof}
+    We study separately the case when $\zeta(a)$ is close to the origin and far from the origin.  
+\begin{itemize}
+    \item \textbf{$\zeta(a)$ close to the origin.} We choose $\varepsilon>0$, then by assumption \eqref{h1} we can choose $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$
+  \begin{equation}\label{eqn:limit_h1}
+      \Big\vert\frac{q(a')}{p(a)}+\frac{\tau}{\zeta(a)}\Big\vert<\varepsilon
+  \end{equation}
+  notice that $|p(a)|\leq \varepsilon$ for $|zeta(a)|\leq \delta$, while $|q(a')-\ell|\leq \varepsilon$ for $|\zeta(a')|\leq \delta$ and $\ell>0$. Then, we choose $b\in\Omega$ such that $\tfrac{\delta}{2}=|\zeta(b)|$.
+  \begin{align*}
+      \left\vert\int_{\zeta(b)}^{\zeta(a)} \frac{p}{q}d\zeta\right\vert&\leq \int_{\zeta(b)}^{\zeta(a)} \Big\vert \frac{q}{p}\Big\vert \, |d\zeta| \\
+      &\leq \int_{\zeta(b)}^{\zeta(a)} \Big\vert \frac{q(a')+q'(a')(\zeta-\zeta(a')+...)}{p(a')+p'(a')(\zeta-\zeta(a'))+\tfrac{p''(a')}{2}\zeta^2+...}\Big\vert \, |d\zeta|\\
+      &\leq \int_{\zeta(b)}^{\zeta(a)} \left\vert\frac{q(a')}{p'(0)\zeta}\right\vert \Big\vert \frac{1+q_1(\zeta-\zeta(a'))+q_2(\zeta-\zeta(a'))^2+...}{1+p_1\zeta+p_2\zeta^2+...}\Big\vert \, |d\zeta|\\
+      &\leq c \left\vert\frac{q(a')}{p'(0)}\right\vert \int_{\zeta(b)}^{\zeta(a)} \frac{|d\zeta|}{|\zeta|}  + c \left\vert\frac{q(a')}{p'(0)}\right\vert \int_{\zeta(b)}^{\zeta(a)}\Big\vert \frac{q_1(\zeta-\zeta(a'))+q_2(\zeta-\zeta(a'))^2+...}{\zeta}\Big\vert \, |d\zeta|\\
+      &\leq c \left\vert\frac{q(a')}{p'(0)}\right\vert \log\Big\vert\frac{\zeta(a)}{\zeta(b)}\Big\vert+ C(\delta) 
+  \end{align*}
+  where in the last step we use that holomorphic function $\frac{q_1(\zeta-\zeta(a'))+q_2(\zeta-\zeta(a'))^2+...)}{\zeta}$ is bounded on $[\tfrac{\delta}{2},\delta]$ and $c>0$. 
+  Now we look at $f_0$: let $b'$ such that $|\zeta(b')|\leq \delta$ and $q(b')\neq 0$
+  \begin{align*}
+      \left\vert\frac{p(b)}{p(a)}\exp\left[-\int_{\zeta(b)}^{\zeta(a)}\frac{q}{p} d\zeta\right]\right\vert &\leq \Big\vert\frac{p(b)}{q(b')}\Big\vert \Big\vert\zeta(a)\frac{q(b')}{p(a)}\Big\vert \Big\vert \zeta(a)\Big\vert^{-1} \exp\left[\left\vert\int_{\zeta(b)}^{\zeta(a)}\frac{q}{p} d\zeta \right\vert\right]\\
+      &\leq C_1(\delta) \Big\vert \zeta(a)\Big\vert^{-1} \exp\left[ c \left\vert\frac{q(a')}{p'(0)}\right\vert \log\Big\vert\frac{\zeta(a)}{\zeta(b)}\Big\vert+ C\right]\\
+      &\leq C_1(\delta) \Big\vert \zeta(a)\Big\vert^{-1} \Big\vert\frac{\zeta(a)}{\zeta(b)}\Big\vert^{\tau'} \, e^{C(\delta)} \\
+      &\leq C_2 |\zeta(a)|^{\tau'-1}
+  \end{align*}
+  where $\tau':=c \left\vert\frac{q(a')}{p'(0)}\right\vert$. In particular, 
+
+  \begin{align*}
+      \tau' &\leq \left\vert c\frac{q(a')}{p'(0)}-\zeta(a)\frac{c q(a')}{p(a)}\right\vert + \left\vert\zeta(a)\frac{c q(a')}{p(a)}-\tau\right\vert + \tau\\
+      &\leq c |q(a')|\, \left\vert\frac{1}{p'(0)}-\frac{\zeta(a)}{p(a)}\right\vert+\varepsilon+ \tau\\
+      &= \frac{c}{|p'(0)|} \frac{|q(a') \zeta(a)|}{|p(a)|} \Big\vert \frac{p(a)}{\zeta(a)}-p'(0)\Big\vert +\tau+\varepsilon\\
+      &\leq c_1(\delta,\varepsilon) +  \tau
+  \end{align*}
+where in the last step we use that $p'(0):=\lim_{\zeta(a)\to 0} \frac{p(a)}{\zeta(a)}$ and $p(0)=0$. 
+Finally, we get  
+  \begin{align*}
+      |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |f_0(a)|&\leq  C_2(\delta)\, |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |\zeta(a)|^{\tau'-1} \\&
+      \leq C_2(\delta) |\zeta(a)|^{\tau'-\tau} \\
+      &\leq C_3(\delta)
+  \end{align*}
+      \item \textbf{$\zeta(a)$ far to the origin.}
+\end{itemize}
+  
+  
+  
+\end{proof}
+
 \color{SteelBlue}
 \section{Integro-differential equations {[from {\tt airy-resurgence}]}}
 \textcolor{DarkTurquoise}{\textbf{Note that {\tt airy-resurgence} uses the opposite sign convention for the parameter $\sigma$ in $\holoL{\infty, \sigma}$.}}
