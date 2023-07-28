@@ -66,6 +66,7 @@
 \newcommand{\cont}{\mathcal{C}}
 \newcommand{\holo}{\mathcal{H}}
 \newcommand{\singexp}[2]{\mathcal{H}L^\infty_{#1, #2}}
+\newcommand{\singexpalg}[1]{\singexp{#1}{\bullet}}
 \newcommand{\holoL}[1]{\mathcal{H}L^{#1}} %% may no longer be needed
 \newcommand{\expHoloL}[2]{\mathcal{H}L^{#1}_{#2}} %% may no longer be needed
 
@@ -83,6 +84,7 @@
 
 % drafting environments
 \newenvironment{verify}{\color{ForestGreen}}{\color{black}}
+\newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
 
 \title{Regular singular Volterra equations on complex domains}
 \author{Aaron Fenyes and Veronica Fantini}
@@ -90,6 +92,53 @@
 
 \begin{document}
 \maketitle
+\begin{brainstorm}
+\item \textit{(Aaron)} State Lemma~\ref{thm:perturbed_volterra} just the way we want it.
+\item Finish introduction
+\begin{itemize}
+\item \textit{(Veronica)} Brainstorm: what are we trying to say in this paper? Write ideas in the to-do list at the bottom of the motivation section.
+\end{itemize}
+\item \textit{(Veronica)} Say in Section~\ref{setting:perturbed} that $\volterra = \hardpart + \softpart$ and write arguments we need for bounds on whole kernel (for example, in Equation~\ref{near-limit}.
+\item \textit{(Veronica)} Review old blue text in Section~\ref{setting:perturbed} and decide whether we want to keep any of it. Can drop unilaterally.
+\item Revise stuff related to proof of main results.
+\begin{itemize}
+        \item \textit{(Aaron)} Add proofs of Lemma~\ref{thm:perturbed_volterra} and Theorem~\ref{thm:general_volterra} to Section~\ref{sec:existence and uniqueness}
+        \item \textit{(Aaron)} State the desired result of Section~\ref{sec:image under soft_part}.
+        \item \textit{(Veronica)} Add motivation to Section~\ref{sec:image under soft_part}, explaining that the desired result of the section follows from a more general result about the smoothing effect of $\softpart$ (Proposition~\ref{prop:smoothing}).
+        \item \textbf{(Aaron)} Confirm again that removed $\tau+\epsilon$ upper bound on $\rho$ was unnecessary.
+\end{itemize}
+\item Revise text around main results.
+\begin{itemize}
+    \item Decide whether to keep Lemma~\ref{thm:perturbed_volterra} as a lemma, or to make it a theorem, and make Theorem~\ref{thm:general_volterra} its corollary. Change order as appropriate.
+    \item \textit{(Veronica)} Convert ``proof'' blocks to plain prose after main results.
+\end{itemize}
+\item \textbf{(Veronica)} Edit statement of Theorem~\ref{thm:example}
+\begin{itemize}
+    \item Edit or remove statements about making $\Lambda$ big enough
+    \item Figure out how to clean up $Q(-\zeta')$ business
+\end{itemize}
+\item Start finalizing notation for the two parts of the operator and the two parts of the solution.
+\begin{itemize}
+    \item Choose subscripts or decorations to tell things apart in equations.
+    \item Choose names to tell things apart in prose. Currently using ``prototypical operator,'' ``prototype solution.'' Come up with names for perturbation stuff.
+\end{itemize}
+\item \textbf{(Aaron)} Read through Section~\ref{sec:example}.
+\item \textbf{(Veronica)} Consider revising notation for roots.
+\begin{itemize}
+\item ``$P$ is a monic degree-$d$ polynomial with only simple zeros;''
+\item ``$Q$ is a degree-$(d-1)$ polynomial, and $Q(-\alpha) \neq 0$ for for every zero $-\alpha$ of $P$;''---or even say it without formulas.
+\end{itemize}
+\item \textbf{(Aaron)} Change list formatting so that extra indentation applies only to conditions. We're using the \texttt{enumitem} package.
+\item Work on acknowledgements
+\begin{itemize}
+\item \textbf{(Aaron)} Add people Aaron had conversations with
+\item \textbf{(Aaron)} Think about rephrasing FMHJ acknowledgement (ERC one can't be changed).
+\end{itemize}
+\item Reconsider using $\lesssim$ (but still leaning not to)
+\begin{itemize}
+    \item \textbf{(Aaron)} As an example, show how we could rewrite the argument in proof of Proposition~\ref{prop:asymptotic at infinity} with $\lesssim$.
+\end{itemize}
+\end{brainstorm}
 \section{Introduction}
 \subsection{Motivation}\label{motivation}
 In its most basic form, the Laplace transform $\laplace$ turns $L^1$ functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. Through identities like
@@ -101,10 +150,12 @@ z^{-\lambda} \laplace \varphi & = \laplace\,\fracderiv{-\lambda}{}{} \varphi,
 where $\fracderiv{-\lambda}{}{}$ is the Riemann-Liouville fractional integral of order $\lambda \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on differential equations.
 
 If we complexify the position variable $\zeta$, the functions on the position domain whose Laplace transforms satisfy a given differential equation will often extend holomorphically. \textbf{[...]}
-
+\begin{brainstorm}
+    \item \textit{Brainstorm motivation ideas here\ldots}
+\end{brainstorm}
 \subsection{Setting}\label{setting}
 \subsubsection{The domain}\label{setting:domain}
-Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but doesn't contain $\zeta = 0$. For some of our results, we'll need an extra condition on $\domain$:
+Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but doesn't contain $\zeta = 0$. We also assume:
 \begin{itemize}
 \cond{star}\label{cond:star} The set $\domain$ is star-shaped around $\zeta = 0$. In other words, for any $a \in \domain$, a straight path from $\zeta = 0$ to $a$ stays in $\domain$. Since $\domain$ doesn't contain $\zeta = 0$, we'll always leave that starting point out of the path.
 \end{itemize}
@@ -128,11 +179,11 @@ The prototypical example of the kind of operator we'll be working with is a holo
 Being a holomorphic Volterra operator means that $\hardpart$ sends each holomorphic function $\varphi$ on $\domain$ to a new holomorphic function
 \[ [\hardpart\,\varphi](a) = \int_{\zeta = 0}^a \hardker(a, \cdot)\,\varphi\;d\zeta. \]
 Being separable means that the kernel $\hardker(a, a')$ factors into a function of $a$ times a function of $a'$. We'll suppose this product can be written as a ratio
-\[ \hardker(a, a') = \textcolor{magenta}{-} \frac{q(a')}{p(a)}, \]
+\[ \hardker(a, a') = - \frac{q(a')}{p(a)}, \]
 where $p$ and $q$ are holomorphic functions on $\domain$. Having a regular singularity at $\zeta = 0$ means the following:
 \begin{itemize}
-\condconst{sing}{\tau}\label{cond:sing} For some constant $\tau$---the {\em residue} of the singularity---the difference
-\[ \hardker(a, a') \textcolor{magenta}{-} \frac{\tau}{\zeta(a)} \]
+\condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
+\[ \hardker(a, a') - \frac{\tau}{\zeta(a)} \]
 is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
 \end{itemize}
 We'll assume that $\tau$ is real and positive.
@@ -154,7 +205,8 @@ This condition explains why $\domain$ might have the sort of shape illustrated i
 \begin{itemize}
 \condconst{diag$_0$}{\lambda_\Delta}\label{cond:diag-basic} We can find a constant $\lambda_\Delta$ with
 \[ \big| \hardker(a, a') \big| \textcolor{magenta}{\lesssim} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
-outside a neighborhood of $\zeta(a) = 0$ in $\domain^2$.
+over all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' \in \domain$.
+%%outside a neighborhood of $\zeta(a) = 0$ in $\domain^2$.
 \end{itemize}
 \subsubsection{The perturbed operator}\label{setting:perturbed}
 We'll generalize $\hardpart$ by adding a perturbation $\softpart$ that doesn't have a separable kernel,\footnote{Unless $\softpart$ is zero, of course.} but does have a smoothing effect that counteracts the singularity of $\hardpart$ (as we'll show in Proposition \ref{prop:smoothing}). To get the smoothing effect, we'll require the kernel $\softker$ of $\softpart$ to vanish to some order $\epsilon > 0$ on the diagonal in $\Omega^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
@@ -197,7 +249,6 @@ Notice that if $a$ and $a'$ are close to $\zeta=0$, then the exponential factor 
 %%We'll say $\mathcal{V}$ has order $0$ in case~\ref{case:0th-order}, and order at least $\lambda$ in case~\ref{case:pos-order}.
 %%\end{defn}
 \begin{thm}\label{thm:basic_volterra}
-\textcolor{orange}{[Assume the domain $\domain$ satisfies {\em Condition \eqref{cond:star}}] from Section \ref{setting:domain}}.
 Let $\hardpart$ be the operator described in Section~\ref{setting:basic} and assume it satisfies {\em Condition \eqref{cond:sing}}. Then the regular singular Volterra equation
 \[ f = \hardpart f \]
 have the {\em prototype solution}
@@ -206,13 +257,20 @@ f_0(a)=\frac{p(b)}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right).
 \end{equation}
 Changing the base point $b \in \domain$ just multiplies $f_0$ by a non-zero constant.
 
-The solution $f_0$ scales like $\zeta^{\tau-1}$ as $\zeta$ goes to zero. To be precise, as $\zeta$ goes to zero, $|f_0/\zeta^{\tau-1}|$ settles into a compact interval that doesn't include zero.
+The magnitude $|f_0|$ is bounded by a constant multiple of $|\zeta|^{\tau-1}$ near $\zeta = 0$.
+
+%%The solution $f_0$ scales like $\zeta^{\tau-1}$ as $\zeta$ goes to zero. To be precise, as $\zeta$ goes to zero, $|f_0/\zeta^{\tau-1}|$ settles into a compact interval that doesn't include zero.
 \end{thm}
 \begin{proof}
 Section~\ref{sec:proto-construction-regularity}. Proposition~\ref{prop:construction} shows that $f_0$ is a solution, and Proposition~\ref{prop:asymptotic at zero} shows that it scales as desired as $\zeta$ goes to zero.
 \end{proof}
+\begin{rmk}
+If $q$ has a limit at $\zeta = 0$, the solution $f_0$ from Theorem~\ref{thm:basic_volterra} can be written as a constant mutiple of $\zeta^{\tau-1}$ plus a function which is $O(\zeta^\tau)$ at $\zeta = 0$.
+
+\textcolor{RoyalBlue}{$f_0 \in F\zeta^{\tau-1} + O(\zeta^\tau)$ near $\zeta = 0$ for some non-zero constant $F$.}
+\end{rmk}
 \begin{thm}\label{thm:proto-growth}
-\textcolor{orange}{[Assume the domain $\domain$ satisfies {\em Condition \eqref{cond:star}}] from Section \ref{setting:domain}}. Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:slow}} from Section~\ref{setting:basic}. Then the solution $f_0$ from {\em Theorem~\ref{thm:basic_volterra}} is uniformly of exponential type $\lambda_0$ \textcolor{orange}{[explain what we mean by ``uniformly'']}. In light of the behavior at $\zeta = 0$ described above, this tells us that $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$ defined in Section~\ref{fn-spaces}.
+Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}} and {\em \eqref{cond:slow}} from Section~\ref{setting:basic}. Then the solution $f_0$ from {\em Theorem~\ref{thm:basic_volterra}} is uniformly of exponential type $\lambda_0$ \textcolor{orange}{[explain what we mean by ``uniformly''---for example, by mentioning the discussion in Section~\ref{sec:fn-space-defs}, including the footnote]}. In light of the behavior at $\zeta = 0$ described above, this tells us that $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$ defined in Section~\ref{fn-spaces}.
 \end{thm}
 \begin{lemma}\label{thm:perturbed_volterra}
 Let $g$ be a function in the space $\in\singexp{\sigma+\epsilon}{A}(\Omega)$ defined in Section~\ref{fn-spaces}. The Volterra equation
@@ -225,7 +283,7 @@ given by an operator of the kind described in Sections \ref{setting:basic} and \
     \[f = \left[ \hardpart + \softpart \right] f\]
     admits a unique solution in the affine subspace
 \[ f_0 + \singexp{\tau-1+\epsilon}{{\Lambda}}(\Omega) \]
-of the function space $\singexp{\tau-1+\epsilon}{{\Lambda}}(\Omega)$, defined in Section~\ref{fn-spaces}, for $\Lambda$ ``big enough'' (meaning $\Lambda>\lambda_\Delta$, and we may require $\Lambda \gg \lambda_\Delta$). The function $f_0$ is the prototypical solution of \eqref{eqn:test_solution} and it belongs to the function space $\singexp{\tau-1}{\lambda_0}(\Omega)$.
+of the function space $\singexp{\tau-1}{{\Lambda}}(\Omega)$, defined in Section~\ref{fn-spaces}, for $\Lambda$ ``big enough'' (meaning $\Lambda>\lambda_\Delta$, and we may require $\Lambda \gg \lambda_\Delta$). The function $f_0$ is the prototypical solution of \eqref{eqn:test_solution} and it belongs to the function space $\singexp{\tau-1}{\lambda_0}(\Omega)$.
 \end{thm}
 %%\begin{thm}
 %%Let $\Omega$ be an acute-angled sector around $0$ in the complex plane. \textcolor{DarkTurquoise}{I don't think it's really necessary for $\Omega$ to have a sharp point at $0$, but the condition of being an acute-angled sector is sufficient and easy to state.}
@@ -262,10 +320,10 @@ We thank Fondation Mathematique Jacques Hadamard for supporting the visit of the
 
 
 \section{Function spaces for holomorphic Volterra operators}\label{fn-spaces}
-\subsection{Weighted holomorphic $L^\infty$ spaces}
+\subsection{Weighted holomorphic $L^\infty$ spaces}\label{sec:fn-space-defs}
 Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\cont(\Omega)$ be the space of continuous complex-valued functions on $\Omega$. Give $\cont(\Omega)$ the compact-open topology, recalling that this is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \Omega$~\cite[Example~2.6 and \S 4 notes]{fnl-cpx-anal}. The holomorphic functions form a closed subspace $\holo(\Omega) \subset \cont(\Omega)$~\cite[Proposition~3.14]{fnl-cpx-anal}.
 
-Fixing a real constant $\Lambda$, let's restrict our attention to holomorphic functions on $\Omega$ which are bounded by constant multiples of $e^{\Lambda|\zeta|}$. One might describe these functions as being uniformly of exponential type $\Lambda$. They form a space $\singexp{0}{\Lambda}(\Omega)$, which we'll equip with the norm $\|f\|_{0,\Lambda} = \sup_\Omega e^{-\Lambda|\zeta|}\,|f|$. With respect to the seminorm on $\holo(\Omega)$ given by a compact set $K \subset \Omega$, the inclusion map $\singexp{0}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ has norm $\sup_K e^{\Lambda |\zeta|}$. That means the inclusion is continuous.
+Fixing a real constant $\Lambda$, let's restrict our attention to holomorphic functions on $\Omega$ which are bounded by constant multiples of $e^{\Lambda|\zeta|}$. One might describe these functions as being uniformly of exponential type $\Lambda$.\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{\Lambda+\varepsilon} $. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} They form a space $\singexp{0}{\Lambda}(\Omega)$, which we'll equip with the norm $\|f\|_{0,\Lambda} = \sup_\Omega e^{-\Lambda|\zeta|}\,|f|$. With respect to the seminorm on $\holo(\Omega)$ given by a compact set $K \subset \Omega$, the inclusion map $\singexp{0}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ has norm $\sup_K e^{\Lambda |\zeta|}$. That means the inclusion is continuous.
 \begin{prop}\label{exp-complete}
 The space $\singexp{0}{\Lambda}(\Omega)$ is complete.
 \end{prop}
@@ -287,30 +345,22 @@ Now, let's relax our norm to allow both exponential growth at infinity and a pow
 The space $\singexp{\sigma}{\Lambda}(\Omega)$ is complete.
 \end{prop}
 
-\subsection{Continuous inclusions between different $\singexp{\sigma}{\Lambda}(\Omega)$}
+\subsection{Continuous inclusions between different $\singexp{\sigma}{\Lambda}(\Omega)$}\label{sec:inclusions}
 \begin{prop}
-    If $\Lambda'\leq\Lambda$, the inclusion map $\singexp{\sigma}{\Lambda'}(\Omega)\hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ is continuous.
+If $\Lambda'\leq\Lambda$, the inclusion map $\singexp{\sigma}{\Lambda'}(\Omega)\hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ is continuous.
 \end{prop}
-
 \begin{proof}
-    \begin{align*}
-        \|f\|_{\sigma,\Lambda}&=\sup_{\Omega} |\zeta|^{-\sigma}\,  e^{-\Lambda |\zeta|}\, |f|\\
-        &= \sup_{\Omega} e^{-\Lambda'|\zeta|}\,|\zeta|^{-\sigma}\,e^{-(\Lambda-\Lambda') |\zeta|}\,|f|\\
-        &\leq \sup_\Omega e^{-\Lambda'|\zeta|}\,|\zeta|^{-\sigma}\,|f|\\
-        &=\|f\|_{\sigma,\Lambda'}
-    \end{align*}
+By definition,
+\[ \|f\|_{\sigma,\Lambda}=\sup_{\Omega} |\zeta|^{-\sigma}\,e^{-\Lambda |\zeta|}\, |f|. \]
+The norm $\|\cdot\|_{\sigma, \Lambda'}$ is designed to give $|f| \le |\zeta|^\sigma\,e^{\Lambda'|\zeta|}\,\|f\|_{\sigma, \Lambda'}$, which tells us that
+\begin{align*}
+\|f\|_{\sigma,\Lambda} & \leq \sup_{\Omega} |\zeta|^{-\sigma}\,e^{-\Lambda |\zeta|}\,|\zeta|^\sigma\,e^{\Lambda'|\zeta|}\,\|f\|_{\sigma, \Lambda'}\\
+&=\sup_{\Omega} e^{-(\Lambda-\Lambda') |\zeta|}\,\|f\|_{\sigma, \Lambda'}\\
+&\leq \|f\|_{\sigma,\Lambda'}.
+\end{align*}
+In the last step, we use the assumption that $\Lambda' \le \Lambda$.
 \end{proof}
-\color{OrangeRed}
-\begin{proof}
-    \begin{align*}
-        \|f\|_{\sigma,\Lambda}&=\sup_{\Omega} |\zeta|^{-\sigma}\,e^{-\Lambda |\zeta|}\, |f|\\
-        &\leq \sup_{\Omega} |\zeta|^{-\sigma}\,e^{-\Lambda |\zeta|}\,|\zeta|^\sigma\,e^{\Lambda'|\zeta|}\,\|f\|_{\sigma, \Lambda'}\\
-        &=\sup_{\Omega} e^{-(\Lambda-\Lambda') |\zeta|}\,\|f\|_{\sigma, \Lambda'}\\
-        &\leq \|f\|_{\sigma,\Lambda'}
-    \end{align*}
-\end{proof}
-\color{black}
-
+As we mentioned in Section~\ref{sec:fn-space-defs}, one might describe $\singexp{0}{\Lambda}(\domain)$ as the space of functions on $\domain$ which are uniformly of exponential type $\Lambda$. Taking the union of these spaces over all $\Lambda \in \R$, we get the space $\singexpalg{0}$ that contains all functions of exponential type. Having continuous inclusions between the subspaces $\singexp{0}{\Lambda}(\domain)$ as $\Lambda$ increases, we can give $\singexpalg{0}$ a meaningful topology: the finest topology that makes all the inclusions $\singexp{0}{\Lambda}(\domain) \hookrightarrow \singexpalg{0}$ continuous.\footnote{In category-theoretic language, $\singexpalg{0}$ is the limit of the family $\singexp{0}{\Lambda}(\domain)$.}
 \begin{prop}
     If $\Lambda'<\Lambda$ and $\sigma'>\sigma$, the inclusion map $\singexp{\sigma'}{\Lambda'}(\Omega)\hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ is continuous.
 \end{prop}
@@ -361,16 +411,30 @@ The space $\singexp{\sigma}{\Lambda}(\Omega)$ is complete.
 %%which is effectively finite-order over $\Omega$ in the sense of Definition~\ref{fin-order}, with order at least $1 + \epsilon$ for some $\epsilon \in (0, \infty)$.
 \section{Solving holomorphic Volterra equations}
 \subsection{Overview}
+\begin{brainstorm}
+\item Explain how we're going to prove Theorem~\ref{thm:general_volterra}.
+\item Roughly follow the sections. Eventual goal: make section titles match proof steps.
+\begin{itemize}
+\item Link to subsections during description.
+\end{itemize}
+\item Rough sketch of proof story:
+\begin{itemize}
+    \item Construct prototype solution $f_0$. Show it's in $\singexp{\tau-1}{\lambda_0}$.
+    \item Show that $\softpart$ maps $f_0$ into $\singexp{\tau-1+\varepsilon}{\lambda_0}$.
+    \item Show that $\volterra$ contracts $\singexp{\rho-1}{\Lambda}$ when $\rho > \tau$ and $\Lambda$ is big enough (done in.
+    \item Use the contraction mapping theorem to prove Lemma~\ref{thm:perturbed_volterra}, and then use that lemma to prove Theorem~\ref{thm:general_volterra}.
+\end{itemize}
+\end{brainstorm}
 \subsection{Construction and regularity of the prototype solution \\ \textit{(proof of Theorems~\ref{thm:basic_volterra}--\ref{thm:proto-growth})}}\label{sec:proto-construction-regularity}
 
 \subsubsection{Construction}\label{sec:construction}
 
 \begin{prop}\label{prop:construction}
-    Let $b\in\Omega$, the function 
+    The function 
     \begin{equation}%%\label{eqn:test_solution}
     f_0(a)=\frac{p(b)}{p(a)} \exp\left[-\int_{b}^{a}\frac{q}{p} d\zeta\right]
    \end{equation}
-is a solution of the Volterra equation $\hardpart f_0=f_0$. We call $f_0$ a prototype solution.  
+is a solution of the Volterra equation $\hardpart f_0=f_0$, for some $b\in\Omega$. We call $f_0$ a prototype solution.  
 \end{prop}
 
 \begin{proof}
@@ -381,33 +445,10 @@ is a solution of the Volterra equation $\hardpart f_0=f_0$. We call $f_0$ a prot
         &= - \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p} \psi_0 d\zeta\\
         &= \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} d\psi_0  \\
     \end{align*}
-    \textcolor{orange}{Bring the proof of Proposition~\ref{prop:asymptotic at zero} in here. Prove Proposition~\ref{prop:asymptotic at zero} by noting that our argument that $\lim_{\zeta(a) \to 0} \psi_0(a) = 0$ actually proves something stronger.}
-    \color{RoyalBlue}
-    Now we claim $\lim_{a\to 0}\psi_0(a)=0$: in fact,
-    \begin{align*}
-        \Big\vert \exp\left(-\int_b^a\frac{q}{p}d\zeta\right) \Big\vert&\leq \exp\left(\int_b^a \Big\vert\frac{q}{p}\Big \vert\, |d\zeta|\right)\\
-        &\leq \exp\left(\int_b^a \Big\vert\frac{q}{p}\textcolor{magenta}{-}\frac{\tau}{\zeta}\Big \vert\, |d\zeta| + \tau \int_b^a\frac{|d\zeta|}{|\zeta|} \right)\\
-        &\Big\vert \frac{\zeta(a)}{\zeta(b)}\Big\vert^{\tau} \, \exp\left(\int_b^a \Big\vert\frac{q}{p}\textcolor{magenta}{-}\frac{\tau}{\zeta}\Big \vert\, |d\zeta|  \right)
-    \end{align*}
-    and by Condition \eqref{cond:sing}
-\begin{align*}
-     \Big\vert \exp\left(-\int_b^a\frac{q}{p}d\zeta\right) \Big\vert& \leq \Big\vert \frac{\zeta(a)}{\zeta(b)}\Big\vert^{\tau} \, \exp\Big(c |\zeta(a)-\zeta(b)|\Big)\\
-     &\leq C |\zeta(a)|^\tau e^{c|\zeta(a)|}
-\end{align*}
- which ends the proof of the claim.\color{black} We deduce that $\hardpart  f_0=f_0$. 
-\end{proof}
 
-
-\subsubsection{Regularity}\label{sec:asymptotics}
-
-\begin{prop}\label{prop:asymptotic at zero}
-    \textcolor{orange}{Assume $\domain$ satisfies Condition~\eqref{cond:star}.} Let $b\in\Omega$ and $f_0$ be the prototype solution defined in \eqref{eqn:test_solution}, then $f_0\in\singexp{\tau-1}{\lambda}(\Omega)$ with $\tau$ and $\lambda$ defined as in {\tt setting}
-\end{prop}
-
-\begin{proof}
-Choose some $\varepsilon>0$. By Condition~\eqref{cond:sing}, we can find $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$
+    Now we claim $\lim_{a\to 0}\psi_0(a)=0$: in fact, choose some $\varepsilon>0$. By Condition~\eqref{cond:sing}, we can find $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$
 \begin{equation}\label{eqn:limit_h1}
-\Big\vert\frac{q(a')}{p(a)}\textcolor{magenta}{-}\frac{\tau}{\zeta(a)}\Big\vert<\varepsilon
+\left|\frac{q(a')}{p(a)} - \frac{\tau}{\zeta(a)}\right|<\varepsilon
 \end{equation}
  % notice that $|p(a)|\leq \varepsilon$ for $|zeta(a)|\leq \delta$, while $|q(a')-\ell|\leq \varepsilon$ for $|\zeta(a')|\leq \delta$ and $\ell>0$. 
  Then, we choose $b\in\Omega$ such that $\tfrac{\delta}{2}=|\zeta(b)|$.
@@ -417,26 +458,46 @@ Choose some $\varepsilon>0$. By Condition~\eqref{cond:sing}, we can find $\delta
 \end{align*}
 Exponentiating both sides, we see that
 \[ \psi_0(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
-The exponential factor is bounded between $\exp[-\varepsilon\big(\tfrac{3}{2} \delta\big)]$ and $\exp[\varepsilon\big(\tfrac{3}{2} \delta\big)]$ for all points $a$ in our chosen neighborhood of $\zeta = 0$.
-\textcolor{orange}{We get $\delta$ in the last step because it should be possible to get from $b$ to $a$ by first going toward $\zeta = 0$, using a path of length at most $\tfrac{1}{2} \delta$, and then going outward again, using a path of length at most $\delta$.}
+The exponential factor is bounded between $\exp\big({-\tfrac{3}{2}\varepsilon\delta}\big)$ and $\exp\big(\tfrac{3}{2}\varepsilon\delta\big)$ for all points $a$ in our chosen neighborhood of $\zeta = 0$. We deduce that $\hardpart  f_0=f_0$. 
+\end{proof}
 
-\textcolor{OrangeRed}{Add argument about $p(b)/p(a)$ factor.}
+
+\subsubsection{Regularity}\label{sec:asymptotics}
+
+\begin{prop}\label{prop:asymptotic at zero}
+    Let $f_0$ be the prototype solution defined in \eqref{eqn:test_solution}, then $|f_0|$ is bounded by a constant multiple of $\zeta^{\tau-1}$ near $\zeta=0$. 
+\end{prop}
+
+\begin{proof}
+The proof follows the argument we use at the end of the proof of proposition \ref{prop:construction}. In particular, once we choose $\varepsilon>0$ we can choose $\delta>0$ such that for $\zeta(a)<\delta$ and $\zeta(a')<\delta$ the function
+
+\[ \psi_0(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
+
+is bounded by $C_1 \, |\zeta(a)|^\tau \, \exp\big(\tfrac{3}{2}\varepsilon\delta\big)$. Therefore, assuming $b'\in\Omega$ and $q(b') \neq 0$
+
+\begin{align*}
+|f_0| & \leq C_1 |\zeta(a)|^\tau \, \exp\big(\tfrac{3}{2}\varepsilon\delta\big) \left\vert  \frac{p(b)}{p(a)}\right\vert \\
+& = C_2 |\zeta(a)|^\tau \, \left\vert\frac{p(q)}{q(b')} \right\vert \, \left\vert \frac{q(b')}{p(a)} \zeta(a)\right\vert \, |\zeta(a)|^{-1} \\
+& \leq C_3 |\zeta(a)|^{\tau-1}.
+\end{align*}
+The last step uses Condition~\eqref{cond:sing}. 
 \end{proof}
 
 \begin{rmk}
     Proposition \ref{prop:construction} and Proposition \ref{prop:asymptotic at zero} together prove Theorem \ref{thm:basic_volterra}. 
 \end{rmk}
 
+%In fact, if we assume $q$ to be more regular near $\zeta=0$, we get that $|f_0|/\zeta^{\tau-1}$
+
 \begin{prop}\label{prop:asymptotic at infinity}
-    \textcolor{orange}{Assume $\domain$ satisfies Condition \eqref{cond:star}} and let $b\in\domain$. Assume $\hardpart$ satisfies {\em Condition} \eqref{cond:slow}. Then the prototype solution $f_0$ constructed in {\em Proposition \ref{prop:construction}} belongs to the function space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+    Let $b\in\domain$. Assume $\hardpart$ satisfies {\em Condition} \eqref{cond:slow}. Then the prototype solution $f_0$ constructed in {\em Proposition \ref{prop:construction}} belongs to the function space $\singexp{\tau-1}{\lambda_0}(\domain)$.
 \end{prop}
 
 \begin{rmk}
     {\em Proposition \ref{prop:asymptotic at infinity}} is an equivalent formulation of {\em Theorem \ref{thm:proto-growth}}.
 \end{rmk}
 
-\begin{proof}
-
+\begin{proof}[Proof of Proposition~\ref{prop:asymptotic at infinity}]
 We choose $\varepsilon>0$, then by Condition \eqref{cond:sing} we can choose $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$ (arguing as in the proof of Proposition \ref{prop:asymptotic at zero}) we get a uniform bound 
 
 \[   |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |f_0(a)|\leq  C_2(\delta)\, |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |\zeta(a)|^{\tau-1} \leq C_3(\delta)
@@ -454,46 +515,6 @@ In particular,
 
 
 \end{proof}
-
-\color{RoyalBlue}
-
-\begin{proof}
-    \begin{itemize}
-    \item \textbf{$\zeta(a)$ close to the origin.} We choose $\varepsilon>0$, then by \em Condition \eqref{cond:sing} we can choose $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$
- \begin{equation}
-      \Big\vert\frac{q(a')}{p(a)}\textcolor{magenta}{-}\frac{\tau}{\zeta(a)}\Big\vert<\varepsilon
-  \end{equation}
- % notice that $|p(a)|\leq \varepsilon$ for $|zeta(a)|\leq \delta$, while $|q(a')-\ell|\leq \varepsilon$ for $|\zeta(a')|\leq \delta$ and $\ell>0$. 
- Then, we choose $b\in\Omega$ such that $\tfrac{\delta}{2}=|\zeta(b)|$.
-  \begin{align*}
-      \left\vert\int_{\zeta(b)}^{\zeta(a)} \frac{q}{p}d\zeta\right\vert&\leq \int_{\zeta(b)}^{\zeta(a)} \Big\vert \frac{q}{p}\Big\vert \, |d\zeta| \\
-      &\leq \int_{\zeta(b)}^{\zeta(a)} \Big\vert \frac{q}{p} \textcolor{magenta}{-} \frac{\tau}{\zeta}\Big\vert \, |d\zeta| +\int_{\zeta(b)}^{\zeta(a)} \Big\vert\frac{\tau}{\zeta}\Big\vert \, |d\zeta| \\
-      &\leq \varepsilon \frac{\delta}{2} + \tau \log \Big\vert\frac{\zeta(a)}{\zeta(b)}\Big\vert
-        \end{align*}
-
- Now we look at $f_0$: let $b'$ such that $|\zeta(b')|\leq \delta$ and $q(b')\neq 0$
-  \begin{align*}
-      \left\vert\frac{p(b)}{p(a)}\exp\left[-\int_{\zeta(b)}^{\zeta(a)}\frac{q}{p} d\zeta\right]\right\vert &\leq \Big\vert\frac{p(b)}{q(b')}\Big\vert \Big\vert\zeta(a)\frac{q(b')}{p(a)}\Big\vert \Big\vert \zeta(a)\Big\vert^{-1} \exp\left[\left\vert\int_{\zeta(b)}^{\zeta(a)}\frac{q}{p} d\zeta \right\vert\right]\\
-      &\leq C_1(\delta) \Big\vert \zeta(a)\Big\vert^{-1} \exp\left[ \tau \log\Big\vert\frac{\zeta(a)}{\zeta(b)}\Big\vert+ \varepsilon \frac{\delta}{2}\right]\\
-      &\leq C_2(\delta) \Big\vert \zeta(a)\Big\vert^{-1} \Big\vert\zeta(a)\Big\vert^{\tau}   
-      \end{align*}
- 
-Finally, we get  
-  \begin{align*}
-      |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |f_0(a)|\leq  C_2(\delta)\, |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |\zeta(a)|^{\tau-1} \leq C_3(\delta)
-  \end{align*}
-      \item \textbf{$\zeta(a)$ far from the origin.} Using assumptions \textcolor{orange}{[two bounds assumption]}
-
-      \begin{align*}
-          |\zeta(a)|^{1-\tau} e^{-\lambda |\zeta(a)|} |f_0|&\leq  |\zeta(a)|^{1-\tau} e^{-\lambda |\zeta(a)|} \left\vert\frac{p(b)}{p(a)}\exp\left[-\int_{\zeta(b)}^{\zeta(a)}\frac{q}{p} d\zeta\right]\right\vert \\
-          &\leq C  |\zeta(a)|^{1-\tau} e^{-\lambda |\zeta(a)|}  \, e^{\lambda_p|\zeta(a)|}\exp\left[\int_{\zeta(b)}^{\zeta(a)} \Big\vert\frac{q}{p} \Big\vert |d\zeta| \right]\\
-          & \leq C |\zeta(a)|^{1-\tau} e^{-(\lambda-\lambda_p) |\zeta(a)|} \exp\Big[\lambda_\text{ratio} |\zeta(a)-\zeta(b)| \Big]
-      \end{align*}
-   which is bounded because $|\zeta(a)|>\delta$. 
-\end{itemize}
-
-\end{proof}
-\color{black}
 
 \subsection{How $\softpart$ perturbs the prototype solution \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 
@@ -578,7 +599,7 @@ Let's again use the straight integration path $\zeta = t \zeta(a)$, with $t \in 
 Let's set $\Lambda > \lambda_\Delta$, ensuring that the exponential factor shrinks as $|\zeta(a)|$ grows. Then we can make our bound uniform over all $a \in \far$, since $|\zeta(a)| \ge R$ for these points:
 \[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda_\Delta)R(1 - t)}\;dt. \]
 
-We can make this bound less than one, as required to show that $\volterra$ is a contraction, by increasing $\Lambda$. To see this in the trickiest case, where $\rho < 1$, it helps to look at the beginning and of the integration separately. At the beginning---for $t \in \big(0, \tfrac{1}{5}\big]$, say---we can use a worst-case estimate on the exponential factor:
+We can make this bound less than one, as required to show that $\volterra$ is a contraction, by increasing $\Lambda$. To see this in the trickiest case, where $\rho < 1$, it helps to look at the beginning and end of the integration separately. At the beginning---for $t \in \big(0, \tfrac{1}{5}\big]$, say---we can use a worst-case estimate on the exponential factor:
 \begin{align*}
 \int_0^{1/5} t^{\rho-1}\,e^{-(\Lambda - \lambda_\Delta)R(1 - t)}\;dt & \le e^{-\frac{4}{5}(\Lambda - \lambda_\Delta)R} \int_0^{1/5} t^{\rho-1}\;dt \\
 & = e^{-\frac{4}{5}(\Lambda - \lambda_\Delta)R}\,\tfrac{1}{\rho} \big(\tfrac{1}{5}\big)^\rho.
@@ -589,10 +610,9 @@ At the end, we instead use a worst-case estimate on $t^{1-\rho}$:
 & = \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda_\Delta)R}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \lambda_\Delta)R} \right] \\
 & \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda_\Delta)R}.
 \end{align*}
-\textcolor{ForestGreen}{[Consider just writing ``const.'' instead of explicit constants.]}
 
-We now know that by setting $\Lambda > \lambda_\Delta$ and then increasing $\Lambda$ as needed, we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. This completes our proof of Proposition~\ref{prop:get-contraction}.
-\subsection{Existence and uniqueness of the perturbed solution \\ \textit{(proof of Lemma~\ref{thm:perturbed_volterra} and Theorem~\ref{thm:general_volterra})}}
+We now know that by setting $\Lambda > \lambda_\Delta+ (1/5)^{\rho-1 R^{-1}}$ (in fact $1/5$ can be replaced by any number in $(0,1)$), we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. This completes our proof of Proposition~\ref{prop:get-contraction}.
+\subsection{Existence and uniqueness of the perturbed solution \\ \textit{(proof of Lemma~\ref{thm:perturbed_volterra} and Theorem~\ref{thm:general_volterra})}}\label{sec:existence and uniqueness}
 
 
 \begin{proof}
@@ -619,7 +639,7 @@ This follows by Theorem \ref{thm:perturbed_volterra}.
 \end{proof}
 
 
-\section{A motivating example}
+\section{A motivating example}\label{sec:example}
 %\color{black}
 %\section{\textcolor{orange}{[Proof of main results]}}
 \subsection{Overview}
@@ -634,7 +654,7 @@ Let $\mathcal{P}$ be a linear differential operator\footnote{ We follow Delabaer
 \end{equation}
 
 \begin{enumerate}
-\item[$\bullet$] $P$ is a monic degree-$d$ polynomial with simple zeros at $-\alpha_j$ for $j=1,...,d$ i.e. such that $P'(-\alpha_j)\neq 0$ for every $j=1,...,d$; 
+\item[$\bullet$] $P$ is a monic degree-$d$ polynomial with only simple zeros; 
 \item[$\bullet$] $Q$ is a degree-$(d-1)$ polynomial and $Q(-\alpha_j)\neq 0$ for all $j=1,...,d$;
 \item[$\bullet$] $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, for every $|z|>A$
 \[ R_r(z^{-1}) = \sum_{j=0}^\infty R_{r,j} z^{-j}. \]
@@ -700,7 +720,7 @@ By the properties of the Laplace transform $\laplace_{\zeta,\alpha}^{\theta}$ we
 \hat{P}_j:=P(-\zeta)+\partial_{\zeta,\alpha_j}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha_j}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha_j}^{-1})\circ (-\zeta)^r
 \end{equation}
  
-If $\hat{\psi}_j$ is a solution of $\hat{P}_j\hat{\psi}_j=0$ then its Laplace transform $\Psi_j:=\laplace_{\zeta,\alpha_j}^{\theta}\hat{\psi}_j$, defined for a suitable direction $\theta$, is a solution of $\mathcal{P}\Psi_j=0$. By suitable direction we mean that the ray $\Gamma_{\alpha_j}^\theta$ must be contained in the domain $\Omega_j$\footnote{We use the shorthand notation $\Omega_j$ for $\Omega_{\alpha_j}$}.     
+If $\hat{\psi}_j$ is a solution of $\hat{P}_j\hat{\psi}_j=0$ then its Laplace transform $\Psi_j:=\laplace_{\zeta,\alpha_j}^{\theta}\hat{\psi}_j$, defined for a suitable direction $\theta$, is a solution of $\mathcal{P}\Psi_j=0$. By suitable direction we mean that the ray $\Gamma_{\alpha_j}^\theta$ must be contained in the domain $\Omega_j$. \footnote{We use the shorthand notation $\Omega_j$ for $\Omega_{\alpha_j}$} In particular, $\Omega_j$ does not contain the tubolar neighbourhood of all the other critical points toward infinity as drawn in Section \ref{setting:domain}.      
 \end{lemma}
 
 \begin{proof}
@@ -713,7 +733,7 @@ Using the properties of the Laplace transform,
     \end{align*}
 \end{proof}
 
-We can now state and prove the main result of this section, namely that the Volterra operator $\hat{P}_j$ admits a unique solution $\hat{\psi}_j$ in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
+We can now state and prove the main result of this section, namely that the Volterra operator $\hat{P}_j$ admits a unique solution $\hat{\psi}_j$ %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
 
 \begin{thm}\label{thm:example}
     There exists a unique solution of $\hat{P}_j\hat{\psi}_j=0$ such that 
@@ -723,6 +743,8 @@ We can now state and prove the main result of this section, namely that the Volt
 \end{thm}
 
 \begin{proof}
+\textcolor{orange}{One option: ``Let $p = P(-\zeta)$ and $q = Q(-\zeta)$, as written in commented-out line. Another: $P(-\zeta(a)) = \int_{\zeta = \alpha}^{\zeta(a)}$}
+
 First of all, we rewrite $\hat{P}_j\varphi=0$ as $\varphi = \volterra_j \varphi $: %we introduce the notation $p(a):=P(-\zeta(a))$ and $q(a)=Q(-\zeta(a))$, then $\hat{P}_j$ is  
 
 \begin{align*}
@@ -750,7 +772,7 @@ hence setting $\tau_j:=\frac{Q(-\alpha_j)}{P'(-\alpha_j)}$, we find
 \begin{equation*}
     -\frac{Q(-\zeta')}{P(-\zeta)}-\frac{\tau_j}{\zeta-\alpha_j}
 \end{equation*}
-is bounded as $\zeta'$ and $\zeta$ approach $\alpha_j$. \textcolor{orange}{[Is there a nice way to write the prototype solution?]} 
+is bounded as $\zeta'$ and $\zeta$ approach $\alpha_j$. 
 
 Then, the proof will follow by Theorem \ref{thm:general_volterra}, once we proved that $\volterra^j$ satisfies the required assumptions.  
 
