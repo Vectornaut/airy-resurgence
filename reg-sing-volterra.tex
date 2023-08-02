@@ -172,6 +172,8 @@ From our experience with solving level 1 differential equations by Borel summati
 These conditions are just strong enough to ensure that the solution has a well-defined Laplace transform, which by construction will satisfy the differential equation we started with in the frequency domain. The first condition also tells us that the Laplace-transformed solution is $O(z^{-\tau})$ as the frequency variable $z$ grows.
 
 Our goal is to justify the expectations above with an existence and uniqueness result, stated in Section~\ref{sec:results}. We'll achieve it by embodying our expectations in a Banach space of holomorphic functions---the space $\singexp{\tau-1}{\Lambda}(\domain)$ defined in Section~\ref{fn-spaces}. \textcolor{orange}{[Mention treatment of motivating example in Section~\ref{sec:example}.]}
+\subsection{Notation for uniform bounds}
+Given a complex-valued function $\varphi$ and a non-negative, real-valued function $\omega$, we'll write $\varphi \lesssim \omega$ to say that $|\varphi|$ is bounded by a constant multiple of $\omega$. Unless we say otherwise, the bound holds throughout the domain where both functions are defined.
 \subsection{Setting}\label{setting}
 \subsubsection{The domain}\label{setting:domain}
 Throughout this paper, as described in Section~\ref{motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but doesn't contain $\zeta = 0$. We also assume:
@@ -385,16 +387,17 @@ As we mentioned in Section~\ref{sec:fn-space-defs}, one might describe $\singexp
 \end{prop}
 
 \begin{proof}
-    \begin{align*}
-        \|f\|_{\sigma,\Lambda}&=\sup_{\Omega} |\zeta|^{-\sigma}  e^{-\Lambda |\zeta|} |f|\\
-        &= \sup_{\Omega} |\zeta|^{\sigma'-\sigma}\,|\zeta|^{-\sigma'}\,e^{-\Lambda'|\zeta|}\,  e^{-(\Lambda-\Lambda') |\zeta|} \, |f|\\
-    \end{align*}
-    The function $|\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zeta|}$ is bounded near $\zeta = 0$ because the power of $|\zeta|$ is positive, and it's bounded far from $\zeta = 0$ thanks to the decaying exponential. Hence,
-    \begin{align*}
-       \|f\|_{\sigma,\Lambda}&\leq C\sup_\Omega  |\zeta|^{-\sigma'}\, e^{-\Lambda'|\zeta|} \, |f|\\
-        &=C \|f\|_{\sigma',\Lambda'}
-    \end{align*}
-    for $C = \sup_{\Omega}  |\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zeta|}$.
+By definition,
+\begin{align*}
+\|f\|_{\sigma,\Lambda}&=\sup_{\Omega} |\zeta|^{-\sigma}  e^{-\Lambda |\zeta|} |f|\\
+&= \sup_{\Omega} |\zeta|^{\sigma'-\sigma}\,|\zeta|^{-\sigma'}\,e^{-\Lambda'|\zeta|}\,  e^{-(\Lambda-\Lambda') |\zeta|} \, |f|.
+\end{align*}
+The function $|\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zeta|}$ is bounded near $\zeta = 0$ because the power of $|\zeta|$ is positive, and it's bounded far from $\zeta = 0$ thanks to the decaying exponential. Hence,
+\begin{align*}
+\|f\|_{\sigma,\Lambda}&\leq C\sup_\Omega  |\zeta|^{-\sigma'}\, e^{-\Lambda'|\zeta|} \, |f|\\
+&=C \|f\|_{\sigma',\Lambda'}
+\end{align*}
+for $C = \sup_{\Omega}  |\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zeta|}$.
 \end{proof}
 
 %%Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. For any $\sigma \in \R$ and $Z \in \C$, multiplying by $\zeta^\sigma e^{\Re(Z\zeta)}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\expHoloL{\infty, \sigma}{Z}(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma; Z} = \|\zeta^{-\sigma} e^{-\Re(Z\zeta)} f\|_\infty$, so that
