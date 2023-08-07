@@ -73,10 +73,12 @@
 
 % operator under consideration
 \newcommand{\volterra}{\mathcal{V}}
-\newcommand{\hardpart}{\mathcal{V}_\text{basic}}
-\newcommand{\softpart}{\mathcal{V}_\text{extra}}
-\newcommand{\hardker}{k_\text{basic}}
-\newcommand{\softker}{k_\text{extra}}
+\newcommand{\hardpart}{\mathcal{V}_0}
+\newcommand{\softpart}{\mathcal{V}_\star}
+\newcommand{\hardker}{k_0}
+\newcommand{\softker}{k_\star}
+\newcommand{\solproto}{f_0}
+\newcommand{\solptb}{f_\star}
 
 % domain
 \newcommand{\domain}{\Omega}
@@ -235,8 +237,8 @@ Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +
 
 Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We'll allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we won't allow any sharper singularity. We'll also put an exponential bound on how fast $\softker$ grows away from the diagonal, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we'll require:
 \begin{itemize}
-\condconst{diag}{\epsilon, \lambda_\Delta}\label{cond:eps-lambda} We have
-\[ \big| k_\text{extra} (a, a') \big| \leq \textcolor{magenta}{C_k}\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
+\condconst{diag$_\star$}{\epsilon, \lambda_\Delta}\label{cond:eps-lambda} We have
+\[ \big| \softker(a, a') \big| \leq \textcolor{magenta}{C_k}\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$.
 \end{itemize}
 Notice that this condition prevents $\softker$ from being separable---unless it's zero, of course.
@@ -591,20 +593,20 @@ continuously for all $\Lambda\geq \lambda_{\Delta}$ and $\sigma>-1$.
     Let $f\in\singexp{\sigma}{\Lambda}$,
     \begin{align*}
         |\zeta(a)|^{-(\sigma+\epsilon)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
-        &\leq |\zeta(a)|^{-(\sigma+\epsilon)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |k_\text{extra}(a,\cdot)|\, |f| \, |d\zeta| \\
-        &\leq |\zeta(a)|^{-(\sigma+\epsilon)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |k_\text{extra}(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \|f\|_{\sigma,\Lambda} \, |d\zeta| 
+        &\leq |\zeta(a)|^{-(\sigma+\epsilon)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |f| \, |d\zeta| \\
+        &\leq |\zeta(a)|^{-(\sigma+\epsilon)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \|f\|_{\sigma,\Lambda} \, |d\zeta| 
     \end{align*}
     By Condition~\eqref{cond:eps-lambda},
     \begin{align*}
-         \int_{\zeta=0}^a |k_\text{extra}(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| &\leq C_k \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\epsilon}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
+         \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| &\leq C_k \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\epsilon}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
          &=C_k |\zeta(a)|^{\epsilon+\sigma} \int_{0}^1 (1-t)^\epsilon e^{\lambda_\Delta |\zeta(a)|(1-t)} t^{\sigma}\, e^{\Lambda|\zeta(a)| t}\;dt\\
          &=C_k |\zeta(a)|^{\epsilon+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,  \int_{0}^1 (1-t)^\epsilon  t^{\sigma}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)| t}\;dt\\
          &\le C_k |\zeta(a)|^{\epsilon+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)|}\int_{0}^1 (1-t)^\epsilon  t^{\sigma}\;dt.
     \end{align*}
     The last step takes advantage of the assumption that $\Lambda \ge \lambda_\Delta$. Recognizing the integral as an evaluation of the beta function, we can rewrite the bound as
-    \[ \int_{\zeta=0}^a |k_\text{extra}(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k |\zeta(a)|^{\epsilon+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\epsilon+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\epsilon+2)}. \]
+    \[ \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k |\zeta(a)|^{\epsilon+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\epsilon+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\epsilon+2)}. \]
     Our assumptions that $\epsilon > 0$ and $\sigma > -1$ ensure that the gamma functions are well-defined. Rearranging to get
-    \[ |\zeta(a)|^{-(\epsilon+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |k_\text{extra}(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k \frac{\Gamma(\epsilon+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\epsilon+2)}, \]
+    \[ |\zeta(a)|^{-(\epsilon+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k \frac{\Gamma(\epsilon+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\epsilon+2)}, \]
     we conclude that $|\zeta(a)|^{-\sigma-\epsilon} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert$ is uniformly bounded in $\domain$. 
 \end{proof}
 
@@ -687,7 +689,7 @@ We now know that by setting $\Lambda > \textcolor{orange}{2}\lambda_\Delta+ (1/5
 
 \begin{proof}[Proof of Theorem~\ref{thm:general_volterra}]
 
-%\textcolor{magenta}{[we have to change the definition of $k_\text{basic}$ in \S \ref{setting:basic} in $-\frac{q(a')}{p(a)}$.]}
+%\textcolor{magenta}{[we have to change the definition of $\hardker$ in \S \ref{setting:basic} in $-\frac{q(a')}{p(a)}$.]}
 
 By Theorem \ref{thm:basic_volterra} and \ref{thm:proto-growth} (proved in Section \ref{sec:construction}), there exists a function $f_0\in \singexp{\tau-1}{\lambda_0}(\Omega)$ such that $\hardpart f_0= f_0$. Hence we can solve the Volterra equation 
 
