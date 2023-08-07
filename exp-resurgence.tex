@@ -302,11 +302,11 @@ where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, 
 
 The form of $\mathcal{P}$ derives from Equation~2.2.3 \textcolor{orange}{(p.~105)} of \cite{EcalleIII}, which encompasses both linear and nonlinear ODEs of level $1$. Borel summation is more involved for the nonlinear ones, raising the question of whether our analysis generalizes.
 
-\item the second problem is evaluating a certain kind of integral: a one-dimensional {\em thimble integral}
+\item Evaluating a certain kind of integral: a one-dimensional {\em thimble integral}
 
-\begin{equation}
+\begin{equation*}
 I(z)\defeq\int_{\Lambda}\exp\big[-z f\big] \nu
-\end{equation}
+\end{equation*}
 where $f\colon X\to \mathbb{C}$ is a holomorphic functions with isolated and non-degenerate critical points, $X$ is $1$-dimensional complex algebraic variety, $\nu\in\Omega^1(X)$ is holomorphic $1$-form in $X$ and $\Lambda$ is a suitable contour such that $I(z)$ is a holomorphic function of $z$.  
 \end{enumerate}
 
@@ -356,43 +356,53 @@ As described in Section~\ref{borel-reg:explanatory-power}, we consider a linear 
 \begin{equation}\label{eqn:standard ODE}
 \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big],
 \end{equation}
-where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$.\footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]} Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$, $P'(-\alpha_j)\neq 0$ for $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ \textcolor{magenta}{[Verify this more carefully! It seems like there should be $2(d-1)$ Stokes sectors, as described below]}.
+where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$.\footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]} Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$, $P'(-\alpha_j)\neq 0$ for $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ (see \cite[Definition 3.3.2]{diverg-resurg--ii}).
 
-\color{DarkTurquoise}
-In \cite[Proposition~2.2.7]{EcalleIII}, where
-\begin{align*}
+\begin{verify}
+    Turn the ODE into a system: assume 
+    \begin{align*}
 P(\lambda) & = P_0 + P_1 \lambda + \ldots + P_d \lambda^d \\
 Q(\lambda) & = Q_0 + Q_1 \lambda + \ldots + Q_{d-1} \lambda^{d-1}
 \end{align*}
-(with the coefficients renamed to avoid a conflict with the zeros $\alpha_j$), the recurrence that gives the solution simplifies
-\begin{align*} b_q & = P_q + Q_q z^{-1} - \frac{\partial}{\partial x^{(q)}} b(z, x, x^{(1)}, \ldots x^{(d)}) \\
-& = P_q + Q_q z^{-1} - R_q(z^{-1}).
-\end{align*}
+then the ODE $\mathcal{P}\psi=0$ is equivalent to the system 
+    \begin{equation}
+        \frac{d}{dz}Y= B(z) Y 
+    \end{equation}
+    \[
+    B(z)=\begin{pmatrix}
+            0 & 1 & 0 & \ldots & 0 \\
+            0 & 0 & 1 & \ldots & 0 \\
+            \vdots & &\ddots & & 1\\
+            b_{1}(z) & & b_j(z) & \ldots & b_{d-1}(z)
+        \end{pmatrix}, \quad Y=\begin{pmatrix}
+            \psi \\
+            \psi ' \\
+            \vdots \\
+            \psi^{(d-1)}
+        \end{pmatrix}
+    \]
+    
+ and $b_j(z)=-P_j-\frac{1}{z}Q_j-\frac{R_j(z)}{z^2}$. A formal system of solutions is given by the matrix 
+\begin{equation}
+    Y=\begin{pmatrix}
+       \psi_1 & \psi_2 & \ldots & \psi_d  \\
+       \psi_1' & \psi_2' & \ldots & \psi_d'  \\
+       \vdots & \vdots  & \ldots & \vdots  \\
+       \psi_1^{(d-1)} & \psi_2^{(d-1)} & \ldots & \psi_d^{(d-1)} 
+    \end{pmatrix}, \qquad \psi_j(z)=e^{-\alpha_j z}z^{-\tau_j}\tilde{f}_j
+\end{equation} 
 
-Following the argument of Delabaere Lemma~6.2, we can prove that $\series{F}_j(z)$ is $1$-Gevrey by taking the formal Borel transform of the ODE it satisfies and showing it is regular singular at $\zeta=0$. 
+To prove that $z=\infty$ is an irregular singular point we change coordinates and set $w=1/z$:  
 
-Roughly speaking, factoring out $e^{-\alpha_j z}$ removes the constant term of $P$, and factoring out $z^{-\tau_j}$ changes $Q$ to give factorial growth instead of gamma function growth (?).
+ \begin{equation}
+        -w^2 \frac{d}{dw}Y= B(1/w) Y 
+    \end{equation}
 
-\begin{align*}
-\mathcal{P} & = \sum_j^d f_j \frac{\partial}{\partial z}^j \\
-& = \sum_j^d f_j \left(-\frac{1}{w^2} \frac{\partial}{\partial w}\right)^j\\
-&=  \sum_j^d \tilde{f}_j \frac{\partial}{\partial w}^j
-\end{align*}
-where $w=1/z$.  if $\tilde{f}_j $ has a pole of order at most $d-j$ at 0 then it's regular singular, otherwise it's irregular. The relevant term should be
-\color{Tan}
-\[ \left(\frac{P_d}{w^{2d}} + \frac{R_d(w)}{w^{2d-2}}\right) \left(\frac{\partial}{\partial w}\right)^d , \]
-\color{DarkTurquoise}
-\[ \frac{P_d}{w^{2d}}  \left(\frac{\partial}{\partial w}\right)^d , \]
-corresponding to the quadratic differential $dw^2/w^{2d}$, whose trajectories form $2(d-1)$ half-planes around $\infty$ (see Bridgeland \& Smith's ``Quadratic differential as stability conditions,'' Figure~10).
+and $-w^{-2}B(1/w)$ has a simple pole at $w=0$ (i.e. $z=\infty$). Then the formal system of solutions is of the form 
+\[\psi_j(w)=e^{-\alpha_j/w} w^{\tau_j} \tilde{f}_j(w)\]
+hence according to \cite[Definition 3.3.2]{diverg-resurg--ii}, $w=0$ is irregular. 
+\end{verify}
 
-From the Bessel equation, for example, we get
-\begin{align*}
-(-w^{-2}\partial_w)^2&=-w^{-2}\partial_w(-w^{-2}\partial_w)\\
-&=-w^{-2}(2w^{-3}\partial_w-w^{-2}\partial_w^2)\\
-&=-2w^{-5}\partial_w+w^{-4}\partial_w^2,
-\end{align*}
-giving two half-planes around $\infty$, as expected.
-\color{black}
 
 Under these assumptions, the space of formal solutions of $\mathcal{P}\Phi = 0$ has a basis $\series{\Psi}_1,...,\series{\Psi}_d$ of the form~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}
 \begin{equation}\label{formal solution}
@@ -895,7 +905,7 @@ To make sense of this formula, we ask for the following conditions.
 \item The base point $b$ is in the domain of $\zeta$. Once we have this, we can continue $\zeta$ along the whole ray $\Gamma_b^\theta$.
 \item The ray $\Gamma_b^\theta$ avoids the branch points after leaving $b$.
 \item The integral converges. We guarantee this by asking for a pair of simpler conditions.
-\color{RoyalBlue}
+%\color{RoyalBlue}
 \begin{itemize}
 \item With respect to the flat metric, $f$ is uniformly of exponential type $\Lambda$ along $\Gamma_b^\theta$, and is locally integrable throughout.\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{\Lambda+\varepsilon} $. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} Following {\tt reg-sing-volterra}, we require $f\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$.\footnote{The condition $\sigma>-1$ guarantees the integrability at $\zeta=b$.} The set $\Omega_b$ is a tubular neighbourhood of $\Gamma_b^\theta$. 
 \item The value of $z$ is in the half-plane $H_{\theta}$ centered around the ray $e^{-i\theta} [0, \infty)$.
@@ -1309,7 +1319,10 @@ the proof is a simple computation, and we refer to Definition 5.12 and Lemma 5.1
 \end{align*}  
 
 and \[\left|\frac{a_{n+1}}{\Gamma(1+n+\alpha)}\right|\leq A^{n+1}\frac{\Gamma(n+2)}{|\Gamma(n+1+\alpha)|} \]
-\textcolor{magenta}{Under which conditions it doesn't grow faster than factorial?}
+which grows as $n(n+1)^{-\alpha} A^{n+1}$.
+\begin{verify}
+    we use $\Gamma(n+1+\alpha)\sim \Gamma(n+1) (n+1)^\alpha$ as $n\to\infty$. 
+\end{verify}
 \end{proof}
 
 
@@ -1381,26 +1394,26 @@ The Laplace transform $\laplace_\zeta^\theta$ turns local holomorphic functions 
 
 \subsubsection{Order shifting}\label{shifting}
 \textcolor{orange}{[Veronica:I think we should move this section, maybe when we do examples]}
-Consider holomorphic functions on a simply connected open set that touches but doesn't contain $\zeta = 0$. A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as \textcolor{magenta}{[rephrase in terms of $\holoL{\infty, \rho}$]}
-\begin{equation}\label{eqn:slight-defn}
-\zeta^{\alpha_1} f_1 + \ldots + \zeta^{\alpha_r} f_r + g
-\end{equation}
-where $f_1, \ldots, f_r$ are regular, $\alpha_1, \ldots, \alpha_r \in \R \smallsetminus \Z$, and $g, g', g'', \ldots$ go to zero at $\zeta = 0$.
-
-Locally integrable slight functions play a special role in Laplace transform methods for linear differential equations. This is because differential equations in the frequency domain arise most naturally from integral equations in the spatial domain, but we'd like to work with differential equations in the spatial domain too. In the space of locally integrable slight functions, differential and integral equations enjoy their simplest equivalence.
+Consider holomorphic functions on a simply connected open domain $\Omega$ that touches but doesn't contain $\zeta = 0$. %A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. %We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as 
+%\begin{equation}\label{eqn:slight-defn}
+%\zeta^{\alpha_1} f_1 + \ldots + \zeta^{\alpha_r} f_r + g
+%\end{equation}
+%where $f_1, \ldots, f_r$ are regular, $\alpha_1, \ldots, \alpha_r \in \R \smallsetminus \Z$, and $g, g', g'', \ldots$ go to zero at $\zeta = 0$.
+As we've seen in Section \ref{reg-decay}, functions in $\singexpalg{\sigma}(\Omega)$ with $\sigma>-1$ play a special role in Laplace transform methods for linear differential equations. This is because differential equations in the frequency domain arise most naturally from integral equations in the spatial domain, but we'd like to work with differential equations in the spatial domain too. In $\singexpalg{\sigma}(\Omega)$, differential and integral equations enjoy their simplest equivalence.
 \begin{prop}\label{prop:shifting}
-When $\psi$ is slight and locally integrable at $\zeta = 0$,
+Let $\psi\in\singexpalg{\sigma}(\Omega)$, and $\sigma>-1$
 \[ \left[ \sum_{k = 0}^n \big(\tfrac{\partial}{\partial \zeta}\big)^k \circ h_k + \sum_{k = 1}^m \fracderiv{-k}{\zeta}{0} \circ h_{-k} \right] \psi = 0, \]
 if and only if
 \[ \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k + \sum_{k = 0}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi = 0, \]
-where $h_n, \ldots, h_{-m}$ are regular functions.
+where $h_n, \ldots, h_{-m}$ are holomorphic functions.
 \end{prop}
-To prove this result, we'll need a little background.
+%To prove this result, we'll need a little background.
 
-Each slight function has a unique {\em normal form}: an expression of the form (\ref{eqn:slight-defn}) where $\alpha_1, \ldots, \alpha_r$ are distinct modulo $\Z$ and $f_1, \ldots, f_r$ are non-vanishing at $\zeta = 0$. The {\em order} of a slight function is the smallest power $\alpha_k$ in its normal form. If there are no $\zeta^\alpha f$ terms, we say the order is $\infty$. A slight function vanishes at $\zeta = 0$ if and only if its order is positive, and it's locally integrable at $\zeta = 0$ if and only if its order is greater than $-1$.
+%Each slight function has a unique {\em normal form}: an expression of the form (\ref{eqn:slight-defn}) where $\alpha_1, \ldots, \alpha_r$ are distinct modulo $\Z$ and $f_1, \ldots, f_r$ are non-vanishing at $\zeta = 0$. The {\em order} of a slight function is the smallest power $\alpha_k$ in its normal form. If there are no $\zeta^\alpha f$ terms, we say the order is $\infty$. A slight function vanishes at $\zeta = 0$ if and only if its order is positive, and it's locally integrable at $\zeta = 0$ if and only if its order is greater than $-1$.
 
-Multiplication by a regular function and differentiation with respect to $\zeta$ both preserve the space of slight functions. Integration from $\zeta = 0$ preserves the space of locally integrable slight functions. Thus, in general, integro-differential operators with regular coefficients send locally integrable slight functions to slight functions. Each basic operation has a simple effect on a slight function's order. Multiplication by $\zeta^n f$, where $f$ is regular and non-vanishing at $\zeta = 0$, adds $n$ to the order. Differentiation and integration add $-1$ and $1$, respectively.
-\begin{proof}[Proof of Proposition~\ref{prop:shifting}]
+%Multiplication by a regular function and differentiation with respect to $\zeta$ both preserve the space of slight functions. Integration from $\zeta = 0$ preserves the space of locally integrable slight functions. Thus, in general, integro-differential operators with regular coefficients send locally integrable slight functions to slight functions. Each basic operation has a simple effect on a slight function's order. Multiplication by $\zeta^n f$, where $f$ is regular and non-vanishing at $\zeta = 0$, adds $n$ to the order. Differentiation and integration add $-1$ and $1$, respectively.
+
+\begin{proof}%[Proof of Proposition~\ref{prop:shifting}]
 The reverse implication holds without any special condition on $\psi$, because $\tfrac{\partial}{\partial \zeta}\;\fracderiv{-1}{\zeta}{0}$ acts as the identity on all differentiable functions.
 
 To prove the forward implication, rewrite the first equation in the statement as
@@ -1409,7 +1422,7 @@ To prove the forward implication, rewrite the first equation in the statement as
 \end{equation}
 The function
 \[ \phi = \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k \right] \psi \]
-is slight. Looking at the right-hand side of equation~\eqref{eqn:diff-int-split}, we can see that $\phi'$ is slight and locally integrable, so its order is greater than $-1$. Hence, $\phi$ has positive order, which means it vanishes at $\zeta = 0$.
+belongs to the function space $\singexpalg{\sigma}(\Omega)$. Looking at the right-hand side of equation~\eqref{eqn:diff-int-split}, we can see that $\phi'$ belongs to $\singexpalg{\sigma}(\Omega)$, and by assumption its order is greater than $-1$. Hence, $\phi$ belongs to $\singexpalg{\sigma+1}(\Omega)$, which means it vanishes at $\zeta = 0$.
 
 Integrating both sides of equation~\eqref{eqn:diff-int-split}, we get
 \[ \fracderiv{-1}{\zeta}{0}\;\tfrac{\partial}{\partial \zeta}\;\phi = -\left[ \fracderiv{-1}{\zeta}{0} \circ h_0 + \sum_{k = 1}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi. \]
