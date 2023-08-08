@@ -77,6 +77,7 @@
 \newcommand{\softpart}{\mathcal{V}_\star}
 \newcommand{\hardker}{k_0}
 \newcommand{\softker}{k_\star}
+\newcommand{\solwhole}{f}
 \newcommand{\solproto}{f_0}
 \newcommand{\solptb}{f_\star}
 
@@ -298,8 +299,10 @@ In the perturbed operator $\volterra = \hardpart +\softpart$ from Section~\ref{s
 \[f = \volterra f\]
 has a unique solution $f$ in the affine subspace
 \[ f_0 + \singexpalg{\tau-1+\epsilon}(\Omega) \]
-of the function space $\singexpalg{\tau-1}(\Omega)$ defined in Section~\ref{fn-spaces}. Here, $f_0$ is the prototype solution \eqref{eqn:test_solution} from Theorems \ref{thm:basic_volterra}--\ref{thm:proto-growth}, which belongs to the function space $\singexp{\tau-1}{\lambda_0}(\Omega)$. For any $\rho > \tau$, the uniqueness of the solution still holds in the larger affine subspace $f_0 + \singexpalg{\rho-1}(\Omega)$.
-\textcolor{RoyalBlue}{Assume $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}, \eqref{cond:slow}} and {\em \eqref{cond:diag-basic}} from Section \ref{setting:basic}. Assume $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}} from Section \ref{setting:perturbed}. Then the Volterra equation 
+of the function space $\singexpalg{\tau-1}(\Omega)$ defined in Section~\ref{fn-spaces}. Here, $f_0$ is the prototype solution \eqref{eqn:test_solution} from Theorems \ref{thm:basic_volterra}--\ref{thm:proto-growth}, which belongs to the function space $\singexp{\tau-1}{\lambda_0}(\Omega)$.
+
+For any $\rho > \tau$, the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$. In other words, lowering $\rho$ into $(\tau, \tau+\epsilon)$ to allow a sharper singularity won't reveal any more solutions, and raising $\rho$ too high to admit the solution found in $f_0 + \singexpalg{\tau-1+\epsilon}(\Omega)$ will leave no solution at all.
+\par\textcolor{RoyalBlue}{Assume $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}, \eqref{cond:slow}} and {\em \eqref{cond:diag-basic}} from Section \ref{setting:basic}. Assume $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}} from Section \ref{setting:perturbed}. Then the Volterra equation 
 \[f = \left[ \hardpart + \softpart \right] f\]
 admits a unique solution in the affine subspace
 \[ f_0 + \singexpalg{\tau-1+\epsilon}(\Omega) \]
@@ -360,7 +363,7 @@ The space $\singexp{\sigma}{\Lambda}(\Omega)$ is complete.
 \end{prop}
 
 \subsection{Continuous inclusions between different $\singexp{\sigma}{\Lambda}(\Omega)$}\label{sec:inclusions}
-\begin{prop}\label{prop:exp-inclus}
+\begin{prop}\label{prop:inclus-ge-exp}
 If $\Lambda'\leq\Lambda$, the inclusion map $\singexp{\sigma}{\Lambda'}(\Omega)\hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ is continuous.
 \end{prop}
 \begin{proof}
@@ -375,10 +378,9 @@ The norm $\|\cdot\|_{\sigma, \Lambda'}$ is designed to give $|f| \le |\zeta|^\si
 In the last step, we use the assumption that $\Lambda' \le \Lambda$.
 \end{proof}
 As we mentioned in Section~\ref{sec:fn-space-defs}, one might describe $\singexp{0}{\Lambda}(\domain)$ as the space of functions on $\domain$ which are uniformly of exponential type $\Lambda$. Taking the union of these spaces over all $\Lambda \in \R$, we get the space $\singexpalg{0}$ that contains all functions of exponential type. Having continuous inclusions between the subspaces $\singexp{0}{\Lambda}(\domain)$ as $\Lambda$ increases, we can give $\singexpalg{0}$ a meaningful topology: the finest topology that makes all the inclusions $\singexp{0}{\Lambda}(\domain) \hookrightarrow \singexpalg{0}$ continuous.\footnote{In category-theoretic language, $\singexpalg{0}$ is the limit of the family $\singexp{0}{\Lambda}(\domain)$.}
-\begin{prop}
-    If $\Lambda'<\Lambda$ and $\sigma'>\sigma$, the inclusion map $\singexp{\sigma'}{\Lambda'}(\Omega)\hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ is continuous.
+\begin{prop}\label{prop:inclus-lt-pow-gt-exp}
+If $\sigma'>\sigma$ and $\Lambda'<\Lambda$, the inclusion map $\singexp{\sigma'}{\Lambda'}(\Omega)\hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ is continuous.
 \end{prop}
-
 \begin{proof}
 By definition,
 \begin{align*}
@@ -391,6 +393,12 @@ The function $|\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zeta|}$ is bo
 &=C \|f\|_{\sigma',\Lambda'}
 \end{align*}
 for $C = \sup_{\Omega}  |\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zeta|}$.
+\end{proof}
+\begin{prop}\label{prop:inclus-lt-pow-alg}
+When $\sigma' > \sigma$, there's a continuous inclusion $\singexpalg{\sigma'}(\Omega)\hookrightarrow \singexpalg{\sigma}(\Omega)$.
+\end{prop}
+\begin{proof}
+For each $\Lambda'$, we can get a continuous inclusion $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ by choosing some $\Lambda > \Lambda'$ and composing the continuous inclusion $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-gt-exp} with the continuous inclusion $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ that we get by definition. For any $\Lambda'' < \Lambda'$, the inclusions $\singexp{\sigma'}{\Lambda''}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ and $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ constructed above automatically commute with the inclusion $\singexp{\sigma'}{\Lambda''}(\Omega) \hookrightarrow \singexp{\sigma'}{\Lambda'}(\Omega)$ given by Proposition~\ref{prop:inclus-ge-exp}, because we're ultimately working in the vector space of holomorphic functions on $\Omega$. Because of how the topology on $\singexpalg{\sigma'}(\Omega)$ is defined, this gives us the desired continuous inclusion $\singexpalg{\sigma'}(\Omega)\hookrightarrow \singexpalg{\sigma}(\Omega)$.
 \end{proof}
 
 %%Let $\holoL{\infty}(\Omega)$ be the space of bounded holomorphic functions on $\Omega$ with the supremum norm $\|\cdot\|_\infty$. For any $\sigma \in \R$ and $Z \in \C$, multiplying by $\zeta^\sigma e^{\Re(Z\zeta)}$ maps $\holoL{\infty}(\Omega)$ isomorphically onto another space of holomorphic functions on $\Omega$. We'll call this space $\expHoloL{\infty, \sigma}{Z}(\Omega)$ and give it the norm $\|f\|_{\infty, \sigma; Z} = \|\zeta^{-\sigma} e^{-\Re(Z\zeta)} f\|_\infty$, so that
@@ -586,7 +594,7 @@ In particular,
 
 \subsection{How $\softpart$ perturbs the prototype solution \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 
-In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\epsilon}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
+\textcolor{orange}{[Read through and revise]} In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\epsilon}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
 
 \begin{prop}\label{prop:smoothing}
 Under {\em Condition~\eqref{cond:eps-lambda}}, the operator $\softpart$ maps
@@ -693,10 +701,38 @@ We now know that by setting $\Lambda > \textcolor{orange}{2}\lambda_\Delta+ (1/5
 \begin{proof}[Proof of Lemma~\ref{lem:perturbed_volterra}]
 Choose $\Lambda$ large enough to ensure that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$ and $g$ belongs to $\singexp{\rho-1}{\Lambda}(\Omega)$. Proposition~\ref{prop:get-contraction} guarantees that we can do the former, given our assumptions about $\volterra$ and $\rho$, and the definition of $\singexpalg{\rho-1}(\Omega)$ guarantees that we can also do the latter. Our choice of $\Lambda$ ensures that the affine map $f \mapsto \volterra f + g$ is also a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$, and thus has a unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ by the contraction mapping theorem.
 
-To see that the fixed point is still unique in the bigger space $\singexpalg{\rho-1}(\Omega)$, first recall from Proposition~\ref{prop:exp-inclus} that we have inclusions $\singexp{\rho-1}{\Lambda'}(\Omega) \hookrightarrow \singexp{\rho-1}{\Lambda}(\Omega)$ for all $\Lambda' \le \Lambda$. Any fixed point in $\singexp{\rho-1}{\Lambda'}(\Omega)$ must map to the unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ under this inclusion. Next, observe that for any $\Lambda'' \ge \Lambda$, the map $f \mapsto \volterra f + g$ is also a contraction of $\singexp{\rho-1}{\Lambda''}(\Omega)$. The inclusion $\singexp{\rho-1}{\Lambda}(\Omega) \hookrightarrow \singexp{\rho-1}{\Lambda''}(\Omega)$ must send the unique fixed point in the smaller space to the unique fixed point in the larger one. Together, these arguments show that the fixed point is unique in $\singexpalg{\rho-1}(\Omega)$.
+To see that the fixed point is still unique in the bigger space $\singexpalg{\rho-1}(\Omega)$, first recall from Proposition~\ref{prop:inclus-ge-exp} that we have inclusions $\singexp{\rho-1}{\Lambda'}(\Omega) \hookrightarrow \singexp{\rho-1}{\Lambda}(\Omega)$ for all $\Lambda' \le \Lambda$. Any fixed point in $\singexp{\rho-1}{\Lambda'}(\Omega)$ must map to the unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ under this inclusion. Next, observe that for any $\Lambda'' \ge \Lambda$, the map $f \mapsto \volterra f + g$ is also a contraction of $\singexp{\rho-1}{\Lambda''}(\Omega)$. The inclusion $\singexp{\rho-1}{\Lambda}(\Omega) \hookrightarrow \singexp{\rho-1}{\Lambda''}(\Omega)$ must send the unique fixed point in the smaller space to the unique fixed point in the larger one. Together, these arguments show that the fixed point is unique in $\singexpalg{\rho-1}(\Omega)$.
 \end{proof}
 \begin{proof}[Proof of Theorem~\ref{thm:general_volterra}]
 %\textcolor{magenta}{[we have to change the definition of $\hardker$ in \S \ref{setting:basic} in $-\frac{q(a')}{p(a)}$.]}
+Start with the prototype solution $\solproto$ constructed in Theorem~\ref{thm:basic_volterra}, which satisfies the equation
+\[ \solproto = \hardpart \solproto. \]
+The base point for the construction can be chosen arbitrarily. Under our assumptions about $\volterra$, Theorem~\ref{thm:proto-growth} tells us that $\solproto$ is in $\singexp{\tau-1}{\lambda_0}(\Omega)$. Our goal is to find a perturbation $\solptb \in \singexpalg{\tau-1+\epsilon}(\Omega)$ that makes $\solwhole = \solproto + \solptb$ a solution of
+\begin{equation}\label{eqn:orig-homog}
+\solwhole = \volterra \solwhole.
+\end{equation}
+Observing that
+\begin{align*}
+\volterra \solproto & = \hardpart\solproto + \softpart\solproto \\
+& = \solproto + \softpart \solproto,
+\end{align*}
+we can rewrite the homogeneous equation we're trying to solve as an inhomogeneous equation for $\solptb$:
+\begin{align}
+\solproto + \solptb & = \volterra\solproto + \volterra\solptb \nonumber \\
+& = \solproto + \softpart\solproto + \volterra\solptb \nonumber \\
+\solptb & = \softpart\solproto + \volterra\solptb. \label{eqn:equiv-inhomog}
+\end{align}
+Since we know that $\solproto$ is in $\singexp{\tau-1}{\lambda_0}(\Omega)$, Proposition~\ref{prop:smoothing} tells us that the inhomogeneous term $\softpart\solproto$ is in $\singexp{\tau-1+\epsilon}{\lambda_0}(\Omega)$. Since $\tau+\epsilon > \tau$, and we've made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\epsilon}(\Omega)$. Equivalently, Equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\epsilon}(\Omega)$.
+
+Now, we just want to show that the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$ for any $\rho > \tau$.
+
+First, suppose $\rho \in (\tau, \tau+\epsilon)$. In this case, we can use the inclusion $\singexpalg{\tau-1+\epsilon}(\Omega) \hookrightarrow \singexpalg{\rho-1}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-alg} to see that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\rho-1}(\Omega)$. Lemma~\ref{lem:perturbed_volterra} then guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found in $\singexpalg{\tau-1+\epsilon}(\Omega)$.
+
+On the other hand, suppose $\rho > \tau+\epsilon$. In this case, Proposition~\ref{prop:inclus-lt-pow-alg} gives an inclusion $\singexpalg{\rho-1}(\Omega) \hookrightarrow \singexpalg{\tau-1+\epsilon}(\Omega)$. Under this inclusion, any solution of Equation~\eqref{eqn:equiv-inhomog} that we might find in $\singexpalg{\rho-1}(\Omega)$ must match the unique solution we found in $\singexpalg{\tau-1+\epsilon}(\Omega)$.
+
+%%the inhomogeneous term $\softpart\solproto$ is still in $\singexpalg{\rho-1}(\Omega)$ by Proposition~\ref{prop:inclus-lt-pow-gt-exp}, so Lemma~\ref{lem:perturbed_volterra} still guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found.
+
+\color{RoyalBlue}
 By Theorem \ref{thm:basic_volterra} and \ref{thm:proto-growth} (proved in Section \ref{sec:construction}), there exists a function $f_0\in \singexp{\tau-1}{\lambda_0}(\Omega)$ such that $\hardpart f_0= f_0$. Hence we can solve the Volterra equation 
 
 \begin{equation}\label{eqn:volterra}
