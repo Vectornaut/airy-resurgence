@@ -39,7 +39,8 @@
 \newtheorem{cor}{Corollary}
 
 % list formatting
-\setlist[itemize]{leftmargin=24mm, rightmargin=12mm}
+\newlist{conditions}{itemize}{1}
+\setlist[conditions]{leftmargin=24mm, rightmargin=12mm}
 \makeatletter
 % hat tip TeX.SE user31729
 %   https://tex.stackexchange.com/a/328393/6934
@@ -185,9 +186,9 @@ Given a complex-valued function $\varphi$ and a non-negative, real-valued functi
 \subsection{Setting}\label{setting}
 \subsubsection{The domain}\label{setting:domain}
 Throughout this paper, as described in Section~\ref{motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but doesn't contain $\zeta = 0$. We also assume:
-\begin{itemize}
+\begin{conditions}
 \cond{star}\label{cond:star} The set $\domain$ is star-shaped around $\zeta = 0$. In other words, for any $a \in \domain$, a straight path from $\zeta = 0$ to $a$ stays in $\domain$. Since $\domain$ doesn't contain $\zeta = 0$, we'll always leave that starting point out of the path.
-\end{itemize}
+\end{conditions}
 For the applications we have in mind, $\domain$ might look something like the set pictured below, which satisfies Condition~\eqref{cond:star}.
 \begin{center}
 \begin{tikzpicture}
@@ -210,11 +211,11 @@ Being a holomorphic Volterra operator means that $\hardpart$ sends each holomorp
 Being separable means that the kernel $\hardker(a, a')$ factors into a function of $a$ times a function of $a'$. We'll suppose this product can be written as a ratio
 \[ \hardker(a, a') = - \frac{q(a')}{p(a)}, \]
 where $p$ and $q$ are holomorphic functions on $\domain$. Having a regular singularity at $\zeta = 0$ means the following:
-\begin{itemize}
+\begin{conditions}
 \condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
 \[ \hardker(a, a') - \frac{\tau}{\zeta(a)} \]
 is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
-\end{itemize}
+\end{conditions}
 We'll assume that $\tau$ is real and positive.
 
 Our definition of a regular singularity implies that as $|\zeta|$ goes to zero, $|p|$ also goes to zero, while $|q|$ settles into a compact interval that doesn't include zero.
@@ -222,31 +223,31 @@ Our definition of a regular singularity implies that as $|\zeta|$ goes to zero, 
 [\textit{Proof.} Fix any $a'$ in the neighborhood where the difference above is bounded. By confining $a$ to small enough neighborhoods of $\zeta = 0$, we can make $|\tau/\zeta(a)|$ arbitrarily large, forcing $|q(a')/p(a)|$ to become arbitrarily large to satisfy the definition. Since $a'$ is fixed, the only way for this ratio to get arbitrarily large is for $|p(a)|$ to get arbitrarily small.]
 \end{verify}
 For some of our results, we'll also need to control $|p|$ and $|q|$ in various ways as $|\zeta|$ goes to infinity.
-\begin{itemize}
+\begin{conditions}
 \condconst{slow}{\lambda_0}\label{cond:slow} We can find constants $\lambda_p$ and $\lambda_\text{ratio}$ with
 \begin{align*}
 \left|\frac{1}{p}\right| & \lesssim e^{\lambda_p |\zeta|} &
 \left|\frac{q}{p}\right| & \le \lambda_\text{ratio}
 \end{align*}
 outside some neighborhood of $\zeta = 0$ in $\Omega$. Note that this only constrains the ratio of $p$ and $q$ when they're evaluated at the same point. The constants will only enter our reasoning through their sum, $\lambda_0 = \lambda_p + \lambda_\text{ratio}$.
-\end{itemize}
+\end{conditions}
 This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
-\begin{itemize}
+\begin{conditions}
 \condconst{diag$_0$}{\lambda_\Delta}\label{cond:diag-basic} We can find a constant $\lambda_\Delta$ with
 \[ \big| \hardker(a, a') \big| \leq \,  \textcolor{magenta}{C_\Delta} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 over all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' \in \domain$.
 %%outside a neighborhood of $\zeta(a) = 0$ in $\domain^2$.
-\end{itemize}
+\end{conditions}
 \subsubsection{The perturbed operator}\label{setting:perturbed}
 
 Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +\softpart$. The perturbation $\softpart$ doesn't have a separable kernel,\footnote{Unless $\softpart$ is zero, of course.} but does have a smoothing effect that counteracts the singularity of $\hardpart$ (as we'll show in Proposition \ref{prop:smoothing}). To get the smoothing effect, we'll require the kernel $\softker$ of $\softpart$ to vanish to some order $\epsilon > 0$ on the diagonal in $\Omega^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
 
 Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We'll allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we won't allow any sharper singularity. We'll also put an exponential bound on how fast $\softker$ grows away from the diagonal, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we'll require:
-\begin{itemize}
+\begin{conditions}
 \condconst{diag$_\star$}{\epsilon, \lambda_\Delta}\label{cond:eps-lambda} We have
 \[ \big| \softker(a, a') \big| \leq \textcolor{magenta}{C_k}\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$.
-\end{itemize}
+\end{conditions}
 Notice that this condition prevents $\softker$ from being separable---unless it's zero, of course.
 
 Like $\hardker$, the combined kernel $k = \hardker + \softker$ of $\volterra$ grows in a controlled way when its arguments are near $\zeta = 0$, and when the difference between its arguments grows. We'll provide specific bounds in Section~\ref{sec:bounds on k}. 
