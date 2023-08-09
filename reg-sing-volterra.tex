@@ -790,7 +790,7 @@ Equations of the form \eqref{eqn:level 1 ode} are called {\em level $1$} by Ecal
 
 %Let $\mathcal{E}_{\alpha}^{\theta}$ \textcolor{orange}{[replace with a function space from this paper]} be the space of functions that are subexponential on $\Gamma_{\alpha}^{\theta}$, integrable at the starting point $\zeta=\alpha$, and locally integrable throughout. 
 
-Let $\Omega_{a}$ be a simply connected open set $\Omega_a\subset\C$ that touches but doesn't contain $\zeta=a$ and let $\Gamma_a^\theta$ be the ray that leaves $a$ at angle $\theta$. If $\Gamma_a^\theta$ is contained in $\Omega_a$, the Laplace transform $\laplace_{\zeta, a}^{\theta} $ maps functions in $\singexp{\sigma}{\Lambda}(\Omega_a)$ with $\sigma>-1$ and $\lambda>0$ to holomorphic functions in the half plane $\Re(z e^{-i\theta}) > 0$ ~\cite[Section 5.6]{diverg-resurg-i}. It is defined by the formula
+Let $\Omega_{a}$ be a simply connected open set $\Omega_a\subset\C$ that touches but doesn't contain $\zeta=a$ and let $\Gamma_a^\theta$ be the ray that leaves $a$ at angle $\theta$. If $\Gamma_a^\theta$ is contained in $\Omega_a$, the Laplace transform $\laplace_{\zeta, a}^{\theta} $ maps functions in $\singexp{\sigma}{\Lambda}(\Omega_a)$ with $\sigma>-1$ and $\textcolor{magenta}{\Lambda}>0$ \textcolor{magenta}{[I don't think we need $\Lambda > 0$. For $\Lambda \le 0$, the Laplace transform should still produce functions on the half-plane $\Re(z e^{-i\theta}) > \Lambda$, which in this case will include $z = 0$]} to holomorphic functions in the half plane $\Re(z e^{-i\theta}) > 0$~\cite[Section 5.6]{diverg-resurg-i} \textcolor{magenta}{[I think we want $\Re(z e^{-i\theta}) > \Lambda$]}. It is defined by the formula
 
 \begin{equation}\label{laplace:int} 
     \laplace_{\zeta, a}^{\theta} f := \int_{\Gamma_{a}^\theta} e^{-z\zeta} f\, d\zeta
@@ -803,9 +803,9 @@ where $z$ is the frequency function.
 \subsubsection{Action on integral operators}\label{L-int-op}
 %%For $\nu \in (-\infty, 1)$, the fractional integral $\partial^{\nu-1}_{x \text{ from } 0}$ is defined by
 %%\[ \partial^{\nu-1}_{x,0} f(x) \defeq \frac{1}{\Gamma(1-\nu)} \int_0^x (x-x')^{-\nu} f(x')\,dx'. \]
-For $\nu \in (-\infty, 1)$, the fractional integral $\partial^{\nu-1}_{\zeta, a}$ is defined by
+For $\nu \in (-\infty, 1)$, the fractional integral $\partial^{\nu-1}_{\zeta, a}$ is defined by \textcolor{orange}{[are we changing the definition of $\partial^{\nu-1}_{\zeta, a}$ so that $a$ is a point, rather than a $\zeta$ value?]}
 \[ [\partial^{\nu-1}_{\zeta, a} f](p) := \frac{1}{\Gamma(1-\nu)} \int_{a}^p \big(\zeta(p)-\zeta\big)^{-\nu} f\,d\zeta, \]
-where $p$ is any point on the position domain $\Omega$. 
+where $p$ is any point on the position domain $\Omega$ \textcolor{orange}{[let's use a different letter here, since $p$ is already used; maybe $b$ for the base point and $a$ for the evaluation point, to match our discussion of $f_0$]}.
 
 It obeys the expected semigroup law \cite[Section  1.3]{mladenov2014advanced}
 \begin{align*}
@@ -825,7 +825,7 @@ and agrees with ordinary repeated integration when $\nu$ is an integer (see equa
 %\fracderiv{\lambda}{\zeta}{0}\,\fracderiv{\mu}{\zeta}{0} & = \fracderiv{\lambda+\mu}{\zeta}{0} & \lambda \in \R \smallsetminus \{0, 1, 2, 3, \ldots\},\quad\mu \in (-\infty, 0).
 %\end{align*}
 
-Using a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, one can show that $\partial^{-\lambda}_{\zeta,a} \varphi \in \singexp{\sigma}{\Lambda}(\Omega_a)$ and
+Using a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, one can show that $\partial^{-\lambda}_{\zeta,a} \varphi \in \singexp{\sigma}{\Lambda}(\Omega_a)$ \textcolor{orange}{[under what condition on $\varphi$? can we do this with Proposition~\ref{prop:smoothing}?]} and
 \[ \laplace_{\zeta,a}\,\partial^{-\lambda}_{\zeta} \varphi = z^{-\lambda} \laplace_{\zeta, a} \varphi \]
 for all $\lambda \in (0, \infty)$. This generalizes the Laplace transform's action on derivatives: when $\varphi \in \singexp{\sigma}{\Lambda}(\Omega_a)$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
 \begin{equation}%%\label{id:L-mult}
@@ -863,7 +863,7 @@ We can now state and prove the main result of this section, namely that the Volt
     There exists a unique solution of $\hat{P}_\alpha\hat{\psi}_\alpha=0$ such that 
     \[\hat{\psi}_\alpha = f_{0,\alpha}+ f_{\star,\alpha}\]
 
-    where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
+    where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ \textcolor{magenta}{[to get this from our uniqueness result, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]} and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
 \end{thm}
 
 \begin{proof}
