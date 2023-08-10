@@ -237,7 +237,7 @@ outside some neighborhood of $\zeta = 0$ in $\Omega$. Note that this only constr
 This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
 \begin{conditions}
 \condconst{diag$_0$}{\lambda_\Delta}\label{cond:diag-basic} We can find a constant $\lambda_\Delta$ with
-\[ \big| \hardker(a, a') \big| \leq \,  \textcolor{magenta}{C_\Delta} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
+\[ \big| \hardker(a, a') \big| \lesssim e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 over all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' \in \domain$.
 %%outside a neighborhood of $\zeta(a) = 0$ in $\domain^2$.
 \end{conditions}
@@ -248,7 +248,7 @@ Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +
 Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We'll allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we won't allow any sharper singularity. We'll also put an exponential bound on how fast $\softker$ grows away from the diagonal, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we'll require:
 \begin{conditions}
 \condconst{diag$_\star$}{\epsilon, \lambda_\Delta}\label{cond:eps-lambda} We have
-\[ \big| \softker(a, a') \big| \leq \textcolor{magenta}{C_k}\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
+\[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$.
 \end{conditions}
 Notice that this condition prevents $\softker$ from being separable---unless it's zero, of course.
@@ -267,21 +267,6 @@ has the {\em prototype solution}
 Changing the base point $b \in \domain$ just multiplies $f_0$ by a non-zero constant.
 \end{thm}
 We'll prove this result in Section~\ref{sec:construction}.
-\color{Tomato}
-\begin{thm}%%\label{thm:basic_volterra}
-Let $\hardpart$ be the operator described in Section~\ref{setting:basic} and assume it satisfies {\em Condition \eqref{cond:sing}}. Then the regular singular Volterra equation
-\[ f = \hardpart f \]
-have the {\em prototype solution}
-\begin{equation}%%\label{eqn:test_solution}
-f_0(a)=\frac{p(b)}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right).
-\end{equation}
-Changing the base point $b \in \domain$ just multiplies $f_0$ by a non-zero constant.
-
-The magnitude $|f_0|$ is bounded by a constant multiple of $|\zeta|^{\tau-1}$ near $\zeta = 0$.
-
-%%The solution $f_0$ scales like $\zeta^{\tau-1}$ as $\zeta$ goes to zero. To be precise, as $\zeta$ goes to zero, $|f_0/\zeta^{\tau-1}|$ settles into a compact interval that doesn't include zero.
-\end{thm}
-We'll prove this result in Section~\ref{sec:proto-construction-regularity}. Proposition~\ref{prop:construction} shows that $f_0$ is a solution, and Proposition~\ref{prop:asymptotic at zero} bounds it as desired near $\zeta = 0$.
 \color{RoyalBlue}
 \begin{rmk}
 If $q$ has a limit at $\zeta = 0$, the solution $f_0$ from Theorem~\ref{thm:basic_volterra} can be written as a constant mutiple of $\zeta^{\tau-1}$ plus a function which is $O(\zeta^\tau)$ at $\zeta = 0$.
@@ -297,12 +282,6 @@ Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a smal
 Suppose $\hardpart$ also satisfies {\em Condition~\eqref{cond:slow}}. Then $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$ defined in Section~\ref{fn-spaces}.
 \end{thm}
 We'll prove this result in Section~\ref{sec:asymptotics}.
-\color{Tomato}
-\begin{thm}%%\label{thm:proto-growth}
-Suppose $\hardpart$ satisfies both {\em Condition~\eqref{cond:sing}} and {\em Condition~\eqref{cond:slow}} from Section~\ref{setting:basic}. Then the solution $f_0$ from {\em Theorem~\ref{thm:basic_volterra}} is uniformly of exponential type $\lambda_0$.\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{\Lambda+\varepsilon} $. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} In light of the behavior near $\zeta = 0$ described in, this tells us that $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$ defined in Section~\ref{fn-spaces}.
-\end{thm}
-We'll prove this result in Section~\ref{sec:proto-construction-regularity}, where it's restated as Proposition~\ref{prop:asymptotic at infinity}.
-\color{black}
 \begin{thm}\label{thm:general_volterra}
 In the perturbed operator $\volterra = \hardpart +\softpart$ from Section~\ref{setting}, suppose the prototypical part $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}}, \eqref{cond:slow}, and \eqref{cond:diag-basic} from Section~\ref{setting:basic}, and the perturbation $\softpart$ satisfies Condition \eqref{cond:eps-lambda} from Section~\ref{setting:perturbed}. Then the Volterra equation
 \[f = \volterra f\]
@@ -445,7 +424,31 @@ For each $\Lambda'$, we can get a continuous inclusion $\singexp{\sigma'}{\Lambd
 \end{itemize}
 \end{brainstorm}
 \subsection{Bounds on the perturbed kernel}\label{sec:bounds on k}
- When $\hardpart$ satisfies Condition \eqref{cond:sing} and $\softpart$ satisfies Condition \eqref{cond:eps-lambda}, we can estimate the kernel $k$ near $\zeta=0$. Let $\varepsilon>0$, we can choose $\delta$ such that for every $\zeta(a)<\delta$ and $\zeta(a') <\delta$
+ When $\hardpart$ satisfies Condition \eqref{cond:sing} and $\softpart$ satisfies Condition \eqref{cond:eps-lambda}, we can estimate the kernel $k$ near $\zeta=0$. On the one hand, we can make the kernel $\hardker$ arbitrary close to $\frac{\tau}{|\zeta(a)|}$, by letting $a,a'$ close enough to $\zeta=0$. If we choose $\varepsilon>0$, we can choose $\delta$ such that for every $\zeta(a)<\delta$ and $\zeta(a') <\delta$
+
+\begin{align*}
+    |\hardker(a,a')| &\leq \left\vert\hardker(a,a')-\frac{\tau}{\zeta(a)} \right\vert +\frac{\tau}{|\zeta(a)|}\\
+    &\leq \varepsilon +\frac{\tau}{|\zeta(a)|} 
+\end{align*}
+
+On the other hand, we can make the kernel $\softker$ arbitrary small by letting $a,a'$ close enough to $\zeta=0$. Assuming $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$, by Condition \eqref{cond:eps-lambda}
+
+\begin{align*}
+    |\softker(a,a')|&\lesssim\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
+    &\lesssim\frac{(2\delta)^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta (2\delta)}
+\end{align*}
+
+Hence, collecting these results together, if $a,a'$ are close enough to $\zeta=0$, there exists a constant $\sigma>\tau$ such that 
+
+\[
+    |k(a,a')|\leq \frac{\sigma}{|\zeta(a)|}
+\]
+
+We'll use this fact is Sections \ref{sec:V is a contraction} and \ref{sec:existence and uniqueness}. 
+
+ \color{Tomato}
+ 
+ Let $\varepsilon>0$, we can choose $\delta$ such that for every $\zeta(a)<\delta$ and $\zeta(a') <\delta$
 
 \[ \left\vert\hardker(a,a')-\frac{\tau}{\zeta(a)} \right\vert \leq \varepsilon\]
 
@@ -460,8 +463,28 @@ Then,
 
 The constant $\sigma:=\varepsilon\delta+\tau+ \textcolor{magenta}{C_k} (2\delta)^\epsilon e^{2\delta \lambda_\Delta} > \tau $, and by choosing $\delta$ small enough we can make $\sigma-\tau$ arbitrary small. We will use this fact in Sections \ref{sec:V is a contraction} and \ref{sec:existence and uniqueness}.
 
+\color{black}
+
 Similarly, we can estimate the kernel $k$ far from $\zeta=0$. Assuming $\hardpart$ satisfies Condition \eqref{cond:diag-basic} and $\softpart$ satisfies Condition \eqref{cond:eps-lambda}, for $|\zeta(a)|\geq \delta$ and for every $a'\in\Omega$
 
+\begin{align*}
+    |k(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
+    &\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} + \frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
+    &\lesssim \big(1 + \delta |\zeta(a)-\zeta(a')|^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
+    %&\leq  \big(\textcolor{magenta}{C_\Delta} + \textcolor{magenta}{C_k}\, |\zeta(a)|^{\epsilon-1}\left\vert 1-\frac{\zeta(a')}{\zeta(a)}\right\vert^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
+\end{align*}
+Since the growth of $|\zeta(a)-\zeta(a')|^\epsilon$ is polynomial, we can roughly estimate it by an exponential factor like 
+
+\[|\zeta(a)-\zeta(a')|^\epsilon\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} \]
+
+We deduce that 
+
+\[ |k(a,a')| \leq M\, e^{2 \lambda_\Delta |\zeta(a)-\zeta(a')|} \]
+
+for some constant $M>0$. 
+
+
+\color{Tomato}
 \begin{align*}
     |k(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
     &\leq \textcolor{magenta}{C_\Delta} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} +\textcolor{magenta}{C_k}\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
@@ -491,6 +514,8 @@ with $M\textcolor{magenta}{(a')} = \textcolor{magenta}{C_\Delta} + (\delta^{\eps
         &\leq \delta^{\epsilon-1}+ \delta |\zeta(a')|^\epsilon 
     \end{align*}
 \end{verify}
+\color{black}
+
 
 %notice that $\left\vert 1-\frac{\zeta(a')}{\zeta(a)}\right\vert^\epsilon$ is bounded by a constant which depends on $|\zeta(a')|$ (and of course on $\delta$ and $\epsilon$)
 
@@ -544,12 +569,12 @@ The proof follows the argument we use at the end of the proof of proposition \re
 
 \[ \psi_0(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
 
-is bounded by $C_1 \, |\zeta(a)|^\tau \, \exp\big(\tfrac{3}{2}\varepsilon\delta\big)$. Therefore, assuming $b'\in\Omega$ and $q(b') \neq 0$
+is bounded by $ |\zeta(a)|^\tau$. Therefore, assuming $b'\in\Omega$ and $q(b') \neq 0$
 
 \begin{align*}
-|f_0| &  \leq C_1 |\zeta(a)|^\tau \, \exp\big(\tfrac{3}{2}\varepsilon\delta\big) \left\vert  \frac{p(b)}{p(a)}\right\vert \\
-& =  C_2 |\zeta(a)|^\tau \, \left\vert\frac{p(q)}{q(b')} \right\vert \, \left\vert \frac{q(b')}{p(a)} \zeta(a)\right\vert \, |\zeta(a)|^{-1} \\
-&  \leq C_3 |\zeta(a)|^{\tau-1}.
+|f_0| &  \lesssim |\zeta(a)|^\tau  \left\vert  \frac{p(b)}{p(a)}\right\vert \\
+& \lesssim |\zeta(a)|^\tau \, \left\vert\frac{p(q)}{q(b')} \right\vert \, \left\vert \frac{q(b')}{p(a)} \zeta(a)\right\vert \, |\zeta(a)|^{-1} \\
+&  \lesssim |\zeta(a)|^{\tau-1}.
 \end{align*}
 
 The last step uses Condition~\eqref{cond:sing}. 
@@ -784,7 +809,7 @@ Equations of the form \eqref{eqn:level 1 ode} are called {\em level $1$} by Ecal
 
 %Let $\mathcal{E}_{\alpha}^{\theta}$ \textcolor{orange}{[replace with a function space from this paper]} be the space of functions that are subexponential on $\Gamma_{\alpha}^{\theta}$, integrable at the starting point $\zeta=\alpha$, and locally integrable throughout. 
 
-Let $\domain_\alpha$ be a simply connected open set $\domain_\alpha\subset\C$ that touches but doesn't contain $\zeta=\alpha$, and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray that leaves $\zeta=\alpha$ at angle $\theta$. If $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, the Laplace transform $\laplace_{\zeta, a}^{\theta} $ maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions in the half plane $\Re(z e^{-i\theta}) > \Lambda$~\cite[Section 5.6]{diverg-resurg-i}. It is defined by the formula
+Let $\domain_\alpha$ be a simply connected open set $\domain_\alpha\subset\C$ that touches but doesn't contain $\zeta=\alpha$, and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray that leaves $\zeta=\alpha$ at angle $\theta$. If $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, the Laplace transform $\laplace_{\zeta, \alpha}^{\theta} $ maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions in the half plane $\Re(z e^{-i\theta}) > \Lambda$~\cite[Section 5.6]{diverg-resurg-i}. It is defined by the formula
 
 \begin{equation}\label{laplace:int} 
 \laplace_{\zeta, \alpha}^{\theta} f := \int_{\Gamma_{\zeta,\alpha}^\theta} e^{-z\zeta} f\, d\zeta
@@ -908,30 +933,30 @@ Then, the proof will follow by Theorem \ref{thm:general_volterra}, once we prove
     \item[$\bullet$]  $\softpart^\alpha$ satisfies Condition \eqref{cond:eps-lambda}: recall that all functions $R_r(z^{-1})$ are holomorphic for $|z|>A$, 
 
     \begin{align*}
-        \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{| R_{r,j}|}{j!} \, \frac{|\zeta(a)-\zeta(a')|^j}{p(\zeta(a))}|\zeta(a')|^r  &\leq C_1 \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{A^j}{j!} \, \frac{|\zeta(a)-\zeta(a')|^{j+1}}{|p(\zeta(a))|}|\zeta(a')|^r \\
-        & =C_1 |\zeta(a)-\zeta(a')| \sum_{r=0}^{d-1} \frac{|\zeta(a')|^r}{|p(\zeta(a))|}\,  e^{A |\zeta(a)-\zeta(a')|}\\
-        &=C_1 |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert \sum_{r=0}^{d-1} \frac{|\zeta'|^r}{|q(\zeta(a'))|} \, e^{A |\zeta(a)-\zeta(a')|}\\
-        &\leq C_2 |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert \,  e^{A |\zeta(a)-\zeta(a')|}
+        \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{| R_{r,j}|}{j!} \, \frac{|\zeta(a)-\zeta(a')|^j}{|p(\zeta(a))|}|\zeta(a')|^r  &\lesssim \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{A^j}{j!} \, \frac{|\zeta(a)-\zeta(a')|^{j+1}}{|p(\zeta(a))|}|\zeta(a')|^r \\
+        & \lesssim |\zeta(a)-\zeta(a')| \sum_{r=0}^{d-1} \frac{|\zeta(a')|^r}{|p(\zeta(a))|}\,  e^{A |\zeta(a)-\zeta(a')|}\\
+        &\lesssim |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert \sum_{r=0}^{d-1} \frac{|\zeta'|^r}{|q(\zeta(a'))|} \, e^{A |\zeta(a)-\zeta(a')|}\\
+        &\lesssim |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert \,  e^{A |\zeta(a)-\zeta(a')|}
     \end{align*}
 now we notice that $\Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert$ is bounded for $a,a'$ far from $\alpha$ by the argument we use in the proof of Condition \eqref{cond:diag-basic}. If $\zeta(a), \zeta(a')$ are close to $\alpha$ we can use Condition \eqref{cond:sing}
 
-\[    \left\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\right\vert  \leq \left\vert \frac{q(\zeta(a'))}{p(\zeta(a))} -\frac{\tau_\alpha}{\zeta(a)-\alpha}\right\vert + \frac{\tau_\alpha}{|\zeta(a)-\alpha|}\leq C +  \frac{\tau_\alpha}{|\zeta(a)-\alpha|} \]
+\[    \left\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\right\vert  \leq \left\vert \frac{q(\zeta(a'))}{p(\zeta(a))} -\frac{\tau_\alpha}{\zeta(a)-\alpha}\right\vert + \frac{\tau_\alpha}{|\zeta(a)-\alpha|}\lesssim 1 +  \frac{\tau_\alpha}{|\zeta(a)-\alpha|} \]
 
 We conclude that 
 
-\[\left\vert \frac{k_R(a,a')}{p(\zeta(a))}\right\vert\textcolor{magenta}{\lesssim} \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a)-\alpha|}\, e^{2A |\zeta(a)-\zeta(a')} | \]
+\[\left\vert \frac{k_R(a,a')}{p(\zeta(a))}\right\vert \lesssim \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a)-\alpha|}\, e^{2A |\zeta(a)-\zeta(a')|}  \]
 
 and $\epsilon=1$.
 
 \end{enumerate}
 
-Finally, we look closer to the prototype solution $f_{0,\alpha}$ from Theorem \ref{thm:basic_volterra}, Equation \eqref{eqn:test_solution}. Following the computation we did above we get that 
+%Finally, we look closer to the prototype solution $f_{0,\alpha}$ from Theorem \ref{thm:basic_volterra}, Equation \eqref{eqn:test_solution}. %Following the computation we did above we get that 
 
-\begin{align*}
-    f_{0,\alpha}(a)&=\frac{p(b)}{p(a)} \exp\left(-\int_b^a\frac{q}{p} d\zeta\right)\\
-    &=\frac{p(b)}{p(a)} \frac{(\zeta(a)-\alpha)^{\tau_\alpha}}{(\zeta(b)-\alpha)^{\tau_\alpha}} \exp\left(-\int_b^a\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} d\zeta\right)\\
-    &=(\zeta(a)-\alpha)^{\tau_\alpha-1} \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}} \frac{1}{p'(\alpha)+b_2'(\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2}
-\end{align*}
+%\begin{align*}
+ %   f_{0,\alpha}(a)&=\frac{p(b)}{p(a)} \exp\left(-\int_b^a\frac{q}{p} d\zeta\right)\\
+  %  &=\frac{p(b)}{p(a)} \frac{(\zeta(a)-\alpha)^{\tau_\alpha}}{(\zeta(b)-\alpha)^{\tau_\alpha}} \exp\left(-\int_b^a\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} d\zeta\right)\\
+  %  &=(\zeta(a)-\alpha)^{\tau_\alpha-1} \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}} \frac{1}{p'(\alpha)+b_2'(\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2}
+%\end{align*}
 
 \end{proof}
 
