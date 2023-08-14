@@ -491,7 +491,7 @@ We'll fill out the details of this argument in Section~\ref{sec:existence and un
 \subsection{Bounds on the perturbed kernel}\label{sec:bounds on k}
 \subsubsection{Overview}
 The conditions on $\hardker$ and $\softker$ described in Sections \ref{setting:basic} and \ref{setting:perturbed} can be combined into convenient bounds on the kernel $\kerwhole = \hardker + \softker$ of $\volterra$. We'll use these bounds in Section~\ref{sec:V is a contraction}. \textcolor{orange}{[Are these bounds actually used in Section~\ref{sec:existence and uniqueness}, or anywhere else? If not, maybe we should move this stuff into Section~\ref{sec:V is a contraction} after all.]}
-\subsubsection{Bounds near $\zeta = 0$}
+\subsubsection{Bounds near the origin}
 When $\hardpart$ satisfies Condition~\eqref{cond:sing} and $\softpart$ satisfies Condition~\eqref{cond:eps-lambda}, we can estimate the kernel $\kerwhole$ near $\zeta=0$.
 
 Condition~\eqref{cond:sing} doesn't stop $|\hardker(a, a')|$ from exceeding $\frac{\tau}{|\zeta(a)|}$. However, by keeping $a$ and $a'$ close to $\zeta = 0$, we can make sure that $|\hardker(a, a')|$ only exceeds $\frac{\tau}{|\zeta(a)|}$ by an arbitrariy small margin. Condition~\eqref{cond:sing} tells us that when $\delta > 0$ is small enough, there's a constant $C$ with
@@ -514,26 +514,19 @@ over all $a, a' \in \domain$ with $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delt
 Putting these results together, we see that for any $\sigma > \tau$, we can ensure that
 \[ |\kerwhole(a, a')| \le \frac{\sigma}{|\zeta(a)|} \]
 by keeping $a$ and $a'$ close enough to $\zeta = 0$.
-\subsubsection{Bounds far from the diagonal}
-Similarly, we can estimate the kernel $k$ far from $\zeta=0$. Assuming $\hardpart$ satisfies Condition \eqref{cond:diag-basic} and $\softpart$ satisfies Condition \eqref{cond:eps-lambda}, for $|\zeta(a)|\geq \delta$ and for every $a'\in\Omega$
-
+\subsubsection{Bounds away from the origin}
+We can also bound the kernel $\kerwhole$ when $a$ is kept away from $\zeta = 0$. Suppose $\hardpart$ satisfies Condition~\eqref{cond:diag-basic} and $\softpart$ satisfies Condition~\eqref{cond:eps-lambda}. Then
 \begin{align*}
-    |k(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
-    &\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} + \frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
-    &\lesssim \big(1 + \delta |\zeta(a)-\zeta(a')|^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
-    %&\leq  \big(\textcolor{magenta}{C_\Delta} + \textcolor{magenta}{C_k}\, |\zeta(a)|^{\epsilon-1}\left\vert 1-\frac{\zeta(a')}{\zeta(a)}\right\vert^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
+|\kerwhole(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
+&\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} + \frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
+&\lesssim \big(1 + \delta^{-1} |\zeta(a)-\zeta(a')|^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
+%&\leq  \big(\textcolor{magenta}{C_\Delta} + \textcolor{magenta}{C_k}\, |\zeta(a)|^{\epsilon-1}\left\vert 1-\frac{\zeta(a')}{\zeta(a)}\right\vert^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
 \end{align*}
-Since the growth of $|\zeta(a)-\zeta(a')|^\epsilon$ is polynomial, we can roughly estimate it by an exponential factor like 
-
-\[|\zeta(a)-\zeta(a')|^\epsilon\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} \]
-
-We deduce that 
-
-\[ |k(a,a')| \leq M\, e^{2 \lambda_\Delta |\zeta(a)-\zeta(a')|} \]
-
-for some constant $M>0$. 
-
-
+over all $a, a' \in \domain$ with  $|\zeta(a)| \ge \delta$. Since $|\zeta(a)-\zeta(a')|^\epsilon$ has power-law growth, we can bound it with any exponential. In other words, for any $\lambda > \lambda_\Delta$,
+\[|\zeta(a)-\zeta(a')|^\epsilon\lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \]
+over all $a, a' \in \domain$. It follows that
+\[ |\kerwhole(a,a')| \lesssim e^{\lambda |\zeta(a)-\zeta(a')|} \]
+over all $a, a' \in \domain$ with  $|\zeta(a)| \ge \delta$.
 %\color{Tomato}
 %\begin{align*}
  %   |k(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
@@ -725,31 +718,31 @@ for any integration path that stays within $\near$. Taking advantage of the fact
 \end{align*}
 Since we set $\sigma < \rho$, this brings us halfway to proving Proposition~\ref{prop:get-contraction}.
 \subsubsection{Away from the origin}\label{far-bound}
-Going back to the end of Section~\ref{first-steps}, suppose that $a \in \far$. We know from Conditions \eqref{cond:diag-basic} and \eqref{cond:eps-lambda} that we can find a constant $M$ for which
-\[ |k(a, \cdot)| \le M e^{\textcolor{orange}{2}\lambda_\Delta |\zeta(a) - \zeta|} \]
-for all $a \in \far$ (see Section \ref{sec:bounds on k}). Note that only the first argument of $k$ has its domain restricted; this bound holds throughout $\domain$ in the second argument. Applying this bound, we learn that
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} M e^{\textcolor{orange}{2}\lambda_\Delta |\zeta(a) - \zeta|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|. \]
+Going back to the end of Section~\ref{first-steps}, suppose that $a \in \far$. Choosing some $\lambda > \lambda_\Delta$, as discussed in Section~\ref{sec:bounds on k}, we can use Conditions \eqref{cond:diag-basic} and \eqref{cond:eps-lambda} to find a constant $M$ for which
+\[ |k(a, \cdot)| \le M e^{\lambda |\zeta(a) - \zeta|} \]
+for all $a \in \far$. Note that only the first argument of $k$ has its domain restricted; this bound holds throughout $\domain$ in the second argument. Applying this bound, we learn that
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le \|\varphi\|_{\rho-1, \Lambda} \int_0^{\zeta(a)} M e^{\lambda |\zeta(a) - \zeta|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|. \]
 Let's again use the straight integration path $\zeta = t \zeta(a)$, with $t \in (0, 1]$. Along this path, $|\zeta(a) - \zeta| = |\zeta(a)| - |\zeta|$, allowing us to combine the exponential factors in our bound:
 \begin{align*}
-|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \|\varphi\|_{\rho-1, \Lambda} \int_0^1 M e^{\textcolor{orange}{2}\lambda_\Delta |\zeta(a)|(1 - t)}\,t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
-& \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \textcolor{orange}{2}\lambda_\Delta)|\zeta(a)|(1 - t)}\;dt.
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \|\varphi\|_{\rho-1, \Lambda} \int_0^1 M e^{\lambda |\zeta(a)|(1 - t)}\,t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
+& \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)|\zeta(a)|(1 - t)}\;dt.
 \end{align*}
-Let's set $\Lambda > \lambda_\Delta$, ensuring that the exponential factor shrinks as $|\zeta(a)|$ grows. Then we can make our bound uniform over all $a \in \far$, since $|\zeta(a)| \ge \textcolor{orange}{\delta}$ for these points:
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \textcolor{orange}{2}\lambda_\Delta)\textcolor{orange}{\delta}(1 - t)}\;dt. \]
+Let's set $\Lambda > \lambda$, ensuring that the exponential factor shrinks as $|\zeta(a)|$ grows. Then we can make our bound uniform over all $a \in \far$, since $|\zeta(a)| \ge \textcolor{orange}{\delta}$ for these points:
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\textcolor{orange}{\delta}(1 - t)}\;dt. \]
 
-We can make this bound less than one, as required to show that $\volterra$ is a contraction, by increasing $\Lambda$. To see this in the trickiest case, where $\rho < 1$, it helps to look at the beginning and end of the integration separately. At the beginning---for $t \in \big(0, \tfrac{1}{5}\big]$, say---we can use a worst-case estimate on the exponential factor:
+We can make this bound less than one, as required to show that $\volterra$ is a contraction, by increasing $\Lambda$. To see this in the trickiest case, where $\rho < 1$, it helps to look at the beginning and end of the integration path separately. At the beginning of the path---for $t \in \big(0, \tfrac{1}{5}\big]$, say---we can use a worst-case estimate on the exponential factor:
 \begin{align*}
-\int_0^{1/5} t^{\rho-1}\,e^{-(\Lambda - \textcolor{orange}{2} \lambda_\Delta)\textcolor{orange}{\delta}(1 - t)}\;dt & \le e^{-\frac{4}{5}(\Lambda -\textcolor{orange}{2} \lambda_\Delta)\textcolor{orange}{\delta}} \int_0^{1/5} t^{\rho-1}\;dt \\
-& = e^{-\frac{4}{5}(\Lambda \textcolor{orange}{2} \lambda_\Delta)\textcolor{orange}{\delta}}\,\tfrac{1}{\rho} \big(\tfrac{1}{5}\big)^\rho.
+\int_0^{1/5} t^{\rho-1}\,e^{-(\Lambda - \lambda)\textcolor{orange}{\delta}(1 - t)}\;dt & \le e^{-\frac{4}{5}(\Lambda -\lambda)\textcolor{orange}{\delta}} \int_0^{1/5} t^{\rho-1}\;dt \\
+& = e^{-\frac{4}{5}(\Lambda - \lambda)\textcolor{orange}{\delta}}\,\tfrac{1}{\rho} \big(\tfrac{1}{5}\big)^\rho.
 \end{align*}
-At the end, we instead use a worst-case estimate on $t^{1-\rho}$:
+At the end of the path, we instead use a worst-case estimate on $t^{1-\rho}$:
 \begin{align*}
-\int_{1/5}^1 t^{\rho-1}\,e^{-(\Lambda - \textcolor{orange}{2}\lambda_\Delta)\textcolor{orange}{\delta}(1 - t)}\;dt & \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \int_{1/5}^1 e^{-(\Lambda -\textcolor{orange}{2} \lambda_\Delta)\textcolor{orange}{\delta}(1 - t)}\;dt \\
-& = \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \textcolor{orange}{2}\lambda_\Delta)\textcolor{orange}{\delta}}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \textcolor{orange}{2}\lambda_\Delta)\textcolor{orange}{\delta}} \right] \\
-& \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \textcolor{orange}{2}\lambda_\Delta)\textcolor{orange}{\delta}}.
+\int_{1/5}^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\textcolor{orange}{\delta}(1 - t)}\;dt & \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \int_{1/5}^1 e^{-(\Lambda - \lambda)\textcolor{orange}{\delta}(1 - t)}\;dt \\
+& = \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)\textcolor{orange}{\delta}}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \lambda)\textcolor{orange}{\delta}} \right] \\
+& \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)\textcolor{orange}{\delta}}.
 \end{align*}
 
-We now know that by setting $\Lambda > \textcolor{orange}{2}\lambda_\Delta+ (1/5)^{\rho-1 \textcolor{orange}{\delta}^{-1}}$ (in fact $1/5$ can be replaced by any number in $(0,1)$), we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. This completes our proof of Proposition~\ref{prop:get-contraction}.
+We now know that by setting $\Lambda > \lambda + \textcolor{orange}{\delta}^{-1} \max\{1, (1/5)^{\rho-1}\}$ (in fact $1/5$ can be replaced by any number in $(0,1)$), we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. \textcolor{orange}{[I think this explicit bound only accounts for the integral over the end of the path, $t \in [1/5, 1)$. To ensure that the whole integral is less than $1$, we also need to look at the integral over the beginning of the path, $t \in (0, 1/5]$, which is calculated above. To me, that seems to make the bound too complicated to be worth stating---but maybe you can find a simplification.]} This completes our proof of Proposition~\ref{prop:get-contraction}.
 \subsection{Existence and uniqueness of the perturbed solution \\ \textit{(proof of Lemma~\ref{lem:perturbed_volterra} and Theorem~\ref{thm:general_volterra})}}\label{sec:existence and uniqueness}
 \begin{proof}[Proof of Lemma~\ref{lem:perturbed_volterra}]
 Choose $\Lambda$ large enough to ensure that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$ and $g$ belongs to $\singexp{\rho-1}{\Lambda}(\Omega)$. Proposition~\ref{prop:get-contraction} guarantees that we can do the former, given our assumptions about $\volterra$ and $\rho$, and the definition of $\singexpalg{\rho-1}(\Omega)$ guarantees that we can also do the latter. Our choice of $\Lambda$ ensures that the affine map $f \mapsto \volterra f + g$ is also a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$, and thus has a unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ by the contraction mapping theorem.
@@ -971,13 +964,18 @@ and $\epsilon=1$.
 
 \end{enumerate}
 
-%Finally, we look closer to the prototype solution $f_{0,\alpha}$ from Theorem \ref{thm:basic_volterra}, Equation \eqref{eqn:test_solution}. %Following the computation we did above we get that 
+Finally, we look closer to the prototype solution $f_{0,\alpha}$ from Theorem \ref{thm:basic_volterra}, Equation \eqref{eqn:test_solution}. Following the computation we did above we get that 
 
-%\begin{align*}
- %   f_{0,\alpha}(a)&=\frac{p(b)}{p(a)} \exp\left(-\int_b^a\frac{q}{p} d\zeta\right)\\
-  %  &=\frac{p(b)}{p(a)} \frac{(\zeta(a)-\alpha)^{\tau_\alpha}}{(\zeta(b)-\alpha)^{\tau_\alpha}} \exp\left(-\int_b^a\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} d\zeta\right)\\
+\begin{align*}
+  f_{0,\alpha}(a)&=\frac{p(b)}{p(a)} \exp\left(-\int_b^a\frac{q}{p} d\zeta\right)\\
+  &=\frac{p(b)}{p(a)} \frac{(\zeta(a)-\alpha)^{\tau_\alpha}}{(\zeta(b)-\alpha)^{\tau_\alpha}} \exp\left(-\int_b^a\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} d\zeta\right)
   %  &=(\zeta(a)-\alpha)^{\tau_\alpha-1} \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}} \frac{1}{p'(\alpha)+b_2'(\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2}
-%\end{align*}
+\end{align*}
+Expanding $p(a)$ near $\zeta=\alpha$, 
+
+\begin{align*}
+     \frac{(\zeta(a)-\alpha)^{\tau_\alpha-1}}{p'(a)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...} \exp\left(-\int_b^a\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} d\zeta\right) 
+\end{align*}
 
 \end{proof}
 
