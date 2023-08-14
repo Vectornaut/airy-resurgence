@@ -76,6 +76,7 @@
 \newcommand{\volterra}{\mathcal{V}}
 \newcommand{\hardpart}{\mathcal{V}_0}
 \newcommand{\softpart}{\mathcal{V}_\star}
+\newcommand{\kerwhole}{k}
 \newcommand{\hardker}{k_0}
 \newcommand{\softker}{k_\star}
 \newcommand{\solwhole}{f}
@@ -480,9 +481,9 @@ We'll fill out the details of this argument in Section~\ref{sec:existence and un
 \end{brainstorm}
 \subsection{Bounds on the perturbed kernel}\label{sec:bounds on k}
 \subsubsection{Overview}
-The conditions on $\hardker$ and $\softker$ described in Sections \ref{setting:basic} and \ref{setting:perturbed} can be combined
+The conditions on $\hardker$ and $\softker$ described in Sections \ref{setting:basic} and \ref{setting:perturbed} can be combined into convenient bounds on the kernel $\kerwhole = \hardker + \softker$ of $\volterra$. We'll use these bounds in Section~\ref{sec:V is a contraction}. \textcolor{orange}{[Are these bounds actually used in Section~\ref{sec:existence and uniqueness}, or anywhere else? If not, maybe we should move this stuff into Section~\ref{sec:V is a contraction} after all.]}
 \subsubsection{Bounds near $\zeta = 0$}
-When $\hardpart$ satisfies Condition~\eqref{cond:sing} and $\softpart$ satisfies Condition~\eqref{cond:eps-lambda}, we can estimate the kernel $k$ near $\zeta=0$.
+When $\hardpart$ satisfies Condition~\eqref{cond:sing} and $\softpart$ satisfies Condition~\eqref{cond:eps-lambda}, we can estimate the kernel $\kerwhole$ near $\zeta=0$.
 
 Condition~\eqref{cond:sing} doesn't stop $|\hardker(a, a')|$ from exceeding $\frac{\tau}{|\zeta(a)|}$. However, by keeping $a$ and $a'$ close to $\zeta = 0$, we can make sure that $|\hardker(a, a')|$ only exceeds $\frac{\tau}{|\zeta(a)|}$ by an arbitrariy small margin. Condition~\eqref{cond:sing} tells us that when $\delta > 0$ is small enough, there's a constant $C$ with
 \[ \left| \hardker(a, a') - \frac{\tau}{\zeta(a)} \right| < C \]
@@ -500,39 +501,10 @@ Under Condition~\eqref{cond:eps-lambda}, we can make $|\softker(a, a')|$ as smal
 over all $a, a' \in \domain$, which means that
 \[ \big| \softker(a, a') \big| \lesssim\frac{(2\delta)^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta(2\delta)}\]
 over all $a, a' \in \domain$ with $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$.
-\par\color{RoyalBlue}
-Condition \eqref{cond:eps-lambda} gives a bound on $\softker$, which can be made arbitrarily small by keeping $a,a'$ close enough to $\zeta=0$. Indeed, assuming $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$ 
 
-\begin{align*}
-    |\softker(a,a')|&\lesssim\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
-    &\lesssim\frac{(2\delta)^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta (2\delta)}
-\end{align*}
-
-Hence, collecting these results together, we can find a constant $\sigma>\tau$ such that for $a,a'$ close enough to $\zeta=0$
-
-\[
-    |k(a,a')|\leq \frac{\sigma}{|\zeta(a)|}
-\]
-We'll use this fact in Sections \ref{sec:V is a contraction} and \ref{sec:existence and uniqueness}. 
-
-% \color{Tomato}
- 
- %Let $\varepsilon>0$, we can choose $\delta$ such that for every $\zeta(a)<\delta$ and $\zeta(a') <\delta$
-
-%\[ \left\vert\hardker(a,a')-\frac{\tau}{\zeta(a)} \right\vert \leq \varepsilon\]
-
-%Then, 
-
-%\begin{align*}
- %   |k(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
- %   &\leq \left\vert\hardker(a,a')-\frac{\tau}{\zeta(a)} \right\vert +\frac{\tau}{|\zeta(a)|} +\textcolor{magenta}{C_k}\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
-  %  &\leq \varepsilon +\frac{\tau}{|\zeta(a)|} + \textcolor{magenta}{C_k}\frac{(2\delta)^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta (2\delta)}\\
-   % &\leq \frac{\varepsilon\delta+\tau+ \textcolor{magenta}{C_k} (2\delta)^\epsilon e^{2\delta \lambda_\Delta} }{|\zeta(a)|}
-%\end{align*}
-
-%The constant $\sigma:=\varepsilon\delta+\tau+ \textcolor{magenta}{C_k} (2\delta)^\epsilon e^{2\delta \lambda_\Delta} > \tau $, and by choosing $\delta$ small enough we can make $\sigma-\tau$ arbitrary small. We will use this fact in Sections \ref{sec:V is a contraction} and \ref{sec:existence and uniqueness}.
-
-\color{black}
+Putting these results together, we see that for any $\sigma > \tau$, we can ensure that
+\[ |\kerwhole(a, a')| \le \frac{\sigma}{|\zeta(a)|} \]
+by keeping $a$ and $a'$ close enough to $\zeta = 0$.
 \subsubsection{Bounds far from the diagonal}
 Similarly, we can estimate the kernel $k$ far from $\zeta=0$. Assuming $\hardpart$ satisfies Condition \eqref{cond:diag-basic} and $\softpart$ satisfies Condition \eqref{cond:eps-lambda}, for $|\zeta(a)|\geq \delta$ and for every $a'\in\Omega$
 
