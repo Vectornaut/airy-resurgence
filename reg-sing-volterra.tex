@@ -173,7 +173,7 @@ z^{-\lambda} \laplace \varphi & = \laplace\,\partial^{-\lambda} \varphi,
 \end{align*}
 where $\partial^{-\lambda}$ is the Riemann-Liouville fractional integral of order $\lambda \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on differential equations.
 
-Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. Solutions that look unrelated in the frequency domain may turn out to be linked by analytic continuation along the complex position domain, as seen in the phenomenon of {\em resurgence} \textcolor{orange}{\cite{EcalleIII}\cite{lectures-marino} \cite[Section 2.4]{sternin1995borel}}.
+Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. Solutions that look unrelated in the frequency domain may turn out to be linked by analytic continuation along the complex position domain, as seen in the phenomenon of {\em resurgence} \cite{EcalleIII}\cite{lectures-marino} \cite[Section 2.4]{sternin1995borel}.
 
 Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we'll see this helpful behavior in the class of differential equations that Ecalle calls {\em level $1$}, which includes classical examples like the modified Bessel equation, the equations describing the vibration modes of beams that taper in certain ways \textcolor{orange}{[find citation]}, and the Airy equation after a change of coordinate. This last example generalizes to some level 1 equations that feature in current research, like the Airy-Lucas and higher Airy equations~\cite[Equations 3.2 and 3.8]{charbonnier22}\cite{durugo_higher}.
 
@@ -422,12 +422,21 @@ For each $\Lambda'$, we can get a continuous inclusion $\singexp{\sigma'}{\Lambd
 \subsection{Overview}
 In this section, we'll prove the results stated in Section~\ref{sec:results}. Our arguments will follow the process of solving the regular singular Volterra equation $\solwhole = \volterra \solwhole$ by Picard iteration.
 
-The prototype solution $\solproto$ is our initial guess. When we apply $\volterra = \hardpart + \softpart$ to it, the singular part $\hardpart$ leaves it unchanged, as we'll show in Section~\ref{sec:construction}. We'll show in Section~\ref{sec:asymptotics} that $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+The prototype solution $\solproto$ is our initial guess. When we apply $\volterra = \hardpart + \softpart$ to it, the singular part $\hardpart$ leaves it unchanged, as we'll show in Section~\ref{sec:construction}. In addition, $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$, as shown in Section~\ref{sec:asymptotics}.\textcolor{RoyalBlue}{We'll show in Section~\ref{sec:asymptotics} that $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.}
 
 To see what the perturbation $\softpart$ does to $\solproto$, we'll show in Section~\ref{sec:image under soft_part} that $\softpart$ has a smoothing effect, reducing the sharpness of any power-law singularity at $\zeta = 0$. In particular, it sends $\solproto$ into $\singexpalg{\tau-1+\epsilon}(\Omega)$. The perturbed operator $\volterra$ therefore sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$.
 
-When we apply $\volterra$ again, it contracts the perturbation term in $\singexpalg{\tau-1+\epsilon}(\domain)$. More precisely, by making $\Lambda$ large enough, we can ensure that the subspace $\singexp{\tau+1+\epsilon}{\Lambda}(\domain)$ both contains the perturbation term and is contracted by $\volterra$. We'll prove this in Section~\ref{sec:V is a contraction}.
+When we apply $\volterra$ again, it contracts the perturbation term $\solptb$ in $\singexpalg{\tau-1+\epsilon}(\domain)$. More precisely, by making $\Lambda$ large enough, we can ensure that the subspace $\singexp{\tau+1+\epsilon}{\Lambda}(\domain)$ both contains the perturbation term and is contracted by $\volterra$. We'll prove this in Section~\ref{sec:V is a contraction}.
 
+We can now see that at each stage of the Picard iteration process, we start with an approximate solution of the form
+\[ \solproto + \solptb, \]
+with $\solptb \in \singexp{\tau-1+\epsilon}{\Lambda}(\domain)$. Applying $\volterra$ gives 
+\[ \solproto + \softpart \solproto + \volterra \solptb, \]
+where the perturbation $\solptb$ has been contracted by $\volterra$, and $\softpart f_0$ has been smoothed and it lies in the same function space as $\solptb$. The contraction mapping theorem guarantees the existence and uniqueness of the fixed point 
+\[ \solptb = \softpart \solproto + \volterra \solptb. \]
+We'll fill out the details of this argument in Section~\ref{sec:existence and uniqueness}.
+
+\color{RoyalBlue}
 We can now see that at each stage of the Picard iteration process, we have an approximate solution of the form
 \[ \solproto + \solptb, \]
 with $\solptb \in \singexp{\tau-1+\epsilon}{\Lambda}(\domain)$. Applying $\volterra$ gives us the new approximate solution
@@ -435,7 +444,7 @@ with $\solptb \in \singexp{\tau-1+\epsilon}{\Lambda}(\domain)$. Applying $\volte
 where the perturbation $\solptb$ has been contracted by $\volterra$ but also augmented with another $\softpart \solproto$. The contraction mapping theorem guarantees that these opposing processes will eventually balance out, bringing us to a unique fixed point where
 \[ \solptb = \softpart \solproto + \volterra \solptb. \]
 We'll fill out the details of this argument in Section~\ref{sec:existence and uniqueness}.
-
+\color{black}
 %%To prove that the Picard iteration process converges, we'll show in Section~\ref{sec:V is a contraction} that $\volterra$ shrinks perturbations
 
 %%To see what the perturbation $\softpart$ does to $\solproto$, we first show in Section~\ref{sec:asymptotics} that $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\Omega)$. We then show in Section~\ref{sec:image under soft_part} that $\softpart$ has the
@@ -565,15 +574,6 @@ for some constant $M>0$.
 \subsection{Construction and regularity of the prototype solution \\ \textit{(proof of Theorems~\ref{thm:basic_volterra}--\ref{thm:proto-growth})}}\label{sec:proto-construction-regularity}
 
 \subsubsection{Construction}\label{sec:construction}
-\color{Tomato}
-\begin{prop}\label{prop:construction}
-    The function 
-    \begin{equation}%%\label{eqn:test_solution}
-    f_0(a)=\frac{p(b)}{p(a)} \exp\left[-\int_{b}^{a}\frac{q}{p} d\zeta\right]
-   \end{equation}
-is a solution of the Volterra equation $\hardpart f_0=f_0$, for some $b\in\Omega$. We call $f_0$ a prototype solution.  
-\end{prop}
-\color{black}
 \begin{proof}[Proof of Theorem~\ref{thm:basic_volterra}]
     Let $\psi_0(a)= \exp\left[-\int_{b}^{a}\frac{q}{p} d\zeta\right]$, then $ d \psi_0 = -\frac{q}{p} \psi_0\;d\zeta $. Hence, for every $a\in\Omega$ 
     \begin{align*}
@@ -600,13 +600,16 @@ The exponential factor is bounded between $\exp\big({-\tfrac{3}{2}\varepsilon\de
 
 
 \subsubsection{Regularity}\label{sec:asymptotics}
-
+Theorem~\ref{thm:proto-growth} comprises two results with different conditions. We'll prove them separately as Propositions \ref{prop:asymptotic at zero} and \ref{prop:asymptotic at infinity}.
+%%\begin{rmk}
+%%{\em Propositions \ref{prop:asymptotic at zero}} and \ref{prop:asymptotic at infinity} together prove {\em Theorem \ref{thm:proto-growth}}. 
+%%\end{rmk}
 \begin{prop}\label{prop:asymptotic at zero}
     Let $f_0$ be the prototype solution defined in \eqref{eqn:test_solution}, then $|f_0|$ is bounded by a constant multiple of $\zeta^{\tau-1}$ near $\zeta=0$. 
 \end{prop}
 
 \begin{proof}
-The proof follows the argument we use at the end of the proof of proposition \ref{prop:construction}. In particular, once we choose $\varepsilon>0$ we can choose $\delta>0$ such that for $\zeta(a)<\delta$ and $\zeta(a')<\delta$ the function
+The proof follows the argument we use at the end of the proof of Theorem \ref{thm:basic_volterra}. In particular, once we choose $\varepsilon>0$ we can choose $\delta>0$ such that for $\zeta(a)<\delta$ and $\zeta(a')<\delta$ the function
 
 \[ \psi_0(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
 
@@ -620,23 +623,9 @@ is bounded by $ |\zeta(a)|^\tau$. Therefore, assuming $b'\in\Omega$ and $q(b') \
 
 The last step uses Condition~\eqref{cond:sing}. 
 \end{proof}
-\color{Tomato}
-\begin{rmk}
-   {\em Proposition \ref{prop:construction}} and {\em Proposition \ref{prop:asymptotic at zero}} together prove {\em Theorem \ref{thm:basic_volterra}}. 
-\end{rmk}
-\color{black}
-%In fact, if we assume $q$ to be more regular near $\zeta=0$, we get that $|f_0|/\zeta^{\tau-1}$
-
 \begin{prop}\label{prop:asymptotic at infinity}
-    Let $b\in\domain$. Assume $\hardpart$ satisfies {\em Condition} \eqref{cond:slow}. Then the prototype solution $f_0$ constructed in {\em Proposition \ref{prop:construction}} belongs to the function space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+    Let $b\in\domain$. Assume $\hardpart$ satisfies {\em Condition} \eqref{cond:slow}. Then the prototype solution $f_0$ defined in \eqref{eqn:test_solution} belongs to the function space $\singexp{\tau-1}{\lambda_0}(\domain)$.
 \end{prop}
-\color{Tomato}
-\begin{rmk}
-    {\em Proposition \ref{prop:asymptotic at infinity}} is an equivalent formulation of {\em Theorem \ref{thm:proto-growth}}.
-\end{rmk}
-\color{black}
-
-%%\begin{proof}[Proof of Proposition~\ref{prop:asymptotic at infinity}]
 \begin{proof}
 We choose $\varepsilon>0$, then by Condition \eqref{cond:sing} we can choose $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$ (arguing as in the proof of Proposition \ref{prop:asymptotic at zero}) we get a uniform bound 
 
@@ -648,8 +637,8 @@ Now we study the regime $|\zeta(a)|>\delta$ and $|\zeta(a')|>\delta$. Recall tha
 In particular, 
       \begin{align*}
           |\zeta(a)|^{1-\tau} e^{-\lambda_0 |\zeta(a)|} |f_0|&\leq  |\zeta(a)|^{1-\tau} e^{-\lambda_0 |\zeta(a)|} \left\vert\frac{p(b)}{p(a)}\exp\left[-\int_{b}^{a}\frac{q}{p} d\zeta\right]\right\vert \\
-          & \textcolor{magenta}{\lesssim}  |\zeta(a)|^{1-\tau} e^{-\lambda_0 |\zeta(a)|}  \, e^{\lambda_p|\zeta(a)|}\exp\left[\int_{b}^{a} \Big\vert\frac{q}{p} \Big\vert |d\zeta| \right]\\
-          & \textcolor{magenta}{\lesssim}  |\zeta(a)|^{1-\tau} e^{-(\lambda-\lambda_p) |\zeta(a)|} \exp\Big[\lambda_\text{ratio} |\zeta(a)-\zeta(b)| \Big]
+          & \lesssim  |\zeta(a)|^{1-\tau} e^{-\lambda_0 |\zeta(a)|}  \, e^{\lambda_p|\zeta(a)|}\exp\left[\int_{b}^{a} \Big\vert\frac{q}{p} \Big\vert |d\zeta| \right]\\
+          & \lesssim  |\zeta(a)|^{1-\tau} e^{-(\lambda-\lambda_p) |\zeta(a)|} \exp\Big[\lambda_\text{ratio} |\zeta(a)-\zeta(b)| \Big]
       \end{align*}
    which is bounded because $|\zeta(a)|>\delta$. 
 
@@ -708,7 +697,7 @@ First, pick some $\sigma \in (\tau, \rho)$.\footnote{If you'd like, you can fix 
 \begin{equation}\label{near-limit}
 |k(a, a')| \le \frac{\sigma}{|\zeta(a)|}
 \end{equation}
-for all $a, a' \in \near$ (see Section~\ref{sec:bounds on k}). By choosing a small enough positive radius $\textcolor{orange}{\delta}$ \textcolor{orange}{[let's choose $R$ or $\delta$ to use both here and in Section~\ref{sec:bounds on k}]}, we can take $\near$ to be the part of $\domain$ where $|\zeta| < \textcolor{orange}{\delta}$. Complementarily, let $\far$ be the part of $\domain$ where $\textcolor{orange}{\delta} \le |\zeta|$.
+for all $a, a' \in \near$ (see Section~\ref{sec:bounds on k}). By choosing a small enough positive radius $\textcolor{orange}{\delta}$, we can take $\near$ to be the part of $\domain$ where $|\zeta| < \textcolor{orange}{\delta}$. Complementarily, let $\far$ be the part of $\domain$ where $\textcolor{orange}{\delta} \le |\zeta|$.
 
 
 Take any function $\varphi \in \singexp{\rho}{\Lambda}(\domain)$. In Section~\ref{near-bound}, we'll bound $|\zeta|^{-(\rho-1)}\,e^{-\Lambda|\zeta|}\,|\volterra\varphi|$ by $\tfrac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}$ on $\near$. In Section~\ref{far-bound}, we'll see that by making $\Lambda$ big enough, we can bound $|\zeta|^{-(\rho-1)}\,e^{-\Lambda|\zeta|}\,|\volterra\varphi|$ by an arbitrarily small constant multiple of $\|\varphi\|_{\rho-1, \Lambda}$ on $\far$. Together, these results show that $\|\volterra \varphi\|_{\rho-1, \Lambda} \le \tfrac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}$ when $\Lambda$ is large enough. Since we set $\sigma < \rho$, this proves Proposition~\ref{prop:get-contraction}.
@@ -865,14 +854,14 @@ and agrees with ordinary repeated integration when $\nu$ is an integer \cite[Equ
 %\begin{align*}
 %\fracderiv{\lambda}{\zeta}{0}\,\fracderiv{\mu}{\zeta}{0} & = \fracderiv{\lambda+\mu}{\zeta}{0} & \lambda \in \R \smallsetminus \{0, 1, 2, 3, \ldots\},\quad\mu \in (-\infty, 0).
 %\end{align*}
-For all $\nu\in (0,\infty)$, the fractional integral $\fracderiv{-\nu}{\zeta}{\alpha}$ behaves as a Volterra operator $\softpart$ which is singular at $\zeta=\alpha$ but it has a smoothing effect on functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$. In fact, it maps functions $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ to $\fracderiv{-\nu}{\zeta}{\alpha}\varphi\in\singexp{\sigma+\nu}{\Lambda}(\domain_\alpha)$: \textcolor{orange}{[if we want our previous results to apply for a singularity at $\zeta = \alpha$, I think we need to redefine our function spaces for that context]}
+For all $\nu\in (0,\infty)$, the fractional integral $\fracderiv{-\nu}{\zeta}{\alpha}$ behaves as a Volterra operator $\softpart$ which is singular at $\zeta=\alpha$ but it has a smoothing effect on functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$. In fact, it maps functions $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ to $\fracderiv{-\nu}{\zeta}{\alpha}\varphi\in\singexp{\sigma+\nu}{\Lambda}(\domain_\alpha)$: %\textcolor{orange}{[if we want our previous results to apply for a singularity at $\zeta = \alpha$, I think we need to redefine our function spaces for that context]}
 
 \begin{align*}
     \left[\fracderiv{-\nu}{\zeta}{\alpha} \varphi\right](a)&=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a (\zeta(a)-\zeta)^{\nu-1} \, \varphi \, d\zeta\\
     &=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\,  \zeta(a)\, \varphi \, d\zeta\\
     &=\frac{\zeta(a)-\alpha}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\, \varphi \, d\zeta
 \end{align*}
-Define $\softker(a,a'):=\frac{(\zeta(a)-\zeta(a'))^{\nu-1}}{\zeta(a) - \alpha}$, it is singular at $\zeta(a)=\alpha$ and it satisfies Condition \eqref{cond:eps-lambda} with $\epsilon=\nu-1$ and $\lambda_\Delta=0$, for every $a,a'\in\domain_\alpha$. Hence by Proposition \ref{prop:smoothing}
+Define $\softker(a,a'):=\frac{(\zeta(a)-\zeta(a'))^{\nu-1}}{\zeta(a) - \alpha}$, it is singular at $\zeta(a)=\alpha$ and it satisfies Condition \eqref{cond:eps-lambda} with $\epsilon=\nu-1$ and $\lambda_\Delta=0$, for every $a,a'\in\domain_\alpha$.\footnote{Notice that $\softker$ has a singularity at $\zeta=\alpha$ and not at $\zeta=0$ as in Section \ref{setting:perturbed}. This explains the definition of $\softker(a,a')$ with $\zeta(a)-\alpha$ at the denominator (instead of $\zeta(a)$). More generally, working in the domain $\domain_\alpha$, we'll adapt the conventions used for $\domain$.} Hence by Proposition \ref{prop:smoothing}
 
 \[ \frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\, \varphi \, d\zeta \in \singexp{\sigma+\nu-1}{\Lambda}(\domain_\alpha) \]
 
