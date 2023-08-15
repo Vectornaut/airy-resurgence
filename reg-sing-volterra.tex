@@ -252,7 +252,7 @@ For some of our results, we'll also need to control $|p|$ and $|q|$ in various w
 \left|\frac{1}{p}\right| & \lesssim e^{\lambda_p |\zeta|} &
 \left|\frac{q}{p}\right| & \le \lambda_\text{ratio}
 \end{align*}
-outside some neighborhood of $\zeta = 0$ in $\Omega$. Note that this only constrains the ratio of $p$ and $q$ when they're evaluated at the same point. The constants will only enter our reasoning through their sum, $\lambda_0 = \lambda_p + \lambda_\text{ratio}$.
+outside some neighborhood of $\zeta = 0$ in $\domain$. In addition, $|1/p|$ and $|q/p|$ are bounded outside every neighborhood of $\zeta = 0$ in $\domain$; the bound may depend on the neighborhood. Note that this only constrains the ratio of $p$ and $q$ when they're evaluated at the same point. The constants will only enter our reasoning through their sum, $\lambda_0 = \lambda_p + \lambda_\text{ratio}$.
 \end{conditions}
 This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
 \begin{conditions}
@@ -289,7 +289,7 @@ Suppose $\hardpart$ satisfies {\em Condition \eqref{cond:sing}}. Then the equati
 \[ f = \hardpart f \]
 has the {\em prototype solution}
 \begin{equation}\label{eqn:test_solution}
-\solproto(a)=\frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right).
+\solproto(a) = \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right).
 \end{equation}
 Changing the base point $b \in \domain$ just multiplies $f_0$ by a non-zero constant.
 \end{thm}
@@ -492,15 +492,33 @@ Since Inequality~\ref{eqn:sing-bound} implies that
 whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$, we can conclude that $|\solproto| \lesssim |\zeta|^{\tau-1}$ on the region $|\zeta| < \delta$, as desired.
 \end{proof}
 \begin{prop}\label{prop:asymptotic at infinity}
-Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:slow}. Then $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:slow}. Then $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
 \end{prop}
 \begin{proof}
-We choose $\varepsilon>0$, then by Condition \eqref{cond:sing} we can choose $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$ (arguing as in the proof of Proposition \ref{prop:asymptotic at zero}) we get a uniform bound 
+We want to show that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$.
+
+Find a neighborhood $\domain_\text{near}$ of $\zeta = 0$ where $|\solproto| \lesssim |\zeta|^{\tau-1}$, as Proposition~\ref{prop:asymptotic at zero} says we can do. By making $\domain_\text{near}$ bounded, we can prevent $e^{\lambda_0|\zeta|}$ from getting arbitrarily close to zero on $\domain_\text{near}$. Then we have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{near}$.
+
+Recall that in Condition~\eqref{cond:slow}, the constant $\lambda_0$ is the sum of two constants: $\lambda_p$, which controls the growth of $1/p$ at infinity, and $\lambda_\text{ratio}$, which controls the growth of $p/q$ at infinity. By removing a bounded neighborhood of $\zeta = 0$ from $\domain$, make a set $\domain_\text{far}$ where $|1/p| \lesssim e^{\lambda_p |\zeta|}$ and $|q/p| \le \lambda_\text{ratio}$, as Condition~\eqref{cond:slow} says we can do. Observe that
+\begin{align*}
+|\solproto(a)| & = \left| \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \right| \\
+& \le \left|\frac{1}{p(a)}\right| \exp\left(\int_{b}^{a}\left|\frac{q}{p}\right|\;d\zeta\right) \\
+& \lesssim e^{\lambda_p|\zeta(a)|}\,e^{\lambda_\text{ratio}(|\zeta(a)| + |\zeta(b)|)} \\
+& \lesssim e^{\lambda_0|\zeta(a)|}\,e^{\lambda_\text{ratio}|\zeta(b)|} \\
+& \lesssim e^{\lambda_0|\zeta(a)|}
+\end{align*}
+over all $a \in \domain_\text{far}$. Since $\domain_\text{far}$ avoids a neighborhood of $\zeta = 0$, we know $|\zeta|^{\tau-1}$ is bounded on $\domain_\text{far}$. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{far}$.
+
+Finally, let $\domain_\text{mid}$ be the set that remains when you remove $\domain_\text{near}$ and $\domain_\text{far}$ from $\domain$. Since $\domain_\text{mid}$ avoids $\zeta = 0$ and is bounded, $|\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ can't get arbitrarily small there, and Condition~\eqref{cond:slow} guarantees that $|\solproto|$ is bounded there. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{mid}$.
+
+Combining the conclusions above, we see that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain = \domain_\text{near} \cup \domain_\text{mid} \cup \domain_\text{far}$, as desired.
+\par\color{RoyalBlue}
+We choose $\varepsilon>0$, then by Condition \eqref{cond:sing} we can choose $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$ \textcolor{orange}{[there's no $a'$ here]} (arguing as in the proof of Proposition \ref{prop:asymptotic at zero}) we get a uniform bound 
 
 \[   |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |f_0(a)|\leq  C_2(\delta)\, |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |\zeta(a)|^{\tau-1} \leq C_3(\delta)
 \]
 
-Now we study the regime $|\zeta(a)|>\delta$ and $|\zeta(a')|>\delta$. Recall that in Condition \eqref{cond:slow} the constant $\lambda_0$ is the sum of two constants $\lambda_0=\lambda_p+\lambda_\text{ratio}$: $\lambda_p$ controls the growth of $p^{-1}$ at infinity, and $\lambda_\text{ratio}$ controls the growth of $p/q$ at infinity. 
+Now we study the regime $|\zeta(a)|>\delta$ and $|\zeta(a')|>\delta$ \textcolor{orange}{[there's no $a'$ here]}. Recall that in Condition \eqref{cond:slow} the constant $\lambda_0$ is the sum of two constants $\lambda_0=\lambda_p+\lambda_\text{ratio}$: $\lambda_p$ controls the growth of $p^{-1}$ at infinity, and $\lambda_\text{ratio}$ controls the growth of $p/q$ at infinity.
 
 In particular, 
       \begin{align*}
@@ -508,9 +526,7 @@ In particular,
           & \lesssim  |\zeta(a)|^{1-\tau} e^{-\lambda_0 |\zeta(a)|}  \, e^{\lambda_p|\zeta(a)|}\exp\left[\int_{b}^{a} \Big\vert\frac{q}{p} \Big\vert |d\zeta| \right]\\
           & \lesssim  |\zeta(a)|^{1-\tau} e^{-(\lambda-\lambda_p) |\zeta(a)|} \exp\Big[\lambda_\text{ratio} |\zeta(a)-\zeta(b)| \Big]
       \end{align*}
-   which is bounded because $|\zeta(a)|>\delta$. 
-
-
+   which is bounded because $|\zeta(a)|>\delta$. \textcolor{orange}{[As Condition~\eqref{cond:slow} is currently stated, $|\zeta| > \delta$ may not be far enough from $\zeta = 0$ to get the $\lambda_p$ and $\lambda_\delta$ bounds. I've strengthened the condition so that $|1/p|$ and $|q/p|$ are at least bounded outside every neighborhood of $\zeta = 0$.]}
 \end{proof}
 
 \begin{prop}\label{prop:better-proto-estimate}
@@ -738,11 +754,15 @@ On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{
     \[f=\volterra f\]
     has a unique solution $f$ in the affine subspace
     \[ M \zeta^{\tau-1}+\singexpalg{\tau-1+\gamma'}(\domain)\]
-    of the space $\singexpalg{\tau-1}(\domain)$, where $\gamma'=\min\{\epsilon,\gamma\}$. 
+    of the space $\singexpalg{\tau-1}(\domain)$, where $\gamma'=\min\{\epsilon, 1, \gamma\}$. 
 \end{prop}
 
 \begin{proof}
-    
+ By Theorem \ref{thm:general_volterra}, we already know there exists a unique solution $f$ which belongs to the affine subspace
+ \[f_0+\singexpalg{\tau+1-\gamma}(\domain)\]
+ of the space $\singexpalg{\tau-1}(\domain)$. In addition, in Proposition \ref{prop:better-proto-estimate}, we learnt that in a neighbourhood of $\zeta=0$
+ \[\solproto\in M\zeta^{\tau-1}+ O(|\zeta|^{\tau-1+\lambda'})\]
+ for some constant $M$ and $\lambda'=\min\{\epsilon, 1\}$. We conclude, by combining these results. 
 \end{proof}
 
 \section{A motivating example}\label{sec:example}
@@ -936,7 +956,13 @@ and $\gamma=1$.
 
 Finally, to get the result as stated, we need to show that
 \[ f_{0, \alpha} \in M\zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha) \]
-for some constant $M$. Since we already know that $f_{0, \alpha}$ is of exponential type, it's enough to show that $f_{0, \alpha}$ falls into the class
+for some constant $M$. Like in the proof of Proposition \ref{prop:alt-general_volterra}, it's enough to show that $p$ satisfies Condition \eqref{cond:reg-p} with $\epsilon=1$. Since $p$ is a polynomial with a simple zero at $\zeta=\alpha$, we have that
+
+\[ p \in (\zeta-\alpha)\Big[ b_1 + O(\zeta-\alpha)\Big] \]
+in a small enough neighborhood of $\zeta=\alpha$. 
+
+\color{RoyalBlue}
+Since we already know that $f_{0, \alpha}$ is of exponential type, it's enough to show that $f_{0, \alpha}$ falls into the class
 \[ (\zeta - \alpha)^{\tau_\alpha-1}\Big[M + O\big(|\zeta - \alpha|\big)\Big] \]
 when it's restricted to some neighborhood of $\zeta = \alpha$. Like we did in the proof of Theorem~\ref{thm:basic_volterra}, we reason that
 \begin{align*}
@@ -965,6 +991,8 @@ Combining the arguments above, we see as desired that
 \[ f_{0, \alpha} \in M\zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha), \]
 with
 \[ M = \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}}\,b_1^{-1}\,e^{S(b)}. \]
+
+\color{black}
 \end{proof}
 
 
