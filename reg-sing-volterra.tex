@@ -770,13 +770,13 @@ for all integers $n \ge 0$ and suitable direction $\theta$.
 By the properties of the Laplace transform $\laplace_{\zeta,\alpha}^{\theta}$ we can turn differential operators in the frequency domain into Volterra operators in the position domain. 
 
 \begin{lemma}
- For every root of $P$, let $\hat{P}_{\alpha}$ be the Volterra operator 
+ For every root $-\alpha$ of $P$, let $\hat{\mathcal{P}}_{\alpha}$ be the Volterra operator 
  
 \begin{equation}\label{P-hat_j}
-\hat{P}_\alpha:=P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha}^{-1})\circ (-\zeta)^r
+\hat{\mathcal{P}}_\alpha:=P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha}^{-1})\circ (-\zeta)^r
 \end{equation}
  
-If $\hat{\psi}_\alpha$ is a solution of $\hat{P}_\alpha\hat{\psi}_\alpha=0$ then its Laplace transform $\Psi_\alpha:=\laplace_{\zeta,\alpha}^{\theta}\hat{\psi}_\alpha$, defined for a suitable direction $\theta$, is a solution of $\mathcal{P}\Psi_\alpha=0$. By suitable direction, we mean that the ray $\Gamma_{\alpha}^\theta$ must be contained in the domain $\Omega_{\alpha}$. \footnote{The domain $\Omega_{\alpha}$ does not contain the tubular neighborhood of all the other critical points toward infinity as drawn in Section \ref{setting:domain}}.      
+If $\hat{\psi}_\alpha$ is a solution of $\hat{\mathcal{P}}_\alpha\hat{\psi}_\alpha=0$ then its Laplace transform $\Psi_\alpha:=\laplace_{\zeta,\alpha}^{\theta}\hat{\psi}_\alpha$, defined for a suitable direction $\theta$, is a solution of $\mathcal{P}\Psi_\alpha=0$. By suitable direction, we mean that the ray $\Gamma_{\alpha}^\theta$ must be contained in the domain $\Omega_{\alpha}$. \footnote{The domain $\Omega_{\alpha}$ does not contain the tubular neighborhood of all the other critical points toward infinity as drawn in Section \ref{setting:domain}}.      
 \end{lemma}
 
 \begin{proof}
@@ -785,25 +785,29 @@ Using the properties of the Laplace transform,
     \begin{align*}
         \mathcal{P}\Psi_\alpha&=\mathcal{P}\laplace_{\zeta,\alpha}^{\theta}\hat{\psi}_\alpha\\
         &=\laplace_{\zeta,\alpha}^{\theta}\left[P(-\zeta)+\fracderiv{-1}{\zeta}{\alpha}\circ Q(-\zeta)+\fracderiv{-2}{\zeta}{\alpha}\circ\sum_{r=0}^{d-1}R_r(\fracderiv{-1}{\zeta}{\alpha})(-\zeta)^r\right]\hat{\psi}_j\\
-        &=\laplace_{\zeta,\alpha}^{\theta}\hat{P}_\alpha\hat{\psi}_\alpha
+        &=\laplace_{\zeta,\alpha}^{\theta}\hat{\mathcal{P}}_\alpha\hat{\psi}_\alpha
     \end{align*}
 \end{proof}
 
-We can now state and prove the main result of this section, namely that the Volterra operator $\hat{P}_\alpha$ admits a unique solution $\hat{\psi}_\alpha$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
+We can now state and prove the main result of this section, namely that the Volterra operator $\hat{\mathcal{P}}_\alpha$ admits a unique solution $\hat{\psi}_\alpha$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
 
 \begin{thm}\label{thm:example}
-    There exists a unique solution of $\hat{P}_\alpha\hat{\psi}_\alpha=0$ such that 
-    \[\hat{\psi}_\alpha = f_{0,\alpha}+ f_{\star,\alpha}\]
-
-    where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
+For each root $-\alpha$ of $P$, the equation
+\[ \hat{\mathcal{P}}_\alpha \hat{\psi}_\alpha = 0 \]
+has a unique solution $\hat{\psi}_\alpha$ in the affine subspace
+\[ \zeta^{\tau_\alpha-1} + \singexpalg{\tau_\alpha}(\domain_\alpha) \]
+of the space $\singexpalg{\tau_\alpha-1}(\domain_\alpha)$.
+%%The equation $\hat{P}_\alpha\hat{\psi}_\alpha=0$ has a unique solution of the form
+%%\[ \hat{\psi}_\alpha = \zeta^{\tau_\alpha-1} + f_{\star,\alpha} \]
+%%\[\hat{\psi}_\alpha = f_{0,\alpha}+ f_{\star,\alpha}\]
+%%where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
 \end{thm}
-
- \textcolor{magenta}{[In the old version, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]}
+%%\textcolor{magenta}{[In the old version, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]}
 
 \begin{proof}
 Let $p = P(-\zeta)$ and $q = Q(-\zeta)$ and let $\alpha$ be a simple root of $p$. Hence, by assumptions that $p(\alpha)=0$, $p'(\alpha)\neq 0$ and $q(\alpha)\neq 0$. 
 
-First of all, we rewrite $\hat{P}_{\alpha}\varphi=0$ as $\varphi = \volterra_\alpha \varphi $: %we introduce the notation $p(a):=P(-\zeta(a))$ and $q(a)=Q(-\zeta(a))$, then $\hat{P}_j$ is  
+First of all, we rewrite $\hat{\mathcal{P}}_{\alpha}\varphi=0$ as $\varphi = \volterra_\alpha \varphi $: %we introduce the notation $p(a):=P(-\zeta(a))$ and $q(a)=Q(-\zeta(a))$, then $\hat{P}_j$ is  
 
 \begin{align*}
     -\big[ p\, \varphi \big](a)= \int_{\zeta=\alpha}^a q  \, \varphi \, d\zeta' + \int_{\zeta=\alpha}^a k_R(a,\cdot)  \, \varphi \, d\zeta
@@ -892,49 +896,10 @@ Combining the arguments above, we see as desired that
 \[ f_{0, \alpha} \in M\zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha), \]
 with
 \[ M = \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}}\,b_1^{-1}\,e^{S(b)}. \]
-
-\color{DarkTurquoise}
-From Condition~\eqref{cond:sing}, we have
-\[ \left| \frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} \right| < \varepsilon \]
-in some neighborhood $\domain_\text{near}$ of $\zeta = \alpha$. It follows that
-\[ S(a) = \int_{\zeta = \alpha}^a \left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta \]
-converges for $a \in \domain_\text{near}$, so we have
-\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
-for $a \in \domain_\text{near}$. Observe that $|S| \le \varepsilon |\zeta - \alpha|$ in $\domain_\text{near}$. 
-
-Since $p$ has a simple zero at $\zeta=\alpha$ The denominator is bounded in some neighbourhood $\domain_{\text{near}}$ of $\zeta=\alpha$
-\begin{verify}
-By definition of limit, as $\zeta(a)\to\alpha$ we should get
-\[
-\left\vert\frac{1}{p'(\alpha)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...}-\frac{1}{p'(\alpha)}\right\vert\leq \varepsilon
-\]
-\end{verify}
-
-\[
-\frac{1}{|p'(\alpha)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...|}\leq  \text{const.} |\zeta(a)-\alpha| + O(|\zeta(a)-\alpha|^2)
-\]
-
-Therefore, we deduce from this that
-\begin{align*}
-f_{0,\alpha} & \in \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} + \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} O(|\zeta - \alpha|) \\
-& \subset \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} + \text{const.}\,O\big(|\zeta-\alpha|^{\tau_\alpha}\big) \\
-\end{align*}
-when we restrict to $\domain_\text{near}$.
-\color{black}
 \end{proof}
 
 
 
-%\color{ForestGreen}
-%\begin{align*}
-%f & = \volterra f \\
-%f_\text{basic} + f_\text{extra} & = \volterra f_\text{basic} + \volterra f_\text{extra} \\
-%f_\text{basic} + f_\text{extra} & = \hardpart\,f_\text{basic} + \softpart \,f_\text{basic} + \volterra f_\text{extra} \\
-%f_\text{basic} + f_\text{extra} & = f_\text{basic} + \softpart \,f_\text{basic} + \volterra f_\text{extra} \\
-%f_\text{extra} & = \softpart \,f_\text{basic} + \volterra f_\text{extra}
-%\end{align*}
-%Solving the original equation is equivalent to finding a fixed point $f_\text{extra}$ of the affine-linear map
-%\[ \varphi \mapsto \softpart\,f_\text{basic} + \volterra \varphi. \]
 \bibliographystyle{plain}
 \bibliography{airy-resurgence}
 
