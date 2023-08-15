@@ -429,10 +429,14 @@ To see what the perturbation $\softpart$ does to $\solproto$, we'll show in Sect
 Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$, suggesting that the equation $\solwhole = \volterra \solwhole$ has a solution there. To confirm this, we'll show in Section~\ref{sec:V is a contraction} that $\volterra$ is a contraction of $\singexp{\tau-1+\epsilon}{\Lambda}(\domain)$ when $\Lambda$ is large enough. This tells us that $\volterra$ has a unique fixed point in $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$, as we'll see in Section~\ref{sec:existence and uniqueness}.
 \subsection{Bounds on the perturbed kernel}\label{sec:bounds on k}
 \subsubsection{Overview}
-The conditions on $\hardker$ and $\softker$ described in Sections \ref{setting:basic} and \ref{setting:perturbed} can be combined into convenient bounds on the kernel $\kerwhole = \hardker + \softker$ of $\volterra$. We'll use these bounds in Section~\ref{sec:V is a contraction}. \textcolor{orange}{[Are these bounds actually used in Section~\ref{sec:existence and uniqueness}, or anywhere else? If not, maybe we should move this stuff into Section~\ref{sec:V is a contraction} after all.]}
-\subsubsection{Bounds near the origin}
-When $\hardpart$ satisfies Condition~\eqref{cond:sing} and $\softpart$ satisfies Condition~\eqref{cond:eps-lambda}, we can estimate the kernel $\kerwhole$ near $\zeta=0$.
-
+The conditions on $\hardker$ and $\softker$ described in Sections \ref{setting:basic} and \ref{setting:perturbed} can be combined into convenient bounds on the kernel $\kerwhole = \hardker + \softker$ of $\volterra$. One bound, which works when both arguments of $\kerwhole$ are close to $\zeta = 0$, will be used in Section~\ref{near-bound}.
+%%We'll use these bounds in Section~\ref{sec:V is a contraction}. \textcolor{orange}{[Are these bounds actually used in Section~\ref{sec:existence and uniqueness}, or anywhere else? If not, maybe we should move this stuff into Section~\ref{sec:V is a contraction} after all.]}
+\begin{prop}\label{prop:whole-ker-near-bound}
+Suppose $\hardpart$ satisfies Condition~\eqref{cond:sing}, and $\softpart$ satisfies Condition~\eqref{cond:eps-lambda}. Then, for any $\sigma > \tau$, we can ensure that
+\[ |\kerwhole(a, a')| \le \frac{\sigma}{|\zeta(a)|} \]
+by keeping $a$ and $a'$ close enough to $\zeta = 0$.
+\end{prop}
+\begin{proof}
 Condition~\eqref{cond:sing} doesn't stop $|\hardker(a, a')|$ from exceeding $\frac{\tau}{|\zeta(a)|}$. However, by keeping $a$ and $a'$ close to $\zeta = 0$, we can make sure that $|\hardker(a, a')|$ only exceeds $\frac{\tau}{|\zeta(a)|}$ by an arbitrariy small margin. Condition~\eqref{cond:sing} tells us that when $\delta > 0$ is small enough, there's a constant $C$ with
 \[ \left| \hardker(a, a') - \frac{\tau}{\zeta(a)} \right| < C \]
 whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. It follows that
@@ -448,61 +452,29 @@ Under Condition~\eqref{cond:eps-lambda}, we can make $|\softker(a, a')|$ as smal
 \[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$, which means that
 \[ \big| \softker(a, a') \big| \lesssim\frac{(2\delta)^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta(2\delta)}\]
-over all $a, a' \in \domain$ with $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$.
-
-Putting these results together, we see that for any $\sigma > \tau$, we can ensure that
-\[ |\kerwhole(a, a')| \le \frac{\sigma}{|\zeta(a)|} \]
-by keeping $a$ and $a'$ close enough to $\zeta = 0$.
-\subsubsection{Bounds away from the origin}
-We can also bound the kernel $\kerwhole$ when $a$ is kept away from $\zeta = 0$. Suppose $\hardpart$ satisfies Condition~\eqref{cond:diag-basic} and $\softpart$ satisfies Condition~\eqref{cond:eps-lambda}. Then
+over all $a, a' \in \domain$ with $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Combining this conclusion with the previous one, we get the desired result.
+\end{proof}
+Another bound, which works when the first argumetn of $\kerwhole$ is kept away from $\zeta = 0$, will be used in Section~\ref{far-bound}.
+\begin{prop}\label{prop:whole-ker-far-bound}
+Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:diag-basic}}, and $\softpart$ satisfies {\em Condition~\eqref{cond:eps-lambda}}. Choose a subset $\domain_\text{far} \subset \domain$ that doesn't touch $\zeta = 0$.\footnote{A subset of a topological space {\em touches} the points in its closure~\cite[Chapter~5, Definition~2.11]{joshi1983gen-top}.} Then, for any $\lambda > \lambda_\Delta$, we have
+\[ |\kerwhole(a,a')| \lesssim e^{\lambda |\zeta(a)-\zeta(a')|} \]
+over all $a \in \domain_\text{far}$ and $a' \in \domain$.
+\end{prop}
+\begin{proof}
+Find a radius $\delta > 0$ with $|\zeta| \ge \delta$ on $\domain_\text{far}$, and choose some $\lambda > \lambda_\Delta$. Conditions \eqref{cond:diag-basic} and \eqref{cond:eps-lambda} tell us that
 \begin{align*}
 |\kerwhole(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
 &\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} + \frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
 &\lesssim \big(1 + \delta^{-1} |\zeta(a)-\zeta(a')|^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
-%&\leq  \big(\textcolor{magenta}{C_\Delta} + \textcolor{magenta}{C_k}\, |\zeta(a)|^{\epsilon-1}\left\vert 1-\frac{\zeta(a')}{\zeta(a)}\right\vert^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
 \end{align*}
-over all $a, a' \in \domain$ with  $|\zeta(a)| \ge \delta$. Since $|\zeta(a)-\zeta(a')|^\epsilon$ has power-law growth, we can bound it with any exponential. In other words, for any $\lambda > \lambda_\Delta$,
-\[|\zeta(a)-\zeta(a')|^\epsilon\lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \]
+over all $a \in \domain_\text{far}$ and $a' \in \domain$. Since
+\[ 1 + \delta^{-1}|\zeta(a)-\zeta(a')|^\epsilon \]
+grows polynomially with respect to $|\zeta(a)-\zeta(a')|$, we can bound it with any growing exponential function of $|\zeta(a)-\zeta(a')|$. In particular,
+\[ 1 + \delta^{-1}|\zeta(a)-\zeta(a')|^\epsilon \lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \]
 over all $a, a' \in \domain$. It follows that
-\[ |\kerwhole(a,a')| \lesssim e^{\lambda |\zeta(a)-\zeta(a')|} \]
-over all $a, a' \in \domain$ with  $|\zeta(a)| \ge \delta$.
-%\color{Tomato}
-%\begin{align*}
- %   |k(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
-  %  &\leq \textcolor{magenta}{C_\Delta} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} +\textcolor{magenta}{C_k}\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
-   % &\leq \big(\textcolor{magenta}{C_\Delta} + \textcolor{magenta}{C_k}\, \delta |\zeta(a)-\zeta(a')|^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
-    %&\leq  \big(\textcolor{magenta}{C_\Delta} + \textcolor{magenta}{C_k}\, |\zeta(a)|^{\epsilon-1}\left\vert 1-\frac{\zeta(a')}{\zeta(a)}\right\vert^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
-%\end{align*}
-%Since the growth of $|\zeta(a)-\zeta(a')|^\epsilon$ is polynomial, we can roughly estimate it by an exponential factor like 
-
-%\[|\zeta(a)-\zeta(a')|^\epsilon\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} \]
-
-%We deduce that 
-
-%\[ |k(a,a')| \leq M\, e^{2 \lambda_\Delta |\zeta(a)-\zeta(a')|} \]
-
-%with $M= \textcolor{magenta}{C_\Delta} + \delta \textcolor{magenta}{C_k}$. 
-
-%\color{purple}If $\epsilon\in (0,1]$, we actually get a better estimate, namely 
-
-%\[ |k(a,a')| \leq M\textcolor{magenta}{(a')}\, e^{ \lambda_\Delta |\zeta(a)-\zeta(a')|} \]
-
-%with $M\textcolor{magenta}{(a')} = \textcolor{magenta}{C_\Delta} + (\delta^{\epsilon-1}+\delta |\zeta(a')|^\epsilon ) \,  \textcolor{magenta}{C_k}$.\color{black}
-
-%\begin{verify}
- %   \begin{align*}
-  %      \frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|} & \leq \frac{|\zeta(a)|^\epsilon + |\zeta(a')|^\epsilon}{|\zeta(a)|}\\
-   %     &= |\zeta(a)|^{\epsilon-1}+ \delta |\zeta(a')|^\epsilon\\
-    %    &\leq \delta^{\epsilon-1}+ \delta |\zeta(a')|^\epsilon 
-    %\end{align*}
-%\end{verify}
-%\color{black}
-
-
-%notice that $\left\vert 1-\frac{\zeta(a')}{\zeta(a)}\right\vert^\epsilon$ is bounded by a constant which depends on $|\zeta(a')|$ (and of course on $\delta$ and $\epsilon$)
-
-
-
+\[ |\kerwhole(a,a')| \lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
+over all $a \in \domain_\text{far}$ and $a' \in \domain$. This simplifies to the desired result.
+\end{proof}.
 \subsection{Construction and regularity of the prototype solution \\ \textit{(proof of Theorems~\ref{thm:basic_volterra}--\ref{thm:proto-growth})}}\label{sec:proto-construction-regularity}
 
 \subsubsection{Construction}\label{sec:construction}
@@ -579,7 +551,7 @@ In particular,
 
 \subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 
-\textcolor{orange}{[Read through and revise]} In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\epsilon}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
+In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\epsilon}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
 
 \begin{prop}\label{prop:smoothing}
 Under {\em Condition~\eqref{cond:eps-lambda}}, the operator $\softpart$ maps
@@ -629,7 +601,7 @@ First, pick some $\sigma \in (\tau, \rho)$.\footnote{If you'd like, you can fix 
 \begin{equation}\label{near-limit}
 |k(a, a')| \le \frac{\sigma}{|\zeta(a)|}
 \end{equation}
-for all $a, a' \in \near$ (see Section~\ref{sec:bounds on k}). By choosing a small enough positive radius $\textcolor{orange}{\delta}$, we can take $\near$ to be the part of $\domain$ where $|\zeta| < \textcolor{orange}{\delta}$. Complementarily, let $\far$ be the part of $\domain$ where $\textcolor{orange}{\delta} \le |\zeta|$.
+for all $a, a' \in \near$ (see Section~\ref{sec:bounds on k}). By choosing a small enough positive radius $\delta$, we can take $\near$ to be the part of $\domain$ where $|\zeta| < \delta$. Complementarily, let $\far$ be the part of $\domain$ where $\delta \le |\zeta|$.
 
 
 Take any function $\varphi \in \singexp{\rho}{\Lambda}(\domain)$. In Section~\ref{near-bound}, we'll bound $|\zeta|^{-(\rho-1)}\,e^{-\Lambda|\zeta|}\,|\volterra\varphi|$ by $\tfrac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}$ on $\near$. In Section~\ref{far-bound}, we'll see that by making $\Lambda$ big enough, we can bound $|\zeta|^{-(\rho-1)}\,e^{-\Lambda|\zeta|}\,|\volterra\varphi|$ by an arbitrarily small constant multiple of $\|\varphi\|_{\rho-1, \Lambda}$ on $\far$. Together, these results show that $\|\volterra \varphi\|_{\rho-1, \Lambda} \le \tfrac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}$ when $\Lambda$ is large enough. Since we set $\sigma < \rho$, this proves Proposition~\ref{prop:get-contraction}.
@@ -666,22 +638,22 @@ Let's again use the straight integration path $\zeta = t \zeta(a)$, with $t \in 
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \|\varphi\|_{\rho-1, \Lambda} \int_0^1 M e^{\lambda |\zeta(a)|(1 - t)}\,t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
 & \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)|\zeta(a)|(1 - t)}\;dt.
 \end{align*}
-Let's set $\Lambda > \lambda$, ensuring that the exponential factor shrinks as $|\zeta(a)|$ grows. Then we can make our bound uniform over all $a \in \far$, since $|\zeta(a)| \ge \textcolor{orange}{\delta}$ for these points:
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\textcolor{orange}{\delta}(1 - t)}\;dt. \]
+Let's set $\Lambda > \lambda$, ensuring that the exponential factor shrinks as $|\zeta(a)|$ grows. Then we can make our bound uniform over all $a \in \far$, since $|\zeta(a)| \ge \delta$ for these points:
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt. \]
 
 We can make this bound less than one, as required to show that $\volterra$ is a contraction, by increasing $\Lambda$. To see this in the trickiest case, where $\rho < 1$, it helps to look at the beginning and end of the integration path separately. At the beginning of the path---for $t \in \big(0, \tfrac{1}{5}\big]$, say---we can use a worst-case estimate on the exponential factor:
 \begin{align*}
-\int_0^{1/5} t^{\rho-1}\,e^{-(\Lambda - \lambda)\textcolor{orange}{\delta}(1 - t)}\;dt & \le e^{-\frac{4}{5}(\Lambda -\lambda)\textcolor{orange}{\delta}} \int_0^{1/5} t^{\rho-1}\;dt \\
-& = e^{-\frac{4}{5}(\Lambda - \lambda)\textcolor{orange}{\delta}}\,\tfrac{1}{\rho} \big(\tfrac{1}{5}\big)^\rho.
+\int_0^{1/5} t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt & \le e^{-\frac{4}{5}(\Lambda -\lambda)\delta} \int_0^{1/5} t^{\rho-1}\;dt \\
+& = e^{-\frac{4}{5}(\Lambda - \lambda)\delta}\,\tfrac{1}{\rho} \big(\tfrac{1}{5}\big)^\rho.
 \end{align*}
 At the end of the path, we instead use a worst-case estimate on $t^{1-\rho}$:
 \begin{align*}
-\int_{1/5}^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\textcolor{orange}{\delta}(1 - t)}\;dt & \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \int_{1/5}^1 e^{-(\Lambda - \lambda)\textcolor{orange}{\delta}(1 - t)}\;dt \\
-& = \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)\textcolor{orange}{\delta}}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \lambda)\textcolor{orange}{\delta}} \right] \\
-& \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)\textcolor{orange}{\delta}}.
+\int_{1/5}^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt & \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \int_{1/5}^1 e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt \\
+& = \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)\delta}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \lambda)\delta} \right] \\
+& \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)\delta}.
 \end{align*}
 
-We now know that by setting $\Lambda > \lambda + \textcolor{orange}{\delta}^{-1} \max\{1, (1/5)^{\rho-1}\}$ (in fact $1/5$ can be replaced by any number in $(0,1)$), we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. \textcolor{orange}{[I think this explicit bound only accounts for the integral over the end of the path, $t \in [1/5, 1)$. To ensure that the whole integral is less than $1$, we also need to look at the integral over the beginning of the path, $t \in (0, 1/5]$, which is calculated above. To me, that seems to make the bound too complicated to be worth stating---but maybe you can find a simplification.]} This completes our proof of Proposition~\ref{prop:get-contraction}.
+We now know that by setting $\Lambda > \lambda + \delta^{-1} \max\{1, (1/5)^{\rho-1}\}$ (in fact $1/5$ can be replaced by any number in $(0,1)$), we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. \textcolor{orange}{[I think this explicit bound only accounts for the integral over the end of the path, $t \in [1/5, 1)$. To ensure that the whole integral is less than $1$, we also need to look at the integral over the beginning of the path, $t \in (0, 1/5]$, which is calculated above. To me, that seems to make the bound too complicated to be worth stating---but maybe you can find a simplification.]} This completes our proof of Proposition~\ref{prop:get-contraction}.
 \subsection{Existence and uniqueness of a fixed point \\ \textit{(proof of Lemma~\ref{lem:perturbed_volterra} and Theorem~\ref{thm:general_volterra})}}\label{sec:existence and uniqueness}
 \begin{proof}[Proof of Lemma~\ref{lem:perturbed_volterra}]
 Choose $\Lambda$ large enough to ensure that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$ and $g$ belongs to $\singexp{\rho-1}{\Lambda}(\Omega)$. Proposition~\ref{prop:get-contraction} guarantees that we can do the former, given our assumptions about $\volterra$ and $\rho$, and the definition of $\singexpalg{\rho-1}(\Omega)$ guarantees that we can also do the latter. Our choice of $\Lambda$ ensures that the affine map $f \mapsto \volterra f + g$ is also a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$, and thus has a unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ by the contraction mapping theorem.
@@ -842,7 +814,7 @@ We can now state and prove the main result of this section, namely that the Volt
     where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
 \end{thm}
 
- \textcolor{magenta}{[In the old version, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]}
+ %\textcolor{magenta}{[In the old version, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]}
 
 \begin{proof}
 Let $p = P(-\zeta)$ and $q = Q(-\zeta)$ and let $\alpha$ be a simple root of $p$. Hence, by assumptions that $p(\alpha)=0$, $p'(\alpha)\neq 0$ and $q(\alpha)\neq 0$. 
@@ -928,13 +900,19 @@ converges for $a \in \domain_\text{near}$, so we have
 \[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
 for $a \in \domain_\text{near}$. Observe that $|S| \le \varepsilon |\zeta - \alpha|$ in $\domain_\text{near}$. 
 
-The denominator is bounded in some neighbourhood $\domain_{\text{near}}$ of $\zeta=\alpha$ and 
+The denominator is bounded in some neighbourhood $\domain_{\text{near}}$ of $\zeta=\alpha$
+\begin{verify}
+By definition of limit, as $\zeta(a)\to\alpha$ we should get
+\[
+\left\vert\frac{1}{p'(\alpha)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...}-\frac{1}{p'(\alpha)}\right\vert\leq \varepsilon
+\]
+\end{verify}
 
 \[
-\frac{1}{|p'(\alpha)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...|}\leq  \text{const.}  
+\frac{1}{|p'(\alpha)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...|}\leq  \text{const.} |\zeta(a)-\alpha| + O(|\zeta(a)-\alpha|^2)
 \]
 
-We should be able to deduce from this that
+Therefore, we deduce from this that
 \begin{align*}
 f_{0,\alpha} & \in \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} + \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} O(|\zeta - \alpha|) \\
 & \subset \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} + \text{const.}\,O\big(|\zeta-\alpha|^{\tau_\alpha}\big) \\
