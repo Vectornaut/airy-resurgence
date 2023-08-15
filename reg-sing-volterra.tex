@@ -179,7 +179,7 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \item \textcolor{gray}{Write abstract.}
 \item \textcolor{gray}{\textbf{(Veronica)} Add table of contents.}
 \item Replace $\psi_0$ with $\chi$.
-\item Replace $\epsilon$ with $\gamma$.
+\item \textcolor{gray}{Replace $\epsilon$ with $\gamma$.}
 \item \textbf{(Aaron)} Use hyperref package. (For link color, use the same green as the verify environment, or maybe turquoise or RoyalBlue?)
 \end{brainstorm}
 \section{Introduction}
@@ -261,6 +261,13 @@ This condition explains why $\domain$ might have the sort of shape illustrated i
 over all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' \in \domain$.
 %%outside a neighborhood of $\zeta(a) = 0$ in $\domain^2$.
 \end{conditions}
+We'll occasionally mention an optional condition on $p$ that allows us to state our main results more explicitly.
+\begin{conditions}
+\condconst{reg-p}{B, \epsilon}\label{cond:reg-p}
+When $p$ is restricted to a small enough neighborhood of $\zeta = 0$, it falls into the class
+\[ B\zeta + O\big(|\zeta|^{1 + \textcolor{orange}{\epsilon}}\big) \]
+for some non-zero constant $B$ and some $\textcolor{orange}{\epsilon} > 0$.
+\end{conditions}
 \subsubsection{The perturbed operator}\label{setting:perturbed}
 
 Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +\softpart$. The perturbation $\softpart$ doesn't have a separable kernel,\footnote{Unless $\softpart$ is zero, of course.} but does have a smoothing effect that counteracts the singularity of $\hardpart$ (as we'll show in Proposition \ref{prop:smoothing}). To get the smoothing effect, we'll require the kernel $\softker$ of $\softpart$ to vanish to some order $\gamma > 0$ on the diagonal in $\Omega^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
@@ -287,13 +294,7 @@ has the {\em prototype solution}
 Changing the base point $b \in \domain$ just multiplies $f_0$ by a non-zero constant.
 \end{thm}
 We'll prove this result in Section~\ref{sec:construction}.
-\color{RoyalBlue}
-\begin{rmk}
-If $q$ has a limit at $\zeta = 0$, the solution $f_0$ from Theorem~\ref{thm:basic_volterra} can be written as a constant mutiple of $\zeta^{\tau-1}$ plus a function which is $O(\zeta^\tau)$ at $\zeta = 0$.
 
-\textcolor{SeaGreen}{$f_0 \in F\zeta^{\tau-1} + O(\zeta^\tau)$ near $\zeta = 0$ for some non-zero constant $F$.}
-\end{rmk}
-\color{black}
 The solution $\solproto$ from Theorem~\ref{thm:basic_volterra} has, at worst, a mild power-law singularity at $\zeta = 0$. With stronger constraints on $\hardpart$, we can also ensure that $\solproto$ grows at most exponentially as $|\zeta| \to \infty$. The function spaces defined in Section~\ref{fn-spaces} express both of these regularity properties.
 \begin{thm}\label{thm:proto-growth}
 Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
@@ -301,6 +302,17 @@ Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a smal
 Suppose $\hardpart$ also satisfies {\em Condition~\eqref{cond:slow}}. Then $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$ defined in Section~\ref{fn-spaces}.
 \end{thm}
 We'll prove this result in Section~\ref{sec:asymptotics}.
+
+\begin{rmk}
+Under stronger conditions on $p$, we can get a better estimate of the prototype solution near $\zeta = 0$, as described in Proposition~\ref{prop:better-proto-estimate} from Section~\ref{sec:asymptotics} for details.
+
+%%Suppose $p$ falls into the class $B\zeta + O\big(|\zeta|^2\big)$, for some constant $B$, when it's restricted to some neighborhood of $\zeta = 0$.
+
+%%for some constant $B$, we can strengthen the conclusion of Theorem~\ref{thm:proto-growth}. Under {\em Condition~\eqref{cond:sing}}, we can show that $\solproto \in B\zeta^{\tau-1} + O(|\zeta|^\tau)$.
+
+%%If $q$ has a limit at $\zeta = 0$, the solution $f_0$ from Theorem~\ref{thm:basic_volterra} can be written as a constant multiple of $\zeta^{\tau-1}$ plus a function which is $O(\zeta^\tau)$ at $\zeta = 0$.
+\end{rmk}
+\color{black}
 
 %%---------
 %%Once we've understood the prototype solution $\solproto$, we can deform it to a solution of the equation we originaly set out to solve---the one involving the perturbed operator $\volterra = \hardpart + \softpart$ from Section~\ref{setting:perturbed}.
@@ -331,6 +343,11 @@ We'll prove Lemma~\ref{lem:perturbed_volterra} in Sections \ref{sec:V is a contr
 
 We'll reduce Theorem~\ref{thm:general_volterra} to Lemma~\ref{lem:perturbed_volterra} in Section~\ref{sec:existence and uniqueness}, by rewriting the homogeneous equation we want to solve as an inhomogeneous equation in a more regular space. To show that the inhomogeneous term, $\softpart f_0$, is regular enough, we'll use Proposition~\ref{prop:smoothing} from Section~\ref{sec:image under soft_part} to show that $\softpart$ improves on the regularity of $f_0$ described by Theorem~\ref{thm:proto-growth}.
 
+\begin{rmk}
+Under stronger conditions on $p$, Theorem~\ref{thm:general_volterra} can be restated to provide a unique solution in the affine subspace
+\[ \zeta^{\tau-1} + \singexpalg{\tau-1+\gamma}(\Omega). \]
+as described in Proposition~\ref{prop:alt-general_volterra} from Section~\ref{sec:existence and uniqueness}.
+\end{rmk}
 %%To prove Theorem~\ref{thm:general_volterra}, we will rewrite the homogeneous equation we want to solve as an inhomogeneous one, with $\softpart f_0$ as the inhomogeneous term.
 
 %%We will reduce Theorem~\ref{thm:general_volterra} to Lemma~\ref{lem:perturbed_volterra} in Section~\ref{sec:existence and uniqueness}, with the help of Proposition~\ref{prop:smoothing} from Section~\ref{sec:image under soft_part}, which can be used to show that $\softpart f_0$ is regular enough to serve as the inhomogeneous term in the lemma.
@@ -422,23 +439,26 @@ Let
 so $\solproto = \frac{p(b)}{p} \psi_0$. Observing that $d\psi_0 = -\frac{q}{p} \psi_0\;d\zeta$, we can write $\hardpart \solproto$ in terms of an integral of $d\psi_0$. For each $a \in \Omega$, we have
 \begin{align*}
 \big[\hardpart \solproto\big](a) &= - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\solproto\;d\zeta \\
-&= -\int_{\zeta=0}^{a} \frac{q}{p(a)}\,\frac{p(b)}{p}\psi_0\;d\zeta \\
-&= - \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p} \psi_0\;d\zeta\\
-&= \frac{p(b)}{p(a)} \int_{\zeta=0}^{a}\;d\psi_0.
+& = -\int_{\zeta=0}^{a} \frac{q}{p(a)}\,\frac{p(b)}{p}\psi_0\;d\zeta \\
+& = - \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p} \psi_0\;d\zeta\\
+& = \frac{p(b)}{p(a)} \int_{\zeta=0}^{a}\;d\psi_0 \\
+& = \frac{p(b)}{p(a)} \left[ \psi_0(a) - \lim_{\zeta \to 0} \psi_0 \right] \\
+& = \solproto(a) - \frac{p(b)}{p(a)} \lim_{\zeta \to 0} \psi_0.
 \end{align*}
+Now, to prove that $\hardpart \solproto = \solproto$, we just need to show that $\lim_{\zeta \to 0} \psi_0 = 0$.
 
-To evaluate this improper integral using the fundamental theorem of calculus, we need to find $\lim_{a \to 0} \psi_0(a)$. This limit turns out to be $0$, as shown by the following argument. By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ and a constant $C$ such that
+By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ and a constant $C$ such that
 \begin{equation}\label{eqn:limit_h1}
 \left|\frac{q(a')}{p(a)} - \frac{\tau}{\zeta(a)}\right| < C
 \end{equation}
-whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. \textcolor{orange}{[...]}
+whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. We can take advantage of this bound by rewriting the integral in the definition of $\psi_0$:
 \begin{align*}
 -\int_b^a \frac{q}{p}\;d\zeta & = \int_b^a \frac{\tau}{\zeta}\;d\zeta - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta \\
 & = \tau \log\left(\frac{\zeta(a)}{\zeta(b)}\right) - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta
 \end{align*}
 Exponentiating both sides, we see that
 \[ \psi_0(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
-The exponential factor is bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ for all points $a$ in our chosen neighborhood of $\zeta = 0$. We deduce that $\hardpart  f_0=f_0$. 
+Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. The exponential factor in the formula above is then bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ whenever $|\zeta(a)| < \delta$. Since $\tau$ is positive, this is enough to show that $\lim_{\zeta \to 0} \psi_0 = 0$. It follows, as discussed above, that $\hardpart \solproto = \solproto$. 
 \end{proof}
 
 
@@ -486,6 +506,13 @@ In particular,
    which is bounded because $|\zeta(a)|>\delta$. 
 
 
+\end{proof}
+
+\begin{prop}\label{prop:better-proto-estimate}
+Suppose $p$ falls into the class $B\zeta + O\big(|\zeta|^{1 + \textcolor{orange}{\epsilon}}\big)$, for some constants $B$ and $\textcolor{orange}{\epsilon}$, when it's restricted to some neighborhood of $\zeta = 0$. In addition, suppose $\hardpart$ satisfies Condition~\eqref{cond:sing}. Then $\solproto \in B\zeta^{\tau-1} + O(|\zeta|^{\tau-1+\textcolor{orange}{\epsilon}})$.
+\end{prop}
+\begin{proof}
+    
 \end{proof}
 
 \subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
@@ -675,6 +702,17 @@ On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{
 
 \end{proof}
 
+\begin{prop}\label{prop:alt-general_volterra}
+    Suppose $p$ satisfies Condition \eqref{cond:reg-p}, and $\volterra$ satisfies assumptions of Theorem \ref{thm:general_volterra}. Then equation 
+    \[f=\volterra f\]
+    has a unique solution $f$ in the affine subspace
+    \[ B \zeta^{\tau-1}+\singexpalg{\tau-1+\gamma'}(\domain)\]
+    of the space $\singexpalg{\tau-1}(\domain)$, where $\gamma'=\min\{\epsilon,\gamma\}$. 
+\end{prop}
+
+\begin{proof}
+    
+\end{proof}
 
 \section{A motivating example}\label{sec:example}
 %\color{black}
