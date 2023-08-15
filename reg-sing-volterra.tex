@@ -289,7 +289,7 @@ Suppose $\hardpart$ satisfies {\em Condition \eqref{cond:sing}}. Then the equati
 \[ f = \hardpart f \]
 has the {\em prototype solution}
 \begin{equation}\label{eqn:test_solution}
-\solproto(a)=\frac{p(b)}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right).
+\solproto(a)=\frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right).
 \end{equation}
 Changing the base point $b \in \domain$ just multiplies $f_0$ by a non-zero constant.
 \end{thm}
@@ -434,21 +434,21 @@ Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solpro
 
 \subsubsection{Construction}\label{sec:construction}
 \begin{proof}[Proof of Theorem~\ref{thm:basic_volterra}]
-Let
-\[ \chi(a) = \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right), \]
-so $\solproto = \frac{p(b)}{p} \chi$. Observing that $d\chi = -\frac{q}{p} \chi\;d\zeta$, we can write $\hardpart \solproto$ in terms of an integral of $d\chi$. For each $a \in \domain$, we have
+Rewrite $\solproto$ as $(1/p)\,\chi$, where
+\[ \chi(a) = \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right). \]
+Observing that $d\chi = -(q/p)\,\chi\;d\zeta$ greatly simplifies the calculation of $\hardpart \solproto$. For each $a \in \domain$,
 \begin{align*}
 \big[\hardpart \solproto\big](a) &= - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\solproto\;d\zeta \\
-& = -\int_{\zeta=0}^{a} \frac{q}{p(a)}\,\frac{p(b)}{p}\chi\;d\zeta \\
-& = - \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p} \chi\;d\zeta\\
-& = \frac{p(b)}{p(a)} \int_{\zeta=0}^{a}\;d\chi \\
-& = \frac{p(b)}{p(a)} \left[ \chi(a) - \lim_{\zeta \to 0} \chi \right] \\
-& = \solproto(a) - \frac{p(b)}{p(a)} \lim_{\zeta \to 0} \chi.
+& = -\int_{\zeta=0}^{a} \frac{q}{p(a)}\,\frac{1}{p}\,\chi\;d\zeta \\
+& = - \frac{1}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p}\,\chi\;d\zeta\\
+& = \frac{1}{p(a)} \int_{\zeta=0}^{a}\;d\chi \\
+& = \frac{1}{p(a)} \left[ \chi(a) - \lim_{\zeta \to 0} \chi \right] \\
+& = \solproto(a) - \frac{1}{p(a)} \lim_{\zeta \to 0} \chi.
 \end{align*}
 Now, to prove that $\hardpart \solproto = \solproto$, we just need to show that $\lim_{\zeta \to 0} \chi = 0$.
 
 By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ and a constant $C$ such that
-\begin{equation}\label{eqn:limit_h1}
+\begin{equation}\label{eqn:sing-bound}
 \left|\frac{q(a')}{p(a)} - \frac{\tau}{\zeta(a)}\right| < C
 \end{equation}
 whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. We can take advantage of this bound by rewriting the integral in the definition of $\chi$:
@@ -468,26 +468,31 @@ Theorem~\ref{thm:proto-growth} comprises two results with different conditions. 
 %%{\em Propositions \ref{prop:asymptotic at zero}} and \ref{prop:asymptotic at infinity} together prove {\em Theorem \ref{thm:proto-growth}}. 
 %%\end{rmk}
 \begin{prop}\label{prop:asymptotic at zero}
-    Let $f_0$ be the prototype solution defined in \eqref{eqn:test_solution}, then $|f_0|$ is bounded by a constant multiple of $\zeta^{\tau-1}$ near $\zeta=0$. 
+Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
 \end{prop}
 
 \begin{proof}
-The proof follows the argument we use at the end of the proof of Theorem \ref{thm:basic_volterra}. In particular, once we choose $\varepsilon>0$ we can choose $\delta>0$ such that for $\zeta(a)<\delta$ and $\zeta(a')<\delta$ the function
+Go back to the proof of Theorem~\ref{thm:basic_volterra}, where we found a radius $\delta > 0$ and a constant $C$ such that Inequality~\eqref{eqn:sing-bound} holds whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. The subsequent argument, which we used to show that $\lim_{\zeta \to 0} \chi = 0$, actually supports a stronger conclusion: it shows that $|\chi| \lesssim |\zeta|^\tau$ on the region $|\zeta| < \delta$. This tells us that
+%%Like we did in the proof of Theorem~\ref{thm:basic_volterra}, find a radius $\delta > 0$ and a constant $C$ such that the bound \eqref{eqn:sing-bound} holds whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. At the end of the proof of Theorem~\ref{thm:basic_volterra}, we showed that $\chi(a)$
 
-\[ \chi(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
+%%The proof follows the argument we use at the end of the proof of Theorem \ref{thm:basic_volterra}. In particular, once we choose $\varepsilon>0$ we can choose $\delta>0$ such that for $\zeta(a)<\delta$ and $\zeta(a')<\delta$ the function
 
-is bounded by $ |\zeta(a)|^\tau$. Therefore, assuming $b'\in\Omega$ and $q(b') \neq 0$
-
+%%\[ \chi(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
+\[ |\solproto| \lesssim \left|\frac{1}{p}\right|\,|\zeta|^\tau \]
+on the region $|\zeta| < \delta$. Choosing a point $b'$ with $|\zeta(b')| < \delta$ and $q(b') \neq 0$, we can deduce that
 \begin{align*}
-|f_0| &  \lesssim |\zeta(a)|^\tau  \left\vert  \frac{p(b)}{p(a)}\right\vert \\
-& \lesssim |\zeta(a)|^\tau \, \left\vert\frac{p(b)}{q(b')} \right\vert \, \left\vert \frac{q(b')}{p(a)} \zeta(a)\right\vert \, |\zeta(a)|^{-1} \\
-&  \lesssim |\zeta(a)|^{\tau-1}.
+|\solproto| & \lesssim \left|\frac{1}{q(b')}\right|\,\left|\frac{q(b')}{p}\right|\,|\zeta|^\tau \\
+& \lesssim \left|\frac{1}{q(b')}\right|\,\left|\frac{q(b')}{p} \zeta\right|\,|\zeta|^{\tau-1}.
 \end{align*}
-
-The last step uses Condition~\eqref{cond:sing}. 
+Since Inequality~\ref{eqn:sing-bound} implies that
+\begin{align*}
+\left|\frac{q(a')}{p(a)}\zeta(a)\right| & \le \tau + C|\zeta(a)| \\
+& \le \tau + C\delta
+\end{align*}
+whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$, we can conclude that $|\solproto| \lesssim |\zeta|^{\tau-1}$ on the region $|\zeta| < \delta$, as desired.
 \end{proof}
 \begin{prop}\label{prop:asymptotic at infinity}
-    Let $b\in\domain$. Assume $\hardpart$ satisfies {\em Condition} \eqref{cond:slow}. Then the prototype solution $f_0$ defined in \eqref{eqn:test_solution} belongs to the function space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:slow}. Then $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
 \end{prop}
 \begin{proof}
 We choose $\varepsilon>0$, then by Condition \eqref{cond:sing} we can choose $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$ (arguing as in the proof of Proposition \ref{prop:asymptotic at zero}) we get a uniform bound 
@@ -509,10 +514,36 @@ In particular,
 \end{proof}
 
 \begin{prop}\label{prop:better-proto-estimate}
-Suppose $p$ falls into the class $B\zeta + O\big(|\zeta|^{1 + \textcolor{orange}{\epsilon}}\big)$, for some constants $B$ and $\textcolor{orange}{\epsilon}$, when it's restricted to some neighborhood of $\zeta = 0$. In addition, suppose $\hardpart$ satisfies Condition~\eqref{cond:sing}. Then $\solproto \in B\zeta^{\tau-1} + O(|\zeta|^{\tau-1+\textcolor{orange}{\epsilon}})$.
+Suppose $p$ satisfies Condition \eqref{cond:reg-p} in some neighborhood of $\zeta = 0$. In addition, suppose $\hardpart$ satisfies Condition~\eqref{cond:sing}. Then $\solproto \in M\zeta^{\tau-1} + O(|\zeta|^{\tau-1+\lambda'})$, for some constant $M$ and $\lambda'=\min\{\epsilon, 1\}$.
 \end{prop}
 \begin{proof}
-    
+Like we did in the proof of Theorem~\ref{thm:basic_volterra}, we reason that
+\begin{align*}
+\solproto(a)&=\frac{p(b)}{p(a)}\, \exp\left(-\int_b^a\frac{q}{p} d\zeta\;\right)\\
+&=\frac{p(b)}{p(a)}\,\frac{\zeta(a)^{\tau}}{\zeta(b)^{\tau}}\,\exp\left(-\int_b^a \left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right)\\
+& = \frac{p(b)}{\zeta(b)^{\tau}}\,\zeta(a)^{\tau-1}\,\frac{\zeta(a)}{p(a)} \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right),
+\end{align*}
+concluding that $\solproto$ is a constant multiple of
+\[ \zeta(a)^{\tau-1}\,\frac{\zeta(a)}{p(a)} \, \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right). \]
+
+By Condition \eqref{cond:reg-p}, we can deduce that
+\[ \frac{\zeta(a)}{p(a)} \in B^{-1} + O\big(|\zeta|^{\epsilon}\big), \]
+in a small enough neighborhood $\domain_\text{near}$ of $\zeta=0$.
+
+Now, let's look at the exponential factor. By Condition~\eqref{cond:sing}, we can find a constant $C$ for which
+\[ \left| \frac{q}{p}+\frac{\tau}{\zeta} \right| < C \]
+in $\domain_\text{near}$. It follows that for all $a \in \domain_\text{near}$, the integral
+\[ S(a) = \int_{0}^a \left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta \]
+converges, allowing us to write
+\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
+for $a \in \domain_\text{near}$. Observe that $|S| \le C |\zeta|$ in $\domain_\text{near}$, implying that
+\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right) \in e^{S(b)} \Big[1 + O\big(|\zeta|\big) \Big] \]
+when we restrict to $\domain_\text{near}$.
+
+Combining the arguments above, we see as desired that
+\[ \solproto \in M\zeta^{\tau - 1} + \singexpalg{\tau-1+\lambda'}(\domain), \]
+with 
+\[ M = \frac{p(b)}{\zeta(b)^{\tau}}\,B^{-1}\,e^{S(b)}. \]
 \end{proof}
 
 \subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
@@ -703,10 +734,10 @@ On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{
 \end{proof}
 
 \begin{prop}\label{prop:alt-general_volterra}
-    Suppose $p$ satisfies Condition \eqref{cond:reg-p}, and $\volterra$ satisfies assumptions of Theorem \ref{thm:general_volterra}. Then equation 
+    Suppose $p$ satisfies Condition \eqref{cond:reg-p}, and $\volterra$ satisfies the assumptions of Theorem \ref{thm:general_volterra}. Then equation 
     \[f=\volterra f\]
     has a unique solution $f$ in the affine subspace
-    \[ B \zeta^{\tau-1}+\singexpalg{\tau-1+\gamma'}(\domain)\]
+    \[ M \zeta^{\tau-1}+\singexpalg{\tau-1+\gamma'}(\domain)\]
     of the space $\singexpalg{\tau-1}(\domain)$, where $\gamma'=\min\{\epsilon,\gamma\}$. 
 \end{prop}
 
