@@ -29,6 +29,8 @@
 }
 \pgfdeclarefading{radial edge}{\pgfuseshading{radialedge}}%
 
+\setcounter{tocdepth}{2}
+
 %%\theoremstyle{definition}
 \newtheorem{defn}{Definition}
 \theoremstyle{plain}
@@ -98,6 +100,18 @@
 
 \begin{document}
 \maketitle
+
+\begin{abstract}
+The inverse Laplace transform can turn a linear differential equation on a complex domain into an equivalent Volterra integral equation on a real domain. This can make things simpler: for example, a differential equation with irregular singularities can become a Volterra equation with regular singularities. It can also reveal hidden structure, especially when the Volterra equation extends to a complex domain.
+
+Our main result is to show that for a certain kind of regular singular Volterra equation on a complex domain, there is always a unique solution of a certain form. As a motivating example, this kind of Volterra equation arises when using Laplace transform methods to solve a ``level~$1$'' differential equation.
+
+
+%Our main result is to show that certain kind of regular singular Volterra equations on complex domains have unique solutions of a characteristic form.
+\end{abstract}
+
+\tableofcontents
+
 \begin{brainstorm}
 \item \textcolor{gray}{\textit{(Aaron)} State Lemma~\ref{lem:perturbed_volterra} just the way we want it.}
 \begin{itemize}
@@ -118,7 +132,7 @@
         \item \textcolor{gray}{\textit{(Aaron)} Add proof of Lemma~\ref{lem:perturbed_volterra} to Section~\ref{sec:existence and uniqueness}}
         \item \textcolor{gray}{\textit{(Aaron)} Revise proof of Theorem~\ref{thm:general_volterra} in Section~\ref{sec:existence and uniqueness}}
         \begin{itemize}
-            \item Proofread revised proof.
+            \item \textcolor{gray}{Proofread revised proof.}
         \end{itemize}
         \item \textit{(Aaron)} State the desired result of Section~\ref{sec:image under soft_part}.
         \color{gray}
@@ -126,7 +140,7 @@
         \color{violet}
         \item \textbf{(Aaron)} Confirm again that removed $\tau+\epsilon$ upper bound on $\rho$ was unnecessary.
 \end{itemize}
-\item Revise text around main results.
+\item \textcolor{gray}{Revise text around main results.}
 \begin{itemize}
     \item \textcolor{gray}{Decide whether to keep Lemma~\ref{lem:perturbed_volterra} as a lemma, or to make it a theorem, and make Theorem~\ref{thm:general_volterra} its corollary. Change order as appropriate.} \textcolor{purple}{Keep Lemma~\ref{lem:perturbed_volterra} as a lemma. State it after Theorem~\ref{thm:general_volterra}.}
     \color{gray}
@@ -139,10 +153,10 @@
     \item Figure out how to clean up $Q(-\zeta')$ business
 \end{itemize}
 \color{violet}
-\item Start finalizing notation for the two parts of the operator and the two parts of the solution.
+\item \textcolor{gray}{Start finalizing notation for the two parts of the operator and the two parts of the solution.}
 \begin{itemize}
-    \item \textcolor{gray}{Choose subscripts or decorations to tell things apart in equations.} Change $\hardpart$ with $\volterra_0$ and $\softpart$ with $\volterra_\star$. Same for $\hardker$ and $\softker$. 
-    \item Choose names to tell things apart in prose. Currently using ``prototypical operator,'' ``prototype solution.'' Come up with names for perturbation stuff.
+    \item \textcolor{gray}{Choose subscripts or decorations to tell things apart in equations.} \textcolor{gray}{Change $\hardpart$ with $\volterra_0$ and $\softpart$ with $\volterra_\star$. Same for $\hardker$ and $\softker$.}
+    \item \textcolor{gray}{Choose names to tell things apart in prose. Currently using ``prototypical operator,'' ``prototype solution.'' Come up with names for perturbation stuff.}
 \end{itemize}
 \item \textbf{(Aaron)} Read through Section~\ref{sec:example}.
 \color{gray}
@@ -158,10 +172,13 @@
 \item \textbf{(Aaron)} Add people Aaron had conversations with
 \item \textbf{(Aaron)} Think about rephrasing FMHJ acknowledgement (ERC one can't be changed).
 \end{itemize}
-\item Reconsider using $\lesssim$ (but still leaning not to)
+\item \textcolor{gray}{Reconsider using $\lesssim$ (but still leaning not to)}
 \begin{itemize}
-    \item \textbf{(Aaron)} As an example, show how we could rewrite the argument in proof of Proposition~\ref{prop:asymptotic at infinity} with $\lesssim$.
+    \item \textcolor{gray}{\textbf{(Aaron)} As an example, show how we could rewrite the argument in proof of Proposition~\ref{prop:asymptotic at infinity} with $\lesssim$.}
 \end{itemize}
+\item \textcolor{gray}{Write abstract.}
+\item \textcolor{gray}{\textbf{(Veronica)} Add table of contents.}
+\item \textbf{(Aaron)} Use hyperref package. (For link color, use the same green as the verify environment, or maybe turquoise or RoyalBlue?)
 \end{brainstorm}
 \section{Introduction}
 \subsection{Motivation}\label{motivation}
@@ -171,9 +188,9 @@ In its most basic form, the Laplace transform $\laplace$ turns exponential-type 
 \laplace k\;\laplace \varphi & = \laplace(k * \varphi) \\
 z^{-\lambda} \laplace \varphi & = \laplace\,\partial^{-\lambda} \varphi,
 \end{align*}
-where $\partial^{-\lambda}$ is the Riemann-Liouville fractional integral of order $\lambda \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on differential equations.
+where $\partial^{-\lambda}$ is the Riemann-Liouville fractional integral of order $\lambda \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on linear differential equations.
 
-Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. Solutions that look unrelated in the frequency domain may turn out to be linked by analytic continuation along the complex position domain, as seen in the phenomenon of {\em resurgence} \cite{EcalleIII}\cite{lectures-marino} \cite[Section 2.4]{sternin1995borel}.
+Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. Solutions that look unrelated in the frequency domain may turn out to be linked by analytic continuation along the complex position domain, as seen in the phenomenon of {\em resurgence} \cite{EcalleIII}\cite{lectures-marino}\cite[Section 2.4]{sternin1995borel}.
 
 Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we'll see this helpful behavior in the class of differential equations that Ecalle calls {\em level $1$}, which includes classical examples like the modified Bessel equation, the equations describing the vibration modes of beams that taper in certain ways \textcolor{orange}{[find citation]}, and the Airy equation after a change of coordinate. This last example generalizes to some level 1 equations that feature in current research, like the Airy-Lucas and higher Airy equations~\cite[Equations 3.2 and 3.8]{charbonnier22}\cite{durugo_higher}.
 
@@ -319,9 +336,11 @@ We'll reduce Theorem~\ref{thm:general_volterra} to Lemma~\ref{lem:perturbed_volt
 
 This paper is a result of the ERC-SyG project, Recursive and Exact New Quantum Theory (ReNewQuantum) which received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme under grant agreement No 810573. 
 
-We thank Fondation Mathematique Jacques Hadamard for supporting the visit of the second author at IH\'ES, under the program \textit{Junior Scientific Visibility}.  
-
-
+We thank Fondation Mathematique Jacques Hadamard for supporting the visit of the second author at IH\'ES, under the program \textit{Junior Scientific Visibility}.
+\begin{brainstorm}
+\item Kihyun Kim and his visitor (possibly Prof. Soonsik Kwon or Sung-Jin Oh)
+\item Angeliki Menegaki
+\end{brainstorm}
 \section{Function spaces for holomorphic Volterra operators}\label{fn-spaces}
 \subsection{Weighted holomorphic $L^\infty$ spaces}\label{sec:fn-space-defs}
 Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\cont(\Omega)$ be the space of continuous complex-valued functions on $\Omega$. Give $\cont(\Omega)$ the compact-open topology, recalling that this is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \Omega$~\cite[Example~2.6 and \S 4 notes]{fnl-cpx-anal}. The holomorphic functions form a closed subspace $\holo(\Omega) \subset \cont(\Omega)$~\cite[Proposition~3.14]{fnl-cpx-anal}.
