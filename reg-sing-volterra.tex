@@ -396,20 +396,21 @@ Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solpro
 
 \subsubsection{Construction}\label{sec:construction}
 \begin{proof}[Proof of Theorem~\ref{thm:basic_volterra}]
-    Let $\psi_0(a)= \exp\left[-\int_{b}^{a}\frac{q}{p} d\zeta\right]$, then $ d \psi_0 = -\frac{q}{p} \psi_0\;d\zeta $. Hence, for every $a\in\Omega$ 
-    \begin{align*}
-        \big[\hardpart f_0\big](a) &= - \int_{\zeta=0}^{a} \frac{q}{p(a)} f_0 d\zeta \\
-        &= - \int_{\zeta=0}^{a} \frac{q}{p(a)} \frac{p(b)}{p}\psi_0 d\zeta \\
-        &= - \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p} \psi_0 d\zeta\\
-        &= \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} d\psi_0  \\
-    \end{align*}
+Let
+\[ \psi_0(a) = \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right), \]
+so $\solproto = \frac{p(b)}{p} \psi_0$. Observing that $d\psi_0 = -\frac{q}{p} \psi_0\;d\zeta$, we can write $\hardpart \solproto$ in terms of an integral of $d\psi_0$. For each $a \in \Omega$, we have
+\begin{align*}
+\big[\hardpart \solproto\big](a) &= - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\solproto\;d\zeta \\
+&= -\int_{\zeta=0}^{a} \frac{q}{p(a)}\,\frac{p(b)}{p}\psi_0\;d\zeta \\
+&= - \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p} \psi_0\;d\zeta\\
+&= \frac{p(b)}{p(a)} \int_{\zeta=0}^{a}\;d\psi_0.
+\end{align*}
 
-    Now we claim $\lim_{a\to 0}\psi_0(a)=0$: in fact, choose some $\varepsilon>0$. By Condition~\eqref{cond:sing}, we can find $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$
+To evaluate this improper integral using the fundamental theorem of calculus, we need to find $\lim_{a \to 0} \psi_0(a)$. This limit turns out to be $0$, as shown by the following argument. Choose some $\varepsilon>0$. By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ such that
 \begin{equation}\label{eqn:limit_h1}
 \left|\frac{q(a')}{p(a)} - \frac{\tau}{\zeta(a)}\right|<\varepsilon
 \end{equation}
- % notice that $|p(a)|\leq \varepsilon$ for $|zeta(a)|\leq \delta$, while $|q(a')-\ell|\leq \varepsilon$ for $|\zeta(a')|\leq \delta$ and $\ell>0$. 
- Then, we choose $b\in\Omega$ such that $\tfrac{\delta}{2}=|\zeta(b)|$.
+whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. \textcolor{orange}{[...]}
 \begin{align*}
 -\int_b^a \frac{q}{p}\;d\zeta & = \int_b^a \frac{\tau}{\zeta}\;d\zeta - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta \\
 & = \tau \log\left(\frac{\zeta(a)}{\zeta(b)}\right) - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta
