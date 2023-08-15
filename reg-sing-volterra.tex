@@ -644,14 +644,13 @@ We can make this bound less than one, as required to show that $\volterra$ is a 
 \int_0^{1/5} t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt & \le e^{-\frac{4}{5}(\Lambda -\lambda)\delta} \int_0^{1/5} t^{\rho-1}\;dt \\
 & = e^{-\frac{4}{5}(\Lambda - \lambda)\delta}\,\tfrac{1}{\rho} \big(\tfrac{1}{5}\big)^\rho.
 \end{align*}
-At the end of the path, we instead use a worst-case estimate on $t^{1-\rho}$:
+At the end of the path, we instead use a worst-case estimate on $t^{\rho-1}$:
 \begin{align*}
-\int_{1/5}^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt & \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \int_{1/5}^1 e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt \\
-& = \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)\delta}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \lambda)\delta} \right] \\
-& \le \left\{\begin{array}{cc}(1/5)^{\rho-1} & \rho \le 1 \\ 1 & \rho \ge 1 \end{array}\right\} \frac{1}{(\Lambda - \lambda)\delta}.
+\int_{1/5}^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt & \le \max\{(1/5)^{\rho-1}, 1\} \int_{1/5}^1 e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt \\
+& = \max\{(1/5)^{\rho-1}, 1\} \frac{1}{(\Lambda - \lambda)\delta}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \lambda)\delta} \right] \\
+& \le \max\{(1/5)^{\rho-1}, 1\} \frac{1}{(\Lambda - \lambda)\delta}.
 \end{align*}
-
-We now know that by setting $\Lambda > \lambda + \delta^{-1} \max\{1, (1/5)^{\rho-1}\}$ (in fact $1/5$ can be replaced by any number in $(0,1)$), we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. \textcolor{orange}{[I think this explicit bound only accounts for the integral over the end of the path, $t \in [1/5, 1)$. To ensure that the whole integral is less than $1$, we also need to look at the integral over the beginning of the path, $t \in (0, 1/5]$, which is calculated above. To me, that seems to make the bound too complicated to be worth stating---but maybe you can find a simplification.]} This completes our proof of Proposition~\ref{prop:get-contraction}.
+In summary, the beginning of the integral is bounded by a decaying exponential function of $(\Lambda - \lambda)\delta$, and the end of the integral is bounded by a reciprocal function of $(\Lambda - \lambda)\delta$. That means we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. This completes our proof of Proposition~\ref{prop:get-contraction}.
 \subsection{Existence and uniqueness of a fixed point \\ \textit{(proof of Lemma~\ref{lem:perturbed_volterra} and Theorem~\ref{thm:general_volterra})}}\label{sec:existence and uniqueness}
 \begin{proof}[Proof of Lemma~\ref{lem:perturbed_volterra}]
 Choose $\Lambda$ large enough to ensure that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$ and $g$ belongs to $\singexp{\rho-1}{\Lambda}(\Omega)$. Proposition~\ref{prop:get-contraction} guarantees that we can do the former, given our assumptions about $\volterra$ and $\rho$, and the definition of $\singexpalg{\rho-1}(\Omega)$ guarantees that we can also do the latter. Our choice of $\Lambda$ ensures that the affine map $f \mapsto \volterra f + g$ is also a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$, and thus has a unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ by the contraction mapping theorem.
