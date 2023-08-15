@@ -178,7 +178,7 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \end{itemize}
 \item \textcolor{gray}{Write abstract.}
 \item \textcolor{gray}{\textbf{(Veronica)} Add table of contents.}
-\item Replace $\psi_0$ with $\chi$.
+\item \textcolor{gray}{Replace $\psi_0$ with $\chi$.}
 \item \textcolor{gray}{Replace $\epsilon$ with $\gamma$.}
 \item \textbf{(Aaron)} Use hyperref package. (For link color, use the same green as the verify environment, or maybe turquoise or RoyalBlue?)
 \end{brainstorm}
@@ -435,30 +435,30 @@ Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solpro
 \subsubsection{Construction}\label{sec:construction}
 \begin{proof}[Proof of Theorem~\ref{thm:basic_volterra}]
 Let
-\[ \psi_0(a) = \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right), \]
-so $\solproto = \frac{p(b)}{p} \psi_0$. Observing that $d\psi_0 = -\frac{q}{p} \psi_0\;d\zeta$, we can write $\hardpart \solproto$ in terms of an integral of $d\psi_0$. For each $a \in \Omega$, we have
+\[ \chi(a) = \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right), \]
+so $\solproto = \frac{p(b)}{p} \chi$. Observing that $d\chi = -\frac{q}{p} \chi\;d\zeta$, we can write $\hardpart \solproto$ in terms of an integral of $d\chi$. For each $a \in \domain$, we have
 \begin{align*}
 \big[\hardpart \solproto\big](a) &= - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\solproto\;d\zeta \\
-& = -\int_{\zeta=0}^{a} \frac{q}{p(a)}\,\frac{p(b)}{p}\psi_0\;d\zeta \\
-& = - \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p} \psi_0\;d\zeta\\
-& = \frac{p(b)}{p(a)} \int_{\zeta=0}^{a}\;d\psi_0 \\
-& = \frac{p(b)}{p(a)} \left[ \psi_0(a) - \lim_{\zeta \to 0} \psi_0 \right] \\
-& = \solproto(a) - \frac{p(b)}{p(a)} \lim_{\zeta \to 0} \psi_0.
+& = -\int_{\zeta=0}^{a} \frac{q}{p(a)}\,\frac{p(b)}{p}\chi\;d\zeta \\
+& = - \frac{p(b)}{p(a)}  \int_{\zeta=0}^{a} \frac{q}{p} \chi\;d\zeta\\
+& = \frac{p(b)}{p(a)} \int_{\zeta=0}^{a}\;d\chi \\
+& = \frac{p(b)}{p(a)} \left[ \chi(a) - \lim_{\zeta \to 0} \chi \right] \\
+& = \solproto(a) - \frac{p(b)}{p(a)} \lim_{\zeta \to 0} \chi.
 \end{align*}
-Now, to prove that $\hardpart \solproto = \solproto$, we just need to show that $\lim_{\zeta \to 0} \psi_0 = 0$.
+Now, to prove that $\hardpart \solproto = \solproto$, we just need to show that $\lim_{\zeta \to 0} \chi = 0$.
 
 By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ and a constant $C$ such that
 \begin{equation}\label{eqn:limit_h1}
 \left|\frac{q(a')}{p(a)} - \frac{\tau}{\zeta(a)}\right| < C
 \end{equation}
-whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. We can take advantage of this bound by rewriting the integral in the definition of $\psi_0$:
+whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. We can take advantage of this bound by rewriting the integral in the definition of $\chi$:
 \begin{align*}
 -\int_b^a \frac{q}{p}\;d\zeta & = \int_b^a \frac{\tau}{\zeta}\;d\zeta - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta \\
 & = \tau \log\left(\frac{\zeta(a)}{\zeta(b)}\right) - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta
 \end{align*}
 Exponentiating both sides, we see that
-\[ \psi_0(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
-Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. The exponential factor in the formula above is then bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ whenever $|\zeta(a)| < \delta$. Since $\tau$ is positive, this is enough to show that $\lim_{\zeta \to 0} \psi_0 = 0$. It follows, as discussed above, that $\hardpart \solproto = \solproto$. 
+\[ \chi(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
+Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. The exponential factor in the formula above is then bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ whenever $|\zeta(a)| < \delta$. Since $\tau$ is positive, this is enough to show that $\lim_{\zeta \to 0} \chi = 0$. It follows, as discussed above, that $\hardpart \solproto = \solproto$. 
 \end{proof}
 
 
@@ -474,13 +474,13 @@ Theorem~\ref{thm:proto-growth} comprises two results with different conditions. 
 \begin{proof}
 The proof follows the argument we use at the end of the proof of Theorem \ref{thm:basic_volterra}. In particular, once we choose $\varepsilon>0$ we can choose $\delta>0$ such that for $\zeta(a)<\delta$ and $\zeta(a')<\delta$ the function
 
-\[ \psi_0(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
+\[ \chi(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
 
 is bounded by $ |\zeta(a)|^\tau$. Therefore, assuming $b'\in\Omega$ and $q(b') \neq 0$
 
 \begin{align*}
 |f_0| &  \lesssim |\zeta(a)|^\tau  \left\vert  \frac{p(b)}{p(a)}\right\vert \\
-& \lesssim |\zeta(a)|^\tau \, \left\vert\frac{p(q)}{q(b')} \right\vert \, \left\vert \frac{q(b')}{p(a)} \zeta(a)\right\vert \, |\zeta(a)|^{-1} \\
+& \lesssim |\zeta(a)|^\tau \, \left\vert\frac{p(b)}{q(b')} \right\vert \, \left\vert \frac{q(b')}{p(a)} \zeta(a)\right\vert \, |\zeta(a)|^{-1} \\
 &  \lesssim |\zeta(a)|^{\tau-1}.
 \end{align*}
 
@@ -922,7 +922,7 @@ recalling that $b_1$ is the derivative of $p$ at $\zeta = \alpha$.
 
 Now, let's look at the exponential factor. By Condition~\eqref{cond:sing}, we can find a constant $C$ for which
 \[ \left| \frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} \right| < C \]
-in some neighborhood $\domain_\text{near}$ of $\zeta = \alpha$. It follows that for all $\alpha \in \domain_\text{near}$, the integral
+in some neighborhood $\domain_\text{near}$ of $\zeta = \alpha$. It follows that for all $a \in \domain_\text{near}$, the integral
 \[ S(a) = \int_{\zeta = \alpha}^a \left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta \]
 converges, allowing us to write
 \[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
