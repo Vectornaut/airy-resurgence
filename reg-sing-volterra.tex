@@ -138,7 +138,7 @@ Our main result is to show that for a certain kind of regular singular Volterra 
         \color{gray}
         \item \textit{(Veronica)} Add motivation to Section~\ref{sec:image under soft_part}, explaining that the desired result of the section follows from a more general result about the smoothing effect of $\softpart$ (Proposition~\ref{prop:smoothing}). \textcolor{green}{I added a Corollary to explicitly write how Proposition \ref{prop:smoothing} implies the regularity we want for $\softpart f_0$}
         \color{violet}
-        \item \textbf{(Aaron)} Confirm again that removed $\tau+\epsilon$ upper bound on $\rho$ was unnecessary.
+        \item \textbf{(Aaron)} Confirm again that removed $\tau+\gamma$ upper bound on $\rho$ was unnecessary.
 \end{itemize}
 \item \textcolor{gray}{Revise text around main results.}
 \begin{itemize}
@@ -178,6 +178,8 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \end{itemize}
 \item \textcolor{gray}{Write abstract.}
 \item \textcolor{gray}{\textbf{(Veronica)} Add table of contents.}
+\item Replace $\psi_0$ with $\chi$.
+\item Replace $\epsilon$ with $\gamma$.
 \item \textbf{(Aaron)} Use hyperref package. (For link color, use the same green as the verify environment, or maybe turquoise or RoyalBlue?)
 \end{brainstorm}
 \section{Introduction}
@@ -261,12 +263,12 @@ over all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' 
 \end{conditions}
 \subsubsection{The perturbed operator}\label{setting:perturbed}
 
-Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +\softpart$. The perturbation $\softpart$ doesn't have a separable kernel,\footnote{Unless $\softpart$ is zero, of course.} but does have a smoothing effect that counteracts the singularity of $\hardpart$ (as we'll show in Proposition \ref{prop:smoothing}). To get the smoothing effect, we'll require the kernel $\softker$ of $\softpart$ to vanish to some order $\epsilon > 0$ on the diagonal in $\Omega^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
+Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +\softpart$. The perturbation $\softpart$ doesn't have a separable kernel,\footnote{Unless $\softpart$ is zero, of course.} but does have a smoothing effect that counteracts the singularity of $\hardpart$ (as we'll show in Proposition \ref{prop:smoothing}). To get the smoothing effect, we'll require the kernel $\softker$ of $\softpart$ to vanish to some order $\gamma > 0$ on the diagonal in $\Omega^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
 
 Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We'll allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we won't allow any sharper singularity. We'll also put an exponential bound on how fast $\softker$ grows away from the diagonal, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we'll require:
 \begin{conditions}
-\condconst{diag$_\star$}{\epsilon, \lambda_\Delta}\label{cond:eps-lambda} We have
-\[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
+\condconst{diag$_\star$}{\gamma, \lambda_\Delta}\label{cond:eps-lambda} We have
+\[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$.
 \end{conditions}
 Notice that this condition prevents $\softker$ from being separable---unless it's zero, of course.
@@ -314,10 +316,10 @@ When we perturb $\hardpart$ to the more general operator $\volterra = \hardpart 
 Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}}, \eqref{cond:slow}, and \eqref{cond:diag-basic}, and $\softpart$ satisfies {\em Condition~\eqref{cond:eps-lambda}}. Then the equation
 \[f = \volterra f\]
 has a unique solution $f$ in the affine subspace
-\[ f_0 + \singexpalg{\tau-1+\epsilon}(\Omega) \]
+\[ f_0 + \singexpalg{\tau-1+\gamma}(\Omega) \]
 of the space $\singexpalg{\tau-1}(\Omega)$ defined in Section~\ref{fn-spaces}. Here, $f_0$ is the prototype solution \eqref{eqn:test_solution} from Theorems \ref{thm:basic_volterra}--\ref{thm:proto-growth}, which belongs to the space $\singexp{\tau-1}{\lambda_0}(\Omega)$.
 
-For any $\rho > \tau$, the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$. In other words, lowering $\rho$ into $(\tau, \tau+\epsilon)$ to allow a sharper singularity won't reveal any more solutions, and raising $\rho$ too high to admit the solution found in $f_0 + \singexpalg{\tau-1+\epsilon}(\Omega)$ will leave no solution at all.
+For any $\rho > \tau$, the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$. In other words, lowering $\rho$ into $(\tau, \tau+\gamma)$ to allow a sharper singularity won't reveal any more solutions, and raising $\rho$ too high to admit the solution found in $f_0 + \singexpalg{\tau-1+\gamma}(\Omega)$ will leave no solution at all.
 \end{thm}
 This result will follow from a more general result about inhomogeneous equations.
 \begin{lemma}\label{lem:perturbed_volterra}
@@ -408,9 +410,9 @@ The results stated in Section~\ref{sec:results} lay out a method for solving the
 
 We start by constructing the prototype solution $\solproto$ from the kernel of $\hardpart$, which is the separable operator that gives $\volterra = \hardpart + \softpart$ its regular singularity. We'll show in Section~\ref{sec:proto-construction-regularity} that $\solproto$ satisfies the equation $\solproto = \hardpart \solproto$ and belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
 
-To see what the perturbation $\softpart$ does to $\solproto$, we'll show in Section~\ref{sec:image under soft_part} that $\softpart$ has a smoothing effect, reducing the sharpness of any power-law singularity at $\zeta = 0$. In particular, it sends $\solproto$ into $\singexpalg{\tau-1+\epsilon}(\domain)$.
+To see what the perturbation $\softpart$ does to $\solproto$, we'll show in Section~\ref{sec:image under soft_part} that $\softpart$ has a smoothing effect, reducing the sharpness of any power-law singularity at $\zeta = 0$. In particular, it sends $\solproto$ into $\singexpalg{\tau-1+\gamma}(\domain)$.
 
-Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$, suggesting that the equation $\solwhole = \volterra \solwhole$ has a solution there. To confirm this, we'll show in Section~\ref{sec:V is a contraction} that $\volterra$ is a contraction of $\singexp{\tau-1+\epsilon}{\Lambda}(\domain)$ when $\Lambda$ is large enough. This tells us that $\volterra$ has a unique fixed point in $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$, as we'll see in Section~\ref{sec:existence and uniqueness}.
+Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, suggesting that the equation $\solwhole = \volterra \solwhole$ has a solution there. To confirm this, we'll show in Section~\ref{sec:V is a contraction} that $\volterra$ is a contraction of $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$ when $\Lambda$ is large enough. This tells us that $\volterra$ has a unique fixed point in $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, as we'll see in Section~\ref{sec:existence and uniqueness}.
 \subsection{Construction and regularity of the prototype solution \\ \textit{(proof of Theorems~\ref{thm:basic_volterra}--\ref{thm:proto-growth})}}\label{sec:proto-construction-regularity}
 
 \subsubsection{Construction}\label{sec:construction}
@@ -425,9 +427,9 @@ so $\solproto = \frac{p(b)}{p} \psi_0$. Observing that $d\psi_0 = -\frac{q}{p} \
 &= \frac{p(b)}{p(a)} \int_{\zeta=0}^{a}\;d\psi_0.
 \end{align*}
 
-To evaluate this improper integral using the fundamental theorem of calculus, we need to find $\lim_{a \to 0} \psi_0(a)$. This limit turns out to be $0$, as shown by the following argument. Choose some $\varepsilon>0$. By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ such that
+To evaluate this improper integral using the fundamental theorem of calculus, we need to find $\lim_{a \to 0} \psi_0(a)$. This limit turns out to be $0$, as shown by the following argument. By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ and a constant $C$ such that
 \begin{equation}\label{eqn:limit_h1}
-\left|\frac{q(a')}{p(a)} - \frac{\tau}{\zeta(a)}\right|<\varepsilon
+\left|\frac{q(a')}{p(a)} - \frac{\tau}{\zeta(a)}\right| < C
 \end{equation}
 whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. \textcolor{orange}{[...]}
 \begin{align*}
@@ -436,7 +438,7 @@ whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Recalling that a chan
 \end{align*}
 Exponentiating both sides, we see that
 \[ \psi_0(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
-The exponential factor is bounded between $\exp\big({-\tfrac{3}{2}\varepsilon\delta}\big)$ and $\exp\big(\tfrac{3}{2}\varepsilon\delta\big)$ for all points $a$ in our chosen neighborhood of $\zeta = 0$. We deduce that $\hardpart  f_0=f_0$. 
+The exponential factor is bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ for all points $a$ in our chosen neighborhood of $\zeta = 0$. We deduce that $\hardpart  f_0=f_0$. 
 \end{proof}
 
 
@@ -488,37 +490,37 @@ In particular,
 
 \subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 
-In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\epsilon}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
+In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\gamma}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
 
 \begin{prop}\label{prop:smoothing}
 Under {\em Condition~\eqref{cond:eps-lambda}}, the operator $\softpart$ maps
-\[ \singexp{\sigma}{\Lambda}(\Omega) \to \singexp{\sigma+\epsilon}{\Lambda}(\Omega) \]
+\[ \singexp{\sigma}{\Lambda}(\Omega) \to \singexp{\sigma+\gamma}{\Lambda}(\Omega) \]
 continuously for all $\Lambda\geq \lambda_{\Delta}$ and $\sigma>-1$.
 \end{prop}
 
 \begin{proof}
     Let $f\in\singexp{\sigma}{\Lambda}$,
     \begin{align*}
-        |\zeta(a)|^{-(\sigma+\epsilon)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
-        &\leq |\zeta(a)|^{-(\sigma+\epsilon)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |f| \, |d\zeta| \\
-        &\leq |\zeta(a)|^{-(\sigma+\epsilon)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \|f\|_{\sigma,\Lambda} \, |d\zeta| 
+        |\zeta(a)|^{-(\sigma+\gamma)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
+        &\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |f| \, |d\zeta| \\
+        &\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \|f\|_{\sigma,\Lambda} \, |d\zeta| 
     \end{align*}
     By Condition~\eqref{cond:eps-lambda},
     \begin{align*}
-         \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| &\leq C_k \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\epsilon}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
-         &=C_k |\zeta(a)|^{\epsilon+\sigma} \int_{0}^1 (1-t)^\epsilon e^{\lambda_\Delta |\zeta(a)|(1-t)} t^{\sigma}\, e^{\Lambda|\zeta(a)| t}\;dt\\
-         &=C_k |\zeta(a)|^{\epsilon+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,  \int_{0}^1 (1-t)^\epsilon  t^{\sigma}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)| t}\;dt\\
-         &\le C_k |\zeta(a)|^{\epsilon+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)|}\int_{0}^1 (1-t)^\epsilon  t^{\sigma}\;dt.
+         \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| &\leq C_k \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\gamma}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
+         &=C_k |\zeta(a)|^{\gamma+\sigma} \int_{0}^1 (1-t)^\gamma e^{\lambda_\Delta |\zeta(a)|(1-t)} t^{\sigma}\, e^{\Lambda|\zeta(a)| t}\;dt\\
+         &=C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,  \int_{0}^1 (1-t)^\gamma  t^{\sigma}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)| t}\;dt\\
+         &\le C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)|}\int_{0}^1 (1-t)^\gamma  t^{\sigma}\;dt.
     \end{align*}
     The last step takes advantage of the assumption that $\Lambda \ge \lambda_\Delta$. Recognizing the integral as an evaluation of the beta function, we can rewrite the bound as
-    \[ \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k |\zeta(a)|^{\epsilon+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\epsilon+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\epsilon+2)}. \]
-    Our assumptions that $\epsilon > 0$ and $\sigma > -1$ ensure that the gamma functions are well-defined. Rearranging to get
-    \[ |\zeta(a)|^{-(\epsilon+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k \frac{\Gamma(\epsilon+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\epsilon+2)}, \]
-    we conclude that $|\zeta(a)|^{-\sigma-\epsilon} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert$ is uniformly bounded in $\domain$. 
+    \[ \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}. \]
+    Our assumptions that $\gamma > 0$ and $\sigma > -1$ ensure that the gamma functions are well-defined. Rearranging to get
+    \[ |\zeta(a)|^{-(\gamma+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}, \]
+    we conclude that $|\zeta(a)|^{-\sigma-\gamma} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert$ is uniformly bounded in $\domain$. 
 \end{proof}
 
 \begin{cor}\label{cor:pertub_f0}
-    Let $f_0$ be the prototype solution in equation \eqref{eqn:test_solution}. If $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}}, then $\softpart f_0\in\singexp{\tau-1+\epsilon}{\Lambda}(\Omega)$, for $\Lambda\geq \lambda_\Delta$. 
+    Let $f_0$ be the prototype solution in equation \eqref{eqn:test_solution}. If $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}}, then $\softpart f_0\in\singexp{\tau-1+\gamma}{\Lambda}(\Omega)$, for $\Lambda\geq \lambda_\Delta$. 
 \end{cor}
 \begin{proof}
     Notice that since $\tau-1>-1$ the hypothesis of Proposition \ref{prop:smoothing} are satisfied. In addition, we can choose the constant $\Lambda=\max \{\lambda_0 , \lambda_\Delta\}$. 
@@ -562,9 +564,9 @@ whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. It follows that
 whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. By shrinking the radius $\delta$, we can make $C\delta$ as small as we want.
 
 Under Condition~\eqref{cond:eps-lambda}, we can make $|\softker(a, a')|$ as small as we want by keeping $a$ and $a'$ close to $\zeta = 0$. The condition tells us that
-\[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
+\[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$, which means that
-\[ \big| \softker(a, a') \big| \lesssim\frac{(2\delta)^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta(2\delta)}\]
+\[ \big| \softker(a, a') \big| \lesssim\frac{(2\delta)^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta(2\delta)}\]
 over all $a, a' \in \domain$ with $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Combining this conclusion with the previous one, we get the desired result.
 \end{proof}
 Another bound, which works when the first argumetn of $\kerwhole$ is kept away from $\zeta = 0$, will be used in Section~\ref{far-bound}.
@@ -577,13 +579,13 @@ over all $a \in \domain_\text{far}$ and $a' \in \domain$.
 Find a radius $\delta > 0$ with $|\zeta| \ge \delta$ on $\domain_\text{far}$, and choose some $\lambda > \lambda_\Delta$. Conditions \eqref{cond:diag-basic} and \eqref{cond:eps-lambda} tell us that
 \begin{align*}
 |\kerwhole(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
-&\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} + \frac{|\zeta(a)-\zeta(a')|^\epsilon}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
-&\lesssim \big(1 + \delta^{-1} |\zeta(a)-\zeta(a')|^\epsilon \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
+&\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} + \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
+&\lesssim \big(1 + \delta^{-1} |\zeta(a)-\zeta(a')|^\gamma \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
 \end{align*}
 over all $a \in \domain_\text{far}$ and $a' \in \domain$. Since
-\[ 1 + \delta^{-1}|\zeta(a)-\zeta(a')|^\epsilon \]
+\[ 1 + \delta^{-1}|\zeta(a)-\zeta(a')|^\gamma \]
 grows polynomially with respect to $|\zeta(a)-\zeta(a')|$, we can bound it with any growing exponential function of $|\zeta(a)-\zeta(a')|$. In particular,
-\[ 1 + \delta^{-1}|\zeta(a)-\zeta(a')|^\epsilon \lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \]
+\[ 1 + \delta^{-1}|\zeta(a)-\zeta(a')|^\gamma \lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \]
 over all $a, a' \in \domain$. It follows that
 \[ |\kerwhole(a,a')| \lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 over all $a \in \domain_\text{far}$ and $a' \in \domain$. This simplifies to the desired result.
@@ -646,7 +648,7 @@ To see that the fixed point is still unique in the bigger space $\singexpalg{\rh
 %\textcolor{magenta}{[we have to change the definition of $\hardker$ in \S \ref{setting:basic} in $-\frac{q(a')}{p(a)}$.]}
 Start with the prototype solution $\solproto$ constructed in Theorem~\ref{thm:basic_volterra}, which satisfies the equation
 \[ \solproto = \hardpart \solproto. \]
-The base point for the construction can be chosen arbitrarily. Under our assumptions about $\volterra$, Theorem~\ref{thm:proto-growth} tells us that $\solproto$ is in $\singexp{\tau-1}{\lambda_0}(\Omega)$. Our goal is to find a perturbation $\solptb \in \singexpalg{\tau-1+\epsilon}(\Omega)$ that makes $\solwhole = \solproto + \solptb$ a solution of
+The base point for the construction can be chosen arbitrarily. Under our assumptions about $\volterra$, Theorem~\ref{thm:proto-growth} tells us that $\solproto$ is in $\singexp{\tau-1}{\lambda_0}(\Omega)$. Our goal is to find a perturbation $\solptb \in \singexpalg{\tau-1+\gamma}(\Omega)$ that makes $\solwhole = \solproto + \solptb$ a solution of
 \begin{equation}\label{eqn:orig-homog}
 \solwhole = \volterra \solwhole.
 \end{equation}
@@ -661,13 +663,13 @@ we can rewrite the homogeneous equation we're trying to solve as an inhomogeneou
 & = \solproto + \softpart\solproto + \volterra\solptb \nonumber \\
 \solptb & = \softpart\solproto + \volterra\solptb. \label{eqn:equiv-inhomog}
 \end{align}
-Since we know that $\solproto$ is in $\singexp{\tau-1}{\lambda_0}(\Omega)$, Proposition~\ref{prop:smoothing} tells us that the inhomogeneous term $\softpart\solproto$ is in $\singexp{\tau-1+\epsilon}{\lambda_0}(\Omega)$. Since $\tau+\epsilon > \tau$, and we've made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\epsilon}(\Omega)$. Equivalently, Equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\epsilon}(\Omega)$.
+Since we know that $\solproto$ is in $\singexp{\tau-1}{\lambda_0}(\Omega)$, Proposition~\ref{prop:smoothing} tells us that the inhomogeneous term $\softpart\solproto$ is in $\singexp{\tau-1+\gamma}{\lambda_0}(\Omega)$. Since $\tau+\gamma > \tau$, and we've made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\gamma}(\Omega)$. Equivalently, Equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\gamma}(\Omega)$.
 
 Now, we just want to show that the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$ for any $\rho > \tau$.
 
-First, suppose $\rho \in (\tau, \tau+\epsilon)$. In this case, we can use the inclusion $\singexpalg{\tau-1+\epsilon}(\Omega) \hookrightarrow \singexpalg{\rho-1}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-alg} to see that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\rho-1}(\Omega)$. Lemma~\ref{lem:perturbed_volterra} then guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found in $\singexpalg{\tau-1+\epsilon}(\Omega)$.
+First, suppose $\rho \in (\tau, \tau+\gamma)$. In this case, we can use the inclusion $\singexpalg{\tau-1+\gamma}(\Omega) \hookrightarrow \singexpalg{\rho-1}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-alg} to see that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\rho-1}(\Omega)$. Lemma~\ref{lem:perturbed_volterra} then guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found in $\singexpalg{\tau-1+\gamma}(\Omega)$.
 
-On the other hand, suppose $\rho > \tau+\epsilon$. In this case, Proposition~\ref{prop:inclus-lt-pow-alg} gives an inclusion $\singexpalg{\rho-1}(\Omega) \hookrightarrow \singexpalg{\tau-1+\epsilon}(\Omega)$. Under this inclusion, any solution of Equation~\eqref{eqn:equiv-inhomog} that we might find in $\singexpalg{\rho-1}(\Omega)$ must match the unique solution we found in $\singexpalg{\tau-1+\epsilon}(\Omega)$.
+On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{prop:inclus-lt-pow-alg} gives an inclusion $\singexpalg{\rho-1}(\Omega) \hookrightarrow \singexpalg{\tau-1+\gamma}(\Omega)$. Under this inclusion, any solution of Equation~\eqref{eqn:equiv-inhomog} that we might find in $\singexpalg{\rho-1}(\Omega)$ must match the unique solution we found in $\singexpalg{\tau-1+\gamma}(\Omega)$.
 
 %%the inhomogeneous term $\softpart\solproto$ is still in $\singexpalg{\rho-1}(\Omega)$ by Proposition~\ref{prop:inclus-lt-pow-gt-exp}, so Lemma~\ref{lem:perturbed_volterra} still guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found.
 
@@ -747,7 +749,7 @@ For all $\nu\in (0,\infty)$, the fractional integral $\fracderiv{-\nu}{\zeta}{\a
     &=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\,  \zeta(a)\, \varphi \, d\zeta\\
     &=\frac{\zeta(a)-\alpha}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\, \varphi \, d\zeta
 \end{align*}
-Define $\softker(a,a'):=\frac{(\zeta(a)-\zeta(a'))^{\nu-1}}{\zeta(a) - \alpha}$, it is singular at $\zeta(a)=\alpha$ and it satisfies Condition \eqref{cond:eps-lambda} with $\epsilon=\nu-1$ and $\lambda_\Delta=0$, for every $a,a'\in\domain_\alpha$.\footnote{Notice that $\softker$ has a singularity at $\zeta=\alpha$ and not at $\zeta=0$ as in Section \ref{setting:perturbed}. This explains the definition of $\softker(a,a')$ with $\zeta(a)-\alpha$ at the denominator (instead of $\zeta(a)$). More generally, working in the domain $\domain_\alpha$, we'll adapt the conventions used for $\domain$.} Hence by Proposition \ref{prop:smoothing}
+Define $\softker(a,a'):=\frac{(\zeta(a)-\zeta(a'))^{\nu-1}}{\zeta(a) - \alpha}$, it is singular at $\zeta(a)=\alpha$ and it satisfies Condition \eqref{cond:eps-lambda} with $\gamma=\nu-1$ and $\lambda_\Delta=0$, for every $a,a'\in\domain_\alpha$.\footnote{Notice that $\softker$ has a singularity at $\zeta=\alpha$ and not at $\zeta=0$ as in Section \ref{setting:perturbed}. This explains the definition of $\softker(a,a')$ with $\zeta(a)-\alpha$ at the denominator (instead of $\zeta(a)$). More generally, working in the domain $\domain_\alpha$, we'll adapt the conventions used for $\domain$.} Hence by Proposition \ref{prop:smoothing}
 
 \[ \frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\, \varphi \, d\zeta \in \singexp{\sigma+\nu-1}{\Lambda}(\domain_\alpha) \]
 
@@ -796,7 +798,7 @@ We can now state and prove the main result of this section, namely that the Volt
     where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
 \end{thm}
 
- %\textcolor{magenta}{[In the old version, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]}
+ \textcolor{magenta}{[In the old version, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]}
 
 \begin{proof}
 Let $p = P(-\zeta)$ and $q = Q(-\zeta)$ and let $\alpha$ be a simple root of $p$. Hence, by assumptions that $p(\alpha)=0$, $p'(\alpha)\neq 0$ and $q(\alpha)\neq 0$. 
@@ -819,9 +821,9 @@ is equivalent to
 Notice that $\hardpart^\alpha$ is holomorphic and separable, while $\softpart^\alpha$ is holomorphic and non-separable. In addition, $\hardpart^\alpha$ is of the type defined in Section \ref{setting:basic} and it satisfies Condition \eqref{cond:sing}: by Taylor expanding the polynomials $p$ and $q$ at $\alpha$
 
 \begin{align*}
-    -\frac{q}{p(\zeta(a))}&=-\frac{q(\alpha)+c_1(\zeta'-\alpha)+c_2 (\zeta'-\alpha)^2+...}{-p'(\alpha)(\zeta(a)-\alpha)+ b_2 (\zeta(a)-\alpha)^2+b_3(\zeta(a)-\alpha)^3+...}\\
-    &=\frac{q\alpha)}{p'(\alpha)(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+ b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}\\
-    &=\frac{q(\alpha)}{p'(\alpha)(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}
+    -\frac{q}{p(\zeta(a))}&=-\frac{q(\alpha)+c_1(\zeta'-\alpha)+c_2 (\zeta'-\alpha)^2+...}{-b_1(\zeta(a)-\alpha)+ b_2 (\zeta(a)-\alpha)^2+b_3(\zeta(a)-\alpha)^3+...}\\
+    &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+ b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}\\
+    &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}
 \end{align*}
 hence setting $\tau_\alpha:=\frac{q(\alpha)}{p'(\alpha)}\neq 0$, we find
 
@@ -855,23 +857,41 @@ We conclude that
 
 \[\left\vert \frac{k_R(a,a')}{p(\zeta(a))}\right\vert \lesssim \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a)-\alpha|}\, e^{2A |\zeta(a)-\zeta(a')|}  \]
 
-and $\epsilon=1$.
+and $\gamma=1$.
 
 \end{enumerate}
 
-Finally, we look closer to the prototype solution $f_{0,\alpha}$ from Theorem \ref{thm:basic_volterra}, Equation \eqref{eqn:test_solution}. Following the computation we did above we get that 
-
+Finally, to get the result as stated, we need to show that
+\[ f_{0, \alpha} \in M\zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha) \]
+for some constant $M$. Since we already know that $f_{0, \alpha}$ is of exponential type, it's enough to show that $f_{0, \alpha}$ falls into the class
+\[ (\zeta - \alpha)^{\tau_\alpha-1}\Big[M + O\big(|\zeta - \alpha|\big)\Big] \]
+when it's restricted to some neighborhood of $\zeta = \alpha$. Like we did in the proof of Theorem~\ref{thm:basic_volterra}, we reason that
 \begin{align*}
-  f_{0,\alpha}(a)&=\frac{p(b)}{p(a)} \exp\left(-\int_b^a\frac{q}{p} d\zeta\right)\\
-  &=\frac{p(b)}{p(a)} \frac{(\zeta(a)-\alpha)^{\tau_\alpha}}{(\zeta(b)-\alpha)^{\tau_\alpha}} \exp\left(-\int_b^a\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} d\zeta\right)
-  %  &=(\zeta(a)-\alpha)^{\tau_\alpha-1} \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}} \frac{1}{p'(\alpha)+b_2'(\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2}
+f_{0,\alpha}(a)&=\frac{p(b)}{p(a)}\, \exp\left(-\int_b^a\frac{q}{p} d\zeta\;\right)\\
+&=\frac{p(b)}{p(a)}\,\frac{(\zeta(a)-\alpha)^{\tau_\alpha}}{(\zeta(b)-\alpha)^{\tau_\alpha}}\,\exp\left(-\int_b^a \left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right)\\
+& = \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}}\,(\zeta(a)-\alpha)^{\tau_\alpha-1}\,\frac{(\zeta(a) - \alpha)}{p(a)} \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right),
 \end{align*}
-Expanding $p(a)$ near $\zeta=\alpha$, we find that $f_{0,\alpha}$ is proportional to  
+concluding that $f_{0,\alpha}$ is a constant multiple of
+\[ (\zeta(a)-\alpha)^{\tau_\alpha-1}\,\frac{\zeta(a)-\alpha}{p(a)} \, \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right). \]
 
-\begin{align*}
-\frac{(\zeta(a)-\alpha)^{\tau_\alpha-1}}{p'(\alpha)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...} \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right)
-\end{align*}
-where both the exponential and the denominator are bounded as $\zeta(a)$ approaches $\alpha$.
+Since $p$ is a polynomial with a simple zero at $\zeta = \alpha$, we can deduce that
+\[ \frac{\zeta(a)-\alpha}{p(a)} \in b_1^{-1} + O\big(|\zeta - \alpha|\big), \]
+recalling that $b_1$ is the derivative of $p$ at $\zeta = \alpha$.
+
+Now, let's look at the exponential factor. By Condition~\eqref{cond:sing}, we can find a constant $C$ for which
+\[ \left| \frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} \right| < C \]
+in some neighborhood $\domain_\text{near}$ of $\zeta = \alpha$. It follows that for all $\alpha \in \domain_\text{near}$, the integral
+\[ S(a) = \int_{\zeta = \alpha}^a \left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta \]
+converges, allowing us to write
+\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
+for $a \in \domain_\text{near}$. Observe that $|S| \le C |\zeta - \alpha|$ in $\domain_\text{near}$, implying that
+\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) \in e^{S(b)} \Big[1 + O\big(|\zeta - \alpha|\big) \Big] \]
+when we restrict to $\domain_\text{near}$.
+
+Combining the arguments above, we see as desired that
+\[ f_{0, \alpha} \in M\zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha), \]
+with
+\[ M = \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}}\,b_1^{-1}\,e^{S(b)}. \]
 
 \color{DarkTurquoise}
 From Condition~\eqref{cond:sing}, we have
@@ -882,7 +902,7 @@ converges for $a \in \domain_\text{near}$, so we have
 \[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
 for $a \in \domain_\text{near}$. Observe that $|S| \le \varepsilon |\zeta - \alpha|$ in $\domain_\text{near}$. 
 
-The denominator is bounded in some neighbourhood $\domain_{\text{near}}$ of $\zeta=\alpha$
+Since $p$ has a simple zero at $\zeta=\alpha$ The denominator is bounded in some neighbourhood $\domain_{\text{near}}$ of $\zeta=\alpha$
 \begin{verify}
 By definition of limit, as $\zeta(a)\to\alpha$ we should get
 \[
