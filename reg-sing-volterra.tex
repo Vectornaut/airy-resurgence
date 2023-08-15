@@ -420,14 +420,28 @@ For each $\Lambda'$, we can get a continuous inclusion $\singexp{\sigma'}{\Lambd
 %%which is effectively finite-order over $\Omega$ in the sense of Definition~\ref{fin-order}, with order at least $1 + \epsilon$ for some $\epsilon \in (0, \infty)$.
 \section{Solving holomorphic Volterra equations}
 \subsection{Overview}
+The results stated in Section~\ref{sec:results} lay out a method for solving the regular singular Volterra equation $\solwhole = \volterra \solwhole$. We'll now show that the method works by proving those results.
+
+We start by constructing the prototype solution $\solproto$ from the kernel of $\hardpart$, which is the separable operator that gives $\volterra = \hardpart + \softpart$ its regular singularity. We'll show in Section~\ref{sec:proto-construction-regularity} that $\solproto$ satisfies the equation $\solproto = \hardpart \solproto$ and belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+
+To see what the perturbation $\softpart$ does to $\solproto$, we'll show in Section~\ref{sec:image under soft_part} that $\softpart$ has a smoothing effect, reducing the sharpness of any power-law singularity at $\zeta = 0$. In particular, it sends $\solproto$ into $\singexpalg{\tau-1+\epsilon}(\domain)$.
+
+Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$, suggesting that the equation $\solwhole = \volterra \solwhole$ has a solution there. To confirm this, we'll show in Section~\ref{sec:V is a contraction} that $\volterra$ is a contraction of $\singexp{\tau-1+\epsilon}{\Lambda}(\domain)$ when $\Lambda$ is large enough. This tells us that $\volterra$ has a unique fixed point in $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$, as we'll see in Section~\ref{sec:existence and uniqueness}.
+
+%%In Section~\ref{setting}, we built $\volterra$ by taking a separable operator $\hardpart$ with a regular singularity at $\zeta = 0$ and adding a perturbation $\softpart$. Correspondingly, our solution method starts with the prototype solution $\solproto$,
+
+%%In this section, we'll prove the results stated in Section~\ref{sec:results}, which lay out a method for solving the Volterra equation $\solwhole = \volterra \solwhole$ from Section~\ref{setting}. Recall that $\volterra$ is the sum of a separable operator $\hardpart$, which has a regular singularity at $\zeta = 0$, and a perturbation $\softpart$.
+
+\color{SeaGreen}
 In this section, we'll prove the results stated in Section~\ref{sec:results}. Our arguments will follow the process of solving the regular singular Volterra equation $\solwhole = \volterra \solwhole$ by Picard iteration.
 
 The prototype solution $\solproto$ is our initial guess. When we apply $\volterra = \hardpart + \softpart$ to it, the singular part $\hardpart$ leaves it unchanged, as we'll show in Section~\ref{sec:construction}. In addition, $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$, as shown in Section~\ref{sec:asymptotics}.\textcolor{RoyalBlue}{We'll show in Section~\ref{sec:asymptotics} that $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.}
 
-To see what the perturbation $\softpart$ does to $\solproto$, we'll show in Section~\ref{sec:image under soft_part} that $\softpart$ has a smoothing effect, reducing the sharpness of any power-law singularity at $\zeta = 0$. In particular, it sends $\solproto$ into $\singexpalg{\tau-1+\epsilon}(\Omega)$. The perturbed operator $\volterra$ therefore sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$.
+To see what the perturbation $\softpart$ does to $\solproto$, we'll show in Section~\ref{sec:image under soft_part} that $\softpart$ has a smoothing effect, reducing the sharpness of any power-law singularity at $\zeta = 0$. In particular, it sends $\solproto$ into $\singexpalg{\tau-1+\epsilon}(\domain)$. The perturbed operator $\volterra$ therefore sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\epsilon}(\domain)$.
 
 When we apply $\volterra$ again, it contracts the perturbation term $\solptb$ in $\singexpalg{\tau-1+\epsilon}(\domain)$. More precisely, by making $\Lambda$ large enough, we can ensure that the subspace $\singexp{\tau+1+\epsilon}{\Lambda}(\domain)$ both contains the perturbation term and is contracted by $\volterra$. We'll prove this in Section~\ref{sec:V is a contraction}.
 
+\color{RoyalBlue}
 We can now see that at each stage of the Picard iteration process, we start with an approximate solution of the form
 \[ \solproto + \solptb, \]
 with $\solptb \in \singexp{\tau-1+\epsilon}{\Lambda}(\domain)$. Applying $\volterra$ gives 
@@ -436,7 +450,7 @@ where the perturbation $\solptb$ has been contracted by $\volterra$, and $\softp
 \[ \solptb = \softpart \solproto + \volterra \solptb. \]
 We'll fill out the details of this argument in Section~\ref{sec:existence and uniqueness}.
 
-\color{RoyalBlue}
+\color{MediumBlue}
 We can now see that at each stage of the Picard iteration process, we have an approximate solution of the form
 \[ \solproto + \solptb, \]
 with $\solptb \in \singexp{\tau-1+\epsilon}{\Lambda}(\domain)$. Applying $\volterra$ gives us the new approximate solution
@@ -638,7 +652,7 @@ In particular,
 
 \end{proof}
 
-\subsection{How $\softpart$ perturbs the prototype solution \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
+\subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 
 \textcolor{orange}{[Read through and revise]} In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\epsilon}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
 
@@ -676,7 +690,7 @@ continuously for all $\Lambda\geq \lambda_{\Delta}$ and $\sigma>-1$.
     Notice that since $\tau-1>-1$ the hypothesis of Proposition \ref{prop:smoothing} are satisfied. In addition, we can choose the constant $\Lambda=\max \{\lambda_0 , \lambda_\Delta\}$. 
 \end{proof}
 
-\subsection{Showing that $\volterra$ shrinks perturbations \\ \textit{(toward Lemma~\ref{lem:perturbed_volterra})}}\label{sec:V is a contraction}
+\subsection{Showing that $\volterra$ shrinks less singular functions \\ \textit{(toward Lemma~\ref{lem:perturbed_volterra})}}\label{sec:V is a contraction}
 \subsubsection{Overview}
 In this section, we'll prove the following proposition. %We assume $\volterra$ satisfies Conditions \eqref{cond:sing}, \eqref{cond:diag-basic} and \eqref{cond:eps-lambda}. 
 
@@ -743,7 +757,7 @@ At the end of the path, we instead use a worst-case estimate on $t^{1-\rho}$:
 \end{align*}
 
 We now know that by setting $\Lambda > \lambda + \textcolor{orange}{\delta}^{-1} \max\{1, (1/5)^{\rho-1}\}$ (in fact $1/5$ can be replaced by any number in $(0,1)$), we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. \textcolor{orange}{[I think this explicit bound only accounts for the integral over the end of the path, $t \in [1/5, 1)$. To ensure that the whole integral is less than $1$, we also need to look at the integral over the beginning of the path, $t \in (0, 1/5]$, which is calculated above. To me, that seems to make the bound too complicated to be worth stating---but maybe you can find a simplification.]} This completes our proof of Proposition~\ref{prop:get-contraction}.
-\subsection{Existence and uniqueness of the perturbed solution \\ \textit{(proof of Lemma~\ref{lem:perturbed_volterra} and Theorem~\ref{thm:general_volterra})}}\label{sec:existence and uniqueness}
+\subsection{Existence and uniqueness of a fixed point \\ \textit{(proof of Lemma~\ref{lem:perturbed_volterra} and Theorem~\ref{thm:general_volterra})}}\label{sec:existence and uniqueness}
 \begin{proof}[Proof of Lemma~\ref{lem:perturbed_volterra}]
 Choose $\Lambda$ large enough to ensure that $\volterra$ is a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$ and $g$ belongs to $\singexp{\rho-1}{\Lambda}(\Omega)$. Proposition~\ref{prop:get-contraction} guarantees that we can do the former, given our assumptions about $\volterra$ and $\rho$, and the definition of $\singexpalg{\rho-1}(\Omega)$ guarantees that we can also do the latter. Our choice of $\Lambda$ ensures that the affine map $f \mapsto \volterra f + g$ is also a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$, and thus has a unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ by the contraction mapping theorem.
 
@@ -900,8 +914,10 @@ We can now state and prove the main result of this section, namely that the Volt
     There exists a unique solution of $\hat{P}_\alpha\hat{\psi}_\alpha=0$ such that 
     \[\hat{\psi}_\alpha = f_{0,\alpha}+ f_{\star,\alpha}\]
 
-    where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ \textcolor{magenta}{[to get this from our uniqueness result, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]} and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
+    where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
 \end{thm}
+
+ \textcolor{magenta}{[In the old version, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]}
 
 \begin{proof}
 Let $p = P(-\zeta)$ and $q = Q(-\zeta)$ and let $\alpha$ be a simple root of $p$. Hence, by assumptions that $p(\alpha)=0$, $p'(\alpha)\neq 0$ and $q(\alpha)\neq 0$. 
@@ -971,12 +987,35 @@ Finally, we look closer to the prototype solution $f_{0,\alpha}$ from Theorem \r
   &=\frac{p(b)}{p(a)} \frac{(\zeta(a)-\alpha)^{\tau_\alpha}}{(\zeta(b)-\alpha)^{\tau_\alpha}} \exp\left(-\int_b^a\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} d\zeta\right)
   %  &=(\zeta(a)-\alpha)^{\tau_\alpha-1} \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}} \frac{1}{p'(\alpha)+b_2'(\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2}
 \end{align*}
-Expanding $p(a)$ near $\zeta=\alpha$, 
+Expanding $p(a)$ near $\zeta=\alpha$, we find that $f_{0,\alpha}$ is proportional to  
 
 \begin{align*}
-     \frac{(\zeta(a)-\alpha)^{\tau_\alpha-1}}{p'(a)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...} \exp\left(-\int_b^a\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} d\zeta\right) 
+\frac{(\zeta(a)-\alpha)^{\tau_\alpha-1}}{p'(\alpha)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...} \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right)
 \end{align*}
+where both the exponential and the denominator are bounded as $\zeta(a)$ approaches $\alpha$.
 
+\color{DarkTurquoise}
+From Condition~\eqref{cond:sing}, we have
+\[ \left| \frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} \right| < \varepsilon \]
+in some neighborhood $\domain_\text{near}$ of $\zeta = \alpha$. It follows that
+\[ S(a) = \int_{\zeta = \alpha}^a \left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta \]
+converges for $a \in \domain_\text{near}$, so we have
+\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
+for $a \in \domain_\text{near}$. Observe that $|S| \le \varepsilon |\zeta - \alpha|$ in $\domain_\text{near}$. 
+
+The denominator is bounded in some neighbourhood $\domain_{\text{near}}$ of $\zeta=\alpha$ and 
+
+\[
+\frac{1}{|p'(\alpha)+b_2(\zeta(a)-\alpha)+b_3(\zeta(a)-\alpha)^2+...|}\leq 
+\]
+
+We should be able to deduce from this that
+\begin{align*}
+f_{0,\alpha} & \in \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} + \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} O(|\zeta - \alpha|) \\
+& \subset \text{const.}\,(\zeta-\alpha)^{\tau_\alpha-1} + \text{const.}\,O\big(|\zeta-\alpha|^{\tau_\alpha}\big) \\
+\end{align*}
+when we restrict to $\domain_\text{near}$.
+\color{black}
 \end{proof}
 
 
