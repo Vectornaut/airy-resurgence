@@ -104,10 +104,7 @@
 \begin{abstract}
 The inverse Laplace transform can turn a linear differential equation on a complex domain into an equivalent Volterra integral equation on a real domain. This can make things simpler: for example, a differential equation with irregular singularities can become a Volterra equation with regular singularities. It can also reveal hidden structure, especially when the Volterra equation extends to a complex domain.
 
-Our main result is to show that for a certain kind of regular singular Volterra equation on a complex domain, there is always a unique solution of a certain form. As a motivating example, this kind of Volterra equation arises when using Laplace transform methods to solve a ``level~$1$'' differential equation.
-
-
-%Our main result is to show that certain kind of regular singular Volterra equations on complex domains have unique solutions of a characteristic form.
+Our main result is to show that for a certain kind of regular singular Volterra equation on a complex domain, there is always a unique solution of a certain form. As a motivating example, this kind of Volterra equation arises when using Laplace transform methods to solve a {\em level~1} differential equation.
 \end{abstract}
 
 \tableofcontents
@@ -194,9 +191,9 @@ where $\partial^{-\lambda}$ is the Riemann-Liouville fractional integral of orde
 
 Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. Solutions that look unrelated in the frequency domain may turn out to be linked by analytic continuation along the complex position domain, as seen in the phenomenon of {\em resurgence} \cite{EcalleIII}\cite{lectures-marino}\cite[Section 2.4]{sternin1995borel}.
 
-Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we'll see this helpful behavior in the class of differential equations that Ecalle calls {\em level $1$}, which includes classical examples like the modified Bessel equation, the equations describing the vibration modes of beams that taper in certain ways \textcolor{orange}{[find citation]}, and the Airy equation after a change of coordinate. This last example generalizes to some level 1 equations that feature in current research, like the Airy-Lucas and higher Airy equations~\cite[Equations 3.2 and 3.8]{charbonnier22}\cite{durugo_higher}.
+Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we'll see this helpful behavior in the class of differential equations that Ecalle calls {\em level~1}, which includes classical examples like the modified Bessel equation, the equations describing the vibration modes of beams that taper in certain ways \textcolor{orange}{[find citation]}, and the Airy equation after a change of coordinate. This last example generalizes to some level 1 equations that feature in current research, like the Airy-Lucas and higher Airy equations~\cite[Equations 3.2 and 3.8]{charbonnier22}\cite{durugo_higher}.
 
-From our experience with solving level 1 differential equations by Borel summation, we expect each of the corresponding integral equations to have a special kind of solution when the integration base point coincides with a regular singularity. Let's say we've chosen the position variable $\zeta$ so that the integration base point is at $\zeta = 0$, and our position-domain Volterra operator has a holomorphic kernel $k(a, a')$ with a $\tau/\zeta(a)$ singularity. Assuming the residue $\tau$ is real and positive, we expect to find a solution with the following features:
+From our experience with solving level~1 differential equations by Borel summation, we expect each of the corresponding integral equations to have a special kind of solution when the integration base point coincides with a regular singularity. Let's say we've chosen the position variable $\zeta$ so that the integration base point is at $\zeta = 0$, and our position-domain Volterra operator has a holomorphic kernel $k(a, a')$ with a $\tau/\zeta(a)$ singularity. Assuming the residue $\tau$ is real and positive, we expect to find a solution with the following features:
 \begin{itemize}
 \item It has an $O\big(\zeta^{\tau-1}\big)$ singularity at $\zeta = 0$.
 \item It's of exponential type, meaning that it's $O\big(e^{\Lambda|\zeta|}\big)$ for some $\Lambda \in \R$ as $\zeta$ grows.
@@ -274,7 +271,7 @@ Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +
 
 Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We'll allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we won't allow any sharper singularity. We'll also put an exponential bound on how fast $\softker$ grows away from the diagonal, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we'll require:
 \begin{conditions}
-\condconst{diag$_\star$}{\gamma, \lambda_\Delta}\label{cond:eps-lambda} We have
+\condconst{diag$_\star$}{\gamma, \lambda_\Delta}\label{cond:eps-lambda} For some constant $\gamma > 0$, we have
 \[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$.
 \end{conditions}
@@ -580,33 +577,35 @@ Under {\em Condition~\eqref{cond:eps-lambda}}, the operator $\softpart$ maps
 \[ \singexp{\sigma}{\Lambda}(\Omega) \to \singexp{\sigma+\gamma}{\Lambda}(\Omega) \]
 continuously for all $\Lambda\geq \lambda_{\Delta}$ and $\sigma>-1$.
 \end{prop}
-
-\begin{proof}
-    Let $f\in\singexp{\sigma}{\Lambda}$,
-    \begin{align*}
-        |\zeta(a)|^{-(\sigma+\gamma)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
-        &\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |f| \, |d\zeta| \\
-        &\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \|f\|_{\sigma,\Lambda} \, |d\zeta| 
-    \end{align*}
-    By Condition~\eqref{cond:eps-lambda},
-    \begin{align*}
-         \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| &\leq C_k \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\gamma}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
-         &=C_k |\zeta(a)|^{\gamma+\sigma} \int_{0}^1 (1-t)^\gamma e^{\lambda_\Delta |\zeta(a)|(1-t)} t^{\sigma}\, e^{\Lambda|\zeta(a)| t}\;dt\\
-         &=C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,  \int_{0}^1 (1-t)^\gamma  t^{\sigma}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)| t}\;dt\\
-         &\le C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)|}\int_{0}^1 (1-t)^\gamma  t^{\sigma}\;dt.
-    \end{align*}
-    The last step takes advantage of the assumption that $\Lambda \ge \lambda_\Delta$. Recognizing the integral as an evaluation of the beta function, we can rewrite the bound as
-    \[ \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}. \]
-    Our assumptions that $\gamma > 0$ and $\sigma > -1$ ensure that the gamma functions are well-defined. Rearranging to get
-    \[ |\zeta(a)|^{-(\gamma+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}, \]
-    we conclude that $|\zeta(a)|^{-\sigma-\gamma} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert$ is uniformly bounded in $\domain$. 
+\begin{rmk}
+We're assuming that $\gamma > 0$, but this result holds even under the weaker assumption that $\gamma > -1$. We'll take advantage of this in Section~\ref{sec:L-int-op}
+\end{rmk}
+\begin{proof}[Proof of Proposition~\ref{prop:smoothing}]
+For any function $f\in\singexp{\sigma}{\Lambda}(\domain)$,
+\begin{align*}
+|\zeta(a)|^{-(\sigma+\gamma)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
+&\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |f| \, |d\zeta| \\
+&\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \|f\|_{\sigma,\Lambda} \, |d\zeta| 
+\end{align*}
+By Condition~\eqref{cond:eps-lambda},
+\begin{align*}
+\int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| &\leq C_k \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\gamma}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
+&=C_k |\zeta(a)|^{\gamma+\sigma} \int_{0}^1 (1-t)^\gamma e^{\lambda_\Delta |\zeta(a)|(1-t)} t^{\sigma}\, e^{\Lambda|\zeta(a)| t}\;dt\\
+&=C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,  \int_{0}^1 (1-t)^\gamma  t^{\sigma}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)| t}\;dt\\
+&\le C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)|}\int_{0}^1 (1-t)^\gamma  t^{\sigma}\;dt.
+\end{align*}
+The last step takes advantage of the assumption that $\Lambda \ge \lambda_\Delta$. Recognizing the integral as an evaluation of the beta function, we can rewrite the bound as
+\[ \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k |\zeta(a)|^{\gamma+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}. \]
+Our assumptions that $\gamma > 0$ and $\sigma > -1$ ensure that the gamma functions are well-defined.\footnote{We could even weaken the constraint on $\gamma$, allowing any $\gamma > -1$.} Rearranging to get
+\[ |\zeta(a)|^{-(\gamma+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \le C_k \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}, \]
+we conclude that $|\zeta(a)|^{-\sigma-\gamma} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert$ is uniformly bounded in $\domain$. 
 \end{proof}
 
 \begin{cor}\label{cor:pertub_f0}
-    Let $f_0$ be the prototype solution in equation \eqref{eqn:test_solution}. If $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}}, then $\softpart f_0\in\singexp{\tau-1+\gamma}{\Lambda}(\Omega)$, for $\Lambda\geq \lambda_\Delta$. 
+Let $f_0$ be the prototype solution from Equation~\eqref{eqn:test_solution}. If $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}}, then $\softpart f_0\in\singexp{\tau-1+\gamma}{\Lambda}(\Omega)$, for $\Lambda\geq \lambda_\Delta$. 
 \end{cor}
 \begin{proof}
-    Notice that since $\tau-1>-1$ the hypothesis of Proposition \ref{prop:smoothing} are satisfied. In addition, we can choose the constant $\Lambda=\max \{\lambda_0 , \lambda_\Delta\}$. 
+Since $\tau-1>-1$ the hypothesis of Proposition~\ref{prop:smoothing} are satisfied. In addition, we can choose the constant $\Lambda=\max \{\lambda_0 , \lambda_\Delta\}$ \textcolor{orange}{[inconsistent with statement, which only mentions $\lambda_\Delta$?]}.
 \end{proof}
 
 \subsection{Showing that $\volterra$ shrinks less singular functions \\ \textit{(toward Lemma~\ref{lem:perturbed_volterra})}}\label{sec:V is a contraction}
@@ -780,47 +779,32 @@ On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{
 \subsection{Overview}
 We can apply the theory of regular singular Volterra operators to the study of so-called \textit{level~1 differential equations}, which each have an irregular singularity at $\infty$. In particular, we can build a frame of analytic solutions in the frequency domain by studying solutions of an integral equation in the position domain. The latter is an example of the regular singular Volterra equations we introduced above.
 \subsection{Level $1$ differential equations}\label{sec:level 1 ODE}
-Let $\mathcal{P}$ be a linear differential operator\footnote{ We follow Delabaere, rather than Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}.}
-\begin{equation}\label{eqn:level 1 ode}
-\mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big],
-\end{equation}
-
+Let $\mathcal{P}$ be a linear differential operator of the form\footnote{ We follow Delabaere, rather than Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}.}
+%%\begin{equation}\label{eqn:level 1 ode}
+\[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big], \]
+%%\end{equation}
+where
 \begin{enumerate}
 \item[$\bullet$] $P$ is a monic degree-$d$ polynomial with only simple zeros; 
 \item[$\bullet$] $Q$ is a degree-$(d-1)$ polynomial and it does not vanish at the critical point of $P$;
-\item[$\bullet$] $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, for every $|z|>A$
-\[ R_r(z^{-1}) = \sum_{j=0}^\infty R_{r,j} z^{-j}. \]
+\item[$\bullet$] $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, the power series
+\[ R_r(z^{-1}) = \sum_{j=0}^\infty R_{r,j} z^{-j} \]
+converge in the region $|z| > A$.
 \end{enumerate}
-
-Equations of the form \eqref{eqn:level 1 ode} are called {\em level $1$} by Ecalle (see \cite[Section 2.1]{EcalleIII}). For instance, the modified Bessel equation is of level $1$, and we'll study its solutions explicitly in \cite{borel_reg}. 
-
+Equations of the form $\mathcal{P}\Phi = 0$ \textcolor{orange}{[the line $\mathcal{P} = \ldots$ is the definition of an operator, not a differential equation]} are called {\em level~1} by Ecalle~\cite[Section 2.1]{EcalleIII}.  \textcolor{RoyalBlue}{As an example, the modified Bessel equation is of level~$1$; we'll study its solutions explicitly in \cite{borel_reg}.}
 \subsection{The Laplace transform}
-
-%Let $\mathcal{E}_{\alpha}^{\theta}$ \textcolor{orange}{[replace with a function space from this paper]} be the space of functions that are subexponential on $\Gamma_{\alpha}^{\theta}$, integrable at the starting point $\zeta=\alpha$, and locally integrable throughout. 
-
-Let $\domain_\alpha$ be a simply connected open set $\domain_\alpha\subset\C$ that touches but doesn't contain $\zeta=\alpha$, and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray that leaves $\zeta=\alpha$ at angle $\theta$. If $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, the Laplace transform $\laplace_{\zeta, \alpha}^{\theta} $ maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions in the half plane $\Re(z e^{-i\theta}) > \Lambda$~\cite[Section 5.6]{diverg-resurg-i}. It is defined by the formula
-
+\subsubsection{Definition}
+Let $\domain_\alpha$ be a simply connected open set $\domain_\alpha\subset\C$ that touches but doesn't contain $\zeta=\alpha$, \textcolor{orange}{[maybe talk about adapting conventions here, since we need that already for the definition of $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ to make sense]} and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray that leaves $\zeta=\alpha$ at angle $\theta$. When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, we can define the Laplace transform $\laplace_{\zeta, \alpha}^{\theta}$, which maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions on the half-plane $\Re(z e^{-i\theta}) > \Lambda$ in the frequency domain~\cite[Section 5.6]{diverg-resurg-i}. The Laplace transform of $\varphi$ is defined by the formula
 \begin{equation}\label{laplace:int} 
-\laplace_{\zeta, \alpha}^{\theta} f := \int_{\Gamma_{\zeta,\alpha}^\theta} e^{-z\zeta} f\, d\zeta
+\laplace_{\zeta, \alpha}^{\theta} \varphi := \int_{\Gamma_{\zeta,\alpha}^\theta} e^{-z\zeta} \varphi\;d\zeta.
 \end{equation}
-
-where $z$ is the frequency function. 
-
-
-
-\subsubsection{Action on integral operators}\label{L-int-op}
+It's a function on the frequency domain because it depends on the frequency variable $z$.
+\subsubsection{Action on integral operators}\label{sec:L-int-op}
 %%For $\nu \in (-\infty, 1)$, the fractional integral $\partial^{\nu-1}_{x \text{ from } 0}$ is defined by
 %%\[ \partial^{\nu-1}_{x,0} f(x) \defeq \frac{1}{\Gamma(1-\nu)} \int_0^x (x-x')^{-\nu} f(x')\,dx'. \]
-For $\nu \in (0, \infty)$, the fractional integral $\partial^{-\nu}_{\zeta, \alpha}$ is defined by
-\[ [\partial^{-\nu}_{\zeta, \alpha} f](a) := \frac{1}{\Gamma(\nu)} \int_{\zeta = \alpha}^a \big(\zeta(a)-\zeta\big)^{\nu-1} f\,d\zeta \]
-for each $a \in \domain_\alpha$.
-%\par\color{RoyalBlue}
-%For $\nu' \in (-\infty, 1)$, the fractional integral $\partial^{\nu'-1}_{\zeta, \alpha}$ is defined by \textcolor{orange}{[$-\nu = \nu'-1$ and $1-\nu = \nu'$]}
-%\[ [\partial^{\nu'-1}_{\zeta, \alpha} f](a) := \frac{1}{\Gamma(1-\nu')} \int_{\zeta = \alpha}^a \big(\zeta(a)-\zeta\big)^{-\nu'} f\,d\zeta \]
-%for each $a \in \domain_\alpha$.
-%\color{black}
-
-It obeys the expected semigroup law \cite[Section~1.3]{mladenov2014advanced}
+For each $\nu \in (0, \infty)$, the fractional integral $\partial^{-\nu}_{\zeta, \alpha}$ is the Volterra operator defined by
+\[ [\partial^{-\nu}_{\zeta, \alpha} \varphi](a) := \frac{1}{\Gamma(\nu)} \int_{\zeta = \alpha}^a \big(\zeta(a)-\zeta\big)^{\nu-1} \varphi\;d\zeta \]
+for each $a \in \domain_\alpha$. It obeys the expected semigroup law \cite[Section~1.3]{mladenov2014advanced}
 \begin{align*}
 \fracderiv{-\nu}{\zeta}{\alpha}\,\fracderiv{-\mu}{\zeta}{\alpha} & = \fracderiv{-\nu-\mu}{\zeta}{\alpha} & \nu, \mu \in (0, \infty),
 \end{align*}
@@ -837,18 +821,34 @@ and agrees with ordinary repeated integration when $\nu$ is an integer \cite[Equ
 %\begin{align*}
 %\fracderiv{\lambda}{\zeta}{0}\,\fracderiv{\mu}{\zeta}{0} & = \fracderiv{\lambda+\mu}{\zeta}{0} & \lambda \in \R \smallsetminus \{0, 1, 2, 3, \ldots\},\quad\mu \in (-\infty, 0).
 %\end{align*}
-For all $\nu\in (0,\infty)$, the fractional integral $\fracderiv{-\nu}{\zeta}{\alpha}$ behaves as a Volterra operator $\softpart$ which is singular at $\zeta=\alpha$ but it has a smoothing effect on functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$. In fact, it maps functions $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ to $\fracderiv{-\nu}{\zeta}{\alpha}\varphi\in\singexp{\sigma+\nu}{\Lambda}(\domain_\alpha)$: %\textcolor{orange}{[if we want our previous results to apply for a singularity at $\zeta = \alpha$, I think we need to redefine our function spaces for that context]}
-
+Fractional integration has a smoothing effect: it reduces the sharpness of any power-law singularity at $\zeta = \alpha$.
+\begin{prop}\label{prop:frac-int-smoothing}
+For each $\nu \in (0, \infty)$, the fractional integral $\fracderiv{-\nu}{\zeta}{\alpha}$ maps
+\[ \varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha) \to \singexp{\sigma+\nu}{\Lambda}(\domain_\alpha) \]
+continuously for all $\sigma > -1$ and $\Lambda \ge 0$.
+\end{prop}
+\begin{proof}
+Rewrite the fractional integral as
 \begin{align*}
-    \left[\fracderiv{-\nu}{\zeta}{\alpha} \varphi\right](a)&=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a (\zeta(a)-\zeta)^{\nu-1} \, \varphi \, d\zeta\\
-    &=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\,  \zeta(a)\, \varphi \, d\zeta\\
-    &=\frac{\zeta(a)-\alpha}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\, \varphi \, d\zeta
+\left[\fracderiv{-\nu}{\zeta}{\alpha} \varphi\right](a)&=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a (\zeta(a)-\zeta)^{\nu-1} \, \varphi \; d\zeta\\
+%%&=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\,  \big(\zeta(a) - \alpha\big)\, \varphi \; d\zeta\\
+&=\frac{\zeta(a)-\alpha}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\,\varphi \; d\zeta.
 \end{align*}
-Define $\softker(a,a'):=\frac{(\zeta(a)-\zeta(a'))^{\nu-1}}{\zeta(a) - \alpha}$, it is singular at $\zeta(a)=\alpha$ and it satisfies Condition \eqref{cond:eps-lambda} with $\gamma=\nu-1$ and $\lambda_\Delta=0$, for every $a,a'\in\domain_\alpha$.\footnote{Notice that $\softker$ has a singularity at $\zeta=\alpha$ and not at $\zeta=0$ as in Section \ref{setting:perturbed}. This explains the definition of $\softker(a,a')$ with $\zeta(a)-\alpha$ at the denominator (instead of $\zeta(a)$). More generally, working in the domain $\domain_\alpha$, we'll adapt the conventions used for $\domain$.} Hence by Proposition \ref{prop:smoothing}
+The Volterra operator with kernel
+\[ h(a, a') = \frac{1}{\Gamma(\nu)}\,\frac{(\zeta(a)-\zeta(a'))^{\nu-1}}{\zeta(a)- \alpha} \]
+satisfies Condition~\eqref{cond:eps-lambda} with $\gamma=\nu-1$ and $\lambda_\Delta=0$, as long as we loosen the condition to allow any $\gamma > -1$. Hence, by Proposition~\ref{prop:smoothing}, this operator maps
+\[ \singexp{\sigma}{\Lambda}(\domain_\alpha) \to \singexp{\sigma+\nu-1}{\Lambda}(\domain_\alpha) \]
+continuously for all $\sigma > -1$ and $\Lambda \ge 0$. Multiplication by $\zeta - \alpha$ then maps
+\[ \singexp{\sigma+\nu-1}{\Lambda}(\domain_\alpha) \to \singexp{\sigma+\nu}{\Lambda}(\domain_\alpha) \]
+continuously.
 
+\color{RoyalBlue}
+Define $\softker(a,a'):=\frac{(\zeta(a)-\zeta(a'))^{\nu-1}}{\zeta(a) - \alpha}$, it is singular at $\zeta(a)=\alpha$ and it satisfies Condition \eqref{cond:eps-lambda} with $\gamma=\nu-1$ and $\lambda_\Delta=0$, for every $a,a'\in\domain_\alpha$.\footnote{Notice that $\softker$ has a singularity at $\zeta=\alpha$ and not at $\zeta=0$ as in Section \ref{setting:perturbed}. This explains the definition of $\softker(a,a')$ with $\zeta(a)-\alpha$ at the denominator (instead of $\zeta(a)$). More generally, working in the domain $\domain_\alpha$, we'll adapt the conventions used for $\domain$.} Hence by Proposition \ref{prop:smoothing}
 \[ \frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\, \varphi \, d\zeta \in \singexp{\sigma+\nu-1}{\Lambda}(\domain_\alpha) \]
 
-Multiplication by $\zeta - \alpha$ then maps functions in $\singexp{\sigma+\nu-1}{\Lambda}(\domain_\alpha)$ to $\singexp{\sigma+\nu}{\Lambda}(\domain_\alpha)$, as claimed. In particular, $\fracderiv{-\nu}{\zeta}{\alpha}\varphi$ admits a well defined Laplace transform along any ray $\Gamma_{\zeta,\alpha}^{\theta}\subset\domain_\alpha$. Thus, using a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, one can show that 
+Multiplication by $\zeta - \alpha$ then maps functions in $\singexp{\sigma+\nu-1}{\Lambda}(\domain_\alpha)$ to $\singexp{\sigma+\nu}{\Lambda}(\domain_\alpha)$, as claimed.
+\end{proof}
+In particular, $\fracderiv{-\nu}{\zeta}{\alpha}\varphi$ admits a well defined Laplace transform along any ray $\Gamma_{\zeta,\alpha}^{\theta}\subset\domain_\alpha$. Thus, using a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, one can show that 
 \[ \laplace_{\zeta,\alpha}^{\theta}\,\fracderiv{-\nu}{\zeta}{\alpha} \varphi = z^{-\nu} \laplace_{\zeta, \alpha}^{\theta} \varphi \]
 for all $\nu \in (0, \infty)$ and $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$. This generalizes the Laplace transform's action on derivatives: when $\varphi \in \singexp{\sigma}{\Lambda}(\domain_\alpha)$ and $\sigma>-1$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
 \begin{equation}%%\label{id:L-mult}
@@ -857,21 +857,15 @@ for all $\nu \in (0, \infty)$ and $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\
 for all integers $n \ge 0$ and suitable direction $\theta$.
 
 \begin{rmk}
-    Increasing the regularity in the position domain, then the Laplace transform gives something which is faster decaying in the frequency domain. This is a general feature of the Laplace transform.
+Increasing the regularity in the position domain, then the Laplace transform gives something which is faster decaying in the frequency domain. This is a general feature of the Laplace transform.
 \end{rmk}
 
 \subsection{Going to the position domain}
-
 By the properties of the Laplace transform $\laplace_{\zeta,\alpha}^{\theta}$ we can turn differential operators in the frequency domain into Volterra operators in the position domain. 
-
 \begin{lemma}
- For every root $-\alpha$ of $P$, let $\hat{\mathcal{P}}_{\alpha}$ be the Volterra operator 
- 
-\begin{equation}\label{P-hat_j}
-\hat{\mathcal{P}}_\alpha:=P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha}^{-1})\circ (-\zeta)^r
-\end{equation}
- 
-If $\hat{\psi}_\alpha$ is a solution of $\hat{\mathcal{P}}_\alpha\hat{\psi}_\alpha=0$ then its Laplace transform $\Psi_\alpha:=\laplace_{\zeta,\alpha}^{\theta}\hat{\psi}_\alpha$, defined for a suitable direction $\theta$, is a solution of $\mathcal{P}\Psi_\alpha=0$. By suitable direction, we mean that the ray $\Gamma_{\alpha}^\theta$ must be contained in the domain $\Omega_{\alpha}$. \footnote{The domain $\Omega_{\alpha}$ does not contain the tubular neighborhood of all the other critical points toward infinity as drawn in Section \ref{setting:domain}}.      
+For each root $-\alpha$ of $P$, let $\hat{\mathcal{P}}_{\alpha}$ be the Volterra operator 
+\[ \hat{\mathcal{P}}_\alpha:=P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha}^{-1})\circ (-\zeta)^r. \]
+If $\hat{\psi}_\alpha$ \textcolor{orange}{[the lower-case letter tells us this is a position-domain function, so why do we need the hat?]} satisfies the equation $\hat{\mathcal{P}}_\alpha\hat{\psi}_\alpha=0$, then its Laplace transform $\Psi_\alpha:=\laplace_{\zeta,\alpha}^{\theta}\hat{\psi}_\alpha$, defined for a suitable direction $\theta$, is a solution of $\mathcal{P}\Psi_\alpha=0$. By suitable direction, we mean that the ray $\Gamma_{\alpha}^\theta$ must be contained in the domain $\Omega_{\alpha}$. \footnote{The domain $\Omega_{\alpha}$ does not contain the tubular neighborhood of all the other critical points toward infinity as drawn in Section \ref{setting:domain}}.      
 \end{lemma}
 
 \begin{proof}
@@ -884,7 +878,7 @@ Using the properties of the Laplace transform,
     \end{align*}
 \end{proof}
 
-We can now state and prove the main result of this section, namely that the Volterra operator $\hat{\mathcal{P}}_\alpha$ admits a unique solution $\hat{\psi}_\alpha$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
+We can now state and prove the main result of this section, namely that the Volterra equation $\hat{\mathcal{P}}_\alpha \hat{\psi}_\alpha = 0$ admits a unique solution $\hat{\psi}_\alpha$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
 
 \begin{thm}\label{thm:example}
 For each root $-\alpha$ of $P$, the equation
@@ -917,17 +911,17 @@ is equivalent to
    \varphi(a) &=\Big[ \volterra^\alpha \, \varphi \Big](a)
 \end{align}
 
-Notice that $\hardpart^\alpha$ is holomorphic and separable, while $\softpart^\alpha$ is holomorphic and non-separable. In addition, $\hardpart^\alpha$ is of the type defined in Section \ref{setting:basic} and it satisfies Condition \eqref{cond:sing}: by Taylor expanding the polynomials $p$ and $q$ at $\alpha$
+Notice that $\hardpart^\alpha$ is holomorphic and separable, while $\softpart^\alpha$ is holomorphic and non-separable. In addition, $\hardpart^\alpha$ is of the type defined in Section \ref{setting:basic} and it satisfies Condition \eqref{cond:sing}: by \textcolor{RoyalBlue}{Taylor} expanding the polynomials $p$ and $q$ around $\zeta = \alpha$ \textcolor{orange}{[the shifted polynomial willhave the same degree as the original]} \textcolor{magenta}{[$\alpha$ is a number, not a point; write $c_0$ in place of $q(\alpha)$? notation $\zeta'$ not defined; switch to $\zeta(a')$?]}.
 
 \begin{align*}
-    -\frac{q}{p(\zeta(a))}&=-\frac{q(\alpha)+c_1(\zeta'-\alpha)+c_2 (\zeta'-\alpha)^2+...}{-b_1(\zeta(a)-\alpha)+ b_2 (\zeta(a)-\alpha)^2+b_3(\zeta(a)-\alpha)^3+...}\\
+    -\frac{q}{p(a)}&=-\frac{\textcolor{magenta}{q(\alpha)}+c_1(\zeta\textcolor{magenta}{'}-\alpha)+c_2 (\zeta'-\alpha)^2+...}{-b_1(\zeta(a)-\alpha)+ b_2 (\zeta(a)-\alpha)^2+b_3(\zeta(a)-\alpha)^3+...}\\
     &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+ b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}\\
     &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}
 \end{align*}
 hence setting $\tau_\alpha:=\frac{q(\alpha)}{p'(\alpha)}\neq 0$, we find
 
 \begin{equation*}
-    -\frac{q(\zeta(a'))}{p(\zeta(a))}-\frac{\tau_\alpha}{\zeta(a)-\alpha}
+    -\frac{q(a')}{p(a)}-\frac{\tau_\alpha}{\zeta(a)-\alpha}
 \end{equation*}
 is bounded as $\zeta(a')$ and $\zeta(a)$ approach $\alpha$. 
 
