@@ -84,6 +84,7 @@
 \newcommand{\solwhole}{f}
 \newcommand{\solproto}{f_0}
 \newcommand{\solptb}{f_\star}
+\newcommand{\roots}{\mathfrak{B}}
 
 % domain
 \newcommand{\domain}{\Omega}
@@ -367,7 +368,7 @@ We thank Fondation Mathematique Jacques Hadamard for supporting the visit of the
 \item Angeliki Menegaki
 \end{brainstorm}
 \section{Function spaces for holomorphic Volterra operators}\label{fn-spaces}
-\subsection{Weighted holomorphic $L^\infty$ spaces}\label{sec:fn-space-defs}
+\subsection{Weighted holomorphic $L^{\infty}$ spaces}\label{sec:fn-space-defs}
 Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\cont(\Omega)$ be the space of continuous complex-valued functions on $\Omega$. Give $\cont(\Omega)$ the compact-open topology, recalling that this is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \Omega$~\cite[Example~2.6 and \S 4 notes]{fnl-cpx-anal}. The holomorphic functions form a closed subspace $\holo(\Omega) \subset \cont(\Omega)$~\cite[Proposition~3.14]{fnl-cpx-anal}.
 
 Fixing a real constant $\Lambda$, let's restrict our attention to holomorphic functions on $\Omega$ which are bounded by constant multiples of $e^{\Lambda|\zeta|}$. One might describe these functions as being uniformly of exponential type $\Lambda$.\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{(\Lambda+\varepsilon)|x|}$. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} They form a space $\singexp{0}{\Lambda}(\Omega)$, which we'll equip with the norm $\|f\|_{0,\Lambda} = \sup_\Omega e^{-\Lambda|\zeta|}\,|f|$. With respect to the seminorm on $\holo(\Omega)$ given by a compact set $K \subset \Omega$, the inclusion map $\singexp{0}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ has norm $\sup_K e^{\Lambda |\zeta|}$. That means the inclusion is continuous.
@@ -776,7 +777,7 @@ of the space $\singexpalg{\tau-1}(\domain)$. To be precise, $\rho$ is low enough
 \end{prop}
 
 \begin{proof}
-Proposition~\ref{prop:better-proto-estimate} implies that for some constant $M$,
+Propositions \ref{prop:asymptotic at infinity} and \ref{prop:better-proto-estimate} imply that for some constant $M$,
 \[ \zeta^{\tau-1} + \singexpalg{\rho-1}(\domain) = M^{-1}\solproto + \singexpalg{\rho-1}(\domain) \]
 whenever $\rho \le \tau + \min\{\epsilon, 1\}$. Theorem~\ref{thm:general_volterra} implies that our equation has a unique solution in
 \[ M^{-1}\solproto + \singexpalg{\rho-1}(\domain) \]
@@ -928,12 +929,44 @@ Notice that $\hardpart^\alpha$ is holomorphic and separable, while $\softpart^\a
     &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+ b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}\\
     &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}
 \end{align*}
-hence setting $\tau_\alpha:=\frac{q(\alpha)}{p'(\alpha)}\neq 0$, we find
+hence setting $\tau_\alpha:=\textcolor{magenta}{-}\frac{q}{p'}\textcolor{orange}{\big|_{\zeta = \alpha}}\neq 0$, we find
 
 \begin{equation*}
     -\frac{q(a')}{p(a)}-\frac{\tau_\alpha}{\zeta(a)-\alpha}
 \end{equation*}
-is bounded as $\zeta(a')$ and $\zeta(a)$ approach $\alpha$. 
+is bounded as $\zeta(a')$ and $\zeta(a)$ approach $\alpha$.
+\par\color{SkyBlue}
+Since $p$ has only simple roots, the partial fraction decomposition of $1/p$ is
+\[ \sum_{\beta = \roots} \left.\frac{1}{p'}\right|_{\zeta = \beta} \frac{1}{\zeta - \beta}, \]
+where $\roots$ is the set containing the values of $\zeta$ at the roots of $p$.
+\par\color{DarkTurquoise}
+\textcolor{orange}{Nicer formulation; note different definition of $\roots$:}\par
+Since $P(-\zeta)$ has only simple roots, the partial fraction decomposition of $1/P(-\zeta)$ is
+\[ \sum_{-\beta = \roots} \frac{1}{-P'(-\beta)\,(\zeta - \beta)}, \]
+where $\roots$ is the zero set of $P$ \textcolor{orange}{[Ahlfors, {\em Complex Analysis}, \S1.4, Exercise~2]}. It follows that
+\begin{align*}
+-\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta = \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
+& \in \sum_{-\beta = \roots} \frac{Q(-\alpha) + O\big(|\zeta(a') - \alpha|\big)}{P'(-\beta)\,(\zeta - \beta)} \\
+%%& \in \frac{Q(-\alpha) + O\big(|\zeta - \alpha|\big)}{-P'(-\alpha)\,(\zeta - \alpha)} + \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\alpha) + O\big(|\zeta - \alpha|\big)}{-P'(-\beta)\,(\zeta - \beta)} \\
+& \subset \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)} + O\big(1\big)
+\end{align*}
+at $(\zeta(a), \zeta(a')) = (\alpha, \alpha)$. In other words, for $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$, the difference
+\[ -\frac{Q(-\zeta(a'))}{P(-\zeta(a))} - \frac{\tau_\alpha}{\zeta - \alpha} \]
+is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$, showing that $\hardpart^\alpha$ satisfies Condition~\eqref{cond:sing}.
+
+\begin{verify}
+A kind of klunky way to do the Ahlfors exercise:
+\begin{align*}
+\frac{1}{p} & = \sum_{\beta \in \roots} \frac{\pi_\beta}{\zeta - \beta} \\
+-\frac{p'}{p^2} & = -\sum_{\beta \in \roots} \frac{\pi_\beta}{(\zeta - \beta)^2} \\
+p' & = \sum_{\beta \in \roots} \left(\frac{p}{\zeta - \beta}\right)^2 \pi_\beta \\
+p'\big|_{\zeta = \alpha} & = \left.\left(\frac{p}{\zeta - \alpha}\right)^2\right|_{\zeta = \alpha} \pi_\alpha \\
+& = \left[\prod_{\beta \in \roots \smallsetminus \alpha} (\alpha - \beta)\right]^2 \pi_\alpha \\
+& = \left(p'\big|_{\zeta = \alpha}\right)^2 \pi_\alpha \\
+\frac{1}{p'\big|_{\zeta = \alpha}} & = \pi_\alpha
+\end{align*}
+\end{verify}
+\color{black}
 
 Then, the proof will follow by Theorem \ref{thm:general_volterra}, once we proved that $\volterra^\alpha$ satisfies the required assumptions.  
 
