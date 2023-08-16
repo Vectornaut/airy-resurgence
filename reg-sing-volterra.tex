@@ -865,7 +865,7 @@ for all $\nu \in (0, \infty)$ and $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\
 \begin{equation}%%\label{id:L-mult}
 \laplace_{\zeta,\alpha}^\theta (\zeta^n \varphi) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_{\zeta,\alpha}^\theta \varphi.
 \end{equation}
-for all integers $n \ge 0$ and suitable direction $\theta$.
+for all integers $n \ge 0$ and suitable directions $\theta$.
 
 \begin{rmk}
 Increasing the regularity in the position domain, then the Laplace transform gives something which is faster decaying in the frequency domain. This is a general feature of the Laplace transform.
@@ -873,23 +873,24 @@ Increasing the regularity in the position domain, then the Laplace transform giv
 
 \subsection{Going to the position domain}
 By the properties of the Laplace transform $\laplace_{\zeta,\alpha}^{\theta}$ we can turn differential operators in the frequency domain into Volterra operators in the position domain. 
-\begin{lemma}
+\begin{lemma}\label{lem:use-dict}
 For each root $-\alpha$ of $P$, let $\hat{\mathcal{P}}_{\alpha}$ be the Volterra operator 
 \[ \hat{\mathcal{P}}_\alpha:=P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha}^{-1})\circ (-\zeta)^r. \]
-If $\hat{\psi}_\alpha$ \textcolor{orange}{[the lower-case letter tells us this is a position-domain function, so why do we need the hat?]} satisfies the equation $\hat{\mathcal{P}}_\alpha\hat{\psi}_\alpha=0$, then its Laplace transform $\Psi_\alpha:=\laplace_{\zeta,\alpha}^{\theta}\hat{\psi}_\alpha$, defined for a suitable direction $\theta$, is a solution of $\mathcal{P}\Psi_\alpha=0$. By suitable direction, we mean that the ray $\Gamma_{\alpha}^\theta$ must be contained in the domain $\Omega_{\alpha}$. \footnote{The domain $\Omega_{\alpha}$ does not contain the tubular neighborhood of all the other critical points toward infinity as drawn in Section \ref{setting:domain}}.      
+If $\psi_\alpha$ satisfies the equation $\hat{\mathcal{P}}_\alpha\psi_\alpha=0$, then its Laplace transform $\Psi_\alpha:=\laplace_{\zeta,\alpha}^{\theta}\psi_\alpha$ satisfies the equation $\mathcal{P}\Psi_\alpha=0$, as long as the Laplace transform is well-defined.\footnote{\textcolor{RoyalBlue}{The domain $\domain_\alpha$ does not contain the tubular neighborhood of all the other critical points toward infinity as drawn in Section \ref{setting:domain}.}}
 \end{lemma}
-
-\begin{proof}
-Using the properties of the Laplace transform, 
-
-    \begin{align*}
-        \mathcal{P}\Psi_\alpha&=\mathcal{P}\laplace_{\zeta,\alpha}^{\theta}\hat{\psi}_\alpha\\
-        &=\laplace_{\zeta,\alpha}^{\theta}\left[P(-\zeta)+\fracderiv{-1}{\zeta}{\alpha}\circ Q(-\zeta)+\fracderiv{-2}{\zeta}{\alpha}\circ\sum_{r=0}^{d-1}R_r(\fracderiv{-1}{\zeta}{\alpha})(-\zeta)^r\right]\hat{\psi}_j\\
-        &=\laplace_{\zeta,\alpha}^{\theta}\hat{\mathcal{P}}_\alpha\hat{\psi}_\alpha
-    \end{align*}
+\begin{rmk}
+For the Laplace transform to have any hope of being well-defined, we have to choose the direction $\theta$ so that the ray $\Gamma_{\zeta, \alpha}^\theta$ stays within $\domain_\alpha$. We'll see later that for our results to apply, $\domain_\alpha$ can't touch any zero of $P(-\zeta)$ other than $\zeta = \alpha$.
+\end{rmk}
+\begin{proof}[Proof of Lemma~\ref{lem:use-dict}]
+Comparing the definitions of $\mathcal{P}$ and $\hat{\mathcal{P}}_\alpha$, and using the properties of the Laplace transform discussed in Section~\ref{sec:L-int-op}, we can work out that $\mathcal{P} \laplace_{\zeta,\alpha}^\theta = \laplace_{\zeta,\alpha}^\theta \hat{\mathcal{P}}_\alpha$. Hence,
+\begin{align*}
+\mathcal{P}\Psi_\alpha & = \mathcal{P}\laplace_{\zeta,\alpha}^{\theta}\psi_\alpha\\
+%%& = \laplace_{\zeta,\alpha}^{\theta}\left[P(-\zeta)+\fracderiv{-1}{\zeta}{\alpha}\circ Q(-\zeta)+\fracderiv{-2}{\zeta}{\alpha}\circ\sum_{r=0}^{d-1}R_r(\fracderiv{-1}{\zeta}{\alpha})(-\zeta)^r\right]\psi_j\\
+& = \laplace_{\zeta,\alpha}^{\theta}\hat{\mathcal{P}}_\alpha\psi_\alpha.
+\end{align*}
 \end{proof}
 
-We can now state and prove the main result of this section, namely that the Volterra equation $\hat{\mathcal{P}}_\alpha \hat{\psi}_\alpha = 0$ admits a unique solution $\hat{\psi}_\alpha$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
+We can now state and prove the main result of this section, namely that the Volterra equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ admits a unique solution $\psi_\alpha$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
 
 \begin{thm}\label{thm:example}
 For each root $-\alpha$ of $P$, the equation
