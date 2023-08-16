@@ -194,7 +194,7 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \item \textcolor{gray}{Replace $\epsilon$ with $\gamma$.}
 \item \textcolor{gray}{\textbf{(Aaron)} Use hyperref package. (For link color, use the same green as the verify environment, or maybe turquoise or RoyalBlue?)}
 \end{brainstorm}
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 \subsection{Motivation}\label{motivation}
 In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a real ``position'' variable $\zeta$ into holomorphic\begin{verify}\footnote{\begin{verify}Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.\end{verify}}\end{verify} functions of a complex ``frequency'' variable $z$. Through identities like
 \begin{align*}
@@ -428,7 +428,7 @@ When $\sigma' > \sigma$, there's a continuous inclusion $\singexpalg{\sigma'}(\O
 \begin{proof}
 For each $\Lambda'$, we can get a continuous inclusion $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ by choosing some $\Lambda > \Lambda'$ and composing the continuous inclusion $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-gt-exp} with the continuous inclusion $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ that we get by definition. For any $\Lambda'' < \Lambda'$, the inclusions $\singexp{\sigma'}{\Lambda''}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ and $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ constructed above automatically commute with the inclusion $\singexp{\sigma'}{\Lambda''}(\Omega) \hookrightarrow \singexp{\sigma'}{\Lambda'}(\Omega)$ given by Proposition~\ref{prop:inclus-ge-exp}, because we're ultimately working in the vector space of holomorphic functions on $\Omega$. Because of how the topology on $\singexpalg{\sigma'}(\Omega)$ is defined, this gives us the desired continuous inclusion $\singexpalg{\sigma'}(\Omega)\hookrightarrow \singexpalg{\sigma}(\Omega)$.
 \end{proof}
-\section{Solving holomorphic Volterra equations}
+\section{Solving holomorphic Volterra equations}\label{sec:proof_main_results}
 \subsection{Overview}
 The results stated in Section~\ref{sec:results} lay out a method for solving the regular singular Volterra equation $\solwhole = \volterra \solwhole$. We'll now show that the method works by proving those results.
 
@@ -762,11 +762,7 @@ Now, we just want to show that the uniqueness of the solution still holds in $f_
 First, suppose $\rho \in (\tau, \tau+\gamma)$. In this case, we can use the inclusion $\singexpalg{\tau-1+\gamma}(\Omega) \hookrightarrow \singexpalg{\rho-1}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-alg} to see that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\rho-1}(\Omega)$. Lemma~\ref{lem:perturbed_volterra} then guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found in $\singexpalg{\tau-1+\gamma}(\Omega)$.
 
 On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{prop:inclus-lt-pow-alg} gives an inclusion $\singexpalg{\rho-1}(\Omega) \hookrightarrow \singexpalg{\tau-1+\gamma}(\Omega)$. Under this inclusion, any solution of Equation~\eqref{eqn:equiv-inhomog} that we might find in $\singexpalg{\rho-1}(\Omega)$ must match the unique solution we found in $\singexpalg{\tau-1+\gamma}(\Omega)$.
-
-%%the inhomogeneous term $\softpart\solproto$ is still in $\singexpalg{\rho-1}(\Omega)$ by Proposition~\ref{prop:inclus-lt-pow-gt-exp}, so Lemma~\ref{lem:perturbed_volterra} still guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found.
-
 \end{proof}
-
 \begin{prop}\label{prop:alt-general_volterra}
 Suppose $\volterra$ satisfies {\em Condition~\eqref{cond:reg-p}} in addition to the other conditions we assume in {\em Theorem~\ref{thm:general_volterra}}. Then, as long as $\rho > \tau$ is low enough, the equation
 \[f = \volterra f\]
@@ -803,6 +799,21 @@ where
 converge in the region $|z| > A$.
 \end{enumerate}
 Equations of the form $\mathcal{P}\Phi = 0$ are called {\em level~1} by Ecalle~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples using Laplace transform method and our existence and uniqueness result Theorem \ref{thm:general_volterra}. 
+\subsection{\textcolor{orange}{Notation}}
+\begin{brainstorm}
+\item Previously, we always looked at Volterra operators with a regular singularity at $\zeta = 0$.
+\item When we try to solve a level~1 differential equation, we'll get an operator with many regular singularities---one at each root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
+\item Rules for working at $\zeta = \alpha$:
+\begin{itemize}
+    \item In all our work from Sections~\ref{sec:intro}--\ref{sec:proof_main_results}, the role of the coordinate $\zeta$ is played instead by $\zeta - \alpha$. Concrete examples of how to do that:
+    \begin{itemize}
+        \item References to the point $\zeta = 0$ become references to the point $\zeta - \alpha = 0$, or equivalently $\zeta = \alpha$.
+        \item Conditions on operators, location of regular singularity.
+        \item Since the $\domain$ is star-shaped around $\zeta = 0$, it's now star-shaped around $\zeta = \alpha$. Introduce notation $\domain_\alpha$.
+        \item Definition of $\singexp{\sigma}{\Lambda}$ spaces.
+    \end{itemize}
+\end{itemize}
+\end{brainstorm}
 \subsection{The Laplace transform}
 \subsubsection{Definition}
 Let $\domain_\alpha$ be a simply connected open subset of $\C$ that touches but doesn't contain $\zeta=\alpha$, \textcolor{orange}{[maybe talk about adapting conventions here, since we need that already for the definition of $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ to make sense]} and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray that leaves $\zeta=\alpha$ at angle $\theta$. When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, we can define the Laplace transform $\laplace_{\zeta, \alpha}^{\theta}$, which maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions on the half-plane $\Re(z e^{-i\theta}) > \Lambda$ in the frequency domain~\cite[Section 5.6]{diverg-resurg-i}. The Laplace transform of $\varphi$ is defined by the formula
@@ -933,8 +944,9 @@ The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One
 \end{align*}
 \end{verify}
 
-%%The least straightforward part of this observation is confirming that $k_R(a, a')$ is well-defined for all $a, a' \in \C$, which you can do by observing that
-
+Since $\hardpart^\alpha$ has a separable kernel of the form described in Section~\ref{setting:basic}, we're now working in the setting of Theorem~\ref{thm:general_volterra}. To apply the theorem, we just need to show that $\hardpart^\alpha$ and $\softpart^\alpha$ satisfy the required conditions from Section~\ref{setting}.
+\begin{itemize}
+\item Condition~\eqref{cond:sing} {\em on $\hardpart^\alpha$ is satisfied}.
 
 Since $P$ is a monic polynomial whose roots are all simple, $1/P(-\zeta)$ has the nice partial fraction decomposition
 \[ \frac{1}{P(-\zeta)} = \sum_{-\beta \in \roots} \frac{1}{-P'(-\beta)\,(\zeta - \beta)}, \]
@@ -948,48 +960,39 @@ As $a$ and $a'$ approach $\zeta = \alpha$, the
 \[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \]
 part approaches the limit
 \[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\alpha)}{P'(-\beta)\,(\alpha - \beta)}. \]
-Hence, that part is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$. Conversely, as $a$ and $a'$ approach $\zeta=\alpha$, the term 
+Hence, that part is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$. Now we just have to deal with the term
+\[ \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a)-\alpha)}. \]
+%%From the fact that
+%%\[ Q(-\zeta) \in Q(-\alpha) + O\big(|\zeta - \alpha|\big) \]
+%%at $\zeta = \alpha$, we reason that
+%%\[ \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a)-\alpha)} \in \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a)-\alpha)} + O(1) \]
+%%at $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$.
+
+
+\[ \frac{Q(-\zeta(a'))}{P'(-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)}\]
+is bounded as $\zeta(a')$ approaches $\alpha$.
+\color{RoyalBlue}
+\[ \left|\frac{Q(-\zeta(a'))}{P'(-\alpha)(\zeta(a)-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)(\zeta(a)-\alpha)}\right|< C  \]
+
+we know
+\[ \left|\frac{Q(-\zeta(a'))}{P'(-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)}\right|< C  \]
+\color{black}
+Conversely, as $a'$ approaches $\zeta=\alpha$, the term 
 
 \[\frac{Q(-\zeta(a'))}{P'(-\alpha)(\zeta(a)-\alpha)}\]
 
 converges to $\frac{\tau_\alpha}{\zeta(a)-\alpha}$ with $\tau_\alpha:=Q(-\alpha)/P'(-\alpha)$. We conclude that 
 \[-\frac{q(a')}{p(a)}-\frac{\tau_\alpha}{\zeta(a)-\alpha}\]
 
-is bounded as $a,a'$ approach $\zeta=\alpha$, showing that $\hardpart^\alpha$ satisfies Condition \eqref{cond:sing}.
-
+is bounded as $a,a'$ approach $\zeta=\alpha$.
 \begin{verify}
-A kind of klunky way to do the Ahlfors exercise:
-\begin{align*}
-\frac{1}{p} & = \sum_{\beta \in \roots} \frac{\pi_\beta}{\zeta - \beta} \\
--\frac{p'}{p^2} & = -\sum_{\beta \in \roots} \frac{\pi_\beta}{(\zeta - \beta)^2} \\
-p' & = \sum_{\beta \in \roots} \left(\frac{p}{\zeta - \beta}\right)^2 \pi_\beta \\
-p'\big|_{\zeta = \alpha} & = \left.\left(\frac{p}{\zeta - \alpha}\right)^2\right|_{\zeta = \alpha} \pi_\alpha \\
-& = \left[\prod_{\beta \in \roots \smallsetminus \alpha} (\alpha - \beta)\right]^2 \pi_\alpha \\
-& = \left(p'\big|_{\zeta = \alpha}\right)^2 \pi_\alpha \\
-\frac{1}{p'\big|_{\zeta = \alpha}} & = \pi_\alpha
-\end{align*}
-
-\color{magenta}
-\begin{align*}
-    \frac{1}{P} & = \sum_{\beta \in \roots} \frac{\pi_\beta}{\zeta - \beta} \\
--\frac{p'}{p^2} & = -\sum_{\beta \in \roots} \frac{\pi_\beta}{(\zeta - \beta)^2} \\
-p' & = \sum_{\beta \in \roots} \left(\frac{p}{\zeta - \beta}\right)^2 \pi_\beta \\
-&\\
-& \\
-P'\big|_{\zeta = \alpha} & = \left.\left(\frac{P}{t - \alpha}\right)^2\right|_{\zeta = \alpha} \pi_\alpha \\
-& = \left[\prod_{\beta \in \roots \smallsetminus \alpha} (\alpha - \beta)\right]^2 \pi_\alpha \\
-& = \left(p'\big|_{\zeta = \alpha}\right)^2 \pi_\alpha \\
-\frac{1}{p'\big|_{\zeta = \alpha}} & = \pi_\alpha
-\end{align*}
-for some constant $c_\beta$.
-\par\color{ForestGreen}
-First, observe that
+\par Proof of Ahlfors exercise. First, observe that
 \begin{align*}
 P(t) &= (t + \beta_1) \cdots (t + \beta_d) \\
 P'(t) &= \sum_k \left[ \prod_{j \neq k} (t + \beta_j) \right] \\
 P'(-\beta_1) &= \prod_{j\neq 1} (-\beta_1 + \beta_j) 
 \end{align*}
-
+Then we see that
 \begin{align*}
 \frac{1}{P(t)} & = \sum_{j} \frac{\pi_j}{t + \beta_j}\\
 -\frac{P'(t)}{P(t)^2} &= -\sum_{j} \frac{\pi_\beta}{(t + \beta_j)^2}\\
@@ -998,25 +1001,10 @@ P'(-\beta_1) &=  \pi_1 \prod_{j\neq 1} (-\beta_1+\beta_j)^2\\
 \frac{1}{P'(-\beta_1)} &= \pi_1
 \end{align*}
 \end{verify}
+\end{itemize}
 
 \par\color{RoyalBlue}
-First of all, we rewrite $\hat{\mathcal{P}}_{\alpha}\varphi=0$ as $\varphi = \volterra_\alpha \varphi $: %we introduce the notation $p(a):=P(-\zeta(a))$ and $q(a)=Q(-\zeta(a))$, then $\hat{P}_j$ is  
-
-\begin{align*}
-    -\big[ p\, \varphi \big](a)= \int_{\zeta=\alpha}^a q  \, \varphi \, d\zeta' + \int_{\zeta=\alpha}^a k_R(a,\cdot)  \, \varphi \, d\zeta
-\end{align*}
-with \[k_R(a,a')=\sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{R_{r,j}}{j!} \, (\zeta(a)-\zeta(a'))^{j+1} \, (-\zeta(a'))^r\]  
-
-is equivalent to 
-
-\begin{align}
-   \nonumber \varphi (a)& =-\int_{\zeta=\alpha}^a \frac{q}{p(\zeta(a))}  \, \varphi \, d\zeta' - \int_{\zeta=\alpha}^a \frac{k_R(a,\cdot)}{p(\zeta(a))}  \, \varphi \, d\zeta' \\
-   \nonumber \varphi (a)& =\Big[ \hardpart^\alpha \, \varphi \Big](a)+ \Big[\softpart^\alpha \, \varphi\Big](a) \\
-   \varphi(a) &=\Big[ \volterra^\alpha \, \varphi \Big](a)
-\end{align}
-\color{black}
-\par\color{RoyalBlue}
-Notice that $\hardpart^\alpha$ is holomorphic and separable, while $\softpart^\alpha$ is holomorphic and non-separable. In addition, $\hardpart^\alpha$ is of the type defined in Section \ref{setting:basic} and it satisfies Condition \eqref{cond:sing}: by Taylor expanding the polynomials $p$ and $q$ around $\zeta = \alpha$ \textcolor{orange}{[the shifted polynomial willhave the same degree as the original]} \textcolor{magenta}{[$\alpha$ is a number, not a point; write $c_0$ in place of $q(\alpha)$? notation $\zeta'$ not defined; switch to $\zeta(a')$?]}.
+Notice that $\hardpart^\alpha$ is holomorphic and separable, while $\softpart^\alpha$ is holomorphic and non-separable. In addition, $\hardpart^\alpha$ is of the type defined in Section \ref{setting:basic} and it satisfies Condition \eqref{cond:sing}: by Taylor expanding the polynomials $p$ and $q$ around $\zeta = \alpha$ \textcolor{orange}{[the shifted polynomial will have the same degree as the original]} \textcolor{magenta}{[$\alpha$ is a number, not a point; write $c_0$ in place of $q(\alpha)$? notation $\zeta'$ not defined; switch to $\zeta(a')$?]}.
 \begin{align*}
     -\frac{q}{p(a)}&=-\frac{\textcolor{magenta}{q(\alpha)}+c_1(\zeta\textcolor{magenta}{'}-\alpha)+c_2 (\zeta'-\alpha)^2+...}{-b_1(\zeta(a)-\alpha)+ b_2 (\zeta(a)-\alpha)^2+b_3(\zeta(a)-\alpha)^3+...}\\
     &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+ b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}\\
