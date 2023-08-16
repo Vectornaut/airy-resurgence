@@ -264,9 +264,9 @@ over all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' 
 We'll occasionally mention an optional condition on $p$ that allows us to state our main results more explicitly.
 \begin{conditions}
 \condconst{reg-p}{B, \epsilon}\label{cond:reg-p}
-When $p$ is restricted to a small enough neighborhood of $\zeta = 0$, it falls into the class
-\[ B\zeta + O\big(|\zeta|^{1 + \textcolor{orange}{\epsilon}}\big) \]
-for some non-zero constant $B$ and some $\textcolor{orange}{\epsilon} > 0$.
+For some non-zero constant $B$ and some $\epsilon > 0$,
+\[ p \in B\zeta + O\big(|\zeta|^{1 + \epsilon}\big) \]
+at $\zeta = 0$.
 \end{conditions}
 \subsubsection{The perturbed operator}\label{setting:perturbed}
 
@@ -528,40 +528,49 @@ In particular,
       \end{align*}
    which is bounded because $|\zeta(a)|>\delta$. \textcolor{orange}{[As Condition~\eqref{cond:slow} is currently stated, $|\zeta| > \delta$ may not be far enough from $\zeta = 0$ to get the $\lambda_p$ and $\lambda_\delta$ bounds. I've strengthened the condition so that $|1/p|$ and $|q/p|$ are at least bounded outside every neighborhood of $\zeta = 0$.]}
 \end{proof}
-
 \begin{prop}\label{prop:better-proto-estimate}
-Suppose $p$ satisfies Condition \eqref{cond:reg-p} in some neighborhood of $\zeta = 0$. In addition, suppose $\hardpart$ satisfies Condition~\eqref{cond:sing}. Then $\solproto \in M\zeta^{\tau-1} + O(|\zeta|^{\tau-1+\lambda'})$, for some constant $M$ and $\lambda'=\min\{\epsilon, 1\}$.
+Suppose $\hardpart$ satisfies {\em Conditions~\eqref{cond:reg-p}} and \eqref{cond:sing}. Then, for some constant $M$,
+\[ \solproto \in M\zeta^{\tau-1} + O(|\zeta|^{\tau-1+\epsilon'}) \]
+at $\zeta = 0$, where $\epsilon'=\min\{\epsilon, 1\}$.
 \end{prop}
 \begin{proof}
-Like we did in the proof of Theorem~\ref{thm:basic_volterra}, we reason that
+It's enough to show that
+\[ \solproto \in M\zeta^{\tau-1} \Big[1 + O\big(|\zeta|^{\epsilon'}\big)\Big] \]
+at $\zeta = 0$. Like we did in the proof of Theorem~\ref{thm:basic_volterra}, we reason that
 \begin{align*}
-\solproto(a)&=\frac{p(b)}{p(a)}\, \exp\left(-\int_b^a\frac{q}{p} d\zeta\;\right)\\
-&=\frac{p(b)}{p(a)}\,\frac{\zeta(a)^{\tau}}{\zeta(b)^{\tau}}\,\exp\left(-\int_b^a \left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right)\\
-& = \frac{p(b)}{\zeta(b)^{\tau}}\,\zeta(a)^{\tau-1}\,\frac{\zeta(a)}{p(a)} \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right),
+\solproto(a)&=\frac{1}{p(a)}\, \exp\left(-\int_b^a\frac{q}{p} d\zeta\;\right)\\
+& = \frac{1}{p(a)}\,\frac{\zeta(a)^{\tau}}{\zeta(b)^{\tau}}\,\exp\left[-\int_b^a \left(\frac{q}{p}+\frac{\tau}{\zeta}\right) d\zeta\right]\\
+& = \zeta(b)^{-\tau}\,\zeta(a)^{\tau-1}\,\frac{\zeta(a)}{p(a)} \exp\left[-\int_b^a\left(\frac{q}{p}+\frac{\tau}{\zeta}\right) d\zeta\right].
 \end{align*}
-concluding that $\solproto$ is a constant multiple of
-\[ \zeta(a)^{\tau-1}\,\frac{\zeta(a)}{p(a)} \, \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right). \]
+Since $\zeta(b)^{-\tau}$ is a constant, the $\zeta(b)^{-\tau}\,\zeta^{\tau-1}$ factor looks like what we want.
 
-By Condition \eqref{cond:reg-p}, we can deduce that
-\[ \frac{\zeta(a)}{p(a)} \in B^{-1} + O\big(|\zeta|^{\epsilon}\big), \]
-in a small enough neighborhood $\domain_\text{near}$ of $\zeta=0$.
+With a little work, the $\zeta/p$ factor also looks like what we want. Condition \eqref{cond:reg-p} implies that
+\[ \frac{\zeta}{p} \in B^{-1} + O\big(|\zeta|^{\epsilon}\big), \]
+at $\zeta = 0$.
 
-Now, let's look at the exponential factor. By Condition~\eqref{cond:sing}, we can find a constant $C$ for which
+Now, let's look at the exponential factor. By Condition~\eqref{cond:sing}, we can find a constant $C$ and a neighborhood $\domain_\text{near}$ of $\zeta = 0$ for which
 \[ \left| \frac{q}{p}+\frac{\tau}{\zeta} \right| < C \]
-in $\domain_\text{near}$. It follows that for all $a \in \domain_\text{near}$, the integral
-\[ S(a) = \int_{0}^a \left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta \]
-converges, allowing us to write
-\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
-for $a \in \domain_\text{near}$. Observe that $|S| \le C |\zeta|$ in $\domain_\text{near}$, implying that
-\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right) \in e^{S(b)} \Big[1 + O\big(|\zeta|\big) \Big] \]
-when we restrict to $\domain_\text{near}$.
+in $\domain_\text{near}$. It follows that the improper integral
+\[ \eta(a) = \int_{\zeta = 0}^a \left(\frac{q}{p}+\frac{\tau}{\zeta}\right) d\zeta \]
+converges for all $a \in \domain$, allowing us to write
+\[ \exp\left[-\int_b^a\left(\frac{q}{p}+\frac{\tau}{\zeta}\right) d\zeta\right] = e^{\eta(b)} e^{-\eta(a)}. \]
+Observing that $|\eta| \le C |\zeta|$ in $\domain_\text{near}$, we can conclude that
+\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau}{\zeta}\right] d\zeta\right) \in e^{\eta(b)} \Big[ 1 + O\big(|\zeta(a)|\big) \Big] \]
+at $\zeta(a) = 0$.
 
+Combining the arguments above, we learn that
+\begin{align*}
+\solproto & \in \zeta(b)^{-\tau}\,\zeta^{\tau-1}\;\Big[ B^{-1} + O\big(|\zeta|^{\epsilon}\big) \Big]\;e^{\eta(b)} \Big[1 + O\big(|\zeta|\big) \Big] \\
+& = \zeta(b)^{-\tau} B^{-1} e^{\eta(b)}\;\zeta^{\tau-1} \Big[ 1 + O\big(|\zeta|^{\epsilon}\big) \Big] \Big[1 + O\big(|\zeta|\big) \Big] \\
+& = M\zeta^{\tau-1} \Big[ 1 + O\big(|\zeta|^{\epsilon}\big) + O\big(|\zeta|\big) \Big]
+\end{align*}
+at $\zeta = 0$, with $M = \zeta(b)^{-\tau} B^{-1} e^{\eta(b)}$. Observing that $O\big(|\zeta|^{\epsilon}\big) + O\big(|\zeta|\big) = O\big(|\zeta|^{\epsilon'}\big)$, we get the desired result.
+\par\color{RoyalBlue}
 Combining the arguments above, we see as desired that
 \[ \solproto \in M\zeta^{\tau - 1} + \singexpalg{\tau-1+\lambda'}(\domain), \]
 with 
 \[ M = \frac{p(b)}{\zeta(b)^{\tau}}\,B^{-1}\,e^{S(b)}. \]
 \end{proof}
-
 \subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 
 In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\gamma}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
@@ -769,12 +778,9 @@ On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{
 %\color{black}
 %\section{\textcolor{orange}{[Proof of main results]}}
 \subsection{Overview}
-
-We can apply the theory of regular singular Volterra operators to the study of the so-called \textit{level 1 ODE}, which have an irregular singularity at $\infty$. In particular, we can build a frame of analytic solutions in the frequency domain by studying solutions of an integral equation in the position domain. The latter is an example of the regular singular Volterra equations we introduced above.    
-
-\subsubsection{Level $1$ ODE}\label{sec:level 1 ODE}
-
-Let $\mathcal{P}$ be a linear differential operator\footnote{ We follow Delabaere, rather than Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}}
+We can apply the theory of regular singular Volterra operators to the study of so-called \textit{level~1 differential equations}, which each have an irregular singularity at $\infty$. In particular, we can build a frame of analytic solutions in the frequency domain by studying solutions of an integral equation in the position domain. The latter is an example of the regular singular Volterra equations we introduced above.
+\subsection{Level $1$ differential equations}\label{sec:level 1 ODE}
+Let $\mathcal{P}$ be a linear differential operator\footnote{ We follow Delabaere, rather than Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}.}
 \begin{equation}\label{eqn:level 1 ode}
 \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big],
 \end{equation}
