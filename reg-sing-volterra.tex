@@ -94,6 +94,20 @@
 \newenvironment{verify}{\color{ForestGreen}}{\color{black}}
 \newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
 
+% colors
+\definecolor{ietocean}{RGB}{0, 30, 140}
+\definecolor{ietcoast}{RGB}{0, 150, 173}
+\definecolor{ietlagoon}{RGB}{0, 216, 180}
+
+% pretty prince hyperref must always be the last thing in the preamble, always
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  linkcolor={ietcoast},
+  citecolor={ietcoast},
+  urlcolor={ietcoast}
+}
+
 \title{Regular singular Volterra equations on complex domains}
 \author{Veronica Fantini and Aaron Fenyes}
 \date{}
@@ -177,7 +191,7 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \item \textcolor{gray}{\textbf{(Veronica)} Add table of contents.}
 \item \textcolor{gray}{Replace $\psi_0$ with $\chi$.}
 \item \textcolor{gray}{Replace $\epsilon$ with $\gamma$.}
-\item \textbf{(Aaron)} Use hyperref package. (For link color, use the same green as the verify environment, or maybe turquoise or RoyalBlue?)
+\item \textcolor{gray}{\textbf{(Aaron)} Use hyperref package. (For link color, use the same green as the verify environment, or maybe turquoise or RoyalBlue?)}
 \end{brainstorm}
 \section{Introduction}
 \subsection{Motivation}\label{motivation}
@@ -213,14 +227,16 @@ For the applications we have in mind, $\domain$ might look something like the se
 \begin{center}
 \begin{tikzpicture}
 \newcommand{\spill}{4}
-\fill[violet!20, bezier bounding box, path fading=radial edge]
+%% previously violet!20
+\fill[ietcoast!33, bezier bounding box, path fading=radial edge]
   (-\spill, -\spill) (\spill, \spill)
   (0, 0) -- (160:\spill)
   arc (160:112:\spill) -- (112:2) .. controls (112:1.7) and (103:1.7) .. (103:2) -- (103:\spill)
   arc (103:50:\spill) -- (50:2.6) .. controls (50:2.2) and (43:2.2) .. (43:2.6) -- (43:\spill)
   arc (43:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-60:2) .. (-60:2.3) -- (-60:\spill)
   arc (-60:-130:\spill) -- (0, 0);
-\fill[violet] circle (0.7mm) node[anchor=195, outer sep=1mm] {$\zeta = 0$};
+%% previously violet
+\fill[ietcoast!33!black] circle (0.7mm) node[anchor=195, outer sep=1mm] {$\zeta = 0$};
 \end{tikzpicture}
 \end{center}
 \subsubsection{The prototype operator}\label{setting:basic}
