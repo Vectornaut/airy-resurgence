@@ -299,15 +299,8 @@ Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a smal
 Suppose $\hardpart$ also satisfies {\em Condition~\eqref{cond:slow}}. Then $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$ defined in Section~\ref{fn-spaces}.
 \end{thm}
 We'll prove this result in Section~\ref{sec:asymptotics}.
-
 \begin{rmk}
-Under stronger conditions on $p$, we can get a better estimate of the prototype solution near $\zeta = 0$, as described in Proposition~\ref{prop:better-proto-estimate} from Section~\ref{sec:asymptotics} for details.
-
-%%Suppose $p$ falls into the class $B\zeta + O\big(|\zeta|^2\big)$, for some constant $B$, when it's restricted to some neighborhood of $\zeta = 0$.
-
-%%for some constant $B$, we can strengthen the conclusion of Theorem~\ref{thm:proto-growth}. Under {\em Condition~\eqref{cond:sing}}, we can show that $\solproto \in B\zeta^{\tau-1} + O(|\zeta|^\tau)$.
-
-%%If $q$ has a limit at $\zeta = 0$, the solution $f_0$ from Theorem~\ref{thm:basic_volterra} can be written as a constant multiple of $\zeta^{\tau-1}$ plus a function which is $O(\zeta^\tau)$ at $\zeta = 0$.
+When $\hardpart$ also satisfies Condition~\eqref{cond:reg-p}, we can get a better estimate of the prototype solution near $\zeta = 0$, as described in Proposition~\ref{prop:better-proto-estimate} from Section~\ref{sec:asymptotics}.
 \end{rmk}
 \color{black}
 
@@ -341,9 +334,9 @@ We'll prove Lemma~\ref{lem:perturbed_volterra} in Sections \ref{sec:V is a contr
 We'll reduce Theorem~\ref{thm:general_volterra} to Lemma~\ref{lem:perturbed_volterra} in Section~\ref{sec:existence and uniqueness}, by rewriting the homogeneous equation we want to solve as an inhomogeneous equation in a more regular space. To show that the inhomogeneous term, $\softpart f_0$, is regular enough, we'll use Proposition~\ref{prop:smoothing} from Section~\ref{sec:image under soft_part} to show that $\softpart$ improves on the regularity of $f_0$ described by Theorem~\ref{thm:proto-growth}.
 
 \begin{rmk}
-Under stronger conditions on $p$, Theorem~\ref{thm:general_volterra} can be restated to provide a unique solution in the affine subspace
-\[ \zeta^{\tau-1} + \singexpalg{\tau-1+\gamma}(\Omega). \]
-as described in Proposition~\ref{prop:alt-general_volterra} from Section~\ref{sec:existence and uniqueness}.
+When $\hardpart$ also satisfies Condition~\eqref{cond:reg-p}, Theorem~\ref{thm:general_volterra} can be restated to give a unique solution in the affine subspace
+\[ \zeta^{\tau-1} + \singexpalg{\rho-1}(\domain) \]
+when $\rho > \tau$ is low enough, as described in Proposition~\ref{prop:alt-general_volterra} from Section~\ref{sec:existence and uniqueness}.
 \end{rmk}
 %%To prove Theorem~\ref{thm:general_volterra}, we will rewrite the homogeneous equation we want to solve as an inhomogeneous one, with $\softpart f_0$ as the inhomogeneous term.
 
@@ -758,19 +751,20 @@ On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{
 \end{proof}
 
 \begin{prop}\label{prop:alt-general_volterra}
-    Suppose $p$ satisfies Condition \eqref{cond:reg-p}, and $\volterra$ satisfies the assumptions of Theorem \ref{thm:general_volterra}. Then equation 
-    \[f=\volterra f\]
-    has a unique solution $f$ in the affine subspace
-    \[ M \zeta^{\tau-1}+\singexpalg{\tau-1+\gamma'}(\domain)\]
-    of the space $\singexpalg{\tau-1}(\domain)$, where $\gamma'=\min\{\epsilon, 1, \gamma\}$. 
+Suppose $\volterra$ satisfies {\em Condition~\eqref{cond:reg-p}} in addition to the other conditions we assume in {\em Theorem~\ref{thm:general_volterra}}. Then, as long as $\rho > \tau$ is low enough, the equation
+\[f = \volterra f\]
+has a unique solution $f$ in the affine subspace
+\[ \zeta^{\tau-1}+\singexpalg{\rho-1}(\domain) \]
+of the space $\singexpalg{\tau-1}(\domain)$. To be precise, $\rho$ is low enough when it's in the interval
+\[ (\tau, \tau + \min\{\gamma, \epsilon, 1\}]. \]
 \end{prop}
 
 \begin{proof}
- By Theorem \ref{thm:general_volterra}, we already know there exists a unique solution $f$ which belongs to the affine subspace
- \[f_0+\singexpalg{\tau+1-\gamma}(\domain)\]
- of the space $\singexpalg{\tau-1}(\domain)$. In addition, in Proposition \ref{prop:better-proto-estimate}, we learnt that in a neighbourhood of $\zeta=0$
- \[\solproto\in M\zeta^{\tau-1}+ O(|\zeta|^{\tau-1+\lambda'})\]
- for some constant $M$ and $\lambda'=\min\{\epsilon, 1\}$. We conclude, by combining these results. 
+Proposition~\ref{prop:better-proto-estimate} implies that for some constant $M$,
+\[ \zeta^{\tau-1} + \singexpalg{\rho-1}(\domain) = M^{-1}\solproto + \singexpalg{\rho-1}(\domain) \]
+whenever $\rho \le \tau + \min\{\epsilon, 1\}$. Theorem~\ref{thm:general_volterra} implies that our equation has a unique solution in
+\[ M^{-1}\solproto + \singexpalg{\rho-1}(\domain) \]
+as long as $\rho \in (\tau, \tau + \gamma]$. Putting these facts together, we get the desired result.
 \end{proof}
 
 \section{A motivating example}\label{sec:example}
