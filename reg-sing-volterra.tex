@@ -917,6 +917,88 @@ Let $\hardpart^\alpha$ be the Volterra operator with kernel
 and let $\softpart^\alpha$ be the Volterra operator with kernel
 \[ \softker^\alpha(a,a') = -\frac{k_R(a,a')}{p(a)}. \]
 Now we can write Equation~\eqref{eqn:divided} as $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha = \hardpart^\alpha + \softpart^\alpha$.
+
+The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One part of this observation demands some explanation: we need to confirm that the power series defining $k_R$ converges everywhere. To do this, recall that the functions $R_r(z^{-1})$ are all holomorphic on the disk $|z| > A$. Consequently, for any $\lambda > A$, we have $R_{r,j} \lesssim \lambda^j$ over all $r \in \{1, \ldots, d-1\}$ and all $j \in \{0, 1, 2, \ldots\}$. This is enough to show that $k_R$ is well-defined throughout $\C^2$. In fact, as we'll see later, it also leads to a useful bound on $k_R$.
+\begin{verify}
+\begin{align*}
+& \sum_{j = 0}^\infty R_{r,j} z^{-j} \text{ converges when } |z| > A \\
+\Longrightarrow & \sum_{j = 0}^\infty R_{r,j} z^{-j} \text{ converges when } |z^{-1}| < A^{-1} \\
+\Longrightarrow & A^{-1} \le \operatorname{radius} R_{r,j} \\
+\Longrightarrow & A \ge \big(\operatorname{radius} R_{r,j}\big)^{-1} \\
+\Longrightarrow & A \ge \limsup_{j \to \infty} R_{r,j}^{1/j} \\
+\Longrightarrow & A \ge \inf_{J \ge 0} \sup_{j \ge J} R_{r,j}^{1/j} \\
+\Longrightarrow & \forall \lambda > A: \exists J: \sup_{j \ge J} R_{r,j}^{1/j} < \lambda \\
+\Longrightarrow & \forall \lambda > A: \exists J: \forall j \ge J: R_{r,j}^{1/j} < \lambda \\
+\Longrightarrow & \forall \lambda > A: \exists J: \forall j \ge J: R_{r,j} < \lambda^j
+\end{align*}
+\end{verify}
+
+%%The least straightforward part of this observation is confirming that $k_R(a, a')$ is well-defined for all $a, a' \in \C$, which you can do by observing that
+
+
+Since $P$ is a monic polynomial whose roots are all simple, $1/P(-\zeta)$ has the nice partial fraction decomposition
+\[ \frac{1}{P(-\zeta)} = \sum_{-\beta \in \roots} \frac{1}{-P'(-\beta)\,(\zeta - \beta)}, \]
+where $\roots$ is the zero set of $P$ \textcolor{orange}{[Ahlfors, {\em Complex Analysis}, \S1.4, Exercise~2]}. 
+It follows that
+\begin{align*}
+-\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
+& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}
+\end{align*}
+As $a$ and $a'$ approach $\zeta = \alpha$, the
+\[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \]
+part approaches the limit
+\[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\alpha)}{P'(-\beta)\,(\alpha - \beta)}. \]
+Hence, that part is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$. Conversely, as $a$ and $a'$ approach $\zeta=\alpha$, the term 
+
+\[\frac{Q(-\zeta(a'))}{P'(-\alpha)(\zeta(a)-\alpha)}\]
+
+converges to $\frac{\tau_\alpha}{\zeta(a)-\alpha}$ with $\tau_\alpha:=Q(-\alpha)/P'(-\alpha)$. We conclude that 
+\[-\frac{q(a')}{p(a)}-\frac{\tau_\alpha}{\zeta(a)-\alpha}\]
+
+is bounded as $a,a'$ approach $\zeta=\alpha$, showing that $\hardpart^\alpha$ satisfies Condition \eqref{cond:sing}.
+
+\begin{verify}
+A kind of klunky way to do the Ahlfors exercise:
+\begin{align*}
+\frac{1}{p} & = \sum_{\beta \in \roots} \frac{\pi_\beta}{\zeta - \beta} \\
+-\frac{p'}{p^2} & = -\sum_{\beta \in \roots} \frac{\pi_\beta}{(\zeta - \beta)^2} \\
+p' & = \sum_{\beta \in \roots} \left(\frac{p}{\zeta - \beta}\right)^2 \pi_\beta \\
+p'\big|_{\zeta = \alpha} & = \left.\left(\frac{p}{\zeta - \alpha}\right)^2\right|_{\zeta = \alpha} \pi_\alpha \\
+& = \left[\prod_{\beta \in \roots \smallsetminus \alpha} (\alpha - \beta)\right]^2 \pi_\alpha \\
+& = \left(p'\big|_{\zeta = \alpha}\right)^2 \pi_\alpha \\
+\frac{1}{p'\big|_{\zeta = \alpha}} & = \pi_\alpha
+\end{align*}
+
+\color{magenta}
+\begin{align*}
+    \frac{1}{P} & = \sum_{\beta \in \roots} \frac{\pi_\beta}{\zeta - \beta} \\
+-\frac{p'}{p^2} & = -\sum_{\beta \in \roots} \frac{\pi_\beta}{(\zeta - \beta)^2} \\
+p' & = \sum_{\beta \in \roots} \left(\frac{p}{\zeta - \beta}\right)^2 \pi_\beta \\
+&\\
+& \\
+P'\big|_{\zeta = \alpha} & = \left.\left(\frac{P}{t - \alpha}\right)^2\right|_{\zeta = \alpha} \pi_\alpha \\
+& = \left[\prod_{\beta \in \roots \smallsetminus \alpha} (\alpha - \beta)\right]^2 \pi_\alpha \\
+& = \left(p'\big|_{\zeta = \alpha}\right)^2 \pi_\alpha \\
+\frac{1}{p'\big|_{\zeta = \alpha}} & = \pi_\alpha
+\end{align*}
+for some constant $c_\beta$.
+\par\color{ForestGreen}
+First, observe that
+\begin{align*}
+P(t) &= (t + \beta_1) \cdots (t + \beta_d) \\
+P'(t) &= \sum_k \left[ \prod_{j \neq k} (t + \beta_j) \right] \\
+P'(-\beta_1) &= \prod_{j\neq 1} (-\beta_1 + \beta_j) 
+\end{align*}
+
+\begin{align*}
+\frac{1}{P(t)} & = \sum_{j} \frac{\pi_j}{t + \beta_j}\\
+-\frac{P'(t)}{P(t)^2} &= -\sum_{j} \frac{\pi_\beta}{(t + \beta_j)^2}\\
+P'(t) &= \sum_{j} \pi_j \left(\frac{P(t)}{t + \beta_j}\right)^2\\
+P'(-\beta_1) &=  \pi_1 \prod_{j\neq 1} (-\beta_1+\beta_j)^2\\
+\frac{1}{P'(-\beta_1)} &= \pi_1
+\end{align*}
+\end{verify}
+
 \par\color{RoyalBlue}
 First of all, we rewrite $\hat{\mathcal{P}}_{\alpha}\varphi=0$ as $\varphi = \volterra_\alpha \varphi $: %we introduce the notation $p(a):=P(-\zeta(a))$ and $q(a)=Q(-\zeta(a))$, then $\hat{P}_j$ is  
 
@@ -952,43 +1034,7 @@ Since $p$ has only simple roots, the partial fraction decomposition of $1/p$ is
 where $\roots$ is the set containing the values of $\zeta$ at the roots of $p$.
 \par\color{DarkTurquoise}
 \textcolor{orange}{Nicer formulation; note different definition of $\roots$:}\par
-Since $P(-\zeta)$ has only simple roots, the partial fraction decomposition of $1/P(-\zeta)$ is
-\[ \sum_{-\beta \in \roots} \frac{1}{-P'(-\beta)\,(\zeta - \beta)}, \]
-where $\roots$ is the zero set of $P$ \textcolor{orange}{[Ahlfors, {\em Complex Analysis}, \S1.4, Exercise~2]}. It follows that
-\begin{align*}
--\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
-& \in \sum_{-\beta \in \roots} \frac{Q(-\alpha) + O\big(|\zeta(a') - \alpha|\big)}{P'(-\beta)\,(\zeta - \beta)} \\
-%%& \in \frac{Q(-\alpha) + O\big(|\zeta - \alpha|\big)}{-P'(-\alpha)\,(\zeta - \alpha)} + \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\alpha) + O\big(|\zeta - \alpha|\big)}{-P'(-\beta)\,(\zeta - \beta)} \\
-& \subset \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)} + O\big(1\big)
-\end{align*}
-at $(\zeta(a), \zeta(a')) = (\alpha, \alpha)$. In other words, for $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$, the difference
-\[ -\frac{Q(-\zeta(a'))}{P(-\zeta(a))} - \frac{\tau_\alpha}{\zeta - \alpha} \]
-is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$, showing that $\hardpart^\alpha$ satisfies Condition~\eqref{cond:sing}.
 
-\textcolor{orange}{[Another phrasing:]}
-It follows that
-\begin{align*}
--\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
-& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta - \alpha)}
-\end{align*}
-As $a$ and $a'$ approach $\zeta = \alpha$, the
-\[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \]
-part approaches the limit
-\[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\alpha)}{P'(-\beta)\,(\alpha - \beta)}. \]
-Hence, that part is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$. \textcolor{orange}{[\ldots]}
-
-\begin{verify}
-A kind of klunky way to do the Ahlfors exercise:
-\begin{align*}
-\frac{1}{p} & = \sum_{\beta \in \roots} \frac{\pi_\beta}{\zeta - \beta} \\
--\frac{p'}{p^2} & = -\sum_{\beta \in \roots} \frac{\pi_\beta}{(\zeta - \beta)^2} \\
-p' & = \sum_{\beta \in \roots} \left(\frac{p}{\zeta - \beta}\right)^2 \pi_\beta \\
-p'\big|_{\zeta = \alpha} & = \left.\left(\frac{p}{\zeta - \alpha}\right)^2\right|_{\zeta = \alpha} \pi_\alpha \\
-& = \left[\prod_{\beta \in \roots \smallsetminus \alpha} (\alpha - \beta)\right]^2 \pi_\alpha \\
-& = \left(p'\big|_{\zeta = \alpha}\right)^2 \pi_\alpha \\
-\frac{1}{p'\big|_{\zeta = \alpha}} & = \pi_\alpha
-\end{align*}
-\end{verify}
 \color{black}
 
 Then, the proof will follow by Theorem \ref{thm:general_volterra}, once we proved that $\volterra^\alpha$ satisfies the required assumptions.  
