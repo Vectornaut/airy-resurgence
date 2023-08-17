@@ -125,6 +125,10 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \tableofcontents
 
 \begin{brainstorm}
+\item Deal with Condition~\eqref{cond:sing}
+\begin{itemize}
+\item In Section~\ref{sec:V is a contraction}, do we only use Condition~\eqref{cond:sing} through Proposition~\ref{prop:whole-ker-near-bound}?
+\end{itemize}
 \item \textcolor{gray}{\textit{(Aaron)} State Lemma~\ref{lem:perturbed_volterra} just the way we want it.}
 \begin{itemize}
     \item \textcolor{gray}{Proofread and drop old version.}
@@ -251,6 +255,7 @@ where $p$ and $q$ are holomorphic functions on $\domain$. Having a regular singu
 \begin{conditions}
 \condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
 \[ \hardker(a, a') - \frac{\tau}{\zeta(a)} \]
+\textcolor{magenta}{\[ \zeta(a)\hardker(a, a') - \tau \]}
 is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
 \end{conditions}
 We'll assume that $\tau$ is real and positive.
@@ -915,7 +920,7 @@ of the space $\singexpalg{\tau_\alpha-1}(\domain_\alpha)$.
 \begin{proof}
 Choose a root $-\alpha$ of $P$. For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$, noting that $\zeta = \alpha$ is a root of $p$. The conditions laid out in Section~\ref{sec:level 1 ODE} guarantee that $\frac{\partial}{\partial \zeta} p$ and $q$ are both non-zero $\zeta = \alpha$.
 
-To apply Theorem~\ref{thm:general_volterra}, we need to rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting}. \textcolor{orange}{[Explain how conditions shift from $\zeta = 0$ to $\zeta = \alpha$?]} When we write $\hat{\mathcal{P}}_\alpha$ explicitly as a Volterra operator, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
+To apply Proposition~\ref{prop:alt-general_volterra}, we need to rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting}. \textcolor{orange}{[Explain how conditions shift from $\zeta = 0$ to $\zeta = \alpha$?]} When we write $\hat{\mathcal{P}}_\alpha$ explicitly as a Volterra operator, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
 \[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta = 0, \]
 where
 \[ k_R(a,a')=\sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{R_{r,j}}{j!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} \, \big(-\zeta(a')\big)^r. \]
@@ -929,7 +934,7 @@ and let $\softpart^\alpha$ be the Volterra operator with kernel
 \[ \softker^\alpha(a,a') = -\frac{k_R(a,a')}{p(a)}. \]
 Now we can write Equation~\eqref{eqn:divided} as $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha = \hardpart^\alpha + \softpart^\alpha$.
 
-The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One part of this observation demands some explanation: we need to confirm that the power series defining $k_R$ converges everywhere. To do this, recall that the functions $R_r(z^{-1})$ are all holomorphic on the disk $|z| > A$. Consequently, for any $\lambda > A$, we have $R_{r,j} \lesssim \lambda^j$ over all $r \in \{1, \ldots, d-1\}$ and all $j \in \{0, 1, 2, \ldots\}$. This is enough to show that $k_R$ is well-defined throughout $\C^2$. In fact, as we'll see later, it also leads to a useful bound on $k_R$.
+The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One part of this observation demands some explanation: we need to confirm that the power series defining $k_R$ converges everywhere. To do this, recall that the functions $R_r(z^{-1})$ are all holomorphic on the disk $|z| > A$. Consequently, for any $\lambda > A$, we have $|R_{r,j}| \lesssim \lambda^j$ over all $r \in \{1, \ldots, d-1\}$ and $j \in \{0, 1, 2, \ldots\}$. This is enough to show that $k_R$ is well-defined throughout $\C^2$. In fact, as we'll see later, it also leads to a useful bound on $k_R$.
 \begin{verify}
 \begin{align*}
 & \sum_{j = 0}^\infty R_{r,j} z^{-j} \text{ converges when } |z| > A \\
@@ -944,13 +949,13 @@ The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One
 \end{align*}
 \end{verify}
 
-Since $\hardpart^\alpha$ has a separable kernel of the form described in Section~\ref{setting:basic}, we're now working in the setting of Theorem~\ref{thm:general_volterra}. To apply the theorem, we just need to show that $\hardpart^\alpha$ and $\softpart^\alpha$ satisfy the required conditions from Section~\ref{setting}.
+Since $\hardpart^\alpha$ has a separable kernel of the form described in Section~\ref{setting:basic}, we're now working in the setting of Proposition~\ref{prop:alt-general_volterra}. To apply the theorem, we just need to show that $\hardpart^\alpha$ and $\softpart^\alpha$ satisfy the required conditions from Section~\ref{setting}.
 \begin{itemize}
-\item Condition~\eqref{cond:sing} {\em on $\hardpart^\alpha$ is satisfied}.
+\item Condition~\eqref{cond:sing} {\em on $\hardpart^\alpha$ is satisfied.}
 
 Since $P$ is a monic polynomial whose roots are all simple, $1/P(-\zeta)$ has the nice partial fraction decomposition
 \[ \frac{1}{P(-\zeta)} = \sum_{-\beta \in \roots} \frac{1}{-P'(-\beta)\,(\zeta - \beta)}, \]
-where $\roots$ is the zero set of $P$ \textcolor{orange}{[Ahlfors, {\em Complex Analysis}, \S1.4, Exercise~2]}. 
+where $\roots$ is the zero set of $P$ \cite[Section 1.4, Exercise~2]{ahlfors}. 
 It follows that
 \begin{align*}
 -\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
@@ -1001,48 +1006,64 @@ P'(-\beta_1) &=  \pi_1 \prod_{j\neq 1} (-\beta_1+\beta_j)^2\\
 \frac{1}{P'(-\beta_1)} &= \pi_1
 \end{align*}
 \end{verify}
-\end{itemize}
+\color{Tan}
+\item \textcolor{orange}{[Condition~\eqref{cond:diag-basic} implies Condition~\eqref{cond:slow}, so we can drop this.]}
 
-\par\color{RoyalBlue}
-Notice that $\hardpart^\alpha$ is holomorphic and separable, while $\softpart^\alpha$ is holomorphic and non-separable. In addition, $\hardpart^\alpha$ is of the type defined in Section \ref{setting:basic} and it satisfies Condition \eqref{cond:sing}: by Taylor expanding the polynomials $p$ and $q$ around $\zeta = \alpha$ \textcolor{orange}{[the shifted polynomial will have the same degree as the original]} \textcolor{magenta}{[$\alpha$ is a number, not a point; write $c_0$ in place of $q(\alpha)$? notation $\zeta'$ not defined; switch to $\zeta(a')$?]}.
+$\hardpart^\alpha$ satisfies Condition \eqref{cond:slow}: by assumption $p$ and $q$ are polynomials, and $q$ has degree less that $p$. Hence for $a$ outside some neighbourhood $U$ of $\alpha$  
 \begin{align*}
-    -\frac{q}{p(a)}&=-\frac{\textcolor{magenta}{q(\alpha)}+c_1(\zeta\textcolor{magenta}{'}-\alpha)+c_2 (\zeta'-\alpha)^2+...}{-b_1(\zeta(a)-\alpha)+ b_2 (\zeta(a)-\alpha)^2+b_3(\zeta(a)-\alpha)^3+...}\\
-    &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+ b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}\\
-    &=\frac{q(\alpha)}{b_1(\zeta(a)-\alpha)}\frac{1+c_1'(\zeta'-\alpha)+c_2' (\zeta'-\alpha)^2+...}{1+b_2' (\zeta(a)-\alpha)+b_3'(\zeta(a)-\alpha)^2+...}
+\sup_U \Big\vert \frac{1}{p}\Big\vert =:c_p \qquad\qquad \sup_U \Big\vert\frac{q}{p}\Big\vert =:\lambda_\text{ration} 
 \end{align*}
-hence setting $\tau_\alpha:=\textcolor{magenta}{-}\frac{q}{p'}\textcolor{orange}{\big|_{\zeta = \alpha}}\neq 0$, we find
-\begin{equation*}
-    -\frac{q(a')}{p(a)}-\frac{\tau_\alpha}{\zeta(a)-\alpha}
-\end{equation*}
-is bounded as $\zeta(a')$ and $\zeta(a)$ approach $\alpha$.
+and we set $\lambda_0:=\log(c_p)+\lambda_\text{ratio}$.
 \color{black}
-\par\color{SkyBlue}
-Since $p$ has only simple roots, the partial fraction decomposition of $1/p$ is
-\[ \sum_{\beta \in \roots} \left.\frac{1}{p'}\right|_{\zeta = \beta} \frac{1}{\zeta - \beta}, \]
-where $\roots$ is the set containing the values of $\zeta$ at the roots of $p$.
-\par\color{DarkTurquoise}
-\textcolor{orange}{Nicer formulation; note different definition of $\roots$:}\par
+\item Condition~\eqref{cond:diag-basic} {\em on $\hardpart^\alpha$ is satisfied.}
 
-\color{black}
-
-Then, the proof will follow by Theorem \ref{thm:general_volterra}, once we proved that $\volterra^\alpha$ satisfies the required assumptions.  
-
-\begin{enumerate}
-    \item[$\bullet$] $\hardpart^\alpha$ satisfies Condition \eqref{cond:slow}: by assumption $p$ and $q$ are polynomials, and $q$ has degree less that $p$. Hence for $a$ outside some neighbourhood $U$ of $\alpha$  
+Since we're trying to bound $\hardker^\alpha(a, a')$ with a function of the difference $\omega(a, a') := \zeta(a) - \zeta(a')$, let's rewrite it as a rational function of $\omega(a, a')$ and $\zeta(a)$. First, rewrite
 \begin{align*}
-    \sup_U \Big\vert \frac{1}{p}\Big\vert =:c_p \qquad\qquad \sup_U \Big\vert\frac{q}{p}\Big\vert =:\lambda_\text{ration} 
+q(a') & = Q\big(-\zeta(a')\big) \\
+& = Q\big(\omega(a, a') - \zeta(a)\big)
 \end{align*}
-    and we set $\lambda_0:=\log(c_p)+\lambda_\text{ratio}$. 
-    \item[$\bullet$] $\hardpart^\alpha$ satisfies Condition \eqref{cond:diag-basic}: in fact $p$ and $q$ are polynomials and $q$ has degree less than $p$, hence their ratio is exponentially bounded if $\zeta(a), \zeta(a')$ are far from $\alpha$. In particular, $\lambda_\Delta=2A$ is a possible choice, where $A$ is the radius of convergence of the functions $R_r$ (see \ref{sec:level 1 ODE}).    
-    \item[$\bullet$]  $\softpart^\alpha$ satisfies Condition \eqref{cond:eps-lambda}: recall that all functions $R_r(z^{-1})$ are holomorphic for $|z|>A$, 
+in the form
+\[ q(a') = Q_{d-1}\big(\zeta(a)\big)\;\omega(a, a')^{d-1} + \ldots + Q_1\big(\zeta(a)\big)\;\omega(a, a') + Q_0\big(\zeta(a)\big), \]
+where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. We can then write $-\hardker^\alpha(a, a')$ in the form
+\[ \frac{q(a')}{p(a)} = \frac{Q_{d-1}\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}\;\omega(a, a')^{d-1} + \ldots + \frac{Q_1\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}\;\omega(a, a') + \frac{Q_0\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}, \]
+viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational functions in $\zeta(a)$. If we keep $a$ away from the roots of from the roots of $p$, each coefficient is bounded, so $|\hardker^\alpha(a, a')|$ is bounded by a polynomial in $|\omega(a, a')|$. It follows that for any $\lambda_\Delta > 0$, we have
+\[ |\hardker^\alpha(a, a')| \lesssim e^{\lambda_\Delta|\omega(a, a')|} \]
+over all $a$ outside a neighborhoood of the roots of $p$ and all $a'$ without restriction.
 
-    \begin{align*}
-        \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{| R_{r,j}|}{j!} \, \frac{|\zeta(a)-\zeta(a')|^j}{|p(\zeta(a))|}|\zeta(a')|^r  &\lesssim \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{A^j}{j!} \, \frac{|\zeta(a)-\zeta(a')|^{j+1}}{|p(\zeta(a))|}|\zeta(a')|^r \\
-        & \lesssim |\zeta(a)-\zeta(a')| \sum_{r=0}^{d-1} \frac{|\zeta(a')|^r}{|p(\zeta(a))|}\,  e^{A |\zeta(a)-\zeta(a')|}\\
-        &\lesssim |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert \sum_{r=0}^{d-1} \frac{|\zeta'|^r}{|q(\zeta(a'))|} \, e^{A |\zeta(a)-\zeta(a')|}\\
-        &\lesssim |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert \,  e^{A |\zeta(a)-\zeta(a')|}
-    \end{align*}
-now we notice that $\Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert$ is bounded for $a,a'$ far from $\alpha$ by the argument we use in the proof of Condition \eqref{cond:diag-basic}. If $\zeta(a), \zeta(a')$ are close to $\alpha$ we can use Condition \eqref{cond:sing}
+For consistency with Condition~\eqref{cond:eps-lambda}, we choose $\lambda_\Delta > A$.
+\color{RoyalBlue}
+\item $\hardpart^\alpha$ satisfies Condition \eqref{cond:diag-basic}: in fact $p$ and $q$ are polynomials and $q$ has degree less than $p$, hence their ratio is exponentially bounded if $\zeta(a), \zeta(a')$ are far from $\alpha$. In particular, $\lambda_\Delta=2A$ is a possible choice, where $A$ is the radius of convergence of the functions $R_r$ (see \ref{sec:level 1 ODE}).
+\color{black}
+\item Condition~\eqref{cond:eps-lambda} {\em on $\softpart^\alpha$ is satisfied.} \textcolor{magenta}{[I think this bound fails unless $R_1, \ldots, R_{d-1}$ are zero, so let's restrict our attention to that case.]}
+
+First, obseve that
+\begin{align*}
+|\softker^\alpha(a, a')| & = \left|\frac{k_R(a, a')}{p(a)}\right| \\
+& \le \frac{1}{|p(a)|} \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{|R_{r,j}|}{j!} \, |\zeta(a)-\zeta(a')|^{j+1} |\zeta(a')|^r \\
+& = \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{r=0}^{d-1} |\zeta(a')|^r \sum_{j=0}^\infty \frac{|R_{r,j}|}{j!} \, |\zeta(a)-\zeta(a')|^j.
+\end{align*}
+Now, choose $\lambda_\Delta > A$. Since the functions $R_r(z^{-1})$ are holomorphic on the disk $|z| > A$, we have $|R_{r,j}| \lesssim \lambda_\Delta^j$ over all $r \in \{1, \ldots, d-1\}$ and $j \in \{0, 1, 2, \ldots\}$, as mentioned earlier. It follows that
+\begin{align*}
+\sum_{j=0}^\infty \frac{|R_{r,j}|}{j!} \, |\zeta(a)-\zeta(a')|^j
+& \lesssim \sum_{j=0}^\infty \frac{\lambda_\Delta^j}{j!} \, |\zeta(a)-\zeta(a')|^j \\
+& \lesssim e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
+\end{align*}
+over all $a, a' \in \domain_\alpha^2$, so
+\begin{align*}
+|\softker^\alpha(a, a')| \lesssim \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{r=0}^{d-1} |\zeta(a')|^r e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}.
+\end{align*}
+over all $a, a' \in \domain_\alpha^2$.
+\color{RoyalBlue}
+\begin{align*}
+|k_R(a,a')| & \le \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{|R_{r,j}|}{j!} \, \frac{|\zeta(a)-\zeta(a')|^{j+1}}{|p(a)|}|\zeta(a')|^r \\
+& \lesssim \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{\lambda_\Delta^j}{j!} \, \frac{|\zeta(a)-\zeta(a')|^{j+1}}{|p(a)|}|\zeta(a')|^r \\
+& \lesssim \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{r=0}^{d-1} |\zeta(a')|^r \sum_{j=0}^\infty \frac{\lambda_\Delta^j}{j!} \, |\zeta(a)-\zeta(a')|^j \\
+& \lesssim |\zeta(a)-\zeta(a')| \sum_{r=0}^{d-1} \frac{|\zeta(a')|^r}{|p(a)|}\,  e^{A |\zeta(a)-\zeta(a')|}\\
+& \lesssim |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(a)}\Big\vert \sum_{r=0}^{d-1} \frac{|\zeta'|^r}{|q(\zeta(a'))|} \, e^{A |\zeta(a)-\zeta(a')|}\\
+& \lesssim |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(a)}\Big\vert \,  e^{A |\zeta(a)-\zeta(a')|}
+\end{align*}
+\color{black}
+\textcolor{magenta}{[I'm pretty sure this is false, because $q(a')$ and $p(a)$ have independent arguments] $\langle$} now we notice that $\Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert$ is bounded for $a,a'$ far from $\alpha$ \textcolor{magenta}{$\rangle$} by the argument we use in the proof of Condition \eqref{cond:diag-basic}. If $\zeta(a), \zeta(a')$ are close to $\alpha$ we can use Condition \eqref{cond:sing}
 
 \[    \left\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\right\vert  \leq \left\vert \frac{q(\zeta(a'))}{p(\zeta(a))} -\frac{\tau_\alpha}{\zeta(a)-\alpha}\right\vert + \frac{\tau_\alpha}{|\zeta(a)-\alpha|}\lesssim 1 +  \frac{\tau_\alpha}{|\zeta(a)-\alpha|} \]
 
@@ -1051,12 +1072,15 @@ We conclude that
 \[\left\vert \frac{k_R(a,a')}{p(\zeta(a))}\right\vert \lesssim \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a)-\alpha|}\, e^{2A |\zeta(a)-\zeta(a')|}  \]
 
 and $\gamma=1$.
-
-\end{enumerate}
-
+\end{itemize}
+\begin{brainstorm}
+\item Show that $\hardpart^\alpha$ satisfies Condition~\eqref{cond:reg-p}.
+\item Apply Prosposition~\ref{prop:alt-general_volterra} to get result.
+\end{brainstorm}
+\par\color{Tomato}
 Finally, to get the result as stated, we need to show that
-\[ f_{0, \alpha} \in M\zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha) \]
-for some constant $M$. Like in the proof of Proposition \ref{prop:alt-general_volterra}, it's enough to show that $p$ satisfies Condition \eqref{cond:reg-p} with $\epsilon=1$. Since $p$ is a polynomial with a simple zero at $\zeta=\alpha$, we have that
+\[ f_{0, \alpha} \in \zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha). \]
+Like in the proof of Proposition \ref{prop:alt-general_volterra}, it's enough to show that $p$ satisfies Condition \eqref{cond:reg-p} with $\epsilon=1$. Since $p$ is a polynomial with a simple zero at $\zeta=\alpha$, we have that
 
 \[ p \in (\zeta-\alpha)\Big[ b_1 + O(\zeta-\alpha)\Big] \]
 in a small enough neighborhood of $\zeta=\alpha$. 
