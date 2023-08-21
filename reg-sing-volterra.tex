@@ -129,6 +129,12 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \begin{itemize}
 \item In Section~\ref{sec:V is a contraction}, do we only use Condition~\eqref{cond:sing} through Proposition~\ref{prop:whole-ker-near-bound}?
 \end{itemize}
+\item Drop Condition~\eqref{cond:slow}, which is implied by Condition~\eqref{cond:diag-basic}
+\begin{itemize}
+  \item Add $\lambda_\text{ratio}$ to Condition~\eqref{cond:diag-basic} as multiplicative constant.
+  \item \textcolor{gray}{Refer to Condition~\eqref{cond:diag-basic} in proof of Theorem~\ref{thm:proto-growth}.}
+  \item \textcolor{gray}{Look for other direct references to Condition~\eqref{cond:slow}.} \textcolor{MediumSeaGreen}{[No other direct references found.]}
+\end{itemize}
 \item \textcolor{gray}{\textit{(Aaron)} State Lemma~\ref{lem:perturbed_volterra} just the way we want it.}
 \begin{itemize}
     \item \textcolor{gray}{Proofread and drop old version.}
@@ -253,10 +259,22 @@ Being separable means that the kernel $\hardker(a, a')$ factors into a function 
 \[ \hardker(a, a') = - \frac{q(a')}{p(a)}, \]
 where $p$ and $q$ are holomorphic functions on $\domain$. Having a regular singularity at $\zeta = 0$ means the following:
 \begin{conditions}
-\condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
+\color{RoyalBlue}
+\condconst{sing}{\tau}%%\label{cond:sing}
+For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
 \[ \hardker(a, a') - \frac{\tau}{\zeta(a)} \]
 \textcolor{magenta}{\[ \zeta(a)\hardker(a, a') - \tau \]}
 is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
+\color{black}
+\condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
+\[ \hardker(a, a) - \frac{\tau}{\zeta(a)} \]
+is bounded on a neighborhood of $\zeta(a) = 0$ in $\domain$.
+
+In addition, for each $\sigma > \tau$, the bound
+\[ |\hardker(a, a')| < \frac{\sigma}{\zeta(a)} \]
+holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
+%%by bringing $a$ and $a'$ close enough to $\zeta = 0$.
+%%is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
 \end{conditions}
 We'll assume that $\tau$ is real and positive.
 
@@ -511,6 +529,27 @@ We want to show that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}
 
 Find a neighborhood $\domain_\text{near}$ of $\zeta = 0$ where $|\solproto| \lesssim |\zeta|^{\tau-1}$, as Proposition~\ref{prop:asymptotic at zero} says we can do. By making $\domain_\text{near}$ bounded, we can prevent $e^{\lambda_0|\zeta|}$ from getting arbitrarily close to zero on $\domain_\text{near}$. Then we have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{near}$.
 
+\color{Brown}By removing a bounded neighborhood of $\zeta = 0$ from $\domain$, make a set $\domain_\text{far}$ with
+\[ \hardker(a, a') \le c_\Delta e^{\lambda_\Delta |\zeta(a) - \zeta(a')|}, \]
+for all $a \in \domain_\text{far}$ and $a' \in \domain$, as Condition~\eqref{cond:diag-basic} says we can do. Applying this bound on the diagonal in $\domain_\text{far}^2$, we learn that $|q/p| \le c_\Delta$ on $\domain_\text{far}$. In addition, by fixing some arbitrary  $b' \in \domain$, see that
+\begin{align*}
+\left|\frac{q(b')}{p(a)}\right| & \lesssim e^{\lambda_\Delta|\zeta(a) - \zeta(b')|} \\
+& \lesssim e^{\lambda_\Delta(|\zeta(a)| + |\zeta(b')|)} \\
+& \lesssim e^{\lambda_\Delta|\zeta(a)|} e^{\lambda_\Delta|\zeta(b')|} \\
+& \lesssim e^{\lambda_\Delta|\zeta(a)|}
+\end{align*}
+over all $a \in \domain_\text{far}$. Hence, $|1/p| \lesssim e^{\lambda_\Delta|\zeta|}$ on $\domain_\text{far}$. Using both of the bounds we just found, we reason that
+\begin{align*}
+|\solproto(a)| & = \left| \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \right| \\
+& \le \left|\frac{1}{p(a)}\right| \exp\left(\int_{b}^{a}\left|\frac{q}{p}\right|\;d\zeta\right) \\
+& \lesssim e^{\lambda_\Delta|\zeta(a)|}\,e^{c_\Delta(|\zeta(a)| + |\zeta(b)|)} \\
+& \lesssim e^{(\lambda_\Delta + c_\Delta)|\zeta(a)|}\,e^{c_\Delta|\zeta(b)|} \\
+& \lesssim e^{\lambda_0|\zeta(a)|}
+\end{align*}
+over all $a \in \domain_\text{far}$, recalling that $\lambda_0 = \lambda_\Delta + c_\Delta$. Since $\domain_\text{far}$ avoids a neighborhood of $\zeta = 0$, we know $|\zeta|^{\tau-1}$ is bounded on $\domain_\text{far}$. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{far}$.
+\color{black}
+
+\color{MediumSpringGreen}
 Recall that in Condition~\eqref{cond:slow}, the constant $\lambda_0$ is the sum of two constants: $\lambda_p$, which controls the growth of $1/p$ at infinity, and $\lambda_\text{ratio}$, which controls the growth of $p/q$ at infinity. By removing a bounded neighborhood of $\zeta = 0$ from $\domain$, make a set $\domain_\text{far}$ where $|1/p| \lesssim e^{\lambda_p |\zeta|}$ and $|q/p| \le \lambda_\text{ratio}$, as Condition~\eqref{cond:slow} says we can do. Observe that
 \begin{align*}
 |\solproto(a)| & = \left| \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \right| \\
@@ -520,8 +559,9 @@ Recall that in Condition~\eqref{cond:slow}, the constant $\lambda_0$ is the sum 
 & \lesssim e^{\lambda_0|\zeta(a)|}
 \end{align*}
 over all $a \in \domain_\text{far}$. Since $\domain_\text{far}$ avoids a neighborhood of $\zeta = 0$, we know $|\zeta|^{\tau-1}$ is bounded on $\domain_\text{far}$. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{far}$.
+\color{black}
 
-Finally, let $\domain_\text{mid}$ be the set that remains when you remove $\domain_\text{near}$ and $\domain_\text{far}$ from $\domain$. Since $\domain_\text{mid}$ avoids $\zeta = 0$ and is bounded, $|\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ can't get arbitrarily small there, and Condition~\eqref{cond:slow} guarantees that $|\solproto|$ is bounded there. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{mid}$.
+Finally, let $\domain_\text{mid}$ be the set that remains when you remove $\domain_\text{near}$ and $\domain_\text{far}$ from $\domain$. Since $\domain_\text{mid}$ avoids $\zeta = 0$ and is bounded, $|\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ can't get arbitrarily small there, and \textcolor{MediumSpringGreen}{Condition~\eqref{cond:slow} [add a new condition for this]} guarantees that $|\solproto|$ is bounded there. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{mid}$.
 
 Combining the conclusions above, we see that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain = \domain_\text{near} \cup \domain_\text{mid} \cup \domain_\text{far}$, as desired.
 \par\color{RoyalBlue}
@@ -961,6 +1001,17 @@ It follows that
 -\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
 & = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}
 \end{align*}
+\color{OrangeRed}
+\begin{align*}
+-\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
+& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
+& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\alpha) + (\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
+& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
+\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| + \left|\frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| \\
+|\zeta(a) - \alpha|\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)}\right| + \left|\frac{Q(-\alpha)}{P'(-\alpha)}\right|
+\end{align*}
+Want: for all $\sigma > \tau$, we have $|q(a')/p(a)| < \sigma/|\zeta(a) - \alpha|$ when $a, a'$ close enough to $\zeta = 0$.
+\par\color{black}
 As $a$ and $a'$ approach $\zeta = \alpha$, the
 \[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \]
 part approaches the limit
