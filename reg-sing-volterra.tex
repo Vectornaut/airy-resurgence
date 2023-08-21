@@ -259,13 +259,6 @@ Being separable means that the kernel $\hardker(a, a')$ factors into a function 
 \[ \hardker(a, a') = - \frac{q(a')}{p(a)}, \]
 where $p$ and $q$ are holomorphic functions on $\domain$. Having a regular singularity at $\zeta = 0$ means the following:
 \begin{conditions}
-\color{RoyalBlue}
-\condconst{sing}{\tau}%%\label{cond:sing}
-For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
-\[ \hardker(a, a') - \frac{\tau}{\zeta(a)} \]
-\textcolor{magenta}{\[ \zeta(a)\hardker(a, a') - \tau \]}
-is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
-\color{black}
 \condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
 \[ \hardker(a, a) - \frac{\tau}{\zeta(a)} \]
 is bounded on a neighborhood of $\zeta(a) = 0$ in $\domain$.
@@ -479,9 +472,9 @@ Now, to prove that $\hardpart \solproto = \solproto$, we just need to show that 
 
 By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ and a constant $C$ such that
 \begin{equation}\label{eqn:sing-bound}
-\left|\frac{q(a')}{p(a)} - \frac{\tau}{\zeta(a)}\right| < C
+\left|\frac{q}{p} - \frac{\tau}{\zeta}\right| < C
 \end{equation}
-whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. We can take advantage of this bound by rewriting the integral in the definition of $\chi$:
+whenever $|\zeta| < \delta$. We can take advantage of this bound by rewriting the integral in the definition of $\chi$:
 \begin{align*}
 -\int_b^a \frac{q}{p}\;d\zeta & = \int_b^a \frac{\tau}{\zeta}\;d\zeta - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta \\
 & = \tau \log\left(\frac{\zeta(a)}{\zeta(b)}\right) - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta
@@ -502,14 +495,21 @@ Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a smal
 \end{prop}
 
 \begin{proof}
-Go back to the proof of Theorem~\ref{thm:basic_volterra}, where we found a radius $\delta > 0$ and a constant $C$ such that Inequality~\eqref{eqn:sing-bound} holds whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. The subsequent argument, which we used to show that $\lim_{\zeta \to 0} \chi = 0$, actually supports a stronger conclusion: it shows that $|\chi| \lesssim |\zeta|^\tau$ on the region $|\zeta| < \delta$. This tells us that
-%%Like we did in the proof of Theorem~\ref{thm:basic_volterra}, find a radius $\delta > 0$ and a constant $C$ such that the bound \eqref{eqn:sing-bound} holds whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. At the end of the proof of Theorem~\ref{thm:basic_volterra}, we showed that $\chi(a)$
-
-%%The proof follows the argument we use at the end of the proof of Theorem \ref{thm:basic_volterra}. In particular, once we choose $\varepsilon>0$ we can choose $\delta>0$ such that for $\zeta(a)<\delta$ and $\zeta(a')<\delta$ the function
-
-%%\[ \chi(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
+Go back to the proof of Theorem~\ref{thm:basic_volterra}, where we found a radius $\delta > 0$ and a constant $C$ such that Inequality~\eqref{eqn:sing-bound} holds whenever $|\zeta| < \delta$. The subsequent argument, which we used to show that $\lim_{\zeta \to 0} \chi = 0$, actually supports a stronger conclusion: it shows that $|\chi| \lesssim |\zeta|^\tau$ on the region $|\zeta| < \delta$. This tells us that
 \[ |\solproto| \lesssim \left|\frac{1}{p}\right|\,|\zeta|^\tau \]
-on the region $|\zeta| < \delta$. Choosing a point $b'$ with $|\zeta(b')| < \delta$ and $q(b') \neq 0$, we can deduce that
+on the region $|\zeta| < \delta$.
+
+Now, using Condition~\eqref{cond:sing} again, choose some $\sigma > \tau$ and find a radius $r < \delta$ for which
+\[ \left|\frac{q(a')}{p(a)}\right| < \frac{\sigma}{|\zeta(a)|} \]
+whenever $|\zeta(a)| < r$ and $|\zeta(a')| < r$. Choosing a point $b'$ with $|\zeta(b')| < r$ and $q(b') \neq 0$, we can deduce that
+\begin{align*}
+|\solproto| & \lesssim \left|\frac{1}{q(b')}\right|\,\left|\frac{q(b')}{p}\right|\,|\zeta|^\tau \\
+& \lesssim \left|\frac{1}{q(b')}\right|\,\frac{\sigma}{|\zeta|}\,|\zeta|^\tau \\
+& \lesssim |\zeta|^{\tau-1}
+\end{align*}
+on the region $|\zeta| < r$, as desired.
+
+\par\color{RoyalBlue}Choosing a point $b'$ with $|\zeta(b')| < \delta$ and $q(b') \neq 0$, we can deduce that
 \begin{align*}
 |\solproto| & \lesssim \left|\frac{1}{q(b')}\right|\,\left|\frac{q(b')}{p}\right|\,|\zeta|^\tau \\
 & \lesssim \left|\frac{1}{q(b')}\right|\,\left|\frac{q(b')}{p} \zeta\right|\,|\zeta|^{\tau-1}.
