@@ -125,15 +125,24 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \tableofcontents
 
 \begin{brainstorm}
-\item Deal with Condition~\eqref{cond:sing}
+\item \textbf{(Veronica)} Deal with Condition~\eqref{cond:sing}
 \begin{itemize}
-\item In Section~\ref{sec:V is a contraction}, do we only use Condition~\eqref{cond:sing} through Proposition~\ref{prop:whole-ker-near-bound}?
+\item \textcolor{gray}{In Section~\ref{sec:V is a contraction}, do we only use Condition~\eqref{cond:sing} through Proposition~\ref{prop:whole-ker-near-bound}?} \textcolor{MediumSpringGreen}{[Yes.]}
+\item Rewrite arguments using new Condition~\eqref{cond:sing}.
+\item Show that example satisfies Condition~\eqref{cond:sing}.
 \end{itemize}
-\item Drop Condition~\eqref{cond:slow}, which is implied by Condition~\eqref{cond:diag-basic}
+\item \textbf{(Aaron)} Drop Condition~\eqref{cond:slow}, which is implied by Condition~\eqref{cond:diag-basic}
 \begin{itemize}
-  \item Add $\lambda_\text{ratio}$ to Condition~\eqref{cond:diag-basic} as multiplicative constant.
+  \item Add $c_\Delta$ to Condition~\eqref{cond:diag-basic} as multiplicative constant, and export both of the constants $\lambda_\Delta$ and $\lambda_0 = \lambda_\Delta + c_\Delta$ from the condition.
+  \item When showing that the example satisfies Condition~\eqref{cond:diag-basic}, make it consistent with new condition wording.
   \item \textcolor{gray}{Refer to Condition~\eqref{cond:diag-basic} in proof of Theorem~\ref{thm:proto-growth}.}
-  \item \textcolor{gray}{Look for other direct references to Condition~\eqref{cond:slow}.} \textcolor{MediumSeaGreen}{[No other direct references found.]}
+  \item \textcolor{gray}{Look for other direct references to Condition~\eqref{cond:slow}.} \textcolor{MediumSpringGreen}{[No other direct references found.]}
+\end{itemize}
+\item Set $R_1, \ldots, \ldots R_{d-1}$ to zero.
+\begin{itemize}
+\item Change definition.
+\item Change intro to clarify that our results only apply to some level~1 equations.
+\item Change intro to clarify that our results only apply to some level~1 equations.
 \end{itemize}
 \item \textcolor{gray}{\textit{(Aaron)} State Lemma~\ref{lem:perturbed_volterra} just the way we want it.}
 \begin{itemize}
@@ -508,21 +517,9 @@ whenever $|\zeta(a)| < r$ and $|\zeta(a')| < r$. Choosing a point $b'$ with $|\z
 & \lesssim |\zeta|^{\tau-1}
 \end{align*}
 on the region $|\zeta| < r$, as desired.
-
-\par\color{RoyalBlue}Choosing a point $b'$ with $|\zeta(b')| < \delta$ and $q(b') \neq 0$, we can deduce that
-\begin{align*}
-|\solproto| & \lesssim \left|\frac{1}{q(b')}\right|\,\left|\frac{q(b')}{p}\right|\,|\zeta|^\tau \\
-& \lesssim \left|\frac{1}{q(b')}\right|\,\left|\frac{q(b')}{p} \zeta\right|\,|\zeta|^{\tau-1}.
-\end{align*}
-Since Inequality~\ref{eqn:sing-bound} implies that
-\begin{align*}
-\left|\frac{q(a')}{p(a)}\zeta(a)\right| & \le \tau + C|\zeta(a)| \\
-& \le \tau + C\delta
-\end{align*}
-whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$, we can conclude that $|\solproto| \lesssim |\zeta|^{\tau-1}$ on the region $|\zeta| < \delta$, as desired.
 \end{proof}
 \begin{prop}\label{prop:asymptotic at infinity}
-Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:slow}. Then $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \textcolor{brown}{\eqref{cond:diag-basic}} \textcolor{MediumSpringGreen}{\eqref{cond:slow}}. Then $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
 \end{prop}
 \begin{proof}
 We want to show that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$.
@@ -564,21 +561,6 @@ over all $a \in \domain_\text{far}$. Since $\domain_\text{far}$ avoids a neighbo
 Finally, let $\domain_\text{mid}$ be the set that remains when you remove $\domain_\text{near}$ and $\domain_\text{far}$ from $\domain$. Since $\domain_\text{mid}$ avoids $\zeta = 0$ and is bounded, $|\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ can't get arbitrarily small there, and \textcolor{MediumSpringGreen}{Condition~\eqref{cond:slow} [add a new condition for this]} guarantees that $|\solproto|$ is bounded there. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{mid}$.
 
 Combining the conclusions above, we see that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain = \domain_\text{near} \cup \domain_\text{mid} \cup \domain_\text{far}$, as desired.
-\par\color{RoyalBlue}
-We choose $\varepsilon>0$, then by Condition \eqref{cond:sing} we can choose $\delta>0$ such that for $|\zeta(a)|<\delta$ and $|\zeta(a')|<\delta$ \textcolor{orange}{[there's no $a'$ here]} (arguing as in the proof of Proposition \ref{prop:asymptotic at zero}) we get a uniform bound 
-
-\[   |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |f_0(a)|\leq  C_2(\delta)\, |\zeta(a)|^{-(\tau-1)} e^{-\lambda |\zeta(a)|} |\zeta(a)|^{\tau-1} \leq C_3(\delta)
-\]
-
-Now we study the regime $|\zeta(a)|>\delta$ and $|\zeta(a')|>\delta$ \textcolor{orange}{[there's no $a'$ here]}. Recall that in Condition \eqref{cond:slow} the constant $\lambda_0$ is the sum of two constants $\lambda_0=\lambda_p+\lambda_\text{ratio}$: $\lambda_p$ controls the growth of $p^{-1}$ at infinity, and $\lambda_\text{ratio}$ controls the growth of $p/q$ at infinity.
-
-In particular, 
-      \begin{align*}
-          |\zeta(a)|^{1-\tau} e^{-\lambda_0 |\zeta(a)|} |f_0|&\leq  |\zeta(a)|^{1-\tau} e^{-\lambda_0 |\zeta(a)|} \left\vert\frac{p(b)}{p(a)}\exp\left[-\int_{b}^{a}\frac{q}{p} d\zeta\right]\right\vert \\
-          & \lesssim  |\zeta(a)|^{1-\tau} e^{-\lambda_0 |\zeta(a)|}  \, e^{\lambda_p|\zeta(a)|}\exp\left[\int_{b}^{a} \Big\vert\frac{q}{p} \Big\vert |d\zeta| \right]\\
-          & \lesssim  |\zeta(a)|^{1-\tau} e^{-(\lambda-\lambda_p) |\zeta(a)|} \exp\Big[\lambda_\text{ratio} |\zeta(a)-\zeta(b)| \Big]
-      \end{align*}
-   which is bounded because $|\zeta(a)|>\delta$. \textcolor{orange}{[As Condition~\eqref{cond:slow} is currently stated, $|\zeta| > \delta$ may not be far enough from $\zeta = 0$ to get the $\lambda_p$ and $\lambda_\delta$ bounds. I've strengthened the condition so that $|1/p|$ and $|q/p|$ are at least bounded outside every neighborhood of $\zeta = 0$.]}
 \end{proof}
 \begin{prop}\label{prop:better-proto-estimate}
 Suppose $\hardpart$ satisfies {\em Conditions~\eqref{cond:reg-p}} and \eqref{cond:sing}. Then, for some constant $M$,
@@ -617,11 +599,6 @@ Combining the arguments above, we learn that
 & = M\zeta^{\tau-1} \Big[ 1 + O\big(|\zeta|^{\epsilon}\big) + O\big(|\zeta|\big) \Big]
 \end{align*}
 at $\zeta = 0$, with $M = \zeta(b)^{-\tau} B^{-1} e^{\eta(b)}$. Observing that $O\big(|\zeta|^{\epsilon}\big) + O\big(|\zeta|\big) = O\big(|\zeta|^{\epsilon'}\big)$, we get the desired result.
-\par\color{RoyalBlue}
-Combining the arguments above, we see as desired that
-\[ \solproto \in M\zeta^{\tau - 1} + \singexpalg{\tau-1+\lambda'}(\domain), \]
-with 
-\[ M = \frac{p(b)}{\zeta(b)^{\tau}}\,B^{-1}\,e^{S(b)}. \]
 \end{proof}
 \subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 
@@ -689,7 +666,10 @@ Suppose $\hardpart$ satisfies Condition~\eqref{cond:sing}, and $\softpart$ satis
 by keeping $a$ and $a'$ close enough to $\zeta = 0$.
 \end{prop}
 \begin{proof}
-Condition~\eqref{cond:sing} doesn't stop $|\hardker(a, a')|$ from exceeding $\frac{\tau}{|\zeta(a)|}$. However, by keeping $a$ and $a'$ close to $\zeta = 0$, we can make sure that $|\hardker(a, a')|$ only exceeds $\frac{\tau}{|\zeta(a)|}$ by an arbitrariy small margin. Condition~\eqref{cond:sing} tells us that when $\delta > 0$ is small enough, there's a constant $C$ with
+For the kernel $\hardker$ the claim follows from Condition \eqref{cond:sing}, namely for any $\sigma>\tau$ we can find a neighbourhood of $(0,0)\in\domain^2$ such that 
+\[ |\hardker(a, a')| \le \frac{\sigma}{|\zeta(a)|}. \]
+\color{RoyalBlue}
+Condition~\eqref{cond:sing} doesn't stop $|\hardker(a, a')|$ from exceeding $\frac{\tau}{|\zeta(a)|}$. However, by keeping $a$ and $a'$ close to $\zeta = 0$, we can make sure that $|\hardker(a, a')|$ only exceeds $\frac{\tau}{|\zeta(a)|}$ by an arbitrary small margin. Condition~\eqref{cond:sing} tells us that when $\delta > 0$ is small enough, there's a constant $C$ with
 \[ \left| \hardker(a, a') - \frac{\tau}{\zeta(a)} \right| < C \]
 whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. It follows that
 \begin{align*}
@@ -699,7 +679,7 @@ whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. It follows that
 &\le \frac{\tau + C\delta}{|\zeta(a)|}
 \end{align*}
 whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. By shrinking the radius $\delta$, we can make $C\delta$ as small as we want.
-
+\color{black}
 Under Condition~\eqref{cond:eps-lambda}, we can make $|\softker(a, a')|$ as small as we want by keeping $a$ and $a'$ close to $\zeta = 0$. The condition tells us that
 \[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$, which means that
@@ -861,7 +841,7 @@ Equations of the form $\mathcal{P}\Phi = 0$ are called {\em level~1} by Ecalle~\
 \end{brainstorm}
 \subsection{The Laplace transform}
 \subsubsection{Definition}
-Let $\domain_\alpha$ be a simply connected open subset of $\C$ that touches but doesn't contain $\zeta=\alpha$, \textcolor{orange}{[maybe talk about adapting conventions here, since we need that already for the definition of $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ to make sense]} and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray that leaves $\zeta=\alpha$ at angle $\theta$. When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, we can define the Laplace transform $\laplace_{\zeta, \alpha}^{\theta}$, which maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions on the half-plane $\Re(z e^{-i\theta}) > \Lambda$ in the frequency domain~\cite[Section 5.6]{diverg-resurg-i}. The Laplace transform of $\varphi$ is defined by the formula
+Let $\domain_\alpha$ be a simply connected open subset of $\C$ that touches but doesn't contain $\zeta=\alpha$, and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray that leaves $\zeta=\alpha$ at angle $\theta$. When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, we can define the Laplace transform $\laplace_{\zeta, \alpha}^{\theta}$, which maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions on the half-plane $\Re(z e^{-i\theta}) > \Lambda$ in the frequency domain~\cite[Section 5.6]{diverg-resurg-i}. The Laplace transform of $\varphi$ is defined by the formula
 \begin{equation}\label{laplace:int} 
 \laplace_{\zeta, \alpha}^{\theta} \varphi := \int_{\Gamma_{\zeta,\alpha}^\theta} e^{-z\zeta} \varphi\;d\zeta.
 \end{equation}
@@ -929,7 +909,7 @@ For each root $-\alpha$ of $P$, let $\hat{\mathcal{P}}_{\alpha}$ be the Volterra
 \[ \hat{\mathcal{P}}_\alpha:=P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha}^{-1})\circ (-\zeta)^r. \]
 If $\psi_\alpha$ satisfies the equation $\hat{\mathcal{P}}_\alpha\psi_\alpha=0$, then its Laplace transform $\Psi_\alpha:=\laplace_{\zeta,\alpha}^{\theta}\psi_\alpha$ satisfies the equation $\mathcal{P}\Psi_\alpha=0$, as long as the Laplace transform is well-defined.
 \end{lemma}
-\textcolor{orange}{[Where do we explain what $\domain_\alpha$ needs to look like in this example?]}
+
 \begin{rmk}
 For the Laplace transform to have any hope of being well-defined, we have to choose the direction $\theta$ so that the ray $\Gamma_{\zeta, \alpha}^\theta$ stays within $\domain_\alpha$. We'll see later that for our results to apply, $\domain_\alpha$ can't touch any zero of $P(-\zeta)$ other than $\zeta = \alpha$. For instance, $\domain_\alpha$ looks like the domain drawn in Section \ref{setting:domain} replacing the origin $\zeta=0$ with $\zeta=\alpha$. 
 \end{rmk}
@@ -997,21 +977,62 @@ Since $P$ is a monic polynomial whose roots are all simple, $1/P(-\zeta)$ has th
 \[ \frac{1}{P(-\zeta)} = \sum_{-\beta \in \roots} \frac{1}{-P'(-\beta)\,(\zeta - \beta)}, \]
 where $\roots$ is the zero set of $P$ \cite[Section 1.4, Exercise~2]{ahlfors}. 
 It follows that
+
+\begin{align*}
+-\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
+& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
+\end{align*}
+
+Now we expand $Q$ at $\zeta=\alpha$ writing $Q=Q(-\alpha)+(\zeta-\alpha)Q_\text{extra}(\zeta)$ and we continue the previous computations, getting
+
+\begin{align}
+-\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & \notag =
+ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\alpha) + (\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
+ &\label{eqn:step} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)} 
+ \end{align}
+
+First we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded when $a$ is close enough to $\zeta = \alpha$. In fact we have 
+
+\begin{align*}
+-\frac{Q(-\zeta(a))}{P(-\zeta(a))} & =
+\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a) - \alpha)\,Q_\text{extra}(\zeta(a))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
+&=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q_\text{extra}(\zeta(a))}{P'(-\alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)}
+ \end{align*}
+
+Define $\tau_\alpha:=Q(-\alpha)/P'(-\alpha)$, then 
+
+\[-\frac{Q(-\zeta(a))}{P(-\zeta(a))}-\frac{\tau_\alpha}{\zeta(a)-\alpha}=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q_\text{extra}(\zeta(a))}{P'(-\alpha)}\]
+
+Since $Q$ is a polynomial, by bringing $a$ close enough to $\zeta=\alpha$ we can bound both $Q(-\zeta(a))/(\zeta(a)-\beta)$ and $Q_\text{extra}(\zeta(a))$.
+
+Then, we want to prove that for all $\sigma > \tau_\alpha$, we have $|q(a')/p(a)| < \sigma/|\zeta(a) - \alpha|$ when $a, a'$ close enough to $\zeta = 0$. From Equation \eqref{eqn:step}, taking the absolute value we get
+
+\begin{align*}
+\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| + \left|\frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| \\
+|\zeta(a) - \alpha|\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)}\right| + \left|\frac{Q(-\alpha)}{P'(-\alpha)}\right|
+\end{align*}
+
+Notice that by bringing $\zeta(a')$ close enough to $0$ we can make the middle term 
+
+\[\left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)}\right|\]
+
+arbitrary small. Similarly, by bringing also $\zeta(a)$ close to $0$ we can make the first term 
+
+\[\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right|\]
+
+as small as we want. Hence, setting $\tau_\alpha=\left|\frac{Q(-\alpha)}{P'(-\alpha)}\right|$, we have that for any $\sigma>\tau_\alpha$
+
+\[|\zeta(a)-\alpha| \, \left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| \le \sigma. \]
+
+
+ %Want: for all $\sigma > \tau$, we have $|q(a')/p(a)| < \sigma/|\zeta(a) - \alpha|$ when $a, a'$ close enough to $\zeta = 0$.
+
+
+\color{RoyalBlue}
 \begin{align*}
 -\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
 & = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}
 \end{align*}
-\color{OrangeRed}
-\begin{align*}
--\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
-& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
-& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\alpha) + (\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
-& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
-\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| + \left|\frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| \\
-|\zeta(a) - \alpha|\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)}\right| + \left|\frac{Q(-\alpha)}{P'(-\alpha)}\right|
-\end{align*}
-Want: for all $\sigma > \tau$, we have $|q(a')/p(a)| < \sigma/|\zeta(a) - \alpha|$ when $a, a'$ close enough to $\zeta = 0$.
-\par\color{black}
 As $a$ and $a'$ approach $\zeta = \alpha$, the
 \[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \]
 part approaches the limit
@@ -1027,12 +1048,12 @@ Hence, that part is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) 
 
 \[ \frac{Q(-\zeta(a'))}{P'(-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)}\]
 is bounded as $\zeta(a')$ approaches $\alpha$.
-\color{RoyalBlue}
+\color{DarkTurquoise}
 \[ \left|\frac{Q(-\zeta(a'))}{P'(-\alpha)(\zeta(a)-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)(\zeta(a)-\alpha)}\right|< C  \]
 
 we know
 \[ \left|\frac{Q(-\zeta(a'))}{P'(-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)}\right|< C  \]
-\color{black}
+
 Conversely, as $a'$ approaches $\zeta=\alpha$, the term 
 
 \[\frac{Q(-\zeta(a'))}{P'(-\alpha)(\zeta(a)-\alpha)}\]
@@ -1041,6 +1062,7 @@ converges to $\frac{\tau_\alpha}{\zeta(a)-\alpha}$ with $\tau_\alpha:=Q(-\alpha)
 \[-\frac{q(a')}{p(a)}-\frac{\tau_\alpha}{\zeta(a)-\alpha}\]
 
 is bounded as $a,a'$ approach $\zeta=\alpha$.
+\color{black}
 \begin{verify}
 \par Proof of Ahlfors exercise. First, observe that
 \begin{align*}
@@ -1079,7 +1101,7 @@ where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. We can then
 \[ \frac{q(a')}{p(a)} = \frac{Q_{d-1}\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}\;\omega(a, a')^{d-1} + \ldots + \frac{Q_1\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}\;\omega(a, a') + \frac{Q_0\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}, \]
 viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational functions in $\zeta(a)$. If we keep $a$ away from the roots of from the roots of $p$, each coefficient is bounded, so $|\hardker^\alpha(a, a')|$ is bounded by a polynomial in $|\omega(a, a')|$. It follows that for any $\lambda_\Delta > 0$, we have
 \[ |\hardker^\alpha(a, a')| \lesssim e^{\lambda_\Delta|\omega(a, a')|} \]
-over all $a$ outside a neighborhoood of the roots of $p$ and all $a'$ without restriction.
+over all $a$ outside a neighborhood of the roots of $p$ and all $a'$ without restriction.
 
 For consistency with Condition~\eqref{cond:eps-lambda}, we choose $\lambda_\Delta > A$.
 \color{RoyalBlue}
