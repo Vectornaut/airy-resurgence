@@ -275,8 +275,6 @@ is bounded on a neighborhood of $\zeta(a) = 0$ in $\domain$.
 In addition, for each $\sigma > \tau$, the bound
 \[ |\hardker(a, a')| < \frac{\sigma}{\zeta(a)} \]
 holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
-%%by bringing $a$ and $a'$ close enough to $\zeta = 0$.
-%%is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
 \end{conditions}
 We'll assume that $\tau$ is real and positive.
 
@@ -825,6 +823,10 @@ converge in the region $|z| > A$.
 \end{enumerate}
 Equations of the form $\mathcal{P}\Phi = 0$ are called {\em level~1} by Ecalle~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples using Laplace transform method and our existence and uniqueness result Theorem \ref{thm:general_volterra}. 
 \subsection{\textcolor{orange}{Notation}}
+Previously, we studied Volterra operators with a regular singularity at $\zeta=0$. However, when we study solutions of a level 1 differential equation $\mathcal{P}\Phi=0$, we'll get many Volterra-type operators $\hat{\mathcal{P}}_\alpha$---one at each root of $\zeta=\alpha$ of the polynomial $P(-\zeta)$---with a regular singularity at $\zeta=\alpha$. Therefore, we have to set the notation, to deal with this more general situation.  
+
+Here, we'll adapt the notation of Sections \ref{sec:intro}--\ref{sec:proof_main_results} to be able to deal with singularities different from the origin. In fact, the role of the coordinate $\zeta$ will be played by $\zeta-\alpha$.  
+
 \begin{brainstorm}
 \item Previously, we always looked at Volterra operators with a regular singularity at $\zeta = 0$.
 \item When we try to solve a level~1 differential equation, we'll get an operator with many regular singularities---one at each root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
@@ -911,7 +913,7 @@ If $\psi_\alpha$ satisfies the equation $\hat{\mathcal{P}}_\alpha\psi_\alpha=0$,
 \end{lemma}
 
 \begin{rmk}
-For the Laplace transform to have any hope of being well-defined, we have to choose the direction $\theta$ so that the ray $\Gamma_{\zeta, \alpha}^\theta$ stays within $\domain_\alpha$. We'll see later that for our results to apply, $\domain_\alpha$ can't touch any zero of $P(-\zeta)$ other than $\zeta = \alpha$. For instance, $\domain_\alpha$ looks like the domain drawn in Section \ref{setting:domain} replacing the origin $\zeta=0$ with $\zeta=\alpha$. 
+For the Laplace transform to have any hope of being well-defined, we have to choose the direction $\theta$ so that the ray $\Gamma_{\zeta, \alpha}^\theta$ stays within $\domain_\alpha$. We'll see later that for our results to apply, $\domain_\alpha$ can't touch any zero of $P(-\zeta)$ other than $\zeta = \alpha$. For instance, $\domain_\alpha$ looks like the domain drawn in Section \ref{setting:domain}, replacing the origin $\zeta=0$ with $\zeta=\alpha$. 
 \end{rmk}
 \begin{proof}[Proof of Lemma~\ref{lem:use-dict}]
 Comparing the definitions of $\mathcal{P}$ and $\hat{\mathcal{P}}_\alpha$, and using the properties of the Laplace transform discussed in Section~\ref{sec:L-int-op}, we can work out that $\mathcal{P} \laplace_{\zeta,\alpha}^\theta = \laplace_{\zeta,\alpha}^\theta \hat{\mathcal{P}}_\alpha$. Hence,
@@ -925,20 +927,14 @@ Comparing the definitions of $\mathcal{P}$ and $\hat{\mathcal{P}}_\alpha$, and u
 We can now state and prove the main result of this section, namely that the Volterra equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ admits a unique solution $\psi_\alpha$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
 
 \begin{thm}\label{thm:example}
-For each root $-\alpha$ of $P$, the equation
+For each root $-\alpha$ of $P$ where $\tau_\alpha := Q(-\alpha)/P'(-\alpha)$ is real and positive, the equation
 \[ \hat{\mathcal{P}}_\alpha \psi_\alpha = 0 \]
 has a unique solution $\psi_\alpha$ in the affine subspace
 \[ \zeta^{\tau_\alpha-1} + \singexpalg{\tau_\alpha}(\domain_\alpha) \]
 of the space $\singexpalg{\tau_\alpha-1}(\domain_\alpha)$.
-%%The equation $\hat{P}_\alpha\psi_\alpha=0$ has a unique solution of the form
-%%\[ \psi_\alpha = \zeta^{\tau_\alpha-1} + f_{\star,\alpha} \]
-%%\[\psi_\alpha = f_{0,\alpha}+ f_{\star,\alpha}\]
-%%where $f_{0,\alpha}$ scales like $\zeta^{\tau_\alpha-1}$ as $\zeta$ goes to $\alpha$ and $f_{\star,\alpha}\in\singexpalg{\tau_\alpha}(\Omega_\alpha)$. The result holds for every critical point of $P$. 
 \end{thm}
-%%\textcolor{magenta}{[In the old version, we need to show somewhere that $\zeta^{\tau_\alpha - 1}$ differs from a multiple of the prototype solution $f_{0,\alpha}$ by an element of $\singexpalg{\tau_\alpha}(\Omega_\alpha)$]}
-
 \begin{proof}
-Choose a root $-\alpha$ of $P$. For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$, noting that $\zeta = \alpha$ is a root of $p$. The conditions laid out in Section~\ref{sec:level 1 ODE} guarantee that $\frac{\partial}{\partial \zeta} p$ and $q$ are both non-zero $\zeta = \alpha$.
+Choose a root $-\alpha$ of $P$ where $\tau_\alpha := Q(-\alpha)/P'(-\alpha)$ is real and positive. For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$, noting that $\zeta = \alpha$ is a root of $p$. The conditions laid out in Section~\ref{sec:level 1 ODE} guarantee that $\frac{\partial}{\partial \zeta} p$ and $q$ are both non-zero $\zeta = \alpha$.
 
 To apply Proposition~\ref{prop:alt-general_volterra}, we need to rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting}. \textcolor{orange}{[Explain how conditions shift from $\zeta = 0$ to $\zeta = \alpha$?]} When we write $\hat{\mathcal{P}}_\alpha$ explicitly as a Volterra operator, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
 \[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta = 0, \]
@@ -977,94 +973,42 @@ Since $P$ is a monic polynomial whose roots are all simple, $1/P(-\zeta)$ has th
 \[ \frac{1}{P(-\zeta)} = \sum_{-\beta \in \roots} \frac{1}{-P'(-\beta)\,(\zeta - \beta)}, \]
 where $\roots$ is the zero set of $P$ \cite[Section 1.4, Exercise~2]{ahlfors}. 
 It follows that
-
 \begin{align*}
 -\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
-& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
+& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}.
 \end{align*}
-
-Now we expand $Q$ at $\zeta=\alpha$ writing $Q=Q(-\alpha)+(\zeta-\alpha)Q_\text{extra}(\zeta)$ and we continue the previous computations, getting
-
+Now we expand $Q$ around $-\alpha$, using the decomposition $Q(\zeta) = Q(-\alpha)+(\zeta-\alpha)\,Q_\alpha(\zeta)$ to split up the last term of the expression above:
 \begin{align}
--\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & \notag =
- \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\alpha) + (\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
- &\label{eqn:step} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)} 
- \end{align}
-
-First we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded when $a$ is close enough to $\zeta = \alpha$. In fact we have 
-
+-\frac{Q(-\zeta(a'))}{P(-\zeta(a))} %% & \notag = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\alpha) + (\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
+&\label{eqn:split-numerator} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)} 
+\end{align}
+First, we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded on a neighborhood of $\zeta = \alpha$ in $\domain_\alpha$. Equation~\eqref{eqn:split-numerator} tells us that
 \begin{align*}
--\frac{Q(-\zeta(a))}{P(-\zeta(a))} & =
-\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a) - \alpha)\,Q_\text{extra}(\zeta(a))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
-&=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q_\text{extra}(\zeta(a))}{P'(-\alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)}
- \end{align*}
-
-Define $\tau_\alpha:=Q(-\alpha)/P'(-\alpha)$, then 
-
-\[-\frac{Q(-\zeta(a))}{P(-\zeta(a))}-\frac{\tau_\alpha}{\zeta(a)-\alpha}=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q_\text{extra}(\zeta(a))}{P'(-\alpha)}\]
-
-Since $Q$ is a polynomial, by bringing $a$ close enough to $\zeta=\alpha$ we can bound both $Q(-\zeta(a))/(\zeta(a)-\beta)$ and $Q_\text{extra}(\zeta(a))$.
-
-Then, we want to prove that for all $\sigma > \tau_\alpha$, we have $|q(a')/p(a)| < \sigma/|\zeta(a) - \alpha|$ when $a, a'$ close enough to $\zeta = 0$. From Equation \eqref{eqn:step}, taking the absolute value we get
-
-\begin{align*}
-\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| + \left|\frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| \\
-|\zeta(a) - \alpha|\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)}\right| + \left|\frac{Q(-\alpha)}{P'(-\alpha)}\right|
+-\frac{Q(-\zeta)}{P(-\zeta)} & =
+\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{(\zeta - \alpha)\,Q_\alpha(\zeta)}{P'(-\alpha)\,(\zeta - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)} \\
+&=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(\zeta)}{P'(-\alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)}
 \end{align*}
+Recalling that $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$, we conclude that
+\[-\frac{Q(-\zeta)}{P(-\zeta)}-\frac{\tau_\alpha}{\zeta-\alpha}=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(\zeta)}{P'(-\alpha)}\]
+Since $Q$ and $Q_\alpha$ are polynomials, the right-hand side is bounded on any neighborhood of $\zeta = \alpha$ that avoids the other roots of $p$ and avoids infinity.
 
-Notice that by bringing $\zeta(a')$ close enough to $0$ we can make the middle term 
-
-\[\left|\frac{(\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)}\right|\]
-
-arbitrary small. Similarly, by bringing also $\zeta(a)$ close to $0$ we can make the first term 
-
+Next, we want to show that for any $\sigma > \tau_\alpha$, the bound
+\[ |\zeta(a) - \alpha| \left|\frac{q(a')}{p(a)}\right| < \sigma \]
+holds when $a$ and $a'$ are close enough to $\zeta = \alpha$. Taking the absolute value of both sides of Equation~\eqref{eqn:split-numerator}, and using the assumption that $\tau_\alpha$ is real and positive, we see that
+\begin{align*}
+\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| + \left|\frac{\tau_\alpha}{\zeta(a) - \alpha}\right| \\
+|\zeta(a) - \alpha|\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)}\right| + \tau_\alpha.
+\end{align*}
+By bringing $\zeta(a')$ closer to $\alpha$, we can make the middle term
+\[\left|\frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)}\right|\]
+as small as we want. Similarly, by bringing $\zeta(a)$ closer to $\alpha$, we can make the sum
 \[\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right|\]
 
-as small as we want. Hence, setting $\tau_\alpha=\left|\frac{Q(-\alpha)}{P'(-\alpha)}\right|$, we have that for any $\sigma>\tau_\alpha$
-
-\[|\zeta(a)-\alpha| \, \left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| \le \sigma. \]
-
-
- %Want: for all $\sigma > \tau$, we have $|q(a')/p(a)| < \sigma/|\zeta(a) - \alpha|$ when $a, a'$ close enough to $\zeta = 0$.
-
-
-\color{RoyalBlue}
-\begin{align*}
--\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
-& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}
-\end{align*}
-As $a$ and $a'$ approach $\zeta = \alpha$, the
-\[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \]
-part approaches the limit
-\[ \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\alpha)}{P'(-\beta)\,(\alpha - \beta)}. \]
-Hence, that part is bounded on a neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$. Now we just have to deal with the term
-\[ \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a)-\alpha)}. \]
-%%From the fact that
-%%\[ Q(-\zeta) \in Q(-\alpha) + O\big(|\zeta - \alpha|\big) \]
-%%at $\zeta = \alpha$, we reason that
-%%\[ \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a)-\alpha)} \in \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a)-\alpha)} + O(1) \]
-%%at $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$.
-
-
-\[ \frac{Q(-\zeta(a'))}{P'(-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)}\]
-is bounded as $\zeta(a')$ approaches $\alpha$.
-\color{DarkTurquoise}
-\[ \left|\frac{Q(-\zeta(a'))}{P'(-\alpha)(\zeta(a)-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)(\zeta(a)-\alpha)}\right|< C  \]
-
-we know
-\[ \left|\frac{Q(-\zeta(a'))}{P'(-\alpha)}-\frac{Q(-\alpha)}{P'(-\alpha)}\right|< C  \]
-
-Conversely, as $a'$ approaches $\zeta=\alpha$, the term 
-
-\[\frac{Q(-\zeta(a'))}{P'(-\alpha)(\zeta(a)-\alpha)}\]
-
-converges to $\frac{\tau_\alpha}{\zeta(a)-\alpha}$ with $\tau_\alpha:=Q(-\alpha)/P'(-\alpha)$. We conclude that 
-\[-\frac{q(a')}{p(a)}-\frac{\tau_\alpha}{\zeta(a)-\alpha}\]
-
-is bounded as $a,a'$ approach $\zeta=\alpha$.
-\color{black}
+as small as we want. Hence, for any $\sigma > \tau_\alpha$, the bound
+\[|\zeta(a)-\alpha| \, \left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| \le \sigma \]
+holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$.
 \begin{verify}
-\par Proof of Ahlfors exercise. First, observe that
+\par Solution of Ahlfors exercise. First, observe that
 \begin{align*}
 P(t) &= (t + \beta_1) \cdots (t + \beta_d) \\
 P'(t) &= \sum_k \left[ \prod_{j \neq k} (t + \beta_j) \right] \\
@@ -1079,15 +1023,6 @@ P'(-\beta_1) &=  \pi_1 \prod_{j\neq 1} (-\beta_1+\beta_j)^2\\
 \frac{1}{P'(-\beta_1)} &= \pi_1
 \end{align*}
 \end{verify}
-\color{Tan}
-\item \textcolor{orange}{[Condition~\eqref{cond:diag-basic} implies Condition~\eqref{cond:slow}, so we can drop this.]}
-
-$\hardpart^\alpha$ satisfies Condition \eqref{cond:slow}: by assumption $p$ and $q$ are polynomials, and $q$ has degree less that $p$. Hence for $a$ outside some neighbourhood $U$ of $\alpha$  
-\begin{align*}
-\sup_U \Big\vert \frac{1}{p}\Big\vert =:c_p \qquad\qquad \sup_U \Big\vert\frac{q}{p}\Big\vert =:\lambda_\text{ration} 
-\end{align*}
-and we set $\lambda_0:=\log(c_p)+\lambda_\text{ratio}$.
-\color{black}
 \item Condition~\eqref{cond:diag-basic} {\em on $\hardpart^\alpha$ is satisfied.}
 
 Since we're trying to bound $\hardker^\alpha(a, a')$ with a function of the difference $\omega(a, a') := \zeta(a) - \zeta(a')$, let's rewrite it as a rational function of $\omega(a, a')$ and $\zeta(a)$. First, rewrite
@@ -1104,9 +1039,6 @@ viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational fu
 over all $a$ outside a neighborhood of the roots of $p$ and all $a'$ without restriction.
 
 For consistency with Condition~\eqref{cond:eps-lambda}, we choose $\lambda_\Delta > A$.
-\color{RoyalBlue}
-\item $\hardpart^\alpha$ satisfies Condition \eqref{cond:diag-basic}: in fact $p$ and $q$ are polynomials and $q$ has degree less than $p$, hence their ratio is exponentially bounded if $\zeta(a), \zeta(a')$ are far from $\alpha$. In particular, $\lambda_\Delta=2A$ is a possible choice, where $A$ is the radius of convergence of the functions $R_r$ (see \ref{sec:level 1 ODE}).
-\color{black}
 \item Condition~\eqref{cond:eps-lambda} {\em on $\softpart^\alpha$ is satisfied.} \textcolor{magenta}{[I think this bound fails unless $R_1, \ldots, R_{d-1}$ are zero, so let's restrict our attention to that case.]}
 
 First, obseve that
