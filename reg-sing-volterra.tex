@@ -42,7 +42,7 @@
 
 % list formatting
 \newlist{conditions}{itemize}{1}
-\setlist[conditions]{leftmargin=24mm, rightmargin=12mm}
+\setlist[conditions]{leftmargin=28mm, rightmargin=12mm}
 \makeatletter
 % hat tip TeX.SE user31729
 %   https://tex.stackexchange.com/a/328393/6934
@@ -129,12 +129,13 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \begin{itemize}
 \item \textcolor{gray}{In Section~\ref{sec:V is a contraction}, do we only use Condition~\eqref{cond:sing} through Proposition~\ref{prop:whole-ker-near-bound}?} \textcolor{MediumSpringGreen}{[Yes.]}
 \item Rewrite arguments using new Condition~\eqref{cond:sing}.
-\item Show that example satisfies Condition~\eqref{cond:sing}.
+\item \textcolor{gray}{Show that example satisfies Condition~\eqref{cond:sing}.}
 \end{itemize}
 \item \textbf{(Aaron)} Drop Condition~\eqref{cond:slow}, which is implied by Condition~\eqref{cond:diag-basic}
 \begin{itemize}
-  \item Add $c_\Delta$ to Condition~\eqref{cond:diag-basic} as multiplicative constant, and export both of the constants $\lambda_\Delta$ and $\lambda_0 = \lambda_\Delta + c_\Delta$ from the condition.
-  \item When showing that the example satisfies Condition~\eqref{cond:diag-basic}, make it consistent with new condition wording.
+  \item Add a condition to ensure that $\zeta(a) = 0$ is the only singularity.
+  \item \textcolor{gray}{Add $c_\Delta$ to Condition~\eqref{cond:diag-basic} as multiplicative constant, and export both of the constants $\lambda_\Delta$ and $\lambda_0 = \lambda_\Delta + c_\Delta$ from the condition.}
+  \item \textcolor{gray}{When showing that the example satisfies Condition~\eqref{cond:diag-basic}, make it consistent with new condition wording.} \textcolor{MediumSpringGreen}{[No change required]}
   \item \textcolor{gray}{Refer to Condition~\eqref{cond:diag-basic} in proof of Theorem~\ref{thm:proto-growth}.}
   \item \textcolor{gray}{Look for other direct references to Condition~\eqref{cond:slow}.} \textcolor{MediumSpringGreen}{[No other direct references found.]}
 \end{itemize}
@@ -225,7 +226,7 @@ where $\partial^{-\lambda}$ is the Riemann-Liouville fractional integral of orde
 
 Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. Solutions that look unrelated in the frequency domain may turn out to be linked by analytic continuation along the complex position domain, as seen in the phenomenon of {\em resurgence} \cite{EcalleIII}\cite{lectures-marino}\cite[Section 2.4]{sternin1995borel}.
 
-Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we'll see this helpful behavior in the class of differential equations that Ecalle calls {\em level~1}, which includes classical examples like the modified Bessel equation, the equations describing the vibration modes of beams that taper in certain ways \textcolor{orange}{[find citation]}, and the Airy equation after a change of coordinate. This last example generalizes to some level 1 equations that feature in current research, like the Airy-Lucas and higher Airy equations~\cite[Equations 3.2 and 3.8]{charbonnier22}\cite{durugo_higher}.
+Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we'll see this helpful behavior in a certain subclass of what Ecalle calls {\em level~1} differential equations, which includes classical examples like the modified Bessel equation, the equations describing the vibration modes of beams that taper in certain ways \textcolor{orange}{[find citation]}, and the Airy equation after a change of coordinate. \textcolor{SpringGreen}{This last example generalizes to some level 1 equations that feature in current research, like the Airy-Lucas and higher Airy equations~\cite[Equations 3.2 and 3.8]{charbonnier22}\cite{durugo_higher}.}
 
 From our experience with solving level~1 differential equations by Borel summation, we expect each of the corresponding integral equations to have a special kind of solution when the integration base point coincides with a regular singularity. Let's say we've chosen the position variable $\zeta$ so that the integration base point is at $\zeta = 0$, and our position-domain Volterra operator has a holomorphic kernel $k(a, a')$ with a $\tau/\zeta(a)$ singularity. Assuming the residue $\tau$ is real and positive, we expect to find a solution with the following features:
 \begin{itemize}
@@ -241,7 +242,7 @@ Given a complex-valued function $\varphi$ and a non-negative, real-valued functi
 \subsubsection{The domain}\label{setting:domain}
 Throughout this paper, as described in Section~\ref{motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but doesn't contain $\zeta = 0$. We also assume:
 \begin{conditions}
-\cond{star}\label{cond:star} The set $\domain$ is star-shaped around $\zeta = 0$. In other words, for any $a \in \domain$, a straight path from $\zeta = 0$ to $a$ stays in $\domain$. Since $\domain$ doesn't contain $\zeta = 0$, we'll always leave that starting point out of the path.
+\cond{star}\label{cond:star} The set $\domain$ is star-shaped around $\zeta = 0$. In other words, for any $a \in \domain$, a straight path from $\zeta = 0$ to $a$ stays in $\domain$. Since $\domain$ doesn't contain $\zeta = 0$, we'll always omit that starting point from the path.
 \end{conditions}
 For the applications we have in mind, $\domain$ might look something like the set pictured below, which satisfies Condition~\eqref{cond:star}.
 \begin{center}
@@ -268,34 +269,33 @@ Being separable means that the kernel $\hardker(a, a')$ factors into a function 
 \[ \hardker(a, a') = - \frac{q(a')}{p(a)}, \]
 where $p$ and $q$ are holomorphic functions on $\domain$. Having a regular singularity at $\zeta = 0$ means the following:
 \begin{conditions}
-\condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---the {\em residue} of the singularity---the difference
+\condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---which we'll require, for simplicity, to be real and positive---the difference
 \[ \hardker(a, a) - \frac{\tau}{\zeta(a)} \]
 is bounded on a neighborhood of $\zeta(a) = 0$ in $\domain$.
 
 In addition, for each $\sigma > \tau$, the bound
-\[ |\hardker(a, a')| < \frac{\sigma}{\zeta(a)} \]
+\[ \big|\hardker(a, a')\big| < \frac{\sigma}{\zeta(a)} \]
 holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
 \end{conditions}
-We'll assume that $\tau$ is real and positive.
-
-Our definition of a regular singularity implies that as $|\zeta|$ goes to zero, $|p|$ also goes to zero, while $|q|$ settles into a compact interval that doesn't include zero.
-\begin{verify}
-[\textit{Proof.} Fix any $a'$ in the neighborhood where the difference above is bounded. By confining $a$ to small enough neighborhoods of $\zeta = 0$, we can make $|\tau/\zeta(a)|$ arbitrarily large, forcing $|q(a')/p(a)|$ to become arbitrarily large to satisfy the definition. Since $a'$ is fixed, the only way for this ratio to get arbitrarily large is for $|p(a)|$ to get arbitrarily small.]
-\end{verify}
-For some of our results, we'll also need to control $|p|$ and $|q|$ in various ways as $|\zeta|$ goes to infinity.
+%%Our definition of a regular singularity implies that as $|\zeta|$ goes to zero, $|p|$ also goes to zero, while $|q|$ settles into a compact interval that doesn't include zero.
+%%\begin{verify}
+%%[\textit{Proof.} Fix any $a'$ in the neighborhood where the difference above is bounded. By confining $a$ to small enough neighborhoods of $\zeta = 0$, we can make $|\tau/\zeta(a)|$ arbitrarily large, forcing $|q(a')/p(a)|$ to become arbitrarily large to satisfy the definition. Since $a'$ is fixed, the only way for this ratio to get arbitrarily large is for $|p(a)|$ to get arbitrarily small.]
+%%\end{verify}
+%%For some of our results, we'll also need to control $|p|$ and $|q|$ in various ways as $|\zeta|$ goes to infinity.
+%%\begin{conditions}
+%%\condconst{slow}{\lambda_0}\label{cond:slow} We can find constants $\lambda_p$ and $\lambda_\text{ratio}$ with
+%%\begin{align*}
+%%\left|\frac{1}{p}\right| & \lesssim e^{\lambda_p |\zeta|} &
+%%\left|\frac{q}{p}\right| & \le \lambda_\text{ratio}
+%%\end{align*}
+%%outside some neighborhood of $\zeta = 0$ in $\domain$. In addition, $|1/p|$ and $|q/p|$ are bounded outside every neighborhood of $\zeta = 0$ in $\domain$; the bound may depend on the neighborhood. Note that this only constrains the ratio of $p$ and $q$ when they're evaluated at the same point. The constants will only enter our reasoning through their sum, $\lambda_0 = \lambda_p + \lambda_\text{ratio}$.
+%%\end{conditions}
+%%This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
+For most of our results, we'll also need to control $\hardker(a, a')$ when $a$ is away from $\zeta = 0$. We'll require $\hardker$ to be bounded on the diagonal in $\domain^2$, and to grow at most exponentially as we move away from the diagonal. Conveniently, these two requirements can be combined into one condition. \textcolor{Tomato}{[Add only-singularity condition.]}
 \begin{conditions}
-\condconst{slow}{\lambda_0}\label{cond:slow} We can find constants $\lambda_p$ and $\lambda_\text{ratio}$ with
-\begin{align*}
-\left|\frac{1}{p}\right| & \lesssim e^{\lambda_p |\zeta|} &
-\left|\frac{q}{p}\right| & \le \lambda_\text{ratio}
-\end{align*}
-outside some neighborhood of $\zeta = 0$ in $\domain$. In addition, $|1/p|$ and $|q/p|$ are bounded outside every neighborhood of $\zeta = 0$ in $\domain$; the bound may depend on the neighborhood. Note that this only constrains the ratio of $p$ and $q$ when they're evaluated at the same point. The constants will only enter our reasoning through their sum, $\lambda_0 = \lambda_p + \lambda_\text{ratio}$.
-\end{conditions}
-This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
-\begin{conditions}
-\condconst{diag$_0$}{\lambda_\Delta}\label{cond:diag-basic} We can find a constant $\lambda_\Delta$ with
-\[ \big| \hardker(a, a') \big| \lesssim e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
-over all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' \in \domain$.
+\condconst{diag$_0$}{\lambda_\Delta, \lambda_0}\label{cond:diag-basic} We can find constants $\lambda_\Delta$ and $c_\Delta$ with
+\[ \big| \hardker(a, a') \big| \le c_\Delta e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
+for all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' \in \domain$. In most cases, $c_\Delta$ will only enter our reasoning through the sum $\lambda_0 = \lambda_\Delta + c_\Delta$.
 %%outside a neighborhood of $\zeta(a) = 0$ in $\domain^2$.
 \end{conditions}
 We'll occasionally mention an optional condition on $p$ that allows us to state our main results more explicitly.
@@ -307,7 +307,7 @@ at $\zeta = 0$.
 \end{conditions}
 \subsubsection{The perturbed operator}\label{setting:perturbed}
 
-Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +\softpart$. The perturbation $\softpart$ doesn't have a separable kernel,\footnote{Unless $\softpart$ is zero, of course.} but does have a smoothing effect that counteracts the singularity of $\hardpart$ (as we'll show in Proposition \ref{prop:smoothing}). To get the smoothing effect, we'll require the kernel $\softker$ of $\softpart$ to vanish to some order $\gamma > 0$ on the diagonal in $\Omega^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
+Now, let's perturb $\hardpart$ to a more general operator $\volterra=\hardpart +\softpart$. The perturbation $\softpart$ doesn't have a separable kernel,\footnote{Unless $\softpart$ is zero, of course.} but does have a smoothing effect that counteracts the singularity of $\hardpart$ (as we'll show in Proposition \ref{prop:smoothing}). To get the smoothing effect, we'll require the kernel $\softker$ of $\softpart$ to vanish to some order $\gamma > 0$ on the diagonal in $\domain^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
 
 Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We'll allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we won't allow any sharper singularity. We'll also put an exponential bound on how fast $\softker$ grows away from the diagonal, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we'll require:
 \begin{conditions}
@@ -517,14 +517,14 @@ whenever $|\zeta(a)| < r$ and $|\zeta(a')| < r$. Choosing a point $b'$ with $|\z
 on the region $|\zeta| < r$, as desired.
 \end{proof}
 \begin{prop}\label{prop:asymptotic at infinity}
-Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \textcolor{brown}{\eqref{cond:diag-basic}} \textcolor{MediumSpringGreen}{\eqref{cond:slow}}. Then $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \textcolor{brown}{\eqref{cond:diag-basic}}. Then $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
 \end{prop}
 \begin{proof}
 We want to show that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$.
 
 Find a neighborhood $\domain_\text{near}$ of $\zeta = 0$ where $|\solproto| \lesssim |\zeta|^{\tau-1}$, as Proposition~\ref{prop:asymptotic at zero} says we can do. By making $\domain_\text{near}$ bounded, we can prevent $e^{\lambda_0|\zeta|}$ from getting arbitrarily close to zero on $\domain_\text{near}$. Then we have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{near}$.
 
-\color{Brown}By removing a bounded neighborhood of $\zeta = 0$ from $\domain$, make a set $\domain_\text{far}$ with
+By removing a bounded neighborhood of $\zeta = 0$ from $\domain$, make a set $\domain_\text{far}$ with
 \[ \hardker(a, a') \le c_\Delta e^{\lambda_\Delta |\zeta(a) - \zeta(a')|}, \]
 for all $a \in \domain_\text{far}$ and $a' \in \domain$, as Condition~\eqref{cond:diag-basic} says we can do. Applying this bound on the diagonal in $\domain_\text{far}^2$, we learn that $|q/p| \le c_\Delta$ on $\domain_\text{far}$. In addition, by fixing some arbitrary  $b' \in \domain$, see that
 \begin{align*}
@@ -542,21 +542,8 @@ over all $a \in \domain_\text{far}$. Hence, $|1/p| \lesssim e^{\lambda_\Delta|\z
 & \lesssim e^{\lambda_0|\zeta(a)|}
 \end{align*}
 over all $a \in \domain_\text{far}$, recalling that $\lambda_0 = \lambda_\Delta + c_\Delta$. Since $\domain_\text{far}$ avoids a neighborhood of $\zeta = 0$, we know $|\zeta|^{\tau-1}$ is bounded on $\domain_\text{far}$. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{far}$.
-\color{black}
 
-\color{MediumSpringGreen}
-Recall that in Condition~\eqref{cond:slow}, the constant $\lambda_0$ is the sum of two constants: $\lambda_p$, which controls the growth of $1/p$ at infinity, and $\lambda_\text{ratio}$, which controls the growth of $p/q$ at infinity. By removing a bounded neighborhood of $\zeta = 0$ from $\domain$, make a set $\domain_\text{far}$ where $|1/p| \lesssim e^{\lambda_p |\zeta|}$ and $|q/p| \le \lambda_\text{ratio}$, as Condition~\eqref{cond:slow} says we can do. Observe that
-\begin{align*}
-|\solproto(a)| & = \left| \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \right| \\
-& \le \left|\frac{1}{p(a)}\right| \exp\left(\int_{b}^{a}\left|\frac{q}{p}\right|\;d\zeta\right) \\
-& \lesssim e^{\lambda_p|\zeta(a)|}\,e^{\lambda_\text{ratio}(|\zeta(a)| + |\zeta(b)|)} \\
-& \lesssim e^{\lambda_0|\zeta(a)|}\,e^{\lambda_\text{ratio}|\zeta(b)|} \\
-& \lesssim e^{\lambda_0|\zeta(a)|}
-\end{align*}
-over all $a \in \domain_\text{far}$. Since $\domain_\text{far}$ avoids a neighborhood of $\zeta = 0$, we know $|\zeta|^{\tau-1}$ is bounded on $\domain_\text{far}$. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{far}$.
-\color{black}
-
-Finally, let $\domain_\text{mid}$ be the set that remains when you remove $\domain_\text{near}$ and $\domain_\text{far}$ from $\domain$. Since $\domain_\text{mid}$ avoids $\zeta = 0$ and is bounded, $|\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ can't get arbitrarily small there, and \textcolor{MediumSpringGreen}{Condition~\eqref{cond:slow} [add a new condition for this]} guarantees that $|\solproto|$ is bounded there. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{mid}$.
+Finally, let $\domain_\text{mid}$ be the set that remains when you remove $\domain_\text{near}$ and $\domain_\text{far}$ from $\domain$. Since $\domain_\text{mid}$ avoids $\zeta = 0$ and is bounded, $|\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ can't get arbitrarily small there, and \textcolor{MediumSpringGreen}{Condition~[add a new condition for this]} guarantees that $|\solproto|$ is bounded there. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{mid}$.
 
 Combining the conclusions above, we see that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain = \domain_\text{near} \cup \domain_\text{mid} \cup \domain_\text{far}$, as desired.
 \end{proof}
@@ -664,9 +651,10 @@ Suppose $\hardpart$ satisfies Condition~\eqref{cond:sing}, and $\softpart$ satis
 by keeping $a$ and $a'$ close enough to $\zeta = 0$.
 \end{prop}
 \begin{proof}
-For the kernel $\hardker$ the claim follows from Condition \eqref{cond:sing}, namely for any $\sigma>\tau$ we can find a neighbourhood of $(0,0)\in\domain^2$ such that 
-\[ |\hardker(a, a')| \le \frac{\sigma}{|\zeta(a)|}. \]
-\color{RoyalBlue}
+First, choose some $\sigma_0 \in (\tau, \sigma)$. Condition~\eqref{cond:sing} tells us that by making $\delta > 0$ small enough, we can ensure that
+\[ |\hardker(a, a')| \le \frac{\sigma_0}{|\zeta(a)|} \]
+whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$.
+\par\color{RoyalBlue}
 Condition~\eqref{cond:sing} doesn't stop $|\hardker(a, a')|$ from exceeding $\frac{\tau}{|\zeta(a)|}$. However, by keeping $a$ and $a'$ close to $\zeta = 0$, we can make sure that $|\hardker(a, a')|$ only exceeds $\frac{\tau}{|\zeta(a)|}$ by an arbitrary small margin. Condition~\eqref{cond:sing} tells us that when $\delta > 0$ is small enough, there's a constant $C$ with
 \[ \left| \hardker(a, a') - \frac{\tau}{\zeta(a)} \right| < C \]
 whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. It follows that
@@ -822,10 +810,27 @@ where
 converge in the region $|z| > A$.
 \end{enumerate}
 Equations of the form $\mathcal{P}\Phi = 0$ are called {\em level~1} by Ecalle~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples using Laplace transform method and our existence and uniqueness result Theorem \ref{thm:general_volterra}. 
-\subsection{\textcolor{orange}{Notation}}
-Previously, we studied Volterra operators with a regular singularity at $\zeta=0$. However, when we study solutions of a level 1 differential equation $\mathcal{P}\Phi=0$, we'll get many Volterra-type operators $\hat{\mathcal{P}}_\alpha$---one at each root of $\zeta=\alpha$ of the polynomial $P(-\zeta)$---with a regular singularity at $\zeta=\alpha$. Therefore, we have to set the notation, to deal with this more general situation.  
+\subsection{Notation}\label{sec:notation_alpha}
+Previously, we studied Volterra operators with a regular singularity at $\zeta=0$. However, when we look at solutions of a level 1 differential equation $\mathcal{P}\Phi=0$, we'll get many Volterra-type operators $\hat{\mathcal{P}}_\alpha$---one at each root of $\zeta=\alpha$ of the polynomial $P(-\zeta)$---with a regular singularity at $\zeta=\alpha$. 
 
-Here, we'll adapt the notation of Sections \ref{sec:intro}--\ref{sec:proof_main_results} to be able to deal with singularities different from the origin. In fact, the role of the coordinate $\zeta$ will be played by $\zeta-\alpha$.  
+Here, we adapt the notation of Sections \ref{sec:intro}--\ref{sec:proof_main_results}, to deal with this more general situation. First of all, the role of the coordinate $\zeta$ will be played by $\zeta-\alpha$. As a consequence, references to the point $\zeta=0$ become references to the point $\zeta-\alpha=0$, or equivalently $\zeta=\alpha$. 
+
+Recalling that $\domain$ is star-shaped around $\zeta=0$ (see Condition \eqref{cond:star}), we introduce the notation $\domain_\alpha$ for domains star-shaped around $\zeta=\alpha$. Then, the function space $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ is the space of holomorphic functions in $\domain_\alpha$, uniformly of exponential type $\Lambda$ and with a power-law singularity at $\zeta=\alpha$. Explicitly, $f\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ if 
+
+\[ e^{-\Lambda |\zeta-\alpha|} |\zeta-\alpha|^{-\sigma} |f| \]
+
+is uniformly bounded in $\domain_\alpha$. 
+
+Finally, we rewrite conditions for Volterra operators with a regular singularity at $\zeta=\alpha$: the changes will affect only Conditions that control the behaviour of the operator near $\zeta=\alpha$, namely Conditions \eqref{cond:sing} and \eqref{cond:eps-lambda}. We say that a Volterra operator $\volterra_\alpha$ with a regular singularity at $\zeta=\alpha$ satisfies Condition \eqref{cond:sing} if for some non-zero constant $\tau$, the difference 
+\[k_\alpha(a,a')-\frac{\tau}{\zeta(a)-\alpha}\]
+is bounded in a neighbourhood of $\zeta(a)=\alpha$ in $\domain_\alpha$, where $k_\alpha$ denotes the kernel of $\volterra$. In addition, we require that for any $\sigma>\tau$, the bound 
+\[|k_\alpha(a,a')|<\frac{\sigma}{\zeta(a)-\alpha}\]
+holds over some neighbourhood of $\big(\zeta(a),\zeta(a')\big)=(\alpha,\alpha)$ in $\domain_\alpha^2$. 
+The operator $\volterra_\alpha$ satisfies Condition \eqref{cond:eps-lambda} if for some constant $\gamma>0$, we have
+\[ |k_\alpha(a,a')|\lesssim \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)-\alpha|} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|}\]
+over all $a,a'\in\domain_\alpha$. 
+
+
 
 \begin{brainstorm}
 \item Previously, we always looked at Volterra operators with a regular singularity at $\zeta = 0$.
