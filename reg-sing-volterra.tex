@@ -42,7 +42,7 @@
 
 % list formatting
 \newlist{conditions}{itemize}{1}
-\setlist[conditions]{leftmargin=28mm, rightmargin=12mm}
+\setlist[conditions]{leftmargin=26mm, rightmargin=12mm}
 \makeatletter
 % hat tip TeX.SE user31729
 %   https://tex.stackexchange.com/a/328393/6934
@@ -291,13 +291,14 @@ holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\do
 %%outside some neighborhood of $\zeta = 0$ in $\domain$. In addition, $|1/p|$ and $|q/p|$ are bounded outside every neighborhood of $\zeta = 0$ in $\domain$; the bound may depend on the neighborhood. Note that this only constrains the ratio of $p$ and $q$ when they're evaluated at the same point. The constants will only enter our reasoning through their sum, $\lambda_0 = \lambda_p + \lambda_\text{ratio}$.
 %%\end{conditions}
 %%This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
-For most of our results, we'll also need to control $\hardker(a, a')$ when $a$ is away from $\zeta = 0$. We'll require $\hardker$ to be bounded on the diagonal in $\domain^2$, and to grow at most exponentially as we move away from the diagonal. Conveniently, these two requirements can be combined into one condition. \textcolor{Tomato}{[Add only-singularity condition.]}
+For most of our results, we'll need to make sure that $\domain$ doesn't touch any singularities of $\hardpart$ other than the one at $\zeta = 0$. We'll also need to control $\hardker(a, a')$ when $a$ is away from $\zeta = 0$, requiring $\hardker$ to be bounded on the diagonal in $\domain^2$ and to grow at most exponentially as we move away from the diagonal. These requirements can be combined into one condition.
 \begin{conditions}
-\condconst{diag$_0$}{\lambda_\Delta, \lambda_0}\label{cond:diag-basic} We can find constants $\lambda_\Delta$ and $c_\Delta$ with
-\[ \big| \hardker(a, a') \big| \le c_\Delta e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
-for all $a$ in $\domain$ outside some neighborhood of $\zeta = 0$, and all $a' \in \domain$. In most cases, $c_\Delta$ will only enter our reasoning through the sum $\lambda_0 = \lambda_\Delta + c_\Delta$.
-%%outside a neighborhood of $\zeta(a) = 0$ in $\domain^2$.
+\condconst{diag$_0$}{\lambda_\Delta}\label{cond:diag-basic} For some constant $\lambda_\Delta$, we have
+\[ \big| \hardker(a, a') \big| \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
+over all $a, a' \in \domain$.
 \end{conditions}
+This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
+
 We'll occasionally mention an optional condition on $p$ that allows us to state our main results more explicitly.
 \begin{conditions}
 \condconst{reg-p}{B, \epsilon}\label{cond:reg-p}
@@ -336,7 +337,7 @@ The solution $\solproto$ from Theorem~\ref{thm:basic_volterra} has, at worst, a 
 \begin{thm}\label{thm:proto-growth}
 Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
 
-Suppose $\hardpart$ also satisfies {\em Condition~\eqref{cond:slow}}. Then $f_0$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$ defined in Section~\ref{fn-spaces}.
+Suppose $\hardpart$ also satisfies {\em Condition~\eqref{cond:diag-basic}}. Then $f_0$ belongs to the space $\singexpalg{\tau-1}(\domain)$ \textcolor{MediumSpringGreen}{$\singexp{\tau-1}{\lambda_0}(\domain)$} defined in Section~\ref{fn-spaces}.
 \end{thm}
 We'll prove this result in Section~\ref{sec:asymptotics}.
 \begin{rmk}
@@ -355,11 +356,11 @@ When $\hardpart$ also satisfies Condition~\eqref{cond:reg-p}, we can get a bette
 %%---------
 When we perturb $\hardpart$ to the more general operator $\volterra = \hardpart + \softpart$ from Section~\ref{setting:perturbed}, the equation we're trying to solve gets more complicated, but its regular singularity at $\zeta = 0$ stays essentially the same. We might therefore expect to find a solution that looks like $\solproto$ near the singularity, differing only by a less singular perturbation. If we strengthen the constraints on $\hardpart$ a little more, this expectation is fulfilled.
 \begin{thm}\label{thm:general_volterra}
-Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}}, \eqref{cond:slow}, and \eqref{cond:diag-basic}, and $\softpart$ satisfies {\em Condition~\eqref{cond:eps-lambda}}. Then the equation
+Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:diag-basic}, and $\softpart$ satisfies {\em Condition~\eqref{cond:eps-lambda}}. Then the equation
 \[f = \volterra f\]
 has a unique solution $f$ in the affine subspace
 \[ f_0 + \singexpalg{\tau-1+\gamma}(\Omega) \]
-of the space $\singexpalg{\tau-1}(\Omega)$ defined in Section~\ref{fn-spaces}. Here, $f_0$ is the prototype solution \eqref{eqn:test_solution} from Theorems \ref{thm:basic_volterra}--\ref{thm:proto-growth}, which belongs to the space $\singexp{\tau-1}{\lambda_0}(\Omega)$.
+of the space $\singexpalg{\tau-1}(\Omega)$ defined in Section~\ref{fn-spaces}. Here, $f_0$ is the prototype solution \eqref{eqn:test_solution} from Theorems \ref{thm:basic_volterra}--\ref{thm:proto-growth}, which belongs to the space $\singexpalg{\tau-1}(\Omega)$ \textcolor{MediumSpringGreen}{$\singexp{\tau-1}{\lambda_0}(\Omega)$}.
 
 For any $\rho > \tau$, the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$. In other words, lowering $\rho$ into $(\tau, \tau+\gamma)$ to allow a sharper singularity won't reveal any more solutions, and raising $\rho$ too high to admit the solution found in $f_0 + \singexpalg{\tau-1+\gamma}(\Omega)$ will leave no solution at all.
 \end{thm}
@@ -517,14 +518,42 @@ whenever $|\zeta(a)| < r$ and $|\zeta(a')| < r$. Choosing a point $b'$ with $|\z
 on the region $|\zeta| < r$, as desired.
 \end{proof}
 \begin{prop}\label{prop:asymptotic at infinity}
-Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \textcolor{brown}{\eqref{cond:diag-basic}}. Then $\solproto$ belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \textcolor{brown}{\eqref{cond:diag-basic}}. Then $\solproto$ belongs to the space $\singexpalg{\tau-1}(\domain)$ \textcolor{MediumSpringGreen}{$\singexp{\tau-1}{\lambda_0}(\domain)$}.
 \end{prop}
 \begin{proof}
-We want to show that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$.
+We want to show that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ for some real constant $\lambda_0$.
 
-Find a neighborhood $\domain_\text{near}$ of $\zeta = 0$ where $|\solproto| \lesssim |\zeta|^{\tau-1}$, as Proposition~\ref{prop:asymptotic at zero} says we can do. By making $\domain_\text{near}$ bounded, we can prevent $e^{\lambda_0|\zeta|}$ from getting arbitrarily close to zero on $\domain_\text{near}$. Then we have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{near}$.
+By Proposition~\ref{prop:asymptotic at zero}, we can find a radius $\delta > 0$ for which $|\solproto| \lesssim |\zeta|^{\tau-1}$ over the region $|\zeta| < \delta$. No matter which value of $\lambda_0$ we pick, we know that $e^{\lambda_0|\zeta|}$ can't get arbitrarily close to zero on a bounded region, so we'll have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ over the region $|\zeta| < \delta$.
 
-By removing a bounded neighborhood of $\zeta = 0$ from $\domain$, make a set $\domain_\text{far}$ with
+%%On a bounded region, $e^{\lambda_0|\zeta|}$ can't get arbitrarily close to zero, so we also have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ over the region $|\zeta| < \delta$.
+
+%%Find a neighborhood $\domain_\text{near}$ of $\zeta = 0$ where $|\solproto| \lesssim |\zeta|^{\tau-1}$, as Proposition~\ref{prop:asymptotic at zero} says we can do. By making $\domain_\text{near}$ bounded, we can prevent $e^{\lambda_0|\zeta|}$ from getting arbitrarily close to zero on $\domain_\text{near}$. Then we have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{near}$.
+
+By Condition~\eqref{cond:diag-basic}, we have
+\begin{align*}
+|\hardker(a, a')| & \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a) - \zeta(a')|} \\
+& \lesssim \frac{1}{\delta} e^{\lambda_\Delta |\zeta(a) - \zeta(a')|} \\
+& \lesssim e^{\lambda_\Delta |\zeta(a) - \zeta(a')|}
+\end{align*}
+over all $a, a' \in \domain$ with $|\zeta(a)| \ge \delta$. One consequence is that, for some $c_\Delta > 0$, we have
+\[ |\hardker(a, a')| \le c_\Delta e^{\lambda_\Delta |\zeta(a) - \zeta(a')|} \]
+whenever $|\zeta(a)| \ge \delta$. Applying this bound along the diagonal in $\domain^2$, we learn that $|q/p| \le c_\Delta$ on the region $|\zeta| \ge \delta$. On the other hand, by fixing some arbitrary  $b' \in \domain$, we see that
+\begin{align*}
+\left|\frac{q(b')}{p(a)}\right| & \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a) - \zeta(b')|} \\
+& \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta(|\zeta(a)| + |\zeta(b')|)} \\
+& \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)|} e^{\lambda_\Delta|\zeta(b')|} \\
+& \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)|}
+\end{align*}
+over all $a \in \domain$ with $|\zeta(a)| \ge \delta$. Using both of the bounds we just found, we reason that
+\begin{align*}
+|\solproto(a)| & = \left| \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \right| \\
+& \le \left|\frac{1}{p(a)}\right| \exp\left(\int_{b}^{a}\left|\frac{q}{p}\right|\;d\zeta\right) \\
+& \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)|}\,e^{c_\Delta(|\zeta(a)| + |\zeta(b)|)} \\
+& \lesssim \frac{1}{|\zeta(a)|} e^{(\lambda_\Delta + c_\Delta)|\zeta(a)|}\,e^{c_\Delta|\zeta(b)|}
+\end{align*}
+over all $a \in \domain$ with $|\zeta(a)| \ge \delta$. Setting $\lambda_0 = \lambda_\Delta + c_\Delta$, we have $|\solproto| \lesssim |\zeta|^{-1} e^{\lambda_0|\zeta|}$ over the region $|\zeta| \ge \delta$. Since we're assuming $\tau$ is real and positive, $|\zeta|^\tau$ can't get arbitrarily close to zero on the region $|\zeta| > \delta$. It follows that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ over the region $|\zeta| \ge \delta$. Combining this with our earlier argument on the region $|\zeta| < \delta$, we get the desired result.
+
+\par\color{RoyalBlue}By removing a bounded neighborhood of $\zeta = 0$ from $\domain$, make a set $\domain_\text{far}$ with
 \[ \hardker(a, a') \le c_\Delta e^{\lambda_\Delta |\zeta(a) - \zeta(a')|}, \]
 for all $a \in \domain_\text{far}$ and $a' \in \domain$, as Condition~\eqref{cond:diag-basic} says we can do. Applying this bound on the diagonal in $\domain_\text{far}^2$, we learn that $|q/p| \le c_\Delta$ on $\domain_\text{far}$. In addition, by fixing some arbitrary  $b' \in \domain$, see that
 \begin{align*}
@@ -541,7 +570,7 @@ over all $a \in \domain_\text{far}$. Hence, $|1/p| \lesssim e^{\lambda_\Delta|\z
 & \lesssim e^{(\lambda_\Delta + c_\Delta)|\zeta(a)|}\,e^{c_\Delta|\zeta(b)|} \\
 & \lesssim e^{\lambda_0|\zeta(a)|}
 \end{align*}
-over all $a \in \domain_\text{far}$, recalling that $\lambda_0 = \lambda_\Delta + c_\Delta$. Since $\domain_\text{far}$ avoids a neighborhood of $\zeta = 0$, we know $|\zeta|^{\tau-1}$ is bounded on $\domain_\text{far}$. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{far}$.
+over all $a \in \domain_\text{far}$, recalling that $\lambda_0 = \lambda_\Delta + c_\Delta$. Since $\domain_\text{far}$ avoids a neighborhood of $\zeta = 0$, we know $|\zeta|^{\tau-1}$ is bounded on $\domain_\text{far}$ \textcolor{Tomato}{[oops, wrong direction]}. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{far}$.
 
 Finally, let $\domain_\text{mid}$ be the set that remains when you remove $\domain_\text{near}$ and $\domain_\text{far}$ from $\domain$. Since $\domain_\text{mid}$ avoids $\zeta = 0$ and is bounded, $|\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ can't get arbitrarily small there, and \textcolor{MediumSpringGreen}{Condition~[add a new condition for this]} guarantees that $|\solproto|$ is bounded there. Therefore, $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{mid}$.
 
@@ -587,7 +616,7 @@ at $\zeta = 0$, with $M = \zeta(b)^{-\tau} B^{-1} e^{\eta(b)}$. Observing that $
 \end{proof}
 \subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 
-In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $f_0\in\singexp{\tau-1}{\lambda_0}(\Omega)$, then we'll show $\softpart f_0 \in\singexp{\tau-1+\gamma}{\Lambda}(\Omega)$ for $\Lambda\geq \lambda_\Delta$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
+In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $\solproto \in \singexpalg{\tau-1}(\domain)$ \textcolor{MediumSpringGreen}{$\solproto\in\singexp{\tau-1}{\lambda_0}(\domain)$}, then we'll show $\softpart \solproto \in\singexpalg{\tau-1+\gamma}(\domain)$ \textcolor{MediumSpringGreen}{$\softpart \solproto \in\singexp{\tau-1+\gamma}{\Lambda}(\domain)$ for $\Lambda\geq \lambda_\Delta$}. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.  
 
 \begin{prop}\label{prop:smoothing}
 Under {\em Condition~\eqref{cond:eps-lambda}}, the operator $\softpart$ maps
@@ -619,10 +648,13 @@ we conclude that $|\zeta(a)|^{-\sigma-\gamma} \, e^{-\Lambda |\zeta(a)|} \, \Big
 \end{proof}
 
 \begin{cor}\label{cor:pertub_f0}
-Let $f_0$ be the prototype solution from Equation~\eqref{eqn:test_solution}. If $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}}, then $\softpart f_0\in\singexp{\tau-1+\gamma}{\Lambda}(\Omega)$, for $\Lambda\geq \lambda_\Delta$. 
+Consider the prototype solution $\solproto$ from Equation~\eqref{eqn:test_solution}. If $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}}, then $\softpart \solproto$ belongs to $\singexpalg{\tau-1+\gamma}(\domain)$ \textcolor{MediumSpringGreen}{$\singexp{\tau-1+\gamma}{\Lambda}(\domain)$, for $\Lambda\geq \lambda_\Delta$}.
 \end{cor}
 \begin{proof}
-Since $\tau-1>-1$ the hypothesis of Proposition~\ref{prop:smoothing} are satisfied. In addition, recall that by Theorem \ref{thm:proto-growth}, $\solproto\in\singexp{\tau-1}{\lambda_0}(\domain)$. Therefore, we can choose the constant $\Lambda=\max \{\lambda_0 , \lambda_\Delta\}$.
+\textcolor{Tomato}{[Revise]}
+We know from Theorem~\ref{thm:proto-growth} that $\solproto$ belongs to $\singexpalg{\tau-1}(\domain)$. Choose a constant $\Lambda \ge \lambda_\Delta$ big enough that $\solproto$ is in $\singexp{\tau-1}{\Lambda}(\domain)$. Since we're assuming $\tau$ is positive, we can apply Proposition~\ref{prop:smoothing}, concluding that $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$ belongs to $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$.
+
+\textcolor{RoyalBlue}{Since $\tau-1>-1$ the hypothesis of Proposition~\ref{prop:smoothing} are satisfied. In addition, recall that by Theorem~\ref{thm:proto-growth}, $\solproto\in\singexp{\tau-1}{\lambda_0}(\domain)$. Therefore, we can choose the constant $\Lambda=\max \{\lambda_0 , \lambda_\Delta\}$.}
 \end{proof}
 
 \subsection{Showing that $\volterra$ shrinks less singular functions \\ \textit{(toward Lemma~\ref{lem:perturbed_volterra})}}\label{sec:V is a contraction}
@@ -751,7 +783,7 @@ To see that the fixed point is still unique in the bigger space $\singexpalg{\rh
 %\textcolor{magenta}{[we have to change the definition of $\hardker$ in \S \ref{setting:basic} in $-\frac{q(a')}{p(a)}$.]}
 Start with the prototype solution $\solproto$ constructed in Theorem~\ref{thm:basic_volterra}, which satisfies the equation
 \[ \solproto = \hardpart \solproto. \]
-The base point for the construction can be chosen arbitrarily. Under our assumptions about $\volterra$, Theorem~\ref{thm:proto-growth} tells us that $\solproto$ is in $\singexp{\tau-1}{\lambda_0}(\Omega)$. Our goal is to find a perturbation $\solptb \in \singexpalg{\tau-1+\gamma}(\Omega)$ that makes $\solwhole = \solproto + \solptb$ a solution of
+The base point for the construction can be chosen arbitrarily. Under our assumptions about $\volterra$, Theorem~\ref{thm:proto-growth} tells us that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$ \textcolor{MediumSpringGreen}{$\singexp{\tau-1}{\lambda_0}(\domain)$}. Our goal is to find a perturbation $\solptb \in \singexpalg{\tau-1+\gamma}(\domain)$ that makes $\solwhole = \solproto + \solptb$ a solution of
 \begin{equation}\label{eqn:orig-homog}
 \solwhole = \volterra \solwhole.
 \end{equation}
@@ -766,7 +798,7 @@ we can rewrite the homogeneous equation we're trying to solve as an inhomogeneou
 & = \solproto + \softpart\solproto + \volterra\solptb \nonumber \\
 \solptb & = \softpart\solproto + \volterra\solptb. \label{eqn:equiv-inhomog}
 \end{align}
-Since we know that $\solproto$ is in $\singexp{\tau-1}{\lambda_0}(\Omega)$, Proposition~\ref{prop:smoothing} tells us that the inhomogeneous term $\softpart\solproto$ is in $\singexp{\tau-1+\gamma}{\lambda_0}(\Omega)$. Since $\tau+\gamma > \tau$, and we've made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\gamma}(\Omega)$. Equivalently, Equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\gamma}(\Omega)$.
+Since we know that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$ \textcolor{MediumSpringGreen}{$\singexp{\tau-1}{\lambda_0}(\domain)$}, Proposition~\ref{prop:smoothing} tells us that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\tau-1+\gamma}(\domain)$ \textcolor{MediumSpringGreen}{$\singexp{\tau-1+\gamma}{\lambda_0}(\domain)$}. Since $\tau+\gamma > \tau$, and we've made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\gamma}(\Omega)$. Equivalently, Equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\gamma}(\domain)$.
 
 Now, we just want to show that the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$ for any $\rho > \tau$.
 
