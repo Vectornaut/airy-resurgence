@@ -843,7 +843,7 @@ converge in the region $|z| > A$.
 \end{enumerate}
 Equations of the form $\mathcal{P}\Phi = 0$ are called {\em level~1} by Ecalle~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples using Laplace transform method and our existence and uniqueness result Theorem \ref{thm:general_volterra}. 
 \subsection{Notation}\label{sec:notation_alpha}
-Previously, we studied Volterra operators with a regular singularity at $\zeta=0$. However, when we look at solutions of a level 1 differential equation $\mathcal{P}\Phi=0$, we'll get many Volterra-type operators $\hat{\mathcal{P}}_\alpha$---one at each root of $\zeta=\alpha$ of the polynomial $P(-\zeta)$---with a regular singularity at $\zeta=\alpha$. 
+Previously, we studied Volterra operators with a regular singularity at $\zeta=0$. However, when we look at solutions of a level 1 differential equation $\mathcal{P}\Phi=0$, we'll get many Volterra-type operators $\hat{\mathcal{P}}_\alpha$---one at each root of $\zeta=\alpha$ of the polynomial $P(-\zeta)$---with a regular singularity at $\zeta=\alpha$. \textcolor{orange}{[I agree that the equation $\hat{\mathcal{P}}\Phi=0$ has a regular singularityat each root of $P(-\zeta)$, but I'm not sure I'd say $\hat{\mathcal{P}}_\alpha$ is singular in the way we've been using the term. Isn't it the operators $\volterra_\alpha$ which are clearly singular in our sense?]}
 
 Here, we adapt the notation of Sections \ref{sec:intro}--\ref{sec:proof_main_results}, to deal with this more general situation. First of all, the role of the coordinate $\zeta$ will be played by $\zeta-\alpha$. As a consequence, references to the point $\zeta=0$ become references to the point $\zeta-\alpha=0$, or equivalently $\zeta=\alpha$. 
 
@@ -1062,18 +1062,18 @@ P'(-\beta_1) &=  \pi_1 \prod_{j\neq 1} (-\beta_1+\beta_j)^2\\
 \end{verify}
 \item Condition~\eqref{cond:diag-basic} {\em on $\hardpart^\alpha$ is satisfied.}
 
-Since we're trying to bound $\hardker^\alpha(a, a')$ with a function of the difference $\omega(a, a') := \zeta(a) - \zeta(a')$, let's rewrite it as a rational function of $\omega(a, a')$ and $\zeta(a)$. First, rewrite
+Since we're trying to bound $\zeta(a)\,\hardker^\alpha(a, a')$ with a function of the difference $\omega(a, a') := \zeta(a) - \zeta(a')$, let's rewrite it as a rational function of $\omega(a, a')$ and $\zeta(a)$. First, rewrite
 \begin{align*}
 q(a') & = Q\big(-\zeta(a')\big) \\
 & = Q\big(\omega(a, a') - \zeta(a)\big)
 \end{align*}
 in the form
 \[ q(a') = Q_{d-1}\big(\zeta(a)\big)\;\omega(a, a')^{d-1} + \ldots + Q_1\big(\zeta(a)\big)\;\omega(a, a') + Q_0\big(\zeta(a)\big), \]
-where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. We can then write $-\hardker^\alpha(a, a')$ in the form
-\[ \frac{q(a')}{p(a)} = \frac{Q_{d-1}\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}\;\omega(a, a')^{d-1} + \ldots + \frac{Q_1\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}\;\omega(a, a') + \frac{Q_0\big(\zeta(a)\big)}{P\big(-\zeta(a)\big)}, \]
-viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational functions in $\zeta(a)$. If we keep $a$ away from the roots of from the roots of $p$, each coefficient is bounded, so $|\hardker^\alpha(a, a')|$ is bounded by a polynomial in $|\omega(a, a')|$. It follows that for any $\lambda_\Delta > 0$, we have
-\[ |\hardker^\alpha(a, a')| \lesssim e^{\lambda_\Delta|\omega(a, a')|} \]
-over all $a$ outside a neighborhood of the roots of $p$ and all $a'$ without restriction.
+where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. Next, knowing that $-\alpha$ is a root of $p$, rewrite $p$ in the form $(\zeta - \alpha)\,P_\alpha(\zeta)$, where $P_\alpha$ is a polynomial of degree $d-1$. We can then write $-\zeta(a)\,\hardker^\alpha(a, a')$ in the form
+\[ \zeta(a)\,\frac{q(a')}{p(a)} = \frac{Q_{d-1}\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a')^{d-1} + \ldots + \frac{Q_1\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a') + \frac{Q_0\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}, \]
+viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational functions in $\zeta(a)$. If we keep $a$ away from the roots of $p$ other than $\zeta = \alpha$, each coefficient is bounded, so $|\hardker^\alpha(a, a')|$ is bounded by a polynomial in $|\omega(a, a')|$. It follows that for any $\lambda_\Delta > 0$, and any domain $\domain_\alpha$ that avoids all the roots of $p$ other than $\zeta = \alpha$, we have
+\[ |\zeta(a)|\,|\hardker^\alpha(a, a')| \lesssim e^{\lambda_\Delta|\omega(a, a')|} \]
+over all $a, a' \in \domain_\alpha$.
 
 For consistency with Condition~\eqref{cond:eps-lambda}, we choose $\lambda_\Delta > A$.
 \item Condition~\eqref{cond:eps-lambda} {\em on $\softpart^\alpha$ is satisfied.} \textcolor{magenta}{[I think this bound fails unless $R_1, \ldots, R_{d-1}$ are zero, so let's restrict our attention to that case.]}
