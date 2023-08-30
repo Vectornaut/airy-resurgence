@@ -532,7 +532,7 @@ By Proposition~\ref{prop:asymptotic at zero}, we can find a radius $\delta > 0$ 
 By Condition~\eqref{cond:diag-basic}, we have
 \begin{align*}
 |\hardker(a, a')| & \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a) - \zeta(a')|} \\
-& \lesssim \frac{1}{\delta} e^{\lambda_\Delta |\zeta(a) - \zeta(a')|} \\
+& \lesssim \delta^{-1} e^{\lambda_\Delta |\zeta(a) - \zeta(a')|} \\
 & \lesssim e^{\lambda_\Delta |\zeta(a) - \zeta(a')|}
 \end{align*}
 over all $a, a' \in \domain$ with $|\zeta(a)| \ge \delta$. One consequence is that, for some $c_\Delta > 0$, we have
@@ -685,20 +685,7 @@ by keeping $a$ and $a'$ close enough to $\zeta = 0$.
 \begin{proof}
 First, choose some $\sigma_0 \in (\tau, \sigma)$. Condition~\eqref{cond:sing} tells us that by making $\delta > 0$ small enough, we can ensure that
 \[ |\hardker(a, a')| \le \frac{\sigma_0}{|\zeta(a)|} \]
-whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$.
-\par\color{RoyalBlue}
-Condition~\eqref{cond:sing} doesn't stop $|\hardker(a, a')|$ from exceeding $\frac{\tau}{|\zeta(a)|}$. However, by keeping $a$ and $a'$ close to $\zeta = 0$, we can make sure that $|\hardker(a, a')|$ only exceeds $\frac{\tau}{|\zeta(a)|}$ by an arbitrary small margin. Condition~\eqref{cond:sing} tells us that when $\delta > 0$ is small enough, there's a constant $C$ with
-\[ \left| \hardker(a, a') - \frac{\tau}{\zeta(a)} \right| < C \]
-whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. It follows that
-\begin{align*}
-|\hardker(a,a')| &\leq \frac{\tau}{|\zeta(a)|}+\left\vert\frac{\tau}{\zeta(a)} - \hardker(a,a')\right\vert \\
-&\leq \frac{\tau}{|\zeta(a)|} + C \\
-&= \frac{\tau + C|\zeta(a)|}{|\zeta(a)|} \\
-&\le \frac{\tau + C\delta}{|\zeta(a)|}
-\end{align*}
-whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. By shrinking the radius $\delta$, we can make $C\delta$ as small as we want.
-\color{black}
-Under Condition~\eqref{cond:eps-lambda}, we can make $|\softker(a, a')|$ as small as we want by keeping $a$ and $a'$ close to $\zeta = 0$. The condition tells us that
+whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Under Condition~\eqref{cond:eps-lambda}, we can make $|\softker(a, a')|$ as small as we want by keeping $a$ and $a'$ close to $\zeta = 0$. The condition tells us that
 \[ \big| \softker(a, a') \big| \lesssim\frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$, which means that
 \[ \big| \softker(a, a') \big| \lesssim\frac{(2\delta)^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta(2\delta)}\]
@@ -714,13 +701,13 @@ over all $a \in \domain_\text{far}$ and $a' \in \domain$.
 Find a radius $\delta > 0$ with $|\zeta| \ge \delta$ on $\domain_\text{far}$, and choose some $\lambda > \lambda_\Delta$. Conditions \eqref{cond:diag-basic} and \eqref{cond:eps-lambda} tell us that
 \begin{align*}
 |\kerwhole(a,a')|&\leq |\hardker(a,a')| + |\softker(a,a')|\\
-&\lesssim e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} + \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
-&\lesssim \big(1 + \delta^{-1} |\zeta(a)-\zeta(a')|^\gamma \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
+&\lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} + \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
+&\lesssim \delta^{-1} \big(1 + |\zeta(a)-\zeta(a')|^\gamma \big) \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
 \end{align*}
 over all $a \in \domain_\text{far}$ and $a' \in \domain$. Since
-\[ 1 + \delta^{-1}|\zeta(a)-\zeta(a')|^\gamma \]
+\[ 1 + |\zeta(a)-\zeta(a')|^\gamma \]
 grows polynomially with respect to $|\zeta(a)-\zeta(a')|$, we can bound it with any growing exponential function of $|\zeta(a)-\zeta(a')|$. In particular,
-\[ 1 + \delta^{-1}|\zeta(a)-\zeta(a')|^\gamma \lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \]
+\[ 1 + |\zeta(a)-\zeta(a')|^\gamma \lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \]
 over all $a, a' \in \domain$. It follows that
 \[ |\kerwhole(a,a')| \lesssim e^{(\lambda - \lambda_\Delta) |\zeta(a)-\zeta(a')|} \, e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 over all $a \in \domain_\text{far}$ and $a' \in \domain$. This simplifies to the desired result.
