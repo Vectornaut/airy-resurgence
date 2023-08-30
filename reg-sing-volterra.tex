@@ -131,9 +131,9 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \item Rewrite arguments using new Condition~\eqref{cond:sing}.
 \item \textcolor{gray}{Show that example satisfies Condition~\eqref{cond:sing}.}
 \end{itemize}
-\item \textbf{(Aaron)} Drop Condition~\eqref{cond:slow}, which is implied by Condition~\eqref{cond:diag-basic}
+\item \textcolor{gray}{\textbf{(Aaron)} Drop Condition~\eqref{cond:slow}, which is implied by Condition~\eqref{cond:diag-basic}}
 \begin{itemize}
-  \item Add a condition to ensure that $\zeta(a) = 0$ is the only singularity.
+  \item \textcolor{gray}{Add a condition to ensure that $\zeta(a) = 0$ is the only singularity.}
   \item \textcolor{gray}{Add $c_\Delta$ to Condition~\eqref{cond:diag-basic} as multiplicative constant, and export both of the constants $\lambda_\Delta$ and $\lambda_0 = \lambda_\Delta + c_\Delta$ from the condition.}
   \item \textcolor{gray}{When showing that the example satisfies Condition~\eqref{cond:diag-basic}, make it consistent with new condition wording.} \textcolor{MediumSpringGreen}{[No change required]}
   \item \textcolor{gray}{Refer to Condition~\eqref{cond:diag-basic} in proof of Theorem~\ref{thm:proto-growth}.}
@@ -704,7 +704,7 @@ over all $a, a' \in \domain$, which means that
 \[ \big| \softker(a, a') \big| \lesssim\frac{(2\delta)^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta(2\delta)}\]
 over all $a, a' \in \domain$ with $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Combining this conclusion with the previous one, we get the desired result.
 \end{proof}
-Another bound, which works when the first argumetn of $\kerwhole$ is kept away from $\zeta = 0$, will be used in Section~\ref{far-bound}.
+Another bound, which works when the first argument of $\kerwhole$ is kept away from $\zeta = 0$, will be used in Section~\ref{far-bound}.
 \begin{prop}\label{prop:whole-ker-far-bound}
 Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:diag-basic}}, and $\softpart$ satisfies {\em Condition~\eqref{cond:eps-lambda}}. Choose a subset $\domain_\text{far} \subset \domain$ that doesn't touch $\zeta = 0$.\footnote{A subset of a topological space {\em touches} the points in its closure~\cite[Chapter~5, Definition~2.11]{joshi1983gen-top}.} Then, for any $\lambda > \lambda_\Delta$, we have
 \[ |\kerwhole(a,a')| \lesssim e^{\lambda |\zeta(a)-\zeta(a')|} \]
@@ -843,27 +843,23 @@ converge in the region $|z| > A$.
 \end{enumerate}
 Equations of the form $\mathcal{P}\Phi = 0$ are called {\em level~1} by Ecalle~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples using Laplace transform method and our existence and uniqueness result Theorem \ref{thm:general_volterra}. 
 \subsection{Notation}\label{sec:notation_alpha}
-Previously, we studied Volterra operators with a regular singularity at $\zeta=0$. However, when we look at solutions of a level 1 differential equation $\mathcal{P}\Phi=0$, we'll get many Volterra-type operators $\hat{\mathcal{P}}_\alpha$---one at each root of $\zeta=\alpha$ of the polynomial $P(-\zeta)$---with a regular singularity at $\zeta=\alpha$. \textcolor{orange}{[I agree that the equation $\hat{\mathcal{P}}\Phi=0$ has a regular singularityat each root of $P(-\zeta)$, but I'm not sure I'd say $\hat{\mathcal{P}}_\alpha$ is singular in the way we've been using the term. Isn't it the operators $\volterra_\alpha$ which are clearly singular in our sense?]}
+So far, we've studied a Volterra equation with a regular singularity at $\zeta = 0$. When we use Laplace transform methods to solve a level~1 differential equation $\mathcal{P}\Phi = 0$ in the frequency domain, we'll end up with several Volterra equations $\hat{\mathcal{P}}_\alpha \varphi = 0$, each with a regular singularity at a different root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
 
-Here, we adapt the notation of Sections \ref{sec:intro}--\ref{sec:proof_main_results}, to deal with this more general situation. First of all, the role of the coordinate $\zeta$ will be played by $\zeta-\alpha$. As a consequence, references to the point $\zeta=0$ become references to the point $\zeta-\alpha=0$, or equivalently $\zeta=\alpha$. 
+Throughout Section~\ref{sec:example}, we'll adapt the notation of Sections \ref{sec:intro}--\ref{sec:proof_main_results} to this more general situation. The role of the coordinate $\zeta$ in those earlier sections will now be played by $\zeta-\alpha$. This substitution leads to several other reinterpretations, summarized below.
 
-Recalling that $\domain$ is star-shaped around $\zeta=0$ (see Condition \eqref{cond:star}), we introduce the notation $\domain_\alpha$ for domains star-shaped around $\zeta=\alpha$. Then, the function space $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ is the space of holomorphic functions in $\domain_\alpha$, uniformly of exponential type $\Lambda$ and with a power-law singularity at $\zeta=\alpha$. Explicitly, $f\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ if 
+References to the point $\zeta=0$ become references to the point $\zeta-\alpha=0$, which we'll rewrite as $\zeta=\alpha$. For example, we'll now work on a domain that touches but doesn't contain $\zeta = \alpha$, introducing the notation $\domain_\alpha$ as a reminder of this change. Condition~\eqref{cond:star} now says that $\domain_\alpha$ is star-shaped around $\zeta = \alpha$. The function space $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ becomes a space of holomorphic functions on $\domain_\alpha$ which have a power-law singularity at $\zeta=\alpha$ and are uniformly of exponential type $\Lambda$. Explicitly, $f$ is in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ if 
+\[ |f| \lesssim |\zeta-\alpha|^{-\sigma} e^{-\Lambda |\zeta-\alpha|} \]
+over $\domain_\alpha$, making the norm
+\[ \|f\|_{\sigma, \Lambda} = \sup_{\domain_\alpha} |\zeta-\alpha|^{-\sigma} e^{-\Lambda |\zeta-\alpha|} |f| \]
+well-defined.
 
-\[ e^{-\Lambda |\zeta-\alpha|} |\zeta-\alpha|^{-\sigma} |f| \]
-
-is uniformly bounded in $\domain_\alpha$. 
-
-Finally, we rewrite conditions for Volterra operators with a regular singularity at $\zeta=\alpha$: the changes will affect only Conditions that control the behaviour of the operator near $\zeta=\alpha$, namely Conditions \eqref{cond:sing} and \eqref{cond:eps-lambda}. We say that a Volterra operator $\volterra_\alpha$ with a regular singularity at $\zeta=\alpha$ satisfies Condition \eqref{cond:sing} if for some non-zero constant $\tau$, the difference 
-\[k_\alpha(a,a')-\frac{\tau}{\zeta(a)-\alpha}\]
-is bounded in a neighbourhood of $\zeta(a)=\alpha$ in $\domain_\alpha$, where $k_\alpha$ denotes the kernel of $\volterra$. In addition, we require that for any $\sigma>\tau$, the bound 
-\[|k_\alpha(a,a')|<\frac{\sigma}{\zeta(a)-\alpha}\]
-holds over some neighbourhood of $\big(\zeta(a),\zeta(a')\big)=(\alpha,\alpha)$ in $\domain_\alpha^2$. 
-The operator $\volterra_\alpha$ satisfies Condition \eqref{cond:eps-lambda} if for some constant $\gamma>0$, we have
-\[ |k_\alpha(a,a')|\lesssim \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)-\alpha|} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|}\]
-over all $a,a'\in\domain_\alpha$. 
-
-
-
+Our conditions on Volterra operators change to describe a regular singularity at $\zeta = \alpha$. For example, consider a Volterra operator $\hardpart^\alpha$ of the kind described in Section~\ref{setting:basic}, with kernel $\hardker^\alpha$. This operator now satisfies Condition~\eqref{cond:sing} if for some real, positive constant $\tau_\alpha$, the difference
+\[ \hardker^\alpha(a, a) - \frac{\tau_\alpha}{\zeta(a) - \alpha} \]
+is bounded on a neighborhood of $\zeta(a) = \alpha$ in $\domain_\alpha$, and for each $\sigma > \tau_\alpha$, the bound
+\[ |\hardker^\alpha(a, a')| < \frac{\sigma}{|\zeta(a) - \alpha|} \]
+holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$. \textcolor{Tomato}{[Also describe change for Condition~\eqref{cond:diag-basic}.]} Similarly, an operator $\softpart^\alpha$ with kernel $\softker^\alpha$ now satisfies Condition~\eqref{cond:eps-lambda} if for some constants $\gamma > 0$ and $\lambda_\Delta$, we have
+\[ |\softker^\alpha(a,a')| \lesssim \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)-\alpha|} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|}\]
+over all $a, a' \in \domain_\alpha$.
 \begin{brainstorm}
 \item Previously, we always looked at Volterra operators with a regular singularity at $\zeta = 0$.
 \item When we try to solve a level~1 differential equation, we'll get an operator with many regular singularities---one at each root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
@@ -871,10 +867,10 @@ over all $a,a'\in\domain_\alpha$.
 \begin{itemize}
     \item In all our work from Sections~\ref{sec:intro}--\ref{sec:proof_main_results}, the role of the coordinate $\zeta$ is played instead by $\zeta - \alpha$. Concrete examples of how to do that:
     \begin{itemize}
-        \item References to the point $\zeta = 0$ become references to the point $\zeta - \alpha = 0$, or equivalently $\zeta = \alpha$.
-        \item Conditions on operators, location of regular singularity.
-        \item Since the $\domain$ is star-shaped around $\zeta = 0$, it's now star-shaped around $\zeta = \alpha$. Introduce notation $\domain_\alpha$.
-        \item Definition of $\singexp{\sigma}{\Lambda}$ spaces.
+        \item \textcolor{gray}{References to the point $\zeta = 0$ become references to the point $\zeta - \alpha = 0$, or equivalently $\zeta = \alpha$.}
+        \item \textcolor{gray}{Conditions on operators, location of regular singularity.}
+        \item \textcolor{gray}{Since the $\domain$ is star-shaped around $\zeta = 0$, it's now star-shaped around $\zeta = \alpha$. Introduce notation $\domain_\alpha$.}
+        \item \textcolor{gray}{Definition of $\singexp{\sigma}{\Lambda}$ spaces.}
     \end{itemize}
 \end{itemize}
 \end{brainstorm}
@@ -929,18 +925,20 @@ continuously for all $\sigma > -1$ and $\Lambda \ge 0$. Multiplication by $\zeta
 continuously.
 \end{proof}
 
-From Proposition \ref{prop:frac-int-smoothing}, we deduce that $\fracderiv{-\nu}{\zeta}{\alpha}\varphi$ admits a well defined Laplace transform along any ray $\Gamma_{\zeta,\alpha}^{\theta}\subset\domain_\alpha$. Thus, using a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, one can show that 
+From Proposition \ref{prop:frac-int-smoothing}, we deduce that $\fracderiv{-\nu}{\zeta}{\alpha}\varphi$ has a well-defined Laplace transform along any ray $\Gamma_{\zeta,\alpha}^{\theta}\subset\domain_\alpha$. Using a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, one can show that 
 \[ \laplace_{\zeta,\alpha}^{\theta}\,\fracderiv{-\nu}{\zeta}{\alpha} \varphi = z^{-\nu} \laplace_{\zeta, \alpha}^{\theta} \varphi \]
-for all $\nu \in (0, \infty)$ and $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$. This generalizes the Laplace transform's action on derivatives: when $\varphi \in \singexp{\sigma}{\Lambda}(\domain_\alpha)$ and $\sigma>-1$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
-\begin{equation}%%\label{id:L-mult}
-\laplace_{\zeta,\alpha}^\theta (\zeta^n \varphi) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_{\zeta,\alpha}^\theta \varphi.
-\end{equation}
+for all $\nu \in (0, \infty)$ and $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$. This generalizes the Laplace transform's action on derivatives: under the same conditions on $\varphi$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
+%%\begin{equation}\label{id:L-mult}
+\[ \laplace_{\zeta,\alpha}^\theta (\zeta^n \varphi) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_{\zeta,\alpha}^\theta \varphi \]
+%%\end{equation}
 for all integers $n \ge 0$ and suitable directions $\theta$.
 
 \begin{rmk}
+In the relationship between $\fracderiv{-\nu}{\zeta}{\alpha}$ and multiplication by $z^{-\nu}$ described above, smoothing out the singularity at $\zeta = \alpha$ in the position domain corresponds to speeding up the decay as $|z| \to \infty$ in the frequency domain. This is a general feature of the Laplace transform.
+\par\color{RoyalBlue}
 Increasing the regularity in the position domain, then the Laplace transform gives something which is faster decaying in the frequency domain. This is a general feature of the Laplace transform.
+\color{black}
 \end{rmk}
-
 \subsection{Going to the position domain}
 By the properties of the Laplace transform $\laplace_{\zeta,\alpha}^{\theta}$ we can turn differential operators in the frequency domain into Volterra operators in the position domain. 
 \begin{lemma}\label{lem:use-dict}
