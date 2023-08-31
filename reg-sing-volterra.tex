@@ -259,7 +259,6 @@ For the applications we have in mind, $\domain$ might look something like the se
 \begin{center}
 \begin{tikzpicture}
 \newcommand{\spill}{4}
-%% previously violet!20
 \fill[ietcoast!33, bezier bounding box, path fading=radial edge]
   (-\spill, -\spill) (\spill, \spill)
   (0, 0) -- (160:\spill)
@@ -267,7 +266,6 @@ For the applications we have in mind, $\domain$ might look something like the se
   arc (103:50:\spill) -- (50:2.6) .. controls (50:2.2) and (43:2.2) .. (43:2.6) -- (43:\spill)
   arc (43:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-60:2) .. (-60:2.3) -- (-60:\spill)
   arc (-60:-130:\spill) -- (0, 0);
-%% previously violet
 \fill[ietcoast!33!black] circle (0.7mm) node[anchor=195, outer sep=1mm] {$\zeta = 0$};
 \end{tikzpicture}
 \end{center}
@@ -288,20 +286,6 @@ In addition, for each $\sigma > \tau$, the bound
 \[ \big|\hardker(a, a')\big| < \frac{\sigma}{\zeta(a)} \]
 holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.
 \end{conditions}
-%%Our definition of a regular singularity implies that as $|\zeta|$ goes to zero, $|p|$ also goes to zero, while $|q|$ settles into a compact interval that doesn't include zero.
-%%\begin{verify}
-%%[\textit{Proof.} Fix any $a'$ in the neighborhood where the difference above is bounded. By confining $a$ to small enough neighborhoods of $\zeta = 0$, we can make $|\tau/\zeta(a)|$ arbitrarily large, forcing $|q(a')/p(a)|$ to become arbitrarily large to satisfy the definition. Since $a'$ is fixed, the only way for this ratio to get arbitrarily large is for $|p(a)|$ to get arbitrarily small.]
-%%\end{verify}
-%%For some of our results, we'll also need to control $|p|$ and $|q|$ in various ways as $|\zeta|$ goes to infinity.
-%%\begin{conditions}
-%%\condconst{slow}{\lambda_0}\label{cond:slow} We can find constants $\lambda_p$ and $\lambda_\text{ratio}$ with
-%%\begin{align*}
-%%\left|\frac{1}{p}\right| & \lesssim e^{\lambda_p |\zeta|} &
-%%\left|\frac{q}{p}\right| & \le \lambda_\text{ratio}
-%%\end{align*}
-%%outside some neighborhood of $\zeta = 0$ in $\domain$. In addition, $|1/p|$ and $|q/p|$ are bounded outside every neighborhood of $\zeta = 0$ in $\domain$; the bound may depend on the neighborhood. Note that this only constrains the ratio of $p$ and $q$ when they're evaluated at the same point. The constants will only enter our reasoning through their sum, $\lambda_0 = \lambda_p + \lambda_\text{ratio}$.
-%%\end{conditions}
-%%This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
 For most of our results, we'll need to make sure that $\domain$ doesn't touch any singularities of $\hardpart$ other than the one at $\zeta = 0$. We'll also need to control $\hardker(a, a')$ when $a$ is away from $\zeta = 0$, requiring $\hardker$ to be bounded on the diagonal in $\domain^2$ and to grow at most exponentially as we move away from the diagonal. These requirements can be combined into one condition.
 \begin{conditions}
 \condconst{diag$_0$}{\lambda_\Delta}\label{cond:diag-basic} For some constant $\lambda_\Delta$, we have
@@ -354,17 +338,7 @@ We'll prove this result in Section~\ref{sec:asymptotics}.
 \begin{rmk}
 When $\hardpart$ also satisfies Condition~\eqref{cond:reg-p}, we can get a better estimate of the prototype solution near $\zeta = 0$, as described in Proposition~\ref{prop:better-proto-estimate} from Section~\ref{sec:asymptotics}.
 \end{rmk}
-\color{black}
 
-%%---------
-%%Once we've understood the prototype solution $\solproto$, we can deform it to a solution of the equation we originaly set out to solve---the one involving the perturbed operator $\volterra = \hardpart + \softpart$ from Section~\ref{setting:perturbed}.
-
-%%The prototype solution $\solproto$ will be our reference point for studying the perturbed operator $\volterra = \hardpart + \softpart$ from Section~\ref{setting:perturbed}.
-
-%%Once we've understood the prototypical operator $\hardpart$, we perturb it to the more general operator $\volterra = \hardpart + \softpart$ described in Section~\ref{setting:perturbed}. The prototypical
-
-%%Since $\hardpart$ is the regular singular part of the perturbed operator $\volterra = \hardpart + \softpart$ from Section~\ref{setting:perturbed},
-%%---------
 When we perturb $\hardpart$ to the more general operator $\volterra = \hardpart + \softpart$ from Section~\ref{setting:perturbed}, the equation we're trying to solve gets more complicated, but its regular singularity at $\zeta = 0$ stays essentially the same. We might therefore expect to find a solution that looks like $\solproto$ near the singularity, differing only by a less singular perturbation. If we strengthen the constraints on $\hardpart$ a little more, this expectation is fulfilled.
 \begin{thm}\label{thm:general_volterra}
 Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:diag-basic}, and $\softpart$ satisfies {\em Condition~\eqref{cond:eps-lambda}}. Then the equation
@@ -492,13 +466,8 @@ Exponentiating both sides, we see that
 \[ \chi(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
 Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. The exponential factor in the formula above is then bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ whenever $|\zeta(a)| < \delta$. Since $\tau$ is positive, this is enough to show that $\lim_{\zeta \to 0} \chi = 0$. It follows, as discussed above, that $\hardpart \solproto = \solproto$. 
 \end{proof}
-
-
 \subsubsection{Regularity}\label{sec:asymptotics}
 Theorem~\ref{thm:proto-growth} comprises two results with different conditions. We'll prove them separately as Propositions \ref{prop:asymptotic at zero} and \ref{prop:asymptotic at infinity}.
-%%\begin{rmk}
-%%{\em Propositions \ref{prop:asymptotic at zero}} and \ref{prop:asymptotic at infinity} together prove {\em Theorem \ref{thm:proto-growth}}. 
-%%\end{rmk}
 \begin{prop}\label{prop:asymptotic at zero}
 Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
 \end{prop}
@@ -525,10 +494,6 @@ Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \textcolor{
 We want to show that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ for some real constant $\lambda_0$.
 
 By Proposition~\ref{prop:asymptotic at zero}, we can find a radius $\delta > 0$ for which $|\solproto| \lesssim |\zeta|^{\tau-1}$ over the region $|\zeta| < \delta$. No matter which value of $\lambda_0$ we pick, we know that $e^{\lambda_0|\zeta|}$ can't get arbitrarily close to zero on a bounded region, so we'll have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ over the region $|\zeta| < \delta$.
-
-%%On a bounded region, $e^{\lambda_0|\zeta|}$ can't get arbitrarily close to zero, so we also have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ over the region $|\zeta| < \delta$.
-
-%%Find a neighborhood $\domain_\text{near}$ of $\zeta = 0$ where $|\solproto| \lesssim |\zeta|^{\tau-1}$, as Proposition~\ref{prop:asymptotic at zero} says we can do. By making $\domain_\text{near}$ bounded, we can prevent $e^{\lambda_0|\zeta|}$ from getting arbitrarily close to zero on $\domain_\text{near}$. Then we have $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ on $\domain_\text{near}$.
 
 By Condition~\eqref{cond:diag-basic}, we have
 \begin{align*}
@@ -741,7 +706,6 @@ Choose $\Lambda$ large enough to ensure that $\volterra$ is a contraction of $\s
 To see that the fixed point is still unique in the bigger space $\singexpalg{\rho-1}(\Omega)$, first recall from Proposition~\ref{prop:inclus-ge-exp} that we have inclusions $\singexp{\rho-1}{\Lambda'}(\Omega) \hookrightarrow \singexp{\rho-1}{\Lambda}(\Omega)$ for all $\Lambda' \le \Lambda$. Any fixed point in $\singexp{\rho-1}{\Lambda'}(\Omega)$ must map to the unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ under this inclusion. Next, observe that for any $\Lambda'' \ge \Lambda$, the map $f \mapsto \volterra f + g$ is also a contraction of $\singexp{\rho-1}{\Lambda''}(\Omega)$. The inclusion $\singexp{\rho-1}{\Lambda}(\Omega) \hookrightarrow \singexp{\rho-1}{\Lambda''}(\Omega)$ must send the unique fixed point in the smaller space to the unique fixed point in the larger one. Together, these arguments show that the fixed point is unique in $\singexpalg{\rho-1}(\Omega)$.
 \end{proof}
 \begin{proof}[Proof of Theorem~\ref{thm:general_volterra}]
-%\textcolor{magenta}{[we have to change the definition of $\hardker$ in \S \ref{setting:basic} in $-\frac{q(a')}{p(a)}$.]}
 Start with the prototype solution $\solproto$ constructed in Theorem~\ref{thm:basic_volterra}, which satisfies the equation
 \[ \solproto = \hardpart \solproto. \]
 The base point for the construction can be chosen arbitrarily. Under our assumptions about $\volterra$, Theorem~\ref{thm:proto-growth} tells us that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$. Our goal is to find a perturbation $\solptb \in \singexpalg{\tau-1+\gamma}(\domain)$ that makes $\solwhole = \solproto + \solptb$ a solution of
@@ -783,17 +747,12 @@ whenever $\rho \le \tau + \min\{\epsilon, 1\}$. Theorem~\ref{thm:general_volterr
 \[ M^{-1}\solproto + \singexpalg{\rho-1}(\domain) \]
 as long as $\rho \in (\tau, \tau + \gamma]$. Putting these facts together, we get the desired result.
 \end{proof}
-
 \section{A motivating example}\label{sec:example}
-%\color{black}
-%\section{\textcolor{orange}{[Proof of main results]}}
 \subsection{Overview}
 We can use our understanding of regular singular Volterra equations study so-called \textit{level~1 differential equations}, which each have an irregular singularity at $\infty$. In particular, we can build a frame of analytic solutions in the frequency domain by studying solutions of an integral equation in the position domain. The latter is an example of the regular singular Volterra equations we introduced above.
 \subsection{Level $1$ differential equations}\label{sec:level 1 ODE}
 Let $\mathcal{P}$ be a linear differential operator of the form\footnote{ We follow Delabaere, rather than Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}.}
-%%\begin{equation}\label{eqn:level 1 ode}
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2} R(z^{-1}), \]
-%%\end{equation}
 where
 \begin{enumerate}
 \item[$\bullet$] $P$ is a monic degree-$d$ polynomial whose roots are all simple; 
@@ -829,8 +788,6 @@ Let $\domain_\alpha$ be a simply connected open subset of $\C$ that touches but 
 \end{equation}
 It's a function on the frequency domain because it depends on the frequency variable $z$.
 \subsubsection{Action on integral operators}\label{sec:L-int-op}
-%%For $\nu \in (-\infty, 1)$, the fractional integral $\partial^{\nu-1}_{x \text{ from } 0}$ is defined by
-%%\[ \partial^{\nu-1}_{x,0} f(x) \defeq \frac{1}{\Gamma(1-\nu)} \int_0^x (x-x')^{-\nu} f(x')\,dx'. \]
 For each $\nu \in (0, \infty)$, the fractional integral $\partial^{-\nu}_{\zeta, \alpha}$ is the Volterra operator defined by
 \[ [\partial^{-\nu}_{\zeta, \alpha} \varphi](a) := \frac{1}{\Gamma(\nu)} \int_{\zeta = \alpha}^a \big(\zeta(a)-\zeta\big)^{\nu-1} \varphi\;d\zeta \]
 for each $a \in \domain_\alpha$. It obeys the expected semigroup law \cite[Section~1.3]{mladenov2014advanced}
@@ -839,17 +796,6 @@ for each $a \in \domain_\alpha$. It obeys the expected semigroup law \cite[Secti
 \end{align*}
 and agrees with ordinary repeated integration when $\nu$ is an integer \cite[Equation~35]{mladenov2014advanced}.
 
-%For $\alpha \in (0, 1)$ and integers $n \ge 0$, fractional derivatives $\fracderiv{n+\mu}{\zeta}{0}$ are defined by composing $\fracderiv{\mu-1}{\zeta}{0}$ with powers of $\tfrac{\partial}{\partial \zeta}$. However, $\fracderiv{\mu-1}{\zeta}{0}$ and $\tfrac{\partial}{\partial \zeta}$ don't commute~\cite[equation 54]{mladenov2014advanced}. Various ordering conventions give various definitions of $\fracderiv{n+\mu}{\zeta}{0} f$, which differ by operators that act on the germ of $f$ at zero (see \cite[\S 1.3]{mladenov2014advanced} \textbf{---original source Podlubny}). We'll use the {\em Riemann-Liouville} convention.
-
-%For $\alpha \in (0, 1)$ and integers $n \ge 0$, the {\em Riemann-Liouville fractional derivative} $\fracderiv{n+\alpha}{\zeta}{0}$ is defined by
-%\[ \fracderiv{n+\mu}{\zeta}{\alpha} := \left(\tfrac{\partial}{\partial \zeta}\right)^{n+1} \fracderiv{\mu-1}{\zeta}{\alpha}. \]
-
-%The symbol $\fracderiv{\mu}{\zeta}{0}$ is now defined for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$. It denotes a fractional integral when $\mu$ is negative, and a fractional derivative when $\mu$ is a positive non-integer.
-
-%The Riemann-Liouville fractional derivative is a left inverse of the fractional integral, in the sense that $\fracderiv{\lambda}{\zeta}{ 0}\,\fracderiv{-\lambda}{\zeta}{0}=\text{Id}$ for all $\lambda \in (0, \infty)$. This extends the semigroup law:
-%\begin{align*}
-%\fracderiv{\lambda}{\zeta}{0}\,\fracderiv{\mu}{\zeta}{0} & = \fracderiv{\lambda+\mu}{\zeta}{0} & \lambda \in \R \smallsetminus \{0, 1, 2, 3, \ldots\},\quad\mu \in (-\infty, 0).
-%\end{align*}
 Fractional integration has a smoothing effect: it reduces the sharpness of any power-law singularity at $\zeta = \alpha$.
 \begin{prop}\label{prop:frac-int-smoothing}
 For each $\nu \in (0, \infty)$, the fractional integral $\fracderiv{-\nu}{\zeta}{\alpha}$ maps
@@ -860,7 +806,6 @@ continuously for all $\sigma > -1$ and $\Lambda \ge 0$.
 Rewrite the fractional integral as
 \begin{align*}
 \left[\fracderiv{-\nu}{\zeta}{\alpha} \varphi\right](a)&=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a (\zeta(a)-\zeta)^{\nu-1} \, \varphi \; d\zeta\\
-%%&=\frac{1}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\,  \big(\zeta(a) - \alpha\big)\, \varphi \; d\zeta\\
 &=\frac{\zeta(a)-\alpha}{\Gamma(\nu)}\int_{\zeta=\alpha}^a \frac{(\zeta(a)-\zeta)^{\nu-1}}{\zeta(a)- \alpha}\,\varphi \; d\zeta.
 \end{align*}
 The Volterra operator with kernel
@@ -875,9 +820,7 @@ continuously.
 From Proposition \ref{prop:frac-int-smoothing}, we deduce that $\fracderiv{-\nu}{\zeta}{\alpha}\varphi$ has a well-defined Laplace transform along any ray $\Gamma_{\zeta,\alpha}^{\theta}\subset\domain_\alpha$. Using a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, one can show that 
 \[ \laplace_{\zeta,\alpha}^{\theta}\,\fracderiv{-\nu}{\zeta}{\alpha} \varphi = z^{-\nu} \laplace_{\zeta, \alpha}^{\theta} \varphi \]
 for all $\nu \in (0, \infty)$ and $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$. This generalizes the Laplace transform's action on derivatives: under the same conditions on $\varphi$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
-%%\begin{equation}\label{id:L-mult}
 \[ \laplace_{\zeta,\alpha}^\theta (\zeta^n \varphi) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_{\zeta,\alpha}^\theta \varphi \]
-%%\end{equation}
 for all integers $n \ge 0$ and suitable directions $\theta$.
 
 \begin{rmk}
@@ -897,13 +840,12 @@ For the Laplace transform to have any hope of being well-defined, we have to cho
 \begin{proof}[Proof of Lemma~\ref{lem:use-dict}]
 Comparing the definitions of $\mathcal{P}$ and $\hat{\mathcal{P}}_\alpha$, and using the properties of the Laplace transform discussed in Section~\ref{sec:L-int-op}, we can work out that $\mathcal{P} \laplace_{\zeta,\alpha}^\theta = \laplace_{\zeta,\alpha}^\theta \hat{\mathcal{P}}_\alpha$. Hence,
 \begin{align*}
-\mathcal{P}\Psi_\alpha & = \mathcal{P}\laplace_{\zeta,\alpha}^{\theta}\psi_\alpha\\
-%%& = \laplace_{\zeta,\alpha}^{\theta}\left[P(-\zeta)+\fracderiv{-1}{\zeta}{\alpha}\circ Q(-\zeta)+\fracderiv{-2}{\zeta}{\alpha}\circ\sum_{r=0}^{d-1}R_r(\fracderiv{-1}{\zeta}{\alpha})(-\zeta)^r\right]\psi_j\\
+\mathcal{P}\Psi_\alpha & = \mathcal{P}\laplace_{\zeta,\alpha}^{\theta}\psi_\alpha \\
 & = \laplace_{\zeta,\alpha}^{\theta}\hat{\mathcal{P}}_\alpha\psi_\alpha.
 \end{align*}
 \end{proof}
 
-We can now state and prove the main result of this section. Choose a simply connected open set $\domain_\alpha$ that touches $\zeta = \alpha$ and doesn't touch any other roots of $P(-\zeta)$, as illustrated in Section~\ref{setting:domain}. We'll show that the Volterra equation $\hat{\mathcal{P}}_\alpha \varphi = 0$ has a unique solution of a certain form on $\domain_\alpha$. By Lemma~\ref{lem:use-dict}, the Laplace transform of this solution satisfies the equation $\mathcal{P}\Phi = 0$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
+We can now state and prove the main result of this section. Choose a simply connected open set $\domain_\alpha$ that touches $\zeta = \alpha$ and doesn't touch any other roots of $P(-\zeta)$, as illustrated in Section~\ref{setting:domain}. We'll show that the Volterra equation $\hat{\mathcal{P}}_\alpha \varphi = 0$ has a unique solution of a certain form on $\domain_\alpha$. By Lemma~\ref{lem:use-dict}, the Laplace transform of this solution satisfies the equation $\mathcal{P}\Phi = 0$.
 \begin{thm}\label{thm:example}
 Consider a root $-\alpha$ of $P$ where $\tau_\alpha := Q(-\alpha)/P'(-\alpha)$ is real and positive. Choose a simply connected open set $\domain_\alpha$ that touches $\zeta = \alpha$, and doesn't touch any other root of $P(-\zeta)$. Then the equation
 \[ \hat{\mathcal{P}}_\alpha \psi_\alpha = 0 \]
@@ -956,10 +898,9 @@ It follows that
 & = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}.
 \end{align*}
 Now we expand $Q$ around $-\alpha$, using the decomposition $Q(\zeta) = Q(-\alpha)+(\zeta-\alpha)\,Q_\alpha(\zeta)$ to split up the last term of the expression above:
-\begin{align}
--\frac{Q(-\zeta(a'))}{P(-\zeta(a))} %% & \notag = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\alpha) + (\zeta(a') - \alpha)\,Q_\text{extra}(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} \\
-&\label{eqn:split-numerator} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)} 
-\end{align}
+\begin{equation}\label{eqn:split-numerator}
+-\frac{Q(-\zeta(a'))}{P(-\zeta(a))} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)}.
+\end{equation}
 First, we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded on a neighborhood of $\zeta = \alpha$ in $\domain_\alpha$. Equation~\eqref{eqn:split-numerator} tells us that
 \begin{align*}
 -\frac{Q(-\zeta)}{P(-\zeta)} & =
