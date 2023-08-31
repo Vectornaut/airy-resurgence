@@ -148,7 +148,7 @@ Our main result is to show that for a certain kind of regular singular Volterra 
   \item \textcolor{gray}{Refer to Condition~\eqref{cond:diag-basic} in proof of Theorem~\ref{thm:proto-growth}.}
   \item \textcolor{gray}{Look for other direct references to Condition~\eqref{cond:slow}.} \textcolor{MediumSpringGreen}{[No other direct references found.]}
 \end{itemize}
-\item \textbf{(Veronica)} Make sure that everything is switched to the new Condition~\eqref{cond:diag-basic}.
+\item \textcolor{gray}{\textbf{(Veronica)} Make sure that everything is switched to the new Condition~\eqref{cond:diag-basic}.}
 \textcolor{gray}{
 \item Set $R_1, \ldots, \ldots R_{d-1}$ to zero.
 \begin{itemize}
@@ -237,7 +237,9 @@ where $\partial^{-\lambda}$ is the Riemann-Liouville fractional integral of orde
 
 Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. Solutions that look unrelated in the frequency domain may turn out to be linked by analytic continuation along the complex position domain, as seen in the phenomenon of {\em resurgence} \cite{EcalleIII}\cite{lectures-marino}\cite[Section 2.4]{sternin1995borel}.
 
-Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we'll see this helpful behavior in a certain subclass of what Ecalle calls {\em level~1} differential equations, which includes classical examples like the modified Bessel equation, the equations describing the vibration modes of beams that taper in certain ways \textcolor{orange}{[find citation]}, and the Airy equation after a change of coordinate. \textcolor{SpringGreen}{This last example generalizes to some level 1 equations that feature in current research, like the Airy-Lucas and higher Airy equations~\cite[Equations 3.2 and 3.8]{charbonnier22}\cite{durugo_higher}.}
+Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we'll see this helpful behavior in a certain subclass of what Ecalle calls {\em level~1} differential equations, which includes classical examples like the modified Bessel equation, the equation describing the vibration modes of a solid triangular cantilever~\cite[from Equation~12.58]{genta2009vibration}, and the Airy equation after a change of coordinate. This last example generalizes to the Airy-Lucas equations, a family of level~1 equations that feature in current research~\cite[Equations 3.2]{charbonnier22}.
+\begin{verify}
+[The differential operator for the cantilever is $(\partial^4 + \omega^2 c_1) + \tfrac{1}{z} c_2 \partial^3$, where $\omega$ is the vibration frequency and $c_1, c_2$ are constants. This example works because the linear density of the beam and the second moment of area perpemdicular to the vibration direction are proportional, so they both end up in the $P(\partial)$ term.]\end{verify}
 
 From our experience with solving level~1 differential equations by Borel summation, we expect each of the corresponding integral equations to have a special kind of solution when the integration base point coincides with a regular singularity. Let's say we've chosen the position variable $\zeta$ so that the integration base point is at $\zeta = 0$, and our position-domain Volterra operator has a holomorphic kernel $k(a, a')$ with a $\tau/\zeta(a)$ singularity. Assuming the residue $\tau$ is real and positive, we expect to find a solution with the following features:
 \begin{itemize}
@@ -281,10 +283,9 @@ where $p$ and $q$ are holomorphic functions on $\domain$. Having a regular singu
 \condconst{sing}{\tau}\label{cond:sing} For some non-zero constant $\tau$---which we'll require, for simplicity, to be real and positive---the difference
 \[ \hardker(a, a) - \frac{\tau}{\zeta(a)} \]
 is bounded on a neighborhood of $\zeta(a) = 0$ in $\domain$.
-
 In addition, for each $\sigma > \tau$, the bound
-\[ \big|\hardker(a, a')\big| < \frac{\sigma}{\zeta(a)} \]
-holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$. \textcolor{orange}{[shouldn't be $|\zeta(a)|$ in the denominator?]}
+\[ \big|\hardker(a, a')\big| < \frac{\sigma}{|\zeta(a)|} \]
+holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$. 
 \end{conditions}
 For most of our results, we'll need to make sure that $\domain$ doesn't touch any singularities of $\hardpart$ other than the one at $\zeta = 0$. We'll also need to control $\hardker(a, a')$ when $a$ is away from $\zeta = 0$, requiring $\hardker$ to be bounded on the diagonal in $\domain^2$ and to grow at most exponentially as we move away from the diagonal. These requirements can be combined into one condition.
 \begin{conditions}
@@ -292,8 +293,21 @@ For most of our results, we'll need to make sure that $\domain$ doesn't touch an
 \[ \big| \hardker(a, a') \big| \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 over all $a, a' \in \domain$.
 \end{conditions}
-This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
-
+This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$. 
+%\color{Tomato}
+%Furthermore, Condition \eqref{cond:diag-basic} tells us that for any $\sigma>0$ we can find a neighbourhood of $(0,0)\in\domain^2$ where 
+%\[|\hardker(a,a')|\le\frac{\sigma}{|\zeta(a)|}.\]
+\begin{verify}
+    By Condition \eqref{cond:diag-basic} we can find $c>0$ such that \[ \big| \hardker(a, a') \big| \le \frac{c}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
+then setting $\delta=\frac{\log(\sigma/c)}{2\lambda_\Delta}$, we deduce that for every $|\zeta(a)|\le\delta$ and  $|\zeta(a')|\le\delta$
+\begin{align*}
+    |\hardker(a,a')|&\le \frac{c}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\\
+    &\le \frac{c}{|\zeta(a)|} e^{\lambda_\Delta(|\zeta(a)|+|\zeta(a')|)}\\
+    &\frac{c}{|\zeta(a)|} e^{2\lambda_\Delta \delta}\\
+    &=\frac{\sigma}{|\zeta(a)|}
+\end{align*}
+\end{verify}
+\color{black}
 We'll occasionally mention an optional condition on $p$ that allows us to state our main results more explicitly.
 \begin{conditions}
 \condconst{reg-p}{B, \epsilon}\label{cond:reg-p}
@@ -329,6 +343,7 @@ Changing the base point $b \in \domain$ just multiplies $f_0$ by a non-zero cons
 We'll prove this result in Section~\ref{sec:construction}.
 
 The solution $\solproto$ from Theorem~\ref{thm:basic_volterra} has, at worst, a mild power-law singularity at $\zeta = 0$. With stronger constraints on $\hardpart$, we can also ensure that $\solproto$ grows at most exponentially as $|\zeta| \to \infty$. The function spaces defined in Section~\ref{fn-spaces} express both of these regularity properties.
+%\textcolor{Tomato}{If we change Condition \eqref{cond:sing}, it'll be enough to assume Condition \eqref{cond:diag-basic} to state Theorem \ref{thm:proto-growth}.}
 \begin{thm}\label{thm:proto-growth}
 Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
 
@@ -467,6 +482,7 @@ Exponentiating both sides, we see that
 Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. The exponential factor in the formula above is then bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ whenever $|\zeta(a)| < \delta$. Since $\tau$ is positive, this is enough to show that $\lim_{\zeta \to 0} \chi = 0$. It follows, as discussed above, that $\hardpart \solproto = \solproto$. 
 \end{proof}
 \subsubsection{Regularity}\label{sec:asymptotics}
+%\textcolor{Tomato}{If we change Condition \eqref{cond:sing}, then we might simply have proof of Theorem \ref{thm:proto-growth} assuming only Condition \eqref{cond:diag-basic}. The proofs of the Proposition below can be combined together.}
 Theorem~\ref{thm:proto-growth} comprises two results with different conditions. We'll prove them separately as Propositions \ref{prop:asymptotic at zero} and \ref{prop:asymptotic at infinity}.
 \begin{prop}\label{prop:asymptotic at zero}
 Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
@@ -488,7 +504,7 @@ whenever $|\zeta(a)| < r$ and $|\zeta(a')| < r$. Choosing a point $b'$ with $|\z
 on the region $|\zeta| < r$, as desired.
 \end{proof}
 \begin{prop}\label{prop:asymptotic at infinity}
-Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \textcolor{brown}{\eqref{cond:diag-basic}}. Then $\solproto$ belongs to the space $\singexpalg{\tau-1}(\domain)$.
+Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:diag-basic}. Then $\solproto$ belongs to the space $\singexpalg{\tau-1}(\domain)$.
 \end{prop}
 \begin{proof}
 We want to show that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ for some real constant $\lambda_0$.
@@ -559,8 +575,8 @@ at $\zeta = 0$, with $M = \zeta(b)^{-\tau} B^{-1} e^{\eta(b)}$. Observing that $
 \end{proof}
 \subsection{Showing that $\softpart$ makes the prototype solution less singular \\ \textit{(toward Theorem~\ref{thm:general_volterra})}}\label{sec:image under soft_part}
 Now that we know the prototype solution $\solproto$ belongs to $\singexpalg{\tau-1}(\domain)$, we'll show that $\softpart$ reduces the sharpness of its singularity at $\zeta = 0$, mapping it into $\singexpalg{\tau-1+\gamma}(\domain)$. This is a consequence of the general smoothing effect of $\softpart$, described in the following result.
-\par\color{RoyalBlue}
-In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $\solproto \in \singexpalg{\tau-1}(\domain)$, then we'll show $\softpart \solproto \in\singexpalg{\tau-1+\gamma}(\domain)$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.\color{black}
+%\par\color{RoyalBlue}
+%In this Section, we show that, under Condition \eqref{cond:eps-lambda}, the smoothing effect of the operator $\softpart$ regularizes the prototype solution $f_0$: recall from Section \ref{sec:asymptotics} that $\solproto \in \singexpalg{\tau-1}(\domain)$, then we'll show $\softpart \solproto \in\singexpalg{\tau-1+\gamma}(\domain)$. This is a consequence of a more general result (see Proposition \ref{prop:smoothing}), namely that $\softpart$ regularises functions in $\singexp{\sigma}{\Lambda}(\Omega)$ which are not too singular at $\zeta=0$.\color{black}
 
 \begin{prop}\label{prop:smoothing}
 Under {\em Condition~\eqref{cond:eps-lambda}}, the operator $\softpart$ maps
@@ -756,12 +772,12 @@ Let $\mathcal{P}$ be a linear differential operator of the form\footnote{ We fol
 where
 \begin{enumerate}
 \item[$\bullet$] $P$ is a monic degree-$d$ polynomial whose roots are all simple; 
-\item[$\bullet$] $Q$ is a degree-$(d-1)$ polynomial that's non-zero at every critical point of $P$;
+\item[$\bullet$] $Q$ is a degree-$(d-1)$ polynomial that's non-zero at every root of $P$;
 \item[$\bullet$] $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, the power series
 \[ R(z^{-1}) = \sum_{j=0}^\infty R_j z^{-j} \]
 converges in the region $|z| > A$.
 \end{enumerate}
-Equations of the form $\mathcal{P}\Phi = 0$ are a sub-class of what Ecalle calls {\em level~1} differential equations~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples of such equations using Laplace transform methods, with the help of our existence and uniqueness result Theorem \ref{thm:general_volterra}. 
+Equations of the form $\mathcal{P}\Phi = 0$ are a sub-class of what Ecalle calls {\em level~1} differential equations~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples of such equations using Laplace transform methods, with the help of our existence and uniqueness result Theorem~\ref{thm:general_volterra}. 
 \subsection{Notation}\label{sec:notation_alpha}
 So far, we've studied a Volterra equation with a regular singularity at $\zeta = 0$. When we use Laplace transform methods to solve a level~1 differential equation $\mathcal{P}\Phi = 0$ in the frequency domain, we'll end up with several Volterra equations $\hat{\mathcal{P}}_\alpha \varphi = 0$, each with a regular singularity at a different root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
 
@@ -777,9 +793,8 @@ Our conditions on Volterra operators change to describe a regular singularity at
 \[ \hardker^\alpha(a, a) - \frac{\tau_\alpha}{\zeta(a) - \alpha} \]
 is bounded on a neighborhood of $\zeta(a) = \alpha$ in $\domain_\alpha$, and for each $\sigma > \tau_\alpha$, the bound
 \[ |\hardker^\alpha(a, a')| < \frac{\sigma}{|\zeta(a) - \alpha|} \]
-holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$.  
-In addition, $\hardker^\alpha$ satisfies Condition~\eqref{cond:diag-basic} if for some constant $\lambda_\Delta$
-\[|\hardker^\alpha(a,a')|\lesssim\frac{1}{|\zeta(a)-\alpha|} e^{|\zeta(a)-\zeta(a')|}\]
+holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha,\alpha)$ in $\domain_\alpha^2$. Condition~\eqref{cond:diag-basic} now requires that for some constant $\lambda_\Delta$
+\[|\hardker^\alpha(a,a')|\lesssim\frac{1}{|\zeta(a)-\alpha|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a,a'\in\domain_\alpha$. 
 Similarly, an operator $\softpart^\alpha$ with kernel $\softker^\alpha$ now satisfies Condition~\eqref{cond:eps-lambda} if for some constants $\gamma > 0$ and $\lambda_\Delta$, we have
 \[ |\softker^\alpha(a,a')| \lesssim \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)-\alpha|} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|}\]
@@ -849,7 +864,7 @@ Comparing the definitions of $\mathcal{P}$ and $\hat{\mathcal{P}}_\alpha$, and u
 \end{align*}
 \end{proof}
 
-We can now state and prove the main result of this section. Choose a simply connected open set $\domain_\alpha$ that touches $\zeta = \alpha$ and doesn't touch any other roots of $P(-\zeta)$, as illustrated in Section~\ref{setting:domain}. We'll show that the Volterra equation $\hat{\mathcal{P}}_\alpha \varphi = 0$ has a unique solution of a certain form on $\domain_\alpha$. By Lemma~\ref{lem:use-dict}, the Laplace transform of this solution satisfies the equation $\mathcal{P}\Phi = 0$.
+We can now state and prove the main result of this section. Choose a simply connected open set $\domain_\alpha$ that touches $\zeta = \alpha$ and doesn't touch any other roots of $P(-\zeta)$, as illustrated in Section~\ref{setting:domain} under the reinterpretation from Section \ref{sec:notation_alpha}. We'll show that the Volterra equation $\hat{\mathcal{P}}_\alpha \varphi = 0$ has a unique solution of a certain form on $\domain_\alpha$. By Lemma~\ref{lem:use-dict}, the Laplace transform of this solution satisfies the equation $\mathcal{P}\Phi = 0$.
 \begin{thm}\label{thm:example}
 Consider a root $-\alpha$ of $P$ where $\tau_\alpha := Q(-\alpha)/P'(-\alpha)$ is real and positive. Choose a simply connected open set $\domain_\alpha$ that touches $\zeta = \alpha$, and doesn't touch any other root of $P(-\zeta)$. Then the equation
 \[ \hat{\mathcal{P}}_\alpha \psi_\alpha = 0 \]
@@ -948,17 +963,17 @@ P'(-\beta_1) &=  \pi_1 \prod_{j\neq 1} (-\beta_1+\beta_j)^2\\
 \end{verify}
 \item Condition~\eqref{cond:diag-basic} {\em on $\hardpart^\alpha$ is satisfied.}
 
-Since we're trying to bound $\zeta(a)\,\hardker^\alpha(a, a')$ with a function of the difference $\omega(a, a') := \zeta(a) - \zeta(a')$, let's rewrite it as a rational function of $\omega(a, a')$ and $\zeta(a)$. First, rewrite
+Since we're trying to bound $\big(\zeta(a) - \alpha\big)\,\hardker^\alpha(a, a')$ with a function of the difference $\omega(a, a') := \zeta(a) - \zeta(a')$, let's rewrite it as a rational function of $\omega(a, a')$ and $\zeta(a)$. First, rewrite
 \begin{align*}
 q(a') & = Q\big(-\zeta(a')\big) \\
 & = Q\big(\omega(a, a') - \zeta(a)\big)
 \end{align*}
 in the form
 \[ q(a') = Q_{d-1}\big(\zeta(a)\big)\;\omega(a, a')^{d-1} + \ldots + Q_1\big(\zeta(a)\big)\;\omega(a, a') + Q_0\big(\zeta(a)\big), \]
-where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. Next, knowing that $-\alpha$ is a root of $p$, rewrite $p$ in the form $(\zeta - \alpha)\,P_\alpha(\zeta)$, where $P_\alpha$ is a polynomial of degree $d-1$. We can then write $-\zeta(a)\,\hardker^\alpha(a, a')$ in the form
-\[ \zeta(a)\,\frac{q(a')}{p(a)} = \frac{Q_{d-1}\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a')^{d-1} + \ldots + \frac{Q_1\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a') + \frac{Q_0\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}, \]
+where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. Next, knowing that $-\alpha$ is a root of $p$, rewrite $p$ in the form $(\zeta - \alpha)\,P_\alpha(\zeta)$, where $P_\alpha$ is a polynomial of degree $d-1$. We can then write $-\big(\zeta(a) - \alpha\big)\,\hardker^\alpha(a, a')$ in the form
+\[ \big(\zeta(a)-\alpha\big)\,\frac{q(a')}{p(a)} = \frac{Q_{d-1}\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a')^{d-1} + \ldots + \frac{Q_1\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a') + \frac{Q_0\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}, \]
 viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational functions in $\zeta(a)$. If we keep $a$ away from the roots of $p$ other than $\zeta = \alpha$, each coefficient is bounded, so $|\hardker^\alpha(a, a')|$ is bounded by a polynomial in $|\omega(a, a')|$. It follows that for any $\lambda_\Delta > 0$, and any domain $\domain_\alpha$ that avoids all the roots of $p$ other than $\zeta = \alpha$, we have
-\[ |\zeta(a)|\,|\hardker^\alpha(a, a')| \lesssim e^{\lambda_\Delta|\omega(a, a')|} \]
+\[ |\zeta(a)-\alpha|\,|\hardker^\alpha(a, a')| \lesssim e^{\lambda_\Delta|\omega(a, a')|} \]
 over all $a, a' \in \domain_\alpha$.
 
 For consistency with Condition~\eqref{cond:eps-lambda}, we choose $\lambda_\Delta > A$.
