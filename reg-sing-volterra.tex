@@ -511,7 +511,7 @@ we conclude that $|\zeta(a)|^{-\sigma-\gamma} \, e^{-\Lambda |\zeta(a)|} \, \Big
 Consider the prototype solution $\solproto$ from Equation~\eqref{eqn:test_solution}. If $\softpart$ satisfies {\em Condition \eqref{cond:eps-lambda}}, then $\softpart \solproto$ belongs to $\singexpalg{\tau-1+\gamma}(\domain)$.
 \end{cor}
 \begin{proof}
-We know from Theorem~\ref{thm:proto-growth} that $\solproto$ belongs to $\singexpalg{\tau-1}(\domain)$. Choose a constant $\Lambda \ge \lambda_\Delta$ big enough that $\solproto$ is in $\singexp{\tau-1}{\Lambda}(\domain)$. Since we're assuming $\tau$ is positive, we can apply Proposition~\ref{prop:smoothing}, concluding that $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$ belongs to $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$.
+We know from Theorem~\ref{thm:proto-growth} that $\solproto$ belongs to $\singexpalg{\tau-1}(\domain)$. Choose a constant $\Lambda \ge \lambda_\Delta$ big enough that $\solproto$ is in $\singexp{\tau-1}{\Lambda}(\domain)$. Since we're assuming $\tau$ is positive, we can apply Proposition~\ref{prop:smoothing}, concluding that $\softpart \solproto$ belongs to $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$.
 \end{proof}
 \subsection{Showing that $\volterra$ shrinks less singular functions \\ \textit{(toward Lemma~\ref{lem:perturbed_volterra})}}\label{sec:V is a contraction}
 \subsubsection{Overview}
@@ -668,7 +668,7 @@ as long as $\rho \in (\tau, \tau + \gamma]$. Putting these facts together, we ge
 \subsection{Overview}
 We can use our understanding of regular singular Volterra equations to study so-called \textit{level~1 differential equations}, which each have an irregular singularity at $\infty$. In particular, we can build a set of analytic solutions in the frequency domain by solving certain regular singular Volterra equations in the position domain. Our main results guarantee that these position domain solutions exist, are unique, and have well-defined Laplace transforms.
 \subsection{Level $1$ differential equations}\label{sec:level 1 ODE}
-Let $\mathcal{P}$ be a linear differential operator of the form\footnote{ We follow Delabaere, rather than Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}.}
+Let $\mathcal{P}$ be a linear differential operator of the form
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2} R(z^{-1}), \]
 where
 \begin{enumerate}
@@ -678,14 +678,14 @@ where
 \[ R(z^{-1}) = \sum_{j=0}^\infty R_j z^{-j} \]
 converges in the region $|z| > A$.
 \end{enumerate}
-Equations of the form $\mathcal{P}\Phi = 0$ are a sub-class of what Ecalle calls {\em level~1} differential equations~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples of such equations using Laplace transform methods, with the help of our existence and uniqueness result Theorem~\ref{thm:general_volterra}. 
+Equations of the form $\mathcal{P}\Phi = 0$ are a sub-class of what Ecalle calls {\em level~1} differential equations~\cite[Section~2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. In an upcoming paper \cite{borel_reg}, we'll study various examples of such equations using Laplace transform methods, with the help of our existence and uniqueness result Theorem~\ref{thm:general_volterra}. 
 \subsection{Notation}\label{sec:notation_alpha}
-So far, we've studied a Volterra equation with a regular singularity at $\zeta = 0$. When we use Laplace transform methods to solve a level~1 differential equation $\mathcal{P}\Phi = 0$ in the frequency domain, we'll end up with several Volterra equations $\hat{\mathcal{P}}_\alpha \varphi = 0$, each with a regular singularity at a different root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
+So far, we've studied a Volterra equation with a regular singularity at $\zeta = 0$. When we use Laplace transform methods to solve a level~1 differential equation $\mathcal{P}\Phi = 0$ in the frequency domain, we'll end up with several Volterra equations $\hat{\mathcal{P}}_\alpha \varphi = 0$ in the position domain, each with a regular singularity at a different root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
 
-Throughout Section~\ref{sec:example}, we'll adapt the notation of Sections \ref{sec:intro}--\ref{sec:proof_main_results} to this more general situation. The role of the coordinate $\zeta$ in those earlier sections will now be played by $\zeta-\alpha$. This substitution leads to several other reinterpretations, summarized below.
+To adapt our previous reasoning to this more general situation, we'll reinterpret the language of Sections \ref{sec:intro}--\ref{sec:proof_main_results} whenever we refer to it Section~\ref{sec:example}. The role of the coordinate $\zeta$ in Sections \ref{sec:intro}--\ref{sec:proof_main_results} will now be played by $\zeta-\alpha$. This substitution leads to several other reinterpretations, summarized below.
 
 References to the point $\zeta=0$ become references to the point $\zeta-\alpha=0$, which we'll rewrite as $\zeta=\alpha$. For example, we'll now work on a domain that touches but doesn't contain $\zeta = \alpha$, introducing the notation $\domain_\alpha$ as a reminder of this change. Condition~\eqref{cond:star} now says that $\domain_\alpha$ is star-shaped around $\zeta = \alpha$. The function space $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ becomes a space of holomorphic functions on $\domain_\alpha$ which have a power-law singularity at $\zeta=\alpha$ and are uniformly of exponential type $\Lambda$. Explicitly, $f$ is in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ if 
-\[ |f| \lesssim |\zeta-\alpha|^{-\sigma} e^{-\Lambda |\zeta-\alpha|} \]
+\[ |f| \lesssim |\zeta-\alpha|^\sigma e^{\Lambda |\zeta-\alpha|} \]
 over $\domain_\alpha$, making the norm
 \[ \|f\|_{\sigma, \Lambda} = \sup_{\domain_\alpha} |\zeta-\alpha|^{-\sigma} e^{-\Lambda |\zeta-\alpha|} |f| \]
 well-defined.
