@@ -11,6 +11,7 @@
 \usepackage[svgnames]{xcolor} %% for revisions
 \usepackage{xparse} %% for squiggly underlines
 \usepackage{tikz-cd} %% for term norm scratch work
+\usepackage{environ} % to hide verifications
 \usepackage{tikz}
 
 % TikZ libraries
@@ -92,8 +93,16 @@
 \newcommand{\far}{\Omega_\text{far}}
 
 % drafting environments
-\newenvironment{verify}{\color{ForestGreen}}{\color{black}}
 \newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
+
+% hideable verifications
+\newif\ifshowverify
+\showverifyfalse
+\ifshowverify
+\newenvironment{verify}{\color{ForestGreen}}{\color{black}}
+\else
+\NewEnviron{verify}{\iffalse\expandafter\BODY\fi}
+\fi
 
 % colors
 \definecolor{ietocean}{RGB}{0, 30, 140}
@@ -218,7 +227,7 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \end{brainstorm}
 \section{Introduction}\label{sec:intro}
 \subsection{Motivation}\label{motivation}
-In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a real ``position'' variable $\zeta$ into holomorphic\begin{verify}\footnote{\begin{verify}Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.\end{verify}}\end{verify} functions of a complex ``frequency'' variable $z$. Through identities like
+In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. \begin{verify}[Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.]\end{verify} Through identities like
 \begin{align*}
 \frac{\partial}{\partial z} \laplace \varphi & = \laplace(z\varphi) \\
 \laplace k\;\laplace \varphi & = \laplace(k * \varphi) \\
@@ -919,7 +928,7 @@ and let $\softpart^\alpha$ be the Volterra operator with kernel
 \[ \softker^\alpha(a,a') = -\frac{k_R(a,a')}{p(a)}. \]
 Now we can write Equation~\eqref{eqn:divided} as $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha = \hardpart^\alpha + \softpart^\alpha$.
 
-The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One part of this observation demands some explanation: we need to confirm that the power series defining $k_R$ converges everywhere. To do this, recall that $R(z^{-1})$ is holomorphic on the disk $|z| > A$. Consequently, for any $\lambda > A$, we have $|R_{j}| \lesssim \lambda^j$ over all $j \in \{0, 1, 2, \ldots\}$. This is enough to show that $k_R$ is well-defined throughout $\C^2$. In fact, as we'll see later, it also leads to a useful bound on $k_R$.
+The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One part of this observation demands some explanation: we need to confirm that the power series defining $k_R$ converges everywhere. To do this, recall that $R(z^{-1})$ is holomorphic on the disk $|z| > A$. Consequently, for any $\lambda > A$, we have $|R_{j}| \lesssim \lambda^j$ over all $j \in \{0, 1, 2, \ldots\}$. This is enough to show that $k_R$ is well-defined throughout $\C^2$. As we'll see later, it also leads to a useful bound on $k_R$.
 \begin{verify}
 \begin{align*}
 & \sum_{j = 0}^\infty R_j z^{-j} \text{ converges when } |z| > A \\
@@ -927,10 +936,10 @@ The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One
 \Longrightarrow & A^{-1} \le \operatorname{radius} R_j \\
 \Longrightarrow & A \ge \big(\operatorname{radius} R_j\big)^{-1} \\
 \Longrightarrow & A \ge \limsup_{j \to \infty} R_j^{1/j} \\
-\Longrightarrow & A \ge \inf_{J \ge 0} \sup_{j \ge J} R_{r,j}^{1/j} \\
-\Longrightarrow & \forall \lambda > A: \exists J: \sup_{j \ge J} R_{r,j}^{1/j} < \lambda \\
-\Longrightarrow & \forall \lambda > A: \exists J: \forall j \ge J: R_{r,j}^{1/j} < \lambda \\
-\Longrightarrow & \forall \lambda > A: \exists J: \forall j \ge J: R_{r,j} < \lambda^j
+\Longrightarrow & A \ge \inf_{J \ge 0} \sup_{j \ge J} R_j^{1/j} \\
+\Longrightarrow & \forall \lambda > A: \exists J: \sup_{j \ge J} R_j^{1/j} < \lambda \\
+\Longrightarrow & \forall \lambda > A: \exists J: \forall j \ge J: R_j^{1/j} < \lambda \\
+\Longrightarrow & \forall \lambda > A: \exists J: \forall j \ge J: R_j < \lambda^j
 \end{align*}
 \end{verify}
 
