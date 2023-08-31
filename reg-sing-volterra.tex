@@ -125,10 +125,10 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \tableofcontents
 
 \begin{brainstorm}
-\item \textbf{(Veronica)} Deal with Condition~\eqref{cond:sing}
+\item \textcolor{gray}{\textbf{(Veronica)} Deal with Condition~\eqref{cond:sing}}
 \begin{itemize}
 \item \textcolor{gray}{In Section~\ref{sec:V is a contraction}, do we only use Condition~\eqref{cond:sing} through Proposition~\ref{prop:whole-ker-near-bound}?} \textcolor{MediumSpringGreen}{[Yes.]}
-\item Rewrite arguments using new Condition~\eqref{cond:sing}.
+\item \textcolor{gray}{Rewrite arguments using new Condition~\eqref{cond:sing}.}
 \item \textcolor{gray}{Show that example satisfies Condition~\eqref{cond:sing}.}
 \end{itemize}
 \item \textcolor{gray}{\textbf{(Aaron)} Drop Condition~\eqref{cond:slow}, which is implied by Condition~\eqref{cond:diag-basic}}
@@ -139,12 +139,14 @@ Our main result is to show that for a certain kind of regular singular Volterra 
   \item \textcolor{gray}{Refer to Condition~\eqref{cond:diag-basic} in proof of Theorem~\ref{thm:proto-growth}.}
   \item \textcolor{gray}{Look for other direct references to Condition~\eqref{cond:slow}.} \textcolor{MediumSpringGreen}{[No other direct references found.]}
 \end{itemize}
+\item \textbf{(Veronica)} Make sure that everything is switched to the new Condition~\eqref{cond:diag-basic}.
+\textcolor{gray}{
 \item Set $R_1, \ldots, \ldots R_{d-1}$ to zero.
 \begin{itemize}
 \item Change definition.
 \item Change intro to clarify that our results only apply to some level~1 equations.
 \item Change intro to clarify that our results only apply to some level~1 equations.
-\end{itemize}
+\end{itemize}}
 \item \textcolor{gray}{\textit{(Aaron)} State Lemma~\ref{lem:perturbed_volterra} just the way we want it.}
 \begin{itemize}
     \item \textcolor{gray}{Proofread and drop old version.}
@@ -379,18 +381,8 @@ When $\hardpart$ also satisfies Condition~\eqref{cond:reg-p}, Theorem~\ref{thm:g
 \[ \zeta^{\tau-1} + \singexpalg{\rho-1}(\domain) \]
 when $\rho > \tau$ is low enough, as described in Proposition~\ref{prop:alt-general_volterra} from Section~\ref{sec:existence and uniqueness}.
 \end{rmk}
-%%To prove Theorem~\ref{thm:general_volterra}, we will rewrite the homogeneous equation we want to solve as an inhomogeneous one, with $\softpart f_0$ as the inhomogeneous term.
-
-%%We will reduce Theorem~\ref{thm:general_volterra} to Lemma~\ref{lem:perturbed_volterra} in Section~\ref{sec:existence and uniqueness}, with the help of Proposition~\ref{prop:smoothing} from Section~\ref{sec:image under soft_part}, which can be used to show that $\softpart f_0$ is regular enough to serve as the inhomogeneous term in the lemma.
 \subsection{Acknowledgements}
-
-This paper is a result of the ERC-SyG project, Recursive and Exact New Quantum Theory (ReNewQuantum) which received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme under grant agreement No 810573. 
-
-We thank Fondation Mathematique Jacques Hadamard for supporting the visit of the second author at IH\'ES, under the program \textit{Junior Scientific Visibility}.
-\begin{brainstorm}
-\item Kihyun Kim and his visitor (possibly Prof. Soonsik Kwon or Sung-Jin Oh)
-\item Angeliki Menegaki
-\end{brainstorm}
+We are grateful for the conversations with Kihyun Kim, Angeliki Menegaki, and Sung-Jin Oh that informed the early stages of this work. This paper is a result of the ERC-SyG project, Recursive and Exact New Quantum Theory (ReNewQuantum) which received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme under grant agreement No 810573. It was also made possible by the hospitality of the Institut des Hautes \'{E}tudes Scientifiques during a return visit by AF, funded by the Fondation Math\'{e}matique Jacques Hadamard under the \textit{Junior Scientific Visibility} program.
 \section{Function spaces for holomorphic Volterra operators}\label{fn-spaces}
 \subsection{Weighted holomorphic $L^{\infty}$ spaces}\label{sec:fn-space-defs}
 Throughout this paper, as described in Section~\ref{motivation}, the ``position'' variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\Omega \subset \C$ that touches but doesn't contain $\zeta = 0$. Let $\cont(\Omega)$ be the space of continuous complex-valued functions on $\Omega$. Give $\cont(\Omega)$ the compact-open topology, recalling that this is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \Omega$~\cite[Example~2.6 and \S 4 notes]{fnl-cpx-anal}. The holomorphic functions form a closed subspace $\holo(\Omega) \subset \cont(\Omega)$~\cite[Proposition~3.14]{fnl-cpx-anal}.
@@ -818,17 +810,17 @@ We can use our understanding of regular singular Volterra equations study so-cal
 \subsection{Level $1$ differential equations}\label{sec:level 1 ODE}
 Let $\mathcal{P}$ be a linear differential operator of the form\footnote{ We follow Delabaere, rather than Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}.}
 %%\begin{equation}\label{eqn:level 1 ode}
-\[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big], \]
+\[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2} R(z^{-1}), \]
 %%\end{equation}
 where
 \begin{enumerate}
 \item[$\bullet$] $P$ is a monic degree-$d$ polynomial whose roots are all simple; 
 \item[$\bullet$] $Q$ is a degree-$(d-1)$ polynomial that's non-zero at every critical point of $P$;
-\item[$\bullet$] $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, the power series
-\[ R_r(z^{-1}) = \sum_{j=0}^\infty R_{r,j} z^{-j} \]
-converge in the region $|z| > A$.
+\item[$\bullet$] $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, the power series
+\[ R(z^{-1}) = \sum_{j=0}^\infty R_j z^{-j} \]
+converges in the region $|z| > A$.
 \end{enumerate}
-Equations of the form $\mathcal{P}\Phi = 0$ are called {\em level~1} by Ecalle~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples using Laplace transform method and our existence and uniqueness result Theorem \ref{thm:general_volterra}. 
+Equations of the form $\mathcal{P}\Phi = 0$ are a sub-class of what Ecalle calls {\em level~1} differential equations~\cite[Section 2.1]{EcalleIII}. In \cite{borel_reg}, we'll study different examples of such equations using Laplace transform methods, with the help of our existence and uniqueness result Theorem \ref{thm:general_volterra}. 
 \subsection{Notation}\label{sec:notation_alpha}
 So far, we've studied a Volterra equation with a regular singularity at $\zeta = 0$. When we use Laplace transform methods to solve a level~1 differential equation $\mathcal{P}\Phi = 0$ in the frequency domain, we'll end up with several Volterra equations $\hat{\mathcal{P}}_\alpha \varphi = 0$, each with a regular singularity at a different root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
 
@@ -847,20 +839,6 @@ is bounded on a neighborhood of $\zeta(a) = \alpha$ in $\domain_\alpha$, and for
 holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (0, 0)$ in $\domain^2$. \textcolor{Tomato}{[Also describe change for Condition~\eqref{cond:diag-basic}.]} Similarly, an operator $\softpart^\alpha$ with kernel $\softker^\alpha$ now satisfies Condition~\eqref{cond:eps-lambda} if for some constants $\gamma > 0$ and $\lambda_\Delta$, we have
 \[ |\softker^\alpha(a,a')| \lesssim \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)-\alpha|} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain_\alpha$.
-\begin{brainstorm}
-\item Previously, we always looked at Volterra operators with a regular singularity at $\zeta = 0$.
-\item When we try to solve a level~1 differential equation, we'll get an operator with many regular singularities---one at each root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
-\item Rules for working at $\zeta = \alpha$:
-\begin{itemize}
-    \item In all our work from Sections~\ref{sec:intro}--\ref{sec:proof_main_results}, the role of the coordinate $\zeta$ is played instead by $\zeta - \alpha$. Concrete examples of how to do that:
-    \begin{itemize}
-        \item \textcolor{gray}{References to the point $\zeta = 0$ become references to the point $\zeta - \alpha = 0$, or equivalently $\zeta = \alpha$.}
-        \item \textcolor{gray}{Conditions on operators, location of regular singularity.}
-        \item \textcolor{gray}{Since the $\domain$ is star-shaped around $\zeta = 0$, it's now star-shaped around $\zeta = \alpha$. Introduce notation $\domain_\alpha$.}
-        \item \textcolor{gray}{Definition of $\singexp{\sigma}{\Lambda}$ spaces.}
-    \end{itemize}
-\end{itemize}
-\end{brainstorm}
 \subsection{The Laplace transform}
 \subsubsection{Definition}
 Let $\domain_\alpha$ be a simply connected open subset of $\C$ that touches but doesn't contain $\zeta=\alpha$, and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray that leaves $\zeta=\alpha$ at angle $\theta$. When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, we can define the Laplace transform $\laplace_{\zeta, \alpha}^{\theta}$, which maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions on the half-plane $\Re(z e^{-i\theta}) > \Lambda$ in the frequency domain~\cite[Section 5.6]{diverg-resurg-i}. The Laplace transform of $\varphi$ is defined by the formula
@@ -922,15 +900,12 @@ for all integers $n \ge 0$ and suitable directions $\theta$.
 
 \begin{rmk}
 In the relationship between $\fracderiv{-\nu}{\zeta}{\alpha}$ and multiplication by $z^{-\nu}$ described above, smoothing out the singularity at $\zeta = \alpha$ in the position domain corresponds to speeding up the decay as $|z| \to \infty$ in the frequency domain. This is a general feature of the Laplace transform.
-\par\color{RoyalBlue}
-Increasing the regularity in the position domain, then the Laplace transform gives something which is faster decaying in the frequency domain. This is a general feature of the Laplace transform.
-\color{black}
 \end{rmk}
 \subsection{Going to the position domain}
 By the properties of the Laplace transform $\laplace_{\zeta,\alpha}^{\theta}$ we can turn differential operators in the frequency domain into Volterra operators in the position domain. 
 \begin{lemma}\label{lem:use-dict}
 For each root $-\alpha$ of $P$, let $\hat{\mathcal{P}}_{\alpha}$ be the Volterra operator 
-\[ \hat{\mathcal{P}}_\alpha:=P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha}^{-1})\circ (-\zeta)^r. \]
+\[ \hat{\mathcal{P}}_\alpha:=P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ R(\partial_{\zeta,\alpha}^{-1}). \]
 If $\psi_\alpha$ satisfies the equation $\hat{\mathcal{P}}_\alpha\psi_\alpha=0$, then its Laplace transform $\Psi_\alpha:=\laplace_{\zeta,\alpha}^{\theta}\psi_\alpha$ satisfies the equation $\mathcal{P}\Psi_\alpha=0$, as long as the Laplace transform is well-defined.
 \end{lemma}
 
@@ -946,22 +921,21 @@ Comparing the definitions of $\mathcal{P}$ and $\hat{\mathcal{P}}_\alpha$, and u
 \end{align*}
 \end{proof}
 
-We can now state and prove the main result of this section, namely that the Volterra equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ admits a unique solution $\psi_\alpha$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
-
+We can now state and prove the main result of this section. Choose a simply connected open set $\domain_\alpha$ that touches $\zeta = \alpha$ and doesn't touch any other roots of $P(-\zeta)$, as illustrated in Section~\ref{setting:domain}. We'll show that the Volterra equation $\hat{\mathcal{P}}_\alpha \varphi = 0$ has a unique solution of a certain form on $\domain_\alpha$. By Lemma~\ref{lem:use-dict}, the Laplace transform of this solution satisfies the equation $\mathcal{P}\Phi = 0$. %in the function space $(\zeta-\alpha_j)^{\tau_j}+\singexp{\tau_j}{\lambda}(\Omega_j)$. 
 \begin{thm}\label{thm:example}
-For each root $-\alpha$ of $P$ where $\tau_\alpha := Q(-\alpha)/P'(-\alpha)$ is real and positive, the equation
+Consider a root $-\alpha$ of $P$ where $\tau_\alpha := Q(-\alpha)/P'(-\alpha)$ is real and positive. Choose a simply connected open set $\domain_\alpha$ that touches $\zeta = \alpha$, and doesn't touch any other root of $P(-\zeta)$. Then the equation
 \[ \hat{\mathcal{P}}_\alpha \psi_\alpha = 0 \]
 has a unique solution $\psi_\alpha$ in the affine subspace
 \[ \zeta^{\tau_\alpha-1} + \singexpalg{\tau_\alpha}(\domain_\alpha) \]
 of the space $\singexpalg{\tau_\alpha-1}(\domain_\alpha)$.
 \end{thm}
-\begin{proof}
+\begin{proof}[Proof of Theorem~\ref{thm:example}]
 Choose a root $-\alpha$ of $P$ where $\tau_\alpha := Q(-\alpha)/P'(-\alpha)$ is real and positive. For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$, noting that $\zeta = \alpha$ is a root of $p$. The conditions laid out in Section~\ref{sec:level 1 ODE} guarantee that $\frac{\partial}{\partial \zeta} p$ and $q$ are both non-zero $\zeta = \alpha$.
 
-To apply Proposition~\ref{prop:alt-general_volterra}, we need to rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting}. \textcolor{orange}{[Explain how conditions shift from $\zeta = 0$ to $\zeta = \alpha$?]} When we write $\hat{\mathcal{P}}_\alpha$ explicitly as a Volterra operator, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
+To apply Proposition~\ref{prop:alt-general_volterra}, we need to rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting} under the reinterpretation from Section~\ref{sec:notation_alpha}. When we write $\hat{\mathcal{P}}_\alpha$ explicitly as a Volterra operator, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
 \[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta = 0, \]
 where
-\[ k_R(a,a')=\sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{R_{r,j}}{j!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} \, \big(-\zeta(a')\big)^r. \]
+\[ k_R(a,a')=\sum_{j=0}^\infty \frac{R_{j}}{j!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} . \]
 Isolating $p\,\varphi$ on the left and dividing both sides by $p$ yields the equivalent equation
 \begin{equation}\label{eqn:divided}
 \varphi(a) = -\int_{\zeta=\alpha}^a \frac{q}{p(a)} \, \varphi \; d\zeta - \int_{\zeta=\alpha}^a \frac{k_R(a,\cdot)}{p(a)} \, \varphi \, d\zeta.
@@ -972,14 +946,14 @@ and let $\softpart^\alpha$ be the Volterra operator with kernel
 \[ \softker^\alpha(a,a') = -\frac{k_R(a,a')}{p(a)}. \]
 Now we can write Equation~\eqref{eqn:divided} as $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha = \hardpart^\alpha + \softpart^\alpha$.
 
-The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One part of this observation demands some explanation: we need to confirm that the power series defining $k_R$ converges everywhere. To do this, recall that the functions $R_r(z^{-1})$ are all holomorphic on the disk $|z| > A$. Consequently, for any $\lambda > A$, we have $|R_{r,j}| \lesssim \lambda^j$ over all $r \in \{1, \ldots, d-1\}$ and $j \in \{0, 1, 2, \ldots\}$. This is enough to show that $k_R$ is well-defined throughout $\C^2$. In fact, as we'll see later, it also leads to a useful bound on $k_R$.
+The kernel of $\volterra^\alpha$ extends meromorphically over all of $\C^2$. One part of this observation demands some explanation: we need to confirm that the power series defining $k_R$ converges everywhere. To do this, recall that $R(z^{-1})$ is holomorphic on the disk $|z| > A$. Consequently, for any $\lambda > A$, we have $|R_{j}| \lesssim \lambda^j$ over all $j \in \{0, 1, 2, \ldots\}$. This is enough to show that $k_R$ is well-defined throughout $\C^2$. In fact, as we'll see later, it also leads to a useful bound on $k_R$.
 \begin{verify}
 \begin{align*}
-& \sum_{j = 0}^\infty R_{r,j} z^{-j} \text{ converges when } |z| > A \\
-\Longrightarrow & \sum_{j = 0}^\infty R_{r,j} z^{-j} \text{ converges when } |z^{-1}| < A^{-1} \\
-\Longrightarrow & A^{-1} \le \operatorname{radius} R_{r,j} \\
-\Longrightarrow & A \ge \big(\operatorname{radius} R_{r,j}\big)^{-1} \\
-\Longrightarrow & A \ge \limsup_{j \to \infty} R_{r,j}^{1/j} \\
+& \sum_{j = 0}^\infty R_j z^{-j} \text{ converges when } |z| > A \\
+\Longrightarrow & \sum_{j = 0}^\infty R_j z^{-j} \text{ converges when } |z^{-1}| < A^{-1} \\
+\Longrightarrow & A^{-1} \le \operatorname{radius} R_j \\
+\Longrightarrow & A \ge \big(\operatorname{radius} R_j\big)^{-1} \\
+\Longrightarrow & A \ge \limsup_{j \to \infty} R_j^{1/j} \\
 \Longrightarrow & A \ge \inf_{J \ge 0} \sup_{j \ge J} R_{r,j}^{1/j} \\
 \Longrightarrow & \forall \lambda > A: \exists J: \sup_{j \ge J} R_{r,j}^{1/j} < \lambda \\
 \Longrightarrow & \forall \lambda > A: \exists J: \forall j \ge J: R_{r,j}^{1/j} < \lambda \\
@@ -1061,94 +1035,34 @@ viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational fu
 over all $a, a' \in \domain_\alpha$.
 
 For consistency with Condition~\eqref{cond:eps-lambda}, we choose $\lambda_\Delta > A$.
-\item Condition~\eqref{cond:eps-lambda} {\em on $\softpart^\alpha$ is satisfied.} \textcolor{magenta}{[I think this bound fails unless $R_1, \ldots, R_{d-1}$ are zero, so let's restrict our attention to that case.]}
+\item Condition~\eqref{cond:eps-lambda} {\em on $\softpart^\alpha$ is satisfied.} 
 
 First, obseve that
 \begin{align*}
 |\softker^\alpha(a, a')| & = \left|\frac{k_R(a, a')}{p(a)}\right| \\
-& \le \frac{1}{|p(a)|} \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{|R_{r,j}|}{j!} \, |\zeta(a)-\zeta(a')|^{j+1} |\zeta(a')|^r \\
-& = \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{r=0}^{d-1} |\zeta(a')|^r \sum_{j=0}^\infty \frac{|R_{r,j}|}{j!} \, |\zeta(a)-\zeta(a')|^j.
+& \le \frac{1}{|p(a)|} \sum_{j=0}^\infty \frac{|R_{j}|}{j!} \, |\zeta(a)-\zeta(a')|^{j+1} \\
+& = \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{j=0}^\infty \frac{|R_{j}|}{j!} \, |\zeta(a)-\zeta(a')|^j.
 \end{align*}
-Now, choose $\lambda_\Delta > A$. Since the functions $R_r(z^{-1})$ are holomorphic on the disk $|z| > A$, we have $|R_{r,j}| \lesssim \lambda_\Delta^j$ over all $r \in \{1, \ldots, d-1\}$ and $j \in \{0, 1, 2, \ldots\}$, as mentioned earlier. It follows that
+Now, choose $\lambda_\Delta > A$. Since $R(z^{-1})$ is holomorphic on the disk $|z| > A$, we have $|R_j| \lesssim \lambda_\Delta^j$ over all and $j \in \{0, 1, 2, \ldots\}$, as mentioned earlier. It follows that
 \begin{align*}
-\sum_{j=0}^\infty \frac{|R_{r,j}|}{j!} \, |\zeta(a)-\zeta(a')|^j
+\sum_{j=0}^\infty \frac{|R_{j}|}{j!} \, |\zeta(a)-\zeta(a')|^j
 & \lesssim \sum_{j=0}^\infty \frac{\lambda_\Delta^j}{j!} \, |\zeta(a)-\zeta(a')|^j \\
 & \lesssim e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
 \end{align*}
 over all $a, a' \in \domain_\alpha^2$, so
-\begin{align*}
-|\softker^\alpha(a, a')| \lesssim \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{r=0}^{d-1} |\zeta(a')|^r e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}.
-\end{align*}
-over all $a, a' \in \domain_\alpha^2$.
-\color{RoyalBlue}
-\begin{align*}
-|k_R(a,a')| & \le \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{|R_{r,j}|}{j!} \, \frac{|\zeta(a)-\zeta(a')|^{j+1}}{|p(a)|}|\zeta(a')|^r \\
-& \lesssim \sum_{r=0}^{d-1}\sum_{j=0}^\infty \frac{\lambda_\Delta^j}{j!} \, \frac{|\zeta(a)-\zeta(a')|^{j+1}}{|p(a)|}|\zeta(a')|^r \\
-& \lesssim \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{r=0}^{d-1} |\zeta(a')|^r \sum_{j=0}^\infty \frac{\lambda_\Delta^j}{j!} \, |\zeta(a)-\zeta(a')|^j \\
-& \lesssim |\zeta(a)-\zeta(a')| \sum_{r=0}^{d-1} \frac{|\zeta(a')|^r}{|p(a)|}\,  e^{A |\zeta(a)-\zeta(a')|}\\
-& \lesssim |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(a)}\Big\vert \sum_{r=0}^{d-1} \frac{|\zeta'|^r}{|q(\zeta(a'))|} \, e^{A |\zeta(a)-\zeta(a')|}\\
-& \lesssim |\zeta(a)-\zeta(a')| \, \Big\vert \frac{q(\zeta(a'))}{p(a)}\Big\vert \,  e^{A |\zeta(a)-\zeta(a')|}
-\end{align*}
-\color{black}
-\textcolor{magenta}{[I'm pretty sure this is false, because $q(a')$ and $p(a)$ have independent arguments] $\langle$} now we notice that $\Big\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\Big\vert$ is bounded for $a,a'$ far from $\alpha$ \textcolor{magenta}{$\rangle$} by the argument we use in the proof of Condition \eqref{cond:diag-basic}. If $\zeta(a), \zeta(a')$ are close to $\alpha$ we can use Condition \eqref{cond:sing}
-
-\[    \left\vert \frac{q(\zeta(a'))}{p(\zeta(a))}\right\vert  \leq \left\vert \frac{q(\zeta(a'))}{p(\zeta(a))} -\frac{\tau_\alpha}{\zeta(a)-\alpha}\right\vert + \frac{\tau_\alpha}{|\zeta(a)-\alpha|}\lesssim 1 +  \frac{\tau_\alpha}{|\zeta(a)-\alpha|} \]
-
-We conclude that 
-
-\[\left\vert \frac{k_R(a,a')}{p(\zeta(a))}\right\vert \lesssim \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a)-\alpha|}\, e^{2A |\zeta(a)-\zeta(a')|}  \]
-
-and $\gamma=1$.
+\[ |\softker^\alpha(a, a')| \lesssim \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
+over all $a, a' \in \domain_\alpha^2$. Like before, rewrite $p$ in the form $(\zeta - \alpha)\,P_\alpha(\zeta)$, so we have
+\[ |\softker^\alpha(a, a')| \lesssim \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a) - \alpha|\,\big|P_\alpha\big(\zeta(a)\big)\big|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
+over all $a, a' \in \domain_\alpha$. Since $P_\alpha$ is a polynomial with a finite number of roots, and $\domain_\alpha$ doesn't touch any of the roots, $\big|P_\alpha\big(\zeta\big)\big|^{-1}$ is bounded on $\domain_\alpha$. We conclude that
+\[ |\softker^\alpha(a, a')| \lesssim \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a) - \alpha|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
+over all $a, a' \in \domain_\alpha$, so Condition~\eqref{cond:eps-lambda} is satisfied with $\gamma = 1$.
 \end{itemize}
 \begin{brainstorm}
 \item Show that $\hardpart^\alpha$ satisfies Condition~\eqref{cond:reg-p}.
 \item Apply Prosposition~\ref{prop:alt-general_volterra} to get result.
 \end{brainstorm}
-\par\color{Tomato}
-Finally, to get the result as stated, we need to show that
-\[ f_{0, \alpha} \in \zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha). \]
-Like in the proof of Proposition \ref{prop:alt-general_volterra}, it's enough to show that $p$ satisfies Condition \eqref{cond:reg-p} with $\epsilon=1$. Since $p$ is a polynomial with a simple zero at $\zeta=\alpha$, we have that
-
-\[ p \in (\zeta-\alpha)\Big[ b_1 + O(\zeta-\alpha)\Big] \]
-in a small enough neighborhood of $\zeta=\alpha$. 
-
-\color{RoyalBlue}
-Since we already know that $f_{0, \alpha}$ is of exponential type, it's enough to show that $f_{0, \alpha}$ falls into the class
-\[ (\zeta - \alpha)^{\tau_\alpha-1}\Big[M + O\big(|\zeta - \alpha|\big)\Big] \]
-when it's restricted to some neighborhood of $\zeta = \alpha$. Like we did in the proof of Theorem~\ref{thm:basic_volterra}, we reason that
-\begin{align*}
-f_{0,\alpha}(a)&=\frac{p(b)}{p(a)}\, \exp\left(-\int_b^a\frac{q}{p} d\zeta\;\right)\\
-&=\frac{p(b)}{p(a)}\,\frac{(\zeta(a)-\alpha)^{\tau_\alpha}}{(\zeta(b)-\alpha)^{\tau_\alpha}}\,\exp\left(-\int_b^a \left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right)\\
-& = \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}}\,(\zeta(a)-\alpha)^{\tau_\alpha-1}\,\frac{(\zeta(a) - \alpha)}{p(a)} \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right),
-\end{align*}
-concluding that $f_{0,\alpha}$ is a constant multiple of
-\[ (\zeta(a)-\alpha)^{\tau_\alpha-1}\,\frac{\zeta(a)-\alpha}{p(a)} \, \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right). \]
-
-Since $p$ is a polynomial with a simple zero at $\zeta = \alpha$, we can deduce that
-\[ \frac{\zeta(a)-\alpha}{p(a)} \in b_1^{-1} + O\big(|\zeta - \alpha|\big), \]
-recalling that $b_1$ is the derivative of $p$ at $\zeta = \alpha$.
-
-Now, let's look at the exponential factor. By Condition~\eqref{cond:sing}, we can find a constant $C$ for which
-\[ \left| \frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha} \right| < C \]
-in some neighborhood $\domain_\text{near}$ of $\zeta = \alpha$. It follows that for all $a \in \domain_\text{near}$, the integral
-\[ S(a) = \int_{\zeta = \alpha}^a \left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta \]
-converges, allowing us to write
-\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) = e^{S(b)} e^{-S(a)} \]
-for $a \in \domain_\text{near}$. Observe that $|S| \le C |\zeta - \alpha|$ in $\domain_\text{near}$, implying that
-\[ \exp\left(-\int_b^a\left[\frac{q}{p}+\frac{\tau_\alpha}{\zeta-\alpha}\right] d\zeta\right) \in e^{S(b)} \Big[1 + O\big(|\zeta - \alpha|\big) \Big] \]
-when we restrict to $\domain_\text{near}$.
-
-Combining the arguments above, we see as desired that
-\[ f_{0, \alpha} \in M\zeta^{\tau_\alpha - 1} + \singexpalg{\tau_\alpha}(\domain_\alpha), \]
-with
-\[ M = \frac{p(b)}{(\zeta(b)-\alpha)^{\tau_\alpha}}\,b_1^{-1}\,e^{S(b)}. \]
-
-\color{black}
 \end{proof}
-
-
 
 \bibliographystyle{plain}
 \bibliography{airy-resurgence}
-
 \end{document}
