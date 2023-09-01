@@ -132,11 +132,11 @@ Our main result is to show that for a certain kind of regular singular Volterra 
 \subsection{Motivation}\label{motivation}
 In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. \begin{verify}[Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.]\end{verify} Through identities like
 \begin{align*}
-\frac{\partial}{\partial z} \laplace \varphi & = \laplace(z\varphi) \\
+\frac{\partial}{\partial z} \laplace \varphi & = \laplace(-\zeta\varphi) \\
 \laplace k\;\laplace \varphi & = \laplace(k * \varphi) \\
-z^{-\lambda} \laplace \varphi & = \laplace\,\partial^{-\lambda} \varphi,
+z^{-\nu} \laplace \varphi & = \laplace\,\partial^{-\nu} \varphi,
 \end{align*}
-where $\partial^{-\lambda}$ is the Riemann-Liouville fractional integral of order $\lambda \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on linear differential equations.
+where $\partial^{-\nu}$ is the Riemann-Liouville fractional integral of order $\nu \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on linear differential equations.
 
 Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. Solutions that look unrelated in the frequency domain may turn out to be linked by analytic continuation along the complex position domain, as seen in the phenomenon of {\em resurgence} \cite{EcalleIII}\cite{lectures-marino}\cite[Section 2.4]{sternin1995borel}.
 
@@ -156,11 +156,11 @@ Our goal is to justify the expectations above with an existence and uniqueness r
 Given a complex-valued function $\varphi$ and a non-negative, real-valued function $\omega$, we'll write $\varphi \lesssim \omega$ to say that $|\varphi|$ is bounded by a constant multiple of $\omega$. Unless we say otherwise, the bound holds throughout the domain where both functions are defined.
 \subsection{Setting}\label{setting}
 \subsubsection{The domain}\label{setting:domain}
-Throughout this paper, as described in Section~\ref{motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but doesn't contain $\zeta = 0$. We also assume:
+Throughout this paper, as described in Section~\ref{motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but doesn't contain $\zeta = 0$, and satisfies the following condition.
 \begin{conditions}
 \cond{star}\label{cond:star} The set $\domain$ is star-shaped around $\zeta = 0$. In other words, for any $a \in \domain$, a straight path from $\zeta = 0$ to $a$ stays in $\domain$. Since $\domain$ doesn't contain $\zeta = 0$, we'll always omit that starting point from the path.
 \end{conditions}
-For the applications we have in mind, $\domain$ might look something like the set pictured below, which satisfies Condition~\eqref{cond:star}.
+For the applications we have in mind, $\domain$ might look something like the set pictured below.
 \begin{center}
 \begin{tikzpicture}
 \newcommand{\spill}{4}
@@ -739,7 +739,7 @@ continuously.
 
 From Proposition~\ref{prop:frac-int-smoothing}, we deduce that when $\varphi$ belongs to $\singexpalg{\sigma}(\domain_\alpha)$ for some $\sigma > -1$, its fractional integral $\fracderiv{-\nu}{\zeta}{\alpha}\varphi$ has a well-defined Laplace transform along any ray $\Gamma_{\zeta,\alpha}^{\theta}\subset\domain_\alpha$. Using a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}, one can show that 
 \[ \laplace_{\zeta,\alpha}^{\theta}\,\fracderiv{-\nu}{\zeta}{\alpha} \varphi = z^{-\nu} \laplace_{\zeta, \alpha}^{\theta} \varphi \]
-for all $\nu \in (0, \infty)$ and $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$. This generalizes the Laplace transform's action on derivatives: under the same conditions on $\varphi$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
+for all $\nu \in (0, \infty)$ and $\varphi\in\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$. This mirrors the Laplace transform's action on multiplication operators: under the same conditions on $\varphi$, you can use differentiation under the integral to show that~\cite[Theorem~1.34]{laplace-tfm}
 \[ \laplace_{\zeta,\alpha}^\theta (\zeta^n \varphi) = \big({-\tfrac{\partial}{\partial z}}\big)^n \laplace_{\zeta,\alpha}^\theta \varphi \]
 for all integers $n \ge 0$ and suitable directions $\theta$.
 
@@ -873,7 +873,7 @@ in the form
 \[ q(a') = Q_{d-1}\big(\zeta(a)\big)\;\omega(a, a')^{d-1} + \ldots + Q_1\big(\zeta(a)\big)\;\omega(a, a') + Q_0\big(\zeta(a)\big), \]
 where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. Next, knowing that $-\alpha$ is a root of $p$, rewrite $p$ in the form $(\zeta - \alpha)\,P_\alpha(\zeta)$, where $P_\alpha$ is a polynomial of degree $d-1$. We can then write $-\big(\zeta(a) - \alpha\big)\,\hardker^\alpha(a, a')$ in the form
 \[ \big(\zeta(a)-\alpha\big)\,\frac{q(a')}{p(a)} = \frac{Q_{d-1}\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a')^{d-1} + \ldots + \frac{Q_1\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a') + \frac{Q_0\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}, \]
-viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational functions in $\zeta(a)$. If we keep $a$ away from the roots of $p$ other than $\zeta = \alpha$, each coefficient is bounded, so $|\hardker^\alpha(a, a')|$ is bounded by a polynomial in $|\omega(a, a')|$. It follows that for any $\lambda_\Delta > 0$, and any domain $\domain_\alpha$ that avoids all the roots of $p$ other than $\zeta = \alpha$, we have
+viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational functions in $\zeta(a)$. If we keep $a$ away from the roots of $p$ other than $\zeta = \alpha$, each coefficient is bounded, so $|\zeta(a) - \alpha|\,|\hardker^\alpha(a, a')|$ is bounded by a polynomial in $|\omega(a, a')|$. It follows that for any $\lambda_\Delta > 0$, and any domain $\domain_\alpha$ that avoids all the roots of $p$ other than $\zeta = \alpha$, we have
 \[ |\zeta(a)-\alpha|\,|\hardker^\alpha(a, a')| \lesssim e^{\lambda_\Delta|\omega(a, a')|} \]
 over all $a, a' \in \domain_\alpha$.
 
@@ -899,7 +899,7 @@ over all $a, a' \in \domain_\alpha^2$, so
 \[ |\softker^\alpha(a, a')| \lesssim \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 over all $a, a' \in \domain_\alpha^2$. Like before, rewrite $p$ in the form $(\zeta - \alpha)\,P_\alpha(\zeta)$, so we have
 \[ |\softker^\alpha(a, a')| \lesssim \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a) - \alpha|\,\big|P_\alpha\big(\zeta(a)\big)\big|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
-over all $a, a' \in \domain_\alpha$. Since $P_\alpha$ is a polynomial with a finite number of roots, and $\domain_\alpha$ doesn't touch any of the roots, $\big|P_\alpha\big(\zeta\big)\big|^{-1}$ is bounded on $\domain_\alpha$. We conclude that
+over all $a, a' \in \domain_\alpha$. Since $P_\alpha$ is a polynomial with a finite number of roots, and $\domain_\alpha$ doesn't touch any of the roots, $|P_\alpha(\zeta)|^{-1}$ is bounded on $\domain_\alpha$. We conclude that
 \[ |\softker^\alpha(a, a')| \lesssim \frac{|\zeta(a)-\zeta(a')|}{|\zeta(a) - \alpha|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 over all $a, a' \in \domain_\alpha$, so Condition~\eqref{cond:eps-lambda} is satisfied with $\gamma = 1$.
 \end{itemize}
