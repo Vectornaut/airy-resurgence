@@ -813,12 +813,12 @@ Since $P$ is a monic polynomial whose roots are all simple, $1/P(-\zeta)$ has th
 where $\roots$ is the zero set of $P$ \cite[Section 1.4, Exercise~2]{ahlfors}. 
 It follows that
 \begin{align*}
--\frac{Q(-\zeta(a'))}{P(-\zeta(a))} & = \sum_{-\beta \in \roots} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} \\
-& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q(-\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}.
+-\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} & = \sum_{-\beta \in \roots} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} \\
+& = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q\big(-\zeta(a')\big)}{P'(-\alpha)\,(\zeta(a) - \alpha)}.
 \end{align*}
 Now we expand $Q$ around $-\alpha$, using the decomposition $Q(\zeta) = Q(-\alpha)+(\zeta-\alpha)\,Q_\alpha(\zeta)$ to split up the last term of the expression above:
 \begin{equation}\label{eqn:split-numerator}
--\frac{Q(-\zeta(a'))}{P(-\zeta(a))} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta(a) - \alpha)}.
+-\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} + \frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)} + \frac{Q(-\alpha)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}.
 \end{equation}
 First, we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded on a neighborhood of $\zeta = \alpha$ in $\domain_\alpha$. Equation~\eqref{eqn:split-numerator} tells us that
 \begin{align*}
@@ -834,16 +834,15 @@ Next, we want to show that for any $\sigma > \tau_\alpha$, the bound
 \[ |\zeta(a) - \alpha| \left|\frac{q(a')}{p(a)}\right| < \sigma \]
 holds when $a$ and $a'$ are close enough to $\zeta = \alpha$. Taking the absolute value of both sides of Equation~\eqref{eqn:split-numerator}, and using the assumption that $\tau_\alpha$ is real and positive, we see that
 \begin{align*}
-\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)\,(\zeta(a) - \alpha)}\right| + \left|\frac{\tau_\alpha}{\zeta(a) - \alpha}\right| \\
-|\zeta(a) - \alpha|\left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)}\right| + \tau_\alpha.
+\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha\big(\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}\right| + \left|\frac{\tau_\alpha}{\zeta(a) - \alpha}\right| \\
+|\zeta(a) - \alpha|\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(\zeta(a')\big)}{P'(-\alpha)}\right| + \tau_\alpha.
 \end{align*}
 By bringing $\zeta(a')$ closer to $\alpha$, we can make the middle term
-\[\left|\frac{(\zeta(a') - \alpha)\,Q_\alpha(\zeta(a'))}{P'(-\alpha)}\right|\]
+\[\left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(\zeta(a')\big)}{P'(-\alpha)}\right|\]
 as small as we want. Similarly, by bringing $\zeta(a)$ closer to $\alpha$, we can make the sum
-\[\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q(-\zeta(a'))\,(\zeta(a) - \alpha)}{P'(-\beta)\,(\zeta(a) - \beta)}\right|\]
-
+\[\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right|\]
 as small as we want. Hence, for any $\sigma > \tau_\alpha$, the bound
-\[|\zeta(a)-\alpha| \, \left|\frac{Q(-\zeta(a'))}{P(-\zeta(a))}\right| \le \sigma \]
+\[|\zeta(a)-\alpha| \, \left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| \le \sigma \]
 holds over some neighborhood of $\big(\zeta(a), \zeta(a')\big) = (\alpha, \alpha)$ in $\domain_\alpha^2$.
 \begin{verify}
 \par Solution of Ahlfors exercise. First, observe that
