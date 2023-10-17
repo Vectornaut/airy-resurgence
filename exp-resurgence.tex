@@ -122,6 +122,31 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \begin{document}
 \maketitle
 
+\begin{brainstorm}
+    \item Section~\ref{borel_reg-ODE}---definitely Section~\ref{setting-ODE}, and maybe other subsections--revise the proof of the main result for ODE taking into account the results in our paper
+    \item Do flagged revisions in Section~\ref{borel-reg-thimble}
+    \item Section~\ref{contour-argument-AL}---revise the general contour argument
+    \item Revise Section 2, using the formalism of $\singexp{\sigma}{\Lambda}(\Omega)$
+    \begin{itemize}
+    \item Replace formalism in Section~\label{reg-decay}
+    \end{itemize}
+    \item Replace {\tt reg-sing-volterra} with the citation from Arxiv
+    \item Check which examples are still in the framework of our theorem
+    \begin{itemize}
+    \item Start a storage document for shelved examples
+    \end{itemize}
+    \item Section~\ref{resurgence-AL}---Draw intersection points figure
+    \item Section~\ref{sec:mod-bessel-lift}---pin down contour
+    \item Explain contour figure in Airy example [explain what the regions indicate and what the color]
+    \begin{itemize}
+    \item Figure out how to release source code. How much do we need to clean it up? Is it okay that it relies on Shadertoy?
+    \end{itemize}
+    \item Look at ``Plan of the paper'' appendix and confirm that we've included everything we want
+    \begin{itemize}
+    \item Put future goals in storage document
+    \end{itemize}
+\end{brainstorm}
+
 \section{Introduction}
 \subsection{The unreasonable effectiveness of Borel summation}\label{intro:summation}
 %%\subsection{A familiar process: Borel summation}\label{intro:summation}
@@ -263,7 +288,7 @@ Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern
 \node[anchor=north east] at (\size, \size) {$z$};
 \end{tikzpicture}
 \end{center}
-When the half-plane extends along the $-\theta$ direction, the sum $\hat{f}$ of the Borel transform of $\aexp^{-\theta} F$ has an absolutely convergent Laplace transform along the $\theta$ direction. In fact, we have $|\hat{f}| \lesssim e^{c |\zeta|}$ uniformly over all $\zeta$ in a constant-radius neighborhood of the ray $e^{i\theta}[0, \infty)$.
+When the half-plane extends along the $-\theta$ direction, the sum $\hat{f}$ of the Borel transform of $\aexp^{-\theta} F$ has an absolutely convergent Laplace transform along the $\theta$ direction. In fact, we have $|\hat{f}| \lesssim e^{c |\zeta|}$ uniformly over all $\zeta$ in a constant-radius neighborhood of the ray $e^{i\theta}[0, \infty)$. \textcolor{orange}{[Picture below should show the constant-radius neighborhood]}
 \begin{center}
 \begin{tikzpicture}
 \newcommand{\size}{3}
@@ -274,7 +299,7 @@ When the half-plane extends along the $-\theta$ direction, the sum $\hat{f}$ of 
   \clip (-\size, -\size) rectangle (\size, \size);
   \fill[violet!20, rotate=\ang] (\dis, -\outsize) rectangle (\outsize, \outsize);
   \begin{scope}[violet]
-    \draw (0, 0) -- (-\ang:\outsize);
+    \draw (0, 0) -- (\ang:\outsize);
     \draw[rotate=-\ang] (\dis, -0.1) -- (\dis, 0.1);
     \draw[shorten <=0.6mm, shorten >=0.6mm] (0:0.5) arc (0:-\ang:0.5) node[midway, anchor=180-\ang/2] {$-\theta$};
     \node[anchor=90-\ang, inner sep=2mm] at (-\ang:\dis) {$c$};
@@ -491,7 +516,7 @@ The theory of $1$-summability allows us to draw the ``square'' with corners $\ha
 %\end{itemize}
 
 
-\subsubsection{Why does Borel summation work for thimbles integrals?}
+\subsubsection{Why does Borel summation work for thimble integrals?}
 
 Let $X$ be an $N$-dimensional complex algebraic variety and $f\colon X\to\mathbb{A}^1$ be a proper algebraic map with non--degenerate critical points $\alpha_1,...,\alpha_N$ \footnote{Everything we will discuss, applies also when $X$ is a $N$-dimensional complex (K\"ahler) manifold and $f\colon X\to\C$ is a holomorphic function with non-degenerates critical points, which is, for example, the setting in \cite{Witten}.}: for a fixed $z\in\C$, we are interested in integrals of the form 
 
@@ -1509,8 +1534,7 @@ which rearranges to the second equation in the statement.
 \subsection{Borel regularity for ODEs}\label{borel_reg-ODE}
 
 \subsubsection{Setting}\label{setting-ODE}
-
-Let $\mathcal{P}$ be a linear differential operator\footnote{ We follow Delabaere, rather than \'Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}}
+\textcolor{orange}{[Make sure this matches regular singular Volterra paper!]} Let $\mathcal{P}$ be a linear differential operator\footnote{ We follow Delabaere, rather than \'Ecalle, in only going on up to degree $d-1$; see footnote~1 in \S 5.2.2.1 of \cite{diverg-resurg-iii}}
 \begin{equation}
 \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big],
 \end{equation}
@@ -1523,7 +1547,7 @@ Let $\mathcal{P}$ be a linear differential operator\footnote{ We follow Delabaer
 
 For every $j=1,...,d$, let $\Omega_j\subset B$ be a simply connected open set that touches but doesn't contain $\zeta = \alpha_j$. We also assume:
 \begin{itemize}
-\item The set $\Omega_j$ is star-shaped around $\zeta = \alpha_j$. In other words, for any $a \in \Omega_j$, a straight path from $\zeta = \alpha_j$ to $a$ stays in $Omega_j$. Since $\Omega_j$ doesn't contain $\zeta = \alpha_j$, we'll always leave that starting point out of the path.
+\item The set $\Omega_j$ is star-shaped around $\zeta = \alpha_j$. In other words, for any $a \in \Omega_j$, a straight path from $\zeta = \alpha_j$ to $a$ stays in $\Omega_j$. Since $\Omega_j$ doesn't contain $\zeta = \alpha_j$, we'll always leave that starting point out of the path.
 \item The set $\Omega_j$ does not contain the tubular neighborhood of the other critical points $-\alpha_k$, for $k\neq j$, as shown in Figure \ref{Fig:domain}
 \end{itemize}
 
@@ -1826,7 +1850,7 @@ where $\Gamma$ is a path that comes from $\infty$ at $-60^\circ$ and goes to $\i
     \centering
     %\includegraphics{figures/u_contour_3.pdf}
     \includegraphics[scale=0.3]{figures/thimble_Airy.png}
-    \caption{\small The contour $\Gamma$ in the $u$ plane is represented by the light blue path.\textcolor{orange}{[explain what the region indicate and what the color]}}
+    \caption{\small The contour $\Gamma$ in the $u$ plane is represented by the light blue path.\textcolor{orange}{[explain what the regions indicate and what the color]}}
     \label{fig:path_Airy}
 \end{figure}
 
@@ -2129,7 +2153,7 @@ It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the
 %\color{black}
 
 
-\subsection{Modified Bessel}
+\subsection{Modified Bessel}\label{sec:mod-bessel-lift}
 
 The modified Bessel equation is a generalization of equation~\eqref{eqn:mod-bessel-AL} where $\frac{m}{n}$ is replaced by a complex parameter $\mu$
 
@@ -2616,7 +2640,7 @@ and differentiating three times we find a generalized hypergeometric equation wi
 
 \textcolor{orange}{we may try to do the computations of Stokes constants for $p=1$, when $\hat{w}_1$ simplifies to a Gauss hypergeometric. Use also information about the monodromy. Check change of coordinates $y=\zeta^2$.}
 
-\subsubsection{thimble projection formula}
+\subsubsection{Thimble projection formula}
 
 In Theorem \ref{thm:maxim}, we proved a $3/2$-derivative formula to compute the Borel transform of the asymptotics of a thimble integral. 
 
@@ -2964,7 +2988,7 @@ giving the alternate decomposition
 
 \subsection{Thimble projection formula}
 
-In an Airy-Lucas integral, $f$ is a Chebyshev polynomial, so we can do a thimble projection technique (\S \ref{contour-argument-AL}) or apply the thimble projection formula \eqref{formula1} \textcolor{red}{\footnote{We have this done in \texttt{draft2}, but we'll probably leave it out of the article}} using a trigonometric substitution. As an example of how one might reason in the latter case, we look at the Airy function ($f = 4u^3-3u$), this time using applying the thimble projection formula to the generalized Cardano's formula.
+In an Airy-Lucas integral, $f$ is a Chebyshev polynomial, so we can do a thimble projection technique (\S \ref{contour-argument-AL}) or apply the thimble projection formula \eqref{formula1} \textcolor{red}{\footnote{We have this done in \texttt{draft2}, but we'll probably leave it out of the article}} using trigonometric substitution. As an example of how one might reason in the latter case, we look at the Airy function ($f = 4u^3-3u$), this time applying the thimble projection formula to the generalized Cardano's formula.
 
 Recall that the roots of $f(u)-\zeta$ can be written explicitly as 
 
@@ -2972,7 +2996,7 @@ Recall that the roots of $f(u)-\zeta$ can be written explicitly as
     u=????
 \end{equation}
 
-\textcolor{orange}{[add the numerical check to show simple resurgence]}
+\textcolor{orange}{[Add the numerical check to show simple resurgence. For example, maybe graph exponential of magnitude of function on position domain]}
 
 \subsection{Comparison with other treatments of the Airy equation}
 
