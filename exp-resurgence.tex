@@ -116,11 +116,32 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \newenvironment{verify}{\color{ForestGreen}}{\color{black}}
 \newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
 
+% colors
+\definecolor{ietocean}{RGB}{0, 30, 140}
+\definecolor{ietcoast}{RGB}{0, 150, 173}
+\definecolor{ietlagoon}{RGB}{0, 216, 180}
+
+% pretty prince hyperref must always be the last thing in the preamble, always
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  linkcolor={ietcoast},
+  citecolor={ietcoast},
+  urlcolor={ietcoast}
+}
+
+\setcounter{tocdepth}{2}
+
 \title{Borel regularity for ODEs and Thimble Integrals}
 \author{Veronica Fantini and Aaron Fenyes}
 
 \begin{document}
 \maketitle
+
+\begin{abstract}
+    ...
+\end{abstract}
+\tableofcontents
 
 \begin{brainstorm}
     \item Section~\ref{borel_reg-ODE}---definitely Section~\ref{setting-ODE}, and maybe other subsections--revise the proof of the main result for ODE taking into account the results in our paper
@@ -2282,151 +2303,6 @@ with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}. Then
     K_0(z)=-\frac{1}{2}\int_1^\infty e^{-z\zeta} \, \left(\frac{\zeta-1}{2}\right)^{-1/2} \,\, {}_2F_1\left(\frac{1}{2}, \frac{1}{2};\frac{1}{2};\frac{1-\zeta}{2}\right)  d\zeta =  \int_1^\infty \frac{e^{-z\zeta}}{\sqrt{\zeta^2-1}} \, d\zeta .
 \end{equation}
 \textcolor{orange}{[can we use (51) directly? It seems to me that if I try the thimble projection reasoning from the integral expression directly, I'm not able to write $1/\sinh(it)$ as a function of $\zeta$. ]}
-
-\subsection{Higher Airy}
-
-\textcolor{magenta}{[The higher Airy example is not completed and there are still some difficulties in the computations, even for simple examples. Should we remove it?]}
-
-The higher Airy equation is
-\begin{equation}\label{eqn:higher-airy}
-\left[\big({-}\tfrac{\partial}{\partial y}\big)^{n-1} - y\right] \psi = 0
-\end{equation}
-with $n \in \{3, 4, 5, \ldots\}$. A few solutions are given by the hyper-Airy functions~\cite[Equation~3.8]{charbonnier22},
-
-\color{Peru}
-With
-\begin{align*}
-z & = (-1)^{n-1} \tfrac{n-1}{n} y^{n/(n-1)} & w & = (-1)^n (n-1) y^{1/(n-1)} u,
-\end{align*}
-we have
-\begin{align*}
-\widetilde{\Ai}^{(k)}_n(y) & = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[\tfrac{1}{n}w^n - yw\right]\,dw \\
-& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[\tfrac{1}{n}w \left(w^{n-1} - ny\right)\right]\,dw \\
-& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[\tfrac{1}{n}w \big((n-1)^{n-1} yu^{n-1} - ny\big)\right]\,dw \\
-& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[\tfrac{1}{n}yw \big((n-1)^{n-1} u^{n-1} - n\big)\right]\,dw \\
-& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[(-1)^n \tfrac{n-1}{n} y^{n/(n-1)} u\big((n-1)^{n-1} u^{n-1} - n\big)\right]\,dw \\
-& = \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} \int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,dw \\
-& = (-1)^n (n-1) \frac{\exp\big(\pi ik \tfrac{n-2}{n-1}\big)}{2\pi i} y^{1/(n-1)}\int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du \\
-& = (-1)^n (n-1) \frac{\exp\left(\pi ik \big(1 - \tfrac{1}{n-1}\big)\right)}{2\pi i} y^{1/(n-1)}\int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du \\
-& = (-1)^{n+k} (n-1) \frac{\exp\big({-}\pi i \tfrac{k}{n-1}\big)}{2\pi i} y^{1/(n-1)}\int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du \\
-\end{align*}
-\color{black}
-\[ \widetilde{\Ai}^{(k)}_n(y) = (-1)^{n+k} (n-1) \frac{\exp\big({-}\pi i \tfrac{k}{n-1}\big)}{2\pi i} y^{1/(n-1)}\int_{\Lambda^{(j)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du \\, \]
-where $\Lambda^{(k)}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{k}{n}\pi\big)$.
-\subsubsection{Rewriting as a \textcolor{magenta}{(???)} equation}
-We can distill the most interesting parts of the hyper-Airy function by writing
-\[ \widetilde{\Ai}^{(k)}_n(y) = \textcolor{magenta}{\text{const.}}\,y^{1/(n-1)}\,K^{(k)}\left((-1)^n\,\tfrac{n-1}{n}\,y^{n/(n-1)}\right), \]
-where
-\begin{equation}\label{int_higher-Ariy}
-K^{(k)}(z) = \textcolor{magenta}{\text{const.}} \int_{\textcolor{magenta}{\text{const.}(n)} z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du.
-\end{equation}
-Saying that $\widetilde{\Ai}^{(k)}_n$ satisfies the higher Airy equation is equivalent to saying that $K$ satisfies an equation of the form
-\begin{equation}\label{eqn:higher-Airy}
-\left[ \big[ \big({-}\tfrac{\partial}{\partial z}\big)^{n-1} - 1 \big] - c_n^{(1)} z^{-1} \big({-}\tfrac{\partial}{\partial z}\big)^{n-2} - c_n^{(2)} z^{-2} \big({-}\tfrac{\partial}{\partial z}\big)^{n-3} - \ldots - c_n^{(n-1)} z^{-(n-1)} \right] K^{(k)} = 0.
-\end{equation}
-The sub-leading coefficients are 
-\[ c_n^{(1)} = \frac{n-1}{2}. \]
-
-The later coefficients can be written as\footnote{Many thanks to Peter Taylor for noticing this [\url{https://mathoverflow.net/q/422337/1096}].}
-\[ c_n^{(k)} = \frac{b_n^{(k)}}{n^k}\,\frac{\Gamma(n+2)}{\Gamma(n-k)} \]
-in terms of the polynomials
-
-\begin{tabular}{llllllllllll}
-$b_n^{(2)}$ & = & $\frac{1}{24}$ \\
-$b_n^{(3)}$ & = & $\frac{1}{48} n$ \\
-$b_n^{(4)}$ & = & $\frac{73}{5760} n^2$ & + & $\frac{1}{1152} n$ & - & $\frac{1}{2880}$ \\
-$b_n^{(5)}$ & = & $\frac{11}{1280} n^{3}$ & + & $\frac{1}{768} n^{2}$ & - & $\frac{1}{1920} n$ \\
-$b_n^{(6)}$ & = & $\frac{3625}{580608} n^{4}$ & + & $\frac{61}{41472} n^{3}$ & - & $\frac{181}{322560} n^{2}$ & - & $\frac{1}{41472} n$ & + & $\frac{1}{181440}$. 
-\end{tabular}
-
-\vspace{5mm}
-
-
-Searching for 580608 in the OEIS turns up the leading coefficients $\beta^{(k)}$ of these polynomials, which are listed as {\tt A249276} and {\tt A249277}. They're defined by the identity [Yang, ``Approximations for Constant $e$ and Their Applications'']
-\[ \frac{1}{e} \left(\frac{n}{n-1}\right)^{n-1} = 1 - \frac{1/2}{n} - \frac{\beta^{(2)}}{n^2} - \frac{\beta^{(3)}}{n^3} - \frac{\beta^{(4)}}{n^4} - \frac{\beta^{(5)}}{n^5} - \ldots, \]
-which tells us that
-\[ \frac{1}{e} \left(\frac{n}{n-1}\right)^{n-1} = 1 - \frac{1/2}{n} - \frac{b_n^{(2)}}{n^2} - \frac{b_n^{(3)}}{n^4} - \left[\frac{b_n^{(4)}}{n^6} + o\left(\frac{1}{n^5}\right)\right] - \left[\frac{b_n^{(5)}}{n^8} + o\left(\frac{1}{n^6}\right)\right] - \ldots. \]
-The last coefficient can be written as
-\[ c_n^{(n-1)} =\left(\frac{n-1}{n}\right)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}}, 
-\]
-giving
-\[ b_n^{(n-1)} = (n-1)^{n-1} \left(\frac{1}{n-1}\right)^{\underline{n-1}} \Big/ \Gamma(n+2). \]
-
-\subsubsection{Building a frame of analytic solutions}
-
-We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:higher-Airy}. We'll succeed when $\alpha^{n-1} - 1 = 0$, and we'll see that $K^{(k)}$ is a scalar multiple of $\laplace_{\zeta, \alpha_k} v_k$ with $\alpha_k=e^{2\pi i \tfrac{k}{n-1}}$.
-
-We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha_k} v$ satisfies the differential equation~\eqref{eqn:higher-Airy} if and only if $v$ satisfies the integral equation
-\begin{equation}\label{int-eq:spatial-higher-Airy}
-\left[ \big[ \zeta^{n-1} - 1 \big] - c_n^{(1)} \partial_{\zeta,\alpha_k}^{-1}\circ \zeta^{n-2} - c_n^{(2)} \partial_{\zeta,\alpha_k}^{-2} \circ\zeta^{n-3} - \ldots - c_n^{(n-1)} \partial_{\zeta,\alpha_k}^{-(n-1)} \right] v = 0.
-\end{equation}
-
-Since equation \eqref{eqn:higher-Airy} is written in form \eqref{eqn:standard ODE} and the coefficient $c_n^{(1)}$ is explicitly known, we deduce that equation \eqref{int-eq:spatial-higher-Airy} admits a slight solution at $\zeta={\alpha_k} $ of order $\tau_{\alpha_k}=\frac{1}{2}$. In particular, $v$ is a solution of \eqref{int-eq:spatial-higher-Airy} if and only if it solves the following differential equation
- 
-\begin{equation}\label{diff-eq:spatial-higher-Airy}
-\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \circ\big[ \zeta^{n-1} - 1 \big] - c_n^{(1)} \big(\tfrac{\partial}{\partial \zeta}\big)^{n-2}\circ \zeta^{n-2} - c_n^{(2)} \big(\tfrac{\partial}{\partial \zeta}\big)^{n-3} \circ\zeta^{n-3} - \ldots - c_n^{(n-1)} \right] v = 0.
-\end{equation}
-
-Using the Liebniz rule for the differential, we get 
-
-\color{Peru}
-
-\begin{align*}
-\big(\tfrac{\partial}{\partial \zeta}\big)^{n-1} \circ\big[ \zeta^{n-1} - 1 \big]v&=\sum_{j=0}^{n-1} \binom{n-1}{j} v^{(n-j-1)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]\\
-&=(\zeta^{n-1} - 1)\partial_{\zeta}^{n-1}v+ (n-1)^2\zeta^{n-2} \partial_\zeta^{n-2}v +\\
-&\qquad \sum_{j=2}^{n-1} \binom{n-2}{j} v^{(n-j-1)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]+(n-1)! v\\
-\big(\tfrac{\partial}{\partial {\zeta}}\big)^{n-2}\circ \zeta^{n-2}v&=\zeta^{n-2}\partial_\zeta^{n-2}v+\sum_{j=1}^{n-3} \binom{n-2}{j} v^{(n-j-2)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]+(n-2)!v \\
-\big(\tfrac{\partial}{\partial \zeta}\big)^{n-3} \circ\zeta^{n-3}v&=\sum_{j=0}^{n-4} \binom{n-3}{j} v^{(n-j-3)}\big(\tfrac{\partial}{\partial \zeta}\big)^{j} \big[ \zeta^{n-1} - 1 \big]+(n-3)!v\\
-\tfrac{\partial}{\partial \zeta} \circ\zeta v&=\zeta \partial_\zeta v+v
-\end{align*}
-
-\color{black}
-\begin{equation}\label{diff-eq:spatial-mod-higher-Airy}
-\left[ (\zeta^{n-1} - 1)\partial_{\zeta}^{n-1}+ \big[(n-1)^2-c_n^{(1)}\big]\zeta^{n-2} \partial_\zeta^{n-2}+...+\big[(n-1)!-c_n^{(1)}(n-2)!-...-c_n^{(n-1)}\big] \right] v = 0.
-\end{equation}
-
-Let's find a solution of equation~\eqref{diff-eq:spatial-mod-higher-Airy} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\eqref{diff-eq:spatial-mod-higher-Airy} looks like
-\begin{multline}\label{diff-eq:spatial-mod-higher-Airy-1}
-\left[\zeta_1(n-1+...+(n-1)\zeta_1^{n-3} + \zeta_1^{n-2}) \big(\tfrac{\partial}{\partial \zeta_1}\big)^{n-1} + \big[(n-1)^2-c_n^{(1)}\big](1+\zeta_1)^{n-2} \tfrac{\partial}{\partial \zeta_1}^{n-2} + ... \right.\\
- \left. +\big[(n-1)!-c_n^{(1)}(n-2)!-...-c_n^{(n-1)}\big]\right] v = 0.
-\end{multline}
-
-
-
-\subsubsection{Higher Airy of degree $3$}
-Setting $n=4$, equation \eqref{eqn:higher-Airy} turns into 
-
-\begin{equation}\label{eqn:reg-higher3}
-\left[\frac{\partial^3}{\partial z^3}+1+\frac{3}{2z}\frac{\partial^2}{\partial z^2}-\frac{5}{16}\frac{1}{z^2}\frac{\partial}{\partial z}+\frac{5}{32}\frac{1}{z^3}\right]\varphi=0
-\end{equation}
-
-and going to the spatial domain, $\laplace_{\zeta,\alpha_k}$ satisfies equation~\eqref{eqn:reg-higher3} if and only if $v$ satisfies 
-
-
-\begin{equation}\label{diff-eq:spatial-higher3}
-\left[(\zeta^3-1)\partial_\zeta^3-\frac{15}{2}\zeta^2\partial_\zeta^2-\frac{187}{16}\zeta\partial_\zeta+\frac{81}{32}\right]\varphi=0
-\end{equation}
-
-Let's find a solution of equation~\eqref{diff-eq:spatial-higher3} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\eqref{diff-eq:spatial-higher3} looks like
-\begin{equation}%%\label{diff-eq:spatial-mod-bessel-pos}
-\left[\zeta_1(3 + 3\zeta_1 + \zeta_1^2) \big(\tfrac{\partial}{\partial \zeta_1}\big)^3 - \frac{15}{2}(1 + 2\zeta_1 + \zeta_1^2) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 -\frac{187}{16}(1+\zeta_1)\tfrac{\partial}{\partial \zeta_1} + \frac{81}{32}\right] v = 0.
-\end{equation}
-
-\textcolor{DarkBlue}{[Find solutions using hypergeometric functions]}
-
-\subsubsection{thimble projection reasoning for higher Airy of degree $3$}
-
-We can recast integral \eqref{int_higher-Ariy} into the $\zeta$-plane by setting $\zeta=27 u^4-4 u$, which implies that $d\zeta=4 (27 u^3-1) du$. Projecting $z^{-1/4}\Lambda^{(k)}$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing a branch of that lifts $\gamma_z$ back to $z^{-1/4}\Lambda^{(k)}$, we get 
-
-\begin{align*}
-K^{(k)}(z)&=\textcolor{magenta}{const.} \int_{\textcolor{magenta}{const.}z^{-1/4}\Lambda^{(k)}}\exp\big[- z \big(27 u^4-4 u\big)\big] du\\
-&=\textcolor{magenta}{const.} \int_{\gamma_z}e^{-z\zeta} \frac{d\zeta}{4(27u^3-1)}\\
-&=\textcolor{magenta}{const.} \frac{1}{4}\int_{\gamma_z}e^{-z\zeta}\frac{1}{3}\left[\frac{1}{3u-1}+\frac{1}{3e^{\frac{2\pi i}{3}} u -1}+\frac{1}{3e^{\frac{4\pi i}{3}} u-1}\right] d\zeta\\
-&=-\textcolor{magenta}{const.} \frac{1}{4}\int_{\gamma_z}e^{-z\zeta} {}_3F_2\left(\frac{1}{3},\frac{2}{3},1;\frac{1}{3},\frac{2}{3};27 u^3\right) d\zeta
-\end{align*}
-\[
-\frac{1}{4}\frac{1}{27u^3-1}=\frac{1}{4}(\frac{A}{3u-1}+\frac{B}{3u-\omega}+\frac{C}{3u-\omega^2})
-\]
 
 
 
