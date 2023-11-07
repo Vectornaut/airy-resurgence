@@ -273,16 +273,16 @@ Since different functions can be asymptotic to the same power series, taking the
 \begin{enumerate}
 \item Take the asymptotic expansion $\series{\Phi} = \aexp^{-\theta} \Phi$.
 \item Take the Borel transform $\series{\phi} = \borel \series{\Phi}$.
-\item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before. This is possible, by definition, if $\series{\Phi}$ is $1$-Gevrey.
-\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable. \textbf{[Should we be allowed to take the Laplace transform at another points $b \in B$ instead?]}
+\item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before.\textcolor{red}{This is possible, by definition, if $\series{\Phi}$ is $1$-Gevrey.[Veronica: I'll remove this! Being Gevrey implies that the Borel transform is convergent, not that we can analytically continue it]}
+\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable.\footnote{More generally, we're allowed to take the Laplace transform at another point $b \in B$. This would be natural in our study of ODEs and thimble integrals.}
 \end{enumerate}
 We'll say a function is {\em Borel-regularizable} if its asymptotic expansion is Borel-summable, ensuring that we can carry out the last two steps.
 
 Defining a regularization process picks out a class of regular functions: the ones that are invariant under regularization. We'll say a function is {\em Borel regular} if it's Borel-regularizable and Borel regularization leaves it unchanged. In other words, $\Phi$ is Borel regular if $\hat{\Phi} = \Phi$.
 \subsubsection{Borel regularity as a good approximation condition}
-Borel regular functions can be characterized as functions that are approximated well, asymptotically, by polynomials. Watson showed a century ago \cite{watson} that a function $F$ that vanishes at $\infty$ is Borel regular whenever its asymptotic expansion is uniformly $1$-Gevrey-asymptotic to it on an obtuse-angled sector around $\infty$ (see Definition~\ref{def:unif-gevrey-asymp}).
+Borel regular functions can be characterized as functions that are approximated well, asymptotically, by polynomials. Watson showed a century ago \cite{watson} that a function $F$ that vanishes at infinity is Borel regular whenever its asymptotic expansion is uniformly $1$-Gevrey-asymptotic to it on an obtuse-angled sector around infinity (see Definition~\ref{def:unif-gevrey-asymp}).
 
-Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern proof in \cite[Theorem~B.15]{nikolaev2023exact} and a generalization to power series with fractional power exponents in \cite{delabaere--rosoamanana}), and improved again later by Sokal \cite{sokal1980improvement}. These improvements tell us that the obtuse-angled sector around $\infty$ in the statement above can be replaced with an open disk whose boundary touches $\infty$---that is, an open half-plane which doesn't contain $0$, and may be displaced from $0$ by some distance $c$.
+Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern proof in \cite[Theorem~B.15]{nikolaev2023exact} and a generalization to power series with fractional power exponents in \cite{delabaere--rosoamanana}), and improved again later by Sokal \cite{sokal1980improvement}. These improvements tell us that the obtuse-angled sector around $\infty$ in the statement above can be replaced with an open disk whose boundary touches infinity---that is, an open half-plane which doesn't contain $0$, and may be displaced from $0$ by some distance $c$.
 \begin{center}
 \begin{tikzpicture}
 \newcommand{\size}{3}
@@ -345,7 +345,7 @@ The central goal of this paper is to explain, from this perspective, why Borel s
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big], \]
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0, \ldots, R_{d-1}$ are holomorphic functions in some disk $|z|>A$ around infinity. We'll restrict our attention to the case where the roots of $P$ are simple (see Section \ref{setting-ODE}).
 
-The form of $\mathcal{P}$ derives from Equation~2.2.3 \textcolor{orange}{(p.~105)} of \cite{EcalleIII}, which encompasses both linear and nonlinear ODEs of level $1$. Borel summation is more involved for the nonlinear ones, raising the question of whether our analysis generalizes.
+The form of $\mathcal{P}$ derives from Equation~2.2.3 of \cite[pag. 105]{EcalleIII}, which encompasses both linear and nonlinear ODEs of level $1$. Borel summation is more involved for the nonlinear ones, raising the question of whether our analysis generalizes.
 
 \item Evaluating a certain kind of integral: a one-dimensional {\em thimble integral}
 
@@ -357,7 +357,7 @@ where $f\colon X\to \mathbb{C}$ is a holomorphic functions with isolated and non
 
 These two problems are closely linked. By playing with derivatives of an exponential integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of exponential integral solutions.
 
-%Notice that our starting point is quite different: we assume $\Phi$ is a holomorphic functions such that it is either a thimble integral or it solves an ODE with irregular singularity at $\infty$. Then we prove $\Phi$ is Borel regular and in both cases, our proves follow the heuristic of the diagram above. We will give precise statements in the following section.
+%Notice that our starting point is quite different: we assume $\Phi$ is a holomorphic functions such that it is either a thimble integral or it solves an ODE with irregular singularity at $\infty$. Then we prove $\Phi$ is Borel regular and in both cases, our proves follow the heuristic of the diagram above. We’ll give precise statements in the following section.
 
        
 
@@ -392,16 +392,16 @@ These two problems are closely linked. By playing with derivatives of an exponen
 
 \subsection{Goals and Results}
 
-First of all we want to clearly separate the parts of the theory that deal with holomorphic functions and formal series. Indeed, for ODEs, we can build an analytic frame of solutions with an explicit growth behaviour (see Theorem~\ref{thm1}), while for thimble integrals we can write an explicit analytic function whose Laplace transform is the thimble integral itself (see part 3 of Theorem~\ref{thm:maxim}). 
+First of all, we want to clearly separate the parts of the theory that deal with holomorphic functions and formal series. Indeed, \textcolor{red}{for ODEs, we can build an analytic frame of solutions with an explicit growth behavior (see Theorem~\ref{thm1})}, while for thimble integrals we can write an explicit analytic function whose Laplace transform is the thimble integral itself (see part 3 of Theorem~\ref{thm:maxim}). 
 
-Second of all, we want to explain why it is useful to work in the Borel plane (the spatial domain): on the one hand integral equations are more regular than differential equations. On the other hand, a thimble integral in the frequency domain can be recast as the Laplace transform of a function in the spatial domain. 
+Second of all, we want to explain why it is useful to work in the Borel plane (the position domain): on the one hand integral equations are more regular than differential equations. On the other hand, a thimble integral in the frequency domain can be recast as the Laplace transform of a function in the spatial domain. 
 
 \subsubsection{Why does Borel summation work for solutions of single level-$1$ ODEs?}
 As described in Section~\ref{borel-reg:explanatory-power}, we consider a linear single level-$1$ ODE $\mathcal{P}\Phi = 0$ given by a differential operator of the form
 \begin{equation}\label{eqn:standard ODE}
 \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big],
 \end{equation}
-where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$.\footnote{Looking at the existence theorem in {\tt airy-resurgence} 2.1.3, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]} Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$, $P'(-\alpha_j)\neq 0$ for $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ (see \cite[Definition 3.3.2]{diverg-resurg--ii}).
+where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$.\footnote{Looking at the existence theorem in \cite[Theorem 4]{reg-sing-volterra}, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.]} Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$, $P'(-\alpha_j)\neq 0$ for $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ (see \cite[Definition 3.3.2]{diverg-resurg--ii}).
 
 \begin{verify}
     Turn the ODE into a system: assume 
@@ -463,44 +463,31 @@ However, can we find a distinguished basis for solutions in a purely analytic wa
 \hat{P}_j:=P(-\zeta)+\partial_{\zeta,\alpha_j}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha_j}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha_j}^{-1})\circ (-\zeta)^r
 \end{equation}
 
-labeled by the roots of $P$. This type of operators are the one we studied in \cite{reg-sing-volterra}, hence we know there exists a unique solution $\psi_j=f_{j,0}+f_{j,\star}$ of $\hat{P}_j\psi_j=0$, such that $\psi_j$ blows-up as $\zeta_j^{\tau_j-1}$ at $\zeta_j=0$ and $f_{j,\star}\in\singexpalg{\tau_j}(\Omega_j)$ for an open domain $\Omega_j$ which is star-shaped at $\alpha_j$ and avoids the other critical points (see the definition in Section \ref{setting-ODE}). In addition, $\psi_j$ can be Laplace transformed, giving a analytic function $\Psi_j:=\laplace_{\zeta_j}^{\theta}$. 
-
-\begin{theorem}\label{thm1}
-    The holomoprhic functions $\Psi_j$ are solutions of $\mathcal{P}\Psi_j=0$. In particular, they are a frame of analytic solutions.
+labeled by the roots of $P$. This type of operator is the one we studied in \cite{reg-sing-volterra}, hence we know there exists a unique solution $\psi_j$ of $\hat{P}_j\psi_j=0$, such that $\psi_j$ blows-up as $\zeta_j^{\tau_j-1}$ at $\zeta_j=0$ and it has a controlled behavior on an open domain $\Omega_j$ which is star-shaped at $\alpha_j$ and avoids the other critical points (see the definition in Section \ref{setting-ODE}). In addition, $\psi_j$ can be Laplace transformed, giving a analytic function $\Psi_j:=\laplace_{\zeta_j}^{\theta}\psi_j$. 
+At this point, we may ask what is the relationship between the two frames of analytic solutions, namely the Borel sum $\hat{\Psi}_j$ of the formal solutions $\series{\Psi}_j$ and the Laplace transform of $\psi_j$. Our main result says they are actually proportional, hence proving Borel summation works. 
+\begin{theorem}[see Theorem \ref{thm2-dim}]\label{thm2}
+The formal frame of solutions $\tilde{\Psi}_j$ is Borel summable and its Borel sum is proportional to $\Psi_j$. In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}.  
 \end{theorem}
-
-At this point, we may ask what is the relationship between the two frame of analytic solutions, namely the Borel sum $\hat{\Psi}_j$ of the formal solutions $\series{\Psi}_j$ and the Laplace transform of $\psi_j$. Our main result says they are actually the same, hence proving Borel summation works. 
- 
-\begin{theorem}\label{thm2}
-The formal frame of solutions $\tilde{\Psi}_j$ is Borel summable and its Borel sum is proportional to $\Psi_j$. 
-\end{theorem}
-
-In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}.  
-
 In the following diagram, we sketch the main step of the proof of Theorem~\ref{thm2} (the rigorous proof is given in Section \ref{borel_reg-ODE}): on the right-hand side of the diagram, we have the formal solution $\series{\Psi }_j$ and its Borel transform $\series{\psi}_j$. %Then, the theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
 
 \begin{center}
 \begin{tikzcd}
-& & ODE\arrow[dd,"\borel"]\arrow[dd,"\laplace^{-1}",swap] & & \\
+& & \text{ODE }\arrow[dd,"\borel"]\arrow[dd,"\laplace^{-1}",swap] & & \\
 \Psi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Psi}}\arrow[ur,red, no head, tail] & & & \tilde{\Psi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\borel"]\\
-& & IE & & \\
+& & \text{IE} & & \\
 \psi\arrow[rru, no head, tail]\arrow[uu,"\laplace"]& \textcolor{red}{\hat{\psi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\laplace"]& & & \tilde{\psi}\arrow[llu, no head, tail]
 \end{tikzcd}
 \end{center} 
 
-Conversely, on the left-hand side, we have the unique (up to scaling) analytic function $\psi_j$ of Theorem 4 \cite{reg-sing-volterra} which solves the integral equation (IE) obtained as the inverse Laplace transform of the (ODE) (Theorem \ref{thm1}).   
-
-The key step is then comparing $\psi_j$ and $\hat{\psi}_j$. First, using properties of the Borel transform, it is easy to show that $\series{\psi}_j$ is a formal solution of the integral equation (IE). In addition, from the explicit formula for $\tilde{\Psi}_j$, we can show that $\hat{\psi}_j$ grows as $\zeta^{-\tau_j+1}$ near $\zeta=\alpha_j$
-therefore, by our uniqueness result, we conclude that $\psi_j$ and $\tilde{\psi}_j$ must coincide up to scaling by a constant. Hence, we define $\hat{\psi}_j$ as the analytic continuation of $\tilde{\psi}_j$ which agrees with $\psi_j$.  
-
-As a consequence, by properties of the Laplace transform, $\Psi_j\defeq\laplace_{\zeta,\alpha_j}^{\theta}\psi_j$ is an analytic solution of the (ODE) and it is asymptotic to $\series{\Psi}_j$. Furthermore, $\Psi_j$ is proportional to $\hat{\Psi}_j$, by construction.   
+Conversely, on the left-hand side, we have the unique (up to scaling) analytic function $\psi_j$ of Theorem 4 \cite{reg-sing-volterra} which solves the integral equation (IE) obtained as the inverse Laplace transform of the (ODE) (see \cite[Lemma 2]{reg-sing-volterra}). The key step is then comparing $\psi_j$ and $\hat{\psi}_j$. First, using properties of the Borel transform, it is easy to show that $\series{\psi}_j$ is a formal solution of the integral equation (IE). In addition, from the explicit formula for $\tilde{\Psi}_j$, we can show that $\hat{\psi}_j$ grows as $\zeta^{-\tau_j+1}$ near $\zeta=\alpha_j$
+therefore, by our uniqueness result \cite[Theorem 4]{reg-sing-volterra}, we conclude that $\psi_j$ and $\tilde{\psi}_j$ must coincide up to scaling by a constant. Hence, we define $\hat{\psi}_j$ as the analytic continuation of $\tilde{\psi}_j$ which agrees with $\psi_j$. As a consequence, by properties of the Laplace transform, $\Psi_j\defeq\laplace_{\zeta,\alpha_j}^{\theta}\psi_j$ is an analytic solution of the (ODE) and it is asymptotic to $\series{\Psi}_j$. Furthermore, $\Psi_j$ is proportional to $\hat{\Psi}_j$, by construction.   
 
 \begin{remark}
-There are many ways to build a frame of solutions for these kinds of ODEs: formally in the $z$-plane Poincar\'e gave an explicit solution \cite{int-irreg}. Formally in the $\zeta$-plane \'Ecalle figured out how to find a frame of formal solutions of the Borel transformed ODE \textcolor{magenta}{[add reference]\cite{EcalleIII,loday-Remy2011}}. It can indeed be seen as a consequence of ``resurgence'' of the ODE. Our results show how to build a frame of solutions, analytically in the Borel plane. Furthermore, it shows we are picking the same frame: from the properties of the Laplace transform we get an analytic frame asymptotic to Poincar\'e frame $\series{\Psi}_j$. From the uniqueness result of Theorem~\ref{thm1}, we get a frame of analytic solutions equivalent to \'Ecalle's ones. 
+There are many ways to build a frame of solutions for these kinds of ODEs: formally in the $z$-plane Poincar\'e gave an explicit solution \cite{int-irreg}. Formally in the $\zeta$-plane \'Ecalle figured out how to find a frame of formal solutions of the Borel transformed ODE \textcolor{magenta}{[add reference]\cite{EcalleIII,loday-Remy2011}}. It can indeed be seen as a consequence of ``resurgence'' of the ODE. Our results of \cite{reg-sing-volterra} show how to build a frame of solutions, analytically in the Borel plane. Here, we show we are picking the same frame: from the properties of the Laplace transform we get an analytic frame asymptotic to Poincar\'e frame $\series{\Psi}_j$. From the uniqueness result of \cite[Theorem~4]{reg-sing-volterra}, we get a frame of analytic solutions equivalent to \'Ecalle's ones. 
 \end{remark} 
 
 \begin{remark}
-The theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$ (namley, drawing the red arrow of the diagram). This ensures that the Borel sum of the formal solution $\series{\Psi}_j$ exists and it solves the ODE. However, the approach of Borel regularity is different as it is based on the analytic solution in the position domain. 
+The theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$ (namely, drawing the red arrow of the diagram). This ensures that the Borel sum of the formal solution $\series{\Psi}_j$ exists and it solves the ODE. However, the approach of Borel regularity is different as it is based on the analytic solution in the position domain. 
 \end{remark}
 
 
@@ -537,102 +524,21 @@ The theory of $1$-summability allows us to draw the ``square'' with corners $\ha
 
 
 \subsubsection{Why does Borel summation work for thimble integrals?}
-
-Let $X$ be an $N$-dimensional complex algebraic variety and $f\colon X\to\mathbb{A}^1$ be a proper algebraic map with non--degenerate critical points $a_1,...,a_N$ and critical values $\alpha_j=f(a_j)$\footnote{Everything we will discuss, applies also when $X$ is a $N$-dimensional complex (K\"ahler) manifold and $f\colon X\to\C$ is a holomorphic function with non-degenerates critical points, which is, for example, the setting in \cite{Witten}.}: for a fixed $z\in\C$, we are interested in integrals of the form 
-
+Let $X$ be an $N$-dimensional complex algebraic variety and $f\colon X\to\C$ a proper algebraic map with non-degenerate critical points $a_1,...,a_N$ and critical values $\alpha_j=f(a_j)$\footnote{Everything we’ll discuss, applies also when $X$ is a $N$-dimensional complex (K\"ahler) manifold and $f\colon X\to\C$ is a holomorphic function with non-degenerates critical points, which is, for example, the setting in \cite{Witten}.}: for $z\in\C$, we are interested in integrals of the form 
 \[
-I(z):=\int_{\mathcal{C}}e^{-zf}\nu
+I_j(z):=\int_{\Lambda_j}e^{-zf}\nu
 \]
-
-regarded as holomorphic functions in the frequency domain for a suitable choice of a contour $\mathcal{C}$ and an $N$-form $\nu$. In fact, we introduce homology and cohomology groups $H_{*}^{B,z}$ and $H_{dR,z}^*$ so that the function $I(z)$ will represent the Poincar\'e pairing. 
-
-We begin with the definition of $H_{*}^{B,z}$: it is the relative homology group with respect to $zf$, and its definition requires some preliminaries. We follow \cite{pham} and \cite[Section 1]{Arnold}. Let us fix $z\in\C$ and $\theta=\arg z$; for every $c>0$ we define 
-\begin{align*}
-    S_c^+(\theta) &:=\lbrace \zeta\in\C \vert \Re (\zeta e^{i\theta})\geq c \rbrace\\
-    S_c^-(\theta)&:=\lbrace \zeta\in\C \vert \Re (\zeta e^{i\theta})\leq c \rbrace
-\end{align*}
-and $H_{*}^{B,z}:=H_{*}(X,f^{-1}(S_c^+(\theta)))$ for $c$ large enough\footnote{In fact $H_{*}^{B,z}$ is defined after taking the projective limit $c\to\infty$ of the chain complex with support $\{A\subset X \text{ closed s.t. } \forall c>0 f^{-1}(S_c^-(\theta))\cup A \text{ is compact }  \}$.}. Moreover, $H_n(X,f^{-1}(S_c^+(\theta)))$ can be identified with the homology of a generic fiber $H_{n-1}(f^{-1}(p_0))$ with $p_0\neq \{\alpha_j\}$. This leads to further identifications:
-
-\begin{equation}
-    H_{*}^{B,z}\cong \bigoplus_{\alpha_i} H_{*}(B_j, B_j^+(\theta))
-\end{equation}
-where $B_j:=f^{-1}(B_r(\alpha_j))$ is the preimage of a small ball or radius $r$, containing only the critical value $\alpha_i$ and $B_j^+(\theta):=f^{-1}\left(B_r(\alpha_j)\cap \{ \Re (\zeta e^{i\theta})\geq r/2\}\right)$. Notice that we are not assuming $f$ to be Morse, hence $B_j$ may have different connected components. Then 
-
-\begin{equation}
-    H_{n}(B_j, B_j^+(\theta))\cong H_{n-1}(f^{-1}(p_j))\cong \begin{cases} \Z^{\mu_j} & \text{if } n=N\\
-     0 & \text{otherwise}
-    \end{cases}
-\end{equation}
-where $|p_j-\alpha_j|=r$, $\Re(p_j e^{i\theta})=r$ and $\mu_j$ is the Milnor number of the critical \textcolor{red}{point/value $a_j/\alpha_j$}. 
-
-
-\begin{center}
-    \begin{tikzpicture}
-        \draw (2,2) circle (2);
-        \node[font=\tiny,red] at (1,1) {$\alpha_1$};
-        \draw (1,1.2) circle (0.4);
-        \node[font=\tiny,red] at (3,1.3) {$\alpha_2$};
-        \draw (3,1.5) circle (0.4);
-        \node[font=\tiny,red] at (2.3,3.2) {$\alpha_3$};
-        \draw (2.3,3.4) circle (0.4);
-        \node[above,red] at (1,1) {$\bullet$};
-        \node[above,red] at (3,1.3) {$\bullet$};
-        \node[above,red] at (2.3,3.2) {$\bullet$};
-        \draw[rounded corners] (2.7,1.76)--(2,2)--(1,3.71);
-        \draw[rounded corners] (1,1.6)--(0.5,2)--(1.2,2.5)--(1,3.71);
-        \draw[rounded corners] (1.9,3.4)--(1,3.71);
-        \node[font=\tiny, above] at (1,3.71) {$p_0$};
-        \node[font=\tiny, above] at (2.7,1.76) {$p_2$};
-        \node[font=\tiny, above] at (1,1.6) {$p_1$};
-        \node[font=\tiny, above] at (1.75,3.4) {$p_3$};
-    \end{tikzpicture}
-\end{center}
-
-From the classical theory of singularities \cite{Arnold} we know that $H_{N-1}(f^{-1}(p_0))$ has a distinguished basis of \textit{vanishing cycles} from the generic fiber over $p_0$ to the preimage of each critical value. 
-Moreover, the vanishing cycles can be identified with the so-called \textit{Lefschetz thimbles}: since we assumed critical points to be non--degenerate, in a neighborhood of $a_j$ there are local coordinates $x_1,...,x_N$ such that 
-\[f=\alpha_j+\sum_{k=1}^N x_k^2\]
-
-and for $p=c e^{i\theta}\in\C$, the thimble $\Lambda_j(p)$ is defined by 
-\begin{align*}
-    \Im(x_1)=...=\Im(x_N)=0 \text{ and } \Re(e^{-i\theta/2}x_1)^2+....+\Re(e^{-i\theta/2}x_N)^2\leq c
-\end{align*}
-Equivalently, Lefschetz thimbles are gradient flow trajectories departing from the critical points of $f$ (see \cite[pag.10]{Witten}).
-
-Hence we deduce that $H_{z, N}^B$ admits a distinguished basis of Lefschetz thimbles labeled by critical points.
-
-
-Then we recall the definition of $H_{dR,z}^*$: it is the hypercohomolgy of the twisted de Rham complex 
-
-\begin{equation*}
-    H_{dR,z}^*:=\mathbb{H}^*( \Omega^\bullet(X), zd+df)
-\end{equation*}
-where $(\Omega^\bullet(X), d)$ is the de Rham complex of differential forms on $X$. 
-
-Therefore, the integral $I(z)$ can e regarded as the image of the following map: 
-
-\begin{align*}
-    \int \colon  H_{z,N}^{B} \times & H_{dR,z}^N \to \C \\
-       [\mathcal{C}] ,\,\, & [\nu] \to \int_{\mathcal{C}}e^{-zf}\nu
-\end{align*}
-
-\textcolor{orange}{[the Betti--de Rham isomorphism is necessery?]}
-
-Since every cycle $\mathcal{C}$ can be written as a linear combination of Lefschetz thimbles, we restrict our attention to  \textit{thimbles} integrals $I_j$, namely the integrals over Lefschetz thimbles labeled by the critical points $a_j\in\text{Crit}(f)$.
-
-As we let $z$ vary, we will observe the so-called \textit{Stokes phenomena}, namely the integral $I_j(z)$ jumps across the rays $\ell_{jl}=\arg(\alpha_j-\alpha_l)\R_{\geq 0}$ for $l=1,...,N$ (and $l\neq j$). The jumps can be described geometrically using the theory of Picard--Lefschetz. Indeed, the jumps of $I_j(z)$ are encoded in the jumps of the Lefschetz thimbles $[\Lambda_j]\in H_{z,N}^B$ as $\arg z$ varies. We will discuss this phenomena from a different perspective in Section \ref{resurgence-AL} in the example of Airy--Lucas functions. \textcolor{orange}{[Can we comment more about this? For instance as a consequence of Theorem 3.3]}  
-
-
+regarded as holomorphic functions on the frequency domain, where $\Lambda_j$ is the Lefschetz thimble through the critical point $a_j$ and $\nu$ is a holomorphic $N$-form on $X$.
 Now using the steepest descendent method we can compute the asymptotic expansion of thimble integrals which in general gives a formal series $\tilde{I}_j$ (see Malgrange, Pham, and for more general thimble integrals see \cite[Section 1.2.2]{mistegard_phdthesis} and \cite{andersen2020resurgence}, the Stirling series for Gamma function in \cite{Maxim_slide_ERC,Maxim_talk_2023}).
 
-Our goal is to study whether $\tilde{I}_j$ is Borel summable and whether its Borel--Laplace sum agrees with the integral $I_j$. 
+Our goal is to study whether $\tilde{I}_j$ is Borel summable and whether its Borel--Laplace sum agrees with the integral $I_j$ itself. 
 
-These questions have been classically addressed by Pham \cite[Section 3.3]{pham}, Malgrange \cite[Theorem 6]{Malgrange22}, Berry and Howls \cite{berry1991hyperasymptotics} and Sternin and Shatalov \cite[Theorem 3.9 and 3.10]{sternin1995borel}. In addition, the study of thimble integrals plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation, resurgence and related techniques to assign values to these integrals \cite{costin_kruskal,delabaere_dillinger_pham,delabaere-howls,Delabaere-Pham99,dingle1973asymptotic,dunne-unsal,gukov-marino-purtrov-resurgence,pham1988resurgence}\textbf{[Delabere \& Howls, Howls, Dingle]}.
+\textcolor{red}{These questions have been classically addressed by Pham \cite[Section 3.3]{pham}, Malgrange \cite[Theorem 6]{Malgrange22}, Berry and Howls \cite{berry1991hyperasymptotics} and Sternin and Shatalov \cite[Theorem 3.9 and 3.10]{sternin1995borel}. In addition, the study of thimble integrals plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation, resurgence and related techniques to assign values to these integrals \cite{costin_kruskal,delabaere_dillinger_pham,delabaere-howls,Delabaere-Pham99,dingle1973asymptotic,dunne-unsal,gukov-marino-purtrov-resurgence,pham1988resurgence}\textbf{[ Howls]}.}
 
 Our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see Fenyes's lecture \cite{Fenyes-ihes-lecture}).  
 
-We will restrict to $1$-dimensional thimble integrals, and in this special case we will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The image of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. 
-
-For each critical point $a_j$, let $\Gamma_j$ be the ray going rightward from the critical value $\alpha_j$, and let $\zeta_{\alpha_j}$ be the translation coordinate around $\Gamma_j$ which vanishes at $\alpha_j$. These are well-defined as long as $\Gamma_j$ misses the critical values of $f$. The preimage $f^{-1}(\Gamma_j)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_j$ misses the other critical values of $f$. The Lefschetz thimble  $\Lambda_j$ can be regarded as the component of $f^{-1}(\Gamma_j)$ that goes through $a_j$, \textcolor{orange}{oriented so that shifting it to its left would make its projection run clockwise around $\Gamma_j$}. 
+We’ll restrict to $1$-dimensional thimble integrals, and in this special case we’ll define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The image of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. 
+For each critical point $a_j$, let $\Gamma_j$ be the ray going rightward from the critical value $\alpha_j$, and let $\zeta_{\alpha_j}$ be the translation coordinate around $\Gamma_j$ which vanishes at $\alpha_j$. These are well-defined as long as $\Gamma_j$ misses the critical values of $f$. The preimage $f^{-1}(\Gamma_j)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_j$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_j$ can be regarded as the component of $f^{-1}(\Gamma_j)$ that goes through $a_j$, \textcolor{orange}{oriented so that shifting it to its left would make its projection run clockwise around $\Gamma_j$}. 
 
 \begin{figure}[ht]
     \centering
@@ -640,13 +546,7 @@ For each critical point $a_j$, let $\Gamma_j$ be the ray going rightward from th
     \caption{The preimage of a ray departing from the critical value and going to infinity.}
     \label{fig:thimble_vs_rays}
 \end{figure}
-
-%The {\em thimble integral}
-%\[ I_p = \int_{\Lambda_p} e^{-z f^*\zeta_p} \nu \]
-%is a holomorphic function on the right half-plane parametrized by $z$, and it turns out to be Borel regular.
-
 Then, our main result for thimble integrals is proving that $1$- dimensional thimble integrals are indeed Borel regular:
-
 \begin{theorem}[see Theorem \ref{thm:maxim}]
     Let $\tilde{I}_{j}(z)\defeq e^{-z \alpha_j}(2\pi)^{1/2} z^{-1/2} \sum_{n\geq 0}a_{j,n}z^{-n}$ be the asymptotic expansion of $I_j$ as $\Re z e^{i\theta}\to \infty$ for a generic direction $\theta$. Then:
 \begin{enumerate}
@@ -656,11 +556,11 @@ Then, our main result for thimble integrals is proving that $1$- dimensional thi
 \begin{multline}\label{eqn:formula}
 \hat{\phi}_{j}(\zeta)=\fracderiv{3/2}{\zeta}{\alpha_j} \left( \int_{\Lambda_j(\zeta)}\nu \right)=\left(\tfrac{\partial}{\partial \zeta}\right)^2\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\alpha_j}^\zeta (\zeta-\zeta')^{-1/2}\left( \int_{\Lambda_j(\zeta')} \nu \right)\,d\zeta',
 \end{multline}
-where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textbf{[Be careful about the orientation of $\Lambda_j$.]}
+where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[Be careful about the orientation of $\Lambda_j$.]}
 \end{enumerate}
 \end{theorem}
 
-The idea of the proof is sketched below in the following diagram (for the rigorous one we refer to Section \ref{borel-reg-thimble}):
+The idea of the proof is sketched below in the following diagram (for the rigorous one we refer to Section \ref{borel-reg-thimble}).
 \[
 \begin{tikzcd}
 {I}_{j} \arrow[rrr,"\aexp"]\arrow[dd, swap,"\laplace^{-1} "] &  & & \tilde{I}_{j}\arrow[dd,"\borel"]\\
@@ -668,8 +568,7 @@ The idea of the proof is sketched below in the following diagram (for the rigoro
 \iota_j \arrow[r,equal] & \hat{\iota}_j & &\tilde{\iota}_{j} \arrow[ll, "\text{sum}"]
 \end{tikzcd}
 \]
-
-on the one hand, the thimble integral $I_j$ can be regarded as a Laplace type integral, i.e. as the Laplace transform of a function $\iota_j$. In addition, $\iota_j$ can be written explicitly in an integral formula \eqref{eqn:formula}. 
+On the one hand, the thimble integral $I_j$ can be regarded as a Laplace type integral, i.e. as the Laplace transform of a function $\iota_j$. In addition, $\iota_j$ can be written explicitly in an integral formula \eqref{eqn:formula}. 
 On the other hand, reading the diagram from the right-hand side, we compute the asymptotic expansion of $I_j$ using the saddle point approximation, which turns out to be a formal $1$-Gevrey series. Thus, its Borel transform $\series{\iota}_j$ is a germ of holomorphic functions at $\alpha_j$ which can be summed to a holomorphic function $\hat{\iota}_j$. \textcolor{red}{At this point, we realize that $\iota_j$ and $\hat{\iota}_j$ are indeed the same.--I think we realise they have the same expansion at $\alpha_j$, thus they must agree.} In a nutshell, thimble integrals are Borel regular because they can be turned into Laplace transforms.      
 
 \begin{remark}
@@ -686,23 +585,13 @@ On the other hand, reading the diagram from the right-hand side, we compute the 
            \frac{(-\zeta)^{\alpha-1}}{2\pi i \Gamma(-\alpha)}+ \text{ hol. funct.} & \text{ if } \alpha\notin \mathbb{N}^* 
        \end{cases}
    \end{equation*}
-        
-    In particular, if $N=1$, from equation \eqref{eqn:Pham} we deduce that $\phi_j$ is the $1/2-$ derivative of $\iota_j$, \textcolor{orange}{hence it has simple singularities [it has to be verified]}. We expect this result to hold beyond the polynomial case. We also expect that equation \eqref{eqn:formula} can be generalized to the $N$-dimensional case replacing the $3/2$-derivative with the $(N+1)/2$ one. 
+In particular, if $N=1$, from equation \eqref{eqn:Pham} we deduce that $\phi_j$ is the $1/2-$ derivative of $\iota_j$, \textcolor{orange}{hence it has simple singularities [it has to be verified]}. We expect this result to hold beyond the polynomial case. We also expect that equation \eqref{eqn:formula} can be generalized to the $N$-dimensional case replacing the $3/2$-derivative with the $(N+1)/2$ one. 
 \end{remark}
-
-
-%In higher-dimensional complex manifolds, integrals over Lefschetz thimbles \textcolor{red}{[I'm not so sure]} are still Borel regular~\textbf{[``Exponential integrals, Lefschetz thimbles and linear resurgence''][``Exponential Integral'' lectures?]}. This fact plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation, resurgence and related techniques to assign values to these integrals \cite{costin_kruskal,delabaere_dillinger_pham,delabaere-howls,Delabaere-Pham99,dingle1973asymptotic}\textbf{[Delabere \& Howls, Howls, Dingle]}.
-
-
-%Choose a path $\gamma \maps \R \to X$ whose projection $f \circ \gamma$ starts out going leftward out of a puncture, ends up going rightward into a puncture, and never touches a critical value of $f$. Choose a translation coordinate $\zeta$ on $B$ and continue it along $f \circ \gamma$, noting that it may become multi-valued if $f \circ \gamma$ intersects itself. This data defines the {\em exponential integral}
-%\[ I = \int_\gamma e^{-z f^*\zeta} \nu, \]
-%a holomorphic function on the right half-plane parametrized by $z$. It turns out \textbf{[we hope]} that we can get $I$ by summing $e^{-\alpha_p z} I_p$ over various critical points---as long as none of the $\Gamma_p$ run into each other. \textbf{[We get jumps at phases where the $\Gamma_p$ do hit each other.]} The constants $\alpha_p$ are values of $\zeta$, continued to the critical points along certain paths.
-
 
 
 \subsubsection{Other results}
 
-As part of the treatment, we have made use of some new perspectives on the Laplace transform (see Section~\ref{sec:Laplace-Borel-general}). Indeed, the Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the spatial domain. We find, however, that it is much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. In particular, working with integral equations in the spatial domain will be our main strategy to prove Borel regularity for ODEs (see \cite[Theorem 4]{reg-sing-volterra}). Our approach is different from the one of Malgrange in \cite{malgrange--fourier} where he uses differential equations in the \textcolor{red}{spatial/frequency?} domain. 
+As part of the treatment, we have made use of some new perspectives on the Laplace transform (see Section~\ref{sec:Laplace-Borel-general}). Indeed, the Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the position domain. We find, however, that it is much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. In particular, working with integral equations in the spatial domain will be our main strategy to prove Borel regularity for ODEs (see \cite[Theorem 4]{reg-sing-volterra}). Our approach is different from the one of Malgrange in \cite{malgrange--fourier} where he uses differential equations in the \textcolor{red}{spatial/frequency?} domain. 
 
 Furthermore, we introduce a geometric picture where the position domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_b^\theta$ is $T^* B_b$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example (see Figure \ref{fig:different_fibres}). 
 
@@ -713,13 +602,12 @@ Furthermore, we introduce a geometric picture where the position domain $B$ is a
     \caption{The fiber over an ordinary point of the translation surface $B$ is a copy of the complex plane. However, the fiber over a singular point of $B$ has an interesting structure. Here we represent the example of Airy functions.}
     \label{fig:different_fibres}
 \end{figure}
+We’ll illustrate our main results with detailed treatments of several examples: we’ll mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals: the Airy--Lucas functions (Section \ref{example_AL}), modified Bessel function, Airy function (Appendix \ref{airy-appendix}), \textcolor{red}{the anharmonic oscillator...).} On the one hand, \textcolor{red}{we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions as the Laplace transform of the solutions of the integral equation.} On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in the proof of Theorem \ref{thm:maxim} part \ref{part3}. In the Airy example (see Section \ref{airy-appendix}) we’ll compute the \textit{thimble projection formula} directly, and \textcolor{red}{by numerical check we show $\hat{\phi}_j$ is a simple resurgent function. Conjecturally, we expect $\hat{\phi}_j$ to be always a simple resurgent function, but so far we don't have a general proof.}
 
-We will illustrate our main results with detailed treatments of several examples: we will mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals: the Airy--Lucas functions (Section \ref{example_AL}), modified Bessel function, Airy function (Appendix \ref{airy-appendix}), \textcolor{red}{the anharmonic oscillator...).} On the one hand, \textcolor{red}{we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions as the Laplace transform of the solutions of the integral equation.} On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in the proof of Theorem \ref{thm:maxim} part \ref{part3}. In the Airy example (see Section \ref{airy-appendix}) we will compute the \textit{thimble projection formula} directly, and \textcolor{red}{by numerical check we show $\hat{\phi}_j$ is a simple resurgent function. Conjecturally, we expect $\hat{\phi}_j$ to be always a simple resurgent function, but so far we don't have a general proof.}
-
-Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we will make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}). The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}). Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}. 
+Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we’ll make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}). The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}). Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}. 
 
  
-Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interest in mathematics and physics as a powerful alternative to Borel summability. The resurgence of linear ODEs have been intensively studied (see Costin slides for ReNewQuantum, \cite{EcalleIII,loday1994stokes,diverg-resurg--ii}) and many results are also known for non-linear ODEs (see \cite{schiappa-PI,costin-PI,diverg-resurg-iii} \textcolor{magenta}{[check also paper by \'Ecalle and Sauzin]}). For algebraic thimble integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see \cite{Maxim_slide_ERC}, \cite[Section 6.2]{kontsevich2022analyticity}), however for more general exponential integrals (see examples in \cite{Maxim_slide_ERC}) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of 1-dimensional integrals show some features of resurgence and they are toy-model to get a feeling of \'Ecalle formalism. 
+Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interest in mathematics and physics. The resurgence of linear ODEs have been intensively studied (see Costin slides for ReNewQuantum, \cite{EcalleIII,loday1994stokes,diverg-resurg--ii}) and many results are also known for non-linear ODEs (see \cite{schiappa-PI,costin-PI,diverg-resurg-iii} \textcolor{magenta}{[check also paper by \'Ecalle and Sauzin]}). For algebraic thimble integrals of the type we studied in this paper, resurgence of their asymptotic expansion can be understood geometrically (see \cite{Maxim_slide_ERC}, \cite[Section 6.2]{kontsevich2022analyticity}), however for more general exponential integrals (see examples in \cite{Maxim_slide_ERC} \textcolor{red}{add reference to state integrals}) resurgence remains a conjecture. Despite their simplicity, our examples of linear ODEs and of 1-dimensional integrals show some features of resurgence and they are toy-model to get a feeling of \'Ecalle formalism. 
 
 %\color{gray}
 %\begin{itemize}
@@ -880,6 +768,8 @@ Recently, resurgence theory (first developed by \'Ecalle in the '80) has attract
 %\item The jump comes from the branch cut difference identity for hypergeometric functions.
 %\item Possible interpretation of the Stokes factors as intersections numbers in Morse--Novikov theory \textbf{[ask Maxim]}
 %\end{itemize}
+\subsection{Plan of the paper}
+
 
 \subsection{Acknowledgements}
 
@@ -936,14 +826,14 @@ T^*B_b \arrow[u,"\blankbox^n"] \arrow[r,"w"'] & \C \arrow[u,"\blankbox^n"']
 \end{center}
 commute.
 \subsubsection{Boundary}
-\textbf{Discuss the visual boundary, citing Lemma~3.1 of Dankwart's thesis \textit{On the large-scale geometry of flat surfaces} for the description of geodesics.}
+\textcolor{red}{\textbf{Discuss the visual boundary, citing Lemma~3.1 of Dankwart's thesis \textit{On the large-scale geometry of flat surfaces} for the description of geodesics.}}
 
 \subsubsection{The Laplace transform over an ordinary point}\label{laplace:ordinary}
 Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an extended angle $\theta \in \R$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] Pick a translation parameter $\zeta$.} The {\em Laplace transform} $\laplace_\zeta^\theta$ turns a local holomorphic function $f$ on $B$ into a local holomorphic function on $T^*B$. When $b \in B$ is an ordinary point, $\laplace_\zeta^\theta f$ is defined on $T^*B_b$ by the formula
 \begin{equation}\label{laplace:int}
 \laplace_\zeta^\theta f\big|_b = \int_{\Gamma_b^\theta} e^{-z\zeta} f\,d\zeta,
 \end{equation}
-where $z$ is the frequency function and $\Gamma_b^\theta$ is the ray that leaves $b$ at angle $\theta$. We will use the shorthand $\laplace_{\zeta, b}^\theta f := \laplace_\zeta^\theta f \big|_{\zeta = b}$ throughout this document.
+where $z$ is the frequency function and $\Gamma_b^\theta$ is the ray that leaves $b$ at angle $\theta$. We’ll use the shorthand $\laplace_{\zeta, b}^\theta f := \laplace_\zeta^\theta f \big|_{\zeta = b}$ throughout this document.
 
 To make sense of this formula, we ask for the following conditions.
 \begin{itemize}
@@ -952,13 +842,13 @@ To make sense of this formula, we ask for the following conditions.
 \item The integral converges. We guarantee this by asking for a pair of simpler conditions.
 %\color{RoyalBlue}
 \begin{itemize}
-\item With respect to the flat metric, $f$ is uniformly of exponential type $\Lambda$ along $\Gamma_b^\theta$, and is locally integrable throughout.\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{\Lambda+\varepsilon} $. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} Following \cite{reg-sing-volterra}, we require $f\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$.\footnote{The condition $\sigma>-1$ guarantees the integrability at $\zeta=b$.} The set $\Omega_b$ is a tubular neighbourhood of $\Gamma_b^\theta$. 
+\item With respect to the flat metric, \textcolor{red}{$f$ is uniformly of exponential type $\Lambda$ along $\Gamma_b^\theta$, and is locally integrable throughout.}\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{\Lambda+\varepsilon} $. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} Following \cite{reg-sing-volterra}, we require $f\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$.\footnote{The condition $\sigma>-1$ guarantees the integrability at $\zeta=b$.} The set $\Omega_b$ is a tubular neighbourhood of $\Gamma_b^\theta$. 
 \item The value of $z$ is in the half-plane $H_{\theta}$ centered around the ray $e^{-i\theta} [0, \infty)$.
 \end{itemize}
 \end{itemize}
 \color{black}
 \subsubsection{The Laplace transform over a branch point}
-When $b$ is a branch point, we can still use formula~\ref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T^*B_b$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T^*B_b^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\ref{laplace:int}. The half-plane $z \in H_{\theta}$ in $T^*B_b^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T^*B_b$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
+When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T^*B_b$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T^*B_b^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\eqref{laplace:int}. The half-plane $z \in H_{\theta}$ in $T^*B_b^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T^*B_b$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
 %\color{gray}
 %\subsection{The geometry of the Borel transform}
 %\begin{itemize}
@@ -973,7 +863,7 @@ When $b$ is a branch point, we can still use formula~\ref{laplace:int} to define
 \subsection{The Laplace transform: analytic version}
 \subsubsection{Regularity and decay properties}\label{reg-decay}
 
-Let $\Omega_\alpha\subset B$ be an open, simply connected set that touches but does not contain $\zeta=\alpha$. Assume the $\Gamma_{\zeta,\alpha}^\theta$ is contained in $\Omega_\alpha$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ of holomorphic functions of exponential type $\Lambda$ with singular behaviour at $\zeta=\alpha$, namley of the form $|\zeta|^\sigma$. When $\sigma>-1$, the singularity at $\zeta=\alpha$ is integrable, hence the Laplace transform $\laplace_{\zeta,\alpha}^\theta$ is a well--defined and holomorphic function for $\Re e^{-i\theta}z>0$ on the fiber $T^*B\vert_{\zeta=0}$ (see for instance ~\cite[Section  5.6]{diverg-resurg-i}.)    
+Let $\Omega_\alpha\subset B$ be an open, simply connected set that touches but does not contain $\zeta=\alpha$ (see Figure \ref{Fig:domain}). Assume the $\Gamma_{\zeta,\alpha}^\theta$ is contained in $\Omega_\alpha$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ of holomorphic functions of exponential type $\Lambda$ with singular behaviour at $\zeta=\alpha$, namely of the form $|\zeta|^\sigma$. When $\sigma>-1$, the singularity at $\zeta=\alpha$ is integrable, hence the Laplace transform $\laplace_{\zeta,\alpha}^\theta$ is a well--defined and holomorphic function for $\Re e^{-i\theta}z>0$ on the fiber $T^*B\vert_{\zeta=0}$ (see for instance ~\cite[Section  5.6]{diverg-resurg-i}.)    
 %Let's say a function $f$ is in $O_{\zeta, \alpha \leftarrow}(g)$ or $O_{\zeta, \alpha \rightarrow}(g)$, respectively, if $|f| \lesssim g$ on some neighborhood of the starting point or infinite end of $\Gamma_{\zeta, \alpha}$. A function is {\em subexponential} along $\Gamma_{\zeta, \alpha}$ if it's in $O_{\zeta, \alpha \rightarrow}(e^{c\zeta})$ for all $c > 0$ \textcolor{magenta}{[shall we write in formula?]}. Let $\mathcal{E}_{\zeta, \alpha}$ be the space of functions that are subexponential on $\Gamma_{\zeta, \alpha}$, integrable at the starting point, and locally integrable throughout. If $f$ is in $\mathcal{E}_{\zeta, \alpha}$, then $\laplace_{\zeta, \alpha} f$ is well-defined and holomorphic for $\Re(z) > 0$ on the part of $T^*B$ that lies over $\Gamma_{\zeta, \alpha}$~\cite[Section  5.6]{diverg-resurg-i}.
 
 The asymptotics of $f$ at the starting point of $\Gamma_{\zeta, \alpha}^\theta$ control the asymptotics of $\laplace_{\zeta, \alpha}^\theta f$ at the infinite end of $\Gamma_{z, 0}$. Once we see how this works for $\alpha = 0$, Section~\ref{translation} will do the rest. In addition, we'll set $\theta=0$ to keep the notation simpler, but the results hold for every angle $\theta$. Let $F = \laplace_{\zeta, 0} f$. Equation~1.8 of \cite{laplace-tfm} shows\footnote{The argument cited still works in our generality. For holomorphic $f$, one can also use \cite[Equation 1.5]{sternin1995borel}.} that
@@ -1024,7 +914,7 @@ It obeys the expected semigroup law \cite[Section  1.3]{mladenov2014advanced}
 \end{align*}
 and agrees with ordinary repeated integration when $\nu$ is an integer (see \cite[Equation 35]{mladenov2014advanced}).
 
-For $\alpha \in (0, 1)$ and integers $n \ge 0$, fractional derivatives $\fracderiv{n+\alpha}{\zeta}{0}$ are defined by composing $\fracderiv{\alpha-1}{\zeta}{0}$ with powers of $\tfrac{\partial}{\partial \zeta}$. However, $\fracderiv{\alpha-1}{\zeta}{0}$ and $\tfrac{\partial}{\partial \zeta}$ don't commute~\cite[equation 54]{mladenov2014advanced}. Various ordering conventions give various definitions of $\fracderiv{n+\alpha}{\zeta}{0} f$, which differ by operators that act on the germ of $f$ at zero (see \cite[\S 1.3]{mladenov2014advanced} \textbf{---original source Podlubny}). We'll use the {\em Riemann-Liouville} convention.
+For $\alpha \in (0, 1)$ and integers $n \ge 0$, fractional derivatives $\fracderiv{n+\alpha}{\zeta}{0}$ are defined by composing $\fracderiv{\alpha-1}{\zeta}{0}$ with powers of $\tfrac{\partial}{\partial \zeta}$. However, $\fracderiv{\alpha-1}{\zeta}{0}$ and $\tfrac{\partial}{\partial \zeta}$ don't commute~\cite[equation 54]{mladenov2014advanced}. Various ordering conventions give various definitions of $\fracderiv{n+\alpha}{\zeta}{0} f$, which differ by operators that act on the germ of $f$ at zero (see \cite[Section 1.3]{mladenov2014advanced}---original source \cite{podlubny}). We'll use the {\em Riemann-Liouville} convention.
 \begin{definition}
 For $\alpha \in (0, 1)$ and integers $n \ge 0$, the {\em Riemann-Liouville fractional derivative} $\fracderiv{n+\alpha}{\zeta}{0}$ is defined by
 \[ \fracderiv{n+\alpha}{\zeta}{0} \defeq \left(\tfrac{\partial}{\partial \zeta}\right)^{n+1} \fracderiv{\alpha-1}{\zeta}{0}. \]
@@ -1075,7 +965,7 @@ Notice that the definition of $\fracderiv{-\lambda}{\zeta}{\alpha}$ and $\fracde
 
 %We remark that on a translation surface, there is no preferred coordinate chart, hence either $\zeta$ as local coordinate at $\alpha$ or $\zeta_\alpha$ as local coordinate at $0$ are equivalent choices. 
 
-%Notice that $z^{-\lambda}$ is a coordinate on different fibres of $T^*B$: $z\in T_0^*B$ in equation $\laplace_{\zeta, \alpha}\,\fracderiv{-\lambda}{\zeta}{\alpha} \varphi = z^{-\lambda} \laplace_{\zeta, \alpha} \varphi$, while $z\in T^*_\alpha B$ in equation $\laplace_{\zeta_\alpha,0}\,\fracderiv{-\lambda}{\zeta_\alpha}{0} \varphi = z^{-\lambda} \laplace_{\zeta_\alpha,0} \varphi$. In fact, as we will see in Section \ref{convolution}, both $\fracderiv{-\lambda}{\zeta}{\alpha}$ and $\fracderiv{-\lambda}{\zeta_\alpha}{0}$ can be regarded as a convolution product which depends on the fibre. 
+%Notice that $z^{-\lambda}$ is a coordinate on different fibres of $T^*B$: $z\in T_0^*B$ in equation $\laplace_{\zeta, \alpha}\,\fracderiv{-\lambda}{\zeta}{\alpha} \varphi = z^{-\lambda} \laplace_{\zeta, \alpha} \varphi$, while $z\in T^*_\alpha B$ in equation $\laplace_{\zeta_\alpha,0}\,\fracderiv{-\lambda}{\zeta_\alpha}{0} \varphi = z^{-\lambda} \laplace_{\zeta_\alpha,0} \varphi$. In fact, as we’ll see in Section \ref{convolution}, both $\fracderiv{-\lambda}{\zeta}{\alpha}$ and $\fracderiv{-\lambda}{\zeta_\alpha}{0}$ can be regarded as a convolution product which depends on the fibre. 
 
 %We also remark that $\partial_{\zeta,\alpha}^{-\lambda}\varphi=\partial_{\zeta_\alpha,0}^{-\lambda}\varphi$ for every $\varphi\in\mathcal{E}_{\zeta,\alpha}$ (in fact the path $\Gamma_{\zeta,\alpha}$ is equivalent to the path $\Gamma_{\zeta_\alpha,0}$). 
 
@@ -1155,7 +1045,7 @@ It's also possible to recover the definition of $\mathcal{B}_{\zeta,\alpha}$ fro
 %\color{black}
 \subsubsection{Action on transseries}\label{sec:action_transseries}
 
-A transseries is a generalization of usual power series, whose building blocks (called trans-monomials) are of the form $e^{\alpha_n z}\varphi_n$ where $a_n$ is a sequence of complex numbers such that $0=a_0 e^{-i\theta}< a_1 e^{-i\theta}<...<a_n e^{-i\theta}<...$ and $\varphi_n\in\C\llbracket z^{-1}\rrbracket$: 
+A transseries is a generalization of usual power series, whose building blocks (called trans-monomials) are of the form $e^{\alpha_n z}\varphi_n$ where $a_n$ is a sequence of complex numbers such that $0=a_0 e^{-i\theta}< a_1 e^{-i\theta}<...<a_n e^{-i\theta}<...$ and $\varphi_n\in\C\llbracket z^{-1}\rrbracket$ for every $n$: 
 
 \[T_{\alpha,\varphi}:=\sum_{n=0}^{\infty} e^{\alpha_n z} \varphi_n(z) \]
 
@@ -1269,7 +1159,7 @@ We want to distinguish between formal series and holomorphic functions, as well 
 \item $\Phi$: upper-case letters are holomorphic functions on the frequency domain;
 \item $\tilde{\Phi}$: \textit{tilde} stands for formal series, so an upper-case letter with \textit{tilde} is a formal series in the frequency domain;
 \item $\phi$: lower-case letters are holomorphic functions on the frequency domain. Since the Laplace transform $\laplace_{\zeta, 0}$ turns functions on the spatial domain into functions on the frequency domain, we might write $\laplace_{\zeta,0}\phi=\Phi$.
-\item $\tilde{\phi}$: lower-case letter with \textit{tilde} are formal series in the Borel plane. As we will see, the Borel transform of $\tilde{\Phi}$ is $\borel\textcolor{orange}{_\zeta} \tilde{\Phi}=:\tilde{\phi}$; 
+\item $\tilde{\phi}$: lower-case letter with \textit{tilde} are formal series in the Borel plane. As we’ll see, the Borel transform of $\tilde{\Phi}$ is $\borel\textcolor{orange}{_\zeta} \tilde{\Phi}=:\tilde{\phi}$; 
 \item $\hat{\phi}$: lower-case letters with \textit{hat} are the sum of the formal series $\tilde{\phi}$, when it exists.  
 \end{itemize}
 \end{notation*}  
@@ -1278,7 +1168,7 @@ We want to distinguish between formal series and holomorphic functions, as well 
 Let $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket$. Then, $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket_1$ is $1$-Gevrey if and only if $\borel\textcolor{orange}{_\zeta}\tilde{\Phi}\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
 \end{lemma}
 
-In fact, we deduce that the Borel transform is an isomorphism between $1$-Gevrey series $z^{-1}\C\llbracket z^{-1}\rrbracket_1$ and $\C\lbrace\zeta\rbrace$. The inverse of $\borel\textcolor{orange}{_\zeta}$ is what we call a \textbf{formal Laplace transform}. In addition, in Section \ref{convolution} we will prove that the Borel transform is an algebra isomoprhisms. 
+In fact, we deduce that the Borel transform is an isomorphism between $1$-Gevrey series $z^{-1}\C\llbracket z^{-1}\rrbracket_1$ and $\C\lbrace\zeta\rbrace$. The inverse of $\borel\textcolor{orange}{_\zeta}$ is what we call a \textit{formal Laplace transform}. In addition, in Section \ref{convolution} we’ll prove that the Borel transform is an algebra isomoprhisms. 
 
 
 \subsubsection{Action on power series with fractional exponents}
@@ -1355,18 +1245,18 @@ In addition, it follows that the convolution product $\ast$ can be explicitly ch
 
 the proof is a simple computation, and we refer to  \cite[Definition 5.12 and Lemma 5.14]{diverg-resurg-i}.
 \begin{lemma}
-    Let $\alpha\in\mathbb{R}\setminus\Z_{<0}$, then $\borel_\zeta$ is an isomorphisms from $1$-Gevrey formal power series $\C \llbracket z^{-\alpha} \rrbracket_1$ to the germs of holomorphic functions $\C \lbrace \zeta^{\alpha-1} \rbrace$, with inverse given by the formal Laplace transform.
+    Let $\tau\in\mathbb{R}\setminus\Z_{<0}$, then $\borel_\zeta$ is an isomorphisms from $1$-Gevrey formal power series $\C \llbracket z^{-\tau} \rrbracket_1$ to the germs of holomorphic functions $\C \lbrace \zeta^{\tau-1} \rbrace$, with inverse given by the formal Laplace transform.
 \end{lemma}
 \begin{proof}
     Let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1$ with $|a_n|\leq A^n n!$ and $A>0$ then  
 \begin{align*}
-\borel_\zeta (z^{-\alpha}\tilde{\Phi})&=\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)=a_0\frac{\zeta^{\alpha-1}}{\Gamma(\alpha)}+\sum_{n\geq 0}a_{n+1}\frac{\zeta^{n+\alpha}}{\Gamma(1+n+\alpha)}
+\borel_\zeta (z^{-\tau}\tilde{\Phi})&=\frac{\zeta^{\tau-1}}{\Gamma(\tau)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)=a_0\frac{\zeta^{\tau-1}}{\Gamma(\tau)}+\sum_{n\geq 0}a_{n+1}\frac{\zeta^{n+\tau}}{\Gamma(1+n+\tau)}
 \end{align*}  
 
-and \[\left|\frac{a_{n+1}}{\Gamma(1+n+\alpha)}\right|\leq A^{n+1}\frac{\Gamma(n+2)}{|\Gamma(n+1+\alpha)|} \]
-which grows as $n(n+1)^{-\alpha} A^{n+1}$.
+and \[\left|\frac{a_{n+1}}{\Gamma(1+n+\tau)}\right|\leq A^{n+1}\frac{\Gamma(n+2)}{|\Gamma(n+1+\tau)|} \]
+which grows as $n(n+1)^{-\tau} A^{n+1}$.
 \begin{verify}
-    we use $\Gamma(n+1+\alpha)\sim \Gamma(n+1) (n+1)^\alpha$ as $n\to\infty$. 
+    we use $\Gamma(n+1+\tau)\sim \Gamma(n+1) (n+1)^\tau$ as $n\to\infty$. 
 \end{verify}
 \end{proof}
 
@@ -1387,19 +1277,19 @@ thus $\delta_\alpha\ast_\alpha\phi=\phi\ast_\alpha\delta_\alpha=\phi$.
 \begin{remark}
 We notice that properties (i) and (ii) are special cases of the convolution product:
 \begin{align*}
-\borel_\zeta (z^\alpha \tilde{\Phi})&=\borel_\zeta (z^\alpha)\ast \tilde{\phi}\\
-&=\frac{\zeta^{-\alpha-1}}{\Gamma(-\alpha)}\ast\tilde{\phi}\\
-&=\int_0^\zeta \frac{(\zeta')^{-\alpha-1}}{\Gamma(-\alpha)}\sum_{k\geq 0}a_k\frac{(\zeta-\zeta')^k}{k!}d\zeta'\\
-&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\int_0^1(t\zeta)^{-\alpha-1}(\zeta-t\zeta)^k\zeta dt\\
-&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\int_0^1 t^{-\alpha-1}(1-t)^k dt\\
-&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\alpha)}\zeta^{k-\alpha}\frac{\Gamma(k+1)\Gamma(-\alpha)}{\Gamma(k-\alpha+1)}\\
-&=\sum_{k\geq 0}\frac{a_k}{k!}\partial_\zeta^{\alpha} \zeta^k \\
-&=\partial_\zeta^\alpha\tilde{\phi}
+\borel_\zeta (z^\tau \tilde{\Phi})&=\borel_\zeta (z^\tau)\ast \tilde{\phi}\\
+&=\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)}\ast\tilde{\phi}\\
+&=\int_0^\zeta \frac{(\zeta')^{-\tau-1}}{\Gamma(-\tau)}\sum_{k\geq 0}a_k\frac{(\zeta-\zeta')^k}{k!}d\zeta'\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\tau)}\int_0^1(t\zeta)^{-\tau-1}(\zeta-t\zeta)^k\zeta dt\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\tau)}\zeta^{k-\alpha}\int_0^1 t^{-\tau-1}(1-t)^k dt\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\frac{1}{\Gamma(-\tau)}\zeta^{k-\tau}\frac{\Gamma(k+1)\Gamma(-\tau)}{\Gamma(k-\tau+1)}\\
+&=\sum_{k\geq 0}\frac{a_k}{k!}\partial_\zeta^{\tau} \zeta^k \\
+&=\partial_\zeta^\tau\tilde{\phi}
 \end{align*}
 \end{remark}
 
 \begin{remark}
-We can express the fractional derivatives $\fracderiv{-\lambda}{\zeta}{\alpha}$ and $\fracderiv{-\lambda}{\zeta_\alpha}{0}$ as convolution products, and we will see how the definitions vary depending on the fibers of $T^*B$ in consideration. 
+We can express the fractional derivatives $\fracderiv{-\lambda}{\zeta}{\alpha}$ and $\fracderiv{-\lambda}{\zeta_\alpha}{0}$ as convolution products, and we’ll see how the definitions vary depending on the fibers of $T^*B$ in consideration. 
 
 We first assume $\series{\Phi}=\laplace_{\zeta,\alpha}\phi$ for $\phi\in\singexpalg{\sigma}(\Omega_\alpha)$, then for every $\lambda\in (0,\infty)$
 \begin{align*}
@@ -1423,58 +1313,18 @@ $\fracderiv{-\lambda}{\zeta_\alpha}{0}\varphi$ coincide, therefore
 in fact equation \eqref{change_chart_convolution} can be regarded as a compatibility condition for the convolution product when different coordinate charts are chosen in a neighborhood of a smooth point $\alpha\in B$.  
 \end{remark}
 
-\color{black}
-
-\subsection{Differential equation}
-\textcolor{orange}{Should we keep this section?}
-If $\zeta$ is a translation chart for $B$, the functions $\zeta, z$ are Darboux coordinates on the part of $T^*B$ that lies over the domain of $\zeta$. In these coordinates, we can write down the partial differential operator
-\begin{equation}%%\label{laplace:op}
-\laplacepde_\zeta = \left(\frac{\partial}{\partial z} - \zeta\right) \frac{\partial}{\partial \zeta}.
-\end{equation}
-The multiplication by $\zeta$ is the only part of $\laplacepde_\zeta$ that depends on which $\zeta$ we choose.
-
-Now we can pose a boundary value problem for each angle $\theta \in \R/2\pi\Z$: find a local holomorphic function $F$ on $T^*B$ that satisfies the equation $\laplacepde_\zeta F = 0$ and approaches zero when continued at fixed $z$ along rays of angle $\theta$.
-%\end{problem}
-The Laplace transform $\laplace_\zeta^\theta$ turns local holomorphic functions on $B$ into solutions of this problem. \textcolor{orange}{In fact, it produces all the solutions \textbf{[check argument]}.[Veronica: I don't understand--why it produces all the solutions?]}
-
-\subsubsection{Order shifting}\label{shifting}
-\textcolor{orange}{[Veronica:I think we should move this section, maybe when we do examples]}
-Consider holomorphic functions on a simply connected open domain $\Omega$ that touches but doesn't contain $\zeta = 0$. %A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. %We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as 
-%\begin{equation}\label{eqn:slight-defn}
-%\zeta^{\alpha_1} f_1 + \ldots + \zeta^{\alpha_r} f_r + g
+%\subsection{Differential equation}
+%\textcolor{orange}{Should we keep this section?}
+%If $\zeta$ is a translation chart for $B$, the functions $\zeta, z$ are Darboux coordinates on the part of $T^*B$ that lies over the domain of $\zeta$. In these coordinates, we can write down the partial differential operator
+%\begin{equation}%%\label{laplace:op}
+%\laplacepde_\zeta = \left(\frac{\partial}{\partial z} - \zeta\right) \frac{\partial}{\partial \zeta}.
 %\end{equation}
-%where $f_1, \ldots, f_r$ are regular, $\alpha_1, \ldots, \alpha_r \in \R \smallsetminus \Z$, and $g, g', g'', \ldots$ go to zero at $\zeta = 0$.
-As we've seen in Section \ref{reg-decay}, functions in $\singexpalg{\sigma}(\Omega)$ with $\sigma>-1$ play a special role in Laplace transform methods for linear differential equations. This is because differential equations in the frequency domain arise most naturally from integral equations in the spatial domain, but we'd like to work with differential equations in the spatial domain too. In $\singexpalg{\sigma}(\Omega)$, differential and integral equations enjoy their simplest equivalence.
-\begin{prop}\label{prop:shifting}
-Let $\psi\in\singexpalg{\sigma}(\Omega)$, and $\sigma>-1$
-\[ \left[ \sum_{k = 0}^n \big(\tfrac{\partial}{\partial \zeta}\big)^k \circ h_k + \sum_{k = 1}^m \fracderiv{-k}{\zeta}{0} \circ h_{-k} \right] \psi = 0, \]
-if and only if
-\[ \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k + \sum_{k = 0}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi = 0, \]
-where $h_n, \ldots, h_{-m}$ are holomorphic functions.
-\end{prop}
-%To prove this result, we'll need a little background.
+%The multiplication by $\zeta$ is the only part of $\laplacepde_\zeta$ that depends on which $\zeta$ we choose.
 
-%Each slight function has a unique {\em normal form}: an expression of the form (\ref{eqn:slight-defn}) where $\alpha_1, \ldots, \alpha_r$ are distinct modulo $\Z$ and $f_1, \ldots, f_r$ are non-vanishing at $\zeta = 0$. The {\em order} of a slight function is the smallest power $\alpha_k$ in its normal form. If there are no $\zeta^\alpha f$ terms, we say the order is $\infty$. A slight function vanishes at $\zeta = 0$ if and only if its order is positive, and it's locally integrable at $\zeta = 0$ if and only if its order is greater than $-1$.
+%Now we can pose a boundary value problem for each angle $\theta \in \R/2\pi\Z$: find a local holomorphic function $F$ on $T^*B$ that satisfies the equation $\laplacepde_\zeta F = 0$ and approaches zero when continued at fixed $z$ along rays of angle $\theta$.
+%\end{problem}
+%The Laplace transform $\laplace_\zeta^\theta$ turns local holomorphic functions on $B$ into solutions of this problem. \textcolor{orange}{In fact, it produces all the solutions \textbf{[check argument]}.[Veronica: I don't understand--why it produces all the solutions?]}
 
-%Multiplication by a regular function and differentiation with respect to $\zeta$ both preserve the space of slight functions. Integration from $\zeta = 0$ preserves the space of locally integrable slight functions. Thus, in general, integro-differential operators with regular coefficients send locally integrable slight functions to slight functions. Each basic operation has a simple effect on a slight function's order. Multiplication by $\zeta^n f$, where $f$ is regular and non-vanishing at $\zeta = 0$, adds $n$ to the order. Differentiation and integration add $-1$ and $1$, respectively.
-
-\begin{proof}%[Proof of Proposition~\ref{prop:shifting}]
-The reverse implication holds without any special condition on $\psi$, because $\tfrac{\partial}{\partial \zeta}\;\fracderiv{-1}{\zeta}{0}$ acts as the identity on all differentiable functions.
-
-To prove the forward implication, rewrite the first equation in the statement as
-\begin{equation}\label{eqn:diff-int-split}
-\tfrac{\partial}{\partial \zeta} \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k \right] \psi = -\left[ h_0 + \sum_{k = 1}^m \fracderiv{-k}{\zeta}{0} \circ h_{-k} \right] \psi.
-\end{equation}
-The function
-\[ \phi = \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k \right] \psi \]
-belongs to the function space $\singexpalg{\sigma}(\Omega)$. Looking at the right-hand side of equation~\eqref{eqn:diff-int-split}, we can see that $\phi'$ belongs to $\singexpalg{\sigma}(\Omega)$, and by assumption its order is greater than $-1$. Hence, $\phi$ belongs to $\singexpalg{\sigma+1}(\Omega)$, which means it vanishes at $\zeta = 0$.
-
-Integrating both sides of equation~\eqref{eqn:diff-int-split}, we get
-\[ \fracderiv{-1}{\zeta}{0}\;\tfrac{\partial}{\partial \zeta}\;\phi = -\left[ \fracderiv{-1}{\zeta}{0} \circ h_0 + \sum_{k = 1}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi. \]
-Since $\fracderiv{-1}{\zeta}{0}\;\tfrac{\partial}{\partial \zeta}$ acts as the identity on functions that vanish at $\zeta = 0$, this simplifies to
-\[ \phi = -\left[ \sum_{k = 0}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi, \]
-which rearranges to the second equation in the statement.
-\end{proof}
 
 %\subsubsection{Regularity}
 
@@ -1568,7 +1418,7 @@ which rearranges to the second equation in the statement.
 For every $j=1,...,d$, let $\Omega_j\subset B$ be a simply connected open set that touches but doesn't contain $\zeta = \alpha_j$. We also assume:
 \begin{itemize}
 \item The set $\Omega_j$ is star-shaped around $\zeta = \alpha_j$. In other words, for any $a \in \Omega_j$, a straight path from $\zeta = \alpha_j$ to $a$ stays in $\Omega_j$. Since $\Omega_j$ doesn't contain $\zeta = \alpha_j$, we'll always leave that starting point out of the path.
-\item The set $\Omega_j$ does not contain the tubular neighborhood of the other critical points $-\alpha_k$, for $k\neq j$, as shown in Figure \ref{Fig:domain}
+\item The set $\Omega_j$ does not contain the tubular neighborhood of the other critical points $-\alpha_k$, for $k\neq j$, as shown in Figure \ref{Fig:domain}.
 \end{itemize}
 
 \begin{figure}
@@ -1591,17 +1441,16 @@ For every $j=1,...,d$, let $\Omega_j\subset B$ be a simply connected open set th
 \caption{The domain $\Omega_j$}\label{Fig:domain}
 \end{figure}
 \subsubsection{Main results}
-
-As a consequence of Theorem 4 in {\tt reg-volterra} we get 
-
-\begin{theorem}\label{thm1-dim}
-In the previous set-up, there exists a unique solution of $\hat{P}_j\psi_j=0$ with $\zeta_j=\zeta-\alpha_j$ and
-\begin{equation}\label{P-hat_j}
-\hat{P}_j:=P(-\alpha_j-\zeta_j)+\partial_{\zeta,\alpha_j}^{-1}\circ Q(-\alpha_j-\zeta_j)+\partial_{\zeta,\alpha_j}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha_j}^{-1})\circ (-\alpha_j-\zeta_j)^r
-\end{equation}
-such that $\psi_j$ blows up as $\zeta^{\tau_j-1}$ at $\alpha_j$:
-${\psi}_j(\zeta_j)=\zeta_j^{\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega_j)$ with $\Omega_j$.
-\end{theorem}
+%As a consequence of Theorem 4 in {\tt reg-volterra} we get 
+%
+%\begin{theorem}\label{thm1-dim}
+%In the previous set-up, there exists a unique solution of $\hat{P}_j\psi_j=0$ with $\zeta_j=\zeta-\alpha_j$ and
+%\begin{equation}\label{P-hat_j}
+%\hat{P}_j:=P(-\alpha_j-\zeta_j)+\partial_{\zeta,\alpha_j}^{-1}\circ Q(-\alpha_j-\zeta_j)+\partial_{\zeta,\alpha_j}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha_j}^{-1})\circ (-\alpha_j-\zeta_j)^r
+%\end{equation}
+%such that $\psi_j$ blows up as $\zeta^{\tau_j-1}$ at $\alpha_j$:
+%${\psi}_j(\zeta_j)=\zeta_j^{\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega_j)$ with $\Omega_j$.
+%\end{theorem}
 
 
 
@@ -1612,11 +1461,11 @@ For every $j=1,...,d$, let $\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\sum_{n=
 \begin{proof}
 We divide the proof into the following steps:
 \begin{itemize}
-\item[$(a)$] let $\series{\psi}_j:=\borel_{\zeta}\series{\Psi}_j$, then $\hat{P}_j\series{\psi}_j=0$
+\item[$(a)$] let $\series{\psi}_j:=\borel_{\zeta}\series{\Psi}_j$, then $\hat{P}_j\series{\psi}_j=0$.
 \item[$(b)$] prove that $\laplace_{\zeta,\alpha_j}^{\theta}\circ\borel_\zeta\series{\Psi}_j\propto \Psi_j $. 
 \end{itemize}
 
-Step $(b)$ clearly follows from Theorem  \ref{thm1-dim} and step $(a)$. In fact, from step $(a)$ and Theorem \ref{thm1-dim}, $\Tilde{\psi}_j$ and ${\psi}_j$ are both solutions of $\hat{P}_j\psi=0$ and by uniqueness they are proportional in a neighbourhood of $\alpha_j$. Then, by Corollary \ref{thm1-dim} we can Laplace transform ${\psi}_j$ along a ray $\Gamma_{\alpha_j}^\theta$ in $\Omega_j$. Hence if $\hat{\psi}_j$ denotes the analytic continuation of $\tilde{\psi}_j$ which agrees with $\psi_j$, we can Laplace transform $\hat{\psi}_j$ along $\Gamma_{\alpha_j}^\theta$, too. 
+Step $(b)$ clearly follows from \cite[Theorem 4]{reg-sing-volterra} and step $(a)$. In fact, $\Tilde{\psi}_j$ and ${\psi}_j$ are both solutions of $\hat{P}_j\psi=0$ and by uniqueness they are proportional in a neighbourhood of $\alpha_j$. Then, we can Laplace transform ${\psi}_j$ along a ray $\Gamma_{\alpha_j}^\theta$ in $\Omega_j$. Hence if $\hat{\psi}_j$ denotes the analytic continuation of $\tilde{\psi}_j$ which agrees with $\psi_j$, we can Laplace transform $\hat{\psi}_j$ along $\Gamma_{\alpha_j}^\theta$, too. 
 
 We now prove step $(a)$: we want to show that $\series{\psi}_j=\borel_{\zeta}\series{\Psi}_j$ is a solution of $\hat{\mathcal{P}}_j\series{\psi}_j=0$. Recall that $\tilde{\Psi}_j$ is a trans-series, thus the Borel transform of $z^{-\lambda}\tilde{\Psi}_j$ is written in terms of the convolution product $\ast_{\alpha_j}$.   
 
@@ -1658,7 +1507,7 @@ Hence, the Borel transform of $\series{\Psi}_j$ is a solution of $\hat{P}_j\seri
 %\end{lemma}
 
 %\begin{proof}
- %   We will prove the following: 
+ %   We’ll prove the following: 
   %  \begin{itemize}
    %     \item there are only a finite number of singularities in the Borel plane, hence there is a direction which avoids all the singularities;
     %    \item the analytic continuation of $\hat{\psi}_j$ along that direction grows sub-exponentially. 
@@ -1740,7 +1589,7 @@ The saddle point approximation gives the formal series
 \begin{multline}\label{formula1}
 \hat{\phi}_{j}(\zeta)=\fracderiv{\textcolor{red}{3/2}}{\zeta} {\alpha_j} \left( \int_{\Lambda_j(\zeta)}\nu \right)=\textcolor{red}{\left(\tfrac{\partial}{\partial \zeta}\right)^2}\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\alpha_j}^\zeta (\zeta-\zeta')^{-1/2} \textcolor{red}{\left( \int_{\Lambda_j(\zeta')} \nu \right)}\,d\zeta',
 \end{multline}
-where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textbf{[Be careful about the orientation of $\Lambda_j$.]}
+where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[Be careful about the orientation of $\Lambda_j$.]}
 \end{enumerate}
 \end{theorem}
 
@@ -1748,14 +1597,14 @@ where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\
 
 Part~\eqref{int:series-gevrey}: Let's write $\approx$ when two functions are asymptotic (at all orders around the base point \textbf{[is this the right condition?]}), and $\sim$ when a function is asymptotic to a formal power series (at the truncation order of each partial sum).
 
-Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $\alpha_j$ with $\tfrac{1}{2} \tau^2 = f - f(\alpha_j)$. Let $\Lambda^-_j$ and $\Lambda^+_j$ be the parts of $\Lambda_j$ that go from the past to $\alpha_j$ and from $\alpha_j$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0, \infty)$ on $\Lambda^-_j$ and $\Lambda^+_j$, respectively. \textbf{[We should explicitly spell out and check the conditions that make this possible. I think we're implicitly orienting $\Lambda_j$ so that $\tau$ is in the upper half-plane.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
+Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $\alpha_j$ with $\tfrac{1}{2} \tau^2 = f - f(\alpha_j)$. Let $\Lambda^-_j$ and $\Lambda^+_j$ be the parts of $\Lambda_j$ that go from the past to $\alpha_j$ and from $\alpha_j$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0, \infty)$ on $\Lambda^-_j$ and $\Lambda^+_j$, respectively. \textcolor{magenta}{[We should explicitly spell out and check the conditions that make this possible. I think we're implicitly orienting $\Lambda_j$ so that $\tau$ is in the upper half-plane.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
 \[ \nu = \sum_{n \ge 0} b_n^j \tau^n\,d\tau \]
 that converges in some disk $|\tau| < \varepsilon$.
 
 By the steepest descent method,
 %%\[ e^{-z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
 \[ e^{\textcolor{magenta}{+}z f(\alpha_j)} I_j(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
-as $\Re z \to \infty$ \textbf{[see, for example, Miller's ``Applied Asymptotic Analysis,'' Proposition 2.1---the argument through equation~(2.9).]} Plugging in the Taylor series above, we get
+as $\Re z \to \infty$ (see, for example, \cite[Proposition 2.1]{miller2006applied}---the argument through equation~(2.9)). Plugging in the Taylor series above, we get
 \begin{align*}
 e^{-z f(\alpha_j)} I_j(z) & \approx \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_n^j \tau^n\,d\tau \\
 & = \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^j \tau^{2n}\,d\tau.
@@ -1766,20 +1615,17 @@ e^{-z f(\alpha_j)} I_j(z) & \approx \sum_{n \ge 0} b_{2n}^j \int_{-\varepsilon}^
 & = \sum_{n \ge 0} (2n-1)!!\,b_{2n}^j \left[ \sqrt{2\pi}\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big) - 2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \right].
 \end{align*}
 
-The annoying $e^{-z\varepsilon^2/2}$ correction terms are crucial for the convergence of the sum, but we can get rid of them and still have a formal series asymptotic to $e^{-z f(\alpha_j)} I_\alpha(z)$. In other words,
-\[ e^{-z f(\alpha_j)} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^j\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
+The annoying $e^{-z\varepsilon^2/2}$ correction terms are crucial for the convergence of the sum, but we can get rid of them and still have a formal series asymptotic to $e^{-z \alpha_j} I_j(z)$. In other words,
+\[ e^{-z \alpha_j} I_j(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^j\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
 To see why, cut the sum off after $N$ terms, and observe that
 \begin{align*}
   \Bigg | \sum_{n= 0}^N(2n-1)!! b_{2n}^j  2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \Bigg | &\leq  2 e^{-\Re (z) \varepsilon^2/2} \sum_{n=0}^N(2n-1)!! b_{2n}^j n|z|^{-n}.
 \end{align*}
 The right-hand side goes to $0$ as $\Re(z)$ grows.
-
 %Hence,
 %\[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
-The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows \textbf{[Chiani, Dardari, and Simon, ``New Exponential Bounds and Approximations
-for the Computation of Error Probability in
-Fading Channels,'' inequality~(5)]}, allowing the simpler estimate
-\[ e^{-zf(\alpha_j)} I_j(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^j \,z^{-(n+1/2)}. \] 
+The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows \cite[inequality~(5)]{chiani-dardari-book}, allowing the simpler estimate
+\[ e^{-z\alpha_j)} I_j(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^j \,z^{-(n+1/2)}. \] 
 
 Call the right-hand side $\tilde{I}_j$. We now see that $a_{j,n} = (2n-1)!!\,b_{2n}^j$ in the statement of the theorem. %\textbf{[Resolve discrepancy with previous calculation.]} 
 
@@ -1789,7 +1635,7 @@ Note that
 & = \sum_{n \ge 0} 2^{n+1/2}\,b_{2n}^j \,\zeta_j^{n-1/2}.
 \end{align*}
 
-We know from the definition of $\varepsilon$ that $\left|b_n^j\right| \varepsilon^n \lesssim 1$. Recalling that $(2n - 1)!! \approx (\pi n)^{-1/2}\,2^n\,n!$ as $n \to \infty$, we deduce that $|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{I}_j$ is Gevrey-1.
+We know from the definition of $\varepsilon$ that $\left|b_n^j\right| \varepsilon^n \lesssim 1$. Recalling that $(2n - 1)!! \approx (\pi n)^{-1/2}\,2^n\,n!$ as $n \to \infty$, we deduce that $|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{I}_j$ is $1$-Gevrey.
 
 Part~\eqref{int:resum-valid}: Let us recast the integral $I_j$ into the $f$ plane. As $\zeta$ goes rightward from $\alpha_j$, the start and end points of $\Lambda_j(\zeta)$ sweep backward along $\Lambda^-_j(\zeta)$ and forward along $\Lambda^+_j(\zeta)$, respectively. Hence, we have
 \begin{align*}
@@ -1806,12 +1652,12 @@ Noticing that the right-hand side is a Laplace transform, we learn that
 
 We can rewrite our Taylor series for $\nu$ as
 \begin{align*}
-\nu & = \sum_{n \ge 0} b_n^j [2(f - f(x_j))]^{n/2}\,\frac{df}{[2(f - f(x_j))]^{1/2}} \\
-& = \sum_{n \ge 0} b_n^j [2(f - f(x_j))]^{(n - 1)/2}\,df,
+\nu & = \sum_{n \ge 0} b_n^j [2(f - f(a_j))]^{n/2}\,\frac{df}{[2(f - f(a_j))]^{1/2}} \\
+& = \sum_{n \ge 0} b_n^j [2(f - f(a_j))]^{(n - 1)/2}\,df,
 \end{align*}
 taking the positive branch of the square root on $\Lambda^+_j$ and the negative branch on $\Lambda^-_j$. Plugging this into our expression for $\hat{\iota}_j$, we learn that
 \begin{align*}
-\hat{\iota}_j(\zeta) & = \left[ \sum_{n \ge 0} b_n^j [2(f - f(x_j))]^{(n - 1)/2} \right]_{\operatorname{start} \Lambda_j(\zeta)}^{\operatorname{end} \Lambda_j(\zeta)} \\
+\hat{\iota}_j(\zeta) & = \left[ \sum_{n \ge 0} b_n^j [2(f - f(a_j))]^{(n - 1)/2} \right]_{\operatorname{start} \Lambda_j(\zeta)}^{\operatorname{end} \Lambda_j(\zeta)} \\
 & = \sum_{n \ge 0} b_n^j \Big( [2\zeta_j]^{(n - 1)/2} - (-1)^{n-1}[2\zeta_j]^{(n - 1)/2} \Big) \\
 & = \sum_{n \ge 0} 2 b_{2n}^j [2\zeta_j]^{n - 1/2} \\
 & = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2} \\
@@ -1821,7 +1667,7 @@ taking the positive branch of the square root on $\Lambda^+_j$ and the negative 
 We have now shown that the sum of $\borel_{\zeta} \tilde{I}_j$ is actually equal to $\hat{\iota}_j$.
 
 %Let $\tilde{\Phi}_j\in\C[\![z^{-1}]\!]$ be such that $\tilde{I}_j(z)=e^{-z\alpha_j}z^{-1/2}\tilde{\Phi}_j(z)$,  
-By the action of $\borel_\zeta$ on transseries (\S \ref{sec:action_transseries}) and the properties of convolution (\S \ref{convolution}) we know 
+By the action of $\borel_\zeta$ on transseries (Section \ref{sec:action_transseries}) and the properties of convolution (Section \ref{convolution}) we know 
 \begin{align*}
 \borel_{\zeta} \tilde{I}_j & = \borel_{\zeta}( z^{-1/2} \tilde{\Phi}_j) \\
 &=\borel_\zeta z^{-1/2}\ast_{\alpha_j}\borel_\zeta\tilde{\Phi}_j\\
@@ -1837,7 +1683,7 @@ Taking the Laplace transform of both sides and applying properties of the Borel 
 I_j(z) & = \laplace_{\zeta, \alpha_j} \left[ \partial^{-1/2}_{\zeta, \alpha_j}  \tilde{\phi}_j \right] \\
 & = z^{-1/2} \laplace_{\zeta, \alpha_j} \tilde{\phi}_j,
 \end{align*}
-as we claimed. \textcolor{orange}{[should we use $\hat{\phi}_j$ when we write the convolution product, assuming the germ is continuable in certain direction?]}
+as we claimed. \textcolor{cyan}{[should we use $\hat{\phi}_j$ when we write the convolution product, assuming the germ is continuable in certain direction?]}
 
 Part~\eqref{int:deriv-formula}: Since fractional integrals form a semigroup, equation~\eqref{shifted-resum-valid} implies that
 \[ \fracderiv{-1}{\zeta}{\alpha_j} \hat{\iota}_j(\zeta) = \fracderiv{-3/2}{\zeta}{\alpha_j} \hat{\phi}_j. \]
@@ -1870,16 +1716,16 @@ where $\Gamma$ is a path that comes from $\infty$ at $-60^\circ$ and goes to $\i
     \centering
     %\includegraphics{figures/u_contour_3.pdf}
     \includegraphics[scale=0.3]{figures/thimble_Airy.png}
-    \caption{\small The contour $\Gamma$ in the $u$ plane is represented by the light blue path.\textcolor{orange}{[explain what the regions indicate and what the color]}}
+    \caption{\small The contour $\Lambda_1$ in the $u$ plane is represented by the light blue path. More generally, the dark blue contour corresponds to the preimage of the ray $+1+e^{i\theta}\infty$ and $\theta=$. While the light blue contour corresponds to the preimage of the ray $-1+e^{i\theta}\infty$. The gray regions correspond to the preimage of $\Re \zeta> \textcolor{orange}{const}$. \textcolor{orange}{[for Aaron: could you please add the correct constant in the description of the figure, and explain what are the different colored regions? Thanks]}}
     \label{fig:path_Airy}
 \end{figure}
 
 
 With the substitution $t = 2uy^{1/2}$, we can rewrite the Airy integral as
-\[ \Ai(y) = y^{1/2}\;\frac{1}{\pi i} \int_{y^{-1/2} \Gamma} \exp\left[\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du. \]
+\[ \Ai(y) = y^{1/2}\;\frac{1}{\pi i} \int_{y^{-1/2} \Lambda_1} \exp\left[\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du. \]
 We have rescaled the contour by a factor of two, but it still approaches $\infty$ in the desired way. Note that $4u^3 - 3u$ is the third Chebyshev polynomial.
 
-By considering other Chebyshev polynomials, we can situate the Airy function within the family of {\em Airy-Lucas functions}, so we will go straight to the general case. However, since the Airy function is a classic example in the study of Borel summation and resurgence, it may be useful to see it on its own. For this reason, in Appendix~\ref{airy-appendix} we give a detailed treatment of the Airy function, specializing the general argument of all Airy-Lucas functions.
+By considering other Chebyshev polynomials, we can situate the Airy function within the family of {\em Airy-Lucas functions}, so we’ll go straight to the general case. However, since the Airy function is a classic example in the study of Borel summation and resurgence, it may be useful to see it on its own. For this reason, in Appendix~\ref{airy-appendix} we give a detailed treatment of the Airy function, specializing the general argument of all Airy-Lucas functions.
 
 \subsection{Airy--Lucas}\label{example_AL}
 The Airy-Lucas equation is
@@ -1893,7 +1739,7 @@ where $\Lambda_{j}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{j}{n}\
 \begin{figure}[ht]
     \centering
    \includegraphics[scale=0.3]{figures/thimble-n5.png}
-    \caption{Integration contour $\Lambda_j$ for the Airy--Lucas function with $n=5$.}
+    \caption{Integration contour $\Lambda_j$ for the Airy--Lucas function with $n=5$. The dark blue contours correspond to the preimage of the ray $1+e^{i\theta}\infty$ and $\theta=$. While the light blue contours correspond to the preimage of the ray $-1+e^{i\theta}\infty$.}
     \label{fig:thimble_n_5}
 \end{figure}
 
@@ -1909,7 +1755,7 @@ Saying that $\widehat{\Ai}^{(k)}_{n, m-1}$ satisfies the Airy-Lucas equation is 
 \begin{equation}\label{eqn:mod-bessel-AL}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{m}{n} \big)^2 + z^2\big]\right] K = 0.
 \end{equation}
-In fact, as we will see in Section~\ref{contour-argument-AL}, $K$ is the modified Bessel function $K_{{m/n}}$.
+In fact, as we’ll see in Section~\ref{contour-argument-AL}, $K$ is the modified Bessel function $K_{{m/n}}$.
 
 Let's put equation~\eqref{eqn:mod-bessel-AL} in the form \eqref{eqn:standard ODE}:
 \begin{equation}\label{eqn:reg-mod-bessel-AL}
@@ -1920,17 +1766,17 @@ Let's put equation~\eqref{eqn:mod-bessel-AL} in the form \eqref{eqn:standard ODE
 
 From the general theory of ODE of Poincar\'e rank $1$, we know that the space of trans-series solutions of ~\eqref{eqn:reg-mod-bessel-AL} has a basis of trans-monomials
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,\series{W}_\alpha \mid \alpha^2 - 1 = 0 \} \]
-where the $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket$ are formal power series in $z^{-1}$ and $\tau_\alpha=1/2$. From \cite[Equations 10.40.2 and 10.17.1]{dlmf}, we learn that $K(z) \sim \left(\tfrac{\pi}{2}\right)^{1/2} e^{-z} z^{-1/2}\,\series{W}_1$, with
+where the $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket$ are formal power series in $z^{-1}$ and $\tau_\alpha=1/2$. From \cite[Equations 10.40.2 and 10.17.1]{dlmf}, we learn that $K_{m/n}(z) \sim \left(\tfrac{\pi}{2}\right)^{1/2} e^{-z} z^{-1/2}\,\series{W}_1$, with
 \begin{equation}\label{bessel-asymp-AL}
 \series{W}_1 = 1 - \frac{(\tfrac{1}{2}-\tfrac{m}{n})_1 (\tfrac{1}{2}+\frac{m}{n})_1}{2^1 \cdot 1!}\;z^{-1} + \frac{(\tfrac{1}{2}-\tfrac{m}{n})_2 (\tfrac{1}{2}+\tfrac{m}{n})_2}{2^2 \cdot 2!}\;z^{-2} - \frac{(\tfrac{1}{2}+\tfrac{m}{n})_3 (\tfrac{1}{2}+\tfrac{m}{n})_3}{2^3 \cdot 3!}\;z^{-3} + \ldots
 \end{equation}
 
 The holomorphic analysis in Section~\ref{big-idea} will give us holomorphic solutions
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,W_\alpha \mid \alpha^2 - 1 = 0 \}, \]
-which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We will see in Section~\ref{bessel-regularity-AL} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is an evidence of Theorem~\ref{thm1-dim}.
+which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We’ll see in Section~\ref{bessel-regularity-AL} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is an evidence of Theorem~\ref{thm1-dim}.
 %\subsection{Going to the spatial domain}\label{spatial-AL}
 \subsubsection{The big idea}\label{big-idea}
-We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel-AL}. We'll succeed when $\alpha^2 - 1 = 0$, and we'll see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
+We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel-AL}. We'll succeed when $\alpha^2 - 1 = 0$, and we'll see that $K_{m/n}$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
 
 We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel-AL} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{int-eq:spatial-mod-bessel-AL}
@@ -1940,16 +1786,16 @@ It's tempting to differentiate both sides of this equation until we get
 \begin{equation}\label{diff-eq:spatial-mod-bessel-AL}
 \left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ \big[ \zeta^2 - 1 \big] - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{m}{n}\big)^2 \right] v = 0,
 \end{equation}
-which is easier to solve. Unfortunately, a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} won't satisfy equation~\eqref{int-eq:spatial-mod-bessel-AL} in general. However, as we learned in Section~\ref{shifting}, a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} {\em will} satisfy equation~\eqref{int-eq:spatial-mod-bessel-AL} if it's slight and locally integrable at $\zeta = \alpha$.
+which is easier to solve. Unfortunately, a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} won't satisfy equation~\eqref{int-eq:spatial-mod-bessel-AL} in general. However, as we show in Section~\ref{shifting}, a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} {\em will} satisfy equation~\eqref{int-eq:spatial-mod-bessel-AL} if it belongs to $\singexpalg{\sigma}(\Omega_j)$, for some $\sigma\in (0,1)$.
 
-This is great news, because equation~\eqref{diff-eq:spatial-mod-bessel-AL} has a regular singularity at each root of $\zeta^2 - 1$, and the Frobenius method often gives a slight solution at each regular singular point. We can see the regular singularities by moving the derivatives to the right:
+This is great news, because equation~\eqref{diff-eq:spatial-mod-bessel-AL} has a regular singularity at each root of $\zeta^2 - 1$, and the Frobenius method often gives a solution of order $\sigma=1/2$ at each regular singular point. We can see the regular singularities by moving the derivatives to the right:
 \[ \left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{m}{n}\big)^2 \big] \right] v = 0. \]
 
-In Sections \ref{pos-root-AL}\,--\,\ref{neg-root-AL}, we'll see this approach succeed. For each root $\alpha$, we'll find a solution $v_\alpha$ of equation~\eqref{diff-eq:spatial-mod-bessel-AL} which is slight and locally integrable at $\zeta = \alpha$. We know the function $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\eqref{eqn:reg-mod-bessel-AL}, and we can even find its asymptotics from the order $\tau_\alpha$ of $v_\alpha$. We learned in Section~\ref{translation} that
-\[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} V_\alpha \]
-where $V_\alpha = \laplace_{\zeta_\alpha, 0} v_\alpha$ and $\zeta = \alpha + \zeta_\alpha$. We can see from Section~\ref{reg-decay} that $V_\alpha$ is asymptotic to a scalar multiple of $z^{-1 - \tau_\alpha}$ at $z = \infty$, so the further decomposition
-\[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} z^{-\tau_\alpha} W_\alpha, \]
-makes $W_\alpha$ is asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
+In Sections \ref{pos-root-AL}\,--\,\ref{neg-root-AL}, we'll see this approach succeed. For each root $\alpha_j$, we'll find a solution $v_j$ of equation~\eqref{diff-eq:spatial-mod-bessel-AL} which is $\singexpalg{\sigma}(\Omega_j)$, for some $\sigma$, and $\Omega_j$ as in Figure \ref{Fig:domain}. We know the function $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\eqref{eqn:reg-mod-bessel-AL}, and we can even find its asymptotics from the order $\tau_\alpha$ of $v_\alpha$. We learned in Section~\ref{translation} that
+\[ \laplace_{\zeta, \alpha_j} v_j = e^{-\alpha_j z} V_j \]
+where $V_j = \laplace_{\zeta_j, 0} v_\alpha$ and $\zeta = \alpha_j + \zeta_j$. We can see from Section~\ref{reg-decay} that $V_j$ is asymptotic to a scalar multiple of $z^{-1 - \tau_j}$ at $z = \infty$, so the further decomposition
+\[ \laplace_{\zeta, \alpha_j} v_j = e^{-\alpha_j z} z^{-\tau_j} W_j, \]
+makes $W_j$ is asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
 %\color{Peru}
 %\begin{align*}
 %\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (\zeta - 1)(\zeta + 1) - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \right] v & = 0
@@ -1966,7 +1812,7 @@ makes $W_\alpha$ is asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
 %%\[ \left[ \big[ \zeta_\alpha (\zeta_\alpha + 2\alpha) + \alpha^2 - 1 \big] + \fracderiv{-1}{\zeta_\alpha}{0} \circ \big[ \zeta_\alpha + \alpha \big] - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta_\alpha}{0} \right] w = 0. \]
 %%\end{equation}
 \subsubsection{Focus on $\zeta = 1$}\label{pos-root-AL}
-Let's find a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\eqref{diff-eq:spatial-mod-bessel-AL} looks like
+Let's find a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} which belongs to $\singexpalg{\sigma}(\Omega_1)$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\eqref{diff-eq:spatial-mod-bessel-AL} looks like
 \begin{equation}\label{diff-eq:spatial-mod-bessel-pos-AL}
 \left[\zeta_1(2 + \zeta_1) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(1 + \zeta_1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{m}{n}\big)^2\big]\right] v = 0.
 \end{equation}
@@ -1974,14 +1820,14 @@ With another change of coordinate, given by $\zeta_1 = -2\xi_1$, we can rewrite 
 \begin{equation}\label{diff-eq:hypergeom-pos-AL}
 \left[\xi_1 (1 - \xi_1) \big(\tfrac{\partial}{\partial \xi_1}\big)^2 + 3(\tfrac{1}{2} - \xi_1) \tfrac{\partial}{\partial \xi_1} - \big[1 - \big(\tfrac{m}{n}\big)^2\big]\right] v = 0.
 \end{equation}
-Looking through the twenty-four expressions for Kummer's six solutions, we find one \cite[formula~15.10.12]{dlmf} which is manifestly slight and locally integrable at $\xi_1 = 0$:
+Looking through the twenty-four expressions for Kummer's six solutions, we find one \cite[formula~15.10.12]{dlmf} which belongs to $\singexpalg{1/2}$ at $\xi_1 = 0$:
 \begin{alignat*}{2}
 v_1 &=\;& \hphantom{-i\sqrt{2}}\,\xi_1^{-1/2} & {}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; \xi_1\big) \\
 &=\;& -i\sqrt{2}\,\zeta_1^{-1/2} & {}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big)
 \end{alignat*}
 From the argument in Section~\ref{big-idea}, we know that $\laplace_{\zeta, 1} v_1$ satisfies equation~\eqref{eqn:mod-bessel-AL}, and can be written as $e^{-z} V_1$, where $V_1 = \laplace_{\zeta_1, 0} v_1$. Since $v_1$ has order $-1/2$, the decomposition $V_1 = z^{-1/2} W_1$ makes $W_1$ asymptotic to a scalar multiple of $1+O(z^{-1})$ at $z = \infty$.
 \subsubsection{Focus on $\zeta = -1$}\label{neg-root-AL}
-Let's find a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} which is slight and locally integrable at $\zeta = -1$. In the rescaled coordinate from Section~\ref{pos-root-AL}, this is the point $\xi_1 = 1$. Looking again through Kummer's table of solutions, we find another expression \cite[formula~15.10.14]{dlmf} which is manifestly slight and locally integrable at $\xi_1 = 1$:
+Let's find a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} which belongs to $\singexpalg{\sigma}(\Omega_{-1})$. In the rescaled coordinate from Section~\ref{pos-root-AL}, this is the point $\xi_1 = 1$. Looking again through Kummer's table of solutions, we find another expression \cite[formula~15.10.14]{dlmf} which belongs to $\singexpalg{1/2}$ at $\xi_1 = 1$:
 \begin{alignat*}{2}
 v_{-1} &=\;& (1-\xi_1)^{-1/2} & {}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; 1-\xi_1\big) \\
 &=\;& \sqrt{2}\,\zeta_{-1}^{-1/2} & {}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big)
@@ -1990,26 +1836,26 @@ where $\zeta_{-1}$ is the coordinate with $\zeta = -1 + \zeta_{-1}$. From the ar
 
 In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{o}bius transformation that pulls $\zeta$ back to $-\zeta$. Kummer's solutions typically come from six different hypergeometric equations, which are related by the M\"{o}bius transformations that permute their singularities. In our case, though, exchanging $1$ with $-1$ keeps equation~\eqref{diff-eq:spatial-mod-bessel-AL} the same.
 \subsubsection{Abstract argument for Borel regularity}\label{bessel-regularity-AL}
-The analysis in Sections~\ref{big-idea}--\ref{neg-root-AL} picks out a frame in the space of analytic solutions of~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by solutions of the form $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$, with $v_\alpha \in \zeta_\alpha^{-1/2} + o\big(\zeta_\alpha^{-1/2}\big)$.
+The analysis in Sections~\ref{big-idea}--\ref{neg-root-AL} picks out a frame in the space of analytic solutions of~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by solutions of the form $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$, with $v_j\in\singexpalg{1/2}(\Omega_j)$.
 \color{DarkTurquoise}
 \begin{quote}
-We get $v_\alpha$ from the existence result in Section~\ref{borel_reg-ODE}, which gives $v_\alpha = \zeta^{\tau-1} + v_\alpha'$ with $\tau \in (0, \infty)$ and $v_\alpha' \in \holoL{\infty, 1-\tau-\epsilon}(\Omega)$ for some $\epsilon \in (0, 1]$. Looking back at the definitions of our weighted $L^\infty$ spaces, we can see that
+We get $v_j$ from the existence result in Section~\ref{borel_reg-ODE}, which gives $v_j = \zeta^{\tau-1} + v_j'$ with $\tau \in (0, \infty)$ and $v_j' \in \holoL{\infty, 1-\tau-\epsilon}(\Omega)$ for some $\epsilon \in (0, 1]$. Looking back at the definitions of our weighted $L^\infty$ spaces, we can see that
 \begin{align*}
-v_\alpha' \in \holoL{\infty, 1-\tau-\epsilon}(\Omega) & \Longrightarrow \zeta_\alpha^{1-\tau-\epsilon}\,v_\alpha' \text{ is bounded near } \zeta_\alpha = 0 \\
-& \Longrightarrow \zeta_\alpha^\epsilon\,\zeta_\alpha^{1-\tau-\epsilon}\,v_\alpha' \text{ goes to } 0 \text{ as } \zeta_\alpha \text{ goes to } 0 \\
-& \Longrightarrow \zeta_\alpha^{1-\tau}\,v_\alpha' \text{ goes to } 0 \text{ as } \zeta_\alpha \text{ goes to } 0 \\
-& \Longrightarrow v_\alpha' / \zeta_\alpha^{\tau-1} \text{ goes to } 0 \text{ as } \zeta_\alpha \text{ goes to } 0 \\
-& \Longleftrightarrow v_\alpha' \in o\big(\zeta_\alpha^{\tau-1}\big).
+v_j' \in \holoL{\infty, 1-\tau-\epsilon}(\Omega) & \Longrightarrow \zeta_j^{1-\tau-\epsilon}\,v_j' \text{ is bounded near } \zeta_j = 0 \\
+& \Longrightarrow \zeta_j^\epsilon\,\zeta_j^{1-\tau-\epsilon}\,v_j' \text{ goes to } 0 \text{ as } \zeta_j \text{ goes to } 0 \\
+& \Longrightarrow \zeta_j^{1-\tau}\,v_j' \text{ goes to } 0 \text{ as } \zeta_j \text{ goes to } 0 \\
+& \Longrightarrow v_j' / \zeta_j^{\tau-1} \text{ goes to } 0 \text{ as } \zeta_j \text{ goes to } 0 \\
+& \Longleftrightarrow v_j' \in o\big(\zeta_j^{\tau-1}\big).
 \end{align*}
 In this case, $\tau = \tfrac{1}{2}$.
 \end{quote}
 \color{black}
 
-The Poincar\'{e} algorithm, as we saw in Section~\ref{sec:asympt-AL}, picks out a frame in the space of formal trans-series solutions of equation~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by trans-monomial solutions of the form $e^{-z} z^{-1/2}\,\tilde{W}_1$ and $e^z z^{-1/2}\,\tilde{W}_{-1}$, with $\tilde{W}_\alpha \in \C\llbracket z^{-1} \rrbracket$. We'll now show that if these solutions are Borel-summable, their Borel sums generate the same frame as $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$.
+The Poincar\'{e} algorithm, as we saw in Section~\ref{sec:asympt-AL}, picks out a frame in the space of formal trans-series solutions of equation~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by trans-monomial solutions of the form $e^{-z} z^{-1/2}\,\tilde{W}_1$ and $e^z z^{-1/2}\,\tilde{W}_{-1}$, with $\tilde{W}_j \in \C\llbracket z^{-1} \rrbracket$. We'll now show that if these solutions are Borel-summable, their Borel sums generate the same frame as $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$.
 
-The Borel transform maps $e^{-\alpha z} z^{-1/2}\,\C\llbracket z^{-1} \rrbracket$ into $\zeta_\alpha^{-1/2}\,\C\llbracket \zeta_\alpha \rrbracket$ (see Section \ref{sec:action_transseries}), and it turns formal trans-monomial solutions of equation~\eqref{eqn:reg-mod-bessel-AL} into formal power series solutions of equation~\eqref{int-eq:spatial-mod-bessel-AL}. Summation sends convergent power series in $\zeta_\alpha^{-1/2}\,\C\llbracket \zeta_\alpha \rrbracket$ into $\zeta_\alpha^{-1/2}+ o\big(\zeta_\alpha^{-1/2}\big)$, and it turns convergent power series that satisfy a given fractional integral equation into holomorphic functions that satisfy the same equation~\textcolor{magenta}{[prove or cite]}. Thus, if $e^{-z} z^{-1/2}\,\tilde{W}_1$ and $e^z z^{-1/2}\,\tilde{W}_{-1}$ are $1$-Gevrey, their Borel transforms sum to solutions of equation~\eqref{int-eq:spatial-mod-bessel-AL}, which lie in $\zeta_\alpha^{-1/2} + o\big(\zeta_\alpha^{-1/2}\big)$ for $\alpha = 1$ and $\alpha = -1$, respectively.
+The Borel transform maps $e^{-\alpha_j z} z^{-1/2}\,\C\llbracket z^{-1} \rrbracket$ into $\zeta_j^{-1/2}\,\C\llbracket \zeta_j \rrbracket$ (see Section \ref{sec:action_transseries}), and it turns formal trans-monomial solutions of equation~\eqref{eqn:reg-mod-bessel-AL} into formal power series solutions of equation~\eqref{int-eq:spatial-mod-bessel-AL}. Summation sends convergent power series in $\zeta_j^{-1/2}\,\C\llbracket \zeta_j \rrbracket$ into $\zeta_j^{-1/2}+ o\big(\zeta_j^{-1/2}\big)$, and it turns convergent power series that satisfy a given fractional integral equation into holomorphic functions that satisfy the same equation \cite[Lemma 2]{reg-sing-volterra}. Thus, if $e^{-z} z^{-1/2}\,\tilde{W}_1$ and $e^z z^{-1/2}\,\tilde{W}_{-1}$ are $1$-Gevrey, their Borel transforms sum to solutions of equation~\eqref{int-eq:spatial-mod-bessel-AL}, which lie in $\singexpalg{1/2}$ for $\alpha = 1$ and $\alpha = -1$, respectively.
 
-When $\alpha$ is $1$ or $-1$, equation~\eqref{int-eq:spatial-mod-bessel-AL} becomes the kind of singular integral equation discussed in Section~\ref{borel_reg-ODE}. It therefore has exactly one solution in $\zeta_\alpha^{-1/2} + o\big(\zeta_\alpha^{-1/2}\big)$, up to scaling. That means $\borel\big[ e^{-\alpha z} z^{-1/2}\,\tilde{W}_\alpha \big]$ must sum to a scalar multiple of $v_\alpha$. Thus, if $e^{-\alpha z} z^{-1/2}\,\tilde{W}_\alpha$ is Borel-summable, its Borel sum is a scalar multiple of $\laplace_{\zeta, \alpha} v_\alpha$.
+When $\alpha$ is $1$ or $-1$, equation~\eqref{int-eq:spatial-mod-bessel-AL} becomes the kind of singular integral equation discussed in Section~\ref{borel_reg-ODE}. It therefore has exactly one solution in $\singexpalg{1/2}$, up to scaling. That means $\borel\big[ e^{-\alpha_j z} z^{-1/2}\,\tilde{W}_j \big]$ must sum to a scalar multiple of $v_j$. Thus, if $e^{-\alpha_j z} z^{-1/2}\,\tilde{W}_j$ is Borel-summable, its Borel sum is a scalar multiple of $\laplace_{\zeta, \alpha_j} v_j$.
 
 \subsubsection{Confirmation of Borel regularity}\label{confirmation-borel-regularity}
 We can confirm the conclusion of Section~\ref{bessel-regularity-AL} using our explicit expressions for the formal power series $\tilde{W}_\alpha$ and the functions $v_\alpha$. We found in Section~\ref{sec:asympt-AL} that
@@ -2026,7 +1872,7 @@ Computing
 \end{align*}
 we see that $\borel\big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big]$ sums to
 \[ \tfrac{1}{\Gamma(1/2)}\,\zeta_1^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
-Looking back at Section~\ref{pos-root-AL}, we recognize this as a scalar multiple of $v_1$.
+Looking back at Section~\ref{pos-root-AL}, we recognize this as a scalar multiple of $v_1$. In fact, with the thimble projection reasoning, there is no ambiguity in the choice of the multiplicative constant. 
 
 
 Through a similar calculation, we see that $\borel\big[ e^z z^{-1/2}\,\tilde{W}_{-1} \big]$ sums to
@@ -2035,10 +1881,11 @@ Looking back at Section~\ref{neg-root-AL}, we recognize this as a scalar multipl
 
 
 
-\subsubsection{Thimble projection technique for Airy-Lucas functions}\label{contour-argument-AL}
+\subsubsection{Thimble projection reasoning for Airy-Lucas functions}\label{contour-argument-AL}
 \textcolor{orange}{[\textbf{New phrasing for rewrite:} The critical point splits the thimble $\Lambda$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away.]}
+We follow the reasoning of the proof of Theorem~\ref{thm:maxim}.
+We can recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $\textcolor{magenta}{-\zeta} = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Projecting $z^{-1/n} \Lambda^{(k)}$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/n} \Lambda^{(k)}$, we get \textcolor{magenta}{[sign flipped]} 
 
-We can recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $\textcolor{magenta}{-\zeta} = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Projecting $z^{-1/n} \Lambda^{(k)}$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/n} \Lambda^{(k)}$, we get \textcolor{magenta}{[sign flipped]} \textcolor{DarkCyan}{[see identity in \texttt{cyl-resurgence.tex}]}
 \begin{align*}%%\label{integral:mod-bessel-rational-zeta}
 K_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
 & = -\frac{1}{2  \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\gamma_z} e^{-z\zeta}\,\frac{U_{m-1}(u)}{U_{n-1}(u)}\,d\zeta %\\
@@ -2051,7 +1898,7 @@ For $z \in (0, \infty)$, the contour $\gamma_z$ runs \textcolor{magenta}{counter
 
 \begin{center}
 \includegraphics{figures/zeta_contour_3.pdf} \\[1em]
-{\small The contour $\gamma_1$ \textcolor{magenta}{[reversed]} in the $\zeta$ plane.}
+{\small The contour $\gamma_1$ \textcolor{magenta}{[reversed]} in the $\zeta$ plane, slightly off from the critical value $\zeta=1$.}
 \end{center}
 
 Now we observe, that by properties of Chebyshev polynomials the integrand can be written as an explicit function of $\zeta$: 
@@ -2086,16 +1933,13 @@ Finally, comparing this expression for $K_{m/n}$ with the expression for $v_1$ c
     K_{m/n}(z)=\frac{i}{2}\laplace_{\zeta,1}v_1 .
 \end{align*}
 
-\subsubsection{A flavour of resurgence: the Stokes phenomena in the position domain}\label{resurgence-AL}
+\subsubsection{A flavor of resurgence: the Stokes phenomena in the position domain}\label{resurgence-AL}
 
-In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (\S\ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (\S\ref{contour-argument-AL}). Up to a constant, in both cases we find 
-
+In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (\S\ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (\S\ref{contour-argument-AL}). In both cases we find 
 \begin{align*}
     v_1(\zeta)= i \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)
 \end{align*}
-
 which has a fractional power singularity at $\zeta=1$. In addition, notice that the hypergeometric function ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ is convergent at $\zeta=1$ therefore $v_1$ has the typical form of a \textit{singularity} in the formalism of \'Ecalle's resurgent functions. More precisely, we can consider ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ as a new germ of holomorphic function, which has a branch cut singularity at $\zeta=-1$. Using equation \cite[15.2.3]{dlmf}, we can compute the analytic continuation of this germ at $\zeta=-1$: 
-
 \begin{align*}
 &{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}+i\varepsilon\right)-{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}-i\varepsilon\right)=\\
 &=\frac{2\pi i}{\Gamma\big(\tfrac{1}{2}-\tfrac{m}{n}\big)\Gamma\big(\tfrac{1}{2}+\tfrac{m}{n}\big)} \left(-\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
@@ -2103,45 +1947,35 @@ which has a fractional power singularity at $\zeta=1$. In addition, notice that 
 &=2\cos(\pi m/n) \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
 &=2\cos(\pi m/n)\, \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} \left(-\frac{\zeta_{1}}{2}\right)^{1/2}\, {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right)
 \end{align*}
-
 Hence, we deduce  
 \begin{equation}\label{resurgent-relation-1}
     v_1(\zeta+1+i\varepsilon)-v_1(\zeta+1+i\varepsilon)=2i \cos(\pi m/n)  v_{-1}(\zeta)
 \end{equation}
-
-namely, that the germ of the singularity at $\zeta=1$ knows about the germ of the singularity at $\zeta=-1$. This is an instance of \textit{resurgent functions}, introduced by \'Ecalle in \cite{EcalleI}\cite{EcalleII}\cite{EcalleIII}\footnote{If the reader is interesting in resurgence, it may be useful to look at the following review \cite{diverg-resurg-i}\cite{Dorigoni}\cite{aniceto2019primer}.}. Although we will not discuss more about resurgence, we would like to point out that among the great advantages of resurgence (for instance compared to Borel summability) there are the \textit{formalism of singularities} and the \textit{Alien calculus} which allow to understand the Stokes phenomena working in the position domain. The same phenomena were described by Berry and Howls \cite{berry1991hyperasymptotics} who noticed that divergent asymptotic expansions of thimble integrals encode the contribution of other critical values.
+namely, that the germ of the singularity at $\zeta=1$ knows about the germ of the singularity at $\zeta=-1$. This is an instance of \textit{resurgent functions}, introduced by \'Ecalle in \cite{EcalleI,EcalleII,EcalleIII}\footnote{If the reader is interested in resurgence, it may be useful to look at the following review \cite{diverg-resurg-i,Dorigoni,aniceto2019primer}.}. Although we’ll not discuss more about resurgence, we would like to point out that among the great advantages of resurgence (for instance compared to Borel summability) there are the \textit{formalism of singularities} and the \textit{Alien calculus} which allow to understand the Stokes phenomena working in the position domain. The same phenomena were described by Berry and Howls \cite{berry1991hyperasymptotics} who noticed that divergent asymptotic expansions of thimble integrals encode the contribution of other critical values.
 
 We can repeat the same reasoning with $v_{-1}$:
-
 \begin{align*}
     v_{-1}(\zeta)=  \left(\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}+\frac{\zeta}{2}\right)
 \end{align*}
-
 and ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}+\frac{\zeta}{2}\right)$ is singular at $\zeta=1$. Hence
-
 \begin{align*}
 &{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}+i\varepsilon\right)-{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}-i\varepsilon\right)=\\
 &=\frac{2\pi i}{\Gamma\big(\tfrac{1}{2}-\tfrac{m}{n}\big)\Gamma\big(\tfrac{1}{2}+\tfrac{m}{n}\big)} \left(\frac{\zeta_{1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};-\frac{\zeta_{1}}{2}\right) \\
 &=2 i\cos(\pi m/n) \left(\frac{\zeta_{1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};-\frac{\zeta_{1}}{2}\right) \\
 &=2i \cos(\pi m/n)\, \left(\frac{\zeta_{1}}{2}\right)^{-1/2} \left(\frac{\zeta_{-1}}{2}\right)^{1/2}\, {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_{1}}{2}\right)
 \end{align*}
-
 and the analogue of \eqref{resurgent-relation-1} is 
 \begin{equation}\label{resurgent-realtion-2}
     v_{-1}(\zeta-1+i\varepsilon)-v_{-1}(\zeta-1-i\varepsilon)= -2i\cos(\pi m/n) v_1(\zeta).
 \end{equation}
-
-
 Equations \eqref{resurgent-relation-1} and \eqref{resurgent-realtion-2} are a manifestation of the Stokes phenomena, already in the position domain. Indeed, when we start varying the contour of integration for the Laplace transform, we know that $\laplace_{\zeta,1}^\pi$ and $\laplace_{\zeta,-1}^0$ are not well defined because the contour hits the other singularity (respectively at $\zeta=-1$ and $\zeta=1$). The Stokes phenomenon consists of comparing the Laplace transform below and above the critical direction and it quantifies the jump as a constant (the so-called Stokes constant) times another function. In our example:
-
 \begin{align*}
     \laplace_{\zeta,1}^{\pi+\varepsilon} v_1-\laplace_{\zeta,1}^{\pi-\varepsilon} v_1 & = 2 i \cos(\pi m/n) \, e^{-z}\, \laplace_{\zeta,-1}^{\pi} v_{-1} \\
     \laplace_{\zeta,-1}^{\varepsilon} v_{-1}-\laplace_{\zeta,-1}^{-\varepsilon} v_{-1} & = - 2 i \cos(\pi m/n)  \, e^z \, \laplace_{\zeta,1} v_{1} 
 \end{align*}
-
 thus the Stokes constants are respectively $\pm 2i \cos(\pi m/n)$\footnote{If we think of the Laplace transforms of $v_1$ and $v_{-1}$ as a frame of solutions for the Airy--Lucas differential equation, the equations above define the so-called Stokes matrices for the ODE.}. 
 
-It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the Stokes constants are the intersection number of \textit{dual pair of thimbles}, according to Picard--Lefschetz formula (in particular, they are integers in a suitable normalization), see \cite[Section 5]{pham} and Figure \ref{fig:intersection_thimbles}. However, in the Airy--Lucas example, $f$ is not Morse (unless $n=3$), hence we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on a lift of a path in the position domain. \textcolor{orange}{ I think we should argue we have the action of the permutation which leaves the base unchanged but gives a } 
+It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the Stokes constants are the intersection number of \textit{dual pair of thimbles}, according to Picard--Lefschetz formula (in particular, they are integers in a suitable normalization), see \cite[Section 5]{pham} and Figure \ref{fig:intersection_thimbles}. However, in the Airy--Lucas example, $f$ is not Morse (unless $n=3$), hence we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on the lift of a path in the position domain. \textcolor{orange}{ I think we should argue we have the action of the permutation which leaves the base unchanged but gives a } 
 
 \begin{figure}[ht]
     \centering
@@ -2176,21 +2010,16 @@ It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the
 \subsection{Modified Bessel}\label{sec:mod-bessel-lift}
 
 The modified Bessel equation is a generalization of equation~\eqref{eqn:mod-bessel-AL} where $\frac{m}{n}$ is replaced by a complex parameter $\mu$
-
 \begin{equation}\label{eqn:mod-bessel}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\mu^2 + z^2\big]\right] \varphi = 0
 \end{equation}
-
 and a basis of solutions is given by the modified Bessel functions (see formulas~10.27.4 and 10.32.12 from \cite{dlmf} \textcolor{red}{10 \cite{watson1922treatise}}) 
-
 \begin{align*}
 I_{\mu}(z)&=\frac{1}{2\pi i}\int_{\Omega} e^{z\cosh t - \mu t} dt \\
 K_{\mu}(z)&=\frac{\pi}{\sin(\mu \pi)}\cdot \frac{1}{2}[ I_{-\mu}(z) - I_{\mu}(z)]\\
 \color{red}K_{\mu}(z)& \color{red}=\int_{-\infty+i\pi/2}^{+\infty+\pi i/2} e^{-\cosh(t)+\mu t} dt \text{  for } -1<\Re \mu<1
 \end{align*} 
-
 where $\Omega$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$ (see Figure \ref{fig:Omega_path}).
-
 \begin{figure}[ht]
 \center
 \begin{tikzpicture}
@@ -2207,9 +2036,7 @@ where $\Omega$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ a
 \end{tikzpicture}
 \caption{The path $\Omega$. }\label{fig:Omega_path}
 \end{figure}
-
 On the one hand, this new condition does not really affect the argument we present in Section~\ref{bessel-regularity-AL}, so we briefly state the main results: 
-
 \begin{itemize}
  \item \textbf{Asymptotic analysis}: equation~\eqref{eqn:mod-bessel} admits a basis of formal solutions $K_{\mu}\sim e^{-z} z^{-1/2} \tilde{W}_{\mu, 1}$ and $I_{\mu} \sim e^z z^{-1/2} \tilde{W}_{\mu, 2}$ with 
  \begin{align*}
@@ -2225,7 +2052,7 @@ v_{\mu, -1}&=\sqrt{2}\,\zeta_{-1}^{-1/2}  {}_2F_1\big(\tfrac{1}{2}-\mu, \tfrac{1
 \item \textbf{Borel regularity} We can compare the Borel transform of the formal solutions $\tilde{W}_{\mu,\pm1}$ with the analytic solutions $v_{\mu,\pm 1}$. They agree (up to the choice of a constant), hence we have another example where Borel regularity can be checked explicitly. 
 \end{itemize}
 
-The thimble projection reasoning we describe in Section~\ref{contour-argument-AL} has to be generalized, as we will discuss in the following Section~\ref{countable-cover}. 
+The thimble projection reasoning we describe in Section~\ref{contour-argument-AL} has to be generalized, as we’ll discuss in the following Section~\ref{countable-cover}. 
 
 
 
@@ -2354,17 +2181,13 @@ Each generalized Airy function is a solution of
 \begin{equation}
 \left[\partial_z^3-z\partial_z+(p-1)\right]f(z,p)=0
 \end{equation} 
-
 and if $p=0$ they reduced to the classical Airy functions: $\mathrm{Ai}(z)=\mathrm{A}_1(z,0)$ and $\mathrm{Bi}(z)=\mathrm{B}_1(z,0)$.
 
 We define the following exponential integral: let $p\geq 0$, $f(t)=4t^3-3t$ and $\nu_p=\tfrac{dt}{t^p}$. The critical points of $f$ are $\alpha_{\pm}:=\pm\tfrac{1}{2}$ (as for the classical Airy case), however the volume form $\nu_p$ is meromorphic    
-
 \begin{equation}
 I_\pm(z,p)\defeq\frac{1}{2\pi i}\int_{\Lambda_{\pm}}e^{-z(4t^3-3t)}\frac{dt}{t^p}
 \end{equation}
-
 where $\Lambda_{\pm}$ are the paths through the points $\alpha_\pm$, starting and ending at infinity (as in Figure \ref{fig:path-generalized-Airy-Lambda+-}).
-
 \begin{figure}
 \center
 \begin{tikzpicture}
@@ -2385,63 +2208,44 @@ where $\Lambda_{\pm}$ are the paths through the points $\alpha_\pm$, starting an
     \end{tikzpicture}
     \caption{The paths of integration $\Lambda_\pm$ for $I_{\pm}$.}\label{fig:path-generalized-Airy-Lambda+-}
 \end{figure}
-
-
 In particular, $I_{+}(z,p)=(12 z)^{\tfrac{p-1}{3}}\mathrm{A}_1((\tfrac{3}{2}z)^{2/3},p)$: 
-
 \begin{align*}
 I_{+}(z,p)&=\frac{1}{2\pi i}\int_{\Lambda_{+}}e^{-z(4t^3-3t)}\frac{dt}{t^p} &\\
 &=\frac{1}{2\pi i}(12 z)^{(p-1)/3}\int_{z^{-1/3}\Lambda_{+}}e^{-z(z^{-1}\frac{s^3}{3}-3 (12 z)^{-1/3}s)}\frac{ds}{s^p} & t=(12 z)^{-\tfrac{1}{3}}s\\
 &=\frac{1}{2\pi i}(12 z)^{(p-1)/3}\int_{z^{-1/3}\Lambda_{+}}e^{-\left(\frac{s^3}{3}-(\tfrac{3}{2} z)^{2/3}s\right)}\frac{ds}{s^p} & \\
 &=(12 z)^{(p-1)/3}\mathrm{A}_1((\tfrac{3}{2}z)^{2/3},p)
 \end{align*}
-
 It follows that $I_+(z)$ is a solution of
-
-
 \begin{equation}\label{eq:I}
 \left[\partial_z^3-\partial_z+\frac{2-p}{z}\partial_z^2+\frac{p-1}{z}+\frac{-1-3p+3p^2}{9}\frac{\partial_z}{z^2}+\frac{3+p-3p^2-p^3}{27z^3}\right]I_+(z,p)=0
 \end{equation}
-
 From the general theory of linear ODE, the formal integral solution of \eqref{eq:I} is a linear combination of three generators 
 \begin{equation}
 U_1z^{p-1}\tilde{W}_1(z)+U_2e^{-z}z^{-1/2}\tilde{W}_2(z)+U_3e^{z}z^{-1/2}\tilde{W}_3(z)
 \end{equation}
- 
 where $\tilde{W}_1, \tilde{W}_2$ and $\tilde{W}_3$ are formal power seirs $\tilde{W}_{\mathbf{k}}(z)=\sum_{j\geq 0}a_{\mathbf{k},j}z^{-j}$, which are the unique (we fix $a_{k,0}=1$ for $k=1,2,3$) solution of 
-
 \begin{multline}\label{w1}
 \left[\partial_z^3-\partial_z-\frac{1-2p}{z}\partial_z^2+\frac{17-30p+12p^2}{9z^2}\partial_z+\frac{8}{27}\frac{p^3-6 p^2+ 11p- 6}{z^3}\right]\tilde{W}_1(z)=0
 \end{multline}
-
-
 \begin{multline}\label{w2}
 \left[\partial_z^3-3\partial_z^2+2\partial_z+\frac{1-2p}{2z}\partial_z^2-\frac{1-2p}{z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
 \left.-\frac{5+24p+12p^2}{36z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_2(z)=0
 \end{multline}
-
 \begin{multline}\label{w3}
 \left[\partial_z^3+3\partial_z^2+2\partial_z+\frac{1-2p}{2z}\partial_z^2+\frac{1-2p}{z}\partial_z+\frac{5+24p+12p^2}{36z^2}\partial_z+\right.\\
 \left.+\frac{5+24p+12p^2}{36z^2}-\frac{1}{z^3}\left(\frac{5}{24}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\right]\tilde{W}_3(z)=0
 \end{multline}
-
-
 Let us first study equation \eqref{w1}: its Borel transform is
-
 \begin{multline*}
 -\zeta^3\tilde{w}_1+\zeta\tilde{w}_1-(1-2p)\int_0^\zeta\tilde{w}_1(t)t^2dt+\frac{(17-30p+12p^2)}{9}\int_0^\zeta(-t\tilde{w}_1(t))(\zeta-t)dt+\\
 +\frac{8}{27}(p^3-6p^2+11p-6)\int_0^\zeta\tilde{w}_1(t)\frac{(\zeta-t)^2}{2}dt=0
 \end{multline*}
-
 We differentiate three times, getting 
-
 \begin{multline*}
 \left(\zeta-\zeta^3\right)\tilde{w}_1^{(3)}(\zeta)+\left(3-2(5-p)\zeta^2\right)\tilde{w}_1''(\zeta)-\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\zeta\tilde{w}_1'(\zeta)+\\
 +\frac{8}{27}\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\left(p-\frac{5}{2}\right)\tilde{w}_1(\zeta)=0
 \end{multline*}
-
 we set $y=\zeta^2$
-
 %\begin{multline}
 %\left[-4y(y-1)(2y\partial_y^3+3\partial_y^2)+3(4y\partial_y^2+2\partial_y)-2(5-p)y(4y\partial_y^2+2\partial_y)+\right.\\
 %\left.-2y\left(\frac{215}{9}-\frac{34}{3}p+\frac{4}{3}p^2\right)\partial_y+\frac{8}{27}\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\left(p-\frac{5}{2}\right)\right]\tilde{w}_1(y)=0
@@ -2450,86 +2254,58 @@ we set $y=\zeta^2$
 y^2(1-y)\tilde{w}_1^{(3)}(y)+y\left((p-\frac{13}{2})y+3\right)\tilde{w}_1''(y)-\left(y\left(\frac{305}{36}-\frac{10}{3}p+\frac{p^2}{3}\right)-\frac{3}{4}\right)\tilde{w}_1'(y)+\\
 +\frac{1}{27}\left(p-\frac{5}{2}\right)\left(p-\frac{9}{2}\right)\left(p-\frac{7}{2}\right)\tilde{w}_1(y)=0
 \end{multline}
-
 which is a generalized hypergeometric equation  \cite[Equation 16.8.5]{dlmf} with parameters
-
-
-
 \begin{align*}
 \mathbf{a}_0=\left(\frac{3}{2}-\frac{p}{3};\frac{7}{6}-\frac{p}{3};\frac{5}{6}-\frac{p}{3}\right) & \qquad\qquad \mathbf{b}_0=\left(\frac{1}{2};\frac{3}{2}\right)
 \end{align*}
-
 therefore, $\tilde{w}_1(y)=c_1\,\,{}_3F_2\left(\mathbf{a}_0;\mathbf{b}_0;y\right)$. 
-
-  
-
 Then we look at equation \eqref{w2}: its Borel transform is
-
 \begin{multline}
 -\zeta^3\tilde{w}_2(\zeta)-3\zeta^2\tilde{w}_2(\zeta)-2\zeta\tilde{w}_2(\zeta)+\frac{1-2p}{2}\int_0^\zeta t^2\tilde{w}_2(t)dt-(1-2p)\int_0^\zeta(-t\tilde{w}_2(t))dt+\\
 +\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)(-t\tilde{w}_2(t))dt
 -\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)\tilde{w}_2(t)dt +\\
 -\left(\frac{5}{54}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\int_0^\zeta\frac{(\zeta-t)^2}{2}\tilde{w}_2(t)dt=0
 \end{multline} 
-
 and taking three derivatives it simplifies to 
-
 \begin{multline}
 \left[\left(\zeta^3+3\zeta^2+2\zeta\right)\partial_\zeta^3 +6\partial_\zeta^2+\left(p-\frac{17}{2}\right)\zeta\left(\zeta+\frac{1}{2}\right)\partial_\zeta^2+\right.\\
 \left. \left(\frac{p^2}{3}+\frac{14}{3}p+\frac{581}{36}\right)\left(\zeta+1\right)\partial_\zeta+\frac{1}{27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(\zeta)=0
 \end{multline}
-
 define $y=\zeta\left(\zeta+\frac{4}{3}\right)$
-
 \begin{multline}\label{eq1}
 \left[y\left(y+\frac{4}{9}\right)^2\partial_y^3+2\left(\frac{3}{2}y+\frac{4}{3}+\frac{y}{2}\left(\frac{17}{2}+p\right)\right)\left(y+\frac{4}{9}\right)\partial_y^2+\left(\frac{2}{3}+\frac{y}{4}\left(\frac{17}{2}+p\right)\right)\partial_y\right.\\
 \left.+\frac{1}{4}\left(\frac{p^3}{3}+\frac{14}{3}p+\frac{581}{36}\right)\left(y+\frac{4}{9}\right)\partial_y+\frac{1}{8\cdot 27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(y)=0
 \end{multline}
-
 which now looks like a generalized hypergeometric equation. Indeed setting $t=\tfrac{9}{4}y+1$, \eqref{eq1} reads
-
 \begin{multline}
 \left[t^2(1-t)\partial_t^3-t\left(\big(\frac{23}{4}+\frac{p}{2}\big)t-\frac{p}{2}-\frac{11}{4}\right)\partial_t^2-\left(-\frac{5}{8}-\frac{p}{4}+t\Big(\frac{887}{144}+\frac{17}{12}p+\frac{p^2}{12}\Big)\right)\partial_t +\right.\\
 \left. -\frac{1}{8\cdot 27}\left(p+\frac{7}{2}\right)\left(p+\frac{11}{2}\right)\left(p+\frac{15}{2}\right)\right]\tilde{w}_2(t)=0
 \end{multline}
 hence a solution is given by the generalized hypergeometric function ${}_3F_2\left(\mathbf{a};\mathbf{b};y\right)$ with parameters
-
 \begin{align*}
 \mathbf{a}=\left(\frac{5}{4}+\frac{p}{6};\frac{7}{12}+\frac{p}{6};\frac{11}{12}+\frac{p}{6}\right) & \qquad\qquad \mathbf{b}=\left(\frac{1}{2};\frac{5}{4}+\frac{p}{2}\right)
 \end{align*}
-
 and we denote $\hat{w}_2(\zeta)=c_2\,\, {}_3F_2\left(\mathbf{a};\mathbf{b};\left(\tfrac{3}{2}\zeta+1\right)^2\right)$. The equation \eqref{w3} differs from \eqref{w2} for few signs: we find that its Borel transform is 
-
 \begin{multline}
 -\zeta^3\tilde{w}_2(\zeta)+2\zeta^2\tilde{w}_2(\zeta)-\frac{8}{9}\zeta\tilde{w}_2(\zeta)+\frac{1-2p}{2}\int_0^\zeta t^2\tilde{w}_2(t)dt+\frac{2-4p}{3}\int_0^\zeta(-t\tilde{w}_2(t))dt+\\
 +\frac{5+24p+12p^2}{36}\int_0^\zeta(\zeta-t)(-t\tilde{w}_2(t))dt
 +\frac{5+24p+12p^2}{54}\int_0^\zeta(\zeta-t)\tilde{w}_2(t)dt +\\
 -\left(\frac{5}{54}+\frac{59}{108}p+\frac{5}{18}p^2+\frac{1}{27}p^3\right)\int_0^\zeta\frac{(\zeta-t)^2}{2}\tilde{w}_2(t)dt=0
 \end{multline}
-
 and differentiating three times we find a generalized hypergeometric equation with parameters $\mathbf{a},\mathbf{b}$ in the variable $y=\left(\tfrac{3}{2}\zeta-1\right)^2$, i.e. $\hat{w}_3(\zeta)= c_3\,\, {}_3F_2\left(\mathbf{a};\mathbf{b};\left(\tfrac{3}{2}\zeta-1\right)^2\right)$. In particular, 
-
 \begin{equation}
 \hat{w}_3(\zeta)=C_{23}\hat{w}_2(\zeta-\tfrac{4}{3})
 \end{equation}
-
 \textcolor{orange}{we may try to do the computations of Stokes constants for $p=1$, when $\hat{w}_1$ simplifies to a Gauss hypergeometric. Use also information about the monodromy. Check change of coordinates $y=\zeta^2$.}
-
 \subsubsection{Thimble projection formula}
-
 In Theorem \ref{thm:maxim}, we proved a $3/2$-derivative formula to compute the Borel transform of the asymptotics of a thimble integral. 
-
 \subsection{Third-order thimble integrals}
-
 Let $f\colon\C\to \C$ be a degree three polynomial\footnote{Every degree three polynomial $a_3 u^3+a_2 u^2+a_1 u+a_0$ can be written in the form $a_3u^3+pu+q$, after a change of coordinates $u\to u-\frac{a_2}{3 a_3}$. Furthermore, we can restrict to monic polynomials by setting $a_3=1$.}, we are going to consider thimble integrals of the form 
 
 \[ I_j(z) = \int_{\Lambda_j} \exp\left[z\big(u^3 + pu + q)\right]\,du \]
 
 where $\Lambda_j$ is a thimble in $H_{1}^{B,z}$ through a critical point of $f$. We can distinguish between the case when $f$ has two distinct critical points $x_+, x_-$ and only one critical point $x$, which correspond respectively to the case $p\neq 0$ and $p=0$. \footnote{Equivalently, the difference between the generic case ($p\neq 0$) and the degenerate one ($p=0$) is visible from the ODE perspective as in the former case $I$ is a solution of degree two ODE \[\left[\partial_z^2 +2q \partial_z+\left(\frac{4p^3}{27}+q^2\right)+\frac{1}{z}\left(\partial_z +q \right)-\frac{1}{9z^2}\right]\Phi=0,\] while in the latter, $I$ solves a degree one ODE (see \eqref{eqn:degree-3-poly-1root}).}
-
-
 Recall that translations and scaling-rotations act naturally on the image of $f\colon X\to \C$ ($f$ not necessarily a degree three polynomial), and their action transforms the thimble integral $I_j$ in the following ways:
-
 \begin{itemize}
     \item \textbf{Action of translations:} let $q\in\C$, post-composing with translation of $q$ maps $f\to f+q$, thus 
     \begin{align*}
@@ -2540,27 +2316,21 @@ Recall that translations and scaling-rotations act naturally on the image of $f\
         \int_{\Lambda_j}e^{z (\gamma\cdot f)} \nu &= I_j(z \gamma)
     \end{align*}
 \end{itemize}
-
 In particular, we can always reduce to study the thimble integral in simpler situations. 
-
 As an example, every degree three polynomial with distinct critical points can be transformed in the Chebyshev polynomial $T_3(t)=4 t^3-3t$, implying that the thimble integral $I_+$ can be transformed into the Airy--Lucas integral with parameter $m=1, n=3$. This follows by post-composing $f$ with a translation of $-q$ followed by a scaling-rotation of $\frac{ -i 3^{3/2}}{2 p^{3/2}}$
-
 \begin{align*}
     f-q &= u^3 + pu \\
     (f-q) \cdot \frac{ -i 3^{3/2}}{2 p^{3/2}} &= 4 \Big(\sqrt{-\tfrac{3}{p}} \tfrac{u}{2} \Big)^{3} - 3\Big(\sqrt{-\tfrac{3}{p}} \tfrac{u}{2} \Big) \\
     &= 4 t^3- 3t 
 \end{align*}
-
 with $t= \sqrt{-\frac{3}{p}} \frac{u}{2}$. Then the thimble integral $I_+$ gets transformed into 
-
 \begin{align*}
     e^{-zq} I_+\left(-\tfrac{i 3^{3/2}}{2 p^{3/2}} z\right)&= \int_{\Lambda_+} e^{z (4t^3-3t)} du\\
     &= 2\sqrt{-\tfrac{p}{3}} \int_{\Lambda_+} e^{z (4t^3-3t)} dt \\
     &= 2\sqrt{-\tfrac{p}{3}} K_{1/3}(z). 
 \end{align*}
-
 In particular, when $p\neq 0$, the thimble integral $I_+$ can be studied following the analysis of Appendix \ref{airy-appendix}. 
-%In both cases, we will compute the differential equation satisfied by $I$. 
+%In both cases, we’ll compute the differential equation satisfied by $I$. 
 
 %\begin{lemma}
  %Let $f(u)=u^3+pu+q$, 
@@ -2609,30 +2379,22 @@ In particular, when $p\neq 0$, the thimble integral $I_+$ can be studied followi
 %\begin{equation*}
 %    v_- =\left(\frac{3}{4p\,x_-}\zeta_-\right)^{-1/2}\, {}_2F_1\left(\frac{1}{6},\frac{5}{6} ;\frac{3}{2};1-\frac{3}{4p\,x_-}\zeta_-\right). 
 %\end{equation*}
-
-
 We then consider the case when $p=0$, and we study it both as a solution of an ODE and as a thimble integral.
-
 First, notice that $I(z)$ solves
        \begin{equation}\label{eqn:degree-3-poly-1root}
           \left[\partial_z+q+\frac{1}{3z}\right]I=0
        \end{equation}
-
-and we can find a Borel regular solution following the argument of \S \ref{big-idea}: $\laplace_{\zeta,\alpha}^{\theta}v$ is a solution of \eqref{eqn:degree-3-poly-1root} if and only if $v$ is a solution of 
-
+and we can find a Borel regular solution following the argument of Section~\ref{big-idea}: $\laplace_{\zeta,\alpha}^{\theta}v$ is a solution of \eqref{eqn:degree-3-poly-1root} if and only if $v$ is a solution of 
 \begin{align*}
    \left[ (\zeta-q)\partial_\zeta +\frac{2}{3}\right] v=0
 \end{align*}
-
 namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q\right)$, where $\zeta_q=\zeta-q$ and $a\in\C$ is a free parameter. 
 
 The result is confirmed by the thimble projection reasoning which in this simple case reads
-
 \begin{align*}
     \int_{\Lambda} e^{-z (u^3+q)} du &= e^{-zq} e^{i\pi/3} \int_0^{+e^{i\theta}\infty} e^{-z\zeta} \zeta^{-2/3} d\zeta\\
     &= e^{i\pi/3} \int_q^{+e^{i\theta}\infty} e^{-z\zeta} \, \zeta_q^{-2/3}\,  d\zeta
 \end{align*}
-
 where $e^{\pi i/3}$ accounts for the monodromy of $\zeta^{-2/3}$ at the origin. 
 
 
@@ -2653,15 +2415,14 @@ We can distill the most interesting part of the Airy function by writing
 \[ \Ai(y) = \tfrac{1}{\pi\sqrt{3}}\,y^{1/2}\,K\big(\tfrac{2}{3} y^{3/2}\big), \]
 where
 \begin{equation}\label{integral:mod-bessel}
-K(z) = i\sqrt{3} \int_{z^{-1/3}\Gamma} \exp\left[z \left(4u^3 - 3u\right)\right]\,du.
+K(z) = i\sqrt{3} \int_{z^{-1/3}\Lambda_1} \exp\left[z \left(4u^3 - 3u\right)\right]\,du.
 \end{equation}
-and the contour $\Gamma$ is represented in Figure \ref{fig:path_Airy}.
+and the contour $\Lambda_1$ is represented in Figure \ref{fig:path_Airy}.
 Saying that $\Ai$ satisfies the Airy equation is equivalent to saying that $K$ satisfies the modified Bessel equation
 \begin{equation}\label{eqn:mod-bessel-1/3}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] K = 0.
 \end{equation}
 In fact, $K$ is the modified Bessel function $K_{1/3}$~\cite[equation~9.6.1]{dlmf}.
-
 %The method we'll demonstrate in Section~\ref{spatial} works for any differential equation
 %\[ \left[ P\big(\tfrac{\partial}{\partial z}\big) + z^{-1} Q\big(\tfrac{\partial}{\partial z}\big) + z^{-2} R(z^{-1}) \right] \varphi = 0, \]
 %where $P$ is a polynomial, $Q$ is a polynomial of one degree lower, and $R$ is an entire function.
@@ -2678,21 +2439,19 @@ where the $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket$ are formal power 
 \begin{equation}\label{bessel-asymp}
 \series{W}_1 = 1 - \frac{(\tfrac{1}{6})_1 (\tfrac{5}{6})_1}{2^1 \cdot 1!}\;z^{-1} + \frac{(\tfrac{1}{6})_2 (\tfrac{5}{6})_2}{2^2 \cdot 2!}\;z^{-2} - \frac{(\tfrac{1}{6})_3 (\tfrac{5}{6})_3}{2^3 \cdot 3!}\;z^{-3} + \ldots
 \end{equation}
-
 The holomorphic analysis in Section~\ref{spatial} will give us holomorphic solutions
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,W_\alpha \mid \alpha^2 - 1 = 0 \}, \]
-which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We will see in Section~\ref{bessel-regularity} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is an evidence of Theorem~\ref{thm1-dim}.
+which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We’ll see in Section~\ref{bessel-regularity} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is an evidence of \cite[Theorem~4]{reg-sing-volterra}.
 
 \subsection{Building a distinguished frame of analytic solutions}
 \subsubsection{Going to the spatial domain}\label{spatial}
 %\subsubsection{The big idea}\label{big-idea}
-We are going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel}. We will succeed when $\alpha^2 - 1 = 0$, and we will see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
+We are going to look for functions $v_j$ whose Laplace transforms $\laplace_{\zeta, \alpha_j} v_j$ satisfy equation~\eqref{eqn:reg-mod-bessel}. We’ll succeed when $\alpha^2 - 1 = 0$, and we’ll see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
 
 We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{int-eq:spatial-mod-bessel}
 \left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] v = 0.
 \end{equation}
-
 It's tempting to differentiate both sides of this equation until we get
 \begin{equation}\label{diff-eq:spatial-mod-bessel}
 \left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ \big[ \zeta^2 - 1 \big] - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \right] v = 0,
@@ -2701,8 +2460,7 @@ which is easier to solve. However, as we learned in Section~\ref{shifting}, a so
 
 This is great news, because equation~\eqref{diff-eq:spatial-mod-bessel} has a regular singularity at each root of $\zeta^2 - 1$, and the Frobenius method often gives a slight solution at each regular singular point. We can see the regular singularities by moving the derivatives to the right:
 \[ \left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v = 0. \]
-
-In Sections \ref{pos-root}\,--\,\ref{neg-root}, we will see this approach succeed. For each root $\alpha$, we'll find a solution $v_\alpha$ of equation~\eqref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = \alpha$. We know the function $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\eqref{eqn:reg-mod-bessel}, and we can even find its asymptotics from the order $\tau_\alpha$ of $v_\alpha$. We learned in Section~\ref{translation} that
+In Sections \ref{pos-root}\,--\,\ref{neg-root}, we’ll see this approach succeed. For each root $\alpha$, we'll find a solution $v_\alpha$ of equation~\eqref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = \alpha$. We know the function $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\eqref{eqn:reg-mod-bessel}, and we can even find its asymptotics from the order $\tau_\alpha$ of $v_\alpha$. We learned in Section~\ref{translation} that
 \[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} V_\alpha \]
 where $V_\alpha = \laplace_{\zeta_\alpha, 0} v_\alpha$ and $\zeta = \alpha + \zeta_\alpha$. We can see from Section~\ref{reg-decay} that $V_\alpha$ is asymptotic to a scalar multiple of $z^{ - \tau_\alpha}$ at $z = \infty$, so the further decomposition
 \[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} z^{-\tau_\alpha} W_\alpha, \]
@@ -2747,14 +2505,12 @@ v_{-1} &=\;& (1-\xi_1)^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 
 where $\zeta_{-1}$ is the coordinate with $\zeta = -1 + \zeta_{-1}$. From the argument in Section~\ref{big-idea}, we know that $\laplace_{\zeta, -1} v_{-1}$ satisfies equation~\eqref{eqn:mod-bessel}, and can be written as $e^z V_{-1}$, where $V_{-1} = \laplace_{\zeta_{-1}, 0} v_{-1}$. Since $v_{-1}$, like our other solution, has order $-1/2$, the same decomposition $V_{-1} = z^{1/2} W_{-1}$ makes $W_{-1}$ asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
 
 In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{o}bius transformation that pulls $\zeta$ back to $-\zeta$. Kummer's solutions typically come from six different hypergeometric equations, which are related by the M\"{o}bius transformations that permute their singularities. In our case, though, exchanging $1$ with $-1$ keeps equation~\eqref{diff-eq:spatial-mod-bessel} the same.
-
 %\color{DodgerBlue}
 %If we follow the routine from Section~\ref{pos-root}, rewriting equation~\eqref{diff-eq:spatial-mod-bessel} in the coordinate $\zeta_{-1}$ and then rewriting it again in a more recognizable form, we arrive at the hypergeometric equation
 %\[ \left[\xi_{-1} (1 - \xi_{-1}) \big(\tfrac{\partial}{\partial \xi_{-1}}\big)^2 + 3(\tfrac{1}{2} - \xi_{-1}) \tfrac{\partial}{\partial \xi_{-1}} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0, \]
 %where $\zeta_{-1} = 2\xi_{-1}$. This is the same as what we get by substituting $\xi_{-1}$ for $\xi_1$ in Section~\ref{pos-root}! In other words, the holomorphic map that pulls $\xi_{-1}$ back to $\xi_1$.
 \subsection{Borel regularity}\label{bessel-regularity}
 Recall that $\tilde{W}_1$ is a formal solution of \eqref{eqn:reg-mod-bessel}
-
 \begin{equation}
 \tilde{W}_1(z)=\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{(-1)^n}{2^n}z^{-n}.
 \end{equation}
@@ -2771,41 +2527,34 @@ Our goal is to prove that the Borel sum of $z^{-1/2}\tilde{W}_1$ is proportional
 %&=\delta-\frac{1}{2}\frac{\Gamma(\frac{7}{6})\Gamma(\frac{11}{6})}{\Gamma(\frac{1}{6})\Gamma(\frac{5}{6})}\sum_{n=0}^{\infty}\frac{\left(\frac{7}{6}\right)_{n}\left(\frac{11}{6}\right)_{n}}{\Gamma(n+2)n!}\frac{(-\zeta)^n}{2^n}\\
 %&=\delta-\frac{5}{72}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2,-\frac{\zeta}{2}\right)
 %\end{align*}
-
 Let us compute the Borel transform of $z^{-1/2}\tilde{W}_1$: notice that the appropriate coordinate is $\zeta_1$ 
-
 \begin{align*}
 \borel\left[z^{-1/2}\tilde{W}_1(z)\right](\zeta_1)&=\borel\left[\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{(-1)^n}{2^n}z^{-n-\frac{1}{2}} \right](\zeta_1)\\
 &=\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{(-1)^n}{2^n}\frac{\zeta_1^{n-\frac{1}{2}}}{\Gamma(n+\frac{1}{2})}\\
 &=\zeta_1^{-1/2}\,\, {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};-\frac{\zeta_1}{2}\right)
 \end{align*}
-
 Comparing with the solution $v_1$ computed in Section~\ref{pos-root} we notice that \[v_1(\zeta_1)\propto \borel\left[z^{-1/2}\tilde{W}_1\right](\zeta_1)\]
 therefore the Borel Laplace sum of $z^{-1/2}\tilde{W}_1$ is proportional to $V_1$. In particular, both $K$ and $e^{-z}V_1$ are analytic solutions of the Airy equation~\eqref{eqn:reg-mod-bessel} and they have the same asymptotics at $\infty$ up to a multiplicative constant. 
 
 Similarly, if we consider the formal power series
-
 \begin{equation}
 \tilde{W}_{-1}(z)=\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{1}{2^n}z^{-n}
 \end{equation}
-
 analogous computations give that $v_{-1}(\zeta_{-1})\propto\borel\left[z^{-1/2}\tilde{W}_{-1}\right](\zeta_{-1})$.
-
 \subsection{Thimble projection reasoning for the Airy function}\label{contour-argument}
-Generalizing from Section~\ref{contour-argument-AL}, we can recast integral~\eqref{integral:mod-bessel} into the $\zeta$ plane by setting $-\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \Gamma$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/3} \Gamma$, we have
+Generalizing from Section~\ref{contour-argument-AL}, we can recast integral~\eqref{integral:mod-bessel} into the $\zeta$ plane by setting $-\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \Lambda_1$ to a contour $\mathcal{H}^1_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\mathcal{H}^1_z$ back to $z^{-1/3} \Lambda_1$, we have
 \begin{equation}\label{integral:mod-bessel-zeta}
-K = \frac{i}{\sqrt{3}} \int_{\gamma_z} e^{-z\zeta}\frac{d\zeta}{4u^2 - 1}.
+K = \frac{i}{\sqrt{3}} \int_{\mathcal{H}^1_z} e^{-z\zeta}\frac{d\zeta}{4u^2 - 1}.
 \end{equation}
-For $z \in (0, \infty)$, the contour $\gamma_z$ runs clockwise around $[1, \infty)$, as shown below. Let's assume $z \in (0, \infty)$ for the rest of the section. \textcolor{magenta}{[Our conclusions should probably hold whenever $\operatorname{Re}(z) > 0$.]}
+For $z \in (0, \infty)$, the contour $\mathcal{H}^1_z$ runs clockwise around $[1, \infty)$, as shown below. Let's assume $z \in (0, \infty)$ for the rest of the section. \textcolor{magenta}{[Our conclusions should probably hold whenever $\operatorname{Re}(z) > 0$.]}
 \begin{center}
 \includegraphics{figures/zeta_contour_3.pdf} \\[1em]
-{\small The contour $\gamma_1$ in the $\zeta$ plane.}
+{\small The contour $\mathcal{H}^1_z$ in the $\zeta$ plane.}
 \end{center}
-
 From formula~15.4.14 in \cite{dlmf}, we learn that for our desired branch of $u$,
 \[ \frac{1}{4u^2 - 1} = -F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big), \]
 so we can rewrite integral~\eqref{integral:mod-bessel-zeta} as
-\[ K = \frac{1}{i\sqrt{3}} \int_{\gamma_z} e^{-z\zeta} F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big)\;d\zeta. \]
+\[ K = \frac{1}{i\sqrt{3}} \int_{\mathcal{H}^1_z} e^{-z\zeta} F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big)\;d\zeta. \]
 This gives us an alternate route to the conclusion of Section~\ref{spatial}, which we'll follow below.
 
 In addition to the solutions $v_1$ and $v_{-1}$ from Section~\ref{pos-root}\,--\, \ref{neg-root}, equation~\eqref{diff-eq:spatial-mod-bessel} has the solutions
@@ -2818,7 +2567,7 @@ given by formulas 15.10.11 and 15.10.13 from \cite{dlmf}.
 The quadratic transformation identity 15.8.27 from \cite{dlmf} shows that\footnote{Note that $2\Gamma(\tfrac{1}{2})\Gamma(\tfrac{3}{2}) = 2\Gamma(\tfrac{1}{2})\,\tfrac{1}{2}\Gamma(\tfrac{1}{2}) = \pi$ and $\big[\Gamma(\tfrac{5}{6})\Gamma(\tfrac{7}{6})\big]^{-1} = \big[\Gamma(\tfrac{5}{6})\,\tfrac{1}{6}\Gamma(\tfrac{1}{6})\big]^{-1} = \frac{6\sin(\tfrac{1}{6} \pi)}{\pi} = \frac{3}{\pi}$.}
 \[ F\big(\tfrac{1}{3}, \tfrac{2}{3}; \tfrac{1}{2}; \zeta^2\big) = \tfrac{1}{3}(g_1 + g_{-1}), \]
 so we have
-\[ K = \frac{1}{i\,3\sqrt{3}} \int_{\gamma_z} e^{-z\zeta} (g_1 + g_{-1})\;d\zeta. \]
+\[ K = \frac{1}{i\,3\sqrt{3}} \int_{\mathcal{H}^1_z} e^{-z\zeta} (g_1 + g_{-1})\;d\zeta. \]
 The solution $g_{-1}$ is holomorphic on $\zeta \in [1, \infty)$, so it integrates to zero. The solution $g_1$, in contrast, is non-meromorphic at $\zeta = 1$. Along the branch cut $\zeta \in [1, \infty)$, its above-minus-below difference is $-\tfrac{3\sqrt{3}}{2}\,v_1$,
 as given\footnote{Note that $\Gamma(\tfrac{3}{2}) \Gamma(\tfrac{1}{2})^{-1} = \tfrac{1}{2}$ and $\big[\Gamma(\tfrac{2}{3})\Gamma(\tfrac{4}{3})\big]^{-1} = \big[\Gamma(\tfrac{2}{3})\,\tfrac{1}{3}\Gamma(\tfrac{1}{3})\big]^{-1} = \frac{3\sin(\tfrac{1}{3} \pi)}{\pi} = \frac{3\sqrt{3}}{2\pi}$.} by equation~15.2.3 from \cite{dlmf}.
 Hence,
@@ -2827,12 +2576,11 @@ K & = \frac{i}{2} \int^\infty_1 e^{-z\zeta} v_1\;d\zeta \\
 e^z K & = \frac{i}{2} \int^\infty_1 e^{-z(\zeta - 1)} v_1\;d\zeta \\
 e^z K & = \tfrac{i}{2} \laplace_{\zeta_1} v_1,
 \end{align*}
-just as we found in Section~\ref{bessel-regularity}.
-\subsection{Another solution}
+just as we found in Section~\ref{bessel-regularity}. However, in this case, we get an exact equality (compared to the proportionality of Section~\ref{bessel-regularity}). 
+\subsubsection{Another solution}
 Section~\ref{contour-argument} associates the solution $K$ of equation~\eqref{eqn:mod-bessel} with the solution $g_1$ of equation~\eqref{diff-eq:hypergeom-pos}, which contributes the pole at $\zeta = 1$ of
 \[ \frac{du}{d\zeta} = \frac{1}{4u^2 - 1} = \tfrac{1}{3}(g_1 + g_{-1}). \]
 The solution $g_{-1}$, which contributes the pole at $\zeta = -1$, is associated with another solution of equation~\eqref{eqn:reg-mod-bessel}.
-
 To express this other solution as a Laplace transform, following the method of Section~\ref{contour-argument}, we would use the solution
 \[ v_{-1} = (1-\xi)^{-1/2} \,\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi\big) \]
 of equation~\eqref{diff-eq:spatial-mod-bessel}, given by formula~15.10.14 from \cite{dlmf}. This is the only solution, up to scale, which has a fractional power singularity at $\zeta = -1$.
@@ -2863,15 +2611,15 @@ giving the alternate decomposition
 
 \subsection{Thimble projection formula}
 
-In an Airy-Lucas integral, $f$ is a Chebyshev polynomial, so we can do a thimble projection technique (\S \ref{contour-argument-AL}) or apply the thimble projection formula \eqref{formula1} \textcolor{red}{\footnote{We have this done in \texttt{draft2}, but we'll probably leave it out of the article}} using trigonometric substitution. As an example of how one might reason in the latter case, we look at the Airy function ($f = 4u^3-3u$), this time applying the thimble projection formula to the generalized Cardano's formula.
+In the Airy-Lucas integral, $f$ is a Chebyshev polynomial, so we can do a thimble projection technique (see Section~\ref{contour-argument-AL}) or apply the thimble projection formula~\eqref{formula1} using trigonometric substitution. As an example of how one might reason in the latter case, we look at the Airy function ($f = 4u^3-3u$), this time applying the thimble projection formula to the generalized Cardano's formula.
 
 Recall that the roots of $f(u)-\zeta$ can be written explicitly as 
-
-\begin{equation}
-    u=????
-\end{equation}
-
-\textcolor{orange}{[Add the numerical check to show simple resurgence. For example, maybe graph exponential of magnitude of function on position domain]}
+\begin{align*}
+    u(\zeta)&=\cos\Big(\frac{1}{3}\arccos\zeta-\frac{2\pi k}{3}\Big) \quad k=0,1,2\\
+    &={}_2F_1\Big(-\frac{1}{6},\frac{1}{6};\frac{1}{2};1-\zeta^2\Big)
+\end{align*}
+\textcolor{orange}{[Add the numerical check to show simple resurgence. For example, maybe graph exponential of the magnitude of function on position domain]}
+\subsubsection{An eye on resurgence}
 
 \subsection{Comparison with other treatments of the Airy equation}
 
@@ -3080,7 +2828,7 @@ q&=\frac{2}{3}\eta x^{3/2}=\eta\int_0^x\sqrt{x'}dx'=\eta\int_{0}^xS_{-1}(x')dx'.
 We expect that the change of coordinates $q=\eta\int_0^{x}S_{-1}(x')dx'$ would explain the analogies between the Borel transform of the WKB solution of a Schrodinger equation and the Borel transform of the associated ODE.  
 \end{remark} 
 
-\section{Application of the integral formula}
+\section{Application of the projection formula}
 
 In Section \ref{sec:examples}, we computed the Borel transform of the asymptotics of thimble integrals in different ways: on the one hand, using the thimble projection reasoning and on the other hand, solving an integral equation with a specified behavior near the singular point. In particular, we noticed that the two approaches give the same result up to the choice of a constant, as the integral equation is homogeneous. However, Theorem \ref{thm:maxim} suggests another approach, namely to use the fractional integral formula \eqref{formula1}. This approach  
 As shown in the previous examples, the Borel transform  of the asymptotics of thimble integrals can be computed in different ways: from the ODE they solve, from the thimble projection reasoning, and from the integral formula \eqref{formula1}. When computed from the ODE, there is an ambiguity in the choice of a constant because the equation they satisfy is homogeneous, while with the thimble projection reasoning and the fractional integral formula the ambiguity is solved.
@@ -3089,9 +2837,9 @@ As shown in the previous examples, the Borel transform  of the asymptotics of th
 
 In Theorem \eqref{thm:maxim} we prove that the Borel transform of $\tilde{I}_{\alpha}$ can be computed by the thimble projection formula~\eqref{int:deriv-formula}. \color{olive} 
 
-By general theory, it is expected that Stokes constants are integers, and numerically this can be verified only when a suitable normalization is chosen. Indeed as we have seen, if we consider exponential integrals the Borel transform can be computed in different ways: from the ODE, from the thimble projection reasoning, and from the integral formula. When computed from the ODE, there is an ambiguity in the choice of the constant, while with the thimble projection reasoning and the thimble projection formula the ambiguity is solved. We will see this for the modified Bessel equation. 
+By general theory, it is expected that Stokes constants are integers, and numerically this can be verified only when a suitable normalization is chosen. Indeed as we have seen, if we consider exponential integrals the Borel transform can be computed in different ways: from the ODE, from the thimble projection reasoning, and from the integral formula. When computed from the ODE, there is an ambiguity in the choice of the constant, while with the thimble projection reasoning and the thimble projection formula the ambiguity is solved. We’ll see this for the modified Bessel equation. 
 
-This method allows us to uniquely determine the constants $U_1,U_2$ that appear in the formal integral solution $\tilde{I}(z)$. Indeed, $\tilde{I}$ is a solution of an homogeneous linear ODE and $\tilde{I}_+(z)=U_1e^{-2/3z}z^{-1/2}\tilde{W}_+(z)$ for a particular choice of $U_1$. %In order to compute the Stokes constants we will first use the fractional derivative formula to compute the correct normalization of \[\hat{w}_\pm(\zeta)=\delta\mp \frac{5}{48}{}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right).\]   
+This method allows us to uniquely determine the constants $U_1,U_2$ that appear in the formal integral solution $\tilde{I}(z)$. Indeed, $\tilde{I}$ is a solution of an homogeneous linear ODE and $\tilde{I}_+(z)=U_1e^{-2/3z}z^{-1/2}\tilde{W}_+(z)$ for a particular choice of $U_1$. %In order to compute the Stokes constants we’ll first use the fractional derivative formula to compute the correct normalization of \[\hat{w}_\pm(\zeta)=\delta\mp \frac{5}{48}{}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right).\]   
 \begin{lemma}\label{claim 2}
 The following formula holds true
 \[ \partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) = -i \frac{\sqrt{\pi}}{2}\,\hat{w}_+(\zeta-2/3), \]
@@ -3185,6 +2933,131 @@ Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
 \end{proof}
 
 \color{black}
+\section{Geometry of thimble integrals}
+
+Let $X$ be an $N$-dimensional complex algebraic variety and $f\colon X\to\C$ a proper algebraic map with non-degenerate critical points $a_1,...,a_N$ and critical values $\alpha_j=f(a_j)$\footnote{Everything we’ll discuss, applies also when $X$ is a $N$-dimensional complex (K\"ahler) manifold and $f\colon X\to\C$ is a holomorphic function with non-degenerates critical points, which is, for example, the setting in \cite{Witten}.}: for a fixed $z\in\C$, we are interested in integrals of the form 
+\[
+I(z):=\int_{\mathcal{C}}e^{-zf}\nu
+\]
+regarded as holomorphic functions on the frequency domain for a suitable choice of a contour $\mathcal{C}$ and an $N$-form $\nu$. In fact, we'll introduce homology and cohomology groups $H_{*}^{B,z}$ and $H_{dR,z}^*$ for which the function $I(z)$ will represent the Poincar\'e pairing. 
+
+We begin with the definition of $H_{*}^{B,z}$: it is the relative homology group with respect to $zf$, and its definition requires some preliminaries. We follow \cite{pham} and \cite[Section 1]{Arnold}. Let us fix $z\in\C$ and $\theta=\arg z$; for every $c>0$ we define 
+\begin{align*}
+    S_c^+(\theta) &:=\lbrace \zeta\in\C \vert \Re (\zeta e^{i\theta})\geq c \rbrace\\
+    S_c^-(\theta)&:=\lbrace \zeta\in\C \vert \Re (\zeta e^{i\theta})\leq c \rbrace
+\end{align*}
+and $H_{*}^{B,z}:=H_{*}(X,f^{-1}(S_c^+(\theta)))$ for $c$ large enough\footnote{In fact $H_{*}^{B,z}$ is defined after taking the projective limit $c\to\infty$ of the chain complex with support $\{A\subset X \text{ closed s.t. } \forall c>0 f^{-1}(S_c^-(\theta))\cup A \text{ is compact }  \}$.}. Moreover, $H_n(X,f^{-1}(S_c^+(\theta)))$ can be identified with the homology of a generic fiber $H_{n-1}(f^{-1}(p_0))$ with $p_0\neq \{\alpha_j\}$. This leads to further identifications:
+
+\begin{equation}
+    H_{*}^{B,z}\cong \bigoplus_{\alpha_i} H_{*}(B_j, B_j^+(\theta))
+\end{equation}
+where $B_j:=f^{-1}(B_r(\alpha_j))$ is the preimage of a small ball or radius $r$, containing only the critical value $\alpha_i$ and $B_j^+(\theta):=f^{-1}\left(B_r(\alpha_j)\cap \{ \Re (\zeta e^{i\theta})\geq r/2\}\right)$. Notice that we are not assuming $f$ to be Morse, hence $B_j$ may have different connected components. Then 
+
+\begin{equation}
+    H_{n}(B_j, B_j^+(\theta))\cong H_{n-1}(f^{-1}(p_j))\cong \begin{cases} \Z^{\mu_j} & \text{if } n=N\\
+     0 & \text{otherwise}
+    \end{cases}
+\end{equation}
+where $|p_j-\alpha_j|=r$, $\Re(p_j e^{i\theta})=r$, and $\mu_j$ is a number in $\{\textcolor{magenta}{???}\}$ called the {\em Milnor number} of the critical \textcolor{red}{point/value $a_j/\alpha_j$}. 
+
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw (2,2) circle (2);
+        \node[font=\tiny,red] at (1,1) {$\alpha_1$};
+        \draw (1,1.2) circle (0.4);
+        \node[font=\tiny,red] at (3,1.3) {$\alpha_2$};
+        \draw (3,1.5) circle (0.4);
+        \node[font=\tiny,red] at (2.3,3.2) {$\alpha_3$};
+        \draw (2.3,3.4) circle (0.4);
+        \node[above,red] at (1,1) {$\bullet$};
+        \node[above,red] at (3,1.3) {$\bullet$};
+        \node[above,red] at (2.3,3.2) {$\bullet$};
+        \draw[rounded corners] (2.7,1.76)--(2,2)--(1,3.71);
+        \draw[rounded corners] (1,1.6)--(0.5,2)--(1.2,2.5)--(1,3.71);
+        \draw[rounded corners] (1.9,3.4)--(1,3.71);
+        \node[font=\tiny, above] at (1,3.71) {$p_0$};
+        \node[font=\tiny, above] at (2.7,1.76) {$p_2$};
+        \node[font=\tiny, above] at (1,1.6) {$p_1$};
+        \node[font=\tiny, above] at (1.75,3.4) {$p_3$};
+    \end{tikzpicture}
+\end{center}
+
+From the classical theory of singularities \cite[\textcolor{magenta}{add section; move to end of sentence}]{Arnold}, we know that $H_{N-1}(f^{-1}(p_0))$ has a distinguished basis of \textit{vanishing cycles} from the generic fiber over $p_0$ to the preimage of each critical value. Each vanishing cycle is represented by the boundary of a so-called \textit{Lefschetz thimble}: since we assumed critical points to be non--degenerate, in a neighborhood of $a_j$ there are local coordinates $x_1,...,x_N$ such that 
+\[f=\alpha_j+\sum_{k=1}^N x_k^2\]
+
+and for $p=c e^{i\theta}\in\C$, the thimble $\Lambda_j(p)$ is defined by 
+\begin{align*}
+    \Im(x_1)=...=\Im(x_N)=0 \text{ and } \Re(e^{-i\theta/2}x_1)^2+....+\Re(e^{-i\theta/2}x_N)^2\leq c
+\end{align*}
+Equivalently, Lefschetz thimbles are gradient flow trajectories departing from the critical points of $f$ (see \cite[page~10]{Witten}).
+
+Hence we deduce that $H_{z, N}^B$ admits a distinguished basis of Lefschetz thimbles labeled by critical points.
+
+
+Then we recall the definition of $H_{dR,z}^*$: it is the hypercohomolgy of the twisted de Rham complex 
+
+\begin{equation*}
+    H_{dR,z}^*:=\mathbb{H}^*( \Omega^\bullet(X), zd+df)
+\end{equation*}
+where $(\Omega^\bullet(X), d)$ is the de Rham complex of differential forms on $X$. 
+
+Therefore, the integral $I(z)$ can e regarded as the image of the following map: 
+
+\begin{align*}
+    \int \colon  H_{z,N}^{B} \times & H_{dR,z}^N \to \C \\
+       [\mathcal{C}] ,\,\, & [\nu] \to \int_{\mathcal{C}}e^{-zf}\nu
+\end{align*}
+
+\textcolor{orange}{[the Betti--de Rham isomorphism is necessary?]}
+
+Since every cycle $\mathcal{C}$ can be written as a linear combination of Lefschetz thimbles, we restrict our attention to  \textit{thimbles} integrals $I_j$, namely the integrals over Lefschetz thimbles labeled by the critical points $a_j\in\text{Crit}(f)$.
+
+As we let $z$ vary, we’ll observe the so-called \textit{Stokes phenomena}, namely the integral $I_j(z)$ jumps across the rays $\ell_{jl}=\arg(\alpha_j-\alpha_l)\R_{\geq 0}$ for $l=1,...,N$ (and $l\neq j$). The jumps can be described geometrically using the theory of Picard--Lefschetz. Indeed, the jumps of $I_j(z)$ are encoded in the jumps of the Lefschetz thimbles $[\Lambda_j]\in H_{z,N}^B$ as $\arg z$ varies. We’ll discuss this phenomenon from a different perspective in Section \ref{resurgence-AL} in the example of Airy--Lucas functions. \textcolor{orange}{[Can we comment more about this? For instance as a consequence of Theorem 3.3]}  
+
+\section{Generalities about ODEs and Integral Equations}
+\textcolor{red}{Shall we review the content of \cite{reg-sing-volterra}?}
+
+\subsubsection{Order shifting}\label{shifting}
+Consider holomorphic functions on a simply connected open domain $\Omega$ that touches but doesn't contain $\zeta = 0$. %A function is {\em regular} at $\zeta = 0$ if it extends holomorphically over that point. %We'll say a function is {\em slight} at $\zeta = 0$ if it can be written as 
+%\begin{equation}\label{eqn:slight-defn}
+%\zeta^{\alpha_1} f_1 + \ldots + \zeta^{\alpha_r} f_r + g
+%\end{equation}
+%where $f_1, \ldots, f_r$ are regular, $\alpha_1, \ldots, \alpha_r \in \R \smallsetminus \Z$, and $g, g', g'', \ldots$ go to zero at $\zeta = 0$.
+As we've seen in Section \ref{reg-decay}, functions in $\singexpalg{\sigma}(\Omega)$ with $\sigma>-1$ play a special role in Laplace transform methods for linear differential equations. This is because differential equations in the frequency domain arise most naturally from integral equations in the spatial domain, but we'd like to work with differential equations in the spatial domain too. In $\singexpalg{\sigma}(\Omega)$, differential and integral equations enjoy their simplest equivalence.
+\begin{prop}\label{prop:shifting}
+Let $\psi\in\singexpalg{\sigma}(\Omega)$, and $\sigma>-1$
+\[ \left[ \sum_{k = 0}^n \big(\tfrac{\partial}{\partial \zeta}\big)^k \circ h_k + \sum_{k = 1}^m \fracderiv{-k}{\zeta}{0} \circ h_{-k} \right] \psi = 0, \]
+if and only if
+\[ \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k + \sum_{k = 0}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi = 0, \]
+where $h_n, \ldots, h_{-m}$ are holomorphic functions.
+\end{prop}
+%To prove this result, we'll need a little background.
+
+%Each slight function has a unique {\em normal form}: an expression of the form (\ref{eqn:slight-defn}) where $\alpha_1, \ldots, \alpha_r$ are distinct modulo $\Z$ and $f_1, \ldots, f_r$ are non-vanishing at $\zeta = 0$. The {\em order} of a slight function is the smallest power $\alpha_k$ in its normal form. If there are no $\zeta^\alpha f$ terms, we say the order is $\infty$. A slight function vanishes at $\zeta = 0$ if and only if its order is positive, and it's locally integrable at $\zeta = 0$ if and only if its order is greater than $-1$.
+
+%Multiplication by a regular function and differentiation with respect to $\zeta$ both preserve the space of slight functions. Integration from $\zeta = 0$ preserves the space of locally integrable slight functions. Thus, in general, integro-differential operators with regular coefficients send locally integrable slight functions to slight functions. Each basic operation has a simple effect on a slight function's order. Multiplication by $\zeta^n f$, where $f$ is regular and non-vanishing at $\zeta = 0$, adds $n$ to the order. Differentiation and integration add $-1$ and $1$, respectively.
+
+\begin{proof}%[Proof of Proposition~\ref{prop:shifting}]
+The reverse implication holds without any special condition on $\psi$, because $\tfrac{\partial}{\partial \zeta}\;\fracderiv{-1}{\zeta}{0}$ acts as the identity on all differentiable functions.
+
+To prove the forward implication, rewrite the first equation in the statement as
+\begin{equation}\label{eqn:diff-int-split}
+\tfrac{\partial}{\partial \zeta} \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k \right] \psi = -\left[ h_0 + \sum_{k = 1}^m \fracderiv{-k}{\zeta}{0} \circ h_{-k} \right] \psi.
+\end{equation}
+The function
+\[ \phi = \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k \right] \psi \]
+belongs to the function space $\singexpalg{\sigma}(\Omega)$. Looking at the right-hand side of equation~\eqref{eqn:diff-int-split}, we can see that $\phi'$ belongs to $\singexpalg{\sigma}(\Omega)$, and by assumption its order is greater than $-1$. Hence, $\phi$ belongs to $\singexpalg{\sigma+1}(\Omega)$, which means it vanishes at $\zeta = 0$.
+
+Integrating both sides of equation~\eqref{eqn:diff-int-split}, we get
+\[ \fracderiv{-1}{\zeta}{0}\;\tfrac{\partial}{\partial \zeta}\;\phi = -\left[ \fracderiv{-1}{\zeta}{0} \circ h_0 + \sum_{k = 1}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi. \]
+Since $\fracderiv{-1}{\zeta}{0}\;\tfrac{\partial}{\partial \zeta}$ acts as the identity on functions that vanish at $\zeta = 0$, this simplifies to
+\[ \phi = -\left[ \sum_{k = 0}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \psi, \]
+which rearranges to the second equation in the statement.
+\end{proof}
+
+
+
 \newpage
 
 
