@@ -533,7 +533,7 @@ Now using the steepest descendent method we can compute the asymptotic expansion
 
 Our goal is to study whether $\tilde{I}_j$ is Borel summable and whether its Borel--Laplace sum agrees with the integral $I_j$ itself. 
 
-\textcolor{red}{These questions have been classically addressed by Pham \cite[Section 3.3]{pham}, Malgrange \cite[Theorem 6]{Malgrange22}, Berry and Howls \cite{berry1991hyperasymptotics} and Sternin and Shatalov \cite[Theorem 3.9 and 3.10]{sternin1995borel}. In addition, the study of thimble integrals plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation, resurgence and related techniques to assign values to these integrals \cite{costin_kruskal,delabaere_dillinger_pham,delabaere-howls,Delabaere-Pham99,dingle1973asymptotic,dunne-unsal,gukov-marino-purtrov-resurgence,pham1988resurgence}\textbf{[ Howls]}.}
+\textcolor{red}{These questions have been classically addressed by Pham \cite[Section 3.3]{pham}, Malgrange \cite[Theorem 6]{Malgrange22}, Berry and Howls \cite{berry1991hyperasymptotics} and Sternin and Shatalov \cite[Theorem 3.9 and 3.10]{sternin1995borel}. In addition, the study of thimble integrals plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation, resurgence and related techniques to assign values to these integrals \cite{costin_kruskal,delabaere_dillinger_pham,delabaere-howls,Delabaere-Pham99,dingle1973asymptotic,dunne-unsal,gukov-marino-purtrov-resurgence,pham1988resurgence,Howls}.}
 
 Our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see Fenyes's lecture \cite{Fenyes-ihes-lecture}).  
 
@@ -1698,6 +1698,9 @@ Recalling that the Riemann-Liouville fractional derivative is a left inverse of 
 \[ \fracderiv{3/2}{\zeta}{\alpha_j} \left( \int_{\Lambda_j(\zeta)} \nu \right) = \hat{\phi}_j(\zeta). \]
 \end{proof}
 
+\begin{remark}
+    The $3/2$ derivative formula~\eqref{formula1} allows us to compute the sum of the Borel transform of $\series{\phi}_j$, hence it is enough to use it to study the location of singularities in the position domain and its growth behavior at infinity\footnote{For instance in \cite{sauzin2021variations}, the analogous of formula~\eqref{formula1} is used to compute a close formula for the Borel sum of the Stirling approximation of the Gamma function.}. Furthermore, expanding $\hat{\phi}_j$ at its critical points we recover the germs $\series{\phi}_k$ for $k\neq j$. This is an instance of resurgence, indeed according to the theory of Ecalle, $\hat{\phi}_j$ are all resurgent functions. We'll see an example in Section~\ref{sec:eye-res-airy}. 
+\end{remark}
 
 
 \section{Examples}\label{sec:examples}
@@ -1979,7 +1982,12 @@ It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the
 
 \begin{figure}[ht]
     \centering
-    %\includegraphics{}
+    \includegraphics[scale=0.45]{figures/contour1-AL4--12.jpg}
+    \includegraphics[scale=0.45]{figures/contour2-AL4--12.jpg}
+    \includegraphics[scale=0.45]{figures/contour--AL4--12--inter.jpg}
+    \includegraphics[scale=0.45]{figures/contour1-AL5--12.jpg}
+    \includegraphics[scale=0.45]{figures/contour2-AL5--12.jpg}
+    \includegraphics[scale=0.45]{figures/contour--AL5--12--inter.jpg}
     \caption{Graphically, we can describe the Stokes phenomenon by looking at the intersection points of \textit{dual pairs of thimbles}, which differ by a rotation of angle $\pi$. We choose $n=4$ and $n=5$. }
     \label{fig:intersection_thimbles}
 \end{figure}
@@ -2619,7 +2627,16 @@ Recall that the roots of $f(u)-\zeta$ can be written explicitly as
     &={}_2F_1\Big(-\frac{1}{6},\frac{1}{6};\frac{1}{2};1-\zeta^2\Big)
 \end{align*}
 \textcolor{orange}{[Add the numerical check to show simple resurgence. For example, maybe graph exponential of the magnitude of function on position domain]}
-\subsubsection{An eye on resurgence}
+\subsubsection{An eye on resurgence}\label{sec:eye-res-airy}
+Resurgent functions have very special features: they are \textit{endlessly} analytically continuable away from the singularities, and by studying one germ we could typically reconstruct the others by looking at the behaviour near the singular points. A prototypical class of resurgent functions is the so-called simple resurgent functions, namely analytic function $\hat{\phi}$ with singularities $\omega$ such that 
+\begin{align*}
+    \hat{\phi}(\zeta-\omega)=\frac{S_\omega}{2\pi i} \log(\zeta) \series{\phi}_\omega(\zeta) + \text{ hol. funct.}
+\end{align*}
+where $S_\omega$ is a constant, typically assumed to be integral (in a suitable normalization) and called the Stokes constant of the singularity $\omega$. The goal of resurgence is to investigate the location of the singularities together with their Stokes constants and the corresponding germs $\series{\phi}_\omega$.  
+The main idea of resurgence is that studying the analytic continuation of $\tilde{\phi}_\omega$  
+Thimbles integrals are good candidates to understand the structure of resurgent functions; indeed the functions $\hat{\phi}_j$ in equation \eqref{formula1} are resurgent functions. Their resurgent structure can be easily reconstructed: if $\nu$ is holomorphic, then $\hat{\phi}_j$ is singular at $\zeta_j=\alpha_k$ for $k\neq j$. Hence the set of singularities is given by the critical values of $f$.  Since $f$ has finitely many critical values, we can  
+
+
 
 \subsection{Comparison with other treatments of the Airy equation}
 
@@ -3015,6 +3032,43 @@ Since every cycle $\mathcal{C}$ can be written as a linear combination of Lefsch
 
 As we let $z$ vary, we’ll observe the so-called \textit{Stokes phenomena}, namely the integral $I_j(z)$ jumps across the rays $\ell_{jl}=\arg(\alpha_j-\alpha_l)\R_{\geq 0}$ for $l=1,...,N$ (and $l\neq j$). The jumps can be described geometrically using the theory of Picard--Lefschetz. Indeed, the jumps of $I_j(z)$ are encoded in the jumps of the Lefschetz thimbles $[\Lambda_j]\in H_{z,N}^B$ as $\arg z$ varies. We’ll discuss this phenomenon from a different perspective in Section \ref{resurgence-AL} in the example of Airy--Lucas functions. \textcolor{orange}{[Can we comment more about this? For instance as a consequence of Theorem 3.3]}  
 
+\subsection{Picard--Lefschetz formula in pictures}
+We'll compute the Picard--Lefschetz formula as intersection of the base of thimbles and its dual, relative the singular direction $\theta=0$. We'll do it graphically, by plotting the steepest decent contours center at the critical points of $f$. We'll consider the example of Airy and Airy--Lucas with $n=4$.
+
+For the classical Airy function, we have a two dimensional base of thimbles, thus we have to compute only one intersection:
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.7]{figures/contour1--airy.jpg}
+    \includegraphics[scale=0.7]{figures/contour2--airy.jpg}
+     \includegraphics[scale=0.7]{figures/contour--Airy--intersection.jpg}
+    \caption{Graphically, we can describe the Stokes phenomenon by looking at the intersection points of \textit{dual pairs of thimbles}, which differ by a rotation of angle $\pi$. With respect to the Stokes line $\theta=0$, we choose $\theta=0.1$ for the picture on the left and $\theta=-0.1+\pi$ for the picture in the center. The picture on the right shows the intersection of the thimbles which is given by a single point. Thus up to normalization, the Stokes constant is $1$. The images were obtained with Mathematica, and the thimbles are computed as the steepest descent contours from the critical points.}
+    \label{fig:intersection_thimbles-Airy}
+\end{figure}
+We deduce that the Stokes constant $S_{12}=\pm 1$ (to specify the sign it is enough to pick an orientation). This agrees with the computations we made in Section \ref{sec:eye-res-airy}.
+
+For Airy--Lucas with parameter $n=4$, we have a three dimensional base of thimbles, graphically represented as 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.35]{figures/thimble-n4.png}
+    \caption{Caption}
+    \label{fig:thimble-n4}
+\end{figure}
+Then computing intersections of dual pairs of thimbles we get 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{figures/contour1-AL4--12.jpg}
+    \includegraphics[scale=0.4]{figures/contour2-AL4--12.jpg}
+     \includegraphics[scale=0.4]{figures/contour--AL4--12--inter.jpg}
+     \includegraphics[scale=0.4]{figures/contour1-AL4--13.jpg}
+    \includegraphics[scale=0.4]{figures/contour2-AL4--13.jpg}
+     \includegraphics[scale=0.4]{figures/contour--AL4--13--inter.jpg}
+     \includegraphics[scale=0.4]{figures/contour1-AL4--32.jpg}
+    \includegraphics[scale=0.4]{figures/contour2-AL4--32.jpg}
+     \includegraphics[scale=0.4]{figures/contour--AL4--32--inter.jpg}
+    \caption{First line computes the intersection of $\Lambda_1$ and $\Lambda_2$. Second line computed the interaction of $\Lambda_3$ and $\Lambda_2$. Third line computed the intersection of $\Lambda_3$ and $\Lambda_1$.}
+    \label{fig:intersection_thimbles-AL4}
+\end{figure}
+Notice that $\Lambda_1$ and $\Lambda_3$ do not intersect as they are in the same class, because they are preimages of the same rays through infinity.   
 \section{Generalities about ODEs and Integral Equations}
 \textcolor{red}{Shall we review the content of \cite{reg-sing-volterra}?}
 
