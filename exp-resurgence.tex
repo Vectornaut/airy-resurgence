@@ -538,7 +538,7 @@ Our goal is to study whether $\tilde{I}_j$ is Borel summable and whether its Bor
 Our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see Fenyes's lecture \cite{Fenyes-ihes-lecture}).  
 
 We’ll restrict to $1$-dimensional thimble integrals, and in this special case we’ll define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The image of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. 
-For each critical point $a_j$, let $\Gamma_j$ be the ray going rightward from the critical value $\alpha_j$, and let $\zeta_{\alpha_j}$ be the translation coordinate around $\Gamma_j$ which vanishes at $\alpha_j$. These are well-defined as long as $\Gamma_j$ misses the critical values of $f$. The preimage $f^{-1}(\Gamma_j)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_j$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_j$ can be regarded as the component of $f^{-1}(\Gamma_j)$ that goes through $a_j$, \textcolor{orange}{oriented so that shifting it to its left would make its projection run clockwise around $\Gamma_j$}. 
+For each critical point $a_j$, let $\Gamma_j$ be the ray going rightward from the critical value $\alpha_j$, and let $\zeta_{\alpha_j}$ be the translation coordinate around $\Gamma_j$ which vanishes at $\alpha_j$. These are well-defined as long as $\Gamma_j$ misses the critical values of $f$. The preimage $f^{-1}(\Gamma_j)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_j$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_j$ can be regarded as the component of $f^{-1}(\Gamma_j)$ that goes through $a_j$.\footnote{\textcolor{orange}{We could orient so that shifting $\Lambda_j$ to its left would make its projection run clockwise around $\Gamma_j$. However, this only seems to be possible when $X$ is 1-dimensional.}}
 
 \begin{figure}[ht]
     \centering
@@ -546,7 +546,7 @@ For each critical point $a_j$, let $\Gamma_j$ be the ray going rightward from th
     \caption{The preimage of a ray departing from the critical value and going to infinity.}
     \label{fig:thimble_vs_rays}
 \end{figure}
-Then, our main result for thimble integrals is proving that $1$- dimensional thimble integrals are indeed Borel regular:
+Then, our main result for thimble integrals is proving that $1$-dimensional thimble integrals are indeed Borel regular:
 \begin{theorem}[see Theorem \ref{thm:maxim}]
     Let $\tilde{I}_{j}(z)\defeq e^{-z \alpha_j}(2\pi)^{1/2} z^{-1/2} \sum_{n\geq 0}a_{j,n}z^{-n}$ be the asymptotic expansion of $I_j$ as $\Re z e^{i\theta}\to \infty$ for a generic direction $\theta$. Then:
 \begin{enumerate}
@@ -556,7 +556,7 @@ Then, our main result for thimble integrals is proving that $1$- dimensional thi
 \begin{multline}\label{eqn:formula}
 \hat{\phi}_{j}(\zeta)=\fracderiv{3/2}{\zeta}{\alpha_j} \left( \int_{\Lambda_j(\zeta)}\nu \right)=\left(\tfrac{\partial}{\partial \zeta}\right)^2\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\alpha_j}^\zeta (\zeta-\zeta')^{-1/2}\left( \int_{\Lambda_j(\zeta')} \nu \right)\,d\zeta',
 \end{multline}
-where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[Be careful about the orientation of $\Lambda_j$.]}
+where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[The thimble $\Lambda_j$ needs an orientation, but the orientation is arbitrary.]}
 \end{enumerate}
 \end{theorem}
 
@@ -1418,7 +1418,7 @@ in fact equation \eqref{change_chart_convolution} can be regarded as a compatibi
 For every $j=1,...,d$, let $\Omega_j\subset B$ be a simply connected open set that touches but doesn't contain $\zeta = \alpha_j$. We also assume:
 \begin{itemize}
 \item The set $\Omega_j$ is star-shaped around $\zeta = \alpha_j$. In other words, for any $a \in \Omega_j$, a straight path from $\zeta = \alpha_j$ to $a$ stays in $\Omega_j$. Since $\Omega_j$ doesn't contain $\zeta = \alpha_j$, we'll always leave that starting point out of the path.
-\item The set $\Omega_j$ does not contain the tubular neighborhood of the other critical points $-\alpha_k$, for $k\neq j$, as shown in Figure \ref{Fig:domain}.
+\item The set $\Omega_j$ does not contain the tubular neighborhood of the other critical points $-\alpha_k$, for $k\neq j$, as shown in Figure \ref{Fig:domain}. \textcolor{orange}{[In ``Regular singular Volterra,'' we assume that $\Omega_j$ doesn't touch any other critical point (that is, doesn't contain any other critical point in its closure). Under the star-shaped assumption, I think that implies avoiding tubular neighborhoods of the shadow rays.]}
 \end{itemize}
 
 \begin{figure}
@@ -1433,10 +1433,10 @@ For every $j=1,...,d$, let $\Omega_j\subset B$ be a simply connected open set th
   arc (43:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-60:2) .. (-60:2.3) -- (-60:\spill)
   arc (-60:-130:\spill) -- (0, 0);
 \fill[violet] circle (0.7mm) node[anchor=195, outer sep=1mm] {$\zeta = \alpha_j$};
-\node at (1.7,1.8) {$\bullet$};
-\node[below] at (1.7,1.8) {$\zeta=\alpha_k$};
-\node at (1.25,-1.85) {$\bullet$};
-\node at (-0.58,1.85) {$\bullet$};
+\node[anchor=north west, outer sep=1mm] at (46.5:2.46) {$\zeta=\alpha_k$};
+\foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
+  \fill \p circle (0.7mm);
+}
 \end{tikzpicture}
 \caption{The domain $\Omega_j$}\label{Fig:domain}
 \end{figure}
@@ -1589,7 +1589,7 @@ The saddle point approximation gives the formal series
 \begin{multline}\label{formula1}
 \hat{\phi}_{j}(\zeta)=\fracderiv{\textcolor{red}{3/2}}{\zeta} {\alpha_j} \left( \int_{\Lambda_j(\zeta)}\nu \right)=\textcolor{red}{\left(\tfrac{\partial}{\partial \zeta}\right)^2}\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\alpha_j}^\zeta (\zeta-\zeta')^{-1/2} \textcolor{red}{\left( \int_{\Lambda_j(\zeta')} \nu \right)}\,d\zeta',
 \end{multline}
-where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[Be careful about the orientation of $\Lambda_j$.]}
+where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[The thimble $\Lambda_j$ needs an orientation, but the orientation is arbitrary.]}
 \end{enumerate}
 \end{theorem}
 
@@ -1597,7 +1597,7 @@ where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\
 
 Part~\eqref{int:series-gevrey}: Let's write $\approx$ when two functions are asymptotic (at all orders around the base point \textbf{[is this the right condition?]}), and $\sim$ when a function is asymptotic to a formal power series (at the truncation order of each partial sum).
 
-Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $\alpha_j$ with $\tfrac{1}{2} \tau^2 = f - f(\alpha_j)$. Let $\Lambda^-_j$ and $\Lambda^+_j$ be the parts of $\Lambda_j$ that go from the past to $\alpha_j$ and from $\alpha_j$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0, \infty)$ on $\Lambda^-_j$ and $\Lambda^+_j$, respectively. \textcolor{magenta}{[We should explicitly spell out and check the conditions that make this possible. I think we're implicitly orienting $\Lambda_j$ so that $\tau$ is in the upper half-plane.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
+Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a_j$ with $\tfrac{1}{2} \tau^2 = f - f(a_j)$. Let $\Lambda^-_j$ and $\Lambda^+_j$ be the parts of $\Lambda_j$ that go from the past to $a_j$ and from $a_j$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0, \infty)$ on $\Lambda^-_j$ and $\Lambda^+_j$, respectively. \textcolor{magenta}{[Point out that we can always accomplish this by changing the sign of $\tau$.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
 \[ \nu = \sum_{n \ge 0} b_n^j \tau^n\,d\tau \]
 that converges in some disk $|\tau| < \varepsilon$.
 
@@ -1742,7 +1742,7 @@ where $\Lambda_{j}$ is the Lefschetz thimble through $u = \cos\big(\tfrac{j}{n}\
 \begin{figure}[ht]
     \centering
    \includegraphics[scale=0.3]{figures/thimble-n5.png}
-    \caption{Integration contour $\Lambda_j$ for the Airy--Lucas function with $n=5$. The dark blue contours correspond to the preimage of the ray $1+e^{i\theta}\infty$ and $\theta=$. While the light blue contours correspond to the preimage of the ray $-1+e^{i\theta}\infty$.}
+    \caption{Integration contour $\Lambda_j$ for the Airy--Lucas function with $n=5$. The dark blue contours correspond to the preimage of the ray $1+e^{i\theta}\infty$ and $\theta=???$. While the light blue contours correspond to the preimage of the ray $-1+e^{i\theta}\infty$.}
     \label{fig:thimble_n_5}
 \end{figure}
 
@@ -1938,11 +1938,11 @@ Finally, comparing this expression for $K_{m/n}$ with the expression for $v_1$ c
 
 \subsubsection{A flavor of resurgence: the Stokes phenomena in the position domain}\label{resurgence-AL}
 
-In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (\S\ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (\S\ref{contour-argument-AL}). In both cases we find 
+In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (Section \ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (Section \ref{contour-argument-AL}). In both cases we find 
 \begin{align*}
     v_1(\zeta)= i \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)
 \end{align*}
-which has a fractional power singularity at $\zeta=1$. In addition, notice that the hypergeometric function ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ is convergent at $\zeta=1$ therefore $v_1$ has the typical form of a \textit{singularity} in the formalism of \'Ecalle's resurgent functions. More precisely, we can consider ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ as a new germ of holomorphic function, which has a branch cut singularity at $\zeta=-1$. Using equation \cite[15.2.3]{dlmf}, we can compute the analytic continuation of this germ at $\zeta=-1$: 
+which has a fractional power singularity at $\zeta=1$. In addition, the hypergeometric function ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ is convergent at $\zeta=1$ therefore $v_1$ has the typical form of a \textit{singularity} in the formalism of \'Ecalle's resurgent functions. More precisely, we can consider ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ as a new holomorphic function (analytic continuation of a new germ at the origin), which has a branch cut singularity at $\zeta=-1$. Using equation \cite[15.2.3]{dlmf}, we can compute the analytic continuation of this germ at $\zeta=-1$: 
 \begin{align*}
 &{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}+i\varepsilon\right)-{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}-i\varepsilon\right)=\\
 &=\frac{2\pi i}{\Gamma\big(\tfrac{1}{2}-\tfrac{m}{n}\big)\Gamma\big(\tfrac{1}{2}+\tfrac{m}{n}\big)} \left(-\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
@@ -1954,7 +1954,7 @@ Hence, we deduce
 \begin{equation}\label{resurgent-relation-1}
     v_1(\zeta+1+i\varepsilon)-v_1(\zeta+1+i\varepsilon)=2i \cos(\pi m/n)  v_{-1}(\zeta)
 \end{equation}
-namely, that the germ of the singularity at $\zeta=1$ knows about the germ of the singularity at $\zeta=-1$. This is an instance of \textit{resurgent functions}, introduced by \'Ecalle in \cite{EcalleI,EcalleII,EcalleIII}\footnote{If the reader is interested in resurgence, it may be useful to look at the following review \cite{diverg-resurg-i,Dorigoni,aniceto2019primer}.}. Although we’ll not discuss more about resurgence, we would like to point out that among the great advantages of resurgence (for instance compared to Borel summability) there are the \textit{formalism of singularities} and the \textit{Alien calculus} which allow to understand the Stokes phenomena working in the position domain. The same phenomena were described by Berry and Howls \cite{berry1991hyperasymptotics} who noticed that divergent asymptotic expansions of thimble integrals encode the contribution of other critical values.
+namely, that the germ of the singularity at $\zeta=1$ knows about the germ of the singularity at $\zeta=-1$. This is an instance of \textit{resurgent functions}, introduced by \'Ecalle in \cite{EcalleI,EcalleII,EcalleIII}\footnote{If the reader is interested in resurgence, it may be useful to look at the following review \cite{diverg-resurg-i,Dorigoni,aniceto2019primer}.}. Although we’ll not discuss more about resurgence, we would like to point out that among the great advantages of resurgence (for instance compared to Borel summability) there are the \textit{formalism of singularities} and the \textit{Alien calculus} which allow to understand the Stokes phenomena working in the position domain. The same phenomena were described by Berry and Howls \cite{berry1991hyperasymptotics} who noticed that divergent asymptotic expansions of thimble integrals encode the contribution of other critical values. 
 
 We can repeat the same reasoning with $v_{-1}$:
 \begin{align*}
@@ -1978,19 +1978,7 @@ Equations \eqref{resurgent-relation-1} and \eqref{resurgent-realtion-2} are a ma
 \end{align*}
 thus the Stokes constants are respectively $\pm 2i \cos(\pi m/n)$\footnote{If we think of the Laplace transforms of $v_1$ and $v_{-1}$ as a frame of solutions for the Airy--Lucas differential equation, the equations above define the so-called Stokes matrices for the ODE.}. 
 
-It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the Stokes constants are the intersection number of \textit{dual pair of thimbles}, according to Picard--Lefschetz formula (in particular, they are integers in a suitable normalization), see \cite[Section 5]{pham} and Figure \ref{fig:intersection_thimbles}. However, in the Airy--Lucas example, $f$ is not Morse (unless $n=3$), hence we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on the lift of a path in the position domain. \textcolor{orange}{ I think we should argue we have the action of the permutation which leaves the base unchanged but gives a } 
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[scale=0.45]{figures/contour1-AL4--12.jpg}
-    \includegraphics[scale=0.45]{figures/contour2-AL4--12.jpg}
-    \includegraphics[scale=0.45]{figures/contour--AL4--12--inter.jpg}
-    \includegraphics[scale=0.45]{figures/contour1-AL5--12.jpg}
-    \includegraphics[scale=0.45]{figures/contour2-AL5--12.jpg}
-    \includegraphics[scale=0.45]{figures/contour--AL5--12--inter.jpg}
-    \caption{Graphically, we can describe the Stokes phenomenon by looking at the intersection points of \textit{dual pairs of thimbles}, which differ by a rotation of angle $\pi$. We choose $n=4$ and $n=5$. }
-    \label{fig:intersection_thimbles}
-\end{figure}
+It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the Stokes constants are the intersection number of \textit{dual pairs of thimbles}, according to Picard--Lefschetz formula (in particular, they are integers in a suitable normalization), see \cite[Section 5]{pham} and Section \ref{sec:Picard-Lefschetz}. However, in the Airy--Lucas example, $f$ is not Morse (unless $n=3$), hence we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on the lift of a path in the position domain. \textcolor{orange}{ I think we should argue we have the action of the permutation which leaves the base unchanged but gives a } 
 
 
 
@@ -2143,9 +2131,9 @@ with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}. Then
 
 \subsection{Generalized Airy}
 
-\textcolor{magenta}{[The generalized Airy example is not completed and there are still some difficulties in the computations. In particular the thimble integral interpretation is missing Should we remove it?]}
+\textcolor{magenta}{[The generalized Airy example is not completed and there are still some difficulties in the computations. In particular, the thimble integral interpretation is missing Should we remove it?]}
 
-In \cite{Reid} and \cite[Appendix]{drazin-reid} the authors introduce generalized Airy functions $A_k(z), B_0(z), B_k(z)$, $k=1,2,3$ as approximate solutions of the Orr--Sommerfield fluid equation. They are defined as countour integral \cite[Section 9.13(ii)]{dlmf}
+In \cite{Reid} and \cite[Appendix]{drazin-reid} the authors introduce generalized Airy functions $A_k(z), B_0(z), B_k(z)$, $k=1,2,3$ as approximate solutions of the Orr--Sommerfield fluid equation. They are defined as contour integral \cite[Section 9.13(ii)]{dlmf}
 
 \begin{align*}
 \mathrm{A}_k(z,p)&=\frac{1}{2\pi i}\int_{\Gamma_k}e^{zt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad k=1,2,3\,\, p\in\C \\
@@ -2627,16 +2615,99 @@ Recall that the roots of $f(u)-\zeta$ can be written explicitly as
     &={}_2F_1\Big(-\frac{1}{6},\frac{1}{6};\frac{1}{2};1-\zeta^2\Big)
 \end{align*}
 \textcolor{orange}{[Add the numerical check to show simple resurgence. For example, maybe graph exponential of the magnitude of function on position domain]}
+The thimble $\Lambda_1$ \textcolor{red}{is/can be} parametrized as the path $\theta \mapsto \cosh(\theta - \tfrac{2}{3}\pi i)$. Hence,
+\begin{align*}
+\int_{\Lambda_1(\zeta)} \nu & = \int_{\Lambda_1(\zeta)} du \\
+& = u \Big|_{\operatorname{start} \Lambda_1(\zeta)}^{\operatorname{end} \Lambda_1(\zeta)}.
+\end{align*}
+Since $4u^3 - 3u$ is the third Chebyshev polynomial, and $\cosh$ is $2\pi$-periodic in the imaginary direction, the start and end points of $\Lambda_1(\zeta)$ are characterized by
+\begin{align*}
+u & = \cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
+\zeta & = \cosh(3\theta),
+\end{align*}
+so
+\begin{align*}
+\int_{\Lambda_1(\zeta)} \nu & = \cosh(\theta - \tfrac{2}{3}\pi i) - \cosh(-\theta - \tfrac{2}{3}\pi i) \\
+& = \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& \quad - \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& = 2\sinh(\theta) \sinh(-\tfrac{2}{3}\pi i) \\
+& = -i\sqrt{3}\,\sinh(\theta).
+\end{align*}
+Let $\xi = \tfrac{1}{2}(1 - \zeta)$, and notice that $\xi = -\sinh( \theta)^2$ at the start and end points. The identity~15.4.16 \cite{dlmf}
+\[ \sinh(\theta) =  \sinh( \theta)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\theta)^2\big) \]
+then shows us that
+\[ \frac{i}{\sqrt{3}} \int_{\Lambda_1(\zeta)} \nu = (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
+
+Now we can evaluate the half-integral of $\int_{\Lambda_1} \nu$ using Bateman's fractional integral formula for hypergeometric functions see \S 4.1 in \cite{koornwinder2015fractional}.
+\begin{align*}
+\partial^{-1/2}_{\zeta \text{ from } 2/3} \left( \int_{\Lambda_1(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{1}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\Lambda_1(\zeta')} \nu \right)\,d\zeta' \\
+& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi  (\xi' - \xi)^{-1/2} \Big[ -{i}{\sqrt{3}}\, (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big) \Big] \,\big( -\,d\xi' \big) \\
+& = -i \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
+& = \frac{i}{2} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
+\end{align*}
+Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}.
+\begin{align*}
+\fracderiv{3/2}{\zeta}{1} \left( \int_{\Lambda_1(\zeta)} \nu \right) & = \left(-\tfrac{\partial}{\partial \xi}\right)^2 \left[ \frac{i\sqrt{\pi}}{2}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& =  \tfrac{i\sqrt{\pi}}{2} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = \tfrac{i\sqrt{\pi}}{2}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = \tfrac{i\sqrt{\pi}}{2}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
+\end{align*}
+%
+For completeness, we repeat the computations for $\hat{\phi}_{-1}$: the thimble $\Lambda_{-1}$ is the path $\theta \mapsto -\cosh(\theta - \tfrac{2}{3}\pi i)$. Hence,
+\begin{align*}
+\int_{\Lambda_{-1}(\zeta)} \nu & = \int_{\Lambda_{-1}(\zeta)} du \\
+& = u \Big|_{\operatorname{start} \Lambda_{-1}(\zeta)}^{\operatorname{end}\Lambda_{-1}(\zeta)}.
+\end{align*}
+The start and end points of $\Lambda_{-1}$ are characterized by
+\begin{align*}
+u & = -\cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
+\zeta & = -\tfrac{2}{3} \cosh(3\theta),
+\end{align*}
+so
+\begin{align*}
+\int_{\Lambda_{-1}(\zeta)} \nu & =- \cosh(\theta - \tfrac{2}{3}\pi i) + \cosh(-\theta - \tfrac{2}{3}\pi i) \\
+& =- \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& \quad + \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& = 2\sinh(\theta) \sinh(\tfrac{2}{3}\pi i) \\
+& = i\sqrt{3}\,\sinh(\theta)
+\end{align*}
+Let $\xi = \tfrac{1}{2}(1 + \zeta)$, and notice that $\xi =- \sinh( \theta)^2$ at the start and end points. The identity~15.4.16 in \cite{dlmf}
+\[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
+then shows us that
+\[ -\frac{i}{\sqrt{3}} \int_{\mathcal{C}_-(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
+
+Now we can evaluate the half-integral of $\int_{\Lambda_{-1}} \nu$ using Bateman's fractional integral formula for hypergeometric functions (see \cite[Section 4.1 ]{koornwinder2015fractional}).
+\begin{align*}
+\partial^{-1/2}_{\zeta \text{ from } -2/3} \left( \int_{\Lambda_{-1}(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{-2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_-(\zeta')} \nu \right)\,d\zeta' \\
+& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi \tfrac{\sqrt{3}}{2} (\xi - \xi')^{-1/2} \Big[{i}{\sqrt{3}}\,\tfrac{2}{3} (-\xi')^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi' \big) \Big] \,\big( \tfrac{4}{3}\,d\xi' \big) \\
+& =  \frac{4}{3} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
+& = - \frac{2}{3} \sqrt{\pi}\,\xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
+\end{align*}
+Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
+\begin{align*}
+\fracderiv{3/2}{\zeta}{-1} \left( \int_{\Lambda_{-1}(\zeta)} \nu \right) & = \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ - \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = - \tfrac{3\sqrt{\pi}}{8} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = - \tfrac{3\sqrt{\pi}}{8}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = - \tfrac{\sqrt{\pi}}{8}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
+\end{align*}
 \subsubsection{An eye on resurgence}\label{sec:eye-res-airy}
-Resurgent functions have very special features: they are \textit{endlessly} analytically continuable away from the singularities, and by studying one germ we could typically reconstruct the others by looking at the behaviour near the singular points. A prototypical class of resurgent functions is the so-called simple resurgent functions, namely analytic function $\hat{\phi}$ with singularities $\omega$ such that 
+Resurgent functions have very special features: they are \textit{endlessly} analytically continuable away from the singularities, and by studying one germ we could typically reconstruct the others by looking at the behavior near the singular points. A prototypical class of resurgent functions is the so-called simple resurgent functions, namely an analytic function $\hat{\phi}$ with singularities $\omega$ such that 
 \begin{align*}
     \hat{\phi}(\zeta-\omega)=\frac{S_\omega}{2\pi i} \log(\zeta) \series{\phi}_\omega(\zeta) + \text{ hol. funct.}
 \end{align*}
 where $S_\omega$ is a constant, typically assumed to be integral (in a suitable normalization) and called the Stokes constant of the singularity $\omega$. The goal of resurgence is to investigate the location of the singularities together with their Stokes constants and the corresponding germs $\series{\phi}_\omega$.  
-The main idea of resurgence is that studying the analytic continuation of $\tilde{\phi}_\omega$  
-Thimbles integrals are good candidates to understand the structure of resurgent functions; indeed the functions $\hat{\phi}_j$ in equation \eqref{formula1} are resurgent functions. Their resurgent structure can be easily reconstructed: if $\nu$ is holomorphic, then $\hat{\phi}_j$ is singular at $\zeta_j=\alpha_k$ for $k\neq j$. Hence the set of singularities is given by the critical values of $f$.  Since $f$ has finitely many critical values, we can  
+%The main idea of resurgence is that studying the analytic continuation of $\tilde{\phi}_\omega$  
 
+Thimbles integrals are good candidates to understand the structure of resurgent functions; indeed the functions $\hat{\phi}_j$ in equation \eqref{formula1} are resurgent. Their resurgent structure can be easily reconstructed: if $\nu$ is holomorphic, then $\hat{\phi}_j$ is singular at $\zeta_j=\alpha_k$ for $k\neq j$. Hence the set of singularities is given by the critical values of $f$. Then, the computation of the Stokes constants and of the other germs $\series{\phi}_k$ is done by studying $\hat{\phi}_j$ near its singular points. For example, for the Airy function, we can expand $\hat{\phi}_1$ near $\zeta=-1$:
+\begin{align*}
+    \hat{\phi}_1(\zeta)=\log(\zeta+1) (1+...) +\text{ hol. funct. }
+\end{align*}
 
+Notice that $(1+...)$ is the Taylor series of $\hat{\phi}_{-1}$ at the origin. Analogously, if we expand $\hat{\phi}_{-1}$ near $\zeta=1$ we find
+\begin{align*}
+    \hat{\phi}_{-1}(\zeta)=\log(\zeta-1) (1+...) +\text{ hol. funct. }
+\end{align*}
+where the germ $(1+...)$ is the Taylor expansion of $\hat{\phi}_1$ at the origin. 
 
 \subsection{Comparison with other treatments of the Airy equation}
 
@@ -2845,111 +2916,6 @@ q&=\frac{2}{3}\eta x^{3/2}=\eta\int_0^x\sqrt{x'}dx'=\eta\int_{0}^xS_{-1}(x')dx'.
 We expect that the change of coordinates $q=\eta\int_0^{x}S_{-1}(x')dx'$ would explain the analogies between the Borel transform of the WKB solution of a Schrodinger equation and the Borel transform of the associated ODE.  
 \end{remark} 
 
-\section{Application of the projection formula}
-
-In Section \ref{sec:examples}, we computed the Borel transform of the asymptotics of thimble integrals in different ways: on the one hand, using the thimble projection reasoning and on the other hand, solving an integral equation with a specified behavior near the singular point. In particular, we noticed that the two approaches give the same result up to the choice of a constant, as the integral equation is homogeneous. However, Theorem \ref{thm:maxim} suggests another approach, namely to use the fractional integral formula \eqref{formula1}. This approach  
-As shown in the previous examples, the Borel transform  of the asymptotics of thimble integrals can be computed in different ways: from the ODE they solve, from the thimble projection reasoning, and from the integral formula \eqref{formula1}. When computed from the ODE, there is an ambiguity in the choice of a constant because the equation they satisfy is homogeneous, while with the thimble projection reasoning and the fractional integral formula the ambiguity is solved.
-
-%In addition, since thimble integrals have a geometric interpretation, the Stokes constants that encode the jumps of thimble integrals when $z$ crosses a Stokes ray are expected to be integers as they are intersection numbers of dual pairs of thimbles. 
-
-In Theorem \eqref{thm:maxim} we prove that the Borel transform of $\tilde{I}_{\alpha}$ can be computed by the thimble projection formula~\eqref{int:deriv-formula}. \color{olive} 
-
-By general theory, it is expected that Stokes constants are integers, and numerically this can be verified only when a suitable normalization is chosen. Indeed as we have seen, if we consider exponential integrals the Borel transform can be computed in different ways: from the ODE, from the thimble projection reasoning, and from the integral formula. When computed from the ODE, there is an ambiguity in the choice of the constant, while with the thimble projection reasoning and the thimble projection formula the ambiguity is solved. We’ll see this for the modified Bessel equation. 
-
-This method allows us to uniquely determine the constants $U_1,U_2$ that appear in the formal integral solution $\tilde{I}(z)$. Indeed, $\tilde{I}$ is a solution of an homogeneous linear ODE and $\tilde{I}_+(z)=U_1e^{-2/3z}z^{-1/2}\tilde{W}_+(z)$ for a particular choice of $U_1$. %In order to compute the Stokes constants we’ll first use the fractional derivative formula to compute the correct normalization of \[\hat{w}_\pm(\zeta)=\delta\mp \frac{5}{48}{}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right).\]   
-\begin{lemma}\label{claim 2}
-The following formula holds true
-\[ \partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) = -i \frac{\sqrt{\pi}}{2}\,\hat{w}_+(\zeta-2/3), \]
-for any $\zeta\in [2/3,+\infty)$.
-\end{lemma}
-\begin{proof}
-In our general picture of exponential integrals, for $I_+(z)$ the thimble $\mathcal{C}_+$ is parametrized as the path $\theta \mapsto \cosh(\theta - \tfrac{2}{3}\pi i)$, $f = \tfrac{2}{3}(4u^3 - 3u)$ and $\nu = du$. Hence,
-\begin{align*}
-\int_{\mathcal{C}_+(\zeta)} \nu & = \int_{\mathcal{C}_+(\zeta)} du \\
-& = u \Big|_{\operatorname{start} \mathcal{C}_+(\zeta)}^{\operatorname{end} \mathcal{C}_+(\zeta)}.
-\end{align*}
-Since $4u^3 - 3u$ is the third Chebyshev polynomial, and $\cosh$ is $2\pi$-periodic in the imaginary direction, the start and end points of $\mathcal{C}_+(\zeta)$ are characterized by
-\begin{align*}
-u & = \cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
-\zeta & = \tfrac{2}{3} \cosh(3\theta),
-\end{align*}
-so
-\begin{align*}
-\int_{\mathcal{C}_+(\zeta)} \nu & = \cosh(\theta - \tfrac{2}{3}\pi i) - \cosh(-\theta - \tfrac{2}{3}\pi i) \\
-& = \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
-& \quad - \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
-& = 2\sinh(\theta) \sinh(-\tfrac{2}{3}\pi i) \\
-& = -i\sqrt{3}\,\sinh(\theta)
-\end{align*}
-with $\tfrac{3}{2} \zeta = \cosh(3\theta)$. Let $\xi = \tfrac{1}{2}(1 - \tfrac{3}{2}\zeta)$, and notice that $\xi = -\sinh(\tfrac{3}{2} \theta)^2$ at the start and end points. The identity~15.4.16 \cite{dlmf}
-\[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
-then shows us that
-\[ \frac{i}{\sqrt{3}} \int_{\mathcal{C}_+(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
-
-Now we can evaluate the half-integral of $\int_{\mathcal{C}_+} \nu$ using Bateman's fractional integral formula for hypergeometric functions see \S 4.1 in \cite{koornwinder2015fractional}.
-\begin{align*}
-\partial^{-1/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_+(\zeta')} \nu \right)\,d\zeta' \\
-& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi \tfrac{\sqrt{3}}{2} (\xi' - \xi)^{-1/2} \Big[ -{i}{\sqrt{3}}\,\tfrac{2}{3} (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big) \Big] \,\big( -\tfrac{4}{3}\,d\xi' \big) \\
-& = -i \frac{4}{3} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
-& = i \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
-\end{align*}
-Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}.
-\begin{align*}
-\partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(-\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ i \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = i \tfrac{3\sqrt{\pi}}{8} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = i \tfrac{3\sqrt{\pi}}{8}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
-& = i \tfrac{\sqrt{\pi}}{8}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
-\end{align*}
-\end{proof}
-Analogously, we can compute the correct constants for $\hat{w}_-(\zeta)$:
-
-\begin{lemma}\label{claim 3}
-For any $\zeta\in (-\infty,-2/3]$
-\[ \partial^{3/2}_{\zeta \text{ from } -2/3} \left( \int_{\mathcal{C}_-(\zeta)} \nu \right) = - \frac{\sqrt{\pi}}{2}\,\hat{w}_-(\zeta+2/3). \]
-\end{lemma}
-\begin{proof}
-Let $\mathcal{C}_-$ is the path $\theta \mapsto -\cosh(\theta - \tfrac{2}{3}\pi i)$, when $x \in [0, \infty)$ 
-\[ I_-(z) = \int_{\mathcal{C}_-} \exp\left[-\tfrac{2}{3} z \left(4u^3 - 3u\right)\right]\,du. \]
-In our general picture of exponential integrals, $f = \tfrac{2}{3}(4u^3 - 3u)$ and $\nu = du$. Hence,
-\begin{align*}
-\int_{\mathcal{C}_-(\zeta)} \nu & = \int_{\mathcal{C}_-(\zeta)} du \\
-& = u \Big|_{\operatorname{start} \mathcal{C}_-(\zeta)}^{\operatorname{end} \mathcal{C}_-(\zeta)}.
-\end{align*}
-The start and end points of $\mathcal{C}_-(\zeta)$ are characterized by
-\begin{align*}
-u & = -\cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
-\zeta & = -\tfrac{2}{3} \cosh(3\theta),
-\end{align*}
-so
-\begin{align*}
-\int_{\mathcal{C}_-(\zeta)} \nu & =- \cosh(\theta - \tfrac{2}{3}\pi i) + \cosh(-\theta - \tfrac{2}{3}\pi i) \\
-& =- \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
-& \quad + \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
-& = 2\sinh(\theta) \sinh(\tfrac{2}{3}\pi i) \\
-& = i\sqrt{3}\,\sinh(\theta)
-\end{align*}
-with $\tfrac{3}{2} \zeta = -\cosh(3\theta)$. Let $\xi = \tfrac{1}{2}(1 + \tfrac{3}{2}\zeta)$, and notice that $\xi =- \sinh(\tfrac{3}{2} \theta)^2$ at the start and end points. The identity~15.4.16 in \cite{dlmf}
-\[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
-then shows us that
-\[ -\frac{i}{\sqrt{3}} \int_{\mathcal{C}_-(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
-
-Now we can evaluate the half-integral of $\int_{\mathcal{C}_-} \nu$ using Bateman's fractional integral formula for hypergeometric functions (see \cite[Section 4.1 ]{koornwinder2015fractional}).
-\begin{align*}
-\partial^{-1/2}_{\zeta \text{ from } -2/3} \left( \int_{\mathcal{C}_-(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{-2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_-(\zeta')} \nu \right)\,d\zeta' \\
-& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi \tfrac{\sqrt{3}}{2} (\xi - \xi')^{-1/2} \Big[{i}{\sqrt{3}}\,\tfrac{2}{3} (-\xi')^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi' \big) \Big] \,\big( \tfrac{4}{3}\,d\xi' \big) \\
-& =  \frac{4}{3} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
-& = - \frac{2}{3} \sqrt{\pi}\,\xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
-\end{align*}
-Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
-\begin{align*}
-\partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ - \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = - \tfrac{3\sqrt{\pi}}{8} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = - \tfrac{3\sqrt{\pi}}{8}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
-& = - \tfrac{\sqrt{\pi}}{8}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
-\end{align*}
-\end{proof}
-
-\color{black}
 \section{Geometry of thimble integrals}
 
 Let $X$ be an $N$-dimensional complex algebraic variety and $f\colon X\to\C$ a proper algebraic map with non-degenerate critical points $a_1,...,a_N$ and critical values $\alpha_j=f(a_j)$\footnote{Everything we’ll discuss, applies also when $X$ is a $N$-dimensional complex (K\"ahler) manifold and $f\colon X\to\C$ is a holomorphic function with non-degenerates critical points, which is, for example, the setting in \cite{Witten}.}: for a fixed $z\in\C$, we are interested in integrals of the form 
@@ -3030,12 +2996,24 @@ Therefore, the integral $I(z)$ can e regarded as the image of the following map:
 
 Since every cycle $\mathcal{C}$ can be written as a linear combination of Lefschetz thimbles, we restrict our attention to  \textit{thimbles} integrals $I_j$, namely the integrals over Lefschetz thimbles labeled by the critical points $a_j\in\text{Crit}(f)$.
 
-As we let $z$ vary, we’ll observe the so-called \textit{Stokes phenomena}, namely the integral $I_j(z)$ jumps across the rays $\ell_{jl}=\arg(\alpha_j-\alpha_l)\R_{\geq 0}$ for $l=1,...,N$ (and $l\neq j$). The jumps can be described geometrically using the theory of Picard--Lefschetz. Indeed, the jumps of $I_j(z)$ are encoded in the jumps of the Lefschetz thimbles $[\Lambda_j]\in H_{z,N}^B$ as $\arg z$ varies. We’ll discuss this phenomenon from a different perspective in Section \ref{resurgence-AL} in the example of Airy--Lucas functions. \textcolor{orange}{[Can we comment more about this? For instance as a consequence of Theorem 3.3]}  
+As we let $z$ vary, we’ll observe the so-called \textit{Stokes phenomena}, namely the integral $I_j(z)$ jumps across the rays $\ell_{jl}=\arg(\alpha_j-\alpha_l)\R_{\geq 0}$ for $l=1,...,N$ (and $l\neq j$). The jumps can be described geometrically using the pairing between dual cycles. Equivalently, the jumps of $I_j(z)$ are encoded in the jumps of the Lefschetz thimbles $[\Lambda_j]\in H_{z,N}^B$ as $\arg z$ varies. %We’ll discuss this phenomenon from a different perspective in Section \ref{resurgence-AL} in the example of Airy--Lucas functions. \textcolor{orange}{[Can we comment more about this? For instance as a consequence of Theorem 3.3]}  
 
-\subsection{Picard--Lefschetz formula in pictures}
-We'll compute the Picard--Lefschetz formula as intersection of the base of thimbles and its dual, relative the singular direction $\theta=0$. We'll do it graphically, by plotting the steepest decent contours center at the critical points of $f$. We'll consider the example of Airy and Airy--Lucas with $n=4$.
+\subsection{Picard--Lefschetz formula}\label{sec:Picard-Lefschetz}
+We'll compute the Picard--Lefschetz formula as the intersection of the base of thimbles and its dual, relative to the singular direction $\theta=0$. We'll do it graphically, by plotting the steepest decent contours center at the critical points of $f$. We'll consider the example of Airy and Airy--Lucas with $n=4$.
 
-For the classical Airy function, we have a two dimensional base of thimbles, thus we have to compute only one intersection:
+For the classical Airy function, we have a two-dimensional base of thimbles, thus we have to compute only one intersection: we choose the Stokes direction $\theta=0$, and we take a base of thimbles $\Lambda_j\in H_1(B_j,B_j^+(0.1))$. Then 
+\begin{equation}
+    \begin{pmatrix}
+        \Lambda_1\\
+        \Lambda_2
+    \end{pmatrix} = \begin{pmatrix}
+        1 & \\
+        0 & 1
+    \end{pmatrix}\begin{pmatrix}
+        \Lambda_1\\
+        \Lambda_2
+    \end{pmatrix}
+\end{equation}
 \begin{figure}[ht]
     \centering
     \includegraphics[scale=0.7]{figures/contour1--airy.jpg}
@@ -3044,13 +3022,14 @@ For the classical Airy function, we have a two dimensional base of thimbles, thu
     \caption{Graphically, we can describe the Stokes phenomenon by looking at the intersection points of \textit{dual pairs of thimbles}, which differ by a rotation of angle $\pi$. With respect to the Stokes line $\theta=0$, we choose $\theta=0.1$ for the picture on the left and $\theta=-0.1+\pi$ for the picture in the center. The picture on the right shows the intersection of the thimbles which is given by a single point. Thus up to normalization, the Stokes constant is $1$. The images were obtained with Mathematica, and the thimbles are computed as the steepest descent contours from the critical points.}
     \label{fig:intersection_thimbles-Airy}
 \end{figure}
+
 We deduce that the Stokes constant $S_{12}=\pm 1$ (to specify the sign it is enough to pick an orientation). This agrees with the computations we made in Section \ref{sec:eye-res-airy}.
 
-For Airy--Lucas with parameter $n=4$, we have a three dimensional base of thimbles, graphically represented as 
+For Airy--Lucas with parameter $n=4$, we have a three thimbles, graphically represented in Figure \ref{fig:thimble-n4}. 
 \begin{figure}[ht]
     \centering
     \includegraphics[scale=0.35]{figures/thimble-n4.png}
-    \caption{Caption}
+    \caption{Caption.}
     \label{fig:thimble-n4}
 \end{figure}
 Then computing intersections of dual pairs of thimbles we get 
@@ -3059,16 +3038,10 @@ Then computing intersections of dual pairs of thimbles we get
     \includegraphics[scale=0.4]{figures/contour1-AL4--12.jpg}
     \includegraphics[scale=0.4]{figures/contour2-AL4--12.jpg}
      \includegraphics[scale=0.4]{figures/contour--AL4--12--inter.jpg}
-     \includegraphics[scale=0.4]{figures/contour1-AL4--13.jpg}
-    \includegraphics[scale=0.4]{figures/contour2-AL4--13.jpg}
-     \includegraphics[scale=0.4]{figures/contour--AL4--13--inter.jpg}
-     \includegraphics[scale=0.4]{figures/contour1-AL4--32.jpg}
-    \includegraphics[scale=0.4]{figures/contour2-AL4--32.jpg}
-     \includegraphics[scale=0.4]{figures/contour--AL4--32--inter.jpg}
-    \caption{First line computes the intersection of $\Lambda_1$ and $\Lambda_2$. Second line computed the interaction of $\Lambda_3$ and $\Lambda_2$. Third line computed the intersection of $\Lambda_3$ and $\Lambda_1$.}
+    \caption{...}
     \label{fig:intersection_thimbles-AL4}
 \end{figure}
-Notice that $\Lambda_1$ and $\Lambda_3$ do not intersect as they are in the same class, because they are preimages of the same rays through infinity.   
+Notice that $\Lambda_1$ and $\Lambda_3$ do not intersect as they are in the same class, because they are preimages of the same rays through infinity.    
 \section{Generalities about ODEs and Integral Equations}
 \textcolor{red}{Shall we review the content of \cite{reg-sing-volterra}?}
 

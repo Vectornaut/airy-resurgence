@@ -1392,5 +1392,111 @@ is the Borel transform of $\tilde{I}_{\lambda_2}(z)$ and it has a branch cut sin
 &=\mathbf{-i}U_1\frac{2\pi i}{\Gamma\left(\frac{2}{3}\right)\Gamma\left(\frac{4}{3}\right)}\left(\frac{\zeta-\lambda_1}{\lambda_2-\lambda_1}\right)^{-1/2}{}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{1}{2};\frac{\zeta-\lambda_1}{\lambda_2-\lambda_1}\right)\\
 &=\mathbf{-i} \hat{I}_{\lambda_2}\left(\zeta;0,\frac{U_1}{\Gamma(2/3)\Gamma(4/3)}\right)
 \end{align*}
+
+\section{Application of the projection formula}
+
+In Section \ref{sec:examples}, we computed the Borel transform of the asymptotics of thimble integrals in different ways: on the one hand, using the thimble projection reasoning and on the other hand, solving an integral equation with a specified behavior near the singular point. In particular, we noticed that the two approaches give the same result up to the choice of a constant, as the integral equation is homogeneous. However, Theorem \ref{thm:maxim} suggests another approach, namely to use the fractional integral formula \eqref{formula1}. This approach  
+As shown in the previous examples, the Borel transform  of the asymptotics of thimble integrals can be computed in different ways: from the ODE they solve, from the thimble projection reasoning, and from the integral formula \eqref{formula1}. When computed from the ODE, there is an ambiguity in the choice of a constant because the equation they satisfy is homogeneous, while with the thimble projection reasoning and the fractional integral formula the ambiguity is solved.
+
+%In addition, since thimble integrals have a geometric interpretation, the Stokes constants that encode the jumps of thimble integrals when $z$ crosses a Stokes ray are expected to be integers as they are intersection numbers of dual pairs of thimbles. 
+
+In Theorem \eqref{thm:maxim} we prove that the Borel transform of $\tilde{I}_{\alpha}$ can be computed by the thimble projection formula~\eqref{int:deriv-formula}. \color{olive} 
+
+By general theory, it is expected that Stokes constants are integers, and numerically this can be verified only when a suitable normalization is chosen. Indeed as we have seen, if we consider exponential integrals the Borel transform can be computed in different ways: from the ODE, from the thimble projection reasoning, and from the integral formula. When computed from the ODE, there is an ambiguity in the choice of the constant, while with the thimble projection reasoning and the thimble projection formula the ambiguity is solved. We’ll see this for the modified Bessel equation. 
+
+This method allows us to uniquely determine the constants $U_1,U_2$ that appear in the formal integral solution $\tilde{I}(z)$. Indeed, $\tilde{I}$ is a solution of an homogeneous linear ODE and $\tilde{I}_+(z)=U_1e^{-2/3z}z^{-1/2}\tilde{W}_+(z)$ for a particular choice of $U_1$. %In order to compute the Stokes constants we’ll first use the fractional derivative formula to compute the correct normalization of \[\hat{w}_\pm(\zeta)=\delta\mp \frac{5}{48}{}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right).\]   
+\begin{lemma}\label{claim 2}
+The following formula holds true
+\[ \partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) = -i \frac{\sqrt{\pi}}{2}\,\hat{w}_+(\zeta-2/3), \]
+for any $\zeta\in [2/3,+\infty)$.
+\end{lemma}
+\begin{proof}
+In our general picture of exponential integrals, for $I_+(z)$ the thimble $\mathcal{C}_+$ is parametrized as the path $\theta \mapsto \cosh(\theta - \tfrac{2}{3}\pi i)$, $f = \tfrac{2}{3}(4u^3 - 3u)$ and $\nu = du$. Hence,
+\begin{align*}
+\int_{\mathcal{C}_+(\zeta)} \nu & = \int_{\mathcal{C}_+(\zeta)} du \\
+& = u \Big|_{\operatorname{start} \mathcal{C}_+(\zeta)}^{\operatorname{end} \mathcal{C}_+(\zeta)}.
+\end{align*}
+Since $4u^3 - 3u$ is the third Chebyshev polynomial, and $\cosh$ is $2\pi$-periodic in the imaginary direction, the start and end points of $\mathcal{C}_+(\zeta)$ are characterized by
+\begin{align*}
+u & = \cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
+\zeta & = \tfrac{2}{3} \cosh(3\theta),
+\end{align*}
+so
+\begin{align*}
+\int_{\mathcal{C}_+(\zeta)} \nu & = \cosh(\theta - \tfrac{2}{3}\pi i) - \cosh(-\theta - \tfrac{2}{3}\pi i) \\
+& = \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& \quad - \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& = 2\sinh(\theta) \sinh(-\tfrac{2}{3}\pi i) \\
+& = -i\sqrt{3}\,\sinh(\theta)
+\end{align*}
+with $\tfrac{3}{2} \zeta = \cosh(3\theta)$. Let $\xi = \tfrac{1}{2}(1 - \tfrac{3}{2}\zeta)$, and notice that $\xi = -\sinh(\tfrac{3}{2} \theta)^2$ at the start and end points. The identity~15.4.16 \cite{dlmf}
+\[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
+then shows us that
+\[ \frac{i}{\sqrt{3}} \int_{\mathcal{C}_+(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
+
+Now we can evaluate the half-integral of $\int_{\mathcal{C}_+} \nu$ using Bateman's fractional integral formula for hypergeometric functions see \S 4.1 in \cite{koornwinder2015fractional}.
+\begin{align*}
+\partial^{-1/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_+(\zeta')} \nu \right)\,d\zeta' \\
+& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi \tfrac{\sqrt{3}}{2} (\xi' - \xi)^{-1/2} \Big[ -{i}{\sqrt{3}}\,\tfrac{2}{3} (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big) \Big] \,\big( -\tfrac{4}{3}\,d\xi' \big) \\
+& = -i \frac{4}{3} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
+& = i \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
+\end{align*}
+Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}.
+\begin{align*}
+\partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(-\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ i \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = i \tfrac{3\sqrt{\pi}}{8} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = i \tfrac{3\sqrt{\pi}}{8}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = i \tfrac{\sqrt{\pi}}{8}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
+\end{align*}
+\end{proof}
+Analogously, we can compute the correct constants for $\hat{w}_-(\zeta)$:
+
+\begin{lemma}\label{claim 3}
+For any $\zeta\in (-\infty,-2/3]$
+\[ \partial^{3/2}_{\zeta \text{ from } -2/3} \left( \int_{\mathcal{C}_-(\zeta)} \nu \right) = - \frac{\sqrt{\pi}}{2}\,\hat{w}_-(\zeta+2/3). \]
+\end{lemma}
+\begin{proof}
+Let $\mathcal{C}_-$ is the path $\theta \mapsto -\cosh(\theta - \tfrac{2}{3}\pi i)$, when $x \in [0, \infty)$ 
+\[ I_-(z) = \int_{\mathcal{C}_-} \exp\left[-\tfrac{2}{3} z \left(4u^3 - 3u\right)\right]\,du. \]
+In our general picture of exponential integrals, $f = \tfrac{2}{3}(4u^3 - 3u)$ and $\nu = du$. Hence,
+\begin{align*}
+\int_{\mathcal{C}_-(\zeta)} \nu & = \int_{\mathcal{C}_-(\zeta)} du \\
+& = u \Big|_{\operatorname{start} \mathcal{C}_-(\zeta)}^{\operatorname{end} \mathcal{C}_-(\zeta)}.
+\end{align*}
+The start and end points of $\mathcal{C}_-(\zeta)$ are characterized by
+\begin{align*}
+u & = -\cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
+\zeta & = -\tfrac{2}{3} \cosh(3\theta),
+\end{align*}
+so
+\begin{align*}
+\int_{\mathcal{C}_-(\zeta)} \nu & =- \cosh(\theta - \tfrac{2}{3}\pi i) + \cosh(-\theta - \tfrac{2}{3}\pi i) \\
+& =- \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& \quad + \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
+& = 2\sinh(\theta) \sinh(\tfrac{2}{3}\pi i) \\
+& = i\sqrt{3}\,\sinh(\theta)
+\end{align*}
+with $\tfrac{3}{2} \zeta = -\cosh(3\theta)$. Let $\xi = \tfrac{1}{2}(1 + \tfrac{3}{2}\zeta)$, and notice that $\xi =- \sinh(\tfrac{3}{2} \theta)^2$ at the start and end points. The identity~15.4.16 in \cite{dlmf}
+\[ \sinh(\theta) = \tfrac{2}{3} \sinh(\tfrac{3}{2} \theta)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\tfrac{3}{2} \theta)^2\big) \]
+then shows us that
+\[ -\frac{i}{\sqrt{3}} \int_{\mathcal{C}_-(\zeta)} \nu = \tfrac{2}{3} (-\xi)^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
+
+Now we can evaluate the half-integral of $\int_{\mathcal{C}_-} \nu$ using Bateman's fractional integral formula for hypergeometric functions (see \cite[Section 4.1 ]{koornwinder2015fractional}).
+\begin{align*}
+\partial^{-1/2}_{\zeta \text{ from } -2/3} \left( \int_{\mathcal{C}_-(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{-2/3}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_-(\zeta')} \nu \right)\,d\zeta' \\
+& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi \tfrac{\sqrt{3}}{2} (\xi - \xi')^{-1/2} \Big[{i}{\sqrt{3}}\,\tfrac{2}{3} (-\xi')^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi' \big) \Big] \,\big( \tfrac{4}{3}\,d\xi' \big) \\
+& =  \frac{4}{3} \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
+& = - \frac{2}{3} \sqrt{\pi}\,\xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
+\end{align*}
+Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
+\begin{align*}
+\partial^{3/2}_{\zeta \text{ from } 2/3} \left( \int_{\mathcal{C}_+(\zeta)} \nu \right) & = \left(\tfrac{3}{4} \tfrac{\partial}{\partial \xi}\right)^2 \left[ - \frac{2}{3} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = - \tfrac{3\sqrt{\pi}}{8} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
+& = - \tfrac{3\sqrt{\pi}}{8}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
+& = - \tfrac{\sqrt{\pi}}{8}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
+\end{align*}
+\end{proof}
+
+\color{black}
     
 \end{document}
