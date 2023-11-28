@@ -896,29 +896,57 @@ When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to defi
 \subsection{The Laplace transform: analytic version}\label{sec:laplace_analytic}
 \subsubsection{Regularity and decay properties}\label{reg-decay}
 %
-Let $\Omega_\alpha\subset B$ be an open, simply connected set that touches but does not contain $\zeta=\alpha$ (see Figure \ref{Fig:domain}). Assume the $\Gamma_{\zeta,\alpha}^\theta$ is contained in $\Omega_\alpha$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ of holomorphic functions of exponential type $\Lambda$ with singular behaviour at $\zeta=\alpha$, namely of the form $|\zeta|^\sigma$. When $\sigma>-1$, the singularity at $\zeta=\alpha$ is integrable, hence the Laplace transform $\laplace_{\zeta, \alpha}^\theta$ is a well--defined and holomorphic function for $\Re(e^{i\theta} z) > 0$ on the fiber $T^*B_{\zeta=\alpha}$ (see for instance ~\cite[Section  5.6]{diverg-resurg-i}.)    
+Let $\Omega_\alpha \subset B$ be an open, simply connected set that touches but does not contain $\zeta=\alpha$ (see Figure \ref{Fig:domain}). Suppose $\Omega_\alpha$ contains the ray $\Gamma_{\zeta,\alpha}^\theta$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ of holomorphic functions on $\Omega_\alpha$ which are uniformly of exponential type $\Lambda$ and blow up like $|\zeta|^\sigma$ as $\zeta$ approaches $\alpha$. When $\sigma>-1$, the singularity at $\zeta=\alpha$ is integrable. Hence, the Laplace transform $\laplace_{\zeta, \alpha}^\theta$ turns elements of $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ into well-defined holomorphic functions on the half-plane $\Re(e^{i\theta} z) > 0$ in the fiber $T^*B_{\zeta=\alpha}$~\cite[Section  5.6]{diverg-resurg-i}.
 %Let's say a function $f$ is in $O_{\zeta, \alpha \leftarrow}(g)$ or $O_{\zeta, \alpha \rightarrow}(g)$, respectively, if $|f| \lesssim g$ on some neighborhood of the starting point or infinite end of $\Gamma_{\zeta, \alpha}$. A function is {\em subexponential} along $\Gamma_{\zeta, \alpha}$ if it's in $O_{\zeta, \alpha \rightarrow}(e^{c\zeta})$ for all $c > 0$ \textcolor{magenta}{[shall we write in formula?]}. Let $\mathcal{E}_{\zeta, \alpha}$ be the space of functions that are subexponential on $\Gamma_{\zeta, \alpha}$, integrable at the starting point, and locally integrable throughout. If $f$ is in $\mathcal{E}_{\zeta, \alpha}$, then $\laplace_{\zeta, \alpha} f$ is well-defined and holomorphic for $\Re(z) > 0$ on the part of $T^*B$ that lies over $\Gamma_{\zeta, \alpha}$~\cite[Section  5.6]{diverg-resurg-i}.
 
 \color{Maroon}
-Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. In this case, for any $\Lambda \in \R$, let $\widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$. Then, let $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ be the space of holomorphic functions $F$ on $\widehat{\Omega}_\alpha^\Lambda$ with $|F| \lesssim \delta^\sigma$, where $\delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. The norm $\|F\|_{\sigma, \Lambda} = \sup_{\widehat{\Omega}_\alpha^\Lambda} \delta^{-\sigma} |F|$ turns $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ into a Banach space.
-\begin{theorem}
-Let $\Omega_\alpha$ be an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. For any $\sigma > 0$ and $\Lambda \ge 0$, and any angle $\theta$ in the opening of $\Omega_\alpha$, the Laplace transform $\laplace_{\zeta_\alpha, 0}^\theta$ is a continuous map $\singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha)$, with norm $\Gamma(\sigma)$.
-\end{theorem}
+Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. In this case, for any $\Lambda \in \R$, let $\widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$. Then, let $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ be the space of holomorphic functions $F$ on $\widehat{\Omega}_\alpha^\Lambda$ with $|F| \lesssim \Delta^\sigma$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. The norm $\|F\|_{\sigma, \Lambda} = \sup_{\widehat{\Omega}_\alpha^\Lambda} \Delta^{-\sigma} |F|$ turns $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ into a Banach space. \textcolor{orange}{Cite \cite{sternin1995borel} better for the theorem.}
+\begin{prop}[following~\cite{sternin1995borel}]\label{prop:laplace-cont}
+Let $\Omega_\alpha$ be an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. For any $\sigma > 0$ and $\Lambda \ge 0$, and any angle $\theta$ in the opening of $\Omega_\alpha$, the Laplace transform $\laplace_{\zeta_\alpha, 0}^\theta$ is a continuous map $\singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha)$, with a norm of at most $\Gamma(\sigma)$.
+\end{prop}
 \begin{proof}
 Given some $f \in \singexp{\sigma-1}{\Lambda}(\Omega_\alpha)$, we compute
 \begin{align*}
-\left| \laplace_{\zeta_\alpha, 0}^\theta f \right| & = \left| \int_{\Gamma_{\zeta, \alpha}^\theta} e^{-z\zeta_\alpha} f\,d\zeta_\alpha \right| \\
+|\laplace_{\zeta_\alpha, 0}^\theta f| & = \left| \int_{\Gamma_{\zeta, \alpha}^\theta} e^{-z\zeta_\alpha} f\,d\zeta_\alpha \right| \\
 & \le \int_{\Gamma_{\zeta, \alpha}^\theta} e^{-\Re(z\zeta_\alpha)} |\zeta_\alpha|^{\sigma-1} e^{\Lambda |\zeta_\alpha|} \|f\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
 & \le \int_{\Gamma_{\zeta, \alpha}^\theta} e^{(\Lambda - c_{z, \theta}|z|)|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|f\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha|,
 \end{align*}
 where $c_{z, \theta}$ is the cosine of $\arg(z) + \theta$. When $|z|$ is large and $c_{z, \theta}$ is positive, the integrand shrinks exponentially as $|\zeta|$ grows. This shows that for each angle $\theta$ in the opening of $\Omega_\alpha$, the integral defining $\laplace_{\zeta_\alpha, 0}^\theta f$ converges in some region of $\widehat{\Omega}_\alpha^\Lambda$. It also shows that for different angles $\theta$, the functions $\laplace_{\zeta_\alpha, 0}^\theta f$ match where their domains overlap. We can therefore glue these functions together into one big Laplace transform of $f$, defined at large values of $|z|$ across the whole opening angle of $\widehat{\Omega}_\alpha^\Lambda$.
 
-We can now simplify the calculation of $\laplace_{\zeta_\alpha, 0}^\theta f$ by looking at $\arg(z)$ and using the closest angle $\theta$ in the opening of $\Omega_\alpha$. Doing this gives
-%%\begin{align*}
-%%\left| \laplace_{\zeta_\alpha, 0}^{\arg(z)} f \right| & \le \int_{\Gamma_{\zeta, \alpha}^{\arg(z)}} e^{(\Lambda - |z|)|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|f\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
-%%& = \int_0^\infty e^{(\Lambda - |z|)t} t^{\sigma-1} \|f\|_{\sigma-1, \Lambda}\,dt.
-%%\end{align*}
-\textcolor{orange}{[\ldots]}
+We can now simplify the calculation of $\laplace_{\zeta_\alpha, 0}^\theta f$ by looking at $\arg(z)$ and using the closest angle $\theta$ in the opening of $\Omega_\alpha$. This keeps $\Lambda - c_{z, \theta}|z|$ equal to $\Delta$, the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. It follows that
+\begin{align*}
+|\laplace_{\zeta_\alpha, 0}^\theta f| & \le \int_{\Gamma_{\zeta, \alpha}^{\arg(z)}} e^{-\Delta|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|f\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
+& = \int_0^\infty e^{-\Delta t} t^{\sigma-1} \|f\|_{\sigma-1, \Lambda}\,dt.
+\end{align*}
+The integral on the last line converges throughout $\widehat{\Omega}_\alpha^\Lambda$. We can evaluate it by observing that this bound on the Laplace transform of $f$ is itself a Laplace transform:
+\[ |\laplace_{\zeta_\alpha, 0}^\theta f| \le \Gamma(\sigma) \Delta^{-\sigma} \|f\|_{\sigma-1, \Lambda}. \]
+In terms of the metric on $\dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha)$ defined above, this bound says that
+\[ \|\laplace_{\zeta_\alpha, 0}^\theta f\|_{\sigma, \Lambda} \le \Gamma(\sigma) \|f\|_{\sigma-1, \Lambda}, \]
+which is what we wanted to show.
+\end{proof}
+\begin{prop}
+Let $\Omega_\alpha$ be an open sector of the kind described in Proposition~\ref{prop:laplace-cont}, and let $\Omega_\alpha^\varepsilon \subset \Omega_\alpha$ be the open sector created by cutting a sector of angle $\varepsilon > 0$ off each edge of $\Omega_\alpha$. Under the conditions of Proposition~\ref{prop:laplace-cont}, the Laplace transform
+\[ \laplace_{\zeta_\alpha, 0}^\theta \maps \singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha) \]
+has a continuous left inverse
+\[ \left(\laplace_{\zeta_\alpha, 0}^\theta\right)^{-1} \maps \dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha) \to \singexp{\sigma-1}{\Lambda}(\Omega_\alpha^\varepsilon), \]
+with a norm of at most \textcolor{orange}{\ldots}
+\end{prop}
+\begin{proof}
+Choose any path $\textcolor{magenta}{\Lambda}$ that runs through $\widehat{\Omega}_\alpha^\Lambda$ at a constant distance from the boundary, oriented so that the boundary is on its left. The inverse Laplace transform is given by the formula
+\[ \big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} F = \frac{1}{2 \pi i} \int_{\textcolor{magenta}{\Lambda}} e^{z\zeta_\alpha} F\,dz. \]
+When $F$ is in $\dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha)$, we have the bound
+\[ \left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} F\right| \le \frac{1}{2 \pi} \int_{\textcolor{magenta}{\Lambda}} e^{\Re(z\zeta_\alpha)} \Delta_{\textcolor{magenta}{\Lambda}}^{-\sigma} \|F\|_{\sigma, \Lambda}\,dz, \]
+where $\Delta_{\textcolor{magenta}{\Lambda}}$ is the constant distance from $\Lambda$ to the boundary.
+
+Choose an arc-length parameter $t$ on $\textcolor{magenta}{\Lambda}$, with $t = 0$ at the middle of circular-arc-shaped part. On $\Omega_\alpha^\varepsilon$, by construction, the angle $\arg(\zeta)$ is more than $\pi + \varepsilon$ away from the asymptotic directions of the boundary of $\widehat{\Omega}_\alpha^\Lambda$, $\textcolor{magenta}{\Lambda}$. Hence, on $\Omega_\alpha^\varepsilon \times \textcolor{magenta}{\Lambda}$, we have
+\[ \Re(z\zeta_\alpha) \le |\zeta_\alpha| \big(\lambda' - \sin(\varepsilon)\,|t|\big) \]
+for some constant $\lambda' \in \R$. It follows that
+\begin{align*}
+\left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} F\right| & \le \frac{1}{2 \pi} \int_{-\infty}^\infty e^{|\zeta_\alpha| \left(\lambda' - \sin(\varepsilon)\,|t|\right)} \Delta_{\textcolor{magenta}{\Lambda}}^{-\sigma} \|F\|_{\sigma, \Lambda}\,dt \\
+& = e^{|\zeta_\alpha| \lambda'} \|F\|_{\sigma, \Lambda}\,\frac{\Delta_{\textcolor{magenta}{\Lambda}}^{-\sigma}}{2 \pi} \int_{-\infty}^\infty e^{-|\zeta_\alpha| \sin(\varepsilon)\,t}\,dt \\
+& = e^{|\zeta_\alpha| \lambda'} \|F\|_{\sigma, \Lambda}\,\frac{\Delta_{\textcolor{magenta}{\Lambda}}^{-\sigma}}{2 \pi}\,\frac{2}{|\zeta_\alpha| \sin(\varepsilon)}
+\end{align*}
+\textcolor{orange}{[Oops, looks like we can't keep $\Delta$ constant along the integration path if we want to recover something with a $|\zeta_\alpha|^{\sigma-1}$ singularity.]}
 \end{proof}
 
 \color{RoyalBlue}
