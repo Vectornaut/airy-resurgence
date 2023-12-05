@@ -440,52 +440,7 @@ For each root $-\alpha$ of $P$, Equation~\eqref{eqn:standard ODE} has a formal s
 \begin{theorem}[see Theorem \ref{thm2-dim}]\label{thm2}
 The formal frame of solutions $\tilde{\Psi}_j$ is Borel summable \textcolor{orange}{[summability is the strongest part of the result]} and its Borel sum is proportional to $\Psi_j$. In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}. \textcolor{orange}{[Alternate statement: look in Sauzin or Delabaere to get uniqueness of formal solution.]} \textcolor{orange}{[Split into theorem, which shows existence of Borel regular frame, and corollary, which shows that this implies a certain frame of formal solutions is Borel-summable and sums to actual solutions.]}
 \end{theorem}
-\color{Goldenrod}
-In the following diagram, we sketch the main step of the proof of Theorem~\ref{thm2} (the rigorous proof is given in Section \ref{borel_reg-ODE}): on the right-hand side of the diagram, we have the formal solution $\series{\Psi }_j$ and its Borel transform $\series{\psi}_j$. %Then, the theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
-
-\begin{center}
-\begin{tikzcd}
-& & \text{ODE }\arrow[dd,"\borel"]\arrow[dd,"\laplace^{-1}",swap] & & \\
-\Psi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Psi}}\arrow[ur,red, no head, tail] & & & \tilde{\Psi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\borel"]\\
-& & \text{IE} & & \\
-\psi\arrow[rru, no head, tail]\arrow[uu,"\laplace"]& \textcolor{red}{\hat{\psi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\laplace"]& & & \tilde{\psi}\arrow[llu, no head, tail]
-\end{tikzcd}
-\end{center} 
-
-Conversely, on the left-hand side, we have the unique (up to scaling) analytic function $\psi_j$ of Theorem 4 \cite{reg-sing-volterra} which solves the integral equation (IE) obtained as the inverse Laplace transform of the (ODE) (see \cite[Lemma 2]{reg-sing-volterra}). The key step is then comparing $\psi_j$ and $\hat{\psi}_j$. First, using properties of the Borel transform, it is easy to show that $\series{\psi}_j$ is a formal solution of the integral equation (IE). In addition, from the explicit formula for $\tilde{\Psi}_j$, we can show that $\hat{\psi}_j$ grows as $\zeta^{-\tau_j+1}$ near $\zeta=\alpha_j$
-therefore, by our uniqueness result \cite[Theorem 4]{reg-sing-volterra}, we conclude that $\psi_j$ and $\tilde{\psi}_j$ must coincide up to scaling by a constant. Hence, we define $\hat{\psi}_j$ as the analytic continuation of $\tilde{\psi}_j$ which agrees with $\psi_j$. As a consequence, by properties of the Laplace transform, $\Psi_j\defeq\laplace_{\zeta,\alpha_j}^{\theta}\psi_j$ is an analytic solution of the (ODE) and it is asymptotic to $\series{\Psi}_j$. Furthermore, $\Psi_j$ is proportional to $\hat{\Psi}_j$, by construction.   
-
-%\color{gray}
-%\begin{itemize}
-%\item Can we see there exists a distinguished basis in a purely analytic way? YES. %%[Thm 1]% The reason is the existence theorem gives for every $\alpha_j$ a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$.
-%\item why Borel summations of $\tilde{\Psi_1},...,\tilde{\Psi_d}$ finds this solutions? because they are an analytic frame of Borel regular functions. 
-%\end{itemize}
-%\begin{itemize}
-%\item {[Thm 1]}: for every $\alpha_j$ there exists a unique solution in the $\zeta$-plane which blows-up in a certain way at $\alpha_j$: ${\phi}_j(\zeta_j)=\zeta_j^{-\tau_j}+\tilde{f}_j$, $\zeta_j=\zeta-\alpha_j$. (proof based on existence theorem \ref{frac_int_exist})
-%\item {[Thm 2]}: The Borel sum of the formal solutions $\tilde{\Psi}_j$ are the same as the Laplace transform of the solutions of Thm 1. 
-%\item Cor of Thm 2: the Laplace transform of solutions of Thm 1 are Borel regular.   
-%\item Say there's a unique solution (up to scaling) that shrinks as you go right; everything else blows up exponentially. Then this is the only solution that can be expressed as a Laplace transform. [Follows from Aaron's argument in Airy resurgence, even if Aaron works with more general ODEs]
-
-%\item Draw diagram showing formal vs. holomorphic solutions in time vs. frequency domains.
-
-%\begin{center}
-%\begin{tikzcd}
-%& & ODE\arrow[dd,"\borel"]\arrow[dd,"\laplace^{-1}",swap] & & \\
-%\Phi\arrow[rru,dotted, no head, tail] &\textcolor{red}{\hat{\Phi}}\arrow[ur,red, no head, tail] & & & \tilde{\Phi}\arrow[llu,"formal",swap, no head, tail]\arrow[dd,"\borel"]\\
-%& & IE & & \\
-%\phi\arrow[rru, no head, tail]\arrow[uu,"\laplace"]& \textcolor{red}{\hat{\phi}}\arrow[ur, no head, tail]\arrow[rrr,"sum",mapsfrom,red]\arrow[uu,"\laplace"]& & & \tilde{\phi}\arrow[llu, no head, tail]
-%\end{tikzcd}
-%\end{center}
-
-%where the arrow in red are a consequence of multisummability. In addition, we can distinguish on the right hand side of the diagram the formal solutions and on the left hand side the holomorphic ones. On the upper part of the diagram the functions in the $z$-plane while on the lower part the functions in the Borel plane $\zeta$-plane.
-%\item  
-%there are many ways to see this problem have a distinguished base of solutions, Poincar\'e see it formally in the $z$-plane, \textcolor{red}{Ecalle figured it out how to see it formally in the Borel plane}, our results shows how to see it analytically in  the Borel plane.
-%\item  M.A.E.T. says you can start in formal $z$-plane but it is not really constructive (see Balser chap 14); going from formal $\zeta$ to analytic is constructive and it's essentially Borel-Laplace summation. Our method uses just Laplace transform. 
-%\item How do we know we are picking the same frame? from properties of Laplace transform we get solution asymptotics to Poincar\'e frame. From uniqueness result we get a frame equivalent to Ecalle's frame. 
-%\item multi-summability is a regularity result starting form the formal solution in the $z$-plane. Borel regularity is instead based on the analytic solution in the $z$-plane. The argument we gave about getting the same frame is what proves Borel regularity of $\Psi_j$.   
-%\end{itemize}
-
-\color{black}
+%
 We summarize the main steps of the proof of Theorem~\ref{thm:borel_reg_ODE} and Corollary~\ref{cor:borel_reg_ODE} (the rigorous proofs are given in Section~\ref{borel_reg-ODE}). On the right-hand side of the diagram, we have the formal solution $\series{\Psi }_\alpha\in e^{-\alpha z}z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket$ and its Borel transform $\series{\psi}_\alpha$. %Then, the theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
 
 \begin{center}
@@ -500,18 +455,8 @@ We summarize the main steps of the proof of Theorem~\ref{thm:borel_reg_ODE} and 
 Conversely, on the left-hand side, by our existence and uniqueness result \cite[Theorem 4]{reg-sing-volterra} we have an analytic function $\psi_\alpha$ with a distinguished behaviour near $\zeta=\alpha$, which solves the integral equation (IE) obtained as the inverse Laplace transform of the (ODE) (see \cite[Lemma 2]{reg-sing-volterra}). The key step is then comparing $\psi_\alpha$ and $\tilde{\psi}_\alpha$. First, by the properties of the Borel transform, it is easy to show that $\series{\psi}_\alpha$ is a formal solution of the integral equation (IE). Then, from the explicit formula for $\tilde{\Psi}_\alpha$, we can show that if $\tilde{\psi}_\alpha$ grows as $\psi_\alpha$ near $\zeta=\alpha$. Therefore, by our uniqueness result \cite[Theorem 4]{reg-sing-volterra}, we conclude that $\tilde{\psi}_j$ is indeed summable and ${\psi}_\alpha$ is the analytic continuation of $\tilde{\psi}_\alpha$.
 
 \subsubsection{Why does Borel summation work for thimble integrals?}
-\textcolor{DarkCyan}{Let $X$ be an $N$-dimensional complex manifold, and $f\colon X\to\C$ a proper holomorphic map with non-degenerate critical points.}
+%\textcolor{DarkCyan}{Let $X$ be an $N$-dimensional complex manifold, and $f\colon X\to\C$ a proper holomorphic map with non-degenerate critical points.}
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}.
-\color{Goldenrod}
-Let $X$ be an $N$-dimensional complex algebraic variety and $f\colon X\to\C$ a proper algebraic map with non-degenerate critical points $a_1,...,a_N$ and critical values $\alpha_j=f(a_j)$\footnote{Everything we’ll discuss, applies also when $X$ is a $N$-dimensional complex (K\"ahler) manifold and $f\colon X\to\C$ is a holomorphic function with non-degenerates critical points, which is, for example, the setting in \cite{Witten}.}: for $z\in\C$, we are interested in integrals of the form 
-\[
-I_j(z):=\int_{\Lambda_j}e^{-zf}\nu
-\]
-regarded as holomorphic functions on the frequency domain, where $\Lambda_j$ is the Lefschetz thimble through the critical point $a_j$ and $\nu$ is a holomorphic $N$-form on $X$.
-Now using the steepest descendent method we can compute the asymptotic expansion of thimble integrals which in general gives a formal series $\tilde{I}_j$ (see Malgrange, Pham, and for more general thimble integrals see \cite[Section 1.2.2]{mistegard_phdthesis} and \cite{andersen2020resurgence}, the Stirling series for Gamma function in \cite{Maxim_slide_ERC,Maxim_talk_2023}).
-
-Our goal is to study whether $\tilde{I}_j$ is Borel summable and whether its Borel--Laplace sum agrees with the integral $I_j$ itself. We’ll restrict to $1$-dimensional thimble integrals, and in this special case we’ll define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform.
-\color{black}
 We'll define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The image of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. 
 For each critical point $a_j$, let $\Gamma_j$ be the ray going rightward from the critical value $\alpha_j$, and let $\zeta_{\alpha_j}$ be the translation coordinate around $\Gamma_j$ which vanishes at $\alpha_j$. These are well-defined as long as $\Gamma_j$ misses the critical values of $f$. Then, the preimage $f^{-1}(\Gamma_j)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_j$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_j$ can be regarded as the component of $f^{-1}(\Gamma_j)$ that goes through $a_j$.\footnote{\textcolor{orange}{We could orient so that shifting $\Lambda_j$ to its left would make its projection run clockwise around $\Gamma_j$. However, this only seems to be possible when $X$ is 1-dimensional.}}
 
