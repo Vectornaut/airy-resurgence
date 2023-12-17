@@ -47,11 +47,13 @@
 
 \newcommand{\singfibercontent}{
   % nonsingular leaves
-  \foreach \sector/\farout in {0/45, 60/90, 120/135, 180/225, 240/270, 300/315} {
+  \foreach \sector in {0, 60, 120, 180, 240, 300} {
     \tikzmath{
+      \farout = 45*floor((\sector + 59) / 45);
       \tfarout = 3*(\farout - \sector);
       \rfarout = \rfiber/sin(45+mod(\farout-45, 90));
     }
+    \draw[green] (0, 0) -- (\farout:\rfarout);
     \pgfmathsetmacro{\rmax}{sin(\tfarout) * pow(\rfarout, 3)}
     \foreach \r in {0.5, 1.0, ..., \rmax} {
       \pgfmathsetmacro{\win}{asin(\r/(2*\rmax))}
@@ -129,8 +131,9 @@
 % singular fiber
 \begin{scope}[canvas is xy plane at z=\zsing, shift={(\xsing, 4.5)}]
   \begin{fiber}
-    \singfibercontent
+    %%\singfibercontent
   \end{fiber}
+  \singfibercontent
 \end{scope}
 
 % generic point
