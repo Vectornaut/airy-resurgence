@@ -47,7 +47,7 @@
 
 \newcommand{\singfibercontent}{
   % nonsingular leaves
-  \foreach \sector in {0, 60, 120, 180, 240, 300} {
+  \foreach \sector in {30, 90, ..., 330} {
     \tikzmath{
       \farout = 45*floor((\sector + 59) / 45);
       \tfarout = 3*(\farout - \sector);
@@ -61,7 +61,7 @@
     };
     
     % singular leaves
-    \foreach \ang in {0, 120, 240} {
+    \foreach \ang in {90, 210, 330} {
       \draw[sing] (\ang:{-sqrt(2)*\rfiber}) -- (\ang:{sqrt(2)*\rfiber});
     };
     \fill[sing] circle (\dotsize);
@@ -141,5 +141,14 @@
 
 % singular point
 \fill[sing] (\xsing, 0, \zsing) circle (\dotsize);
+
+% labels
+\begin{scope}[overlay]
+  \node (surf label) at (9, 0, 4) {$B$};
+  \path (surf label) ++(0, 4.5, 0) node {$T^*B$};
+  \node[outer sep=0.15mm, font=\footnotesize, align=left]
+    (cut label) at (-1.25, 1.2, \zsing) {branch cut \\ at conical \\ singularity};
+  \draw[->] (cut label) to[out=-75, in=180] (-0.25, 0, \zsing);
+\end{scope}
 \end{tikzpicture}
 }
