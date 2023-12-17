@@ -8,7 +8,8 @@
 \tikzset{
   surf/.style={pwbeige!10},
   leaf/.style={thin, pwbeige!60},
-  sing/.style={thick, pworange}
+  sing/.style={thick, pworange},
+  ray/.style={thick}
 }
 
 % --- cotangent fibers ---
@@ -41,10 +42,7 @@
   \foreach \y in {\firsthatch, \nexthatch, ..., \hatchstop} {
     \draw[leaf] (-\rfiber, \y) -- (\rfiber, \y);
   };
-  \pgfmathsetmacro{\rcross}{0.08}
-  \draw[thick]
-    (-\rcross, 0) -- (\rcross, 0)
-    (0, \rcross) -- (0, -\rcross);
+  \fill circle (\dotsize);
 }
 
 \newcommand{\singfibercontent}{
@@ -55,8 +53,6 @@
       \rfarout = \rfiber/sin(45+mod(\farout-45, 90));
     }
     \pgfmathsetmacro{\rmax}{sin(\tfarout) * pow(\rfarout, 3)}
-    \draw[green] (0, 0) -- (\farout:\rfarout);
-    %%\draw[violet] (0, 0) -- ({\sector + \u/3}:{(\rfarout/sin(\u))^(1/3)});
     \foreach \r in {0.5, 1.0, ..., \rmax} {
       \pgfmathsetmacro{\win}{asin(\r/(2*\rmax))}
       \draw[leaf, rotate=\sector, domain=\win:{180-\win}, variable=\t] plot ({\t/3}:{(\r/sin(\t))^(1/3)});
@@ -66,6 +62,7 @@
     \foreach \ang in {0, 120, 240} {
       \draw[sing] (\ang:{-sqrt(2)*\rfiber}) -- (\ang:{sqrt(2)*\rfiber});
     };
+    \fill[sing] circle (\dotsize);
   };
 }
 
@@ -73,7 +70,11 @@
 
 \pgfmathsetmacro{\hatch}{2/3}
 \tikzmath{
+  \dotsize = 0.04;
+  \xsing = 2;
   \zsing = 4*\hatch;
+  \xgen = 6;
+  \zgen = 8*\hatch;
   \rcut = 1/5;
 }
 
@@ -84,7 +85,7 @@
   % surface
   \fill[surf]
     (0, 0) -- (0, \zsing-\rcut)
-    -- ++(2-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut})
+    -- ++(\xsing-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut})
     -- (0, 8) --(8, 8) -- (8, 0) -- cycle;
   
   % hatching
@@ -102,9 +103,12 @@
   
   % singular leaves
   \begin{scope}[sing]
-    \draw (2, \zsing) -- (8, \zsing);
-    \draw (0, \zsing-\rcut) -- ++(2-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut});
+    \draw (\xsing, \zsing) -- (8, \zsing);
+    \draw (0, \zsing-\rcut) -- ++(\xsing-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut});
   \end{scope}
+  
+  % generic ray
+  \draw[ray] (\xgen, \zgen) -- (8, \zgen);
   
   % outline
   \calligraphy[copperplate, heavy, heavy line width=0.25mm]
@@ -116,17 +120,23 @@
 \end{scope}
 
 % generic fiber
-\begin{scope}[canvas is xy plane at z=4.666, shift={(6, 4.5)}]
+\begin{scope}[canvas is xy plane at z=\zgen, shift={(\xgen, 4.5)}]
   \begin{fiber}
     \genfibercontent
   \end{fiber}
 \end{scope}
 
 % singular fiber
-\begin{scope}[canvas is xy plane at z=2.666, shift={(2, 4.5)}]
+\begin{scope}[canvas is xy plane at z=\zsing, shift={(\xsing, 4.5)}]
   \begin{fiber}
-  \singfibercontent
+    \singfibercontent
   \end{fiber}
 \end{scope}
+
+% generic point
+\fill (\xgen, 0, \zgen) circle (\dotsize);
+
+% singular point
+\fill[sing] (\xsing, 0, \zsing) circle (\dotsize);
 \end{tikzpicture}
 }
