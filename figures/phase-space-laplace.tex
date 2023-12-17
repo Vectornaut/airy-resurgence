@@ -1,0 +1,75 @@
+\usetikzlibrary{math, 3d, calligraphy}
+
+\newcommand{\rfiber}{1.5}
+
+\newcommand{\drawfiber}{
+  \calligraphy[copperplate, light, thin] (0, -\rfiber) -- (0, -4.5);
+  \foreach \sgn in {-1, 1} {
+    \calligraphy[scale=\sgn, copperplate, heavy, heavy line width=0.25mm]
+      (\rfiber, \rfiber) -- (\rfiber, -\rfiber)
+      (\rfiber, -\rfiber) -- (-\rfiber, -\rfiber);
+  };
+}
+
+\newenvironment{fiber}{%
+  \drawfiber
+  \begin{scope}
+  \clip (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
+}{%
+  \end{scope}
+}
+
+\newcommand{\rloop}[1]{\foreach \r in {0.5, 1.0, ..., #1}}
+\newcommand{\rrange}[1]{0.5, 1.0, ..., #1}
+
+\tikzset{
+  leaf/.style={thin, smoked},
+  sing/.style={line width=0.2mm, apricot}
+}
+
+\newcommand{\phaseSpaceLaplace}{
+\begin{tikzpicture}[z={(0.25cm, 0.125cm)}]
+\begin{scope}[canvas is xz plane at y=0]
+% hatching
+\foreach \z in {1, 2, ..., 7} {
+  \draw[thin, smoked] (0, \z) -- (8, \z);
+};
+
+% outline
+\calligraphy[copperplate, heavy, heavy line width=0.25mm]
+  (0, 0) -- (8, 0)
+  (8, 0) -- (8, 8)
+  (8, 8) -- (0, 8)
+  (0, 8) -- (0, 0);
+\end{scope}
+
+\begin{scope}[canvas is xy plane at z=3, shift={(2, 4.5)}]
+  \foreach \sector in {0, 60, ..., 300} {
+    \tikzmath{
+      \u = \sector+30;
+      \rside = \rfiber/max(abs(sin(\u)), abs(cos(\u)));
+    }
+    \pgfmathsetmacro{\rmax}{pow(\rside, 3)}
+    \node at ({\sector+30}:3) {\rmax};
+    \foreach \r in {1, 2, ..., \rmax} {
+      \draw ({\u-5}:{(\r/abs(sin((3*\u))))^(1/3)}) arc ({\u-5}:{\u+5}:{(\r/abs(sin((3*\u))))^(1/3)});
+      \draw[green] ({\u-20}:\rside) arc ({\u-20}:{\u+20}:\rside);
+      \begin{scope}[green, every node/.style={rotate={\u-90}}]
+        \node at (\u:{1.5*\rfiber}) {\rside};
+        \node at (\u:{2*\rfiber}) {\rmax};
+      \end{scope}
+    };
+    \foreach \r in {1,2,...,\rmax} {
+      \pgfmathsetmacro{\win}{asin(\r/(2*\rmax))}
+      \node[red, rotate={\u-90}] at (\u:{\rfiber+2*\r^(1/3)}) {\win};
+      \draw[leaf, rotate=\sector, domain=\win:{180-\win}, variable=\t] plot ({\t/3}:{(\r/sin(\t))^(1/3)});
+    };
+  };
+  \begin{fiber}
+    \foreach \ang in {0, 120, 240} {
+      \draw[sing] (\ang:-2*\rfiber) -- (\ang:2*\rfiber);
+    }
+  \end{fiber}
+\end{scope}
+\end{tikzpicture}
+}
