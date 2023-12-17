@@ -1,5 +1,18 @@
 \usetikzlibrary{math, 3d, calligraphy}
 
+% --- styles ---
+
+\definecolor{pwbeige}{RGB}{172, 146, 122}
+\definecolor{pworange}{RGB}{245, 153, 30}
+
+\tikzset{
+  surf/.style={pwbeige!10},
+  leaf/.style={thin, pwbeige!60},
+  sing/.style={thick, pworange}
+}
+
+% --- cotangent fibers ---
+
 \newcommand{\rfiber}{1.5}
 
 \newcommand{\drawfiber}{
@@ -12,50 +25,107 @@
 }
 
 \newenvironment{fiber}{%
-  \drawfiber
   \begin{scope}
-  \clip (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
-}{%
+    \fill[surf] (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
+    \clip (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
+}{% ...
   \end{scope}
+  \drawfiber
 }
 
-\tikzset{
-  leaf/.style={thin, smoked},
-  sing/.style={line width=0.2mm, apricot}
+\newcommand{\genfibercontent}{
+  \pgfmathsetmacro{\hatch}{\rfiber/8};
+  \pgfmathsetmacro{\firsthatch}{-\rfiber+\hatch}
+  \pgfmathsetmacro{\nexthatch}{-\rfiber+2*\hatch}
+  \pgfmathsetmacro{\hatchstop}{\rfiber-\hatch/2}
+  \foreach \y in {\firsthatch, \nexthatch, ..., \hatchstop} {
+    \draw[leaf] (-\rfiber, \y) -- (\rfiber, \y);
+  };
+  \pgfmathsetmacro{\rcross}{0.08}
+  \draw[thick]
+    (-\rcross, 0) -- (\rcross, 0)
+    (0, \rcross) -- (0, -\rcross);
 }
 
-\newcommand{\phaseSpaceLaplace}{
-\begin{tikzpicture}[z={(0.25cm, 0.125cm)}]
-\begin{scope}[canvas is xz plane at y=0]
-% hatching
-\foreach \z in {1, 2, ..., 7} {
-  \draw[thin, smoked] (0, \z) -- (8, \z);
-};
-
-% outline
-\calligraphy[copperplate, heavy, heavy line width=0.25mm]
-  (0, 0) -- (8, 0)
-  (8, 0) -- (8, 8)
-  (8, 8) -- (0, 8)
-  (0, 8) -- (0, 0);
-\end{scope}
-
-\begin{scope}[canvas is xy plane at z=3, shift={(2, 4.5)}]
-  \foreach \sector in {0, 60, ..., 300} {
+\newcommand{\singfibercontent}{
+  % nonsingular leaves
+  \foreach \sector/\farout in {0/45, 60/90, 120/135, 180/225, 240/270, 300/315} {
     \tikzmath{
-      \u = \sector+30;
-      \rside = \rfiber/max(abs(sin(\u)), abs(cos(\u)));
+      \tfarout = 3*(\farout - \sector);
+      \rfarout = \rfiber/sin(45+mod(\farout-45, 90));
     }
-    \pgfmathsetmacro{\rmax}{pow(\rside, 3)}
-    \foreach \r in {1,2,...,\rmax} {
+    \pgfmathsetmacro{\rmax}{sin(\tfarout) * pow(\rfarout, 3)}
+    \draw[green] (0, 0) -- (\farout:\rfarout);
+    %%\draw[violet] (0, 0) -- ({\sector + \u/3}:{(\rfarout/sin(\u))^(1/3)});
+    \foreach \r in {0.5, 1.0, ..., \rmax} {
       \pgfmathsetmacro{\win}{asin(\r/(2*\rmax))}
       \draw[leaf, rotate=\sector, domain=\win:{180-\win}, variable=\t] plot ({\t/3}:{(\r/sin(\t))^(1/3)});
     };
-  };
-  \begin{fiber}
+    
+    % singular leaves
     \foreach \ang in {0, 120, 240} {
-      \draw[sing] (\ang:-2*\rfiber) -- (\ang:2*\rfiber);
-    }
+      \draw[sing] (\ang:{-sqrt(2)*\rfiber}) -- (\ang:{sqrt(2)*\rfiber});
+    };
+  };
+}
+
+% --- posititon plane ---
+
+\pgfmathsetmacro{\hatch}{2/3}
+\tikzmath{
+  \zsing = 4*\hatch;
+  \rcut = 1/5;
+}
+
+\newcommand{\phaseSpaceLaplace}{
+\begin{tikzpicture}[z={(0.25cm, 0.2cm)}]
+% position plane
+\begin{scope}[canvas is xz plane at y=0]
+  % surface
+  \fill[surf]
+    (0, 0) -- (0, \zsing-\rcut)
+    -- ++(2-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut})
+    -- (0, 8) --(8, 8) -- (8, 0) -- cycle;
+  
+  % hatching
+  \pgfmathsetmacro{\nexthatch}{2*\hatch}
+  \pgfmathsetmacro{\singstop}{\zsing - \hatch/2}
+  \foreach \z in {\hatch, \nexthatch, ..., \singstop} {
+    \draw[leaf] (0, \z) -- (8, \z);
+  };
+  \pgfmathsetmacro{\singstart}{\zsing + \hatch}
+  \pgfmathsetmacro{\singnext}{\zsing + 2*\hatch}
+  \pgfmathsetmacro{\hatchstop}{8 - \hatch/2}
+  \foreach \z in {\singstart, \singnext, ..., \hatchstop} {
+    \draw[leaf] (0, \z) -- (8, \z);
+  };
+  
+  % singular leaves
+  \begin{scope}[sing]
+    \draw (2, \zsing) -- (8, \zsing);
+    \draw (0, \zsing-\rcut) -- ++(2-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut});
+  \end{scope}
+  
+  % outline
+  \calligraphy[copperplate, heavy, heavy line width=0.25mm]
+    (0, 0) -- (0, \zsing-\rcut)
+    (0, \zsing+\rcut) -- (0, 8)
+    (0, 8) -- (8, 8)
+    (8, 8) -- (8, 0)
+    (8, 0) -- (0, 0);
+\end{scope}
+
+% generic fiber
+\begin{scope}[canvas is xy plane at z=4.666, shift={(6, 4.5)}]
+  \begin{fiber}
+    \genfibercontent
+  \end{fiber}
+\end{scope}
+
+% singular fiber
+\begin{scope}[canvas is xy plane at z=2.666, shift={(2, 4.5)}]
+  \begin{fiber}
+  \singfibercontent
   \end{fiber}
 \end{scope}
 \end{tikzpicture}
