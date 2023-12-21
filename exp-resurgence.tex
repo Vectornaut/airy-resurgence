@@ -496,7 +496,7 @@ Then, Borel regularity for thimble integrals is stated in the following theorem:
 \begin{theorem}[see Theorem \ref{thm:maxim-proof}]\label{thm:maxim}
 If the integral defining $I_j$ is absolutely convergent, then $I_j$ is Borel regular. More explicitly: 
 \begin{enumerate}
-\item\label{part-1} As $z \to \infty$ along the ray $z \in e^{-i\theta}\,\R_{>0}$, the function $I_j$ is asymptotic to a trans-monomial $\tilde{I}_{j}\in e^{-z \alpha_j} z^{-1/2} \C\llbracket z^{-1}\rrbracket$.
+\item\label{part-1} As $z \to \infty$ along the ray $z \in e^{-i\theta}\,\R_{>0}$, the function $I_j$ is asymptotic to a trans-monomial $\tilde{I}_{j}\in e^{-z \alpha_j} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Recall that $\theta$ is the direction of the ray $\Gamma^\theta_j$.
 \item\label{part-2} The series $\tilde{I}_j$ is $1$-Gevrey. In other words, $\tilde{\iota}_j \defeq \borel_\zeta \tilde{I}_j$ converges near $\zeta=\alpha_j$.
 \item\label{part-3} If you continue the sum of $\tilde{\iota}_j$ along the ray $\Gamma_j^\theta$, and take its Laplace transform along that ray, you'll recover $I_j$.
 \end{enumerate}
@@ -1745,7 +1745,7 @@ Since $f$ has non--degenerate critical points, we can find a holomorphic chart $
 \[ \nu = \sum_{m \ge 0} b_m^j \tau^m\,d\tau \]
 that converges in some disk $|\tau| < \varepsilon$.
 
-Let's write $\approx$ when two functions are asymptotic at all orders around the base poin; by the steepest descent method,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).} t  
+Let's write $\approx$ when two functions are asymptotic at all orders around the base poin; by the steepest descent method,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).}
 %%\[ e^{-z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
 \[ e^{z \alpha_j} I_j \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
 as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$. Plugging in the Taylor series for $\nu$, we get
@@ -2035,8 +2035,20 @@ Recalling that the Riemann-Liouville fractional derivative is a left inverse of 
 \end{proof}
 \color{black}
 \begin{remark}
-    The $3/2$ derivative formula~\eqref{formula1} allows us to compute the sum of the germ $\series{\phi}_j$, hence it is enough to use it to study the location of singularities in the position domain and its growth behavior at infinity\footnote{For instance in \cite{sauzin2021variations}, the analogous of formula~\eqref{formula1} is used to compute a close formula for the Borel sum of the Stirling approximation of the Gamma function.}. Furthermore, expanding $\hat{\phi}_j$ at its critical points, we recover the germs $\series{\phi}_k$ for $k\neq j$. This is an instance of resurgence, indeed according to the theory of \'Ecalle, $\hat{\phi}_j$ are all resurgent functions. We'll see an example in Appendix~\ref{apx:eye-res-airy}. 
+We can use the $3/2$ derivative formula~\eqref{formula1} to see that the functions $\phi_j$ are all resurgent, in the sense of \'{E}calle~\cite[\textcolor{orange}{section?}]{EcalleI}. Let's say $\Gamma_j(\beta)$ is the straight path from $\zeta = \alpha_j$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\Lambda_j(\beta)$ in $X$. This lets us analytically continue $\int_{\Lambda_j(\zeta)} \nu$ to a star-shaped domain $\Omega \subset \C$. Intuitively, $\Omega$ is constructed by drawing rays from $\zeta = \alpha_j$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\infty$.
+\begin{center}
+\textcolor{orange}{FIGURE OF SLIT DOMAIN}
+\end{center}
+Let's calculate the jump of $\int_{\Lambda_j(\zeta)}$ across the cut starting at $\zeta = \alpha_k$. Write $\alpha_k$ as $\alpha_j + re^{i\theta}$, and let $\alpha_k^+$ and $\alpha_k^-$ be the points we get by infinitesimally increasing or decreasing $\theta$. The jump is then given by $\int_{\Lambda_j(\alpha_k^+)} \nu - \int_{\Lambda_j(\alpha_k^-)} \nu$.
+
+
+\textcolor{Navy}{Initially, the function $\int_{\Lambda_j(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha_j, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\Lambda_j(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\Lambda_j(\zeta)} \nu$ to be singular is for something to go wrong with the hotmotopy of $\Lambda_j(\zeta)$. At a critical point of $f$, the ends of the homotoped path $\Lambda_j(\zeta)$ come together, telling us that.}
 \end{remark}
+\color{DarkSeaGreen}
+\begin{remark}
+    The $3/2$ derivative formula~\eqref{formula1} allows us to compute the sum of the germ $\series{\phi}_j$, hence it is enough to use it to study the location of singularities in the position domain and its growth behavior at infinity\footnote{For instance in \cite{sauzin2021variations}, the analogous of formula~\eqref{formula1} is used to compute a close formula for the Borel sum of the Stirling approximation of the Gamma function.}. Furthermore, expanding $\hat{\phi}_j$ at its critical points, we recover the germs $\series{\phi}_k$ for $k\neq j$. This is an instance of resurgence, indeed according to the theory of \'{E}calle, $\hat{\phi}_j$ are all resurgent functions. We'll see an example in Appendix~\ref{apx:eye-res-airy}. 
+\end{remark}
+\color{black}
 \textcolor{orange}{
 \begin{corollary}\label{simple-res-thimble}
     If $f$ and $\nu$ are polynomials, the function $\hat{\phi}_j$ defined in \eqref{formula1} has simple resurgent singularities at $\zeta=\alpha_k$.  
