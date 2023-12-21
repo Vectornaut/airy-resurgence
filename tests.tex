@@ -1,0 +1,104 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage[hmargin=1.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz-cd}
+% convenience aliases
+\newcommand{\maps}{\colon}
+
+% symbology
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\series}[1]{\tilde{#1}}
+\newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
+\newcommand{\holoL}[1]{\mathcal{H}L^{#1}} %% may no longer be needed
+\newcommand{\blankbox}{{\fboxsep 0pt \colorbox{lightgray}{\phantom{$h$}}}}
+\newcommand{\laplacepde}{\mathcal{D}}
+\newcommand{\van}{\mathfrak{m}}
+\DeclareMathOperator{\Ai}{Ai}
+\usetikzlibrary{matrix,shapes,arrows,decorations.pathmorphing}
+\tikzset{commutative diagrams/arrow style=math font}
+\tikzset{commutative diagrams/.cd,
+mysymbol/.style={start anchor=center,end anchor=center,draw=none}}
+\newcommand\MySymb[2][\square]{%
+  \arrow[mysymbol]{#2}[description]{#1}}
+\tikzset{
+shift up/.style={
+to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikztonodes}
+}
+}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+                     =}
+\newcommand*{\defeqin}{\mathrel{\vcenter{\lineskiplimit0pt\baselineskip0.5ex
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+                     =}                     
+
+%%\let\Re\relax
+%%\DeclareMathOperator{\Re}{Re}
+
+\newcommand{\laplace}{\mathcal{L}}
+\newcommand{\borel}{\mathcal{B}}
+\newcommand{\aexp}{\text{\ae}}
+\newcommand{\deriv}[3]{\partial^{#1}_{#2 \text{ from } #3}}
+
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{prop}[definition]{Proposition}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[definition]{Lemma}
+%\newtheorem{conjecture}[definition]{Conjecture}
+\newtheorem{claim}[definition]{Claim}
+%\newtheorem{exercise}[definition]{Exercise}
+%\newtheorem*{notation*}{Notation}
+
+% drafting environments
+\newenvironment{verify}{\color{ForestGreen}}{\color{black}}
+\newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
+
+% colors
+\definecolor{ietocean}{RGB}{0, 30, 140}
+\definecolor{ietcoast}{RGB}{0, 150, 173}
+\definecolor{ietlagoon}{RGB}{0, 216, 180}
+
+% pretty prince hyperref must always be the last thing in the preamble, always
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  linkcolor={ietcoast},
+  citecolor={ietcoast},
+  urlcolor={ietcoast}
+}
+
+
+\title{Find the differential equation}
+\author{Veronica Fantini}
+
+\begin{document}
+
+\maketitle
+For $n\geq 3$, the thimble integral $K_n(z)$ is defined as follows 
+\begin{equation}\label{int_higher-Ariy}
+K_n(z) =  \int_{\Lambda} \exp\left[-z\big((n-1)^{n-1} u^n - nu\big)\right]\,du
+\end{equation}
+
+Our goal is to find the ODE that has \eqref{int_higher-Ariy} as a solution. 
+
+For $n=3$, the solution is given by the modified Bessel equation with parameter $1/3$. 
+
+==================================================
+
+For $p\geq 1$, consider the thimble integral 
+\[I_+(z,p):=\frac{1}{2\pi i}\int_{\Gamma_1} e^{-z(4u^3-3u)} \frac{du}{u^p}\]
+
+\end{document}
