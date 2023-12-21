@@ -1,3 +1,5 @@
+\usepackage{etoolbox}
+
 \usetikzlibrary{math, 3d, calligraphy}
 
 % --- styles ---
@@ -15,9 +17,9 @@
 % --- cotangent fibers ---
 
 \newcommand{\rfiber}{1.5}
+\pgfmathsetmacro{\rshade}{1.5*\rfiber}
 
 \newcommand{\drawfiber}{
-  \calligraphy[copperplate, light, thin] (0, -\rfiber) -- (0, -4.5);
   \foreach \sgn in {-1, 1} {
     \calligraphy[scale=\sgn, copperplate, heavy, heavy line width=0.25mm]
       (\rfiber, \rfiber) -- (\rfiber, -\rfiber)
@@ -25,22 +27,69 @@
   };
 }
 
-\newenvironment{fiber}{%
+% set up PGF keys
+\pgfkeys{
+  /laplace/.cd,
+  drop/.store in=\fiberdrop,   drop/.value required,
+  shade/.store in=\fibershade, shade/.default=true,
+  degree/.store in=\fiberdeg,  degree/.value required,
+  phase/.store in=\fiberphase, phase/.value required,
+  dual/.store in=\fiberdual,   dual/.default=true
+}
+
+\newcommand{\fiberdescender}[1]{
+  \calligraphy[copperplate, light, thin] (0, -\rfiber) -- (0, -#1);
+}
+
+\newcommand{\fibershading}[2]{
+  \tikzmath{
+    \shadestart = (-90 - #1) / \fiberdeg;
+    \shadeend = (90 - #1) / \fiberdeg;
+  }
+  \fill[pwbeige!30, draw=pwbeige!60] (0, 0) -- (\shadestart:\rshade) arc (\shadestart:\shadeend:\rshade) -- cycle;
+}
+
+\newenvironment{fiber}[1][]{%
+  \pgfkeys{/laplace/.cd, drop=0, shade=false, degree=1, phase=0, #1}
   \begin{scope}
     \fill[surf] (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
     \clip (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
+    \tikzmath{
+      if \fibershade then {
+        print \fibershading{\fiberphase}{0};
+      };
+    }
 }{% ...
   \end{scope}
+  % see TikZ docs for branching statements
+  % https://tikz.dev/library-math#sec-58.5
+  \tikzmath{
+    if \fiberdrop > 0 then {
+      print \fiberdescender{\fiberdrop};
+    };
+  }
   \drawfiber
 }
 
-\newcommand{\genfibercontent}{
+\newcommand{\genfibercontent}[1][]{
+  \pgfkeys{/laplace/.cd, dual=false, #1}
   \pgfmathsetmacro{\hatch}{\rfiber/8};
   \pgfmathsetmacro{\firsthatch}{-\rfiber+\hatch}
   \pgfmathsetmacro{\nexthatch}{-\rfiber+2*\hatch}
   \pgfmathsetmacro{\hatchstop}{\rfiber-\hatch/2}
   \foreach \y in {\firsthatch, \nexthatch, ..., \hatchstop} {
-    \draw[leaf] (-\rfiber, \y) -- (\rfiber, \y);
+    \tikzmath{
+      coordinate \drawfrom;
+      coordinate \drawto;
+      if \fiberdual then {
+        \drawfrom = (\y, -\rfiber);
+        \drawto = (\y, \rfiber);
+      } else {
+        \drawfrom = (-\rfiber, \y);
+        \drawto = (\rfiber, \y);
+      };
+    }
+    \draw[leaf] (\drawfrom) -- (\drawto);
   };
   \fill circle (\dotsize);
 }
@@ -71,7 +120,9 @@
 
 \pgfmathsetmacro{\hatch}{2/3}
 \tikzmath{
+  \phase = 15;
   \dotsize = 0.04;
+  \drop = 3.5;
   \xsing = 2;
   \zsing = 4*\hatch;
   \xgen = 6;
@@ -79,8 +130,35 @@
   \rcut = 1/5;
 }
 
+\newcommand{\ray}[2]{
+  \draw[ray] (#1, #2) -- (8, {#2 + (8-#1)*tan(\phase)});
+}
+
+% local picture of the Laplace transform
+\newcommand{\basicLaplace}{
+\begin{tikzpicture}[scale=0.9]
+% position space
+\begin{fiber}
+  \genfibercontent
+  \ray{0}{0}
+\end{fiber}
+\node[anchor=north, outer sep=1mm, font=\footnotesize]
+  at (0, -\rfiber) {position space};
+
+% frequency space
+\begin{scope}[shift={(4 + 0.25*8/3, 0)}]
+  \begin{fiber}[shade, phase=\phase]
+    \genfibercontent[dual]
+  \end{fiber}
+  \node[anchor=north, outer sep=1mm, font=\footnotesize]
+    at (0, -\rfiber) {frequency space};
+\end{scope}
+\end{tikzpicture}
+} % \basicLaplace
+
+% phase space picture of the Laplace transform
 \newcommand{\phaseSpaceLaplace}{
-\begin{tikzpicture}[z={(0.25cm, 0.2cm)}]
+\begin{tikzpicture}[z={(0.25cm, 0.2cm)}, scale=0.9]
 % position plane
 \begin{scope}[canvas is xz plane at y=0]
   % surface
@@ -108,8 +186,9 @@
     \draw (0, \zsing-\rcut) -- ++(\xsing-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut});
   \end{scope}
   
-  % generic ray
-  \draw[ray] (\xgen, \zgen) -- (8, \zgen);
+  % integration rays
+  \ray{\xgen}{\zgen}
+  \ray{\xsing}{\zsing}
   
   % outline
   \calligraphy[copperplate, heavy, heavy line width=0.25mm]
@@ -121,15 +200,15 @@
 \end{scope}
 
 % generic fiber
-\begin{scope}[canvas is xy plane at z=\zgen, shift={(\xgen, 4.5)}]
-  \begin{fiber}
-    \genfibercontent
+\begin{scope}[canvas is xy plane at z=\zgen, shift={(\xgen, \drop)}]
+  \begin{fiber}[drop=\drop, shade, phase=\phase]
+    \genfibercontent[dual]
   \end{fiber}
 \end{scope}
 
 % singular fiber
-\begin{scope}[canvas is xy plane at z=\zsing, shift={(\xsing, 4.5)}]
-  \begin{fiber}
+\begin{scope}[canvas is xy plane at z=\zsing, shift={(\xsing, \drop)}]
+  \begin{fiber}[drop=\drop, shade, degree=3, phase=\phase]
     \singfibercontent
   \end{fiber}
 \end{scope}
@@ -143,10 +222,10 @@
 % labels
 \begin{scope}[overlay]
   \node (surf label) at (9, 0, 4) {$B$};
-  \path (surf label) ++(0, 4.5, 0) node {$T^*B$};
+  \path (surf label) ++(0, \drop, 0) node {$T^*B$};
   \node[outer sep=0.15mm, font=\footnotesize, align=left]
     (cut label) at (-1.25, 1.2, \zsing) {branch cut \\ at conical \\ singularity};
   \draw[->] (cut label) to[out=-75, in=180] (-0.25, 0, \zsing);
 \end{scope}
 \end{tikzpicture}
-}
+} % \phaseSpaceLaplace
