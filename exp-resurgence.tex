@@ -70,6 +70,17 @@
 \newcommand*{\isoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\sim\)}"
 ]}
 
+%% for the figure
+% colors
+\definecolor{smoked}{RGB}{216, 212, 204}
+\definecolor{mauve}{RGB}{200, 55, 171}
+\definecolor{apricot}{RGB}{250, 144, 4}
+\definecolor{sky}{RGB}{66, 169, 244}
+\definecolor{plum}{RGB}{76, 0, 102}
+
+% === phase space laplace ===
+\include{../figures/phase-space-laplace.tex}
+
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
 \newcommand{\blankbox}{{\fboxsep 0pt \colorbox{lightgray}{\phantom{$h$}}}}
@@ -184,17 +195,17 @@ with $\tau \in (0, 1]$, that looks or acts like a solution to a problem whose ac
 \end{equation}
 behave near $z = \infty$, you might start by looking for formal {\em transmonomial} solutions $e^{-\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above. Setting $\alpha = -1$ and $\tau = \tfrac{1}{2}$ gives a well-behaved recurrence relation for $\series{\Phi}$, which produces the solution 
 \begin{equation}
-e^{z} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{72} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{31104} \cdot \frac{3!!}{z^{5/2}} + \frac{85085}{33592320} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel-ex}
+e^{z} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{72} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{31104} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{6718464} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel-ex}
 \end{equation}
 and its constant multiples (see \cite[equation 10.40.1]{dlmf}). As another example, you might rewrite the integral
 
 \[ \Phi(z) = \int_{\Lambda} \exp\left[-z \left(4 u^3 - 3 u\right)\right]\,du \]
 as
-\textcolor{orange}{[How do we know it is a solution of Equation (1)?]}
-\color{orange}
-\[ e^{z}\, (2\pi)^{-\tfrac{1}{2}}\, \int_{-\infty}^\infty e^{-z t^2/2} \left[ 1 - \frac{2}{3} t + \frac{5}{72} t^2 - \frac{32}{27} t^3 + \frac{385}{31104} t^4 - \frac{224}{81} t^5 + \frac{85085}{33592320} t^6 - \ldots \right] dt \]
-using the substitution $\tfrac{1}{2} t^2 = 4 u^3 - 3 u + 1$. Na\"{i}vely integrating term by term, you again get the transmonomial~\eqref{series:bessel-ex}.
-\color{black}
+\[ e^{z}\, \frac{1}{2\sqrt{3}}\, \int_{-\infty}^\infty e^{-z t^2/2} \left[ 1 - \frac{\sqrt{3}}{9} t + \frac{5}{72} t^2 - \frac{4\sqrt{3}}{243} t^3 + \frac{385}{31104} t^4 - \frac{7\sqrt{3}}{2187} t^5 + \frac{17017}{6718464} t^6 - \ldots \right] dt \]
+using the substitution $\tfrac{1}{2} t^2 = 4 u^3 - 3 u + 1$. Na\"{i}vely integrating term by term, you again get the transmonomial~\eqref{series:bessel-ex}---up to a constant.\begin{verify}
+    see Mathematica document.
+\end{verify}
+
 Once you have the formal solution $\series{\Phi}$, you might try to get an actual solution by applying {\em Borel summation}, which turns a formal power series into a function asymptotic to it. Borel summation works in three steps.
 \begin{enumerate}
 \item Thinking of $z$ as a ``frequency variable,'' we take the Borel transform (also known as formal inverse Laplace transform) of $\series{\Phi}$, producing a formal power series $\series{\phi}$ in a new ``position variable'' $\zeta$.
@@ -456,7 +467,7 @@ Conversely, on the left-hand side, by our existence and uniqueness result \cite[
 
 \subsubsection{Why does Borel summation work for thimble integrals?}
 %\textcolor{DarkCyan}{Let $X$ be an $N$-dimensional complex manifold, and $f\colon X\to\C$ a proper holomorphic map with non-degenerate critical points.}
-Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We'll define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{RoyalBlue}{[The important thing about $\C$, where $f$ takes values, is htat it's a translation surface---\ldots]} For each critical point $a_j$, let $\Gamma_j^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha_j$, and let $\zeta_{\alpha_j}$ be the translation coordinate around $\Gamma_j^\theta$ which vanishes at $\alpha_j$. These are well-defined as long as $\Gamma_j^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\Gamma_j^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_j^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_j^\theta$ can be regarded as the component of $f^{-1}(\Gamma_j^\theta)$ that goes through $a_j$.  \textcolor{orange}{We could orient so that shifting $\Lambda_j$ to its left would make its projection run clockwise around $\Gamma_j$. However, this only seems to be possible when $X$ is 1-dimensional.} 
+Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We'll define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{RoyalBlue}{[The important thing about $\C$, where $f$ takes values, is htat it's a translation surface---\ldots]} For each critical point $a$, let $\Gamma_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\Gamma_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\Gamma_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\Gamma_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_a^\theta$ can be regarded as the component of $f^{-1}(\Gamma_\alpha^\theta)$ that goes through $a$.  \textcolor{orange}{We could orient so that shifting $\Lambda_a$ to its left would make its projection run clockwise around $\Gamma_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
 
 \begin{figure}[ht]
     \centering
@@ -466,18 +477,17 @@ Consider a thimble integral of the form described in Section~\ref{borel-reg:expl
     \caption{\textcolor{orange}{Change the pictures with the one centered at the critical values/points respectively}The preimage of a ray departing from the critical value and going to infinity along the positive real axis.}
     \label{fig:thimble_vs_rays}
 \end{figure}
-
-Let $I_j$ be the thimble integral through the thimble $\Lambda_j^\theta$,
+Choose $a$ a ciritcal point of $f$ and $\alpha=f(a)$, let $I$ be the thimble integral through the thimble $\Lambda_a^\theta$,
 \begin{equation}
-I_j(z)\defeq\int_{\Lambda_j^\theta}e^{-zf}\nu
+I(z)\defeq\int_{\Lambda_a^\theta}e^{-zf}\nu
 \end{equation}
-our main results show that $I_j$ is Borel regular as a conseuqence of the fact that thimble integrals can be turned into Laplace transforms. Thus, we recall the well-known result
+our main results show that $I$ is Borel regular as a conseuqence of the fact that thimble integrals can be turned into Laplace transforms. We recall the well-known result
 \begin{lemma}[see Lemma \ref{lem:thimble_proj_formula-proof}]\label{lem:thimble_proj_formula}
-A function $\iota_j$ with $I_j = \laplace_{\zeta, \alpha_j}^\theta \iota_j$ is given by the {\em thimble projection formula}
+A function $\iota$ with $I = \laplace_{\zeta, \alpha}^\theta \iota$ is given by the {\em thimble projection formula}
 \begin{equation}\label{eqn:formula}
-\iota_{j} = \frac{\partial}{\partial \zeta} \left( \int_{\Lambda_j(\zeta)}\nu \right),
+\iota = \frac{\partial}{\partial \zeta} \left( \int_{\Lambda^\theta(\zeta)}\nu \right),
 \end{equation}
-where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j,\zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[The thimble $\Lambda_j$ needs an orientation, but the orientation is arbitrary.]}
+where $\Lambda^\theta(\zeta)$ is the part of $\Lambda_a^\theta$ that goes through $f^{-1}([\alpha,\zeta e^{i\theta}])$. Notice that $\Lambda(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[The thimble $\Lambda$ needs an orientation, but the orientation is arbitrary.]}
 \end{lemma}
 %\begin{remark}
 %The operator $\fracderiv{1/2}{\zeta}{\alpha}$ is the fractional derivative based at $\zeta = \alpha$, as defined in Section~\ref{L-int-op}:
@@ -494,11 +504,11 @@ where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\
 %\end{remark}
 Then, Borel regularity for thimble integrals is stated in the following theorem: 
 \begin{theorem}[see Theorem \ref{thm:maxim-proof}]\label{thm:maxim}
-If the integral defining $I_j$ is absolutely convergent, then $I_j$ is Borel regular. More explicitly: 
+If the integral defining $I$ is absolutely convergent, then $I$ is Borel regular. More explicitly: 
 \begin{enumerate}
-\item\label{part-1} As $z \to \infty$ along the ray $z \in e^{-i\theta}\,\R_{>0}$, the function $I_j$ is asymptotic to a trans-monomial $\tilde{I}_{j}\in e^{-z \alpha_j} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Recall that $\theta$ is the direction of the ray $\Gamma^\theta_j$.
-\item\label{part-2} The series $\tilde{I}_j$ is $1$-Gevrey. In other words, $\tilde{\iota}_j \defeq \borel_\zeta \tilde{I}_j$ converges near $\zeta=\alpha_j$.
-\item\label{part-3} If you continue the sum of $\tilde{\iota}_j$ along the ray $\Gamma_j^\theta$, and take its Laplace transform along that ray, you'll recover $I_j$.
+\item\label{part-1} As $z \to \infty$ along the ray $z \in e^{-i\theta}\,\R_{>0}$, the function $I$ is asymptotic to a trans-monomial $\tilde{I}\in e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Recall that $\theta$ is the direction of the ray $\Gamma^\theta_\alpha$.
+\item\label{part-2} The series $\tilde{I}$ is $1$-Gevrey. In other words, $\tilde{\iota} \defeq \borel_\zeta \tilde{I}$ converges near $\zeta=\alpha$.
+\item\label{part-3} If you continue the sum of $\tilde{\iota}$ along the ray $\Gamma_\alpha^\theta$, and take its Laplace transform along that ray, you'll recover $I$.
 \end{enumerate}
 \end{theorem}
 \color{Goldenrod}
@@ -519,13 +529,13 @@ where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\
 We sketch the proofs of the main results in the following diagram (for the rigorous ones see Section~\ref{borel-reg-thimble}):
 \[
 \begin{tikzcd}
-{I}_{j} \arrow[rrr,"\aexp^{\theta}"]\arrow[dd, swap,"\laplace^{-1} "] &  & & \tilde{I}_{j}\arrow[dd,"\borel"]\\
+{I} \arrow[rrr,"\aexp^{\theta}"]\arrow[dd, swap,"\laplace^{-1} "] &  & & \tilde{I}\arrow[dd,"\borel"]\\
 & & &\\
-\iota_j \arrow[r,equal] & \hat{\iota}_j & &\tilde{\iota}_{j} \arrow[ll, "\text{sum}"]
+\iota \arrow[r,equal] & \hat{\iota} & &\tilde{\iota} \arrow[ll, "\text{sum}"]
 \end{tikzcd}
 \]
-On the one hand, with a change of coordinates, the thimble integral $I_j$ can be written as a Laplace type integral, i.e. as the Laplace transform of a function $\iota_j$, written explicitly in equation~\eqref{eqn:formula}. 
-On the other hand, we compute the asymptotic expansion of $I_j$ using the saddle point approximation, which turns out to be a formal $1$-Gevrey series in the frequency domain. Consequently, its Borel transform $\series{\iota}_j$ is a germ of holomorphic functions at $\zeta=\alpha_j$ in the position domain. Then, we'll show that the Taylor expansion of $\iota_j$ at $\zeta=\alpha_j$ agrees with $\tilde{\iota}_j$. 
+On the one hand, with a change of coordinates, the thimble integral $I$ can be written as a Laplace type integral, i.e. as the Laplace transform of a function $\iota$, written explicitly in equation~\eqref{eqn:formula}. 
+On the other hand, we compute the asymptotic expansion of $I$ using the saddle point approximation, which turns out to be a formal $1$-Gevrey series in the frequency domain. Consequently, its Borel transform $\series{\iota}$ is a germ of holomorphic functions at $\zeta=\alpha$ in the position domain. Finally, we'll show that the Taylor expansion of $\iota$ at $\zeta=\alpha$ agrees with~$\tilde{\iota}$. 
 
 
 %% the following remark has been moved to Section of the proof
@@ -552,14 +562,14 @@ As part of the treatment, we have made use of some new perspectives on the Lapla
 Furthermore, we introduce a geometric picture where the position domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_b^\theta$ is $T^* B_b$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example (see Figure \ref{fig:different_fibres}). 
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[scale=0.15]{figures/cotg_singular_fibre_laplace.PNG}
-    \caption{The fiber over an ordinary point of the translation surface $B$ is a copy of the complex plane. However, the fiber over a singular point $s$ of $B$ has an interesting structure. Here we represent the example of Airy functions, where the singularity as angle $6 \pi$.}
+\centering
+    \includegraphics{testbed/testbed1.pdf}
+    \caption{The fiber over an ordinary point of the translation surface $B$ is a copy of the complex plane. However, the fiber over a singular point of $B$ has an interesting structure. Here we represent the example of Airy functions, where the singularity as angle $6 \pi$.}
     \label{fig:different_fibres}
 \end{figure}
 We’ll illustrate our main results with detailed treatments of several examples: we’ll mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals: the Airy--Lucas functions (Section~\ref{example_AL}), modified Bessel function, Airy function (Appendix~\ref{airy-appendix}), \textcolor{red}{the anharmonic oscillator...).} 
 
-On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in the proof of Theorem~\ref{thm:maxim} part~\ref{part3}. In the Airy example (see Section~\ref{airy-appendix}) we’ll compute the \textit{thimble projection formula} directly, and by numerical check we show $\hat{\phi}_j$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
+On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in the proof of Theorem~\ref{thm:maxim} part~\ref{part3}. In the Airy example (see Section~\ref{airy-appendix}) we’ll compute the \textit{thimble projection formula} directly, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
 
 Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we’ll make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}). \textcolor{red}{The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}).} Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}. 
 
@@ -802,9 +812,9 @@ The Watson--Nevanlinna--Sokal characterization of Borel regular functions is tot
 %%a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\borel\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
 \subsection{Borel regularity for level~$1$ ODEs}
 %
-From a formal perspective, the general theory of linear level~$1$ ODEs suggests to look for formal solutions $\tilde{\Psi}_j$ of $\mathcal{P}\Phi=0$ in the transmonomial space $\tilde{\Psi}_j\in e^{-\alpha_j z} z^{-\tau_j}\C\llbracket z^{-1}\rrbracket$, where $\tau_j=Q(-\alpha_j)/P’(-\alpha_j)$~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. Since $-\alpha_1,\ldots,-\alpha_d$ are distinct, the transmonomials $\tilde{\Psi}_1,\ldots,\tilde{\Psi}_d$ determine a basis up to scaling, giving the space of formal solutions a a distinguished frame. Then, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotic to the formal one, but it  does not give a way to construct that analytic frame (see~\cite[Chapter 14]{balser}). To get a constructive proof, a classical approach was to investigate Borel summability of the formal solutions~\cite{loday-Remy2011,diverg-resurg--ii,malgrange--fourier,malgrange1995sommation,malgrange92,ramis1991series}. For example, the Ramis Index Theorem shows that the $\tilde{\Psi}_j$ are 1-Gevrey series---the first step in proving Borel~summability~\cite{ramis_index}.
+From a formal perspective, the general theory of linear level~$1$ ODEs suggests to look for formal solutions $\tilde{\Psi}_\alpha$ of $\mathcal{P}\Phi=0$ in the transmonomial space $\tilde{\Psi}_\alpha\in e^{-\alpha z} z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket$, where $\tau_\alpha=Q(-\alpha)/P’(-\alpha)$~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. Since the cirtical values are distinct, the transmonomials $\tilde{\Psi}_\alpha$ determine a basis up to scaling, giving the space of formal solutions a distinguished frame. Then, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotic to the formal one, but it  does not give a way to construct that analytic frame (see~\cite[Chapter 14]{balser}). To get a constructive proof, a classical approach was to investigate Borel summability of the formal solutions~\cite{loday-Remy2011,diverg-resurg--ii,malgrange--fourier,malgrange1995sommation,malgrange92,ramis1991series}. For example, the Ramis Index Theorem shows that the $\tilde{\Psi}_\alpha$ are 1-Gevrey series---the first step in proving Borel~summability~\cite{ramis_index}.
 
-At the same time, a natural question we can ask is whether we can build an analytic frame of solutions, without looking for a formal frame. This is possible, as we proved in~\cite{reg-sing-volterra}, and by our construction, these solutions turn out to be uniform 1-Gevrey asymptotic to the formal solutions $\tilde{\Psi}_1,\ldots,\tilde{\Psi}_d$ (see Corollary~\ref{cor:borel_reg_ODE}). As briefly discussed in Section~\ref{sec:why_borel_ODE} in the sketch the proof of Theorem~\ref{thm:borel_reg_ODE} and Corollary~\ref{cor:borel_reg_ODE}, our result is based on going to the position domain and study solutions of an integral equation with a special behaviour at the singular points $\zeta=\alpha_j$. Although our approach and the classical one of Borel summability both focus on the importance of the position domain, we study different equations: on the one hand, we solve integral equations in the position domain; on the other hand, Malgrange~\cite{malgrange--fourier} solves differential equations analytically in the position domain, and in~\cite{loday-Remy2011}, Loday-Richaud and Remy solve perturbed integral equations formally in the position domain (following the approach of \'Ecalle~\cite{EcalleIII}). 
+At the same time, a natural question we can ask is whether we can build an analytic frame of solutions, without looking for a formal frame. This is possible, as we proved in~\cite{reg-sing-volterra}, and by our construction, these solutions turn out to be uniform 1-Gevrey asymptotic to the formal solutions $\tilde{\Psi}_\alpha$ (see Corollary~\ref{cor:borel_reg_ODE}). As briefly discussed in Section~\ref{sec:why_borel_ODE} in the sketch the proof of Theorem~\ref{thm:borel_reg_ODE} and Corollary~\ref{cor:borel_reg_ODE}, our result is based on going to the position domain and study solutions of an integral equation with a special behaviour at the singular points $\zeta=\alpha$. Although our approach and the classical one of Borel summability both focus on the importance of the position domain, we study different equations: on the one hand, we solve integral equations in the position domain; on the other hand, Malgrange~\cite{malgrange--fourier} solves differential equations analytically in the position domain, and in~\cite{loday-Remy2011}, Loday-Richaud and Remy solve perturbed integral equations formally in the position domain (following the approach of \'Ecalle~\cite{EcalleIII}). 
 
 \begin{remark}
 Our approach of solving regular singular Volterra equation is analogous to the one that Braaksma used to solve a different class of non-linear ODEs and difference equations whose coefficients are written as Laplace transforms~\cite{braaksma2006laplace}. \textcolor{orange}{[Let's do more compare-and-contrast! Our problem space is sort of orthogonal to Braaksma's, but we use the same solution space, so it seems like there could be a cool interaction there.]}
@@ -831,7 +841,7 @@ In Section~\ref{borel_reg-ODE}, we show that we're all finding the same frame. T
 %
 Thimble integrals have been studied from different perspectives: in physics, they play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities \cite{dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua}. In this context, physicists often use Borel summation, resurgence and related techniques to assign values to these integrals going beyond their pertubative expansion. For instance, in complex Chern--Simons theory, one could decompose the path integral in thimble integrals and arguing as in the finite dimesional set-up to study the Witten--Reshetikhin--Turaev invariants of $3$ manifolds \cite{gukov-marino-purtrov-resurgence,Witten}. \textcolor{orange}{Take a look at Witten's paper on knots} More generally, we could of a problem that is known to admit a thimble integral solution but hard to be defined explicitly. However, we know the perturbative expansion of this expected solution; then Borel regularity tells us that the Borel sum of the pertubative series is the solution we're looking for. In fact, the Laplace transform ray (namely the ray along which the Laplace trasnform is defined) is often a ``collapsed'' thimble.\textcolor{Maroon}{This is the bit about turning a perturbative series back into a thimble integral, taking advantage of the fact that the Laplace transform ray is often a ``collapsed'' thimble.}
 
-In the algebraic geometric set-up, namely when $X$ is an $N$-dimensional alegbraic variety over $\C$ and $f$ is a proper map $f\colon X\to\C$, thimble integrals are known as period integrals \cite{deligne2007singularites,Maxim_lectures,pham}.\footnote{In particular, they find application in mirror symmetry for Fano varieties as they encode the Gromov--Witten invariants.\textcolor{orange}{add references---Maxim's mirror symmetry talk, Varchenko}.} In fact, the thimbles represent classes in the homology $H^{B,\theta}_N(X,f)$ which are relative to the preimage of $e^{i\theta}\infty$ under the funtion $f$, for a generic direction $\theta$.\footnote{The relative homology $H_i^{\theta}(X,f)$ is defined as the limit as $c\to e^{i\theta}\infty$, of $H_i^{\theta}(X,f^{-1}(S_c^+))$, where $S_c^+=\lbrace \zeta\in\C \vert \Re \zeta> c\rbrace$. Generic directions correspond to $\theta\neq \arg (\alpha_k-\alpha_j)$, and $k\neq j$. } Furthermore, if $f$ has non-degenerate critical points, they form a basis for $H_N^{B,\theta}(X,f)$. Then varying $\theta$, $H_N^{B,\theta}(X,f)$ forms a local system over $S^1=\R/2\pi \Z$ singular at $\theta=\arg(\alpha_i-\alpha_j)$, and whose monodromy can be computed by Picard--Lefschetz formula (we refer to \cite{pham,Arnold}).  
+In the algebraic geometric set-up, namely when $X$ is an $N$-dimensional alegbraic variety over $\C$ and $f$ is a proper map $f\colon X\to\C$, thimble integrals are known as period integrals \cite{deligne2007singularites,Maxim_lectures,pham}.\footnote{In particular, they find application in mirror symmetry for Fano varieties as they encode the Gromov--Witten invariants.\textcolor{orange}{add references---Maxim's mirror symmetry talk, Varchenko}.} In fact, the thimbles represent classes in the homology $H^{B,\theta}_N(X,f)$ which are relative to the preimage of $e^{i\theta}\infty$ under the funtion $f$, for a generic direction $\theta$.\footnote{The relative homology $H_i^{\theta}(X,f)$ is defined as the limit as $c\to e^{i\theta}\infty$, of $H_i^{\theta}(X,f^{-1}(S_c^+))$, where $S_c^+=\lbrace \zeta\in\C \vert \Re \zeta> c\rbrace$. Generic directions correspond to $\theta\neq \arg (\alpha-\beta)$. } Furthermore, if $f$ has non-degenerate critical points, they form a basis for $H_N^{B,\theta}(X,f)$. Then varying $\theta$, $H_N^{B,\theta}(X,f)$ forms a local system over $S^1=\R/2\pi \Z$ singular at $\theta=\arg(\alpha-\beta)$, and whose monodromy can be computed by Picard--Lefschetz formula (we refer to \cite{pham,Arnold}).  
 
 \textcolor{orange}{thimble integral as solution of ODE with irregular singularity and the Stokes phenomena. }
 
@@ -899,7 +909,7 @@ commute.
 \textcolor{red}{\textbf{Discuss the visual boundary, citing Lemma~3.1 of Dankwart's thesis \textit{On the large-scale geometry of flat surfaces} for the description of geodesics.}}
 %
 \subsubsection{The Laplace transform over an ordinary point}\label{laplace:ordinary}
-Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an extended angle $\theta \in \R$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] Pick a translation parameter $\zeta$.} The {\em Laplace transform} $\laplace_\zeta^\theta$ turns a local holomorphic function $f$ on $B$ into a local holomorphic function on $T^*B$. When $b \in B$ is an ordinary point, $\laplace_\zeta^\theta f$ is defined on $T^*B_b$ by the formula
+Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an extended angle $\theta \in \R$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] Pick a translation parameter $\zeta$.} The {\em Laplace transform} $\laplace_\zeta^\theta$ turns a local holomorphic function $f$ on $B$ into a local holomorphic function on $T^*B$. When $b \in B$ is an ordinary point, $\laplace_\zeta^\theta f$ is defined on $T_b^*B$ by the formula
 \begin{equation}\label{laplace:int}
 \laplace_\zeta^\theta f\big|_b = \int_{\Gamma_b^\theta} e^{-z\zeta} f\,d\zeta,
 \end{equation}
@@ -918,7 +928,7 @@ To make sense of this formula, we ask for the following conditions.
 \end{itemize}
 \color{black}
 \subsubsection{The Laplace transform over a branch point}
-When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T^*B_b$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T^*B_b^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\eqref{laplace:int}. The half-plane $z \in H_{\theta}$ in $T^*B_b^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T^*B_b$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
+When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T_b^*B$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T_b^*B^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\eqref{laplace:int}. The half-plane $z \in H_{\theta}$ in $T_b^*B^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T_b^*B$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
 %\color{gray}
 %\subsection{The geometry of the Borel transform}
 %\begin{itemize}
@@ -933,7 +943,7 @@ When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to defi
 \subsection{The Laplace transform: analytic version}\label{sec:laplace_analytic}
 \subsubsection{Regularity and decay properties}\label{reg-decay}
 %
-Let $\Omega_\alpha \subset B$ be an open, simply connected set that touches but does not contain $\zeta=\alpha$ (see Figure \ref{Fig:domain}). Suppose $\Omega_\alpha$ contains the ray $\Gamma_{\zeta,\alpha}^\theta$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ of holomorphic functions on $\Omega_\alpha$ which are uniformly of exponential type $\Lambda$ and blow up like $|\zeta|^\sigma$ as $\zeta$ approaches $\alpha$. When $\sigma>-1$, the singularity at $\zeta=\alpha$ is integrable. Hence, the Laplace transform $\laplace_{\zeta, \alpha}^\theta$ turns elements of $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ into well-defined holomorphic functions on the half-plane $\Re(e^{i\theta} z) > 0$ in the fiber $T^*B_{\zeta=\alpha}$~\cite[Section  5.6]{diverg-resurg-i}.
+Let $\Omega_\alpha \subset B$ be an open, simply connected set that touches but does not contain $\zeta=\alpha$ (see Figure \ref{Fig:domain}). Suppose $\Omega_\alpha$ contains the ray $\Gamma_{\zeta,\alpha}^\theta$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ of holomorphic functions on $\Omega_\alpha$ which are uniformly of exponential type $\Lambda$ and blow up like $|\zeta|^\sigma$ as $\zeta$ approaches $\alpha$. When $\sigma>-1$, the singularity at $\zeta=\alpha$ is integrable. Hence, the Laplace transform $\laplace_{\zeta, \alpha}^\theta$ turns elements of $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ into well-defined holomorphic functions on the half-plane $\Re(e^{i\theta} z) > 0$ in the fiber $T_{\zeta=\alpha}^*B$~\cite[Section  5.6]{diverg-resurg-i}.
 %Let's say a function $f$ is in $O_{\zeta, \alpha \leftarrow}(g)$ or $O_{\zeta, \alpha \rightarrow}(g)$, respectively, if $|f| \lesssim g$ on some neighborhood of the starting point or infinite end of $\Gamma_{\zeta, \alpha}$. A function is {\em subexponential} along $\Gamma_{\zeta, \alpha}$ if it's in $O_{\zeta, \alpha \rightarrow}(e^{c\zeta})$ for all $c > 0$ \textcolor{magenta}{[shall we write in formula?]}. Let $\mathcal{E}_{\zeta, \alpha}$ be the space of functions that are subexponential on $\Gamma_{\zeta, \alpha}$, integrable at the starting point, and locally integrable throughout. If $f$ is in $\mathcal{E}_{\zeta, \alpha}$, then $\laplace_{\zeta, \alpha} f$ is well-defined and holomorphic for $\Re(z) > 0$ on the part of $T^*B$ that lies over $\Gamma_{\zeta, \alpha}$~\cite[Section  5.6]{diverg-resurg-i}.
 
 \color{RoyalBlue}{$\singexpalg{\sigma}(\Omega_\alpha^\Lambda)$}
@@ -1553,15 +1563,15 @@ in fact equation \eqref{change_chart_convolution} can be regarded as a compatibi
 \end{equation}
 
 \begin{itemize}
-\item $P$ is a monic degree-$d$ polynomial with simple zeros at $-\alpha_j$ for $j=1,...,d$ i.e. such that $P'(-\alpha_j)\neq 0$ for every $j=1,...,d$; \footnote{Unlike \'Ecalle, we don't require all the roots of $P$ to be non-zero, because  we can translate in the position domain.}
-\item $Q$ is a degree-$(d-1)$ polynomial and $Q(-\alpha_j)\neq 0$ for all $j=1,...,d$;
+\item $P$ is a monic degree-$d$ polynomial with simple zeros; \footnote{Unlike \'Ecalle, we don't require all the roots of $P$ to be non-zero, because  we can translate in the position domain.}
+\item $Q$ is a degree-$(d-1)$ polynomial and $Q(-\alpha)\neq 0$ for all zeros $\alpha$;
 \item $R_0(z^{-1}), \ldots, R_{d-1}(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$.
 \end{itemize}
 
-For every $j=1,...,d$, let $\Omega_j\subset B$ be a simply connected open set that touches but doesn't contain $\zeta = \alpha_j$. We also assume:
+For every zeros $\alpha$, let $\Omega_\alpha\subset B$ be a simply connected open set that touches but doesn't contain $\zeta = \alpha$. We also assume:
 \begin{itemize}
-\item The set $\Omega_j$ is star-shaped around $\zeta = \alpha_j$. In other words, for any $a \in \Omega_j$, a straight path from $\zeta = \alpha_j$ to $a$ stays in $\Omega_j$. Since $\Omega_j$ doesn't contain $\zeta = \alpha_j$, we'll always leave that starting point out of the path.
-\item The set $\Omega_j$ does not contain the tubular neighborhood of the other critical points $-\alpha_k$, for $k\neq j$, as shown in Figure \ref{Fig:domain}. \textcolor{orange}{[In ``Regular singular Volterra,'' we assume that $\Omega_j$ doesn't touch any other critical point (that is, doesn't contain any other critical point in its closure). Under the star-shaped assumption, I think that implies avoiding tubular neighborhoods of the shadow rays.]}
+\item The set $\Omega_\alpha$ is star-shaped around $\zeta = \alpha$. In other words, for any $a \in \Omega_\alpha$, a straight path from $\zeta = \alpha$ to $a$ stays in $\Omega_\alpha$. Since $\Omega_\alpha$ doesn't contain $\zeta = \alpha$, we'll always leave that starting point out of the path.
+\item The set $\Omega_\alpha$ does not contain the tubular neighborhood of the other critical points, as shown in Figure \ref{Fig:domain}. \textcolor{orange}{[In ``Regular singular Volterra,'' we assume that $\Omega_\alpha$ doesn't touch any other critical point (that is, doesn't contain any other critical point in its closure). Under the star-shaped assumption, I think that implies avoiding tubular neighborhoods of the shadow rays.]}
 \end{itemize}
 
 \begin{figure}
@@ -1575,8 +1585,8 @@ For every $j=1,...,d$, let $\Omega_j\subset B$ be a simply connected open set th
   arc (103:50:\spill) -- (50:2.6) .. controls (50:2.2) and (43:2.2) .. (43:2.6) -- (43:\spill)
   arc (43:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-60:2) .. (-60:2.3) -- (-60:\spill)
   arc (-60:-130:\spill) -- (0, 0);
-\fill[violet] circle (0.7mm) node[anchor=195, outer sep=1mm] {$\zeta = \alpha_j$};
-\node[anchor=north west, outer sep=1mm] at (46.5:2.46) {$\zeta=\alpha_k$};
+\fill[violet] circle (0.7mm) node[anchor=195, outer sep=1mm] {$\zeta = \alpha$};
+\node[anchor=north west, outer sep=1mm] at (46.5:2.46) {$\zeta=\beta$};
 \foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
   \fill \p circle (0.7mm);
 }
@@ -1594,25 +1604,20 @@ For every $j=1,...,d$, let $\Omega_j\subset B$ be a simply connected open set th
 %such that $\psi_j$ blows up as $\zeta^{\tau_j-1}$ at $\alpha_j$:
 %${\psi}_j(\zeta_j)=\zeta_j^{\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega_j)$ with $\Omega_j$.
 %\end{theorem}
-\color{Maroon}
-For each root $\alpha$ of $P$,
-\color{black}
-
-
 \begin{theorem}\label{thm2-dim}
 %For every $j=1,...,d$ let $\psi_j(\zeta_j)$ be the unique solution of $\hat{P}_j\psi_j=0$ as in in Theorem \ref{thm1-dim}. Then $\psi_j(\zeta_j)$ admits a well defined Laplace transform $\Psi_j:=\laplace_{\zeta_j,-\alpha_j}^{\theta_j}$ for some direction $\theta_j$.
-For every $j=1,...,d$, let $\tilde{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\sum_{n=0}^{\infty}a_{j,n}z^{-n}$ be the formal solution of $\mathcal{P}\Psi=0$ with $a_{j,0}=1$. Then $\series{\Psi}_j(z)$ is Borel summable and its Borel sum is proportional to $\Psi_j$. 
+For each root $\alpha$ of $P$, let $\tilde{\Psi}_\alpha(z)=e^{-\alpha z}z^{-\tau_\alpha}\sum_{n=0}^{\infty}a_{\alpha,n}z^{-n}$ be the formal solution of $\mathcal{P}\Psi=0$ with $a_{\alpha,0}=1$. Then $\series{\Psi}_\alpha(z)$ is Borel summable and its Borel sum is proportional to $\Psi_\alpha$. 
 \end{theorem}
 \begin{proof}
 We divide the proof into the following steps:
 \begin{itemize}
-\item[$(a)$] let $\series{\psi}_j:=\borel_{\zeta}\series{\Psi}_j$, then $\hat{P}_j\series{\psi}_j=0$.
-\item[$(b)$] prove that $\laplace_{\zeta,\alpha_j}^{\theta}\circ\borel_\zeta\series{\Psi}_j\propto \Psi_j $. 
+\item[$(a)$] let $\series{\psi}_\alpha:=\borel_{\zeta}\series{\Psi}_\alpha$, then $\hat{P}_\alpha\series{\psi}_\alpha=0$.
+\item[$(b)$] prove that $\laplace_{\zeta,\alpha}^{\theta}\circ\borel_\zeta\series{\Psi}_\alpha\propto \Psi_\alpha $. 
 \end{itemize}
 
-Step $(b)$ clearly follows from \cite[Theorem 4]{reg-sing-volterra} and step $(a)$. In fact, $\Tilde{\psi}_j$ and ${\psi}_j$ are both solutions of $\hat{P}_j\psi=0$ and by uniqueness they are proportional in a neighbourhood of $\alpha_j$. Then, we can Laplace transform ${\psi}_j$ along a ray $\Gamma_{\alpha_j}^\theta$ in $\Omega_j$. Hence if $\hat{\psi}_j$ denotes the analytic continuation of $\tilde{\psi}_j$ which agrees with $\psi_j$, we can Laplace transform $\hat{\psi}_j$ along $\Gamma_{\alpha_j}^\theta$, too. 
+Step $(b)$ clearly follows from \cite[Theorem 4]{reg-sing-volterra} and step $(a)$. In fact, $\Tilde{\psi}_\alpha$ and ${\psi}_\alpha$ are both solutions of $\hat{P}_\alpha\psi=0$ and by uniqueness they are proportional in a neighbourhood of $\alpha_j$. Then, we can Laplace transform ${\psi}_\alpha$ along a ray $\Gamma_{\alpha}^\theta$ in $\Omega_\alpha$. Hence if $\hat{\psi}_\alpha$ denotes the analytic continuation of $\tilde{\psi}_\alpha$ which agrees with $\psi_\alpha$, we can Laplace transform $\hat{\psi}_\alpha$ along $\Gamma_{\alpha}^\theta$, too. 
 
-We now prove step $(a)$: we want to show that $\series{\psi}_j=\borel_{\zeta}\series{\Psi}_j$ is a solution of $\hat{\mathcal{P}}_j\series{\psi}_j=0$. Recall that $\tilde{\Psi}_j$ is a trans-series, thus the Borel transform of $z^{-\lambda}\tilde{\Psi}_j$ is written in terms of the convolution product $\ast_{\alpha_j}$.   
+We now prove step $(a)$: we want to show that $\series{\psi}_\alpha=\borel_{\zeta}\series{\Psi}_\alpha$ is a solution of $\hat{\mathcal{P}}_\alpha\series{\psi}_\alpha=0$. Recall that $\tilde{\Psi}_\alpha$ is a trans-series, thus the Borel transform of $z^{-\lambda}\tilde{\Psi}_\alpha$ is written in terms of the convolution product $\ast_{\alpha}$.   
 
 %First notice that if $\series{\Psi}_j=e^{-\alpha_jz}\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}$ solves $\mathcal{P}\Psi=0$ then $\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}$ is a solution of $\mathcal{P}_j\Psi=0$ with
 
@@ -1628,8 +1633,8 @@ We now prove step $(a)$: we want to show that $\series{\psi}_j=\borel_{\zeta}\se
 
 
 \begin{align*}
-  \borel_{\zeta}\left(\mathcal{P}\series{\Psi}_j\right)&= \left[P(-\zeta)+1\ast_{\alpha_j} Q(-\zeta)+\zeta \ast_{\alpha_j} \left(\sum_{r=0}^{d-1}\borel_\zeta(R_r(z^{-1}))\ast_{\alpha_j}(-\zeta)^r\right)\right]\series{\psi}_j(\zeta_j)\\
-  &=\left[P(-\zeta)+\partial_{\zeta,\alpha_j}^{-1}\circ Q(-\zeta)+\fracderiv{-2}{\zeta}{\alpha_j} \left(\sum_{r=0}^{d-1}R_r(\fracderiv{-1}{\zeta}{\alpha_j} )(-\zeta)^r\right)\right]\series{\psi}_j(\zeta_j)\\&=\hat{P}_j\tilde{\psi}_j(\zeta_j)
+  \borel_{\zeta}\left(\mathcal{P}\series{\Psi}_\alpha\right)&= \left[P(-\zeta)+1\ast_{\alpha} Q(-\zeta)+\zeta \ast_{\alpha} \left(\sum_{r=0}^{d-1}\borel_\zeta(R_r(z^{-1}))\ast_{\alpha}(-\zeta)^r\right)\right]\series{\psi}_\alpha(\zeta_\alpha)\\
+  &=\left[P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\fracderiv{-2}{\zeta}{\alpha} \left(\sum_{r=0}^{d-1}R_r(\fracderiv{-1}{\zeta}{\alpha} )(-\zeta)^r\right)\right]\series{\psi}_\alpha(\zeta_j)\\&=\hat{P}_\alpha\tilde{\psi}_\alpha(\zeta_\alpha)
 \end{align*}
 %\begin{multline*}
 %\borel_\zeta\left(\mathcal{P}\series{\Psi}_j\right)=\borel_\zeta\left[e^{-\alpha_j z}\mathcal{P}_j\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}\right]=\\
@@ -1643,7 +1648,7 @@ We now prove step $(a)$: we want to show that $\series{\psi}_j=\borel_{\zeta}\se
 %&=\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}(\zeta-\alpha_j)^{n+\tau_j-1}
 %\end{align*}
 
-Hence, the Borel transform of $\series{\Psi}_j$ is a solution of $\hat{P}_j\series{\psi}_j$=0. 
+Hence, the Borel transform of $\series{\Psi}_\alpha$ is a solution of $\hat{P}_\alpha\series{\psi}_\alpha$=0. 
 \end{proof}
 
 %\color{Turquoise}
@@ -1710,91 +1715,93 @@ Hence, the Borel transform of $\series{\Psi}_j$ is a solution of $\hat{P}_j\seri
 
 \subsection{Borel regularity for thimble integrals}\label{borel-reg-thimble}
 
-Recall the setting from Section~\ref{borel-reg:explanatory-power}: let $X$ be a $1$-dimensional complex manifold equipped with a volume form $\nu\in\Gamma(X,\Omega^1)$ and a holomorphic function $f\colon X\to\C$ with non--degenerate critical points $\{a_1,...,a_d\}$. Let $I_j$ be the thimble integral 
+Recall the setting from Section~\ref{borel-reg:explanatory-power}: let $X$ be a $1$-dimensional complex manifold equipped with a volume form $\nu\in\Gamma(X,\Omega^1)$ and a holomorphic function $f\colon X\to\C$ with non--degenerate critical points. Let $I$ be the thimble integral 
 \begin{equation}\label{exp-int}
-I_j \defeq \int_{\Lambda_j} e^{-zf} \nu
+I \defeq \int_{\Lambda_a^\theta} e^{-zf} \nu
 \end{equation}
-where $\Lambda_j$ is the thimble through the critical point $a_j$. In this section, we'll prove that thimble integrals of the form \eqref{exp-int} are Borel regular. The first step will be to rewrite $I_j$ as the Laplace transform of a function $\iota_j$ which is explicitly given by the\textit{thimble projection formula}.% \eqref{eqn:formula-proof}.   
+where $\Lambda_a^\theta$ is the thimble through the critical point $a$. In this section, we'll prove that thimble integrals of the form \eqref{exp-int} are Borel regular. The first step will be to rewrite $I$ as the Laplace transform of a function $\iota$ which is explicitly given by the\textit{thimble projection formula}.% \eqref{eqn:formula-proof}.   
 \begin{lemma}\label{lem:thimble_proj_formula-proof}
-\textcolor{magenta}{[Well-known result---see, e.g., \S 3.3 of \cite{pham}, which uses the variation $\nu/df$ instead of derivative of integral.]} A function $\iota_j$ with $I_j = \laplace_{\zeta, \alpha_j}^\theta \iota_j$ is given by the {\em thimble projection formula}
-\[ \iota_{j} = \frac{\partial}{\partial \zeta} \left( \int_{\Lambda_j(\zeta)}\nu \right), \]
-where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j,\zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[The thimble $\Lambda_j$ needs an orientation, but the orientation is arbitrary.]}
+\textcolor{magenta}{[Well-known result---see, e.g., \S 3.3 of \cite{pham}, which uses the variation $\nu/df$ instead of derivative of integral.]} A function $\iota$ with $I = \laplace_{\zeta, \alpha}^\theta \iota$ is given by the {\em thimble projection formula}
+\begin{equation}\label{eqn:formula-proof}
+    \iota = \frac{\partial}{\partial \zeta} \left( \int_{\Lambda_\alpha^\theta(\zeta)}\nu \right),
+\end{equation}
+where $\Lambda_\alpha^\theta(\zeta)$ is the part of $\Lambda_a^\theta$ that goes through $f^{-1}([\alpha,\zeta e^{i\theta}])$. Notice that $\Lambda_\alpha^\theta(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[The thimble $\Lambda_a^\theta$ needs an orientation, but the orientation is arbitrary.]}
 \end{lemma}
 \begin{proof}
-    Let us recast the integral $I_j$ into the position domain. As $\zeta$ goes rightward from $\alpha_j$, the start and end points of $\Lambda_j(\zeta)$ sweep backward along $\Lambda^-_j(\zeta)$ and forward along $\Lambda^+_j(\zeta)$, respectively. Hence, we have
+    Let us recast the integral $I$ into the position domain. As $\zeta$ goes rightward from $\alpha$ with angle $\theta$, the start and end points of $\Lambda_\alpha^\theta(\zeta)$ sweep backward along $\Lambda^-_\alpha(\zeta)$ and forward along $\Lambda^+_\alpha(\zeta)$, respectively. Hence, we have
 \begin{align*}
-I_j(z) & = \int_{\Lambda_j} e^{-zf} \nu \\
-& = \int_{\alpha_j}^\infty e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \Lambda_j(\zeta)}^{\operatorname{end} \Lambda_j(\zeta)}\,d\zeta.
+I(z) & = \int_{\Lambda_a^\theta} e^{-zf} \nu \\
+& = \int_{\alpha}^{e^{i\theta} \infty} e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \Lambda_\alpha^\theta(\zeta)}^{\operatorname{end} \Lambda_\alpha^\theta(\zeta)}\,d\zeta.
 \end{align*}
 Noticing that the right-hand side is a Laplace transform, we learn that
 \begin{equation}\label{thimble-difference}
-{\iota}_j(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \Lambda_j(\zeta)}^{\operatorname{end} \Lambda_j(\zeta)}.
+{\iota}(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \Lambda_\alpha^\theta(\zeta)}^{\operatorname{end} \Lambda_\alpha^\theta(\zeta)}.
 \end{equation}
 \end{proof}
-We'll now prove that $I_j$ is Borel regular:
+We'll now prove that $I$ is Borel regular:
 \begin{theorem}\label{thm:maxim-proof}
-If the integral defining $I_j$ is absolutely convergent, then $I_j$ is Borel regular. More explicitly: 
+If the integral defining $I$ is absolutely convergent, then $I$ is Borel regular. More explicitly: 
 \begin{enumerate}
-\item\label{part-1} As $z \to \infty$ along the ray $z \in e^{-i\theta}\,\R_{>0}$, the function $I_j$ is asymptotic to a trans-monomial $\tilde{I}_{j}\in e^{-z \alpha_j} z^{-1/2} \C\llbracket z^{-1}\rrbracket$.
-\item\label{part-2} The series $\tilde{I}_j$ is $1$-Gevrey. In other words, $\tilde{\iota}_j \defeq \borel_\zeta \tilde{I}_j$ converges near $\zeta=\alpha_j$.
-\item\label{part-3} If you continue the sum of $\tilde{\iota}_j$ along the ray $\Gamma_j^\theta$, and take its Laplace transform along that ray, you'll recover $I_j$.
+\item\label{part-1} As $z \to \infty$ along the ray $z \in e^{-i\theta}\,\R_{>0}$, the function $I$ is asymptotic to a trans-monomial $\tilde{I}\in e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$.
+\item\label{part-2} The series $\tilde{I}$ is $1$-Gevrey. In other words, $\tilde{\iota} \defeq \borel_\zeta \tilde{I}$ converges near $\zeta=\alpha$.
+\item\label{part-3} If you continue the sum of $\tilde{\iota}$ along the ray $\Gamma_\alpha^\theta$, and take its Laplace transform along that ray, you'll recover $I$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a_j$ with $\tfrac{1}{2} \tau^2 = f - f(a_j)$. Let $\Lambda^-_j$ and $\Lambda^+_j$ be the parts of $\Lambda_j$ that go from the past to $a_j$ and from $a_j$ to the future, respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0, \infty)$ on $\Lambda^-_j$ and $\Lambda^+_j$, respectively. \textcolor{magenta}{[Point out that we can always accomplish this by changing the sign of $\tau$.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
-\[ \nu = \sum_{m \ge 0} b_m^j \tau^m\,d\tau \]
+Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a$ with $\tfrac{1}{2} \tau^2 = f - f(a)$. Let $\Lambda^-_\alpha$ and $\Lambda^+_\alpha$ be the parts of $\Lambda_a^\theta$ that go from the past ($-e^{-i\theta}\infty$) to $a$ and from $a$ to the future ($+e^{-i\theta}\infty$), respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0,\infty)$ on $\Lambda^-_\alpha$ and $\Lambda^+_\alpha$, respectively. \textcolor{magenta}{[Point out that we can always accomplish this by changing the sign of $\tau$.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
+\[ \nu = \sum_{m \ge 0} b_m^a \tau^m\,d\tau \]
 that converges in some disk $|\tau| < \varepsilon$.
 
-Let's write $\approx$ when two functions are asymptotic at all orders around the base poin; by the steepest descent method,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).}
+Let's write $\approx$ when two functions are asymptotic at all orders around the base point; by the steepest descent method,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).}
 %%\[ e^{-z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
-\[ e^{z \alpha_j} I_j \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
-as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$. Plugging in the Taylor series for $\nu$, we get
+\[ e^{z \alpha} I \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
+as $z \to \infty$. Plugging in the Taylor series for $\nu$, we get
 \begin{align*}
-e^{z \alpha_j} I_j & \approx \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{m \ge 0} b_m^j \tau^m\,d\tau \\
-& = \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^j \tau^{2n}\,d\tau.
+e^{z \alpha} I & \approx \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{m \ge 0} b_m^a \tau^m\,d\tau \\
+& = \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^a \tau^{2n}\,d\tau.
 \end{align*}
 By the dominated convergence theorem,\footnote{Notice that the sum over $k$ is empty when $n = 0$. Following convention, we extend the double factorial to all odd integers by its recurrence relation, giving $(-1)!! = 1$.}
 \begin{align*}
-e^{z \alpha_j} I_j & \approx \sum_{n \ge 0} b_{2n}^j \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \\
-& = \sum_{n \ge 0} (2n-1)!!\,b_{2n}^j \left[ \sqrt{2\pi}\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big) - 2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \right].
+e^{z \alpha} I & \approx \sum_{n \ge 0} b_{2n}^a \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \\
+& = \sum_{n \ge 0} (2n-1)!!\,b_{2n}^a \left[ \sqrt{2\pi}\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big) - 2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \right].
 \end{align*}
 
-The annoying $e^{-z\varepsilon^2/2}$ correction terms are crucial for the convergence of the sum, but we can get rid of them and still have a formal series asymptotic to $e^{-z \alpha_j} I_j(z)$. In other words,
-\[ e^{z \alpha_j} I_j(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^j\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
+The annoying $e^{-z\varepsilon^2/2}$ correction terms are crucial for the convergence of the sum, but we can get rid of them and still have a formal series asymptotic to $e^{-z \alpha} I(z)$. In other words,
+\[ e^{z \alpha} I(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^a\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
 To see why, cut the sum off after $N$ terms, and observe that
 \begin{align*}
-  \Bigg | \sum_{n= 0}^N(2n-1)!! b_{2n}^j  2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \Bigg | &\leq  2 e^{-\Re (z) \varepsilon^2/2} \sum_{n=0}^N(2n-1)!! b_{2n}^j n|z|^{-n}.
+  \Bigg | \sum_{n= 0}^N(2n-1)!! b_{2n}^a  2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \Bigg | &\leq  2 e^{-\Re (z) \varepsilon^2/2} \sum_{n=0}^N(2n-1)!! b_{2n}^a n|z|^{-n}.
 \end{align*}
 The right-hand side goes to $0$ as $\Re(z)$ grows.
 %Hence,
 %\[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
 The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows \cite[inequality~(5)]{chiani-dardari-book}, allowing the simpler estimate
-\[ e^{z\alpha_j} I_j(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^j \,z^{-(n+1/2)}. \]
-Hence, defining the formal series $\tilde{I_j}$
-\[\tilde{I}_j(z):=e^{-z\alpha_j} z^{-1/2}\, \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^j \,z^{-n}\]
-we get $\tilde{I}_j\in e^{-z\alpha_j}z^{-1/2}\C\llbracket z^{-1}\rrbracket$. This ends the proof of part \ref{part-1}.
+\[ e^{z\alpha} I(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^a \,z^{-(n+1/2)}. \]
+Hence, defining the formal series $\tilde{I}$
+\[\tilde{I}(z):=e^{-z\alpha} z^{-1/2}\, \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^a \,z^{-n}\]
+we get $\tilde{I}\in e^{-z\alpha}z^{-1/2}\C\llbracket z^{-1}\rrbracket$. This ends the proof of part \ref{part-1}.
 
 Using the porperties of the Borel tranform acting on trans-mononials \ref{sec:action_transseries} we get 
 \begin{align*}
-\tilde{\iota}_j & = \sqrt{2\pi} \sum_{n \ge 0} (2n - 1)!! \,b_{2n}^j\,\frac{\zeta_j^{n+\tfrac{1}{2}}}{\Gamma(n+\tfrac{1}{2})} \\
-&= \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \,b_{2n}^j\,\zeta_j^{n+\tfrac{1}{2}}
+\tilde{\iota} & = \sqrt{2\pi} \sum_{n \ge 0} (2n - 1)!! \,b_{2n}^a\,\frac{\zeta_\alpha^{n+\tfrac{1}{2}}}{\Gamma(n+\tfrac{1}{2})} \\
+&= \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \,b_{2n}^a\,\zeta_\alpha^{n+\tfrac{1}{2}}
 \end{align*}
-We know from the definition of $\varepsilon$ that $\left|b_n^j\right| \varepsilon^n \lesssim 1$, thus we deduce that $\tilde{\iota}_j$ has a finite radius of convergence. This ends the proof of part \ref{part-2}. %$|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{I}_j$ is $1$-Gevrey.
+We know from the definition of $\varepsilon$ that $\left|b_n^a\right| \varepsilon^n \lesssim 1$, thus we deduce that $\tilde{\iota}$ has a finite radius of convergence. This ends the proof of part \ref{part-2}. %$|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{I}_j$ is $1$-Gevrey.
 
-\textcolor{RoyalBlue}{[Analytic/position version starts here.]} The proof of part \ref{part-3} relies on the thimble projection formula \eqref{eqn:formula-proof}; \textcolor{pink}{in fact, we'll show that the Taylor expansion of $\iota_j$ near $\zeta=\alpha_j$ agrees with $\tilde{\iota}_j$.}
+\textcolor{RoyalBlue}{[Analytic/position version starts here.]} The proof of part \ref{part-3} relies on the thimble projection formula \eqref{eqn:formula-proof}; \textcolor{pink}{in fact, we'll show that the Taylor expansion of $\iota$ near $\zeta=\alpha$ agrees with $\tilde{\iota}$.}
 
 We can rewrite the Taylor series for $\nu$ as
 \begin{align*}
-\nu & = \sum_{n \ge 0} b_n^j [2(f - \alpha_j)]^{(n - 1)/2}\,df,
+\nu & = \sum_{n \ge 0} b_n^a [2(f - \alpha)]^{(n - 1)/2}\,df,
 \end{align*}
-taking the positive branch of the square root on $\Lambda^+_j$ and the negative branch on $\Lambda^-_j$. Plugging this into our expression for $\iota_j$ (in Theorem \ref{thm:thimble_proj_formula-proof}), we learn that
+taking the positive branch of the square root on $\Lambda^+_a$ and the negative branch on $\Lambda^-_a$. Plugging this into our expression for $\iota$ (in Theorem \ref{lem:thimble_proj_formula-proof}), we learn that
 \begin{align*}
-\iota_j & = \left[ \sum_{m \ge 0} b_m^j [2(f - \alpha_j)]^{(m - 1)/2} \right]_{\operatorname{start} \Lambda_j(\zeta)}^{\operatorname{end} \Lambda_j(\zeta)} \\
-& = \sum_{m \ge 0} b_m^j \Big( [2\zeta_j]^{(m - 1)/2} - (-1)^{m-1}[2\zeta_j]^{(m - 1)/2} \Big) \\
-& = \sum_{n \ge 0} 2 b_{2n}^j [2\zeta_j]^{n - 1/2} \\
-& = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2}
+\iota & = \left[ \sum_{m \ge 0} b_m^a [2(f - \alpha)]^{(m - 1)/2} \right]_{\operatorname{start} \Lambda_a(\zeta)}^{\operatorname{end} \Lambda_a(\zeta)} \\
+& = \sum_{m \ge 0} b_m^a \Big( [2\zeta_\alpha]^{(m - 1)/2} - (-1)^{m-1}[2\zeta_\alpha]^{(m - 1)/2} \Big) \\
+& = \sum_{n \ge 0} 2 b_{2n}^a [2\zeta_\alpha]^{n - 1/2} \\
+& = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^a \zeta_\alpha^{n - 1/2}
 \end{align*}
-In particular, $\tilde{\iota}_j$ can be analytically continued along $\Gamma_j^\theta$ and its sum is given by $\iota_j$. %Thus, we can take the Laplace transform of $\phi_j$ and we find
+In particular, $\tilde{\iota}$ can be analytically continued along $\Gamma_\alpha^\theta$ and its sum is given by $\iota$. %Thus, we can take the Laplace transform of $\phi_j$ and we find
 %\begin{align*}
  %   \laplace_{\zeta,\alpha_j}^\theta \phi_j &= \laplace_{\zeta,\alpha_j}^\theta \fracderiv{-1/2}{\zeta}{\alpha_j} \iota_j \\
  %   &= z^{-1/2} \laplace_{\zeta,\alpha_j}^\theta  \iota_j \\
@@ -1802,7 +1809,7 @@ In particular, $\tilde{\iota}_j$ can be analytically continued along $\Gamma_j^\
 %\end{align*}
 
 \color{RoyalBlue}
-Theorem~\ref{thm:thimble_proj_formula-proof} tells us that
+Lemma~\ref{lem:thimble_proj_formula-proof} tells us that
 \begin{align*}
 I_j & = \laplace_{\zeta, \alpha_j}^\theta \iota_j \\
 e^{z\alpha_j} I_j & = \laplace_{\zeta_j, 0}^\theta \iota_j \\
@@ -1893,20 +1900,20 @@ as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$.
 %%\end{align*}
 \color{black}
 \end{proof}
-\begin{remark}
-    \textcolor{orange}{[Spirit of the remark: if you want to run the argument above for $\Phi_j$, you can, but there's one subtlety you should be aware of\ldots]} For some applications, it might be more convenient to study Borel regularity of $\Phi_j=z^{-1/2}I_j$, as its asymptotics won't have fractional power singularities. The proof follows the same argument we chose for $I_j$, but there's one subtulty to be aware of when rewriting $\Phi_j$ as the Laplace transform of $\phi_j$. Indeed, first notice that \[\phi_j = \fracderiv{-1/2}{\zeta}{\alpha_j} \, \iota_j \]
+\begin{remark}\label{rmk:1/2-deriv}
+    \textcolor{orange}{[Spirit of the remark: if you want to run the argument above for $\Phi$, you can, but there's one subtlety you should be aware of\ldots]} For some applications, it might be more convenient to study Borel regularity of $\Phi=z^{-1/2}I$, as its asymptotics won't have fractional power singularities. The proof follows the same argument we chose for $I$, but there's one subtulty to be aware of when rewriting $\Phi$ as the Laplace transform of a function $\phi$. Indeed, first notice that \[\phi = \fracderiv{-1/2}{\zeta}{\alpha} \, \iota \]
     Then, we can take the $1/2$ fractional integral on both sides:
     \begin{align*}
-        \fracderiv{-1/2}{\zeta}{\alpha_j} \phi_j &= \fracderiv{-1}{\zeta}{\alpha_j} \, \iota_j \\
-        & = \fracderiv{-1}{\zeta}{\alpha_j} \partial_\zeta \left( \int_{\Lambda_j(\zeta)}\nu \right) \\
-        & = \int_{\Lambda_j(\zeta)}\nu - \int_{\Lambda_j(\alpha_j)}\nu.
+        \fracderiv{-1/2}{\zeta}{\alpha} \phi &= \fracderiv{-1}{\zeta}{\alpha} \, \iota \\
+        & = \fracderiv{-1}{\zeta}{\alpha} \partial_\zeta \left( \int_{\Lambda_a^\theta(\zeta)}\nu \right) \\
+        & = \int_{\Lambda_\alpha^\theta(\zeta)}\nu - \int_{\Lambda_\alpha^\theta(\alpha)}\nu.
     \end{align*}
-    The second term vanishes because $\Lambda_j(\alpha)$ is a single point, leaving
-    \[ \fracderiv{-1/2}{\zeta}{\alpha_j} \phi_j = \int_{\Lambda_j(\zeta)}\nu. \]
+    The second term vanishes because $\Lambda_\alpha^\theta(\alpha)$ is a single point, leaving
+    \[ \fracderiv{-1/2}{\zeta}{\alpha} \phi = \int_{\Lambda_\alpha^\theta(\zeta)}\nu. \]
     Since the $1/2$ derivative of
     Finally, we apply the $1/2$ derivative of both sides, recalling that it's a left inverse of the $1/2$ integral:
-    \[\phi_j= \fracderiv{1/2}{\zeta}{\alpha_j} \left( \int_{\Lambda_j(\zeta)}\nu \right).\]
-    \textcolor{orange}{[This argument works for any function that vanishes at $\alpha_j$, so maybe we should instead prove it generally in the section on fractional calculus.]}
+    \[\phi= \fracderiv{1/2}{\zeta}{\alpha} \left( \int_{\Lambda_\alpha^\theta(\zeta)}\nu \right).\]
+    \textcolor{orange}{[This argument works for any function that vanishes at $\alpha$, so maybe we should instead prove it generally in the section on fractional calculus.]}
 \end{remark}
 
 
@@ -2035,11 +2042,28 @@ Recalling that the Riemann-Liouville fractional derivative is a left inverse of 
 \end{proof}
 \color{black}
 \begin{remark}
-We can use the $3/2$ derivative formula~\eqref{formula1} to see that the functions $\phi_j$ are all resurgent, in the sense of \'{E}calle~\cite[\textcolor{orange}{section?}]{EcalleI}. Let's say $\Gamma_j(\beta)$ is the straight path from $\zeta = \alpha_j$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\Lambda_j(\beta)$ in $X$. This lets us analytically continue $\int_{\Lambda_j(\zeta)} \nu$ to a star-shaped domain $\Omega \subset \C$. Intuitively, $\Omega$ is constructed by drawing rays from $\zeta = \alpha_j$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\infty$.
-\begin{center}
-\textcolor{orange}{FIGURE OF SLIT DOMAIN}
-\end{center}
-Let's calculate the jump of $\int_{\Lambda_j(\zeta)}$ across the cut starting at $\zeta = \alpha_k$. Write $\alpha_k$ as $\alpha_j + re^{i\theta}$, and let $\alpha_k^+$ and $\alpha_k^-$ be the points we get by infinitesimally increasing or decreasing $\theta$. The jump is then given by $\int_{\Lambda_j(\alpha_k^+)} \nu - \int_{\Lambda_j(\alpha_k^-)} \nu$.
+We can use the $3/2$ derivative formula~\eqref{formula1} to see that the functions $\phi$ are all resurgent, in the sense of \'{E}calle~\cite[\textcolor{orange}{section?}]{EcalleI}. Let's say $\Gamma_\alpha^\theta(\beta)$ is the straight path from $\zeta = \alpha$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\Lambda_\alpha^\theta(\beta)$ in $X$. This lets us analytically continue $\int_{\Lambda_\alpha^\theta(\zeta)} \nu$ to a star-shaped domain $\Omega_\alpha \subset \C$. Intuitively, $\Omega_\alpha$ is constructed by drawing rays from $\zeta = \alpha$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\infty$.
+\begin{figure}
+\center
+\begin{tikzpicture}
+\newcommand{\spill}{4}
+\fill[violet!20, bezier bounding box, path fading=radial edge]
+  (-\spill, -\spill) (\spill, \spill)
+  (0, 0) -- (180:\spill)
+  arc (180:113:\spill) -- (112:2) .. controls (112:1.7) and (111:1.7) .. (111:2) -- (111:\spill)
+  arc (111:50:\spill) -- (50:2.6) .. controls (50:2.2) and (49:2.2) .. (49:2.6) -- (49:\spill)
+  arc (49:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-53:2) .. (-53:2.3) -- (-53:\spill)
+  arc (-53:-180:\spill) -- (0, 0);
+  \node[anchor=north west, outer sep=1mm] at (46.5:2.46) {$\zeta=\beta$};
+\foreach \p in {(111.5:1.9), (49.5:2.4), (-52.5:2.2)} {
+  \fill \p circle (0.7mm);
+  \draw[dashed,violet!50] \p -- (0,0); 
+  }
+\fill[violet] circle (0.7mm) node[anchor=180, outer sep=1mm] {$\zeta = \alpha$};
+\end{tikzpicture}
+\caption{The domain $\Omega_\alpha$}\label{Fig:slit domain}
+\end{figure}
+Let's calculate the jump of $\int_{\Lambda_\alpha^\theta(\zeta)}\nu$ across the cut starting at $\zeta = \beta$. Write $\beta$ as $\alpha + re^{i\theta_\beta}$, and let $\beta^+$ and $\beta^-$ be the points we get by infinitesimally increasing or decreasing $\theta_\beta$. The jump is then given by $\int_{\Lambda_\alpha^\theta(\beta^+)} \nu - \int_{\Lambda_\alpha^\theta(\beta^-)} \nu$ which turns out to be proportional to $\tilde{\phi}_\beta$, namely the germ of analytic functions at $\zeta_\alpha=\beta$. We'll see an example of this behaviour in Appendix~\ref{apx:eye-res-airy}. 
 
 
 \textcolor{Navy}{Initially, the function $\int_{\Lambda_j(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha_j, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\Lambda_j(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\Lambda_j(\zeta)} \nu$ to be singular is for something to go wrong with the hotmotopy of $\Lambda_j(\zeta)$. At a critical point of $f$, the ends of the homotoped path $\Lambda_j(\zeta)$ come together, telling us that.}
@@ -2063,19 +2087,19 @@ hence
 \end{proof}
 }
 \begin{remark}\label{rmk:Pham formula}
-    When $f$ and $\nu$ are polynomials and $X$ is $N$-dimensional, a result of Pham \cite[Equation 2.4, II partie]{pham} allows to write ${\iota}_j$ explicitly as 
+    When $f$ and $\nu$ are polynomials and $X$ is $N$-dimensional, a result of Pham \cite[Equation 2.4, II partie]{pham} allows to write ${\iota}$ explicitly as 
     \begin{equation}\label{eqn:Pham}
         (-1)^{\frac{N(N-1)}{2}}  \sum_{k=0}^\infty c_k\, \delta^{-\frac{N}{2}-k}+ \text{ hol. funct.}
     \end{equation}
-    for some coefficients $c_k$ which depends on $f$ and $\nu$, and with $\delta^{-\alpha}$ be defined as
+    for some coefficients $c_k$ which depends on $f$ and $\nu$, and with $\delta^{-\ell}$ be defined as
    \begin{equation*}
-       \delta^{-\alpha}:=\begin{cases}
-           \frac{\zeta^{\alpha-1}}{-2\pi i(\alpha-1)!}\log(\zeta) + \text{ hol. funct.} & \text{ if } \alpha\in\mathbb{N}^*\\
+       \delta^{-\ell}:=\begin{cases}
+           \frac{\zeta^{\ell-1}}{-2\pi i(\ell-1)!}\log(\zeta) + \text{ hol. funct.} & \text{ if } \ell\in\mathbb{N}^*\\
            & \\
-           \frac{(-\zeta)^{\alpha-1}}{2\pi i \Gamma(-\alpha)}+ \text{ hol. funct.} & \text{ if } \alpha\notin \mathbb{N}^* 
+           \frac{(-\zeta)^{\ell-1}}{2\pi i\, \Gamma(-\ell)}+ \text{ hol. funct.} & \text{ if } \ell\notin \mathbb{N}^* 
        \end{cases}
    \end{equation*}
-In particular, if $N=1$, from equation \eqref{eqn:Pham} we deduce that $\hat{\phi}_j$ is the $1/2-$ derivative of ${\iota}_j$, \textcolor{orange}{hence it has simple singularities \ref{simple-res-thimble}.} We expect this result to hold beyond the polynomial case. We also expect that equation \eqref{eqn:formula} can be generalized to the $N$-dimensional case replacing the $3/2$-derivative with the $(N+1)/2$ one. 
+In particular, if $N=1$, as computed in Remark~\ref{rmk:1/2-deriv} the inverse Laplace tranform of $z^{-1/2} I$ is the $1/2$-derivative of ${\iota}$, hence it has \textcolor{orange}{simple singularities (see Corollary~\ref{simple-res-thimble})}. \textcolor{magenta}{We expect this result to hold beyond the polynomial case.} We also expect that equation \eqref{eqn:formula-proof} can be generalized to the $N$-dimensional case replacing the $1/2$-derivative with the $N/2$ one. 
 \end{remark}
 \section{Examples}\label{sec:examples}
 
