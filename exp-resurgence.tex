@@ -216,7 +216,7 @@ On an open, possibly bounded sector $\Omega$ around $\infty$, a power series
 \frac{a_1}{z} + \frac{a_2}{z^2} + \frac{a_3}{z^3} + \frac{a_4}{z^4} + \ldots
 \end{equation}
 is {\em asymptotic} to a holomorphic function $F$ if
-\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \in o_{z \to \infty}\big(|z|^{-n}\big) \]
+\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{z \to \infty}\big(|z|^{-n}\big) \]
 over all orders $n$. We'll use the symbol $\sim$ to denote the asymptotic of $F$, namely we'll write \[F\sim \sum_{n\geq 1} a_n z^{-n}.\]
 \end{defn}
 If two power series of the form \eqref{series:asymp-defn} are asymptotic to the same function, they must be equal; this can be deduced from the triangle inequality. The power series which is asymptotic to a given function on a given open sector, if it exists, is therefore an intrinsic property of the function: it's the function's {\em asymptotic expansion} on that sector. The functions that have asymptotic expansions on a given sector form a ring~\cite[Section~A.4]{nikolaev2023existence}, and the map that sends such a function to its asymptotic expansion is a ring homomorphism. We'll denote such map with the symbol $\aexp$. More generally, when the asymptotic expansion is taken in the direction $\theta$ at infinity, i.e. as $z\to e^{i\theta}\infty$, we'll write $\aexp^\theta$.  
@@ -225,6 +225,9 @@ If two power series of the form \eqref{series:asymp-defn} are asymptotic to the 
 \textcolor{orange}{[Define $\aexp^\theta$ homomorphism that sends a function with an asymptotic expansion on a sector that contains the $\theta$-ray to its asymptotic expansion on that sector.\ldots]}
 \end{defn}
 \textcolor{RoyalBlue}{The {\em asymptotic expansion} map $\aexp^\theta$ sends a holomorphic function that vanishes at $\infty$ to the unique power series of the form \eqref{series:asymp-defn} which is asymptotic to it on the half-plane $\Re e^{i\theta}z > 0$ (see \cite[Theorem~C.11]{nikolaev2023existence}).}
+
+\textcolor{orange}{[State theorem: differentiation commutes with $\aexp^\theta$ under certain circumstances. See Erdelyi's {\em Asymptotic Expansions}, \S 1.6]}
+
 \begin{defn}\label{def:unif-gevrey-asymp}
 On an open sector $\Omega$ around $\infty$, a power series of the form \eqref{series:asymp-defn} is {\em uniformly $1$-Gevrey asymptotic} to a holomorphic function $F$ if there's a constant $A \in (0, \infty)$ for which
 \[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \lesssim \frac{A^n n!}{|z|^n} \]
@@ -887,26 +890,26 @@ Near each branch point $b$, let's fix a coordinate $\omega_b$ with $\zeta_b = \t
 %
 \subsubsection{Frequency}\label{transl-freq}
 %
-The translation structure also gives us an isomorphism $z \maps T^*B_b \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*B_b^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$ \textcolor{orange}{[make it clear that $z$ is an almost-global chart on $T^*B$---for example, writing $z\colon T^*B\to\C^2$]}. At an ordinary point, we can define $z$ simply as the map
+The translation structure also gives us an isomorphism $z \maps T^*_bB \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*_bB^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$ \textcolor{orange}{[make it clear that $z$ is an almost-global chart on $T^*B$---for example, writing $z\colon T^*B\to\C^2$]}. At an ordinary point, we can define $z$ simply as the map
 \begin{align*}
-z \maps T^*B_b & \to \C \\
+z \maps T^*_bB & \to \C \\
 \lambda\big|_b & \mapsto 1.
 \end{align*}
-To get a definition that generalizes to branch points, though, it's worth taking a fancier point of view. Recall that $T^*B_b = \van_b / \van_b^2$, where $\van_b$ is the ideal of holomorphic functions that vanish at $b$. Observing that $(f + \van_b)^n$ lies within $f^n + \van_b^{n+1}$ for any $f \in \van_b$, we can identify $T^*B_b^{\otimes n}$ with $\van_b^n / \van_b^{n+1}$ for $n \ge 1$. When $b$ is an ordinary point, the function $\zeta_b$ defined in Section~\ref{transl:dir} represents a nonzero element of $\van_b / \van_b^2$: the cotangent vector $\lambda\big|_b$. In general, $\zeta_b$ represents a nonzero element of $\van_b^n / \van_b^{n+1}$, where $2\pi n$ is the cone angle at $b$. We define $z$ as the isomorphism
+To get a definition that generalizes to branch points, though, it's worth taking a fancier point of view. Recall that $T^*_bB = \van_b / \van_b^2$, where $\van_b$ is the ideal of holomorphic functions that vanish at $b$. Observing that $(f + \van_b)^n$ lies within $f^n + \van_b^{n+1}$ for any $f \in \van_b$, we can identify $T^*_bB^{\otimes n}$ with $\van_b^n / \van_b^{n+1}$ for $n \ge 1$. When $b$ is an ordinary point, the function $\zeta_b$ defined in Section~\ref{transl:dir} represents a nonzero element of $\van_b / \van_b^2$: the cotangent vector $\lambda\big|_b$. In general, $\zeta_b$ represents a nonzero element of $\van_b^n / \van_b^{n+1}$, where $2\pi n$ is the cone angle at $b$. We define $z$ as the isomorphism
 \begin{align*}
 z \maps \van_b^n / \van_b^{n+1} & \to \C \\
 \zeta_b + \van^{n+1} & \mapsto 1.
 \end{align*}
 When $b$ is a branch point, the coordinate $\omega_b$ we chose in Section~\ref{transl:dir} gives us an isomorphism
 \begin{align*}
-w_b \maps T^*B_b & \to \C \\
+w_b \maps T^*_bB & \to \C \\
 \omega_b + \van^2 & \mapsto 1
 \end{align*}
 that makes the diagram
 \begin{center}
 \begin{tikzcd}
-T^*B_b^{\otimes n} \arrow[r,"z"] & \C \\
-T^*B_b \arrow[u,"\blankbox^n"] \arrow[r,"w"'] & \C \arrow[u,"\blankbox^n"']
+T^*_bB^{\otimes n} \arrow[r,"z"] & \C \\
+T^*_bB \arrow[u,"\blankbox^n"] \arrow[r,"w"'] & \C \arrow[u,"\blankbox^n"']
 \end{tikzcd}
 \end{center}
 commute.
@@ -933,7 +936,7 @@ To make sense of this formula, we ask for the following conditions.
 \end{itemize}
 \color{black}
 \subsubsection{The Laplace transform over a branch point}
-When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T_b^*B$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T_b^*B^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*B_b$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\eqref{laplace:int}. The half-plane $z \in H_{\theta}$ in $T_b^*B^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T_b^*B$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
+When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T_b^*B$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\Gamma_b^\theta$. The function $z$ is defined on $T_b^*B^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*_bB$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\eqref{laplace:int}. The half-plane $z \in H_{\theta}$ in $T_b^*B^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T_b^*B$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
 %\color{gray}
 %\subsection{The geometry of the Borel transform}
 %\begin{itemize}
@@ -951,16 +954,16 @@ Let $b\in B$ be an ordinary point, and let $\zeta_b$ be a coordinate on $B$ so t
 Let $\varphi\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$ and for some $\Lambda>0$, then
    \begin{equation}
     \label{change-chart}
-    \laplace_{\zeta_b, 0} \varphi = e^{b z} \laplace_{\zeta, b} \varphi.
+    e^{-b z} \laplace_{\zeta_b, 0} \varphi = \laplace_{\zeta, b} \varphi.
 \end{equation}
 In other words, the diagram 
 \begin{center}
 \begin{tikzcd}
- \mathcal{O}(H) \arrow[rr, "e^{bz}"]  &  & e^{zb}\,\mathcal{O}(H)\\
+ \mathcal{O}_{T^*B}(H) \arrow[rr, "e^{bz}"]&  & e^{zb}\,\mathcal{O}_{T^*B}(H)\\
 & \singexp{\sigma}{\Lambda}(\Omega_b) \arrow[ul, "\laplace_{\zeta_b,0}"]\arrow[ur,swap,"\laplace_{\zeta,b}"]  &  
 \end{tikzcd}
 \end{center}
-commutes, and $H$ is the right half plane $\Re z>0$.
+commutes, where $H$ on the left-hand-side is the right half plane $\Re z>0$ (\textcolor{orange}{the coordinate $z$ is a global coordinate on $T^*B$}).
 \end{lemma}
 \begin{proof}
     The result follws from a simple calculation:
@@ -1127,7 +1130,7 @@ using the Borel transform:
 \borel_\zeta \series{\Phi}&=\borel_\zeta\left[\sum_{n=0}^\infty a_{n+1}z^{-n-1}\right]\\
 &=\sum_{n=0}^\infty a_{n+1}\frac{\zeta^n}{n!}.
 \end{align*}
-We took the Borel transform with respect to the coordinate $\zeta$ because $\series{\Phi}$ represents a holomorphic function on the cotangent space $T^*B_{\zeta = 0}$.
+We took the Borel transform with respect to the coordinate $\zeta$ because $\series{\Phi}$ represents a holomorphic function on the cotangent space $T^*_{\zeta = 0}B$.
 
 If we'd expanded $\varphi$ as a Taylor series ${\varphi}_b$ in the translated coordinate $\zeta_b$ from above, we could have taken the Laplace transform $\laplace_{\zeta_b,0}$ instead, giving a power series in $z^{-1}$ that represents a function on $T^*_{\zeta = b}B$. Using the Borel transform with respect to $\zeta_b$, defined like the formal inverse of $\laplace_{\zeta_b,0}$
 \begin{center}
@@ -1146,24 +1149,24 @@ and extended to formal power series by linearity $\borel_{\zeta_b} \maps z^{-1} 
  %%\end{align*}
 we could again recover ${\varphi}_b$. 
 
-Summarizing, we can describe the geometry of Borel and Laplace transforms by drawing the following diagram
-\begin{center}
-\begin{tikzcd}[every arrow/.append style={shift left}]
- \text{functions on } T^*_{\zeta=0}B \arrow{d}{\borel_{\zeta}} & & \text{functions on } T^*_{\zeta=b}B \arrow{d}{\borel_{\zeta_b}}\arrow[ll,swap,"\mathsf{T}_b^*"] \\ 
- \text{functions of } \zeta \arrow{u}{\laplace_{\zeta, 0}}\arrow[rr,"\mathsf{T}_b"'] & & \text{functions of } \zeta_b \arrow{u}{\laplace_{\zeta_b, 0}}
-\end{tikzcd}
-\end{center}
-where $\mathsf{T}_b$ denotes the map of change of variables $\mathsf{T}_b(\zeta)=\zeta_b$. \textcolor{orange}{I don't like much the word function and the map $\mathsf{T}_b$, but we could change later.}
+%Summarizing, we can describe the geometry of Borel and Laplace transforms by drawing the following diagram
+%\begin{center}
+%\begin{tikzcd}[every arrow/.append style={shift left}]
+ %\text{functions on } T^*_{\zeta=0}B \arrow{d}{\borel_{\zeta}} & & \text{functions on } T^*_{\zeta=b}B \arrow{d}{\borel_{\zeta_b}}\arrow[ll,swap,"\mathsf{T}_b^*"] \\ 
+ %\text{functions of } \zeta \arrow{u}{\laplace_{\zeta, 0}}\arrow[rr,"\mathsf{T}_b"'] & & \text{functions of } \zeta_b \arrow{u}{\laplace_{\zeta_b, 0}}
+%\end{tikzcd}
+%\end{center}
+%where $\mathsf{T}_b$ denotes the translation map $\mathsf{T}_b(\zeta)=\zeta_b$. \textcolor{orange}{I don't like much the word function and the map $\mathsf{T}_b$, but we could change later.}
 
-%It's also possible to recover the definition of $\mathcal{B}_{\zeta,\alpha}$ from the properties of $\laplace_{\zeta_\alpha,0}$, as discussed in Section~\ref{transl-borel}.
+%%It's also possible to recover the definition of $\mathcal{B}_{\zeta,\alpha}$ from the properties of $\laplace_{\zeta_\alpha,0}$, as discussed in Section~\ref{transl-borel}.
 
-%%We then could've recovered the Taylor series of $\varphi$ using the Borel transform on $T^*B_{\zeta = \alpha}$, which is defined as
-%%\begin{align*}
-%%\borel_{\zeta_\alpha} \maps z^{-1} \C \llbracket z^{-1} \rrbracket & \to \C \llbracket \zeta_\alpha \rrbracket \\
+%%%We then could've recovered the Taylor series of $\varphi$ using the Borel transform on $T^*B_{\zeta = \alpha}$, which is defined as
+%%%\begin{align*}
+%%%\borel_{\zeta_\alpha} \maps z^{-1} \C \llbracket z^{-1} \rrbracket & \to \C \llbracket \zeta_\alpha \rrbracket \\
 %%z^{-n-1} & \mapsto \frac{\zeta_\alpha^n}{n!}.
 %%\end{align*}
 
-%%working in a different cotangent space $T^*B_{\zeta = \alpha}$, we'd take the Borel transform with respect to $\zeta_\alpha$ instead, as described in Section~\ref{transl-borel}.
+%%%working in a different cotangent space $T^*B_{\zeta = \alpha}$, we'd take the Borel transform with respect to $\zeta_\alpha$ instead, as described in Section~\ref{transl-borel}.
 
 %\color{Peru}
 %\textbf{[Draft version]} The Borel transform $\borel\textcolor{orange}{_\zeta}$ turns formal power series in $z^{-1}$---which represent functions defined all non-singular cotangent spaces---into formal power series in $\zeta$. More precisely, $\borel_\zeta$ is a $\C$-linear map 
@@ -1192,109 +1195,72 @@ A transseries is a generalization of usual power series, whose building blocks (
 
 The main feature of $T_{\alpha,\varphi}$ is that its asymptotics as $\text{ Re } e^{i\theta}z \to +\infty$ is $\varphi_0$. In fact, they play a crucial role in the theory of ODEs with irregular singularities. 
 
-It is natural to ask whether we can extend the definition of $\borel_\zeta$ to transseries. Indeed it is possible by formalizing the change of variable identity that relates $\laplace_{\zeta, \alpha}$ to $\laplace_{\zeta_\alpha, 0}$ (see Section \ref{translation} identity \eqref{change-chart}). 
+It's natural to ask whether we can extend the definition of $\borel_\zeta$ to transseries, and we'll achieve it using the relationship between $\laplace_{\zeta, \alpha}$ and $\laplace_{\zeta_\alpha, 0}$ in identity~\eqref{change-chart}. 
+\begin{definition}
+    The action of $\borel_\zeta$ on trans-monomials is the formal inverse of $\laplace_{\zeta,\alpha}$
+    \[\laplace_{\zeta,\alpha}\borel_\zeta\big[e^{-z\alpha}z^{-n-1}\big]=e^{-z\alpha}z^{-n-1}\]
+    %\begin{center}
+%\begin{tikzcd}[every arrow/.append style={shift left}]
+ %e^{-z\alpha}\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow{d}{\borel_{\zeta}} \\ \{1, \zeta_\alpha, \zeta_\alpha^2, \zeta_\alpha^3, \ldots\} \arrow{u}{\laplace_{\zeta,\alpha}}
+%\end{tikzcd}
+%\end{center}
+    and it extends by linearity to transseries. 
+\end{definition}
+In particular, from identity~\eqref{change-chart} we deduce 
+\begin{align*}
+    e^{-z\alpha}z^{-n-1}&=e^{-z\alpha}\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\zeta\alpha}z^{-n-1}\big]\\
+     z^{-n-1}&=\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\zeta\alpha}z^{-n-1}\big]
+\end{align*}
+and taking the inverse of $\laplace_{\zeta_\alpha,0}$ we find
+%Indeed it is possible by formalizing the change of variable identity that relates $\laplace_{\zeta, \alpha}$ to $\laplace_{\zeta_\alpha, 0}$ (see Section \ref{translation} identity \eqref{change-chart}). 
 
-We extend the Borel transform to transseries, defining \[\borel_\zeta \maps e^{-\alpha z} \C\llbracket z^{-1} \rrbracket \to \C\llbracket \zeta_\alpha \rrbracket\] as the formal inverse of $\laplace_{\zeta, \alpha}$. To be more precise, we define the action on trans-monomial so that the diagram
+%We extend the Borel transform to transseries, defining \[\borel_\zeta \maps e^{-\alpha z} \C\llbracket z^{-1} \rrbracket \to \C\llbracket \zeta_\alpha \rrbracket\] as the formal inverse of $\laplace_{\zeta, \alpha}$. To be more precise, we define the action on trans-monomial so that the diagram
 %%\begin{center}
 %%\begin{tikzcd}
 %%& e^{-\alpha z} \C\llbracket z^{-1} \rrbracket \arrow[rd, "\borel_\zeta"] \\
 %%\C\llbracket \zeta \rrbracket \arrow[ru, "\laplace_{\zeta, \alpha}"] \arrow[rr, "\text{change of variable}"'] & & \C\llbracket \zeta_\alpha \rrbracket
 %%\end{tikzcd}
 %%\end{center}
-\begin{center}
-\begin{tikzcd}
-& e^{-\alpha z} \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[rd, "\borel_\zeta"] & \\
-\{1, \zeta, \zeta^2, \zeta^3, \ldots\} \arrow[ru, "\laplace_{\zeta, \alpha}"] \arrow[rr, "\text{change of variable}"'] & & \{1, \zeta_\alpha, \zeta_\alpha^2, \zeta_\alpha^3, \ldots\}
+%\begin{lemma}
+    \[\borel_{\zeta}\big[e^{-z\alpha}z^{-n-1}\big]=\frac{\zeta_\alpha^n}{n!}.\]
+In other words, the following diagram 
+    \begin{center}
+\begin{tikzcd}[every arrow/.append style={shift left}]
+\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[dd,"\borel_\zeta"']\arrow[rr,"e^{-z\alpha}"]& & e^{-\alpha z} \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[dd, "\borel_\zeta"]    \\
+& & \\
+\{1, \zeta, \zeta^2, \zeta^3, \ldots\} \arrow[rr, "\mathsf{T}_\alpha"']      &  & \{1, \zeta_\alpha, \zeta_\alpha^2, \zeta_\alpha^3, \ldots\}\arrow[lluu,"\laplace_{\zeta_\alpha,0}"]\arrow{uu}{\laplace_{\zeta,\alpha}}
 \end{tikzcd}
 \end{center}
-commutes. Then we'll extend the definition by linearity.%then from identity \eqref{change-chart}
- % \begin{align*}
-  %    \borel_\zeta\laplace_{\zeta,\alpha}\varphi=\borel_\zeta\left[e^{-\alpha z }\laplace_{\zeta_\alpha,0}\varphi\right]
-  %\end{align*}
-%We compute the left-hand-side
-  \begin{align*}
-\borel_\zeta\laplace_{\zeta,\alpha}\zeta^n &=\borel_\zeta\int_{\Gamma_{\zeta,\alpha}}e^{-z\zeta}\zeta^n d\zeta\\
-      &=\borel_\zeta\left[ \int_{\alpha}^{\infty}e^{-z\zeta} \zeta^nd\zeta\right]\\
-      &=\borel_\zeta\left[e^{-z\alpha}\sum_{k=0}^n \frac{n!}{(n-k)!}\alpha^{n-k}z^{-k-1}\right]\\
-      &=\sum_{k=0}^n \frac{n!}{(n-k)!}\alpha^{n-k}\borel_\zeta(e^{-z\alpha}z^{-k-1})
-  \end{align*}
- % 
-  %and the right-hand-side
-  %\begin{align*}
-   %   \borel_\zeta\left[e^{-\alpha z
-    %  }\laplace_{\zeta_\alpha}\varphi\right]&=\borel_\zeta\left[e^{-\alpha z
-     % }\int_{\Gamma_{\zeta_\alpha,0}} e^{-\zeta_\alpha z} \varphi d\zeta\right]\\
-     % &=\borel_\zeta\left[
-     % \int_{\Gamma_{\zeta_\alpha,0}} e^{-\zeta z} \varphi d\zeta\right]\\
-     % &=\borel_\zeta\left[ \sum_{n=0}^{\infty}a_n\int_{0}^{\infty} e^{-\zeta z} \zeta^n d\zeta\right]\\
-    %  &=\borel_\zeta\left[\sum_{n=0}^{\infty}a_n z^{-n-1}n! \right]\\
-     % &= \sum_{n=0}^{\infty}a_n \zeta^n
-  %\end{align*}
-%In particular, we get \[\borel_{\zeta}\laplace_{\zeta,\alpha}\varphi=\varphi\]
-hence we require %the following equality to hold  
-%\[ \sum_{k=0}^n \frac{n!}{(n-k)!}\alpha^{n-k}\borel_\zeta(e^{-z\alpha}z^{-k-1})=\zeta^n\]
-%and, comparing term by term in powers of $\zeta$ %in the second identity we get 
-  \begin{align*}
-      \sum_{k=0}^n \frac{n!}{(n-k)!}\alpha^{n-k}\borel_\zeta(e^{-z\alpha}z^{-k-1})&=\zeta^n\\
-      \sum_{k=0}^n {n\choose k} \alpha^{n-k} \borel_\zeta(e^{-z\alpha} k! z^{-k-1})&=\sum_{k=0}^n {n\choose k} \alpha^{n-k}(\zeta-\alpha)^k
-  \end{align*}
-and we deduce \[\borel_\zeta(e^{-z\alpha}z^{-k-1})=\frac{1}{k!}(\zeta-\alpha)^k.\]
-
-%\begin{itemize}
- %   \item In other words, when $\borel_\zeta$ acts on formal power series, it formally inverts $\laplace_\zeta$ on the cotangent fiber over $0$. \textcolor{magenta}{When it acts on other trans-monomials, it formally inverts $\laplace_\zeta$ on other cotangent fibers. [Not quite\ldots figure out how to make this precise.] }
-%  \end{itemize}
+commutes, where $\mathsf{T}_\alpha$ denote the traslation by $\alpha$. Notice that the functions on the varible $z$ are meant to be on the fiber $T^*_{\zeta=0}B$. 
+%\end{lemma} 
 \subsubsection{Change of translation chart}\label{transl-borel}
-We'll show that the Borel transform is compatible with the change of translation chart for the Laplace transform in Section~\ref{sec:change-translation}. To be more precise, we want to show that
-\[ \borel_{\zeta_\alpha} [e^{z \alpha} \varphi] = \borel_\zeta \varphi \]
-for all $\varphi \in e^{-z\alpha}\C\llbracket z^{-1} \rrbracket$, implying that the diagram
+We'll show that the Borel transform is compatible with the change of translation chart for the Laplace transform in Section~\ref{sec:change-translation}. To be more precise, we'll show that the diagram
 \begin{center}
 \begin{tikzcd}
-& e^{-\alpha z} \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[rd, "\borel_\zeta"] \arrow[rr, "e^{\alpha z}"] & & \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[ld, "\borel_{\zeta_\alpha}"'] \\
-\{1, \zeta, \zeta^2, \zeta^3, \ldots\} \arrow[ru, "\laplace_{\zeta, \alpha}"] \arrow[rr, "\text{change of variable}"'] & & \{1, \zeta_\alpha, \zeta_\alpha^2, \zeta_\alpha^3, \ldots\}
+e^{-zb}\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \}  \arrow[r,"e^{zb}"]  & \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \}\arrow[d, "\borel_{\zeta_b}"] \\
+\{1, \zeta, \zeta^2, \zeta^3, \ldots\}\arrow[u,"\laplace_{\zeta,b}"]\arrow[r,"\text{change chart}"'] &  \{1, \zeta_b, \zeta_b^2, \zeta_b^3, \ldots\}  
 \end{tikzcd}
 \end{center}
-commutes. Let $\varphi=e^{-z\alpha}\sum_{n=0}^\infty a_n z^{-n-1}$
-\begin{align*}
-    \borel_{\zeta_\alpha}\varphi&=\borel_{\zeta_\alpha}\big[e^{-z \alpha}\sum_{n=0}^\infty a_n z^{-n-1}\big]\\
-    &=\sum_{n=0}^\infty a_n \borel_{\zeta_\alpha}\big[e^{-z\alpha} z^{-n-1}\big]\\
-    &\textcolor{orange}{...}
-\end{align*}
-
-Recall that $\borel_{\zeta_\alpha}$
-is the formal inverse of $\laplace_{\zeta_\alpha}$ on the cotangent fibre over $\alpha$. Thus, we can compute the Borel transform on both side of the identity~\eqref{change-chart}. Let $\varphi\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$ and for some $\Lambda>0$
+commutes, where the functions of $z$ are functions on the fiber $T^*_{\zeta=b}B$. 
+\begin{proof}
+We want to show that 
+\[\borel_{\zeta_b}\left[e^{zb} \laplace_{\zeta,b}\big[\zeta^n\big]\right]=\zeta^n.\]
+Recall that $\borel_{\zeta_b}$
+is the formal inverse of $\laplace_{\zeta_b,0}$ on the cotangent fibre over $b$. Thus, taking the Borel transform on both side of the identity~\eqref{change-chart} we find
   \begin{align*}
-      \borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\varphi\right]&=\varphi
+      \borel_{\zeta_b}\left[e^{zb} \laplace_{\zeta,b}\big[\zeta^n\big]\right]&=\borel_{\zeta_b}\laplace_{\zeta_b,0}\big[\zeta^n\big]\\
+      &=\borel_{\zeta_b}\laplace_{\zeta_b,0}\left[\sum_{k=0}^n{n\choose k}\zeta_b^k b^{n-k}\right]\\
+      &=\sum_{k=0}^n{n\choose k} b^{n-k}\borel_{\zeta_b}\laplace_{\zeta_b,0}\big[\zeta_b^k \big]\\
+      &=\sum_{k=0}^n{n\choose k} b^{n-k}\zeta_b^k\\
+      &=\zeta^n.
   \end{align*}
-  now the left-hand-side reads
-  \begin{align*}
-      \borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\varphi\right]&=\borel_{\zeta_\alpha}\left[e^{z\alpha} \int_{\Gamma_{\zeta,\alpha}}e^{-z\zeta}\varphi d\zeta\right]\\
-      &=\borel_{\zeta_\alpha}\left[e^{z\alpha} \sum_{n=0}^{\infty}a_n\int_{\Gamma_{\zeta,\alpha}}e^{-z\zeta}\zeta^n d\zeta\right]\\
-      &=\borel_{\zeta_\alpha}\left[e^{z\alpha} \sum_{n=0}^{\infty}a_ne^{-z\alpha}\sum_{k=0}^{n}\frac{n!}{(n-k)!}\alpha^{n-k}z^{-k-1}\right]\\
-      &=\borel_{\zeta_\alpha}\left[\sum_{n=0}^{\infty}a_n \sum_{k=0}^{n}\frac{n!}{(n-k)!}\alpha^{n-k}  z^{-k-1}\right]
-  \end{align*}
-  %the RHS is 
-  %\begin{align*}
-   %   \borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\varphi&=\borel_{\zeta_\alpha}\left[\int_{\Gamma_{\zeta_\alpha,0}}e^{-z\zeta_\alpha}\varphi d\zeta\right]\\
-    %  &=\borel_{\zeta_\alpha}\left[e^{z\alpha}\int_{\Gamma_{\zeta_\alpha,0}}e^{-z\zeta}\varphi d\zeta\right]\\
-     % &=\borel_{\zeta_\alpha}\left[e^{z\alpha}\sum_{n=0}^{\infty}\int_{\Gamma_{\zeta_\alpha,0}}e^{-z\zeta}\zeta^n d\zeta\right]\\
-     % &=\borel_{\zeta_\alpha}\left[e^{z\alpha}\sum_{n=0}^{\infty}a_nz^{-n-1}n!\right]\\
-     % &= \borel_{\zeta_\alpha}\left[\sum_{n=0}^{\infty}a_n n!e^{z\alpha}z^{-n-1}\right]
-     % \end{align*}
-     Since $\borel_{\zeta_\alpha}$ is $\C$-linear and
-     % \[\borel_{\zeta_\alpha}\left[e^{z\alpha}z^{-n-1}\right]=\frac{\zeta^n}{n!}=\frac{(\zeta_\alpha+\alpha)^n}{n!}\]
-       \[\borel_{\zeta_\alpha}\left[z^{-k-1}\right]=\frac{\zeta_\alpha^k}{k!}\]
-       we deduce
-       \begin{align*}
-           \borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\varphi\right]&=\sum_{n=0}^{\infty}a_n \sum_{k=0}^{n}\frac{n!}{(n-k)!}\alpha^{n-k} \frac{\zeta_\alpha^k}{k!}\\
-           &=\sum_{n=0}^{\infty}a_n(\zeta_\alpha+\alpha)^n\\
-           &=\varphi.
-       \end{align*}
+\end{proof}
  %Therefore, we learn that $\borel_{\zeta_\alpha}$ is a $\C$-linear map from formal power series in the frequency variable $z$ to formal power series in the position variable $\zeta_\alpha$, it is defined by 
  %\begin{align*}
     % \borel_{\zeta_\alpha}\colon z^{-1}\C\llbracket z^{-1}\rrbracket &\to \C\llbracket \zeta_\alpha \rrbracket  \\
     % z^{-n-1}& \mapsto \frac{\zeta_\alpha^n}{n!} \qquad \text{ when } n\geq 0
  %\end{align*}
-\textcolor{orange}{[Move to beginning?]} Furthermore, we learn that the action of $\borel_{\zeta_\alpha}$ extends to trans-monomials: $\borel_{\zeta_\alpha}\colon e^{z\alpha}\C\llbracket z^{-1}\rrbracket\to \C\llbracket \zeta  \rrbracket$ as the formal inverse of $\laplace_{\zeta_\alpha,-\alpha}$. 
+%\textcolor{orange}{[Move to beginning?]} Furthermore, we learn that the action of $\borel_{\zeta_\alpha}$ extends to trans-monomials: $\borel_{\zeta_\alpha}\colon e^{z\alpha}\C\llbracket z^{-1}\rrbracket\to \C\llbracket \zeta  \rrbracket$ as the formal inverse of $\laplace_{\zeta_\alpha,-\alpha}$. 
 \subsection{Borel and Laplace transforms as algebra homomorphisms}
 So far, our discussion on the Borel transform was at the level of formal series, however there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic functions at the origin in $\C_{\zeta}$. These formal series are the so-called $1$-Gevrey series:
 \[\tilde{\Phi}=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1\]
@@ -1312,7 +1278,7 @@ We want to distinguish between formal series and holomorphic functions, as well 
 \end{notation*}  
 
 \begin{lemma}
-Let $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket$. Then, $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket_1$ is $1$-Gevrey if and only if $\borel\textcolor{orange}{_\zeta}\tilde{\Phi}\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
+Let $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket$. Then, $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket_1$ is $1$-Gevrey if and only if $\borel_\zeta\tilde{\Phi}\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
 \end{lemma}
 
 In fact, we deduce that the Borel transform is an isomorphism between $1$-Gevrey series $z^{-1}\C\llbracket z^{-1}\rrbracket_1$ and $\C\lbrace\zeta\rbrace$. The inverse of $\borel_\zeta$ is what we call a \textit{formal Laplace transform}. In addition, in Section \ref{convolution} we’ll prove that the Borel transform is an algebra homomoprhisms. 
@@ -1806,6 +1772,8 @@ By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha
 of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. It follows, by the results of Section~\ref{sec:reg-decay} \textcolor{magenta}{[the domain $\Omega_\alpha$ needs to be a sector for this]}, that the equation $\mathcal{P}\Psi_\alpha = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
 \[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
 of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
+
+To show that $\Psi_\alpha$ is Borel regular,
 \end{proof}
 \color{black}
 
