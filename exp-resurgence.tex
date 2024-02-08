@@ -155,6 +155,238 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
   urlcolor={ietcoast}
 }
 
+\usepackage{etoolbox}
+
+\usetikzlibrary{math, 3d, calligraphy}
+
+% --- styles ---
+
+\definecolor{pwbeige}{RGB}{172, 146, 122}
+\definecolor{pworange}{RGB}{245, 153, 30}
+
+\tikzset{
+  surf/.style={pwbeige!10},
+  leaf/.style={thin, pwbeige!60},
+  sing/.style={thick, pworange},
+  ray/.style={thick}
+}
+
+% --- cotangent fibers ---
+
+\newcommand{\rfiber}{1.5}
+\pgfmathsetmacro{\rshade}{1.5*\rfiber}
+
+\newcommand{\drawfiber}{
+  \foreach \sgn in {-1, 1} {
+    \calligraphy[scale=\sgn, copperplate, heavy, heavy line width=0.25mm]
+      (\rfiber, \rfiber) -- (\rfiber, -\rfiber)
+      (\rfiber, -\rfiber) -- (-\rfiber, -\rfiber);
+  };
+}
+
+% set up PGF keys
+\pgfkeys{
+  /laplace/.cd,
+  drop/.store in=\fiberdrop,   drop/.value required,
+  shade/.store in=\fibershade, shade/.default=true,
+  degree/.store in=\fiberdeg,  degree/.value required,
+  phase/.store in=\fiberphase, phase/.value required,
+  dual/.store in=\fiberdual,   dual/.default=true
+}
+
+\newcommand{\fiberdescender}[1]{
+  \calligraphy[copperplate, light, thin] (0, -\rfiber) -- (0, -#1);
+}
+
+\newcommand{\fibershading}[2]{
+  \tikzmath{
+    \shadestart = (-90 - #1) / \fiberdeg;
+    \shadeend = (90 - #1) / \fiberdeg;
+  }
+  \fill[pwbeige!30, draw=pwbeige!60] (0, 0) -- (\shadestart:\rshade) arc (\shadestart:\shadeend:\rshade) -- cycle;
+}
+
+\newenvironment{fiber}[1][]{%
+  \pgfkeys{/laplace/.cd, drop=0, shade=false, degree=1, phase=0, #1}
+  \begin{scope}
+    \fill[surf] (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
+    \clip (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
+    \tikzmath{
+      if \fibershade then {
+        print \fibershading{\fiberphase}{0};
+      };
+    }
+}{% ...
+  \end{scope}
+  % see TikZ docs for branching statements
+  % https://tikz.dev/library-math#sec-58.5
+  \tikzmath{
+    if \fiberdrop > 0 then {
+      print \fiberdescender{\fiberdrop};
+    };
+  }
+  \drawfiber
+}
+
+\newcommand{\genfibercontent}[1][]{
+  \pgfkeys{/laplace/.cd, dual=false, #1}
+  \pgfmathsetmacro{\hatch}{\rfiber/8};
+  \pgfmathsetmacro{\firsthatch}{-\rfiber+\hatch}
+  \pgfmathsetmacro{\nexthatch}{-\rfiber+2*\hatch}
+  \pgfmathsetmacro{\hatchstop}{\rfiber-\hatch/2}
+  \foreach \y in {\firsthatch, \nexthatch, ..., \hatchstop} {
+    \tikzmath{
+      coordinate \drawfrom;
+      coordinate \drawto;
+      if \fiberdual then {
+        \drawfrom = (\y, -\rfiber);
+        \drawto = (\y, \rfiber);
+      } else {
+        \drawfrom = (-\rfiber, \y);
+        \drawto = (\rfiber, \y);
+      };
+    }
+    \draw[leaf] (\drawfrom) -- (\drawto);
+  };
+  \fill circle (\dotsize);
+}
+
+\newcommand{\singfibercontent}{
+  % nonsingular leaves
+  \foreach \sector in {30, 90, ..., 330} {
+    \tikzmath{
+      \farout = 45*floor((\sector + 59) / 45);
+      \tfarout = 3*(\farout - \sector);
+      \rfarout = \rfiber/sin(45+mod(\farout-45, 90));
+    }
+    \pgfmathsetmacro{\rmax}{sin(\tfarout) * pow(\rfarout, 3)}
+    \foreach \r in {0.5, 1.0, ..., \rmax} {
+      \pgfmathsetmacro{\win}{asin(\r/(2*\rmax))}
+      \draw[leaf, rotate=\sector, domain=\win:{180-\win}, variable=\t] plot ({\t/3}:{(\r/sin(\t))^(1/3)});
+    };
+    
+    % singular leaves
+    \foreach \ang in {90, 210, 330} {
+      \draw[sing] (\ang:{-sqrt(2)*\rfiber}) -- (\ang:{sqrt(2)*\rfiber});
+    };
+    \fill[sing] circle (\dotsize);
+  };
+}
+
+% --- posititon plane ---
+
+\pgfmathsetmacro{\hatch}{2/3}
+\tikzmath{
+  \phase = 15;
+  \dotsize = 0.04;
+  \drop = 3.5;
+  \xsing = 2;
+  \zsing = 4*\hatch;
+  \xgen = 6;
+  \zgen = 8*\hatch;
+  \rcut = 1/5;
+}
+
+\newcommand{\ray}[2]{
+  \draw[ray] (#1, #2) -- (8, {#2 + (8-#1)*tan(\phase)});
+}
+
+% local picture of the Laplace transform
+\newcommand{\basicLaplace}{
+\begin{tikzpicture}[scale=0.9]
+% position space
+\begin{fiber}
+  \genfibercontent
+  \ray{0}{0}
+\end{fiber}
+\node[anchor=north, outer sep=1mm, font=\footnotesize]
+  at (0, -\rfiber) {position space};
+
+% frequency space
+\begin{scope}[shift={(4 + 0.25*8/3, 0)}]
+  \begin{fiber}[shade, phase=\phase]
+    \genfibercontent[dual]
+  \end{fiber}
+  \node[anchor=north, outer sep=1mm, font=\footnotesize]
+    at (0, -\rfiber) {frequency space};
+\end{scope}
+\end{tikzpicture}
+} % \basicLaplace
+
+% phase space picture of the Laplace transform
+\newcommand{\phaseSpaceLaplace}{
+\begin{tikzpicture}[z={(0.25cm, 0.2cm)}, scale=0.9]
+% position plane
+\begin{scope}[canvas is xz plane at y=0]
+  % surface
+  \fill[surf]
+    (0, 0) -- (0, \zsing-\rcut)
+    -- ++(\xsing-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut})
+    -- (0, 8) --(8, 8) -- (8, 0) -- cycle;
+  
+  % hatching
+  \pgfmathsetmacro{\nexthatch}{2*\hatch}
+  \pgfmathsetmacro{\singstop}{\zsing - \hatch/2}
+  \foreach \z in {\hatch, \nexthatch, ..., \singstop} {
+    \draw[leaf] (0, \z) -- (8, \z);
+  };
+  \pgfmathsetmacro{\singstart}{\zsing + \hatch}
+  \pgfmathsetmacro{\singnext}{\zsing + 2*\hatch}
+  \pgfmathsetmacro{\hatchstop}{8 - \hatch/2}
+  \foreach \z in {\singstart, \singnext, ..., \hatchstop} {
+    \draw[leaf] (0, \z) -- (8, \z);
+  };
+  
+  % singular leaves
+  \begin{scope}[sing]
+    \draw (\xsing, \zsing) -- (8, \zsing);
+    \draw (0, \zsing-\rcut) -- ++(\xsing-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut});
+  \end{scope}
+  
+  % integration rays
+  \ray{\xgen}{\zgen}
+  \ray{\xsing}{\zsing}
+  
+  % outline
+  \calligraphy[copperplate, heavy, heavy line width=0.25mm]
+    (0, 0) -- (0, \zsing-\rcut)
+    (0, \zsing+\rcut) -- (0, 8)
+    (0, 8) -- (8, 8)
+    (8, 8) -- (8, 0)
+    (8, 0) -- (0, 0);
+\end{scope}
+
+% generic fiber
+\begin{scope}[canvas is xy plane at z=\zgen, shift={(\xgen, \drop)}]
+  \begin{fiber}[drop=\drop, shade, phase=\phase]
+    \genfibercontent[dual]
+  \end{fiber}
+\end{scope}
+
+% singular fiber
+\begin{scope}[canvas is xy plane at z=\zsing, shift={(\xsing, \drop)}]
+  \begin{fiber}[drop=\drop, shade, degree=3, phase=\phase]
+    \singfibercontent
+  \end{fiber}
+\end{scope}
+
+% generic point
+\fill (\xgen, 0, \zgen) circle (\dotsize);
+
+% singular point
+\fill[sing] (\xsing, 0, \zsing) circle (\dotsize);
+
+% labels
+\begin{scope}[overlay]
+  \node (surf label) at (9, 0, 4) {$B$};
+  \path (surf label) ++(0, \drop, 0) node {$T^*B$};
+  \node[outer sep=0.15mm, font=\footnotesize, align=left]
+    (cut label) at (-1.25, 1.2, \zsing) {branch cut \\ at conical \\ singularity};
+  \draw[->] (cut label) to[out=-75, in=180] (-0.25, 0, \zsing);
+\end{scope}
+\end{tikzpicture}
+} % \phaseSpaceLaplace
+
 \setcounter{tocdepth}{2}
 
 \title{Borel regularity for ODEs and Thimble Integrals}
@@ -164,35 +396,12 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \maketitle
 
 \begin{abstract}
-    ...
+    Borel regularity is a new approach to Borel summability, that present Borel summation as a regularization process and it explains the effectiveness of Borel summability, namely that Borel summation can be used to reconstruct analytic functions from their asymptotics. Borel regular functions shows up in two classes of examples: as solutions of certain level $1$ ODEs and as integrals over Lefschetz thimbles. In addition, we give a geometric description of the Borel plane.
 \end{abstract}
 \tableofcontents
-
-\begin{brainstorm}
-    \item Section~\ref{borel_reg-ODE} and maybe other subsections--revise the proof of the main result for ODE taking into account the results in our paper
-    \item Do flagged revisions in Section~\ref{borel-reg-thimble}
-    \item Section~\ref{contour-argument-AL}---revise the general contour argument
-    \item Revise Section 2, using the formalism of $\singexp{\sigma}{\Lambda}(\Omega)$
-    \begin{itemize}
-    \item Replace formalism in Section~\ref{sec:reg-decay}
-    \end{itemize}
-    \item Check which examples are still in the framework of our theorem
-    \begin{itemize}
-    \item Start a storage document for shelved examples
-    \end{itemize}
-    \item Section~\ref{resurgence-AL}---Draw intersection points figure
-    \item Section~\ref{sec:mod-bessel-lift}---pin down contour
-    \item Explain contour figure in Airy example (explain what the regions indicate and what the color)
-    \begin{itemize}
-    \item Figure out how to release source code. How much do we need to clean it up? Is it okay that it relies on Shadertoy?
-    \end{itemize}
-    \item Look at ``Plan of the paper'' appendix and confirm that we've included everything we want
-    \begin{itemize}
-    \item Put future goals in storage document
-    \end{itemize}
-    \item Veronica doesn't like $\gamma_z$ as notation for Hankel contour. I'll suggest $\mathcal{H}_{1,z}$ where $1$ is the point where the path is centered. 
-\end{brainstorm}
-
+%
+%
+%
 \section{Introduction}
 \subsection{The unreasonable effectiveness of Borel summation}\label{intro:summation}
 %%\subsection{A familiar process: Borel summation}\label{intro:summation}
@@ -219,7 +428,7 @@ Once you have the formal solution $\series{\Phi}$, you might try to get an actua
 \begin{enumerate}
 \item Thinking of $z$ as a ``frequency variable,'' we take the Borel transform (also known as formal inverse Laplace transform) of $\series{\Phi}$, producing a formal power series $\series{\phi}$ in a new ``position variable'' $\zeta$.
 \item If $\series{\phi}$ has a positive radius of convergence we say $\series{\Phi}$ is {\em $1$-Gevrey}. We sum $\series{\phi}$ to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. %\textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
-\item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $b + e^{i\theta}[0, \infty)$ \textcolor{magenta}{[change, explain, or link to notation]} its Laplace transform $\laplace_b^\theta \hat{\phi}$ (see Section \ref{laplace:ordinary}) turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\hat{\Phi}:=\laplace_b^\theta \hat{\phi}$ its {\em Borel sum} at $b$. 
+\item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $b + e^{i\theta}[0, \infty)$ \textcolor{magenta}{[change, explain, or link to notation]} its Laplace transform $\laplace_{\zeta,b}^\theta \hat{\phi}$ (see Section \ref{laplace:ordinary}) turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\hat{\Phi}:=\laplace_{\zeta,b}^\theta \hat{\phi}$ its {\em Borel sum} at $b$. 
 \end{enumerate}
 The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship, which is best described in the language of {\em Gevrey asymptoticity}. %\textcolor{magenta}{[Do we need to extend these definitions, and the associated theorems, to cover slight series? Hopefully it wouldn't be too hard, but it would be a pain.]}
 \begin{defn}
@@ -318,7 +527,7 @@ The idea of Borel regularity can help us understand why Borel summation is so ef
 
 The central goal of this paper is to explain, from this perspective, why Borel summation works well for the two kinds of problems exemplified in Section~\ref{intro:summation}.
 \begin{enumerate}
-\item Solving a linear ODE of single level~$1$ \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. One example is Equation~\eqref{eqn:bessel-rescaled-1}. \textcolor{magenta}{The general example [not anymore---we've restricted]} is the equation $\mathcal{P} \Phi = 0$ given by a differential operator of the form
+\item Solving a linear ODE of single level~$1$ \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. One example is Equation~\eqref{eqn:bessel-rescaled-1}, and we will cosndier equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2} R(z^{-1}), \]
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial that's non-zero at every root of $P$, and $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. We'll restrict our attention to the case where the roots of $P$ are simple (see Section \ref{borel_reg-ODE}).
 
@@ -378,7 +587,7 @@ Consider a linear level-$1$ differential operator $\mathcal{P}$ of the form desc
 
 \color{Goldenrod}
 [These details are right above in Section~\ref{borel-reg:explanatory-power}!]
-\begin{equation}\label{eqn:standard ODE}
+\begin{equation}%\label{eqn:standard ODE}
 \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big],
 \end{equation}
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_j(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$, for every $j=0,\ldots, d-1$.\footnote{Looking at the existence theorem in \cite[Theorem 4]{reg-sing-volterra}, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.} Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$, $P'(-\alpha_j)\neq 0$ for $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ (see \cite[Definition 3.3.2]{diverg-resurg--ii}).
@@ -445,36 +654,36 @@ At this point, we may ask what is the relationship between the two frames of ana
 
 We know from experience that we can find holomorphic solutions of the equation $\mathcal{P}\Phi = 0$ by taking the Borel sums of formal trans-monomial solutions. However, this only works when there's a coincidence between exponential factor $e^{-\alpha z}$ in the formal solution, the base point $\zeta = \alpha$ we use for Borel summation, and the characteristic equation $P(-\alpha) = 0$. Why?
 
-A first clue is the observation that every solution we get from Borel summation is, by definition, the Laplace transform $\Phi = \laplace_\alpha^\theta \phi$ of a function on $\phi$ the position domain. In fact, the differential equation $\mathcal{P}\Phi = 0$ is equivalent to an integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$.
+A first clue is the observation that every solution we get from Borel summation is, by definition, the Laplace transform $\Phi = \laplace_{\zeta,\alpha}^\theta \phi$ of a function on $\phi$ the position domain. In fact, the differential equation $\mathcal{P}\Phi = 0$ is equivalent to an integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$.
 
-Furthermore, when $-\alpha$ is a root of $P$, the integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$ has a special solution $\psi_\alpha$ which is distinguished, up to scaling, by its power-law asymptotics at $\zeta = \alpha$. Because this solution is so unique, its Laplace transform $\Phi_\alpha$ turns out to be Borel regular.
+Furthermore, when $-\alpha$ is a root of $P$, the integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$ has a special solution $\psi_\alpha$ which is distinguished, up to scaling, by its power-law asymptotics at $\zeta = \alpha$. Because this solution is so unique, its Laplace transform $\Psi_\alpha$ turns out to be Borel regular.
 
 %%The Laplace transform commutes this distinguishing behavior into asymptotics at $z = \infty$, which can be recognized even if we turn $\Phi$ into a formal series $
 
 %We can use the Laplace transform to convert $\mathcal{P}$ into a family of integral operators $\hat{\mathcal{P}}_\upsilon$ parameterized by the point $\zeta = \upsilon$ on the position domain.
 \color{Maroon}
 \begin{theorem}\label{thm:borel_reg_ODE}
-Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation~\eqref{eqn:standard ODE} has a unique solution $\Psi_\alpha$ in the affine subspace
+Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation $\mathcal{P}\Psi=0$ has a unique solution $\Psi_\alpha$ in the affine subspace
 \[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\textcolor{orange}{[figure out where to put definition]}. That solution is Borel regular.
+of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}. That solution is Borel regular.
 \end{theorem}
 \textcolor{violet}{If you prefer to work in the analytic world, you can use this result to prove the existence and Borel summability of special formal transmonomial solutions.}
 \begin{corollary}\label{cor:borel_reg_ODE}
-For each root $-\alpha$ of $P$, Equation~\eqref{eqn:standard ODE} has a formal solution in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$, which is unique up to scaling. That solution is Borel summable, and its Borel sum is a constant multiple of $\Psi_\alpha$.
+For each root $-\alpha$ of $P$, equation $\mathcal{P}\Psi=0$ has a formal solution in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$, which is unique up to scaling. That solution is Borel summable, and its Borel sum is a constant multiple of $\Psi_\alpha$.
 \end{corollary}
 \textcolor{violet}{On the other hand, if you prefer to work in the formal world, you can use Theorem~\ref{thm:borel_reg_ODE} to show that the Poincar\'{e} solutions are Borel summable. See Section~\ref{sec:new-summability-proof}.}
-\textcolor{violet}{[In another section, do the ``mirror image'' argument. Use the Poincar\'{e} algorithm to construct a formal transmonomial solution in the classical way. Use the Ramis index theorem to show that it's Gevrey-$1$, and then then use our existence and uniqueness result for regular singular Volterra equations to show that it's not only Gevrey-$1$, but in fact Borel summable.]}
+\textcolor{violet}{[In another section, do the ``mirror image'' argument. Use the Poincar\'{e} algorithm to construct a formal transmonomial solution in the classical way. Use the Ramis Index Theorem to show that it's Gevrey-$1$, and then then use our existence and uniqueness result for regular singular Volterra equations to show that it's not only Gevrey-$1$, but in fact Borel summable.]}
 %%The formal solution whose existence is shown in Corollary~\ref{cor:borel_reg_ODE} is the Poincar\'{e} solution.
 %%\begin{corollary}
 %%\textcolor{orange}{[The Poincar\'{e} solution is Borel summable.]}
 %%\end{corollary}
 \color{black}
-\textcolor{Violet}{[This is sort of a mirror image of the Ramis index theorem?]}
-\begin{theorem}[see Theorem \ref{thm2-dim}]\label{thm2}
-The formal frame of solutions $\tilde{\Psi}_j$ is Borel summable \textcolor{orange}{[summability is the strongest part of the result]} and its Borel sum is proportional to $\Psi_j$. In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}. \textcolor{orange}{[Alternate statement: look in Sauzin or Delabaere to get uniqueness of formal solution.]} \textcolor{orange}{[Split into theorem, which shows existence of Borel regular frame, and corollary, which shows that this implies a certain frame of formal solutions is Borel-summable and sums to actual solutions.]}
-\end{theorem}
+\textcolor{Violet}{[This is sort of a mirror image of the Ramis Index Theorem?]}
+%\begin{theorem}[see Theorem \ref{thm2-dim}]\label{thm2}
+%The formal frame of solutions $\tilde{\Psi}_j$ is Borel summable \textcolor{orange}{[summability is the strongest part of the result]} and its Borel sum is proportional to $\Psi_j$. In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}. \textcolor{orange}{[Alternate statement: look in Sauzin or Delabaere to get uniqueness of formal solution.]} \textcolor{orange}{[Split into theorem, which shows existence of Borel regular frame, and corollary, which shows that this implies a certain frame of formal solutions is Borel-summable and sums to actual solutions.]}
+%\end{theorem}
 %
-We summarize the main steps of the proof of Theorem~\ref{thm:borel_reg_ODE} and Corollary~\ref{cor:borel_reg_ODE} (the rigorous proofs are given in Section~\ref{borel_reg-ODE}). On the right-hand side of the diagram, we have the formal solution $\series{\Psi }_\alpha\in e^{-\alpha z}z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket$ and its Borel transform $\series{\psi}_\alpha$. %Then, the theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
+\textcolor{red}{[Change or actually delete]}We summarize the main steps of the proof of Theorem~\ref{thm:borel_reg_ODE} and Corollary~\ref{cor:borel_reg_ODE} (the rigorous proofs are given in Section~\ref{borel_reg-ODE}). On the right-hand side of the diagram, we have the formal solution $\series{\Psi }_\alpha\in e^{-\alpha z}z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket$ and its Borel transform $\series{\psi}_\alpha$. %Then, the theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
 
 \begin{center}
 \begin{tikzcd}
@@ -533,33 +742,33 @@ If the integral defining $I$ is absolutely convergent, then $I$ is Borel regular
 \item\label{part-3} If you continue the sum of $\tilde{\iota}$ along the ray $\Gamma_\alpha^\theta$, and take its Laplace transform along that ray, you'll recover $I$.
 \end{enumerate}
 \end{theorem}
-\color{Goldenrod}
-Then, our main result for thimble integrals is proving they are indeed Borel regular:
-\begin{theorem}[see Theorem \ref{thm:maxim-dim}]
-    Let $\tilde{I}_{j}(z)\in e^{-z \alpha_j} z^{-1/2} \C\llbracket z^{-1}\rrbracket$ be the asymptotic expansion of $I_j$ as $\Re z e^{i\theta}\to \infty$ for the generic direction $\theta$. Then:
-\begin{enumerate}
-\item The series $\tilde{\Phi}_j:=z^{1/2} \tilde{I}_j$ is $1$-Gevrey, thus $\tilde{\phi}_j(\zeta)\defeq\borel_\zeta(\tilde{\Phi}_j)$ converges near $\zeta=\alpha_j$
-\item If you continue the sum of $\tilde{\phi}_j$ along the ray $ e^{i\theta}[\alpha_j,+\infty)$, and take its Laplace transform along that ray, you'll recover $z^{1/2} I_j$.
-\item\label{part3} For any $\zeta$ on the ray going rightward from $\alpha_j$, we have a \textit{thimble projection formula}
-\begin{multline}
-\hat{\phi}_{j}(\zeta)=\fracderiv{3/2}{\zeta}{\alpha_j} \left( \int_{\Lambda_j(\zeta)}\nu \right)=\left(\tfrac{\partial}{\partial \zeta}\right)^2\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\alpha_j}^\zeta (\zeta-\zeta')^{-1/2}\left( \int_{\Lambda_j(\zeta')} \nu \right)\,d\zeta',
-\end{multline}
-where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[The thimble $\Lambda_j$ needs an orientation, but the orientation is arbitrary.]}
-\end{enumerate}
-\end{theorem}
-\color{black}
+%\color{Goldenrod}
+%Then, our main result for thimble integrals is proving they are indeed Borel regular:
+%\begin{theorem}[see Theorem \ref{thm:maxim-dim}]
+ %   Let $\tilde{I}_{j}(z)\in e^{-z \alpha_j} z^{-1/2} \C\llbracket z^{-1}\rrbracket$ be the asymptotic expansion of $I_j$ as $\Re z e^{i\theta}\to \infty$ for the generic direction $\theta$. Then:
+%\begin{enumerate}
+%\item The series $\tilde{\Phi}_j:=z^{1/2} \tilde{I}_j$ is $1$-Gevrey, thus $\tilde{\phi}_j(\zeta)\defeq\borel_\zeta(\tilde{\Phi}_j)$ converges near $\zeta=\alpha_j$
+%\item If you continue the sum of $\tilde{\phi}_j$ along the ray $ e^{i\theta}[\alpha_j,+\infty)$, and take its Laplace transform along that ray, you'll recover $z^{1/2} I_j$.
+%\item\label{part3} For any $\zeta$ on the ray going rightward from $\alpha_j$, we have a \textit{thimble projection formula}
+%\begin{multline}
+%\hat{\phi}_{j}(\zeta)=\fracderiv{3/2}{\zeta}{\alpha_j} \left( \int_{\Lambda_j(\zeta)}\nu \right)=\left(\tfrac{\partial}{\partial \zeta}\right)^2\,\frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{\alpha_j}^\zeta (\zeta-\zeta')^{-1/2}\left( \int_{\Lambda_j(\zeta')} \nu \right)\,d\zeta',
+%\end{multline}
+%where $\Lambda_j(\zeta)$ is the part of $\Lambda_j$ that goes through $f^{-1}([\alpha_j, \zeta])$. Notice that $\Lambda_j(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \textcolor{magenta}{[The thimble $\Lambda_j$ needs an orientation, but the orientation is arbitrary.]}
+%\end{enumerate}
+%\end{theorem}
+%\color{black}
+\color{RoyalBlue}
 We sketch the proofs of the main results in the following diagram (for the rigorous ones see Section~\ref{borel-reg-thimble}):
-\[
-\begin{tikzcd}
-{I} \arrow[rrr,"\aexp^{\theta}"]\arrow[dd, swap,"\laplace^{-1} "] &  & & \tilde{I}\arrow[dd,"\borel"]\\
-& & &\\
-\iota \arrow[r,equal] & \hat{\iota} & &\tilde{\iota} \arrow[ll, "\text{sum}"]
-\end{tikzcd}
-\]
+%\[
+%\begin{tikzcd}
+%{I} \arrow[rrr,"\aexp^{\theta}"]\arrow[dd, swap,"\laplace^{-1} "] &  & & \tilde{I}\arrow[dd,"\borel"]\\
+%& & &\\
+%\iota \arrow[r,equal] & \hat{\iota} & &\tilde{\iota} \arrow[ll, "\text{sum}"]
+%\end{tikzcd}
+%\]
 On the one hand, with a change of coordinates, the thimble integral $I$ can be written as a Laplace type integral, i.e. as the Laplace transform of a function $\iota$, written explicitly in equation~\eqref{eqn:formula}. 
 On the other hand, we compute the asymptotic expansion of $I$ using the saddle point approximation, which turns out to be a formal $1$-Gevrey series in the frequency domain. Consequently, its Borel transform $\series{\iota}$ is a germ of holomorphic functions at $\zeta=\alpha$ in the position domain. Finally, we'll show that the Taylor expansion of $\iota$ at $\zeta=\alpha$ agrees with~$\tilde{\iota}$. 
-
-
+\color{black}
 %% the following remark has been moved to Section of the proof
 %\begin{remark}\label{rmk:Pham formula}
 %    Equation \eqref{eqn:formula} gives an explicit expression for $\phi_j$ in terms of $\nu$ and of the pre-image of the ray $e^{i\theta}[\alpha_j,\zeta)$ via $f$. When $f$ and $\nu$ are polynomials and $X$ is $N$-dimensional, a result of Pham \cite[Equation 2.4, II partie]{pham} allows to write $\hat{\iota}_j$ explicitly as 
@@ -579,23 +788,24 @@ On the other hand, we compute the asymptotic expansion of $I$ using the saddle p
 %     
 \subsubsection{Other results}
 %
-As part of the treatment, we have made use of some new perspectives on the Laplace transform (see Section~\ref{sec:Laplace-Borel-general}). Indeed, the Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the position domain. We find, however, that it is much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. In particular, working with integral equations in the spatial domain will be our main strategy to prove Borel regularity for ODEs (see \cite[Theorem 4]{reg-sing-volterra}). 
+As part of the treatment, we have made use of some new perspectives on the Laplace transform (see Section~\ref{sec:Laplace-Borel-general}). Indeed, the Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the position domain. We find, however, that it is much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. In particular, working with integral equations in the spatial domain will be our main strategy to prove Borel regularity for ODEs, building on our previous result \cite[Theorem 4]{reg-sing-volterra}. 
 
-Furthermore, we introduce a geometric picture where the position domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_b^\theta$ is $T^* B_b$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example (see Figure \ref{fig:different_fibres}). 
-
+Furthermore, we introduce a geometric picture where the position domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_{\zeta,b}^\theta$ is $T^*_{\zeta=b} B$. If $b$ is a conical singularity, the frequency domain is more interesting, as we'll see in our main example (see Figure \ref{fig:different_fibres}). 
 \begin{figure}[ht]
 \centering
-    \includegraphics{testbed/testbed1.pdf}
-    \caption{The fiber over an ordinary point of the translation surface $B$ is a copy of the complex plane. However, the fiber over a singular point of $B$ has an interesting structure. Here we represent the example of Airy functions, where the singularity as angle $6 \pi$.}
+\basicLaplace
+\vspace{1cm}
+
+\phaseSpaceLaplace
+\caption{The fiber over an ordinary point of the translation surface $B$ is a copy of the complex plane. However, the fiber over a singular point of $B$ has an interesting structure. Here we represent the example of Airy functions, where the singularity as angle $6 \pi$.}
     \label{fig:different_fibres}
 \end{figure}
-We’ll illustrate our main results with detailed treatments of several examples: we’ll mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals: the Airy--Lucas functions (Section~\ref{example_AL}), modified Bessel function, Airy function (Appendix~\ref{airy-appendix}), \textcolor{red}{the anharmonic oscillator...).} 
 
-On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in the proof of Theorem~\ref{thm:maxim} part~\ref{part3}. In the Airy example (see Section~\ref{airy-appendix}) we’ll compute the \textit{thimble projection formula} directly, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
+We’ll illustrate our main results with detailed treatments of several examples: we’ll mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals: the Airy--Lucas functions (Section~\ref{example_AL}), the modified Bessel functions, the Airy function (Appendix~\ref{airy-appendix}), \textcolor{red}{the anharmonic oscillator...).} On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in Lemma~\ref{lem:thimble_proj_formula} and it is crucial for the proof of Theorem~\ref{thm:maxim}. In the Airy example (see Section~\ref{airy-appendix}) we’ll compute the \textit{thimble projection formula} directly, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
 
-Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we’ll make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}). \textcolor{red}{The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}).} Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}. 
+Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we’ll make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}. \textcolor{red}{The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}).} Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}. 
 
-Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interest in mathematics and physics. The resurgence of linear ODEs have been intensively studied (see Costin slides for ReNewQuantum, \cite{EcalleIII,loday1994stokes,diverg-resurg--ii}) and many results are also known for non-linear ODEs (see \cite{schiappa-PI,costin-PI,diverg-resurg-iii} \textcolor{magenta}{[check also paper by \'Ecalle and Sauzin]}). For algebraic thimble integrals of the type we studied in this paper, the resurgence of their asymptotic expansion can be understood geometrically (see \cite{Maxim_slide_ERC}, \cite[Section 6.2]{kontsevich2022analyticity}), however for more general exponential integrals (see examples in \cite{Maxim_slide_ERC}) resurgence remains conjectural. Despite their simplicity, our examples of linear ODEs and of 1-dimensional integrals are toy-models that show some features of resurgent functions. 
+Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interest in mathematics and physics. The resurgence of linear ODEs have been intensively studied \cite{loday1994stokes,diverg-resurg--ii} and many results are also known for non-linear ODEs \cite{costin-PI,costin_kruskal,diverg-resurg-iii,schiappa-PI}. For algebraic thimble integrals of the type we studied in this paper, the resurgence of their asymptotic expansion can be understood geometrically (see \cite{Maxim_slide_ERC}, \cite[Section 6.2]{kontsevich2022analyticity}), however for more general exponential integrals (see the last example in \cite{Maxim_slide_ERC}) resurgence remains conjectural. Despite their simplicity, our examples of linear ODEs and of 1-dimensional thimble integrals are toy-models that show some features of resurgent functions. 
 
 %\color{gray}
 %\begin{itemize}
@@ -757,8 +967,8 @@ Recently, resurgence theory (first developed by \'Ecalle in the '80) has attract
 %\item Possible interpretation of the Stokes factors as intersections numbers in Morse--Novikov theory \textbf{[ask Maxim]}
 %\end{itemize}
 \subsection{Plan of the paper}
-The paper is organized as follows: Section~\ref{sec:Laplace-Borel-general} is devoted to define the new geometric picture of the Borel and Laplace transform. The reader who is not familiar with the formalism of Borel and Laplace transforms might start with Sections \ref{sec:reg-decay}, the beginning of Section~\ref{sec:geometry_borel} and of Section~\ref{sec:borel-laplace-homom}. Then, Section~\ref{sec:proof_main_results} contains proofs of the main results: Theorem~\ref{thm2} and Theorem~\ref{thm:maxim}. Finally, in Section~\ref{sec:examples} we give a detailed treatment of different examples both from the ODE perspective and from the thimble integral one. 
-We include two appendices: the first one (Appendix~\ref{airy-appendix}) contains a detailed treatment of the Airy example, and it is recommended for readers less familiar to the subject. The second one, Appendix~\ref{apx:generalities_ODEs}, reviews the main aspects of \cite{reg-sing-volterra}.  
+The paper is organized as follows: in Section~\ref{sec:historical-context} we review some well-known results concerning Borel regularity which dates back to the classical theory of asymptotics, ODEs and integrals over Lefschetz thimbles. This could help the reader to contextualize our results in the literature. Then, in Section~\ref{sec:Laplace-Borel-general} is devoted to define the new geometric picture of the Borel and Laplace transform. The reader who is not familiar with the formalism of Borel and Laplace transforms might start with Sections \ref{laplace:ordinary}, the beginning of Section~\ref{sec:geometry_borel} and of Section~\ref{sec:borel-laplace-homom}. Then, Section~\ref{sec:proof_main_results} contains proofs of the main results: Theorem~\ref{thm:borel_reg_ODE} and Theorem~\ref{thm:maxim}. Finally, in Section~\ref{sec:examples} we give a detailed treatment of different examples both from the ODE perspective and from the thimble integral one. 
+We include Appendix~\ref{airy-appendix} that contains a detailed treatment of the Airy example, and it is recommended for readers less familiar to the subject. \textcolor{red}{The second one, Appendix~\ref{apx:generalities_ODEs}, reviews the main aspects of \cite{reg-sing-volterra}.}  
 %
 \subsection{Acknowledgements}
 This paper is a result of the ERC-SyG project, Recursive and Exact New Quantum Theory (ReNewQuantum) which received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme under grant agreement No 810573. 
@@ -887,7 +1097,7 @@ Classically, the Laplace transform turns functions on the position domain into f
 %
 \subsubsection{Translation surfaces, briefly}
 %
-A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\cite{zorich2006flat}. A translation chart is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$. We'll require $B$ to be finite-type and $\lambda$ to have a pole at each puncture. This kind of translation surface has a ``cylindrical end'' (see Figure \ref{fig:translation_surface}) at each puncture where $\lambda$ has order $-1$, and a ``$|2n|$-planar end'' (see Figure \ref{fig:translation_surface}) at each puncture where $\lambda$ has order $n-1 < -1$~\cite[Section 2.5]{gupta2013meromorphic} \textcolor{orange}{(or cite Aaron's article, which will hopefully present the same background in the translation surface context)}.
+A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\cite{zorich2006flat}. A translation chart is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$. We'll require $B$ to be finite-type and $\lambda$ to have a pole at each puncture. This kind of translation surface has a ``cylindrical end'' at each puncture where $\lambda$ has order $-1$, and a ``$|2n|$-planar end'' at each puncture where $\lambda$ has order $n-1 < -1$~\cite[Section 2.5]{gupta2013meromorphic} \textcolor{orange}{(or cite Aaron's article, which will hopefully present the same background in the translation surface context)}(see Figure~\ref{fig:translation_surface}).
 \begin{figure}[ht]
     \centering
     %\includegraphics{}
@@ -1614,7 +1824,9 @@ hence,  \[\partial_{\zeta_b,0}^{-\lambda}\big[\borel_{\zeta_b}\Phi\big]=\borel_{
 \subsubsection{Proof of main results}
 Let's recall the setting from Section~\ref{borel-reg:explanatory-power}. Let $\mathcal{P}$ be a linear differential operator of the form
 %%\footnote{We follow Delabaere, rather than \'{E}calle, in only going on up to degree $d-1$; see \cite[Footnote~1 in Section 5.2.2.1]{diverg-resurg-iii}}
-\[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2} R(z^{-1}), \]
+\begin{equation}\label{eqn:operator-P}
+    \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2} R(z^{-1}),
+\end{equation}
 where
 \begin{enumerate}
 \item[$\bullet$] $P$ is a monic degree-$d$ polynomial whose roots are all simple; 
@@ -1650,10 +1862,14 @@ converges in the region $|z| > A$.
 \caption{The domain $\Omega_\alpha$ \textcolor{orange}{[Revise to show asector]}}\label{Fig:domain}
 \end{figure}
 \color{Maroon}
-\begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]
-Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation~\eqref{eqn:standard ODE} has a unique solution $\Psi_\alpha$ in the affine subspace
+\begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
+Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation 
+\begin{equation}\label{eqn:standard ODE}
+    \mathcal{P}\Psi=0
+\end{equation}
+has a unique solution $\Psi_\alpha$ in the affine subspace
 \[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\textcolor{orange}{[figure out where to put definition]}. That solution is Borel regular.
+of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}. That solution is Borel regular.
 \end{theorem}
 The key to our proof is recasting Equation~\eqref{eqn:standard ODE} as an integral equation in the position domain. This integral equation belongs to a well-behaved class of regular singular Volterra equations, which we study in~\cite{reg-sing-volterra}. In particular, it can be solved using Picard iteration, which refines an initial guess toward the unique solution in its basin of attraction. We'll use \textcolor{magenta}{the guess $\frac{1}{\Gamma(\tau_\alpha)} \zeta^{\tau_\alpha - 1}$ [actually, use prototype solution instead]} to find a solution $\psi_\alpha$ with the same singularity at $\zeta_\alpha = 0$.
 %%\begin{theorem}[Theorem~4 from \cite{reg-sing-volterra}]\label{thm:sing-soln}
@@ -1749,20 +1965,42 @@ To show that $\Psi_\alpha$ is Borel regular, first observe that by \textcolor{or
 %such that $\psi_j$ blows up as $\zeta^{\tau_j-1}$ at $\alpha_j$:
 %${\psi}_j(\zeta_j)=\zeta_j^{\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega_j)$ with $\Omega_j$.
 %\end{theorem}
+
+\color{black}
+\subsubsection{A new proof of the Borel summability of the Poincar\'{e} solutions}\label{sec:new-summability-proof}
+%\textcolor{orange}{[Mention that this is a component of the earlier Borel regularity proof.]}
+Given a differential operator $\mathcal{P}$ as in Equation~\eqref{eqn:operator-P}, Poincar\'e showed how to build a frame of formal solutions of the equation $\mathcal{P}\Psi=0$ with a simple algorithm: for every root $\alpha$ of $P$, let $\tau_\alpha:=Q(-\alpha)/P'(-\alpha)$ and consider the following ansatz
+\begin{equation}
+    \tilde{\Psi}_\alpha(z):=e^{-z\alpha}z^{-\tau_\alpha}\sum_{n=0}^\infty a_{\alpha,n}\, z^{-n}\in e^{-z\alpha} z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket.
+\end{equation}
+Then solving order by order in $n$ it's possible to compute the coefficients of the formal series $\sum_{n=0}^\infty a_{\alpha,n}\, z^{-n}$, which will turn out to be a $1$-Gevrey series because of Ramis
+Index Theorem \cite{ramis_index}. When applicable, Borel summability is an effective method to produce an analytic frame of solutions from the formal Poincar\'e frame $\tilde{\Psi}_\alpha$. In particular, as a consequence of our result in Theorem~\ref{thm:borel_reg_ODE_proof} we deduce that the Poincar\'e frame of solutions is Borel summable (proving Corollary~\ref{cor:borel_reg_ODE}).
 \begin{theorem}\label{thm2-dim}
-%For every $j=1,...,d$ let $\psi_j(\zeta_j)$ be the unique solution of $\hat{P}_j\psi_j=0$ as in in Theorem \ref{thm1-dim}. Then $\psi_j(\zeta_j)$ admits a well defined Laplace transform $\Psi_j:=\laplace_{\zeta_j,-\alpha_j}^{\theta_j}$ for some direction $\theta_j$.
-For each root $\alpha$ of $P$, let $\tilde{\Psi}_\alpha(z)=e^{-\alpha z}z^{-\tau_\alpha}\sum_{n=0}^{\infty}a_{\alpha,n}z^{-n}$ be the formal solution of $\mathcal{P}\Psi=0$ with $a_{\alpha,0}=1$. Then $\series{\Psi}_\alpha(z)$ is Borel summable and its Borel sum is proportional to $\Psi_\alpha$. 
+For each root $\alpha$ of $P$, let $\tilde{\Psi}_\alpha(z)\in e^{-z\alpha} z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket_1$ be the formal solution of $\mathcal{P}\Psi=0$ with $a_{\alpha,0}=1$. Then $\series{\Psi}_\alpha(z)$ is Borel summable and its Borel sum $\hat{\Psi}_\alpha(z)$ is proportional to the analytic solution $\Psi_\alpha$ of Theorem~\ref{thm:borel_reg_ODE_proof}. 
 \end{theorem}
 \begin{proof}
-We divide the proof into the following steps:
+We divide the proof in the following steps:
 \begin{itemize}
-\item[$(a)$] let $\series{\psi}_\alpha:=\borel_{\zeta}\series{\Psi}_\alpha$, then $\hat{P}_\alpha\series{\psi}_\alpha=0$.
-\item[$(b)$] prove that $\laplace_{\zeta,\alpha}^{\theta}\circ\borel_\zeta\series{\Psi}_\alpha\propto \Psi_\alpha $. 
+\item[$(a)$] let $\series{\psi}_\alpha:=\borel_{\zeta}\series{\Psi}_\alpha$, then $\hat{\mathcal{P}}_\alpha\series{\psi}_\alpha=0$.
+\item[$(b)$] $\tilde{\psi}_\alpha\in\C\lbrace\zeta_\alpha\rbrace$ can be analytically continued and its sum $\hat{\psi}_\alpha$ solves $\hat{\mathcal{P}}_\alpha\hat{\psi}_\alpha=0$. 
+\item[$(c)$] $\hat{\psi}_\alpha$ admits a Laplace transform $\laplace_{\zeta,\alpha}^{\theta}\hat{\psi}_\alpha=:\hat{\Psi}_\alpha$ and that $\hat{\Psi}_\alpha\propto\Psi_\alpha $. 
 \end{itemize}
+Step $(a)$ follows from the properties of the Borel transform: recall from Section~\ref{sec:convolution-compatible} that $\tilde{\Psi}_\alpha$ is a transmonomial, thus the Borel transform of $z^{-\lambda}\tilde{\Psi}_\alpha$ is written in terms of the convolution product $\ast_{\alpha}$:   
+\begin{align*}
+  \borel_{\zeta}\left(\mathcal{P}\series{\Psi}_\alpha\right)&= \left[P(-\zeta)+1\ast_{\alpha} Q(-\zeta)+\zeta \ast_{\alpha} \left(\sum_{r=0}^{d-1}\borel_\zeta(R_r(z^{-1}))\ast_{\alpha}(-\zeta)^r\right)\right]\series{\psi}_\alpha(\zeta_\alpha)\\
+  &=\left[P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\fracderiv{-2}{\zeta}{\alpha} \left(\sum_{r=0}^{d-1}R_r(\fracderiv{-1}{\zeta}{\alpha} )(-\zeta)^r\right)\right]\series{\psi}_\alpha(\zeta_\alpha)\\
+  &=\hat{\mathcal{P}}_\alpha\tilde{\psi}_\alpha(\zeta_\alpha)
+\end{align*}
+Hence, the Borel transform of $\series{\Psi}_\alpha$ is a solution of $\hat{\mathcal{P}}_\alpha\series{\psi}_\alpha$=0. 
 
-Step $(b)$ clearly follows from \cite[Theorem 4]{reg-sing-volterra} and step $(a)$. In fact, $\Tilde{\psi}_\alpha$ and ${\psi}_\alpha$ are both solutions of $\hat{P}_\alpha\psi=0$ and \textcolor{magenta}{by uniqueness}\footnote{\color{magenta} One possibility: show that a solution of a formal Volterra equation of the type we have is determined by the $z^{-\tau_\alpha}$ asymptotics somehow? Not enough in general. Another possibility: [\ldots]} they are proportional in a neighbourhood of $\alpha_j$. Then, we can Laplace transform ${\psi}_\alpha$ along a ray $\Gamma_{\alpha}^\theta$ in $\Omega_\alpha$. Hence if $\hat{\psi}_\alpha$ denotes the analytic continuation of $\tilde{\psi}_\alpha$ which agrees with $\psi_\alpha$, we can Laplace transform $\hat{\psi}_\alpha$ along $\Gamma_{\alpha}^\theta$, too. 
+To prove Step $(b)$ we'll use the properties of the integral equation $\hat{\mathcal{P}}_\alpha\psi=0$. First, recall that ${\psi}_\alpha$ is the uniques solution of $\hat{\mathcal{P}}_\alpha\psi=0$ such that $\psi_\alpha\in\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$ \cite[Theorem~4]{reg-sing-volterra}. Then, as shown in Lemma~\ref{lem:picard-power}, the Taylor expansion of $\psi_\alpha$ is the formal solution of $\hat{\mathcal{P}}_\alpha\psi=0$ in $\zeta_\alpha^{\tau_\alpha-1}\C\lbrace\zeta_\alpha\rbrace$. Since by direct computations $\tilde{\psi}_\alpha\in\zeta_\alpha^{\tau_\alpha-1}\C\lbrace\zeta_\alpha\rbrace$
+\[\tilde{\psi}_\alpha=\sum_{n=0}^\infty a_{\alpha,n}\frac{\zeta_\alpha^{n+\tau_\alpha-1}}{\Gamma(n+\tau_\alpha)},\]
+our uniquess result ensures that $\tilde{\psi}_\alpha$ is proportional to the Taylor expansion of $\psi_\alpha$. Thus if $\hat{\psi}_\alpha$ denotes the sum of $\tilde{\psi}_\alpha$, we deduce that $\tilde{\psi}_\alpha\propto\psi_\alpha$. 
 
-We now prove step $(a)$: we want to show that $\series{\psi}_\alpha=\borel_{\zeta}\series{\Psi}_\alpha$ is a solution of $\hat{\mathcal{P}}_\alpha\series{\psi}_\alpha=0$. Recall that $\tilde{\Psi}_\alpha$ is a trans-series, thus the Borel transform of $z^{-\lambda}\tilde{\Psi}_\alpha$ is written in terms of the convolution product $\ast_{\alpha}$.   
+Finally, we can Laplace transform $\hat{\psi}_\alpha$ along a ray $\Gamma_{\alpha}^\theta$ in $\Omega_\alpha$, proving the $\tilde{\Psi}_\alpha$ is Borel summable. In addition, since $\tilde{\psi}_\alpha\propto\psi_\alpha$, their Laplace transform will be proportional too $\laplace_{\zeta,\alpha}^\theta\hat{\psi}_\alpha\propto \Psi_\alpha$. This ends the proof of Step $(c)$. 
+ 
+
+
 
 %First notice that if $\series{\Psi}_j=e^{-\alpha_jz}\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}$ solves $\mathcal{P}\Psi=0$ then $\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}$ is a solution of $\mathcal{P}_j\Psi=0$ with
 
@@ -1777,10 +2015,7 @@ We now prove step $(a)$: we want to show that $\series{\psi}_\alpha=\borel_{\zet
 %Then we take the (formal) Borel transform $\borel_\zeta$ of  $\mathcal{P}_j \sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}$
 
 
-\begin{align*}
-  \borel_{\zeta}\left(\mathcal{P}\series{\Psi}_\alpha\right)&= \left[P(-\zeta)+1\ast_{\alpha} Q(-\zeta)+\zeta \ast_{\alpha} \left(\sum_{r=0}^{d-1}\borel_\zeta(R_r(z^{-1}))\ast_{\alpha}(-\zeta)^r\right)\right]\series{\psi}_\alpha(\zeta_\alpha)\\
-  &=\left[P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\fracderiv{-2}{\zeta}{\alpha} \left(\sum_{r=0}^{d-1}R_r(\fracderiv{-1}{\zeta}{\alpha} )(-\zeta)^r\right)\right]\series{\psi}_\alpha(\zeta_j)\\&=\hat{P}_\alpha\tilde{\psi}_\alpha(\zeta_\alpha)
-\end{align*}
+
 %\begin{multline*}
 %\borel_\zeta\left(\mathcal{P}\series{\Psi}_j\right)=\borel_\zeta\left[e^{-\alpha_j z}\mathcal{P}_j\sum_{n=0}^{\infty}a_{j,n}z^{-n-\tau_j}\right]=\\
 %\left[P(-\alpha_j-\zeta_j)+\partial_{\zeta_j,0}^{-1}\circ Q(-\alpha_j-\zeta_j)+\partial_{\zeta_j,0}^{-2}\circ \sum_{r=0}^dR_r(\partial_{\zeta_j,0}^{-1})\circ (-\alpha_j-\zeta_j)^r\right]\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}\zeta_j^{n+\tau_j-1}\\
@@ -1793,7 +2028,7 @@ We now prove step $(a)$: we want to show that $\series{\psi}_\alpha=\borel_{\zet
 %&=\sum_{n=0}^{\infty}\frac{a_{j,n}}{\Gamma(n+\tau_j)}(\zeta-\alpha_j)^{n+\tau_j-1}
 %\end{align*}
 
-Hence, the Borel transform of $\series{\Psi}_\alpha$ is a solution of $\hat{P}_\alpha\series{\psi}_\alpha$=0. 
+
 \end{proof}
 
 %\color{Turquoise}
@@ -1856,9 +2091,6 @@ Hence, the Borel transform of $\series{\Psi}_\alpha$ is a solution of $\hat{P}_\
  %  \textcolor{red}{Be careful with derivatives: maybe rewrite Lemma 3.8 in such a way that includes them. This means that equation 27 is not anymore algebraic, but it will include terms of the form $R_r(z) \tilde{W}^{(r)}$.
   % There is also another problem, the reasoning of Delabere in Lemma 3.9 requires the existence of a point $p_0$ in $\Omega'$ such that $|\hat{\psi}_j(p_0)|\leq |\hat{W}_m(p_0)|$ for every $m\geq 0$. Can we argue that $|\hat{\psi}_j(\rho e^{i\theta})|$ is bounded for $\rho\in [|\alpha_j|,|p|]$? }
 %\end{proof}
-\color{violet}
-\subsubsection{A new proof of the Borel summability of the Poincar\'{e} solutions}\label{sec:new-summability-proof}
-\textcolor{orange}{[Mention that this is a component of the earlier Borel regularity proof.]}
 \color{black}
 \subsection{Borel regularity for thimble integrals}\label{borel-reg-thimble}
 
@@ -1935,9 +2167,7 @@ Using the porperties of the Borel tranform acting on trans-mononials \ref{sec:ac
 \end{align*}
 We know from the definition of $\varepsilon$ that $\left|b_n^a\right| \varepsilon^n \lesssim 1$, thus we deduce that $\tilde{\iota}$ has a finite radius of convergence. This ends the proof of part \ref{part-2}. %$|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{I}_j$ is $1$-Gevrey.
 
-\textcolor{RoyalBlue}{[Analytic/position version starts here.]} The proof of part \ref{part-3} relies on the thimble projection formula \eqref{eqn:formula-proof}; \textcolor{pink}{in fact, we'll show that the Taylor expansion of $\iota$ near $\zeta=\alpha$ agrees with $\tilde{\iota}$.}
-
-We can rewrite the Taylor series for $\nu$ as
+\textcolor{RoyalBlue}{[Analytic/position version starts here.]} The proof of part \ref{part-3} relies on the thimble projection formula \eqref{eqn:formula-proof}: we'll show that the Taylor expansion of $\iota$ at $\zeta=\alpha$ agrees with $\tilde{\iota}$. We can rewrite the Taylor series for $\nu$ as
 \begin{align*}
 \nu & = \sum_{n \ge 0} b_n^a [2(f - \alpha)]^{(n - 1)/2}\,df,
 \end{align*}
@@ -3412,7 +3642,7 @@ q&=\frac{2}{3}\eta x^{3/2}=\eta\int_0^x\sqrt{x'}dx'=\eta\int_{0}^xS_{-1}(x')dx'.
 We expect that the change of coordinates $q=\eta\int_0^{x}S_{-1}(x')dx'$ would explain the analogies between the Borel transform of the WKB solution of a Schrodinger equation and the Borel transform of the associated ODE.  
 \end{remark} 
 
-\section{Facts about differential and integral equations}
+\section{Facts about differential and integral equations}\label{apx:generalities_ODEs}
 %%\section{Generalities about ODEs and Integral Equations}\label{apx:generalities_ODEs}
 \textcolor{red}{Shall we review the content of \cite{reg-sing-volterra}?}
 \subsection{Passing between the analytic world and the formal world}
