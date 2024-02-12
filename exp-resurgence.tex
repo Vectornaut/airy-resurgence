@@ -453,12 +453,14 @@ The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relatio
 \begin{defn}
 On an open, possibly bounded sector $\Omega$ around $\infty$, a power series
 \begin{equation}\label{series:asymp-defn}
-\frac{a_1}{z} + \frac{a_2}{z^2} + \frac{a_3}{z^3} + \frac{a_4}{z^4} + \ldots
+\textcolor{orange}{a_0}+\frac{a_1}{z} + \frac{a_2}{z^2} + \frac{a_3}{z^3} + \frac{a_4}{z^4} + \ldots
 \end{equation}
 is {\em asymptotic} to a holomorphic function $F$ if
-\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{z \to \infty}\big(|z|^{-n}\big) \]
+\[ \left|F - \left(\textcolor{orange}{a_0}+\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{\Re(z) \to \infty}\big(|z|^{-n}\big) \]
 over all orders $n$. We'll use the symbol $\sim$ to denote the asymptotic of $F$, namely we'll write \[F\sim \sum_{n\geq 1} a_n z^{-n}.\]
 \end{defn}
+\textcolor{orange}{Not all funtions are asymptotic to a power series, thus more generally, we'll say a function $F$ is Poincar\'e asymptotic to a trans-monomial $e^{\lambda z}z^\tau\sum_{n=0}^Na_nz^{-n}$ for some positive $\lambda>0$ and $\tau\in(0,1)$ if 
+\[\left|F - e^{\lambda z}z^{\tau}\left(\textcolor{orange}{a_0}+\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{\Re(z) \to \infty}\big(e^{\lambda\Re(z)}|z|^{\tau-n}\big).\]}
 If two power series of the form \eqref{series:asymp-defn} are asymptotic to the same function, they must be equal; this can be deduced from the triangle inequality. The power series which is asymptotic to a given function on a given open sector, if it exists, is therefore an intrinsic property of the function: it's the function's {\em asymptotic expansion} on that sector. The functions that have asymptotic expansions on a given sector form a ring~\cite[Section~A.4]{nikolaev2023existence}, and the map that sends such a function to its asymptotic expansion is a ring homomorphism. We'll denote such map with the symbol $\aexp$. More generally, when the asymptotic expansion is taken in the direction $\theta$ at infinity, i.e. as $z\to e^{i\theta}\infty$, we'll write $\aexp^\theta$.  
 
 \begin{defn}
@@ -546,7 +548,7 @@ The idea of Borel regularity can help us understand why Borel summation is so ef
 
 The central goal of this paper is to explain, from this perspective, why Borel summation works well for the two kinds of problems exemplified in Section~\ref{intro:summation}.
 \begin{enumerate}
-\item Solving a linear ODE of single level~$1$ \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. One example is Equation~\eqref{eqn:bessel-rescaled-1}, and we will cosndier equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form
+\item Solving a single-level linear ODE, with level~$1$ \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii} \textcolor{orange}{[awkward?]}. Equation~\eqref{eqn:bessel-rescaled-1} is an example. More generally, we'll consider equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2} R(z^{-1}), \]
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial that's non-zero at every root of $P$, and $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. We'll restrict our attention to the case where the roots of $P$ are simple (see Section \ref{borel_reg-ODE}).
 
@@ -1242,7 +1244,7 @@ Let $\Omega_b \subset B$ be an open, simply connected set that touches but does 
 
 \color{RoyalBlue}{$\singexpalg{\sigma}(\Omega_\alpha^\Lambda)$}
 \color{Maroon}
-Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. In this case, for any $\Lambda \in \R$, let \textcolor{magenta}{$\widehat{\Omega}_\alpha^\Lambda$} $\dualsector{\alpha}{\Lambda}$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$. Then, let $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ be the space of holomorphic functions $F$ on $\widehat{\Omega}_\alpha^\Lambda$ with $|F| \lesssim \Delta^\sigma$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. The norm $\|F\|_{\sigma, \Lambda} = \sup_{\widehat{\Omega}_\alpha^\Lambda} \Delta^{-\sigma} |F|$ turns $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ into a Banach space. \textcolor{orange}{Cite \cite{sternin1995borel} better for the theorem.}
+Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. In this case, for any $\Lambda \in \R$, let $\widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$. Then, let $\dualsingexp{\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda)$ be the space of holomorphic functions $F$ on $\widehat{\Omega}_\alpha^\Lambda$ with $|F| \lesssim \Delta^\sigma$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. The norm $\|F\|_{\sigma, \Lambda} = \sup_{\widehat{\Omega}_\alpha^\Lambda} \Delta^{-\sigma} |F|$ turns $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ into a Banach space. \textcolor{orange}{Cite \cite{sternin1995borel} better for the theorem.}
 \begin{prop}[following~\cite{sternin1995borel}]\label{prop:laplace-cont}
 Let $\Omega_\alpha$ be an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. For any $\sigma > 0$ and $\Lambda \ge 0$, and any angle $\theta$ in the opening of $\Omega_\alpha$, the Laplace transform $\laplace_{\zeta_\alpha, 0}^\theta$ is a continuous map $\singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha)$, with a norm of at most $\Gamma(\sigma)$.
 \end{prop}
@@ -1268,9 +1270,9 @@ which is what we wanted to show.
 \end{proof}
 \begin{prop}
 Let $\Omega_\alpha$ be an open sector of the kind described in Proposition~\ref{prop:laplace-cont}, and let $\Omega_\alpha^\varepsilon \subset \Omega_\alpha$ be the open sector created by cutting a sector of angle $\varepsilon > 0$ off each edge of $\Omega_\alpha$. Choose any $\lambda' > \Lambda$. Under the conditions of Proposition~\ref{prop:laplace-cont}, the Laplace transform
-\[ \laplace_{\zeta_\alpha, 0}^\theta \maps \singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha) \]
+\[ \laplace_{\zeta_\alpha, 0}^\theta \maps \singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda) \]
 has a continuous left inverse
-\[ \left(\laplace_{\zeta_\alpha, 0}^\theta\right)^{-1} \maps \dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha) \to \singexp{\sigma-1}{\lambda'}(\Omega_\alpha^\varepsilon), \]
+\[ \left(\laplace_{\zeta_\alpha, 0}^\theta\right)^{-1} \maps \dualsingexp{-\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda) \to \singexp{\sigma-1}{\lambda'}(\Omega_\alpha^\varepsilon), \]
 with a norm of at most
 \[ \frac{\Gamma(1-\sigma)}{\pi\,\sin(\varepsilon/2)}. \]
 \end{prop}
@@ -1840,7 +1842,8 @@ hence,  \[\partial_{\zeta_b,0}^{-\lambda}\big[\borel_{\zeta_b}\Phi\big]=\borel_{
 
 \section{Proof of main results}\label{sec:proof_main_results}
 \subsection{Borel regularity for ODEs}\label{borel_reg-ODE}
-\subsubsection{Proof of main results}
+\textcolor{orange}{[Explain the contents of the section]}
+\subsubsection{Regularity results}
 Let's recall the setting from Section~\ref{borel-reg:explanatory-power}. Let $\mathcal{P}$ be a linear differential operator of the form
 %%\footnote{We follow Delabaere, rather than \'{E}calle, in only going on up to degree $d-1$; see \cite[Footnote~1 in Section 5.2.2.1]{diverg-resurg-iii}}
 \begin{equation}\label{eqn:operator-P}
@@ -1848,9 +1851,9 @@ Let's recall the setting from Section~\ref{borel-reg:explanatory-power}. Let $\m
 \end{equation}
 where
 \begin{enumerate}
-\item[$\bullet$] $P$ is a monic degree-$d$ polynomial whose roots are all simple; 
-\item[$\bullet$] $Q$ is a degree-$(d-1)$ polynomial that's non-zero at every root of $P$;
-\item[$\bullet$] $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, the power series
+\item $P$ is a monic degree-$d$ polynomial whose roots are all simple; 
+\item $Q$ is a degree-$(d-1)$ polynomial that's non-zero at every root of $P$;
+\item $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, the power series
 \[ R(z^{-1}) = \sum_{j=0}^\infty R_j z^{-j} \]
 converges in the region $|z| > A$.
 \end{enumerate}
@@ -1860,26 +1863,6 @@ converges in the region $|z| > A$.
 %%%\item The set $\Omega_\alpha$ is star-shaped around $\zeta = \alpha$. In other words, for any $a \in \Omega_\alpha$, a straight path from $\zeta = \alpha$ to $a$ stays in $\Omega_\alpha$. Since $\Omega_\alpha$ doesn't contain $\zeta = \alpha$, we'll always leave that starting point out of the path.
 %%%\item The set $\Omega_\alpha$ does not contain the tubular neighborhood of the other critical points, as shown in Figure \ref{Fig:domain}. \textcolor{orange}{[In ``Regular singular Volterra,'' we assume that $\Omega_\alpha$ doesn't touch any other critical point (that is, doesn't contain any other critical point in its closure). Under the star-shaped assumption, I think that implies avoiding tubular neighborhoods of the shadow rays.]}
 %%%\end{itemize}
-
-\begin{figure}
-\center
-\begin{tikzpicture}
-\newcommand{\spill}{4}
-\fill[violet!20, bezier bounding box, path fading=radial edge]
-  (-\spill, -\spill) (\spill, \spill)
-  (0, 0) -- (160:\spill)
-  arc (160:112:\spill) -- (112:2) .. controls (112:1.7) and (103:1.7) .. (103:2) -- (103:\spill)
-  arc (103:50:\spill) -- (50:2.6) .. controls (50:2.2) and (43:2.2) .. (43:2.6) -- (43:\spill)
-  arc (43:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-60:2) .. (-60:2.3) -- (-60:\spill)
-  arc (-60:-130:\spill) -- (0, 0);
-\fill[violet] circle (0.7mm) node[anchor=195, outer sep=1mm] {$\zeta = \alpha$};
-\node[anchor=north west, outer sep=1mm] at (46.5:2.46) {$\zeta=\beta$};
-\foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
-  \fill \p circle (0.7mm);
-}
-\end{tikzpicture}
-\caption{The domain $\Omega_\alpha$ \textcolor{orange}{[Revise to show asector]}}\label{Fig:domain}
-\end{figure}
 \color{Maroon}
 \begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
 Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation 
@@ -1888,8 +1871,75 @@ Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has 
 \end{equation}
 has a unique solution $\Psi_\alpha$ in the affine subspace
 \[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}. That solution is Borel regular.
+of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
 \end{theorem}
+\begin{proof}
+%Let $\hat{\mathcal{P}}_\alpha$ be the Volterra operator defined in Section~4.5 of \cite{reg-sing-volterra}. Take any holomorphic function $\phi$ on $\Omega_\alpha$ with a well-defined Laplace transform $\Phi = \laplace_{\zeta,\alpha}^{\theta} \phi$ \textcolor{magenta}{[choose $\theta$]}. Lemma~2 of \cite{reg-sing-volterra} shows that $\hat{\mathcal{P}}_\alpha \phi = 0$ if and only if $\mathcal{P}\Phi = 0$ \textcolor{magenta}{[the lemma only states one direction; change it before publication to state both directions]}.
+%
+As a consequence of Theorem~4 \cite{reg-sing-volterra}, after rescaling by a constant, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
+\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
+of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. It follows, by the results of Section~\ref{sec:reg-decay} \textcolor{magenta}{[the domain $\Omega_\alpha$ needs to be a sector for this]}, that the equation $\mathcal{P}\Psi_\alpha = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
+\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
+of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
+\end{proof}
+\begin{theorem}
+That solution $\Psi_\alpha$ from Theorem~\ref{thm:borel_reg_ODE_proof} is Borel regular.
+\end{theorem}
+\color{Violet}
+\begin{proof}
+    \begin{itemize}
+        \item the asymptotitics of $\Psi_\alpha$ \textcolor{LimeGreen}{[exist and]} are $1$-Gevrey
+        \item \textcolor{LimeGreen}{The solution $\Psi_\alpha$ has an asymptotic expansion} indeed it's the Laplace transform of $\psi_\alpha$, thus if we consider the Taylor expansion of $\psi_\alpha$ at $\zeta=\alpha$ and then we integrate term by term we can compute the asymptotic. Notice that Poincar\'e asymptotic doesn't have to be to a power series, but it can be mor generally to a trans-monomial. I think we should state the definition for trans-monomials.
+        \begin{align}
+            \Psi_\alpha&=\int_\alpha^\infty e^{-z\zeta} \sum_{n=0}^\infty a_n (\zeta-\eta)^n d\zeta \\
+            & = \sum_{n=0}^N a_n \int_\alpha^\infty e^{-z\zeta}   (\zeta-\eta)^n d\zeta+\int_\alpha^\infty e^{-z\zeta} \sum_{n=N+1}^\infty a_n (\zeta-\eta)^n d\zeta \\
+            & = e^{-z\eta} \sum_{n=0}^N a_n \int_\alpha^\infty e^{-z(\zeta - \eta)} (\zeta-\eta)^n d\zeta + e^{-z\eta} \int_\alpha^\infty e^{-z(\zeta - \eta)} \sum_{n=N+1}^\infty a_n (\zeta-\eta)^n d\zeta
+        \end{align}
+        \begin{multline*}
+            \left|\Psi_\alpha- e^{-z\eta} \sum_{n=0}^N a_n \int_\alpha^\infty e^{-z(\zeta - \eta)} (\zeta-\eta)^n d\zeta\right|\leq e^{-\Re(z)|\eta|} \int_\alpha^R |e^{-z(\zeta - \eta)} |\sum_{n=N+1}^\infty R^{-n} |(\zeta-\eta)|^n d\zeta +\\
+            e^{-\Re(z)|\eta|} \int_R^\infty |e^{-z(\zeta - \eta)} | |\psi_\alpha| d\zeta \qquad\text{[use that $\psi_\alpha$ is exponentially bounded]}
+        \end{multline*}
+       \[\Psi_\alpha=\lim_{b \to (\zeta = \alpha)}\int_b^\infty e^{-z\zeta} f\;d\zeta \]
+       \item Say $\left|\Psi_\alpha - \int_b^{\infty}\right| \leq \epsilon$ over all $z$. Then $|z|^n\;\left|\Psi_\alpha - \int_b^{\infty}\right| \leq |z|^n \epsilon$
+       \item \begin{align*}
+       \int_\alpha^\infty e^{-z\zeta} |z|^n |\psi_\alpha-\text{poly}(\zeta)| d\zeta \\
+       \int_\alpha^\infty \left[\left(\tfrac{\partial}{\partial \zeta}\right)^n e^{-z\zeta}\right] |\psi_\alpha-\text{poly}(\zeta)| d\zeta
+       \end{align*}
+       \item Need $\lim_{z \to \infty} z^n |\Psi_\alpha - \text{poly}|$ for all $n \in \Z_{\ge 0}$
+        \item $\tilde{\psi}_\alpha\in\zeta_\alpha^{\tau_\alpha}\C\lbrace\zeta_\alpha\rbrace$ and solves $\hat{\mathcal{P}}_\alpha\phi=0$
+        \item Integral looks like
+        \begin{align*}
+        \int_0^\infty e^{-z\zeta} f\;d\zeta & = \int_0^r e^{-z\zeta} f\;d\zeta + \int_r^\infty e^{-z\zeta} f\;d\zeta \\
+        & \text{``}\approx\text{''} \int_0^r e^{-z\zeta} f\;d\zeta + e^{-z \Re(\zeta)} \|f\|_1 \\
+        & \text{``}\approx\text{''} \|f\|_1 + e^{-zr} \|f\|_1
+        \end{align*}
+        \item $\hat{\mathcal{P}}_\alpha\phi=0$ admits a unique formal solution
+        \item  $\tilde{\psi}_\alpha$ is proportional to the Taylor expansion of $\psi_\alpha$ \textcolor{LimeGreen}{[which exists]}
+    \end{itemize}
+\end{proof}
+\color{Maroon}
+\begin{figure}[h]
+\center
+\begin{tikzpicture}
+\newcommand{\spill}{4}
+\fill[violet!20, bezier bounding box, path fading=radial edge]
+  (-\spill, -\spill) (\spill, \spill)
+  (0, 0) -- (41:\spill) arc (41:-48:\spill) -- cycle;
+  %arc (160:112:\spill) -- (112:2) .. controls (112:1.7) and (103:1.7) .. (103:2) -- (103:\spill)
+  %arc (103:50:\spill) -- (50:2.6) .. controls (50:2.2) and (43:2.2) .. (43:2.6) -- (43:\spill)
+  %arc (43:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-60:2) .. (-60:2.3) -- (-60:\spill)
+  %arc (-60:-130:\spill) -- (0, 0);
+  %%arc (46:-51:\spill) -- (-51:2.5) .. controls (-51:6.4) and (-55.8:6.4) .. (-55.8:-1) -- (-55.8:\spill);
+ %arc (-59:-57:\spill)--(0, 0);
+\fill[violet] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
+%%\node[anchor=south east, outer sep=1mm] at (46.5:2.46) {$\zeta=\beta$};
+\foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
+  \fill \p circle (0.7mm);
+  %\draw[dashed,violet!50] \p -- (0,0);
+}
+\end{tikzpicture}
+\caption{The domain $\Omega_\alpha$}\label{Fig:domain}
+\end{figure}
 The key to our proof is recasting Equation~\eqref{eqn:standard ODE} as an integral equation in the position domain. This integral equation belongs to a well-behaved class of regular singular Volterra equations, which we study in~\cite{reg-sing-volterra}. In particular, it can be solved using Picard iteration, which refines an initial guess toward the unique solution in its basin of attraction. We'll use \textcolor{magenta}{the guess $\frac{1}{\Gamma(\tau_\alpha)} \zeta^{\tau_\alpha - 1}$ [actually, use prototype solution instead]} to find a solution $\psi_\alpha$ with the same singularity at $\zeta_\alpha = 0$.
 %%\begin{theorem}[Theorem~4 from \cite{reg-sing-volterra}]\label{thm:sing-soln}
 %%The equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
