@@ -1883,10 +1883,12 @@ of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on an
 of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
 \end{proof}
 \begin{theorem}
-That solution $\Psi_\alpha$ from Theorem~\ref{thm:borel_reg_ODE_proof} is Borel regular.
+\textcolor{Turquoise}{Assuming $\Psi_\alpha$ from Theorem~\ref{thm:borel_reg_ODE_proof} admits an asymptotic expansion as $\Re z\to e^{i\theta}\infty$ along some rays contained in the sector $\Omega_\alpha$, then $\Psi_\alpha$ is Borel regular.} That solution $\Psi_\alpha$ from Theorem~\ref{thm:borel_reg_ODE_proof} is Borel regular.
 \end{theorem}
-\color{Violet}
 \begin{proof}
+\color{Turquoise}
+If $\Psi_\alpha$ admits an asymptotic expansion $\tilde{\Psi}_\alpha$, then $\Psi_\alpha$ is a formal solution of Equation~\eqref{eqn:operator-P}, thus by Ramis Index Theorem is $1$-Gevrey. The Borel transform of $\tilde{\Psi}_\alpha$ is a germ of convergent power series, and by the properties of the Borel transform, it's a formal solution of $\hat{\mathcal{P}}_\alpha \phi=0$. \textcolor{red}{[check the exponential term $e^{-z\alpha}$, otherwise get different points]}
+\color{Violet}
     \begin{itemize}
         \item the asymptotitics of $\Psi_\alpha$ \textcolor{LimeGreen}{[exist and]} are $1$-Gevrey
         \item \textcolor{LimeGreen}{The solution $\Psi_\alpha$ has an asymptotic expansion} indeed it's the Laplace transform of $\psi_\alpha$, thus if we consider the Taylor expansion of $\psi_\alpha$ at $\zeta=\alpha$ and then we integrate term by term we can compute the asymptotic. Notice that Poincar\'e asymptotic doesn't have to be to a power series, but it can be mor generally to a trans-monomial. I think we should state the definition for trans-monomials.
@@ -2536,7 +2538,7 @@ The holomorphic analysis in Section~\ref{big-idea} will give us holomorphic solu
 which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We’ll see in Section~\ref{bessel-regularity-AL} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$. This is evidence of Theorem~4 from \cite{reg-sing-volterra}.
 %\subsection{Going to the spatial domain}\label{spatial-AL}
 \subsubsection{The big idea}\label{big-idea}
-We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfies equation~\eqref{eqn:reg-mod-bessel-AL}. We'll succeed when $\alpha^2 - 1 = 0$, and we'll see that $K_{m/n}$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
+We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel-AL}. We'll succeed when $\alpha^2 - 1 = 0$, and we'll see that $K_{m/n}$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
 
 We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel-AL} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{int-eq:spatial-mod-bessel-AL}
@@ -3092,15 +3094,46 @@ where $e^{\pi i/3}$ accounts for the monodromy of $\zeta^{-2/3}$ at the origin.
     \[e^{\pi i/3} \Gamma\big(\tfrac{1}{3}\big) e^{-zq} z^{-1/3}= e^{\pi i/3} e^{-qz} \laplace_{\zeta,0}(\zeta^{-2/3}) = e^{\pi i/3} \laplace_{\zeta_{-q},q}(\zeta^{-2/3})\]
     which agrees with the thimble integral representation of $I$ computed above. 
 \end{remark}
-\subsection{The triangular catilever}\label{sec:catilever}
+\subsection{The triangular cantilever}\label{sec:catilever}
+%% genta2009vibration
 The equation of a triangular cantilever with \textcolor{orange}{[...]} $\mu\in\R\setminus\{0\}$ is 
 \begin{equation}\label{eqn:triangular_cantilever}
-    \Big[\big[\Big(\frac{\partial}{\partial z}\Big)^4 +\mu\big]+\frac{2}{z}\Big(\frac{\partial}{\partial z}\Big)^3\Big]\varphi=0 .
+    \left[\big[\big(\tfrac{\partial}{\partial z}\big)^4 +\mu\big] + \tfrac{2}{z}\big(\tfrac{\partial}{\partial z}\big)^3\right] \Phi = 0.
 \end{equation}
-Going to the position domain we can solve the equation explicitly: let $\alpha_1,\ldots,\alpha_4$ be the solutions of $\lambda^4+\mu=0$; we'll look for solutions $v_j$ whose Laplace transform $\laplace_{\zeta,\alpha_j}v_j$ satisfies the equation \eqref{eqn:triangular_cantilever}. For $j=1,\ldots,4$, $v_j$ solves
+\begin{verify}
+The vertical displacement of a vibrating beam is annihilated by the operator
+\[ \big(\tfrac{\partial}{\partial z}\big)^2 \circ EI_\text{roll} \circ \big(\tfrac{\partial}{\partial z}\big)^2 + m \big(\tfrac{\partial}{\partial t}\big)^2, \]
+as described in equation~12.58 of \cite{genta2009vibration}. Here, $m$ is the mass per unit length, $E$ is the elastic modulus, and $I_\text{roll}$ is the second moment of area about the axis the beam ``rolls'' around as it vibrates. We can write the displacement as $\cos(\omega t)$ times a time-independent envelope, which is annihilated by the operator
+\[ \mathcal{P} = \big(\tfrac{\partial}{\partial z}\big)^2 \circ EI_\text{roll} \circ \big(\tfrac{\partial}{\partial z}\big)^2 - m\omega^2. \]
+We're assuming the cantilever has a rectangular cross-section with half-width $s$ and half-thickness $t$, so its second moment of area about the side-to-side axis is $\tfrac{4}{3}st^3$, mass per unit length isproportional to $st$, giving
+\[ \mathcal{P} = \big(\tfrac{\partial}{\partial z}\big)^2 \circ \tfrac{4}{3}Et^3 s \circ \big(\tfrac{\partial}{\partial z}\big)^2 - t\omega^2 s. \]
+For the triangular cantilever, $t$ is constant, and $s$ is proportional to $z$. Since the constant of proportionality only affects the equation by scaling it, we can assume it's one, so we have
+\begin{align*}
+\mathcal{P} & = \big(\tfrac{\partial}{\partial z}\big)^2 \circ c_1 z \circ \big(\tfrac{\partial}{\partial z}\big)^2 - c_2 z \\
+& = c_1 \tfrac{\partial}{\partial z} \circ \big[ 1 + z \tfrac{\partial}{\partial z} \big] \circ \big(\tfrac{\partial}{\partial z}\big)^2 - c_2 z \\
+& = c_1 \circ \big[ \tfrac{\partial}{\partial z} + \tfrac{\partial}{\partial z} + z \big(\tfrac{\partial}{\partial z}\big)^2 \big] \circ \big(\tfrac{\partial}{\partial z}\big)^2 - c_2 z \\
+& = c_1 2\big(\tfrac{\partial}{\partial z}\big)^3 + c_1 z \big(\tfrac{\partial}{\partial z}\big)^4 - c_2 z \\
+\tfrac{1}{c_1 z} \mathcal{P} & = \tfrac{2}{z} \big(\tfrac{\partial}{\partial z}\big)^3 + \big(\tfrac{\partial}{\partial z}\big)^4 - \tfrac{c_2}{c_1}.
+\end{align*}
+Now, set $\mu = \tfrac{c_2}{c_1} = \tfrac{3}{4} \tfrac{1}{E} \big(\tfrac{\omega}{t}\big)^2$.
+
+[The differential operator for the cantilever is $(\partial^4 + \omega^2 c_1) + \tfrac{1}{z} c_2 \partial^3$, where $\omega$ is the vibration frequency and $c_1, c_2$ are constants. This example works because the linear density of the beam and the second moment of area perpemdicular to the vibration direction are proportional, so they both end up in the $P(\partial)$ term.]\end{verify}
+\color{Tan}
+\begin{equation}\label{eqn:mod-bessel-AL}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{m}{n} \big)^2 + z^2\big]\right] K = 0.
+\end{equation}
+\color{black}
+We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:triangular_cantilever}.
+\textcolor{RoyalBlue}{Going to the position domain we can solve the equation explicitly: let $\alpha_1,\ldots,\alpha_4$ be the solutions of $\lambda^4+\mu=0$; we'll look for solutions $v_j$ whose Laplace transform $\laplace_{\zeta,\alpha_j}v_j$ satisfies the equation \eqref{eqn:triangular_cantilever}. For $j=1,\ldots,4$, $v_j$ solves}
 \begin{equation}\label{eqn:position_j}
-    \Big[\big[\zeta^4+\mu\big]+2\fracderiv{-1}{\zeta}{\alpha_j}\circ(-\zeta)^3\Big] v_j=0
+    \left[ \big[ \zeta^4 + \mu \big] + 2\fracderiv{-1}{\zeta}{\alpha} \circ (-\zeta)^3 \right] v_\alpha = 0
 \end{equation}
+\color{Tan}
+We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel-AL} if and only if $v$ satisfies the integral equation
+\begin{equation}\label{int-eq:spatial-mod-bessel-AL}
+\left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{m}{n}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] v = 0.
+\end{equation}
+\color{black}
 As we'll show in Section \ref{shifting}, for $j=1,\ldots,4$, $v_j$ solves \eqref{eqn:position_j} if and only if $v_j$ solves the differential equation 
 \begin{equation}
     \Big[\big[\zeta^4+\mu\big]\tfrac{\partial}{\partial\zeta}-2\zeta^3\Big]v_j = 0
