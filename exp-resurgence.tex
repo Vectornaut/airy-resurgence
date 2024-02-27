@@ -3095,11 +3095,25 @@ where $e^{\pi i/3}$ accounts for the monodromy of $\zeta^{-2/3}$ at the origin.
     which agrees with the thimble integral representation of $I$ computed above. 
 \end{remark}
 \subsection{The triangular cantilever}\label{sec:catilever}
-%% genta2009vibration
-The equation of a triangular cantilever with \textcolor{orange}{[...]} $\mu\in\R\setminus\{0\}$ is 
+A {\em triangular cantilever} is a flexible strip with constant thickness and linearly tapered width, clamped at the broad end so it sticks out horizontally like a diving board.
+\begin{center}
+\begin{tikzpicture}
+\fill[black!10] (0, 0.1, 0) -- (6, 0.1, -1) -- (6, -0.1, -1) -- (6, -0.1, 1) -- (0, -0.1, 0);
+\draw (0, -0.1, 0) -- (6, -0.1, 1) -- (6, -0.1, -1);
+\draw[black!50] (0, 0, 0) -- (6, 0, 0);
+\draw[->] (6, 0, 0) -- (7, 0, 0) node[anchor=west] {$z$};
+\draw (0, 0.1, 0) -- (6, 0.1, 1) -- (6, 0.1, -1) -- cycle;
+\foreach \x / \y in {0 / 0, 6 / 1, 6 / -1} {
+  \draw (\x, 0.1, \y) -- (\x, -0.1, \y);
+}
+\end{tikzpicture}
+\end{center}
+If you strike the strip from above, it vibrates up and down. Let's suppose the vibrations are small, and uniform across the width of the strip, so we can describe them using the Euler--Bernoulli beam model~\cite[\S 12.4]{genta2009vibration}. The vibration modes of frequency $\omega$ are described by the vertical displacement profiles $\Phi$ that satisfy the equation
 \begin{equation}\label{eqn:triangular_cantilever}
-    \left[\big[\big(\tfrac{\partial}{\partial z}\big)^4 +\mu\big] + \tfrac{2}{z}\big(\tfrac{\partial}{\partial z}\big)^3\right] \Phi = 0.
+    \left[\big[\big(\tfrac{\partial}{\partial z}\big)^4 - \omega^2\big] + \tfrac{2}{z}\big(\tfrac{\partial}{\partial z}\big)^3\right] \Phi = 0,
 \end{equation}
+where $z$ is the distance from the tip along the strip's axis.\footnote{To keep the equation simple, we've adjusted the units of time so that the strip's elasticity, density, and taper are absorbed into the frequency parameter.}
+
 \begin{verify}
 The vertical displacement of a vibrating beam is annihilated by the operator
 \[ \big(\tfrac{\partial}{\partial z}\big)^2 \circ EI_\text{roll} \circ \big(\tfrac{\partial}{\partial z}\big)^2 + m \big(\tfrac{\partial}{\partial t}\big)^2, \]
@@ -3107,7 +3121,7 @@ as described in equation~12.58 of \cite{genta2009vibration}. Here, $m$ is the ma
 \[ \mathcal{P} = \big(\tfrac{\partial}{\partial z}\big)^2 \circ EI_\text{roll} \circ \big(\tfrac{\partial}{\partial z}\big)^2 - m\omega^2. \]
 We're assuming the cantilever has a rectangular cross-section with half-width $s$ and half-thickness $t$, so its second moment of area about the side-to-side axis is $\tfrac{4}{3}st^3$, mass per unit length isproportional to $st$, giving
 \[ \mathcal{P} = \big(\tfrac{\partial}{\partial z}\big)^2 \circ \tfrac{4}{3}Et^3 s \circ \big(\tfrac{\partial}{\partial z}\big)^2 - t\omega^2 s. \]
-For the triangular cantilever, $t$ is constant, and $s$ is proportional to $z$. Since the constant of proportionality only affects the equation by scaling it, we can assume it's one, so we have
+For the triangular cantilever, $t$ is constant, and $s = \sigma z$ for some constant $\sigma$. Letting $c_1 = \tfrac{4}{3}\sigma Et^3$ and $c_2 = t\sigma\omega^2$, we have
 \begin{align*}
 \mathcal{P} & = \big(\tfrac{\partial}{\partial z}\big)^2 \circ c_1 z \circ \big(\tfrac{\partial}{\partial z}\big)^2 - c_2 z \\
 & = c_1 \tfrac{\partial}{\partial z} \circ \big[ 1 + z \tfrac{\partial}{\partial z} \big] \circ \big(\tfrac{\partial}{\partial z}\big)^2 - c_2 z \\
@@ -3115,31 +3129,24 @@ For the triangular cantilever, $t$ is constant, and $s$ is proportional to $z$. 
 & = c_1 2\big(\tfrac{\partial}{\partial z}\big)^3 + c_1 z \big(\tfrac{\partial}{\partial z}\big)^4 - c_2 z \\
 \tfrac{1}{c_1 z} \mathcal{P} & = \tfrac{2}{z} \big(\tfrac{\partial}{\partial z}\big)^3 + \big(\tfrac{\partial}{\partial z}\big)^4 - \tfrac{c_2}{c_1}.
 \end{align*}
-Now, set $\mu = \tfrac{c_2}{c_1} = \tfrac{3}{4} \tfrac{1}{E} \big(\tfrac{\omega}{t}\big)^2$.
-
-[The differential operator for the cantilever is $(\partial^4 + \omega^2 c_1) + \tfrac{1}{z} c_2 \partial^3$, where $\omega$ is the vibration frequency and $c_1, c_2$ are constants. This example works because the linear density of the beam and the second moment of area perpemdicular to the vibration direction are proportional, so they both end up in the $P(\partial)$ term.]\end{verify}
-\color{Tan}
-\begin{equation}\label{eqn:mod-bessel-AL}
-\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{m}{n} \big)^2 + z^2\big]\right] K = 0.
-\end{equation}
+Now, set $\mu = \tfrac{c_2}{c_1} = \tfrac{3}{4} \tfrac{1}{E} \big(\tfrac{\omega}{t}\big)^2$. This example works because the linear density of the beam and the second moment of area about the side-to-side axis are proportional, so they both end up in the $P(\partial/\partial z)$ term.\par
+\end{verify}
 \color{black}
-We're going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:triangular_cantilever}.
-\textcolor{RoyalBlue}{Going to the position domain we can solve the equation explicitly: let $\alpha_1,\ldots,\alpha_4$ be the solutions of $\lambda^4+\mu=0$; we'll look for solutions $v_j$ whose Laplace transform $\laplace_{\zeta,\alpha_j}v_j$ satisfies the equation \eqref{eqn:triangular_cantilever}. For $j=1,\ldots,4$, $v_j$ solves}
-\begin{equation}\label{eqn:position_j}
-    \left[ \big[ \zeta^4 + \mu \big] + 2\fracderiv{-1}{\zeta}{\alpha} \circ (-\zeta)^3 \right] v_\alpha = 0
+We're going to look for functions $v$ and points $\zeta = \alpha$ for which the Laplace transform $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:triangular_cantilever}. We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies equation~\eqref{eqn:triangular_cantilever} if and only if $v$ satisfies the integral equation
+\begin{equation}\label{eqn:position_cantilever}
+    \left[ \big[ \zeta^4 - \omega^2 \big] - 2\fracderiv{-1}{\zeta}{\alpha} \circ \zeta^3 \right] v = 0.
 \end{equation}
-\color{Tan}
-We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel-AL} if and only if $v$ satisfies the integral equation
-\begin{equation}\label{int-eq:spatial-mod-bessel-AL}
-\left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{m}{n}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] v = 0.
-\end{equation}
-\color{black}
+Observing that
+\[ \tfrac{\partial}{\partial \zeta}\,(\zeta^4 - \omega^2)^{1/2} = 2\zeta^3\,(\zeta^4 - \omega^2)^{-1/2}, \]
+we learn that $v_\text{uni} = (\zeta^4 - \omega^2)^{-1/2}$ satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega = 0$. Thus, a single ``universal solution'' in the position domain leads to four linearly independent solutions $V_\alpha = \laplace_{\zeta, \alpha} v_\text{uni}$ of equation~\eqref{eqn:triangular_cantilever}.
+\par\color{RoyalBlue}
 As we'll show in Section \ref{shifting}, for $j=1,\ldots,4$, $v_j$ solves \eqref{eqn:position_j} if and only if $v_j$ solves the differential equation 
 \begin{equation}
     \Big[\big[\zeta^4+\mu\big]\tfrac{\partial}{\partial\zeta}-2\zeta^3\Big]v_j = 0
 \end{equation}
 In particular, at $\zeta_j=\zeta-\alpha_j$ we find 
 \[v_j \propto \frac{1}{\zeta_j^{1/2}}\, \prod_{k\neq j}(\zeta_j-\alpha_k+\alpha_j)^{-1/2}.\]
+\color{black}
 \textcolor{orange}{[Stokes? Thimbles?]}
 %\subsection{The anharmonic oscillator}\label{sec:anharmonic_oscillator}
 
