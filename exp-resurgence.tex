@@ -1972,11 +1972,11 @@ lies in the space $\singexpalg{\tau_\alpha - 1}(\Omega_\alpha)$ and satisfies th
 \begin{equation}\label{eqn:inhomog-volterra}
 \solptb = \softpart^\alpha \solproto + \volterra^\alpha \solptb
 \end{equation}
-The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Omega_\alpha)$, into $\singexpalg{\tau_\alpha}(\Omega_\alpha)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by Picard iteration. Starting with any initial guess $\solptb^{(0)} \in \singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ and defining
+The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Omega_\alpha)$, into $\singexpalg{\tau_\alpha}(\Omega_\alpha)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, that equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by Picard iteration. Starting with any initial guess $\solptb^{(0)} \in \singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ and defining
 \begin{align*}
-\solptb^{(1)} & = \volterra^\alpha \solptb^{(0)} \\
-\solptb^{(2)} & = \volterra^\alpha \solptb^{(1)} \\
-\solptb^{(3)} & = \volterra^\alpha \solptb^{(2)} \\
+\solptb^{(1)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(0)} \\
+\solptb^{(2)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(1)} \\
+\solptb^{(3)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(2)} \\
 & \;\;\vdots
 \end{align*}
 we get a sequence of functions that converges in $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ to a solution.
@@ -3098,11 +3098,14 @@ where $e^{\pi i/3}$ accounts for the monodromy of $\zeta^{-2/3}$ at the origin.
 A {\em triangular cantilever} is a flexible strip with constant thickness and linearly tapered width, clamped at the broad end so it sticks out horizontally like a diving board.
 \begin{center}
 \begin{tikzpicture}
-\fill[black!10] (0, 0.1, 0) -- (6, 0.1, -1) -- (6, -0.1, -1) -- (6, -0.1, 1) -- (0, -0.1, 0);
-\draw (0, -0.1, 0) -- (6, -0.1, 1) -- (6, -0.1, -1);
-\draw[black!50] (0, 0, 0) -- (6, 0, 0);
-\draw[->] (6, 0, 0) -- (7, 0, 0) node[anchor=west] {$z$};
-\draw (0, 0.1, 0) -- (6, 0.1, 1) -- (6, 0.1, -1) -- cycle;
+\newcommand{\clen}{6}
+\newcommand{\ctaper}{1}
+\newcommand{\cthic}{0.1}
+\fill[black!10] (0, \cthic, 0) -- ++(6, 0, -\ctaper) -- ++(0, -2*\cthic, 0) -- ++(0, 0, 2*\ctaper) -- (0, -\cthic, 0);
+\draw (0, -\cthic, 0) -- ++(\clen, 0, \ctaper) -- ++(0, 0, -2*\ctaper);
+\draw[black!50] (0, 0, 0) -- ++(\clen, 0, 0);
+\draw[->] (\clen, 0, 0) -- ++(1, 0, 0) node[anchor=west] {$z$};
+\draw (0, \cthic, 0) -- ++(\clen, 0, \ctaper) -- ++(0, 0, -2*\ctaper) -- cycle;
 \foreach \x / \y in {0 / 0, 6 / 1, 6 / -1} {
   \draw (\x, 0.1, \y) -- (\x, -0.1, \y);
 }
@@ -3137,8 +3140,10 @@ We're going to look for functions $v$ and points $\zeta = \alpha$ for which the 
     \left[ \big[ \zeta^4 - \omega^2 \big] - 2\fracderiv{-1}{\zeta}{\alpha} \circ \zeta^3 \right] v = 0.
 \end{equation}
 Observing that
-\[ \tfrac{\partial}{\partial \zeta}\,(\zeta^4 - \omega^2)^{1/2} = 2\zeta^3\,(\zeta^4 - \omega^2)^{-1/2}, \]
-we learn that $v_\text{uni} = (\zeta^4 - \omega^2)^{-1/2}$ satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega = 0$. Thus, a single ``universal solution'' in the position domain leads to four linearly independent solutions $V_\alpha = \laplace_{\zeta, \alpha} v_\text{uni}$ of equation~\eqref{eqn:triangular_cantilever}.
+\[ \tfrac{\partial}{\partial \zeta} \sqrt{\zeta^4 - \omega^2} = \frac{2\zeta^3}{\sqrt{\zeta^4 - \omega^2}}, \]
+we learn that
+\[ v_\text{uni} = \frac{1}{\sqrt{\zeta^4 - \omega^2}} \]
+satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega = 0$. Thus, a single ``universal solution'' in the position domain leads to four linearly independent solutions $V_\alpha = \laplace_{\zeta, \alpha} v_\text{uni}$ of equation~\eqref{eqn:triangular_cantilever}, indexed by the fourth roots of $\omega^2$.
 \par\color{RoyalBlue}
 As we'll show in Section \ref{shifting}, for $j=1,\ldots,4$, $v_j$ solves \eqref{eqn:position_j} if and only if $v_j$ solves the differential equation 
 \begin{equation}
