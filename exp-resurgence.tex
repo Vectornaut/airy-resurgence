@@ -79,6 +79,7 @@
 \newcommand{\fmlsolproto}{\series{f}_0}
 \newcommand{\fmlsolptb}{\series{f}_\star}
 %%\newcommand{\roots}{\mathfrak{B}}
+\DeclareMathOperator{\hol}{hol}
 
 %% for the figure
 % colors
@@ -682,6 +683,20 @@ Furthermore, when $-\alpha$ is a root of $P$, the integral equation $\hat{\mathc
 %%The Laplace transform commutes this distinguishing behavior into asymptotics at $z = \infty$, which can be recognized even if we turn $\Phi$ into a formal series $
 
 %We can use the Laplace transform to convert $\mathcal{P}$ into a family of integral operators $\hat{\mathcal{P}}_\upsilon$ parameterized by the point $\zeta = \upsilon$ on the position domain.
+\color{BlueViolet}
+\begin{theorem}\label{thm:exist_uniq_ODE}
+Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
+\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
+of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
+\end{theorem}
+\begin{theorem}\label{thm:has_ae_ODE}
+The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} has an asymptotic expansion in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. In fact, up to scaling, it's asymptotic to the Poincar\'{e} solution found in that space \textcolor{orange}{[not defined yet?]}.
+\end{theorem}
+Combining our uniqueness and regularity results for $\psi_\alpha$ with uniqueness and regularity results for the Poincar\'{e} solutions, we can show that $\Psi_\alpha$ is Borel regular.
+\begin{corollary}
+The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is Borel regular.
+\end{corollary}
+\color{black}
 \color{Maroon}
 \begin{theorem}\label{thm:borel_reg_ODE}
 Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation $\mathcal{P}\Psi=0$ has a unique solution $\Psi_\alpha$ in the affine subspace
@@ -1863,11 +1878,96 @@ converges in the region $|z| > A$.
 %%%\item The set $\Omega_\alpha$ is star-shaped around $\zeta = \alpha$. In other words, for any $a \in \Omega_\alpha$, a straight path from $\zeta = \alpha$ to $a$ stays in $\Omega_\alpha$. Since $\Omega_\alpha$ doesn't contain $\zeta = \alpha$, we'll always leave that starting point out of the path.
 %%%\item The set $\Omega_\alpha$ does not contain the tubular neighborhood of the other critical points, as shown in Figure \ref{Fig:domain}. \textcolor{orange}{[In ``Regular singular Volterra,'' we assume that $\Omega_\alpha$ doesn't touch any other critical point (that is, doesn't contain any other critical point in its closure). Under the star-shaped assumption, I think that implies avoiding tubular neighborhoods of the shadow rays.]}
 %%%\end{itemize}
+\color{BlueViolet}
+\begin{theorem}[restatement of \ref{thm:exist_uniq_ODE}]\label{thm:exist_uniq_ODE_proof}
+Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
+\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
+of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
+\end{theorem}
+\begin{proof}
+After rescaling by a constant, Theorem~4 of \cite{reg-sing-volterra} tells us that the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
+\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
+of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. It follows, by the results of Section~\ref{sec:reg-decay} \textcolor{magenta}{[the domain $\Omega_\alpha$ needs to be a sector for this]}, that the equation $\mathcal{P}\Psi_\alpha = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
+\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
+of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
+\end{proof}
+\textcolor{orange}{[\ldots]} Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work work just as well on a covering of $\C$ which is branched at the roots of $P(-\zeta)$. Let's use the covering $\pi \maps \widetilde{B}_{P(-\zeta)} \to \C$ built by puncturing $\C$ at the roots of $P(-\zeta)$, taking the universal cover, and then gluing the roots back in as infinite-order branch points.
+\begin{lemma}\label{lem:shifted_holo_closed}
+Choose a root $-\alpha$ of $P$. Consider a simply connected open set $\Upsilon \subset \widetilde{B}_{P(-\zeta)}$ which touches but doesn't contain $\zeta = \alpha$, is star-shaped around $\zeta = \alpha$, and doesn't touch any other root of $P(-\zeta)$. Suppose that $\pi \maps \Upsilon \to \C$ overlaps itself at the edges: it's two-to-one over a simply connected open set $\Upsilon_\Delta \subset \C$ which is star-shaped around $\zeta = \alpha$, and it's one-to-one everywhere else.
+\begin{center}
+\begin{tikzpicture}
+  \newcommand{\spill}{4}
+  \fill[violet!20, bezier bounding box, path fading=radial edge]
+    (-\spill, -\spill) (\spill, \spill)
+    (190:1.5) arc (190:41:1.5) -- (41:\spill) arc (41:-48:\spill) -- (-48:1.3) arc (-48:-170:1.3) -- cycle;
+  \fill[violet!35] (0, 0) -- (-170:1.3) arc (-170:-210:1.3) -- cycle;
+  \fill[violet] circle (0.7mm) node[anchor=west, outer sep=1mm] {$\zeta = \alpha$};
+  \node[violet] at (-190:0.85) {$\Upsilon_\Delta$};
+  \foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
+    \fill \p circle (0.7mm);
+  }
+\end{tikzpicture}
+\end{center}
+For any real numbers $\sigma$, $\Lambda$ and any $\delta \in [0, 1)$, the intersection of $\zeta^{\sigma + \delta}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$ is a closed subspace of the latter.
+\end{lemma}
+\begin{proof}
+Each point $b \in \Upsilon_\Delta$ has two preimages $b_+, b_- \in \Upsilon$, where $b_+$ is $2\pi$ counterclockwise of $b_-$ around $\zeta = \alpha$. The operator $\hol \maps \singexp{\sigma}{\Lambda}(\Upsilon) \to \singexp{\sigma}{\Lambda}(\Upsilon_\Delta)$ defined by
+\[ \hol \varphi \big|_b = \varphi(b_+) - \varphi(b_-) \]
+is bounded. The intersection of $\zeta^{\sigma + \delta}\,\mathcal{O}(\Upsilon_\Delta)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$ is the kernel of the bounded operator $\hol - e^{2\pi i \delta}$, so it's closed.
+\end{proof}
+\begin{theorem}[restatement of \ref{thm:has_ae_ODE}]
+The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE_proof} has an asymptotic expansion in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. In fact, up to scaling, it's asymptotic to the Poincar\'{e} solution found in that space \textcolor{orange}{[not defined yet?]}.
+\end{theorem}
+\begin{proof}
+Take an open sector $\Omega_\alpha$ of the kind used in Theorem~\ref{thm:exist_uniq_ODE_proof}, and expand it to an open set $\Upsilon \subset \widetilde{B}_{P(-\zeta)}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
+\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Upsilon) \]
+of the space $\singexpalg{\tau_\alpha-1}(\Upsilon)$. Restricting this solution to $\Omega_\alpha$ gives the analogous solution from the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}, as we can see from the uniqueness part of Theorem~4. To prove that $\Psi_\alpha$ has a the desired asymptotic expansion, we'll show that $\psi_\alpha$ lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
+
+%%The key step of our proof will be to show that $\psi_\alpha$ lies in
+
+%%The uniqueness part of the Theorem~4 ensures that restricting $\psi_\alpha$ to $\Omega_\alpha$ gives the analogous solution used in the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}.
+
+%%%In the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}, we used Theorem~4 of \cite{reg-sing-volterra} to show that the equation $\mathcal
+
+%%%$\psi_\alpha$ in the affine subspace
+%%\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
+%%of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$
+
+For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$. In \cite{reg-sing-volterra}, to prove Theorem~4, we rewrite the equation $\hat{\mathcal{P}}_\alpha \solwhole = 0$ as a regular singular Volterra equation $\solwhole = \volterra^\alpha \solwhole$ that satisfies the conditions of Theorem~3. The operator $\volterra^\alpha$ is the sum of the ``prototypical'' part
+%%\[ \hardpart^\alpha = -\tfrac{1}{P(-\zeta)} \circ \partial^{-1}_{\zeta, \alpha} \circ Q(-\zeta) \]
+\[ \hardpart^\alpha = -\tfrac{1}{p} \circ \partial^{-1}_{\zeta, \alpha} \circ q \]
+and the perturbation
+%%\[ \softpart^\alpha = \tfrac{1}{P(-\zeta)} \circ \partial^{-2}_{\zeta, \alpha} \circ R(\partial^{-1}_{\zeta, \alpha}) \]
+\[ \softpart^\alpha = \tfrac{1}{p} \circ \partial^{-2}_{\zeta, \alpha} \circ R\big(\partial^{-1}_{\zeta, \alpha}\big). \]
+\color{SlateBlue}
+\begin{itemize}
+\item Prove Theorem~3 using Picard iteration, using the {\em prototype solution}
+\[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right], \]
+given by an arbitary point $b \in \Omega_\alpha$ as our initial guess.
+\item This expression for the prototype solution, taken from \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, makes it clear that the prototype solution belongs to $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
+\item The operator $\volterra^\alpha$ preserves the intersection of $\zeta^{\sigma + \delta}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$. Hence, the Picard iteration sequence must lie in this subspace.
+\item We know from Lemma~\ref{lem:shifted_holo_closed} that the intersection of $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$ is a closed subspace of the latter. Hence, the solution $\psi_\alpha$ that Picard iteration converges to must also lie within this subspace.
+\item Use Laplace transforms of truncated power series for $\psi_\alpha$ to show that $\Psi_\alpha$ has an asymptotic series?
+\end{itemize}
+\color{BlueViolet}
+
+%%Let's run through the proof of Theorem~3, specialized to the case we consider in Theorem~4. First, picking an arbitrary point $b \in \Omega_\alpha$, we show that
+
+%%Picking an arbitrary point $b \in \Omega_\alpha$, we observe that the {\em prototype solution}
+%%\[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right] \]
+
+%% \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]
+
+%%Theorem~4 of \cite{reg-sing-volterra} tells us that the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the subspace
+
+%%The restriction map $\singexp{\sigma}{\Lambda}(\Upsilon) \hookrightarrow \singexp{\sigma}{\Lambda}(\Omega_\alpha)$ \textcolor{orange}{\ldots}
+\end{proof}
+\color{black}
 \color{Maroon}
 \begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
 Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation 
 \begin{equation}\label{eqn:standard ODE}
-    \mathcal{P}\Psi=0
+\mathcal{P}\Psi=0
 \end{equation}
 has a unique solution $\Psi_\alpha$ in the affine subspace
 \[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
@@ -1927,17 +2027,9 @@ If $\Psi_\alpha$ admits an asymptotic expansion $\tilde{\Psi}_\alpha$, then $\Ps
 \fill[violet!20, bezier bounding box, path fading=radial edge]
   (-\spill, -\spill) (\spill, \spill)
   (0, 0) -- (41:\spill) arc (41:-48:\spill) -- cycle;
-  %arc (160:112:\spill) -- (112:2) .. controls (112:1.7) and (103:1.7) .. (103:2) -- (103:\spill)
-  %arc (103:50:\spill) -- (50:2.6) .. controls (50:2.2) and (43:2.2) .. (43:2.6) -- (43:\spill)
-  %arc (43:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-60:2) .. (-60:2.3) -- (-60:\spill)
-  %arc (-60:-130:\spill) -- (0, 0);
-  %%arc (46:-51:\spill) -- (-51:2.5) .. controls (-51:6.4) and (-55.8:6.4) .. (-55.8:-1) -- (-55.8:\spill);
- %arc (-59:-57:\spill)--(0, 0);
 \fill[violet] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
-%%\node[anchor=south east, outer sep=1mm] at (46.5:2.46) {$\zeta=\beta$};
 \foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
   \fill \p circle (0.7mm);
-  %\draw[dashed,violet!50] \p -- (0,0);
 }
 \end{tikzpicture}
 \caption{The domain $\Omega_\alpha$}\label{Fig:domain}
