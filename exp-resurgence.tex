@@ -1891,7 +1891,7 @@ of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on an
 \[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
 of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
 \end{proof}
-\textcolor{orange}{[\ldots]} Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work work just as well on a covering of $\C$ which is branched at the roots of $P(-\zeta)$. Let's use the covering $\pi \maps \widetilde{B}_{P(-\zeta)} \to \C$ built by puncturing $\C$ at the roots of $P(-\zeta)$, taking the universal cover, and then gluing the roots back in as infinite-order branch points.
+\textcolor{orange}{[\ldots]} Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work just as well on a covering of $\C$ which is branched at the roots of $P(-\zeta)$. Let's use the covering $\pi \maps \widetilde{B}_{P(-\zeta)} \to \C$ built by puncturing $\C$ at the roots of $P(-\zeta)$, taking the universal cover, and then gluing the roots back in as infinite-order branch points.
 \begin{lemma}\label{lem:shifted_holo_closed}
 Choose a root $-\alpha$ of $P$. Consider a simply connected open set $\Upsilon \subset \widetilde{B}_{P(-\zeta)}$ which touches but doesn't contain $\zeta = \alpha$, is star-shaped around $\zeta = \alpha$, and doesn't touch any other root of $P(-\zeta)$. Suppose that $\pi \maps \Upsilon \to \C$ overlaps itself at the edges: it's two-to-one over a simply connected open set $\Upsilon_\Delta \subset \C$ which is star-shaped around $\zeta = \alpha$, and it's one-to-one everywhere else.
 \begin{center}
@@ -1939,6 +1939,34 @@ For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$. In \cite{reg-sing-volt
 and the perturbation
 %%\[ \softpart^\alpha = \tfrac{1}{P(-\zeta)} \circ \partial^{-2}_{\zeta, \alpha} \circ R(\partial^{-1}_{\zeta, \alpha}) \]
 \[ \softpart^\alpha = \tfrac{1}{p} \circ \partial^{-2}_{\zeta, \alpha} \circ R\big(\partial^{-1}_{\zeta, \alpha}\big). \]
+
+Let's run through the proof of Theorem~3, specialized to the case we consider in Theorem~4. First, picking an arbitrary point $b \in \Omega_\alpha$, we show that the {\em prototype solution}
+\[ \solproto(a) = \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \]
+lies in the space $\singexpalg{\tau_\alpha - 1}(\Upsilon)$ and satisfies the equation $\solproto = \hardpart^\alpha \solproto$. We then look for a perturbation $\solptb$ that makes $\solwhole = \solproto + \solptb$ a solution of the Volterra equation we're trying to solve. This is equivalent to solving the inhomogeneous equation
+\begin{equation}\label{eqn:inhomog-volterra}
+\solptb = \softpart^\alpha \solproto + \volterra^\alpha \solptb
+\end{equation}
+The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Upsilon)$, into $\singexpalg{\tau_\alpha}(\Upsilon)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, that equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by Picard iteration. Defining
+\begin{align*}
+\solptb^{(0)} & = \softpart^\alpha \solproto \\
+\solptb^{(1)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(0)} \\
+\solptb^{(2)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(1)} \\
+\solptb^{(3)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(2)} \\
+& \;\;\vdots
+\end{align*}
+we get a sequence of functions that converges in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ to a solution.
+
+In \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, we rewrite the prototype solution in the form
+\[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right], \]
+which shows that it lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$. By working with Taylor series, we can show that $\softpart^\alpha$ maps
+\[ \zeta^{\tau_\alpha-1}\,\mathcal{O}(\pi \Upsilon) \to \zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \]
+and $\volterra^\alpha$ maps $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$ to itself. It follows that the sequence $\solptb^{(0)}, \solptb^{(1)}, \solptb^{(2)}, \ldots$ lies within the intersection of $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$, which by Lemma~\ref{lem:shifted_holo_closed} is a closed subspace of the latter. The solution $\solptb$ of equation~\eqref{eqn:inhomog-volterra} that this sequence converges to therefore lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$. Recalling that the prototype solution lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$, we can deduce that $\psi_\alpha$ lies in that space too.
+
+%%Consider any $\rho > \tau$, recalling our assumption that $\tau > 0$. We know from Propositions \textcolor{orange}{\tt prop:smoothing} 9 and \textcolor{orange}{\tt prop:get-contraction} 10 of \cite{reg-sing-volterra} that $\softpart^\alpha$ maps
+%%\[ \singexp{\tau-1}{\Lambda}(\Upsilon) \to \singexp{\tau}{\Lambda}(\Upsilon) \]
+%%continuously and $\volterra^\alpha$ contracts $\singexp{\rho-1}{\Lambda}(\Upsilon)$ when $\Lambda$ is large enough. Under the same conditions, by working with Taylor series, we can show that $\softpart^\alpha$ maps
+%%\[ \zeta^{\tau-1}\,\mathcal{O}(\pi \Upsilon) \to \zeta^{\tau}\,\mathcal{O}(\pi \Upsilon) \]
+%%and $\volterra^\alpha$ maps $\zeta^{\rho-1}\,\mathcal{O}(\pi \Upsilon)$ to itself.
 \color{SlateBlue}
 \begin{itemize}
 \item Prove Theorem~3 using Picard iteration, using the {\em prototype solution}
@@ -1947,7 +1975,8 @@ given by an arbitary point $b \in \Omega_\alpha$ as our initial guess.
 \item This expression for the prototype solution, taken from \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, makes it clear that the prototype solution belongs to $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
 \item The operator $\volterra^\alpha$ preserves the intersection of $\zeta^{\sigma + \delta}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$. Hence, the Picard iteration sequence must lie in this subspace.
 \item We know from Lemma~\ref{lem:shifted_holo_closed} that the intersection of $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$ is a closed subspace of the latter. Hence, the solution $\psi_\alpha$ that Picard iteration converges to must also lie within this subspace.
-\item Use Laplace transforms of truncated power series for $\psi_\alpha$ to show that $\Psi_\alpha$ has an asymptotic series?
+\color{SteelBlue}
+\item \textbf{[still to do]} Use Laplace transforms of truncated power series for $\psi_\alpha$ to show that $\Psi_\alpha$ has an asymptotic series?
 \end{itemize}
 \color{BlueViolet}
 
@@ -1963,25 +1992,25 @@ given by an arbitary point $b \in \Omega_\alpha$ as our initial guess.
 %%The restriction map $\singexp{\sigma}{\Lambda}(\Upsilon) \hookrightarrow \singexp{\sigma}{\Lambda}(\Omega_\alpha)$ \textcolor{orange}{\ldots}
 \end{proof}
 \color{black}
-\color{Maroon}
-\begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
-Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation 
-\begin{equation}\label{eqn:standard ODE}
-\mathcal{P}\Psi=0
-\end{equation}
-has a unique solution $\Psi_\alpha$ in the affine subspace
-\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
-\end{theorem}
-\begin{proof}
+%%%\color{Maroon}
+%%%\begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
+%%%Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation 
+%%%\begin{equation}\label{eqn:standard ODE}
+%%%\mathcal{P}\Psi=0
+%%%\end{equation}
+%%%has a unique solution $\Psi_\alpha$ in the affine subspace
+%%%\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
+%%%of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
+%%%\end{theorem}
+%%%\begin{proof}
 %Let $\hat{\mathcal{P}}_\alpha$ be the Volterra operator defined in Section~4.5 of \cite{reg-sing-volterra}. Take any holomorphic function $\phi$ on $\Omega_\alpha$ with a well-defined Laplace transform $\Phi = \laplace_{\zeta,\alpha}^{\theta} \phi$ \textcolor{magenta}{[choose $\theta$]}. Lemma~2 of \cite{reg-sing-volterra} shows that $\hat{\mathcal{P}}_\alpha \phi = 0$ if and only if $\mathcal{P}\Phi = 0$ \textcolor{magenta}{[the lemma only states one direction; change it before publication to state both directions]}.
 %
-As a consequence of Theorem~4 \cite{reg-sing-volterra}, after rescaling by a constant, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
-\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
-of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. It follows, by the results of Section~\ref{sec:reg-decay} \textcolor{magenta}{[the domain $\Omega_\alpha$ needs to be a sector for this]}, that the equation $\mathcal{P}\Psi_\alpha = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
-\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
-\end{proof}
+%%%As a consequence of Theorem~4 \cite{reg-sing-volterra}, after rescaling by a constant, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
+%%%\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
+%%%of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. It follows, by the results of Section~\ref{sec:reg-decay} \textcolor{magenta}{[the domain $\Omega_\alpha$ needs to be a sector for this]}, that the equation $\mathcal{P}\Psi_\alpha = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
+%%%\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
+%%%of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
+%%%\end{proof}
 \begin{theorem}
 \textcolor{Turquoise}{Assuming $\Psi_\alpha$ from Theorem~\ref{thm:borel_reg_ODE_proof} admits an asymptotic expansion as $\Re z\to e^{i\theta}\infty$ along some rays contained in the sector $\Omega_\alpha$, then $\Psi_\alpha$ is Borel regular.} That solution $\Psi_\alpha$ from Theorem~\ref{thm:borel_reg_ODE_proof} is Borel regular.
 \end{theorem}
