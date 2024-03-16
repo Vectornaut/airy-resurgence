@@ -1880,7 +1880,7 @@ converges in the region $|z| > A$.
 %%%\end{itemize}
 \color{BlueViolet}
 \begin{theorem}[restatement of \ref{thm:exist_uniq_ODE}]\label{thm:exist_uniq_ODE_proof}
-Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
+Choose a root $-\alpha$ of $P$ with $\tau_\alpha \in (0, \infty)$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
 \[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
 of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
 \end{theorem}
@@ -1895,7 +1895,7 @@ of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
 \textcolor{orange}{[\ldots]} Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work just as well on a covering of $\C$ which is branched at the roots of $P(-\zeta)$. Let us use the covering $\pi \maps \widetilde{B}_{P(-\zeta)} \to \C$ built by puncturing $\C$ at the roots of $P(-\zeta)$, taking the universal cover, and then gluing the roots back in as infinite-order branch points.
 
 \color{BlueViolet}
-Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work just as well on appropriate covers of punctured versions of $\C$, like the universal cover $\pi \maps \widetilde{\C^\times} \to \C^\times$.
+Our arguments in \cite{reg-sing-volterra} took place on the complex plane, but they work just as well on appropriate covers of punctured complex planes. The universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$ is a convenient setting for the following result.
 \begin{lemma}\label{lem:shifted_holo_closed}
 Consider a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ which touches $\zeta = 0$ and is star-shaped around $\zeta = 0$. Suppose that $\pi \maps \Upsilon \to \C^\times$ overlaps itself at the edges: it is two-to-one over a simply connected open set $\Upsilon_\Delta \subset \C^\times$ which is star-shaped around $\zeta = 0$, and it is one-to-one everywhere else.
 
@@ -1917,18 +1917,45 @@ Choose a root $-\alpha$ of $P$. Consider a simply connected open set $\Upsilon \
   }
 \end{tikzpicture}
 \end{center}
-For any $\sigma, \Lambda \in \R$ and $\delta \in [0, 1)$ with $\sigma + \delta \notin \Z$, the intersection of $\zeta^{\sigma + \delta}\,\pi^*\mathcal{O}(\pi \Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$ is a closed subspace of the latter.
+For any $\rho' \in \R \smallsetminus \Z$, $\Lambda \in \R$ and $\sigma' \in (\rho'-1, \rho']$, the intersection
+\[ \zeta^{\rho'}\,\pi^*\mathcal{O}(\pi \Upsilon) \cap \singexp{\sigma'}{\Lambda}(\Upsilon) \]
+is a closed subspace of $\singexp{\sigma'}{\Lambda}(\Upsilon)$.
 \end{lemma}
 \begin{proof}
-Each point $b \in \Upsilon_\Delta$ has two preimages $b_+, b_- \in \Upsilon$, where $b_+$ is $2\pi$ counterclockwise of $b_-$ around $\zeta = \alpha$. The {\em variation} operator $\var \maps \singexp{\sigma}{\Lambda}(\Upsilon) \to \singexp{\sigma}{\Lambda}(\Upsilon_\Delta)$, defined by\footnote{The target of the variation operator is a space of functions on $\Upsilon_\Delta$ because the variation is defined only on the overlap. Our notation follows the convention of \cite{diverg-resurg-i}, described before Definition~6.46.}
+Each point $b \in \Upsilon_\Delta$ has two preimages $b_+, b_- \in \Upsilon$, where $b_+$ is $2\pi$ counterclockwise of $b_-$ around $\zeta = \alpha$. The {\em variation} operator $\var \maps \singexp{\sigma'}{\Lambda}(\Upsilon) \to \singexp{\sigma'}{\Lambda}(\Upsilon_\Delta)$, defined by\footnote{The target of the variation operator is a space of functions on $\Upsilon_\Delta$ because the variation is defined only on the overlap. Our notation follows the convention of \cite{diverg-resurg-i}, described before Definition~6.46.}
 \[ \var \varphi \big|_b = \varphi(b_+) - \varphi(b_-) \]
-is bounded. The intersection of $\zeta^{\sigma + \delta}\,\pi^*\mathcal{O}(\pi\Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$ is the kernel of the bounded operator $\var - (e^{2\pi i (\sigma + \delta)} - 1)$, so it is closed.
+is bounded. The intersection of $\zeta^{\rho'}\,\pi^*\mathcal{O}(\pi\Upsilon)$ with $\singexp{\sigma'}{\Lambda}(\Upsilon)$ is the kernel of the bounded operator $\var - (e^{2\pi i \rho'} - 1)$, so it is closed.
+\end{proof}
+\textcolor{orange}{[Add flavor text]}
+\begin{lemma}\label{lem:laplace-bridge}
+\textcolor{orange}{[Move to Laplace transform section?]} Consider an open sector $\Omega$ of the kind used in Theorem~\ref{thm:exist_uniq_ODE_proof}, but with its tip at $\zeta = 0$. Take some $\rho \in (-1,\infty)$. If $\varphi \in \singexp{\rho}{\Lambda}(\Omega)$ is the sum of a power series $\series{\varphi} \in \zeta^\rho\,\C\{\zeta\}$, then its Laplace transform $\Phi = \laplace_{\zeta, 0}^\theta \varphi$ is asymptotic to the formal Laplace transform $\series{\Phi} = \laplace_{\zeta, 0} \series{\varphi}$. \textcolor{orange}{[Define formal Laplace transform into transmonomial spaces?]}
+\end{lemma}
+\begin{proof}
+By adding points within the disk around $\zeta = 0$ where $\series{\varphi}$ converges, expand $\Omega$ to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. Write $\series{\varphi}$ out in the form
+\[ \series{\varphi} = a_0 \frac{\zeta^\rho}{\Gamma(\rho+1)} + a_1 \frac{\zeta^{\rho+1}}{\Gamma(\rho+2)} + a_2 \frac{\zeta^{\rho+2}}{\Gamma(\rho+3)} + a_3 \frac{\zeta^{\rho+3}}{\Gamma(\rho+4)} + \ldots, \]
+observing that
+\[ \series{\Phi} = \frac{a_0}{z^{\rho+1}} + \frac{a_1}{z^{\rho+2}} + \frac{a_2}{z^{\rho+3}} + \frac{a_3}{z^{\rho+4}} + \ldots. \]
+For each $n \in \Z_{\ge 0}$, define the tail sum $\varepsilon_n \in \singexp{\sigma+n}{\Lambda}(\Upsilon)$ by the equation
+\[ \varphi = a_0 \frac{\zeta^\rho}{\Gamma(\rho+1)} + a_1 \frac{\zeta^{\rho+1}}{\Gamma(\rho+2)} + \ldots + a_{n-1} \frac{\zeta^{\rho+n-1}}{\Gamma(\rho+n)} + \varepsilon_n. \]
+Taking the Laplace transform of both sides, we learn that
+\[ \Phi = \frac{a_0}{z^{\rho+1}} + \frac{a_1}{z^{\rho+2}} + \ldots + \frac{a_{n-1}}{z^{\rho+n}} + E_n, \]
+where $E_n = \laplace_{\zeta, 0}^\theta \varepsilon_n$. To show that $\Phi$ is asymptotic to $\series{\Phi}$, we just need to prove that $|z^{\rho+n} E_n| \to 0$ as $|z| \to \infty$ along every ray.
+
+Proposition~\ref{prop:laplace-cont} tells us \textcolor{orange}{[as long as the opening angle of $\Omega$ is less than $\pi$]} that $E_n$ lies in $\dualsingexp{-\rho-n-1}{\Lambda}(\widehat{\Omega}_0^\Lambda)$. This means that $|E_n| \lesssim \Delta^{-\rho-n-1}$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. Noting that $|z|/\Delta$ goes to a constant limit as $|z| \to \infty$ along any ray \textcolor{magenta}{[check; note that the constant isn't uniform!]}, we deduce that
+\begin{align*}
+|z^{\rho+n} E_n| & \lesssim |z|^{\rho+n} \Delta^{-\rho-n-1} \\
+& = \big(|z|/\Delta\big)^{\rho+n} \Delta^{-1} \\
+& \lesssim \Delta^{-1}
+\end{align*}
+along any ray. This, as discussed above, proves the desired result.
+
+%%\[ \varepsilon_n = a_n \zeta^{\rho+n} + a_1 \zeta^{\rho+n+1} + a_2 \zeta^{\rho+n+2} + a_{n+3} \zeta^{\rho+n+3} + \ldots \]
 \end{proof}
 \begin{theorem}[restatement of \ref{thm:has_ae_ODE}]
-The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE_proof} has an asymptotic expansion in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. In fact, up to scaling, it is asymptotic to the Poincar\'{e} solution found in that space \textcolor{orange}{[not defined yet?]}.
+The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE_proof} has an asymptotic expansion in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$.
 \end{theorem}
 \begin{proof}
-Take an open sector $\Omega_\alpha$ of the kind used in Theorem~\ref{thm:exist_uniq_ODE_proof}, and expand it to an open set $\Upsilon \subset \widetilde{B}_{P(-\zeta)}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed} \textcolor{orange}{[definition of $\widetilde{B}_{P(-\zeta)}$ should actually be down here]}. By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
+Take an open sector $\Omega_\alpha$ of the kind used in Theorem~\ref{thm:exist_uniq_ODE_proof}, and expand it to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace \textcolor{orange}{[use $\zeta_\alpha$ in place of $\zeta$ throughout proof]}
 \[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Upsilon) \]
 of the space $\singexpalg{\tau_\alpha-1}(\Upsilon)$. Restricting this solution to $\Omega_\alpha$ gives the analogous solution from the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}, as we can see from the uniqueness part of Theorem~4. To prove that $\Psi_\alpha$ has a the desired asymptotic expansion, we will show that $\psi_\alpha$ lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
 
@@ -1969,42 +1996,9 @@ In \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volt
 \[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right], \]
 which shows that it lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$. By working with Taylor series, we can show that $\softpart^\alpha$ maps
 \[ \zeta^{\tau_\alpha-1}\,\mathcal{O}(\pi \Upsilon) \to \zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \]
-and $\volterra^\alpha$ maps $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$ to itself. It follows that the sequence $\solptb^{(0)}, \solptb^{(1)}, \solptb^{(2)}, \ldots$ lies within the intersection of $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$, which by Lemma~\ref{lem:shifted_holo_closed} is a closed subspace of the latter. The solution $\solptb$ of equation~\eqref{eqn:inhomog-volterra} that this sequence converges to therefore lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$. Recalling that the prototype solution lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$, we can deduce that $\psi_\alpha$ lies in that space too.
+and $\volterra^\alpha$ maps $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$ to itself. It follows that the sequence $\solptb^{(0)}, \solptb^{(1)}, \solptb^{(2)}, \ldots$ lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \cap \singexp{\tau_\alpha}{\Lambda}(\Upsilon)$, which by Lemma~\ref{lem:shifted_holo_closed} is a closed subspace of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. The solution $\solptb$ of equation~\eqref{eqn:inhomog-volterra} that this sequence converges to therefore lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$. Recalling that the prototype solution lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$, we can deduce that $\psi_\alpha$ lies in that space too.
 
-%%Consider any $\rho > \tau$, recalling our assumption that $\tau > 0$. We know from Propositions \textcolor{orange}{\tt prop:smoothing} 9 and \textcolor{orange}{\tt prop:get-contraction} 10 of \cite{reg-sing-volterra} that $\softpart^\alpha$ maps
-%%\[ \singexp{\tau-1}{\Lambda}(\Upsilon) \to \singexp{\tau}{\Lambda}(\Upsilon) \]
-%%continuously and $\volterra^\alpha$ contracts $\singexp{\rho-1}{\Lambda}(\Upsilon)$ when $\Lambda$ is large enough. Under the same conditions, by working with Taylor series, we can show that $\softpart^\alpha$ maps
-%%\[ \zeta^{\tau-1}\,\mathcal{O}(\pi \Upsilon) \to \zeta^{\tau}\,\mathcal{O}(\pi \Upsilon) \]
-%%and $\volterra^\alpha$ maps $\zeta^{\rho-1}\,\mathcal{O}(\pi \Upsilon)$ to itself.
-\color{SlateBlue}
-\begin{itemize}
-\item Prove Theorem~3 using Picard iteration, using the {\em prototype solution}
-\[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right], \]
-given by an arbitary point $b \in \Omega_\alpha$ as our initial guess.
-\item This expression for the prototype solution, taken from \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, makes it clear that the prototype solution belongs to $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
-\item The operator $\volterra^\alpha$ preserves the intersection of $\zeta^{\sigma + \delta}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$. Hence, the Picard iteration sequence must lie in this subspace.
-\item We know from Lemma~\ref{lem:shifted_holo_closed} that the intersection of $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$ with $\singexp{\sigma}{\Lambda}(\Upsilon)$ is a closed subspace of the latter. Hence, the solution $\psi_\alpha$ that Picard iteration converges to must also lie within this subspace.
-\color{SteelBlue}
-\item \textbf{[still to do]} Use Laplace transforms of truncated power series for $\psi_\alpha$ to show that $\Psi_\alpha$ has an asymptotic series?
-\end{itemize}
-\color{BlueViolet}
-
-%%Let us run through the proof of Theorem~3, specialized to the case we consider in Theorem~4. First, picking an arbitrary point $b \in \Omega_\alpha$, we show that
-
-%%Picking an arbitrary point $b \in \Omega_\alpha$, we observe that the {\em prototype solution}
-%%\[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right] \]
-
-%% \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]
-
-%%Theorem~4 of \cite{reg-sing-volterra} tells us that the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the subspace
-
-%%The restriction map $\singexp{\sigma}{\Lambda}(\Upsilon) \hookrightarrow \singexp{\sigma}{\Lambda}(\Omega_\alpha)$ \textcolor{orange}{\ldots}
-\end{proof}
-\begin{lemma}
-The Poincar\'{e} solutions of Equation~\eqref{eq:I} are 1-Gevrey.
-\end{lemma}
-\begin{proof}
-This statement is equivalent to Proposition~2.2.1 of \cite{EcalleIII}, proven on p.~114.
+Since $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$, we can now conclude that $\psi_\alpha$ is the sum of a shifted Laurent series in $\zeta^{\tau_\alpha-1}\,\C\llbracket \zeta, \zeta^{-1} \rrbracket$. The definition of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ tells us that $|\zeta|^{\tau_\alpha-1} |\psi_\alpha|$ is bounded on a punctured disk around $\zeta = 0$, so in fact $\psi_\alpha$ is the sum of a shifted Taylor series $\series{\psi}_\alpha \in \zeta^{\tau_\alpha-1}\,\C\llbracket \zeta \rrbracket$. Therefore, by Lemma~\ref{lem:laplace-bridge}, the solution $\Psi_\alpha$ is asymptotic to the formal Laplace transform $\series{\Psi}_\alpha = \laplace_{\zeta, \alpha} \series{\psi}_\alpha$, which lies in $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. \textcolor{orange}{[How to rephrase without formal Laplace transform? Conclusion is stronger than statement; change statement accordingly.]}
 \end{proof}
 \color{black}
 %%%\color{Maroon}
@@ -2788,22 +2782,11 @@ K_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\Lambda^\thet
 & = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\Gamma^\theta_{\mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\Gamma^\theta_{\mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right]
 \end{align*}
 where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $u$, respectively.
-\par\color{RoyalBlue}\textcolor{orange}{[\textbf{New phrasing for rewrite:} The critical point splits the thimble $\Lambda$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away.]}
-We follow the reasoning of the proof of Theorem~\ref{thm:maxim}. We can recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $\textcolor{magenta}{-\zeta} = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Projecting $z^{-1/n} \Lambda^{(k)}$ to a contour $\gamma_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\gamma_z$ back to $z^{-1/n} \Lambda^{(k)}$, we get \textcolor{magenta}{[sign flipped]} 
-
-\begin{align*}%%\label{integral:mod-bessel-rational-zeta}
-K_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{z^{-\textcolor{DarkCyan}{1/n}}\Lambda^{(k)}} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
-& = -\frac{1}{2  \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\gamma_z} e^{-z\zeta}\,\frac{U_{m-1}(u)}{U_{n-1}(u)}\,d\zeta %\\
-%& = -\frac{1}{2\,\tfrac{n}{m} \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\gamma_z} e^{-z\zeta}\,F(1 - \tfrac{m}{n}, 1 + \tfrac{m}{n}, \tfrac{3}{2}, \tfrac{1}{2} \pm \tfrac{1}{2}\zeta)\,d\zeta.
-\end{align*}
-
-
-For $z \in (0, \infty)$, the contour $\gamma_z$ runs \textcolor{magenta}{counterclockwise} around $[1, \infty)$, as shown below\textcolor{DarkCyan}{, so we have to choose the negative sign above (?)}. Let us assume $z \in (0, \infty)$ for the rest of the section. \textcolor{magenta}{[Our conclusions should probably hold whenever $\operatorname{Re}(z) > 0$.]}\color{black}
 \begin{center}
-\includegraphics{figures/zeta_contour_3.pdf} \\[1em]
-{\small The contour $\gamma_1$ \textcolor{magenta}{[reversed]} in the $\zeta$ plane, slightly off from the critical value $\zeta=1$.}
+\textcolor{orange}{[Do we still want a picture? Maybe draw the thimble in the $u$ plane]}
 \end{center}
 
+\color{MediumSpringGreen}
 Now we observe, that by properties of Chebyshev polynomials the integrand can be written as an explicit function of $\zeta$: \textcolor{orange}{[If $u_+ = \cos(\phi)$, then $u_- = \cos(\overline{\phi})$]}
 
 \begin{align*}
@@ -2829,7 +2812,7 @@ In addition, recall that ${}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\
     &=-\frac{1}{2}\int_{1}^{+\infty}e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right) d\zeta
 \end{align*}
 
-where in the second step we use the analytic continuation of the hypergeometric function \cite[Equation 15.2.3]{dlmf}. 
+where in the second step we use the analytic continuation of the hypergeometric function \cite[Equation 15.2.3]{dlmf}.\color{black}
 
 Finally, comparing this expression for $K_{m/n}$ with the expression for $v_1$ computed in Section \ref{pos-root} we notice that 
 \begin{align*}
