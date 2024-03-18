@@ -606,17 +606,10 @@ Second of all, we want to explain why it is useful to work in the position domai
 %\textcolor{DarkCyan}{[Let us try to move some technical detail from here to the section where the result is proved. For example:]}
 %
 Consider a linear level-$1$ differential operator $\mathcal{P}$ of the form described in~Section~\ref{borel-reg:explanatory-power}. This operator will always have an irregular singularity at $z = \infty$.
-
-\color{Goldenrod}
-[These details are right above in Section~\ref{borel-reg:explanatory-power}!]
-\begin{equation}%\label{eqn:standard ODE}
-\mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2}\big[ R_0(z^{-1}) + R_1(z^{-1})\,\partial_z + \ldots + R_{d-1}(z^{-1})\,\partial_z^{d-1} \big],
-\end{equation}
-where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial, and $R_j(z^{-1})$ are holomorphic in some disk $|z| > A$ around $z = \infty$, for every $j=0,\ldots, d-1$.\footnote{Looking at the existence theorem in \cite[Theorem 4]{reg-sing-volterra}, we could apply this reasoning on the analytic side for more general equations, but this particular case makes it easier to talk about the formal side as well.} Furthermore we assume $P$ has simple zeros $P(-\alpha_j)=0$, $j=1,...,d$, $P'(-\alpha_j)\neq 0$ for $j=1,...,d$ and $Q(-\alpha_j)\neq 0$. Our equation has an irregular singularity at $\infty$ (see \cite[Definition 3.3.2]{diverg-resurg--ii}).
-\color{black}
 \begin{verify}
-    Turn the ODE into a system: assume 
-    \begin{align*}
+\par
+Turn the ODE into a system: assume 
+\begin{align*}
 P(\lambda) & = P_0 + P_1 \lambda + \ldots + P_d \lambda^d \\
 Q(\lambda) & = Q_0 + Q_1 \lambda + \ldots + Q_{d-1} \lambda^{d-1}
 \end{align*}
@@ -656,24 +649,9 @@ To prove that $z=\infty$ is an irregular singular point we change coordinates an
 
 and $-w^{-2}B(1/w)$ has a simple pole at $w=0$ (i.e. $z=\infty$). Then the formal system of solutions is of the form 
 \[\psi_j(w)=e^{-\alpha_j/w} w^{\tau_j} \tilde{f}_j(w)\]
-hence according to \cite[Definition 3.3.2]{diverg-resurg--ii}, $w=0$ is irregular. 
+hence according to \cite[Definition 3.3.2]{diverg-resurg--ii}, $w=0$ is irregular.
+\par
 \end{verify}
-
-\color{gray}
-[This is now a corollary; moved to historical.] Under these assumptions, the space of formal solutions of $\mathcal{P}\Phi = 0$ has a basis $\series{\Psi}_1,...,\series{\Psi}_d$ of the form~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}
-\begin{equation}\label{formal solution}
-\series{\Psi}_j(z)=e^{-\alpha_j z}z^{-\tau_j}\series{F}_j(z)\in e^{-\alpha_j z } z^{-\tau_j}\,\C \llbracket z^{-1} \rrbracket,
-\end{equation}
-where $\tau_j$ is the non-zero complex number $Q(-\alpha_j)/P'(-\alpha_j)$. Since the roots $-\alpha_1, \ldots, -\alpha_n$ are distinct, this form determines the basis up to scaling, giving the space of formal solutions a distinguished frame. \textcolor{orange}{Add that the formal series is $1$-Gevrey.} Classically it was proved that the formal solutions of \eqref{formal solution} are Borel-Laplace summable and their Borel-Laplace sums satisfy the original differential equation (see for example \cite{ramis1991series,malgrange92,malgrange1995sommation,diverg-resurg--ii}\textcolor{magenta}{[Braaksma,check]}). Therefore, the distinguished frame of formal solutions $\series{\Psi}_1,...,\series{\Psi}_d$ becomes a distinguished frame of analytic solutions $\hat{\Psi}_1,...,\hat{\Psi}_d$.       
-
-However, can we find a distinguished basis for solutions in a purely analytic way? This should be possible because of our regularity assumptions about the coefficients of $\mathcal{P}$. In fact, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotic to a formal frame (see \cite[Theorem 3.1]{diverg-resurg-iii}), but it is not a constructive method (see \cite[Chapter 14]{balser}). \color{black} \color{Goldenrod}[Let us try to move most of this detail to the proof section.] Conversely, we can explicitly build a distinguished basis of analytic solutions: first going to the position domain, we can consider $d$ integral operators of the form 
-\begin{equation}
-\hat{P}_j:=P(-\zeta)+\partial_{\zeta,\alpha_j}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha_j}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha_j}^{-1})\circ (-\zeta)^r
-\end{equation}
-labeled by the roots of $P$. This type of operator is the one we studied in \cite{reg-sing-volterra}, hence we know there exists a unique solution $\psi_j$ of $\hat{P}_j\psi_j=0$, such that $\psi_j$ blows-up as $\zeta_j^{\tau_j-1}$ at $\zeta_j=0$ and it has a controlled behavior on an open domain $\Omega_j$ which is star-shaped at $\alpha_j$ and avoids the other critical points (see the definition in Section \ref{borel_reg-ODE}). In addition, $\psi_j$ can be Laplace transformed, giving a analytic function $\Psi_j:=\laplace_{\zeta_j}^{\theta}\psi_j$. 
-At this point, we may ask what is the relationship between the two frames of analytic solutions, namely the Borel sum $\hat{\Psi}_j$ of the formal solutions $\series{\Psi}_j$ and the Laplace transform of $\psi_j$. Our main result says they are actually proportional, hence proving Borel summation works \textcolor{orange}{[add reminder of what it means for Borel summation to ``work'']}.\color{black}
-\textcolor{Cyan}{Using the dictionary for the Laplace transform associated with some point $\zeta = \alpha$ in the frequency domain, (link section), we can turn $\mathcal{P}$ into an integral operator $\hat{\mathcal{P}}_\alpha$. If we choose $-\alpha$ to be a root of $P$, then $\hat{\mathcal{P}}_\alpha$ will have a regular singularity at $\zeta = \alpha$, and we understand a lot of details about its specific form~\cite{reg-sing-volterra}. We show in~\cite{reg-sing-volterra} that $\hat{\mathcal{P}}_\alpha \phi = 0$ has a distinguished solution $\psi_\alpha$ which is characterized by having a power-law singularity with a known exponent $\tau_\alpha - 1$ at $\zeta = \alpha$ and having exponentially bounded growth at infinity.}
-
 We know from experience that we can find holomorphic solutions of the equation $\mathcal{P}\Phi = 0$ by taking the Borel sums of formal trans-monomial solutions. However, this only works when there's a coincidence between exponential factor $e^{-\alpha z}$ in the formal solution, the base point $\zeta = \alpha$ we use for Borel summation, and the characteristic equation $P(-\alpha) = 0$. Why?
 
 A first clue is the observation that every solution we get from Borel summation is, by definition, the Laplace transform $\Phi = \laplace_{\zeta,\alpha}^\theta \phi$ of a function on $\phi$ the position domain. In fact, the differential equation $\mathcal{P}\Phi = 0$ is equivalent to an integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$.
@@ -719,8 +697,9 @@ The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is Borel regula
 %\begin{theorem}[see Theorem \ref{thm2-dim}]\label{thm2}
 %The formal frame of solutions $\tilde{\Psi}_j$ is Borel summable \textcolor{orange}{[summability is the strongest part of the result]} and its Borel sum is proportional to $\Psi_j$. In fact, $\Psi_j$ is a Borel regular solution of \eqref{eqn:standard ODE}. \textcolor{orange}{[Alternate statement: look in Sauzin or Delabaere to get uniqueness of formal solution.]} \textcolor{orange}{[Split into theorem, which shows existence of Borel regular frame, and corollary, which shows that this implies a certain frame of formal solutions is Borel-summable and sums to actual solutions.]}
 %\end{theorem}
-%
-\textcolor{red}{[Change or actually delete]}We summarize the main steps of the proof of Theorem~\ref{thm:borel_reg_ODE} and Corollary~\ref{cor:borel_reg_ODE} (the rigorous proofs are given in Section~\ref{borel_reg-ODE}). On the right-hand side of the diagram, we have the formal solution $\series{\Psi }_\alpha\in e^{-\alpha z}z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket$ and its Borel transform $\series{\psi}_\alpha$. %Then, the theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
+
+\textcolor{red}{[Change or actually delete]}
+\color{Violet}We summarize the main steps of the proof of Theorem~\ref{thm:borel_reg_ODE} and Corollary~\ref{cor:borel_reg_ODE} (the rigorous proofs are given in Section~\ref{borel_reg-ODE}). On the right-hand side of the diagram, we have the formal solution $\series{\Psi }_\alpha\in e^{-\alpha z}z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket$ and its Borel transform $\series{\psi}_\alpha$. %Then, the theory of $1$-summability allows us to draw the ``square'' with corners $\hat{\psi}_j$ and its Laplace transform $\hat{\Psi}_j$.  
 
 \begin{center}
 \begin{tikzcd}
@@ -732,7 +711,7 @@ The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is Borel regula
 \end{center} 
 
 Conversely, on the left-hand side, by our existence and uniqueness result \cite[Theorem 4]{reg-sing-volterra} we have an analytic function $\psi_\alpha$ with a distinguished behaviour near $\zeta=\alpha$, which solves the integral equation (IE) obtained as the inverse Laplace transform of the (ODE) (see \cite[Lemma 2]{reg-sing-volterra}). The key step is then comparing $\psi_\alpha$ and $\tilde{\psi}_\alpha$. First, by the properties of the Borel transform, it is easy to show that $\series{\psi}_\alpha$ is a formal solution of the integral equation (IE). Then, from the explicit formula for $\tilde{\Psi}_\alpha$, we can show that if $\tilde{\psi}_\alpha$ grows as $\psi_\alpha$ near $\zeta=\alpha$. Therefore, by our uniqueness result \cite[Theorem 4]{reg-sing-volterra}, we conclude that $\tilde{\psi}_j$ is indeed summable and ${\psi}_\alpha$ is the analytic continuation of $\tilde{\psi}_\alpha$.
-
+\color{black}
 \subsubsection{Why does Borel summation work for thimble integrals?}
 %\textcolor{DarkCyan}{Let $X$ be an $N$-dimensional complex manifold, and $f\colon X\to\C$ a proper holomorphic map with non-degenerate critical points.}
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{RoyalBlue}{[The important thing about $\C$, where $f$ takes values, is that it is a translation surface---\ldots]} For each critical point $a$, let $\Gamma_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\Gamma_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\Gamma_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\Gamma_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_a^\theta$ can be regarded as the component of $f^{-1}(\Gamma_\alpha^\theta)$ that goes through $a$.  \textcolor{orange}{We could orient so that shifting $\Lambda_a$ to its left would make its projection run clockwise around $\Gamma_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
