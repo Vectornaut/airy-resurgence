@@ -657,7 +657,7 @@ We know from experience that we can find holomorphic solutions of the equation $
 A first clue is the observation that every solution we get from Borel summation is, by definition, the Laplace transform $\Phi = \laplace_{\zeta,\alpha}^\theta \phi$ of a function on $\phi$ the position domain. In fact, the differential equation $\mathcal{P}\Phi = 0$ is equivalent to an integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$.
 
 Furthermore, when $-\alpha$ is a root of $P$, the integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$ has a special solution $\psi_\alpha$ which is distinguished, up to scaling, by its power-law asymptotics at $\zeta = \alpha$. This solution is regular enough to have a well-defined Laplace transform $\Psi_\alpha$, which is a special solution of $\mathcal{P}\Phi = 0$ distinguished by its own characteristic asymptotics.
-\color{BlueViolet}
+\color{DarkBlue}
 \begin{theorem}\label{thm:exist_uniq_ODE}
 Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
 \[ e^{-\alpha z} \left[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \right] \]
@@ -1858,6 +1858,33 @@ converges in the region $|z| > A$.
 %%%\item The set $\Omega_\alpha$ is star-shaped around $\zeta = \alpha$. In other words, for any $a \in \Omega_\alpha$, a straight path from $\zeta = \alpha$ to $a$ stays in $\Omega_\alpha$. Since $\Omega_\alpha$ doesn't contain $\zeta = \alpha$, we will always leave that starting point out of the path.
 %%%\item The set $\Omega_\alpha$ does not contain the tubular neighborhood of the other critical points, as shown in Figure \ref{Fig:domain}. \textcolor{orange}{[In ``Regular singular Volterra,'' we assume that $\Omega_\alpha$ doesn't touch any other critical point (that is, doesn't contain any other critical point in its closure). Under the star-shaped assumption, I think that implies avoiding tubular neighborhoods of the shadow rays.]}
 %%%\end{itemize}
+\color{DarkBlue}
+\begin{theorem}\label{re:thm:exist_uniq_ODE}
+Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace \textcolor{orange}{[define $\widehat{\Omega}_\alpha$]}
+\[ e^{-\alpha z} \left[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\widehat{\Omega}_\alpha) \right] \]
+of the space $e^{-\alpha z} \dualsingexpalg{-\tau_\alpha}(\widehat{\Omega}_\alpha)$ from Section~\ref{sec:reg-decay}.
+\end{theorem}
+\begin{center}
+\begin{tikzpicture}
+\newcommand{\spill}{4}
+\fill[violet!20, bezier bounding box, path fading=radial edge]
+  (-\spill, -\spill) (\spill, \spill)
+  (0, 0) -- (41:\spill) arc (41:-48:\spill) -- cycle;
+\fill[violet] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
+\foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
+  \fill \p circle (0.7mm);
+}
+\end{tikzpicture}
+
+{\small The domain $\Omega_\alpha$}
+\end{center}
+\begin{proof}
+After rescaling by a constant, Theorem~4 of \cite{reg-sing-volterra} tells us that the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
+\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
+of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. By Theorem~\ref{translation} and the results of Section~\ref{sec:reg-decay}, the Laplace transform $\laplace^\theta_{\zeta, \alpha}$ is a left-invertible map
+\[ \singexpalg{\tau_\alpha}(\Omega_\alpha) \to e^{-\alpha z} \dualsingexpalg{-\tau_\alpha-1}(\widehat{\Omega}_\alpha). \]
+With $\Psi_\alpha = \laplace^\theta_{\zeta, \alpha} \psi_\alpha$, the desired result follows.
+\end{proof}
 \color{BlueViolet}
 \begin{theorem}[restatement of \ref{thm:exist_uniq_ODE}]\label{thm:exist_uniq_ODE_proof}
 Choose a root $-\alpha$ of $P$ with $\tau_\alpha \in (0, \infty)$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
@@ -1888,7 +1915,7 @@ of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
 \color{RoyalBlue}
 \textcolor{orange}{[\ldots]} Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work just as well on a covering of $\C$ which is branched at the roots of $P(-\zeta)$. Let us use the covering $\pi \maps \widetilde{B}_{P(-\zeta)} \to \C$ built by puncturing $\C$ at the roots of $P(-\zeta)$, taking the universal cover, and then gluing the roots back in as infinite-order branch points.
 
-\color{BlueViolet}
+\color{DarkBlue}
 Our arguments in \cite{reg-sing-volterra} took place on the complex plane, but they work just as well on appropriate covers of punctured complex planes. The universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$ is a convenient setting for the following result.
 \begin{lemma}\label{lem:shifted_holo_closed}
 Consider a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ which touches $\zeta = 0$ and is star-shaped around $\zeta = 0$. Suppose that $\pi \maps \Upsilon \to \C^\times$ overlaps itself at the edges: it is two-to-one over a simply connected open set $\Upsilon_\Delta \subset \C^\times$ which is star-shaped around $\zeta = 0$, and it is one-to-one everywhere else.
@@ -1896,7 +1923,7 @@ Consider a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ wh
 \color{RoyalBlue}\textcolor{orange}{[Rephrase more generally, without referring to $P$.} 
 $\tilde{\C}$
 Choose a root $-\alpha$ of $P$. Consider a simply connected open set $\Upsilon \subset \widetilde{B}_{P(-\zeta)}$ which touches but doesn't contain $\zeta = \alpha$, is star-shaped around $\zeta = \alpha$, and doesn't touch any other root of $P(-\zeta)$. Suppose that $\pi \maps \Upsilon \to \C$ overlaps itself at the edges: it is two-to-one over a simply connected open set $\Upsilon_\Delta \subset \C$ which is star-shaped around $\zeta = \alpha$, and it is one-to-one everywhere else.
-\color{BlueViolet}
+\color{DarkBlue}
 \begin{center}
 \begin{tikzpicture}
   \newcommand{\spill}{4}
@@ -1919,6 +1946,48 @@ is a closed subspace of $\singexp{\sigma'}{\Lambda}(\Upsilon)$.
 Each point $b \in \Upsilon_\Delta$ has two preimages $b_+, b_- \in \Upsilon$, where $b_+$ is $2\pi$ counterclockwise of $b_-$ around $\zeta = \alpha$. The {\em variation} operator $\var \maps \singexp{\sigma'}{\Lambda}(\Upsilon) \to \singexp{\sigma'}{\Lambda}(\Upsilon_\Delta)$, defined by\footnote{The target of the variation operator is a space of functions on $\Upsilon_\Delta$ because the variation is defined only on the overlap. Our notation follows the convention of \cite{diverg-resurg-i}, described before Definition~6.46.}
 \[ \var \varphi \big|_b = \varphi(b_+) - \varphi(b_-) \]
 is bounded. The intersection of $\zeta^{\rho'}\,\pi^*\mathcal{O}(\pi\Upsilon)$ with $\singexp{\sigma'}{\Lambda}(\Upsilon)$ is the kernel of the bounded operator $\var - (e^{2\pi i \rho'} - 1)$, so it is closed.
+\end{proof}
+\textcolor{orange}{[Add flavor text]}
+\begin{theorem}[restatement of \ref{thm:is_Borel_sum}]\label{re:thm:is_Borel_sum}
+The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is the Borel sum of a formal trans-monomial solution $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$ of the equation $\mathcal{P}\series{\Phi} = 0$.
+\end{theorem}
+\begin{proof}
+Take an open sector $\Omega_\alpha$ of the kind used in Theorem~\ref{thm:exist_uniq_ODE_proof}, and expand it to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace \textcolor{orange}{[use $\zeta_\alpha$ in place of $\zeta$ throughout proof]}
+\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Upsilon) \]
+of the space $\singexpalg{\tau_\alpha-1}(\Upsilon)$. Restricting this solution to $\Omega_\alpha$ gives the analogous solution from the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}, as we can see from the uniqueness part of Theorem~4. To express $\Psi_\alpha = \laplace_{\zeta, \alpha} \psi_\alpha$ as the Borel sum of a trans-monomial, we first need to expess $\psi_\alpha$ as the sum of a convergent power series. We'll do this by showing that $\psi_\alpha$ lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
+
+For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$. In \cite{reg-sing-volterra}, to prove Theorem~4, we rewrite the equation $\hat{\mathcal{P}}_\alpha \solwhole = 0$ as a regular singular Volterra equation $\solwhole = \volterra^\alpha \solwhole$ that satisfies the conditions of Theorem~3. The operator $\volterra^\alpha$ is the sum of the ``prototypical'' part
+%%\[ \hardpart^\alpha = -\tfrac{1}{P(-\zeta)} \circ \partial^{-1}_{\zeta, \alpha} \circ Q(-\zeta) \]
+\[ \hardpart^\alpha = -\tfrac{1}{p} \circ \partial^{-1}_{\zeta, \alpha} \circ q \]
+and the perturbation
+%%\[ \softpart^\alpha = \tfrac{1}{P(-\zeta)} \circ \partial^{-2}_{\zeta, \alpha} \circ R(\partial^{-1}_{\zeta, \alpha}) \]
+\[ \softpart^\alpha = \tfrac{1}{p} \circ \partial^{-2}_{\zeta, \alpha} \circ R\big(\partial^{-1}_{\zeta, \alpha}\big). \]
+
+Let us run through the proof of Theorem~3, specialized to the case we consider in Theorem~4. First, picking an arbitrary point $b \in \Omega_\alpha$, we show that the {\em prototype solution}
+\[ \solproto(a) = \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \]
+lies in the space $\singexpalg{\tau_\alpha - 1}(\Upsilon)$ and satisfies the equation $\solproto = \hardpart^\alpha \solproto$. We then look for a perturbation $\solptb$ that makes $\solwhole = \solproto + \solptb$ a solution of the Volterra equation we're trying to solve. This is equivalent to solving the inhomogeneous equation
+\begin{equation}\label{eqn:inhomog-volterra}
+\solptb = \softpart^\alpha \solproto + \volterra^\alpha \solptb
+\end{equation}
+The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Upsilon)$, into $\singexpalg{\tau_\alpha}(\Upsilon)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, that equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by Picard iteration. Defining
+\begin{align*}
+\solptb^{(0)} & = \softpart^\alpha \solproto \\
+\solptb^{(1)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(0)} \\
+\solptb^{(2)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(1)} \\
+\solptb^{(3)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(2)} \\
+& \;\;\vdots
+\end{align*}
+we get a sequence of functions that converges in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ to a solution.
+
+In \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, we rewrite the prototype solution in the form
+\[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right], \]
+which shows that it lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$. By working with Taylor series, we can show that $\softpart^\alpha$ maps
+\[ \zeta^{\tau_\alpha-1}\,\mathcal{O}(\pi \Upsilon) \to \zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \]
+and $\volterra^\alpha$ maps $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$ to itself. It follows that the sequence $\solptb^{(0)}, \solptb^{(1)}, \solptb^{(2)}, \ldots$ lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \cap \singexp{\tau_\alpha}{\Lambda}(\Upsilon)$, which by Lemma~\ref{lem:shifted_holo_closed} is a closed subspace of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. The solution $\solptb$ of equation~\eqref{eqn:inhomog-volterra} that this sequence converges to therefore lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$. Recalling that the prototype solution lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$, we can deduce that $\psi_\alpha$ lies in that space too.
+
+Since $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$, we can now conclude that $\psi_\alpha$ is the sum of a shifted Laurent series in $\zeta^{\tau_\alpha-1}\,\C\{\zeta, \zeta^{-1}\}$. The definition of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ tells us that $|\zeta|^{\tau_\alpha-1} |\psi_\alpha|$ is bounded on a punctured disk around $\zeta = 0$, so in fact $\psi_\alpha$ is the sum of a shifted Taylor series $\series{\psi}_\alpha \in \zeta^{\tau_\alpha-1}\,\C\{\zeta\}$. By definition \textcolor{orange}{[to be added to the paper]}, the formal Laplace transform $\series{\Psi}_\alpha = \laplace_{\zeta, \alpha} \series{\psi}_\alpha$ lies in $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$.
+
+When we take the Borel sum of $\series{\Psi}_\alpha$, we start by retracing the construction steps described above. The Borel transform inverts the formal Laplace transform, bringing us back to $\series{\psi}_\alpha$, and summation then inverts the Taylor expansion, bringing us back to $\psi_\alpha$. We finish the Borel summation by taking the Laplace transform $\laplace^\theta_{\zeta, \alpha} \psi_\alpha$, giving $\Psi_\alpha$ by definition.
 \end{proof}
 \textcolor{orange}{[Add flavor text]}
 \begin{lemma}\label{lem:laplace-bridge}
@@ -1945,6 +2014,7 @@ along any ray. This, as discussed above, proves the desired result.
 
 %%\[ \varepsilon_n = a_n \zeta^{\rho+n} + a_1 \zeta^{\rho+n+1} + a_2 \zeta^{\rho+n+2} + a_{n+3} \zeta^{\rho+n+3} + \ldots \]
 \end{proof}
+\color{BlueViolet}
 We're now ready to show that the solution $\Psi_\alpha$ is Borel regular.
 \begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
 The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE_proof} is asymptotic to a transmonomial $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. The series $\series{\Psi}_\alpha$ is Borel summable, and its Borel sum is $\Psi_\alpha$.
@@ -1983,7 +2053,7 @@ which shows that it lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$
 \[ \zeta^{\tau_\alpha-1}\,\mathcal{O}(\pi \Upsilon) \to \zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \]
 and $\volterra^\alpha$ maps $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$ to itself. It follows that the sequence $\solptb^{(0)}, \solptb^{(1)}, \solptb^{(2)}, \ldots$ lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \cap \singexp{\tau_\alpha}{\Lambda}(\Upsilon)$, which by Lemma~\ref{lem:shifted_holo_closed} is a closed subspace of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. The solution $\solptb$ of equation~\eqref{eqn:inhomog-volterra} that this sequence converges to therefore lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$. Recalling that the prototype solution lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$, we can deduce that $\psi_\alpha$ lies in that space too.
 
-Since $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$, we can now conclude that $\psi_\alpha$ is the sum of a shifted Laurent series in $\zeta^{\tau_\alpha-1}\,\C\llbracket \zeta, \zeta^{-1} \rrbracket$. The definition of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ tells us that $|\zeta|^{\tau_\alpha-1} |\psi_\alpha|$ is bounded on a punctured disk around $\zeta = 0$, so in fact $\psi_\alpha$ is the sum of a shifted Taylor series $\series{\psi}_\alpha \in \zeta^{\tau_\alpha-1}\,\C\llbracket \zeta \rrbracket$. Therefore, by Lemma~\ref{lem:laplace-bridge}, the solution $\Psi_\alpha$ is asymptotic to the formal Laplace transform $\series{\Psi}_\alpha = \laplace_{\zeta, \alpha} \series{\psi}_\alpha$, which lies in $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. \textcolor{orange}{[How to rephrase without formal Laplace transform?]}
+Since $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$, we can now conclude that $\psi_\alpha$ is the sum of a shifted Laurent series in $\zeta^{\tau_\alpha-1}\,\C\{\zeta, \zeta^{-1}\}$. The definition of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ tells us that $|\zeta|^{\tau_\alpha-1} |\psi_\alpha|$ is bounded on a punctured disk around $\zeta = 0$, so in fact $\psi_\alpha$ is the sum of a shifted Taylor series $\series{\psi}_\alpha \in \zeta^{\tau_\alpha-1}\,\C\{\zeta\}$. Therefore, by Lemma~\ref{lem:laplace-bridge}, the solution $\Psi_\alpha$ is asymptotic to the formal Laplace transform $\series{\Psi}_\alpha = \laplace_{\zeta, \alpha} \series{\psi}_\alpha$, which lies in $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. \textcolor{orange}{[How to rephrase without formal Laplace transform?]}
 
 Now, let's take the Borel sum of $\series{\Psi}_\alpha$. The Borel transform inverts the formal Laplace transform, bringing us back to $\series{\psi}_\alpha$. By definition, the sum of $\series{\psi}_\alpha$ is $\psi_\alpha$, and the Laplace transform $\laplace^\theta_{\zeta, \alpha} \psi_\alpha$ is $\Psi_\alpha$.
 \end{proof}
