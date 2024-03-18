@@ -678,37 +678,38 @@ We know from experience that we can find holomorphic solutions of the equation $
 
 A first clue is the observation that every solution we get from Borel summation is, by definition, the Laplace transform $\Phi = \laplace_{\zeta,\alpha}^\theta \phi$ of a function on $\phi$ the position domain. In fact, the differential equation $\mathcal{P}\Phi = 0$ is equivalent to an integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$.
 
-Furthermore, when $-\alpha$ is a root of $P$, the integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$ has a special solution $\psi_\alpha$ which is distinguished, up to scaling, by its power-law asymptotics at $\zeta = \alpha$. Because this solution is so unique, its Laplace transform $\Psi_\alpha$ turns out to be Borel regular.
-
-%%The Laplace transform commutes this distinguishing behavior into asymptotics at $z = \infty$, which can be recognized even if we turn $\Phi$ into a formal series $
-
-%We can use the Laplace transform to convert $\mathcal{P}$ into a family of integral operators $\hat{\mathcal{P}}_\upsilon$ parameterized by the point $\zeta = \upsilon$ on the position domain.
+Furthermore, when $-\alpha$ is a root of $P$, the integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$ has a special solution $\psi_\alpha$ which is distinguished, up to scaling, by its power-law asymptotics at $\zeta = \alpha$. This solution is regular enough to have a well-defined Laplace transform $\Psi_\alpha$, which is a special solution of $\mathcal{P}\Phi = 0$ distinguished by its own characteristic asymptotics.
 \color{BlueViolet}
 \begin{theorem}\label{thm:exist_uniq_ODE}
 Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
-\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
+\[ e^{-\alpha z} \left[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \right] \]
+of the space $e^{-\alpha z} \dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
 \end{theorem}
-\begin{theorem}\label{thm:has_ae_ODE}
-The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} has an asymptotic expansion in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. In fact, up to scaling, it is asymptotic to the Poincar\'{e} solution found in that space \textcolor{orange}{[not defined yet?]}.
+The special solution $\psi_\alpha$ is also regular enough to have a ``fractionally shifted'' power series expansion $\series{\psi}_\alpha$, whose formal Laplace transform $\series{\Psi}_\alpha$ is a formal solution of $\mathcal{P}\series{\Phi} = 0$. By construction, $\series{\Psi}_\alpha$ is Borel summable, with Borel sum $\Psi_\alpha$.
+\begin{theorem}\label{thm:is_Borel_sum}
+The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is the Borel sum of a formal trans-monomial solution $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$ of the equation $\mathcal{P}\series{\Phi} = 0$.
 \end{theorem}
-Combining our uniqueness and regularity results for $\psi_\alpha$ with uniqueness and regularity results for the Poincar\'{e} solutions, we can show that $\Psi_\alpha$ is Borel regular.
+With a little more work, encapsulated in Lemma~\textcolor{orange}{?} from Section~\textcolor{orange}{?}, we can use this result to show that $\Psi_\alpha$ is Borel regular.
+\begin{theorem}
+The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is asymptotic to the formal solution $\series{\Psi}_\alpha$ from Theorem~\ref{thm:is_Borel_sum}.
+\end{theorem}
 \begin{corollary}
 The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is Borel regular.
 \end{corollary}
 \color{black}
-\color{Maroon}
-\begin{theorem}\label{thm:borel_reg_ODE}
-Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation $\mathcal{P}\Psi=0$ has a unique solution $\Psi_\alpha$ in the affine subspace
-\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}. That solution is Borel regular.
-\end{theorem}
-\textcolor{violet}{If you prefer to work in the analytic world, you can use this result to prove the existence and Borel summability of special formal transmonomial solutions.}
-\begin{corollary}\label{cor:borel_reg_ODE}
-For each root $-\alpha$ of $P$, equation $\mathcal{P}\Psi=0$ has a formal solution in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$, which is unique up to scaling. That solution is Borel summable, and its Borel sum is a constant multiple of $\Psi_\alpha$.
-\end{corollary}
-\textcolor{violet}{On the other hand, if you prefer to work in the formal world, you can use Theorem~\ref{thm:borel_reg_ODE} to show that the Poincar\'{e} solutions are Borel summable. See Section~\ref{sec:new-summability-proof}.}
-\textcolor{violet}{[In another section, do the ``mirror image'' argument. Use the Poincar\'{e} algorithm to construct a formal transmonomial solution in the classical way. Use the Ramis Index Theorem to show that it is Gevrey-$1$, and then then use our existence and uniqueness result for regular singular Volterra equations to show that it is not only Gevrey-$1$, but in fact Borel summable.]}
+%%\color{Maroon}
+%%\begin{theorem}\label{thm:borel_reg_ODE}
+%%Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation $\mathcal{P}\Psi=0$ has a unique solution $\Psi_\alpha$ in the affine subspace
+%%\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
+%%of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}. That solution is Borel regular.
+%%\end{theorem}
+%%\textcolor{violet}{If you prefer to work in the analytic world, you can use this result to prove the existence and Borel summability of special formal transmonomial solutions.}
+%%\begin{corollary}\label{cor:borel_reg_ODE}
+%%For each root $-\alpha$ of $P$, equation $\mathcal{P}\Psi=0$ has a formal solution in the transmonomial space $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$, which is unique up to scaling. That solution is Borel summable, and its Borel sum is a constant multiple of $\Psi_\alpha$.
+%%\end{corollary}
+\textcolor{BlueViolet}{From an analytic perspective, Theorem~\ref{thm:is_Borel_sum} justifies the ansatz that Poincar\'{e} used to solve the equation $\mathcal{P}\series{\Phi} = 0$. On the other hand, if you prefer to work formally, you can take the Poincar\'{e} solutions as given and use Theorem~\ref{thm:exist_uniq_ODE} to establish their Borel summability. We do this in Section~\ref{sec:new-summability-proof}.}
+%%\textcolor{violet}{On the other hand, if you prefer to work in the formal world, you can use Theorem~\ref{thm:borel_reg_ODE} to show that the Poincar\'{e} solutions are Borel summable. See Section~\ref{sec:new-summability-proof}.}
+%%\textcolor{violet}{[In another section, do the ``mirror image'' argument. Use the Poincar\'{e} algorithm to construct a formal transmonomial solution in the classical way. Use the Ramis Index Theorem to show that it is Gevrey-$1$, and then then use our existence and uniqueness result for regular singular Volterra equations to show that it is not only Gevrey-$1$, but in fact Borel summable.]}
 %%The formal solution whose existence is shown in Corollary~\ref{cor:borel_reg_ODE} is the Poincar\'{e} solution.
 %%\begin{corollary}
 %%\textcolor{orange}{[The Poincar\'{e} solution is Borel summable.]}
@@ -1884,6 +1885,20 @@ Choose a root $-\alpha$ of $P$ with $\tau_\alpha \in (0, \infty)$. Choose an ope
 \[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
 of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
 \end{theorem}
+\begin{center}
+\begin{tikzpicture}
+\newcommand{\spill}{4}
+\fill[violet!20, bezier bounding box, path fading=radial edge]
+  (-\spill, -\spill) (\spill, \spill)
+  (0, 0) -- (41:\spill) arc (41:-48:\spill) -- cycle;
+\fill[violet] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
+\foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
+  \fill \p circle (0.7mm);
+}
+\end{tikzpicture}
+
+{\small The domain $\Omega_\alpha$}
+\end{center}
 \begin{proof}
 After rescaling by a constant, Theorem~4 of \cite{reg-sing-volterra} tells us that the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
 \[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
@@ -1953,22 +1968,12 @@ along any ray. This, as discussed above, proves the desired result.
 \end{proof}
 We're now ready to show that the solution $\Psi_\alpha$ is Borel regular.
 \begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
-The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE_proof} is asymptotic to a transmonomial $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$, and the Borel sum of $\series{\Psi}_\alpha$ is $\Psi_\alpha$.
+The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE_proof} is asymptotic to a transmonomial $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. The series $\series{\Psi}_\alpha$ is Borel summable, and its Borel sum is $\Psi_\alpha$.
 \end{theorem}
 \begin{proof}
 Take an open sector $\Omega_\alpha$ of the kind used in Theorem~\ref{thm:exist_uniq_ODE_proof}, and expand it to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace \textcolor{orange}{[use $\zeta_\alpha$ in place of $\zeta$ throughout proof]}
 \[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Upsilon) \]
 of the space $\singexpalg{\tau_\alpha-1}(\Upsilon)$. Restricting this solution to $\Omega_\alpha$ gives the analogous solution from the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}, as we can see from the uniqueness part of Theorem~4. To prove that $\Psi_\alpha$ has a the desired asymptotic expansion, we will show that $\psi_\alpha$ lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
-
-%%The key step of our proof will be to show that $\psi_\alpha$ lies in
-
-%%The uniqueness part of the Theorem~4 ensures that restricting $\psi_\alpha$ to $\Omega_\alpha$ gives the analogous solution used in the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}.
-
-%%%In the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}, we used Theorem~4 of \cite{reg-sing-volterra} to show that the equation $\mathcal
-
-%%%$\psi_\alpha$ in the affine subspace
-%%\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
-%%of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$
 
 For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$. In \cite{reg-sing-volterra}, to prove Theorem~4, we rewrite the equation $\hat{\mathcal{P}}_\alpha \solwhole = 0$ as a regular singular Volterra equation $\solwhole = \volterra^\alpha \solwhole$ that satisfies the conditions of Theorem~3. The operator $\volterra^\alpha$ is the sum of the ``prototypical'' part
 %%\[ \hardpart^\alpha = -\tfrac{1}{P(-\zeta)} \circ \partial^{-1}_{\zeta, \alpha} \circ Q(-\zeta) \]
@@ -2003,216 +2008,6 @@ Since $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$, we can now co
 
 Now, let's take the Borel sum of $\series{\Psi}_\alpha$. The Borel transform inverts the formal Laplace transform, bringing us back to $\series{\psi}_\alpha$. By definition, the sum of $\series{\psi}_\alpha$ is $\psi_\alpha$, and the Laplace transform $\laplace^\theta_{\zeta, \alpha} \psi_\alpha$ is $\Psi_\alpha$.
 \end{proof}
-\color{black}
-%%%\color{Maroon}
-%%%\begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
-%%%Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. Equation 
-%%%\begin{equation}\label{eqn:standard ODE}
-%%%\mathcal{P}\Psi=0
-%%%\end{equation}
-%%%has a unique solution $\Psi_\alpha$ in the affine subspace
-%%%\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-%%%of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
-%%%\end{theorem}
-%%%\begin{proof}
-%Let $\hat{\mathcal{P}}_\alpha$ be the Volterra operator defined in Section~4.5 of \cite{reg-sing-volterra}. Take any holomorphic function $\phi$ on $\Omega_\alpha$ with a well-defined Laplace transform $\Phi = \laplace_{\zeta,\alpha}^{\theta} \phi$ \textcolor{magenta}{[choose $\theta$]}. Lemma~2 of \cite{reg-sing-volterra} shows that $\hat{\mathcal{P}}_\alpha \phi = 0$ if and only if $\mathcal{P}\Phi = 0$ \textcolor{magenta}{[the lemma only states one direction; change it before publication to state both directions]}.
-%
-%%%As a consequence of Theorem~4 \cite{reg-sing-volterra}, after rescaling by a constant, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
-%%%\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
-%%%of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. It follows, by the results of Section~\ref{sec:reg-decay} \textcolor{magenta}{[the domain $\Omega_\alpha$ needs to be a sector for this]}, that the equation $\mathcal{P}\Psi_\alpha = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
-%%%\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-%%%of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
-%%%\end{proof}
-\begin{theorem}
-\textcolor{Turquoise}{Assuming $\Psi_\alpha$ from Theorem~\ref{thm:borel_reg_ODE_proof} admits an asymptotic expansion as $\Re z\to e^{i\theta}\infty$ along some rays contained in the sector $\Omega_\alpha$, then $\Psi_\alpha$ is Borel regular.} That solution $\Psi_\alpha$ from Theorem~\ref{thm:borel_reg_ODE_proof} is Borel regular.
-\end{theorem}
-\begin{proof}
-\color{Turquoise}
-If $\Psi_\alpha$ admits an asymptotic expansion $\tilde{\Psi}_\alpha$, then $\Psi_\alpha$ is a formal solution of Equation~\eqref{eqn:operator-P}, thus by Ramis Index Theorem is $1$-Gevrey. The Borel transform of $\tilde{\Psi}_\alpha$ is a germ of convergent power series, and by the properties of the Borel transform, it is a formal solution of $\hat{\mathcal{P}}_\alpha \phi=0$. \textcolor{red}{[check the exponential term $e^{-z\alpha}$, otherwise get different points]}
-\color{Violet}
-    \begin{itemize}
-        \item the asymptotitics of $\Psi_\alpha$ \textcolor{LimeGreen}{[exist and]} are $1$-Gevrey
-        \item \textcolor{LimeGreen}{The solution $\Psi_\alpha$ has an asymptotic expansion} indeed it is the Laplace transform of $\psi_\alpha$, thus if we consider the Taylor expansion of $\psi_\alpha$ at $\zeta=\alpha$ and then we integrate term by term we can compute the asymptotic. Notice that Poincar\'e asymptotic doesn't have to be to a power series, but it can be mor generally to a trans-monomial. I think we should state the definition for trans-monomials.
-        \begin{align}
-            \Psi_\alpha&=\int_\alpha^\infty e^{-z\zeta} \sum_{n=0}^\infty a_n (\zeta-\eta)^n d\zeta \\
-            & = \sum_{n=0}^N a_n \int_\alpha^\infty e^{-z\zeta}   (\zeta-\eta)^n d\zeta+\int_\alpha^\infty e^{-z\zeta} \sum_{n=N+1}^\infty a_n (\zeta-\eta)^n d\zeta \\
-            & = e^{-z\eta} \sum_{n=0}^N a_n \int_\alpha^\infty e^{-z(\zeta - \eta)} (\zeta-\eta)^n d\zeta + e^{-z\eta} \int_\alpha^\infty e^{-z(\zeta - \eta)} \sum_{n=N+1}^\infty a_n (\zeta-\eta)^n d\zeta
-        \end{align}
-        \begin{multline*}
-            \left|\Psi_\alpha- e^{-z\eta} \sum_{n=0}^N a_n \int_\alpha^\infty e^{-z(\zeta - \eta)} (\zeta-\eta)^n d\zeta\right|\leq e^{-\Re(z)|\eta|} \int_\alpha^R |e^{-z(\zeta - \eta)} |\sum_{n=N+1}^\infty R^{-n} |(\zeta-\eta)|^n d\zeta +\\
-            e^{-\Re(z)|\eta|} \int_R^\infty |e^{-z(\zeta - \eta)} | |\psi_\alpha| d\zeta \qquad\text{[use that $\psi_\alpha$ is exponentially bounded]}
-        \end{multline*}
-       \[\Psi_\alpha=\lim_{b \to (\zeta = \alpha)}\int_b^\infty e^{-z\zeta} f\;d\zeta \]
-       \item Say $\left|\Psi_\alpha - \int_b^{\infty}\right| \leq \epsilon$ over all $z$. Then $|z|^n\;\left|\Psi_\alpha - \int_b^{\infty}\right| \leq |z|^n \epsilon$
-       \item \begin{align*}
-       \int_\alpha^\infty e^{-z\zeta} |z|^n |\psi_\alpha-\text{poly}(\zeta)| d\zeta \\
-       \int_\alpha^\infty \left[\left(\tfrac{\partial}{\partial \zeta}\right)^n e^{-z\zeta}\right] |\psi_\alpha-\text{poly}(\zeta)| d\zeta
-       \end{align*}
-       \item Need $\lim_{z \to \infty} z^n |\Psi_\alpha - \text{poly}|$ for all $n \in \Z_{\ge 0}$
-        \item $\tilde{\psi}_\alpha\in\zeta_\alpha^{\tau_\alpha}\C\lbrace\zeta_\alpha\rbrace$ and solves $\hat{\mathcal{P}}_\alpha\phi=0$
-        \item Integral looks like
-        \begin{align*}
-        \int_0^\infty e^{-z\zeta} f\;d\zeta & = \int_0^r e^{-z\zeta} f\;d\zeta + \int_r^\infty e^{-z\zeta} f\;d\zeta \\
-        & \text{``}\approx\text{''} \int_0^r e^{-z\zeta} f\;d\zeta + e^{-z \Re(\zeta)} \|f\|_1 \\
-        & \text{``}\approx\text{''} \|f\|_1 + e^{-zr} \|f\|_1
-        \end{align*}
-        \item $\hat{\mathcal{P}}_\alpha\phi=0$ admits a unique formal solution
-        \item  $\tilde{\psi}_\alpha$ is proportional to the Taylor expansion of $\psi_\alpha$ \textcolor{LimeGreen}{[which exists]}
-    \end{itemize}
-\end{proof}
-\color{Maroon}
-\begin{figure}[h]
-\center
-\begin{tikzpicture}
-\newcommand{\spill}{4}
-\fill[violet!20, bezier bounding box, path fading=radial edge]
-  (-\spill, -\spill) (\spill, \spill)
-  (0, 0) -- (41:\spill) arc (41:-48:\spill) -- cycle;
-\fill[violet] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
-\foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
-  \fill \p circle (0.7mm);
-}
-\end{tikzpicture}
-\caption{The domain $\Omega_\alpha$}\label{Fig:domain}
-\end{figure}
-The key to our proof is recasting Equation~\eqref{eqn:standard ODE} as an integral equation in the position domain. This integral equation belongs to a well-behaved class of regular singular Volterra equations, which we study in~\cite{reg-sing-volterra}. In particular, it can be solved using Picard iteration, which refines an initial guess toward the unique solution in its basin of attraction. We will use \textcolor{magenta}{the guess $\frac{1}{\Gamma(\tau_\alpha)} \zeta^{\tau_\alpha - 1}$ [actually, use prototype solution instead]} to find a solution $\psi_\alpha$ with the same singularity at $\zeta_\alpha = 0$.
-%%\begin{theorem}[Theorem~4 from \cite{reg-sing-volterra}]\label{thm:sing-soln}
-%%The equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
-%%\[ \zeta_\alpha^{\tau_\alpha-1} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
-of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$.
-%%\end{theorem}
-
-For the Borel regularity part of the proof, we need to make a connection between the analytic and formal worlds. To do this in the position domain, we again use Picard iteration. \textcolor{orange}{[This does seem to generalize Delabaere's argument! We should confirm and mention that.]}
-\begin{lemma}\label{lem:picard-power}
-In Theorem~4 of \cite{reg-sing-volterra}, the solution $\psi_\alpha$ can be expressed as the sum of a power series in $\zeta_\alpha^{\tau_\alpha - 1} \C\{\zeta_\alpha\}$.
-%%can be expressed as a convergent power series of the form
-%%\[ c_1 \zeta_\alpha^{\tau_\alpha - 1} + c_2 \zeta_\alpha^{\tau_\alpha} + c_3 \zeta_\alpha^{\tau_\alpha + 1} + c_4 \zeta_\alpha^{\tau_\alpha + 2} + \ldots. \]
-\end{lemma}
-\begin{proof}
-%%Theorem~\ref{thm:sing-soln} is a corollary of Theorem~\ref{thm:general_volterra} of \cite{reg-sing-volterra}.
-The ring of formal power series $\C\{\zeta_\alpha\}$ is isomorphic to the ring of germs of holomorphic functions at $\zeta = \alpha$. This isomorphism identifies the analytic and formal versions of the integration operator $\partial^{-1}_{\zeta, \alpha}$. In the argument that follows, we will only distinguish the analytic and formal interpretations of $\C\{\zeta_\alpha\}$ when we need to.
-
-For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$. In \cite{reg-sing-volterra}, to prove Theorem~4, we rewrite the equation $\hat{\mathcal{P}}_\alpha \solwhole = 0$ as a regular singular Volterra equation $\solwhole = \volterra^\alpha \solwhole$ that satisfies the conditions of Theorem~3. The operator $\volterra^\alpha$ is the sum of the ``prototypical'' part
-%%\[ \hardpart^\alpha = -\tfrac{1}{P(-\zeta)} \circ \partial^{-1}_{\zeta, \alpha} \circ Q(-\zeta) \]
-\[ \hardpart^\alpha = -\tfrac{1}{p} \circ \partial^{-1}_{\zeta, \alpha} \circ q \]
-and the perturbation
-%%\[ \softpart^\alpha = \tfrac{1}{P(-\zeta)} \circ \partial^{-2}_{\zeta, \alpha} \circ R(\partial^{-1}_{\zeta, \alpha}) \]
-\[ \softpart^\alpha = \tfrac{1}{p} \circ \partial^{-2}_{\zeta, \alpha} \circ R\big(\partial^{-1}_{\zeta, \alpha}\big). \]
-
-Let us run through the proof of Theorem~3, specialized to the case we consider in Theorem~4. First, picking an arbitrary point $b \in \Omega_\alpha$, we show that the {\em prototype solution}
-\[ \solproto(a) = \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \]
-lies in the space $\singexpalg{\tau_\alpha - 1}(\Omega_\alpha)$ and satisfies the equation $\solproto = \hardpart^\alpha \solproto$. We then look for a perturbation $\solptb$ that makes $\solwhole = \solproto + \solptb$ a solution of the Volterra equation we're trying to solve. This is equivalent to solving the inhomogeneous equation
-\begin{equation}\label{eqn:inhomog-volterra}
-\solptb = \softpart^\alpha \solproto + \volterra^\alpha \solptb
-\end{equation}
-The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Omega_\alpha)$, into $\singexpalg{\tau_\alpha}(\Omega_\alpha)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, that equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by Picard iteration. Starting with any initial guess $\solptb^{(0)} \in \singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ and defining
-\begin{align*}
-\solptb^{(1)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(0)} \\
-\solptb^{(2)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(1)} \\
-\solptb^{(3)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(2)} \\
-& \;\;\vdots
-\end{align*}
-we get a sequence of functions that converges in $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ to a solution.
-
-\textcolor{orange}{[\ldots]}
-
-%%Let us recall some notation from the proof. For convenience, we let $p = P(-\zeta)$ and $q = Q(-\zeta)$.
-
-%%For convenience, let $p = P(-\zeta_\alpha)$ and $q = Q(-\zeta_\alpha)$. In \cite{reg-sing-volterra}, we observed that the Volterra operator $\hardpart^\alpha$ with kernel
-%%Let $\hardpart^\alpha$ be the Volterra operator with kernel
-%%\[ \hardker^\alpha(a,a') = -\frac{q(a')}{p(a)} \]
-%%and let $\softpart^\alpha$ be the Volterra operator with kernel
-%%\[ \softker^\alpha(a,a') = -\frac{k_R(a,a')}{p(a)}. \]
-
-%%For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$.
-
-%%As we did in the proof of Theorem~\ref{thm:sing-soln} from \cite{reg-sing-volterra}, let
-
-%%\[ \hardker^\alpha(a,a') = -\frac{q(a')}{p(a)}, \]
-
-%%\[ k_R(a,a')=\sum_{j=0}^\infty \frac{R_{j}}{j!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} . \]
-
-Since $p$ has a simple root at $\zeta = \alpha$, the prototypical part $\hardpart^\alpha$ sends $\C\{\zeta_\alpha\}$ to itself. In fact, for any real number $\sigma$ that's not a negative integer, $\hardpart^\alpha$ maps $\zeta^\sigma \C\{\zeta_\alpha\}$ to itself. Under the same condition on $\sigma$, the operator $R(\partial^{-1}_{\zeta, \alpha})$ is well-defined as a map from $\zeta_\alpha^\sigma \C\{\zeta_\alpha\}$ to itself,\footnote{This is easiest to see from the formal point of view. Multiplication by $R(\zeta)$ sends convergent series to convergent series, and $\partial^{-1}_{\zeta, \alpha}$ acts like multiplication by $\zeta$ followed by the map $\zeta^\rho \mapsto \tfrac{1}{\Gamma(\rho+1)} \zeta^\rho$. A convergent series stays convergent under any operation that leaves its coefficients the same or smaller. \textcolor{orange}{[Discuss convergence of the operator series from the analytic point of view?]}.} so the perturbation can be seen as a map $\softpart^\alpha \maps \zeta_\alpha^\sigma \C\{\zeta_\alpha\} \to \zeta_\alpha^{\sigma + 1} \C\{\zeta_\alpha\}$.
-
-\textcolor{orange}{[\ldots]}
-
-\end{proof}
-\textcolor{orange}{[We will prove a formal analogue of Theorem~4 from \cite{reg-sing-volterra}. We use essentially the same technique]}, replacing the function spaces $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ used in \cite{reg-sing-volterra} with the formal power series spaces $\zeta_\alpha^\sigma \C\llbracket \zeta_\alpha \rrbracket$ under \color{Tan}{the non-archimedean norm
-\[ \big| c_n \zeta_\alpha^{\sigma+n} + c_{n+1} \zeta_\alpha^{\sigma+n+1} + c_{n+2} \zeta_\alpha^{\sigma+n+2} + \ldots \big|_\lambda = \lambda^{-(\sigma+n)} \]
-\color{Maroon}
-the weighted $L^1$ norm \textcolor{orange}{[whoops, not defined for all formal power series]}
-\[ \big| c_n \zeta_\alpha^{\sigma+n} + c_{n+1} \zeta_\alpha^{\sigma+n+1} + c_{n+2} \zeta_\alpha^{\sigma+n+2} + \ldots \big|_\lambda = |c_n| \lambda^{-(\sigma+n)} + |c_{n+1}| \lambda^{-(\sigma+n+1)} + |c_{n+2}| \lambda^{\sigma+n+2} + \ldots\]
-for some $\lambda > 1$. \textcolor{orange}{[My hope was to use a non-archimedean norm to give a contraction mapping theorem formulation of an argument that more and more terms match, but it is hard to split up the operator in a way that makes more and more terms match\ldots]}
-\begin{lemma}\label{lem:formal-general-volterra}
-The equation $\hat{\mathcal{P}}_\alpha \series{\psi}_\alpha = 0$ has a unique formal solution $\series{\psi}_\alpha$ in the affine subspace
-\[ \frac{\zeta_\alpha^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \zeta_\alpha^{\tau_\alpha} \C\llbracket \zeta_\alpha \rrbracket \]
-of the space $\zeta_\alpha^{\tau_\alpha - 1} \C\llbracket \zeta_\alpha \rrbracket$.
-\end{lemma}
-\begin{proof}
-In \cite{reg-sing-volterra}, to prove Theorem~4, we rewrite the equation $\hat{\mathcal{P}}_\alpha \solwhole = 0$ as a regular singular Volterra equation $\solwhole = \volterra^\alpha \solwhole$ that satisfies the conditions of Theorem~3. Instead of looking for an analytic solution, like we do in \cite{reg-sing-volterra}, we will seek a formal solution $\fmlsolwhole$. First, we have to make sure the equation makes sense in the space of formal power series. Let $\series{p} = P(-\zeta)$ and $\series{q} = Q(-\zeta)$, thinking of the polynomials as formal power series, and let $\series{R}$ be the Taylor series of $R$. The operator $\volterra^\alpha$ is the sum of the ``prototypical'' part
-%%\[ \hardpart^\alpha = -\tfrac{1}{P(-\zeta)} \circ \partial^{-1}_{\zeta, \alpha} \circ Q(-\zeta) \]
-\color{magenta}
-\[ \hardpart^\alpha = -\tfrac{1}{\series{p}} \circ \partial^{-1}_{\zeta, \alpha} \circ \series{q} \]
-\color{Maroon}
-and the perturbation
-\color{magenta}
-\[ \softpart^\alpha = \tfrac{1}{\series{p}} \circ \partial^{-2}_{\zeta, \alpha} \circ \series{R}\big(\partial^{-1}_{\zeta, \alpha}\big), \]
-[have to get a contraction somehow for this to work like I imagined] \color{Maroon} which are both written here as operators on $\C\llbracket \zeta_\alpha \rrbracket$.
-
-Now, let us run through the proof of Theorem~3, replacing the function spaces $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ used in \cite{reg-sing-volterra} with the formal power series spaces $\zeta_\alpha^\sigma \C\llbracket \zeta_\alpha \rrbracket$ in the ``$\lambda$-adic'' norms described above. For simplicity, we will specialize the proof to the case we consider in Theorem~4. First, picking an arbitrary point $\zeta = \eta$ in $\Omega_\alpha$, we show that the {\em prototype solution}
-%%\[ \solproto(a) = \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \]
-%%\[ \solproto = \frac{1}{\series{p}(a)} \exp\big(-\partial^{-1}_{\zeta, \eta} (\series{q}/\series{p})\big) \]
-\[ \fmlsolproto = \frac{1}{\series{p}} \left(\frac{\zeta}{\eta}\right)^{\tau_\alpha} \exp\left[-\partial^{-1}_{\zeta, \eta} \left( \frac{\series{q}}{\series{p}} + \frac{\tau_\alpha}{\zeta} \right)\right] \]
-satisfies the equation $\fmlsolproto = \hardpart^\alpha \fmlsolproto$. Our expression for the prototype solution, taken from \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, gives a convergent power series expansion of the analytic prototype solution defined in \cite{reg-sing-volterra}.
-
-
-This definition of the prototype solution is taken from an intermediate step of the calculate in Section~3.2.1 \textcolor{orange}{\tt sec:construction} of \cite{reg-sing-volterra}, in which
-
-
-to express the prototype solution as a formal power series that satisfies the same equation. The definition of $\tau_\alpha$ ensures that $\series{q}/\series{p} + \tau_\alpha/\zeta$ is in $\C\llbracket \zeta_\alpha \rrbracket$, so $\fmlsolproto$ is in $\zeta_\alpha^{\tau_\alpha - 1} \C\llbracket \zeta_\alpha \rrbracket$.
-
-Next, we look for a perturbation $\fmlsolptb$ that makes $\fmlsolwhole = \fmlsolproto + \fmlsolptb$ a solution of the Volterra equation we're trying to solve. This is equivalent to solving the inhomogeneous equation
-\begin{equation}\label{eqn:inhomog-volterra2}
-\fmlsolptb = \softpart^\alpha \fmlsolproto + \volterra^\alpha \fmlsolptb
-\end{equation}
-The central idea of the proof is to show that $\softpart^\alpha$ maps $\zeta_\alpha^{\tau_\alpha - 1} \C\llbracket \zeta_\alpha \rrbracket$ into $\zeta_\alpha^{\tau_\alpha} \C\llbracket \zeta_\alpha \rrbracket$ and that $\volterra^\alpha$ is a contraction of $\zeta_\alpha^{\tau_\alpha - 1} \C\llbracket \zeta_\alpha \rrbracket$.
-
-
-$\solproto$ lies in $\singexpalg{\tau_\alpha - 1}(\Omega_\alpha)$, that $\softpart^\alpha$ maps $\singexpalg{\tau_\alpha - 1}(\Omega_\alpha)$ into $\singexpalg{\tau_\alpha}(\Omega_\alpha)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by Picard iteration. Starting with any initial guess $\fmlsolptb^{(0)} \in \singexp{\tau_\alpha}{\Lambda}(\Omega_\alpha)$ and defining
-\begin{align*}
-\fmlsolptb^{(1)} & = \volterra^\alpha \fmlsolptb^{(0)} \\
-\fmlsolptb^{(2)} & = \volterra^\alpha \fmlsolptb^{(1)} \\
-\fmlsolptb^{(3)} & = \volterra^\alpha \fmlsolptb^{(2)} \\
-& \;\;\vdots
-\end{align*}
-we get a sequence of functions that converges in $\zeta_\alpha^{\tau_\alpha} \C\llbracket \zeta_\alpha \rrbracket$ to a solution.
-
-\textcolor{orange}{[Argument of Loday-Richaud\ldots]}
-\end{proof}
-\begin{proof}
-Let $\hat{\mathcal{P}}_\alpha$ be the Volterra operator defined in Section~4.5 of \cite{reg-sing-volterra}. Take any holomorphic function $\phi$ on $\Omega_\alpha$ with a well-defined Laplace transform $\Phi = \laplace_{\zeta,\alpha}^{\theta} \phi$ \textcolor{magenta}{[choose $\theta$]}. Lemma~2 of \cite{reg-sing-volterra} shows that $\hat{\mathcal{P}}_\alpha \phi = 0$ if and only if $\mathcal{P}\Phi = 0$ \textcolor{magenta}{[the lemma only states one direction; change it before publication to state both directions]}.
-
-As a consequence of Theorem~\ref{thm:sing-soln}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
-\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
-of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. It follows, by the results of Section~\ref{sec:reg-decay} \textcolor{magenta}{[the domain $\Omega_\alpha$ needs to be a sector for this]}, that the equation $\mathcal{P}\Psi_\alpha = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
-\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
-
-To show that $\Psi_\alpha$ is Borel regular, first observe that by \textcolor{orange}{[Erdelyi \S 1.6---cite in appdendix; to get uniformity, we might need a constant-width strip, rather than a sector]}, the asymptotic expansion $\series{\Psi}_\alpha = \aexp^\theta \Psi_\alpha$ satisfies the same differential equation that $\Psi_\alpha$ does. In addition, the leadeing term of $\series{\Psi}_\alpha$ is $z^{-\tau_\alpha}$. Thus, $\series{\psi}_\alpha = \borel_\zeta \series{\Psi}_\alpha$ satisfies the same intergral equation that $\psi_\alpha$ does, and its leading term is $\frac{1}{\Gamma(\tau_\alpha)} \zeta^{\tau_\alpha - 1}$.
-\end{proof}
-\color{black}
-
-%As a consequence of Theorem 4 in {\tt reg-volterra} we get 
-%
-%\begin{theorem}\label{thm1-dim}
-%In the previous set-up, there exists a unique solution of $\hat{P}_j\psi_j=0$ with $\zeta_j=\zeta-\alpha_j$ and
-%\begin{equation}\label{P-hat_j}
-%\hat{P}_j:=P(-\alpha_j-\zeta_j)+\partial_{\zeta,\alpha_j}^{-1}\circ Q(-\alpha_j-\zeta_j)+\partial_{\zeta,\alpha_j}^{-2}\circ\sum_{r=0}^{d-1}R_r(\partial_{\zeta,\alpha_j}^{-1})\circ (-\alpha_j-\zeta_j)^r
-%\end{equation}
-%such that $\psi_j$ blows up as $\zeta^{\tau_j-1}$ at $\alpha_j$:
-%${\psi}_j(\zeta_j)=\zeta_j^{\tau_j-1}+f_j$ and $f_j\in\mathcal{HL}^{\infty,-\tau_j}(\Omega_j)$ with $\Omega_j$.
-%\end{theorem}
-
 \color{black}
 \subsubsection{A new proof of the Borel summability of the Poincar\'{e} solutions}\label{sec:new-summability-proof}
 %\textcolor{orange}{[Mention that this is a component of the earlier Borel regularity proof.]}
@@ -2690,7 +2485,7 @@ which is easier to solve. Unfortunately, a solution of equation~\eqref{diff-eq:s
 This is great news, because equation~\eqref{diff-eq:spatial-mod-bessel-AL} has a regular singularity at each root of $\zeta^2 - 1$, and the Frobenius method often gives a solution of order $\sigma=1/2$ at each regular singular point. We can see the regular singularities by moving the derivatives to the right:
 \[ \left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{m}{n}\big)^2 \big] \right] v = 0. \]
 
-In Sections \ref{pos-root-AL}\,--\,\ref{neg-root-AL}, we will see this approach succeed. For each root $\alpha_j$, we will find a solution $v_j$ of equation~\eqref{diff-eq:spatial-mod-bessel-AL} which is $\singexpalg{\sigma}(\Omega_j)$, for some $\sigma$, and $\Omega_j$ as in Figure \ref{Fig:domain}. We know the function $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\eqref{eqn:reg-mod-bessel-AL}, and we can even find its asymptotics from the order $\tau_\alpha$ of $v_\alpha$. We learned in Section~\ref{translation} that
+In Sections \ref{pos-root-AL}\,--\,\ref{neg-root-AL}, we will see this approach succeed. For each root $\alpha_j$, we will find a solution $v_j$ of equation~\eqref{diff-eq:spatial-mod-bessel-AL} which is $\singexpalg{\sigma}(\Omega_j)$, for some $\sigma$, and $\Omega_j$ as in the figure from Theorem~\ref{thm:exist_uniq_ODE}\textcolor{RoyalBlue}{[Figure \ref{Fig:domain}]}. We know the function $\laplace_{\zeta, \alpha} v_\alpha$ will satisfy equation~\eqref{eqn:reg-mod-bessel-AL}, and we can even find its asymptotics from the order $\tau_\alpha$ of $v_\alpha$. We learned in Section~\ref{translation} that
 \[ \laplace_{\zeta, \alpha_j} v_j = e^{-\alpha_j z} V_j \]
 where $V_j = \laplace_{\zeta_j, 0} v_\alpha$ and $\zeta = \alpha_j + \zeta_j$. We can see from Section~\ref{sec:reg-decay} that $V_j$ is asymptotic to a scalar multiple of $z^{-1 - \tau_j}$ at $z = \infty$, so the further decomposition
 \[ \laplace_{\zeta, \alpha_j} v_j = e^{-\alpha_j z} z^{-\tau_j} W_j, \]
