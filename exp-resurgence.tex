@@ -1282,6 +1282,7 @@ which is what we wanted to show.
 %%\end{align*}
 \textcolor{orange}{[Oops, looks like we can't keep $\Delta$ constant along the integration path if we want to recover something with a $|\zeta_\alpha|^{\sigma-1}$ singularity.]}
 \end{proof}
+\textcolor{magenta}{[Introduce bare $\widehat{\Omega}$]}
 \color{black}
 %
 \subsection{The geometry of the Borel transform}\label{sec:geometry_borel}
@@ -1466,7 +1467,7 @@ is the formal inverse of $\laplace_{\zeta_b,0}$ on the cotangent fibre over $b$.
  %\end{align*}
 %\textcolor{orange}{[Move to beginning?]} Furthermore, we learn that the action of $\borel_{\zeta_\alpha}$ extends to trans-monomials: $\borel_{\zeta_\alpha}\colon e^{z\alpha}\C\llbracket z^{-1}\rrbracket\to \C\llbracket \zeta  \rrbracket$ as the formal inverse of $\laplace_{\zeta_\alpha,-\alpha}$. 
 \subsubsection{Action on translations in the frequency domain}
-Since $\borel_\zeta$ is the formal inverse of $\laplace_{\zeta,0}$, we can use the properties of the Laplace transform to deduce how $\borel_\zeta$ acts on translations in the frequency domain. It turns out that 
+\textcolor{Pink}{[Optional section; used in theory of difference equations in the frequency domain]} Since $\borel_\zeta$ is the formal inverse of $\laplace_{\zeta,0}$, we can use the properties of the Laplace transform to deduce how $\borel_\zeta$ acts on translations in the frequency domain. It turns out that 
 \[ \borel_\zeta \mathsf{T}_{-c}^* \series{\Phi} = e^{-c\zeta }\borel_\zeta \series{\Phi} \]
 for all $\series{\Phi} \in z^{-1}\,\C\llbracket z^{-1} \rrbracket$.
 Indeed, the following diagram
@@ -1807,7 +1808,7 @@ hence,  \[\partial_{\zeta_b,0}^{-\lambda}\big[\borel_{\zeta_b}\Phi\big]=\borel_{
 %Now we can pose a boundary value problem for each angle $\theta \in \R/2\pi\Z$: find a local holomorphic function $F$ on $T^*B$ that satisfies the equation $\laplacepde_\zeta F = 0$ and approaches zero when continued at fixed $z$ along rays of angle $\theta$.
 %\end{problem}
 %The Laplace transform $\laplace_\zeta^\theta$ turns local holomorphic functions on $B$ into solutions of this problem. \textcolor{orange}{In fact, it produces all the solutions \textbf{[check argument]}.[Veronica: I don't understand--why it produces all the solutions?]}
-\color{DarkBlue}
+
 \subsection{Bridging the gap between analytic and formal objects}
 The spaces $\singexp{\rho}{\textcolor{LimeGreen}{\Lambda}}(\Omega)$ from \cite{reg-sing-volterra} are convenient for analytic discussions of the Laplace transform, as we saw in Section~\ref{sec:reg-decay}. To study Borel summation, however, we also need to take Taylor series expansions around $\zeta = 0$, which cannot be done for all functions in $\singexp{\rho}{\textcolor{LimeGreen}{\Lambda}}(\Omega)$. We need a way to make sure we stay in the subspace where the Taylor series exists.
 
@@ -1820,14 +1821,14 @@ Consider a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ wh
 \begin{center}
 \begin{tikzpicture}
   \newcommand{\spill}{4}
-  \fill[violet!20, bezier bounding box, path fading=radial edge]
+  \fill[ietcoast!20, bezier bounding box, path fading=radial edge]
     (-\spill, -\spill) (\spill, \spill)
     (190:1.5) arc (190:41:1.5) -- (41:\spill) arc (41:-48:\spill) -- (-48:1.3) arc (-48:-170:1.3) -- cycle;
-  \fill[violet!35] (0, 0) -- (-170:1.3) arc (-170:-210:1.3) -- cycle;
-  \fill[violet] circle (0.7mm) node[anchor=west, outer sep=1mm] {$\zeta = \alpha$};
-  \node[violet] at (-190:0.85) {$\Upsilon_\Delta$};
+  \fill[ietcoast!35] (0, 0) -- (-170:1.3) arc (-170:-210:1.3) -- cycle;
+  \fill[ietcoast] circle (0.7mm) node[anchor=west, black, outer sep=1mm] {$\zeta = \alpha$};
+  \node at (-190:0.85) {$\Upsilon_\Delta$};
   \foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
-    \fill \p circle (0.7mm);
+    \fill[ietcoast] \p circle (0.7mm);
   }
 \end{tikzpicture}
 \end{center}
@@ -1876,8 +1877,8 @@ along any ray. This, as discussed above, proves the desired result.
 \color{black}
 \section{Proof of main results}\label{sec:proof_main_results}
 \subsection{Borel regularity for ODEs}\label{borel_reg-ODE}
-\textcolor{orange}{[Explain the contents of the section]}
-\subsubsection{Regularity results}
+In Section~\ref{sec:regularity-results}, we will prove Borel regularity of the solutions of a certain class of linear level-$1$ ODEs. Then, in Section~\ref{sec:new-summability-proof}, we will give a new proof of Borel summability of the Poincar\'e frame of solutions. \textcolor{Pink}{[Flavor text added; check over]}
+\subsubsection{Regularity results}\label{sec:regularity-results}
 Let us recall the setting from Section~\ref{borel-reg:explanatory-power}. Let $\mathcal{P}$ be a linear differential operator of the form
 %%\footnote{We follow Delabaere, rather than \'{E}calle, in only going on up to degree $d-1$; see \cite[Footnote~1 in Section 5.2.2.1]{diverg-resurg-iii}}
 \begin{equation}\label{eqn:operator-P}
@@ -1892,30 +1893,31 @@ where
 converges in the region $|z| > A$.
 \end{enumerate}
 %%For each root $-\alpha$ of $P$, choose an open sector $\Omega_\alpha \subset \C$ that has $\zeta = \alpha$ at its tip, doesn't touch any other root of $P(-\zeta)$, and has an opening angle of $\pi$ or less.
-\textcolor{orange}{[Discuss terminology, like in \tt{reg-sing-volterra}?]}
+\textcolor{orange}{[Transition text]}
 %%%\begin{itemize}
 %%%\item The set $\Omega_\alpha$ is star-shaped around $\zeta = \alpha$. In other words, for any $a \in \Omega_\alpha$, a straight path from $\zeta = \alpha$ to $a$ stays in $\Omega_\alpha$. Since $\Omega_\alpha$ doesn't contain $\zeta = \alpha$, we will always leave that starting point out of the path.
 %%%\item The set $\Omega_\alpha$ does not contain the tubular neighborhood of the other critical points, as shown in Figure \ref{Fig:domain}. \textcolor{orange}{[In ``Regular singular Volterra,'' we assume that $\Omega_\alpha$ doesn't touch any other critical point (that is, doesn't contain any other critical point in its closure). Under the star-shaped assumption, I think that implies avoiding tubular neighborhoods of the shadow rays.]}
 %%%\end{itemize}
-\color{DarkBlue}
 \begin{theorem}[restatement of \ref{thm:exist_uniq_ODE}]\label{re:thm:exist_uniq_ODE}
 Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace \textcolor{orange}{[define $\widehat{\Omega}_\alpha$]}
 \[ e^{-\alpha z} \left[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\widehat{\Omega}_\alpha) \right] \]
 of the space $e^{-\alpha z} \dualsingexpalg{-\tau_\alpha}(\widehat{\Omega}_\alpha)$ from Section~\ref{sec:reg-decay}.
 \end{theorem}
 \begin{center}
+%\begin{figure}
 \begin{tikzpicture}
 \newcommand{\spill}{4}
-\fill[violet!20, bezier bounding box, path fading=radial edge]
+\fill[ietcoast!20, bezier bounding box, path fading=radial edge]
   (-\spill, -\spill) (\spill, \spill)
   (0, 0) -- (41:\spill) arc (41:-48:\spill) -- cycle;
-\fill[violet] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
+\fill[ietcoast] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
 \foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
-  \fill \p circle (0.7mm);
+  \fill[ietcoast] \p circle (0.7mm);
 }
 \end{tikzpicture}
 
-{\small The domain $\Omega_\alpha$}
+{\small The domain $\Omega_\alpha$ \textcolor{orange}{[Cite as ``the figure after Lemma~***]}}
+%\end{figure}
 \end{center}
 \begin{proof}
 After rescaling by a constant, Theorem~4 of \cite{reg-sing-volterra} tells us that the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
@@ -1923,33 +1925,6 @@ After rescaling by a constant, Theorem~4 of \cite{reg-sing-volterra} tells us th
 of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. By Theorem~\ref{translation} and the results of Section~\ref{sec:reg-decay}, the Laplace transform $\laplace^\theta_{\zeta, \alpha}$ is a left-invertible map
 \[ \singexpalg{\tau_\alpha}(\Omega_\alpha) \to e^{-\alpha z} \dualsingexpalg{-\tau_\alpha-1}(\widehat{\Omega}_\alpha). \]
 With $\Psi_\alpha = \laplace^\theta_{\zeta, \alpha} \psi_\alpha$, the desired result follows.
-\end{proof}
-\color{BlueViolet}
-\begin{theorem}[restatement of \ref{thm:exist_uniq_ODE}]\label{thm:exist_uniq_ODE_proof}
-Choose a root $-\alpha$ of $P$ with $\tau_\alpha \in (0, \infty)$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and doesn't touch any other root of $P(-\zeta)$. The equation $\mathcal{P}\Psi = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
-\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$ from Section~\ref{sec:reg-decay}.
-\end{theorem}
-\begin{center}
-\begin{tikzpicture}
-\newcommand{\spill}{4}
-\fill[violet!20, bezier bounding box, path fading=radial edge]
-  (-\spill, -\spill) (\spill, \spill)
-  (0, 0) -- (41:\spill) arc (41:-48:\spill) -- cycle;
-\fill[violet] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
-\foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
-  \fill \p circle (0.7mm);
-}
-\end{tikzpicture}
-
-{\small The domain $\Omega_\alpha$}
-\end{center}
-\begin{proof}
-After rescaling by a constant, Theorem~4 of \cite{reg-sing-volterra} tells us that the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
-\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
-of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. It follows, by the results of Section~\ref{sec:reg-decay} \textcolor{magenta}{[the domain $\Omega_\alpha$ needs to be a sector for this]}, that the equation $\mathcal{P}\Psi_\alpha = 0$ has a unique solution $\Psi_\alpha$ in the affine subspace
-\[ z^{-\tau_\alpha} + \dualsingexpalg{-\tau_\alpha-1}(\Omega_\alpha) \]
-of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
 \end{proof}
 \color{RoyalBlue}
 \textcolor{orange}{[\ldots]} Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work just as well on a covering of $\C$ which is branched at the roots of $P(-\zeta)$. Let us use the covering $\pi \maps \widetilde{B}_{P(-\zeta)} \to \C$ built by puncturing $\C$ at the roots of $P(-\zeta)$, taking the universal cover, and then gluing the roots back in as infinite-order branch points.
@@ -1959,9 +1934,9 @@ of the space $\dualsingexpalg{-\tau_\alpha}(\Omega_\alpha)$.
 The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is the Borel sum of a formal trans-monomial solution $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$ of the equation $\mathcal{P}\series{\Phi} = 0$.
 \end{theorem}
 \begin{proof}
-Take an open sector $\Omega_\alpha$ of the kind used in Theorem~\ref{thm:exist_uniq_ODE_proof}, and expand it to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace \textcolor{orange}{[use $\zeta_\alpha$ in place of $\zeta$ throughout proof]}
+Take an open sector $\Omega_\alpha$ of the kind used in Theorem~\ref{re:thm:exist_uniq_ODE}, and expand it to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace \textcolor{orange}{[use $\zeta_\alpha$ in place of $\zeta$ throughout proof]}
 \[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Upsilon) \]
-of the space $\singexpalg{\tau_\alpha-1}(\Upsilon)$. Restricting this solution to $\Omega_\alpha$ gives the analogous solution from the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}, as we can see from the uniqueness part of Theorem~4. To express $\Psi_\alpha = \laplace_{\zeta, \alpha} \psi_\alpha$ as the Borel sum of a trans-monomial, we first need to expess $\psi_\alpha$ as the sum of a convergent power series. We'll do this by showing that $\psi_\alpha$ lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
+of the space $\singexpalg{\tau_\alpha-1}(\Upsilon)$. Restricting this solution to $\Omega_\alpha$ gives the analogous solution from the proof of Theorem~\ref{re:thm:exist_uniq_ODE}, as we can see from the uniqueness part of Theorem~4. To express $\Psi_\alpha = \laplace_{\zeta, \alpha} \psi_\alpha$ as the Borel sum of a trans-monomial, we first need to expess $\psi_\alpha$ as the sum of a convergent power series. We'll do this by showing that $\psi_\alpha$ lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
 
 For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$. In \cite{reg-sing-volterra}, to prove Theorem~4, we rewrite the equation $\hat{\mathcal{P}}_\alpha \solwhole = 0$ as a regular singular Volterra equation $\solwhole = \volterra^\alpha \solwhole$ that satisfies the conditions of Theorem~3. The operator $\volterra^\alpha$ is the sum of the ``prototypical'' part
 %%\[ \hardpart^\alpha = -\tfrac{1}{P(-\zeta)} \circ \partial^{-1}_{\zeta, \alpha} \circ Q(-\zeta) \]
@@ -1997,56 +1972,14 @@ We now cross over into the formal world using Proposition~\ref{prop:shifted_holo
 When we take the Borel sum of $\series{\Psi}_\alpha$, we start by retracing the construction steps described above. The Borel transform inverts the formal Laplace transform, bringing us back to $\series{\psi}_\alpha$, and summation then inverts the Taylor expansion, bringing us back to $\psi_\alpha$. We finish the Borel summation by taking the Laplace transform $\laplace^\theta_{\zeta, \alpha} \psi_\alpha$, giving $\Psi_\alpha$ by definition.
 \end{proof}
 \textcolor{orange}{[Add flavor text]}
+\color{black}
 \begin{theorem}[restatement of \ref{thm:soln_is_asymptotic}]\label{re:thm:soln_is_asymptotic}
 The analytic solution $\Psi_\alpha$ from Theorem~\ref{re:thm:exist_uniq_ODE} is asymptotic to the formal solution $\series{\Psi}_\alpha$ from Theorem~\ref{re:thm:soln_is_Borel_sum}.
 \end{theorem}
 \begin{proof}
-In the proof of Theorem~\ref{re:thm:soln_is_Borel_sum}, we showed that the position-domain solution $\psi_\alpha \in \singexpalg{\tau_\alpha-1}(\Upsilon)$ is the sum of a shifted Taylor series $\series{\psi}_\alpha \in \zeta^{\tau_\alpha-1}\,\C\{\zeta\}$. Since $\Psi_\alpha$ is the Laplace transform of $\psi_\alpha$, and $\series{\Psi_\alpha}$ is the formal Laplace transform of $\series{\psi}_\alpha$, the desired result follows from Lemma~\ref{lem:laplace-bridge}.
+In the proof of Theorem~\ref{re:thm:soln_is_Borel_sum}, we showed that the position-domain solution $\psi_\alpha \in \singexpalg{\tau_\alpha-1}(\Upsilon)$ is the sum of a shifted Taylor series $\series{\psi}_\alpha \in \zeta^{\tau_\alpha-1}\,\C\{\zeta\}$. Since $\Psi_\alpha$ is the Laplace transform of $\psi_\alpha$, and $\series{\Psi}_\alpha$ is the formal Laplace transform of $\series{\psi}_\alpha$, the desired result follows from Lemma~\ref{lem:laplace-bridge}.
 \end{proof}
-\color{BlueViolet}
-We are now ready to show that the solution $\Psi_\alpha$ is Borel regular.
-\begin{theorem}[restatement of \ref{thm:borel_reg_ODE}]\label{thm:borel_reg_ODE_proof}
-The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE_proof} is asymptotic to a transmonomial $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. The series $\series{\Psi}_\alpha$ is Borel summable, and its Borel sum is $\Psi_\alpha$.
-\end{theorem}
-\begin{proof}
-Take an open sector $\Omega_\alpha$ of the kind used in Theorem~\ref{thm:exist_uniq_ODE_proof}, and expand it to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. By Theorem~4 of \cite{reg-sing-volterra}, the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace \textcolor{orange}{[use $\zeta_\alpha$ in place of $\zeta$ throughout proof]}
-\[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Upsilon) \]
-of the space $\singexpalg{\tau_\alpha-1}(\Upsilon)$. Restricting this solution to $\Omega_\alpha$ gives the analogous solution from the proof of Theorem~\ref{thm:exist_uniq_ODE_proof}, as we can see from the uniqueness part of Theorem~4. To prove that $\Psi_\alpha$ has a the desired asymptotic expansion, we will show that $\psi_\alpha$ lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$.
-
-For convenience, let $p = P(-\zeta)$ and $q = Q(-\zeta)$. In \cite{reg-sing-volterra}, to prove Theorem~4, we rewrite the equation $\hat{\mathcal{P}}_\alpha \solwhole = 0$ as a regular singular Volterra equation $\solwhole = \volterra^\alpha \solwhole$ that satisfies the conditions of Theorem~3. The operator $\volterra^\alpha$ is the sum of the ``prototypical'' part
-%%\[ \hardpart^\alpha = -\tfrac{1}{P(-\zeta)} \circ \partial^{-1}_{\zeta, \alpha} \circ Q(-\zeta) \]
-\[ \hardpart^\alpha = -\tfrac{1}{p} \circ \partial^{-1}_{\zeta, \alpha} \circ q \]
-and the perturbation
-%%\[ \softpart^\alpha = \tfrac{1}{P(-\zeta)} \circ \partial^{-2}_{\zeta, \alpha} \circ R(\partial^{-1}_{\zeta, \alpha}) \]
-\[ \softpart^\alpha = \tfrac{1}{p} \circ \partial^{-2}_{\zeta, \alpha} \circ R\big(\partial^{-1}_{\zeta, \alpha}\big). \]
-
-Let us run through the proof of Theorem~3, specialized to the case we consider in Theorem~4. First, picking an arbitrary point $b \in \Omega_\alpha$, we show that the {\em prototype solution}
-\[ \solproto(a) = \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right) \]
-lies in the space $\singexpalg{\tau_\alpha - 1}(\Upsilon)$ and satisfies the equation $\solproto = \hardpart^\alpha \solproto$. We then look for a perturbation $\solptb$ that makes $\solwhole = \solproto + \solptb$ a solution of the Volterra equation we are trying to solve. This is equivalent to solving the inhomogeneous equation
-\begin{equation}\label{eqn:inhomog-volterra}
-\solptb = \softpart^\alpha \solproto + \volterra^\alpha \solptb
-\end{equation}
-The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Upsilon)$, into $\singexpalg{\tau_\alpha}(\Upsilon)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, that equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by Picard iteration. Defining
-\begin{align*}
-\solptb^{(0)} & = \softpart^\alpha \solproto \\
-\solptb^{(1)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(0)} \\
-\solptb^{(2)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(1)} \\
-\solptb^{(3)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(2)} \\
-& \;\;\vdots
-\end{align*}
-we get a sequence of functions that converges in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ to a solution.
-
-In \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, we rewrite the prototype solution in the form
-\[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right], \]
-which shows that it lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$. By working with Taylor series, we can show that $\softpart^\alpha$ maps
-\[ \zeta^{\tau_\alpha-1}\,\mathcal{O}(\pi \Upsilon) \to \zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \]
-and $\volterra^\alpha$ maps $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$ to itself. It follows that the sequence $\solptb^{(0)}, \solptb^{(1)}, \solptb^{(2)}, \ldots$ lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \cap \singexp{\tau_\alpha}{\Lambda}(\Upsilon)$, which by Lemma~\ref{lem:shifted_holo_closed} is a closed subspace of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. The solution $\solptb$ of equation~\eqref{eqn:inhomog-volterra} that this sequence converges to therefore lies in $\zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon)$. Recalling that the prototype solution lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$, we can deduce that $\psi_\alpha$ lies in that space too.
-
-Since $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$, we can now conclude that $\psi_\alpha$ is the sum of a shifted Laurent series in $\zeta^{\tau_\alpha-1}\,\C\{\zeta, \zeta^{-1}\}$. The definition of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ tells us that $|\zeta|^{\tau_\alpha-1} |\psi_\alpha|$ is bounded on a punctured disk around $\zeta = 0$, so in fact $\psi_\alpha$ is the sum of a shifted Taylor series $\series{\psi}_\alpha \in \zeta^{\tau_\alpha-1}\,\C\{\zeta\}$. Therefore, by Lemma~\ref{lem:laplace-bridge}, the solution $\Psi_\alpha$ is asymptotic to the formal Laplace transform $\series{\Psi}_\alpha = \laplace_{\zeta, \alpha} \series{\psi}_\alpha$, which lies in $e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$. \textcolor{orange}{[How to rephrase without formal Laplace transform?]}
-
-Now, let's take the Borel sum of $\series{\Psi}_\alpha$. The Borel transform inverts the formal Laplace transform, bringing us back to $\series{\psi}_\alpha$. By definition, the sum of $\series{\psi}_\alpha$ is $\psi_\alpha$, and the Laplace transform $\laplace^\theta_{\zeta, \alpha} \psi_\alpha$ is $\Psi_\alpha$.
-\end{proof}
-\color{black}
+%
 \subsubsection{A new proof of the Borel summability of the Poincar\'{e} solutions}\label{sec:new-summability-proof}
 %\textcolor{orange}{[Mention that this is a component of the earlier Borel regularity proof.]}
 Given a differential operator $\mathcal{P}$ as in Equation~\eqref{eqn:operator-P}, Poincar\'e showed how to build a frame of formal solutions of the equation $\mathcal{P}\Psi=0$ with a simple algorithm: for every root $\alpha$ of $P$, let $\tau_\alpha:=Q(-\alpha)/P'(-\alpha)$ and consider the following ansatz
@@ -2054,9 +1987,9 @@ Given a differential operator $\mathcal{P}$ as in Equation~\eqref{eqn:operator-P
     \tilde{\Psi}_\alpha(z):=e^{-z\alpha}z^{-\tau_\alpha}\sum_{n=0}^\infty a_{\alpha,n}\, z^{-n}\in e^{-z\alpha} z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket.
 \end{equation}
 Then solving order by order in $n$ it is possible to compute the coefficients of the formal series $\sum_{n=0}^\infty a_{\alpha,n}\, z^{-n}$, which will turn out to be a $1$-Gevrey series because of Ramis
-Index Theorem \cite{ramis_index}. When applicable, Borel summability is an effective method to produce an analytic frame of solutions from the formal Poincar\'e frame $\tilde{\Psi}_\alpha$. In particular, as a consequence of our result in Theorem~\ref{thm:borel_reg_ODE_proof} we deduce that the Poincar\'e frame of solutions is Borel summable (proving Corollary~\ref{cor:borel_reg_ODE}).
+Index Theorem \cite{ramis_index}. When applicable, Borel summability is an effective method to produce an analytic frame of solutions from the formal Poincar\'e frame $\tilde{\Psi}_\alpha$. In particular, as a consequence of our result in Theorem~\ref{re:thm:exist_uniq_ODE} we deduce that the Poincar\'e frame of solutions is Borel summable.
 \begin{theorem}\label{thm2-dim}
-For each root $\alpha$ of $P$, let $\tilde{\Psi}_\alpha(z)\in e^{-z\alpha} z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket_1$ be the formal solution of $\mathcal{P}\Psi=0$ with $a_{\alpha,0}=1$. Then $\series{\Psi}_\alpha(z)$ is Borel summable and its Borel sum $\hat{\Psi}_\alpha(z)$ is proportional to the analytic solution $\Psi_\alpha$ of Theorem~\ref{thm:borel_reg_ODE_proof}. 
+For each root $\alpha$ of $P$, let $\tilde{\Psi}_\alpha(z)\in e^{-z\alpha} z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket_1$ be the formal solution of $\mathcal{P}\Psi=0$ with $a_{\alpha,0}=1$. Then $\series{\Psi}_\alpha(z)$ is Borel summable and its Borel sum $\hat{\Psi}_\alpha(z)$ is proportional to the analytic solution $\Psi_\alpha$ of Theorem~\ref{re:thm:exist_uniq_ODE}. 
 \end{theorem}
 \begin{proof}
 We divide the proof in the following steps:
@@ -2201,9 +2134,9 @@ We will now prove that $I_\alpha$ is Borel regular:
 \begin{theorem}\label{thm:maxim-proof}
 If the integral defining $I_\alpha$ is absolutely convergent, then $I_\alpha$ is Borel regular. More explicitly: 
 \begin{enumerate}
-\item\label{part-1} The function $I_\alpha$ is asymptotic, as $\Re (e^{-i\theta} z) \to \infty$, to a trans-monomial $\tilde{I}_\alpha\in e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$.
-\item\label{part-2} The series $\tilde{I}_\alpha$ is $1$-Gevrey. In other words, $\tilde{\iota}_\alpha \defeq \borel_\zeta \tilde{I}_\alpha$ converges near $\zeta=\alpha$.
-\item\label{part-3} By continuing the sum of $\tilde{\iota}_\alpha$ along the ray $\Gamma_\alpha^\theta$, and taking its Laplace transform along that ray, we recover $I_\alpha$.
+\item\label{part-1-prf} The function $I_\alpha$ is asymptotic, as $\Re (e^{-i\theta} z) \to \infty$, to a trans-monomial $\tilde{I}_\alpha\in e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$.
+\item\label{part-2-prf} The series $\tilde{I}_\alpha$ is $1$-Gevrey. In other words, $\tilde{\iota}_\alpha \defeq \borel_\zeta \tilde{I}_\alpha$ converges near $\zeta=\alpha$.
+\item\label{part-3-prf} By continuing the sum of $\tilde{\iota}_\alpha$ along the ray $\Gamma_\alpha^\theta$, and taking its Laplace transform along that ray, we recover $I_\alpha$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -2238,16 +2171,16 @@ The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink 
 \[ e^{z\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^a \,z^{-(n+1/2)}. \]
 Hence, defining the formal series $\tilde{I}_\alpha$
 \[\tilde{I}_\alpha(z):=e^{-z\alpha} z^{-1/2}\, \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^a \,z^{-n}\]
-we get $\tilde{I}_\alpha\in e^{-z\alpha}z^{-1/2}\C\llbracket z^{-1}\rrbracket$. This ends the proof of part \ref{part-1}.
+we get $\tilde{I}_\alpha\in e^{-z\alpha}z^{-1/2}\C\llbracket z^{-1}\rrbracket$. This ends the proof of part \ref{part-1-prf}.
 
 Using the porperties of the Borel tranform acting on trans-mononials \ref{sec:action_transseries} we get 
 \begin{align*}
 \tilde{\iota}_\alpha & = \sqrt{2\pi} \sum_{n \ge 0} (2n - 1)!! \,b_{2n}^a\,\frac{\zeta_\alpha^{n+\tfrac{1}{2}}}{\Gamma(n+\tfrac{1}{2})} \\
 &= \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \,b_{2n}^a\,\zeta_\alpha^{n+\tfrac{1}{2}}
 \end{align*}
-We know from the definition of $\varepsilon$ that $\left|b_n^a\right| \varepsilon^n \lesssim 1$, thus we deduce that $\tilde{\iota}$ has a finite radius of convergence. This ends the proof of part \ref{part-2}. %$|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{I}_j$ is $1$-Gevrey.
+We know from the definition of $\varepsilon$ that $\left|b_n^a\right| \varepsilon^n \lesssim 1$, thus we deduce that $\tilde{\iota}$ has a finite radius of convergence. This ends the proof of part~\ref{part-2-prf}. %$|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\tilde{I}_j$ is $1$-Gevrey.
 
-\textcolor{RoyalBlue}{[Analytic/position version starts here.]} The proof of part \ref{part-3} relies on the thimble projection formula \eqref{eqn:formula-proof}: we will show that the Taylor expansion of $\iota_\alpha$ at $\zeta=\alpha$ agrees with $\tilde{\iota}_\alpha$. We can rewrite the Taylor series for $\nu$ as
+\textcolor{RoyalBlue}{[Analytic/position version starts here.]} The proof of part~\ref{part-3-prf} relies on the thimble projection formula \eqref{eqn:formula-proof}: we will show that the Taylor expansion of $\iota_\alpha$ at $\zeta=\alpha$ agrees with $\tilde{\iota}_\alpha$. We can rewrite the Taylor series for $\nu$ as
 \begin{align*}
 \nu & = \sum_{n \ge 0} b_n^a [2(f - \alpha)]^{(n - 1)/2}\,df,
 \end{align*}
@@ -2358,7 +2291,7 @@ as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$.
 \color{black}
 \end{proof}
 \begin{remark}\label{rmk:1/2-deriv}
-    \textcolor{orange}{[Spirit of the remark: if you want to run the argument above for $\Phi_\alpha$, you can, but there's one subtlety you should be aware of\ldots]} For some applications, it might be more convenient to study Borel regularity of $\Phi_\alpha=z^{-1/2}I_\alpha$, as its asymptotics will not have fractional power singularities. The proof follows the same argument we chose for $I_\alpha$, but there's one subtulty to be aware of when rewriting $\Phi_\alpha$ as the Laplace transform of a function $\phi_\alpha$. Indeed, first notice that \[\phi_\alpha = \fracderiv{-1/2}{\zeta}{\alpha} \, \iota_\alpha \]
+    \textcolor{orange}{[Spirit of the remark: if you want to run the argument above for $\Phi_\alpha$, you can, but there is one subtlety you should be aware of\ldots]} For some applications, it might be more convenient to study Borel regularity of $\Phi_\alpha=z^{-1/2}I_\alpha$, as its asymptotics will not have fractional power singularities. The proof follows the same argument we chose for $I_\alpha$, but there's one subtulty to be aware of when rewriting $\Phi_\alpha$ as the Laplace transform of a function $\phi_\alpha$. Indeed, first notice that \[\phi_\alpha = \fracderiv{-1/2}{\zeta}{\alpha} \, \iota_\alpha \]
     Then, we can take the $1/2$ fractional integral on both sides:
     \begin{align*}
         \fracderiv{-1/2}{\zeta}{\alpha} \phi_\alpha &= \fracderiv{-1}{\zeta}{\alpha} \, \iota_\alpha \\
@@ -2375,22 +2308,25 @@ as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$.
 We can use the $1/2$ derivative formula~\eqref{eqn:formula--1/2} to see that the functions $\phi$ are all resurgent, in the sense of \'{E}calle~\cite[Section~1]{EcalleI}. Let us say $\Gamma_\alpha^\theta(\beta)$ is the straight path from $\zeta = \alpha$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\Lambda_\alpha^\theta(\beta)$ in $X$. This lets us analytically continue $\int_{\Lambda_\alpha^\theta(\zeta)} \nu$ to a star-shaped domain $\Omega_\alpha \subset \C$. Intuitively, $\Omega_\alpha$ is constructed by drawing rays from $\zeta = \alpha$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\infty$ (see Figure~\ref{Fig:slit domain}).
 \begin{figure}
 \center
+\begin{center}
 \begin{tikzpicture}
 \newcommand{\spill}{4}
-\fill[violet!20, bezier bounding box, path fading=radial edge]
+\newcommand{\slitsize}{0.4}
+\fill[ietcoast!20, bezier bounding box, path fading=radial edge]
   (-\spill, -\spill) (\spill, \spill)
   (0, 0) -- (180:\spill)
-  arc (180:113:\spill) -- (112:2) .. controls (112:1.7) and (111:1.7) .. (111:2) -- (111:\spill)
-  arc (111:50:\spill) -- (50:2.6) .. controls (50:2.2) and (49:2.2) .. (49:2.6) -- (49:\spill)
-  arc (49:-52:\spill) -- (-52:2.3) .. controls (-52:2) and (-53:2) .. (-53:2.3) -- (-53:\spill)
-  arc (-53:-180:\spill) -- (0, 0);
-  \node[anchor=north west, outer sep=1mm] at (46.5:2.46) {$\zeta=\beta$};
-\foreach \p in {(111.5:1.9), (49.5:2.4), (-52.5:2.2)} {
+  arc (180:107.5+\slitsize:\spill) -- (107.5+\spill/1.95*\slitsize:1.95) -- (107.5-\spill/1.95*\slitsize:1.95) -- (107.5-\slitsize:\spill)
+  arc (107.5-\slitsize:46.5+\slitsize:\spill) -- (46.5+\spill/2.46*\slitsize:2.46) -- (46.5-\spill/2.46*\slitsize:2.46) -- (46.5-\slitsize:\spill)
+  arc (46.5-\slitsize:-56+\slitsize:\spill) -- (-56+\spill/2.24*\slitsize:2.24) -- (-56-\spill/2.24*\slitsize:2.24) -- (-56-\slitsize:\spill)
+  arc (-56-\slitsize:-180:\spill) -- (0, 0);
+\node[anchor=north west] at (46.5:2.46) {$\zeta=\beta$};
+\foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
+  \draw[ietcoast!50] \p -- (0,0);
   \fill \p circle (0.7mm);
-  \draw[dashed,violet!50] \p -- (0,0); 
-  }
-\fill[violet] circle (0.7mm) node[anchor=180, outer sep=1mm] {$\zeta = \alpha$};
+}
+\fill[ietcoast] circle (0.7mm) node[anchor=180,black, outer sep=1mm] {$\zeta = \alpha$};
 \end{tikzpicture}
+\end{center}
 \caption{The domain $\Omega_\alpha$}\label{Fig:slit domain}
 \end{figure}
 Let us calculate the jump of $\int_{\Lambda_\alpha^\theta(\zeta)}\nu$ across the cut starting at $\zeta = \beta$. Write $\beta$ as $\alpha + re^{i\theta_\beta}$, and let $\beta^+$ and $\beta^-$ be the points we get by infinitesimally increasing or decreasing $\theta_\beta$. The jump is then given by \[\int_{\Lambda_\alpha^\theta(\beta^+)} \nu - \int_{\Lambda_\alpha^\theta(\beta^-)} \nu\] 
@@ -2444,7 +2380,7 @@ where $\Gamma$ is a path that comes from $\infty$ at $-60^\circ$ and goes to $\i
     \centering
     %\includegraphics{figures/u_contour_3.pdf}
     \includegraphics[scale=0.3]{figures/thimble_Airy.png}
-    \caption{\small The contour $\Lambda_1$ in the $u$ plane is represented by the light blue path. More generally, the dark blue contour corresponds to the preimage of the ray $+1+e^{i\theta}\infty$ and $\theta=$. While the light blue contour corresponds to the preimage of the ray $-1+e^{i\theta}\infty$. The gray regions correspond to the preimage of $\Re \zeta> \textcolor{orange}{const}$. \textcolor{orange}{[for Aaron: could you please add the correct constant in the description of the figure, and explain what are the different colored regions? Thanks]}}
+    \caption{\small In this picture of the $u$ plane, the light and dark checks are the preimages of the upper and lower halves of the $\zeta$ plane, respectively. The light path is the contour $\Lambda_1$. More generally, the dark blue contour corresponds to the preimage of the ray $+1+e^{i\theta}\infty$ and $\theta=$. While the light blue contour corresponds to the preimage of the ray $-1+e^{i\theta}\infty$. The shadowed region is the preimage of the region where $\Re(\zeta) > 3.897\ldots$. \textcolor{orange}{[for Aaron: could you please add the correct constant in the description of the figure, and explain what are the different colored regions? Thanks]}} \textcolor{BlueViolet}{[Right now, the program chooses the constant to be $\tfrac{3}{4} n^{3/2}$, so it's about $3.897$ in this picture. If you want to put something concrete, I could redraw the picture so that it's $4$.]}
     \label{fig:path_Airy}
 \end{figure}
 
@@ -2471,7 +2407,7 @@ By definition, $\Lambda^\theta_j$ is a preimage of the ray $\Gamma^\theta_{\mp 1
 \begin{figure}[ht]
     \centering
    \includegraphics[scale=0.3]{figures/thimble-n5.png}
-    \caption{Integration contour $\Lambda^\theta_j$ for the Airy--Lucas function with $n=5$. The dark blue contours correspond to the preimage of the ray $1+e^{i\theta}\infty$ and $\theta=???$. While the light blue contours correspond to the preimage of the ray $-1+e^{i\theta}\infty$.}
+    \caption{Integration contour $\Lambda^\theta_j$ for the Airy--Lucas function with $n=5$. The dark blue contours correspond to the preimage of the ray \textcolor{magenta}{$1+e^{i\theta}\infty$ [convert to $\Gamma$]} and \textcolor{orange}{$\theta=???$}. While the light blue contours correspond to the preimage of the ray $-1+e^{i\theta}\infty$. \textcolor{orange}{[Preferred version, with ``Figure'' label]}}
     \label{fig:thimble_n_5}
 \end{figure}
 
@@ -2487,9 +2423,9 @@ Saying that $\widehat{\Ai}^{(j)}_{n, m-1}$ satisfies the Airy-Lucas equation is 
 \begin{equation}\label{eqn:mod-bessel-AL}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{m}{n} \big)^2 + z^2\big]\right] K = 0.
 \end{equation}
-In fact, as we’ll see in Section~\ref{contour-argument-AL}, $K$ is the modified Bessel function $K_{{m/n}}$.
+In fact, as we will see in Section~\ref{contour-argument-AL}, $K$ is the modified Bessel function $K_{{m/n}}$.
 
-Let us put equation~\eqref{eqn:mod-bessel-AL} in the form \eqref{eqn:standard ODE}:
+Let us put Equation~\eqref{eqn:mod-bessel-AL} in the form $\mathcal{P}\Phi=0$ with $\mathcal{P}$ as in Equation~\eqref{eqn:operator-P}:
 \begin{equation}\label{eqn:reg-mod-bessel-AL}
 \left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big({\tfrac{m}{n}}\big)^2 z^{-2} \right] K = 0.
 \end{equation}
@@ -2510,7 +2446,7 @@ which seem analogous to the trans-monomials above. Borel summation makes the ana
 \subsubsection{The big idea}\label{big-idea}
 We are going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel-AL}. We will succeed when $\alpha^2 - 1 = 0$, and we will see that $K_{m/n}$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
 
-We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel-AL} if and only if $v$ satisfies the integral equation
+By the properties of the Laplace transform (we refer to Proposition~\ref{prop:L-int-op}), $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel-AL} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{int-eq:spatial-mod-bessel-AL}
 \left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{m}{n}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] v = 0.
 \end{equation}
@@ -2518,7 +2454,7 @@ It's tempting to differentiate both sides of this equation until we get
 \begin{equation}\label{diff-eq:spatial-mod-bessel-AL}
 \left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ \big[ \zeta^2 - 1 \big] - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{m}{n}\big)^2 \right] v = 0,
 \end{equation}
-which is easier to solve. Unfortunately, a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} won't satisfy equation~\eqref{int-eq:spatial-mod-bessel-AL} in general. However, as we show in Section~\ref{shifting}, a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} {\em will} satisfy equation~\eqref{int-eq:spatial-mod-bessel-AL} if it belongs to $\singexpalg{\sigma}(\Omega_j)$, for some $\sigma\in (0,1)$.
+which is easier to solve. Unfortunately, a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} will not satisfy equation~\eqref{int-eq:spatial-mod-bessel-AL} in general. However, as we show in Section~\ref{shifting}, a solution of equation~\eqref{diff-eq:spatial-mod-bessel-AL} {\em will} satisfy equation~\eqref{int-eq:spatial-mod-bessel-AL} if it belongs to $\singexpalg{\sigma}(\Omega_j)$, for some $\sigma\in (0,1)$.
 
 This is great news, because equation~\eqref{diff-eq:spatial-mod-bessel-AL} has a regular singularity at each root of $\zeta^2 - 1$, and the Frobenius method often gives a solution of order $\sigma=1/2$ at each regular singular point. We can see the regular singularities by moving the derivatives to the right:
 \[ \left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{m}{n}\big)^2 \big] \right] v = 0. \]
@@ -2612,24 +2548,60 @@ Looking back at Section~\ref{neg-root-AL}, we recognize this as a scalar multipl
 
 
 \subsubsection{Thimble projection reasoning for Airy-Lucas functions}\label{contour-argument-AL}
-We follow the reasoning of the proof of Theorem~\ref{lem:thimble_proj_formula-proof}. We can recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. The critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$ splits $\Lambda^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\Lambda^\theta_j$ is a preimage of $\Gamma^\theta_{\zeta, \mp 1}$, we get \textcolor{magenta}{[mention that $\theta$ should be $\arg z$]}
+We follow the reasoning of the proof of Lemma~\ref{lem:thimble_proj_formula-proof}. We can recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. The critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$ splits $\Lambda^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\Lambda^\theta_j$ is a preimage of $\Gamma^\theta_{\zeta, \mp 1}$, we get \textcolor{magenta}{[mention that $\theta$ should be $\arg z$]}
 \begin{align*}%%\label{integral:mod-bessel-rational-zeta}
 K_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\Lambda^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
 & = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\Gamma^\theta_{\mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\Gamma^\theta_{\mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right]
 \end{align*}
-where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $u$, respectively.
+where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $\Lambda^\theta_j$, respectively.
 \begin{center}
-\textcolor{orange}{[Do we still want a picture? Maybe draw the thimble in the $u$ plane]}
+\textcolor{orange}{[Draw the thimble in the $u$ plane]}
 \end{center}
+
+\color{DarkTurquoise}
+Since the Chebyshev polynomial $T_n$ is defined by the identity $T_n(\cos(\phi)) = \cos(n\phi)$, we introduce a new variable $\phi$ with $u = \cos(\phi)$ and $-\zeta = \cos(n\phi)$. On the $\phi$ plane, which is an infinite branched cover of the $u$ plane, we can lift $\Lambda^\theta_j$ to the path $\tfrac{j}{n}\pi + i\R$. The incoming and outgoing branches lift to $\tfrac{j}{n}\pi - i[0, \infty)$ and $\tfrac{j}{n}\pi + i[0, \infty)$, respectively.
+\begin{center}
+\textcolor{orange}{[Draw the lifted thimble in the $\phi$ plane]}
+\end{center}
+We can now use identity~15.4.16 from \cite{dlmf} to write the integrand explicitly in terms of $\zeta$:
+\begin{align*}
+\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} &= \frac{\sin(m\phi)}{\sin(\phi)}\frac{\sin(\phi)}{\sin(n \phi)}\\
+&= \frac{\sin(m\phi)}{\sin(n \phi)}\\
+&= \frac{m}{n}\;{}_2F_1\Big(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; \sin^2(n \phi)\Big) \\
+&= \frac{m}{n}\;{}_2F_1\Big(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1-\zeta^2\Big).
+\end{align*}
+This equation holds straightforwardly in the disk $|\phi| < \tfrac{\pi}{2n}$. As the value of $\phi$ goes along the real axis from $0$ to $\tfrac{\pi}{2n}$, the value of $\zeta$ goes along the real axis from $-1$ to $0$, at which point the hypergeometric function in the expression above becomes singular. To continue further, we have to dodge the singularity by pushing the value of $\zeta$ off the real axis. If we dodge into the lower half of the $\zeta$ plane, the value of $1 - \zeta^2$ loops counterclockwise around the singularity. In this case, as $\zeta$ continues from $0$ to $1$, we can use identity~15.2.3 of \cite{dlmf} to write
+\begin{verify}
+\begin{align*}
+\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} & = \tfrac{m}{n}\;{}_2F_1\big(a, b; c; 1-\zeta^2\big) \\
+& \quad + \tfrac{m}{n} \frac{2\pi i}{\Gamma(a) \Gamma(b)} (-\zeta^2)^{c-a-b} {}_2 F_1\big(c-a, c-b; c-a-b+1; \zeta^2\big) \\
+& = \tfrac{m}{n}\;{}_2F_1\big(\tfrac{1}{2} - \tfrac{m}{2n}, \tfrac{1}{2} + \tfrac{m}{2n}; \tfrac{3}{2}; 1-\zeta^2\big) \\
+& \quad + \tfrac{m}{n} \frac{2\pi i}{\Gamma\big(\tfrac{1}{2} - \tfrac{m}{2n}\big) \Gamma\big(\tfrac{1}{2} + \tfrac{m}{2n}\big)} (-\zeta^2)^{1/2} {}_2 F_1\big(1 + \tfrac{m}{2n}, 1 - \tfrac{m}{2n}; \tfrac{3}{2}; \zeta^2\big)
+\end{align*}
+\end{verify}
+\begin{align*}
+\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} & = \frac{m}{n}\;{}_2F_1\Big(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1-\zeta^2\Big) \\
+& \quad - \frac{m}{n} \frac{2\pi \zeta}{\Gamma\big(\tfrac{1}{2} - \frac{m}{2n}\big) \Gamma\big(\frac{1}{2} + \frac{m}{2n}\big)} {}_2 F_1\Big(1 + \frac{m}{2n}, 1 - \frac{m}{2n}; \frac{3}{2}; \zeta^2\Big)
+\end{align*}
+in terms of the principal branch of the hypergeometric function.
+
+Similarly, if we dodge into the upper half of the $\zeta$ plane, we can write
+\begin{align*}
+\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} & = \frac{m}{n}\;{}_2F_1\Big(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1-\zeta^2\Big) \\
+& \quad + \frac{m}{n} \frac{2\pi \zeta}{\Gamma\big(\frac{1}{2} - \frac{m}{2n}\big) \Gamma\big(\frac{1}{2} + \frac{m}{2n}\big)} {}_2 F_1\Big(1 + \frac{m}{2n}, 1 - \frac{m}{2n}; \frac{3}{2}; \zeta^2\Big)
+\end{align*}
+as $\zeta$ continues from $0$ to $1$.
+
+Let us now lift this path to the $u$ plane, starting at $u = \tfrac{1}{2}$ when $\zeta = -1$. We can bring the lift to the incoming or outgoing branch of $\Lambda^\theta_1$ by dodging into the lower or upper half of the $\zeta$ plane, respectively.
 
 \color{MediumSpringGreen}
 Now we observe, that by properties of Chebyshev polynomials the integrand can be written as an explicit function of $\zeta$: \textcolor{orange}{[If $u_+ = \cos(\phi)$, then $u_- = \cos(\overline{\phi})$]}
 
 \begin{align*}
-    \frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))}&=\frac{\sin(m\phi)}{\sin(\phi)}\frac{\sin(\phi)}{\sin(n \phi)}\\
-    &=\frac{\sin(m\phi)}{\sin(n \phi)}\\
-    &=\frac{m}{n}\,\, {}_2F_1\left(\frac{1}{2}-\frac{m}{2n},\frac{1}{2}+\frac{m}{2n};\frac{3}{2};\sin^2(n \phi)\right)\\
-    &=\frac{m}{n}\,\, {}_2F_1\left(\frac{1}{2}-\frac{m}{2n},\frac{1}{2}+\frac{m}{2n};\frac{3}{2};1-\zeta^2\right) 
+\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))}&=\frac{\sin(m\phi)}{\sin(\phi)}\frac{\sin(\phi)}{\sin(n \phi)}\\
+&=\frac{\sin(m\phi)}{\sin(n \phi)}\\
+&=\frac{m}{n}\,\, {}_2F_1\left(\frac{1}{2}-\frac{m}{2n},\frac{1}{2}+\frac{m}{2n};\frac{3}{2};\sin^2(n \phi)\right)\\
+&=\frac{m}{n}\,\, {}_2F_1\left(\frac{1}{2}-\frac{m}{2n},\frac{1}{2}+\frac{m}{2n};\frac{3}{2};1-\zeta^2\right) 
 \end{align*}
 where in the last step we use $-\zeta=T_n(u)=T_n(\cos\phi)=\cos(n\phi)$. Applying identity 15.8.4, 15.8.27 and 15.8.28 from \cite{dlmf}, 
 
@@ -2939,7 +2911,7 @@ Notice that $\laplace_{\zeta,1}v_{1,1}$ and $\laplace_{\zeta,-1}v_{-1,1}$ are no
 %
 \color{RoyalBlue}
 \subsubsection{Thimble projection formula}
-In Theorem \ref{thm:maxim-dim}, we proved a $3/2$-derivative formula to compute the Borel transform of the asymptotics of a thimble integral.
+In Theorem~\ref{thm:maxim-proof}, we proved a $3/2$-derivative formula to compute the Borel transform of the asymptotics of a thimble integral.
 \color{black}
 \subsection{Third-order thimble integrals}
 Let $f\colon\C\to \C$ be a degree three polynomial\footnote{Every degree three polynomial $a_3 u^3+a_2 u^2+a_1 u+a_0$ can be written in the form $a_3u^3+pu+q$, after a change of coordinates $u\to u-\frac{a_2}{3 a_3}$. Furthermore, we can restrict to monic polynomials by setting $a_3=1$.}, we are going to consider thimble integrals of the form 
@@ -3097,7 +3069,7 @@ For the triangular cantilever, $t$ is constant, and $s = \sigma z$ for some cons
 Now, set $\mu = \tfrac{c_2}{c_1} = \tfrac{3}{4} \tfrac{1}{E} \big(\tfrac{\omega}{t}\big)^2$. This example works because the linear density of the beam and the second moment of area about the side-to-side axis are proportional, so they both end up in the $P(\partial/\partial z)$ term.\par
 \end{verify}
 \color{black}
-We are going to look for functions $v$ and points $\zeta = \alpha$ for which the Laplace transform $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:triangular_cantilever}. We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies equation~\eqref{eqn:triangular_cantilever} if and only if $v$ satisfies the integral equation
+We are going to look for functions $v$ and points $\zeta = \alpha$ for which the Laplace transform $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:triangular_cantilever}. From Proposition~\ref{prop:L-int-op} we deduce that $\laplace_{\zeta, \alpha} v$ satisfies equation~\eqref{eqn:triangular_cantilever} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{eqn:position_cantilever}
     \left[ \big[ \zeta^4 - \omega^2 \big] - 2\fracderiv{-1}{\zeta}{\alpha} \circ \zeta^3 \right] v = 0.
 \end{equation}
@@ -3161,7 +3133,7 @@ which seem analogous to the trans-monomials above. Borel summation makes the ana
 %\subsubsection{The big idea}\label{big-idea}
 We are going to look for functions $v_j$ whose Laplace transforms $\laplace_{\zeta, \alpha_j} v_j$ satisfy equation~\eqref{eqn:reg-mod-bessel}. We’ll succeed when $\alpha^2 - 1 = 0$, and we’ll see that $K$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
 
-We can see from Section~\ref{L-int-op} that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel} if and only if $v$ satisfies the integral equation
+From Proposition~\ref{prop:L-int-op}, we find that $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{int-eq:spatial-mod-bessel}
 \left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] v = 0.
 \end{equation}
@@ -3324,7 +3296,7 @@ giving the alternate decomposition
 
 \subsection{Thimble projection formula}
 
-In the Airy-Lucas integral, $f$ is a Chebyshev polynomial, so we can do a thimble projection technique (see Section~\ref{contour-argument-AL}) or apply the thimble projection formula~\eqref{formula1} using trigonometric substitution. As an example of how one might reason in the latter case, we look at the Airy function, given by $f = 4u^3-3u$.
+In the Airy-Lucas integral, $f$ is a Chebyshev polynomial, so we can do a thimble projection technique (see Section~\ref{contour-argument-AL}) or apply the thimble projection formula Equation~\eqref{eqn:formula-proof} using trigonometric substitution. As an example of how one might reason in the latter case, we look at the Airy function, given by $f = 4u^3-3u$.
 
 \textcolor{RoyalBlue}{[\ldots] this time applying the thimble projection formula to the generalized Cardano's formula.}
 
@@ -3415,7 +3387,7 @@ Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
 where \textcolor{Maroon}{$\zeta = \omega + \zeta_\omega$, $\series{\phi}_\omega$ is a series in $\zeta_\omega$} $C_\omega, S_\omega$ are constants and $S_\omega$ is typically assumed to be integral (in a suitable normalization) and called the Stokes constant of the singularity $\omega$. The goal of resurgence is to investigate the location of the singularities together with their Stokes constants and the corresponding germs $\series{\phi}_\omega$.  
 %The main idea of resurgence is that studying the analytic continuation of $\tilde{\phi}_\omega$  
 
-Thimbles integrals are good candidates to understand the structure of resurgent functions; indeed the functions $\hat{\phi}_j$ in equation \eqref{formula1} are resurgent. Their resurgent structure can be easily reconstructed: if $\nu$ is holomorphic, then $\hat{\phi}_j$ is singular at $\zeta_j=\alpha_k$ for $k\neq j$. Hence the set of singularities is given by the critical values of $f$. Then, the computation of the Stokes constants and of the other germs $\series{\phi}_k$ is done by studying $\hat{\phi}_j$ near its singular points. For example, for the Airy function, we can expand $\hat{\phi}_1$ near $\zeta=-1$:
+Thimbles integrals are good candidates to understand the structure of resurgent functions; indeed the functions $\hat{\phi}_j$ in Equation~\eqref{eqn:formula-proof} are resurgent. Their resurgent structure can be easily reconstructed: if $\nu$ is holomorphic, then $\hat{\phi}_j$ is singular at $\zeta_j=\alpha_k$ for $k\neq j$. Hence the set of singularities is given by the critical values of $f$. Then, the computation of the Stokes constants and of the other germs $\series{\phi}_k$ is done by studying $\hat{\phi}_j$ near its singular points. For example, for the Airy function, we can expand $\hat{\phi}_1$ near $\zeta=-1$:
 \begin{align*}
     \hat{\phi}_1(\zeta-1)=\frac{36}{5\pi}\frac{1}{\zeta}+\frac{1}{2\pi}\log(\zeta) \left(1+\frac{77}{144}\zeta+\frac{17017}{62208}\zeta^2+\frac{7436429}{53747712}\zeta^3+\ldots\right)  +\text{ hol. funct. }
 \end{align*}
