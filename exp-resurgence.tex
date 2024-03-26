@@ -429,20 +429,19 @@ You can often find a formal power series %\textcolor{magenta}{[double-check that
 \[ \series{\Phi} = \frac{c_0}{z^\tau} + \frac{c_1}{z^{\tau+1}} + \frac{c_2}{z^{\tau+2}} + \frac{c_3}{z^{\tau+3}} + \ldots, \]
 with $\tau \in (0, 1]$, that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example, if you want to understand how the solutions of the holomorphic ordinary differential equation (ODE)
 \begin{equation}
-\left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\tfrac{1}{3}\big)^2 z^{-2} \right] \Phi= 0. \label{eqn:bessel-rescaled-1}
+\left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\tfrac{1}{3}\big)^2 z^{-2} \right] \Phi= 0. \label{eqn:bessel_rescaled_ex}
 \end{equation}
 behave near $z = \infty$, you might start by looking for formal {\em transmonomial} solutions $e^{-\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above. Setting $\alpha = -1$ and $\tau = \tfrac{1}{2}$ gives a well-behaved recurrence relation for $\series{\Phi}$, which produces the solution 
 \begin{equation}
-e^{z} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{72} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{31104} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{6718464} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel-ex}
+e^{z} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{72} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{31104} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{6718464} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel_ex}
 \end{equation}
 and its constant multiples (see \cite[equation 10.40.1]{dlmf}). As another example, you might rewrite the integral
-
-\[ \Phi(z) = \int_{\Lambda} \exp\left[-z \left(4 u^3 - 3 u\right)\right]\,du \]
+\begin{equation}\label{int:bessel_ex}
+\Phi = \int_{\Lambda} \exp\left[-z \left(4 u^3 - 3 u\right)\right]\,du
+\end{equation}
 as
 \[ e^{z}\, \frac{1}{2\sqrt{3}}\, \int_{-\infty}^\infty e^{-z t^2/2} \left[ 1 - \frac{\sqrt{3}}{9} t + \frac{5}{72} t^2 - \frac{4\sqrt{3}}{243} t^3 + \frac{385}{31104} t^4 - \frac{7\sqrt{3}}{2187} t^5 + \frac{17017}{6718464} t^6 - \ldots \right] dt \]
-using the substitution $\tfrac{1}{2} t^2 = 4 u^3 - 3 u + 1$. Na\"{i}vely integrating term by term, you again get the transmonomial~\eqref{series:bessel-ex}---up to a constant.\begin{verify}
-    see Mathematica document.
-\end{verify}
+using the substitution $\tfrac{1}{2} t^2 = 4 u^3 - 3 u + 1$. Na\"{i}vely integrating term by term, you again get the transmonomial~\eqref{series:bessel_ex}, up to a constant. \begin{verify}[See Mathematica document.]\end{verify}
 
 Once you have the formal solution $\series{\Phi}$, you might try to get an actual solution by applying {\em Borel summation}, which turns a formal power series into a function asymptotic to it. Borel summation works in three steps.
 \begin{enumerate}
@@ -549,20 +548,19 @@ The idea of Borel regularity can help us understand why Borel summation is so ef
 
 The central goal of this paper is to explain, from this perspective, why Borel summation works well for the two kinds of problems exemplified in Section~\ref{intro:summation}.
 \begin{enumerate}
-\item Solving a level~$1$ linear ODE \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. Equation~\eqref{eqn:bessel-rescaled-1} is an example. More generally, we will consider equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form
+\item Solving a level~$1$ linear ODE \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. Equation~\eqref{eqn:bessel_rescaled_ex} is an example. More generally, we will consider equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form
 \[ \mathcal{P} = P(\partial_z) + \frac{1}{z} Q(\partial_z) + \frac{1}{z^2} R(z^{-1}), \]
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial that's non-zero at every root of $P$, and $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. We will restrict our attention to the case where the roots of $P$ are simple (see Section \ref{borel_reg-ODE}).
 
 The form of $\mathcal{P}$ derives from Equation~2.2.3 of \cite[pag. 105]{EcalleIII}, which encompasses both linear and nonlinear ODEs of level $1$. Borel summation is more involved for the nonlinear ones, raising the question of whether our analysis generalizes.
 %
-\item Evaluating a certain kind of integral: a one-dimensional {\em thimble integral}
-%
+\item Evaluating a one-dimensional {\em thimble integral}. Integral~\eqref{int:bessel_ex} is an example. More generally, we will consider integrals of the form
 \begin{equation*}
-I(z)\defeq\int_{\Lambda}\exp\big[-z f\big] \nu
+I = \int_{\Lambda}e^{-zf}\,\nu,
 \end{equation*}
-where $f\colon X\to \mathbb{C}$ is a holomorphic functions with isolated and non-degenerate critical points, $X$ is $1$-dimensional complex manifold, $\nu\in\Omega^1(X)$ is holomorphic $1$-form in $X$ and $\Lambda$ is a suitable contour such that $I(z)$ is a holomorphic function of $z$.  
+where $X$ is $1$-dimensional complex manifold; $f \maps X \to \C$ is a holomorphic function with isolated, non-degenerate critical points; $\nu \in \Omega^1(X)$ is holomorphic $1$-form on $X$, and $\Lambda$ is {\em Lefschetz thimble}---a type of contour described in Section~\ref{sec:why_borel_thimble}. Under these conditions, $I$ is a holomorphic function of $z$.
 \end{enumerate}
-These two problems are closely linked. By playing with derivatives of an exponential integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of exponential integral solutions.
+These two problems are closely linked. By playing with derivatives of a thimble integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of thimble integral solutions.
 
 %Notice that our starting point is quite different: we assume $\Phi$ is a holomorphic functions such that it is either a thimble integral or it solves an ODE with irregular singularity at $\infty$. Then we prove $\Phi$ is Borel regular and in both cases, our proves follow the heuristic of the diagram above. We’ll give precise statements in the following section.
 
@@ -603,7 +601,7 @@ First of all, we want to clearly separate the parts of the theory that deal with
 
 Second of all, we want to explain why it is useful to work in the position domain (the Borel plane): on the one hand integral equations are more regular than differential equations. On the other hand, a thimble integral in the frequency domain can be recast as the Laplace transform of a function in the position domain.
 
-We will present the statements of our main results in Section~\ref{sec:why_borel_ODE} and Section~\ref{sec:why_borel_thibmle}, for ODEs and thimble integrals, respectively. The corresponding proofs are collected in Section~\ref{sec:proof_main_results}.
+We will present the statements of our main results in Section~\ref{sec:why_borel_ODE} and Section~\ref{sec:why_borel_thimble}, for ODEs and thimble integrals, respectively. The corresponding proofs are collected in Section~\ref{sec:proof_main_results}.
 \subsubsection{Why does Borel summation work for solutions of level $1$ ODEs?}\label{sec:why_borel_ODE}
 %\textcolor{DarkCyan}{[Let us try to move some technical detail from here to the section where the result is proved. For example:]}
 %
@@ -684,7 +682,7 @@ In addition, as a consequence of Corollary~\ref{cor:soln_borel-reg} we deduce th
 
 \textcolor{orange}{[Prove existence of a frame of Borel regular solutions?]}
 \color{black}
-\subsubsection{Why does Borel summation work for thimble integrals?}\label{sec:why_borel_thibmle}
+\subsubsection{Why does Borel summation work for thimble integrals?}\label{sec:why_borel_thimble}
 %\textcolor{DarkCyan}{Let $X$ be an $N$-dimensional complex manifold, and $f\colon X\to\C$ a proper holomorphic map with non-degenerate critical points.}
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{RoyalBlue}{[The important thing about $\C$, where $f$ takes values, is that it is a translation surface---\ldots]} For each critical point $a$, let $\Gamma_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\Gamma_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\Gamma_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\Gamma_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_a^\theta$ can be regarded as the component of $f^{-1}(\Gamma_\alpha^\theta)$ that goes through $a$. \textcolor{orange}{We could orient the thimble so that shifting $\Lambda_a$ to its left would make its projection run clockwise around $\Gamma_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
 \begin{figure}[ht]
@@ -1162,8 +1160,10 @@ When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to defi
 %\end{itemize}
 %\color{black}
 \subsubsection{Change of translation chart}\label{sec:change-translation}
-Let $b \in B$ be an ordinary point, and let $\zeta_b$ be the coordinate on $B$ for which $\zeta = \zeta(b) + \zeta_b$. Then the Laplace transform $\laplace_{\zeta_b,0}$, which turns functions on $B$ into functions on $T^*_{b}B$, is compatible with $\laplace_{\zeta,b}$.  
-\begin{lemma}\label{translation}
+Suppose $\zeta$ is a translation chart on $B$, and $\zeta = \alpha$ is an ordinary point. Let $\zeta_\alpha$ be the translation chart with $\zeta = \alpha + \zeta_\alpha$. The Laplace transforms $\laplace_{\zeta_\alpha, 0}$ and $\laplace_{\zeta, \alpha}$, which both turn functions on $B$ into functions on $T^*_{\zeta = \alpha}B$, are related in the following way.
+
+\textcolor{RoyalBlue}{Let $b \in B$ be an ordinary point, and let $\zeta_b$ be the coordinate on $B$ for which $\zeta = \zeta(b) + \zeta_b$. Then the Laplace transform $\laplace_{\zeta_b,0}$, which turns functions on $B$ into functions on $T^*_{b}B$, is compatible with $\laplace_{\zeta,b}$.}
+\begin{lemma}%%\label{translation}
 Let $\varphi\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$ and for some $\Lambda>0$, then
    \begin{equation}
     \label{change-chart}
@@ -1178,6 +1178,24 @@ In other words, the diagram
 \end{center}
 commutes, where $H$ is the half-plane $\Re(z) > 0$ (\textcolor{orange}{the coordinate $z$ is a global coordinate on $T^*B$}).
 \end{lemma}
+\color{black}
+\color{RoyalBlue}
+\begin{lemma}%%\label{translation}
+Let $\varphi\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$ and for some $\Lambda>0$, then
+   \begin{equation}
+    \label{change-chart}
+    e^{-bz} \laplace_{\zeta_b, 0} \varphi = \laplace_{\zeta, b} \varphi.
+\end{equation}
+In other words, the diagram
+\begin{center}
+\begin{tikzcd}
+ \mathcal{O}_{T^*B}(H) \arrow[rr, "e^{bz}"]&  & e^{bz}\,\mathcal{O}_{T^*B}(H)\\
+& \singexp{\sigma}{\Lambda}(\Omega_b) \arrow[ul, "\laplace_{\zeta_b,0}"]\arrow[ur,swap,"\laplace_{\zeta,b}"]  &  
+\end{tikzcd}
+\end{center}
+commutes, where $H$ is the half-plane $\Re(z) > 0$ (\textcolor{orange}{the coordinate $z$ is a global coordinate on $T^*B$}).
+\end{lemma}
+\color{black}
 \begin{proof}
 With a change of variable in the integral that defines the Laplace transform, we see that
 \begin{align*}
@@ -1393,14 +1411,17 @@ and extended to formal power series by countable linearity $\borel_{\zeta_b} \ma
 %where in the second step we formally interchange the integral and the sum. 
 %\color{black}
 \subsubsection{Action on transseries}\label{sec:action_transseries}
-
+%
+\color{DarkTurquoise}
+\color{RoyalBlue}
 A transseries is a generalization of usual power series, whose building blocks (called trans-monomials) are of the form $e^{\alpha_n z}\varphi_n$ where $\alpha_n$ is a sequence of complex numbers such that \textcolor{PaleVioletRed}{[what does this mean?]} $0=\alpha_0 e^{-i\theta}< \alpha_1 e^{-i\theta}<...<\alpha_n e^{-i\theta}<...$ and $\varphi_n\in\C\llbracket z^{-1}\rrbracket$ for every $n$: 
 
 \[T_{\alpha,\varphi}:=\sum_{n=0}^{\infty} e^{\alpha_n z} \varphi_n(z) \]
 
 The main feature of $T_{\alpha,\varphi}$ is that its asymptotics as $\text{ Re } e^{i\theta}z \to +\infty$ is $\varphi_0$. In fact, they play a crucial role in the theory of ODEs with irregular singularities. 
 
-It's natural to ask whether we can extend the definition of $\borel_\zeta$ to transseries, and we will achieve it using the relationship between $\laplace_{\zeta, \alpha}$ and $\laplace_{\zeta_\alpha, 0}$ in identity~\eqref{change-chart}. 
+It's natural to ask whether we can extend the definition of $\borel_\zeta$ to transseries, and we will achieve it using the relationship between $\laplace_{\zeta, \alpha}$ and $\laplace_{\zeta_\alpha, 0}$ in identity~\eqref{change-chart}.
+\color{black}
 \begin{definition}
     The action of $\borel_\zeta$ on trans-monomials is the formal inverse of $\laplace_{\zeta,\alpha}$
     \[\laplace_{\zeta,\alpha}\borel_\zeta\big[e^{-z\alpha}z^{-n-1}\big]=e^{-z\alpha}z^{-n-1}\]
@@ -1951,7 +1972,7 @@ lies in the space $\singexpalg{\tau_\alpha - 1}(\Upsilon)$ and satisfies the equ
 \begin{equation}\label{eqn:inhomog-volterra}
 \solptb = \softpart^\alpha \solproto + \volterra^\alpha \solptb
 \end{equation}
-The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Upsilon)$, into $\singexpalg{\tau_\alpha}(\Upsilon)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, that equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by Picard iteration. Defining
+The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Upsilon)$, into $\singexpalg{\tau_\alpha}(\Upsilon)$ \textcolor{orange}{[check]}, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, that equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by fixed-point iteration. Defining
 \begin{align*}
 \solptb^{(0)} & = \softpart^\alpha \solproto \\
 \solptb^{(1)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(0)} \\
@@ -2596,64 +2617,6 @@ Comparing the expressions above with the expressions for $v_{\pm 1}$ computed in
 \frac{i}{2}\laplace_{\zeta, 1} v_1 & j \text{ odd} \\
 \frac{i}{2}\laplace_{\zeta, -1} v_{-1} \;\textcolor{magenta}{\text{(?)}} & j \text{ even}.
 \end{cases} \]
-
-\color{GreenYellow}
-This equation holds straightforwardly in the disk $|\phi| < \tfrac{\pi}{2n}$. As the value of $\phi$ goes along the real axis from $0$ to $\tfrac{\pi}{2n}$, the value of $\zeta$ goes along the real axis from $-1$ to $0$, at which point the hypergeometric function in the expression above becomes singular. To continue further, we have to dodge the singularity by pushing the value of $\zeta$ off the real axis. If we dodge into the lower half of the $\zeta$ plane, the value of $1 - \zeta^2$ loops counterclockwise around the singularity. In this case, as $\zeta$ continues from $0$ to $1$, we can use identity~15.2.3 of \cite{dlmf} to write
-\begin{verify}
-\begin{align*}
-\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} & = \tfrac{m}{n}\;{}_2F_1\big(a, b; c; 1-\zeta^2\big) \\
-& \quad + \tfrac{m}{n} \frac{2\pi i}{\Gamma(a) \Gamma(b)} (-\zeta^2)^{c-a-b} {}_2 F_1\big(c-a, c-b; c-a-b+1; \zeta^2\big) \\
-& = \tfrac{m}{n}\;{}_2F_1\big(\tfrac{1}{2} - \tfrac{m}{2n}, \tfrac{1}{2} + \tfrac{m}{2n}; \tfrac{3}{2}; 1-\zeta^2\big) \\
-& \quad + \tfrac{m}{n} \frac{2\pi i}{\Gamma\big(\tfrac{1}{2} - \tfrac{m}{2n}\big) \Gamma\big(\tfrac{1}{2} + \tfrac{m}{2n}\big)} (-\zeta^2)^{1/2} {}_2 F_1\big(1 + \tfrac{m}{2n}, 1 - \tfrac{m}{2n}; \tfrac{3}{2}; \zeta^2\big)
-\end{align*}
-\end{verify}
-\begin{align*}
-\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} & = \frac{m}{n}\;{}_2F_1\Big(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1-\zeta^2\Big) \\
-& \quad - \frac{m}{n} \frac{2\pi \zeta}{\Gamma\big(\tfrac{1}{2} - \frac{m}{2n}\big) \Gamma\big(\frac{1}{2} + \frac{m}{2n}\big)} {}_2 F_1\Big(1 + \frac{m}{2n}, 1 - \frac{m}{2n}; \frac{3}{2}; \zeta^2\Big)
-\end{align*}
-in terms of the principal branch of the hypergeometric function.
-
-Similarly, if we dodge into the upper half of the $\zeta$ plane, we can write
-\begin{align*}
-\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} & = \frac{m}{n}\;{}_2F_1\Big(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1-\zeta^2\Big) \\
-& \quad + \frac{m}{n} \frac{2\pi \zeta}{\Gamma\big(\frac{1}{2} - \frac{m}{2n}\big) \Gamma\big(\frac{1}{2} + \frac{m}{2n}\big)} {}_2 F_1\Big(1 + \frac{m}{2n}, 1 - \frac{m}{2n}; \frac{3}{2}; \zeta^2\Big)
-\end{align*}
-as $\zeta$ continues from $0$ to $1$.
-
-Let us now lift this path to the $u$ plane, starting at $u = \tfrac{1}{2}$ when $\zeta = -1$. We can bring the lift to the incoming or outgoing branch of $\Lambda^\theta_1$ by dodging into the lower or upper half of the $\zeta$ plane, respectively.
-
-\color{MediumSpringGreen}
-Now we observe, that by properties of Chebyshev polynomials the integrand can be written as an explicit function of $\zeta$: \textcolor{orange}{[If $u_+ = \cos(\phi)$, then $u_- = \cos(\overline{\phi})$]}
-
-\begin{align*}
-\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))}&=\frac{\sin(m\phi)}{\sin(\phi)}\frac{\sin(\phi)}{\sin(n \phi)}\\
-&=\frac{\sin(m\phi)}{\sin(n \phi)}\\
-&=\frac{m}{n}\,\, {}_2F_1\left(\frac{1}{2}-\frac{m}{2n},\frac{1}{2}+\frac{m}{2n};\frac{3}{2};\sin^2(n \phi)\right)\\
-&=\frac{m}{n}\,\, {}_2F_1\left(\frac{1}{2}-\frac{m}{2n},\frac{1}{2}+\frac{m}{2n};\frac{3}{2};1-\zeta^2\right) 
-\end{align*}
-where in the last step we use $-\zeta=T_n(u)=T_n(\cos\phi)=\cos(n\phi)$. Applying identity 15.8.4, 15.8.27 and 15.8.28 from \cite{dlmf}, 
-
-\begin{align*}
-    &{}_2F_1\left(\frac{1}{2}-\frac{m}{2n},\frac{1}{2}+\frac{m}{2n};\frac{3}{2};1-\zeta^2\right)=\\
-    &\qquad = \frac{\pi}{\Gamma\left(1-\frac{m}{2n}\right)\Gamma\left(1+\frac{m}{2n}\right)} \,\,\, {}_2F_1\left(\frac{1}{2}-\frac{m}{2n},\frac{1}{2}+\frac{m}{2n};\frac{1}{2};\zeta^2\right)+\\
-    &\qquad \qquad\qquad - \frac{\pi \zeta}{\Gamma\left(\frac{1}{2}-\frac{m}{2n}\right)\Gamma\left(\frac{1}{2}+\frac{m}{2n}\right)} \,\,\, {}_2F_1\left(1-\frac{m}{2n},1+\frac{m}{2n};\frac{3}{2};\zeta^2\right)\\
-    &\qquad ={}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}-\frac{\zeta}{2}\right)+{}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right)+\\
-    &\qquad\qquad +\frac{1}{2} {}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}-\frac{\zeta}{2}\right)-\frac{1}{2}{}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right)\\
-    &\qquad =\frac{3}{2} {}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}-\frac{\zeta}{2}\right)+\frac{1}{2}{}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right)
-\end{align*}
-In addition, recall that ${}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ has a branch cut singularity at $\zeta=-1$ while ${}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right)$ has a branch cut at $\zeta=1$; hence 
-
-\begin{align*}
-    K_{m/n}(z)&=-\frac{m}{4 n\sinh(\tfrac{m}{n}i\pi)}\int_{\gamma_z}e^{-z\zeta} {}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\frac{1}{2}+\frac{\zeta}{2}\right) d\zeta\\
-    &=-\frac{1}{2}\int_{1}^{+\infty}e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right) d\zeta
-\end{align*}
-
-where in the second step we use the analytic continuation of the hypergeometric function \cite[Equation 15.2.3]{dlmf}.
-
-Finally, comparing this expression for $K_{m/n}$ with the expression for $v_1$ computed in Section \ref{pos-root} we notice that 
-\begin{align*}
-K_{m/n}(z)=\frac{i}{2}\laplace_{\zeta,1}v_1 .
-\end{align*}
 \color{black}
 %
 \subsubsection{A flavor of resurgence: the Stokes phenomena in the position domain}\label{resurgence-AL}
