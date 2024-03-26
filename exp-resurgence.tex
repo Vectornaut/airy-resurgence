@@ -1134,7 +1134,7 @@ Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an
 \begin{equation}\label{laplace:int}
 \laplace_{\zeta}^\theta f\big|_b = \int_{\Gamma_{b}^\theta} e^{-z\zeta} f\,d\zeta,
 \end{equation}
-where $z$ is the frequency function and $\Gamma_{b}^\theta$ is the ray that leaves $b$ at angle $\theta$. We’ll use the shorthand $\laplace_{\zeta, b}^\theta f := \laplace_\zeta^\theta f \big|_{\zeta = b}$ throughout this document.
+where $z$ is the frequency function and $\Gamma_{b}^\theta$ is the ray that leaves $b$ at angle $\theta$. We’ll use the shorthand $\laplace_{\zeta, b}^\theta f := \laplace_\zeta^\theta f \big|_b$ throughout this document. \textcolor{magenta}{[Notation conflict: we also use $\laplace_{\zeta, \alpha}$ to represent starting at $\zeta = \alpha$, giving the starting point as a coordinate value instead of a point $b$.]}
 
 To make sense of this formula, we ask for the following conditions.
 \begin{itemize}
@@ -1143,8 +1143,8 @@ To make sense of this formula, we ask for the following conditions.
 \item The integral converges. We guarantee this by asking for a pair of simpler conditions.
 %\color{RoyalBlue}
 \begin{itemize}
-\item With respect to the flat metric, $f$ is uniformly of exponential type $\Lambda$ along $\Gamma_b^\theta$, and is locally integrable throughout.\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{\Lambda+\varepsilon} $. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} Following \cite{reg-sing-volterra}, we require $f\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$.\footnote{The condition $\sigma>-1$ guarantees the integrability at $\zeta=b$.} The set $\Omega_b$ is a tubular neighbourhood of $\Gamma_b^\theta$. 
-\item The value of $z$ is in the half-plane $H_{\theta}$ centered around the ray $e^{-i\theta} [0, \infty)$.
+\item With respect to the flat metric, $f$ is uniformly of exponential type $\Lambda$ along $\Gamma_b^\theta$, and is locally integrable throughout.\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{\Lambda+\varepsilon} $. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} \textcolor{Pink}{[Revise]} Following \cite{reg-sing-volterra}, we require $f \in \singexp{\sigma}{\Lambda}(\Omega_b)$, with $\sigma>-1$.\footnote{The condition $\sigma>-1$ guarantees the integrability at $\zeta=b$.} The set $\Omega_b$ is a tubular neighbourhood of $\Gamma_b^\theta$. 
+\item The value of $z$ is in the half-plane $H^{\theta}_\Lambda$ cut out by the inequality $\Re(e^{i\theta} z) > \Lambda$.
 \end{itemize}
 \end{itemize}
 \color{black}
@@ -2414,10 +2414,10 @@ By definition, $\Lambda^\theta_j$ is a preimage of the ray $\Gamma^\theta_{\mp 1
 
 \subsubsection{Rewriting as a modified Bessel $\frac{m}{n}$ equation}
 We can distill the most interesting parts of the Airy-Lucas function by writing
-\[ \widehat{\Ai}^{(j)}_{n, m-1}(y) = \textcolor{magenta}{\text{const.}}\,y^{{m/2}}\,K\big(\tfrac{2}{n} y^{n/2}\big), \]
+\[ \widehat{\Ai}^{(j)}_{n, m-1}(y) = \textcolor{magenta}{\text{const.}}\,y^{{m/2}}\,K^{(j)}_{m/n}\big(\tfrac{2}{n} y^{n/2}\big), \]
 where
 \begin{equation}\label{integral:mod-bessel-rational-AL}
-K_{m/n}(z) = \textcolor{magenta}{\text{const.}} \int_{\Lambda^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du.
+K^{(j)}_{m/n}(z) = \textcolor{magenta}{\text{const.}} \int_{\Lambda^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du.
 \end{equation}
 Saying that $\widehat{\Ai}^{(j)}_{n, m-1}$ satisfies the Airy-Lucas equation is equivalent to saying that $K$ satisfies the modified Bessel $\frac{m}{n}$ equation \textcolor{orange}{[Why put the order $m/n$ in the name? Is that standard?]}
 \begin{equation}\label{eqn:mod-bessel-AL}
@@ -2550,8 +2550,8 @@ Looking back at Section~\ref{neg-root-AL}, we recognize this as a scalar multipl
 \subsubsection{Thimble projection reasoning for Airy-Lucas functions}\label{contour-argument-AL}
 We follow the reasoning of the proof of Lemma~\ref{lem:thimble_proj_formula-proof}. We can recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. The critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$ splits $\Lambda^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\Lambda^\theta_j$ is a preimage of $\Gamma^\theta_{\zeta, \mp 1}$, we get \textcolor{magenta}{[mention that $\theta$ should be $\arg z$]}
 \begin{align*}%%\label{integral:mod-bessel-rational-zeta}
-K_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\Lambda^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
-& = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\Gamma^\theta_{\mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\Gamma^\theta_{\mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right]
+K^{(j)}_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\Lambda^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
+& = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\Gamma^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\Gamma^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right]
 \end{align*}
 where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $\Lambda^\theta_j$, respectively.
 \begin{center}
@@ -2566,10 +2566,38 @@ Since the Chebyshev polynomial $T_n$ is defined by the identity $T_n(\cos(\phi))
 We can now use identity~15.4.16 from \cite{dlmf} to write the integrand explicitly in terms of $\zeta$:
 \begin{align*}
 \frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} &= \frac{\sin(m\phi)}{\sin(\phi)}\frac{\sin(\phi)}{\sin(n \phi)}\\
-&= \frac{\sin(m\phi)}{\sin(n \phi)}\\
-&= \frac{m}{n}\;{}_2F_1\Big(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; \sin^2(n \phi)\Big) \\
-&= \frac{m}{n}\;{}_2F_1\Big(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1-\zeta^2\Big).
+& = \frac{\sin(m\phi)}{\sin(n \phi)}\\
+& = \frac{m}{n}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{3}{2};\;\sin^2(n \phi)\right) \\
+& = \frac{m}{n}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{3}{2};\;1 - \zeta^2\right).
 \end{align*}
+Initially, we only know that this equation holds in the disk $|\phi| < \tfrac{\pi}{2n}$. However, observing that the left-hand side is meromorphic throughout the $\phi$ plane, we can deduce by analytic continuation that the equation holds throughout the $\phi$ plane.
+
+Next, we simplify the integrand using identities 15.8.4 and 15.8.27--28 from \cite{dlmf}, which tell us that\begin{align*}
+&{}_2F_1\left(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1 - \zeta^2\right) \\[3mm]
+& =\; \hphantom{+} \frac{\pi}{\Gamma\left(1-\frac{m}{2n}\right) \Gamma\left(1 + \frac{m}{2n}\right)}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{1}{2};\;\zeta^2\right) \\
+& \hphantom{=}\; - \frac{\pi \zeta}{\Gamma\left(\frac{1}{2} - \frac{m}{2n}\right) \Gamma\left(\frac{1}{2} + \frac{m}{2n}\right)}\;{}_2F_1\left(1 - \frac{m}{2n},\;1 + \frac{m}{2n};\;\frac{3}{2};\;\zeta^2\right) \\[3mm]
+& =\; \hphantom{+ \frac{0}{0}}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) + \hphantom{\frac{0}{0}}\;{}_2F_1\left(1-\frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \\
+& \hphantom{=}\; + \frac{1}{2}\;{}_2F_1\left(1-\frac{m}{n},\;1+\frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) - \frac{1}{2}\;{}_2F_1\left(1-\frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \\[3mm]
+& =\; \hphantom{+} \frac{3}{2}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{1}{2}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right)
+\end{align*}
+away from the line $\Re(\zeta) = 0$ and the rays $\Gamma^0_{\zeta,1}$ and $\Gamma^\pi_{\zeta,-1}$.
+
+Returning to the projected thimble integral
+\[ K^{(j)}_{m/n}(z) = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\Gamma^\theta_{\zeta, \mp 1}} e^{-z\zeta} \left[ \frac{U_{m-1}(u_+)}{U_{n-1}(u_+)} - \frac{U_{m-1}(u_-)}{U_{n-1}(u_-)} \right] d\zeta, \]
+we can see the integrand as the variation of the function
+\[ \frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} = \frac{3m}{2n}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{m}{2n}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \]
+across the branch cut $\Gamma^\theta_{\zeta, \mp 1}$. When $j$ is odd, only the second term will contribute to the jump, because the first term is regular at $\zeta = 1$. Similarly, when $j$ is even, only the first term will contribute to the jump. We can write the jump explicitly using identity~15.2.3 from \cite{dlmf}. For odd $j$, we have
+\[ K^{(j)}_{m/n}(z) = -\frac{1}{2} \int_{\Gamma^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \frac{m}{n},\;\frac{1}{2} + \frac{m}{n};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta, \]
+and for even $j$, we have \textcolor{magenta}{[check]}
+\[ K^{(j)}_{m/n}(z) = -\frac{3}{2} \int_{\Gamma^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \frac{m}{n},\;\frac{1}{2} + \frac{m}{n};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta. \]
+
+Comparing the expressions above with the expressions for $v_{\pm 1}$ computed in Sections~\ref{pos-root}--\ref{neg-root}, we notice that
+\[ K^{(j)}_{m/n}(z) = \begin{cases}
+\frac{i}{2}\laplace_{\zeta, 1} v_1 & j \text{ odd} \\
+\frac{i}{2}\laplace_{\zeta, -1} v_{-1} \;\textcolor{magenta}{\text{(?)}} & j \text{ even}.
+\end{cases} \]
+
+\color{GreenYellow}
 This equation holds straightforwardly in the disk $|\phi| < \tfrac{\pi}{2n}$. As the value of $\phi$ goes along the real axis from $0$ to $\tfrac{\pi}{2n}$, the value of $\zeta$ goes along the real axis from $-1$ to $0$, at which point the hypergeometric function in the expression above becomes singular. To continue further, we have to dodge the singularity by pushing the value of $\zeta$ off the real axis. If we dodge into the lower half of the $\zeta$ plane, the value of $1 - \zeta^2$ loops counterclockwise around the singularity. In this case, as $\zeta$ continues from $0$ to $1$, we can use identity~15.2.3 of \cite{dlmf} to write
 \begin{verify}
 \begin{align*}
@@ -2620,15 +2648,16 @@ In addition, recall that ${}_2F_1\left(1-\frac{m}{n},1+\frac{m}{n};\frac{3}{2};\
     &=-\frac{1}{2}\int_{1}^{+\infty}e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right) d\zeta
 \end{align*}
 
-where in the second step we use the analytic continuation of the hypergeometric function \cite[Equation 15.2.3]{dlmf}.\color{black}
+where in the second step we use the analytic continuation of the hypergeometric function \cite[Equation 15.2.3]{dlmf}.
 
 Finally, comparing this expression for $K_{m/n}$ with the expression for $v_1$ computed in Section \ref{pos-root} we notice that 
 \begin{align*}
-    K_{m/n}(z)=\frac{i}{2}\laplace_{\zeta,1}v_1 .
+K_{m/n}(z)=\frac{i}{2}\laplace_{\zeta,1}v_1 .
 \end{align*}
-
+\color{black}
+%
 \subsubsection{A flavor of resurgence: the Stokes phenomena in the position domain}\label{resurgence-AL}
-
+%
 In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (Section \ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (Section \ref{contour-argument-AL}). In both cases we find 
 \begin{align*}
     v_1(\zeta)= i \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)
