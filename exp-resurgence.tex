@@ -90,7 +90,7 @@
 \definecolor{plum}{RGB}{76, 0, 102}
 
 % === phase space laplace ===
-\include{../figures/phase-space-laplace.tex}
+\include{figures/phase-space-laplace.tex}
 
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
@@ -158,238 +158,6 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
   citecolor={ietcoast},
   urlcolor={ietcoast}
 }
-
-\usepackage{etoolbox}
-
-\usetikzlibrary{math, 3d, calligraphy}
-
-% --- styles ---
-
-\definecolor{pwbeige}{RGB}{172, 146, 122}
-\definecolor{pworange}{RGB}{245, 153, 30}
-
-\tikzset{
-  surf/.style={pwbeige!10},
-  leaf/.style={thin, pwbeige!60},
-  sing/.style={thick, pworange},
-  ray/.style={thick}
-}
-
-% --- cotangent fibers ---
-
-\newcommand{\rfiber}{1.5}
-\pgfmathsetmacro{\rshade}{1.5*\rfiber}
-
-\newcommand{\drawfiber}{
-  \foreach \sgn in {-1, 1} {
-    \calligraphy[scale=\sgn, copperplate, heavy, heavy line width=0.25mm]
-      (\rfiber, \rfiber) -- (\rfiber, -\rfiber)
-      (\rfiber, -\rfiber) -- (-\rfiber, -\rfiber);
-  };
-}
-
-% set up PGF keys
-\pgfkeys{
-  /laplace/.cd,
-  drop/.store in=\fiberdrop,   drop/.value required,
-  shade/.store in=\fibershade, shade/.default=true,
-  degree/.store in=\fiberdeg,  degree/.value required,
-  phase/.store in=\fiberphase, phase/.value required,
-  dual/.store in=\fiberdual,   dual/.default=true
-}
-
-\newcommand{\fiberdescender}[1]{
-  \calligraphy[copperplate, light, thin] (0, -\rfiber) -- (0, -#1);
-}
-
-\newcommand{\fibershading}[2]{
-  \tikzmath{
-    \shadestart = (-90 - #1) / \fiberdeg;
-    \shadeend = (90 - #1) / \fiberdeg;
-  }
-  \fill[pwbeige!30, draw=pwbeige!60] (0, 0) -- (\shadestart:\rshade) arc (\shadestart:\shadeend:\rshade) -- cycle;
-}
-
-\newenvironment{fiber}[1][]{%
-  \pgfkeys{/laplace/.cd, drop=0, shade=false, degree=1, phase=0, #1}
-  \begin{scope}
-    \fill[surf] (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
-    \clip (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
-    \tikzmath{
-      if \fibershade then {
-        print \fibershading{\fiberphase}{0};
-      };
-    }
-}{% ...
-  \end{scope}
-  % see TikZ docs for branching statements
-  % https://tikz.dev/library-math#sec-58.5
-  \tikzmath{
-    if \fiberdrop > 0 then {
-      print \fiberdescender{\fiberdrop};
-    };
-  }
-  \drawfiber
-}
-
-\newcommand{\genfibercontent}[1][]{
-  \pgfkeys{/laplace/.cd, dual=false, #1}
-  \pgfmathsetmacro{\hatch}{\rfiber/8};
-  \pgfmathsetmacro{\firsthatch}{-\rfiber+\hatch}
-  \pgfmathsetmacro{\nexthatch}{-\rfiber+2*\hatch}
-  \pgfmathsetmacro{\hatchstop}{\rfiber-\hatch/2}
-  \foreach \y in {\firsthatch, \nexthatch, ..., \hatchstop} {
-    \tikzmath{
-      coordinate \drawfrom;
-      coordinate \drawto;
-      if \fiberdual then {
-        \drawfrom = (\y, -\rfiber);
-        \drawto = (\y, \rfiber);
-      } else {
-        \drawfrom = (-\rfiber, \y);
-        \drawto = (\rfiber, \y);
-      };
-    }
-    \draw[leaf] (\drawfrom) -- (\drawto);
-  };
-  \fill circle (\dotsize);
-}
-
-\newcommand{\singfibercontent}{
-  % nonsingular leaves
-  \foreach \sector in {30, 90, ..., 330} {
-    \tikzmath{
-      \farout = 45*floor((\sector + 59) / 45);
-      \tfarout = 3*(\farout - \sector);
-      \rfarout = \rfiber/sin(45+mod(\farout-45, 90));
-    }
-    \pgfmathsetmacro{\rmax}{sin(\tfarout) * pow(\rfarout, 3)}
-    \foreach \r in {0.5, 1.0, ..., \rmax} {
-      \pgfmathsetmacro{\win}{asin(\r/(2*\rmax))}
-      \draw[leaf, rotate=\sector, domain=\win:{180-\win}, variable=\t] plot ({\t/3}:{(\r/sin(\t))^(1/3)});
-    };
-    
-    % singular leaves
-    \foreach \ang in {90, 210, 330} {
-      \draw[sing] (\ang:{-sqrt(2)*\rfiber}) -- (\ang:{sqrt(2)*\rfiber});
-    };
-    \fill[sing] circle (\dotsize);
-  };
-}
-
-% --- posititon plane ---
-
-\pgfmathsetmacro{\hatch}{2/3}
-\tikzmath{
-  \phase = 15;
-  \dotsize = 0.04;
-  \drop = 3.5;
-  \xsing = 2;
-  \zsing = 4*\hatch;
-  \xgen = 6;
-  \zgen = 8*\hatch;
-  \rcut = 1/5;
-}
-
-\newcommand{\ray}[2]{
-  \draw[ray] (#1, #2) -- (8, {#2 + (8-#1)*tan(\phase)});
-}
-
-% local picture of the Laplace transform
-\newcommand{\basicLaplace}{
-\begin{tikzpicture}[scale=0.9]
-% position space
-\begin{fiber}
-  \genfibercontent
-  \ray{0}{0}
-\end{fiber}
-\node[anchor=north, outer sep=1mm, font=\footnotesize]
-  at (0, -\rfiber) {position space};
-
-% frequency space
-\begin{scope}[shift={(4 + 0.25*8/3, 0)}]
-  \begin{fiber}[shade, phase=\phase]
-    \genfibercontent[dual]
-  \end{fiber}
-  \node[anchor=north, outer sep=1mm, font=\footnotesize]
-    at (0, -\rfiber) {frequency space};
-\end{scope}
-\end{tikzpicture}
-} % \basicLaplace
-
-% phase space picture of the Laplace transform
-\newcommand{\phaseSpaceLaplace}{
-\begin{tikzpicture}[z={(0.25cm, 0.2cm)}, scale=0.9]
-% position plane
-\begin{scope}[canvas is xz plane at y=0]
-  % surface
-  \fill[surf]
-    (0, 0) -- (0, \zsing-\rcut)
-    -- ++(\xsing-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut})
-    -- (0, 8) --(8, 8) -- (8, 0) -- cycle;
-  
-  % hatching
-  \pgfmathsetmacro{\nexthatch}{2*\hatch}
-  \pgfmathsetmacro{\singstop}{\zsing - \hatch/2}
-  \foreach \z in {\hatch, \nexthatch, ..., \singstop} {
-    \draw[leaf] (0, \z) -- (8, \z);
-  };
-  \pgfmathsetmacro{\singstart}{\zsing + \hatch}
-  \pgfmathsetmacro{\singnext}{\zsing + 2*\hatch}
-  \pgfmathsetmacro{\hatchstop}{8 - \hatch/2}
-  \foreach \z in {\singstart, \singnext, ..., \hatchstop} {
-    \draw[leaf] (0, \z) -- (8, \z);
-  };
-  
-  % singular leaves
-  \begin{scope}[sing]
-    \draw (\xsing, \zsing) -- (8, \zsing);
-    \draw (0, \zsing-\rcut) -- ++(\xsing-\rcut, 0) arc (-90:90:\rcut) -- (0, {\zsing + \rcut});
-  \end{scope}
-  
-  % integration rays
-  \ray{\xgen}{\zgen}
-  \ray{\xsing}{\zsing}
-  
-  % outline
-  \calligraphy[copperplate, heavy, heavy line width=0.25mm]
-    (0, 0) -- (0, \zsing-\rcut)
-    (0, \zsing+\rcut) -- (0, 8)
-    (0, 8) -- (8, 8)
-    (8, 8) -- (8, 0)
-    (8, 0) -- (0, 0);
-\end{scope}
-
-% generic fiber
-\begin{scope}[canvas is xy plane at z=\zgen, shift={(\xgen, \drop)}]
-  \begin{fiber}[drop=\drop, shade, phase=\phase]
-    \genfibercontent[dual]
-  \end{fiber}
-\end{scope}
-
-% singular fiber
-\begin{scope}[canvas is xy plane at z=\zsing, shift={(\xsing, \drop)}]
-  \begin{fiber}[drop=\drop, shade, degree=3, phase=\phase]
-    \singfibercontent
-  \end{fiber}
-\end{scope}
-
-% generic point
-\fill (\xgen, 0, \zgen) circle (\dotsize);
-
-% singular point
-\fill[sing] (\xsing, 0, \zsing) circle (\dotsize);
-
-% labels
-\begin{scope}[overlay]
-  \node (surf label) at (9, 0, 4) {$B$};
-  \path (surf label) ++(0, \drop, 0) node {$T^*B$};
-  \node[outer sep=0.15mm, font=\footnotesize, align=left]
-    (cut label) at (-1.25, 1.2, \zsing) {branch cut \\ at conical \\ singularity};
-  \draw[->] (cut label) to[out=-75, in=180] (-0.25, 0, \zsing);
-\end{scope}
-\end{tikzpicture}
-} % \phaseSpaceLaplace
 
 \setcounter{tocdepth}{2}
 
@@ -698,12 +466,12 @@ In addition, as a consequence of Corollary~\ref{cor:soln_borel-reg} we deduce th
 \subsubsection{Why does Borel summation work for thimble integrals?}\label{sec:why_borel_thimble}
 %\textcolor{DarkCyan}{Let $X$ be an $N$-dimensional complex manifold, and $f\colon X\to\C$ a proper holomorphic map with non-degenerate critical points.}
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{RoyalBlue}{[The important thing about $\C$, where $f$ takes values, is that it is a translation surface---\ldots]} For each critical point $a$, let $\Gamma_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\Gamma_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\Gamma_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\Gamma_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\Gamma_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\Lambda_a^\theta$ can be regarded as the component of $f^{-1}(\Gamma_\alpha^\theta)$ that goes through $a$. \textcolor{orange}{We could orient the thimble so that shifting $\Lambda_a$ to its left would make its projection run clockwise around $\Gamma_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering
-    \includegraphics[scale=0.7]{figures/u_contour_5.pdf}
-    \hspace{1cm}
-    \includegraphics[scale=0.7]{figures/zeta_contour_5.pdf}
-    \caption{\textcolor{orange}{Change the pictures with the one centered at the critical values/points respectively}The preimage of a ray departing from the critical value and going to infinity along the positive real axis.}
+    \includegraphics[width=6.5cm]{figures/ray_1.png}
+    \hspace{0.5cm}
+    \includegraphics[width=6.5cm]{figures/thimble-n5_1.png}
+    \caption{The ray $\Gamma^{\pi/6}_{\zeta, 1}$ on the position domain, and its preimage in the $u$ plane.}
     \label{fig:thimble_vs_rays}
 \end{figure}
 Choose a ciritcal point $a$ of $f$, noting the associated critical value $\alpha = f(a)$, and let $I_\alpha$ be a thimble integral through the thimble $\Lambda_a^\theta$:
@@ -988,7 +756,14 @@ Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern
 \renewcommand{\rfiber}{3}
 \pgfmathsetmacro{\rshade}{1.5*\rfiber}
 \renewcommand{\phase}{35}
-\begin{fiber}[shade, phase=\phase]
+\newcommand{\dis}{1.2}
+\begin{fiber}[shade, phase=\phase, dis=\dis]
+\genfibercontent[dual]
+\draw (0, 0) -- (-\phase:\rshade);
+\draw[rotate=-\phase] (\dis, -0.1) -- (\dis, 0.1);
+\draw (0, 0) -- (0.75, 0);
+\draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:-\phase:0.5) node[midway, anchor=180-\phase/2] {$-\theta$};
+\node[anchor=90-\phase, inner sep=2mm] at (-\phase:\dis) {$c$};
 \end{fiber}
 \end{tikzpicture}
 \begin{tikzpicture}
@@ -1024,10 +799,10 @@ When the half-plane extends along the $-\theta$ direction, the sum $\hat{f}$ of 
 \newcommand{\radius}{1}
 \begin{fiber}
 \fill[pwbeige!30, rotate=\phase] (\rshade, \radius) -- (0, \radius) arc (90:270:\radius) -- (0, -\radius) -- (\rshade, -\radius) -- cycle;
-  \begin{scope}
-    \draw[ray] (0, 0) -- (\phase:\rshade);
-    \draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:\phase:0.5) node[midway, anchor=180+\phase/2] {$\theta$};
-  \end{scope}
+\genfibercontent
+\draw (0, 0) -- (0.75, 0);
+\draw[ray] (0, 0) -- (\phase:\rshade);
+\draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:\phase:0.5) node[midway, anchor=180+\phase/2] {$\theta$};
 \end{fiber}
 \end{tikzpicture}
 \begin{tikzpicture}
