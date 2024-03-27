@@ -34,6 +34,7 @@
   shade/.store in=\fibershade, shade/.default=true,
   degree/.store in=\fiberdeg,  degree/.value required,
   phase/.store in=\fiberphase, phase/.value required,
+  dis/.store in=\fiberdis,     phase/.value required,
   dual/.store in=\fiberdual,   dual/.default=true
 }
 
@@ -46,17 +47,17 @@
     \shadestart = (-90 - #1) / \fiberdeg;
     \shadeend = (90 - #1) / \fiberdeg;
   }
-  \fill[pwbeige!30, draw=pwbeige!60] (0, 0) -- (\shadestart:\rshade) arc (\shadestart:\shadeend:\rshade) -- cycle;
+  \fill[pwbeige!30, draw=pwbeige!60] (0, 0) ++(-#1:#2) -- ++(\shadestart:\rshade) arc (\shadestart:\shadeend:\rshade) -- cycle;
 }
 
 \newenvironment{fiber}[1][]{%
-  \pgfkeys{/laplace/.cd, drop=0, shade=false, degree=1, phase=0, #1}
+  \pgfkeys{/laplace/.cd, drop=0, shade=false, degree=1, phase=0, dis=0, #1}
   \begin{scope}
     \fill[surf] (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
     \clip (-\rfiber, -\rfiber) rectangle (\rfiber, \rfiber);
     \tikzmath{
       if \fibershade then {
-        print \fibershading{\fiberphase}{0};
+        print \fibershading{\fiberphase}{\fiberdis};
       };
     }
 }{% ...
