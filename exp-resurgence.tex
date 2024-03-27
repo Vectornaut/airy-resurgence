@@ -451,17 +451,30 @@ Once you have the formal solution $\series{\Phi}$, you might try to get an actua
 \end{enumerate}
 The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship, which is best described in the language of {\em Gevrey asymptoticity}. %\textcolor{magenta}{[Do we need to extend these definitions, and the associated theorems, to cover slight series? Hopefully it wouldn't be too hard, but it would be a pain.]}
 \begin{defn}
-On an open, possibly bounded sector $\Omega$ around $\infty$, a power series
+On an open, possibly bounded sector $\Omega$ around $\infty$, a holomorphic function $F$ is {\em asymptotic} to a power series
 \begin{equation}\label{series:asymp-defn}
+a_0 + \frac{a_1}{z} + \frac{a_2}{z^2} + \frac{a_3}{z^3} + \frac{a_4}{z^4} + \ldots
+\end{equation}
+if, along each ray toward $\infty$,
+\[ \left|F - \left(a_0 + \frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o\big(z^{-n}\big) \]
+over all orders $n$. We will write
+\[ F \sim \sum_{n \geq 0} a_n z^{-n} \]
+to denote this relationship.
+\end{defn}
+\color{RoyalBlue}
+\begin{defn}
+On an open, possibly bounded sector $\Omega$ around $\infty$, a power series
+\begin{equation}%%\label{series:asymp-defn}
 \textcolor{orange}{a_0}+\frac{a_1}{z} + \frac{a_2}{z^2} + \frac{a_3}{z^3} + \frac{a_4}{z^4} + \ldots
 \end{equation}
 is {\em asymptotic} to a holomorphic function $F$ if
-\[ \left|F - \left(\textcolor{orange}{a_0}+\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{\Re(z) \to \infty}\big(|z|^{-n}\big) \]
-over all orders $n$. We will use the symbol $\sim$ to denote the asymptotic of $F$, namely we will write \[F\sim \sum_{n\geq 1} a_n z^{-n}.\]
+\[ \left|F - \left(\textcolor{orange}{a_0}+\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{\textcolor{magenta}{\Re(z)} \to \infty}\big(|z|^{-n}\big) \]
+over all orders $n$. \textcolor{magenta}{We will use the symbol $\sim$ to denote the asymptotic of $F$, namely we will write \[F\sim \sum_{n\geq 1} a_n z^{-n}.\]}
 \end{defn}
+\color{black}
 \textcolor{orange}{Not all funtions are asymptotic to a power series, thus more generally, we will say a function $F$ is Poincar\'e asymptotic to a trans-monomial $e^{\lambda z}z^\tau\sum_{n=0}^Na_nz^{-n}$ for some positive $\lambda>0$ and $\tau\in(0,1)$ if 
 \[\left|F - e^{\lambda z}z^{\tau}\left(\textcolor{orange}{a_0}+\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{\Re(z) \to \infty}\big(e^{\lambda\Re(z)}|z|^{\tau-n}\big).\]}
-If two power series of the form \eqref{series:asymp-defn} are asymptotic to the same function, they must be equal; this can be deduced from the triangle inequality. The power series which is asymptotic to a given function on a given open sector, if it exists, is therefore an intrinsic property of the function: it is the function's {\em asymptotic expansion} on that sector. The functions that have asymptotic expansions on a given sector form a ring~\cite[Section~A.4]{nikolaev2023existence}, and the map that sends such a function to its asymptotic expansion is a ring homomorphism. We will denote such map with the symbol $\aexp$. More generally, when the asymptotic expansion is taken in the direction $\theta$ at infinity, i.e. as $z\to e^{i\theta}\infty$, we will write $\aexp^\theta$.  
+If two power series of the form \eqref{series:asymp-defn} are asymptotic to the same function, they must be equal; this can be deduced from the triangle inequality. The power series which is asymptotic to a given function on a given open sector, if it exists, is therefore an intrinsic property of the function: it is the function's {\em asymptotic expansion} on that sector. The functions that have asymptotic expansions on a given sector form a ring~\cite[Section~A.4]{nikolaev2023existence}, and the map that sends such a function to its asymptotic expansion is a ring homomorphism. Since asymptotic expansions on overlapping sectors must agree, we can meaningfully take a function's asymptotic expansion along a ray:\textcolor{RoyalBlue}{We will denote such map with the symbol $\aexp$. More generally, when the asymptotic expansion is taken in the direction $\theta$ at infinity, i.e. as $z\to e^{i\theta}\infty$, we will write $\aexp^\theta$.}  
 
 \begin{defn}
 \textcolor{orange}{[Define $\aexp^\theta$ homomorphism that sends a function with an asymptotic expansion on a sector that contains the $\theta$-ray to its asymptotic expansion on that sector.\ldots]}
@@ -471,8 +484,8 @@ If two power series of the form \eqref{series:asymp-defn} are asymptotic to the 
 \textcolor{orange}{[State theorem: differentiation commutes with $\aexp^\theta$ under certain circumstances. See Erdelyi's {\em Asymptotic Expansions}, \S 1.6. For basic facts about uniform asymptoticity, see \S 5.7.2 of Mitschi and Sauzin. Theorem~5.20 and its rephrasing say that the Laplace transform of a function is uniformly asymptotic to the formal Laplace transform of the function's Taylor series.]}
 
 \begin{defn}\label{def:unif-gevrey-asymp}
-On an open sector $\Omega$ around $\infty$, a power series of the form \eqref{series:asymp-defn} is {\em uniformly $1$-Gevrey asymptotic} to a holomorphic function $F$ if there's a constant $A \in (0, \infty)$ for which
-\[ \left|F - \left(\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \lesssim \frac{A^n n!}{|z|^n} \]
+On an open sector $\Omega$ around $\infty$, a holomorphic function $F$ is {\em uniformly $1$-Gevrey asymptotic} to a power series of the form \eqref{series:asymp-defn} if there is a constant $A \in (0, \infty)$ for which
+\[ \left|F - \left(a_0 + \frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \lesssim \frac{A^n n!}{|z|^n} \]
 over all orders $n$ and all $z \in \Omega$. We will use $\lesssim$ throughout the paper to mean ``bounded by a constant multiple of,'' with the same constant over all the specified variables.
 \end{defn}
 To compare the Borel sum $\hat{\Phi}$ with the original series $\series{\Phi}$, let's take it one more step, sending it back into the world of formal power series by taking its asymptotic expansion.
@@ -972,6 +985,13 @@ Borel regular functions can be characterized as functions that are approximated 
 Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern proof in \cite[Theorem~B.15]{nikolaev2023exact} and a generalization to power series with fractional power exponents in \cite{delabaere--rosoamanana}), and improved again later by Sokal \cite{sokal1980improvement}. These improvements tell us that the obtuse-angled sector around $\infty$ in the statement above can be replaced with an open disk whose boundary touches infinity---that is, an half-plane which doesn't contain $0$, and may be displaced from $0$ by some distance $c$.
 \begin{center}
 \begin{tikzpicture}
+\renewcommand{\rfiber}{3}
+\pgfmathsetmacro{\rshade}{1.5*\rfiber}
+\renewcommand{\phase}{35}
+\begin{fiber}[shade, phase=\phase]
+\end{fiber}
+\end{tikzpicture}
+\begin{tikzpicture}
 \newcommand{\size}{3}
 \pgfmathsetmacro{\outsize}{sqrt(2)*\size}
 \newcommand{\ang}{35}
@@ -998,11 +1018,23 @@ Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern
 When the half-plane extends along the $-\theta$ direction, the sum $\hat{f}$ of the Borel transform of $\aexp^{-\theta} F$ has an absolutely convergent Laplace transform along the $\theta$ direction. In fact, we have $|\hat{f}| \lesssim e^{c |\zeta|}$ uniformly over all $\zeta$ in a constant-radius neighborhood of the ray $e^{i\theta}[0, \infty)$. 
 \begin{center}
 \begin{tikzpicture}
+\renewcommand{\rfiber}{3}
+\pgfmathsetmacro{\rshade}{1.5*\rfiber}
+\renewcommand{\phase}{35}
+\newcommand{\radius}{1}
+\begin{fiber}
+\fill[pwbeige!30, rotate=\phase] (\rshade, \radius) -- (0, \radius) arc (90:270:\radius) -- (0, -\radius) -- (\rshade, -\radius) -- cycle;
+  \begin{scope}
+    \draw[ray] (0, 0) -- (\phase:\rshade);
+    \draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:\phase:0.5) node[midway, anchor=180+\phase/2] {$\theta$};
+  \end{scope}
+\end{fiber}
+\end{tikzpicture}
+\begin{tikzpicture}
 \newcommand{\size}{3}
 \pgfmathsetmacro{\outsize}{sqrt(2)*\size}
 \newcommand{\ang}{35}
 \newcommand{\radius}{1}
-\newcommand{\dis}{1.2}
 \begin{scope}
   \clip (-\size, -\size) rectangle (\size, \size);
   \fill[violet!20, rotate=\ang] (\outsize, \radius) -- (0, \radius) arc (90:270:\radius) -- (0, -\radius) -- (\outsize, -\radius) -- cycle;
@@ -1846,11 +1878,11 @@ Consider a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ wh
   \fill[ietcoast!20, bezier bounding box, path fading=radial edge]
     (-\spill, -\spill) (\spill, \spill)
     (190:1.5) arc (190:41:1.5) -- (41:\spill) arc (41:-48:\spill) -- (-48:1.3) arc (-48:-170:1.3) -- cycle;
-  \fill[ietcoast!35] (0, 0) -- (-170:1.3) arc (-170:-210:1.3) -- cycle;
-  \fill[ietcoast] circle (0.7mm) node[anchor=west, black, outer sep=1mm] {$\zeta = \alpha$};
-  \node at (-190:0.85) {$\Upsilon_\Delta$};
+  \fill[ietcoast!33] (0, 0) -- (-170:1.3) arc (-170:-210:1.3) -- cycle;
+  \fill[ietcoast!33!black] circle (0.7mm) node[anchor=west, black, outer sep=1mm] {$\zeta = \alpha$};
+  \node[ietcoast!33!black] at (-190:0.85) {$\Upsilon_\Delta$};
   \foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
-    \fill[ietcoast] \p circle (0.7mm);
+    \fill[ietcoast!33!black] \p circle (0.7mm);
   }
 \end{tikzpicture}
 \end{center}
@@ -1875,7 +1907,7 @@ Since $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$, every functio
 
 Taylor expansion and summation form a two-way link between holomorphic functions and formal power series. For regular enough functions, the Laplace transform preserves a one-way vestige of this link: it turns Taylor expansions on the position domain into asymptotic expansions on the frequency domain. \textcolor{orange}{[Compare with Sokal's version of the Watson--Nevanlinna theorem?]}
 \begin{lemma}\label{lem:laplace-bridge}
-Let $\Omega$ be an open sector with $\zeta = 0$ at its tip, and an opening angle of $\pi$ or less. Take some $\rho \in (-1,\infty)$. If $\varphi \in \singexp{\rho}{\Lambda}(\Omega)$ is the sum of a power series $\series{\varphi} \in \zeta^\rho\,\C\{\zeta\}$, then its Laplace transform $\Phi = \laplace_{\zeta, 0}^\theta \varphi$ is asymptotic to \textcolor{orange}{[backwards terminology?]} the formal Laplace transform $\series{\Phi} = \laplace_{\zeta, 0} \series{\varphi}$. \textcolor{orange}{[Define formal Laplace transform into transmonomial spaces?]}
+Let $\Omega$ be an open sector with $\zeta = 0$ at its tip, and an opening angle of $\pi$ or less. Take some $\rho \in (-1,\infty)$. If $\varphi \in \singexp{\rho}{\Lambda}(\Omega)$ is the sum of a power series $\series{\varphi} \in \zeta^\rho\,\C\{\zeta\}$, then its Laplace transform $\Phi = \laplace_{\zeta, 0}^\theta \varphi$ is asymptotic to the formal Laplace transform $\series{\Phi} = \laplace_{\zeta, 0} \series{\varphi}$. \textcolor{orange}{[Define formal Laplace transform into transmonomial spaces?]}
 \end{lemma}
 \begin{proof}
 By adding points within the disk around $\zeta = 0$ where $\series{\varphi}$ converges, expand $\Omega$ to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. Write $\series{\varphi}$ out in the form
@@ -2341,12 +2373,12 @@ We can use the $1/2$ derivative formula~\eqref{eqn:formula--1/2} to see that the
   arc (107.5-\slitsize:46.5+\slitsize:\spill) -- (46.5+\spill/2.46*\slitsize:2.46) -- (46.5-\spill/2.46*\slitsize:2.46) -- (46.5-\slitsize:\spill)
   arc (46.5-\slitsize:-56+\slitsize:\spill) -- (-56+\spill/2.24*\slitsize:2.24) -- (-56-\spill/2.24*\slitsize:2.24) -- (-56-\slitsize:\spill)
   arc (-56-\slitsize:-180:\spill) -- (0, 0);
-\node[anchor=north west] at (46.5:2.46) {$\zeta=\beta$};
+\node[ietcoast!33!black, anchor=north west] at (46.5:2.46) {$\zeta = \beta$};
 \foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
-  \draw[ietcoast!50] \p -- (0,0);
-  \fill \p circle (0.7mm);
+  \draw[ietcoast] \p -- (0,0);
+  \fill[ietcoast!33!black] \p circle (0.7mm);
 }
-\fill[ietcoast] circle (0.7mm) node[anchor=180,black, outer sep=1mm] {$\zeta = \alpha$};
+\fill[ietcoast!33!black] circle (0.7mm) node[anchor=180, outer sep=1mm] {$\zeta = \alpha$};
 \end{tikzpicture}
 \end{center}
 \caption{The domain $\Omega_\alpha$}\label{Fig:slit domain}
