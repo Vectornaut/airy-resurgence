@@ -157,6 +157,15 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \fi
 \newcommand{\citesection}[1]{\begin{unstable}\texttt{#1}\end{unstable}}
 
+% hideable to-do notes
+\newif\ifshowtodo
+\showtodotrue
+\ifshowtodo
+\newenvironment{todo}{\color{Coral}}{\color{black}}
+\else
+\NewEnviron{todo}{\iffalse\expandafter\BODY\fi}
+\fi
+
 % drafting environments
 %%\usepackage{environ} % to hide verifications
 %%\newenvironment{verify}{\color{ForestGreen}}{\color{black}}
@@ -216,7 +225,7 @@ with $\tau \in (0, 1]$, that looks or acts like a solution to a problem whose ac
 \begin{equation}
 \left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\tfrac{1}{3}\big)^2 z^{-2} \right] \Phi= 0. \label{eqn:bessel_rescaled_ex}
 \end{equation}
-behave near $z = \infty$, you might start by looking for formal {\em transmonomial} solutions $e^{-\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above. Setting $\alpha = -1$ and $\tau = \tfrac{1}{2}$ gives a well-behaved recurrence relation for $\series{\Phi}$, which produces the solution 
+behave near $z = \infty$, you might start by looking for formal {\em trans-monomial} solutions $e^{-\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above. Setting $\alpha = -1$ and $\tau = \tfrac{1}{2}$ gives a well-behaved recurrence relation for $\series{\Phi}$, which produces the solution 
 \begin{equation}
 e^{z} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{72} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{31104} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{6718464} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel_ex}
 \end{equation}
@@ -234,7 +243,7 @@ Once you have the formal solution $\series{\Phi}$, you might try to get an actua
 \item If $\series{\phi}$ has a positive radius of convergence, we say $\series{\Phi}$ is {\em $1$-Gevrey}. We sum $\series{\phi}$ to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. %\textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
 \item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $\zeta \in \alpha + e^{i\theta}[0, \infty)$ its Laplace transform $\hat{\Phi} : = \laplace_{\zeta, \alpha}^\theta \hat{\phi}$ turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\hat{\Phi}$ its {\em Borel sum} at $b$. 
 \end{enumerate}
-The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship, which is best described in the language of {\em Gevrey asymptoticity}. %\textcolor{magenta}{[Do we need to extend these definitions, and the associated theorems, to cover slight series? Hopefully it wouldn't be too hard, but it would be a pain.]}
+The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship, which is best described in the language of {\em Gevrey asymptoticity}.
 \begin{defn}
 On an open, possibly bounded sector $\Omega$ around $\infty$, a holomorphic function $F$ is {\em asymptotic} to a power series
 \begin{equation}\label{series:asymp-defn}
@@ -257,16 +266,25 @@ is {\em asymptotic} to a holomorphic function $F$ if
 over all orders $n$. \textcolor{magenta}{We will use the symbol $\sim$ to denote the asymptotic of $F$, namely we will write \[F\sim \sum_{n\geq 1} a_n z^{-n}.\]}
 \end{defn}
 \color{black}
-\textcolor{orange}{Not all funtions are asymptotic to a power series, thus more generally, we will say a function $F$ is Poincar\'e asymptotic to a trans-monomial $e^{\lambda z}z^\tau\sum_{n=0}^Na_nz^{-n}$ for some positive $\lambda>0$ and $\tau\in(0,1)$ if 
-\[\left|F - e^{\lambda z}z^{\tau}\left(\textcolor{orange}{a_0}+\frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o_{\Re(z) \to \infty}\big(e^{\lambda\Re(z)}|z|^{\tau-n}\big).\]}
-If two power series of the form \eqref{series:asymp-defn} are asymptotic to the same function, they must be equal; this can be deduced from the triangle inequality. The power series which is asymptotic to a given function on a given open sector, if it exists, is therefore an intrinsic property of the function: it is the function's {\em asymptotic expansion} on that sector. The functions that have asymptotic expansions on a given sector form a ring~\cite[Section~A.4]{nikolaev2023existence}, and the map that sends such a function to its asymptotic expansion is a ring homomorphism. Since asymptotic expansions on overlapping sectors must agree, we can meaningfully take a function's asymptotic expansion along a ray:\textcolor{RoyalBlue}{We will denote such map with the symbol $\aexp$. More generally, when the asymptotic expansion is taken in the direction $\theta$ at infinity, i.e. as $z\to e^{i\theta}\infty$, we will write $\aexp^\theta$.}  
-
+This definition generalizes straightforwardly to ``fractionally shifted'' power series and trans-monomials.
 \begin{defn}
-\textcolor{orange}{[Define $\aexp^\theta$ homomorphism that sends a function with an asymptotic expansion on a sector that contains the $\theta$-ray to its asymptotic expansion on that sector.\ldots]}
+On an open, possibly bounded sector $\Omega$ around $\infty$, a holomorphic function $F$ is {\em asymptotic} to a fractionally shifted trans-monomial
+\begin{equation}\label{trans-monom:asymp-defn}
+e^{\alpha z} z^{-\sigma} \left(a_0 + \frac{a_1}{z} + \frac{a_2}{z^2} + \frac{a_3}{z^3} + \frac{a_4}{z^4} + \ldots\right)
+\end{equation}
+if, along each ray toward $\infty$,
+\[ \left|F - e^{\alpha z} z^{-\sigma} \left(a_0 + \frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_n}{z^n} \right) \right| \in o\big(e^{-\alpha|z|}\,z^{-\sigma-n}\big) \]
+over all orders $n$. We will again use $\sim$ to denote this relationship.
 \end{defn}
-\textcolor{RoyalBlue}{The {\em asymptotic expansion} map $\aexp^\theta$ sends a holomorphic function that vanishes at $\infty$ to the unique power series of the form \eqref{series:asymp-defn} which is asymptotic to it on the half-plane $\Re e^{i\theta}z > 0$ (see \cite[Theorem~C.11]{nikolaev2023existence}).}
 
-\textcolor{orange}{[State theorem: differentiation commutes with $\aexp^\theta$ under certain circumstances. See Erdelyi's {\em Asymptotic Expansions}, \S 1.6. For basic facts about uniform asymptoticity, see \S 5.7.2 of Mitschi and Sauzin. Theorem~5.20 and its rephrasing say that the Laplace transform of a function is uniformly asymptotic to the formal Laplace transform of the function's Taylor series.]}
+If two power series of the form \eqref{series:asymp-defn} are asymptotic to the same function, they must be equal; this can be deduced from the triangle inequality. The power series which is asymptotic to a given function on a given open sector, if it exists, is therefore an intrinsic property of the function: we call it the function's {\em asymptotic expansion} on that sector. The functions that have asymptotic expansions on a given sector form a ring~\cite[Section~A.4]{nikolaev2023existence}, and the map that sends such a function to its asymptotic expansion is a ring homomorphism. Since asymptotic expansions on overlapping sectors must agree, we can think of this homomorphism as being determined by a ray.
+\begin{defn}
+For any direction $\theta$ and any trans-monomial space $e^{\alpha z} z^{-\sigma} \C \llbracket z^{-1} \rrbracket$, the {\em asymptotic expansion} homomorphism
+\[ \aexp^\theta \maps \mathcal{O}(\C) \to e^{\alpha z} z^{-\sigma} \C \llbracket z^{-1} \rrbracket \]
+is the partially defined map that sends a holomorphic function on an open subset of $\C$ to its asymptotic expansion on a sector containing the end of the ray $z \in e^{i\theta} (0, \infty)$. To be in the domain of $\aexp^\theta$, a function just needs to have an asymptotic expansion on one such sector.
+\end{defn}
+\begin{todo}[Mention Nevanlinna's theorem, re-stated as \cite[Theorem~C.11]{nikolaev2023existence}, somewhere later.]\end{todo}
+\begin{todo}[State the theorem that differentiation and integration commute with $\aexp^\theta$ under certain circumstances. See Erdelyi's {\em Asymptotic Expansions}, \S 1.6. For basic facts about uniform asymptoticity, see \S 5.7.2 of Mitschi and Sauzin. Theorem~5.20 and its rephrasing say that the Laplace transform of a function is uniformly asymptotic to the formal Laplace transform of the function's Taylor series.]\end{todo}
 
 \begin{defn}\label{def:unif-gevrey-asymp}
 On an open sector $\Omega$ around $\infty$, a holomorphic function $F$ is {\em uniformly $1$-Gevrey asymptotic} to a power series of the form \eqref{series:asymp-defn} if there is a constant $A \in (0, \infty)$ for which
@@ -1695,10 +1713,13 @@ is the sum of a shifted Taylor series in $\zeta^\rho\,\C\{\zeta\}$.
 Since $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$, every function $\varphi \in \zeta^\rho\,\mathcal{O}(\pi \Upsilon)$ is the sum of a shifted Laurent series $\series{\varphi} \in \zeta^\rho\,\C\{\zeta, \zeta^{-1}\}$. The definition of $\singexp{\sigma}{\Lambda}(\Upsilon)$ tells us that $|\zeta|^\sigma |\varphi|$ is bounded on a punctured disk around $\zeta = 0$, which would be impossible if $\series{\varphi}$ included any $\zeta^{\rho-1},\;\zeta^{\rho-2},\;\zeta^{\rho-3}\ldots$ terms. That means $\series{\varphi}$ must belong to $\zeta^\rho\,\C\{\zeta\}$.
 \end{proof}
 
-Taylor expansion and summation form a two-way link between holomorphic functions and formal power series. For regular enough functions, the Laplace transform preserves a one-way vestige of this link: it turns Taylor expansions on the position domain into asymptotic expansions on the frequency domain. \textcolor{orange}{[Compare with Sokal's version of the Watson--Nevanlinna theorem?]}
+Taylor expansion and summation form a two-way link between holomorphic functions and formal power series. For regular enough functions, the Laplace transform preserves a one-way vestige of this link: it turns Taylor expansions on the position domain into asymptotic expansions on the frequency domain. \begin{todo}[Compare with Sokal's version of the Watson--Nevanlinna theorem?]\end{todo}
 \begin{lemma}\label{lem:laplace-bridge}
 Let $\Omega$ be an open sector with $\zeta = 0$ at its tip, and an opening angle of $\pi$ or less. Take some $\rho \in (-1,\infty)$. If $\varphi \in \singexp{\rho}{\Lambda}(\Omega)$ is the sum of a power series $\series{\varphi} \in \zeta^\rho\,\C\{\zeta\}$, then its Laplace transform $\Phi = \laplace_{\zeta, 0}^\theta \varphi$ is asymptotic to the formal Laplace transform $\series{\Phi} = \laplace_{\zeta, 0} \series{\varphi}$. \textcolor{orange}{[Define formal Laplace transform into transmonomial spaces?]}
 \end{lemma}
+\begin{remark}
+This result is similar to Theorem~5.20 of \cite{diverg-resurg-i}. It is weaker in that it does not establish Gevrey asymptoticity, but stronger in that it can be applied to functions with fractionally shifted Taylor expansions.
+\end{remark}
 \begin{proof}
 By adding points within the disk around $\zeta = 0$ where $\series{\varphi}$ converges, expand $\Omega$ to an open set $\Upsilon \subset \widetilde{\C^\times}$ of the kind used in Lemma~\ref{lem:shifted_holo_closed}. Write $\series{\varphi}$ out in the form
 \[ \series{\varphi} = a_0 \frac{\zeta^\rho}{\Gamma(\rho+1)} + a_1 \frac{\zeta^{\rho+1}}{\Gamma(\rho+2)} + a_2 \frac{\zeta^{\rho+2}}{\Gamma(\rho+3)} + a_3 \frac{\zeta^{\rho+3}}{\Gamma(\rho+4)} + \ldots, \]
@@ -2509,12 +2530,13 @@ It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the
 
 
 \subsection{Modified Bessel}\label{sec:mod-bessel-lift}
-
-The modified Bessel equation is a generalization of equation~\eqref{eqn:mod-bessel-AL} where $\frac{m}{n}$ is replaced by a complex parameter $\mu$
+Our analysis of the Airy-Lucas functions boiled down to an analysis of equation~\eqref{eqn:mod-bessel-AL}: the modified Bessel equation with a rational parameter $\mu = \tfrac{m}{n}$. We now do a general analysis of the modified Bessel equation, allowing the parameter $\mu$ to be any complex number.
 \begin{equation}\label{eqn:mod-bessel}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\mu^2 + z^2\big]\right] \varphi = 0
 \end{equation}
-On the one hand, this new condition does not really affect the argument we present in Section~\ref{bessel-regularity-AL}, so we briefly state the main results: 
+
+
+This generalization does not really affect the argument from Section~\ref{bessel-regularity-AL}, so we will only briefly state the analogous results:
 \begin{itemize}
  \item \textbf{Asymptotic analysis}: equation~\eqref{eqn:mod-bessel} admits a basis of formal solutions \[\series{I}_{\mu,1}(z)=e^{-z} z^{-1/2} \tilde{W}_{\mu, 1} \quad \text{ and } \quad \series{I}_{\mu,-1}(z)=e^z z^{-1/2} \series{W}_{\mu, -1}\] with 
  \begin{align*}
