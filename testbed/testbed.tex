@@ -19,4 +19,21 @@
 
 \phaseSpaceLaplace
 \end{center}
+
+\begin{center}
+\begin{tikzpicture}
+\renewcommand{\rfiber}{3}
+\pgfmathsetmacro{\rshade}{1.5*\rfiber}
+\renewcommand{\phase}{35}
+\newcommand{\dis}{1.2}
+\begin{fiber}[shade, phase=\phase, dis=\dis]
+\genfibercontent[dual]
+\draw (0, 0) -- (-\phase:\rshade);
+\draw[rotate=-\phase] (\dis, -0.1) -- (\dis, 0.1);
+\draw (0, 0) -- (0.75, 0);
+\draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:-\phase:0.5) node[midway, anchor=180-\phase/2] {$-\theta$};
+\node[anchor=90-\phase, inner sep=2mm] at (-\phase:\dis) {$c$};
+\end{fiber}
+\end{tikzpicture}
+\end{center}
 \end{document}
