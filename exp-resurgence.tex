@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{stmaryrd} %% needed for mapsto arrows in commutative diagrams
+\usepackage[scr=boondoxo, scrscaled=1.05]{mathalpha} %% hat tip https://tex.stackexchange.com/a/247819
 %%\usepackage{bm} %% for putting series names in bold
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -2208,12 +2209,12 @@ hence
 In particular, if $N=1$, the inverse Laplace transform of $I$ has a fractional power singularity of order $1/2$ at the origin, as we compute explicitly in the proof of Theorem~\ref{thm:maxim-proof}. %as computed in Remark~\ref{rmk:1/2-deriv} the inverse Laplace tranform of $z^{-1/2} I$ is the $1/2$-derivative of ${\iota}$, hence it has \textcolor{orange}{simple singularities (see Corollary~\ref{simple-res-thimble})}. \textcolor{magenta}{We expect this result to hold beyond the polynomial case.} We also expect that equation \eqref{eqn:formula-proof} can be generalized to the $N$-dimensional case replacing the $1/2$-derivative with the $N/2$ one. 
 \end{remark}
 \section{Examples}\label{sec:examples}
-
-\subsection{Airy}
-
+%
+\subsection{Airy}\label{sec:airy}
+%
 The Airy equation is
 \begin{equation}\label{eqn:airy}
-\left[\big(\tfrac{\partial}{\partial y}\big)^2 - y\right] \Phi = 0.
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - y\right] F = 0.
 \end{equation}
 One solution is given by the Airy function,
 \[ \Ai(y) = \frac{1}{2\pi i} \int_\gamma \exp\left(\tfrac{1}{3}t^3 - yt\right)\,dt, \]
@@ -2237,7 +2238,7 @@ By considering other Chebyshev polynomials, we can situate the Airy function wit
 \subsection{Airy--Lucas}\label{example_AL}
 The Airy-Lucas equation is
 \begin{equation}\label{eqn:airy-lucas}
-\left[\big(\tfrac{\partial}{\partial y}\big)^2 - (m-1) y^{-1} \tfrac{\partial}{\partial y} - y^{n-2}\right] \psi = 0
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - (m-1) y^{-1} \tfrac{\partial}{\partial y} - y^{n-2}\right] F = 0
 \end{equation}
 with $n \in \{3, 4, 5, \ldots\}$ and $m \in \{1, 2, \ldots, n-1\}$. A few solutions are given by the Airy-Lucas functions~\cite[equation~3.6]{charbonnier22}
 \[ \widehat{\Ai}^{(j)}_{n, m-1}(y) = \left\{\begin{array}{ll}1 & j \text{ even} \\ i & j \text{ odd}\end{array}\right\} \frac{y^{m/2}}{\pi} \int_{\mathcal{C}^\theta_j} \exp\left[\tfrac{2}{n} y^{n/2}\,T_n(u)\right]\,U_{m-1}(u)\,du, \]
@@ -2642,56 +2643,52 @@ with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}. Then
 
 
 \subsection{Generalized Airy}
-In \cite{Reid} and \cite[Appendix]{drazin-reid} the authors introduce generalized Airy functions $A_k, B_0, B_k$, $k=1,2,3$ as approximate solutions of the Orr--Sommerfield fluid equation. They are defined as contour integral \cite[Section 9.13(ii)]{dlmf}
-
+\color{NavyBlue}
+In \cite{Reid} and the appendix of \cite{drazin-reid}, Drazin and Reid construct approximate solutions of the Orr--Sommerfield fluid equation using the generalized Airy functions
 \begin{align*}
-\mathrm{A}_k(y,p)&=\frac{1}{2\pi i}\int_{\mathcal{J}_k}e^{yt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad k=1,2,3\,\, p\in\C \\
-\mathrm{B}_0(y,p)&=\frac{1}{2\pi i}\int_{\mathcal{J}_0}e^{yt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad p\in\Z \\
-\mathrm{B}_k(y,p)&=\int_{\gamma_k}e^{yt-\tfrac{t^3}{3}}\frac{dt}{t^p} \qquad k=1,2,3\,\, p\in\Z 
+\mathrm{A}_k(y,p) & = \frac{1}{2\pi i}\int_{\mathscr{a}_k} \exp\big[yt-\tfrac{t^3}{3}\big]\,\frac{dt}{t^p} & & p \in \C\hphantom{{}_{\le 0}},\quad k \in \{1,2,3\} \\
+\mathrm{B}_0(y,p) & = \frac{1}{2\pi i}\int_{\mathscr{b}_0} \exp\big[yt-\tfrac{t^3}{3}\big]\,\frac{dt}{t^p} & & p \in \Z \\
+\mathrm{B}_k(y,p) & = \hphantom{\frac{1}{2\pi i}} \int_{\mathscr{b}_k} \exp\big[yt-\tfrac{t^3}{3}\big]\,\frac{dt}{t^p}, & & p \in \Z_{\le 0},\quad k \in \{1,2,3\}
 \end{align*}
-where the contours $\mathcal{J}_k, \mathcal{J}_0, \gamma_k$ are represented in Figure \ref{fig:path-generalized-Airy}. 
+which are defined by integrals along the contours $\mathscr{a}_k, \mathscr{b}_0, \mathscr{b}_k$ shown in Figure~\ref{fig:path-generalized-Airy}~\cite{drazin-reid}\cite[Section 9.13(ii)]{dlmf}.
 \begin{figure}[ht]
 \center
+\newcommand{\apathcolor}{ietcoast}
+\newcommand{\bpathcolor}{black}
 \begin{tikzpicture}
-    \draw[->] (4,0)--(4,8);
-    \draw[->] (0,4)--(8,4);
-    \draw[blue,very thick] (4,4) circle (0.5) ;
-    \node[blue,font=\tiny] at (4.5,3.5) {$\mathcal{J}_0$};
-    \node[red,font=\tiny] at (1.4,1.3) {$\mathcal{J}_1$};
-    \draw[red,very thick,->] (1,0.2) .. controls (3.5,4) .. (1,7.8);
-    \node[red,font=\tiny] at (5.5,4.8) {$\mathcal{J}_2$};
-    \draw[red,very thick,->] (1.8,8) .. controls (4,4.5) ..(8,4.4) ;
-     \node[red,font=\tiny] at (5.5,3.2) {$\mathcal{J}_3$};
-    \draw[red,very thick,->] (8,3.6) .. controls (4,3.5) ..(1.8,0) ;
-    \draw[orange,very thick,->] (4,4)--(6.5,4);
-    \draw[orange,very thick] (6.5,4)--(8,4);
-    \node[orange,font=\tiny,below] at (7,4) {$\gamma_1$};
-    \draw[orange,very thick,->] (4,4)--(2.7,6);
-    \draw[orange,very thick] (2.7,6)--(1.4,8);
-    \node[orange,font=\tiny,right] at (2.2,6) {$\gamma_2$};
-    \draw[orange,very thick,->] (4,4)--(2.7,2);
-    \draw[orange,very thick] (2.7,2)--(1.4,0);
-    \node[orange,font=\tiny,right] at (2.2,2) {$\gamma_3$};
-    \node at (5.1,4) {$\bullet$};
-    \node at (2.9,4) {$\bullet$};
-    \node[font=\tiny,below,right] at (2.3,3.8) {$-1$};
-    \node[font=\tiny,below] at (5.3,4) {$1$};
-    \end{tikzpicture}
-    \caption{Representation of the path of integration for $\mathrm{A}_k,\mathrm{B}_0,\mathrm{B}_k$ respectively in red, blue and orange.}\label{fig:path-generalized-Airy}
+\renewcommand{\dotsize}{0.08}
+\fill[pwbeige!10] circle(3.95);
+\begin{scope}[\bpathcolor, very thick, -stealth]
+  \draw (80:0.8) arc (80:400:0.8);
+  \node at (60:0.8) {$\mathscr{b}_0$};
+  \foreach \ang/\name in {0/1, 120/2, 240/3} {
+    \draw[very thick,-stealth] (0, 0) -- ++(\ang:4) node[anchor=\ang-180] {$\mathscr{b}_\name$};
+  };
+  \fill (1.25, 0) circle (\dotsize) node[anchor=north west] {$1$};
+  \draw[fill=white, thin] circle (\dotsize);
+\end{scope}
+\begin{scope}[\apathcolor, very thick, -stealth]
+  \foreach \ang/\name in {0/1, 120/2, 240/3} {
+    \draw[rotate=\ang] (-0.5, 0) +(-120:3.75) .. controls +(62:1) and +(0, -1.2) .. +(-0.75, 0) .. controls +(0, 1.2) and +(-62:1) .. +(120:3.75) node[midway, anchor=\ang+30] {$\mathscr{a}_\name$};
+  };
+  \fill (-1.25, 0) circle (\dotsize) node[anchor=north east] {$1$};
+\end{scope}
+\end{tikzpicture}
+\caption{The integration contours in the $t$ plane that define $\mathrm{A}_k,\mathrm{B}_0,\mathrm{B}_k$. \textcolor{orange}{[Why are $y = \pm 1$ marked? Should we mark the critical points $\pm\tfrac{1}{2}$ instead?]}}\label{fig:path-generalized-Airy}
 \end{figure}
+These functions satisfy the generalized Airy equation
+\[ \left[\big(\tfrac{\partial}{\partial y}\big)^3 - y\,\tfrac{\partial}{\partial y} + (p-1)\right] \Phi = 0. \]
+When $p = 0$, this equation reduces to
+\[ \tfrac{\partial}{\partial y} \circ \left[\big(\tfrac{\partial}{\partial y}\big)^2 - y\right] \Phi = 0, \]
+which is equivalent to an inhomogeneous version of the classical Airy equation.
 
-Each generalized Airy function is a solution of
-\begin{equation}
-\left[\partial_y^3-y\partial_y+(p-1)\right]f=0
-\end{equation} 
-and if $p=0$ they reduce to the classical Airy functions.
-
-Following the treatment of the Airy--Lucas functions, we will rewrite the generalized Airy function $\mathrm{A}_1(y,p)$ as thimble integrals with the function $f=4u^3-3u$. This follows from the change of coordinates $z=\tfrac{2}{3}y^{3/2}$, and gives $\mathrm{A}_1(y,p) = (12 z)^{\tfrac{1-p}{3}}\, I_+(z,p)$ with 
-%
-\[I_+(z,p):=\frac{1}{2\pi i}\int_{z^{-1/3}\mathcal{J}_1} e^{-z(4u^3-3u)} \frac{du}{u^p}\]
-%
+As we did with the Airy--Lucas functions, we will use the substitution $t = 2uy^{1/2}$ to rewrite the generalized Airy function $\mathrm{A}_1(y,p)$ in terms of a thimble integral. We get
+\[ \mathrm{A}_1(y,p) = (12 z)^{(1-p)/3}\,I_+\big(\tfrac{2}{3}y^{3/2},p\big) \]
+with
+\[ I_+(z,p) = \frac{1}{2\pi i} \int_{\mathcal{C}^\theta_1} \exp\left[-z\left(4u^3 - 3u\right)\right]\,\frac{du}{u^p}. \]
+To find the right contour $\mathcal{C}_1^\theta$, we first note that the mapping $\zeta = 4u^3 - 3u$ is familiar, up to a sign, from Section~\ref{sec:airy}. In particular, we already know its critical points $u = \pm\tfrac{1}{2}$ and the corresponding critical values $\zeta = \pm 1$. To get the desired integral, $\mathcal{C}_1^\theta$ should be the thimble through $u = -\tfrac{1}{2}$ over the ray $\mathcal{J}^\theta_1$. However, this thimble does not live on the complex plane, like it did for the classical Airy function. When $p$ is a positive integer, the volume form $du/u^p$ has a pole at $u = 0$, so we put $\mathcal{C}_1^\theta$ as a contour on $\C^\times$. More generally, for any complex value of $p$, we can put $\mathcal{C}_1^\theta$ on the universal cover $\widetilde{\C^\times}$.
 \begin{verify}
-  \begin{align*}
+\begin{align*}
 I_{+}(z,p)&=\frac{1}{2\pi i}\int_{\mathcal{C}_{+}}e^{-z(4u^3-3u)}\, \frac{du}{u^p} &\\
 &=\frac{1}{2\pi i}(12 z)^{(p-1)/3}\int_{z^{1/3}\mathcal{C}_{+}}e^{-z(\tfrac{4}{12}\tfrac{t^3}{z}-3 (12 z)^{-1/3}t)}\frac{dt}{t^p} & u=(12 z)^{-\tfrac{1}{3}}t\\
 &=\frac{1}{2\pi i}(12 z)^{(p-1)/3}\int_{z^{1/3}\mathcal{C}_{+}}e^{-\left(\frac{t^3}{3}-(\tfrac{3}{2} z)^{2/3}t\right)}\frac{dt}{t^p} & \\
@@ -2699,16 +2696,24 @@ I_{+}(z,p)&=\frac{1}{2\pi i}\int_{\mathcal{C}_{+}}e^{-z(4u^3-3u)}\, \frac{du}{u^
 \end{align*}  
 \end{verify}
 %
-Notice that, the critical points of $f$ are $\alpha_{\pm}=\pm\tfrac{1}{2}$, as in the Airy case. However, the volume form $\nu_p$ is meromorphic, hence $f$ should be regarded as a function from $\C^*$ to $\C$. In particular, in this example we will see that there is a new singularity at the origin due to the singularity of $\nu_p$. For simplicity, we will restrict to the case $p=1$. Then, $I_+(z,1)$ solves
-\begin{equation}\label{eq:I}
-\left[\partial_z^3-\partial_z+\frac{1}{z}\partial_z^2-\frac{1}{9}\frac{\partial_z}{z^2}\right]\varphi=0
+We will now show, in the case $p = 1$, that equation~\eqref{eqn:I} has a frame of Borel regular solutions---as long as the constant solution $\mathrm{B}_0(z, 1)$ counts as Borel regular. For $\mathrm{A}_1(y, p)$ to satisfy the generalized Airy equation, $I_+(z,1)$ must satisfy the equation
+\begin{equation}\label{eqn:I}
+\left[\big[\big(\tfrac{\partial}{\partial z}\big)^2 - 1\big] + z^{-1} \left(\tfrac{\partial}{\partial z}\right)^2 - \tfrac{1}{9} z^{-2} \right] \tfrac{\partial}{\partial z} \Phi = 0.
 \end{equation}
-or equivalently, $\partial_z\varphi$ solves the modified Bessel equation \eqref{eqn:mod-bessel-AL} with parameter $1/3$. Therefore, following the reasoning of Section \ref{big-idea} and the results of Sections \ref{pos-root-AL} and \ref{neg-root-AL}, we get two analytic solutions of \eqref{eq:I}: $\laplace_{\zeta,1}v_{1,1}$ and $\laplace_{\zeta,-1}v_{-1,1}$ 
-\[ v_{1,1}=-i\sqrt{2}\, (\zeta_1+1)^{-1}\, \zeta_1^{-1/2}\, {}_2F_1\Big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};-\tfrac{1}{2}\zeta_{1}\Big)\]
-\[ v_{-1,1}=-\sqrt{2}\, (1-\zeta_{-1})^{-1}\, \zeta_{-1}^{-1/2}\, {}_2F_1\Big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};\tfrac{1}{2}\zeta_{-1}\Big)\]
-where $\zeta_1=\zeta-1$ and $\zeta_{-1}=\zeta+1$. 
+Equivalently, $\tfrac{\partial}{\partial z} I_+(z, 1)$ satisfies the modified Bessel equation \eqref{eqn:reg-mod-bessel-AL} with parameter $1/3$. We can now follow the reasoning of Section~\ref{big-idea}, viewing that frequency domain differential equation~\eqref{eqn:I} as the image under $\laplace_{\zeta, \alpha}$ of the position domain integral equation
+\begin{equation}\label{int-eq:position-I}
+\left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] (-\zeta)\,v^{(1)} = 0.
+\end{equation}
+In Sections \ref{pos-root-AL} and \ref{neg-root-AL}, we found solutions $v_{\pm 1}$ of the closely related equation~\eqref{int-eq:spatial-mod-bessel-AL}, which we can turn into solutions $v^{(1)}_{\pm 1} = \zeta^{-1} v_{\pm 1}$ of equation~\eqref{int-eq:position-I}.
+
+At the critical values $\zeta = \pm 1$, we can build solutions $v^{(1)}_{\pm 1}$ of this equation from the solutions $v_{\pm 1}$ of equation~\eqref{int-eq:spatial-mod-bessel-AL} that we found in Sections \ref{pos-root-AL} and \ref{neg-root-AL}. Explicitly, in terms of the coordinates defined by $\zeta = 1 + \zeta_1$ and $\zeta = -1 + \zeta_{-1}$, these solutions are
+\begin{alignat*}{3}
+v^{(1)}_1 &=\;& -i\sqrt{2}\,(1 + \zeta_1)^{-1} &\,\zeta_1^{-1/2} &\;{}_2F_1\big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};-\tfrac{1}{2}\zeta_{1}\big) \\
+v^{(1)}_{-1} &=\;& \sqrt{2}\,(-1 + \zeta_{-1})^{-1} &\,\zeta_{-1}^{-1/2} &\;{}_2F_1\big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};\tfrac{1}{2}\zeta_{-1}\big).
+\end{alignat*}
+Their Laplace transforms $V^{(1)}_1 = \laplace_{\zeta, 1} v^{(1)}_1$ and $V^{(1)}_{-1} = \laplace_{\zeta, -1} v^{(1)}_{-1}$ satisfy equation~\eqref{eqn:I}.
 \begin{verify}
-From the result about the Bessel equation, we know there exists two analytic functions $v_1$ and $v_{-1}$ such that $\varphi_1$ and $\varphi_2$ defined by $\partial_z\varphi_1=\laplace_{\zeta,1}v_1$ and $\partial_z\varphi_2=\laplace_{\zeta,-1}v_{-1}$, give a frame of analytic solutions of \eqref{eq:I}. Then we argue as follows:
+From the result about the Bessel equation, we know there exists two analytic functions $v_1$ and $v_{-1}$ such that $\varphi_1$ and $\varphi_2$ defined by $\partial_z\varphi_1=\laplace_{\zeta,1}v_1$ and $\partial_z\varphi_2=\laplace_{\zeta,-1}v_{-1}$, give a frame of analytic solutions of \eqref{eqn:I}. Then we argue as follows:
 \begin{align*}
     \partial_z\varphi_1&=\laplace_{\zeta,1}v_1\\
     \varphi_1-\varphi_1(a)&=\int_a^z\int_1^{\infty}e^{-y\zeta} v_1 d\zeta \, dy\\
@@ -2717,19 +2722,18 @@ From the result about the Bessel equation, we know there exists two analytic fun
     &=\laplace_{\zeta,1} \tfrac{v_1}{\zeta}-\Big[\laplace_{\zeta,1}\tfrac{v_1}{\zeta}\Big](a)
 \end{align*}
 \end{verify}
-Notice that $v_{1,1}\in\singexpalg{1/2}(\Omega_1)$, it has a simple pole at $\zeta_1=-1$ and it is a log--singularity at $\zeta_1=-2$. Similarly, $v_{-1,1}\in\singexpalg{1/2}(\Omega_{-1})$, it has a simple pole at $\zeta_{-1}=1$ and it is a log--singularity at $\zeta_{-1}=2$.
+Notice that $v^{(1)}_1$ belongs to $\singexpalg{-1/2}(\Omega_1)$, has a simple pole at $\zeta_1 = -1$, and has a logarithmic singularity at $\zeta_1 = -2$. Similarly, $v^{(1)}_{-1}$ belongs to $\singexpalg{1/2}(\Omega_{-1})$, has a simple pole at $\zeta_{-1} = 1$, and has a logarithmic singularity at $\zeta_{-1} = 2$.
 
-Notice that $\laplace_{\zeta,1}v_{1,1}$ and $\laplace_{\zeta,-1}v_{-1,1}$ are not a frame of solutions; the equation \eqref{eq:I} is of degree three, but it is enough to consider the constant function $1=\laplace_\zeta \delta$ to build a frame of analytic solutions, where $\delta$ is the formal unit (see the definition in Section \ref{convolution}). In particular, $1=B_0(z,1)$ and confirms Borel regularity for the constant solution. 
+With an argument analogous to the one in Section~\ref{bessel-regularity-AL}, one should be able to show that $V^{(1)}_1$ and $V^{(1)}_{-1}$ are Borel regular. Since equation~\eqref{eqn:I} is third-order, we need one more Borel regular solution to make a frame. We choose the constant solution $1$, which can be seen as the Laplace transform of the formal convolution unit $\delta$ introduced in Section~\ref{convolution}. Interestingly, $1$ is actually the generalized Airy function $\mathrm{B}_0(z,1)$.
+\color{black}
 %
 \color{RoyalBlue}
 \subsubsection{Thimble projection formula}
-In Theorem~\ref{thm:maxim-proof}, we proved a $3/2$-derivative formula to compute the Borel transform of the asymptotics of a thimble integral.
+\textcolor{magenta}{[Are we hoping to fill this in later? We can hide it in a to-do comment, if so]} In Theorem~\ref{thm:maxim-proof}, we proved a $3/2$-derivative formula to compute the Borel transform of the asymptotics of a thimble integral.
 \color{black}
 \subsection{Third-order thimble integrals}
 Let $f\colon\C\to \C$ be a degree three polynomial\footnote{Every degree three polynomial $a_3 u^3+a_2 u^2+a_1 u+a_0$ can be written in the form $a_3u^3+pu+q$, after a change of coordinates $u\to u-\frac{a_2}{3 a_3}$. Furthermore, we can restrict to monic polynomials by setting $a_3=1$.}, we are going to consider thimble integrals of the form 
-
 \[ I_j(z) = \int_{\mathcal{C}_j} \exp\left[z\big(u^3 + pu + q)\right]\,du \]
-
 where $\mathcal{C}_j$ is a thimble in $H_{1}^{B,z}$ through a critical point of $f$. We can distinguish between the case when $f$ has two distinct critical points $x_+, x_-$ and only one critical point $x$, which correspond respectively to the case $p\neq 0$ and $p=0$. \footnote{Equivalently, the difference between the generic case ($p\neq 0$) and the degenerate one ($p=0$) is visible from the ODE perspective as in the former case $I$ is a solution of degree two ODE \[\left[\partial_z^2 +2q \partial_z+\left(\frac{4p^3}{27}+q^2\right)+\frac{1}{z}\left(\partial_z +q \right)-\frac{1}{9z^2}\right]\Phi=0,\] while in the latter, $I$ solves a degree one ODE (see \eqref{eqn:degree-3-poly-1root}).}
 Recall that translations and scaling-rotations act naturally on the image of $f\colon X\to \C$ ($f$ not necessarily a degree three polynomial), and their action transforms the thimble integral $I_j$ in the following ways:
 \begin{itemize}
