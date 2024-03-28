@@ -2572,37 +2572,42 @@ Setting $u = \cosh(t/n)$ and recalling that
 \cosh(n\tau) & = T_n(\cosh(\tau)) \\
 \sinh(m\tau) & = U_{m-1}(\cosh(\tau)) \sinh(\tau),
 \end{align*}
-we can rewrite formula~\eqref{integral:mod-bessel-rational-AL} as \textcolor{magenta}{[switching to the conventional sign for the projection map, so $\mathcal{C}^{(3)}$ now comes from $\infty$ at $-60^\circ$ and goes to $\infty$ at $60^\circ$]}
+we can rewrite formula~\eqref{integral:mod-bessel-rational-AL} as
 \begin{align}
-\notag K_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{z^{-\textcolor{DarkCyan}{1/n}}\mathcal{C}^{(k)}} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
-\notag & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\textcolor{magenta}{\mathcal{C}_j}} \exp\left[z \cosh(t)\right]\,U_{m-1}(\cosh(t/n))\,\sinh(t/n)\,d(t/n) \\
-\label{integral:mod-bessel-lifted} & = \frac{1}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\textcolor{magenta}{\mathcal{C}_j}} \exp\left[z \cosh(t)\right]\,\sinh\big(\tfrac{m}{n}\,t\big)\,dt.
+\notag K^{(j)}_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_\gamma \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
+\notag & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z \cosh(t)\right]\,U_{m-1}(\cosh(t/n))\,\sinh(t/n)\,d(t/n) \\
+\label{integral:mod-bessel-lifted} & = \frac{1}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z \cosh(t)\right]\,\sinh\big(\tfrac{m}{n}\,t\big)\,dt,
 \end{align}
-where $\mathcal{C}_j$ is the path coming from infinity along $(-\infty,0) + 2\pi i (j - \tfrac{1}{2})$ and returning to infinity along $(0, \infty) + 2\pi i (j + \tfrac{1}{2})$, as represented in Figure \ref{fig:bessel_unrolled}. Because $\cosh(t)$ is periodic, the integral has the same value for every choice of $\mathcal{C}_j$ with $j\in\Z$.  
+using the path $\mathcal{C}^\theta_j$ described below.
+\begin{center}
+\begin{tabular}{l|l|l}
+When $j$ is\ldots & $\mathcal{C}^\theta_j$ comes from $-\infty$ along\ldots & and goes to $+\infty$ along\ldots \\[1mm] \hline
+\vphantom{\rule{0mm}{5mm}} Odd & $(-\infty,0) + (j\pi-\theta)i$ & $(0, \infty) + (j\pi-\theta)i$ \\[1mm] \hline
+\vphantom{\rule{0mm}{5mm}} Even & $(-\infty,0) + \big((j+1)\pi-\theta\big)i$ & $(0, \infty) + \big((j-1)\pi-\theta\big)i$ \\[1mm]
+\end{tabular}
+\end{center}
+Because $\cosh(t)$ is periodic, $j$ only affects the integral through its parity.
 \begin{figure}[ht]
     \centering
-    \includegraphics[scale=0.3]{figures/Bessel0_unrolled_lightblue.png}
+    \includegraphics[width=14cm]{figures/bessel-unrolled.png}
     \caption{The paths $\mathcal{C}_j$.}
     \label{fig:bessel_unrolled}
 \end{figure}
 
-For any $\mu \in \C \smallsetminus \Z$, we have a thimble integral representation of $K_{\mu}$ given by formulas 10.32(ii) and 10.27.4 of \cite{dlmf}\textcolor{DarkCyan}{[Cite Watson too?]}
+For any $\mu \in \C \smallsetminus \Z$, the classical modified Bessel function $K_\mu(z)$ can be expressed as the thimble integral
 \begin{equation}\label{int:mod-bessel-gen}
- K_\mu(z) = \frac{1}{2 \sinh(\mu\,i\pi)} \int_{\mathcal{C}_0} \exp\left[z \cosh(t)\right]\,\sinh(\mu t)\,dt,
+ K_\mu(z) = \frac{1}{2 \sinh(\mu\,i\pi)} \int_{\mathcal{C}^\theta_1} \exp\left[z \cosh(t)\right]\,\sinh(\mu t)\,dt
 \end{equation}
+for $|\theta| < \tfrac{\pi}{2}$. This formula can be deduced, with a lot of finagling, from formulas 10.32(ii) and 10.27.4 of \cite{dlmf}\begin{todo}{[Cite Watson too?]}\end{todo}.
 \begin{verify}
-% \begin{align*}
-% \notag K_\mu(z) & = \frac{\pi}{\sin(\mu \pi)} \cdot \frac{1}{2}\big[ I_{-\mu}(z) - I_\mu(z) \big] \\
-% \notag & = \frac{1}{2i \sin(\mu \pi)} \int_{\mathcal{C}'} \exp\left[z \cosh(t)\right]\,\frac{1}{2}\left[e^{\mu t} - e^{-\mu t}\right]\,dt 
-% \end{align*}
-% where $\mathcal{C}'$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$ 
-Following Watson \textit{A treatment of Bessel function}, 1944, pp. 181 (it is the reference in \cite{dlmf})
+\par
+From equation~6.22(3) of Watson's \textit{A treatise on the theory of Bessel functions} (1944), p. 181 (the reference in \cite{dlmf}):
 \begin{align*}
 2\pi i \, I_\mu(z) &= \int_{+\infty}^0 e^{z\cosh(-\pi i+a)-\mu(-i\pi +a)}\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i\pi +a)}\,da +\int_{-\pi}^{\pi} e^{z\cosh(ib)-\mu i b}\,db\\
 & = -\int_{-\infty}^0 e^{z\cosh(-\pi i-a)+\mu(i \pi +a)}\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i \pi  +a)}\,da +\int_{0}^{\pi} e^{z\cosh(ib)}\cosh(i\mu b)\,db\\
-& = -\int_{-\infty}^0 e^{z\cosh(\pi i+a)+\mu(i\pi +a)}\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i\pi +a)}\,da +\int_{0}^{\pi} e^{z\cosh(ib)}\cosh(i\mu b)\,db
+& = -\int_{-\infty}^0 e^{z\cosh(\pi i+a)+\mu(i\pi +a)}\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i\pi +a)}\,da +\int_{0}^{\pi} e^{z\cosh(ib)}\cosh(i\mu b)\,db.
 \end{align*}
-hence 
+Hence,
 \begin{align*}
 4 i \sin(\mu \pi) K_\mu(z) & = 2\pi i \big[ I_{-\mu}(z) - I_\mu(z) \big] \\
 & = \int_{-\infty}^0 e^{z\cosh(\pi i+a)}\left[-e^{-\mu(i\pi +a)}+e^{\mu(i\pi +a)}\right]\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)}\left[e^{\mu(i\pi +a)}-e^{-\mu(i\pi +a)}\right]\,da \\
@@ -2612,28 +2617,18 @@ hence
 \color{OrangeRed}
 Stop at the highlighted line! This simplifies to the integral
 \[ 2 \int_\gamma e^{z\cosh(t)} \sinh(\mu t)\,dt \]
-along the contour $\gamma$ that runs rightward along $i\pi + \R$.
-
-\textcolor{magenta}{The integral on the next line is {\em not} the path coming from infinity along $(-\infty,0) + 2\pi i (j - \tfrac{1}{2})$ and returning to infinity along $(0, \infty) + 2\pi i (j + \tfrac{1}{2})$, because it skips the segment along $i(-\pi, \pi)$.}
+along the contour $\gamma$ that runs rightward along $i\pi + \R$. \textcolor{magenta}{The integral on the next line is {\em not} the path coming from infinity along $(-\infty,0) + 2\pi i (j - \tfrac{1}{2})$ and returning to infinity along $(0, \infty) + 2\pi i (j + \tfrac{1}{2})$, because it skips the segment along $i(-\pi, \pi)$.}
 \par
 \end{verify}
-\textcolor{orange}{The integral converges when $z$ is in the right half-plane.} We get formula~\eqref{integral:mod-bessel-lifted} when we choose a rational parameter $\mu = m/n$.
-%
-%\begin{center}
-%    \begin{tikzpicture}
-%        \draw[->] (6,2)--(10,2);
-%        \draw[->] (8,0)--(8,4);
-%        \draw[red,thick,->] (10,1.8) .. controls (8,2) .. (10,2.2);
-%        %\draw[red,thick,->] (10,2)--(9,2);
-%        %\draw[red,thick] (9,2)--(8.5,2);
-%        %\draw[red,thick] (10,2)--(9.3,2);
-%        %\draw[red,thick,->] (8.5,2)--(9.3,2);
-%        \node[red,below, font=\tiny] at (10,1.8) {$\gamma_z$};
-%        \node[font=\tiny,below] at (8.5,2) {$1$};
-%    \end{tikzpicture}
-%\end{center}
+The integral converges when $z$ is in the right half-plane. Choosing a rational parameter $\mu = \tfrac{m}{n}$ gives formula~\eqref{integral:mod-bessel-lifted}, showing that $K^{(j)}_{m/n}(z)$ is the classical modified Bessel function $K_{m/n}(z)$ when $j$ is odd.
 
+\color{RoyalBlue}
 We can now follow Section \ref{contour-argument-AL} to compute the Borel transform of the asymptotic of $K_\mu$ as an inverse Laplace transform: let $\zeta=-\cosh(t)$
+\color{black}
+\textcolor{orange}{[\ldots]} We first recast the integral into the $\zeta$ plane by setting $-\zeta = \cosh(t)$
+\[ K^{(j)}_{m/n}(z) = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta} \left[ \frac{\sinh(\mu t_+)}{\sinh(t_+)} - \frac{\sinh(\mu t_-)}{\sinh(t_-)} \right] d\zeta, \]
+where $t_-$ and $t_+$ are the lifts to the incoming and outgoing branches of $\mathcal{C}^\theta_j$. \textcolor{orange}{[\ldots]}
+\color{RoyalBlue}
 \begin{align*}
     K_\mu(z)& = -\frac{1}{2 \sinh(\mu\,i\pi)} \int_{\gamma_z} e^{-z \zeta}\,\frac{\sinh(\mu t)}{\sinh(t)}\,d\zeta  & \\
     &=-\frac{\mu}{2 \sinh(\mu\,i\pi)} \int_{\gamma_z} e^{-z \zeta}\, {}_2F_1\left(\frac{1+\mu}{2},\frac{1-\mu}{2};\frac{3}{2};1-\zeta^2\right)\,d\zeta & \cite[15.4.16]{dlmf}
@@ -2663,7 +2658,7 @@ K_0(z) & = \frac{1}{2\pi i} \int_0^\infty \exp\left[-z \cosh(t)\right]\,2\pi i\,
 & = \int_1^\infty \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s},
 \end{align*}
 with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}. Then equation \eqref{eqn:K-mu} gives
-
+\color{black}
 \begin{equation}\label{eqn:borel_bessel0}
     K_0(z)=\textcolor{red}{-}\frac{1}{2}\int_1^\infty e^{-z\zeta} \, \left(\frac{\zeta-1}{2}\right)^{-1/2} \,\, {}_2F_1\left(\frac{1}{2}, \frac{1}{2};\frac{1}{2};\frac{1-\zeta}{2}\right)  d\zeta =  \int_1^\infty \frac{e^{-z\zeta}}{\sqrt{\zeta^2-1}} \, d\zeta .
 \end{equation}
