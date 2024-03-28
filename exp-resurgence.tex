@@ -209,8 +209,8 @@ We view the effectiveness of Borel summation as a regularity property of the sol
 
 The particular classes of problems we look at are level~1 ODEs and exponential period integrals over one dimensional Lefschetz thimbles. To expand the variety of examples available in the literature, we treat various examples of these problems in detail.
 
-\textcolor{RoyalBlue}{
-Borel regularity is a new approach to Borel summability, that present Borel summation as a regularization process and it explains the effectiveness of Borel summability, namely that Borel summation can be used to reconstruct analytic functions from their asymptotics. \textcolor{orange}{[Highlight analytic perspective more?]} Borel regular functions shows up in two classes of examples: as solutions of certain level $1$ ODEs and as integrals over Lefschetz thimbles. In addition, we give a geometric description of the Borel plane.}
+% \textcolor{RoyalBlue}{
+% Borel regularity is a new approach to Borel summability, that present Borel summation as a regularization process and it explains the effectiveness of Borel summability, namely that Borel summation can be used to reconstruct analytic functions from their asymptotics. \textcolor{orange}{[Highlight analytic perspective more?]} Borel regular functions shows up in two classes of examples: as solutions of certain level $1$ ODEs and as integrals over Lefschetz thimbles. In addition, we give a geometric description of the Borel plane.}
 \end{abstract}
 \tableofcontents
 %
@@ -241,8 +241,10 @@ Once you have the formal solution $\series{\Phi}$, you might try to get an actua
 \begin{enumerate}
 \item Thinking of $z$ as a ``frequency variable,'' we take the Borel transform (also known as formal inverse Laplace transform) of $\series{\Phi}$, producing a formal power series $\series{\phi}$ in a new ``position variable'' $\zeta$.
 \item If $\series{\phi}$ has a positive radius of convergence, we say $\series{\Phi}$ is {\em $1$-Gevrey}. We sum $\series{\phi}$ to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. %\textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
-\item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $\zeta \in \alpha + e^{i\theta}[0, \infty)$ its Laplace transform $\hat{\Phi} : = \laplace_{\zeta, \alpha}^\theta \hat{\phi}$ turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\hat{\Phi}$ its {\em Borel sum} at $b$. 
+\item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $\zeta \in\textcolor{red}{\mathcal{J}_\alpha^\theta:=} \alpha + e^{i\theta}[0, \infty)$ its Laplace transform $\hat{\Phi} : = \laplace_{\zeta, \alpha}^\theta \hat{\phi}$ turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\hat{\Phi}$ its {\em Borel sum} at $b$. 
 \end{enumerate}
+\textcolor{red}{[add figure]}
+
 The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship, which is best described in the language of {\em Gevrey asymptoticity}.
 \begin{defn}
 On an open, possibly bounded sector $\Omega$ around $\infty$, a holomorphic function $F$ is {\em asymptotic} to a power series
@@ -281,7 +283,7 @@ If two power series of the form \eqref{series:asymp-defn} are asymptotic to the 
 \begin{defn}
 For any direction $\theta$ and any trans-monomial space $e^{\alpha z} z^{-\sigma} \C \llbracket z^{-1} \rrbracket$, the {\em asymptotic expansion} homomorphism
 \[ \aexp^\theta \maps \mathcal{O}(\C) \to e^{\alpha z} z^{-\sigma} \C \llbracket z^{-1} \rrbracket \]
-is the partially defined map that sends a holomorphic function on an open subset of $\C$ to its asymptotic expansion on a sector containing the end of the ray $z \in e^{i\theta} (0, \infty)$. To be in the domain of $\aexp^\theta$, a function just needs to have an asymptotic expansion on one such sector.
+is the partially defined map that sends a holomorphic function on an open subset of $\C$ to its asymptotic expansion on a sector containing the end of the ray $z \in \mathcal{J}_0^\infty$. To be in the domain of $\aexp^\theta$, a function just needs to have an asymptotic expansion on one such sector.
 \end{defn}
 \begin{todo}[Mention Nevanlinna's theorem, re-stated as \cite[Theorem~C.11]{nikolaev2023existence}, somewhere later.]\end{todo}
 \begin{todo}[State the theorem that differentiation and integration commute with $\aexp^\theta$ under certain circumstances. See Erdelyi's {\em Asymptotic Expansions}, \S 1.6. For basic facts about uniform asymptoticity, see \S 5.7.2 of Mitschi and Sauzin. Theorem~5.20 and its rephrasing say that the Laplace transform of a function is uniformly asymptotic to the formal Laplace transform of the function's Taylor series.]\end{todo}
@@ -1111,7 +1113,7 @@ with a norm of at most
 \[ \frac{\Gamma(1-\sigma)}{\pi\,\sin(\varepsilon/2)}. \]
 \end{prop}
 \begin{proof}
-Define the sector $\Omega_\alpha^{\varepsilon/2} \subset \Omega_\alpha$ similarly to $\Omega_\alpha^\varepsilon$. Choosing some $\lambda' > \Lambda$, let $\widehat{\Omega}_\alpha^{\varepsilon/2, \lambda'} \subset \widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \lambda'$ over all angles $\theta$ in the opening of $\Omega_\alpha^{\varepsilon/2}$. The boundary of $\widehat{\Omega}_\alpha^{\varepsilon/2, \lambda'}$ forms a path $\textcolor{magenta}{\mathcal{C}}$, which we orient so that the boundary of $\widehat{\Omega}_\alpha^\Lambda$ is on its left. Parameterize $\textcolor{magenta}{\mathcal{C}}$ using the arc length parameter $t$ which is zero at the midpoint of the circular arc part of $\textcolor{magenta}{\mathcal{C}}$. Along $\mathcal{C}$, we have
+Define the sector $\Omega_\alpha^{\varepsilon/2} \subset \Omega_\alpha$ similarly to $\Omega_\alpha^\varepsilon$. Choosing some $\lambda' > \Lambda$, let $\widehat{\Omega}_\alpha^{\varepsilon/2, \lambda'} \subset \widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \lambda'$ over all angles $\theta$ in the opening of $\Omega_\alpha^{\varepsilon/2}$. The boundary of $\widehat{\Omega}_\alpha^{\varepsilon/2, \lambda'}$ forms a path $\mathcal{C}$, which we orient so that the boundary of $\widehat{\Omega}_\alpha^\Lambda$ is on its left. Parameterize $\mathcal{C}$ using the arc length parameter $t$ which is zero at the midpoint of the circular arc part of $\mathcal{C}$. Along $\mathcal{C}$, we have
 \[ \Delta \ge \mu + \sin(\varepsilon/2)\,|t|, \]
 for some $\mu \in (\lambda, \lambda')$, where $\Delta$ is still the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. On $\Omega_\alpha^\varepsilon \times \textcolor{magenta}{\mathcal{C}}$, we have
 \[ \Re(z\zeta_\alpha) \le |\zeta_\alpha| \big(\lambda' - \sin(\varepsilon/2)\,|t|\big). \]
@@ -1310,25 +1312,24 @@ In other words, the following diagram
 commutes, where $\mathsf{T}_{-\alpha}$ denotes traslation by $-\alpha$. Notice that $\laplace_{\zeta, 0}$ and $\laplace_{\zeta, \alpha}$ produce functions on the fiber $T^*_{\zeta = 0}B$, while $\laplace_{\zeta_\alpha, 0}$ produces functions on the fiber $T^*_{\zeta = \alpha}B$, so this argument depends on the fact that $z$ is defined almost globally $T^*B$.
 %\end{lemma}
 \subsubsection{Change of translation chart}\label{transl-borel}
-\textcolor{red}{[change $b$ with $\alpha$]}
 We will show that the Borel transform is compatible with the change of translation chart for the Laplace transform in Section~\ref{sec:change-translation}. To be more precise, we will show that the diagram
 \begin{center}
 \begin{tikzcd}
-e^{-zb}\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \}  \arrow[r,"e^{zb}"]  & \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \}\arrow[d, "\borel_{\zeta_b}"] \\
-\{1, \zeta, \zeta^2, \zeta^3, \ldots\}\arrow[u,"\laplace_{\zeta,b}"]\arrow[r,"\text{change chart}"'] &  \{1, \zeta_b, \zeta_b^2, \zeta_b^3, \ldots\}  
+e^{-z\alpha}\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \}  \arrow[r,"e^{z\alpha}"]  & \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \}\arrow[d, "\borel_{\zeta_\alpha}"] \\
+\{1, \zeta, \zeta^2, \zeta^3, \ldots\}\arrow[u,"\laplace_{\zeta,\alpha}"]\arrow[r,"\text{change chart}"'] &  \{1, \zeta_\alpha, \zeta_\alpha^2, \zeta_\alpha^3, \ldots\}  
 \end{tikzcd}
 \end{center}
-commutes, where the functions of $z$ are functions on the fiber $T^*_{\zeta=b}B$. 
+commutes, where the functions of $z$ are functions on the fiber $T^*_{\zeta=\alpha}B$. 
 \begin{proof}
 We want to show that 
-\[\borel_{\zeta_b}\left[e^{zb} \laplace_{\zeta,b}\big[\zeta^n\big]\right]=\zeta^n.\]
-Recall that $\borel_{\zeta_b}$
-is the formal inverse of $\laplace_{\zeta_b,0}$ on the cotangent fibre over $b$. Thus, taking the Borel transform on both side of the identity~\eqref{change-chart} we find
+\[\borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\big[\zeta^n\big]\right]=\zeta^n.\]
+Recall that $\borel_{\zeta_\alpha}$
+is the formal inverse of $\laplace_{\zeta_\alpha,0}$ on the cotangent fibre over $\alpha$. Thus, taking the Borel transform on both side of the identity~\eqref{change-chart} we find
   \begin{align*}
-      \borel_{\zeta_b}\left[e^{zb} \laplace_{\zeta,b}\big[\zeta^n\big]\right]&=\borel_{\zeta_b}\laplace_{\zeta_b,0}\big[\zeta^n\big]\\
-      &=\borel_{\zeta_b}\laplace_{\zeta_b,0}\left[\sum_{k=0}^n{n\choose k}\zeta_b^k b^{n-k}\right]\\
-      &=\sum_{k=0}^n{n\choose k} b^{n-k}\borel_{\zeta_b}\laplace_{\zeta_b,0}\big[\zeta_b^k \big]\\
-      &=\sum_{k=0}^n{n\choose k} b^{n-k}\zeta_b^k\\
+      \borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\big[\zeta^n\big]\right]&=\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\big[\zeta^n\big]\\
+      &=\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\left[\sum_{k=0}^n{n\choose k}\zeta_\alpha^k \alpha^{n-k}\right]\\
+      &=\sum_{k=0}^n{n\choose k} \alpha^{n-k}\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\big[\zeta_\alpha^k \big]\\
+      &=\sum_{k=0}^n{n\choose k} \alpha^{n-k}\zeta_\alpha^k\\
       &=\zeta^n.
   \end{align*}
 \end{proof}
@@ -2235,7 +2236,7 @@ In particular, if $N=1$, the inverse Laplace transform of $I$ has a fractional p
 %
 The Airy equation is
 \begin{equation}\label{eqn:airy}
-\left[\big(\tfrac{\partial}{\partial y}\big)^2 - y\right] F = 0.
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - y\right] \Phi = 0.
 \end{equation}
 One solution is given by the Airy function,
 \[ \Ai(y) = \frac{1}{2\pi i} \int_\gamma \exp\left(\tfrac{1}{3}t^3 - yt\right)\,dt, \]
@@ -2259,7 +2260,7 @@ By considering other Chebyshev polynomials, we can situate the Airy function wit
 \subsection{Airy--Lucas}\label{example_AL}
 The Airy-Lucas equation is
 \begin{equation}\label{eqn:airy-lucas}
-\left[\big(\tfrac{\partial}{\partial y}\big)^2 - (m-1) y^{-1} \tfrac{\partial}{\partial y} - y^{n-2}\right] F = 0
+\left[\big(\tfrac{\partial}{\partial y}\big)^2 - (m-1) y^{-1} \tfrac{\partial}{\partial y} - y^{n-2}\right] \Phi = 0
 \end{equation}
 with $n \in \{3, 4, 5, \ldots\}$ and $m \in \{1, 2, \ldots, n-1\}$. A few solutions are given by the Airy-Lucas functions~\cite[equation~3.6]{charbonnier22}
 \[ \widehat{\Ai}^{(j)}_{n, m-1}(y) = \left\{\begin{array}{ll}1 & j \text{ even} \\ i & j \text{ odd}\end{array}\right\} \frac{y^{m/2}}{\pi} \int_{\mathcal{C}^\theta_j} \exp\left[\tfrac{2}{n} y^{n/2}\,T_n(u)\right]\,U_{m-1}(u)\,du, \]
@@ -2452,14 +2453,25 @@ we can see the integrand as the variation of the function
 \[ \frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} = \frac{3m}{2n}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{m}{2n}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \]
 across the branch cut $\mathcal{J}^\theta_{\zeta, \mp 1}$. When $j$ is odd, only the second term will contribute to the jump, because the first term is regular at $\zeta = 1$. Similarly, when $j$ is even, only the first term will contribute to the jump. We can write the jump explicitly using identity~15.2.3 from \cite{dlmf}. For odd $j$, we have
 \[ K^{(j)}_{m/n}(z) = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \frac{m}{n},\;\frac{1}{2} + \frac{m}{n};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta, \]
-and for even $j$, we have \textcolor{magenta}{[check]}
+and for even $j$, we have \begin{todo}{[check sign]}\end{todo}
 \[ K^{(j)}_{m/n}(z) = -\frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \frac{m}{n},\;\frac{1}{2} + \frac{m}{n};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta. \]
 
-Comparing the expressions above with the expressions for $v_{\pm 1}$ computed in Sections~\ref{pos-root}--\ref{neg-root}, we notice that
+Comparing the expressions above with the expressions for $v_{\pm 1}$ computed in Sections~\ref{pos-root-AL}\;--\;\ref{neg-root-AL}, we notice that
 \[ K^{(j)}_{m/n}(z) = \begin{cases}
 \frac{i}{2}\laplace_{\zeta, 1} v_1 & j \text{ odd} \\
-\frac{i}{2}\laplace_{\zeta, -1} v_{-1} \;\textcolor{magenta}{\text{(?)}} & j \text{ even}.
+\frac{3i}{2}\laplace_{\zeta, -1} v_{-1} & j \text{ even}.
 \end{cases} \]
+\begin{verify}
+\begin{align*}
+\zeta & = 1 + \zeta_1 & -\zeta_1 & = 1 - \zeta \\
+\zeta & = -1 + \zeta_{-1} & \zeta_{-1} & = 1 + \zeta
+\end{align*}
+\begin{align*}
+\left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} & = \sqrt{2}\,\zeta_1^{-1/2} \\
+\left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} & = \sqrt{2}\,(-\zeta_{-1})^{-1/2} \\
+& = i\sqrt{2}\,\zeta_{-1}^{-1/2}
+\end{align*}
+\end{verify}
 \color{black}
 %
 \subsubsection{A flavor of resurgence: the Stokes phenomena in the position domain}\label{resurgence-AL}
@@ -2532,7 +2544,7 @@ It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, as the
 \subsection{Modified Bessel}\label{sec:mod-bessel-lift}
 Our analysis of the Airy-Lucas functions boiled down to an analysis of equation~\eqref{eqn:mod-bessel-AL}: the modified Bessel equation with a rational parameter $\mu = \tfrac{m}{n}$. We now do a general analysis of the modified Bessel equation, allowing the parameter $\mu$ to be any complex number.
 \begin{equation}\label{eqn:mod-bessel}
-\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\mu^2 + z^2\big]\right] \varphi = 0
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\mu^2 + z^2\big]\right] \Phi = 0
 \end{equation}
 
 
@@ -2579,24 +2591,31 @@ For any $\mu \in \C \smallsetminus \Z$, we have a thimble integral representatio
  K_\mu(z) = \frac{1}{2 \sinh(\mu\,i\pi)} \int_{\mathcal{C}_0} \exp\left[z \cosh(t)\right]\,\sinh(\mu t)\,dt,
 \end{equation}
 \begin{verify}
-   % \begin{align*}
-   %    \notag K_\mu(z) & = \frac{\pi}{\sin(\mu \pi)} \cdot \frac{1}{2}\big[ I_{-\mu}(z) - I_\mu(z) \big] \\
-%\notag & = \frac{1}{2i \sin(\mu \pi)} \int_{\mathcal{C}'} \exp\left[z \cosh(t)\right]\,\frac{1}{2}\left[e^{\mu t} - e^{-\mu t}\right]\,dt 
- %   \end{align*}
-  %  where $\mathcal{C}'$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$ 
-  Following Watson \textit{A treatment of Bessel function}, 1944, pp. 181 (it is the reference in \cite{dlmf})
-    \begin{align*}
-        2\pi i \, I_\mu(z) &= \int_{+\infty}^0 e^{z\cosh(-\pi i+a)-\mu(-i\pi +a)} da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i\pi +a)} da +\int_{-\pi}^{\pi} e^{z\cosh(ib)-\mu i b} db\\
-        &=-\int_{-\infty}^0 e^{z\cosh(-\pi i-a)+\mu(i \pi +a)} da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i \pi  +a)} da +\int_{0}^{\pi} e^{z\cosh(ib)}\cosh(i\mu b) db\\
-        &=-\int_{-\infty}^0 e^{z\cosh(\pi i+a)+\mu(i\pi +a)} da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i\pi +a)} da +\int_{0}^{\pi} e^{z\cosh(ib)}\cosh(i\mu b) db
-    \end{align*}
-    hence 
-    \begin{align*}
-   4 i \sin(\mu \pi) K_\mu(z) & = 2\pi i \big[ I_{-\mu}(z) - I_\mu(z) \big]\\
-     &= \int_{-\infty}^0 e^{z\cosh(\pi i+a)}\left[-e^{-\mu(i\pi +a)}+e^{\mu(i\pi +a)}\right] da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)}\left[e^{\mu(i\pi +a)}-e^{-\mu(i\pi +a)}\right] da \\
-        &=2\int_{-\infty}^0 e^{z\cosh(\pi i+a)} \sinh(a+i\pi) da + 2\int_{0}^{+\infty} e^{z\cosh(\pi i+a)} \sinh(i\pi+a) da\\
-        &=2\int_{-\infty}^0 e^{z\cosh(-\pi i+a)} \sinh(a-i\pi) da + 2\int_{0}^{+\infty} e^{z\cosh(\pi i+a)} \sinh(i\pi+a) da
-    \end{align*}
+% \begin{align*}
+% \notag K_\mu(z) & = \frac{\pi}{\sin(\mu \pi)} \cdot \frac{1}{2}\big[ I_{-\mu}(z) - I_\mu(z) \big] \\
+% \notag & = \frac{1}{2i \sin(\mu \pi)} \int_{\mathcal{C}'} \exp\left[z \cosh(t)\right]\,\frac{1}{2}\left[e^{\mu t} - e^{-\mu t}\right]\,dt 
+% \end{align*}
+% where $\mathcal{C}'$ is a path that comes from $\infty$ along $-i \pi + (0, \infty)$ and goes to $\infty$ along $i \pi + (0, \infty)$ 
+Following Watson \textit{A treatment of Bessel function}, 1944, pp. 181 (it is the reference in \cite{dlmf})
+\begin{align*}
+2\pi i \, I_\mu(z) &= \int_{+\infty}^0 e^{z\cosh(-\pi i+a)-\mu(-i\pi +a)}\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i\pi +a)}\,da +\int_{-\pi}^{\pi} e^{z\cosh(ib)-\mu i b}\,db\\
+& = -\int_{-\infty}^0 e^{z\cosh(-\pi i-a)+\mu(i \pi +a)}\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i \pi  +a)}\,da +\int_{0}^{\pi} e^{z\cosh(ib)}\cosh(i\mu b)\,db\\
+& = -\int_{-\infty}^0 e^{z\cosh(\pi i+a)+\mu(i\pi +a)}\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)-\mu(i\pi +a)}\,da +\int_{0}^{\pi} e^{z\cosh(ib)}\cosh(i\mu b)\,db
+\end{align*}
+hence 
+\begin{align*}
+4 i \sin(\mu \pi) K_\mu(z) & = 2\pi i \big[ I_{-\mu}(z) - I_\mu(z) \big] \\
+& = \int_{-\infty}^0 e^{z\cosh(\pi i+a)}\left[-e^{-\mu(i\pi +a)}+e^{\mu(i\pi +a)}\right]\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)}\left[e^{\mu(i\pi +a)}-e^{-\mu(i\pi +a)}\right]\,da \\
+& \textcolor{OrangeRed}{= 2\int_{-\infty}^0 e^{z\cosh(\pi i+a)} \sinh\big(\mu(a+i\pi)\big)\,da + 2\int_{0}^{+\infty} e^{z\cosh(\pi i+a)} \sinh(\mu(i\pi+a)\big)\,da} \\
+& = 2\int_{-\infty}^0 e^{z\cosh(-\pi i+a)} \sinh\big(\mu(a-i\pi)\big)\,da + 2\int_{0}^{+\infty} e^{z\cosh(\pi i+a)} \sinh\big(\mu(i\pi+a)\big)\,da
+\end{align*}
+\color{OrangeRed}
+Stop at the highlighted line! This simplifies to the integral
+\[ 2 \int_\gamma e^{z\cosh(t)} \sinh(\mu t)\,dt \]
+along the contour $\gamma$ that runs rightward along $i\pi + \R$.
+
+\textcolor{magenta}{The integral on the next line is {\em not} the path coming from infinity along $(-\infty,0) + 2\pi i (j - \tfrac{1}{2})$ and returning to infinity along $(0, \infty) + 2\pi i (j + \tfrac{1}{2})$, because it skips the segment along $i(-\pi, \pi)$.}
+\par
 \end{verify}
 \textcolor{orange}{The integral converges when $z$ is in the right half-plane.} We get formula~\eqref{integral:mod-bessel-lifted} when we choose a rational parameter $\mu = m/n$.
 %
