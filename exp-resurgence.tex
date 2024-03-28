@@ -5,18 +5,17 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-%\usepackage{eqnarray}
 \usepackage{stmaryrd} %% needed for mapsto arrows in commutative diagrams
-\usepackage{bm} %% for putting series names in bold
-%%\usepackage{amsthm}
+%%\usepackage{bm} %% for putting series names in bold
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage[svgnames]{xcolor} %% for revisions
 \usepackage{xparse} %% for squiggly underlines
-\usepackage{tikz-cd} %% for term norm scratch work
 \usepackage{tikz}
-%\usepackage{eqnarray}
+\usepackage{tikz-cd}
+\usepackage{rotating} % for \isoarrow
+\usepackage{environ} % to hide verifications and stuff
 
 \let\Re\relax
 \DeclareMathOperator{\Re}{Re}
@@ -59,9 +58,6 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Q}{\mathbb{Q}}
-\usepackage{tikz}
-\usepackage{tikz-cd}
-\usepackage{rotating}
 \newcommand*{\isoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\sim\)}"
 ]}
 
@@ -141,9 +137,29 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 %\newtheorem{exercise}[definition]{Exercise}
 \newtheorem*{notation*}{Notation}
 
-% drafting environments
+% hideable verifications
+\newif\ifshowverify
+\showverifytrue
+\ifshowverify
 \newenvironment{verify}{\color{ForestGreen}}{\color{black}}
-\newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
+\else
+\NewEnviron{verify}{\iffalse\expandafter\BODY\fi}
+\fi
+
+% hideable notes for unstable references
+\newif\ifshowunstable
+\showunstabletrue
+\ifshowunstable
+\newenvironment{unstable}{\color{YellowGreen}}{\color{black}}
+\else
+\NewEnviron{unstable}{\iffalse\expandafter\BODY\fi}
+\fi
+\newcommand{\citesection}[1]{\begin{unstable}\texttt{#1}\end{unstable}}
+
+% drafting environments
+%%\usepackage{environ} % to hide verifications
+%%\newenvironment{verify}{\color{ForestGreen}}{\color{black}}
+%%\newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
 
 % colors
 \definecolor{ietocean}{RGB}{0, 30, 140}
@@ -1737,9 +1753,9 @@ of the space $e^{-\alpha z} \dualsingexpalg{-\tau_\alpha}(\widehat{\Omega}_\alph
 \fill[ietcoast!20, bezier bounding box, path fading=radial edge]
   (-\spill, -\spill) (\spill, \spill)
   (0, 0) -- (41:\spill) arc (41:-48:\spill) -- cycle;
-\fill[ietcoast] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
+\fill[ietcoast!33!black] circle (0.7mm) node[anchor=-15, outer sep=1mm] {$\zeta = \alpha$};
 \foreach \p in {(107.5:1.95), (46.5:2.46), (-56:2.24)} {
-  \fill[ietcoast] \p circle (0.7mm);
+  \fill[ietcoast!33!black] \p circle (0.7mm);
 }
 \end{tikzpicture}
 
@@ -1788,7 +1804,7 @@ The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto
 \end{align*}
 we get a sequence of functions that converges in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ to a solution.
 
-In \textcolor{orange}{\tt sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, we rewrite the prototype solution in the form
+In \citesection{sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, we rewrite the prototype solution in the form
 \[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right], \]
 which shows that it lies in $\zeta^{\tau_\alpha - 1}\,\mathcal{O}(\pi \Upsilon)$. By working with Taylor series, we can show that $\softpart^\alpha$ maps
 \[ \zeta^{\tau_\alpha-1}\,\mathcal{O}(\pi \Upsilon) \to \zeta^{\tau_\alpha}\,\mathcal{O}(\pi \Upsilon) \]
