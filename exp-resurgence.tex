@@ -959,21 +959,25 @@ When $\zeta = 0$ is a branch point, we can still use formula~\eqref{laplace:int}
 \subsubsection{Change of translation chart}\label{sec:change-translation}
 Suppose $\zeta$ is a translation chart on $B$, and $\zeta = \alpha$ is an ordinary point. Let $\zeta_\alpha$ be the translation chart with $\zeta = \alpha + \zeta_\alpha$. The Laplace transforms $\laplace_{\zeta_\alpha, 0}$ and $\laplace_{\zeta, \alpha}$, which both turn functions on $B$ into functions on $T^*_{\zeta = \alpha}B$, are related in the following way. \textcolor{PaleVioletRed}{[We use $\singexp{}{}$ in the diagram below, but it hasn't been introduced yet. Should we just use generic holomorphic function spaces instead? Note that multiplying $\mathcal{O}_{T^*B}(H)$ by $e^{bz}$ (marked in magenta) doesn't do anything.]}
 
-\textcolor{RoyalBlue}{Let $b \in B$ be an ordinary point, and let $\zeta_b$ be the coordinate on $B$ for which $\zeta = \zeta(b) + \zeta_b$. Then the Laplace transform $\laplace_{\zeta_b,0}$, which turns functions on $B$ into functions on $T^*_{b}B$, is compatible with $\laplace_{\zeta,b}$.}
-\begin{lemma}%%\label{translation}
+\textcolor{RoyalBlue}{Let $b \in B$ be an ordinary point, and let $\zeta_b$ be the coordinate on $B$ for which $\zeta = \zeta(b) + \zeta_b$. Then the Laplace transform $\laplace_{\zeta_b,0}$, which turns functions on $B$ into functions on $T^*_\alpha B$, is compatible with $\laplace_{\zeta, \alpha}$.}
+\begin{lemma}\label{translation}
+If the Laplace transform of $\varphi$ is well-defined, then
+
 Let $\varphi\in\singexp{\sigma}{\Lambda}(\Omega_b)$ with $\sigma>-1$ and for some $\Lambda>0$, then
    \begin{equation}
     \label{change-chart}
     e^{-bz} \laplace_{\zeta_b, 0} \varphi = \laplace_{\zeta, b} \varphi.
 \end{equation}
+\begin{todo}
 In other words, the diagram
 \begin{center}
-\begin{tikzcd}
- \mathcal{O}_{T^*B}(H) \arrow[rr, "e^{bz}"]&  & \textcolor{magenta}{e^{bz}}\,\mathcal{O}_{T^*B}(H)\\
-& \singexp{\sigma}{\Lambda}(\Omega_b) \arrow[ul, "\laplace_{\zeta_b,0}"]\arrow[ur,swap,"\laplace_{\zeta,b}"]  &  
+\begin{tikzcd}[row sep=12mm, column sep=2mm]
+\mathcal{O}(T^*B) \arrow[rr, "e^{\alpha z}"] & & \mathcal{O}(T^*B)\\
+& \singexp{\sigma}{\Lambda}(\Omega_b) \arrow[ul, "\laplace_{\zeta_\alpha, 0}"]\arrow[ur,swap,"\laplace_{\zeta, \alpha}"]
 \end{tikzcd}
 \end{center}
-commutes, where $H$ is the half-plane $\Re(z) > 0$ (\textcolor{orange}{the coordinate $z$ is a global coordinate on $T^*B$}).
+commutes, where $H$ is the half-plane $\Re(z) > 0$.
+\end{todo}
 \end{lemma}
 \color{black}
 \color{RoyalBlue}
@@ -1025,28 +1029,28 @@ we get the desired result.
 \textcolor{orange}{[Revise]} Let $\Omega_\beta \subset B$ be an open, simply connected set that touches but does not contain $\zeta = \beta$, as shown \textcolor{RoyalBlue}{(see Figure \ref{Fig:domain})}. Suppose $\Omega_\beta$ contains the ray $\mathcal{J}_{\zeta, \beta}^\theta$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\beta)$ of holomorphic functions on $\Omega_\beta$ which are uniformly of exponential type $\Lambda$ and blow up like $|\zeta - \beta|^\sigma$ as $\zeta$ approaches $\beta$. When $\sigma>-1$, the singularity at $\zeta = \beta$ is integrable. Hence, the Laplace transform $\laplace_{\zeta, \beta}^\theta$ turns elements of $\singexp{\sigma}{\Lambda}(\Omega_\beta)$ into well-defined holomorphic functions on the half-plane $\Re(e^{i\theta} z) > \Lambda$ in the cotangent space $T_{\zeta = \beta}^*B$~\cite[Section  5.6]{diverg-resurg-i}.
 
 \color{NavyBlue}
-Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. In this case, for any $\Lambda \in \R$, let $\widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$. Then, let $\dualsingexp{\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda)$ be the space of holomorphic functions $\Phi$ on $\widehat{\Omega}_\alpha^\Lambda$ with $|\Phi| \lesssim \Delta^\sigma$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. The norm $\|\Phi\|_{\sigma, \Lambda} = \sup_{\widehat{\Omega}_\alpha^\Lambda} \Delta^{-\sigma} |\Phi|$ turns $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ into a Banach space. \textcolor{orange}{Cite \cite{sternin1995borel} better for the theorem.}
+Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. In this case, for any $\Lambda \in \R$, let $\widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$. Then, let $\dualsingexp{\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda)$ be the space of holomorphic functions $\Phi$ on $\widehat{\Omega}_\alpha^\Lambda$ with $|\Phi| \lesssim \Delta^\sigma$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. The norm $\|\Phi\|_{\sigma, \Lambda} = \sup_{\widehat{\Omega}_\alpha^\Lambda} \Delta^{-\sigma} |\Phi|$ turns $\dualsingexp{\sigma}{\Lambda}(\Omega_\alpha)$ into a Banach space. \textcolor{orange}{Cite \cite{sternin1995borel} better for the theorem.} \textcolor{orange}{Note that these results don't depend on which cotangent fiber we're mapping into. $\widehat{\Omega}$ is defined across all cotangent fibers over ordinary points.}
 \begin{prop}[following~\cite{sternin1995borel}]\label{prop:laplace-cont}
 Let $\Omega_\alpha$ be an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. For any $\sigma > 0$ and $\Lambda \ge 0$, and any angle $\theta$ in the opening of $\Omega_\alpha$, the Laplace transform $\laplace_{\zeta_\alpha, 0}^\theta$ is a continuous map $\singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha)$, with a norm of at most $\Gamma(\sigma)$.
 \end{prop}
 \begin{proof}
-Given some $f \in \singexp{\sigma-1}{\Lambda}(\Omega_\alpha)$, we compute
+Given some $\phi \in \singexp{\sigma-1}{\Lambda}(\Omega_\alpha)$, we compute
 \begin{align*}
-|\laplace_{\zeta_\alpha, 0}^\theta f| & = \left| \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta_\alpha} f\,d\zeta_\alpha \right| \\
-& \le \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-\Re(z\zeta_\alpha)} |\zeta_\alpha|^{\sigma-1} e^{\Lambda |\zeta_\alpha|} \|f\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
-& \le \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{(\Lambda - c_{z, \theta}|z|)|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|f\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha|,
+|\laplace_{\zeta_\alpha, 0}^\theta \phi| & = \left| \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta_\alpha} \phi\,d\zeta_\alpha \right| \\
+& \le \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-\Re(z\zeta_\alpha)} |\zeta_\alpha|^{\sigma-1} e^{\Lambda |\zeta_\alpha|} \|\phi\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
+& \le \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{(\Lambda - c_{z, \theta}|z|)|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|\phi\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha|,
 \end{align*}
-where $c_{z, \theta}$ is the cosine of $\arg(z) + \theta$. When $|z|$ is large and $c_{z, \theta}$ is positive, the integrand shrinks exponentially as $|\zeta|$ grows. This shows that for each angle $\theta$ in the opening of $\Omega_\alpha$, the integral defining $\laplace_{\zeta_\alpha, 0}^\theta f$ converges in some region of $\widehat{\Omega}_\alpha^\Lambda$. It also shows that for different angles $\theta$, the functions $\laplace_{\zeta_\alpha, 0}^\theta f$ match where their domains overlap. We can therefore glue these functions together into one big Laplace transform of $f$, defined at large values of $|z|$ across the whole opening angle of $\widehat{\Omega}_\alpha^\Lambda$.
+where $c_{z, \theta}$ is the cosine of $\arg(z) + \theta$. When $|z|$ is large and $c_{z, \theta}$ is positive, the integrand shrinks exponentially as $|\zeta|$ grows. This shows that for each angle $\theta$ in the opening of $\Omega_\alpha$, the integral defining $\laplace_{\zeta_\alpha, 0}^\theta \phi$ converges in some region of $\widehat{\Omega}_\alpha^\Lambda$. It also shows that for different angles $\theta$, the functions $\laplace_{\zeta_\alpha, 0}^\theta \phi$ match where their domains overlap. We can therefore glue these functions together into one big Laplace transform of $\phi$, defined at large values of $|z|$ across the whole opening angle of $\widehat{\Omega}_\alpha^\Lambda$.
 
-We can now simplify the calculation of $\laplace_{\zeta_\alpha, 0}^\theta f$ by looking at $\arg(z)$ and using the closest angle $\theta$ in the opening of $\Omega_\alpha$. This keeps $\Lambda - c_{z, \theta}|z|$ equal to $\Delta$, the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. It follows that
+We can now simplify the calculation of $\laplace_{\zeta_\alpha, 0}^\theta \phi$ by looking at $\arg(z)$ and using the closest angle $\theta$ in the opening of $\Omega_\alpha$. This keeps $\Lambda - c_{z, \theta}|z|$ equal to $\Delta$, the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. It follows that
 \begin{align*}
-|\laplace_{\zeta_\alpha, 0}^\theta f| & \le \int_{\mathcal{J}_{\zeta, \alpha}^{\arg(z)}} e^{-\Delta|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|f\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
-& = \int_0^\infty e^{-\Delta t} t^{\sigma-1} \|f\|_{\sigma-1, \Lambda}\,dt.
+|\laplace_{\zeta_\alpha, 0}^\theta \phi| & \le \int_{\mathcal{J}_{\zeta, \alpha}^{\arg(z)}} e^{-\Delta|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|\phi\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
+& = \int_0^\infty e^{-\Delta t} t^{\sigma-1} \|\phi\|_{\sigma-1, \Lambda}\,dt.
 \end{align*}
-The integral on the last line converges throughout $\widehat{\Omega}_\alpha^\Lambda$. We can evaluate it by observing that this bound on the Laplace transform of $f$ is itself a Laplace transform:
-\[ |\laplace_{\zeta_\alpha, 0}^\theta f| \le \Gamma(\sigma) \Delta^{-\sigma} \|f\|_{\sigma-1, \Lambda}. \]
+The integral on the last line converges throughout $\widehat{\Omega}_\alpha^\Lambda$. We can evaluate it by observing that it is a Laplace transform integral, with the roles of position and frequency played by $t$ and $\Delta$ respectively:
+\[ |\laplace_{\zeta_\alpha, 0}^\theta \phi| \le \Gamma(\sigma) \Delta^{-\sigma} \|\phi\|_{\sigma-1, \Lambda}. \]
 In terms of the metric on $\dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha)$ defined above, this bound says that
-\[ \|\laplace_{\zeta_\alpha, 0}^\theta f\|_{\sigma, \Lambda} \le \Gamma(\sigma) \|f\|_{\sigma-1, \Lambda}, \]
+\[ \|\laplace_{\zeta_\alpha, 0}^\theta \phi\|_{\sigma, \Lambda} \le \Gamma(\sigma) \|\phi\|_{\sigma-1, \Lambda}, \]
 which is what we wanted to show.
 \end{proof}
 \begin{prop}
@@ -1060,7 +1064,7 @@ with a norm of at most
 \begin{proof}
 Define the sector $\Omega_\alpha^{\varepsilon/2} \subset \Omega_\alpha$ similarly to $\Omega_\alpha^\varepsilon$. Choosing some $\lambda' > \Lambda$, let $\widehat{\Omega}_\alpha^{\varepsilon/2, \lambda'} \subset \widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \lambda'$ over all angles $\theta$ in the opening of $\Omega_\alpha^{\varepsilon/2}$. The boundary of $\widehat{\Omega}_\alpha^{\varepsilon/2, \lambda'}$ forms a path $\mathcal{C}$, which we orient so that the boundary of $\widehat{\Omega}_\alpha^\Lambda$ is on its left. Parameterize $\mathcal{C}$ using the arc length parameter $t$ which is zero at the midpoint of the circular arc part of $\mathcal{C}$. Along $\mathcal{C}$, we have
 \[ \Delta \ge \mu + \sin(\varepsilon/2)\,|t|, \]
-for some $\mu \in (\lambda, \lambda')$, where $\Delta$ is still the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. On $\Omega_\alpha^\varepsilon \times \textcolor{magenta}{\mathcal{C}}$, we have
+for some $\mu \in (\lambda, \lambda')$, where $\Delta$ is still the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. On $\Omega_\alpha^\varepsilon \times \mathcal{C}$, we have
 \[ \Re(z\zeta_\alpha) \le |\zeta_\alpha| \big(\lambda' - \sin(\varepsilon/2)\,|t|\big). \]
 
 %%Choose a path $\textcolor{magenta}{\mathcal{C}}$ through $\widehat{\Omega}_\alpha^\Lambda$ on which
@@ -1070,10 +1074,10 @@ for some $\mu \in (\lambda, \lambda')$, where $\Delta$ is still the distance to 
 %Choose any path $\textcolor{magenta}{\mathcal{C}}$ that runs through $\widehat{\Omega}_\alpha^\Lambda$ at a constant distance from the boundary, oriented so that the boundary is on its left. The inverse Laplace transform is given by the formula
 
 The inverse Laplace transform is given by the formula
-\[ \big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi = \frac{1}{2 \pi i} \int_{\textcolor{magenta}{\mathcal{C}}} e^{z\zeta_\alpha} \Phi\,dz. \]
+\[ \big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi = \frac{1}{2 \pi i} \int_{\mathcal{C}} e^{z\zeta_\alpha} \Phi\,dz. \]
 When $\Phi$ is in $\dualsingexp{-\sigma}{\Lambda}(\Omega_\alpha)$, we have the bound
 \begin{align*}
-\left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi\right| & \le \frac{1}{2 \pi} \int_{\textcolor{magenta}{\mathcal{C}}} e^{\Re(z\zeta_\alpha)} \Delta^{-\sigma} \|\Phi\|_{\sigma, \Lambda}\,dz \\
+\left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi\right| & \le \frac{1}{2 \pi} \int_{\mathcal{C}} e^{\Re(z\zeta_\alpha)} \Delta^{-\sigma} \|\Phi\|_{\sigma, \Lambda}\,dz \\
 & \le \frac{1}{2 \pi} \int_{-\infty}^\infty e^{|\zeta_\alpha| \left(\lambda' - \sin(\varepsilon/2)\,|t|\right)} \big(\mu + \sin(\varepsilon/2)\,|t|\big)^{-\sigma} \|\Phi\|_{\sigma, \Lambda}\,dt \\
 & = e^{|\zeta_\alpha| \lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{1}{2 \pi} \int_{-\infty}^\infty e^{-|\zeta_\alpha| \sin(\varepsilon/2)\,|t|} \big(\mu + \sin(\varepsilon/2)\,|t|\big)^{-\sigma}\,dt,
 \end{align*}
@@ -1083,19 +1087,9 @@ which we can rewrite as
 & = e^{|\zeta_\alpha| \lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{1}{\pi\,\sin(\varepsilon/2)} \int_0^\infty e^{-|\zeta_\alpha|s} \big(\mu + s\big)^{-\sigma}\,ds \\
 & \le e^{|\zeta_\alpha| \lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{1}{\pi\,\sin(\varepsilon/2)} \int_0^\infty e^{-|\zeta_\alpha|s} s^{-\sigma}\,ds
 \end{align*}
-using the new parameter $s = \sin(\varepsilon/2)\,t$. Recognizing the integral in the last line as itself a Laplace transform, we have
+using the new parameter $s = \sin(\varepsilon/2)\,t$. Recognizing the integral in the last line as a Laplace transform integral, with the roles of position and frequency played by $s$ and $|\zeta_\alpha|$ respectively, we have
 \[ \left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi\right| \le e^{|\zeta_\alpha| \lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{\Gamma(1-\sigma)}{\pi\,\sin(\varepsilon/2)} |\zeta_\alpha|^{\sigma-1}, \]
 which is what we wanted to show.
-
-%%On $\Omega_\alpha^\varepsilon$, by construction, the angle $\arg(\zeta)$ is more than $\pi + \varepsilon/2$ away from the asymptotic directions of $\textcolor{magenta}{\mathcal{C}}$. Hence, on $\Omega_\alpha^\varepsilon \times \textcolor{magenta}{\mathcal{C}}$, we have
-%%\[ \Re(z\zeta_\alpha) \le |\zeta_\alpha| \big(\lambda' - \sin(\varepsilon/2)\,|t|\big) \]
-%%for some constant $\lambda' \in \R$. It follows that
-%%\begin{align*}
-%%\left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} F\right| & \le \frac{1}{2 \pi} \int_{-\infty}^\infty e^{|\zeta_\alpha| \left(\lambda' - \sin(\varepsilon)\,|t|\right)} \Delta_{\textcolor{magenta}{\Lambda}}^{-\sigma} \|F\|_{\sigma, \Lambda}\,dt \\
-%%& = e^{|\zeta_\alpha| \lambda'} \|F\|_{\sigma, \Lambda}\,\frac{\Delta_{\textcolor{magenta}{\Lambda}}^{-\sigma}}{2 \pi} \int_{-\infty}^\infty e^{-|\zeta_\alpha| \sin(\varepsilon)\,t}\,dt \\
-%%& = e^{|\zeta_\alpha| \lambda'} \|F\|_{\sigma, \Lambda}\,\frac{\Delta_{\textcolor{magenta}{\Lambda}}^{-\sigma}}{2 \pi}\,\frac{2}{|\zeta_\alpha| \sin(\varepsilon)}
-%%\end{align*}
-\textcolor{orange}{[Oops, looks like we can't keep $\Delta$ constant along the integration path if we want to recover something with a $|\zeta_\alpha|^{\sigma-1}$ singularity.]}
 \end{proof}
 \textcolor{magenta}{[Introduce bare $\widehat{\Omega}$]}
 \color{black}
@@ -1246,12 +1240,12 @@ and taking the inverse of $\laplace_{\zeta_\alpha,0}$ we find
 %%\end{center}
 %\begin{lemma}
     \[\borel_{\zeta}\big[e^{-z\alpha}z^{-n-1}\big]=\frac{\zeta_\alpha^n}{n!}.\]
-In other words, the following diagram 
-    \begin{center}
+In other words, the diagram 
+\begin{center}
 \begin{tikzcd}[every arrow/.append style={shift left}]
-\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[dd,"\borel_\zeta"']\arrow[rr,"e^{-z\alpha}"]& & e^{-\alpha z} \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[dd, "\borel_\zeta"]    \\
+\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[dd,"\borel_\zeta"'] \arrow[rr,"e^{-z\alpha}"]& & e^{-\alpha z} \{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow[dd, "\borel_\zeta"] \\
 & & \\
-\{1, \zeta, \zeta^2, \zeta^3, \ldots\} \arrow[rr, "\mathsf{T}_{-\alpha}^*"']      &  & \{1, \zeta_\alpha, \zeta_\alpha^2, \zeta_\alpha^3, \ldots\}\arrow[lluu,"\laplace_{\zeta_\alpha,0}"]\arrow{uu}{\laplace_{\zeta,\alpha}}
+\{1, \zeta, \zeta^2, \zeta^3, \ldots\} \arrow[rr, "\mathsf{T}_{-\alpha}^*"'] & & \{1, \zeta_\alpha, \zeta_\alpha^2, \zeta_\alpha^3, \ldots\}\arrow[lluu,"\laplace_{\zeta_\alpha, 0}" description]\arrow{uu}{\laplace_{\zeta, \alpha}}
 \end{tikzcd}
 \end{center}
 commutes, where $\mathsf{T}_{-\alpha}$ denotes traslation by $-\alpha$. Notice that $\laplace_{\zeta, 0}$ and $\laplace_{\zeta, \alpha}$ produce functions on the fiber $T^*_{\zeta = 0}B$, while $\laplace_{\zeta_\alpha, 0}$ produces functions on the fiber $T^*_{\zeta = \alpha}B$, so this argument depends on the fact that $z$ is defined almost globally $T^*B$.
@@ -1328,6 +1322,12 @@ Here are some examples of this notation in action. Since the Laplace transform $
 \subsubsection{The convolution product}\label{convolution}
 %
 Let $\series{\phi}, \series{\psi} \in \C\{\zeta\}$ be two convergent formal series in a neighbourhood of $\zeta=0$, and let $\hat{\phi}$ and $\hat{\psi}$ be respectively their sum in a common region of convergence, say $|\zeta|<R$. Then the convolution product $\hat{\phi}\ast\hat{\psi}$ is defined as
+\color{Maroon}
+\[ [\phi \ast_{\zeta, \alpha} \psi](a) = \int_{\zeta = \alpha}^a \psi\,\mathsf{R}^*\phi\,d\zeta, \]
+where $\mathsf{R}$ is the $180^\circ$ rotation that exchanges $\zeta = 0$ with $a$. In other words, $\mathsf{R}^*\zeta = \zeta(a) - \zeta$.
+
+%%where we get $\phi_\text{flip}$ by pulling $\phi$ back along the transformation that moves $a$ to $\zeta = \alpha$ and then rotates $180 translating $a$ to $\zeta = \alpha$, rotating $180^\circ$, and
+\color{black}
 \begin{equation}\label{eq:convolution}
     \hat{\phi}\ast\hat{\psi}:=\int_0^{\zeta}\hat{\phi}(\zeta-\zeta')\hat{\psi}(\zeta')\, d\zeta'
 \end{equation}
@@ -1403,45 +1403,12 @@ We saw in Section~\ref{sec:reg-decay} that when $\Omega$ is an appropriate secto
 \subsubsection{Borel transforms on $1$-Gevrey series}
 [I've moved this section into Section~\ref{sec:bridging} (``Bridging the gap\ldots'') because it seems to be in the same spirit. If it should or must stay here, please let me know.]
 \color{black}
-\subsubsection{Borel transforms on $1$-Gevrey series}\label{sec:Borel-gevrey}
-\textcolor{PaleVioletRed}{[This is an example of a ``run-on sentence.'' Please look for sentences like this and split them up, as shown above. $\rightarrow$]} \textcolor{OrangeRed}{So far, our discussion on the Borel transform was at the level of formal series, however there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic functions at $\zeta=0$.} These formal series are the so-called $1$-Gevrey series:
-\[\tilde{\Phi}=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1\]
-is $1$-Gevrey if there exists $A>0$ such that $|a_n|\lesssim A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis $k$-Gevrey series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. The Borel transform can be generalized in order to obtain germs of holomorphic function for higher Gevrey series. }  
-\begin{lemma}
-Let $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket$. Then, $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket_1$ is $1$-Gevrey if and only if $\borel_\zeta\tilde{\Phi}\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
-\end{lemma}
-Let $\tilde{\Phi}, \tilde{\Psi}\in \C \llbracket z^{-1} \rrbracket_1$ (assuming they are series of $z$ on the fiber over $\zeta=0$), then following \cite[Definition 5.12]{diverg-resurg-i}, the convolution product $*$ of $\tilde{\phi}:=\borel_\zeta\tilde{\Phi}$ and $\tilde{\psi}:=\borel_\zeta\tilde{\Psi}$ is defined as
-\[\borel_\zeta(\tilde{\Psi}\tilde{\Phi})=:\tilde{\psi}\ast\tilde{\phi}.\]
-Furthermore, since $\tilde{\phi}$ and $\tilde{\psi}$ are convergent formal series, it follows that the sum of $\tilde{\psi}\ast\tilde{\phi}$ is $\hat{\psi}\ast\hat{\phi}$ (see the discussion in Section~\ref{convolution}).   %It's not accidentely that we use the same symbol $*$ that denotes the convolution product to denote the product of two convergent series; indeed, as proved in , %the convolution product $\ast$ can be explicitly characterized as \textcolor{orange}{[maybe just define it on holomorphic functions first, and then extend to all formal series by linearity via Taylor series]}
-%\[
- %   \hat{\psi}\ast\hat{\phi}=\int_0^{\zeta}d\zeta' \hat{\psi}(\zeta-\zeta')\hat{\phi}(\zeta'),
-%\]
-%and we refer to \cite[Definition 5.12 and Lemma 5.14]{diverg-resurg-i} for a proof. 
-%\textcolor{orange}{check Lemma 5.14}{where $\hat{\phi}$ and $\hat{\psi}$ are the sum of $\series{\phi}$ and $\series{\psi}$, respectively. }
-%\begin{prop}
- %   Let $\tau\in\mathbb{R}\setminus\Z_{<0}$, then $\borel_\zeta$ is a $\C$-algebra homomorphism from $1$-Gevrey formal power series $z^{-\tau} \C\llbracket z^{-1} \rrbracket$ to the germs of holomorphic functions $\zeta^{\tau-1} \C\{ z^{-1} \}$.
-%\end{prop}
-%\begin{proof}
- %   Let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1$ %with $|a_n|\leq A^n n!$ and $A>0$ then  
-%\begin{align*}
-%\borel_\zeta (z^{-\tau}\tilde{\Phi})&=\frac{\zeta^{\tau-1}}{\Gamma(\tau)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
-%&=a_0\frac{\zeta^{\tau-1}}{\Gamma(\tau)}+\frac{1}{\Gamma(\tau)}\int_0^\zeta\sum_{n\geq 0}\frac{a_{n+1}}{n!}(\zeta-\zeta')^{\tau-1}(\zeta')^n\, d\zeta'\\
-%&=a_0\frac{\zeta^{\tau-1}}{\Gamma(\tau)}+\frac{1}{\Gamma(\tau)}\sum_{n\geq 0} \frac{a_{n+1}}{n!} \int_0^\zeta (\zeta-\zeta')^{\tau-1}(\zeta')^n\, d\zeta'\\
-%&=a_0\frac{\zeta^{\tau-1}}{\Gamma(\tau)}+\sum_{n\geq 0}a_{n+1} \frac{\zeta^{n+\tau}}{\Gamma(1+n+\tau)}
-%\end{align*}  
-%where in the third step we use that the Borel transform of $\tilde{\Phi}$ is convergent in a neighbourhood of $\zeta=0$. and \[\left|\frac{a_{n+1}}{\Gamma(1+n+\tau)}\right|\leq A^{n+1}\frac{\Gamma(n+2)}{|\Gamma(n+1+\tau)|} \]
-%which grows as $n(n+1)^{-\tau} A^{n+1}$.
-%\begin{verify}
- %   we use $\Gamma(n+1+\tau)\sim \Gamma(n+1) (n+1)^\tau$ as $n\to\infty$. 
-%\end{verify}
-%\end{proof}
-
 %
 \subsubsection{Action on fractional derivatives and fractional integrals}\label{sec:frac-diff-laplace}
 As we will see in Section~\ref{sec:examples}, it is useful to study the action of the Laplace and Borel transform on both fractional integral and fractional derivative operators.
 \begin{defn}
     Let $\nu \in (-\infty, 1)$, the \textit{fractional integral} $\partial^{\nu-1}_{\zeta, b}$ is defined by
-\[ [\partial^{\nu-1}_{\zeta, b} f](p) \defeq \frac{1}{\Gamma(1-\nu)} \int_{\zeta =b}^p \big(\zeta(p)-\zeta\big)^{-\nu} f\,d\zeta, \]
+\[ [\partial^{\nu-1}_{\zeta, b} \phi](p) \defeq \frac{1}{\Gamma(1-\nu)} \int_{\zeta =b}^p \big(\zeta(p)-\zeta\big)^{-\nu} \phi\,d\zeta, \]
 where $p$ is any point on the position domain $B$.\footnote{For completeness we also give the definition of the fractional integral $\partial_{\zeta_b,0}^{-\lambda}$: 
 %
 \begin{equation*}
@@ -1454,7 +1421,7 @@ Notice that the fractional integral obeys the expected semigroup law \cite[Secti
 \end{align*}
 and agrees with ordinary repeated integration when $\nu$ is an integer (see \cite[Equation 35]{mladenov2014advanced}).
 
-For $\alpha \in (0, 1)$ and integers $n \ge 0$, fractional derivatives $\fracderiv{n+\alpha}{\zeta}{0}$ are defined by composing $\fracderiv{\alpha-1}{\zeta}{0}$ with powers of $\tfrac{\partial}{\partial \zeta}$. However, $\fracderiv{\alpha-1}{\zeta}{0}$ and $\tfrac{\partial}{\partial \zeta}$ don't commute~\cite[equation 54]{mladenov2014advanced}. Various ordering conventions give various definitions of $\fracderiv{n+\alpha}{\zeta}{0} f$, which differ by operators that act on the germ of $f$ at zero (see \cite[Section 1.3]{mladenov2014advanced}---original source \cite{podlubny}). We will use the {\em Riemann-Liouville} convention.
+For $\alpha \in (0, 1)$ and integers $n \ge 0$, fractional derivatives $\fracderiv{n+\alpha}{\zeta}{0}$ are defined by composing $\fracderiv{\alpha-1}{\zeta}{0}$ with powers of $\tfrac{\partial}{\partial \zeta}$. However, $\fracderiv{\alpha-1}{\zeta}{0}$ and $\tfrac{\partial}{\partial \zeta}$ don't commute~\cite[equation 54]{mladenov2014advanced}. Various ordering conventions give various definitions of $\fracderiv{n+\alpha}{\zeta}{0} \phi$, which differ by operators that act on the germ of $\phi$ at zero (see \cite[Section 1.3]{mladenov2014advanced}---original source \cite{podlubny}). We will use the {\em Riemann-Liouville} convention.
 \begin{definition}\label{defn:frac_driv}
 For $\alpha \in (0, 1)$ and integers $n \ge 0$, the {\em Riemann-Liouville fractional derivative} $\fracderiv{n+\alpha}{\zeta}{0}$ is defined by
 \[ \fracderiv{n+\alpha}{\zeta}{0} \defeq \left(\tfrac{\partial}{\partial \zeta}\right)^{n+1} \fracderiv{\alpha-1}{\zeta}{0}. \]
@@ -1587,7 +1554,7 @@ We can express the fractional integrals/derivatives $\fracderiv{\lambda}{\zeta}{
 
 We first assume $\Phi=\laplace_{\zeta,\alpha}\phi$ for $\phi\in\singexpalg{\sigma}(\Omega_\alpha)$, and assume $z$ is a function on $T^*_{\zeta=0}B$. Then, for every $\lambda\in (-1,\infty)$
 \begin{align*}
-    \borel_\zeta(z^{-\lambda}{\Phi})=\borel_\zeta(z^{-\lambda}\laplace_{\zeta,\alpha}\phi)&=\borel_\zeta(\laplace_{\zeta,\alpha}\partial_{\zeta,\alpha}^{-\lambda}\phi)=\partial_{\zeta,\alpha}^{-\lambda}\phi=\frac{1}{\Gamma(\lambda)}\int_{\alpha}^\zeta (\zeta-t)^{\lambda-1}\phi(t)dt=\borel_\zeta z^{-\lambda}\ast_\alpha\phi
+    \borel_\zeta(z^{-\lambda}{\Phi})=\borel_\zeta(z^{-\lambda}\laplace_{\zeta,\alpha}\phi)&=\borel_\zeta(\laplace_{\zeta,\alpha}\partial_{\zeta,\alpha}^{-\lambda}\phi)=\partial_{\zeta,\alpha}^{-\lambda}\phi=\frac{1}{\Gamma(\lambda)}\int_{\alpha}^\zeta (\zeta-t)^{\lambda-1}\phi(t)dt=\borel_\zeta (z^{-\lambda})\ast_\alpha\phi
 \end{align*}
 where we use the identity $\laplace_{\zeta, \alpha}\,\fracderiv{-\lambda}{\zeta}{\alpha} \varphi = z^{-\lambda} \laplace_{\zeta, \alpha} \varphi$, that generalizes properties $(i)$ and $(ii)$ in Proposition~\ref{prop:L-int-op}. Hence \[\borel_\zeta (z^{-\lambda})\ast_\alpha\borel_\zeta{\Phi}=\fracderiv{-\lambda}{\zeta}{\alpha}\big[\borel_\zeta\Phi\big].\]
 %However, if we consider a different fiber on $T^*B$, we have to modify the definition of convolution product in order to generalize properties (i) and (ii): indeed assuming $\series{\Phi}=\laplace_{\zeta_\alpha,0}\phi$ we have for every $\lambda\in (0,\infty)$
@@ -1617,7 +1584,57 @@ hence,  \[\partial_{\zeta_b,0}^{-\lambda}\big[\borel_{\zeta_b}\Phi\big]=\borel_{
 %\end{problem}
 %The Laplace transform $\laplace_\zeta^\theta$ turns local holomorphic functions on $B$ into solutions of this problem. \textcolor{orange}{In fact, it produces all the solutions \textbf{[check argument]}.[Veronica: I don't understand--why it produces all the solutions?]}
 
-\subsection{Bridging the gap between analytic and formal objects}\label{sec:bridging}
+\subsection{Bridging the gap between formal and analytic objects}\label{sec:bridging}
+%
+\subsubsection{Formal to analytic \textcolor{LimeGreen}{[title suggestions?]}}\label{sec:Borel-gevrey}
+%
+If we want to get analytic information from the Borel transform---for example, by doing Borel summation---we should focus on the series whose Borel transforms converge. These are the {\em $1$-Gevrey} series mentioned in Section~\ref{intro:summation}. Within $\C \llbracket z^{-1} \rrbracket$, the $1$-Gevrey series form a subspace $\C \llbracket z^{-1} \rrbracket_1$. They are characterized by the moderate growth of their coefficients.
+\begin{prop}
+A series
+\[ \sum_{n \ge -1} a_n z^{-n-1} \]
+is $1$-Gevrey if and only if there is some $A > 0$ with $|a_n| \lesssim A^n n!$ over all $n \ge 0$.
+\end{prop}
+\begin{proof}[Proof sketch]
+The Borel-transformed series
+\[ a_{-1} \delta + \sum_{n \ge 0} a_n \frac{\zeta^n}{n!} \]
+converges if and only if there is some $A > 0$ with $|a_n / n!| \lesssim A^n$ over all $n \ge 0$.
+\end{proof}
+\color{RoyalBlue}
+\textcolor{PaleVioletRed}{[This is an example of a ``run-on sentence.'' Please look for sentences like this and split them up, like above $\rightarrow$]} \textcolor{OrangeRed}{So far, our discussion on the Borel transform was at the level of formal series, however there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic functions at $\zeta=0$.} These formal series are the so-called $1$-Gevrey series:
+\[\tilde{\Phi}=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1\]
+is $1$-Gevrey if there exists $A>0$ such that $|a_n|\lesssim A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis $k$-Gevrey series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. The Borel transform can be generalized in order to obtain germs of holomorphic function for higher Gevrey series. }  
+\begin{lemma}
+Let $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket$. Then, $\tilde{\Phi}\in\C \llbracket z^{-1} \rrbracket_1$ is $1$-Gevrey if and only if $\borel_\zeta\tilde{\Phi}\in\C\lbrace\zeta\rbrace$ is a germ of holomorphic functions. 
+\end{lemma}
+\color{black}
+Let $\tilde{\Phi}, \tilde{\Psi}\in \C \llbracket z^{-1} \rrbracket_1$ (assuming they are series of $z$ on the fiber over $\zeta=0$), then following \cite[Definition 5.12]{diverg-resurg-i}, the convolution product $*$ of $\tilde{\phi}:=\borel_\zeta\tilde{\Phi}$ and $\tilde{\psi}:=\borel_\zeta\tilde{\Psi}$ is defined as
+\[\borel_\zeta(\tilde{\Psi}\tilde{\Phi})=:\tilde{\psi}\ast\tilde{\phi}.\]
+Furthermore, since $\tilde{\phi}$ and $\tilde{\psi}$ are convergent formal series, it follows that the sum of $\tilde{\psi}\ast\tilde{\phi}$ is $\hat{\psi}\ast\hat{\phi}$ (see the discussion in Section~\ref{convolution}).   %It's not accidentely that we use the same symbol $*$ that denotes the convolution product to denote the product of two convergent series; indeed, as proved in , %the convolution product $\ast$ can be explicitly characterized as \textcolor{orange}{[maybe just define it on holomorphic functions first, and then extend to all formal series by linearity via Taylor series]}
+%\[
+ %   \hat{\psi}\ast\hat{\phi}=\int_0^{\zeta}d\zeta' \hat{\psi}(\zeta-\zeta')\hat{\phi}(\zeta'),
+%\]
+%and we refer to \cite[Definition 5.12 and Lemma 5.14]{diverg-resurg-i} for a proof. 
+%\textcolor{orange}{check Lemma 5.14}{where $\hat{\phi}$ and $\hat{\psi}$ are the sum of $\series{\phi}$ and $\series{\psi}$, respectively. }
+%\begin{prop}
+ %   Let $\tau\in\mathbb{R}\setminus\Z_{<0}$, then $\borel_\zeta$ is a $\C$-algebra homomorphism from $1$-Gevrey formal power series $z^{-\tau} \C\llbracket z^{-1} \rrbracket$ to the germs of holomorphic functions $\zeta^{\tau-1} \C\{ z^{-1} \}$.
+%\end{prop}
+%\begin{proof}
+ %   Let $\tilde{\Phi}(z)=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1$ %with $|a_n|\leq A^n n!$ and $A>0$ then  
+%\begin{align*}
+%\borel_\zeta (z^{-\tau}\tilde{\Phi})&=\frac{\zeta^{\tau-1}}{\Gamma(\tau)}\ast\left(a_0\delta+\sum_{n\geq 0}a_{n+1}\frac{\zeta^n}{n!}\right)\\
+%&=a_0\frac{\zeta^{\tau-1}}{\Gamma(\tau)}+\frac{1}{\Gamma(\tau)}\int_0^\zeta\sum_{n\geq 0}\frac{a_{n+1}}{n!}(\zeta-\zeta')^{\tau-1}(\zeta')^n\, d\zeta'\\
+%&=a_0\frac{\zeta^{\tau-1}}{\Gamma(\tau)}+\frac{1}{\Gamma(\tau)}\sum_{n\geq 0} \frac{a_{n+1}}{n!} \int_0^\zeta (\zeta-\zeta')^{\tau-1}(\zeta')^n\, d\zeta'\\
+%&=a_0\frac{\zeta^{\tau-1}}{\Gamma(\tau)}+\sum_{n\geq 0}a_{n+1} \frac{\zeta^{n+\tau}}{\Gamma(1+n+\tau)}
+%\end{align*}  
+%where in the third step we use that the Borel transform of $\tilde{\Phi}$ is convergent in a neighbourhood of $\zeta=0$. and \[\left|\frac{a_{n+1}}{\Gamma(1+n+\tau)}\right|\leq A^{n+1}\frac{\Gamma(n+2)}{|\Gamma(n+1+\tau)|} \]
+%which grows as $n(n+1)^{-\tau} A^{n+1}$.
+%\begin{verify}
+ %   we use $\Gamma(n+1+\tau)\sim \Gamma(n+1) (n+1)^\tau$ as $n\to\infty$. 
+%\end{verify}
+%\end{proof}
+%
+\subsubsection{Analytic to formal \textcolor{LimeGreen}{[title suggestions?]}}
+%
 The spaces $\singexp{\rho}{\Lambda}(\Omega)$ from \cite{reg-sing-volterra} are convenient for analytic discussions of the Laplace transform, as we saw in Section~\ref{sec:reg-decay}. To study Borel summation, however, we also need to take Taylor series expansions around $\zeta = 0$, which cannot be done for all functions in $\singexp{\rho}{\Lambda}(\Omega)$. We need a way to make sure we stay in the subspace where the Taylor series exists.
 
 To do this, it will be helpful to work on the universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$. In the result below, our conditions on the open set $\Upsilon \subset \widetilde{\C^\times}$ imply that the projection $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$. A holomorphic function on $\pi \Upsilon$ is therefore guaranteed to have a Laurent series expansion around $\zeta = 0$. In fact, a holomorphic function on $\Upsilon$ will have a Laurent series expansion around $\zeta = 0$ only if it descends to a holomorphic function on $\pi \Upsilon$. In other words, by pulling back along $\pi$, we can think of the holomorphic function space $\mathcal{O}(\pi \Upsilon)$ as the subspace of $\mathcal{O}(\Upsilon)$ where the Laurent series around $\zeta = 0$ exists.
