@@ -16,8 +16,13 @@
 
 % --- cotangent fibers ---
 
-\newcommand{\rfiber}{1.5}
-\pgfmathsetmacro{\rshade}{1.5*\rfiber}
+\newcommand{\setfiberscale}[1]{
+  \pgfmathsetmacro{\rfiber}{#1}
+  \pgfmathsetmacro{\rshade}{1.5*\rfiber}
+}
+\setfiberscale{1.5}
+%%\newcommand{\rfiber}{1.5}
+%%\pgfmathsetmacro{\rshade}{1.5*\rfiber}
 
 \newcommand{\drawfiber}{
   \foreach \sgn in {-1, 1} {
@@ -137,19 +142,24 @@
 
 % local picture of the Laplace transform
 \newcommand{\basicLaplace}{
-\begin{tikzpicture}[scale=0.9]
+\begin{tikzpicture}
+\setfiberscale{2}
+
 % position space
 \begin{fiber}
   \genfibercontent
-  \ray{0}{0}
+  \ray{-1}{0.4}
+  \fill (-1, 0.4) circle (\dotsize);
+  \node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$\zeta$};
 \end{fiber}
 \node[anchor=north, outer sep=1mm, font=\footnotesize]
   at (0, -\rfiber) {position space};
 
 % frequency space
-\begin{scope}[shift={(4 + 0.25*8/3, 0)}]
-  \begin{fiber}[shade, phase=\phase]
+\begin{scope}[shift={(5.5, 0)}]
+  \begin{fiber}[shade, phase=\phase, dis=0.6]
     \genfibercontent[dual]
+    \node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$z$};
   \end{fiber}
   \node[anchor=north, outer sep=1mm, font=\footnotesize]
     at (0, -\rfiber) {frequency space};
@@ -159,7 +169,7 @@
 
 % phase space picture of the Laplace transform
 \newcommand{\phaseSpaceLaplace}{
-\begin{tikzpicture}[z={(0.25cm, 0.2cm)}, scale=0.9]
+\begin{tikzpicture}[z={(0.25cm, 0.2cm)}]
 % position plane
 \begin{scope}[canvas is xz plane at y=0]
   % surface

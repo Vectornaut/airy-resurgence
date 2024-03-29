@@ -10,6 +10,7 @@
 %%\usepackage{bm} %% for putting series names in bold
 \usepackage{graphicx}
 \usepackage{fancyhdr}
+\usepackage[font=small, margin=1cm]{caption}
 \usepackage{enumitem}
 \usepackage[svgnames]{xcolor} %% for revisions
 \usepackage{xparse} %% for squiggly underlines
@@ -241,15 +242,12 @@ Once you have the formal solution $\series{\Phi}$, you might try to get an actua
 \begin{enumerate}
 \item Thinking of $z$ as a ``frequency variable,'' we take the Borel transform (also known as formal inverse Laplace transform) of $\series{\Phi}$, producing a formal power series $\series{\phi}$ in a new ``position variable'' $\zeta$.
 \item If $\series{\phi}$ has a positive radius of convergence, we say $\series{\Phi}$ is {\em $1$-Gevrey}. We sum $\series{\phi}$ to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. %\textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
-\item Furthermore, if $\hat{\phi}$ grows slowly enough along an infinite ray $\zeta \in\textcolor{red}{\mathcal{J}_\alpha^\theta:=} \alpha + e^{i\theta}[0, \infty)$ its Laplace transform $\hat{\Phi} : = \laplace_{\zeta, \alpha}^\theta \hat{\phi}$ turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\hat{\Phi}$ its {\em Borel sum} at $\alpha$. 
+\item If $\hat{\phi}$ also grows slowly enough along an infinite ray $\zeta \in \alpha + e^{i\theta}[0, \infty)$, its Laplace transform $\hat{\Phi} : = \laplace_{\zeta, \alpha}^\theta \hat{\phi}$ turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\tilde{\Phi}$ is {\em Borel-summable}, and we call $\hat{\Phi}$ its {\em Borel sum} at $\alpha$. 
 \end{enumerate}
-%
-%
-\begin{figure}[ht]
-\centering
+\begin{center}
 \basicLaplace
-\caption{\small{On the right, the ray $\mathcal{J}_\alpha^\theta$ in the position domain. On the left, the half plane in the frequency domain, where the Laplace transform $\laplace_{\zeta,0}^\theta \hat{\phi}$ is holomorphic.}}
-\end{figure}
+\captionof{figure}{The Laplace transform $\laplace^\theta_{\zeta, \alpha}$ integrates a function along the ray $\zeta \in \alpha + e^{i\theta}[0, \infty)$ in the position domain, turning it into a function on some half-plane $\Re(e^{i\theta} z) > \Lambda$ in the frequency domain.}
+\end{center}
 
 The series $\series{\Phi}$ and its Borel sum $\hat{\Phi}$ have a special relationship, which is best described in the language of {\em Gevrey asymptoticity}.
 \begin{defn}
@@ -342,7 +340,7 @@ You can not be sure {\em a priori} that $\hat{\Phi}$ solves your original proble
 %\color{black}
 \subsection{A new perspective: Borel regularity}
 \subsubsection{Introducing Borel regularity}
-We consider an holomoprhic function $\Phi$, solution of our problem. Taking its asymptotic expansion along the half-plane $\Re e^{i\theta}z > 0$, we get a formal power series $\series{\Phi}$. 
+We consider an holomoprhic function $\Phi$, solution of our problem. Taking its asymptotic expansion along the half-plane $\Re(e^{i\theta}z) > 0$, we get a formal power series $\series{\Phi}$. 
 
 %\textcolor{Tan}{We consider a new diagram: we start reading it from the upper-left corner, namely we assume there exists a holomorphic function $\Phi$ which is asymptotic to a formal power series $\series{\Phi}$ as $\Re e^{i\theta}z$ goes to $\infty$ in the direction of $\theta$}
 
@@ -350,18 +348,18 @@ We consider an holomoprhic function $\Phi$, solution of our problem. Taking its 
 \begin{tikzcd}
 & \text{problem} & \\
 \Phi \arrow[ru, no head, tail, swap, "\text{solves}"' ] \arrow[rrd, mapsto, "\aexp^{\theta}"]& & \\
-\hat{\Phi} \arrow[rr, "\aexp^{\theta}", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[luu, no head, tail, swap, "\parbox{10mm}{\centering\scriptsize formally solves}"] \arrow[dd, mapsto, "\borel"] \\
+\hat{\Phi} \arrow[rr, "\aexp^{\theta}", "\text{($1$-Gevrey)}"'] & & \series{\Phi} \arrow[luu, no head, tail, swap, "\parbox{10mm}{\centering\scriptsize formally solves}"] \arrow[dd, mapsto, "\borel_\zeta"] \\
 & & \\
-\hat{\phi} \arrow[uu, mapsto, "\laplace_b^\theta"] & & \series{\phi} \arrow[ll, mapsto, "\text{sum}"] 
+\hat{\phi} \arrow[uu, mapsto, "\laplace_{\zeta, 0}^\theta"] & & \series{\phi} \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
 \end{center}
 If $\series{\Phi}$ is Borel-summable, as described in Section~\ref{intro:summation}, its Borel sum $\hat{\Phi}$ is a new holomorphic function.
-Since different functions can be asymptotic to the same power series, taking the Borel sum of the asymptotic series of $\Phi$ must smooth away some details. We will therefore call this process {\em Borel regularization}. Explicitly, Borel regularization works in four steps.
+Since different functions can be asymptotic to the same power series, taking the Borel sum of the asymptotic series of $\Phi$ must smooth away some details. We will therefore call this process {\em Borel regularization}. Explicitly, Borel regularization works in four steps:
 \begin{enumerate}
 \item Take the asymptotic expansion $\series{\Phi} = \aexp^{-\theta} \Phi$.
-\item Take the Borel transform $\series{\phi} = \borel \series{\Phi}$.
+\item Take the Borel transform $\series{\phi} = \borel_\zeta \series{\Phi}$.
 \item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before.%\textcolor{red}{This is possible, by definition, if $\series{\Phi}$ is $1$-Gevrey.[Veronica: I'll remove this! Being Gevrey implies that the Borel transform is convergent, not that we can analytically continue it]}
-\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable.\footnote{More generally, we are allowed to take the Laplace transform at another point $b \in B$. This would be natural in our study of ODEs and thimble integrals.}
+\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable.\footnote{More generally, we could take the Laplace transform $\laplace^\theta_{\zeta, \alpha}$ starting at any point $\zeta = \alpha$ in $B$. The choice of base point will play an important role in our study of ODEs and thimble integrals.}
 \end{enumerate}
 We will say a function is {\em Borel-regularizable} if its asymptotic expansion is Borel-summable, ensuring that we can carry out the last two steps.
 
@@ -490,38 +488,30 @@ The special solution $\psi_\alpha$ is also regular enough to have a ``fractional
 \begin{theorem}\label{thm:soln_is_Borel_sum}
 The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is the Borel sum of the suitable normalizad formal trans-monomial solution $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$ of the equation $\mathcal{P}\series{\Phi} = 0$.
 \end{theorem}
-With a little more work, encapsulated in Lemma~\ref{lem:shifted_holo_closed} from Section~\ref{sec:bridging}, we can use this result to show that $\Psi_\alpha$ is Borel regular.
+We can use this result to show that $\Psi_\alpha$ is Borel regular. Because of the fractional power $z^{-\tau_\alpha}$, we use Lemma~\ref{lem:shifted_holo_closed} instead of a more standard result on the asymptotics of a Borel sum, such as Theorem~5.20 of \cite{diverg-resurg-i}.
+\color{RoyalBlue}
 \begin{theorem}\label{thm:soln_is_asymptotic}
 The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is asymptotic to the formal solution $\series{\Psi}_\alpha$ from Theorem~\ref{thm:soln_is_Borel_sum}.
 \end{theorem}
-\begin{corollary}\label{cor:soln_borel-reg}
-The solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is Borel regular.
-\end{corollary}
-\begin{remark}
-\textcolor{Maroon}{Notice that the result of Theorem~\ref{thm:soln_is_asymptotic} is not a consequence of the general result that the Borel--Laplace sum of 1-Gevrey series $\series{\Phi}$ is uniform Gevrey asymptotic to $\series{\Phi}$ itself (see Theorem~5.20 in~\cite{diverg-resurg-i}).}
-\end{remark}
-From an analytic perspective, Theorem~\ref{thm:soln_is_Borel_sum} justifies the ansatz that Poincar\'{e} used to solve the equation $\mathcal{P}\series{\Phi} = 0$. On the other hand, if you prefer to work formally, you can start from the computation of the Poincar\'{e} solutions and the observation that they are $1$-Gevrey, and then use Theorem~\ref{thm:exist_uniq_ODE} to establish their Borel summability. We do this in Section~\ref{sec:new-summability-proof}.
-
-In addition, as a consequence of Corollary~\ref{cor:soln_borel-reg} we deduce that the set of solutions $\Psi_\alpha$ for $-\alpha$ root of $P$, gives a frame of Borel regular solutions of equation $\mathcal{P}\Phi=0$.  
-
-\textcolor{magenta}{[Discuss where to find proofs, similarly to \texttt{reg-sing-volterra}.]}
-
-\textcolor{orange}{[Prove existence of a frame of Borel regular solutions?]}
 \color{black}
+\begin{corollary}\label{cor:soln_borel-reg}
+The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is Borel regular. This is because $\Psi_\alpha$ is asymptotic to the formal solution $\series{\Psi}_\alpha$ from Theorem~\ref{thm:soln_is_Borel_sum}.
+\end{corollary}
+In many cases, by choosing from among the solutions $\Psi_\alpha$, we can build a frame of Borel-regular solutions of the equation $\mathcal{P}\Phi = 0$.
+
+From an analytic perspective, Theorem~\ref{thm:soln_is_Borel_sum} justifies the ansatz that Poincar\'{e} used to solve the equation $\mathcal{P}\series{\Phi} = 0$. On the other hand, if you prefer to work formally, you can start from the computation of the Poincar\'{e} solutions and the observation that they are $1$-Gevrey, and then use Theorem~\ref{thm:exist_uniq_ODE} to establish their Borel summability. We do this in Section~\ref{sec:new-summability-proof}.
 \subsubsection{Why does Borel summation work for thimble integrals?}\label{sec:why_borel_thimble}
 %\textcolor{DarkCyan}{Let $X$ be an $N$-dimensional complex manifold, and $f\colon X\to\C$ a proper holomorphic map with non-degenerate critical points.}
 Our treatment of thimble integrals will be based on our geometric picture of the Laplace transform, summarized in Section~
 
 \color{RoyalBlue}
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{NavyBlue}{[The important thing about $\C$, where $f$ takes values, is that it is a translation surface---\ldots]} For each critical point $a$, let $\mathcal{J}_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\mathcal{J}_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\mathcal{J}_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\mathcal{J}_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\mathcal{J}_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\mathcal{C}_a^\theta$ can be regarded as the component of $f^{-1}(\mathcal{J}_\alpha^\theta)$ that goes through $a$. \textcolor{orange}{We could orient the thimble so that shifting $\mathcal{C}_a$ to its left would make its projection run clockwise around $\mathcal{J}_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=6.5cm]{figures/rays.png}
-    \hspace{0.5cm}
-    \includegraphics[width=6.5cm]{figures/thimbles-n5.png}
-    \caption{The rays $\mathcal{J}^{\pi/8}_{\zeta, \pm 1}$ on the position domain, and their preimages in the $u$ plane.}
-    \label{fig:thimble_vs_rays}
-\end{figure}
+\begin{center}
+\includegraphics[width=6.5cm]{figures/rays.png}
+\hspace{0.5cm}
+\includegraphics[width=6.5cm]{figures/thimbles-n5.png}
+\captionof{figure}{The rays $\mathcal{J}^{\pi/8}_{\zeta, \pm 1}$ on the position domain, and their preimages in the $u$ plane.}\label{fig:thimble_vs_rays}
+\end{center}
 Choose a critcal point $a$ of $f$, noting the associated critical value $\alpha = f(a)$, and let $I_\alpha$ be a thimble integral through the thimble $\mathcal{C}_a^\theta$:
 \begin{equation}
 I_\alpha(z)\defeq\int_{\mathcal{C}_a^\theta}e^{-zf}\nu.
@@ -604,18 +594,17 @@ On the other hand, we compute the asymptotic expansion of $I$ using the saddle p
 %     
 \subsubsection{Other results}
 %
-As part of the treatment, we have made use of some new perspectives on the Laplace transform (see Section~\ref{sec:Laplace-Borel-general}). Indeed, the Laplace transform is often used to solve ODEs on the frequency domain by relating them to ODEs on the position domain. We find, however, that it is much easier and more natural to relate ODEs on the frequency domain to integral equations on the spatial domain. In particular, working with integral equations in the spatial domain will be our main strategy to prove Borel regularity for ODEs, building on our previous result \cite[Theorem 4]{reg-sing-volterra}. 
+In our study of Borel regularity, we use some new perspectives on the Laplace transform, discussed in Section~\ref{sec:Laplace-Borel-general}.
 
-Furthermore, we introduce a geometric picture where the position domain $B$ is a translation surface. If $b \in B$ is non-singular, the frequency domain for $\laplace_{\zeta,b}^\theta$ is $T^*_{\zeta=b} B$. If $b$ is a conical singularity, the frequency domain is more interesting, as we will see in our main example (see Figure \ref{fig:different_fibres}). 
+Laplace transform methods for solving ODEs on the frequency domain traditionally relate them to ODEs on the position domain. We find, however, that it is easier and more natural to relate ODEs on the frequency domain to integral equations on the position domain. In particular, the good behavior of integral equations and their solutions is central to our proof that certain ODEs have Borel regular solutions.
 
-\begin{figure}[ht]
-\centering
+In Sections \ref{sec:geometry_laplace} and \ref{sec:geometry_borel}, we introduce a geometric picture of the Laplace and Borel transforms, generalizing the position domain from the complex plane to a translation surface $B$. Each translation chart $\zeta$ gives a different version of the Laplace transform, whose associated frequency domain is the cotangent fiber $T^*_{\zeta = 0} B$. At a conical singularity of $B$, which cannot lie in the domain of a translation chart, the frequency domain has a more interesting shape, illustrated in Figure \ref{fig:different_fibres}.
+\begin{center}
 \phaseSpaceLaplace
-\caption{The fiber over an ordinary point of the translation surface $B$ is a copy of the complex plane. However, the fiber over a singular point of $B$ has an interesting structure. Here we represent the example of Airy functions, where the singularity as angle $6 \pi$.}
-    \label{fig:different_fibres}
-\end{figure}
+\captionof{figure}{The fiber over an ordinary point of the translation surface $B$ is a copy of the complex plane. However, the fiber over a singular point of $B$ has an interesting structure. Here we represent the example of Airy functions, where the singularity as angle $6 \pi$.}\label{fig:different_fibres}
+\end{center}
 
-We will illustrate our main results with detailed treatments of several examples: we will mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals: the Airy--Lucas functions (Section~\ref{example_AL}), the modified Bessel functions, the Airy function (Appendix~\ref{airy-appendix}), \textcolor{red}{the anharmonic oscillator...).} On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in Lemma~\ref{lem:thimble_proj_formula} and it is crucial for the proof of Theorem~\ref{thm:maxim}. In the Airy example (see Section~\ref{airy-appendix}) we’ll compute the \textit{thimble projection formula} directly, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
+We illustrate our main results with detailed treatments of several examples: we will mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals: the Airy--Lucas functions (Section~\ref{example_AL}), the modified Bessel functions, the Airy function (Appendix~\ref{airy-appendix}), \textcolor{red}{the anharmonic oscillator...).} On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in Lemma~\ref{lem:thimble_proj_formula} and it is crucial for the proof of Theorem~\ref{thm:maxim}. In the Airy example (see Section~\ref{airy-appendix}) we’ll compute the \textit{thimble projection formula} directly, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
 
 Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we’ll make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}. \textcolor{red}{The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}).} Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}.
 
@@ -796,11 +785,10 @@ We thank Maxim Kontsevich, David Sauzin, Fr\'ed\'eric Fauvet, Andrew Neitzke, fo
 \subsection{Borel regularity as a good approximation condition}
 Borel regular functions can be characterized as functions that are approximated well, asymptotically, by polynomials. Watson showed a century ago \cite[Part II, Section 9]{watson2} that a function $\Phi$ is Borel regular whenever its asymptotic expansion for large $|z|$ is uniformly $1$-Gevrey-asymptotic in an obtuse-angled sector at infinity (see Definition~\ref{def:unif-gevrey-asymp}).
 
-Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern proof in \cite[Theorem~B.15]{nikolaev2023exact} and a generalization to power series with fractional power exponents in \cite{delabaere--rosoamanana}), and improved again later by Sokal \cite{sokal1980improvement}. These improvements tell us that the obtuse-angled sector around $\infty$ in the statement above can be replaced with an open disk whose boundary touches infinity---that is, an half-plane which doesn't contain $0$, and may be displaced from $0$ by some distance $c$.
+Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern proof in \cite[Theorem~B.15]{nikolaev2023exact} and a generalization to power series with fractional power exponents in \cite{delabaere--rosoamanana}), and improved again later by Sokal \cite{sokal1980improvement}. These improvements tell us that the obtuse-angled sector around $\infty$ in the statement above can be replaced with an open disk whose boundary touches infinity---that is, an half-plane which doesn't contain $0$, and may be displaced from $0$ by some distance $\Lambda$.
 \begin{center}
 \begin{tikzpicture}
-\renewcommand{\rfiber}{3}
-\pgfmathsetmacro{\rshade}{1.5*\rfiber}
+\setfiberscale{2.5}
 \renewcommand{\phase}{35}
 \newcommand{\dis}{1.2}
 \begin{fiber}[shade, phase=\phase, dis=\dis]
@@ -809,73 +797,26 @@ Watson's theorem was soon improved by Nevanlinna \cite{nevanlinna} (see a modern
 \draw[rotate=-\phase] (\dis, -0.1) -- (\dis, 0.1);
 \draw (0, 0) -- (0.75, 0);
 \draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:-\phase:0.5) node[midway, anchor=180-\phase/2] {$-\theta$};
-\node[anchor=90-\phase, inner sep=2mm] at (-\phase:\dis) {$c$};
+\node[anchor=90-\phase, inner sep=2mm] at (-\phase:\dis) {$\Lambda$};
+\node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$z$};
 \end{fiber}
 \end{tikzpicture}
-\begin{tikzpicture}
-\newcommand{\size}{3}
-\pgfmathsetmacro{\outsize}{sqrt(2)*\size}
-\newcommand{\ang}{35}
-\newcommand{\dis}{1.2}
-\begin{scope}
-  \clip (-\size, -\size) rectangle (\size, \size);
-  \fill[violet!20, rotate=-\ang] (\dis, -\outsize) rectangle (\outsize, \outsize);
-  \begin{scope}[violet]
-    \draw (0, 0) -- (-\ang:\outsize);
-    \draw[rotate=-\ang] (\dis, -0.1) -- (\dis, 0.1);
-    \draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:-\ang:0.5) node[midway, anchor=180-\ang/2] {$-\theta$};
-    \node[anchor=90-\ang, inner sep=2mm] at (-\ang:\dis) {$c$};
-  \end{scope}
-\end{scope}
-%%\begin{scope}[violet]
-%%  \draw (0, 0) -- (center);
-%%  \fill (center) circle (0.05);
-%%\end{scope}
-\draw[->] (-\size, 0) -- (\size, 0);
-\draw[->] (0, -\size) -- (0, \size);
-\node[anchor=north west] at (-\size, \size) {$z$};
-\end{tikzpicture}
 \end{center}
-\textcolor{orange}{[move $z$, $\zeta$ before removing old purple figures]} When the half-plane extends along the $-\theta$ direction, the sum \textcolor{magenta}{$\hat{f}$} of the Borel transform of $\aexp^{-\theta} \Phi$ has an absolutely convergent Laplace transform along the $\theta$ direction. In fact, we have $|\textcolor{magenta}{\hat{f}}| \lesssim e^{c |\zeta|}$ uniformly over all $\zeta$ in a constant-radius neighborhood of the ray $e^{i\theta}[0, \infty)$. 
+When the half-plane extends along the $-\theta$ direction, the sum $\hat{\phi}$ of the Borel transform of $\aexp^{-\theta} \Phi$ has an absolutely convergent Laplace transform along the $\theta$ direction. In fact, we have $|\hat{\phi}| \lesssim e^{\Lambda |\zeta|}$ uniformly over a constant-radius neighborhood of the ray $\zeta \in e^{i\theta}[0, \infty)$. 
 \begin{center}
 \begin{tikzpicture}
-\renewcommand{\rfiber}{3}
+\setfiberscale{2.5}
 \pgfmathsetmacro{\rshade}{1.5*\rfiber}
 \renewcommand{\phase}{35}
-\newcommand{\radius}{1}
+\newcommand{\radius}{0.85}
 \begin{fiber}
 \fill[pwbeige!30, rotate=\phase] (\rshade, \radius) -- (0, \radius) arc (90:270:\radius) -- (0, -\radius) -- (\rshade, -\radius) -- cycle;
 \genfibercontent
 \draw (0, 0) -- (0.75, 0);
 \draw[ray] (0, 0) -- (\phase:\rshade);
 \draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:\phase:0.5) node[midway, anchor=180+\phase/2] {$\theta$};
+\node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$\zeta$};
 \end{fiber}
-\end{tikzpicture}
-\begin{tikzpicture}
-\newcommand{\size}{3}
-\pgfmathsetmacro{\outsize}{sqrt(2)*\size}
-\newcommand{\ang}{35}
-\newcommand{\radius}{1}
-\begin{scope}
-  \clip (-\size, -\size) rectangle (\size, \size);
-  \fill[violet!20, rotate=\ang] (\outsize, \radius) -- (0, \radius) arc (90:270:\radius) -- (0, -\radius) -- (\outsize, -\radius) -- cycle;
-  \begin{scope}[violet]
-    \draw (0, 0) -- (\ang:\outsize);
-    \draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:\ang:0.5) node[midway, anchor=180+\ang/2] {$\theta$};
-    %%\begin{scope}[rotate=\ang]
-    %%  \draw[dotted] (0, 0) -- (0, -\radius) node[anchor=90+\ang] {$r$};
-    %%  \draw (\radius, -0.1) -- (\radius, 0.1);
-    %%\end{scope}
-    %%\fill (mark) circle (0.05);
-  \end{scope}
-\end{scope}
-%%\begin{scope}[violet]
-%%  \draw (0, 0) -- (center);
-%%  \fill (center) circle (0.05);
-%%\end{scope}
-\draw[->] (-\size, 0) -- (\size, 0);
-\draw[->] (0, -\size) -- (0, \size);
-\node[anchor=north west] at (-\size, \size) {$\zeta$};
 \end{tikzpicture}
 \end{center}
 
@@ -938,24 +879,27 @@ In the $N$-dimensional analog of our set-up \ref{borel-reg:explanatory-power} th
 \section{The Laplace and Borel transforms}\label{sec:Laplace-Borel-general}
 \subsection{The geometry of the Laplace transform}\label{sec:geometry_laplace}
 Classically, the Laplace transform turns functions on the position domain into functions on the frequency domain. In the study of Borel summation and resurgence, it is useful to see the position domain as a {\em translation surface} $B$, and the frequency domain as one of its cotangent spaces. Roughly speaking, the Laplace transform lifts holomorphic functions on $B$ to holomorphic functions on $T^*B$.
+\par \textcolor{magenta}{Combine ``briefly,'' ``direction,'' and ``frequency'' into all one sub-sub-section}
 %
-\subsubsection{Translation surfaces, briefly}
+\subsubsection{Background on translation surfaces}
 %
-A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\cite{zorich2006flat}. A translation chart is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$. We will require $B$ to be finite-type and $\lambda$ to have a pole at each puncture. This kind of translation surface has a ``cylindrical end'' at each puncture where $\lambda$ has order $-1$, and a ``$|2n|$-planar end'' at each puncture where $\lambda$ has order $n-1 < -1$~\cite[Section 2.5]{gupta2013meromorphic} \textcolor{orange}{(or cite Aaron's article, which will hopefully present the same background in the translation surface context)}(see Figure~\ref{fig:translation_surface}).
-\begin{figure}[ht]
-    \centering
-    %\includegraphics{}
-    \caption{On the left an example of translation surface with ``cylindrical end''. On the right, an example of translation surface with  ``$|2n|$-planar end''. }
-    \label{fig:translation_surface}
-\end{figure}
+\paragraph{Translation surfaces, briefly}
 %
-\subsubsection{Direction}\label{transl:dir}
+A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\cite{zorich2006flat}. A translation chart is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$. \textcolor{magenta}{We will require $B$ to be finite-type and $\lambda$ to have a pole at each puncture. This kind of translation surface has a ``cylindrical end'' at each puncture where $\lambda$ has order $-1$, and a ``$|2n|$-planar end'' at each puncture where $\lambda$ has order $n-1 < -1$~\cite[Section 2.5]{gupta2013meromorphic} \textcolor{orange}{(or cite Aaron's article, which will hopefully present the same background in the translation surface context)}(see Figure~\ref{fig:translation_surface}).}
+%%\begin{figure}[ht]
+%%    \centering
+%%    %\includegraphics{}
+%%    \caption{On the left an example of translation surface with ``cylindrical end''. On the right, an example of translation surface with  ``$|2n|$-planar end''. }
+%%    \label{fig:translation_surface}
+%%\end{figure}
+%
+\paragraph{Direction}\label{transl:dir}
 %
 The translation structure gives $B$ a notion of direction as well as distance. Away from the zeros of $\lambda$, which we will call {\em branch points}, we can talk about moving upward, rightward, or at any angle, just as we would on $\C$. At a branch point of cone angle $2\pi n$, we can also talk about moving upward, rightward, or at any angle in $\R/2\pi\Z$, but here there are $n$ directions that fit each description. To make this more concrete, note that around any point $b \in B$, there is a unique holomorphic function $\zeta_b$ that vanishes at $b$ and has $d\zeta_b = \lambda$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] there is a unique translation parameter $\zeta_b$ that vanishes at $b$.} This function is a translation chart when $b$ is an ordinary point, and an $n$-fold branched covering when $b$ is a branch point of cone angle $2\pi n$. In either case, $\zeta_b \in e^{i\theta} [0, \infty)$ is a ray or a set of rays leaving $b$ at angle $\theta \in \R/2\pi\Z$.
 
 \textcolor{magenta}{[par break wanted?]} Near each branch point $b$, let us fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1}{n} \omega_b^n$, where $2\pi n$ is the cone angle at $b$. This lets us label each direction at $b$ with an ``extended angle'' in $\R/2\pi n\Z$. Of course, there are $n$ different choices for $\omega_b$.
 %
-\subsubsection{Frequency}\label{transl-freq}
+\paragraph{Frequency}\label{transl-freq}
 %
 The translation structure also gives us an isomorphism $z \maps T^*_bB \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*_bB^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$ \textcolor{orange}{[make it clear that $z$ is an almost-global chart on $T^*B$---for example, writing $z\colon T^*B\to\C^2$]}. At an ordinary point, we can define $z$ simply as the map
 \begin{align*}
@@ -979,12 +923,12 @@ T^*_bB^{\otimes n} \arrow[r,"z"] & \C \\
 T^*_bB \arrow[u,"\blankbox^n"] \arrow[r,"w"'] & \C \arrow[u,"\blankbox^n"']
 \end{tikzcd}
 \end{center}
-commute.
+commute. Here, $\blankbox^n$ represents the $n$th power map.
 % \subsubsection{Boundary}
 % \textcolor{red}{\textbf{Discuss the visual boundary, citing Lemma~3.1 of Dankwart's thesis \textit{On the large-scale geometry of flat surfaces} for the description of geodesics.}}
 % %
 \subsubsection{The Laplace transform over an ordinary point}\label{laplace:ordinary}
-Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an extended angle $\theta \in \R$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] Pick a translation parameter $\zeta$.} The {\em Laplace transform} $\laplace_\zeta^\theta$ turns a local holomorphic function $f$ on $B$ into a local holomorphic function on $T^*B$. When $b \in B$ is an ordinary point, $\laplace_\zeta^\theta f$ is defined on $T_b^*B$ by the formula
+Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an extended angle $\theta \in \R$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] Pick a translation parameter $\zeta$.} The {\em Laplace transform} $\laplace_\zeta^\theta$ turns a local holomorphic function $f$ on $B$ into a local holomorphic function on $T^*B$. \textcolor{magenta}{[Priority: update to $\zeta = \alpha$]} When $b \in B$ is an ordinary point, $\laplace_\zeta^\theta f$ is defined on $T_b^*B$ by the formula
 \begin{equation}\label{laplace:int}
 %%\laplace_{\zeta}^\theta f\big|_b =
 \int_{\mathcal{J}_{b}^\theta} e^{-z\zeta} f\,d\zeta,
@@ -2594,7 +2538,7 @@ When $j$ is\ldots & $\mathcal{C}^\theta_j$ comes from $-\infty$ along\ldots & an
 Because $\cosh(t)$ is periodic, $j$ only affects the integral through its parity.
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=14cm]{figures/bessel-unrolled.png}
+    \includegraphics[width=10cm]{figures/bessel-unrolled.png}
     \caption{The paths $\mathcal{C}_j$.}
     \label{fig:bessel_unrolled}
 \end{figure}
