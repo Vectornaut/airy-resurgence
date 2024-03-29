@@ -359,7 +359,7 @@ Since different functions can be asymptotic to the same power series, taking the
 \item Take the asymptotic expansion $\series{\Phi} = \aexp^{-\theta} \Phi$.
 \item Take the Borel transform $\series{\phi} = \borel_\zeta \series{\Phi}$.
 \item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before.%\textcolor{red}{This is possible, by definition, if $\series{\Phi}$ is $1$-Gevrey.[Veronica: I'll remove this! Being Gevrey implies that the Borel transform is convergent, not that we can analytically continue it]}
-\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable.\footnote{More generally, we could take the Laplace transform $\laplace^\theta_{\zeta, \alpha}$ starting at any point $\zeta = \alpha$ in $B$. The choice of base point will play an important role in our study of ODEs and thimble integrals.}
+\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable.\footnote{More generally, we could take the Laplace transform $\laplace^\theta_{\zeta, \alpha}$ starting at any point $\zeta = \alpha$ in $B$. The choice of starting point will play an important role in our study of ODEs and thimble integrals.}
 \end{enumerate}
 We will say a function is {\em Borel-regularizable} if its asymptotic expansion is Borel-summable, ensuring that we can carry out the last two steps.
 
@@ -879,39 +879,39 @@ In the $N$-dimensional analog of our set-up \ref{borel-reg:explanatory-power} th
 \section{The Laplace and Borel transforms}\label{sec:Laplace-Borel-general}
 \subsection{The geometry of the Laplace transform}\label{sec:geometry_laplace}
 Classically, the Laplace transform turns functions on the position domain into functions on the frequency domain. In the study of Borel summation and resurgence, it is useful to see the position domain as a {\em translation surface} $B$, and the frequency domain as one of its cotangent spaces. Roughly speaking, the Laplace transform lifts holomorphic functions on $B$ to holomorphic functions on $T^*B$.
-\par \textcolor{magenta}{Combine ``briefly,'' ``direction,'' and ``frequency'' into all one sub-sub-section}
 %
-\subsubsection{Background on translation surfaces}
+\subsubsection{Background on translation surfaces}\label{sec:transl}
 %
-\paragraph{Translation surfaces, briefly}
+\paragraph{A brief definition}
 %
-A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\cite{zorich2006flat}. A translation chart is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$. \textcolor{magenta}{We will require $B$ to be finite-type and $\lambda$ to have a pole at each puncture. This kind of translation surface has a ``cylindrical end'' at each puncture where $\lambda$ has order $-1$, and a ``$|2n|$-planar end'' at each puncture where $\lambda$ has order $n-1 < -1$~\cite[Section 2.5]{gupta2013meromorphic} \textcolor{orange}{(or cite Aaron's article, which will hopefully present the same background in the translation surface context)}(see Figure~\ref{fig:translation_surface}).}
-%%\begin{figure}[ht]
-%%    \centering
-%%    %\includegraphics{}
-%%    \caption{On the left an example of translation surface with ``cylindrical end''. On the right, an example of translation surface with  ``$|2n|$-planar end''. }
-%%    \label{fig:translation_surface}
-%%\end{figure}
-%
-\paragraph{Direction}\label{transl:dir}
-%
-The translation structure gives $B$ a notion of direction as well as distance. Away from the zeros of $\lambda$, which we will call {\em branch points}, we can talk about moving upward, rightward, or at any angle, just as we would on $\C$. At a branch point of cone angle $2\pi n$, we can also talk about moving upward, rightward, or at any angle in $\R/2\pi\Z$, but here there are $n$ directions that fit each description. To make this more concrete, note that around any point $b \in B$, there is a unique holomorphic function $\zeta_b$ that vanishes at $b$ and has $d\zeta_b = \lambda$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] there is a unique translation parameter $\zeta_b$ that vanishes at $b$.} This function is a translation chart when $b$ is an ordinary point, and an $n$-fold branched covering when $b$ is a branch point of cone angle $2\pi n$. In either case, $\zeta_b \in e^{i\theta} [0, \infty)$ is a ray or a set of rays leaving $b$ at angle $\theta \in \R/2\pi\Z$.
+A translation surface is a Riemann surface $B$ carrying a holomorphic $1$-form $\lambda$~\cite{zorich2006flat}. A {\em translation chart} is a local coordinate $\zeta$ with $d\zeta = \lambda$. The standard metric on $\C$ pulls back along translation charts to a flat metric on $B$, with a conical singularity of angle $2\pi n$ wherever $\lambda$ has a zero of order $n-1 > 0$.
 
-\textcolor{magenta}{[par break wanted?]} Near each branch point $b$, let us fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1}{n} \omega_b^n$, where $2\pi n$ is the cone angle at $b$. This lets us label each direction at $b$ with an ``extended angle'' in $\R/2\pi n\Z$. Of course, there are $n$ different choices for $\omega_b$.
+We will call the zeros of $\lambda$ {\em branch points}. To explore the region around a branch point, it can be helpful to use a {\em translation parameter}: a function $\zeta$ which has $d\zeta = \lambda$, but is not necessarily a local coordinate.
+
+In all of our examples, $B$ will be a finite-type Riemann surface, and $\lambda$ will have a pole at each puncture. This level of generality allows for plenty of interesting behavior without letting $B$ get too messy. Sections~2.4\;--\;2.5 of \cite{gupta2013meromorphic} give a sense of what $B$ can look like near a pole of $\lambda$.
 %
-\paragraph{Frequency}\label{transl-freq}
+\paragraph{A sense of direction}
 %
-The translation structure also gives us an isomorphism $z \maps T^*_bB \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*_bB^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$ \textcolor{orange}{[make it clear that $z$ is an almost-global chart on $T^*B$---for example, writing $z\colon T^*B\to\C^2$]}. At an ordinary point, we can define $z$ simply as the map
+The translation structure gives $B$ a notion of direction as well as distance. Away from the branch points, we can talk about moving upward, rightward, or at any angle, just as we would on $\C$. At a branch point of cone angle $2\pi n$, we can also talk about moving upward, rightward, or at any angle in $\R/2\pi\Z$, but here there are $n$ directions that fit each description. To make this more concrete, note that around any point $b \in B$, there is a unique translation parameter $\zeta_b$ that vanishes at $b$. This parameter is a translation chart when $b$ is an ordinary point, and an $n$-fold branched covering of $\C$ when $b$ is a branch point of cone angle $2\pi n$. In either case, $\zeta_b \in e^{i\theta} [0, \infty)$ is a ray or a set of rays leaving $b$ at angle $\theta \in \R/2\pi\Z$.
+
+Near each branch point $b$, fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1}{n} \omega_b^n$, where $2\pi n$ is the cone angle at $b$. This lets us label each direction at $b$ with an ``extended angle'' in $\R/2\pi n\Z$. Of course, there are $n$ different choices for $\omega_b$.
+%
+\paragraph{The frequency coordinate}\label{transl-freq}
+%
+Over the complement $B'$ of the branch points, the translation structure gives us a holomorphic map $z \maps T^*B' \to \C$. This map is an isomorphism on every fiber, trivializing $T^*B$ almost globally. Over a branch point $b$ of cone angle $2\pi n$, we get an analogous isomorphism $z \maps T^*_bB^{\otimes n} \to \C$. In both cases, we will call $z$ the {\em frequency coordinate} of $B$.
+\par\textcolor{RoyalBlue}{The translation structure gives us an isomorphism $z \maps T^*_bB \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*_bB^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$.}
+
+At an ordinary point, we can define $z$ simply as the map
 \begin{align*}
 z \maps T^*_bB & \to \C \\
 \lambda\big|_b & \mapsto 1.
 \end{align*}
-To get a definition that generalizes to branch points, though, it is worth taking a fancier point of view. Recall that $T^*_bB = \van_b / \van_b^2$, where $\van_b$ is the ideal of holomorphic functions that vanish at $b$. Observing that $(f + \van_b)^n$ lies within $f^n + \van_b^{n+1}$ for any $f \in \van_b$, we can identify $T^*_bB^{\otimes n}$ with $\van_b^n / \van_b^{n+1}$ for $n \ge 1$. When $b$ is an ordinary point, the function $\zeta_b$ defined in Section~\ref{transl:dir} represents a nonzero element of $\van_b / \van_b^2$: the cotangent vector $\lambda\big|_b$. In general, $\zeta_b$ represents a nonzero element of $\van_b^n / \van_b^{n+1}$, where $2\pi n$ is the cone angle at $b$. We define $z$ as the isomorphism
+To generalize $z$ to branch points, though, we need a more sophisticated definition. Recall that $T^*_bB = \van_b / \van_b^2$, where $\van_b$ is the ideal of holomorphic functions that vanish at $b$. Observing that $(f + \van_b)^n$ lies within $f^n + \van_b^{n+1}$ for any $f \in \van_b$, we can identify $T^*_bB^{\otimes n}$ with $\van_b^n / \van_b^{n+1}$ for $n \ge 1$. When $b$ is an ordinary point, the translation parameter $\zeta_b$ that vanishes at $b$ represents a nonzero element of $\van_b / \van_b^2$: the cotangent vector $\lambda\big|_b$. In general, $\zeta_b$ represents a nonzero element of $\van_b^n / \van_b^{n+1}$, where $2\pi n$ is the cone angle at $b$. We define $z$ as the isomorphism
 \begin{align*}
 z \maps \van_b^n / \van_b^{n+1} & \to \C \\
 \zeta_b + \van^{n+1} & \mapsto 1.
 \end{align*}
-When $b$ is a branch point, the coordinate $\omega_b$ we chose in Section~\ref{transl:dir} gives us an isomorphism
+When $b$ is a branch point, the coordinate $\omega_b$ we fixed in ``A sense of direction'' gives us an isomorphism
 \begin{align*}
 w_b \maps T^*_bB & \to \C \\
 \omega_b + \van^2 & \mapsto 1
@@ -923,32 +923,28 @@ T^*_bB^{\otimes n} \arrow[r,"z"] & \C \\
 T^*_bB \arrow[u,"\blankbox^n"] \arrow[r,"w"'] & \C \arrow[u,"\blankbox^n"']
 \end{tikzcd}
 \end{center}
-commute. Here, $\blankbox^n$ represents the $n$th power map.
+commute. Here, $\blankbox^n$ represents the $n$th-power map.
 % \subsubsection{Boundary}
 % \textcolor{red}{\textbf{Discuss the visual boundary, citing Lemma~3.1 of Dankwart's thesis \textit{On the large-scale geometry of flat surfaces} for the description of geodesics.}}
 % %
 \subsubsection{The Laplace transform over an ordinary point}\label{laplace:ordinary}
-Pick a local holomorphic function $\zeta$ on $B$ with $d\zeta = \lambda$, and an extended angle $\theta \in \R$. \textcolor{VioletRed}{[If we define ``translation parameter'' earlier, we can say:] Pick a translation parameter $\zeta$.} The {\em Laplace transform} $\laplace_\zeta^\theta$ turns a local holomorphic function $f$ on $B$ into a local holomorphic function on $T^*B$. \textcolor{magenta}{[Priority: update to $\zeta = \alpha$]} When $b \in B$ is an ordinary point, $\laplace_\zeta^\theta f$ is defined on $T_b^*B$ by the formula
+Pick a translation parameter $\zeta$ on $B$ and an extended angle $\theta \in \R$. The {\em Laplace transform} $\laplace_{\zeta, \alpha}^\theta$ turns a local holomorphic function $\phi$ on $B$ into a local holomorphic function on $T^*_{\zeta = 0} B$. When $\zeta = 0$ is an ordinary point, the Laplace transform is defined by the formula
 \begin{equation}\label{laplace:int}
-%%\laplace_{\zeta}^\theta f\big|_b =
-\int_{\mathcal{J}_{b}^\theta} e^{-z\zeta} f\,d\zeta,
+\laplace_{\zeta, \alpha}^\theta \phi = \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \phi\,d\zeta,
 \end{equation}
-where $z$ is the frequency function and $\mathcal{J}_{b}^\theta$ is the ray that leaves $b$ at angle $\theta$. We will use the shorthand $\laplace_{\zeta, b}^\theta f := \laplace_\zeta^\theta f \big|_b$ throughout this document. \textcolor{magenta}{[Notation conflict: we also use $\laplace_{\zeta, \alpha}$ to represent starting at $\zeta = \alpha$, giving the starting point as a coordinate value instead of a point $b$.]}
-
-To make sense of this formula, we ask for the following conditions.
+where $z$ is the frequency function and $\mathcal{J}_{\zeta, \alpha}^\theta$ is the ray $\zeta \in \alpha + e^{i\theta} [0, \infty)$. To make sense of this formula, we ask for the following conditions.
 \begin{itemize}
-\item The base point $b$ is in the domain of $\zeta$. Once we have this, we can continue $\zeta$ along the whole ray $\mathcal{J}_b^\theta$.
-\item The ray $\mathcal{J}_b^\theta$ avoids the branch points after leaving $b$.
-\item The integral converges. We guarantee this by asking for a pair of simpler conditions.
-%\color{RoyalBlue}
+\item The starting point $\zeta = \alpha$ is in the domain of $\zeta$. Once we have this, we can continue $\zeta$ along the whole ray $\mathcal{J}_{\zeta, \alpha}^\theta$.
+\item The ray $\mathcal{J}_{\zeta, \alpha}^\theta$ avoids the branch points after leaving $\zeta = 0$.
+\item The integral converges. We ensure this by putting conditions on $\phi$ and $z$.
 \begin{itemize}
-\item With respect to the flat metric, $f$ is uniformly of exponential type $\Lambda$ along $\mathcal{J}_b^\theta$, and is locally integrable throughout.\footnote{Recall that a function is of exponential type $\Lambda$ if for every $\varepsilon>0$ there is a constant $A_\varepsilon$ (which depends on $\varepsilon$) such that $|f(x)|\leq A_\varepsilon e^{\Lambda+\varepsilon} $. We instead require that there exists a uniform constant $A$ such that for every $\varepsilon>0$ the bound holds.} \textcolor{Pink}{[Revise]} Following \cite{reg-sing-volterra}, we require $f \in \singexp{\sigma}{\Lambda}(\Omega_b)$, with $\sigma>-1$.\footnote{The condition $\sigma>-1$ guarantees the integrability at $\zeta=b$.} The set $\Omega_b$ is a tubular neighbourhood of $\mathcal{J}_b^\theta$. 
-\item The value of $z$ is in the half-plane $H^{\theta}_\Lambda$ cut out by the inequality $\Re(e^{i\theta} z) > \Lambda$.
+\item With respect to the flat metric, $\phi$ is uniformly of exponential type $\Lambda$ along the ray $\mathcal{J}_{\zeta, \alpha}^\theta$, and is locally integrable throughout the ray.\footnote{Recall that a function $\phi$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|\phi|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|\phi| \le A e^{\Lambda|\zeta|}$.}
+\item The value of $z$ satisfies the inequality $\Re(e^{i\theta} z) > \Lambda$, which cuts out a half-plane $H^\theta_\Lambda$ in $T^*_{\zeta = 0} B$.
 \end{itemize}
 \end{itemize}
-\color{black}
+For any $\sigma > -1$, the conditions on $\phi$ are satisfied by all of the functions in the spaces $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ introduced in \cite{reg-sing-volterra}. Here, the domain $\Omega_\alpha$ must contain the ray $\mathcal{J}_{\zeta, \alpha}^\theta$, and the norm $\|\cdot\|_{\sigma, \Lambda}$ is taken with respect to $\zeta = \alpha$.
 \subsubsection{The Laplace transform over a branch point}
-When $b$ is a branch point, we can still use formula~\eqref{laplace:int} to define $\laplace_\zeta^\theta f$ on $T_b^*B$, as long as we take care of a few subtleties. Thanks to the labeling choices we made at the end of Section~\ref{transl:dir}, the extended angle $\theta \in \R$ still picks out a ray $\mathcal{J}_b^\theta$. The function $z$ is defined on $T_b^*B^{\otimes n}$, where $2\pi n$ is cone angle at $b$, so we pull it back to $T^*_bB$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\eqref{laplace:int}. The half-plane $z \in H_{\theta}$ in $T_b^*B^{\otimes n}$ pulls back to $n$ sectors of angle $\pi/n$ in $T_b^*B$. We only define $\laplace_\zeta^\theta f$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
+When $\zeta = 0$ is a branch point, we can still use formula~\eqref{laplace:int} to define $\laplace_{\zeta, \alpha}^\theta \phi$ on $T_{\zeta = 0}^*B$, as long as we take care of a few subtleties. Thanks to the labeling choices we made in Section~\ref{sec:transl}, the extended angle $\theta \in \R$ still picks out a ray $\mathcal{J}_{\zeta, \alpha}^\theta$. The function $z$ is defined on $T_b^*B^{\otimes n}$, where $2\pi n$ is cone angle at $\zeta = 0$, so we pull it back to $T^*_{\zeta = 0} B$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\eqref{laplace:int}. The inequality $\Re(e^{i\theta} z) > \Lambda$ cuts out a half-plane in $T_b^*B^{\otimes n}$, which pulls back to $n$ sector-like regions in $T_b^*B$ of angle $\pi/n$. We only define $\laplace_{\zeta, \alpha}^\theta \phi$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
 %\color{gray}
 %\subsection{The geometry of the Borel transform}
 %\begin{itemize}
@@ -1318,7 +1314,6 @@ Finally in Section~\ref{sec:frac-diff-laplace}, we will consider the action of $
 
 \begin{notation*}
 In reasoning about Borel summation, it is important to keep track of whether we are working with holomorphic functions or formal series, and whether we are working on the position domain (the Borel plane) or the frequency domain (the $z$ plane). We have adopted a variable naming convention that makes these distinctions apparent at a glance.
-\color{LimeGreen}
 \begin{center}
 \begin{tabular}{c|c|c}
 & \textbf{Analytic}: no tilde & \textbf{Formal}: tilde \\[1mm] \hline
@@ -1329,11 +1324,10 @@ In reasoning about Borel summation, it is important to keep track of whether we 
 We will sometimes use a hat to emphasize that we got a holomorphic function $\hat{\phi}$ by taking the sum of formal series $\series{\phi}$.
 \end{notation*}
 Here are some examples of this notation in action. Since the Laplace transform $\laplace_{\zeta, 0}$ turns functions on the position domain into functions on the frequency domain, we might write $\laplace_{\zeta,0} \phi = \Phi$. On the other hand, the Borel transform $\borel_\zeta$ turns formal series in the frequency variable into formal series in the position variable, so we might write $\series{\phi} = \borel_\zeta \series{\Phi}$.
-\color{black}
 %
 \subsubsection{The convolution product}\label{convolution}
 %
-Let $\series{\phi},\series{\psi}\in\C\lbrace\zeta\rbrace$ be two convergent formal series in a neighbourhood of $\zeta=0$, and let $\hat{\phi}$ and $\hat{\psi}$ be respectively their sum in a common region of convergence, say $|\zeta|<R$. Then the convolution product $\hat{\phi}\ast\hat{\phi}$ is defined as
+Let $\series{\phi}, \series{\psi} \in \C\{\zeta\}$ be two convergent formal series in a neighbourhood of $\zeta=0$, and let $\hat{\phi}$ and $\hat{\psi}$ be respectively their sum in a common region of convergence, say $|\zeta|<R$. Then the convolution product $\hat{\phi}\ast\hat{\psi}$ is defined as
 \begin{equation}\label{eq:convolution}
     \hat{\phi}\ast\hat{\psi}:=\int_0^{\zeta}\hat{\phi}(\zeta-\zeta')\hat{\psi}(\zeta')\, d\zeta'
 \end{equation}
@@ -1359,14 +1353,12 @@ In addition, we can show that $\laplace_{\zeta,0}$ is a $\C$-algebra homomorphis
     Let $\sigma>-1$ and $\Lambda>0$. The Laplace transform $\laplace_{\zeta,0}$ is a $\C$-algebra homomorphism from $(\singexp{\sigma}{\Lambda}(\Omega), \ast)$ to to the space of holomorphic functions on the right-half-plane $\Re z>0$ with the standard multiplication of functions. 
 \end{prop}
 \begin{proof}
-It is enough to show that
-\[\laplace_{\zeta,0}\big[{\phi}\ast{\psi}\big]=\laplace_{\zeta,0}\big[{\phi}\big]\laplace_{\zeta,0}\big[{\psi}\big],\]
-which indeed follows from simple integral computations (see for instance ~\cite[Theorem 2.39]{laplace-tfm}). 
+We just need to prove that
+\[ \laplace_{\zeta,0}[{\phi}\ast{\psi}] = \laplace_{\zeta,0}[{\phi}]\,\laplace_{\zeta,0}[{\psi}] \]
+for all $\phi, \psi \in \singexp{\sigma}{\Lambda}$. This can be shown by direct computation, done for instance in Theorem 2.39 of \cite{laplace-tfm}.
 \end{proof}
 \begin{remark}
-We saw in Section~\ref{sec:reg-decay} that when $\Omega$ is an appropriate sector, the Laplace transform on $\singexp{\sigma}{\Lambda}(\Omega)$ has a left inverse. In light of the proposition above, that means the Laplace transform is a $\C$-algebra isomorphism onto its image.
-    \color{RoyalBlue} It is possible to define an inverse Laplace transform, so that $\laplace_{\zeta,0}$ becomes an algebra isomorphisms. However we will refer to \textcolor{magenta}{[standard reference]} for details. \textcolor{magenta}{[see also section on Regularity for Laplace]}  
-    \color{black}
+We saw in Section~\ref{sec:reg-decay} that when $\Omega$ is an appropriate sector, the Laplace transform on $\singexp{\sigma}{\Lambda}(\Omega)$ has a left inverse. This strengthens the proposition above, showing that the Laplace transform is a $\C$-algebra isomorphism onto its image.
 \end{remark}
 %The space of $1$-Gevrey formal series is a $\C$-algebra with unit $1$, thus in order to prove that $\borel_\zeta$ is an algebra homomorphism between $\C\llbracket z^{-1}\rrbracket_1$ and $\C\lbrace\zeta\rbrace$ we should endow $\C\lbrace\zeta\rbrace$ with the convolution product and with the formal unit $\delta\defeq\borel_\zeta 1$. 
 
@@ -1407,8 +1399,12 @@ We saw in Section~\ref{sec:reg-decay} that when $\Omega$ is an appropriate secto
 %\big[\delta\ast\phi\big](p)&=\int_0^{\zeta(p)} \delta(\zeta(p)-\zeta)\phi(\zeta) \, d\zeta=\phi(p)
  %   \end{align*}
 %\end{proof}
+\color{PaleVioletRed}
+\subsubsection{Borel transforms on $1$-Gevrey series}
+[I've moved this section into Section~\ref{sec:bridging} (``Bridging the gap\ldots'') because it seems to be in the same spirit. If it should or must stay here, please let me know.]
+\color{black}
 \subsubsection{Borel transforms on $1$-Gevrey series}\label{sec:Borel-gevrey}
-So far, our discussion on the Borel transform was at the level of formal series, however there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic functions at $\zeta=0$. These formal series are the so-called $1$-Gevrey series:
+\textcolor{PaleVioletRed}{[This is an example of a ``run-on sentence.'' Please look for sentences like this and split them up, as shown above. $\rightarrow$]} \textcolor{OrangeRed}{So far, our discussion on the Borel transform was at the level of formal series, however there is a special class of formal series that behaves well under Borel transform, meaning that their Borel transform gives a germ of holomorphic functions at $\zeta=0$.} These formal series are the so-called $1$-Gevrey series:
 \[\tilde{\Phi}=\sum_{n\geq 0}a_nz^{-n}\in\C \llbracket z^{-1} \rrbracket_1\]
 is $1$-Gevrey if there exists $A>0$ such that $|a_n|\lesssim A^n n!$ for all $n\geq 0$.\footnote{In asymptotic analysis $k$-Gevrey series $\sum_{n\geq 0}a_nz^{-n}$ have coefficients that grow as $(n!)^{k}$, i.e. there exists $A>0$ such that $|a_n|\leq A^n (n!)^k$ for every $n\geq 0$. The Borel transform can be generalized in order to obtain germs of holomorphic function for higher Gevrey series. }  
 \begin{lemma}
@@ -1622,7 +1618,7 @@ hence,  \[\partial_{\zeta_b,0}^{-\lambda}\big[\borel_{\zeta_b}\Phi\big]=\borel_{
 %The Laplace transform $\laplace_\zeta^\theta$ turns local holomorphic functions on $B$ into solutions of this problem. \textcolor{orange}{In fact, it produces all the solutions \textbf{[check argument]}.[Veronica: I don't understand--why it produces all the solutions?]}
 
 \subsection{Bridging the gap between analytic and formal objects}\label{sec:bridging}
-The spaces $\singexp{\rho}{\textcolor{LimeGreen}{\Lambda}}(\Omega)$ from \cite{reg-sing-volterra} are convenient for analytic discussions of the Laplace transform, as we saw in Section~\ref{sec:reg-decay}. To study Borel summation, however, we also need to take Taylor series expansions around $\zeta = 0$, which cannot be done for all functions in $\singexp{\rho}{\textcolor{LimeGreen}{\Lambda}}(\Omega)$. We need a way to make sure we stay in the subspace where the Taylor series exists.
+The spaces $\singexp{\rho}{\Lambda}(\Omega)$ from \cite{reg-sing-volterra} are convenient for analytic discussions of the Laplace transform, as we saw in Section~\ref{sec:reg-decay}. To study Borel summation, however, we also need to take Taylor series expansions around $\zeta = 0$, which cannot be done for all functions in $\singexp{\rho}{\Lambda}(\Omega)$. We need a way to make sure we stay in the subspace where the Taylor series exists.
 
 To do this, it will be helpful to work on the universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$. In the result below, our conditions on the open set $\Upsilon \subset \widetilde{\C^\times}$ imply that the projection $\pi \Upsilon$ contains a punctured disk around $\zeta = 0$. A holomorphic function on $\pi \Upsilon$ is therefore guaranteed to have a Laurent series expansion around $\zeta = 0$. In fact, a holomorphic function on $\Upsilon$ will have a Laurent series expansion around $\zeta = 0$ only if it descends to a holomorphic function on $\pi \Upsilon$. In other words, by pulling back along $\pi$, we can think of the holomorphic function space $\mathcal{O}(\pi \Upsilon)$ as the subspace of $\mathcal{O}(\Upsilon)$ where the Laurent series around $\zeta = 0$ exists.
 
@@ -1955,7 +1951,7 @@ If the integral defining $I_\alpha$ is absolutely convergent, then $I_\alpha$ is
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a$ with $\tfrac{1}{2} \tau^2 = f - f(a)$. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_a^\theta$ that go from the past ($-e^{-i\theta}\infty$) to $a$ and from $a$ to the future ($+e^{-i\theta}\infty$), respectively. We can arrange for $\tau$ to be valued in $(-\infty, 0]$ and $[0,\infty)$ on $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$, respectively. \textcolor{magenta}{[Point out that we can always accomplish this by changing the sign of $\tau$.]} Since $\nu$ is holomorphic, we can express it as a Taylor series
+Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a$ with $\tfrac{1}{2} \tau^2 = f - f(a)$. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_a^\theta$ that go from the past ($-e^{-i\theta}\infty$) to $a$ and from $a$ to the future ($+e^{-i\theta}\infty$), respectively. By changing the sign of $\tau$, we can arrange for it to be valued in $(-\infty, 0]$ and $[0,\infty)$ on $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$, respectively. Since $\nu$ is holomorphic, we can express it as a Taylor series
 \[ \nu = \sum_{m \ge 0} b_m^a \tau^m\,d\tau \]
 that converges in some disk $|\tau| < \varepsilon$.
 
