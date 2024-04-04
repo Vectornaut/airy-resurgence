@@ -337,7 +337,7 @@ The idea of Borel regularity can help us understand why Borel summation is so ef
 
 The central goal of this paper is to explain, from this perspective, why Borel summation works well for the two kinds of problems exemplified in Section~\ref{intro:summation}.
 \begin{enumerate}
-\item Solving a level~$1$ linear ODE \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. equation~\eqref{eqn:bessel_rescaled_ex} is an example. More generally, we will consider equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form \textcolor{PaleVioletRed}{[I just noticed we use $\partial_z$ instead of $\tfrac{\partial}{\partial z}$ in \texttt{reg-sing-volterra}, where these equations were copied from. Could we switch to $\tfrac{\partial}{\partial z}$, as I've done provisionally?]}
+\item Solving a level~$1$ linear ODE \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. equation~\eqref{eqn:bessel_rescaled_ex} is an example. More generally, we will consider equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form 
 \[ \mathcal{P} = P\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z} Q\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z^2} R(z^{-1}), \]
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial that is non-zero at every root of $P$, and $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. We will restrict our attention to the case where the roots of $P$ are simple (see Section \ref{borel_reg-ODE}).
 
@@ -1011,43 +1011,40 @@ we get the desired result.
 %
 \subsubsection{Regularity and decay properties}\label{sec:reg-decay}
 %
-% \textcolor{orange}{[Revise]} Let $\Omega_\beta \subset B$ be an open, simply connected set that touches but does not contain $\zeta = \beta$, as shown \textcolor{RoyalBlue}{(see Figure \ref{Fig:domain})}. Suppose $\Omega_\beta$ contains the ray $\mathcal{J}_{\zeta, \beta}^\theta$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\beta)$ of holomorphic functions on $\Omega_\beta$ which are uniformly of exponential type $\Lambda$ and blow up like $|\zeta - \beta|^\sigma$ as $\zeta$ approaches $\beta$. When $\sigma>-1$, the singularity at $\zeta = \beta$ is integrable. Hence, the Laplace transform $\laplace_{\zeta, \beta}^\theta$ turns elements of $\singexp{\sigma}{\Lambda}(\Omega_\beta)$ into well-defined holomorphic functions on the half-plane $\Re(e^{i\theta} z) > \Lambda$ in the cotangent space $T_{\zeta = \beta}^*B$~\cite[Section  5.6]{diverg-resurg-i}.
-
-Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less, as in Figure~\ref{fig:sectorial_domain-pos-fre}. In this case, for any $\Lambda \in \R$, let $\widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$. Then, let $\dualsingexp{\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda)$ be the space of holomorphic functions $\Phi$ on $\widehat{\Omega}_\alpha^\Lambda$ with $|\Phi| \lesssim \Delta^\sigma$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. The norm $\|\Phi\|_{\sigma, \Lambda} = \sup_{\widehat{\Omega}_\alpha^\Lambda} \Delta^{-\sigma} |\Phi|$ turns $\dualsingexp{\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda)$ into a Banach space. \textcolor{orange}{Cite \cite{sternin1995borel} better for the theorem.} \textcolor{orange}{Note that these results don't depend on which cotangent fiber we're mapping into. $\widehat{\Omega}$ is defined across all cotangent fibers over ordinary points.}
+%% \textcolor{orange}{[Revise]} Let $\Omega_\beta \subset B$ be an open, simply connected set that touches but does not contain $\zeta = \beta$, as shown \textcolor{RoyalBlue}{(see Figure \ref{Fig:domain})}. Suppose $\Omega_\beta$ contains the ray $\mathcal{J}_{\zeta, \beta}^\theta$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\beta)$ of holomorphic functions on $\Omega_\beta$ which are uniformly of exponential type $\Lambda$ and blow up like $|\zeta - \beta|^\sigma$ as $\zeta$ approaches $\beta$. When $\sigma>-1$, the singularity at $\zeta = \beta$ is integrable. Hence, the Laplace transform $\laplace_{\zeta, \beta}^\theta$ turns elements of $\singexp{\sigma}{\Lambda}(\Omega_\beta)$ into well-defined holomorphic functions on the half-plane $\Re(e^{i\theta} z) > \Lambda$ in the cotangent space $T_{\zeta = \beta}^*B$~\cite[Section  5.6]{diverg-resurg-i}.
+%%
+Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. For any $\Lambda \in \R$, let $\widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$.
 \begin{todo}
 \begin{center}
 \begin{tikzpicture}
-\setfiberscale{2.5}
+\setfiberscale{2}
 \pgfmathsetmacro{\rshade}{1.5*\rfiber}
-\renewcommand{\phase}{35}
-\newcommand{\radius}{0.85}
+\newcommand{\dis}{1}
+\renewcommand{\phase}{0}
+\newcommand{\spread}{30}
+
 \begin{fiber}
-%\fill[pwbeige!30, rotate=\phase] (\rshade, \radius) -- (0, \radius) arc (90:270:\radius) -- (0, -\radius) -- (\rshade, -\radius) -- cycle;
-\fill[pwbeige!30, bezier bounding box, path fading=radial edge]
-  (-4, -4) (4, 4)
-  (0, 0) -- (41:4) arc (41:-48:4) -- cycle;
+\fill[pwbeige!30, draw=pwbeige!60] (0, 0) -- (\phase-\spread:1.5*\rshade) -- (\phase+\spread:1.5*\rshade) -- cycle;
 \genfibercontent
-%\draw (0, 0) -- (0.75, 0);
-%\draw[ray] (0, 0) -- (\phase:\rshade);
-%\draw[shorten <=0.3mm, shorten >=0.3mm] (0:0.5) arc (0:\phase:0.5) node[midway, anchor=180+\phase/2] {$\theta$};
-\node[anchor=-10, inner sep=2mm] at (0,0) {$\zeta = \alpha$};
+\node[anchor=-11, inner sep=2mm] at (0,0) {$\zeta = \alpha$};
 \node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$\zeta$};
 \end{fiber}
-\end{tikzpicture}
-\hspace{5mm}
-\begin{tikzpicture}
-\setfiberscale{2.5}
-\renewcommand{\phase}{35}
-\newcommand{\dis}{1.2}
-\begin{fiber}[shade, phase=\phase, dis=\dis]
+
+\begin{scope}[shift={(5.5, 0)}]
+\begin{fiber}[phase=\phase, dis=\dis]
+\fill[pwbeige!30, draw=pwbeige!60] (-\phase-\spread:\dis) +(-\phase-\spread-90:\rshade) -- +(0, 0) arc (-\phase-\spread:-\phase+\spread:\dis) -- ++(-\phase+\spread+90:\rshade) -- (\rshade, \rshade) -- (\rshade, -\rshade) -- (0, -\rshade) -- cycle;
 \genfibercontent[dual]
-\node[anchor=-10, inner sep=2mm] at (0,0) {$z = 0$};
-\node[anchor=90-\phase, inner sep=2mm] at (-\phase:\dis) {$\Lambda$};
+%%\node[anchor=90-\phase, inner sep=2mm] at (-\phase:\dis) {$\Lambda$};
 \node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$z$};
 \end{fiber}
+\end{scope}
 \end{tikzpicture}
-\captionof{figure}{On the left, the sectorial domain $\Omega_\alpha$. On the right the domain $\Omega_\alpha^\Lambda$ \textcolor{orange}{Fix the figure}.}\label{fig:sectorial_domain-pos-fre}
+\captionof{figure}{A sector $\Omega_\alpha$ in the position domain, and the corresponding union of half-planes $\widehat{\Omega}_\alpha^\Lambda$ in the frequency domain.}\label{fig:sectorial_domain-pos-fre}
 \end{center}
+\end{todo}
+Let $\dualsingexp{\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda)$ be the space of holomorphic functions $\Phi$ on $\widehat{\Omega}_\alpha^\Lambda$ with $|\Phi| \lesssim \Delta^\sigma$, where $\Delta$ is the function that measures distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. The norm $\|\Phi\|_{\sigma, \Lambda} = \sup_{\widehat{\Omega}_\alpha^\Lambda} \Delta^{-\sigma} |\Phi|$ turns $\dualsingexp{\sigma}{\Lambda}(\widehat{\Omega}_\alpha^\Lambda)$ into a Banach space.
+\begin{todo}\par
+[Cite \cite{sternin1995borel} better for the theorem. Note that these results don't depend on which cotangent fiber we're mapping into. $\widehat{\Omega}$ is defined across all cotangent fibers over ordinary points.]
 \end{todo}
 %
 \begin{prop}[following~\cite{sternin1995borel}]\label{prop:laplace-cont}
@@ -1224,11 +1221,11 @@ It extends countable linearity to a map $\borel_{\zeta_\alpha} \maps z^{-1} \C \
 %\end{align*}
 %where in the second step we formally interchange the integral and the sum. 
 %\color{black}
-\subsubsection{Action on transseries}\label{sec:action_transseries}
+\subsubsection{Action on trans-series}\label{sec:action_transseries}
 %
 \color{DarkTurquoise}
 \color{RoyalBlue}
-A transseries is a generalization of usual power series, whose building blocks (called trans-monomials) are of the form $e^{\alpha_n z}\varphi_n$ where $\alpha_n$ is a sequence of complex numbers such that \textcolor{PaleVioletRed}{[exponents must lie along a ray]} $0=\alpha_0 e^{-i\theta}< \alpha_1 e^{-i\theta}<...<\alpha_n e^{-i\theta}<...$ and $\varphi_n\in\C\llbracket z^{-1}\rrbracket$ for every $n$: 
+A trans-series is a generalization of usual power series, whose building blocks (called trans-monomials) are of the form $e^{\alpha_n z}\varphi_n$ where $\alpha_n$ is a sequence of complex numbers such that \textcolor{PaleVioletRed}{[exponents must lie along a ray]} $0=\alpha_0 e^{-i\theta}< \alpha_1 e^{-i\theta}<...<\alpha_n e^{-i\theta}<...$ and $\varphi_n\in\C\llbracket z^{-1}\rrbracket$ for every $n$: 
 
 \[T_{\alpha,\varphi}:=\sum_{n=0}^{\infty} e^{\alpha_n z} \varphi_n(z) \]
 
@@ -1864,7 +1861,7 @@ In Section~\ref{sec:regularity-results}, we show that linear level~1 ODEs of a c
 In Section~\ref{sec:new-summability-proof}, we will look at the same class of ODEs from a more formal perspective, starting from the assumption that Poincar\'{e}'s solutions exist and are $1$-Gevrey. Using the existence and uniqueness results that characterize the Borel regular solutions, we give a new proof that Poincar\'{e}'s solutions are Borel summable.
 %
 \subsubsection{Regularity results}\label{sec:regularity-results}
-Let us recall the setting from Section~\ref{borel-reg:explanatory-power}. Let $\mathcal{P}$ be a linear differential operator of the form \textcolor{PaleVioletRed}{[I just noticed we use $\partial_z$ instead of $\tfrac{\partial}{\partial z}$ in \texttt{reg-sing-volterra}, where these equations were copied from. Could we switch to $\tfrac{\partial}{\partial z}$, as I've done provisionally?]}
+Let us recall the setting from Section~\ref{borel-reg:explanatory-power}. Let $\mathcal{P}$ be a linear differential operator of the form 
 \begin{equation}\label{eqn:operator-P}
 \mathcal{P} = P\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z} Q\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z^2} R(z^{-1}),
 \end{equation}
@@ -2832,41 +2829,85 @@ on integrals. This is because
 \subsubsection{Reduction of the integral}
 We now return to our original thimble integral $I(z)$, defined by the third-degree polynomial map
 \[ g = a_3 u^3 + a_2 u^2 + a_1 u + a_0, \]
-and use the group actions from Section~\ref{sec:int-symm} to reduce it to its two essential cases. Our first move is to bring the polynomial into depressed form by post-composing it with a scaling by $\tfrac{1}{a_3}$ and pre-composing it with a translation by $\tfrac{1}{3} \tfrac{a_2}{a_3}$.
-\begin{center}
-\begin{tabular}{c|c|c}
-\textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
-$\displaystyle f \mapsto f/a_3$ & $\displaystyle u^3 + \frac{a_2}{a_3} u^2 + \frac{a_1}{a_3} u + \frac{a_0}{a_3}$ & $\displaystyle I\left(\frac{z}{a_3}\right)$ \\[5mm]
-$\displaystyle \mathsf{T}_{a_2/3a_3}^*$ & $\displaystyle u^3 + pu + q$ & $\displaystyle I\left(\frac{z}{a_3}\right)$ \\[5mm]
-\end{tabular}
-\end{center}
-The coefficients of the depressed polynomial are given by the usual formulas,\footnote{\begin{align*}
+and use the group actions from Section~\ref{sec:int-symm} to reduce it to its two essential cases. We first put $g$ in depressed form by scaling the leading coefficient to $1$ and translating the mean of the critical points to $0$.\footnote{The coefficients of the depressed form are related to the original coefficients as follows:
+\begin{align*}
 p & = \frac{a_1}{a_3} - \frac{1}{3} \left(\frac{a_2}{a_3}\right)^2 \\
-q & = \frac{a_0}{a_3} - \frac{1}{3} \frac{a_1 a_2}{a_3^2} + \frac{2}{27} \left(\frac{a_2}{a_3}\right)^3
-\end{align*}}
-and its critical points are $\pm\big(\tfrac{p}{3}\big)^{1/2}$. We make the critical values symmetric around $0$ by post-composing the polynomial with a translation by $-q$.
+q & = \frac{a_0}{a_3} - \frac{1}{3} \left(\frac{a_1}{a_3}\right)\left(\frac{a_2}{a_3}\right) + \frac{2}{27} \left(\frac{a_2}{a_3}\right)^3.
+\end{align*}} We then also translate the mean of the critical values to $0$.
 \begin{center}
 \begin{tabular}{c|c|c}
 \textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
+$\displaystyle f \mapsto \frac{f}{a_3}$ & $\displaystyle u^3 + \frac{a_2}{a_3} u^2 + \frac{a_1}{a_3} u + \frac{a_0}{a_3}$ & $\displaystyle \hphantom{e^{qz}} I\left(\frac{z}{a_3}\right)$ \\[5mm]
+$\displaystyle \mathsf{T}_{(1/3)\,a_2/a_3}^*$ & $\displaystyle u^3 + pu + q$ & $\displaystyle \hphantom{e^{qz}} I\left(\frac{z}{a_3}\right)$ \\[5mm]
 $\displaystyle f \mapsto f - q$ & $\displaystyle u^3 + pu$ & $\displaystyle e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
 \end{tabular}
 \end{center}
-What we do next depends on how many critical points $g$ has.
+Our next move depends on how many critical points $g$ has.
 \begin{itemize}
 \item[] \textbf{Two distinct critical points}
 
-When $p$ is non-zero, $g$ has two distinct critical points. We can use our symmetries turn it into any other third-degree polynomial with distinct critical points. To illustrate, we will turn $g$ into the Chebyshev polynomial $T_3$ by moving its critical points to $\pm\tfrac{1}{2}$ and its critical values to $\pm 1$.
-
-\textcolor{RoyalBlue}{We bring them to $\pm \tfrac{1}{2}$ by pre-composing the polynomial with a scaling by $2\big(\tfrac{p}{3}\big)^{1/2}$. Then we bring the critical values to $\pm 1$ by post-composing with}
+When $p$ is non-zero, $g$ has two distinct critical points. We can use our symmetries turn it into any other third-degree polynomial with distinct critical points. To illustrate, we turn $g$ into the Chebyshev polynomial $T_3$ by scaling and rotating its critical points to $\pm\tfrac{1}{2}$ and its critical values to $\pm 1$.
 \begin{center}
 \begin{tabular}{c|c|c}
 \textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
-$\displaystyle \mathsf{M}_{-2i(p/3)^{1/2}}^*$ & $\displaystyle 2i\left(\frac{p}{3}\right)^{3/2} \left(4u^3 - 3u\right)$ & $\displaystyle -2i\left(\frac{p}{3}\right)^{1/2} e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
-$f \mapsto \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} f$ & \\[5mm]
+$\displaystyle \mathsf{M}_{(i/2)(3/p)^{1/2}}^*$ & $\displaystyle 2i\left(\frac{p}{3}\right)^{3/2} \left(4u^3 - 3u\right)$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
+$\displaystyle f \mapsto \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} f$ & $\displaystyle 4u^3 - 3u$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right)$ \\[5mm]
 \end{tabular}
 \end{center}
-\end{itemize}
+We can now relate the general third-degree thimble integral $I$ to the modified Bessel function $K_{1/3}$, defined in equation~\eqref{integral:mod-bessel}:
+\[ K_{1/3}(z) = -\frac{3}{2}\,p^{-1/2} e^{qz}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right). \]
+From this identity, we can see that $I(z)$ satisfies a transformed version of the modified Bessel equation:
+\[\left[\left(\frac{\partial}{\partial z}\right)^2 + 2\left(\frac{q}{a_3}\right)\frac{\partial}{\partial z} + \frac{1}{a_3^2} \left(\frac{4p^3}{27} + q^2\right) + \frac{1}{z} \left(\frac{\partial}{\partial z} + \frac{q}{a_3}\right) - \frac{1}{9z^2}\right] \Phi = 0.\]
+\begin{verify}
+\[\left[a_3^2 \left(\frac{\partial}{\partial z}\right)^2 + 2a_3 q \frac{\partial}{\partial z} + \left(\frac{4p^3}{27} + q^2\right) + \frac{a_3}{z} \left(a_3\frac{\partial}{\partial z} + q\right) - \frac{a_3^2}{9z^2}\right] \Phi = 0.\]
+\end{verify}
+\item[] \textbf{One degenerate critical point}
 
+When $p$ is zero, $g$ has a single degenerate critical point. Like we did in Appendix~\ref{airy-appendix} for the non-degenerate case, we will first study $I(z)$ by viewing it as a solution of an ODE, and we will then confirm our results using the thimble projection formula.
+
+By differentiating under the integral, we can see that $I(z)$ satisfies the equation
+\begin{equation}\label{eqn:degree-3-poly-1root}
+\left[\frac{\partial}{\partial z} + \frac{1}{3z}\right] \Phi = 0.
+\end{equation}
+A function $\laplace_{\zeta,\alpha}^{\theta} v$ satisfies this equation if and only if $v$ satisfies the integral equation
+\[ \left[ -\zeta + \tfrac{1}{3} \partial^{-1}_{\zeta, \alpha} \right] v = 0. \]
+When $\alpha = 0$, this equation has the solution
+\[ v_0 = \zeta^{-2/3}, \]
+whose Laplace transform
+\[ V_0 = \Gamma\big(\tfrac{1}{3})\,z^{-1/3} \]
+must be proportional to $I(z)$.
+
+We can confirm this result, and find the correct normalization, using the thimble projection formula:
+\begin{align*}
+\int_{\mathcal{C}} e^{-zu^3}\,du & = e^{i\pi/3} \int_{\mathcal{J}_{\zeta, 0}^\theta} e^{-z\zeta}\,\tfrac{1}{3}\zeta^{-2/3}\,d\zeta \\
+& = \tfrac{1}{3}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3})\,z^{-1/3}.
+\end{align*}
+The factor of $e^{i\pi/3}$ \begin{todo}[check]\end{todo} comes from the monodromy of $\zeta^{-2/3}$ around $\zeta = 0$.
+
+\color{RoyalBlue}
+namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q\right)$, where $\zeta_q=\zeta-q$ and $a\in\C$ is a free parameter. 
+\end{itemize}
+\subsubsection{Coalescence of critical values}
+We can recover the degenerate case by taking the limit of the non-degenerate case as $p$ goes to zero. Rearranging the relationship above between $I(z)$ and the modified Bessel function $K_{1/3}(z)$, we get the formula
+\[ I(z) = -\frac{2}{3}\,p^{1/2} \exp\left[-2ia_3 \left(\frac{p}{3}\right)^{3/2} qz\right] K_{1/3}\left(2ia_3 \left(\frac{p}{3}\right)^{3/2} z\right). \]
+Using the Taylor expansion of $K_{1/3}(z)$ around $z = 0$, given by equations 10.25.2 and 10.27.4 of \cite{dlmf}, we can see that $I(z)$ converges pointwise to $\tfrac{1}{\sqrt{3}} e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3}\big)\,z^{-1/3}$ as $p$ goes to zero with $q$ and $a_3$ held constant.
+\begin{todo}\par
+[Our treatments of the $e^{qz}$ factor disagree. With this version, the exponential factor goes to $1$ as $p \to 0$, which I think is consistent with the limit to the degenerate case. Comparison:]
+\begin{align*}
+    e^{-zq} I_+\left(-\tfrac{i 3^{3/2}}{2 p^{3/2}} z\right)&= \int_{\mathcal{C}_+} e^{z (4t^3-3t)} du\\
+    &= 2\sqrt{-\tfrac{p}{3}} \int_{\mathcal{C}_+} e^{z (4t^3-3t)} dt \\
+    &= 2\sqrt{-\tfrac{p}{3}} K_{1/3}(z). 
+\end{align*}
+\end{todo}
+\begin{verify}
+\begin{align*}
+2\sqrt{\frac{-p}{3}} K_{1/3}\Big(\frac{2ip^{3/2}}{3^{3/2}}z\Big)&=2\sqrt{\frac{-p}{3}}\left[\frac{\pi}{2\sin(\pi/3)}\Big(I_{-1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)-I_{1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)\Big)\right]\\
+&=\frac{2}{3}\pi ip^{1/2}\left[\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{-1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{2}{3})}-\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{4}{3})}\right]\\
+&=\frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{2}{3})}-\frac{2\pi }{3\sqrt{3}} e^{2\pi i/3} z^{1/3} p \sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{4}{3})}
+\end{align*}
+Now we take the limit as $p\to 0$ and we find 
+\[\frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \frac{1}{\Gamma\big(\tfrac{2}{3}\big)}=e^{\pi i/3} \Gamma\big(\tfrac{1}{3}\big) z^{-1/3}\]
+\end{verify}
 \color{black}
 
 \par\color{RoyalBlue}
@@ -2948,6 +2989,7 @@ In particular, when $p\neq 0$, the thimble integral $I_+$ can be studied followi
 %\begin{equation*}
 %    v_- =\left(\frac{3}{4p\,x_-}\zeta_-\right)^{-1/2}\, {}_2F_1\left(\frac{1}{6},\frac{5}{6} ;\frac{3}{2};1-\frac{3}{4p\,x_-}\zeta_-\right). 
 %\end{equation*}
+\color{RoyalBlue}
 We then consider the case when $p=0$, and we study it both as a solution of an ODE and as a thimble integral.
 First, notice that $I(z)$ solves
        \begin{equation}\label{eqn:degree-3-poly-1root}
@@ -2957,28 +2999,21 @@ and we can find a Borel regular solution following the argument of Section~\ref{
 \begin{align*}
    \left[ (\zeta-q)\partial_\zeta +\frac{2}{3}\right] v=0
 \end{align*}
-namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q\right)$, where $\zeta_q=\zeta-q$ and $a\in\C$ is a free parameter. 
+namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q\right)$, where $\zeta_q=\zeta-q$ and $a\in\C$ is a free parameter.
+\color{black}
 
 The result is confirmed by the thimble projection reasoning which in this simple case reads
 \begin{align*}
     \int_{\mathcal{C}} e^{-z (u^3+q)} du &= e^{-zq} e^{i\pi/3} \int_0^{+e^{i\theta}\infty} e^{-z\zeta} \zeta^{-2/3} d\zeta\\
     &= e^{i\pi/3} \int_q^{+e^{i\theta}\infty} e^{-z\zeta} \, \zeta_q^{-2/3}\,  d\zeta
 \end{align*}
-where $e^{\pi i/3}$ accounts for the monodromy of $\zeta^{-2/3}$ at the origin. 
+where $e^{\pi i/3}$ accounts for the monodromy of $\zeta^{-2/3}$ at the origin.
 \begin{remark}
     The degenerate case $p=0$ can be recovered from the generic case, taking the limit of $I_+(z)$ as $p\to 0$. Indeed, 
     \[ e^{-zq} I_+(z)=2 \sqrt{-\frac{p}{3}} K_{1/3}\Big(\frac{2p^{3/2}}{i3^{3/2}}z\Big)\]
     and its limit as $p\to 0$ can be computed from equations 10.25.2 and 10.27.4 in \cite{dlmf} giving 
     \[ e^{\pi i/3} \Gamma\big(\tfrac{1}{3}\big) e^{-zq} z^{-1/3}.  \]
-    \begin{verify}
-        \begin{align*}
-            2\sqrt{\frac{-p}{3}} K_{1/3}\Big(\frac{2ip^{3/2}}{3^{3/2}}z\Big)&=2\sqrt{\frac{-p}{3}}\left[\frac{\pi}{2\sin(\pi/3)}\Big(I_{-1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)-I_{1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)\Big)\right]\\
-            &=\frac{2}{3}\pi ip^{1/2}\left[\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{-1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{2}{3})}-\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{4}{3})}\right]\\
-            &=\frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{2}{3})}-\frac{2\pi }{3\sqrt{3}} e^{2\pi i/3} z^{1/3} p \sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{4}{3})}
-        \end{align*}
-         Now we take the limit as $p\to 0$ and we find 
-         \[\frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \frac{1}{\Gamma\big(\tfrac{2}{3}\big)}=e^{\pi i/3} \Gamma\big(\tfrac{1}{3}\big) z^{-1/3}\]
-    \end{verify}
+
     From the properties of the Laplace transform, we then deduce
     \[e^{\pi i/3} \Gamma\big(\tfrac{1}{3}\big) e^{-zq} z^{-1/3}= e^{\pi i/3} e^{-qz} \laplace_{\zeta,0}(\zeta^{-2/3}) = e^{\pi i/3} \laplace_{\zeta_{-q},q}(\zeta^{-2/3})\]
     which agrees with the thimble integral representation of $I$ computed above. 
