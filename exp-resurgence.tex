@@ -1231,8 +1231,15 @@ It extends countable linearity to a map $\borel_{\zeta_\alpha} \maps z^{-1} \C \
 %\color{black}
 \subsubsection{Action on trans-series}\label{sec:action_transseries}
 %
-\color{DarkTurquoise}
-\color{RoyalBlue}
+\color{DarkBlue}
+{\em Trans-series} are formal objects that greatly generalize formal power series. Their full definition is quite involved~\cite{aniceto2019primer}, especially when complex exponents are allowed~\cite{van-der-hoeven2001complex}. We will only see examples of the simple form
+\[ \sum_{\alpha \in A} e^{-\alpha z} z^{\sigma_\alpha} \series{\varphi}_\alpha, \]
+where $A$ is a finite set of complex numbers, each $\sigma_\alpha$ is a real number, and each $\series{\varphi}_\alpha$ is a formal power series in $\C\llbracket z^{-1} \rrbracket$. Each term $e^{-\alpha z} z^{\sigma_\alpha} \series{\varphi}_\alpha$ is called a {\em trans-monomial}.
+
+Trans-series of this form play a crucial role in the theory of ODEs with irregular singularities. In particular, they exhibit a formal analogue of the Stokes phenomenon: their asymptotics can change sharply from one direction to the next. Trans-monomials $e^{-\alpha z} z^{\sigma_\alpha} \series{\varphi}_\alpha$ can be ordered by $\Re(e^{i\theta} \alpha)$ for any direction $\theta$. When a trans-series converges, its sum becomes dominated by the lowest term in this ordering as $\Re(e^{-i\theta} z)$ grows.
+
+We can extend the definition of the Borel transform to trans-series by recognizing that $\laplace_{\zeta, \alpha}$ sends ordinary monomials to trans-monomials, and then taking advantage of the relationship between $\laplace_{\zeta, \alpha}$ and $\laplace_{\zeta_\alpha, 0}$ given by identity~\eqref{change-chart}.
+\par\color{RoyalBlue}
 A trans-series is a generalization of usual power series, whose building blocks (called trans-monomials) are of the form $e^{\alpha_n z}\varphi_n$ where $\alpha_n$ is a sequence of complex numbers such that \textcolor{PaleVioletRed}{[exponents must lie along a ray]} $0=\alpha_0 e^{-i\theta}< \alpha_1 e^{-i\theta}<...<\alpha_n e^{-i\theta}<...$ and $\varphi_n\in\C\llbracket z^{-1}\rrbracket$ for every $n$: 
 
 \[T_{\alpha,\varphi}:=\sum_{n=0}^{\infty} e^{\alpha_n z} \varphi_n(z) \]
@@ -1242,23 +1249,19 @@ The main feature of $T_{\alpha,\varphi}$ is that its asymptotics as $\text{ Re }
 It's natural to ask whether we can extend the definition of $\borel_\zeta$ to transseries, and we will achieve it using the relationship between $\laplace_{\zeta, \alpha}$ and $\laplace_{\zeta_\alpha, 0}$ in identity~\eqref{change-chart}.
 \color{black}
 \begin{definition}
-    The action of $\borel_\zeta$ on trans-monomials is the formal inverse of $\laplace_{\zeta,\alpha}$
-    \[\laplace_{\zeta,\alpha}\borel_\zeta\big[e^{-z\alpha}z^{-n-1}\big]=e^{-z\alpha}z^{-n-1}\]
-    %\begin{center}
-%\begin{tikzcd}[every arrow/.append style={shift left}]
- %e^{-z\alpha}\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \} \arrow{d}{\borel_{\zeta}} \\ \{1, \zeta_\alpha, \zeta_\alpha^2, \zeta_\alpha^3, \ldots\} \arrow{u}{\laplace_{\zeta,\alpha}}
-%\end{tikzcd}
-%\end{center}
-    and it extends by linearity to transseries. 
+On each ordinary monomial within a trans-monomial, $\borel_\zeta$ acts as the formal inverse of $\laplace_{\zeta,\alpha}$:
+\[\laplace_{\zeta,\alpha}\borel_\zeta\big[e^{-\alpha z} z^{-n-1} \big]=e^{-\alpha z} z^{-n-1}. \]
+The action of $\borel_\zeta$ extends to general trans-monomials and trans-series by countable linearity.
 \end{definition}
-In particular, from identity~\eqref{change-chart} we deduce 
+From this definition, and identity~\eqref{change-chart}, we deduce that
 \begin{align*}
-    e^{-z\alpha}z^{-n-1}&=e^{-z\alpha}\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\zeta\alpha}z^{-n-1}\big]\\
-     z^{-n-1}&=\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\zeta\alpha}z^{-n-1}\big]
+e^{-z\alpha}\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\alpha z} z^{-n-1}\big] & = e^{-z\alpha} z^{-n-1} \\
+\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\alpha z} z^{-n-1}\big] & = z^{-n-1} \\
+\borel_{\zeta}\big[e^{-z\alpha}z^{-n-1}\big] & = \frac{\zeta_\alpha^n}{n!}.
 \end{align*}
-and taking the inverse of $\laplace_{\zeta_\alpha,0}$ we find
+%%%and taking the inverse of $\laplace_{\zeta_\alpha,0}$ we find
 %Indeed it is possible by formalizing the change of variable identity that relates $\laplace_{\zeta, \alpha}$ to $\laplace_{\zeta_\alpha, 0}$ (see Section \ref{translation} identity \eqref{change-chart}). 
-
+%
 %We extend the Borel transform to transseries, defining \[\borel_\zeta \maps e^{-\alpha z} \C\llbracket z^{-1} \rrbracket \to \C\llbracket \zeta_\alpha \rrbracket\] as the formal inverse of $\laplace_{\zeta, \alpha}$. To be more precise, we define the action on trans-monomial so that the diagram
 %%\begin{center}
 %%\begin{tikzcd}
@@ -1267,7 +1270,7 @@ and taking the inverse of $\laplace_{\zeta_\alpha,0}$ we find
 %%\end{tikzcd}
 %%\end{center}
 %\begin{lemma}
-    \[\borel_{\zeta}\big[e^{-z\alpha}z^{-n-1}\big]=\frac{\zeta_\alpha^n}{n!}.\]
+%%%\[\borel_{\zeta}\big[e^{-z\alpha}z^{-n-1}\big]=\frac{\zeta_\alpha^n}{n!}.\]
 In other words, the diagram 
 \begin{center}
 \begin{tikzcd}[every arrow/.append style={shift left}]
@@ -3539,6 +3542,6 @@ Since $\fracderiv{-1}{\zeta}{0}\;\tfrac{\partial}{\partial \zeta}$ acts as the i
 which rearranges to the second equation in the statement.
 \end{proof}
 \newpage
-\bibliographystyle{plain}
+\bibliographystyle{utphys}
 \bibliography{airy-resurgence}
 \end{document}
