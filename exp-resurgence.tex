@@ -470,12 +470,28 @@ From an analytic perspective, Theorem~\ref{thm:soln_is_Borel_sum} justifies the 
 %%Our treatment of thimble integrals will be based on our geometric picture of the Laplace transform, briefly sketched in Section~\ref{sec:other_results}. \textcolor{orange}{[Can you remind me why we discuss the geometric picture here? Is it to justify doing things in a coordinate-independent way?]}
 In Section~\ref{borel-reg:explanatory-power}, we gave the general form of a thimble integral associated with a map $f \maps X \to \C$. The important thing about $\C$ here turns out to be its {\em translation surface} structure, which picks out an atlas of charts related by translations and provides a global sense of direction. The geometry of translation surfaces, described more fully in Section~\ref{sec:transl}, provides a natural setting for the Laplace transform. It will therefore be useful to place thimble integrals in this setting as well.
 
-Given a translation chart $\zeta$ on a translation surface $B$, we write $\mathcal{J}_{\zeta, \alpha}^\theta$ to denote the ray in direction $\theta$ starting at $\zeta = \alpha$. Consider a map $f \maps X \to B$ with a critical value at $\zeta = \alpha$, supposing for the moment that $X$ is an $N$-dimensional complex manifold. Each connected component of the preimage $f^{-1}(\mathcal{J}_{\zeta, \alpha}^\theta)$ runs through a critical point of $f$; a {\em Lefschetz thimble} is a component that runs through a non-degenerate critical point.
+Given a translation chart $\zeta$ on a translation surface $B$, we write $\mathcal{J}_{\zeta, \alpha}^\theta$ to denote the ray in direction $\theta$ starting at $\zeta = \alpha$. Consider a map $f \maps X \to B$ with a critical value at $\zeta = \alpha$. Each connected component of the preimage $f^{-1}(\mathcal{J}_{\zeta, \alpha}^\theta)$ runs through one of the critical points that $f$ sends to $\zeta = \alpha$. When the complex manifold $X$ is one-dimensional, as it will be throughout this paper, a {\em Lefschetz thimble} is an oriented component of $f^{-1}(\mathcal{J}_{\zeta, \alpha}^\theta)$ that runs through a single, non-degenerate critical point of $f$. A one-dimensional Lefschetz thimble is determined up to orientation by the critical point $a$ that it runs through and the direction $\theta$ of the ray that it projects to, so we will often denote it with a symbol like $\mathcal{C}^\theta_a$.
+\begin{center}
+\includegraphics[width=6.5cm]{figures/rays_ge6.png}
+\hspace{0.5cm}
+\includegraphics[width=6.5cm]{figures/thimbles-n5.png}
+\captionof{figure}{On the left, we see the rays $\mathcal{J}^{\pi/8}_{\zeta, \pm 1}$ on the translation surface $B = \C$, where $\zeta$ is the standard coordinate. On the right, we see the complex manifold $X = \C$, colored according to a holomorphic map $f \maps X \to B$ whose critical values are $\zeta = \pm 1$. The Lefschetz thimbles over the rays $\mathcal{J}^{\pi/8}_{\zeta, \pm 1}$ are shown.}
+\end{center}
+%%
+%%supposing for the moment that $X$ is an $N$-dimensional complex manifold.
+%%
+%%Each connected component of the preimage $f^{-1}(\mathcal{J}_{\zeta, \alpha}^\theta)$ runs through a critical point of $f$. When {\em Lefschetz thimble} is a component that runs through a non-degenerate critical point.
 
-To \textcolor{orange}{[\ldots]}, consider a non-degenerate critical point $a$ in the preimage of $\zeta = \alpha$, and let $\mathcal{C}^\theta_a$ be the Lefschetz thimble that runs through it. Near $a$ we can always find coordinates $t_1, \ldots, t_N$ on $X$ with $f = t_1^2 + \ldots + t_N^2$.
+For context, let us see how the one-dimensional definition of a Lefschetz thimble arises from the general definition. Suppose for a moment that $X$ is $N$-dimensional, and consider a non-degenerate critical point $a$ that $f$ sends to $\zeta = \alpha$. Near $a$, we can always find coordinates $t_1, \ldots, t_N$ on $X$ with
+\[ f^*\zeta = \alpha + e^{i \theta} (t_1^2 + \ldots + t_N^2). \]
+Each such coordinate system defines a Lefschetz thimble: the oriented real-analytic submanifold where $t_1, \ldots, t_N$ are real. There are many such coordinate systems, but they are all related by local holomorphic maps from $X$ to the complex orthogonal group $O_N(\C)$. Since $O_N(\C)$ has only two connected components, distinguished by the sign of the determinant, a Lefschetz thimble is determined up to homotopy and orientation by the critical point $a$ and the direction $\theta$. When $N = 1$, the homotopy freedom disappears, because $O_1(\C)$ is the discrete group $\{\pm 1\}$.
 
+\textcolor{orange}{[\ldots]}
+%%
+%%To \textcolor{orange}{[\ldots]}, consider a non-degenerate critical point $a$ in the preimage of $\zeta = \alpha$, and let $\mathcal{C}^\theta_a$ be the Lefschetz thimble that runs through it. Near $a$ we can always find coordinates $t_1, \ldots, t_N$ on $X$ with $f = t_1^2 + \ldots + t_N^2$.
+%%
 %%To see why the term ``thimble'' is fitting, consider a non-degenerate critical point $a$ in the preimage of $\zeta = \alpha$, and let $\mathcal{C}^\theta_a$ be the Lefschetz thimble that runs through it. Near $a$ we can always find coordinates $x_1, \ldots, x_N$ on $X$ in which $\mathcal{C}^\theta_a$ looks like the paraboloid
-where $\zeta = \alpha + \zeta_\alpha$. \textcolor{orange}{[\ldots]}
+%%where $\zeta = \alpha + \zeta_\alpha$. \textcolor{orange}{[\ldots]}
 
 \color{RoyalBlue}
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{NavyBlue}{[The important thing about $\C$, where $f$ takes values, is that it is a translation surface---\ldots]} For each critical point $a$, let $\mathcal{J}_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\mathcal{J}_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\mathcal{J}_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\mathcal{J}_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\mathcal{J}_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\mathcal{C}_a^\theta$ can be regarded as the component of $f^{-1}(\mathcal{J}_\alpha^\theta)$ that goes through $a$. \textcolor{orange}{We could orient the thimble so that shifting $\mathcal{C}_a$ to its left would make its projection run clockwise around $\mathcal{J}_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
@@ -820,26 +836,39 @@ When the half-plane extends along the $-\theta$ direction, the sum $\hat{\phi}$ 
 The Watson--Nevanlinna--Sokal characterization of Borel regular functions is totally general, which means it cannot  take advantage of any extra structure provided by the problem you are trying to solve. We take the opposite approach, showing that certain functions are Borel regular just because of the extra structure provided by the problems they solve. 
 
 %%a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\borel\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
-\subsection{Borel regularity for level~$1$ ODEs}
+\subsection{Borel regularity for level~$1$ ODEs}\label{sec:history_ODE}
 %
-The study of irregular singular differential equations on complex domains has a long history, and interesting phenoma distinguish irregular singular equations from regular singular ones. At the formal level, irregular singular ODEs already have distinctive behaviour: they admit divergent formal series solutions in the form of trans-monomials. In particular, the trans-monomial characterizes the different asymptotic behvaiours of the underlying analytic solution---whose existence is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.). Then, the so called Stokes phenomenon, which is also a distinguished aspect of irregular singular ODEs, measures the ``jumps" of these analytic solutions with different asymptotics, after they are analytically continued. 
+The study of irregular singular differential equations on complex domains has a long history, and interesting phenoma distinguish irregular singular equations from regular singular ones. \color{DarkViolet}
+Analytic solutions of a linear ODE with an irregular singularity at $\infty$ often exhibit the Stokes phenomenon: asymptotic behavior that changes sharpy from from direction to the next. Formally, this behavior is captured in a {\em formal integral} solution: an expression
+\[ \sum_{\alpha \in A} e^{-\alpha z} z^{\tau_\alpha} \series{\varphi}_\alpha \]
+in which $A$ is a finite set of complex numbers, each $\tau_\alpha$ is a real number, and each $\series{\varphi}_\alpha$ is a formal power series in $\C\llbracket z^{-1} \rrbracket$. For each direction $\theta$, the term with the lowest value of $\Re(e^{i\theta} \alpha)$ represents the dominant contribution to the solution's asymptotic behavior. 
 
-Since in this paper we focus on buidling a frame of solutions, without dicussing the Stokes phenomenon, we will describe below the main methods to solve irregular singular ODEs stressing the difference between formal and analytic solutions in either the frequency and the position domain. A summary is given in the following table
+Each term of a formal integral is an example of a {\em trans-monomial}---the basic building block of a {\em trans-series} \footnote{The full definition of a trans-series is quite involved, especially when complex exponents are allowed~\cite{EcalleIII,van-der-hoeven2001complex,costin_transseries,costin_summability}.} The trans-monomials in the spaces $e^{-\alpha z} z^\tau\,\C\llbracket z^{-1} \rrbracket$ are the only ones we will need to consider in the study of level-$1$ ODEs, as indicated by the Poincar\'e method~\ref{sec:Poincare method}. Then, the existence of corresponding analytic solutions is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.). \textcolor{DarkBlue}{At the formal level, irregular singular ODEs already have distinctive behaviour. Their ``formal integral'' series solutions, discussed in Section~\ref{sec:action_transseries}, exhibit the {\em Stokes phenomenon}: asymptotic behavior that changes sharply from one direction to the next. The existence of corresponding analytic solutions is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.).} %\textcolor{RoyalBlue}{At the formal level, irregular singular ODEs already have distinctive behaviour: they admit divergent formal series solutions in the form of trans-monomials. In particular, the trans-monomial characterizes the different asymptotic behvaiours of the underlying analytic solution---whose existence is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.). Then, the so called Stokes phenomenon, which is also a distinguished aspect of irregular singular ODEs, measures the ``jumps" of these analytic solutions with different asymptotics, after they are analytically continued.}
+\color{Maroon}
+Analytic solutions of a linear ODE with an irregular singularity at $\infty$ often exhibit the Stokes phenomenon: asymptotic behavior that changes sharpy from from direction to the next. Formally, this behavior is captured in a {\em formal integral} solution: an expression
+\[ \sum_{\alpha \in A} e^{-\alpha z} z^{\sigma_\alpha} \series{\varphi}_\alpha \]
+in which $A$ is a finite set of complex numbers, each $\sigma_\alpha$ is a real number, and each $\series{\varphi}_\alpha$ is a formal power series in $\C\llbracket z^{-1} \rrbracket$. For each direction $\theta$, the term with the lowest value of $\Re(e^{i\theta} \alpha)$ represents the dominant contribution to the solution's asymptotic behavior.
+
+Each term of a formal integral is an example of a {\em trans-monomial}---the basic building block of a {\em trans-series}. The full definition of a trans-series is quite involved, especially when complex exponents are allowed~\cite{EcalleIII,van-der-hoeven2001complex,costin_transseries,costin_summability}. The trans-monomials in the spaces $e^{-\alpha z} z^\sigma\,\C\llbracket z^{-1} \rrbracket$ are the only ones we will need to consider.
+\color{black}
+
+The formal integral solutions and the M.A.E.T. have inspired several other solution methods for linear level~1 ODEs. The ones we will discuss in this section are summarized in the following table. We classify solution methods by two features: whether the solutions they produce are analytic functions or formal series, and whether they solve the original equation on the frequency domain or an equivalent equation in the position domain.
+%\textcolor{RoyalBlue}{Since in this paper we focus on buidling a frame of solutions, without dicussing the Stokes phenomenon, we will describe below the main methods to solve irregular singular ODEs stressing the difference between formal and analytic solutions in either the frequency and the position domain. A summary is given in the following table}
 \begin{center}
 \begin{tabular}{l|l|l}
 & \textbf{Analytic} & \textbf{Formal} \\ \hline
-\textbf{Frequency} &  & Poincar\'{e}: trans-monomial ansatz~\cite{int-irreg} \\ \hline
+\textbf{Frequency} &  & Poincar\'{e}: \textcolor{DarkBlue}{``formal integral'' series \textcolor{orange}{(?)}} \textcolor{DarkViolet}{trans-monomial ansatz}~\cite{int-irreg} \\ \hline
 \textbf{Position} & \'{E}calle: resurgence  & \'{E}calle: formal perturbation theory~\cite{EcalleIII,loday-Remy2011} \\
 & Fixed-point iteration~\cite{reg-sing-volterra} \\
 \end{tabular}
 \end{center}
 
-\subsubsection{Poincar\'e method and Borel--Laplace summation}
-For a level $1$ ODE of the kind we will study, these formal solutions can be found systematically, using an algorithm described by Poincar\'{e}~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. For instance, for an ODE like the one in Section~\ref{borel-reg:explanatory-power}, a frame of formal solutions are given by trans-monomial $\Phi_\alpha$ of the form
+\subsubsection{Poincar\'e method and Borel--Laplace summation}\label{sec:Poincare method}
+For a level $1$ ODE of the kind we will study, these formal solutions can be found systematically, using an algorithm described by Poincar\'{e}~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. For instance, for an ODE like the one in Section~\ref{borel-reg:explanatory-power}, a frame of formal solutions are given by trans-monomial $\series{\Phi}_\alpha$ of the form
 \begin{equation}
-    \Phi_\alpha=e^{\alpha z} z^{-\tau} \sum_{n=0}^\infty a_n z^{-n}
+\series{\Phi}_\alpha=e^{\alpha z} z^{-\tau_\alpha} \sum_{n=0}^\infty a_n z^{-n}
 \end{equation}
-with $P(-\alpha)=0$ and $\tau=Q(-\alpha)/P'(-\alpha)$. We will refer to $\Phi_\alpha$ as Poincar\'{e}'s formal solutions. 
+with $P(-\alpha) = 0$ and $\tau_\alpha = Q(-\alpha) / P'(-\alpha)$. We will refer to $\Phi_\alpha$ as Poincar\'{e}'s formal solutions. 
 
 Then, although it is not contructive, the M.A.E.T. guarantees the existence of a frame of analytic solutions asymptotic to Poincar\'{e}'s formal ones~\cite[Chapter~14]{balser}. In particular, the Ramis Index Theorem shows that the formal solutions $\Phi_\alpha$ are 1-Gevrey series---the first step in proving Borel~summability~\cite{ramis_index}. This motivated the desire to promote formal solutions to analytic ones through the development of summability methods, even beyond the study of level-$1$ ODEs~\cite{diverg-resurg--ii,malgrange--fourier,malgrange1995sommation,malgrange92,ramis1991series}.
 % \subsubsection{\textcolor{orange}{[M.A.E.T. section]}}
@@ -849,7 +878,7 @@ The developement of \'Ecalle's theory of resurgence introduced a new approach to
 
 In a nutshell, the aim of resurgence is to study the analytic continuation of the Borel transform of a divergent series, in particular the location of sngularities in the position domain and Stokes constants computed after analytic continuation across the singularities. 
 
-Recall, that resurgent $1$-Gevrey series have an endlessly analytically continuable Borel transform. Thus resurgence makes naturally a bridge between formal and analytic solutions in the position domain. Indeed, differential equations in the frequency domain can be turned into integral equations in the position domain, using the Borel transform. In particular the Borel transform of the formal solution $\series{\Phi}_\alpha$ is a germ of analytic functions, and its analytic properties can be studied in terms of the equation they satisfy. For instance, in~\cite{loday-Remy2011}, Loday-Richaud and Remy solve perturbed integral equations formally in the position domain (following the approach of \'Ecalle~\cite{EcalleIII}). Yet working in the position domain, one can turn the integral equation into a differential equation and trying to solve it analytically in the position domain, see~\cite{malgrange--fourier}. Then, going back to the frequency plane can be done with the Laplace transform, but it is usually a technincal analytic step. 
+Recall, that resurgent $1$-Gevrey series have an endlessly analytically continuable Borel transform. Thus resurgence makes naturally a bridge between formal and analytic solutions in the position domain. Indeed, differential equations in the frequency domain can be turned into integral equations in the position domain, using the Borel transform. In particular the Borel transform of the formal solution $\series{\Phi}_\alpha$ is a convergent power series, and its sum can be studied by in terms of the equation it satisfies. For instance, in~\cite{loday-Remy2011}, Loday-Richaud and Remy solve perturbed integral equations formally in the position domain (following the approach of \'Ecalle~\cite{EcalleIII}). Yet working in the position domain, one can turn the integral equation into a differential equation and trying to solve it analytically in the position domain, see~\cite{malgrange--fourier}. Then, going back to the frequency plane can be done with the Laplace transform, but it is usually a technincal analytic step. 
 
 However, more absractly, taking as input the set of Stokes data (namely the Stokes ray emanating from the singulairties and the associated Stokes constants) one can set-up a Riemann--Hilbert problem, whose solution would give a frame of analytic solutions of the ODEs~\cite{kontsevich2022analyticity}. This is an advantage of resurgence techniques compared to the usual Borel summation method. 
 
@@ -958,8 +987,8 @@ Near each branch point $b$, fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1
 %
 \paragraph{The frequency coordinate}\label{transl-freq}
 %
-\textcolor{DarkBlue}{Over the complement $B'$ of the branch points, the translation structure gives us a holomorphic map $z \maps T^*B' \to \C$. This map is an isomorphism on every fiber, trivializing $T^*B$ almost globally. Over a branch point $b$ of cone angle $2\pi n$, we get an analogous isomorphism $z \maps T^*_bB^{\otimes n} \to \C$. In both cases, we will call $z$ the {\em frequency coordinate} of $B$.}
-\par\textcolor{RoyalBlue}{The translation structure gives us an isomorphism $z \maps T^*_bB \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*_bB^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$.}
+Over the complement $B'$ of the branch points, the translation structure gives us a holomorphic map $z \maps T^*B' \to \C$. This map is an isomorphism on every fiber, trivializing $T^*B$ almost globally. Over a branch point $b$ of cone angle $2\pi n$, we get an analogous isomorphism $z \maps T^*_bB^{\otimes n} \to \C$. In both cases, we will call $z$ the {\em frequency coordinate} of $B$.
+%\par\textcolor{RoyalBlue}{The translation structure gives us an isomorphism $z \maps T^*_bB \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*_bB^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$.}
 \begin{center}
 \phaseSpaceLaplace
 \captionof{figure}{The frequency coordinate $z$ on the cotangent spaces of an ordinary point and a singular point. The singularity shown here has cone angle $6\pi$, like the singularities of the translation surface associated with the Airy function.}
@@ -1304,14 +1333,7 @@ It extends countable linearity to a map $\borel_{\zeta_\alpha} \maps z^{-1} \C \
 %where in the second step we formally interchange the integral and the sum. 
 %\color{black}
 \subsubsection{Action on trans-monomials}\label{sec:action_transseries}
-%
-\color{DarkBlue}
-\textcolor{orange}{[We can add ``As discussed in Section~[relevant historical section]''\ldots]} Analytic solutions of a linear ODE with an irregular singularity at $\infty$ often exhibit the Stokes phenomenon: asymptotic behavior that changes sharpy from from direction to the next. Formally, this behavior is captured in a {\em formal integral} solution: an expression
-\[ \sum_{\alpha \in A} e^{-\alpha z} z^{\sigma_\alpha} \series{\varphi}_\alpha \]
-in which $A$ is a finite set of complex numbers, each $\sigma_\alpha$ is a real number, and each $\series{\varphi}_\alpha$ is a formal power series in $\C\llbracket z^{-1} \rrbracket$. For each direction $\theta$, the term with the lowest value of $\Re(e^{i\theta} \alpha)$ represents the dominant contribution to the solution's asymptotic behavior.
-
-Each term of a formal integral is an example of a {\em trans-monomial}---the basic building block of a {\em trans-series}. The full definition of a trans-series is quite involved, especially when complex exponents are allowed~\cite{EcalleIII,van-der-hoeven2001complex,costin_transseries,costin_summability}. The trans-monomials in the spaces $e^{-\alpha z} z^\sigma\,\C\llbracket z^{-1} \rrbracket$ are the only ones we will need to consider.
-\color{black}
+%Recall from the discussion in Section~\ref{sec:history_ODE}, that formal solutions of irregular singualr ODEs are in form of trans-monomials. 
 %%
 %%{\em Trans-series} are formal objects that greatly generalize formal power series. Their full definition is quite involved, especially when complex exponents are allowed~\cite{EcalleIII,van-der-hoeven2001complex,costin_transseries,costin_summability}. We will only see examples of the simple form 
 %%\[  e^{-\alpha z} z^{\sigma_\alpha} \series{\varphi}_\alpha, \]
@@ -1326,15 +1348,27 @@ Each term of a formal integral is an example of a {\em trans-monomial}---the bas
 We can extend the definition of the Borel transform to these trans-monomials by recognizing that $\laplace_{\zeta, \alpha}$ sends ordinary monomials to trans-monomials, and then taking advantage of the relationship between $\laplace_{\zeta, \alpha}$ and $\laplace_{\zeta_\alpha, 0}$ given by identity~\eqref{change-chart}.
 \begin{definition}
 On each ordinary monomial within a trans-monomial, $\borel_\zeta$ acts as the formal inverse of $\laplace_{\zeta,\alpha}$:
+\color{DarkBlue}
+\[\laplace_{\zeta,\alpha}\borel_\zeta\big[e^{-\alpha z} z^{-\nu-1} \big]=e^{-\alpha z} z^{-\nu-1}. \]
+\color{DarkViolet}
 \[\laplace_{\zeta,\alpha}\borel_\zeta\big[e^{-\alpha z} z^{-n-1} \big]=e^{-\alpha z} z^{-n-1}. \]
-The action of $\borel_\zeta$ extends to general trans-monomials \textcolor{orange}{[of this form]} by countable linearity.
+The action of $\borel_\zeta$ extends to all of $e^{-\alpha z} \C\llbracket z^{-1} \rrbracket$ by countable linearity.
+%The action of $\borel_\zeta$ extends to all of $e^{-\alpha z} z^\sigma\,\C\llbracket z^{-1} \rrbracket$ by countable linearity.
 \end{definition}
 From this definition, and identity~\eqref{change-chart}, we deduce that
+\color{DarkBlue}
+\begin{align*}
+e^{-z\alpha}\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\alpha z} z^{-\nu-1}\big] & = e^{-z\alpha} z^{-\nu-1} \\
+\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\alpha z} z^{-\nu-1}\big] & = z^{-\nu-1} \\
+\borel_{\zeta}\big[e^{-z\alpha}z^{-\nu-1}\big] & = \frac{\zeta_\alpha^\nu}{\Gamma(\nu+1)}.
+\end{align*}
+\color{DarkViolet}
 \begin{align*}
 e^{-z\alpha}\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\alpha z} z^{-n-1}\big] & = e^{-z\alpha} z^{-n-1} \\
 \laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-\alpha z} z^{-n-1}\big] & = z^{-n-1} \\
 \borel_{\zeta}\big[e^{-z\alpha}z^{-n-1}\big] & = \frac{\zeta_\alpha^n}{n!}.
 \end{align*}
+\color{black}
 %%%and taking the inverse of $\laplace_{\zeta_\alpha,0}$ we find
 %Indeed it is possible by formalizing the change of variable identity that relates $\laplace_{\zeta, \alpha}$ to $\laplace_{\zeta_\alpha, 0}$ (see Section \ref{translation} identity \eqref{change-chart}). 
 %
@@ -1357,6 +1391,11 @@ In other words, the diagram
 \end{center}
 commutes, where $\mathsf{T}_{-\alpha}$ denotes traslation by $-\alpha$. Notice that $\laplace_{\zeta, 0}$ and $\laplace_{\zeta, \alpha}$ produce functions on the fiber $T^*_{\zeta = 0}B$, while $\laplace_{\zeta_\alpha, 0}$ produces functions on the fiber $T^*_{\zeta = \alpha}B$, so this argument depends on the fact that $z$ is defined almost globally $T^*B$.
 %\end{lemma}
+
+\color{DarkViolet}
+Notice that the Borel transform extends to $e^{-\alpha z} z^\tau\,\C\llbracket z^{-1} \rrbracket$ for $\tau\in\R\setminus\Z$ by conutably linearity. In fact, as we argue at the end of Section~\ref{sec:geometry_borel}
+\[\borel_{\zeta}\big[e^{-z\alpha}z^{-\tau-1}\big] = \frac{\zeta_\alpha^\nu}{\Gamma(\tau+1)}.\]
+\color{black}
 \subsubsection{Change of translation chart}\label{transl-borel}
 We will show that the Borel transform is compatible with the change of translation chart for the Laplace transform in Section~\ref{sec:change-translation}. To be more precise, we will show that the diagram
 \begin{center}
@@ -2627,7 +2666,6 @@ On the other hand, the thimble projection reasoning of Section~\ref{contour-argu
 %
 \subsubsection{Lifting to a countable cover}\label{countable-cover}
 %
-\color{DarkBlue}
 Formula~\eqref{integral:mod-bessel-rational-AL} expresses the modified Bessel function $K_{m/n}$ as an exponential integral on a finite cover of $\C$. Lifting to a countable cover reveals this formula as a special case of a general integral formula for modified Bessel functions.
 
 Setting $u = \cosh(t/n)$ and recalling that
@@ -2695,33 +2733,38 @@ Like before, we can deduce by analytic continuation that this identity holds thr
 Using formula~15.8.4 from \cite{dlmf}, followed by formulas 15.8.27 and 15.8.28 from the same source, we can repeat the arguments of Section~\ref{contour-argument-AL}, eventually rewriting the integrand as the variation of the function
 \[ \frac{\sinh(\mu t)}{\sinh(t)} = \frac{3\mu}{2}\;{}_2F_1\left(1 - \mu,\;1 + \mu;\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{\mu}{2}\;{}_2F_1\left(1 - \mu,\;1 + \mu;\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \]
 across the branch cut $\mathcal{J}^\theta_{\zeta, \mp 1}$. As before, the term that contributes to the jump is the one which is singular at the critical value where the branch cut starts. We use identity~15.2.3 from \cite{dlmf} to write the jump explicitly. For odd $j$, we get
-\[ K^{(j)}_\mu(z) = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \mu,\;\frac{1}{2} + \mu;\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta, \]
+\begin{equation}\label{eq: K_j_mu at 1}
+  K^{(j)}_\mu(z) = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \mu,\;\frac{1}{2} + \mu;\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta,  
+\end{equation}
 and for even $j$, we get
-\[ K^{(j)}_\mu(z) = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \mu,\;\frac{1}{2} + \mu;\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta. \]
-\color{black}
-\par\textcolor{orange}{[Old text\ldots]}
-\color{RoyalBlue}
-\begin{align*}
-    K_\mu(z)& = -\frac{1}{2 \sinh(\mu\,i\pi)} \int_{\gamma_z} e^{-z \zeta}\,\frac{\sinh(\mu t)}{\sinh(t)}\,d\zeta  & \\
-    &=-\frac{\mu}{2 \sinh(\mu\,i\pi)} \int_{\gamma_z} e^{-z \zeta}\, {}_2F_1\left(\frac{1+\mu}{2},\frac{1-\mu}{2};\frac{3}{2};1-\zeta^2\right)\,d\zeta & \cite[15.4.16]{dlmf}
-\end{align*}
-where $\gamma_z$ is Hankel contour coming from $\infty$ to $1$ and then going back to $\infty$. Using formula \cite[15.8.4]{dlmf}, followed by \cite[15.8.27]{dlmf} and \cite[15.8.28]{dlmf} \textcolor{PaleVioletRed}{[Please clean up operators that are repeated across line breaks, like the $=$ below. I like the equation spacing in the ``Thimble projection reasoning for Airly-Lucas functions'' section; can we copy that here?]}
-\begin{multline*}
-     {}_2F_1\left(\frac{1+\mu}{2},\frac{1-\mu}{2};\frac{3}{2};1-\zeta^2\right) \textcolor{magenta}{=} \\
-     =\frac{3}{2}\, {}_2F_1\left(1-\mu,1+\mu,\frac{3}{2};\frac{1-\zeta}{2}\right)+\frac{1}{2}\, {}_2F_1\left(1-\mu,1+\mu,\frac{3}{2};\frac{1+\zeta}{2}\right)
-\end{multline*}
-hence 
-%
-\[K_\mu(z)=\frac{\mu\, i}{4 \sin(\mu\pi)} \int_{\gamma_z} e^{-z \zeta}\, {}_2F_1\left(1-\mu,1+\mu;\frac{3}{2};\frac{1+\zeta}{2}\right)\,d\zeta\]
-%
-Equation \cite[15.2.3]{dlmf} gives the analytic continuation of hypergeometric functions across the branch cut:
+\begin{equation}\label{eq: K_j_mu at -1}
+ K^{(j)}_\mu(z) = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \mu,\;\frac{1}{2} + \mu;\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta. 
+\end{equation}
 
-\begin{align}
-    K_{\mu}(z)& \label{eqn:K-mu}=-\frac{1}{2}\int_1^\infty e^{-z\zeta} \, \left(\frac{\zeta-1}{2}\right)^{-1/2} \,\, {}_2F_1\left(\frac{1}{2}-\mu, \frac{1}{2}+\mu;\frac{1}{2};\frac{1-\zeta}{2}\right)  d\zeta\\
-    &  \notag=-\frac{i}{2}\laplace_{\zeta,1} v_{\mu,1} . 
-\end{align}
-\color{black}
-\subsubsection{The case $\mu=0$}
+% \color{black}
+% \par\textcolor{orange}{[Old text\ldots]}
+% \color{RoyalBlue}
+% \begin{align*}
+%     K_\mu(z)& = -\frac{1}{2 \sinh(\mu\,i\pi)} \int_{\gamma_z} e^{-z \zeta}\,\frac{\sinh(\mu t)}{\sinh(t)}\,d\zeta  & \\
+%     &=-\frac{\mu}{2 \sinh(\mu\,i\pi)} \int_{\gamma_z} e^{-z \zeta}\, {}_2F_1\left(\frac{1+\mu}{2},\frac{1-\mu}{2};\frac{3}{2};1-\zeta^2\right)\,d\zeta & \cite[15.4.16]{dlmf}
+% \end{align*}
+% where $\gamma_z$ is Hankel contour coming from $\infty$ to $1$ and then going back to $\infty$. Using formula \cite[15.8.4]{dlmf}, followed by \cite[15.8.27]{dlmf} and \cite[15.8.28]{dlmf} \textcolor{PaleVioletRed}{[Please clean up operators that are repeated across line breaks, like the $=$ below. I like the equation spacing in the ``Thimble projection reasoning for Airly-Lucas functions'' section; can we copy that here?]}
+% \begin{multline*}
+%      {}_2F_1\left(\frac{1+\mu}{2},\frac{1-\mu}{2};\frac{3}{2};1-\zeta^2\right) \textcolor{magenta}{=} \\
+%      =\frac{3}{2}\, {}_2F_1\left(1-\mu,1+\mu,\frac{3}{2};\frac{1-\zeta}{2}\right)+\frac{1}{2}\, {}_2F_1\left(1-\mu,1+\mu,\frac{3}{2};\frac{1+\zeta}{2}\right)
+% \end{multline*}
+% hence 
+% %
+% \[K_\mu(z)=\frac{\mu\, i}{4 \sin(\mu\pi)} \int_{\gamma_z} e^{-z \zeta}\, {}_2F_1\left(1-\mu,1+\mu;\frac{3}{2};\frac{1+\zeta}{2}\right)\,d\zeta\]
+% %
+% Equation \cite[15.2.3]{dlmf} gives the analytic continuation of hypergeometric functions across the branch cut:
+
+% \begin{align}
+%     K_{\mu}(z)& \label{eqn:K-mu}=-\frac{1}{2}\int_1^\infty e^{-z\zeta} \, \left(\frac{\zeta-1}{2}\right)^{-1/2} \,\, {}_2F_1\left(\frac{1}{2}-\mu, \frac{1}{2}+\mu;\frac{1}{2};\frac{1-\zeta}{2}\right)  d\zeta\\
+%     &  \notag=-\frac{i}{2}\laplace_{\zeta,1} v_{\mu,1} . 
+% \end{align}
+% \color{black}
+\subsubsection{The modified Bessel function with parameter $0$}
 When $\mu$ goes to $0$, formula~\eqref{int:mod-bessel-gen} becomes
 \[ K_0^{(j)}(z) = \frac{1}{2\pi i} \int_ {\mathcal{C}_j^\theta} \exp\left[z \cosh(t)\right]\,t\,dt. \]
 We will evaluate
@@ -2735,35 +2778,59 @@ over the contour $\mathscr{c}$ that runs as follows:
 \item Rightward along $(0, \infty) + (\pi + \theta)i$.
 \end{enumerate}
 Since the integrand is an odd function, the upward part of the path integrates to zero. Since the integrand is also $2\pi i$-periodic, the leftward and rightward parts of the integral collapse to
-\begin{align*}
-K_0(z) & = \frac{1}{2\pi i} \int_0^\infty \exp\left[z \cosh(t)\right]\,2\pi i\,dt \\
-& = \int_0^\infty \exp\left[-z \cosh(t)\right]\,dt \\
-& = \int_1^\infty \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s},
-\end{align*}
+\begin{align}
+K_0(z) & = \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[z \cosh(t + \pi i)\right]\,\pi i\,dt \notag - \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[z \cosh(t - \pi i)\right]\,\pi i\,dt \notag \\
+& = \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[-z \cosh(t)\right]\,2\pi i\,dt \notag \\
+& = \int_{\mathcal{J}^0_{t, 0}} \exp\left[-z \cosh(t)\right]\,dt \label{int:k0_cosh} \\
+& = \int_{\mathcal{J}^0_{s, 1}} \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s}, \notag
+\end{align}
 with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}.
 
-On the other hand, equation \eqref{eqn:K-mu} gives \textcolor{magenta}{[relationship? what are we trying to say?]}
-\begin{align}
-K_0(z) & \notag = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta \\
-&\label{eqn:borel_bessel0} = \int_{\mathcal{J}^\theta_{\zeta, 1}} \frac{e^{-z\zeta}}{\sqrt{\zeta^2-1}}\;d\zeta.
-\end{align}
+To confirm that the calculation above is consistent with Section~\ref{countable-cover}, use formulas \eqref{eq: K_j_mu at 1} and \eqref{eq: K_j_mu at -1} to get
+\begin{align*}
+K_0(z) & = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta \\
+& \hphantom{=} - \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta
+\end{align*}
+The hypergeometric function in the integrand can be simplified away using identity~15.4.13 from \cite{dlmf}, leaving an expression that makes the $\zeta_{\pm 1}^{1/2}$ singularities of the integrand even more apparent:
+\begin{equation}\label{eqn:borel_bessel0}
+K_0(z) = \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\big(\zeta^2 - 1\big)^{-1/2}\;d\zeta.
+\end{equation}
+We could get the same result from equation~\eqref{int:k0_cosh} by trigonometric substitution.
 \begin{verify}
-    We can also verify equation \eqref{eqn:borel_bessel0} using the thimble projection reasoning: from the expression of $K_0$ 
-    \begin{equation}
-        K_0(z)=\int_0^{\infty} \exp(-z\cosh(t)) dt
-    \end{equation}
-    we set $\zeta=\cosh(t)$, and choosing a branch for the square root
-    \begin{align*}
-        d\zeta & = \sinh(t) dt\\
-        & =  \sqrt{\zeta^2-1} \, dt
-    \end{align*}
-    we finally get 
-    \[\int_1^{\infty} e^{-z\zeta} \frac{d\zeta}{\sqrt{\zeta^2-1}}\]
+\par
+For odd $j$, with $-\eta^2 = \tfrac{1}{2} - \tfrac{\zeta}{2}$, equation~\eqref{eq: K_j_mu at 1} gives
+\begin{align*}
+K^{(j)}_\mu(z) & = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta \\
+& = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} (1 + \eta^2)^{-1/2} \\
+& = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} \left(\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} \\
+& = -\frac{1}{4} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} \\
+& = -\frac{2}{4} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2}
+\end{align*}
+For even $j$, with $-\eta^2 = \tfrac{1}{2} + \tfrac{\zeta}{2}$, equation~\eqref{eq: K_j_mu at -1} gives
+\begin{align*}
+K^{(j)}_\mu(z) & = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta \\
+& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} (1 + \eta^2)^{-1/2} d\zeta \\
+& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} \left(\frac{1}{2} - \frac{\zeta}{2}\right)^{-1/2} d\zeta \\
+& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \textcolor{Tomato}{i} \left(\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{\textcolor{Tomato}{i}}{2} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} d\zeta \textcolor{Tomato}{\quad\text{(?)}} \\
+& = \textcolor{Tomato}{-}\frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} d\zeta \\
+& = \textcolor{Tomato}{-}\frac{2 \cdot 3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
+\end{align*}
+
+We can also verify equation \eqref{eqn:borel_bessel0} using the thimble projection reasoning. From the expression of $K_0$ 
+\begin{equation}
+K_0(z)=\int_0^{\infty} \exp(-z\cosh(t)) dt,
+\end{equation}
+we set $\zeta=\cosh(t)$. Choosing a branch for the square root
+\begin{align*}
+d\zeta & = \sinh(t) dt\\
+& =  \sqrt{\zeta^2-1} \, dt
+\end{align*}
+we finally get 
+\[\int_1^{\infty} e^{-z\zeta} \frac{d\zeta}{\sqrt{\zeta^2-1}}\]
 \end{verify}
-
-
-
+%
 \subsection{Generalized Airy}
+%
 In \cite{Reid} and the appendix of \cite{drazin-reid}, Drazin and Reid construct approximate solutions of the Orr--Sommerfield fluid equation using the generalized Airy functions
 \begin{align*}
 \mathrm{A}_k(y,p) & = \frac{1}{2\pi i}\int_{\mathscr{a}_k} \exp\big[yt-\tfrac{t^3}{3}\big]\,\frac{dt}{t^p} & & p \in \C\hphantom{{}_{\le 0}},\quad k \in \{1,2,3\} \\
@@ -2852,7 +2919,6 @@ In Theorem~\ref{thm:maxim-proof}, we proved a $3/2$-derivative formula to comput
 \color{black}
 \end{todo}
 \subsection{Third-degree thimble integrals}
-\color{DarkBlue}
 In this section, we consider the thimble integral
 \[ I(z) = \int_{\mathcal{C}} e^{-zg}\,du \]
 defined by a general third-degree polynomial map $g \maps \C \to \C$. By definition, the Lefschetz thimble $\mathcal{C}$ is a connected component of the preimage of a critical value of $g$. After taking various symmetries into account, we will find that there are essentially only two cases, distinguished by whether $g$ has two distinct critical points or a single degenerate one.
@@ -2945,7 +3011,6 @@ From this identity, we can see that $I(z)$ satisfies a transformed version of th
 \[\left[a_3^2 \left(\frac{\partial}{\partial z}\right)^2 + 2a_3 q \frac{\partial}{\partial z} + \left(\frac{4p^3}{27} + q^2\right) + \frac{a_3}{z} \left(a_3\frac{\partial}{\partial z} + q\right) - \frac{a_3^2}{9z^2}\right] \Phi = 0.\]
 \end{verify}
 \item[] \textbf{One degenerate critical point}
-
 When $p$ is zero, $g$ has a single degenerate critical point. Like we did in Appendix~\ref{airy-appendix} for the non-degenerate case, we will first study $I(z)$ by viewing it as a solution of an ODE, and we will then confirm our results using the thimble projection formula.
 
 By differentiating under the integral, we can see that $I(z)$ satisfies the equation
