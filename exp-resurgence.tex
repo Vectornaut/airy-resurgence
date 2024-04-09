@@ -242,7 +242,7 @@ Once you have the formal solution $\series{\Phi}$, you might try to get an actua
 \begin{enumerate}
 \item Thinking of $z$ as a ``frequency variable,'' we take the Borel transform (also known as formal inverse Laplace transform) of $\series{\Phi}$, producing a formal power series $\series{\phi}$ in a new ``position variable'' $\zeta$.
 \item If $\series{\phi}$ has a positive radius of convergence, we sum it to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. %\textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
-\item If $\hat{\phi}$ grows slowly enough along an infinite ray $\zeta \in \alpha + e^{i\theta}(0, \infty)$, its Laplace transform $\hat{\Phi} : = \laplace_{\zeta, \alpha}^\theta \hat{\phi}$ turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\series{\Phi}$ is {\em Borel-summable}, and we call $\hat{\Phi}$ its {\em Borel sum} at $\alpha$ in the direction $\theta$.
+\item If $\hat{\phi}$ grows slowly enough along an infinite ray $\zeta \in \alpha + e^{i\theta}(0, \infty)$, its Laplace transform $\hat{\Phi} : = \laplace_{\zeta, \alpha}^\theta \hat{\phi}$ turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\series{\Phi}$ is {\em Borel summable}, and we call $\hat{\Phi}$ its {\em Borel sum} at $\alpha$ in the direction $\theta$.
 \end{enumerate}
 \begin{center}
 \basicLaplace
@@ -286,7 +286,7 @@ On an open sector $\Omega$ around $\infty$, a holomorphic function $\Phi$ is {\e
 \[ \left|\Phi - \left(a_0 + \frac{a_1}{z} + \frac{a_2}{z^2} + \ldots + \frac{a_{n-1}}{z^{n-1}} \right) \right| \lesssim \frac{A^n n!}{|z|^n} \]
 over all orders $n$ and all $z \in \Omega$. We will use $\lesssim$ throughout the paper to mean ``bounded by a constant multiple of,'' with the same constant over all the specified variables.
 \end{definition}
-To compare the Borel sum $\hat{\Phi}$ with the original series $\series{\Phi}$, let's take it one more step, sending it back into the world of formal power series by taking its asymptotic expansion.
+To compare the Borel sum $\hat{\Phi}$ with the original series $\series{\Phi}$, let us take it one more step, sending it back into the world of formal power series by taking its asymptotic expansion.
 
 \begin{enumerate}[start=4]
 \item By construction, $\aexp^\theta \hat{\Phi} = \series{\Phi}$. It turns out that $\hat{\Phi}$ is not only asymptotic to $\series{\Phi}$, but {\em {uniformly} $1$-Gevrey}-asymptotic~\cite[Corollary~5.23]{diverg-resurg-i}.
@@ -302,18 +302,16 @@ The Borel summation process is summarized in the following diagram:
 \end{tikzcd}
 \end{center}
 
-You can not be sure {\em a priori} that $\hat{\Phi}$ solves your original problem, even if you know that $\series{\Phi}$ is asymptotic to an actual solution. After all, $\series{\Phi}$ is asymptotic to lots of functions; Borel summation just picks one of them. In many cases, however, Borel summation picks correctly, delivering an actual solution to your problem. The question of how that happens is the starting point for this paper.
+You can not be sure {\em a priori} that $\hat{\Phi}$ solves your original problem, even if you know that $\series{\Phi}$ is asymptotic to an actual solution. After all, $\series{\Phi}$ is asymptotic to many functions; Borel summation simply picks one of them. In many cases, however, Borel summation picks correctly, delivering an actual solution to your problem. The question of how that happens is the starting point for this paper.
 %
 \subsection{A new perspective: Borel regularity}
 %
 \subsubsection{Introducing Borel regularity}
 %
 \color{DarkBlue}
-Let us start again, \textcolor{orange}{[Revise\ldots]}
-%%Instead of starting with a formal solution to a problem, as we did in Section~\ref{intro:summation}, let us start with a holomorphic solution $\Phi$. Suppose it has an asymptotic expansion \series{\Phi} \defeq \aexp^\theta \Phi$.
+We will look at the effectiveness of Borel summation from an analytic perspective, as a regularity property of problems and their holomorphic solutions. Suppose we have a holomorphic function $\Phi$ which is a solution of some problem. If the asymptotic expansion $\series{\Phi} = \ae^\theta \Phi$ is well-defined, it should be a formal solution of the same problem; we can take this as a basic requirement for our concept of a formal solution.
 \color{black}
-
-Taking its asymptotic expansion along the half-plane $\Re(e^{i\theta}z) > 0$, we get a formal power series $\series{\Phi}$. 
+\par\textcolor{RoyalBlue}{Taking its asymptotic expansion along the half-plane $\Re(e^{i\theta}z) > 0$, we get a formal power series $\series{\Phi}$.}
 \begin{center}
 \begin{tikzcd}
 & \text{problem} & \\
@@ -323,17 +321,17 @@ Taking its asymptotic expansion along the half-plane $\Re(e^{i\theta}z) > 0$, we
 \hat{\phi} \arrow[uu, mapsto, "\laplace_{\zeta, 0}^\theta"] & & \series{\phi} \arrow[ll, mapsto, "\text{sum}"] 
 \end{tikzcd}
 \end{center}
-If $\series{\Phi}$ is Borel-summable, as described in Section~\ref{intro:summation}, its Borel sum $\hat{\Phi}$ is a new holomorphic function.
-Since different functions can be asymptotic to the same power series, taking the Borel sum of the asymptotic series of $\Phi$ must smooth away some details. We will therefore call this process {\em Borel regularization}. Explicitly, Borel regularization works in four steps:
+If $\series{\Phi}$ is Borel summable, as described in Section~\ref{intro:summation}, its Borel sum $\hat{\Phi}$ is a new holomorphic function.
+Since different functions can have the same asymptotic expansion, taking the Borel sum of the asymptotic expansion of a function must smooth away some details. We will therefore call this process {\em Borel regularization}. Explicitly, Borel regularization works in four steps:
 \begin{enumerate}
 \item Take the asymptotic expansion $\series{\Phi} = \aexp^{-\theta} \Phi$.
 \item Take the Borel transform $\series{\phi} = \borel_\zeta \series{\Phi}$.
-\item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before.%\textcolor{red}{This is possible, by definition, if $\series{\Phi}$ is $1$-Gevrey.[Veronica: I'll remove this! Being Gevrey implies that the Borel transform is convergent, not that we can analytically continue it]}
-\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel-summable.\footnote{More generally, we could take the Laplace transform $\laplace^\theta_{\zeta, \alpha}$ starting at any point $\zeta = \alpha$ in $B$. The choice of starting point will play an important role in our study of ODEs and thimble integrals.}
+\item Take the sum $\hat{\phi}$ of $\series{\phi}$, and expand its domain to a Riemann surface with a distinguished $1$-form, as before.
+\item Take the Laplace transform $\hat{\Phi} = \laplace_{\zeta, 0}^\theta \hat{\phi}$. This is possible, by definition, if $\series{\Phi}$ is Borel summable.\footnote{More generally, we could take the Laplace transform $\laplace^\theta_{\zeta, \alpha}$ starting at any point $\zeta = \alpha$ in $B$. The choice of starting point will play an important role in our study of ODEs and thimble integrals.}
 \end{enumerate}
-We will say a function is {\em Borel-regularizable} if its asymptotic expansion is Borel-summable, ensuring that we can carry out the last two steps.
+We will say a function is {\em Borel regularizable} if its asymptotic expansion is well-defined and Borel summable, ensuring that we can carry out all the steps.
 
-Defining a regularization process picks out a class of regular functions: the ones that are invariant under regularization. We will say a function is {\em Borel regular} if it is Borel-regularizable and Borel regularization leaves it unchanged. In other words, $\Phi$ is Borel regular if $\hat{\Phi} = \Phi$.
+Defining a regularization process picks out a class of regular functions: the ones that are invariant under regularization. We will say a function is {\em Borel regular} if it is Borel regularizable and Borel regularization leaves it unchanged. In other words, $\Phi$ is Borel regular if $\hat{\Phi} = \Phi$.
 
 \subsubsection{Borel regularity sometimes explains why Borel summation works}\label{borel-reg:explanatory-power}
 The idea of Borel regularity can help us understand why Borel summation is so effective in some situations. Roughly speaking, Borel summation works well for problems that admit solutions in terms of Laplace transform. 
@@ -843,7 +841,7 @@ Analytic solutions of a linear ODE with an irregular singularity at $\infty$ oft
 \[ \sum_{\alpha \in A} e^{-\alpha z} z^{\tau_\alpha} \series{\varphi}_\alpha \]
 in which $A$ is a finite set of complex numbers, each $\tau_\alpha$ is a real number, and each $\series{\varphi}_\alpha$ is a formal power series in $\C\llbracket z^{-1} \rrbracket$. For each direction $\theta$, the term with the lowest value of $\Re(e^{i\theta} \alpha)$ represents the dominant contribution to the solution's asymptotic behavior. 
 
-Each term of a formal integral is an example of a {\em trans-monomial}---the basic building block of a {\em trans-series}.\footnote{For the full definition of a trans-series, see~\cite{EcalleIII,van-der-hoeven2001complex,costin_transseries,costin_summability}.} The trans-monomials in the spaces $e^{-\alpha z} z^\tau\,\C\llbracket z^{-1} \rrbracket$ are the only ones we will need to consider in the study of level-$1$ ODEs, because they are the ones used in the the Poincar\'e method, discussed in Section~\ref{sec:Poincare method}. Then, the existence of corresponding analytic solutions is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.). \textcolor{DarkBlue}{At the formal level, irregular singular ODEs already have distinctive behaviour. Their ``formal integral'' series solutions, discussed in Section~\ref{sec:action_transseries}, exhibit the {\em Stokes phenomenon}: asymptotic behavior that changes sharply from one direction to the next. The existence of corresponding analytic solutions is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.).} %\textcolor{RoyalBlue}{At the formal level, irregular singular ODEs already have distinctive behaviour: they admit divergent formal series solutions in the form of trans-monomials. In particular, the trans-monomial characterizes the different asymptotic behvaiours of the underlying analytic solution---whose existence is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.). Then, the so called Stokes phenomenon, which is also a distinguished aspect of irregular singular ODEs, measures the ``jumps" of these analytic solutions with different asymptotics, after they are analytically continued.}
+Each term of a formal integral is an example of a {\em trans-monomial}---the basic building block of a {\em trans-series}.\footnote{For the full definition of a trans-series, see~\cite{EcalleIII,van-der-hoeven2001complex,costin_transseries,costin_summability}.} The trans-monomials in the spaces $e^{-\alpha z} z^\tau\,\C\llbracket z^{-1} \rrbracket$ are the only ones we will need to consider in this paper. Poincar\'{e}'s method for solving linear level-$1$ ODEs, discussed in Section~\ref{sec:Poincare method}, produces trans-monomial solutions in these spaces. The Poincar\'{e} solutions serve as the terms of a general formal integral. Each Poincar\'{e} solution is the asymptotic expansion of an analytic solution, whose existence is guaranteed---non-constructively---by the Main Asymptotic Existence Theorem (M.A.E.T.). \textcolor{DarkBlue}{At the formal level, irregular singular ODEs already have distinctive behaviour. Their ``formal integral'' series solutions, discussed in Section~\ref{sec:action_transseries}, exhibit the {\em Stokes phenomenon}: asymptotic behavior that changes sharply from one direction to the next. The existence of corresponding analytic solutions is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.).} %\textcolor{RoyalBlue}{At the formal level, irregular singular ODEs already have distinctive behaviour: they admit divergent formal series solutions in the form of trans-monomials. In particular, the trans-monomial characterizes the different asymptotic behvaiours of the underlying analytic solution---whose existence is guaranteed by the Main Asymptotic Existence Theorem (M.A.E.T.). Then, the so called Stokes phenomenon, which is also a distinguished aspect of irregular singular ODEs, measures the ``jumps" of these analytic solutions with different asymptotics, after they are analytically continued.}
 \color{Maroon}
 Analytic solutions of a linear ODE with an irregular singularity at $\infty$ often exhibit the Stokes phenomenon: asymptotic behavior that changes sharpy from from direction to the next. Formally, this behavior is captured in a {\em formal integral} solution: an expression
 \[ \sum_{\alpha \in A} e^{-\alpha z} z^{\sigma_\alpha} \series{\varphi}_\alpha \]
@@ -857,7 +855,7 @@ The formal integral solutions and the M.A.E.T. have inspired several other solut
 \begin{center}
 \begin{tabular}{l|l|l}
 & \textbf{Analytic} & \textbf{Formal} \\ \hline
-\textbf{Frequency} &  & Poincar\'{e}: \textcolor{DarkBlue}{``formal integral'' series \textcolor{orange}{(?)}} \textcolor{DarkViolet}{trans-monomial ansatz}~\cite{int-irreg} \\ \hline
+\textbf{Frequency} &  & Poincar\'{e}: trans-monomial ansatz~\cite{int-irreg} \\ \hline
 \textbf{Position} & \'{E}calle: resurgence  & \'{E}calle: formal perturbation theory~\cite{EcalleIII,loday-Remy2011} \\
 & Fixed-point iteration~\cite{reg-sing-volterra} \\
 \end{tabular}
@@ -895,41 +893,40 @@ However, more absractly, taking as input the set of Stokes data (namely the Stok
 So far we have been discussing the classical approaches to summability and reusrgence of formal divergent solutions of irregular singular ODEs, but a different approach would be to look for analytic solutions of $\mathcal{P}\Phi=0$. In other words, we can solve irregular singular ODEs in the frequency domain starting with an analytic \emph{ansatz}. Here the standard approach is the so called Laplace method, which takes as \emph{ansatz} a Laplace transform integral. This is the approach we adopt in this paper, but our choice of Laplace transform integral is very special, i.e. it is a Borel regular solution. As for \'Ecalle's method, the Laplace transform method turns differential equations in the frequency domain into integral equations in the position domain. Then, building on our existence and uniqueness results of~\cite{reg-sing-volterra}, we show that analytic solutions of the Laplace transformed ODE can be computed with Picard iteration. %In addition, as we will show in Section~\ref{sec:new-summability-proof}.  
 
 A similar approach was taken by Braaksma in~\cite{braaksma2006laplace}, where also the same function spaces we will introduce in Section~\ref{sec:laplace_analytic} have been used to solve system of ODEs whose coefficients are in the form of Laplace transforms. However, with our approach, we can solve differetial equations with more general coefficients, and it will be interesting to extend our results to systems of ODEs and generalize Braaksma's results. 
+%
+%
+% \color{RoyalBlue}
+% From a formal perspective, the general theory of linear level~$1$ ODEs suggests to look for formal solutions $\series{\Psi}_\alpha$ of $\mathcal{P}\Phi=0$ in the transmonomial space $\series{\Psi}_\alpha\in e^{-\alpha z} z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket$, where $\tau_\alpha=Q(-\alpha)/P’(-\alpha)$~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. Since the cirtical values are distinct, the transmonomials $\series{\Psi}_\alpha$ determine a basis up to scaling, giving the space of formal solutions a distinguished frame. Then, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotic to the formal one, but it  does not give a way to construct that analytic frame (see~\cite[Chapter 14]{balser}). To get a constructive proof, a classical approach was to investigate Borel summability of the formal solutions~\cite{loday-Remy2011,diverg-resurg--ii,malgrange--fourier,malgrange1995sommation,malgrange92,ramis1991series}. For example, the Ramis Index Theorem shows that the $\series{\Psi}_\alpha$ are 1-Gevrey series---the first step in proving Borel~summability~\cite{ramis_index}. \textcolor{orange}{[Mention connection to index, in Loday-Richaud, and to the way orders get shifted?]}
 
+% At the same time, a natural question we can ask is whether we can build an analytic frame of solutions, without looking for a formal frame. This is possible, as we proved in Theorem~\ref{thm:exist_uniq_ODE} (building on our previous results in~\cite{reg-sing-volterra}), and these solutions turn out to be asymptotic to the formal solutions $\series{\Psi}_\alpha$ (see Corollary~\ref{cor:soln_borel-reg}). Recall that the key aspect in the proof of our result~\cite[Theorem~4]{reg-sing-volterra} is going to the position domain and study solutions of an integral equation with a special behaviour at the singular points $\zeta=\alpha$. Although our approach and the classical one of Borel summability both focus on the importance of the position domain, we study different equations: on the one hand, we solve integral equations in the position domain; on the other hand, Malgrange solves differential equations analytically in the position domain~\cite{malgrange--fourier}, and in~\cite{loday-Remy2011}, Loday-Richaud and Remy solve perturbed integral equations formally in the position domain (following the approach of \'Ecalle~\cite{EcalleIII}). 
 
-\color{RoyalBlue}
-From a formal perspective, the general theory of linear level~$1$ ODEs suggests to look for formal solutions $\series{\Psi}_\alpha$ of $\mathcal{P}\Phi=0$ in the transmonomial space $\series{\Psi}_\alpha\in e^{-\alpha z} z^{-\tau_\alpha}\C\llbracket z^{-1}\rrbracket$, where $\tau_\alpha=Q(-\alpha)/P’(-\alpha)$~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. Since the cirtical values are distinct, the transmonomials $\series{\Psi}_\alpha$ determine a basis up to scaling, giving the space of formal solutions a distinguished frame. Then, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of an analytic frame of solutions asymptotic to the formal one, but it  does not give a way to construct that analytic frame (see~\cite[Chapter 14]{balser}). To get a constructive proof, a classical approach was to investigate Borel summability of the formal solutions~\cite{loday-Remy2011,diverg-resurg--ii,malgrange--fourier,malgrange1995sommation,malgrange92,ramis1991series}. For example, the Ramis Index Theorem shows that the $\series{\Psi}_\alpha$ are 1-Gevrey series---the first step in proving Borel~summability~\cite{ramis_index}. \textcolor{orange}{[Mention connection to index, in Loday-Richaud, and to the way orders get shifted?]}
+% \begin{remark}
+% Our approach of solving regular singular Volterra equation---based on the contraction mapping theorem for suitable Banach spaces \cite{reg-sing-volterra}---is analogous to the one that Braaksma used to solve a different class of non-linear ODEs and difference equations whose coefficients are written as Laplace transforms~\cite{braaksma2006laplace}. \textcolor{orange}{Our approach differs from Braaksma's in two ways. [\ldots]} \textcolor{RoyalBlue}{What distinguishs our result from Braaksma's is considering the Laplace transform of functions with integrable fractional power singuarities, and even if our result has been proved for linear level~1 ODEs, we allow holomorphic coefficents that are not necesserly Laplace transforms.}
 
-At the same time, a natural question we can ask is whether we can build an analytic frame of solutions, without looking for a formal frame. This is possible, as we proved in Theorem~\ref{thm:exist_uniq_ODE} (building on our previous results in~\cite{reg-sing-volterra}), and these solutions turn out to be asymptotic to the formal solutions $\series{\Psi}_\alpha$ (see Corollary~\ref{cor:soln_borel-reg}). Recall that the key aspect in the proof of our result~\cite[Theorem~4]{reg-sing-volterra} is going to the position domain and study solutions of an integral equation with a special behaviour at the singular points $\zeta=\alpha$. Although our approach and the classical one of Borel summability both focus on the importance of the position domain, we study different equations: on the one hand, we solve integral equations in the position domain; on the other hand, Malgrange solves differential equations analytically in the position domain~\cite{malgrange--fourier}, and in~\cite{loday-Remy2011}, Loday-Richaud and Remy solve perturbed integral equations formally in the position domain (following the approach of \'Ecalle~\cite{EcalleIII}). 
+% In future work, it might be useful to combine our approach with Braaksma's
 
-\begin{remark}
-Our approach of solving regular singular Volterra equation---based on the contraction mapping theorem for suitable Banach spaces \cite{reg-sing-volterra}---is analogous to the one that Braaksma used to solve a different class of non-linear ODEs and difference equations whose coefficients are written as Laplace transforms~\cite{braaksma2006laplace}. \textcolor{orange}{Our approach differs from Braaksma's in two ways. [\ldots]} \textcolor{RoyalBlue}{What distinguishs our result from Braaksma's is considering the Laplace transform of functions with integrable fractional power singuarities, and even if our result has been proved for linear level~1 ODEs, we allow holomorphic coefficents that are not necesserly Laplace transforms.}
+% Combining our approach with Braaksma's, to
 
-In future work, it might be useful to combine our approach with Braaksma's
+% We leave a possible generalization of our result to other classes of ODEs and difference equations for further pubblications. \textcolor{orange}{[Let us do more compare-and-contrast! Our problem space is sort of orthogonal to Braaksma's, but we use the same solution space, so it seems like there could be a cool interaction there.]}
+% \end{remark}
 
-Combining our approach with Braaksma's, to
+% \begin{remark}
+% There are many ways to build a frame of solutions for these kinds of ODEs.
+% \begin{center}
+% \begin{tabular}{l|l|l}
+% & \textbf{Analytic} & \textbf{Formal} \\ \hline
+% \textbf{Frequency} &  & Poincar\'{e}: trans-monomial ansatz~\cite{int-irreg} \\ \hline
+% \textbf{Position} & \'{E}calle: resurgence  & \'{E}calle: formal perturbation theory~\cite{EcalleIII,loday-Remy2011} \\
+% & Fixed-point iteration~\cite{reg-sing-volterra} \\
+% \end{tabular}
+% \end{center}
+% In the late 1800s, Poincar\'{e} did it formally in the frequency domain~\cite{int-irreg}. In the late 1900s, \'{E}calle and later authors did it formally in the position domain~\cite{EcalleIII,loday-Remy2011}. \'{E}calle also showed that each of his formal solutions sums to a resurgent analytic solution, from which a frame of analytic solutions can be extracted. Most recently, we directly constructed a frame of analytic solutions in the position domain~\cite{reg-sing-volterra}.
 
-We leave a possible generalization of our result to other classes of ODEs and difference equations for further pubblications. \textcolor{orange}{[Let us do more compare-and-contrast! Our problem space is sort of orthogonal to Braaksma's, but we use the same solution space, so it seems like there could be a cool interaction there.]}
-\end{remark}
-
-\begin{remark}
-There are many ways to build a frame of solutions for these kinds of ODEs.
-\begin{center}
-\begin{tabular}{l|l|l}
-& \textbf{Analytic} & \textbf{Formal} \\ \hline
-\textbf{Frequency} &  & Poincar\'{e}: trans-monomial ansatz~\cite{int-irreg} \\ \hline
-\textbf{Position} & \'{E}calle: resurgence  & \'{E}calle: formal perturbation theory~\cite{EcalleIII,loday-Remy2011} \\
-& Fixed-point iteration~\cite{reg-sing-volterra} \\
-\end{tabular}
-\end{center}
-In the late 1800s, Poincar\'{e} did it formally in the frequency domain~\cite{int-irreg}. In the late 1900s, \'{E}calle and later authors did it formally in the position domain~\cite{EcalleIII,loday-Remy2011}. \'{E}calle also showed that each of his formal solutions sums to a resurgent analytic solution, from which a frame of analytic solutions can be extracted. Most recently, we directly constructed a frame of analytic solutions in the position domain~\cite{reg-sing-volterra}.
-
-In Section~\ref{borel_reg-ODE}, we show that we are all finding the same frame. The uniqueness part of \cite[Theorem~4]{reg-sing-volterra} shows that \'{E}calle's formal solutions sum to our analytic ones, and Theorem~\ref{thm:exist_uniq_ODE} guarantees that our solutions are asymptotic to Poincar\'{e}'s ones.
-\end{remark} 
+% In Section~\ref{borel_reg-ODE}, we show that we are all finding the same frame. The uniqueness part of \cite[Theorem~4]{reg-sing-volterra} shows that \'{E}calle's formal solutions sum to our analytic ones, and Theorem~\ref{thm:exist_uniq_ODE} guarantees that our solutions are asymptotic to Poincar\'{e}'s ones.
+% \end{remark} 
 %
 %
 %
-\color{black}
 \subsection{Borel regularity for thimble integrals}
 %
 Thimble integrals have been studied from different perspectives: in physics, they play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities \cite{dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua}. In the algebraic geometric set-up, namely when, following the notation introduced in Section~\ref{borel-reg:explanatory-power}, $X$ is an $N$-dimensional alegbraic variety over $\C$ and $f$ is a proper map $f\colon X\to\C$, thimble integrals are known as period integrals \cite{deligne2007singularites,Maxim_lectures,pham}.\footnote{In particular, they find application in mirror symmetry for Fano varieties as they encode the Gromov--Witten invariants.\textcolor{orange}{add references---Maxim's mirror symmetry talk, Varchenko}.}
@@ -1222,7 +1219,7 @@ using the new parameter $s = \sin(\varepsilon/2)\,t$. Recognizing the integral i
 \[ \left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi\right| \le e^{|\zeta_\alpha| \lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{\Gamma(1-\sigma)}{\pi\,\sin(\varepsilon/2)} |\zeta_\alpha|^{\sigma-1}, \]
 which is what we wanted to show.
 \end{proof}
-\textcolor{magenta}{[Introduce bare $\widehat{\Omega}$]}
+\textcolor{magenta}{[Introduce $\widehat{\Omega}^\bullet$]}
 \color{black}
 %
 \subsection{The geometry of the Borel transform}\label{sec:geometry_borel}
@@ -2049,7 +2046,7 @@ In~\cite{int-irreg}, Poincar\'{e} described a formal way to solve the equation $
 
 We have come this far in our discussion of Poincar\'{e}'s method through formal reasoning in the frequency domain. From here, there are various ways to show that $\series{\Psi}_\alpha$ is Borel summable. We do it by using Theorem~4 of \cite{reg-sing-volterra} to show that the relevant integral equation in the position domain has a unique analytic solution.
 \begin{theorem}\label{thm:summability_ODE}
-Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and does not touch any other root of $P(-\zeta)$. If a $1$-Gevrey trans-monomial \textcolor{orange}{[define]} $\series{\Psi}_\alpha \in e^{-z\alpha} z^{-\tau_\alpha}\C\llbracket z^{-1} \rrbracket_1$ satisfies the equation $\mathcal{P} \series{\Psi}_\alpha = 0$, then it is Borel summable at $\alpha$ along any ray in $\Omega_\alpha$, and its Borel sum is proportional to the analogous analytic solution $\Psi_\alpha$ from Theorem~\ref{re:thm:exist_uniq_ODE}.
+Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has an opening angle of $\pi$ or less, has $\zeta = \alpha$ at its tip, and does not touch any other root of $P(-\zeta)$. If a $1$-Gevrey trans-monomial $\series{\Psi}_\alpha \in e^{-z\alpha} z^{-\tau_\alpha}\C\llbracket z^{-1} \rrbracket_1$ satisfies the equation $\mathcal{P} \series{\Psi}_\alpha = 0$, then it is Borel summable at $\alpha$ along any ray in $\Omega_\alpha$, and its Borel sum is proportional to the analogous analytic solution $\Psi_\alpha$ from Theorem~\ref{re:thm:exist_uniq_ODE}.
 \end{theorem}
 \begin{proof}
 By Proposition~\ref{prop:frac-der-int-borel}, the Borel transform $\series{\psi}_\alpha = \borel_\zeta \series{\Psi}_\alpha$ is a formal solution of the equation $\hat{\mathcal{P}}_\alpha \series{\psi}_\alpha = 0$, where $\hat{\mathcal{P}}_\alpha$ is the operator\eqref{eq:hat_P}. By Proposition~\ref{prop:gevrey_to_convergent}, the series $\series{\psi}_\alpha$ converges to a holomorphic function $\hat{\psi}_\alpha$ on some open set $\Omega_\text{near}$ created by restricting $\Omega_\alpha$ to a small disk around of $\zeta = \alpha$. Since the integrals in $\hat{\mathcal{P}}_\alpha \hat{\psi}_\alpha$ converge absolutely, $\hat{\psi}_\alpha$ satisfies the same equation that its Taylor series does: $\hat{\mathcal{P}}_\alpha \hat{\psi}_\alpha = 0$.
@@ -2451,7 +2448,7 @@ In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{
 \subsubsection{Abstract argument for Borel regularity}\label{bessel-regularity-AL}
 The analysis in Sections~\ref{big-idea}\;--\;\ref{neg-root-AL} picks out a frame in the space of analytic solutions of~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by solutions of the form $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$, with $v_\alpha \in \singexpalg{-1/2}(\Omega_\alpha)$.
 
-The Poincar\'{e} algorithm, as discussed in Sections \ref{sec:asympt-AL} and \ref{sec:new-summability-proof}, picks out a frame in the \textcolor{magenta}{space of formal trans-series solutions [wrong: formal integral is not a trans-series because of direction conflict; say in footnote what the space is]} of equation~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by $1$-Gevrey trans-monomial solutions of the form $e^{-z} z^{-1/2}\,\tilde{W}_1$ and $e^z z^{-1/2}\,\tilde{W}_{-1}$, with $\tilde{W}_j \in \C\llbracket z^{-1} \rrbracket_1$. Reprising the proof of Theorem~\ref{thm:summability_ODE}, we will show that these solutions are Borel-summable, and their Borel sums generate the same frame as $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$.
+The Poincar\'{e} algorithm, as discussed in Sections \ref{sec:asympt-AL} and \ref{sec:new-summability-proof}, picks out a frame in the \textcolor{magenta}{space of formal trans-series solutions [wrong: formal integral is not a trans-series because of direction conflict; say in footnote what the space is]} of equation~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by $1$-Gevrey trans-monomial solutions of the form $e^{-z} z^{-1/2}\,\tilde{W}_1$ and $e^z z^{-1/2}\,\tilde{W}_{-1}$, with $\tilde{W}_j \in \C\llbracket z^{-1} \rrbracket_1$. Reprising the proof of Theorem~\ref{thm:summability_ODE}, we will show that these solutions are Borel summable, and their Borel sums generate the same frame as $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$.
 
 The Borel transform $\borel_\zeta$ maps $e^{-\alpha z} z^{-1/2}\,\C\llbracket z^{-1} \rrbracket_1$ into $\zeta_\alpha^{-1/2}\,\C\{\zeta_\alpha\}$, as discussed in Sections \ref{sec:action_transseries} and \ref{sec:new-summability-proof}. In particular, it sends each Poincar\'{e} solution $e^{-\alpha z} z^{-1/2}\,\series{W}_\alpha$ to a convergent series $\series{v}_\alpha \in \zeta_\alpha^{-1/2}\,\C\{\zeta_\alpha\}$. Make a bounded sector $\Omega'_\alpha$ by intersecting $\Omega_\alpha$ with a disk around $\zeta_\alpha = 0$ whose radius is smaller than the radius of convergence of $\series{v}_\alpha$. On $\Omega'_\alpha$, the sum $\hat{v}_\alpha$ of $\series{v}_\alpha$ can be bounded by a shifted geometric series, showing that $\zeta_\alpha^{1/2} \hat{v}_\alpha$ is bounded by a constant. Therefore, $\hat{v}_\alpha$ belongs to $\singexpalg{-1/2}(\Omega'_\alpha)$.
 
@@ -2769,7 +2766,7 @@ To confirm that the calculation above is consistent with Section~\ref{countable-
 K_0(z) & = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta \\
 & \hphantom{=} - \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta
 \end{align*}
-The hypergeometric function in the integrand can be simplified away using identity~15.4.13 from \cite{dlmf}, leaving an expression that makes the $\zeta_{\pm 1}^{1/2}$ singularities of the integrand even more apparent:
+The hypergeometric function in the integrand can be simplified away using identity~15.4.13 from \cite{dlmf}, leaving an expression that makes the $\zeta_{\pm 1}^{1/2}$ singularities of the integrand even more apparent: \textcolor{magenta}{[result is right, but reasoning is wrong: integrals can't be directly combined, because they use different contours]}
 \begin{equation}\label{eqn:borel_bessel0}
 K_0(z) = \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\big(\zeta^2 - 1\big)^{-1/2}\;d\zeta.
 \end{equation}
@@ -2789,12 +2786,13 @@ For even $j$, with $-\eta^2 = \tfrac{1}{2} + \tfrac{\zeta}{2}$, equation~\eqref{
 K^{(j)}_0(z) & = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta \\
 & = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} (1 + \eta^2)^{-1/2} d\zeta \\
 & = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} \left(\frac{1}{2} - \frac{\zeta}{2}\right)^{-1/2} d\zeta \\
-%%& = \color{DarkViolet}\frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left[\left(-\frac{1}{2}-\frac{\zeta}{2}\right)  \left(\frac{1}{2} - \frac{\zeta}{2}\right)\right]^{-1/2} d\zeta  \\
-%%& =  \color{DarkViolet} \frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{4}+\frac{\zeta^2}{4}\right)^{-1/2} d\zeta  \\
-%%& = \color{DarkViolet} \frac{2 \cdot 3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
-& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \textcolor{Tomato}{i} \left(\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{\textcolor{Tomato}{i}}{2} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} d\zeta \textcolor{Tomato}{\quad\text{(is this justified?)}} \\
-& = \textcolor{Tomato}{-}\frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} d\zeta \\
-& = \textcolor{Tomato}{-}\frac{2 \cdot 3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
+& = \color{DarkViolet}\frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left[\left(-\frac{1}{2}-\frac{\zeta}{2}\right)  \left(\frac{1}{2} - \frac{\zeta}{2}\right)\right]^{-1/2} d\zeta  \\
+& =  \color{DarkViolet} \frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{4}+\frac{\zeta^2}{4}\right)^{-1/2} d\zeta  \\
+& = \color{DarkViolet} \frac{2 \cdot 3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta \\
+& = \color{DarkViolet} -\frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
+%%& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \textcolor{Tomato}{i} \left(\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{\textcolor{Tomato}{i}}{2} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} d\zeta \textcolor{Tomato}{\quad\text{(is this justified?)}} \\
+%%& = \textcolor{Tomato}{-}\frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} d\zeta \\
+%%& = \textcolor{Tomato}{-}\frac{2 \cdot 3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
 \end{align*}
 
 We can also verify equation \eqref{eqn:borel_bessel0} using the thimble projection formula, \eqref{eqn:formula-proof}. From the expression of $K_0$ 
@@ -2916,7 +2914,6 @@ For any $c \in \C$, the translation action $f \mapsto f + c$ on maps corresponds
 on integrals. This is because
 \begin{align*}
 \int_\mathcal{C} e^{-z(f + c)}\,\nu & = e^{-cz} \int_\mathcal{C} e^{-zf}\,\nu \\
-& = e^{-cz} \int_\mathcal{C} e^{-zf}\,\nu \\
 & = e^{-cz} J(z).
 \end{align*}
 \item[] \textbf{Scaling-rotations}
@@ -2969,7 +2966,7 @@ q & = \frac{a_0}{a_3} - \frac{1}{3} \left(\frac{a_1}{a_3}\right)\left(\frac{a_2}
 \textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
 $\displaystyle f \mapsto \frac{f}{a_3}$ & $\displaystyle u^3 + \frac{a_2}{a_3} u^2 + \frac{a_1}{a_3} u + \frac{a_0}{a_3}$ & $\displaystyle \hphantom{e^{qz}} I\left(\frac{z}{a_3}\right)$ \\[5mm]
 $\displaystyle \mathsf{T}_{(1/3)\,a_2/a_3}^*$ & $\displaystyle u^3 + pu + q$ & $\displaystyle \hphantom{e^{qz}} I\left(\frac{z}{a_3}\right)$ \\[5mm]
-$\displaystyle f \mapsto f - q$ & $\displaystyle u^3 + pu$ & $\displaystyle e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
+$\displaystyle f \mapsto f - q$ & $\displaystyle u^3 + pu$ & $\displaystyle \textcolor{DarkViolet}{e^{qz}\,I\left(\frac{z}{a_3}\right)}$ \\[5mm]
 \end{tabular}
 \end{center}
 Our next move depends on how many critical points $g$ has.
@@ -2980,12 +2977,12 @@ When $p$ is non-zero, $g$ has two distinct critical points. We can use our symme
 \begin{center}
 \begin{tabular}{c|c|c}
 \textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
-$\displaystyle \mathsf{M}_{(i/2)(3/p)^{1/2}}^*$ & $\displaystyle 2i\left(\frac{p}{3}\right)^{3/2} \left(4u^3 - 3u\right)$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
+a$\displaystyle \mathsf{M}_{(i/2)(3/p)^{1/2}}^*$ & $\displaystyle 2i\left(\frac{p}{3}\right)^{3/2} \left(4u^3 - 3u\right)$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
 $\displaystyle f \mapsto \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} f$ & $\displaystyle 4u^3 - 3u$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right)$ \\[5mm]
 \end{tabular}
 \end{center}
-We can now relate the general third-degree thimble integral $I$ to the modified Bessel function $K_{1/3}$, defined in equation~\eqref{integral:mod-bessel}:
-\[ K_{1/3}(z) = -\frac{3}{2}\,p^{-1/2} e^{qz}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right). \]
+We can now relate the general third-degree thimble integral $I$ to the modified Bessel function $K_{1/3}$, defined in equation~\eqref{integral:mod-bessel-rational-AL}:
+\[ K_{1/3}(z) = -\frac{3}{2}\,p^{-1/2} e^{zq}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right). \]
 From this identity, we can see that $I(z)$ satisfies a transformed version of the modified Bessel equation:
 \[\left[\left(\frac{\partial}{\partial z}\right)^2 + 2\left(\frac{q}{a_3}\right)\frac{\partial}{\partial z} + \frac{1}{a_3^2} \left(\frac{4p^3}{27} + q^2\right) + \frac{1}{z} \left(\frac{\partial}{\partial z} + \frac{q}{a_3}\right) - \frac{1}{9z^2}\right] \Phi = 0.\]
 \begin{verify}
@@ -3019,6 +3016,7 @@ namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q
 \subsubsection{Coalescence of critical values}
 We can recover the degenerate case by taking the limit of the non-degenerate case as $p$ goes to zero. Rearranging the relationship above between $I(z)$ and the modified Bessel function $K_{1/3}(z)$, we get the formula
 \[ I(z) = -\frac{2}{3}\,p^{1/2} \exp\left[-2ia_3 \left(\frac{p}{3}\right)^{3/2} qz\right] K_{1/3}\left(2ia_3 \left(\frac{p}{3}\right)^{3/2} z\right). \]
+\textcolor{DarkViolet}{\[ I(z) = -\frac{2}{3}\,p^{1/2} \exp\left[-a_3 qz\right] K_{1/3}\left(2i \left(\frac{p}{3}\right)^{3/2} z\right). \]}
 Using the Taylor expansion of $K_{1/3}(z)$ around $z = 0$, given by equations 10.25.2 and 10.27.4 of \cite{dlmf}, we can see that $I(z)$ converges pointwise to $\tfrac{1}{i\sqrt{3}} e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3}\big)\,z^{-1/3}$ as $p$ goes to zero with $q$ and $a_3$ held constant.
 \begin{todo}\par
 [Our treatments of the $e^{qz}$ factor disagree. With this version, the exponential factor goes to $1$ as $p \to 0$, which I think is consistent with the limit to the degenerate case. Comparison:]
