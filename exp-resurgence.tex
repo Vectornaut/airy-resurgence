@@ -308,10 +308,7 @@ You can not be sure {\em a priori} that $\hat{\Phi}$ solves your original proble
 %
 \subsubsection{Introducing Borel regularity}
 %
-\color{DarkBlue}
 We will look at the effectiveness of Borel summation from an analytic perspective, as a regularity property of problems and their holomorphic solutions. Suppose we have a holomorphic function $\Phi$ which is a solution of some problem. If the asymptotic expansion $\series{\Phi} = \ae^\theta \Phi$ is well-defined, it should be a formal solution of the same problem; we can take this as a basic requirement for our concept of a formal solution.
-\color{black}
-\par\textcolor{RoyalBlue}{Taking its asymptotic expansion along the half-plane $\Re(e^{i\theta}z) > 0$, we get a formal power series $\series{\Phi}$.}
 \begin{center}
 \begin{tikzcd}
 & \text{problem} & \\
@@ -480,18 +477,22 @@ Given a translation chart $\zeta$ on a translation surface $B$, we write $\mathc
 %%
 %%Each connected component of the preimage $f^{-1}(\mathcal{J}_{\zeta, \alpha}^\theta)$ runs through a critical point of $f$. When {\em Lefschetz thimble} is a component that runs through a non-degenerate critical point.
 
-\textcolor{orange}{[move to historical]} For context, let us see how the one-dimensional definition of a Lefschetz thimble arises from the general definition. Suppose for a moment that $X$ is $N$-dimensional, and consider a non-degenerate critical point $a$ that $f$ sends to $\zeta = \alpha$. Near $a$, we can always find coordinates $t_1, \ldots, t_N$ on $X$ with
+\textcolor{PaleVioletRed}{[move to historical] For context, let us see how the one-dimensional definition of a Lefschetz thimble arises from the general definition. Suppose for a moment that $X$ is $N$-dimensional, and consider a non-degenerate critical point $a$ that $f$ sends to $\zeta = \alpha$. Near $a$, we can always find coordinates $t_1, \ldots, t_N$ on $X$ with
 \[ f^*\zeta = \alpha + e^{i \theta} (t_1^2 + \ldots + t_N^2). \]
-Each such coordinate system defines a Lefschetz thimble: the oriented real-analytic submanifold where $t_1, \ldots, t_N$ are real. There are many such coordinate systems, but they are all related by local holomorphic maps from $X$ to the complex orthogonal group $O_N(\C)$. Since $O_N(\C)$ has only two connected components, distinguished by the sign of the determinant, a Lefschetz thimble is determined up to homotopy and orientation by the critical point $a$ and the direction $\theta$. When $N = 1$, the homotopy freedom disappears, because $O_1(\C)$ is the discrete group $\{\pm 1\}$.
-
-\textcolor{orange}{[\ldots]}
+Each such coordinate system defines a Lefschetz thimble: the oriented real-analytic submanifold where $t_1, \ldots, t_N$ are real. There are many such coordinate systems, but they are all related by local holomorphic maps from $X$ to the complex orthogonal group $O_N(\C)$. Since $O_N(\C)$ has only two connected components, distinguished by the sign of the determinant, a Lefschetz thimble is determined up to homotopy and orientation by the critical point $a$ and the direction $\theta$. When $N = 1$, the homotopy freedom disappears, because $O_1(\C)$ is the discrete group $\{\pm 1\}$.}
 %%
 %%To \textcolor{orange}{[\ldots]}, consider a non-degenerate critical point $a$ in the preimage of $\zeta = \alpha$, and let $\mathcal{C}^\theta_a$ be the Lefschetz thimble that runs through it. Near $a$ we can always find coordinates $t_1, \ldots, t_N$ on $X$ with $f = t_1^2 + \ldots + t_N^2$.
 %%
 %%To see why the term ``thimble'' is fitting, consider a non-degenerate critical point $a$ in the preimage of $\zeta = \alpha$, and let $\mathcal{C}^\theta_a$ be the Lefschetz thimble that runs through it. Near $a$ we can always find coordinates $x_1, \ldots, x_N$ on $X$ in which $\mathcal{C}^\theta_a$ looks like the paraboloid
 %%where $\zeta = \alpha + \zeta_\alpha$. \textcolor{orange}{[\ldots]}
 
-\color{RoyalBlue}
+We are now ready to define a one-dimensional thimble integral precisely, and at our desired level of generality.
+\begin{definition}
+Fix a one-dimensional complex manifold $X$; a translation surface $B$; and a holomorphic map $f \maps X \to B$ with isolated, non-degenerate critical points. A one-dimensional {\em thimble integral} has the form
+\[ I = \int_{\mathcal{C}_a^\theta} e^{-zf}\,\nu, \]
+where $\nu$ is a holomorphic $1$-form on $X$, $a$ is a critical point of $f$, and $\mathcal{C}^\theta_a$ is the Lefschetz thimble that runs through $a$ in direction $\theta$ with a chosen orientation.
+\end{definition}
+\color{RoyalBlue}\par
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{NavyBlue}{[The important thing about $\C$, where $f$ takes values, is that it is a translation surface---\ldots]} For each critical point $a$, let $\mathcal{J}_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\mathcal{J}_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\mathcal{J}_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\mathcal{J}_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\mathcal{J}_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\mathcal{C}_a^\theta$ can be regarded as the component of $f^{-1}(\mathcal{J}_\alpha^\theta)$ that goes through $a$. \textcolor{orange}{We could orient the thimble so that shifting $\mathcal{C}_a$ to its left would make its projection run clockwise around $\mathcal{J}_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
 \begin{center}
 \includegraphics[width=6.5cm]{figures/rays_ge6.png}
@@ -854,19 +855,10 @@ The Poincar\'{e} solutions and the M.A.E.T. have inspired several other methods 
 \end{center}
 
 \subsubsection{The Poincar\'e method and Borel summation}\label{sec:Poincare method}
-\color{DarkBlue}
 An ODE of the form described in Section~\ref{borel-reg:explanatory-power} always has a frame of solutions in the trans-monomial spaces $e^{-\alpha z} z^{\tau_\alpha}\,\C\llbracket z^{-1} \rrbracket$. These solutions can be found systematically, using an algorithm described by Poincar\'{e}~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. Poincar\'{e} observes \begin{verify}(Section~3)\end{verify} that when $z$ is large, the constant-coefficient equation $P\big(\tfrac{\partial}{\partial z}\big) \Phi = 0$ approximates the equation $\mathcal{P}\Phi = 0$ that we are trying to solve. The solutions of this approximate equation are the exponentials $\{e^{-\alpha z} \colon P(-\alpha) = 0\}$. Poincar\'{e} guesses that each approximate solution $e^{-\alpha z}$ can be turned into an exact solution $e^{-\alpha z} \series{F}_\alpha$ using a formal correction factor $\series{F}_\alpha \in z^{-\tau_\alpha}\,\C\llbracket z^{-1} \rrbracket$. When $\tau_\alpha = Q(-\alpha) / P'(-\alpha)$, the correction factor can be found order by order, starting from any chosen constant term. We will refer to the resulting solutions $e^{-\alpha z} \series{F}_\alpha \in e^{-\alpha z} z^{\tau_\alpha}\,\C\llbracket z^{-1} \rrbracket$ as Poincar\'{e}'s formal solutions.
 
 Although it is not contructive, the M.A.E.T. guarantees the existence of a frame of analytic solutions asymptotic to Poincar\'{e}'s formal ones~\cite[Chapter~14]{balser}. Furthermore, the Ramis Index Theorem tells us that the Borel transform sends Poincar\'{e}'s formal solutions to convergent series on the position domain---the first step toward proving Borel summability~\cite{ramis_index}. This has motivated the development of summability methods, which promote formal solutions to analytic ones~\cite{diverg-resurg--ii,malgrange--fourier,malgrange1995sommation,malgrange92,ramis1991series}. These methods can be applied both within and beyond the world of linear level~1 ODEs.
-\color{RoyalBlue}\par
-For a level~$1$ ODE of the kind we will study, these formal solutions can be found systematically, using an algorithm described by Poincar\'{e}~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. For instance, for an ODE like the one in Section~\ref{borel-reg:explanatory-power}, a frame of formal solutions are given by trans-monomial $\series{\Phi}_\alpha$ of the form
-\begin{equation}
-\series{\Phi}_\alpha=e^{\alpha z} z^{-\tau_\alpha} \sum_{n=0}^\infty a_n z^{-n}
-\end{equation}
-with $P(-\alpha) = 0$ and $\tau_\alpha = Q(-\alpha) / P'(-\alpha)$. We will refer to $\series{\Phi}_\alpha$ as Poincar\'{e}'s formal solutions. 
 
-Then, although it is not contructive, the M.A.E.T. guarantees the existence of a frame of analytic solutions asymptotic to Poincar\'{e}'s formal ones~\cite[Chapter~14]{balser}. In particular, the Ramis Index Theorem shows that the formal solutions $\series{\Phi}_\alpha$ are 1-Gevrey series---the first step in proving Borel~summability~\cite{ramis_index}. This motivated the desire to promote formal solutions to analytic ones through the development of summability methods, even beyond the study of level-$1$ ODEs~\cite{diverg-resurg--ii,malgrange--fourier,malgrange1995sommation,malgrange92,ramis1991series}.
-\color{black}
 % \subsubsection{\textcolor{orange}{[M.A.E.T. section]}}
 % Although it is not contructive, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of a frame of analytic solutions asymptotic to Poincar\'{e}'s formal ones~\cite[Chapter~14]{balser}. The Ramis Index Theorem shows that the formal solutions are 1-Gevrey series---the first step in proving Borel~summability~\cite{ramis_index}. \textcolor{orange}{[Revise\ldots]} \textcolor{RoyalBlue}{Furthermore, after checking the solution $\series{\Phi}$ is Borel summable, another argument is needed to show that the Borel sum solve the original equation---a priori, the Borel sum is only Gevrey asymptotic to the solution $\series{\Phi}$.}
 \subsubsection{\'{E}calle's theory of resurgence}
@@ -892,10 +884,11 @@ However, more absractly, taking as input the set of Stokes data (namely the Stok
 
 
 \subsubsection{Laplace transform methods and fixed point iteration}
-\textcolor{DarkBlue}{All of the historical approaches we have discussed so far start by looking for formal solutions. In this paper, we will focus on a different kind of approach, where we start by looking for analytic solutions expressed as Laplace transforms. By carefully choosing the starting point of the Laplace transform, we get analytic solutions which are asymptotic to Poincar\'{e}'s formal ones. These solutions will turn out to be Borel regular.}
-\par \textcolor{RoyalBlue}{So far we have been discussing the classical approaches to summability and reusrgence of formal divergent solutions of irregular singular ODEs, but a different approach would be to look for analytic solutions of $\mathcal{P}\Phi=0$. In other words, we can solve irregular singular ODEs in the frequency domain starting with an analytic \emph{ansatz}. Here the standard approach is the so called Laplace method, which takes as \emph{ansatz} a Laplace transform integral. This is the approach we adopt in this paper, but our choice of Laplace transform integral is very special, i.e. it is a Borel regular solution.} \textcolor{DarkBlue}{We use the Laplace transform to turn differential equations on the frequency domain into integral equations on the position domain. This runs parallel to \'{E}calle's use of the Borel transform. Building on the existence and uniqueness results we proved in~\cite{reg-sing-volterra}, we use Picard iteration to solve the integral equation in the position domain, and to show that the corresponding solution in the frequency domain is Borel regularizable.} \textcolor{RoyalBlue}{Like in \'Ecalle's method, the Laplace transform method turns differential equations in the frequency domain into integral equations in the position domain. Then, building on our existence and uniqueness results of~\cite{reg-sing-volterra}, we show that analytic solutions of the Laplace transformed ODE can be computed with Picard iteration.} %In addition, as we will show in Section~\ref{sec:new-summability-proof}.  
+All of the historical approaches we have discussed so far start by looking for formal solutions. In this paper, we will focus on a different kind of approach, where we start by looking for analytic solutions expressed as Laplace transforms. By carefully choosing the starting point of the Laplace transform, we get analytic solutions which are asymptotic to Poincar\'{e}'s formal ones. These solutions will turn out to be Borel regular.
+% \par \textcolor{RoyalBlue}{So far we have been discussing the classical approaches to summability and reusrgence of formal divergent solutions of irregular singular ODEs, but a different approach would be to look for analytic solutions of $\mathcal{P}\Phi=0$. In other words, we can solve irregular singular ODEs in the frequency domain starting with an analytic \emph{ansatz}. Here the standard approach is the so called Laplace method, which takes as \emph{ansatz} a Laplace transform integral. This is the approach we adopt in this paper, but our choice of Laplace transform integral is very special, i.e. it is a Borel regular solution.} 
+We use the Laplace transform to turn differential equations on the frequency domain into integral equations on the position domain. This runs parallel to \'{E}calle's use of the Borel transform. Building on the existence and uniqueness results we proved in~\cite{reg-sing-volterra}, we use Picard iteration to solve the integral equation in the position domain, and to show that the corresponding solution in the frequency domain is Borel regularizable.%\textcolor{RoyalBlue}{Like in \'Ecalle's method, the Laplace transform method turns differential equations in the frequency domain into integral equations in the position domain. Then, building on our existence and uniqueness results of~\cite{reg-sing-volterra}, we show that analytic solutions of the Laplace transformed ODE can be computed with Picard iteration.} %In addition, as we will show in Section~\ref{sec:new-summability-proof}.  
 
-\textcolor{DarkBlue}{The function spaces mentioned in Section~\ref{sec:laplace_analytic} play an important role in our approach. They also appear in the work of Braaksma, who uses them to solve systems of ODEs whose coefficients are expressed as Laplace transforms~\cite{braaksma2006laplace}. This overlap suggests an opportunity to combine the two approaches, extending our results to systems of equations, and Braaksma's to equations with more general coefficients.} \textcolor{RoyalBlue}{A similar approach was taken by Braaksma in~\cite{braaksma2006laplace}, where also the same function spaces we will introduce in Section~\ref{sec:laplace_analytic} have been used to solve system of ODEs whose coefficients are in the form of Laplace transforms. However, with our approach, we can solve differetial equations with more general coefficients, and it will be interesting to extend our results to systems of ODEs and generalize Braaksma's results.}
+The function spaces mentioned in Section~\ref{sec:laplace_analytic} play an important role in our approach. They also appear in the work of Braaksma, who uses them to solve systems of ODEs whose coefficients are expressed as Laplace transforms~\cite{braaksma2006laplace}. This overlap suggests an opportunity to combine the two approaches, extending our results to systems of equations, and Braaksma's to equations with more general coefficients. %\textcolor{RoyalBlue}{A similar approach was taken by Braaksma in~\cite{braaksma2006laplace}, where also the same function spaces we will introduce in Section~\ref{sec:laplace_analytic} have been used to solve system of ODEs whose coefficients are in the form of Laplace transforms. However, with our approach, we can solve differetial equations with more general coefficients, and it will be interesting to extend our results to systems of ODEs and generalize Braaksma's results.}
 %
 %
 % \color{RoyalBlue}
@@ -2473,7 +2466,7 @@ In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{
 \subsubsection{Abstract argument for Borel regularity}\label{bessel-regularity-AL}
 The analysis in Sections~\ref{big-idea}\;--\;\ref{neg-root-AL} picks out a frame in the space of analytic solutions of~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by solutions of the form $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$, with $v_\alpha \in \singexpalg{-1/2}(\Omega_\alpha)$.
 
-The Poincar\'{e} algorithm, as discussed in Sections \ref{sec:asympt-AL} and \ref{sec:new-summability-proof}, picks out a frame in the \textcolor{magenta}{space of formal trans-series solutions [wrong: formal integral is not a trans-series because of direction conflict; say in footnote what the space is]} of equation~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by $1$-Gevrey trans-monomial solutions of the form $e^{-z} z^{-1/2}\,\tilde{W}_1$ and $e^z z^{-1/2}\,\tilde{W}_{-1}$, with $\tilde{W}_j \in \C\llbracket z^{-1} \rrbracket_1$. Reprising the proof of Theorem~\ref{thm:summability_ODE}, we will show that these solutions are Borel summable, and their Borel sums generate the same frame as $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$.
+The Poincar\'{e} algorithm, as discussed in Section~\ref{sec:asympt-AL} picks out a frame in the \textcolor{magenta}{space of formal trans-series solutions [wrong: formal integral is not a trans-series because of direction conflict; say in footnote what the space is]} of equation~\eqref{eqn:reg-mod-bessel-AL}. The frame is generated by $1$-Gevrey trans-monomial solutions of the form $e^{-z} z^{-1/2}\,\tilde{W}_1$ and $e^z z^{-1/2}\,\tilde{W}_{-1}$, with $\tilde{W}_j \in \C\llbracket z^{-1} \rrbracket_1$. Reprising the proof of Theorem~\ref{thm:summability_ODE}, we will show that these solutions are Borel summable, and their Borel sums generate the same frame as $\laplace_{\zeta, 1} v_1$ and $\laplace_{\zeta, -1} v_{-1}$.
 
 The Borel transform $\borel_\zeta$ maps $e^{-\alpha z} z^{-1/2}\,\C\llbracket z^{-1} \rrbracket_1$ into $\zeta_\alpha^{-1/2}\,\C\{\zeta_\alpha\}$, as discussed in Sections \ref{sec:action_transseries} and \ref{sec:new-summability-proof}. In particular, it sends each Poincar\'{e} solution $e^{-\alpha z} z^{-1/2}\,\series{W}_\alpha$ to a convergent series $\series{v}_\alpha \in \zeta_\alpha^{-1/2}\,\C\{\zeta_\alpha\}$. Make a bounded sector $\Omega'_\alpha$ by intersecting $\Omega_\alpha$ with a disk around $\zeta_\alpha = 0$ whose radius is smaller than the radius of convergence of $\series{v}_\alpha$. On $\Omega'_\alpha$, the sum $\hat{v}_\alpha$ of $\series{v}_\alpha$ can be bounded by a shifted geometric series, showing that $\zeta_\alpha^{1/2} \hat{v}_\alpha$ is bounded by a constant. Therefore, $\hat{v}_\alpha$ belongs to $\singexpalg{-1/2}(\Omega'_\alpha)$.
 
@@ -2994,7 +2987,7 @@ q & = \frac{a_0}{a_3} - \frac{1}{3} \left(\frac{a_1}{a_3}\right)\left(\frac{a_2}
 \textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
 $\displaystyle f \mapsto \frac{f}{a_3}$ & $\displaystyle u^3 + \frac{a_2}{a_3} u^2 + \frac{a_1}{a_3} u + \frac{a_0}{a_3}$ & $\displaystyle \hphantom{e^{qz}} I\left(\frac{z}{a_3}\right)$ \\[5mm]
 $\displaystyle \mathsf{T}_{(1/3)\,a_2/a_3}^*$ & $\displaystyle u^3 + pu + q$ & $\displaystyle \hphantom{e^{qz}} I\left(\frac{z}{a_3}\right)$ \\[5mm]
-$\displaystyle f \mapsto f - q$ & $\displaystyle u^3 + pu$ & $\displaystyle \textcolor{DarkViolet}{e^{qz}\,I\left(\frac{z}{a_3}\right)}$ \\[5mm]
+$\displaystyle f \mapsto f - q$ & $\displaystyle u^3 + pu$ & $\displaystyle e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
 \end{tabular}
 \end{center}
 Our next move depends on how many critical points $g$ has.
@@ -3005,17 +2998,30 @@ When $p$ is non-zero, $g$ has two distinct critical points. We can use our symme
 \begin{center}
 \begin{tabular}{c|c|c}
 \textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
-a$\displaystyle \mathsf{M}_{(i/2)(3/p)^{1/2}}^*$ & $\displaystyle 2i\left(\frac{p}{3}\right)^{3/2} \left(4u^3 - 3u\right)$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
+$\displaystyle \mathsf{M}_{(i/2)(3/p)^{1/2}}^*$ & $\displaystyle 2i\left(\frac{p}{3}\right)^{3/2} \left(4u^3 - 3u\right)$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
 $\displaystyle f \mapsto \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} f$ & $\displaystyle 4u^3 - 3u$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right)$ \\[5mm]
 \end{tabular}
 \end{center}
-We can now relate the general third-degree thimble integral $I$ to the modified Bessel function $K_{1/3}$, defined in equation~\eqref{integral:mod-bessel-rational-AL}:
-\[ K_{1/3}(z) = -\frac{3}{2}\,p^{-1/2} e^{zq}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right). \]
+\color{orange}Replace $\textcolor{DarkViolet}{e^{qz}}$ with $e^{q \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} z}$\color{black}
+
+We can now relate the general third-degree thimble integral $I$ to the modified Bessel function $K_{1/3}$, defined in equation~\eqref{integral:mod-bessel-rational-AL}:\textcolor{red}{[check the sign in (29), it seems positive $e^{zT_3(u)}$]}
+\[ K_{1/3}(z) = -\frac{3}{2}\,p^{-1/2} e^{qz}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right). \]
+\color{orange}
+\begin{equation}
+    K_{1/3}(-z) = -\frac{3}{2}\,p^{-1/2} e^{zq \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2}}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right).
+\end{equation}
+\color{black}
 From this identity, we can see that $I(z)$ satisfies a transformed version of the modified Bessel equation:
 \[\left[\left(\frac{\partial}{\partial z}\right)^2 + 2\left(\frac{q}{a_3}\right)\frac{\partial}{\partial z} + \frac{1}{a_3^2} \left(\frac{4p^3}{27} + q^2\right) + \frac{1}{z} \left(\frac{\partial}{\partial z} + \frac{q}{a_3}\right) - \frac{1}{9z^2}\right] \Phi = 0.\]
 \begin{verify}
 \[\left[a_3^2 \left(\frac{\partial}{\partial z}\right)^2 + 2a_3 q \frac{\partial}{\partial z} + \left(\frac{4p^3}{27} + q^2\right) + \frac{a_3}{z} \left(a_3\frac{\partial}{\partial z} + q\right) - \frac{a_3^2}{9z^2}\right] \Phi = 0.\]
 \end{verify}
+\color{orange}
+Let us rewrite for simpicilty $K_{1/3}(z)=\alpha e^{\beta z} I(\gamma z)$, then using that $K_{1/3}$ is a solution of the modified Bessel equation~\eqref{eqn:mod-bessel} we get
+\begin{align*}
+    0&=I''+\frac{\beta^2-1}{\gamma^2}I+\frac{2\beta}{\gamma}I'+\frac{1}{z}\left(\frac{\beta}{\gamma^2}I+\frac{I'}{\gamma}\right)-\frac{1}{9\gamma^2}\frac{1}{z^2} I
+\end{align*}
+\color{black}
 \item[] \textbf{One degenerate critical point}
 When $p$ is zero, $g$ has a single degenerate critical point. Like we did in Appendix~\ref{airy-appendix} for the non-degenerate case, we will first study $I(z)$ by viewing it as a solution of an ODE, and we will then confirm our results using the thimble projection formula.
 
@@ -3044,7 +3050,6 @@ namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q
 \subsubsection{Coalescence of critical values}
 We can recover the degenerate case by taking the limit of the non-degenerate case as $p$ goes to zero. Rearranging the relationship above between $I(z)$ and the modified Bessel function $K_{1/3}(z)$, we get the formula
 \[ I(z) = -\frac{2}{3}\,p^{1/2} \exp\left[-2ia_3 \left(\frac{p}{3}\right)^{3/2} qz\right] K_{1/3}\left(2ia_3 \left(\frac{p}{3}\right)^{3/2} z\right). \]
-\textcolor{DarkViolet}{\[ I(z) = -\frac{2}{3}\,p^{1/2} \exp\left[-a_3 qz\right] K_{1/3}\left(2i \left(\frac{p}{3}\right)^{3/2} z\right). \]}
 Using the Taylor expansion of $K_{1/3}(z)$ around $z = 0$, given by equations 10.25.2 and 10.27.4 of \cite{dlmf}, we can see that $I(z)$ converges pointwise to $\tfrac{1}{i\sqrt{3}} e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3}\big)\,z^{-1/3}$ as $p$ goes to zero with $q$ and $a_3$ held constant.
 \begin{todo}\par
 [Our treatments of the $e^{qz}$ factor disagree. With this version, the exponential factor goes to $1$ as $p \to 0$, which I think is consistent with the limit to the degenerate case. Comparison:]
