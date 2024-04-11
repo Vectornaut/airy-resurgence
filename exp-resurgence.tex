@@ -2994,34 +2994,62 @@ Our next move depends on how many critical points $g$ has.
 \begin{itemize}
 \item[] \textbf{Two distinct critical points}
 
-When $p$ is non-zero, $g$ has two distinct critical points. We can use our symmetries turn it into any other third-degree polynomial with distinct critical points. To illustrate, we turn $g$ into the Chebyshev polynomial $T_3$ by scaling and rotating its critical points to $\pm\tfrac{1}{2}$ and its critical values to $\pm 1$.
+When $p$ is non-zero, $g$ has two distinct critical points. We can use our symmetries turn it into any other third-degree polynomial with distinct critical points. To illustrate, we turn $g$ into the Chebyshev polynomial $T_3$ by scaling and rotating its critical points to $\pm\tfrac{1}{2}$ and its critical values to $\pm 1$. Setting
+\[ r \defeq \frac{i}{2} \left(\frac{3}{p}\right)^{3/2}, \]
+we get
 \begin{center}
 \begin{tabular}{c|c|c}
 \textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
-$\displaystyle \mathsf{M}_{(i/2)(3/p)^{1/2}}^*$ & $\displaystyle 2i\left(\frac{p}{3}\right)^{3/2} \left(4u^3 - 3u\right)$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
-$\displaystyle f \mapsto \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} f$ & $\displaystyle 4u^3 - 3u$ & $\displaystyle \frac{i}{2}\left(\frac{3}{p}\right)^{1/2} e^{qz}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right)$ \\[5mm]
+$\displaystyle \mathsf{M}_{rp/3}^*$ & $\displaystyle r^{-1} \left(-4u^3 + 3u\right)$ & $\displaystyle \frac{rp}{3}\,e^{qz}\,I\left(\frac{z}{a_3}\right)$ \\[5mm]
+$\displaystyle f \mapsto rf$ & $\displaystyle -4u^3 + 3u$ & $\displaystyle \frac{rp}{3}\,e^{qrz}\,I\left(\frac{rz}{a_3}\right)$ \\[5mm]
 \end{tabular}
 \end{center}
-\color{orange}Replace $\textcolor{DarkViolet}{e^{qz}}$ with $e^{q \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} z}$\color{black}
 
-We can now relate the general third-degree thimble integral $I$ to the modified Bessel function $K_{1/3}$, defined in equation~\eqref{integral:mod-bessel-rational-AL}:\textcolor{red}{[check the sign in (29), it seems positive $e^{zT_3(u)}$]}
-\[ K_{1/3}(z) = -\frac{3}{2}\,p^{-1/2} e^{qz}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right). \]
-\color{orange}
+We can now relate the general third-degree thimble integral $I$ to the modified Bessel function $K_{1/3}$, defined in equation~\eqref{integral:mod-bessel-rational-AL}:
 \begin{equation}
-    K_{1/3}(-z) = -\frac{3}{2}\,p^{-1/2} e^{zq \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2}}\,I\left(\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right).
+K_{1/3}(z) = \frac{irp}{\sqrt{3}}\,e^{qrz}\,I\left(\frac{rz}{a_3}\right)
 \end{equation}
+\begin{verify}
+\begin{equation}
+K_{1/3}(z) = -\frac{3}{2}\,p^{-1/2} e^{-zq \frac{1}{2i} \left(\frac{3}{p}\right)^{3/2}}\,I\left(-\frac{1}{2i} \left(\frac{3}{p}\right)^{3/2} \frac{z}{a_3}\right).
+\end{equation}
+\end{verify}
 \color{black}
 From this identity, we can see that $I(z)$ satisfies a transformed version of the modified Bessel equation:
-\[\left[\left(\frac{\partial}{\partial z}\right)^2 + 2\left(\frac{q}{a_3}\right)\frac{\partial}{\partial z} + \frac{1}{a_3^2} \left(\frac{4p^3}{27} + q^2\right) + \frac{1}{z} \left(\frac{\partial}{\partial z} + \frac{q}{a_3}\right) - \frac{1}{9z^2}\right] \Phi = 0.\]
+\[ \left[ \big[\big(\tfrac{\partial}{\partial z}\big)^2 + 2a_3 q\,\tfrac{\partial}{\partial z} + a_3^2 (q^2 - r^{-2})\big] + z^{-1} \big(a_3 q + \tfrac{\partial}{\partial z}\big) - \tfrac{1}{9} z^{-2} \right] \Phi = 0 \]
 \begin{verify}
-\[\left[a_3^2 \left(\frac{\partial}{\partial z}\right)^2 + 2a_3 q \frac{\partial}{\partial z} + \left(\frac{4p^3}{27} + q^2\right) + \frac{a_3}{z} \left(a_3\frac{\partial}{\partial z} + q\right) - \frac{a_3^2}{9z^2}\right] \Phi = 0.\]
-\end{verify}
-\color{orange}
+With
+\begin{align*}
+w & = \frac{r}{a_3}\,z &
+\frac{\partial}{\partial w} & = \frac{a_3}{r} \frac{\partial}{\partial z}
+\end{align*}
+we have
+\[ K_{1/3}(z) = \frac{irp}{\sqrt{3}}\,e^{a_3 qw}\,I(w) \]
+
 Let us rewrite for simpicilty $K_{1/3}(z)=\alpha e^{\beta z} I(\gamma z)$, then using that $K_{1/3}$ is a solution of the modified Bessel equation~\eqref{eqn:mod-bessel} we get
 \begin{align*}
-    0&=I''+\frac{\beta^2-1}{\gamma^2}I+\frac{2\beta}{\gamma}I'+\frac{1}{z}\left(\frac{\beta}{\gamma^2}I+\frac{I'}{\gamma}\right)-\frac{1}{9\gamma^2}\frac{1}{z^2} I
+0 &= I''(\gamma z)+\frac{\beta^2-1}{\gamma^2}I(\gamma z)+\frac{2\beta}{\gamma}I'(\gamma z)+\frac{1}{z}\left(\frac{\beta}{\gamma^2}I(\gamma z)+\frac{I'(\gamma z)}{\gamma}\right)-\frac{1}{9\gamma^2}\frac{1}{z^2} I(\gamma z) \\
+0 &= I''(t)+\frac{\beta^2-1}{\gamma^2}I(t)+\frac{2\beta}{\gamma}I'(t)+\frac{1}{t}\left(\frac{\beta}{\gamma}I(t)+I'(t)\right)-\frac{1}{9t^2} I(t)\\
+0 &= I''(t)+\frac{\beta^2}{\gamma^2}I(t)-\frac{1}{\gamma^2}I(t)+\frac{2\beta}{\gamma}I'(t)+\frac{1}{t}\frac{\beta}{\gamma}I(t)+\frac{1}{t}I'(t)-\frac{1}{9t^2} I(t)\\
+0 &= I''(t)+a_3^2q^2 I(t)-\frac{a_3^2}{r^2}I(t)+2a_3 qI'(t)+\frac{a_3 q}{t}I(t)+\frac{1}{t}I'(t)-\frac{1}{9t^2} I(t)
 \end{align*}
-\color{black}
+
+Here's a double-check. Since $K_{1/3}(z)$ satisfies the modified Bessel equation~\eqref{eqn:mod-bessel},
+\begin{align*}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] K_{1/3}(z) & = 0 \\
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] \frac{irp}{\sqrt{3}}\,e^{a_3 qw}\,I(w) & = 0 \\
+\left[\big(\tfrac{a_3}{r} w\big)^2 \big(\tfrac{r}{a_3} \tfrac{\partial}{\partial w}\big)^2 + \big(\tfrac{a_3}{r} w\big) \tfrac{r}{a_3} \tfrac{\partial}{\partial w} - \big[\big(\tfrac{1}{3}\big)^2 + \big(\tfrac{a_3}{r} w\big)^2\big]\right] e^{a_3 qw}\,I(w) & = 0 \\
+\left[w^2\big(\tfrac{\partial}{\partial w}\big)^2 + w \tfrac{\partial}{\partial w} - \big[\big(\tfrac{1}{3}\big)^2 + \big(\tfrac{a_3}{r}\big)^2 w^2\big]\right] e^{a_3 qw}\,I(w) & = 0 \\
+e^{a_3 qw} \left[w^2 \big(\tfrac{\partial}{\partial w} + a_3 q\big)^2 + w \big(\tfrac{\partial}{\partial w} + a_3 q\big) - \big[\big(\tfrac{1}{3}\big)^2 + \big(\tfrac{a_3}{r}\big)^2 w^2\big]\right] I(w) & = 0 \\
+\left[w^2 \big[\big(\tfrac{\partial}{\partial w}\big)^2 + 2a_3 q \tfrac{\partial}{\partial w} + (a_3 q)^2\big] + w \big(\tfrac{\partial}{\partial w} + a_3 q\big) - \big[\big(\tfrac{1}{3}\big)^2 + \big(\tfrac{a_3}{r}\big)^2 w^2\big]\right] I(w) & = 0
+\end{align*}
+\end{verify}
+\begin{verify}
+Taking $p$ and $q$ to $0$ in
+\[ \left[ \big[\big(\tfrac{\partial}{\partial z}\big)^2 + 2a_3 q\,\tfrac{\partial}{\partial z} + a_3^2 (q^2 - r^{-2})\big] + z^{-1} \big(a_3 q + \tfrac{\partial}{\partial z}\big) - \tfrac{1}{9} z^{-2} \right] \Phi = 0, \]
+we get
+\[ \left[ \big[\big(\tfrac{\partial}{\partial z}\big)^2 + z^{-1} \tfrac{\partial}{\partial z} - \tfrac{1}{9} z^{-2} \right] \Phi = 0\]
+\end{verify}
 \item[] \textbf{One degenerate critical point}
 When $p$ is zero, $g$ has a single degenerate critical point. Like we did in Appendix~\ref{airy-appendix} for the non-degenerate case, we will first study $I(z)$ by viewing it as a solution of an ODE, and we will then confirm our results using the thimble projection formula.
 
@@ -3038,29 +3066,49 @@ whose Laplace transform
 must be proportional to $I(z)$.
 
 We can confirm this result, and find the correct normalization, using the thimble projection formula:
+\color{RoyalBlue}
 \begin{align*}
 \int_{\mathcal{C}} e^{-zu^3}\,du & = e^{i\pi/3} \int_{\mathcal{J}_{\zeta, 0}^\theta} e^{-z\zeta}\,\tfrac{1}{3}\zeta^{-2/3}\,d\zeta \\
 & = \tfrac{1}{3}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3})\,z^{-1/3}.
 \end{align*}
-The factor of $e^{i\pi/3}$ \begin{todo}[check]\end{todo} comes from the monodromy of $\zeta^{-2/3}$ around $\zeta = 0$.
+\color{DarkBlue}
+\begin{align*}
+\int_{\mathcal{C}} e^{-zu^3}\,du & = (1 - e^{i\pi/3}) \int_{\mathcal{J}_{\zeta, 0}^\theta} e^{-z\zeta}\,\tfrac{1}{3}\zeta^{-2/3}\,d\zeta \\
+& = \tfrac{1}{i\sqrt{3}}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3})\,z^{-1/3}.
+\end{align*}
+\color{black}
+The factor of \textcolor{DarkBlue}{$e^{i\pi/3} - 1$} \textcolor{RoyalBlue}{$e^{i\pi/3}$} \begin{todo}[check]\end{todo} comes from the monodromy of $\zeta^{-2/3}$ around $\zeta = 0$.
 
 \color{RoyalBlue}
 namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q\right)$, where $\zeta_q=\zeta-q$ and $a\in\C$ is a free parameter. 
 \end{itemize}
 \subsubsection{Coalescence of critical values}
 We can recover the degenerate case by taking the limit of the non-degenerate case as $p$ goes to zero. Rearranging the relationship above between $I(z)$ and the modified Bessel function $K_{1/3}(z)$, we get the formula
+\color{DarkBlue}
+\[ I(z) = \frac{\sqrt{3}}{irp} e^{-qrz} K_{1/3}\left(\frac{a_3 z}{r}\right) \]
+\color{RoyalBlue}
 \[ I(z) = -\frac{2}{3}\,p^{1/2} \exp\left[-2ia_3 \left(\frac{p}{3}\right)^{3/2} qz\right] K_{1/3}\left(2ia_3 \left(\frac{p}{3}\right)^{3/2} z\right). \]
-Using the Taylor expansion of $K_{1/3}(z)$ around $z = 0$, given by equations 10.25.2 and 10.27.4 of \cite{dlmf}, we can see that $I(z)$ converges pointwise to $\tfrac{1}{i\sqrt{3}} e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3}\big)\,z^{-1/3}$ as $p$ goes to zero with $q$ and $a_3$ held constant.
-\begin{todo}\par
-[Our treatments of the $e^{qz}$ factor disagree. With this version, the exponential factor goes to $1$ as $p \to 0$, which I think is consistent with the limit to the degenerate case. Comparison:]
-\begin{align*}
-    e^{-zq} I_+\left(-\tfrac{i 3^{3/2}}{2 p^{3/2}} z\right)&= \int_{\mathcal{C}_+} e^{z (4t^3-3t)} du\\
-    &= 2\sqrt{-\tfrac{p}{3}} \int_{\mathcal{C}_+} e^{z (4t^3-3t)} dt \\
-    &= 2\sqrt{-\tfrac{p}{3}} K_{1/3}(z). 
-\end{align*}
-\end{todo}
+\color{black}
+Using the Taylor expansion of $K_{1/3}(z)$ around $z = 0$, given by equations 10.25.2 and 10.27.4 of \cite{dlmf}, we can see that $I(z)$ converges pointwise to $\tfrac{1}{i\sqrt{3}}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3}\big)\,z^{-1/3}$ as $p$ goes to zero with $q$ and $a_3$ held constant.
 \begin{verify}
 \begin{align*}
+I(z) & = \frac{\sqrt{3}}{irp} e^{-qrz} K_{1/3}\left(\frac{a_3 z}{r}\right) \\
+& = \frac{\sqrt{3}}{irp} e^{-qrz} \frac{\pi}{2 \sin(\pi/3)} \left[ I_{-1/3}\left(\frac{a_3 z}{r}\right) - I_{1/3}\left(\frac{a_3 z}{r} \right)\right].
+\end{align*}
+We take the lowest-order term, which is the leading term of $I_{-1/3}(a_3 z / r)$:
+\begin{align*}
+I(z) & \approx \frac{\sqrt{3}}{irp} \frac{\pi}{2 \sin(\pi/3)} \left(\frac{a_3 z}{2r}\right)^{-1/3} \frac{1}{\Gamma\big(-\tfrac{1}{3} + 1\big)} \\
+& = \frac{\sqrt{3}}{irp}\;\frac{1}{2}\;\Gamma\big(\tfrac{1}{3}\big)\,\Gamma\big(\tfrac{2}{3}\big) \left(\frac{a_3 z}{2r}\right)^{-1/3} \frac{1}{\Gamma\big(\tfrac{2}{3}\big)} \\
+& = \frac{\sqrt{3}}{irp}\;\frac{1}{2}\;\Gamma\big(\tfrac{1}{3}\big)\,\Gamma\big(\tfrac{2}{3}\big) \left(\frac{a_3 z}{2r}\right)^{-1/3} \frac{1}{\Gamma\big(\tfrac{2}{3}\big)} \\
+& = \frac{\sqrt{3}}{i a_3^{1/3} (2r)^{2/3} p} \Gamma\big(\tfrac{1}{3}\big)\;z^{-1/3} \\
+& = \frac{\sqrt{3}}{i a_3^{1/3} (2r)^{2/3} p} \Gamma\big(\tfrac{1}{3}\big)\;z^{-1/3}.
+\end{align*}
+Observing that $(2r)^{2/3} = e^{i(2/3)\pi }\,3/p$, we get
+\begin{align*}
+I(z) & \approx \frac{\sqrt{3}}{i a_3^{1/3}\,3e^{i(2/3)\pi}} \Gamma\big(\tfrac{1}{3}\big)\;z^{-1/3} \\
+& = \frac{1}{i\sqrt{3}} a_3^{-1/3} e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3}\big)\;z^{-1/3}
+\end{align*}
+\textcolor{RoyalBlue}{\begin{align*}
 i\sqrt{3}\,I(z) & = 2\sqrt{\frac{-p}{3}} K_{1/3}\Big(\frac{2ip^{3/2}}{3^{3/2}}z\Big) \\
 &=2\sqrt{\frac{-p}{3}}\left[\frac{\pi}{2\sin(\pi/3)}\Big(I_{-1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)-I_{1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)\Big)\right]\\
 &=\frac{2}{3}\pi ip^{1/2}\left[\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{-1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{2}{3})}-\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{4}{3})}\right]\\
@@ -3070,7 +3118,7 @@ Now we take the limit as $p\to 0$ and we find
 \begin{align*}
 i\sqrt{3}\,I(z) & = \frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \frac{1}{\Gamma\big(\tfrac{2}{3}\big)} \\
 & = e^{\pi i/3} \Gamma\big(\tfrac{1}{3}\big) z^{-1/3}
-\end{align*}
+\end{align*}}
 \end{verify}
 %
 \subsection{The triangular cantilever}\label{sec:catilever}
