@@ -2757,8 +2757,32 @@ and for even $j$, we get
 %     &  \notag=-\frac{i}{2}\laplace_{\zeta,1} v_{\mu,1} . 
 % \end{align}
 % \color{black}
-\begin{todo}
 \subsubsection{The modified Bessel function with parameter $0$}
+\color{DarkBlue}
+When $\mu$ goes to $0$, formula~\eqref{int:mod-bessel-gen} becomes
+\[ K_0^{(j)}(z) = \frac{1}{2\pi i} \int_{\mathcal{C}_j^\theta} \exp\left[z \cosh(t)\right]\,t\,dt. \]
+Let us compute $K^{(1)}_{0}(z)$ using the contour $\mathcal{C}_1^0$, which runs rightward along the line $\Im(t) = \pi$. In the translated coordinate $w$ defined by $t = w + i\pi$, the integral becomes
+\begin{align*}
+K_0^{(1)}(z) & = \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[z \cosh(w + i\pi)\right]\,(w + i\pi)\,dw \\
+& = \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,w\,dw + \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,i\pi\,dw.
+\end{align*}
+The first integrand is odd with respect to $w = 0$, so it vanishes, leaving
+\begin{align}
+K_0^{(1)}(z) & = \frac{1}{2} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,dw \notag \\
+& = \int_0^\infty \exp\left[-z \cosh(w)\right]\,dw. \label{int:k0_cosh}
+\end{align}
+This is a special case of formula~10.32.9 from \cite{dlmf}. Rolling the $t$ plane up into a cylinder, parameterized by the coordinate $s = e^t$, we can express $K_0^{(1)}(z)$ as an exponential period:
+\[ K_0^{(1)}(z) = \int_{\mathcal{J}^0_{s, 1}} \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s}. \]
+
+To confirm that the calculation above is consistent with Section~\ref{countable-cover}, recall formula~\eqref{eq: K_j_mu at 1}:
+\[ K_0^{(1)}(z) = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta. \]
+The hypergeometric function in the integrand can be expressed algebraically using identity~15.4.13 from \cite{dlmf}. This leads to an expression for the integrand that makes its $\zeta_{\pm 1}^{1/2}$ singularities even more apparent:
+\begin{equation}\label{eqn:borel_bessel0}
+K_0^{(1)}(z) = \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\big(\zeta^2 - 1\big)^{-1/2}\;d\zeta.
+\end{equation}
+We could get the same result from formula~\eqref{int:k0_cosh} by trigonometric substitution. This is a special case of formula~10.32.8 from \cite{dlmf}.
+
+\color{RoyalBlue}
 When $\mu$ goes to $0$, formula~\eqref{int:mod-bessel-gen} becomes
 \[ K_0^{(j)}(z) = \frac{1}{2\pi i} \int_ {\mathcal{C}_j^\theta} \exp\left[z \cosh(t)\right]\,t\,dt. \]
 We will evaluate
@@ -2775,7 +2799,7 @@ Since the integrand is an odd function, the upward part of the path integrates t
 \begin{align}
 K_0(z) & = \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[z \cosh(t + \pi i)\right]\,\pi i\,dt \notag - \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[z \cosh(t - \pi i)\right]\,\pi i\,dt \notag \\
 & = \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[-z \cosh(t)\right]\,2\pi i\,dt \notag \\
-& = \int_{\mathcal{J}^0_{t, 0}} \exp\left[-z \cosh(t)\right]\,dt \label{int:k0_cosh} \\
+& = \int_{\mathcal{J}^0_{t, 0}} \exp\left[-z \cosh(t)\right]\,dt \label{int:k0_cosh_old} \\
 & = \int_{\mathcal{J}^0_{s, 1}} \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s}, \notag
 \end{align}
 with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}.
@@ -2792,23 +2816,23 @@ K_0(z) = \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\big(\zeta^2 - 1\big)
 We could get the same result from equation~\eqref{int:k0_cosh} by trigonometric substitution. This is a special case of formula~10.32.8 from \cite{dlmf}.
 \begin{verify}
 \par
-For odd $j$, with $-\eta^2 = \tfrac{1}{2} - \tfrac{\zeta}{2}$, equation~\eqref{eq: K_j_mu at 1} gives
+For odd $j$, with $-\eta^2 = \tfrac{1}{2} - \tfrac{\zeta}{2}$, equation~\eqref{eq: K_j_mu at 1} gives \textcolor{GreenYellow}{(we were missing a factor of two in identity~15.4.13, so the highlighted factors of $1/2$ should be removed)}
 \begin{align*}
 K^{(j)}_0(z) & = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta \\
-& = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} (1 + \eta^2)^{-1/2} \\
-& = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} \left(\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} d\zeta \\
-& = -\frac{1}{4} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} d\zeta \\
-& = -\frac{2}{4} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
+& = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \textcolor{GreenYellow}{\frac{1}{2}} (1 + \eta^2)^{-1/2} \\
+& = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \textcolor{GreenYellow}{\frac{1}{2}} \left(\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} d\zeta \\
+& = -\frac{1}{2} \textcolor{GreenYellow}{\frac{1}{2}} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} d\zeta \\
+& = -\textcolor{GreenYellow}{\frac{1}{2}} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
 \end{align*}
-For even $j$, with $-\eta^2 = \tfrac{1}{2} + \tfrac{\zeta}{2}$, equation~\eqref{eq: K_j_mu at -1} gives
+This is off by a sign from what we expect, but the sign could be accounted for by the branch cuts in the square roots. For even $j$, with $-\eta^2 = \tfrac{1}{2} + \tfrac{\zeta}{2}$, equation~\eqref{eq: K_j_mu at -1} gives
 \begin{align*}
 K^{(j)}_0(z) & = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta \\
-& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} (1 + \eta^2)^{-1/2} d\zeta \\
-& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \frac{1}{2} \left(\frac{1}{2} - \frac{\zeta}{2}\right)^{-1/2} d\zeta \\
-& = \color{DarkViolet}\frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left[\left(-\frac{1}{2}-\frac{\zeta}{2}\right)  \left(\frac{1}{2} - \frac{\zeta}{2}\right)\right]^{-1/2} d\zeta  \\
-& =  \color{DarkViolet} \frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{4}+\frac{\zeta^2}{4}\right)^{-1/2} d\zeta  \\
-& = \color{DarkViolet} \frac{2 \cdot 3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta \\
-& = \color{DarkViolet} -\frac{3}{2} \int_{\mathcal{J}^{\theta+\pi}_{\zeta, 1}} e^{z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
+& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \textcolor{GreenYellow}{\frac{1}{2}} (1 + \eta^2)^{-1/2} d\zeta \\
+& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \textcolor{GreenYellow}{\frac{1}{2}} \left(\frac{1}{2} - \frac{\zeta}{2}\right)^{-1/2} d\zeta \\
+& = \color{DarkViolet}\textcolor{GreenYellow}{\frac{1}{2}} \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left[\left(-\frac{1}{2}-\frac{\zeta}{2}\right)  \left(\frac{1}{2} - \frac{\zeta}{2}\right)\right]^{-1/2} d\zeta  \\
+& =  \color{DarkViolet} \textcolor{GreenYellow}{\frac{1}{2}} \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{4}+\frac{\zeta^2}{4}\right)^{-1/2} d\zeta  \\
+& = \color{DarkViolet} \textcolor{GreenYellow}{\frac{1}{2}} 3 \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta \\
+& = \color{DarkViolet} -\textcolor{GreenYellow}{\frac{1}{2}} 3 \int_{\mathcal{J}^{\theta+\pi}_{\zeta, 1}} e^{z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
 %%& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \textcolor{Tomato}{i} \left(\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{\textcolor{Tomato}{i}}{2} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} d\zeta \textcolor{Tomato}{\quad\text{(is this justified?)}} \\
 %%& = \textcolor{Tomato}{-}\frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} d\zeta \\
 %%& = \textcolor{Tomato}{-}\frac{2 \cdot 3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
@@ -2827,8 +2851,8 @@ d\zeta & = \sinh(t) dt\\
 we finally get 
 \[\int_{\mathcal{J}^0_{\zeta, 1}} e^{-z\zeta} \frac{d\zeta}{\sqrt{\zeta^2-1}}\]
 \end{verify}
+\color{black}
 %
-\end{todo}
 \subsection{Generalized Airy}
 %
 In \cite{Reid} and the appendix of \cite{drazin-reid}, Drazin and Reid construct approximate solutions of the Orr--Sommerfield fluid equation using the generalized Airy functions
