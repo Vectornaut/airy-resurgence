@@ -10,7 +10,7 @@
 %%\usepackage{bm} %% for putting series names in bold
 \usepackage{graphicx}
 \usepackage{fancyhdr}
-\usepackage[font=small, margin=1cm]{caption}
+\usepackage[margin=1cm]{caption}
 \usepackage{enumitem}
 \usepackage[svgnames]{xcolor} %% for revisions
 \usepackage{xparse} %% for squiggly underlines
@@ -384,7 +384,6 @@ These two problems are closely linked. By playing with derivatives of a thimble 
 
 \subsection{Goals and Results}
 %
-\color{DarkBlue}
 We present the results, proofs, and examples in this paper with a few central goals in mind. Our first goal is to discuss Borel summability in a way that carefully separates the analytic and formal sides of the theory. In particular, we highlight results---like Theorem~\ref{thm:exist_uniq_ODE} for level~1 ODEs and Lemma~\ref{lem:thimble_proj_formula} for thimble integrals---that can be proven in purely analytic ways.
 
 Our second goal is to emphasize how the problems we study become more regular when posed in the position domain (the Borel plane). When we take level~$1$ differential equations from the frequency domain to the position domain, we not only turn their irregular singularities into regular ones, but also turn them into integral equations, which provide more smoothness and can be solved more constructively. When we write thimble integrals as Laplace transforms, their irregularly shaped integration contours collapse to rays in the position domain.
@@ -931,7 +930,11 @@ The function spaces mentioned in Section~\ref{sec:laplace_analytic} play an impo
 %
 Thimble integrals have been studied from different perspectives: in physics, they play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities \cite{dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua}. In the algebraic geometric set-up, namely when, following the notation introduced in Section~\ref{borel-reg:explanatory-power}, $X$ is an $N$-dimensional alegbraic variety over $\C$ and $f$ is a proper map $f\colon X\to\C$, thimble integrals are known as period integrals \cite{deligne2007singularites,Maxim_lectures,pham}.\footnote{In particular, they find application in mirror symmetry for Fano varieties as they encode the Gromov--Witten invariants.\textcolor{orange}{add references---Maxim's mirror symmetry talk, Varchenko}.}
 \subsubsection{Thimble integrals in physics}
-
+In physics, thimble integrals play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. In this context, physicists often use Borel summation, resurgence and related techniques to assign values to these integrals going beyond their pertubative expansion~\cite{dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua,Berry_Howls,Berry1991,costin_kruskal,Howls97,Howls,pham1988resurgence}. 
+\color{orange}
+For instance, in complex Chern--Simons theory, one could decompose the path integral in thimble integrals and arguing as in the finite dimesional set-up to study the Witten--Reshetikhin--Turaev invariants of $3$ manifolds \cite{gukov-marino-purtrov-resurgence,Witten}.
+\color{black}
+%
 \subsubsection{Thimble integrals in geometry}
 Thimble integrals can be used to explore the geometry of complex manifolds, and even to represent elements of a homology group. To see how this works, we first recall how the one-dimensional definition of a Lefschetz thimble arises from the general definition. Suppose that $f \maps X \to B$ is a holomorphic map from an $N$-dimensional complex manifold $X$ to a translation surface $B$. Consider a translation chart $\zeta$ on $B$ and a non-degenerate critical point $a \in X$ that $f$ sends to $\zeta = \alpha$. Near $a$, we can always find coordinates $t_1, \ldots, t_N$ on $X$ with
 \[ f^*\zeta = \alpha + e^{i \theta} (t_1^2 + \ldots + t_N^2). \]
@@ -953,27 +956,34 @@ Like solutions of level~$1$ ODEs, thimble integrals often exhibit the Stokes phe
 %
 \subsubsection{Asymptotics of thimble integrals}
 %
-Thimble integrals are traditionally understood through their asymptotics, which can be found with the saddle point approximation. A thimble integral's asymptotic expansion is typically divergent, but the integral contains a hint about where to find the corresponding analytic object: the thimble itself, which is a real-analytic submanifold.
+\color{DarkBlue}
+Thimble integrals are traditionally understood through their asymptotics, which can be found with the saddle point approximation~\cite{andersen2020resurgence,delabaere-howls,delabaere_dillinger_pham,Delabaere-Pham99,dingle1973asymptotic,Malgrange22,Pham83}. A thimble integral's asymptotic expansion is typically divergent, \textbf{[but can be recovered using Borel summation]}
+\color{black}
 
 \textcolor{orange}{[Keep revising\ldots]}
+
 \color{BlueViolet}
 \begin{itemize}
-\item Traditionally, people study the asymptotic expansions of thimble integrals. This is the saddle point approximation.
-\item Problem: the resulting series is usually divergent. This is another source of divergent power series.
-\item In this case, we have a clue about where to find the corresponding analytic object, because the thimble itself is analytic.
-\item In fact, the thimble integral is almost a Laplace transform (cite Pham).
+\item In fact, the thimble integral is almost a Laplace transform (cite Pham and point to thimble projection formula in this paper)
+\item Can also recover analytic object using Borel summation.
+\begin{itemize}
+\item {[Transition into discussion similar to ``Laplace transform methods and fixed point iteration'' for ODEs]}
+\item This raises the question we address in this paper, namely to understand why Borel summation is effective for $1$-dimensional thimbles integrals.
+\item \ldots but the integral contains a hint about where to find the corresponding analytic object: the thimble itself, which is a real-analytic submanifold.
+\end{itemize}
+\item {[Footnote:]} In fact, analougus results hold when $f$ satisfies milder assumptions (see for instance~\cite[Section 1.2.2]{mistegard_phdthesis}).
 %%\begin{itemize}
 %%\item ODE: get a formal series, resum it, check whether the result is an actual series.
 %%\item Thimble integral: get a formal series, resum it, check whether the result matches the original analytic thimble integral.
 %%\end{itemize}
 \end{itemize}
 \color{DarkTurquoise}\par
-Classical examples of $1$-dimensional thimble integrals (with polynomial $f$) are special functions, thus the Borel summability properties of their asymptotics can be studied either analytically (through the \textit{thimble projection reasoning} see the discussion in Section~\ref{sec:examples}) or geometrically (in terms of a certain Riemann--Hilbert problem \cite{Maxim_slide_ERC}\cite[Section 6.2]{kontsevich2022analyticity}). 
+\begin{itemize}
+\item Classical examples of $1$-dimensional thimble integrals (with polynomial $f$) are special functions
+\item {[Toy model of situations where there's no well-defined thimble---like infinite-dimensional path integrals---or where the integral doesn't quite look like a thimble integral---like state integral in Chern-Simons.]}
+\end{itemize}
 
-In the $N$-dimensional analog of our set-up \ref{borel-reg:explanatory-power} the thimbles are actually steepest descent paths from the critical points; thus the asymptotic behaviour as $z \to \infty$ in direction $\theta$ can be studied using the steepest descent method \cite{andersen2020resurgence,delabaere-howls,delabaere_dillinger_pham,Delabaere-Pham99,dingle1973asymptotic,Malgrange22,Pham83}.\footnote{In fact, analougus results hold when $f$ satisfies milder assumptions (see for instance~\cite[Section 1.2.2]{mistegard_phdthesis}).} However, the asymptotics of thimble integrals is typically a formal power series, and choosing a suitable resummation technique one should be able to recover the original function. 
-
-This raises the question we address in this paper, namely to understand why Borel summation is effective for $1$-dimensional thimbles integrals. In a nutshell, our result follows from the fact that thimble integrals are generalized Laplace transforms, hence they are Borel regular functions. In addition, our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see Fenyes's lecture~\cite{Fenyes-ihes-lecture} and Section~\ref{sec:Laplace-Borel-general}).   
-
+This raises the question we address in this paper, namely to understand why Borel summation is effective for $1$-dimensional thimbles integrals. In a nutshell, our result follows from the fact that thimble integrals are generalized Laplace transforms. We prove, from this, that they are Borel regular functions. In addition, our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see Fenyes's lecture~\cite{Fenyes-ihes-lecture} and Section~\ref{sec:Laplace-Borel-general}).   
 
 \color{RoyalBlue}
 \subsubsection*{Old stuff to distribute among new sections}
@@ -1471,6 +1481,15 @@ Let $\phi,\psi$ be two holomorphic functions on $B$. Choose a translation coorid
 [\phi \ast_{\zeta, \alpha} \psi](a) := \int_{\zeta = \alpha}^a \psi\,\mathsf{R}^*\phi\,d\zeta,
 \end{equation}
 where $\mathsf{R}$ is the $180^\circ$ rotation that exchanges $\zeta = 0$ with $a$. In other words, $\mathsf{R}^*\zeta = \zeta(a) - \zeta$.
+\color{DarkTurquoise}
+\begin{itemize}
+\item Given a function $f$ on $B$, we will write $f'$ and $f''$ to denote the pullbacks of $f$ to the first and second factors, respectively, of $B \times B$.
+\end{itemize}
+
+\textcolor{orange}{\ldots} defined as
+\[ \phi \ast_{\zeta, \alpha} \psi \defeq \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}} \phi'\,\psi''\,d\zeta'', \]
+where $\mathcal{S}'(\zeta)$ is the line segment connecting $\zeta' = \alpha$ to $\zeta' = \zeta$, and $\mathcal{S}''(\zeta)$ is defined similarly \textcolor{orange}{[check]}.
+\color{black}
 \end{definition}
 \begin{prop}
 The Laplace transform $\laplace^\theta_{\zeta,\alpha}$ is a homomorphism from the algebra of locally integrable, exponentially bounded holomorphic functions, equipped with the convolution product, to the algebra of analytic functions on the half-plane $\Re(e^{i\theta} z) > 0$, equipped with the usual product.
@@ -1480,27 +1499,43 @@ We just need to prove that
 \[ \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}] = \laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,\alpha}[{\psi}] \]
 for all $\phi, \psi$ with a well-defined Laplace transform. This can be shown by direct computation, done for instance in Theorem 2.39 of \cite{laplace-tfm} for $\alpha=0$.
 \textcolor{orange}{[add proof for $\alpha\neq 0$]}
+\color{DarkTurquoise}
+\begin{align*}
+\laplace_{\zeta, \alpha}(\phi)\,\laplace_{\zeta,\alpha}(\psi) & \defeq \left( \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \phi\,d\zeta \right)\left( \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \psi\,d\zeta \right) \\
+& = \left( \int_{\mathcal{J}_{\zeta', \alpha}^\theta} e^{-z\zeta'} \phi'\,d\zeta' \right)\left( \int_{\mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z\zeta''} \psi''\,d\zeta'' \right) \\
+& = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z(\zeta' + \zeta'')}\,\phi'\,\psi''\;d\zeta' \wedge d\zeta''.
+\end{align*}
+Since $d\zeta'' \wedge d\zeta'' = 0$, we can rewrite this as \textcolor{orange}{[with $\zeta' + \zeta'' = \zeta$]}
+\begin{align*}
+\laplace_{\zeta, \alpha}(\phi)\,\laplace_{\zeta,\alpha}(\psi) & = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z(\zeta' + \zeta'')}\,\phi'\,\psi''\;(d\zeta' + d\zeta'') \wedge d\zeta'' \\
+& = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z\zeta}\,\phi'\,\psi''\;d\zeta \wedge d\zeta'' \\
+& = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} \big(e^{-z\zeta}\;d\zeta\big) \wedge \big(\phi'\,\psi''\;d\zeta''\big) \\
+& = \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \left(\int_{\substack{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta \\ \zeta' + \zeta'' = \zeta}} \phi'\,\psi''\;d\zeta''\right) d\zeta \\
+& = \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta}\,(\phi \ast_{\zeta, \alpha} \psi)\;d\zeta \\
+& = \laplace^\theta_{\zeta, \alpha}(\phi \ast_{\zeta, \alpha} \psi).
+\end{align*}
+\color{black}
 \begin{verify}
 \begin{align*}
-    \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}](a)&= \int_{\mathcal{J}^\theta_{\zeta, \alpha}} e^{-z\zeta(a)} \left(\int_{\zeta=\alpha}^a \psi \mathsf{R}^*\phi\;d\zeta\right)\;d\zeta
+\laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}](a)&= \int_{\mathcal{J}^\theta_{\zeta, \alpha}} e^{-z\zeta(a)} \left(\int_{\zeta=\alpha}^a \psi \mathsf{R}^*\phi\;d\zeta\right)\;d\zeta
 \end{align*}
 
-    \begin{align*}
-         \laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,\alpha}[{\psi}]&=\int_\alpha^\infty e^{-z t}\phi(t)dt \int_\alpha^\infty e^{-z u} \psi(u) du \\
-         &=\int_\alpha^\infty \left(\int_\alpha^\infty  e^{-z (t+u)}\phi(t) \psi(u) du \right)dt \\
-         &=\int_\alpha^\infty \left(\int_{t+\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt 
-    \end{align*}
-    Define $\psi(s)=0$ if $s<\alpha$, thus $\psi(s-t)=0$ if $s<t+\alpha$, 
-    \begin{align*}
-        \int_\alpha^\infty \left(\int_{t+\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt &=\int_\alpha^\infty \left(\int_{\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt 
-    \end{align*}
-    Under the assumption that the integral is absolutely convergent, we can exchange the order of integration
-    \begin{align*}
-        \int_\alpha^\infty \left(\int_{\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt &=\int_\alpha^\infty e^{-z s} \left(\int_{\alpha}^\infty    \psi(s-t) \phi(t) dt \right)ds\\
-        &=\int_\alpha^\infty e^{-z s} \left(\int_{\alpha}^s    \psi(s-t) \phi(t) dt \right)ds \\
-        &=\int_\alpha^\infty e^{-z s} \phi\ast_{t,\alpha}\psi ds 
-    \end{align*}
-    \textcolor{orange}{[see Thm 5.25 \cite{diverg-resurg-i}]}
+\begin{align*}
+\laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,\alpha}[{\psi}]&=\int_\alpha^\infty e^{-z t}\phi(t)dt \int_\alpha^\infty e^{-z u} \psi(u) du \\
+&=\int_\alpha^\infty \left(\int_\alpha^\infty  e^{-z (t+u)}\phi(t) \psi(u) du \right)dt \\
+&=\int_\alpha^\infty \left(\int_{t+\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt 
+\end{align*}
+Define $\psi(s)=0$ if $s<\alpha$, thus $\psi(s-t)=0$ if $s<t+\alpha$, 
+\begin{align*}
+\int_\alpha^\infty \left(\int_{t+\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt &=\int_\alpha^\infty \left(\int_{\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt 
+\end{align*}
+Under the assumption that the integral is absolutely convergent, we can exchange the order of integration
+\begin{align*}
+\int_\alpha^\infty \left(\int_{\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt &=\int_\alpha^\infty e^{-z s} \left(\int_{\alpha}^\infty    \psi(s-t) \phi(t) dt \right)ds\\
+&=\int_\alpha^\infty e^{-z s} \left(\int_{\alpha}^s    \psi(s-t) \phi(t) dt \right)ds \\
+&=\int_\alpha^\infty e^{-z s} \phi\ast_{t,\alpha}\psi ds 
+\end{align*}
+\textcolor{orange}{[see Thm 5.25 \cite{diverg-resurg-i}]}
 \end{verify}
 \end{proof}
 %
