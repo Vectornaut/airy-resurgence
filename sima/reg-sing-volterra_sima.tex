@@ -364,7 +364,7 @@ Now, to prove that $\hardpart \solproto = \solproto$, we just need to show that 
 
 By Condition~\eqref{cond:sing}, we can find a radius $\delta>0$ and a constant $C$ such that
 \begin{equation}\label{eqn:sing-bound}
-\left|\frac{q}{p} - \frac{\tau}{\zeta}\right| < C
+\left|\frac{q}{p} + \frac{\tau}{\zeta}\right| < C
 \end{equation}
 whenever $|\zeta| < \delta$. We can take advantage of this bound by rewriting the integral in the definition of $\chi$:
 \begin{align*}
@@ -770,7 +770,7 @@ Choose a root $-\alpha$ of $P$ where $\tau_\alpha := Q(-\alpha)/P'(-\alpha)$ is 
 To apply Proposition~\ref{prop:alt-general_volterra}, we need to rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting} under the reinterpretation from Section~\ref{sec:notation_alpha}. When we write $\hat{\mathcal{P}}_\alpha$ explicitly as a Volterra operator, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
 \[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta = 0, \]
 where
-\[ k_R(a,a')=\sum_{j=0}^\infty \frac{R_{j}}{j!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} . \]
+\[ k_R(a,a')=\sum_{j=0}^\infty \frac{R_{j}}{(j+1)!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} . \]
 Isolating $p\,\varphi$ on the left and dividing both sides by $p$ yields the equivalent equation
 \begin{equation}\label{eqn:divided}
 \varphi(a) = -\int_{\zeta=\alpha}^a \frac{q}{p(a)} \, \varphi \; d\zeta - \int_{\zeta=\alpha}^a \frac{k_R(a,\cdot)}{p(a)} \, \varphi \, d\zeta.
@@ -808,29 +808,29 @@ It follows that
 -\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} & = \sum_{-\beta \in \roots} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} \\
 & = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q\big(-\zeta(a')\big)}{P'(-\alpha)\,(\zeta(a) - \alpha)}.
 \end{align*}
-Now we expand $Q$ around $-\alpha$, using the decomposition $Q(\zeta) = Q(-\alpha)+(\zeta-\alpha)\,Q_\alpha(\zeta)$ to split up the last term of the expression above:
+Now we expand $Q$ around $-\alpha$, using the decomposition $Q(-\zeta) = Q(-\alpha)+(\zeta-\alpha)\,Q_\alpha(-\zeta)$ to split up the last term of the expression above:
 \begin{equation}\label{eqn:split-numerator}
--\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} + \frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)} + \frac{Q(-\alpha)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}.
+-\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} + \frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)} + \frac{Q(-\alpha)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}.
 \end{equation}
 First, we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded on a neighborhood of $\zeta = \alpha$ in $\domain_\alpha$. Equation~\eqref{eqn:split-numerator} tells us that
 \begin{align*}
 -\frac{Q(-\zeta)}{P(-\zeta)} & =
-\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{(\zeta - \alpha)\,Q_\alpha(\zeta)}{P'(-\alpha)\,(\zeta - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)} \\
-&=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(\zeta)}{P'(-\alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)}
+\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{(\zeta - \alpha)\,Q_\alpha(-\zeta)}{P'(-\alpha)\,(\zeta - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)} \\
+&=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(-\zeta)}{P'(-\alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)}
 \end{align*}
 Recalling that $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$, we conclude that
-\[-\frac{Q(-\zeta)}{P(-\zeta)}-\frac{\tau_\alpha}{\zeta-\alpha}=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(\zeta)}{P'(-\alpha)}\]
+\[-\frac{Q(-\zeta)}{P(-\zeta)}-\frac{\tau_\alpha}{\zeta-\alpha}=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(-\zeta)}{P'(-\alpha)}\]
 Since $Q$ and $Q_\alpha$ are polynomials, the right-hand side is bounded on any neighborhood of $\zeta = \alpha$ that avoids the other roots of $p$ and avoids infinity.
 
 Next, we want to show that for any $\sigma > \tau_\alpha$, the bound
 \[ |\zeta(a) - \alpha| \left|\frac{q(a')}{p(a)}\right| < \sigma \]
 holds when $a$ and $a'$ are close enough to $\zeta = \alpha$. Taking the absolute value of both sides of Equation~\eqref{eqn:split-numerator}, and using the assumption that $\tau_\alpha$ is real and positive, we see that
 \begin{align*}
-\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha\big(\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}\right| + \left|\frac{\tau_\alpha}{\zeta(a) - \alpha}\right| \\
-|\zeta(a) - \alpha|\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(\zeta(a')\big)}{P'(-\alpha)}\right| + \tau_\alpha.
+\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}\right| + \left|\frac{\tau_\alpha}{\zeta(a) - \alpha}\right| \\
+|\zeta(a) - \alpha|\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)}\right| + \tau_\alpha.
 \end{align*}
 By bringing $\zeta(a')$ closer to $\alpha$, we can make the middle term
-\[\left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(\zeta(a')\big)}{P'(-\alpha)}\right|\]
+\[\left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)}\right|\]
 as small as we want. Similarly, by bringing $\zeta(a)$ closer to $\alpha$, we can make the sum
 \[\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right|\]
 as small as we want. Hence, for any $\sigma > \tau_\alpha$, the bound
@@ -861,7 +861,7 @@ q(a') & = Q\big(-\zeta(a')\big) \\
 \end{align*}
 in the form
 \[ q(a') = Q_{d-1}\big(\zeta(a)\big)\;\omega(a, a')^{d-1} + \ldots + Q_1\big(\zeta(a)\big)\;\omega(a, a') + Q_0\big(\zeta(a)\big), \]
-where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. Next, knowing that $-\alpha$ is a root of $p$, rewrite $p$ in the form $(\zeta - \alpha)\,P_\alpha(\zeta)$, where $P_\alpha$ is a polynomial of degree $d-1$. We can then write $-\big(\zeta(a) - \alpha\big)\,\hardker^\alpha(a, a')$ in the form
+where $Q_0, \ldots Q_{d-1}$ are polynomials of degree at most $d-1$. Next, knowing that $\alpha$ is a root of $p$, rewrite $p$ in the form $(\zeta - \alpha)\,P_\alpha(\zeta)$, where $P_\alpha$ is a polynomial of degree $d-1$. We can then write $-\big(\zeta(a) - \alpha\big)\,\hardker^\alpha(a, a')$ in the form
 \[ \big(\zeta(a)-\alpha\big)\,\frac{q(a')}{p(a)} = \frac{Q_{d-1}\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a')^{d-1} + \ldots + \frac{Q_1\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}\;\omega(a, a') + \frac{Q_0\big(\zeta(a)\big)}{P_\alpha\big(\zeta(a)\big)}, \]
 viewing it as a polynomial in $\omega(a, a')$ whose coefficients are rational functions in $\zeta(a)$. If we keep $a$ away from the roots of $p$ other than $\zeta = \alpha$, each coefficient is bounded, so $|\zeta(a) - \alpha|\,|\hardker^\alpha(a, a')|$ is bounded by a polynomial in $|\omega(a, a')|$. It follows that for any $\lambda_\Delta > 0$, and any domain $\domain_\alpha$ that avoids all the roots of $p$ other than $\zeta = \alpha$, we have
 \[ |\zeta(a)-\alpha|\,|\hardker^\alpha(a, a')| \lesssim e^{\lambda_\Delta|\omega(a, a')|} \]
@@ -873,16 +873,16 @@ For consistency with Condition~\eqref{cond:eps-lambda}, we choose $\lambda_\Delt
 This is true because $p$ is a polynomial.
 \item Condition~\eqref{cond:eps-lambda} {\em on $\softpart^\alpha$ is satisfied.} 
 
-First, obseve that
+First, observe that
 \begin{align*}
 |\softker^\alpha(a, a')| & = \left|\frac{k_R(a, a')}{p(a)}\right| \\
-& \le \frac{1}{|p(a)|} \sum_{j=0}^\infty \frac{|R_{j}|}{j!} \, |\zeta(a)-\zeta(a')|^{j+1} \\
-& = \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{j=0}^\infty \frac{|R_{j}|}{j!} \, |\zeta(a)-\zeta(a')|^j.
+& \le \frac{1}{|p(a)|} \sum_{j=0}^\infty \frac{|R_{j}|}{(j+1)!} \, |\zeta(a)-\zeta(a')|^{j+1} \\
+& = \frac{|\zeta(a)-\zeta(a')|}{|p(a)|} \sum_{j=0}^\infty \frac{|R_{j}|}{(j+1)!} \, |\zeta(a)-\zeta(a')|^j.
 \end{align*}
 Now, choose $\lambda_\Delta > A$. Since $R(z^{-1})$ is holomorphic on the disk $|z| > A$, we have $|R_j| \lesssim \lambda_\Delta^j$ over all and $j \in \{0, 1, 2, \ldots\}$, as mentioned earlier. It follows that
 \begin{align*}
-\sum_{j=0}^\infty \frac{|R_{j}|}{j!} \, |\zeta(a)-\zeta(a')|^j
-& \lesssim \sum_{j=0}^\infty \frac{\lambda_\Delta^j}{j!} \, |\zeta(a)-\zeta(a')|^j \\
+\sum_{j=0}^\infty \frac{|R_{j}|}{(j+1)!} \, |\zeta(a)-\zeta(a')|^j
+& \lesssim \sum_{j=0}^\infty \left(\frac{1}{j+1}\right)\frac{\lambda_\Delta^j}{j!} \, |\zeta(a)-\zeta(a')|^j \\
 & \lesssim e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}
 \end{align*}
 over all $a, a' \in \domain_\alpha^2$, so
