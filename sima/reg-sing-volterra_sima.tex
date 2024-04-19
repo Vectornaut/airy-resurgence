@@ -141,7 +141,7 @@ From our experience with solving level~1 differential equations by Borel summati
 \item It has an $O\big(\zeta^{\tau-1}\big)$ singularity at $\zeta = 0$.
 \item It is of exponential type, meaning that it is $O\big(e^{\Lambda|\zeta|}\big)$ for some $\Lambda \in \R$ as $\zeta$ grows.
 \end{itemize}
-These conditions are just strong enough to ensure that the solution has a well-defined Laplace transform, which by construction will satisfy the differential equation we started with in the frequency domain. The first condition also tells us that the Laplace-transformed solution is $O(z^{-\tau})$ as the frequency variable $z$ grows.
+These conditions are just strong enough to ensure that the solution has a well-defined Laplace transform, which by construction will satisfy the differential equation we started with in the frequency domain. The first condition also implies that the Laplace-transformed solution is $O(z^{-\tau})$ as the frequency variable $z$ grows.
 
 Our goal is to justify the expectations above with an existence and uniqueness result, stated in Section~\ref{sec:results}. We will achieve it by embodying our expectations in a Banach space of holomorphic functions---the space $\singexp{\tau-1}{\Lambda}(\domain)$ defined in Section~\ref{fn-spaces}. We will apply our results to level $1$ differential equations in Section~\ref{sec:example}.
 \subsection{Notation for uniform bounds}
@@ -188,10 +188,7 @@ For most of our results, we will need to make sure that $\domain$ does not touch
 \[ |\hardker(a, a')| \lesssim \frac{1}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 over all $a, a' \in \domain$.
 \end{conditions}
-This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$. 
-%\color{Tomato}
-%Furthermore, Condition \eqref{cond:diag-basic} tells us that for any $\sigma>0$ we can find a neighbourhood of $(0,0)\in\domain^2$ where 
-%\[|\hardker(a,a')|\le\frac{\sigma}{|\zeta(a)|}.\]
+This condition explains why $\domain$ might have the sort of shape illustrated in Section~\ref{setting:domain}. As $\domain$ stretches out toward infinity, it has to part around the zeros of $p$, keeping well away from every zero except the one at $\zeta = 0$.
 \begin{verify}
     By Condition \eqref{cond:diag-basic} we can find $c>0$ such that \[ | \hardker(a, a') | \le \frac{c}{|\zeta(a)|} e^{\lambda_\Delta|\zeta(a)-\zeta(a')|} \]
 then setting $\delta=\frac{\log(\sigma/c)}{2\lambda_\Delta}$, we deduce that for every $|\zeta(a)|\le\delta$ and  $|\zeta(a')|\le\delta$
@@ -202,7 +199,7 @@ then setting $\delta=\frac{\log(\sigma/c)}{2\lambda_\Delta}$, we deduce that for
     &=\frac{\sigma}{|\zeta(a)|}
 \end{align*}
 \end{verify}
-\color{black}
+
 We will occasionally mention an optional condition on $p$ that allows us to state our main results more explicitly.
 \begin{conditions}
 \condconst{reg-p}{B, \epsilon}\label{cond:reg-p}
@@ -286,7 +283,7 @@ The space $\singexp{0}{\Lambda}(\domain)$ is complete.
 \begin{proof}
 Take a Cauchy sequence $f_1, f_2, f_3, \ldots \in \singexp{0}{\Lambda}(\Omega)$. The inclusion map $\singexp{0}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ is bounded with respect to each of the seminorms on $\holo(\Omega)$ given by $|f| \mapsto \sup_K |f|$ for compact subsets $K \subset \Omega$, so our sequence is Cauchy in $\holo(\Omega)$ too. Since $\holo(\Omega)$ is complete~\cite[Proposition~3.5]{fnl-cpx-anal},\footnote{That is, a sequence which is Cauchy in each of the seminorms on $\holo(\Omega)$ will always converge in the topology of $\holo(\Omega)$, which is the coarsest topology in which all of the seminorms are continuous.} our sequence converges to a function $f$ there.
 
-The Cauchy property in $\singexp{0}{\Lambda}(\Omega)$ tells us that for any $r > 0$, we can find some $n$ for which $e^{-\Lambda |\zeta|}\,|f_k - f_n| \le r$ whenever $k \ge n$. Since convergence in $\holo(\Omega)$ implies pointwise convergence, we can see as $k$ grows that $e^{-\Lambda |\zeta|}\,|f - f_n| \le r$. This shows that our sequence converges to $f$ in the norm $\|\cdot\|_{0,\Lambda}$. We can also see from this argument that $f$ is in $\singexp{0}{\Lambda}(\domain)$: picking some $r > 0$, we observe that
+The Cauchy property in $\singexp{0}{\Lambda}(\Omega)$ implies that for any $r > 0$, we can find some $n$ for which $e^{-\Lambda |\zeta|}\,|f_k - f_n| \le r$ whenever $k \ge n$. Since convergence in $\holo(\Omega)$ implies pointwise convergence, we can see as $k$ grows that $e^{-\Lambda |\zeta|}\,|f - f_n| \le r$. This shows that our sequence converges to $f$ in the norm $\|\cdot\|_{0,\Lambda}$. We can also see from this argument that $f$ is in $\singexp{0}{\Lambda}(\domain)$: picking some $r > 0$, we observe that
 \begin{align*}
 e^{-\Lambda |\zeta|}\,|f| & \le e^{-\Lambda |\zeta|}\,|f - f_n| + e^{-\Lambda |\zeta|}\,|f_n| \\
 & \le r + \|f_n\|_{0,\Lambda}
@@ -305,7 +302,7 @@ If $\Lambda'\leq\Lambda$, the inclusion map $\singexp{\sigma}{\Lambda'}(\Omega)\
 \begin{proof}
 By definition,
 \[ \|f\|_{\sigma,\Lambda}=\sup_{\Omega} |\zeta|^{-\sigma}\,e^{-\Lambda |\zeta|}\, |f|. \]
-The norm $\|\cdot\|_{\sigma, \Lambda'}$ is designed to give $|f| \le |\zeta|^\sigma\,e^{\Lambda'|\zeta|}\,\|f\|_{\sigma, \Lambda'}$, which tells us that
+The norm $\|\cdot\|_{\sigma, \Lambda'}$ is designed to give $|f| \le |\zeta|^\sigma\,e^{\Lambda'|\zeta|}\,\|f\|_{\sigma, \Lambda'}$, implying that
 \begin{align*}
 \|f\|_{\sigma,\Lambda} & \leq \sup_{\Omega} |\zeta|^{-\sigma}\,e^{-\Lambda |\zeta|}\,|\zeta|^\sigma\,e^{\Lambda'|\zeta|}\,\|f\|_{\sigma, \Lambda'}\\
 &=\sup_{\Omega} e^{-(\Lambda-\Lambda') |\zeta|}\,\|f\|_{\sigma, \Lambda'}\\
@@ -344,7 +341,7 @@ We start by constructing the prototype solution $\solproto$ from the kernel of $
 
 To see what the perturbation $\softpart$ does to $\solproto$, we will show in Section~\ref{sec:image under soft_part} that $\softpart$ has a smoothing effect, reducing the sharpness of any power-law singularity at $\zeta = 0$. In particular, it sends $\solproto$ into $\singexpalg{\tau-1+\gamma}(\domain)$.
 
-Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, suggesting that the equation $\solwhole = \volterra \solwhole$ has a solution there. To confirm this, we will show in Section~\ref{sec:V is a contraction} that $\volterra$ is a contraction of $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$ when $\Lambda$ is large enough. This tells us that $\volterra$ has a unique fixed point in $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, as we will see in Section~\ref{sec:existence and uniqueness}.
+Now we know that $\volterra$ sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, suggesting that the equation $\solwhole = \volterra \solwhole$ has a solution there. To confirm this, we will show in Section~\ref{sec:V is a contraction} that $\volterra$ is a contraction of $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$ when $\Lambda$ is large enough. This implies that $\volterra$ has a unique fixed point in $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, as we will see in Section~\ref{sec:existence and uniqueness}.
 \subsection{Construction and regularity of the prototype solution \\ \textit{(proof of Theorems~\ref{thm:basic_volterra}--\ref{thm:proto-growth})}}\label{sec:proto-construction-regularity}
 
 \subsubsection{Construction}\label{sec:construction}
@@ -383,7 +380,7 @@ Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a smal
 \end{proposition}
 
 \begin{proof}
-Go back to the proof of Theorem~\ref{thm:basic_volterra}, where we found a radius $\delta > 0$ and a constant $C$ such that Inequality~\eqref{eqn:sing-bound} holds whenever $|\zeta| < \delta$. The subsequent argument, which we used to show that $\lim_{\zeta \to 0} \chi = 0$, actually supports a stronger conclusion: it shows that $|\chi| \lesssim |\zeta|^\tau$ on the region $|\zeta| < \delta$. This tells us that
+Go back to the proof of Theorem~\ref{thm:basic_volterra}, where we found a radius $\delta > 0$ and a constant $C$ such that Inequality~\eqref{eqn:sing-bound} holds whenever $|\zeta| < \delta$. The subsequent argument, which we used to show that $\lim_{\zeta \to 0} \chi = 0$, actually supports a stronger conclusion: it shows that $|\chi| \lesssim |\zeta|^\tau$ on the region $|\zeta| < \delta$. This implies that
 \[ |\solproto| \lesssim \left|\frac{1}{p}\right|\,|\zeta|^\tau \]
 on the region $|\zeta| < \delta$.
 
@@ -530,9 +527,9 @@ Suppose $\hardpart$ satisfies Condition~\eqref{cond:sing}, and $\softpart$ satis
 by keeping $a$ and $a'$ close enough to $\zeta = 0$.
 \end{proposition}
 \begin{proof}
-First, choose some $\sigma_0 \in (\tau, \sigma)$. Condition~\eqref{cond:sing} tells us that by making $\delta > 0$ small enough, we can ensure that
+First, choose some $\sigma_0 \in (\tau, \sigma)$. From Condition~\eqref{cond:sing}, by making $\delta > 0$ small enough, we can ensure that
 \[ |\hardker(a, a')| \le \frac{\sigma_0}{|\zeta(a)|} \]
-whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Now, we will show that under Condition~\eqref{cond:eps-lambda}, we can make $|\softker(a, a')|$ as small as we want by keeping $a$ and $a'$ close to $\zeta = 0$. The condition tells us that
+whenever $|\zeta(a)| < \delta$ and $|\zeta(a')| < \delta$. Now, we will show that under Condition~\eqref{cond:eps-lambda}, we can make $|\softker(a, a')|$ as small as we want by keeping $a$ and $a'$ close to $\zeta = 0$. The condition guarantees that
 \[ | \softker(a, a') | \lesssim\frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain$, which means that
 \[ | \softker(a, a') | \lesssim\frac{(2\delta)^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta(2\delta)}\]
@@ -569,7 +566,7 @@ for any choice of integration path.\footnote{The absolute value of a $1$-form, l
 \end{align*}
 What we do next depends on whether $a$ is in $\near$ or $\far$.
 \subsubsection{Near the origin}\label{near-bound}
-Suppose that $a \in \near$. Then inequality~\eqref{near-limit} tells us that
+Suppose that $a \in \near$. Then inequality~\eqref{near-limit} gives
 \begin{align*}
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le
 \|\varphi\|_{\rho-1, \Lambda}  \int_0^a \frac{\sigma}{|\zeta(a)|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta| \\
@@ -616,7 +613,7 @@ To see that the fixed point is still unique in the bigger space $\singexpalg{\rh
 \begin{proof}[Proof of Theorem~\ref{thm:general_volterra}]
 Start with the prototype solution $\solproto$ constructed in Theorem~\ref{thm:basic_volterra}, which satisfies the equation
 \[ \solproto = \hardpart \solproto. \]
-The base point for the construction can be chosen arbitrarily. Under our assumptions about $\volterra$, Theorem~\ref{thm:proto-growth} tells us that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$. Our goal is to find a perturbation $\solptb \in \singexpalg{\tau-1+\gamma}(\domain)$ that makes $\solwhole = \solproto + \solptb$ a solution of
+The base point for the construction can be chosen arbitrarily. Under our assumptions about $\volterra$, Theorem~\ref{thm:proto-growth} ensures that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$. Our goal is to find a perturbation $\solptb \in \singexpalg{\tau-1+\gamma}(\domain)$ that makes $\solwhole = \solproto + \solptb$ a solution of
 \begin{equation}\label{eqn:orig-homog}
 \solwhole = \volterra \solwhole.
 \end{equation}
@@ -631,7 +628,7 @@ we can rewrite the homogeneous equation we are trying to solve as an inhomogeneo
 & = \solproto + \softpart\solproto + \volterra\solptb \nonumber \\
 \solptb & = \softpart\solproto + \volterra\solptb. \label{eqn:equiv-inhomog}
 \end{align}
-Since we know that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$, Proposition~\ref{prop:smoothing} tells us that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\tau-1+\gamma}(\domain)$. Since $\tau+\gamma > \tau$, and we have made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\gamma}(\Omega)$. Equivalently, Equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\gamma}(\domain)$.
+Since we know that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$, Proposition~\ref{prop:smoothing} shows that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\tau-1+\gamma}(\domain)$. Since $\tau+\gamma > \tau$, and we have made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\gamma}(\Omega)$. Equivalently, Equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\gamma}(\domain)$.
 
 Now, we just want to show that the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$ for any $\rho > \tau$.
 
@@ -812,14 +809,14 @@ Now we expand $Q$ around $-\alpha$, using the decomposition $Q(-\zeta) = Q(-\alp
 \begin{equation}\label{eqn:split-numerator}
 -\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} + \frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)} + \frac{Q(-\alpha)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}.
 \end{equation}
-First, we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded on a neighborhood of $\zeta = \alpha$ in $\domain_\alpha$. Equation~\eqref{eqn:split-numerator} tells us that
+First, we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded on a neighborhood of $\zeta = \alpha$ in $\domain_\alpha$. It follows from Equation~\eqref{eqn:split-numerator} that
 \begin{align*}
 -\frac{Q(-\zeta)}{P(-\zeta)} & =
 \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{(\zeta - \alpha)\,Q_\alpha(-\zeta)}{P'(-\alpha)\,(\zeta - \alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)} \\
-&=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(-\zeta)}{P'(-\alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)}
+&=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(-\zeta)}{P'(-\alpha)} + \frac{Q(-\alpha)}{P'(-\alpha)\,(\zeta - \alpha)}\,.
 \end{align*}
 Recalling that $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$, we conclude that
-\[-\frac{Q(-\zeta)}{P(-\zeta)}-\frac{\tau_\alpha}{\zeta-\alpha}=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(-\zeta)}{P'(-\alpha)}\]
+\[-\frac{Q(-\zeta)}{P(-\zeta)}-\frac{\tau_\alpha}{\zeta-\alpha}=\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q(-\zeta)}{P'(-\beta)\,(\zeta - \beta)} + \frac{Q_\alpha(-\zeta)}{P'(-\alpha)}\,. \]
 Since $Q$ and $Q_\alpha$ are polynomials, the right-hand side is bounded on any neighborhood of $\zeta = \alpha$ that avoids the other roots of $p$ and avoids infinity.
 
 Next, we want to show that for any $\sigma > \tau_\alpha$, the bound
@@ -827,7 +824,7 @@ Next, we want to show that for any $\sigma > \tau_\alpha$, the bound
 holds when $a$ and $a'$ are close enough to $\zeta = \alpha$. Taking the absolute value of both sides of Equation~\eqref{eqn:split-numerator}, and using the assumption that $\tau_\alpha$ is real and positive, we see that
 \begin{align*}
 \left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}\right| + \left|\frac{\tau_\alpha}{\zeta(a) - \alpha}\right| \\
-|\zeta(a) - \alpha|\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)}\right| + \tau_\alpha.
+|\zeta(a) - \alpha|\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)}\right| + \tau_\alpha\,.
 \end{align*}
 By bringing $\zeta(a')$ closer to $\alpha$, we can make the middle term
 \[\left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)}\right|\]
