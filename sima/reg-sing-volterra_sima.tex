@@ -14,6 +14,7 @@
 % TikZ libraries
 \usetikzlibrary{bbox}
 \usetikzlibrary{fadings}
+\usetikzlibrary{cd}
 
 % hat tip TeX.SE user Andrew Stacey
 %   https://tex.stackexchange.com/a/82503/6934
@@ -368,12 +369,8 @@ We are grateful for the conversations with Kihyun Kim, Angeliki Menegaki, and Su
 \subsection{Weighted holomorphic $L^{\infty}$ spaces}\label{sec:fn-space-defs}
 Throughout this paper, as described in Section~\ref{motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but does not contain $\zeta = 0$. \textcolor{blue}{Let $\cont(\domain)$ be the space of continuous complex-valued functions on $\domain$, equipped with the compact-open topology. This} is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \domain$~\cite[Example~2.6 and Section~4 notes]{fnl-cpx-anal}.
 
-The holomorphic functions form a closed subspace $\holo(\domain) \subset \cont(\domain)$~\cite[Proposition~3.14]{fnl-cpx-anal}. \textcolor{blue}{We first restrict our attention to holomorphic functions on $\domain$ which are uniformly of exponential type $\Lambda \in \R$.}
-%%Within $\holo(\domain)$, we define a normed subspace consisting of functions which are uniformly of exponential type $\Lambda$.\footnote{Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.}
-\color{red}
-Fixing a real constant $\Lambda$, we restrict our attention to holomorphic functions on $\domain$ which are bounded by constant multiples of $e^{\Lambda|\zeta|}$. One might describe these functions as being uniformly of exponential type $\Lambda$.\footnote{Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.} They form a space $\singexp{0}{\Lambda}(\domain)$, which we equip with the norm $\|f\|_{0,\Lambda} = \sup_\domain e^{-\Lambda|\zeta|}\,|f|$. With respect to the seminorm on $\holo(\domain)$ given by a compact set $K \subset \domain$, the inclusion map $\singexp{0}{\Lambda}(\domain) \hookrightarrow \holo(\domain)$ has norm $\sup_K e^{\Lambda |\zeta|}$. That means the inclusion is continuous.
-\par\color{blue}
-\begin{definition}\label{def:exp}
+The holomorphic functions form a closed subspace $\holo(\domain) \subset \cont(\domain)$~\cite[Proposition~3.14]{fnl-cpx-anal}. \color{blue}We first restrict our attention to holomorphic functions on $\domain$ which are uniformly of exponential type $\Lambda \in \R$.
+\begin{definition}\label{def:unif-exp}
 For any $\Lambda \in \R$, let
 \[ \singexp{0}{\Lambda}(\domain) \subset \holo(\domain) \]
 be the subspace consisting of functions $f$ with $f \lesssim e^{\Lambda|\zeta|}$ over $\domain$, equipped with the norm
@@ -382,7 +379,7 @@ be the subspace consisting of functions $f$ with $f \lesssim e^{\Lambda|\zeta|}$
 With respect to the seminorm on $\holo(\domain)$ given by a compact set $K \subset \domain$, the inclusion map $\singexp{0}{\Lambda}(\domain) \hookrightarrow \holo(\domain)$ has norm $\sup_K e^{\Lambda |\zeta|}$. That means the inclusion is continuous.
 %%\textcolor{orange}{$\{f \in \holo(\domain) : f \lesssim |\zeta|^\sigma e^{\Lambda|\zeta|}\}$}
 \begin{rmk}
-The subspace of functions of exponential type $\Lambda$ strictly contains $\singexp{0}{\Lambda}(\domain)$. A function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. Definition~\ref{def:exp} instead requires a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.\end{rmk}
+The subspace of functions of exponential type $\Lambda$ strictly contains $\singexp{0}{\Lambda}(\domain)$. A function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. Definition~\ref{def:unif-exp} instead requires a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.\end{rmk}
 We now relax our norm to allow both exponential growth at infinity and a power-law singularity at $\zeta = 0$.
 \begin{definition}
 For any $\sigma, \Lambda \in \R$, let
@@ -391,18 +388,6 @@ be the subspace consisting of functions $f$ with $f \lesssim |\zeta|^\sigma e^{\
 \[ \|f\|_{\sigma,\Lambda} := \sup_\Omega |\zeta|^{-\sigma} e^{-\Lambda|\zeta|}\,|f|. \]
 \end{definition}
 The inclusion $\singexp{\sigma}{\Lambda}(\domain) \hookrightarrow \holo(\domain)$ is again continuous.
-\par\color{brown}
-For $\Lambda\in\R$, let 
-\[\|f\|_{0,\Lambda} := \sup_\domain e^{-\Lambda|\zeta|}\,|f|\,,\qquad f\in\holo(\domain)\,.\]
-\begin{definition}
-    We define the normed space
-    \[\singexp{0}{\Lambda}(\domain):=\{ f\in\holo(\domain) : \|f\|_{0,\Lambda}<+\infty\}\,.\]
-\end{definition}
-\begin{rmk}
-    The space $\singexp{0}{\Lambda}(\domain)$ can be seen as the space of functions uniformly bounded by constant multiples of $e^{\Lambda |\zeta|}$.
-\end{rmk}
-With respect to the seminorm on $\holo(\domain)$ given by a compact set $K \subset \domain$, the inclusion map $\singexp{0}{\Lambda}(\domain) \hookrightarrow \holo(\domain)$ has norm $\sup_K e^{\Lambda |\zeta|}$. That means the inclusion is continuous.
-\color{blue}
 \begin{proposition}\label{exp-complete}
 The space $\singexp{\sigma}{\Lambda}(\domain)$ is complete.
 \end{proposition}
@@ -415,47 +400,6 @@ The Cauchy property in $\singexp{\sigma}{\Lambda}(\domain)$ says that for any $r
 & \le r + \|f_n\|_{\sigma,\Lambda}
 \end{align*}
 for the corresponding $n$, so $|\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f|$ is bounded.
-\end{proof}
-\color{red}
-\begin{proposition}%%\label{exp-complete}
-The space $\singexp{0}{\Lambda}(\domain)$ is complete.
-\end{proposition}
-\begin{proof}
-Take a Cauchy sequence $f_1, f_2, f_3, \ldots \in \singexp{0}{\Lambda}(\Omega)$. The inclusion map $\singexp{0}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ is bounded with respect to each of the seminorms on $\holo(\Omega)$ given by $|f| \mapsto \sup_K |f|$ for compact subsets $K \subset \Omega$, so our sequence is Cauchy in $\holo(\Omega)$ too. Since $\holo(\Omega)$ is complete~\cite[Proposition~3.5]{fnl-cpx-anal},\footnote{That is, a sequence which is Cauchy in each of the seminorms on $\holo(\Omega)$ will always converge in the topology of $\holo(\Omega)$, which is the coarsest topology in which all of the seminorms are continuous.} our sequence converges to a function $f$ there.
-
-The Cauchy property in $\singexp{0}{\Lambda}(\Omega)$ implies that for any $r > 0$, \textcolor{red}{we can find some} there exists $n$ for which $e^{-\Lambda |\zeta|}\,|f_k - f_n| \le r$ whenever $k \ge n$. Since convergence in $\holo(\Omega)$ implies pointwise convergence, \textcolor{red}{we can see as $k$ grows that $e^{-\Lambda |\zeta|}\,|f - f_n| \le r$} we get that $e^{-\Lambda |\zeta|}\,|f - f_n| \le r$, as $k$ grows. This shows that \textcolor{red}{our} the sequence $f_k$ converges to $f$ in the norm $\|\cdot\|_{0,\Lambda}$. \textcolor{red}{We can also see} In addition, from this argument it follows that $f$ is in $\singexp{0}{\Lambda}(\domain)$: picking some $r > 0$, we observe that
-\begin{align*}
-e^{-\Lambda |\zeta|}\,|f| & \le e^{-\Lambda |\zeta|}\,|f - f_n| + e^{-\Lambda |\zeta|}\,|f_n| \\
-& \le r + \|f_n\|_{0,\Lambda}
-\end{align*}
-for the corresponding $n$, showing that $e^{-\Lambda |\zeta|}\,|f|$ is bounded.
-\end{proof}\color{black}
-
-\textcolor{pink}{Now, let us relax our norm to allow both exponential growth at infinity and a power-law singularity at $\zeta = 0$.} \color{red} For any $\sigma \in \R$, let $\singexp{\sigma}{\Lambda}(\Omega)$ be the space of holomorphic functions on $\Omega$ which are bounded by constant multiples of $|\zeta|^\sigma e^{\Lambda|\zeta|}$. Give it the norm $\|f\|_{\sigma,\Lambda} = \sup_\Omega |\zeta|^{-\sigma} e^{-\Lambda|\zeta|}\,|f|$. Reprising the arguments from above, we can show that the inclusion $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ is continuous, and we \textcolor{red}{can} generalize Proposition~\ref{exp-complete}:
-\color{brown}
-For $\sigma\in\R$, let 
-\[\|f\|_{\sigma,\Lambda} = \sup_\Omega |\zeta|^{-\sigma} e^{-\Lambda|\zeta|}\,|f|\,,\qquad f\in\holo(\domain)\,.\]
-\begin{definition}
-    We define the normed space
-    \[\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega):=\{f\in\holo(\domain)\,\vert \, \|f\|_{\sigma,\Lambda}<+\infty\}\,.\]
-\end{definition}
-\begin{rmk}
-    The above is a space of functions uniformly bounded by constant multiples of $|\zeta|^\sigma e^{\Lambda |\zeta|}$.
-\end{rmk}
-\color{black}
-\color{pink}\begin{proposition}
-The space $\singexp{\sigma}{\Lambda}(\Omega)$ is complete.
-\end{proposition}
-\color{brown}
-\begin{proof}
-Let $\{f_n\}_{n=1}^\infty\subset\singexp{\sigma}{\Lambda}(\domain)$ be a Cauchy sequence. The inclusion map $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ is bounded with respect to each norm on $\sup_K |f|$ on $\holo(\domain)$, where $K \subset \Omega$ is compact. Hence, $\{f_n\}_{n=1}^\infty$ is a Cauchy sequence also in $\holo(\domain)$. The latter being complete~\cite[Proposition~3.5]{fnl-cpx-anal}, the sequence converges to a function $f\in\holo(\domain)$.  
-
-By the Cauchy property on $\singexp{\sigma}{\Lambda}(\Omega)$, for any $r > 0$ there exists $n$ such that $e^{-\Lambda |\zeta|}\,|f_k - f_n| \le r$ for every $k \ge n$. Since convergence in $\holo(\Omega)$ implies pointwise convergence, we get that $e^{-\Lambda |\zeta|}\,|f - f_n| \le r$, as $k$ grows. This implies that the sequence $\{f_n\}_{n=1}^\infty$ converges to $f$ in the norm $\|\cdot\|_{0,\Lambda}$. In addition, from this argument it follows that $f$ is in $\singexp{\sigma}{\Lambda}(\domain)$: picking some $r > 0$, we observe that
-\begin{align*}
-|\zeta|^{-\sigma}e^{-\Lambda |\zeta|}\,|f| & \le |\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f - f_n| + |\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f_n| \\
-& \le r + \|f_n\|_{\sigma,\Lambda}
-\end{align*}
-for the corresponding $n$, showing that $|\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f|$ is bounded.
 \end{proof}
 \color{black}
 \subsection{Continuous inclusions between different $\singexp{\sigma}{\Lambda}(\Omega)$}\label{sec:inclusions}
@@ -473,13 +417,13 @@ The norm $\|\cdot\|_{\sigma, \Lambda'}$ is designed to give $|f| \le |\zeta|^\si
 \end{align*}
 In the last step, we use the assumption that $\Lambda' \le \Lambda$.
 \end{proof}
-\textcolor{blue}{One might describe the functions in $\singexp{\sigma}{\Lambda}(\domain)$ as being uniformly of exponential type $\Lambda$.\footnote{Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.} Taking the union of these spaces over all $\Lambda \in \R$, we get the subspace that contains all exponential-type functions which are bounded by constant multiples of $|\zeta|^\sigma$ near zero.}
-
-\textcolor{violet}{As we mentioned in Section~\ref{sec:fn-space-defs} [now removed]}\textcolor{pink}{, one might describe $\singexp{0}{\Lambda}(\domain)$ as the space of functions on $\domain$ which are uniformly of exponential type $\Lambda$.}\footnote{\textcolor{orange}{[footnote moved because of rephrasing above]} \textcolor{pink}{Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.}}
+%\textcolor{blue}{One might describe the functions in $\singexp{\sigma}{\Lambda}(\domain)$ as being uniformly of exponential type $\Lambda$.\footnote{Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.}
 \color{blue}
-\begin{definition}
-For any $\sigma \in \R$, we define $\singexpalg{\sigma}(\domain)$ as the union
-\[ \bigcup_{\Lambda\in\R}\singexp{\sigma}{\Lambda}(\domain) \]
+
+The union $\bigcup_{\Lambda \in \R} \singexp{0}{\Lambda}(\domain)$ is the subspace comprising all functions of exponential type. The continuous inclusions between the $\singexp{0}{\Lambda}(\domain)$ define a limit topology on this subspace. The spaces $\singexp{\sigma}{\Lambda}(\domain)$ fit together analogously for other $\sigma \in \R$.
+\begin{definition}\label{def:exp-top}
+For any $\sigma \in \R$, let $\singexpalg{\sigma}(\domain)$ be the union
+\[ \bigcup_{\Lambda \in \R} \singexp{\sigma}{\Lambda}(\domain) \]
 equipped with the finest topology that makes all the inclusions $\singexp{\sigma}{\Lambda}(\domain) \hookrightarrow \singexpalg{\sigma}(\domain)$ continuous.
 \end{definition}
 \color{brown}
@@ -489,7 +433,6 @@ equipped with the finest topology that makes all the inclusions $\singexp{\sigma
     equipped with the finest topology that makes continuous the inclusions $\singexp{\sigma}{\Lambda}(\domain) \hookrightarrow \singexpalg{\sigma}(\domain)$. 
 \end{definition}
 \color{red} Taking the union of these spaces over all $\Lambda \in \R$, we get the space $\singexpalg{0}(\domain)$ that contains all functions of exponential type. Having continuous inclusions between the subspaces $\singexp{0}{\Lambda}(\domain)$ as $\Lambda$ increases, we \textcolor{red}{can} give $\singexpalg{0}(\domain)$ a meaningful topology: the finest topology that makes all the inclusions $\singexp{0}{\Lambda}(\domain) \hookrightarrow \singexpalg{0}(\domain)$ continuous.\footnote{In category-theoretic language, $\singexpalg{0}(\domain)$ is the limit of the family $\singexp{0}{\Lambda}(\domain)$.} For any $\sigma \in \R$, we define $\singexpalg{\sigma}(\domain)$ similarly.
-\color{brown}
 \color{black}
 \begin{proposition}\label{prop:inclus-lt-pow-gt-exp}
 If $\sigma'>\sigma$ and $\Lambda'<\Lambda$, the inclusion map $\singexp{\sigma'}{\Lambda'}(\Omega)\hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ is continuous.
@@ -510,11 +453,32 @@ for $C = \sup_{\Omega}  |\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zet
 \begin{proposition}\label{prop:inclus-lt-pow-alg}
 When $\sigma' > \sigma$, there is a continuous inclusion $\singexpalg{\sigma'}(\domain)\hookrightarrow \singexpalg{\sigma}(\domain)$.
 \end{proposition}
+\color{blue}
 \begin{proof}
-\color{red}
+For each $\Lambda'$, we define a continuous inclusion $\singexp{\sigma'}{\Lambda'}(\domain) \hookrightarrow \singexpalg{\sigma}(\domain)$ by choosing some $\Lambda > \Lambda'$ and composing the continuous inclusions
+\begin{center}
+\begin{tikzcd}[column sep=25mm, labels={inner sep=0.75ex}]
+\singexp{\sigma'}{\Lambda'}(\domain) \arrow[r, hook, "\text{\footnotesize Proposition~\ref{prop:inclus-lt-pow-gt-exp}}"'] & \singexp{\sigma}{\Lambda}(\domain) \arrow[r, hook, "\text{\footnotesize Definition~\ref{def:exp-top}}"'] & \singexpalg{\sigma}(\domain).
+\end{tikzcd}
+\end{center}
+For any $\Lambda'' < \Lambda'$, the inclusions
+\begin{center}
+\begin{tikzcd}[row sep=6mm, column sep=8mm, labels={inner sep=0.75ex}]
+\singexp{\sigma'}{\Lambda''}(\domain) \arrow[rr, hook, "\text{\footnotesize Proposition~\ref{prop:inclus-ge-exp}}"] \arrow[rd, hook] & & \singexp{\sigma'}{\Lambda'}(\domain) \arrow[ld, hook] \\
+& \singexpalg{\sigma}(\domain)
+\end{tikzcd}
+\end{center}
+%%\begin{center}
+%%\begin{tikzcd}[row sep=2mm, column sep=15mm, labels={inner sep=1ex,}]
+%%\singexp{\sigma'}{\Lambda'}(\Omega) \arrow[rd, hook] \\
+%%& \singexpalg{\sigma}(\Omega) \\
+%%\singexp{\sigma'}{\Lambda''}(\Omega) \arrow[ru, hook] \arrow[uu, hook, "\text{\footnotesize Proposition~\ref{prop:inclus-ge-exp}}"]
+%%\end{tikzcd}
+%%\end{center}
+automatically commute, because as non-topological linear maps they are all inclusions between subspaces of $\holo(\domain)$. The existence of the desired continuous inclusion $\singexpalg{\sigma'}(\Omega)\hookrightarrow \singexpalg{\sigma}(\Omega)$ then follows from the universal property of the limit topology.
+\par\color{red}
 For each $\Lambda'$, we \textcolor{red}{can} get a continuous inclusion $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ by choosing \textcolor{red}{some} $\Lambda > \Lambda'$ and composing the continuous inclusion $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-gt-exp} with the continuous inclusion $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ that we get by definition. For any $\Lambda'' < \Lambda'$, the inclusions $\singexp{\sigma'}{\Lambda''}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ and $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ constructed above automatically commute with the inclusion $\singexp{\sigma'}{\Lambda''}(\Omega) \hookrightarrow \singexp{\sigma'}{\Lambda'}(\Omega)$ given by Proposition~\ref{prop:inclus-ge-exp}, because we are ultimately working in the vector space of holomorphic functions on $\Omega$. Because of how the topology on $\singexpalg{\sigma'}(\Omega)$ is defined, this gives us the desired continuous inclusion $\singexpalg{\sigma'}(\Omega)\hookrightarrow \singexpalg{\sigma}(\Omega)$.
-
-\color{brown}
+\par\color{brown}
 For every $\Lambda'$, there is a continuous inclusion $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ obtained by choosing $\Lambda > \Lambda'$ and composing the continuous inclusion $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexp{\sigma}{\Lambda}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-gt-exp} with the continuous inclusion $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$.
 
 For any $\Lambda'' < \Lambda'$, the inclusions $\singexp{\sigma'}{\Lambda''}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ and $\singexp{\sigma'}{\Lambda'}(\Omega) \hookrightarrow \singexpalg{\sigma}(\Omega)$ constructed above automatically commute with the inclusion $\singexp{\sigma'}{\Lambda''}(\Omega) \hookrightarrow \singexp{\sigma'}{\Lambda'}(\Omega)$ given by Proposition~\ref{prop:inclus-ge-exp}, because we are working in the space of holomprhic functions on $\domain$. In the topology of $\singexpalg{\sigma'}(\domain)$, this gives the desired continuos inclusion $\singexpalg{\sigma'}(\Omega)\hookrightarrow \singexpalg{\sigma}(\Omega)$.
