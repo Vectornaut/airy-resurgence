@@ -361,10 +361,19 @@ when $\rho > \tau$ is \textcolor{blue!50}{low enough}, as described in Propositi
 We are grateful for the conversations with Kihyun Kim, Angeliki Menegaki, and Sung-Jin Oh that informed the early stages of this work. This paper is a result of the ERC-SyG project, Recursive and Exact New Quantum Theory (ReNewQuantum) which received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme under grant agreement No 810573. It was also made possible by the hospitality of the Institut des Hautes \'{E}tudes Scientifiques during a return visit by AF, funded by the Fondation Math\'{e}matique Jacques Hadamard under the \textit{Junior Scientific Visibility} program.
 \section{Function spaces for holomorphic Volterra operators}\label{fn-spaces}
 \subsection{Weighted holomorphic $L^{\infty}$ spaces}\label{sec:fn-space-defs}
-Throughout this paper, as described in Section~\ref{motivation}, the \textcolor{magenta}{``}position\textcolor{magenta}{'' [why are these quote marks nencessary? we've already introduced the term ``position'']} variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but does not contain $\zeta = 0$. \textcolor{red}{Let $\cont(\domain)$ be the space of continuous complex-valued functions on $\domain$. Give $\cont(\domain)$ the compact-open topology, recalling that this} \textcolor{blue}{Let $\cont(\domain)$ be the space of continuous complex-valued functions on $\domain$, equipped with the compact-open topology. This} is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \domain$~\cite[Example~2.6 and Section~4 notes]{fnl-cpx-anal}. The holomorphic functions form a closed subspace $\holo(\domain) \subset \cont(\domain)$~\cite[Proposition~3.14]{fnl-cpx-anal}.
+Throughout this paper, as described in Section~\ref{motivation}, the \textcolor{magenta}{``}position\textcolor{magenta}{'' [why are these quote marks nencessary? we've already introduced the term ``position'']} variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but does not contain $\zeta = 0$. \textcolor{red}{Let $\cont(\domain)$ be the space of continuous complex-valued functions on $\domain$. Give $\cont(\domain)$ the compact-open topology, recalling that this} \textcolor{blue}{Let $\cont(\domain)$ be the space of continuous complex-valued functions on $\domain$, equipped with the compact-open topology. This} is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \domain$~\cite[Example~2.6 and Section~4 notes]{fnl-cpx-anal}. \textcolor{orange}{By the maximum principle and the connectedness of $\domain$, each of the seminorms $\sup_K |\cdot|$ is actually a norm.} The holomorphic functions form a closed subspace $\holo(\domain) \subset \cont(\domain)$~\cite[Proposition~3.14]{fnl-cpx-anal}.
 \color{red}
 Fixing a real constant $\Lambda$, we restrict our attention to holomorphic functions on $\domain$ which are bounded by constant multiples of $e^{\Lambda|\zeta|}$. One might describe these functions as being uniformly of exponential type $\Lambda$.\footnote{Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.} They form a space $\singexp{0}{\Lambda}(\domain)$, which we equip with the norm $\|f\|_{0,\Lambda} = \sup_\domain e^{-\Lambda|\zeta|}\,|f|$. With respect to the seminorm on $\holo(\domain)$ given by a compact set $K \subset \domain$, the inclusion map $\singexp{0}{\Lambda}(\domain) \hookrightarrow \holo(\domain)$ has norm $\sup_K e^{\Lambda |\zeta|}$. That means the inclusion is continuous.
-\color{brown}
+\par\color{blue}
+\begin{definition}
+For any $\sigma, \Lambda \in \R$, let
+\[ \singexp{\sigma}{\Lambda}(\domain) \subset \holo(\domain) \]
+be the subspace consisting of functions $f$ with $f \lesssim |\zeta|^\sigma e^{\Lambda|\zeta|}$ \textcolor{orange}{functions bounded by constant multiples of $|\zeta|^\sigma e^{\Lambda|\zeta|}$}, equipped with the norm
+\[ \|f\|_{\sigma,\Lambda} := \sup_\Omega |\zeta|^{-\sigma} e^{-\Lambda|\zeta|}\,|f|. \]
+\end{definition}
+With respect to the seminorm on $\holo(\domain)$ given by a compact set $K \subset \domain$, the inclusion map $\singexp{0}{\Lambda}(\domain) \hookrightarrow \holo(\domain)$ has norm $\sup_K |\zeta|^\sigma e^{\Lambda |\zeta|}$. That means the inclusion is continuous.
+%%\textcolor{orange}{$\{f \in \holo(\domain) : f \lesssim |\zeta|^\sigma e^{\Lambda|\zeta|}\}$}
+\par\color{brown}
 For $\Lambda\in\R$, let 
 \[\|f\|_{0,\Lambda} := \sup_\domain e^{-\Lambda|\zeta|}\,|f|\,,\qquad f\in\holo(\domain)\,.\]
 \begin{definition}
@@ -380,14 +389,14 @@ With respect to the seminorm on $\holo(\domain)$ given by a compact set $K \subs
 The space $\singexp{\sigma}{\Lambda}(\domain)$ is complete.
 \end{proposition}
 \begin{proof}
-Take a Cauchy sequence $f_1, f_2, f_3, \ldots \in \singexp{\sigma}{\Lambda}(\Omega)$. This sequence is Cauchy in $\holo(\Omega)$ as well, because the inclusion map $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ is bounded with respect to each of the seminorms on $\holo(\Omega)$ given by $f \mapsto \sup_K |f|$ for compact subsets $K \subset \Omega$. Since $\holo(\Omega)$ is complete~\cite[Proposition~3.5]{fnl-cpx-anal},\footnote{That is, a sequence which is Cauchy in each of the seminorms on $\holo(\Omega)$ will always converge in the topology of $\holo(\Omega)$, which is the coarsest topology in which all of the seminorms are continuous.} our sequence converges to a function $f$ there.
+Take a Cauchy sequence $f_1, f_2, f_3, \ldots \in \singexp{\sigma}{\Lambda}(\domain)$. This sequence is Cauchy in $\holo(\domain)$ as well, because the inclusion map $\singexp{\sigma}{\Lambda}(\domain) \hookrightarrow \holo(\domain)$ is bounded with respect to each of the seminorms on $\holo(\domain)$ given by $f \mapsto \sup_K |f|$ for compact subsets $K \subset \domain$. Since $\holo(\domain)$ is complete~\cite[Proposition~3.5]{fnl-cpx-anal},\footnote{That is, a sequence which is Cauchy in each of the seminorms on $\holo(\domain)$ will always converge in the topology of $\holo(\domain)$, which is the coarsest topology in which all of the seminorms are continuous.} our sequence converges to a function $f$ there.
 
-The Cauchy property in $\singexp{0}{\Lambda}(\Omega)$ says that for any $r > 0$, there is some $n$ for which $|\zeta|^\sigma e^{-\Lambda |\zeta|}\,|f_k - f_n| \le r$ whenever $k \ge n$. Since convergence in $\holo(\Omega)$ implies pointwise convergence, it follows that $|\zeta|^\sigma e^{-\Lambda |\zeta|}\,|f - f_n| \le r$. This reasoning shows that $f_1, f_2, f_3, \ldots$ converges to $f$ in the norm $\|\cdot\|_{\sigma, \Lambda}$. It also shows that $f$ is in $\singexp{\sigma}{\Lambda}(\domain)$: picking some $r > 0$, we have
+The Cauchy property in $\singexp{\sigma}{\Lambda}(\domain)$ says that for any $r > 0$, there is some $n$ for which $|\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f_k - f_n| \le r$ whenever $k \ge n$. Since convergence in $\holo(\domain)$ implies pointwise convergence, it follows that $|\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f - f_n| \le r$. This reasoning shows that $f_1, f_2, f_3, \ldots$ converges to $f$ in the norm $\|\cdot\|_{\sigma, \Lambda}$. It also shows that $f$ is in $\singexp{\sigma}{\Lambda}(\domain)$: picking some $r > 0$, we have
 \begin{align*}
-|\zeta|^\sigma e^{-\Lambda |\zeta|}\,|f| & \le |\zeta|^\sigma e^{-\Lambda |\zeta|}\,|f - f_n| + |\zeta|^\sigma e^{-\Lambda |\zeta|}\,|f_n| \\
+|\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f| & \le |\zeta|^\sigma e^{-\Lambda |\zeta|}\,|f - f_n| + |\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f_n| \\
 & \le r + \|f_n\|_{\sigma,\Lambda}
 \end{align*}
-for the corresponding $n$, so $|\zeta|^\sigma e^{-\Lambda |\zeta|}\,|f|$ is bounded.
+for the corresponding $n$, so $|\zeta|^{-\sigma} e^{-\Lambda |\zeta|}\,|f|$ is bounded.
 \end{proof}
 \color{red}
 \begin{proposition}%%\label{exp-complete}
@@ -404,7 +413,7 @@ e^{-\Lambda |\zeta|}\,|f| & \le e^{-\Lambda |\zeta|}\,|f - f_n| + e^{-\Lambda |\
 for the corresponding $n$, showing that $e^{-\Lambda |\zeta|}\,|f|$ is bounded.
 \end{proof}\color{black}
 
-Now, let us relax our norm to allow both exponential growth at infinity and a power-law singularity at $\zeta = 0$. \color{red} For any $\sigma \in \R$, let $\singexp{\sigma}{\Lambda}(\Omega)$ be the space of holomorphic functions on $\Omega$ which are bounded by constant multiples of $|\zeta|^\sigma e^{\Lambda|\zeta|}$. Give it the norm $\|f\|_{\sigma,\Lambda} = \sup_\Omega |\zeta|^{-\sigma} e^{-\Lambda|\zeta|}\,|f|$. Reprising the arguments from above, we can show that the inclusion $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ is continuous, and we \textcolor{red}{can} generalize Proposition~\ref{exp-complete}:
+\textcolor{pink}{Now, let us relax our norm to allow both exponential growth at infinity and a power-law singularity at $\zeta = 0$.} \color{red} For any $\sigma \in \R$, let $\singexp{\sigma}{\Lambda}(\Omega)$ be the space of holomorphic functions on $\Omega$ which are bounded by constant multiples of $|\zeta|^\sigma e^{\Lambda|\zeta|}$. Give it the norm $\|f\|_{\sigma,\Lambda} = \sup_\Omega |\zeta|^{-\sigma} e^{-\Lambda|\zeta|}\,|f|$. Reprising the arguments from above, we can show that the inclusion $\singexp{\sigma}{\Lambda}(\Omega) \hookrightarrow \holo(\Omega)$ is continuous, and we \textcolor{red}{can} generalize Proposition~\ref{exp-complete}:
 \color{brown}
 For $\sigma\in\R$, let 
 \[\|f\|_{\sigma,\Lambda} = \sup_\Omega |\zeta|^{-\sigma} e^{-\Lambda|\zeta|}\,|f|\,,\qquad f\in\holo(\domain)\,.\]
@@ -416,7 +425,7 @@ For $\sigma\in\R$, let
     The above is a space of functions uniformly bounded by constant multiples of $|\zeta|^\sigma e^{\Lambda |\zeta|}$.
 \end{rmk}
 \color{black}
-\begin{proposition}
+\color{pink}\begin{proposition}
 The space $\singexp{\sigma}{\Lambda}(\Omega)$ is complete.
 \end{proposition}
 \color{brown}
@@ -446,7 +455,9 @@ The norm $\|\cdot\|_{\sigma, \Lambda'}$ is designed to give $|f| \le |\zeta|^\si
 \end{align*}
 In the last step, we use the assumption that $\Lambda' \le \Lambda$.
 \end{proof}
-As we mentioned in Section~\ref{sec:fn-space-defs}, one might describe $\singexp{0}{\Lambda}(\domain)$ as the space of functions on $\domain$ which are uniformly of exponential type $\Lambda$.\footnote{\textcolor{orange}{[footnote moved because of rephrasing above]} Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.} 
+One might describe the functions in $\singexp{\sigma}{\Lambda}(\domain)$ as being uniformly of exponential type $\Lambda$.\footnote{Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.}
+
+\textcolor{violet}{As we mentioned in Section~\ref{sec:fn-space-defs} [now removed]}\textcolor{pink}{, one might describe $\singexp{0}{\Lambda}(\domain)$ as the space of functions on $\domain$ which are uniformly of exponential type $\Lambda$.}\footnote{\textcolor{orange}{[footnote moved because of rephrasing above]} \textcolor{pink}{Recall that a function $f$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|f|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|f| \le A e^{\Lambda|\zeta|}$.}}
 \color{blue}
 \begin{definition}
 For any $\sigma \in \R$, we define $\singexpalg{\sigma}(\domain)$ as the union
@@ -479,7 +490,7 @@ The function $|\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zeta|}$ is bo
 for $C = \sup_{\Omega}  |\zeta|^{\sigma'-\sigma}\,  e^{-(\Lambda-\Lambda') |\zeta|}$.
 \end{proof}
 \begin{proposition}\label{prop:inclus-lt-pow-alg}
-When $\sigma' > \sigma$, there's a continuous inclusion $\singexpalg{\sigma'}(\domain)\hookrightarrow \singexpalg{\sigma}(\domain)$.
+When $\sigma' > \sigma$, there is a continuous inclusion $\singexpalg{\sigma'}(\domain)\hookrightarrow \singexpalg{\sigma}(\domain)$.
 \end{proposition}
 \begin{proof}
 \color{red}
@@ -494,8 +505,12 @@ For any $\Lambda'' < \Lambda'$, the inclusions $\singexp{\sigma'}{\Lambda''}(\Om
 \section{Solving holomorphic Volterra equations}\label{sec:proof_main_results}
 \subsection{Overview}
 \color{blue}
-\textcolor{orange}{[Revise and implement]}
-\color{red}
+In this section, we prove the results stated in Section~\ref{sec:results}, which lay out a method for solving the regular singular Volterra equation $\solwhole = \volterra \solwhole$.
+
+We first construct the prototype solution $\solproto$ from the kernel of $\hardpart$. We show in Section~\ref{sec:proto-construction-regularity} that $\solproto$ satisfies the equation $\solproto = \hardpart \solproto$ and belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
+
+We then study how the perturbation $\softpart$ affects $\solproto$. We show in Section~\ref{sec:image under soft_part} that $\softpart$ has a smoothing effect, reducing the sharpness of any power-law singularity at $\zeta = 0$. In particular, it sends $\solproto$ into $\singexpalg{\tau-1+\gamma}(\domain)$.
+\par\textcolor{orange}{[Keep revising]} \color{red}
 The results stated in Section~\ref{sec:results} lay out a method for solving the regular singular Volterra equation $\solwhole = \volterra \solwhole$. In this section, we show that the method works by proving those results.
 
 We start by constructing the prototype solution $\solproto$ from the kernel of $\hardpart$, which is the separable operator that gives $\volterra = \hardpart + \softpart$ its regular singularity. We will show in Section~\ref{sec:proto-construction-regularity} that $\solproto$ satisfies the equation $\solproto = \hardpart \solproto$ and belongs to the space $\singexp{\tau-1}{\lambda_0}(\domain)$.
@@ -510,7 +525,7 @@ We start by constructing the prototype solution $f_0$ of $f=\softpart f$, and sh
 In Section~\ref{sec:image under soft_part}, we show that the perturbation $\softpart$ has a smoothing effect on $f_0$, reducing the power-law singularity at $\zeta=0$. In particular, it turns out that $\softpart f_0\in\singexpalg{\tau-1+\gamma}(\domain)$.
 \color{black}
 
-\textcolor{red}{Now we know that} Therefore $\volterra$ sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, suggesting that the equation $\solwhole = \volterra \solwhole$ has a solution there. To confirm this, we will show in Section~\ref{sec:V is a contraction} that $\volterra$ is a contraction of $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$ when $\Lambda$ is large enough. This implies that $\volterra$ has a unique fixed point in $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, as we will see in Section~\ref{sec:existence and uniqueness}.
+\textcolor{red}{Now we know that} \textcolor{brown}{Therefore} $\volterra$ sends $\solproto$ into the affine subspace $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, suggesting that the equation $\solwhole = \volterra \solwhole$ has a solution there. To confirm this, we will show in Section~\ref{sec:V is a contraction} that $\volterra$ is a contraction of $\singexp{\tau-1+\gamma}{\Lambda}(\domain)$ when $\Lambda$ is large enough. This implies that $\volterra$ has a unique fixed point in $\solproto + \singexpalg{\tau-1+\gamma}(\domain)$, as we will see in Section~\ref{sec:existence and uniqueness}.
 \subsection{Construction and regularity of the prototype solution \\ \textit{(proof of Theorems~\ref{thm:basic_volterra}--\ref{thm:proto-growth})}}\label{sec:proto-construction-regularity}
 \subsubsection{Construction}\label{sec:construction}
 \begin{proof}[Proof of Theorem~\ref{thm:basic_volterra}]
@@ -531,7 +546,7 @@ By Condition~\eqref{cond:sing}, \textcolor{blue}{there exist} a radius $\delta>0
 \begin{equation}\label{eqn:sing-bound}
 \left|\frac{q}{p} + \frac{\tau}{\zeta}\right| < C
 \end{equation}
-whenever $|\zeta| < \delta$. \textcolor{red}{We can take advantage of} \textcolor{magenta}{We use this bound [we do not use the bound yet]} by rewriting the integral in the definition of $\chi$:
+whenever $|\zeta| < \delta$. \textcolor{blue}{To use this bound, we rewrite the integral in the definition of $\chi$:} \textcolor{red}{We can take advantage of} \textcolor{magenta}{We use this bound [we do not use the bound yet]} \textcolor{pink}{by rewriting the integral in the definition of $\chi$:}
 \begin{align*}
 -\int_b^a \frac{q}{p}\;d\zeta & = \int_b^a \frac{\tau}{\zeta}\;d\zeta - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta \\
 & = \tau \log\left(\frac{\zeta(a)}{\zeta(b)}\right) - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta
