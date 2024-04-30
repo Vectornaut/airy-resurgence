@@ -124,63 +124,17 @@ The inverse Laplace transform can turn a linear differential equation on a compl
 \tableofcontents
 \section{Introduction}\label{sec:intro}
 \subsection{Motivation}\label{motivation}
-%%\color{brown}Classically, ODEs with an irregular singularity at infinity can be solved formally by ``normal series'' solutions~\cite{int-irreg}. These series are typicaly divergent, but summability methods allow to recover analytic solutions from them~\cite{loday1994stokes,diverg-resurg--ii,loday-Remy2011,malgrange1995sommation,ramis1991series}. Remarkably, these ``resummed" analytic solutions are characterized by their asymptotic behaviour at infinity. In particular, under suitable assumptions on the ODE, a frame of solutions can be constructed by ``resumming" a frame of formal ones. The results of this paper are motivated by the desire to find the same frame of analytic solutions more directly, without the use of formal series. We do this in Section~\ref{sec:example} for a certain class of \emph{level}-1 ODEs, using new Laplace transform methods tailored to the special properties of the analytic solutions that we seek. In~\cite{borel_reg}, we show that these solutions match the ones obtained from summability methods. Since the Laplace transform methods we use may be of wider interest, we describe them here in a general and self-contained way. 
-
-%%In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a \textcolor{cyan}{real} ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$
-%%\[\big[\laplace\varphi\big](z):=\int_{\Gamma_{\zeta,0}}e^{-z\zeta}\varphi\; d\zeta \,,\]
-%%where $\Gamma_{\zeta,0}$ is a line issuing from $\zeta=0$. \begin{verify}[Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.]\end{verify}
-%%Through identities like
-%%\begin{align*}
-%%\frac{\partial}{\partial z} \laplace \varphi & = \laplace(-\zeta\varphi) \\
-%%\laplace \psi\;\laplace \varphi & = \laplace(\psi * \varphi)\,,%\\
-%%z^{-\nu} \laplace \varphi & = \laplace\,\partial^{-\nu} \varphi,
-%%\end{align*}
-%where $\partial^{-\nu}$ is the Riemann-Liouville fractional integral of order $\nu \in (0, \infty)$, 
-%%the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. 
-%%
-%%For instance, let $\mathcal{P}\Psi=0$ be the level-1 ODE of the kind studied in Section~\ref{sec:example}, with $\mathcal{P}$ being the differential operator 
-%%\[ \mathcal{P} = P\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z} Q\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z^2} R(z^{-1}), \]
-%%where $P$ a degree $d$ polynomial with distinct roots, $Q$ a degree $d-1$ polynomial non-vanishing at the roots of $P$, and the series $\sum_{j=0}^\infty R_j z^{-j}$ convergent for $|z|>A>0$. If $\Psi=\laplace\psi$, then 
-%%\[
-%%\mathcal{P}\Psi=\mathcal{P}\big[\laplace\psi\big]=\laplace\big[\hat{\mathcal{P}}\psi\big]
-%%\]
-%%where $\hat{\mathcal{P}}$ is the integral operator 
-%%\[
-%%\hat{\mathcal{P}}\psi=P(-\zeta)\psi+\int_{0}^\zeta Q(-t)\psi\; dt+\int_0^\zeta \sum_{j=0}^\infty \frac{R_j}{(j+1)!} (\zeta-t)^{j+1}\psi\; dt \,.
-%%\]
-%%Therfore, the differential equation $\mathcal{P}\Psi=0$ is turned into the integral equation 
-%%\[\psi=\volterra\psi\,\]
-%%where $\volterra$ is the Volterra operator with kernel
-%%\[
-%%k(\zeta,t):=-\frac{Q(-t)}{P(-\zeta)}- \sum_{j=0}^\infty \frac{R_j}{(j+1)!} \frac{(\zeta-t)^{j+1}}{P(-\zeta)}\,.
-%%\]
-%%The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on linear differential equations. 
-%%Indeed, a Volterra operator $\volterra$ of the kind described above is expected to have a solution $\psi$ with the following feautures:
-%%\begin{itemize}
-%%    \item it has an $O(\zeta^{\tau_\alpha-1})$ singulairty at $\zeta=0$,
-%%    \item it is of exponential type, meaning that it is $O(e^{\Lambda|\zeta|})$ for some $\Lambda\in\R$, as $\zeta$ grows. 
-%%\end{itemize}
-%%These conditions are just strong enough to ensure that the solution $\psi$ has a well-defined Laplace transform $\Psi=\laplace\psi$, which by construction will satisfy the differential equation $\mathcal{P}\Psi=0$. The first condition also implies that the Laplace-transformed solution is $O(z^{-\tau})$ as the frequency variable $z$ grows.
-%%
-%%Our goal is to justify the expectations above with an existence and uniqueness result, stated in Section~\ref{sec:results}. We will achieve it by embodying our expectations in a Banach space of holomorphic functions---the space $\singexp{\tau-1}{\Lambda}(\domain)$ defined in Section~\ref{fn-spaces}. We will apply our results to level $1$ differential equations (of the kind described above) in Section~\ref{sec:example}. In particular, varying the contour of integration of the Laplace transform, so that the base point cooresponds to a root of $P$, we will construct solutions of the correspondent integral equation with a distinguished behaviour. 
-%%
-%%This is a new approach to solve level $1$ ODEs with irregular singulatiries. Indeed, a classical alternative to Borel summability is given by the approach of Ecalle, which uses the Borel transform to turn differential equations to integral (convolution) equations. However, his approach to solve integral equations is by perturbation theory~\cite{EcalleIII} amd it have been applied also by other authors~\cite{loday-Remy2011,diverg-resurg-iii}.
-%%
-%%Furthermore, the Banach spaces $\singexp{\tau-1}{\Lambda}(\domain)$ are essentially new; in fact a similar definition was given in~\cite{braaksma2006laplace}. However, \textcolor{cyan}{[say why we are different from Braaksma]}
-%%\color{black}
-%%
-%%\textcolor{blue}{An ordinary differential equation with an irregular singularity at infinity comes with a special family of formal solutions: ``normal series'' characterized by their formal asymptotics at infinity~\cite{int-irreg}. These series are typicaly divergent, but they can be ``resummed'' to produce analytic solutions~\cite{loday1994stokes,diverg-resurg--ii,loday-Remy2011,malgrange1995sommation,ramis1991series}. The results of this paper are motivated by the desire to find the same analytic solutions more directly, without the use of formal series. We do this in Section~\ref{sec:example} for a certain class of level~$1$ ODEs, using new Laplace transform methods tailored to the special properties of the analytic solutions that we seek. In~\cite{borel_reg}, we show that these solutions match the ones obtained through resummation. Since the Laplace transform methods we use may be of wider interest, we describe them here in a general and self-contained way.}
-%%
-%% ---------
-%%In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. \begin{verify}[Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.]\end{verify} Through identities like
-%%\begin{align*}
-%%\frac{\partial}{\partial z} \laplace \varphi & = \laplace(-\zeta\varphi) \\
-%%\laplace k\;\laplace \varphi & = \laplace(k * \varphi) \\
-%%z^{-\nu} \laplace \varphi & = \laplace\,\partial^{-\nu} \varphi,
-%%\end{align*}
-%%where $\partial^{-\nu}$ is the Riemann-Liouville fractional integral of order $\nu \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on linear differential equations.
-%%
 \color{blue}
+\textcolor{blue}{An ordinary differential equation with an irregular singularity at infinity comes with a special family of formal solutions: ``normal series'' characterized by their formal asymptotics at infinity~\cite{int-irreg}. These series are typicaly divergent, but they can be ``resummed'' to produce analytic solutions~\cite{loday1994stokes,diverg-resurg--ii,loday-Remy2011,malgrange1995sommation,ramis1991series}. The results of this paper are motivated by the desire to find the same analytic solutions more directly, without the use of formal series. We do this in Section~\ref{sec:example} for a certain class of level~$1$ ODEs, using new Laplace transform methods tailored to the special properties of the analytic solutions that we seek. In~\cite{borel_reg}, we show that these solutions match the ones obtained through resummation. Since the Laplace transform methods we use may be of wider interest, we describe them here in a general and self-contained way.}
+
+In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. \begin{verify}[Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.]\end{verify} Through identities like
+\begin{align*}
+\frac{\partial}{\partial z} \laplace \varphi & = \laplace(-\zeta\varphi) \\
+\laplace k\;\laplace \varphi & = \laplace(k * \varphi) \\
+z^{-\nu} \laplace \varphi & = \laplace\,\partial^{-\nu} \varphi,
+\end{align*}
+where $\partial^{-\nu}$ is the Riemann-Liouville fractional integral of order $\nu \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on linear differential equations.
+
 Some differential equations pull back to Volterra equations with real-analytic kernels, which extend to holomorphic Volterra equations on complex extensions of the position domain. For instance, in Section~\ref{sec:example}, we consider equations of the form
 \begin{equation}\label{eqn:intro-level-1}
 \left[ P\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z} Q\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z^2} R(z^{-1}) \right] \Phi = 0
@@ -192,19 +146,6 @@ given by polynomials $P$, $Q$ and a holomorphic function $R(z^{-1})$ satisfying 
 The integral operator remains well-defined if we make $\zeta$ a complex coordinate and seek solutions $\varphi$ which extend holomorphically into the complex position domain.
 
 Equation~\eqref{eqn:intro-level-1} can be solved by resumming normal series, as described earlier. Each resummed solution is characterized by its $e^{-\alpha z} z^{-\tau_\alpha}$ asymptotics, where $-\alpha$ is a root of $P$ and $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$ is real and positive. To obtain this solution analytically through Laplace transform methods, we must take the Laplace transform $\laplace_{\zeta,\alpha}$ that uses $\zeta = \alpha$ in place of the traditional $\zeta = 0$ as the integration base point. Equation~\eqref{eqn:intro-use-dict} then comes out based at $\zeta = \alpha$ as well. We seek a solution $\psi_\alpha$ which
-
-
-%%The integral operator $\partial^{-1}$ in equation~\ref{eqn:intro-use-dict} then becomes the integration $\partial^{-1}_{\zeta, \alpha}$ based at $\zeta = \alpha$.
-
-
-%%Equation~\ref{eqn:intro-use-dict} then uses the integral operator $\partial_{\zeta, \alpha}$ based at $\zeta = \alpha$.
-
-%%We then hope for the resulting version of equation~\eqref{eqn:intro-use-dict} to have a solution $\psi_\alpha$ with the following features: \textcolor{orange}{We then look for a solution $\psi_\alpha$ of (the resulting version of equation~\ref{eqn:intro-use-dict}) which:}
-
-%%take the Laplace transform using $\zeta = \alpha$ in place of the traditional $\zeta = 0$ as the integration base point. We must then solve equation~\eqref{eqn:intro-use-dict}, with the integration base point similarly shifted to $\zeta = \alpha$,
-
-
-%%find a solution of equation~\eqref{eqn:intro-use-dict} with the following features:
 \begin{itemize}
 \item has an $O\big((\zeta - \alpha)^{\tau_\alpha-1}\big)$ singularity at $\zeta = \alpha$; and
 \item is of exponential type, meaning that it is $O\big(e^{\Lambda|\zeta|}\big)$ for some $\Lambda \in \R$ as $\zeta$ grows.
@@ -214,39 +155,6 @@ These conditions ensure that $\psi_\alpha$ has a well-defined Laplace transform,
 The theory of Volterra equations is well-suited to this solution method. By embodying our conditions on $\psi_\alpha$ in a Banach space, defined in Section~\ref{fn-spaces}, we can solve equations like~\eqref{eqn:intro-use-dict} using the contraction mapping theorem, taking advantage of the regularizing effect of the relevant Volterra operators. This establishes the existence and uniqueness of $\psi_\alpha$, as stated in Theorem~\ref{thm:example}. Since integral operators on the position domain correspond directly to multiplication operators on the frequency domain, with no need to worry about initial values, we know immediately that $\laplace_{\zeta, \alpha} \psi_\alpha$ satisfies equation~\eqref{eqn:intro-level-1}, even when $\psi_\alpha$ blows up at $\zeta = \alpha$. By isolating the features of equation~\ref{eqn:intro-use-dict} that make our contraction mapping argument possible, we get our main result of this paper: the general existence and uniqueness result stated in Section~\ref{sec:results}.
 
 Our results build on known methods for solving differential equations with irregular singularities. Our focus on integral equations in the position domain, and the singularities of their solutions, recalls \'{E}calle's \textcolor{orange}{[and Remy \& Loday-Richaud's?]} theory of resurgence~\cite{EcalleIII}. One of our motivations is to understand \'{E}calle's theory from an analytic perspective, without reference to formal solutions. The Banach spaces we use to achieve this also appear in the work of Braaksma, who uses them to solve systems of ODEs whose coefficients are expressed as Laplace transforms~\cite{braaksma2006laplace}. This overlap suggests an opportunity to combine the two approaches, extending our results to systems of equations, and Braaksma's to equations with more general coefficients.
-
-%%The existence and uniqueness of $\psi_\alpha$, stated as Theorem~\ref{thm:example}, follow from \textcolor{orange}{This gives} an existence and uniqueness result for
-
-%%The technique we use to solve equation~\eqref{eqn:intro-use-dict} applies to a wider class of regular singular Volterra equations. This paper focuses on stating and proving it in general,
-
-%%The Banach spaces we use also appear in the work of Braaksma, who uses them to study resummation for systems of ODEs whose coefficients are Laplace transforms.
-
-%%They also appear in the work of Braaksma, who uses them to solve systems of ODEs whose coefficients are expressed as Laplace transforms~\cite{braaksma2006laplace}. This overlap suggests an opportunity to combine the two approaches, extending our results to systems of equations, and Braaksma's to equations with more general coefficients.
-
-%%\textcolor{RoyalBlue}{A similar approach was taken by Braaksma in~\cite{braaksma2006laplace}, where also the same function spaces we will introduce in Section~\ref{sec:laplace_analytic} have been used to solve system of ODEs whose coefficients are in the form of Laplace transforms. However, with our approach, we can solve differetial equations with more general coefficients, and it will be interesting to extend our results to systems of ODEs and generalize Braaksma's results.}
-
-%%%%%%%%
-
-%%Our conditions on $\psi_\alpha$ define a Banach space of holomorphic functions, as discussed in Section~\ref{fn-spaces}.
-
-%%Our conditions place $\psi_\alpha$ in the Banach space $\singexp{\tau_\alpha-1}{\Lambda}(\domain)$ defined in Section~\ref{fn-spaces}, where we can use the contraction mapping theorem to prove the existence and uniqueness of solutions for equations like~\ref{eqn:intro-use-dict}.
-
-%%Functions with the desired analytic properties form a Banach space of the form $\singexp{\tau_\alpha-1}{\Lambda}(\domain)$ defined in Section~\ref{fn-spaces}, so we can use the contraction mapping theorem to prove that $\psi_\alpha$ exists and is un
-%%
-%%\color{black}
-%%\textcolor{orange}{Differential equations with irregular singularities in the frequency domain can pull back to Volterra equations with regular singularities in the position domain. In Section~\ref{sec:example}, we will see this helpful behavior in a certain subclass of what Ecalle calls {\em level~1} differential equations, which includes classical examples like the modified Bessel equation, the equation describing the vibration modes of a solid triangular cantilever~\cite[from Equation~12.58]{genta2009vibration}, and the Airy equation after a change of coordinate. This last example generalizes to the Airy-Lucas equations, a family of level~1 equations that feature in current research~\cite[Equations 3.2]{charbonnier22}.}
-%%\begin{verify}
-%%[The differential operator for the cantilever is $(\partial^4 + \omega^2 c_1) + \tfrac{1}{z} c_2 \partial^3$, where $\omega$ is the vibration frequency and $c_1, c_2$ are constants. This example works because the linear density of the beam and the second moment of area perpemdicular to the vibration direction are proportional, so they both end up in the $P(\partial)$ term.]\end{verify}
-%%
-%%From our experience with solving level~1 differential equations by \textcolor{magenta}{Borel summation}, we expect each of the corresponding integral equations to have a special kind of solution when the integration base point coincides with a regular singularity. Suppose \textcolor{red}{we have chosen} the position variable $\zeta$ is chosen so that the integration base point is at $\zeta = 0$, and our position-domain Volterra operator has a holomorphic kernel $k(a, a')$ with a $\tau/\zeta(a)$ singularity. Assuming the residue $\tau$ is real and positive, we expect to find a solution with the following features:
-%%\begin{itemize}
-%%\item It has an $O\big(\zeta^{\tau-1}\big)$ singularity at $\zeta = 0$.
-%%\item It is of exponential type, meaning that it is $O\big(e^{\Lambda|\zeta|}\big)$ for some $\Lambda \in \R$ as $\zeta$ grows.
-%%\end{itemize}
-%%These conditions are just strong enough to ensure that the solution has a well-defined Laplace transform, which by construction will satisfy the differential equation we started with in the frequency domain. The first condition also implies that the Laplace-transformed solution is $O(z^{-\tau})$ as the frequency variable $z$ grows.
-%%
-%%Our goal is to justify the expectations above with an existence and uniqueness result, stated in Section~\ref{sec:results}. We will achieve it by embodying our expectations in a Banach space of holomorphic functions---the space $\singexp{\tau-1}{\Lambda}(\domain)$ defined in Section~\ref{fn-spaces}. \textcolor{orange}{We will apply our results to level $1$ differential equations in Section~\ref{sec:example}.} \textcolor{violet}{[Mention Theorem~\ref{thm:example} and Lemma~\ref{lem:use-dict}]}
-\color{blue}
 \subsection{Convention for coordinates}
 Our motivating example, equation~\eqref{eqn:intro-use-dict}, has regular singularities at various points $\zeta = \alpha$ on the position domain. Each associated solution $\psi_\alpha$ is most easily expressed in terms of its own translated position coordinate $\zeta_\alpha = \zeta - \alpha$. We therefore expect our results to be used in calculations involving multiple coordinates. The ways we talk about points, functions, and coordinates are meant to promote clarity in calculations of this kind.
 
