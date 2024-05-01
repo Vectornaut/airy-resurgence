@@ -531,9 +531,9 @@ By Condition~\eqref{cond:sing}, \textcolor{blue}{there exist} a radius $\delta>0
 whenever $|\zeta| < \delta$. \textcolor{blue}{To use this bound, we rewrite the integral in the definition of $\chi$:} \textcolor{red}{We can take advantage of} \textcolor{magenta}{We use this bound [we do not use the bound yet]} \textcolor{pink}{by rewriting the integral in the definition of $\chi$:}
 \begin{align*}
 -\int_b^a \frac{q}{p}\;d\zeta & = \int_b^a \frac{\tau}{\zeta}\;d\zeta - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta \\
-& = \tau \log\left(\frac{\zeta(a)}{\zeta(b)}\right) - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta
+& = \tau \log\left(\frac{\zeta(a)}{\zeta(b)}\right) - \int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta.
 \end{align*}
-Exponentiating both sides, we see that
+Exponentiating both sides \textcolor{blue}{shows that}
 \[ \chi(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
 Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. The exponential factor in the formula above is then bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ whenever $|\zeta(a)| < \delta$. Since $\tau$ is positive, this is enough to show that $\lim_{\zeta \to 0} \chi = 0$. It follows, as discussed above, that $\hardpart \solproto = \solproto$. 
 \color{orange}
@@ -760,7 +760,7 @@ Suppose that $a \in \near$. Then inequality~\eqref{near-limit} gives
 \|\varphi\|_{\rho-1, \Lambda}  \int_0^a \frac{\sigma}{|\zeta(a)|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta| \\
 & \le \sigma \|\varphi\|_{\rho-1, \Lambda}  \int_0^a \left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;\left|\frac{d\zeta}{\zeta(a)}\right|
 \end{align*}
-for any integration path that stays within $\near$. \textcolor{blue}{Since $\domain$ is star-shaped around $\zeta = 0$, so is $\near$. \textcolor{orange}{[\ldots]}} \textcolor{red}{Taking advantage of the fact that $\near$ is a sector of a disk, let us use the straight path} \textcolor{brown}{Since $\near$ \textcolor{magenta}{is star-shaped [why?]} at $\zeta=0$, the path of integration can be chosen to be a segment } $\zeta = t \zeta(a)$, with $t \in (0, 1]$.
+for any integration path that stays within $\near$. \textcolor{blue}{Noting} that $\near$ is \textcolor{blue}{star-shaped by construction, we} use the straight path $\zeta = t \zeta(a)$, with $t \in (0, 1]$:
 \begin{align*}
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
 & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\;dt \\
@@ -768,7 +768,7 @@ for any integration path that stays within $\near$. \textcolor{blue}{Since $\dom
 \end{align*}
 Since we set $\sigma < \rho$, this brings us halfway to proving Proposition~\ref{prop:get-contraction}.
 \subsubsection{Away from the origin}\label{far-bound}
-Going back to the end of Section~\ref{first-steps}, suppose that $a \in \far$. Choose some $\lambda > \lambda_\Delta$. By Proposition~\ref{prop:whole-ker-far-bound} from Section~\ref{sec:bounds on k}, \textcolor{red}{we can find a constant} there is some $M\in\R_{>0}$ for which
+Going back to the end of Section~\ref{first-steps}, suppose that $a \in \far$. Choose some $\lambda > \lambda_\Delta$. By Proposition~\ref{prop:whole-ker-far-bound} from Section~\ref{sec:bounds on k}, \textcolor{red}{we can find a constant} \textcolor{blue}{there is some $M\in\R_{>0}$} for which
 \textcolor{red}{\[ |k(a, \cdot)| \le M e^{\lambda |\zeta(a) - \zeta|} \]}
 \textcolor{blue}{\[ |k(a, a')| \le M e^{\lambda |\zeta(a) - \zeta(a')|} \]}
 \textcolor{blue}{for all $a \in \far$ and $a' \in \Omega$.}\textcolor{red}{for all $a \in \far$.} \textcolor{pink}{Note that only the first argument of $k$ has its domain restricted\textcolor{red}{; this bound holds throughout $\domain$ in the second argument}, \textcolor{violet}{[rephrase]} \textcolor{brown}{while the second varies in $\domain$}.} Applying this bound, we \textcolor{red}{learn} that
@@ -778,7 +778,7 @@ Let us again use the straight integration path $\zeta = t \zeta(a)$, with $t \in
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \|\varphi\|_{\rho-1, \Lambda} \int_0^1 M e^{\lambda |\zeta(a)|(1 - t)}\,t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
 & \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)|\zeta(a)|(1 - t)}\;dt.
 \end{align*}
-Let us set $\Lambda > \lambda$, ensuring that the exponential factor shrinks as $|\zeta(a)|$ grows. Then \textcolor{red}{we can make our bound} there is an uniform bound over all $a \in \far$, since $|\zeta(a)| \ge \delta$ for these points:
+Let us set $\Lambda > \lambda$, ensuring that the exponential factor shrinks as $|\zeta(a)|$ grows. Then \textcolor{red}{we can make our bound uniform} \textcolor{brown}{there is an uniform bound} over all $a \in \far$, since $|\zeta(a)| \ge \delta$ for these points:
 \[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt. \]
 
 We can make this bound less than one, as required to show that $\volterra$ is a contraction, by increasing $\Lambda$. To see this in the trickiest case, where $\rho < 1$, it helps to look at the beginning and end of the integration path separately. At the beginning of the path---for $t \in \big(0, \tfrac{1}{5}\big]$, say---we \textcolor{red}{can} use a worst-case estimate on the exponential factor:
@@ -825,7 +825,7 @@ we \textcolor{red}{can} rewrite the homogeneous equation we are trying to solve 
 \end{align}
 Since we know that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$, Proposition~\ref{prop:smoothing} shows that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\tau-1+\gamma}(\domain)$. Since $\tau+\gamma > \tau$, and we have made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\gamma}(\Omega)$. Equivalently, Equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\gamma}(\domain)$.
 
-\textcolor{red}{Now, we just want to} Next, we show that the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$ for any $\rho > \tau$.
+\textcolor{red}{Now, we just want to} \textcolor{brown}{Next, we} show that the uniqueness of the solution still holds in $f_0 + \singexpalg{\rho-1}(\Omega)$ for any $\rho > \tau$.
 
 First, suppose $\rho \in (\tau, \tau+\gamma)$. In this case, we \textcolor{red}{can} use the inclusion $\singexpalg{\tau-1+\gamma}(\Omega) \hookrightarrow \singexpalg{\rho-1}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-alg} to see that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\rho-1}(\Omega)$. Lemma~\ref{lem:perturbed_volterra} then guarantees that Equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found in $\singexpalg{\tau-1+\gamma}(\Omega)$.
 
@@ -895,8 +895,14 @@ Similarly, an operator $\softpart^\alpha$ with kernel $\softker^\alpha$ now sati
 over all $a, a' \in \domain_\alpha$.
 \subsection{The Laplace transform}
 \subsubsection{Definition}
-Let $\domain_\alpha$ be a simply connected open subset of $\C$ that touches but does not contain $\zeta=\alpha$, and let $\Gamma_{\zeta, \alpha}^\theta$ be the ray \textcolor{red}{that leaves} originating from $\zeta=\alpha$ \textcolor{red}{at angle} in the direction of $\theta$. \color{red} When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, we \textcolor{red}{can} define the Laplace transform $\laplace_{\zeta, \alpha}^{\theta}$, which maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions on the half-plane $\Re(z e^{-i\theta}) > \Lambda$ in the frequency domain~\cite[Section 5.6]{diverg-resurg-i}. The Laplace transform of $\varphi$ is defined by the formula
-\begin{equation}%\label{laplace:int} 
+Let $\domain_\alpha$ be a simply connected open subset of $\C$ that touches but does not contain \textcolor{blue}{$\zeta=\alpha$. Let} $\Gamma_{\zeta, \alpha}^\theta$ be the ray \textcolor{blue}{in the position domain} \textcolor{blue!50}{that leaves} $\zeta=\alpha$ \textcolor{blue!50}{at angle} $\theta$\textcolor{blue}{, and let $\Pi^{-\theta}_\Lambda$ be the half-plane $\Re(z e^{i\theta}) > \Lambda$ in the frequency domain.} When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, \color{blue}the Laplace transform
+\[ \laplace_{\zeta, \alpha}^{\theta} \maps \singexp{\sigma}{\Lambda}(\domain_\alpha) \to \holo(\Pi^{-\theta}_\Lambda) \]
+is defined for all $\sigma > -1$ and $\Lambda \in \R$. Its action on a function $\varphi$ is given by the formula
+\begin{equation}\label{laplace:int}
+\laplace_{\zeta, \alpha}^{\theta} \varphi := \int_{\Gamma_{\zeta,\alpha}^\theta} e^{-z\zeta} \varphi\;d\zeta.
+\end{equation}
+\color{red} When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, we \textcolor{red}{can} define the Laplace transform $\laplace_{\zeta, \alpha}^{\theta}$, which maps functions in $\singexp{\sigma}{\Lambda}(\domain_\alpha)$ with $\sigma>-1$ and $\Lambda\in\R$ to holomorphic functions on the half-plane $\Re(z e^{-i\theta}) > \Lambda$ in the frequency domain~\cite[Section 5.6]{diverg-resurg-i}. The Laplace transform of $\varphi$ is defined by the formula
+\begin{equation}%%\label{laplace:int} 
 \laplace_{\zeta, \alpha}^{\theta} \varphi := \int_{\Gamma_{\zeta,\alpha}^\theta} e^{-z\zeta} \varphi\;d\zeta.
 \end{equation}
 It is a function on the frequency domain because it depends on the frequency variable $z$.
@@ -904,7 +910,7 @@ It is a function on the frequency domain because it depends on the frequency var
 Let $\Pi_\Lambda^\theta:=\{z\in\C \,\vert \, \Re(z e^{i\theta})>\Lambda\}$. If $\Gamma_{\zeta, \alpha}^\theta$ is contained in $\domain_\alpha$, the Laplace transform 
 \[\laplace_{\zeta,\alpha}^\theta\colon\singexp{\sigma}{\Lambda}(\domain_\alpha)\to\holo(\Pi_\Lambda^\theta)\]
 is defined by
-\begin{equation}\label{laplace:int} 
+\begin{equation}%%\label{laplace:int} 
 (\laplace_{\zeta, \alpha}^{\theta} \varphi)(z) := \int_{\Gamma_{\zeta,\alpha}^\theta} e^{-z\zeta} \varphi\;d\zeta.
 \end{equation}
 \color{black}
