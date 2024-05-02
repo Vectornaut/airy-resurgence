@@ -125,7 +125,7 @@ The inverse Laplace transform can turn a linear differential equation on a compl
 \end{abstract}
 \tableofcontents
 \section{Introduction}\label{sec:intro}
-\subsection{Motivation}\label{motivation}
+\subsection{Motivation}\label{sec:motivation}
 \color{blue}
 \textcolor{blue}{An ordinary differential equation with an irregular singularity at infinity comes with a special family of formal solutions: ``normal series'' characterized by their formal asymptotics at infinity~\cite{int-irreg}. These series are typicaly divergent, but they can be ``resummed'' to produce analytic solutions~\cite{loday1994stokes,diverg-resurg--ii,loday-Remy2011,malgrange1995sommation,ramis1991series}. The results of this paper are motivated by the desire to find the same analytic solutions more directly, without the use of formal series. We do this in Section~\ref{sec:example} for a certain class of level~$1$ ODEs, using new Laplace transform methods tailored to the special properties of the analytic solutions that we seek. In~\cite{borel_reg}, we show that these solutions match the ones obtained through resummation. Since the Laplace transform methods we use may be of wider interest, we describe them here in a general and self-contained way.}
 
@@ -158,63 +158,18 @@ The theory of Volterra equations is well-suited to this solution method. By embo
 
 Our results build on known methods for solving differential equations with irregular singularities. Our focus on integral equations in the position domain, and the singularities of their solutions, \textcolor{orange}{recalls [reword]} \'{E}calle's \textcolor{orange}{[and Remy \& Loday-Richaud's?]} theory of resurgence~\cite{EcalleIII}. One of our motivations is to understand \'{E}calle's theory from an analytic perspective, without reference to formal solutions. The Banach spaces we use to achieve this also appear in the work of Braaksma, who uses them to solve systems of ODEs whose coefficients are expressed as Laplace transforms~\cite{braaksma2006laplace}. This overlap suggests an opportunity to combine the two approaches, extending our results to systems of equations, and Braaksma's to equations with more general coefficients.
 \subsection{Formalism for coordinates}
+\subsubsection{Rationale}
 Our motivating example, equation~\eqref{eqn:intro-use-dict}, has regular singularities at various points $\zeta = \alpha$ on the position domain. Each associated solution $\psi_\alpha$ is most easily expressed in terms of its own translated position coordinate $\zeta_\alpha = \zeta - \alpha$. We therefore expect our results to be used in calculations involving multiple coordinates. Our formalism for points, functions, and coordinates is tailored to such calculations.
 
+For simplicity, we use $\C$ as the position domain throughout this article. In the study of resurgence, however, the position domain is often a Riemann surface over $\C$, or even a more general ``translation surface.'' Thanks to our choice of formalism, our results and their proofs generalize immediately to this setting.
+\subsubsection{Points and coordinates}
 From now on, we will carefully respect the distinction between points and coordinates. A point is a location in space, while a coordinate is a function on space. For example, the position coordinates $\zeta$ and $\zeta_\alpha$ are functions on the position domain, just like the integral equation solutions $\psi_\alpha$. A coordinate, like $\zeta$, can be evaluated at a point $b$, yielding a number $\beta := \zeta(b)$. Conversely, the point $b$ can be described as the place where $\zeta = \beta$.
-
-\textcolor{orange}{[talk about integration]} For a function $\varphi$ defined on a simply connected subset of the position domain,
-
-\textcolor{orange}{Integrals will typically resemble this one:}
-\[ \int_{\zeta = \beta}^a \varphi\,d\zeta \]
-\[ \int_b^a \varphi\,d\zeta \]
-
-\textcolor{orange}{The integrand will always be either a 1-form, like $\varphi\,d\zeta$, or a density, like $|\varphi\,d\zeta|$. On a simply connected domain, all integration paths are equivalent, so we will typically specify an integral by its start and end points.}
-
-In the integral
-\[ \int_{\zeta = \beta}^a \big(\zeta(a) - \zeta\big)^{1/2} \varphi\,d\zeta, \]
+\subsubsection{Integration}
+When we integrate, the integrand will always be either a 1-form, like $\varphi\,d\zeta$, or a density, like $|\varphi\,d\zeta|$. On a simply connected domain, all integration paths are equivalent, so we will typically specify an integral by its start and end points. These points may be given directly, as in the expression $\int_b^a \varphi\,d\zeta$, or described in terms of coordinates, as in the equivalent expression $\int_{\zeta = \beta}^a \varphi\,d\zeta$. When a bound depends on a particular choice of integration path, we will specify the path in the surrounding text. In the integral
+\[ \int_{\zeta = \beta}^a \big(\zeta(a) - \zeta\big)^{-1/2} \varphi\,d\zeta, \]
 notice that $\zeta(a)$ is a number, which stays constant throughout the integration, while $\zeta$ is a function, whose value changes along the integration path.
-
-%%Coordinates, like the frequency coordinate $z$ and the position coordinates $\zeta$ and $\zeta_\alpha$,
-
-%%We will typically speak in terms of functions on spaces, not functions of coordinates.
-
-%%Functions---like the coordinates $\zeta$ and $\zeta_\alpha$, and the solutions $\psi_\alpha$---will be defined directly on the position or frequency domain, not as functions of a particular coordinate.
-
-\textcolor{orange}{[\ldots]}
-\color{violet}
-\begin{itemize}
-\item Can mention translation surfaces, but don't define.
-\item Maybe talk about branched covers of the complex plane, which we need to describe the singular solutions?
-\item Can identify the number $\zeta(a)$ with the point $a$.
-%%\item In the theory of resurgence, the position domain is often a Riemann surface $B$ with a branched covering map $B \to \C$.
-\end{itemize}
-\color{brown}
-\begin{itemize}
-\item mention that $\zeta=0$ is not special, and having in mind the application to ODEs, we need to consider different coordinates. Thus, we think it's appropriate to use the coordinate free notation.
-\item Coordinate free notation is easy to generalize to translation surfaces.
-\item If the reader is familiar with the analysis notation, he should read $\zeta(a)$ as $\zeta$, and the variable inside the integral as ?? 
-\begin{itemize}
-\item You can think of $f$ as the pullback $f(\zeta)$, and then $f(\zeta(\zeta - \alpha))$
-\item $f:M\to N$, $\zeta:M\to\C$, $\phi:N\to\C$, 
-    \item A tangent vector at $x \in M$ is a linear map $v \maps T_x^*M \to \C$. Similarly, a tangent vector at $f(x) \in N$ is a linear map $T_{f(x)}^*N \to \C$. Define $f_* v \cdot d_x\phi = v \cdot f^* d_{f(x)}\phi = v \cdot d_x(f^* \phi)$ for all functions $\phi$ on $N$.
-    \item $f:M\to\C$, $\zeta:M\to\C$
-    \item if you write $f(a)=\zeta(a)^2+3$, $a\in M$ \textcolor{orange}{[we would write this as $f = \zeta^2 + 3$]}
-    \item if $M=\C$
-    \item $f = \zeta^2 + 3$. Equivalently $f = \big((\zeta - 5) + 5\big)^2 + 3$, or.
-    \item $f=\zeta^2+3$ or equivalently $f(\zeta)=\zeta^2+3$
-    \begin{itemize}
-    \item When you evaluate $f$ at $\zeta = 0$, you get $0^2 + 3 = 3$.
-    \item When you evaluate $f$ at $\zeta = 2$, you get $2^2 + 3 = 7$.
-    \end{itemize}
-    \item $\zeta-\alpha \longrightarrow f(\zeta-\alpha)=(\zeta-\alpha)^2+3$
-    \item $\zeta=0$, $f(0)=3$
-    \begin{itemize}
-    \item Suppose $\alpha = 5$. \item When you evaluate $f(\zeta_5 + 5)$ at $\zeta_5 = 0$, you get $5^2 + 3 = 28$.
-    \item Suppose $\alpha = 5$. \item When you evaluate $f(\zeta - 5)$ at $\zeta = 0$, you get $(-5)^2 + 3 = 28$.
-    \end{itemize}
-\end{itemize}
-\end{itemize}
-\color{black}
+\subsubsection{Plugging into formal expressions}
+Plugging a function $\varphi$ into a formal polynomial or power series $P$ gives a new function $P(\varphi)$. The correspondence between operators on the position and frequency domains will lead to expressions of this kind. In Section~\ref{sec:motivation}, for example, we saw that the differential operator $P\big(\tfrac{\partial}{\partial z}\big)$ on the frequency domain corresponds to multiplication by the function $P(-\zeta)$ on the position domain.\color{black}
 \subsection{Notation}
 \subsubsection{Uniform bounds}
 Given a complex-valued function $\varphi$ and a non-negative, real-valued function $\omega$, we will write $|\varphi| \lesssim \omega$ to say that $|\varphi|$ is bounded by a constant multiple of $\omega$. Unless we say otherwise, the bound holds throughout the domain where both functions are defined. If the bound invovles an explicit variable, we will say that it holds over all values of the variable. For example, we will write ``$|R_j| \lesssim \lambda^j$ over all $j \in \{0, 1, 2, \ldots\}$'' to mean ``there is a constant $M$ such that for all $j \in \{0, 1, 2, \ldots\}$, the inequality $|R_j| \le M \lambda^j$ holds.''
@@ -223,7 +178,7 @@ A subset of a topological space {\em touches} the points in its closure~\cite[Ch
 
 \subsection{Setting}\label{setting}
 \subsubsection{The domain}\label{setting:domain}
-Throughout this paper, as described in Section~\ref{motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. 
+Throughout this paper, as described in Section~\ref{sec:motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. 
 
 Take a simply connected open set $\domain \subset \C$ that touches but does not contain $\zeta = 0$, and satisfies the following condition.
 \begin{conditions}
@@ -367,7 +322,7 @@ when $\rho > \tau$ is low enough, as described in Proposition~\ref{prop:alt-gene
 We are grateful for the conversations with Kihyun Kim, Angeliki Menegaki, and Sung-Jin Oh that informed the early stages of this work. This paper is a result of the ERC-SyG project, Recursive and Exact New Quantum Theory (ReNewQuantum) which received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme under grant agreement No 810573. It was also made possible by the hospitality of the Institut des Hautes \'{E}tudes Scientifiques during a return visit by AF, funded by the Fondation Math\'{e}matique Jacques Hadamard under the \textit{Junior Scientific Visibility} program.
 \section{Function spaces for holomorphic Volterra operators}\label{fn-spaces}
 \subsection{Weighted holomorphic $L^{\infty}$ spaces}\label{sec:fn-space-defs}
-Throughout this paper, as described in Section~\ref{motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but does not contain $\zeta = 0$. \textcolor{blue}{Let $\cont(\domain)$ be the space of continuous complex-valued functions on $\domain$, equipped with the compact-open topology. This} is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \domain$~\cite[Example~2.6 and Section~4 notes]{fnl-cpx-anal}.
+Throughout this paper, as described in Section~\ref{sec:motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. Take a simply connected open set $\domain \subset \C$ that touches but does not contain $\zeta = 0$. \textcolor{blue}{Let $\cont(\domain)$ be the space of continuous complex-valued functions on $\domain$, equipped with the compact-open topology. This} is the coarsest topology in which the seminorm $f \mapsto \sup_K |f|$ is continuous for every compact subset $K \subset \domain$~\cite[Example~2.6 and Section~4 notes]{fnl-cpx-anal}.
 
 The holomorphic functions form a closed subspace $\holo(\domain) \subset \cont(\domain)$~\cite[Proposition~3.14]{fnl-cpx-anal}. \color{blue}We first restrict our attention to holomorphic functions on $\domain$ which are uniformly of exponential type $\Lambda \in \R$.
 \begin{definition}\label{def:unif-exp}
