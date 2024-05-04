@@ -87,7 +87,6 @@
 \definecolor{sky}{RGB}{66, 169, 244}
 \definecolor{plum}{RGB}{76, 0, 102}
 
-
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
 \newcommand{\blankbox}{{\fboxsep 0pt \colorbox{lightgray}{\phantom{$h$}}}}
@@ -155,19 +154,29 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \fi
 \newcommand{\citesection}[1]{\begin{unstable}\texttt{#1}\end{unstable}}
 
-% hideable to-do notes
+% hideable to-do notes and brainstorming
 \newif\ifshowtodo
 \showtodotrue
 \ifshowtodo
 \newenvironment{todo}{\color{Coral}}{\color{black}}
+\newenvironment{brainstorm}{\color{BlueViolet}\begin{itemize}}{\end{itemize}\color{black}}
 \else
 \NewEnviron{todo}{\iffalse\expandafter\BODY\fi}
+\NewEnviron{brainstorm}{\iffalse\expandafter\BODY\fi}
 \fi
 
-% drafting environments
-%%\usepackage{environ} % to hide verifications
-%%\newenvironment{verify}{\color{ForestGreen}}{\color{black}}
-%%\newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
+% hideable old text
+\newif\ifshowold
+\showoldtrue
+\ifshowold
+\newenvironment{old}{\color{RoyalBlue}}{\color{black}}
+\else
+\NewEnviron{old}{\iffalse\expandafter\BODY\fi}
+\fi
+
+% more drafting environments
+\newenvironment{draft}{\color{SlateBlue}}{\color{black}}
+\newenvironment{revised}{\color{DarkBlue}}{\color{black}}
 
 % colors
 \definecolor{ietocean}{RGB}{0, 30, 140}
@@ -389,13 +398,13 @@ We present the results, proofs, and examples in this paper with a few central go
 Our second goal is to emphasize how the problems we study become more regular when posed in the position domain (the Borel plane). When we take level~$1$ differential equations from the frequency domain to the position domain, we not only turn their irregular singularities into regular ones, but also turn them into integral equations, which provide more smoothness and can be solved more constructively. When we write thimble integrals as Laplace transforms, their irregularly shaped integration contours collapse to rays in the position domain.
 
 \textcolor{orange}{[Plentiful, novel examples.]}
-\color{RoyalBlue}\par
+\begin{old}\par
 First of all, we want to clearly separate the parts of the theory that deal with holomorphic functions and formal series. For ODEs, we proved in \cite[Theorem~4]{reg-sing-volterra} how to build an analytic frame of solutions with an explicit growth behavior, while for thimble integrals we will prove in part 3 of Theorem~\ref{thm:maxim} that there is an explicit analytic function whose Laplace transform is the thimble integral itself. \textcolor{Maroon}{[In other words, we go directly from the frequency--analytic quadrant to the position--analytic quadrant, without passing through the formal side.]}
 
 Second of all, we want to explain why it is useful to work in the position domain (the Borel plane): on the one hand integral equations are more regular than differential equations. On the other hand, a thimble integral in the frequency domain can be recast as the Laplace transform of a function in the position domain.
 
 We will present the statements of our main results in Section~\ref{sec:why_borel_ODE} and Section~\ref{sec:why_borel_thimble}, for ODEs and thimble integrals, respectively. The corresponding proofs are collected in Section~\ref{sec:proof_main_results}.
-\color{black}
+\end{old}
 \subsubsection{Why does Borel summation work for solutions of level $1$ ODEs?}\label{sec:why_borel_ODE}
 %\textcolor{DarkCyan}{[Let us try to move some technical detail from here to the section where the result is proved. For example:]}
 %
@@ -495,7 +504,7 @@ Fix a one-dimensional complex manifold $X$; a translation surface $B$; and a hol
 \[ I = \int_{\mathcal{C}_a^\theta} e^{-zf}\,\nu, \]
 where $\nu$ is a holomorphic $1$-form on $X$, $a$ is a critical point of $f$, and $\mathcal{C}^\theta_a$ is the Lefschetz thimble that runs through $a$ in direction $\theta$ with a chosen orientation.
 \end{definition}
-\color{RoyalBlue}\par
+\begin{old}\par
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{NavyBlue}{[The important thing about $\C$, where $f$ takes values, is that it is a translation surface---\ldots]} For each critical point $a$, let $\mathcal{J}_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\mathcal{J}_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\mathcal{J}_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\mathcal{J}_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\mathcal{J}_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\mathcal{C}_a^\theta$ can be regarded as the component of $f^{-1}(\mathcal{J}_\alpha^\theta)$ that goes through $a$. \textcolor{orange}{We could orient the thimble so that shifting $\mathcal{C}_a$ to its left would make its projection run clockwise around $\mathcal{J}_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
 \begin{center}
 \includegraphics[width=6.5cm]{figures/rays_ge6.png}
@@ -506,8 +515,8 @@ Consider a thimble integral of the form described in Section~\ref{borel-reg:expl
 Choose a critcal point $a$ of $f$, noting the associated critical value $\alpha = f(a)$, and let $I_\alpha$ be a thimble integral through the thimble $\mathcal{C}_a^\theta$:
 \begin{equation}
 I_\alpha(z)\defeq\int_{\mathcal{C}_a^\theta}e^{-zf}\nu.
-\end{equation}
-Our main results show that $I_\alpha$ is Borel regular as a conseuqence of the fact that thimble integrals can be turned into a Laplace transform on the ray $f(\mathcal{C}_a^\theta)$. \textcolor{RoyalBlue}{[say more about this?]}. \textcolor{orange}{[As a start\ldots]} We recall the well-known result\color{black}
+\end{equation}\end{old}
+\begin{draft}Our main results show that $I_\alpha$ is Borel regular as a conseuqence of the fact that thimble integrals can be turned into a Laplace transform on the ray $f(\mathcal{C}_a^\theta)$. \begin{todo}[say more about this?]\end{todo}. \textcolor{orange}{[As a start\ldots]} We recall the well-known result\end{draft}
 \begin{lemma}[adapted from {\cite[Section~3.3]{pham}}]\label{lem:thimble_proj_formula}
 A function $\iota_\alpha$ with $I_\alpha = \laplace_{\zeta, \alpha}^\theta \iota_\alpha$ is given by the {\em thimble projection formula}
 \begin{equation}\label{eqn:formula}
@@ -552,7 +561,7 @@ If the integral defining $I_\alpha$ is absolutely convergent, then $I_\alpha$ is
 %\end{enumerate}
 %\end{theorem}
 %\color{black}
-\color{RoyalBlue}
+\begin{draft}
 \textcolor{orange}{[Shorten, but maybe keep the basics.]} We sketch the proofs of the main results in the following diagram (for the rigorous ones see Section~\ref{borel-reg-thimble}):
 %\[
 %\begin{tikzcd}
@@ -565,7 +574,7 @@ On the one hand, with a change of coordinates, the thimble integral $I$ can be w
 On the other hand, we compute the asymptotic expansion of $I$ using the saddle point approximation, which turns out to be a formal $1$-Gevrey series in the frequency domain. Consequently, its Borel transform $\series{\iota}$ is a germ of holomorphic functions at $\zeta=\alpha$ in the position domain. Finally, we will show that the Taylor expansion of $\iota$ at $\zeta=\alpha$ agrees with~$\series{\iota}_\alpha$.
 
 \textcolor{magenta}{Discuss where to find proofs, similarly to \texttt{reg-sing-volterra}.}
-\color{black}
+\end{draft}
 %% the following remark has been moved to Section of the proof
 %\begin{remark}\label{rmk:Pham formula}
 %    Equation \eqref{eqn:formula} gives an explicit expression for $\phi_j$ in terms of $\nu$ and of the pre-image of the ray $e^{i\theta}[\alpha_j,\zeta)$ via $f$. When $f$ and $\nu$ are polynomials and $X$ is $N$-dimensional, a result of Pham \cite[Equation 2.4, II partie]{pham} allows to write $\hat{\iota}_j$ explicitly as 
@@ -587,7 +596,7 @@ On the other hand, we compute the asymptotic expansion of $I$ using the saddle p
 %
 \paragraph{New perspectives on the Laplace transform}
 %
-\textcolor{orange}{[Revise\ldots]}\textcolor{RoyalBlue}{In our study of Borel regularity, we use some new perspectives on the Laplace transform, discussed in Section~\ref{sec:Laplace-Borel-general}.}
+\begin{draft}In our study of Borel regularity, we use some new perspectives on the Laplace transform, discussed in Section~\ref{sec:Laplace-Borel-general}.\end{draft}
 
 Laplace transform methods for solving ODEs on the frequency domain traditionally relate them to ODEs on the position domain. We find, however, that it is easier and more natural to relate ODEs on the frequency domain to integral equations on the position domain. In particular, the good behavior of integral equations and their solutions is central to our proof that certain ODEs have Borel regular solutions.
 
@@ -881,9 +890,9 @@ The formal solutions of a level~$1$ ODE are always resurgent series~\cite[Propos
 %%\textcolor{orange}{[Where does resurgence come in?]}
 
 \textcolor{orange}{[Kontsevich and Soibelman: Riemann-Hilbert problem in analytic frequency domain from Stokes constants in the formal position domain. New section?]}
-\color{RoyalBlue}\par
+\begin{old}\par
 However, more absractly, taking as input the set of Stokes data (namely the Stokes ray emanating from the singulairties and the associated Stokes constants) one can set-up a Riemann--Hilbert problem, whose solution would give a frame of analytic solutions of the ODEs~\cite{kontsevich2022analyticity}. This is an advantage of resurgence techniques compared to the usual Borel summation method. 
-\color{black}
+\end{old}
 %
 \subsubsection{Laplace transform methods and fixed point iteration}
 %
@@ -956,14 +965,13 @@ Like solutions of level~$1$ ODEs, thimble integrals often exhibit the Stokes phe
 %
 \subsubsection{Asymptotics of thimble integrals}
 %
-\color{DarkBlue}
-Thimble integrals are traditionally understood through their asymptotics, which can be found with the saddle point approximation~\cite{andersen2020resurgence,delabaere-howls,delabaere_dillinger_pham,Delabaere-Pham99,dingle1973asymptotic,Malgrange22,Pham83}. A thimble integral's asymptotic expansion is typically divergent, \textbf{[but can be recovered using Borel summation]}
-\color{black}
+\begin{revised}
+Thimble integrals are traditionally understood through their asymptotics, which can be found with the saddle point approximation~\cite{andersen2020resurgence,delabaere-howls,delabaere_dillinger_pham,Delabaere-Pham99,dingle1973asymptotic,Malgrange22,Pham83}. A thimble integral's asymptotic expansion is typically divergent, \begin{draft}[but can be recovered using Borel summation]\end{draft}
+\end{revised}
 
 \textcolor{orange}{[Keep revising\ldots]}
 
-\color{BlueViolet}
-\begin{itemize}
+\begin{brainstorm}
 \item In fact, the thimble integral is almost a Laplace transform (cite Pham and point to thimble projection formula in this paper)
 \item Can also recover analytic object using Borel summation.
 \begin{itemize}
@@ -976,16 +984,16 @@ Thimble integrals are traditionally understood through their asymptotics, which 
 %%\item ODE: get a formal series, resum it, check whether the result is an actual series.
 %%\item Thimble integral: get a formal series, resum it, check whether the result matches the original analytic thimble integral.
 %%\end{itemize}
-\end{itemize}
+\end{brainstorm}
+\begin{brainstorm}
 \color{DarkTurquoise}\par
-\begin{itemize}
 \item Classical examples of $1$-dimensional thimble integrals (with polynomial $f$) are special functions
 \item {[Toy model of situations where there's no well-defined thimble---like infinite-dimensional path integrals---or where the integral doesn't quite look like a thimble integral---like state integral in Chern-Simons.]}
-\end{itemize}
+\end{brainstorm}
 
-This raises the question we address in this paper, namely to understand why Borel summation is effective for $1$-dimensional thimbles integrals. In a nutshell, our result follows from the fact that thimble integrals are generalized Laplace transforms. We prove, from this, that they are Borel regular functions. In addition, our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see Fenyes's lecture~\cite{Fenyes-ihes-lecture} and Section~\ref{sec:Laplace-Borel-general}).   
+\begin{draft}This raises the question we address in this paper, namely to understand why Borel summation is effective for $1$-dimensional thimbles integrals. In a nutshell, our result follows from the fact that thimble integrals are generalized Laplace transforms. We prove, from this, that they are Borel regular functions. In addition, our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see~\cite{Fenyes-ihes-lecture} and Section~\ref{sec:Laplace-Borel-general}).\end{draft}
 
-\color{RoyalBlue}
+\begin{old}
 \subsubsection*{Old stuff to distribute among new sections}
 Thimble integrals have been studied from different perspectives: in physics, they play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities \cite{dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua}. In this context, physicists often use Borel summation, resurgence and related techniques to assign values to these integrals going beyond their pertubative expansion (see also \cite{Berry_Howls,Berry1991,costin_kruskal,Howls97,Howls,pham1988resurgence}). For instance, in complex Chern--Simons theory, one could decompose the path integral in thimble integrals and arguing as in the finite dimesional set-up to study the Witten--Reshetikhin--Turaev invariants of $3$ manifolds \cite{gukov-marino-purtrov-resurgence,Witten}. \textcolor{orange}{Take a look at Witten's paper on knots} More generally, we could think of a problem that is known to admit a thimble integral solution but that's hard to be defined explicitly. However, we know the perturbative expansion of the expected solution; then Borel regularity tells us that the Borel sum of the pertubative series is the solution we are looking for. In fact, the Laplace transform ray (namely the ray along which the Laplace trasnform is defined) is often a ``collapsed'' thimble.\textcolor{Maroon}{This is the bit about turning a perturbative series back into a thimble integral, taking advantage of the fact that the Laplace transform ray is often a ``collapsed'' thimble.}
 
@@ -1005,7 +1013,7 @@ In the $N$-dimensional analog of our set-up \ref{borel-reg:explanatory-power} th
 %\color{black}
 %%Our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see Fenyes's lecture \cite{Fenyes-ihes-lecture}). In a nutshell, we use that thimble integrals are generalized Laplace transforms, to show they are indeed Borel regular functions.  
 %    
-\color{black}
+\end{old}
 \section{The Laplace and Borel transforms}\label{sec:Laplace-Borel-general}
 \subsection{The geometry of the Laplace transform}\label{sec:geometry_laplace}
 Classically, the Laplace transform turns functions on the position domain into functions on the frequency domain. In the study of Borel summation and resurgence, it is useful to see the position domain as a {\em translation surface} $B$, and the frequency domain as one of its cotangent spaces. Roughly speaking, the Laplace transform lifts holomorphic functions on $B$ to holomorphic functions on $T^*B$.
@@ -1481,8 +1489,7 @@ Let $\phi,\psi$ be two holomorphic functions on $B$. Choose a translation coorid
 [\phi \ast_{\zeta, \alpha} \psi](a) := \int_{\zeta = \alpha}^a \psi\,\mathsf{R}^*\phi\,d\zeta,
 \end{equation}
 where $\mathsf{R}$ is the $180^\circ$ rotation that exchanges $\zeta = 0$ with $a$. In other words, $\mathsf{R}^*\zeta = \zeta(a) - \zeta$.
-\color{DarkTurquoise}
-\begin{itemize}
+\begin{brainstorm}
 \item Given a function $f$ on $B$, we will write $f'$ and $f''$ to denote the pullbacks of $f$ to the first and second factors, respectively, of $B \times B$.
 \item For a kernel $k$ on $B \times B$, we the corresponding integral kernel operator would be
 \[ \mathcal{V}\phi = \int_0^\zeta k\,\phi'\,d\zeta' \]
@@ -1496,12 +1503,10 @@ Do you say $\zeta(\omega)$? Or $\omega(\zeta)$? What does $\omega(\zeta + 1)$ me
 \[ \int_0^\zeta (\zeta^2 + \zeta'^2)\,d\zeta' \]
 \[ \int_{\zeta=0}^a (\zeta(a)^2 + \zeta^2)\,d\zeta \]
 \[ \int_{\zeta=0}^a (\zeta^2 + \zeta^2)\,d\zeta \]
-\end{itemize}
-
-\textcolor{orange}{\ldots} defined as
+\item \textcolor{orange}{\ldots} defined as
 \[ \phi \ast_{\zeta, \alpha} \psi \defeq \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}} \phi'\,\psi''\,d\zeta'', \]
 where $\mathcal{S}'(\zeta)$ is the line segment connecting $\zeta' = \alpha$ to $\zeta' = \zeta$, and $\mathcal{S}''(\zeta)$ is defined similarly \textcolor{orange}{[check]}.
-\color{black}
+\end{brainstorm}
 \end{definition}
 \begin{prop}
 The Laplace transform $\laplace^\theta_{\zeta,\alpha}$ is a homomorphism from the algebra of locally integrable, exponentially bounded holomorphic functions, equipped with the convolution product, to the algebra of analytic functions on the half-plane $\Re(e^{i\theta} z) > 0$, equipped with the usual product.
@@ -1511,13 +1516,13 @@ We just need to prove that
 \[ \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}] = \laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,\alpha}[{\psi}] \]
 for all $\phi, \psi$ with a well-defined Laplace transform. This can be shown by direct computation, done for instance in Theorem 2.39 of \cite{laplace-tfm} for $\alpha=0$.
 \textcolor{orange}{[add proof for $\alpha\neq 0$]}
-\color{DarkTurquoise}
-\begin{align*}
+\begin{brainstorm}
+\item \begin{align*}
 \laplace_{\zeta, \alpha}(\phi)\,\laplace_{\zeta,\alpha}(\psi) & \defeq \left( \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \phi\,d\zeta \right)\left( \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \psi\,d\zeta \right) \\
 & = \left( \int_{\mathcal{J}_{\zeta', \alpha}^\theta} e^{-z\zeta'} \phi'\,d\zeta' \right)\left( \int_{\mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z\zeta''} \psi''\,d\zeta'' \right) \\
 & = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z(\zeta' + \zeta'')}\,\phi'\,\psi''\;d\zeta' \wedge d\zeta''.
 \end{align*}
-Since $d\zeta'' \wedge d\zeta'' = 0$, we can rewrite this as \textcolor{orange}{[with $\zeta' + \zeta'' = \zeta$]}
+\item Since $d\zeta'' \wedge d\zeta'' = 0$, we can rewrite this as \textcolor{orange}{[with $\zeta' + \zeta'' = \zeta$]}
 \begin{align*}
 \laplace_{\zeta, \alpha}(\phi)\,\laplace_{\zeta,\alpha}(\psi) & = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z(\zeta' + \zeta'')}\,\phi'\,\psi''\;(d\zeta' + d\zeta'') \wedge d\zeta'' \\
 & = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z\zeta}\,\phi'\,\psi''\;d\zeta \wedge d\zeta'' \\
@@ -1526,7 +1531,7 @@ Since $d\zeta'' \wedge d\zeta'' = 0$, we can rewrite this as \textcolor{orange}{
 & = \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta}\,(\phi \ast_{\zeta, \alpha} \psi)\;d\zeta \\
 & = \laplace^\theta_{\zeta, \alpha}(\phi \ast_{\zeta, \alpha} \psi).
 \end{align*}
-\color{black}
+\end{brainstorm}
 \begin{verify}
 \begin{align*}
 \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}](a)&= \int_{\mathcal{J}^\theta_{\zeta, \alpha}} e^{-z\zeta(a)} \left(\int_{\zeta=\alpha}^a \psi \mathsf{R}^*\phi\;d\zeta\right)\;d\zeta
@@ -1557,8 +1562,8 @@ In addition, we will denote $\ast_{\zeta,0}$ simply by \textcolor{magenta}{$\ast
 \end{remark}
 Notice that, assuming the Taylor expansion of $\phi$ and $\psi$ at $\zeta=\alpha$ are convergent in a disk of radius $R$, then the convolution $\phi\ast_{\zeta,\alpha}\psi$ has a convergent Taylor expansion at $\zeta=\alpha$ in the disk of radius $R$ (when $\alpha=0$, see \cite[Lemma 5.14]{diverg-resurg-i} for a proof).
 
-\textcolor{DarkBlue}{On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$, and the Laplace transform is an algebra isomorphism.}
-\par\textcolor{RoyalBlue}{In addition, the convolution product induces a $\C$-algebra structure on the space $\singexp{\sigma}{\Lambda}$, and the Laplace transform is an algebra isomorphism.}
+\begin{revised}On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$, and the Laplace transform is an algebra isomorphism.\end{revised}
+\begin{old}\par In addition, the convolution product induces a $\C$-algebra structure on the space $\singexp{\sigma}{\Lambda}$, and the Laplace transform is an algebra isomorphism.
 \textcolor{magenta}{[actually need $\Omega_0$ in lemma]}
 \begin{lemma}
 If $\Omega_0$ is star-shaped around $\zeta = 0$, then for any $\sigma > -1$ and $\Lambda > 0$, the space $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ is closed \textcolor{magenta}{[no; revise]} under the convolution product $\ast_{\zeta, \alpha}$.
@@ -1599,9 +1604,10 @@ Using the shorthand $\delta \defeq |\zeta(a) - \alpha|$, we compute
 For any $\sigma > -1$ and $\Lambda > 0$, the Laplace transform 
 \[ \laplace_{\zeta,\alpha}^\theta\colon\singexp{\sigma}{\Lambda}(\Omega_\alpha) \to \dualsingexp{\sigma}(\widehat{\Omega}_\alpha^\Lambda) \]
 is a $\C$-algebra isomomorphism, with inverse defined in Proposition~\ref{prop:inverse_laplace_analytic}. 
-\end{corollary}
-
+\end{corollary}\end{old}
+%
 \subsubsection*{The Borel transform as algebra isomomrphism}
+%
 The Borel transform $\borel_\zeta$ is defined on the space of formal power series $z^{-1}\C\llbracket z^{-1}\rrbracket$, which is a $\C$-algebra, with product given by the Cauchy product of formal power series. In addition, introducing the formal unit $\delta$, the Borel transform can be extended to $\C\llbracket z^{-1}\rrbracket$ (including constants), as $\borel_\zeta(1)=:\delta$. Therefore, the Borel transform is a $\C$-linear map
  \[\borel_\zeta\colon\C\llbracket z^{-1}\rrbracket\to\C\delta + \C\llbracket\zeta\rrbracket\,.\] 
 In fact, since $\borel_\zeta$ is defined as the formal inverse of $\laplace_{\zeta,0}$ we can introduce the \textit{formal Laplace transform} as the map from $\C\llbracket \zeta\rrbracket$ to $z^{-1}\C\llbracket z^{-1}\rrbracket$ which acts as $\laplace_{\zeta,0}$ on monomials $\zeta^k$ and then it extends by countable linearity. As a result, we find that the Borel transform is a $\C$-linear invertible map whose inverse is the formal Laplace transform.
@@ -1678,7 +1684,7 @@ Similarly, $\borel_{\zeta_\alpha}$ is an algebra homomorphism from $\C\llbracket
 %
 \subsubsection{Formal to analytic}\label{sec:Borel-gevrey}
 %
-If we want to get analytic information from the Borel transform---for example, by doing Borel summation---we should focus on the series whose Borel transforms converge. \textcolor{LimeGreen}{These are the {\em $1$-Gevrey} series mentioned in Section~\ref{intro:summation}.} Within $\C \llbracket z^{-1} \rrbracket$, the $1$-Gevrey series form a subspace $\C \llbracket z^{-1} \rrbracket_1$. They are characterized by the factorial growth of their coefficients.
+If we want to get analytic information from the Borel transform---for example, by doing Borel summation---we should focus on the series whose Borel transforms converge. \begin{old}\textcolor{LimeGreen}{These are the {\em $1$-Gevrey} series mentioned in Section~\ref{intro:summation}.}\end{old} Within $\C \llbracket z^{-1} \rrbracket$, the $1$-Gevrey series form a subspace $\C \llbracket z^{-1} \rrbracket_1$. They are characterized by the factorial growth of their coefficients.
 \begin{prop}\label{prop:gevrey_to_convergent}
 A series
 \[ \series{\Phi} = \sum_{n \ge -1} a_n z^{-n-1} \]
@@ -1789,7 +1795,9 @@ where $\mathcal{O}_{\zeta = \alpha}$ is the algebra of germs of holomorphic func
 
 To study this subspace, it will be helpful to work on the universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$. On a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ that touches $\zeta = 0$, a function has an ordinary Taylor expansion around $\zeta = 0$ if and only if it descends and extends to a holomorphic function on a neighborhood of $\zeta = 0$ in $\C$. Thus, once again, we can see the subspace of $\singexp{\sigma}{\Lambda}(\Upsilon)$ where the $\rho$-shifted Taylor series exists as the intersection
 \[ \zeta^\rho\,\mathcal{O}_{\zeta = 0} \cap \singexp{\sigma}{\Lambda}(\Upsilon). \]
-\par\textcolor{RoyalBlue}{Our arguments in \cite{reg-sing-volterra} took place on the complex plane, but they work just as well on appropriate covers of punctured complex planes. The universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$ is a convenient setting for the following result.}
+\begin{brainstorm}
+\item Our arguments in \cite{reg-sing-volterra} took place on the complex plane, but they work just as well on appropriate covers of punctured complex planes. The universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$ is a convenient setting for the following result.
+\end{brainstorm}
 
 \begin{lemma}\label{lem:shifted_holo_closed}
 Consider a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ which touches $\zeta = 0$ and is star-shaped around $\zeta = 0$. Suppose that $\pi \maps \Upsilon \to \C^\times$ overlaps itself at the edges: it is two-to-one over a simply connected open set $\Upsilon_\Delta \subset \C^\times$ which is star-shaped around $\zeta = 0$, and it is one-to-one everywhere else.
@@ -2019,7 +2027,7 @@ Finally, $(iii)$ follows from a simple computation:
 % therefore, we deduce $\fracderiv{\tau}{\zeta}{0}\borel_\zeta\series{\Phi}=\frac{\zeta^{\tau-1}}{\Gamma(-\tau)}\ast\borel_\zeta\series{\Phi}$. 
 % \end{verify}
 % \end{remark}
-\color{RoyalBlue}
+\begin{old}
 We can express the fractional integrals/derivatives $\fracderiv{\lambda}{\zeta}{\alpha}$ as convolution product.
 \begin{lemma}
     Let us assume $\Phi=\laplace_{\zeta,\alpha}\phi$ for $\phi\in\singexpalg{\sigma}(\Omega_\alpha)$, and $z$ to be a function on $T^*_{\zeta=0}B$. Then, for every $\lambda\in (-1,\infty)$
@@ -2057,7 +2065,7 @@ where we use the identity $\laplace_{\zeta, \alpha}\,\fracderiv{-\lambda}{\zeta}
 %
 %
 %
-\color{black}
+\end{old}
 \section{Proof of main results}\label{sec:proof_main_results}
 %
 \subsection{Borel regularity for ODEs}\label{borel_reg-ODE}
@@ -2114,9 +2122,9 @@ of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on an
 \[ \singexpalg{\tau_\alpha}(\Omega_\alpha) \to e^{-\alpha z} \dualsingexp{-\tau_\alpha-1}(\widehat{\Omega}_\alpha^{\textcolor{LimeGreen}{\bullet}}). \]
 With $\Psi_\alpha = \laplace^\theta_{\zeta, \alpha} \psi_\alpha$, the desired result follows.
 \end{proof}
-\color{RoyalBlue}
+\begin{old}
 \textcolor{orange}{[\ldots]} Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work just as well on a covering of $\C$ which is branched at the roots of $P(-\zeta)$. Let us use the covering $\pi \maps \widetilde{B}_{P(-\zeta)} \to \C$ built by puncturing $\C$ at the roots of $P(-\zeta)$, taking the universal cover, and then gluing the roots back in as infinite-order branch points.
-\color{black}
+\end{old}
 \textcolor{orange}{[Add flavor text]}
 \begin{theorem}[restatement of \ref{thm:soln_is_Borel_sum}]\label{re:thm:soln_is_Borel_sum}
 The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is the Borel sum of a formal trans-monomial solution $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$ of the equation $\mathcal{P}\series{\Phi} = 0$.
@@ -2258,7 +2266,7 @@ Using the porperties of the Borel tranform acting on trans-mononials \ref{sec:ac
 \end{align*}
 We know from the definition of $\varepsilon$ that $\left|b_n^a\right| \varepsilon^n \lesssim 1$, thus we deduce that $\series{\iota}$ has a finite radius of convergence. This ends the proof of part~\ref{part-2-prf}. %$|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\series{I}_j$ is $1$-Gevrey.
 
-\textcolor{RoyalBlue}{[Analytic/position version starts here.]} The proof of part~\ref{part-3-prf} relies on the thimble projection formula \eqref{eqn:formula-proof}: we will show that the Taylor expansion of $\iota_\alpha$ at $\zeta=\alpha$ agrees with $\series{\iota}_\alpha$. We can rewrite the Taylor series for $\nu$ as
+\begin{todo}[Analytic/position version starts here.]\end{todo} The proof of part~\ref{part-3-prf} relies on the thimble projection formula \eqref{eqn:formula-proof}: we will show that the Taylor expansion of $\iota_\alpha$ at $\zeta=\alpha$ agrees with $\series{\iota}_\alpha$. We can rewrite the Taylor series for $\nu$ as
 \begin{align*}
 \nu & = \sum_{n \ge 0} b_n^a [2(f - \alpha)]^{(n - 1)/2}\,df,
 \end{align*}
@@ -2276,7 +2284,7 @@ In particular, $\series{\iota}_\alpha$ can be analytically continued along $\mat
  %   &= z^{-1/2} I_j
 %\end{align*}
 
-\color{RoyalBlue}
+\begin{old}
 Lemma~\ref{lem:thimble_proj_formula-proof} tells us that
 \begin{align*}
 I_j & = \laplace_{\zeta, \alpha_j}^\theta \iota_j \\
@@ -2366,10 +2374,10 @@ as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$.
 %%\begin{align*}
 %%\left| e^{-z\zeta_j}\;2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2} \right| \lesssim 2^{n+1/2} \varepsilon^{-2n} e^{-|z||\zeta_j|} |\zeta_j|^{n - 1/2}.
 %%\end{align*}
-\color{black}
+\end{old}
 \end{proof}
 \begin{remark}\label{rmk:1/2-deriv}
-\color{Navy}
+\begin{revised}
 For some applications, it is more convenient to work with $\Phi_\alpha=z^{-1/2}I_\alpha$, whose asymptotic series has integer powers. The argument we use to prove of Theorem~\ref{thm:maxim-proof} can also be used to show that $\Phi_\alpha$ is Borel regular, but the thimble projection formula is trickier in this case. Proposition~\ref{prop:L-int-op} tells us that $\Phi_\alpha = \laplace^\theta_{\zeta, \alpha} \phi_\alpha$ for
 \[\phi_\alpha \defeq \fracderiv{-1/2}{\zeta}{\alpha}\,\iota_\alpha. \]
 To get the thimble projection formula for $\phi_\alpha$, take the $1/2$ fractional integral of both sides:
@@ -2382,7 +2390,8 @@ The second term vanishes because $\mathcal{C}_\alpha^\theta(\alpha)$ is a single
 \[ \fracderiv{-1/2}{\zeta}{\alpha} \phi_\alpha = \int_{\mathcal{C}_\alpha^\theta(\zeta)}\nu. \]
 The $1/2$ fractional derivative is a left inverse of the $1/2$ fractional integral. Applying it to both sides, we find that
 \begin{equation}\label{eqn:formula--1/2}\phi_\alpha= \fracderiv{1/2}{\zeta}{\alpha} \left( \int_{\mathcal{C}_\alpha^\theta(\zeta)}\nu \right).\end{equation}
-\color{RoyalBlue}
+\end{revised}
+\begin{old}
 For some applications, it might be more convenient to study Borel regularity of $\Phi_\alpha=z^{-1/2}I_\alpha$, as its asymptotics will not have fractional power singularities. The proof follows the same argument we use in the proof on Theorem~\ref{thm:maxim-proof} for $I_\alpha$, but there is one subtlety to be aware of when rewriting $\Phi_\alpha$ as the Laplace transform of a function $\phi_\alpha$. Indeed, first notice that \[\phi_\alpha = \fracderiv{-1/2}{\zeta}{\alpha}\,\iota_\alpha \]
 Then, we can take the $1/2$ fractional integral on both sides:
 \begin{align*}
@@ -2396,6 +2405,7 @@ Finally, we apply the $1/2$ derivative of both sides, recalling that it is a lef
 \begin{equation}\label{eqn:formula--1/2}\phi_\alpha= \fracderiv{1/2}{\zeta}{\alpha} \left( \int_{\mathcal{C}_\alpha^\theta(\zeta)}\nu \right).\end{equation}
 \color{black}
 \textcolor{orange}{[This argument works for any function that vanishes at $\alpha$, so maybe we should instead prove it generally in the section on fractional calculus.]}
+\end{old}
 \end{remark}
 \begin{remark}
 We can use the $1/2$ derivative formula~\eqref{eqn:formula--1/2} to see that the functions $\phi$ are all resurgent, in the sense of \'{E}calle~\cite[Section~1]{EcalleI}. Let us say $\mathcal{J}_\alpha^\theta(\beta)$ is the straight path from $\zeta = \alpha$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\mathcal{C}_\alpha^\theta(\beta)$ in $X$. This lets us analytically continue $\int_{\mathcal{C}_\alpha^\theta(\zeta)} \nu$ to a star-shaped domain $\Omega_\alpha \subset \C$. Intuitively, $\Omega_\alpha$ is constructed by drawing rays from $\zeta = \alpha$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\infty$ (see Figure~\ref{Fig:slit domain}).
@@ -2426,9 +2436,9 @@ and it is
 which turns out to be proportional to $\series{\phi}_\beta$, namely to the germ of analytic functions at $\zeta_\alpha=\beta$. %We will see an example of this behaviour in Appendix~\ref{apx:eye-res-airy}. 
 
 
-\textcolor{Navy}{Initially, the function $\int_{\mathcal{C}_j(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha_j, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\mathcal{C}_j(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\mathcal{C}_j(\zeta)} \nu$ to be singular is for something to go wrong with the hotmotopy of $\mathcal{C}_j(\zeta)$. At a critical point of $f$, the ends of the homotoped path $\mathcal{C}_j(\zeta)$ come together, telling us that.}
+\begin{revised}Initially, the function $\int_{\mathcal{C}_j(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha_j, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\mathcal{C}_j(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\mathcal{C}_j(\zeta)} \nu$ to be singular is for something to go wrong with the hotmotopy of $\mathcal{C}_j(\zeta)$. At a critical point of $f$, the ends of the homotoped path $\mathcal{C}_j(\zeta)$ come together, telling us that \begin{todo}[\ldots]\end{todo}\end{revised}
 \end{remark}
-\textcolor{orange}{
+\begin{todo}
 \begin{corollary}\label{simple-res-thimble}
     If $f$ and $\nu$ are polynomials, the function ${\phi}=\fracderiv{-1/2}{\zeta}{\alpha}\iota$ defined in Remark~\ref{rmk:1/2-deriv} has simple resurgent singularities at $\zeta=\beta$, for all $\beta$ roots of $P$ such that $\beta\neq\alpha$.  
 \end{corollary}
@@ -2440,7 +2450,7 @@ which turns out to be proportional to $\series{\phi}_\beta$, namely to the germ 
 hence 
 \[\hat{\iota}_j(\zeta)=\int_{\alpha_j}^\zeta(\zeta-s)^{-3/2}\frac{(-s+\alpha_j)^{-1/2}}{2\pi i\Gamma(-\tfrac{1}{2})}\sum_{k=0}^\infty c_k (-s+\alpha_j)^{-k} \, ds + \text{ hol. funct. }\]
 \end{proof}
-}
+\end{todo}
 \begin{remark}\label{rmk:Pham formula}
     When $f$ and $\nu$ are polynomials and $X$ is $N$-dimensional, a result of Pham \cite[Equation 2.4, II partie]{pham} allows to write ${\iota}$ explicitly as 
     \begin{equation}\label{eqn:Pham}
@@ -2686,12 +2696,10 @@ Comparing the expressions above with the expressions for $v_{\pm 1}$ computed in
 %
 \subsubsection{A flavor of resurgence: the Stokes phenomena in the position domain}\label{resurgence-AL}
 %
-\textcolor{PaleVioletRed}{[Up to now, we've treated the Airy-Lucas functions as separate elements of a frame of solutions. Using the idea of resurgence, we see that they are actually more closely related. You can recover the frame from any one of its elements\ldots]}
-%%In Sections~\ref{confirmation-borel-regularity}\;--\;\ref{contour-argument-AL}, we
-
-\color{RoyalBlue}
-In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (Section \ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (Section \ref{contour-argument-AL}). In both cases we find
-\color{black}
+\begin{brainstorm}
+\item Up to now, we've treated the Airy-Lucas functions as separate elements of a frame of solutions. Using the idea of resurgence, we see that they are actually more closely related. You can recover the frame from any one of its elements\ldots
+\end{brainstorm}
+\begin{draft}In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (Section \ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (Section \ref{contour-argument-AL}). In both cases we find\end{draft}
 \begin{align*}
 v_1(\zeta) = i \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)
 \end{align*}
@@ -2731,7 +2739,7 @@ Equations \eqref{resurgent-relation-1} and \eqref{resurgent-realtion-2} are a ma
 \end{align*}
 thus the Stokes constants are respectively $\pm 2i \cos(\pi m/n)$\footnote{If we think of the Laplace transforms of $v_1$ and $v_{-1}$ as a frame of solutions for the Airy--Lucas differential equation, the equations above define the so-called Stokes matrices for the ODE.}. 
 
-It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, because the Stokes constants are \textcolor{orange}{[typically]} the intersection number of \textit{dual pairs of thimbles}, according to Picard--Lefschetz formula. Stokes constants that arise in this way are integers in a suitable normalization \cite[Section 5]{pham}\cite[Chapter~\textcolor{orange}{??}]{Arnold}. However, in the Airy--Lucas example, $f$ is not Morse unless $n=3$. Hence, we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on the lift of a path in the position domain. \textcolor{orange}{[I think we should argue we have the action of the permutation which leaves the base unchanged but gives a\ldots]}
+It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, because the Stokes constants are \begin{revised}typically\end{revised} the intersection number of \textit{dual pairs of thimbles}, according to Picard--Lefschetz formula. Stokes constants that arise in this way are integers in a suitable normalization \cite[Section 5]{pham}\cite[Chapter~\textcolor{orange}{??}]{Arnold}. However, in the Airy--Lucas example, $f$ is not Morse unless $n=3$. Hence, we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on the lift of a path in the position domain. \textcolor{orange}{[I think we should argue we have the action of the permutation which leaves the base unchanged but gives a\ldots]}
 %
 %\textcolor{DarkCyan}{where the sign must be chosen so that $\pm\zeta$ stays in the left half-plane over the whole integration path (?)}.
 %For $z \in (0, \infty)$, the contour $\gamma_z$ runs \textcolor{magenta}{counterclockwise} around $[1, \infty)$, as shown below\textcolor{DarkCyan}{, so we have to choose the negative sign above (?)}. Let us assume $z \in (0, \infty)$ for the rest of the section. \textcolor{magenta}{[Our conclusions should probably hold whenever $\operatorname{Re}(z) > 0$.]}
@@ -3142,21 +3150,22 @@ whose Laplace transform
 must be proportional to $I(z)$.
 
 We can confirm this result, and find the correct normalization, using the thimble projection formula:
-\color{RoyalBlue}
+\begin{old}
 \begin{align*}
 \int_{\mathcal{C}} e^{-zu^3}\,du & = e^{i\pi/3} \int_{\mathcal{J}_{\zeta, 0}^\theta} e^{-z\zeta}\,\tfrac{1}{3}\zeta^{-2/3}\,d\zeta \\
 & = \tfrac{1}{3}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3})\,z^{-1/3}.
 \end{align*}
-\color{DarkBlue}
+\end{old}
+\begin{revised}
 \begin{align*}
 \int_{\mathcal{C}} e^{-z(u^3+q)}\,du & = (1 - e^{i\pi/3}) \int_{\mathcal{J}_{\zeta_q, 0}^\theta} e^{-z\zeta}\,\tfrac{1}{3}\zeta_q^{-2/3}\,d\zeta_q \\
 & = e^{-zq}\tfrac{1}{i\sqrt{3}}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3})\,z^{-1/3}.
 \end{align*}
-\color{black}
-The factor of \textcolor{DarkBlue}{$e^{i\pi/3} - 1$} \textcolor{RoyalBlue}{$e^{i\pi/3}$} \begin{todo}[check]\end{todo} comes from the monodromy of $\zeta_q^{-2/3}$ around $\zeta_q = 0$.
-
-\color{RoyalBlue}
-namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q\right)$, where $\zeta_q=\zeta-q$ and $a\in\C$ is a free parameter. 
+\end{revised}
+The factor of \begin{revised}$e^{i\pi/3} - 1$\end{revised} \begin{old}$e^{i\pi/3}$\end{old} \begin{todo}[check]\end{todo} comes from the monodromy of $\zeta_q^{-2/3}$ around $\zeta_q = 0$.
+\begin{brainstorm}
+\item namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q\right)$, where $\zeta_q=\zeta-q$ and $a\in\C$ is a free parameter.
+\end{brainstorm}
 \end{itemize}
 \subsubsection{Coalescence of critical values}
 We can recover the degenerate case by taking the limit of the non-degenerate case as $p$ goes to zero. Rearranging the relationship above between $I(z)$ and the modified Bessel function $K_{1/3}(z)$, we get the formula
@@ -3180,7 +3189,7 @@ Observing that $(2r)^{2/3} = e^{i(2/3)\pi }\,3/p$, we get
 I(z) & \approx \frac{\sqrt{3}}{i a_3^{1/3}\,3e^{i(2/3)\pi}} \Gamma\big(\tfrac{1}{3}\big)\;z^{-1/3} \\
 & = \frac{1}{i\sqrt{3}} a_3^{-1/3} e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3}\big)\;z^{-1/3}
 \end{align*}
-\textcolor{RoyalBlue}{\begin{align*}
+\begin{old}\begin{align*}
 i\sqrt{3}\,I(z) & = 2\sqrt{\frac{-p}{3}} K_{1/3}\Big(\frac{2ip^{3/2}}{3^{3/2}}z\Big) \\
 &=2\sqrt{\frac{-p}{3}}\left[\frac{\pi}{2\sin(\pi/3)}\Big(I_{-1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)-I_{1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)\Big)\right]\\
 &=\frac{2}{3}\pi ip^{1/2}\left[\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{-1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{2}{3})}-\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{4}{3})}\right]\\
@@ -3190,7 +3199,7 @@ Now we take the limit as $p\to 0$ and we find
 \begin{align*}
 i\sqrt{3}\,I(z) & = \frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \frac{1}{\Gamma\big(\tfrac{2}{3}\big)} \\
 & = e^{\pi i/3} \Gamma\big(\tfrac{1}{3}\big) z^{-1/3}
-\end{align*}}
+\end{align*}\end{old}
 \end{verify}
 %
 \subsection{The triangular cantilever}\label{sec:catilever}
@@ -3252,7 +3261,7 @@ satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega =
 \section{The Airy equation}\label{airy-appendix}
 %
 \textcolor{orange}{[If we don't have time to redo this section, let's just drop it for now, since you can recover it from the Airy-Lucas section without too much work.]}
-\color{LimeGreen}
+\begin{old}
 \subsubsection{Rewriting as a modified Bessel equation}
 We can distill the most interesting part of the Airy function by writing
 \[ \Ai(y) = \tfrac{1}{\pi\sqrt{3}}\,y^{1/2}\,K\big(\tfrac{2}{3} y^{3/2}\big), \]
@@ -3534,7 +3543,7 @@ Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
 & = - \tfrac{\sqrt{\pi}}{2}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
 & = - \tfrac{\sqrt{\pi}}{2}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
 \end{align*}
-\color{black}
+\end{old}
 % \subsubsection{An eye on resurgence}\label{apx:eye-res-airy}
 % \textcolor{orange}{[Add link to general references in intro].} Resurgent functions in the position domain are characterized by being ``endlessly analytically continuable'' away from their singularities~\textcolor{magenta}{\cite[Section~1.2.2]{intro-to-ecalle}\{this paper only defines resurgent functions in the frequency domain\}\{For definition in the position domain, cite \S 6.1 of Mitschi and Sauzin~\cite{diverg-resurg-i}\}}. \textcolor{MediumSeaGreen}{[Focus on endlessly continuable functions instead? See~[Section~2, ``Variations on the resurgence of the gamma function''.]} \textcolor{red}{They have the special property that by studying their analytic continuation around one singularity, we can typically discover the germ of another singularity.} \textcolor{RoyalBlue}{They have the very special property that by studying one germ, we can typically reconstruct the others by looking at the behavior near the singular points.} \textcolor{MediumSeaGreen}{[They are ``self-reproducing'' in a certain remarkable way involving holonomy around singularities, as we will see in the example below\ldots]} A prototypical class of resurgent functions is the so-called simple resurgent functions~\textcolor{magenta}{\cite[Section~1.2.3]{intro-to-ecalle}\{oops, this source defines simple resurgent functions in the frequency domain\}}.  namely an \textcolor{Maroon}{[resurgent]} analytic function $\hat{\phi}$ in the position domain with singularities $\omega$ such that
 
