@@ -2812,13 +2812,11 @@ Hence,
 \begin{align*}
 4 i \sin(\mu \pi) K_\mu(z) & = 2\pi i \big[ I_{-\mu}(z) - I_\mu(z) \big] \\
 & = \int_{-\infty}^0 e^{z\cosh(\pi i+a)}\left[-e^{-\mu(i\pi +a)}+e^{\mu(i\pi +a)}\right]\,da + \int_{0}^{+\infty} e^{z\cosh(\pi i+a)}\left[e^{\mu(i\pi +a)}-e^{-\mu(i\pi +a)}\right]\,da \\
-& \textcolor{OrangeRed}{= 2\int_{-\infty}^0 e^{z\cosh(\pi i+a)} \sinh\big(\mu(a+i\pi)\big)\,da + 2\int_{0}^{+\infty} e^{z\cosh(\pi i+a)} \sinh(\mu(i\pi+a)\big)\,da} \\
-& = 2\int_{-\infty}^0 e^{z\cosh(-\pi i+a)} \sinh\big(\mu(a-i\pi)\big)\,da + 2\int_{0}^{+\infty} e^{z\cosh(\pi i+a)} \sinh\big(\mu(i\pi+a)\big)\,da
+& = 2\int_{-\infty}^0 e^{z\cosh(\pi i+a)} \sinh\big(\mu(a+i\pi)\big)\,da + 2\int_{0}^{+\infty} e^{z\cosh(\pi i+a)} \sinh(\mu(i\pi+a)\big)\,da.
 \end{align*}
-\color{OrangeRed}
-Stop at the highlighted line! This simplifies to the integral
+This simplifies to the integral
 \[ 2 \int_\gamma e^{z\cosh(t)} \sinh(\mu t)\,dt \]
-along the contour $\gamma$ that runs rightward along $i\pi + \R$. \textcolor{magenta}{The integral on the next line is {\em not} the path coming from infinity along $(-\infty,0) + 2\pi i (j - \tfrac{1}{2})$ and returning to infinity along $(0, \infty) + 2\pi i (j + \tfrac{1}{2})$, because it skips the segment along $i(-\pi, \pi)$.}
+along the contour $\gamma$ that runs rightward along $i\pi + \R$.
 \par
 \end{verify}
 The integral converges when $z$ is in the right half-plane. Choosing a rational parameter $\mu = \tfrac{m}{n}$ gives formula~\eqref{integral:mod-bessel-lifted}, showing that $K^{(j)}_{m/n}(z)$ is the classical modified Bessel function $K_{m/n}(z)$ when $j$ is odd.
@@ -2889,77 +2887,6 @@ The hypergeometric function in the integrand can be expressed algebraically usin
 K_0^{(1)}(z) = \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\big(\zeta^2 - 1\big)^{-1/2}\;d\zeta.
 \end{equation}
 We could get the same result from formula~\eqref{int:k0_cosh} by trigonometric substitution. This is a special case of formula~10.32.8 from \cite{dlmf}.
-
-\color{RoyalBlue}
-When $\mu$ goes to $0$, formula~\eqref{int:mod-bessel-gen} becomes
-\[ K_0^{(j)}(z) = \frac{1}{2\pi i} \int_ {\mathcal{C}_j^\theta} \exp\left[z \cosh(t)\right]\,t\,dt. \]
-We will evaluate
-\[ K_0(z) \defeq K_0^{(1)}(z) - K_0^{(0)}(z). \]
-In this difference, the parts of $\mathcal{C}_1^\theta$ and $\mathcal{C}_0^\theta$ in the left half-plane cancel out \textcolor{orange}{[$\theta$ is small]}, leaving the integral
-\[ K_0(z) = \frac{1}{2\pi i} \int_\mathscr{c} \exp\left[z \cosh(t)\right]\,t\,dt \]
-over the contour $\mathscr{c}$ that runs as follows:
-\begin{enumerate}
-\item Leftward along $(0, \infty) + (-\pi + \theta)i$.
-\item Upward along $(-\pi + \theta, \pi + \theta)i$.
-\item Rightward along $(0, \infty) + (\pi + \theta)i$.
-\end{enumerate}
-Since the integrand is an odd function, the upward part of the path integrates to zero. Since the integrand is also $2\pi i$-periodic, the leftward and rightward parts of the integral collapse to
-\begin{align}
-K_0(z) & = \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[z \cosh(t + \pi i)\right]\,\pi i\,dt \notag - \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[z \cosh(t - \pi i)\right]\,\pi i\,dt \notag \\
-& = \frac{1}{2\pi i} \int_{\mathcal{J}^0_{t, 0}} \exp\left[-z \cosh(t)\right]\,2\pi i\,dt \notag \\
-& = \int_{\mathcal{J}^0_{t, 0}} \exp\left[-z \cosh(t)\right]\,dt \label{int:k0_cosh_old} \\
-& = \int_{\mathcal{J}^0_{s, 1}} \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s}, \notag
-\end{align}
-with $s = e^t$. This is a special case of formula~10.32.9 from \cite{dlmf}.
-
-To confirm that the calculation above is consistent with Section~\ref{countable-cover}, use formulas \eqref{eq: K_j_mu at 1} and \eqref{eq: K_j_mu at -1} to get
-\begin{align*}
-K_0(z) & = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta \\
-& \hphantom{=} - \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta
-\end{align*}
-The hypergeometric function in the integrand can be simplified away using identity~15.4.13 from \cite{dlmf}, leaving an expression that makes the $\zeta_{\pm 1}^{1/2}$ singularities of the integrand even more apparent: \textcolor{magenta}{[result is right, but reasoning is wrong: integrals can't be directly combined, because they use different contours]}
-\begin{equation}\label{eqn:borel_bessel0}
-K_0(z) = \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\big(\zeta^2 - 1\big)^{-1/2}\;d\zeta.
-\end{equation}
-We could get the same result from equation~\eqref{int:k0_cosh} by trigonometric substitution. This is a special case of formula~10.32.8 from \cite{dlmf}.
-\begin{verify}
-\par
-For odd $j$, with $-\eta^2 = \tfrac{1}{2} - \tfrac{\zeta}{2}$, equation~\eqref{eq: K_j_mu at 1} gives \textcolor{GreenYellow}{(we were missing a factor of two in identity~15.4.13, so the highlighted factors of $1/2$ should be removed)}
-\begin{align*}
-K^{(j)}_0(z) & = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta \\
-& = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \textcolor{GreenYellow}{\frac{1}{2}} (1 + \eta^2)^{-1/2} \\
-& = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \textcolor{GreenYellow}{\frac{1}{2}} \left(\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} d\zeta \\
-& = -\frac{1}{2} \textcolor{GreenYellow}{\frac{1}{2}} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} d\zeta \\
-& = -\textcolor{GreenYellow}{\frac{1}{2}} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
-\end{align*}
-This is off by a sign from what we expect, but the sign could be accounted for by the branch cuts in the square roots. For even $j$, with $-\eta^2 = \tfrac{1}{2} + \tfrac{\zeta}{2}$, equation~\eqref{eq: K_j_mu at -1} gives
-\begin{align*}
-K^{(j)}_0(z) & = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2},\;\frac{1}{2};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta \\
-& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \textcolor{GreenYellow}{\frac{1}{2}} (1 + \eta^2)^{-1/2} d\zeta \\
-& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} \textcolor{GreenYellow}{\frac{1}{2}} \left(\frac{1}{2} - \frac{\zeta}{2}\right)^{-1/2} d\zeta \\
-& = \color{DarkViolet}\textcolor{GreenYellow}{\frac{1}{2}} \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left[\left(-\frac{1}{2}-\frac{\zeta}{2}\right)  \left(\frac{1}{2} - \frac{\zeta}{2}\right)\right]^{-1/2} d\zeta  \\
-& =  \color{DarkViolet} \textcolor{GreenYellow}{\frac{1}{2}} \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{4}+\frac{\zeta^2}{4}\right)^{-1/2} d\zeta  \\
-& = \color{DarkViolet} \textcolor{GreenYellow}{\frac{1}{2}} 3 \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta \\
-& = \color{DarkViolet} -\textcolor{GreenYellow}{\frac{1}{2}} 3 \int_{\mathcal{J}^{\theta+\pi}_{\zeta, 1}} e^{z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
-%%& = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \textcolor{Tomato}{i} \left(\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} \frac{\textcolor{Tomato}{i}}{2} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2} d\zeta \textcolor{Tomato}{\quad\text{(is this justified?)}} \\
-%%& = \textcolor{Tomato}{-}\frac{3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(\frac{\zeta^2}{4}-\frac{1}{4}\right)^{-1/2} d\zeta \\
-%%& = \textcolor{Tomato}{-}\frac{2 \cdot 3}{4} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} (\zeta^2 - 1)^{-1/2} d\zeta
-\end{align*}
-$\int_{-1}^{e^{i\theta}\infty} = \int_{-1}^{e^{-i\theta}\infty}+2 \int_{1}^{\infty}$
-
-We can also verify equation \eqref{eqn:borel_bessel0} using the thimble projection formula, \eqref{eqn:formula-proof}. From the expression of $K_0$ 
-\begin{equation}
-K_0(z)=\int_0^{\infty} \exp(-z\cosh(t)) dt,
-\end{equation}
-we set $\zeta=\cosh(t)$. Choosing a branch for the square root
-\begin{align*}
-d\zeta & = \sinh(t) dt\\
-& =  \sqrt{\zeta^2-1} \, dt
-\end{align*}
-we finally get 
-\[\int_{\mathcal{J}^0_{\zeta, 1}} e^{-z\zeta} \frac{d\zeta}{\sqrt{\zeta^2-1}}\]
-\end{verify}
-\color{black}
 %
 \subsection{Generalized Airy}
 %
