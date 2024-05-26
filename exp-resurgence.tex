@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage[square,numbers,sort,compress]{natbib}
 \usepackage{stmaryrd} %% needed for mapsto arrows in commutative diagrams
 \usepackage[scr=boondoxo, scrscaled=1.05]{mathalpha} %% hat tip https://tex.stackexchange.com/a/247819
 %%\usepackage{bm} %% for putting series names in bold
@@ -137,7 +138,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % hideable verifications
 \newif\ifshowverify
-\showverifyfalse
+\showverifytrue
 \ifshowverify
 \newenvironment{verify}{\color{ForestGreen}}{\color{black}}
 \else
@@ -146,7 +147,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % hideable notes for unstable references
 \newif\ifshowunstable
-\showunstablefalse
+\showunstabletrue
 \ifshowunstable
 \newenvironment{unstable}{\color{YellowGreen}}{\color{black}}
 \else
@@ -156,7 +157,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % hideable to-do notes and brainstorming
 \newif\ifshowtodo
-\showtodofalse
+\showtodotrue
 \ifshowtodo
 \newenvironment{todo}{\color{Coral}}{\color{black}}
 \newenvironment{brainstorm}{\color{BlueViolet}\begin{itemize}}{\end{itemize}\color{black}}
@@ -167,7 +168,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % hideable old text
 \newif\ifshowold
-\showoldfalse
+\showoldtrue
 \ifshowold
 \newenvironment{old}{\color{RoyalBlue}}{\color{black}}
 \else
@@ -501,8 +502,8 @@ Given a translation chart $\zeta$ on a translation surface $B$, we write $\mathc
 We are now ready to define a one-dimensional thimble integral precisely, at our desired level of generality.
 \begin{definition}
 Fix a one-dimensional complex manifold $X$; a translation surface $B$; and a holomorphic map $f \maps X \to B$ with isolated, non-degenerate critical points. A one-dimensional {\em thimble integral} has the form
-\[ I = \int_{\mathcal{C}_a^\theta} e^{-zf}\,\nu, \]
-where $\nu$ is a holomorphic $1$-form on $X$, $a$ is a critical point of $f$, and $\mathcal{C}^\theta_a$ is the Lefschetz thimble that runs through $a$ in direction $\theta$ with a chosen orientation.
+\[ I_a = \int_{\mathcal{C}_a^\theta} e^{-zf}\,\nu, \]
+where $\nu$ is a holomorphic $1$-form on $X$, $a$ is a critical point of $f$, and $\mathcal{C}^\theta_a$ is the Lefschetz thimble that runs through $a$ in direction $\theta$ with a chosen orientation. Since $I_a$ depends on the frequency coordinate $z$, it is a holomorphic function on the frequency domain.
 \end{definition}
 \begin{old}\par
 Consider a thimble integral of the form described in Section~\ref{borel-reg:explanatory-power}. We will define our setting in the language of translation surfaces, to make clear the connection with our geometric picture of the Laplace transform. The codomain of $f$ has a natural structure of translation surface---a Riemann surface carrying a holomorphic 1-form $d\zeta$, and $\zeta$ is a translation coordinate. \textcolor{NavyBlue}{[The important thing about $\C$, where $f$ takes values, is that it is a translation surface---\ldots]} For each critical point $a$, let $\mathcal{J}_\alpha^\theta$ be the ray going to infinity with an angle $\theta$ from the critical value $\alpha$, and let $\zeta_{\alpha}$ be the translation coordinate around $\mathcal{J}_\alpha^\theta$ which vanishes at $\alpha$. These are well-defined as long as $\mathcal{J}_\alpha^\theta$ misses the critical values of $f$. Then, the preimage $f^{-1}(\mathcal{J}_\alpha^\theta)$ is a bunch of disjoint curves (see Figure \ref{fig:thimble_vs_rays}), as long as $\mathcal{J}_\alpha^\theta$ misses the other critical values of $f$. The Lefschetz thimble $\mathcal{C}_a^\theta$ can be regarded as the component of $f^{-1}(\mathcal{J}_\alpha^\theta)$ that goes through $a$. \textcolor{orange}{We could orient the thimble so that shifting $\mathcal{C}_a$ to its left would make its projection run clockwise around $\mathcal{J}_\alpha$. However, this only seems to be possible when $X$ is 1-dimensional.} 
@@ -516,11 +517,11 @@ Choose a critcal point $a$ of $f$, noting the associated critical value $\alpha 
 \begin{equation}
 I_\alpha(z)\defeq\int_{\mathcal{C}_a^\theta}e^{-zf}\nu.
 \end{equation}\end{old}
-\begin{draft}Our main results show that $I_\alpha$ is Borel regular as a conseuqence of the fact that thimble integrals can be turned into a Laplace transform on the ray $f(\mathcal{C}_a^\theta)$. \begin{todo}[say more about this?]\end{todo}. \begin{todo}[As a start\ldots\end{todo} We recall the well-known result\end{draft}
+\begin{draft}Our main results show that $I_a$ is Borel regular as a conseuqence of the fact that thimble integrals can be turned into a Laplace transform on the ray $f(\mathcal{C}_a^\theta)$. \begin{todo}[no need to say more; just get to the results]\end{todo}. \begin{todo}[As a start\ldots\end{todo} We recall the well-known result\end{draft}
 \begin{lemma}[adapted from {\cite[Section~3.3]{pham}}]\label{lem:thimble_proj_formula}
-A function $\iota_\alpha$ with $I_\alpha = \laplace_{\zeta, \alpha}^\theta \iota_\alpha$ is given by the {\em thimble projection formula}
+A function $\iota_a$ with $I_a = \laplace_{\zeta, \alpha}^\theta \iota_a$ is given by the {\em thimble projection formula}
 \begin{equation}\label{eqn:formula}
-    \iota_\alpha = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right),
+    \iota_a = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right),
 \end{equation}
 where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that goes through $f^{-1}([\alpha,\zeta e^{i\theta}])$. Notice that $\mathcal{C}_a^\theta(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \begin{todo}[The thimble $\mathcal{C}_a^\theta$ needs an orientation, but the orientation is arbitrary.]\end{todo}
 \end{lemma}
@@ -537,13 +538,13 @@ where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that g
 %\end{align*}
 %\end{verify}
 %\end{remark}
-Then, the Borel regularity of thimble integrals is established by the following theorem: 
+\begin{draft}Then, the Borel regularity of thimble integrals is established by the following theorem:\end{draft}
 \begin{theorem}\label{thm:maxim}
-If the integral defining $I_\alpha$ is absolutely convergent, then $I_\alpha$ is Borel regular. More explicitly: \begin{todo}[change restatement to match]\end{todo}
+If the integral defining $I_a$ is absolutely convergent, then $I_a$ is Borel regular. More explicitly: \begin{todo}[change restatement to match]\end{todo}
 \begin{enumerate}
-\item\label{part-1} The function $I_\alpha$ has an asymptotic expansion $\series{I}_\alpha \defeq \aexp^\theta I_\alpha$, which lies in the space $e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Here, $\theta$ is the direction of the ray $\mathcal{J}^\theta_{\zeta, \alpha}$ that defines the thimble.
-\item\label{part-2} The Borel transform $\series{\iota}_\alpha \defeq \borel_\zeta \series{I}_\alpha$ converges near $\zeta=\alpha$.
-\item\label{part-3} The sum of $\series{\iota}_\alpha$ can be analytically continued along the ray $\mathcal{J}_{\zeta, \alpha}^\theta$. Its Laplace transform along that ray is well-defined, and equal to $I_\alpha$.
+\item\label{part-1} The function $I_a$ has an asymptotic expansion $\series{I}_a \defeq \aexp^\theta I_a$, which lies in the space $e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Here, $\theta$ is the direction of the ray $\mathcal{J}^\theta_{\zeta, \alpha}$ that defines the thimble.
+\item\label{part-2} The Borel transform $\series{\iota}_a \defeq \borel_\zeta \series{I}_a$ converges near $\zeta = \alpha$.
+\item\label{part-3} The sum of $\series{\iota}_a$ can be analytically continued along the ray $\mathcal{J}_{\zeta, \alpha}^\theta$. Its Laplace transform along that ray is well-defined, and equal to $I_a$.
 \end{enumerate}
 \end{theorem}
 %\color{Goldenrod}
@@ -562,7 +563,7 @@ If the integral defining $I_\alpha$ is absolutely convergent, then $I_\alpha$ is
 %\end{theorem}
 %\color{black}
 \begin{draft}
-\begin{todo}[Shorten, but maybe keep the basics.]\end{todo} We sketch the proofs of the main results in the following diagram (for the rigorous ones see Section~\ref{borel-reg-thimble}):
+\begin{todo}[Shorten or remove. The original intent was to highlight similarity with Borel regularity diagram, but the statement of the theorem now matches the diagram closely.]\end{todo} We sketch the proofs of the main results in the following diagram (for the rigorous ones see Section~\ref{borel-reg-thimble}):
 %\[
 %\begin{tikzcd}
 %{I} \arrow[rrr,"\aexp^{\theta}"]\arrow[dd, swap,"\laplace^{-1} "] &  & & \series{I}\arrow[dd,"\borel"]\\
@@ -572,8 +573,6 @@ If the integral defining $I_\alpha$ is absolutely convergent, then $I_\alpha$ is
 %\]
 On the one hand, with a change of coordinates, the thimble integral $I$ can be written as a Laplace type integral, i.e. as the Laplace transform of a function $\iota$, written explicitly in equation~\eqref{eqn:formula}. 
 On the other hand, we compute the asymptotic expansion of $I$ using the saddle point approximation, which turns out to be a formal $1$-Gevrey series in the frequency domain. Consequently, its Borel transform $\series{\iota}$ is a germ of holomorphic functions at $\zeta=\alpha$ in the position domain. Finally, we will show that the Taylor expansion of $\iota$ at $\zeta=\alpha$ agrees with~$\series{\iota}_\alpha$.
-
-\begin{todo}[Discuss where to find proofs, similarly to \texttt{reg-sing-volterra}.]\end{todo}
 \end{draft}
 %% the following remark has been moved to Section of the proof
 %\begin{remark}\label{rmk:Pham formula}
@@ -609,13 +608,13 @@ In Sections \ref{sec:geometry_laplace} and \ref{sec:geometry_borel}, we introduc
 \begin{draft}
 \paragraph{New and old examples}
 %
-We illustrate our main results with detailed treatments of several examples: we will mostly focus on degree two ODEs that admit a frame of solutions expressed as thimble integrals \begin{todo}[These examples are all closely related; they're not just examples of second-order ODEs]\end{todo}: the Airy--Lucas functions (Section~\ref{example_AL}), the modified Bessel functions, the Airy function (Appendix~\ref{airy-appendix}). \begin{todo}[the anharmonic oscillator\ldots]\end{todo} On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. The thimble projection reasoning is the one we use in Lemma~\ref{lem:thimble_proj_formula} and it is crucial for the proof of Theorem~\ref{thm:maxim}. In the Airy example (see Section~\ref{airy-appendix}) we will compute the \textit{thimble projection formula} directly.%, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
+\begin{todo}[First mention more classical examples; then talk about Airy-Lucas and cantilever.]\end{todo} We illustrate our main results with detailed treatments of several examples: we will mostly focus on [modified Bessel functions, which are] degree two ODEs that admit a frame of solutions expressed as thimble integrals. \begin{todo}[Transition: many well-known examples reduce to special cases of these\ldots]\end{todo} the Airy--Lucas functions (Section~\ref{example_AL}), the Airy function (Appendix~\ref{airy-appendix}). \begin{todo}[the anharmonic oscillator---see ``A Primer on Resurgent Transseries,'' appendices B--C]\end{todo} On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. \begin{todo}[Mention that some classical integral formulas for modified Bessel functions are actually thimble integrals.]\end{todo} The thimble projection reasoning is the one we use in Lemma~\ref{lem:thimble_proj_formula} and it is crucial for the proof of Theorem~\ref{thm:maxim}. In the Airy example (see Section~\ref{airy-appendix}) we will compute the \textit{thimble projection formula} directly.%, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
 
 Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we will make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}. \begin{todo}The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}).\end{todo} Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}.
 %
 \paragraph{Links to resurgence}
 %
-Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interest in mathematics and physics. The resurgence of linear ODEs have been intensively studied \cite{loday1994stokes,diverg-resurg--ii} and many results are also known for non-linear ODEs \cite{costin-PI,costin_kruskal,diverg-resurg-iii,schiappa-PI}. For algebraic thimble integrals of the type we studied in this paper, the resurgence of their asymptotic expansion can be understood geometrically (see \cite{Maxim_slide_ERC}, \cite[Section 6.2]{kontsevich2022analyticity}), however for more general exponential integrals (see the last example in \cite{Maxim_slide_ERC}) resurgence remains conjectural. Despite their simplicity, our examples of linear ODEs and of 1-dimensional thimble integrals are toy-models that show some features of resurgent functions. 
+\begin{todo}[The examples we study all involve {\em resurgent functions} in the position domain.] [Say a tiny bit about what resurgence does or is good for.]\end{todo} Recently, resurgence theory (first developed by \'Ecalle in the '80) has attracted interest in mathematics and physics. The resurgence of linear ODEs have been intensively studied \cite{loday1994stokes,diverg-resurg--ii} and many results are also known for non-linear ODEs \cite{costin-PI,costin_kruskal,diverg-resurg-iii,schiappa-PI}. For algebraic thimble integrals of the type we studied in this paper, the resurgence of their asymptotic expansion can be understood geometrically (see \cite{Maxim_slide_ERC}, \cite[Section 6.2]{kontsevich2022analyticity}), however for more general exponential integrals (see the last example in \cite{Maxim_slide_ERC}) resurgence remains conjectural. Despite their simplicity, our examples of linear ODEs and of 1-dimensional thimble integrals are toy-models that show some features of resurgent functions. 
 
 %\color{gray}
 %\begin{itemize}
@@ -890,8 +889,9 @@ The formal solutions of a level~$1$ ODE are always resurgent series~\cite[Propos
 %%A resurgent analysis of a differential equation on the frequency domain begins by using formal perturbation theory to solve a corresponding equation on the position domain---either an integral equation, as in the work of Loday-Richaud and Remy~\cite{loday-Remy2011}, or a differential equation, as in the work of Malgrange~\cite{malgrange--fourier}. Ecalle's
 
 %%\textcolor{orange}{[Where does resurgence come in?]}
-
-\begin{todo}[Kontsevich and Soibelman: Riemann-Hilbert problem in analytic frequency domain from Stokes constants in the formal position domain. New section?]\end{todo}
+\subsubsection{Equivalence to Riemann--Hilbert problems}
+\begin{todo}\textbf{V}\end{todo} \begin{todo}[Update title.] [Focus on Kontsevich and Soibelman's example, where the R--H problem turns out to be solvable.] [Kontsevich and Soibelman: Riemann-Hilbert problem in analytic frequency domain from Stokes constants in the formal position domain. New section?]\end{todo}
+Add brief description of general RH, when it can be solves like Boalch, KS, Tom, GMN
 \begin{old}\par
 However, more absractly, taking as input the set of Stokes data (namely the Stokes ray emanating from the singulairties and the associated Stokes constants) one can set-up a Riemann--Hilbert problem, whose solution would give a frame of analytic solutions of the ODEs~\cite{kontsevich2022analyticity}. This is an advantage of resurgence techniques compared to the usual Borel summation method. 
 \end{old}
@@ -937,26 +937,25 @@ The function spaces mentioned in Section~\ref{sec:laplace_analytic} play an impo
 %
 %
 %
-\subsection{Borel regularity for thimble integrals}
+\subsection{Thimble integrals}
 %
 Thimble integrals have been studied from different perspectives: in physics, they play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities \cite{dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua}. In the algebraic geometric set-up, namely when, following the notation introduced in Section~\ref{borel-reg:explanatory-power}, $X$ is an $N$-dimensional alegbraic variety over $\C$ and $f$ is a proper map $f\colon X\to\C$, thimble integrals are known as period integrals \cite{deligne2007singularites,Maxim_lectures,pham}.\footnote{In particular, they find application in mirror symmetry for Fano varieties as they encode the Gromov--Witten invariants. \begin{todo}[Add references---Maxim's mirror symmetry talk, Varchenko.]\end{todo}}
 \subsubsection{Thimble integrals in physics}
-In physics, thimble integrals play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. In this context, physicists often use Borel summation, resurgence and related techniques to assign values to these integrals going beyond their pertubative expansion~\cite{dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua,Berry_Howls,Berry1991,costin_kruskal,Howls97,Howls,pham1988resurgence}. 
-\begin{todo}
-For instance, in complex Chern--Simons theory, one could decompose the path integral in thimble integrals and arguing as in the finite dimesional set-up to study the Witten--Reshetikhin--Turaev invariants of $3$ manifolds \cite{gukov-marino-purtrov-resurgence,Witten}.
-\end{todo}
+\begin{todo}\textbf{A} [Thimble integrals in optics? Mention Voros, and maybe Knoll--Schaeffer?]\end{todo} In physics, thimble integrals play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. In this context, physicists often use Borel summation, resurgence and related techniques to assign values to these integrals going beyond their pertubative expansion, see some examples in~\cite{costin_kruskal,Garoufalidis--CS,GTM--CS,GGM,dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua,Berry_Howls,Berry1991,Howls97,Howls,pham1988resurgence,Unsal--resurgence-gauge}.
+For instance, in $\mathcal{N}=2$ $d=2$ QFT given by Landau--Ginzburg theories, Cecotti--Vafa showed that instantons can be computed using Picard--Lefschetz formulas, indeed the so called wall--crossing phenomenon is equivalent to Stokes phenomenon for thimble integrals~\cite{CV91}.
+Similarly, in the study of complex Chern--Simons theory, the path integral can be studied using a decomposition in thimble integrals and arguing as in the finite dimesional set-up~\cite{gukov-marino-purtrov-resurgence,Witten}. 
+\textcolor{orange}{[Is it true that all thimble integrals describes instantions? Can we have (higher dimensional) thimble integrals describing renormalons?]}
 %
 \subsubsection{Thimble integrals in geometry}
 Thimble integrals can be used to explore the geometry of complex manifolds, and even to represent elements of a homology group. To see how this works, we first recall how the one-dimensional definition of a Lefschetz thimble arises from the general definition. Suppose that $f \maps X \to B$ is a holomorphic map from an $N$-dimensional complex manifold $X$ to a translation surface $B$. Consider a translation chart $\zeta$ on $B$ and a non-degenerate critical point $a \in X$ that $f$ sends to $\zeta = \alpha$. Near $a$, we can always find coordinates $t_1, \ldots, t_N$ on $X$ with
 \[ f^*\zeta = \alpha + e^{i \theta} (t_1^2 + \ldots + t_N^2). \]
 When the ray $\mathcal{J}_{\zeta, \alpha}^\theta$ avoids the other critical values of $f$, each such coordinate system defines a Lefschetz thimble: the oriented real-analytic submanifold where $t_1, \ldots, t_N$ are real. There are many such coordinate systems, but they are all related by local holomorphic maps from $X$ to the complex orthogonal group $O_N(\C)$. Since $O_N(\C)$ has only two connected components, distinguished by the sign of the determinant, a Lefschetz thimble is determined up to homotopy and orientation by the critical point $a$ and the direction $\theta$. When $N = 1$, the homotopy freedom disappears, because $O_1(\C)$ is the discrete group $\{\pm 1\}$.
 
-Lefschetz thimbles for $f$ with direction $\theta$ represent classes in the ``rapid decay homology'' group $H^\theta_N(X,f)$. Roughly speaking, this group describes homology relative to the region where $\Re(e^{-i\theta} f)$ is large and positive. In this context, each thimble integral
+Lefschetz thimbles for $f$ with direction $\theta$ represent classes in the ``rapid decay homology'' group $H^\theta_N(X,f)$~\cite{pham}\cite[Section~1.1]{fresan-notes}. Roughly speaking, this group describes homology relative to the region where $\Re(e^{-i\theta} f)$ is large and positive. In this context, each thimble integral
 \[ \int_{\mathcal{C}}e^{-zf}\,\nu \]
 computes the pairing between a rapid decay homology class $\mathcal{C}$ and a ``twisted $1$-form'' $e^{-zf}\,\nu$. When all the critical points of $f$ are non-degenerate, Lefschetz thimbles actually form a basis for $H^\theta_N(X,f)$. As $\theta$ varies, the groups $H^\theta_N(X,f)$ fit together into a local system over the circle of directions, which is singular at the direction of each segment connecting a pair of critical values. The monodromy of this local system can be found using the Picard--Lefschetz formula~\cite[Section~1]{Arnold}\cite[Section~3.3, Part II]{pham}.
 
-Like solutions of level~$1$ ODEs, thimble integrals often exhibit the Stokes phenomenon. The Stokes constants can be interpreted geometrically as intersection numbers for pairs of thimbles. Finding the Stokes constants is equivalent to finding the monodromy of the local system $H^\theta_N(X,f)$.
-
+Like solutions of level~$1$ ODEs, thimble integrals often exhibit the Stokes phenomenon. For one dimensional thimble integrals, the Stokes constants can be interpreted geometrically as intersection numbers for pairs of thimbles~\cite{kontsevich2022analyticity}. More generally, finding the Stokes constants is equivalent to finding the monodromy of the local system $H^\theta_N(X,f)$ (see the recent developement~\cite{kontsevich2024holomorphic}). 
 %%Equivalently, using the Borel regularity result \textcolor{magenta}{[do we really want this theorem, rather than the thimble projection formula?]} Theorem~\ref{thm:maxim}, we can express thimble integrals as Laplace transforms and reconstruct the monodromy of $H^\theta_N(X,f)$ from the associated Stokes constants. The Stokes
 %%\color{BlueViolet}
 %%\begin{itemize}
@@ -968,10 +967,10 @@ Like solutions of level~$1$ ODEs, thimble integrals often exhibit the Stokes phe
 \subsubsection{Asymptotics of thimble integrals}
 %
 \begin{revised}
-Thimble integrals are traditionally understood through their asymptotics, which can be found with the saddle point approximation~\cite{andersen2020resurgence,delabaere-howls,delabaere_dillinger_pham,Delabaere-Pham99,dingle1973asymptotic,Malgrange22,Pham83}. A thimble integral's asymptotic expansion is typically divergent, \begin{draft}[but can be recovered using Borel summation]\end{draft}
+Thimble integrals are traditionally understood through their asymptotics, which can be found with the saddle point approximation~\cite{andersen2020resurgence,delabaere-howls,delabaere_dillinger_pham,Delabaere-Pham99,dingle1973asymptotic,Malgrange22,Pham83}. A thimble integral's asymptotic expansion is typically divergent, but the integral can often be recovered using Borel summation. \begin{draft}[but can be recovered using Borel summation]\end{draft}
 \end{revised}
 
-\begin{todo}[Keep revising\ldots]\end{todo}
+\begin{todo}\textbf{A} [Keep revising. We agree that this outline is good.]\end{todo}
 
 \begin{brainstorm}
 \item In fact, the thimble integral is almost a Laplace transform (cite Pham and point to thimble projection formula in this paper)
@@ -987,35 +986,9 @@ Thimble integrals are traditionally understood through their asymptotics, which 
 %%\item Thimble integral: get a formal series, resum it, check whether the result matches the original analytic thimble integral.
 %%\end{itemize}
 \end{brainstorm}
-\begin{brainstorm}
-\color{DarkTurquoise}\par
-\item Classical examples of $1$-dimensional thimble integrals (with polynomial $f$) are special functions
-\item {[Toy model of situations where there's no well-defined thimble---like infinite-dimensional path integrals---or where the integral doesn't quite look like a thimble integral---like state integral in Chern-Simons.]}
-\end{brainstorm}
 
 \begin{draft}This raises the question we address in this paper, namely to understand why Borel summation is effective for $1$-dimensional thimbles integrals. In a nutshell, our result follows from the fact that thimble integrals are generalized Laplace transforms. We prove, from this, that they are Borel regular functions. In addition, our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see~\cite{Fenyes-ihes-lecture} and Section~\ref{sec:Laplace-Borel-general}).\end{draft}
-
-\begin{old}
-\subsubsection*{Old stuff to distribute among new sections}
-Thimble integrals have been studied from different perspectives: in physics, they play an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities \cite{dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua}. In this context, physicists often use Borel summation, resurgence and related techniques to assign values to these integrals going beyond their pertubative expansion (see also \cite{Berry_Howls,Berry1991,costin_kruskal,Howls97,Howls,pham1988resurgence}). For instance, in complex Chern--Simons theory, one could decompose the path integral in thimble integrals and arguing as in the finite dimesional set-up to study the Witten--Reshetikhin--Turaev invariants of $3$ manifolds \cite{gukov-marino-purtrov-resurgence,Witten}. \begin{todo}Take a look at Witten's paper on knots\end{todo} More generally, we could think of a problem that is known to admit a thimble integral solution but that's hard to be defined explicitly. However, we know the perturbative expansion of the expected solution; then Borel regularity tells us that the Borel sum of the pertubative series is the solution we are looking for. In fact, the Laplace transform ray (namely the ray along which the Laplace trasnform is defined) is often a ``collapsed'' thimble. \begin{todo}[This is the bit about turning a perturbative series back into a thimble integral, taking advantage of the fact that the Laplace transform ray is often a ``collapsed'' thimble.]\end{todo}
-
-In the algebraic geometric set-up, namely when $X$ is an $N$-dimensional alegbraic variety over $\C$ and $f$ is a proper map $f\colon X\to\C$, thimble integrals are known as period integrals \cite{deligne2007singularites,Maxim_lectures,pham}.\footnote{In particular, they find application in mirror symmetry for Fano varieties as they encode the Gromov--Witten invariants. \begin{todo}[Add references---Maxim's mirror symmetry talk, Varchenko.]\end{todo}} In fact, the thimbles represent classes in the homology $H^{B,\theta}_N(X,f)$ which are relative to the preimage of \begin{draft}$e^{i\theta}\infty$\end{draft} under the funtion $f$, for a generic direction $\theta$.\footnote{The relative homology $H_i^{\theta}(X,f)$ is defined as the limit as $c\to e^{i\theta}\infty$, of $H_i^{\theta}(X,f^{-1}(S_c^+))$, where $S_c^+=\lbrace \zeta\in\C \vert \Re \zeta> c\rbrace$. Generic directions correspond to $\theta\neq \arg (\alpha-\beta)$. } Furthermore, if $f$ has non-degenerate critical points, they form a basis for $H_N^{B,\theta}(X,f)$. Then varying $\theta$, $H_N^{B,\theta}(X,f)$ forms a local system over $S^1=\R/2\pi \Z$ singular at $\theta=\arg(\alpha-\beta)$, and whose monodromy can be computed by Picard--Lefschetz formula (we refer to \cite[Section~1]{Arnold} and \cite[Section~3.3, Part II]{pham}). Equivalently, the monodromy data can be computed as the Stokes phenomena for Laplace transforms; indeed as a consequence of our Borel regularity result Theorem~\ref{thm:maxim}, thimble integrals can be turned into Laplace transforms.
-
-Classical examples of thimble integrals (with polynomial $f$) are special functions, thus the Borel summability properties of their asymptotics can be studied either analytically (through the \textit{thimble projection reasoning} see the discussion in Section~\ref{sec:examples}) or geometrically (in terms of a certain Riemann--Hilbert problem \cite{Maxim_slide_ERC}\cite[Section 6.2]{kontsevich2022analyticity}). 
-
-
-In the $N$-dimensional analog of our set-up \ref{borel-reg:explanatory-power} the thimbles are actually steepest descent paths from the critical points; thus the asymptotic behaviour as $z \to \infty$ in direction $\theta$ can be studied using the steepest descent method \cite{andersen2020resurgence,delabaere-howls,delabaere_dillinger_pham,Delabaere-Pham99,dingle1973asymptotic,Malgrange22,Pham83}.\footnote{In fact, analougus results hold when $f$ satisfies milder assumptions (see for instance~\cite[Section 1.2.2]{mistegard_phdthesis}).} However, the asymptotics of thimble integrals is typically a formal power series, and choosing a suitable resummation technique one should be able to recover the original function. This raises the question we address in this paper, namely to understand why Borel summation is effective for $1$-dimensional thimbles integrals. In a nutshell, our result follows from the fact that thimble integrals are generalized Laplace transforms, hence they are Borel regular functions. In addition, our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see \cite{Fenyes-ihes-lecture} and Section~\ref{sec:Laplace-Borel-general}).   
-
- %In addition, they typically come as \textcolor{orange}{[Stokes phenomena in one case ... in the other is ...]}   
-
-
-%\textcolor{orange}{hyperasymptotics \cite{Berry_Howls,Berry1991,Howls97,Howls}}
-%\color{DarkTurquoise}
-%These questions have been classically addressed by Pham \cite[Section 3.3]{pham}, Malgrange \cite[Theorem 6]{Malgrange22}, Berry and Howls \cite{Berry_Howls} and Sternin and Shatalov \cite[Theorem 3.9 and 3.10]{sternin1995borel}. In addition, the study of thimble integrals plays an important technical role in quantum mechanics, where infinite-dimensional exponential integrals are supposed to give the expectation values of observable quantities. Physicists often use Borel summation, resurgence and related techniques to assign values to these integrals \cite{costin_kruskal,pham1988resurgence}.
-%\color{black}
-%%Our approach wants to focus on the role of the position domain and it emphasizes how the geometry of the Laplace transform is the natural framework to describe Borel regularity for thimbles integrals (see Fenyes's lecture \cite{Fenyes-ihes-lecture}). In a nutshell, we use that thimble integrals are generalized Laplace transforms, to show they are indeed Borel regular functions.  
-%    
-\end{old}
+%
 \section{The Laplace and Borel transforms}\label{sec:Laplace-Borel-general}
 \subsection{The geometry of the Laplace transform}\label{sec:geometry_laplace}
 Classically, the Laplace transform turns functions on the position domain into functions on the frequency domain. In the study of Borel summation and resurgence, it is useful to see the position domain as a {\em translation surface} $B$, and the frequency domain as one of its cotangent spaces. Roughly speaking, the Laplace transform lifts holomorphic functions on $B$ to holomorphic functions on $T^*B$.
@@ -2227,7 +2200,7 @@ If the integral defining $I_\alpha$ is absolutely convergent, then $I_\alpha$ is
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a$ with $\tfrac{1}{2} \tau^2 = f - f(a)$. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_a^\theta$ that go from the past ($-e^{-i\theta}\infty$) to $a$ and from $a$ to the future ($+e^{-i\theta}\infty$), respectively. By changing the sign of $\tau$, we can arrange for it to be valued in $(-\infty, 0]$ and $[0,\infty)$ on $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$, respectively. Since $\nu$ is holomorphic, we can express it as a Taylor series
+\begin{todo}\textbf{A} [Use $a$ subscript instead of $\alpha$ for $I$ and $\iota$.]\end{todo} Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a$ with $\tfrac{1}{2} \tau^2 = f - f(a)$. Let $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$ be the parts of $\mathcal{C}_a^\theta$ that go from the past ($-e^{-i\theta}\infty$) to $a$ and from $a$ to the future ($+e^{-i\theta}\infty$), respectively. By changing the sign of $\tau$, we can arrange for it to be valued in $(-\infty, 0]$ and $[0,\infty)$ on $\mathcal{C}^-_\alpha$ and $\mathcal{C}^+_\alpha$, respectively. Since $\nu$ is holomorphic, we can express it as a Taylor series
 \[ \nu = \sum_{m \ge 0} b_m^a \tau^m\,d\tau \]
 that converges in some disk $|\tau| < \varepsilon$.
 
