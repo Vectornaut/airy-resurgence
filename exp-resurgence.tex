@@ -1506,6 +1506,8 @@ where $\mathcal{S}'(\zeta)$ is the line segment connecting $\zeta' = \alpha$ to 
 \item Draw diagram
 \end{brainstorm}
 \end{definition}
+\begin{todo}[Show that Laplace transform preserves domain of Laplace transform]\end{todo}
+\begin{draft}On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$. The Laplace transform $\laplace_{\zeta, 0}$ is special, because it is an algebra isomorphism with respect to $\ast_{\zeta, 0}$.\end{draft}
 \begin{prop}
 \begin{todo}[Correct and rewrite!]\end{todo}
 \begin{old}The Laplace transform $\laplace^\theta_{\zeta,\alpha}$ is a homomorphism from the algebra of locally integrable, exponentially bounded holomorphic functions, equipped with the convolution product, to the algebra of analytic functions on the half-plane $\Re(e^{i\theta} z) > 0$, equipped with the usual product.\end{old}
@@ -1544,55 +1546,6 @@ where $\mathcal{S}'(\zeta)$ is the line segment connecting $\zeta' = \alpha$ to 
    \end{align*}
    where we have introduced the coordinate $t=\zeta''\frac{s}{1-s}+\alpha$ which gives the ray $\Gamma_{t,\alpha}$ as $s$ varies in $[0,1]$. \begin{todo}[Check claim: as coordinates on the position domain, $t = \zeta'$. If true, clarify argument.]\end{todo}
 \end{proof}
-\begin{proof}
-We just need to prove that
-\[ \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}] = \laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,\alpha}[{\psi}] \]
-\begin{todo}
-\textbf{A} \textbf{V} [Find and prove correct statement. Maybe it should be\ldots]
-\[ \laplace_{\zeta_\alpha,0}[{\phi}\ast_{\zeta_\alpha,0}{\psi}] = \laplace_{\zeta_\alpha,0}[{\phi}]\,\laplace_{\zeta_\alpha,0}[{\psi}] \]
-\[ \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta, \alpha}{\psi}] = \laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta_\alpha,0}[{\psi}] \]
-\end{todo}
-for all $\phi, \psi$ with a well-defined Laplace transform. This can be shown by direct computation, done for instance in Theorem 2.39 of \cite{laplace-tfm} for $\alpha=0$.
-\begin{todo}[Add proof for $\alpha\neq 0$.]\end{todo}
-\begin{brainstorm}
-\item \begin{align*}
-\laplace_{\zeta, \alpha}(\phi)\,\laplace_{\zeta,\alpha}(\psi) & \defeq \left( \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \phi\,d\zeta \right)\left( \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \psi\,d\zeta \right) \\
-& = \left( \int_{\mathcal{J}_{\zeta', \alpha}^\theta} e^{-z\zeta'} \phi'\,d\zeta' \right)\left( \int_{\mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z\zeta''} \psi''\,d\zeta'' \right) \\
-& = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z(\zeta' + \zeta'')}\,\phi'\,\psi''\;d\zeta' \wedge d\zeta''.
-\end{align*}
-\item Since $d\zeta'' \wedge d\zeta'' = 0$, we can rewrite this as \begin{todo}[with $\zeta' + \zeta'' = \zeta$]\end{todo}
-\begin{align*}
-\laplace_{\zeta, \alpha}(\phi)\,\laplace_{\zeta,\alpha}(\psi) & = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z(\zeta' + \zeta'')}\,\phi'\,\psi''\;(d\zeta' + d\zeta'') \wedge d\zeta'' \\
-& = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} e^{-z\zeta}\,\phi'\,\psi''\;d\zeta \wedge d\zeta'' \\
-& = \int_{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta} \big(e^{-z\zeta}\;d\zeta\big) \wedge \big(\phi'\,\psi''\;d\zeta''\big) \\
-& = \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \left(\int_{\substack{\mathcal{J}_{\zeta', \alpha}^\theta \times \mathcal{J}_{\zeta'', \alpha}^\theta \\ \zeta' + \zeta'' = \zeta}} \phi'\,\psi''\;d\zeta''\right) d\zeta \\
-& = \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta}\,(\phi \ast_{\zeta, \alpha} \psi)\;d\zeta \\
-& = \laplace^\theta_{\zeta, \alpha}(\phi \ast_{\zeta, \alpha} \psi).
-\end{align*}
-\end{brainstorm}
-\begin{verify}
-\begin{align*}
-\laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}](a)&= \int_{\mathcal{J}^\theta_{\zeta, \alpha}} e^{-z\zeta(a)} \left(\int_{\zeta=\alpha}^a \psi \mathsf{R}^*\phi\;d\zeta\right)\;d\zeta
-\end{align*}
-
-\begin{align*}
-\laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,\alpha}[{\psi}]&=\int_\alpha^\infty e^{-z t}\phi(t)dt \int_\alpha^\infty e^{-z u} \psi(u) du \\
-&=\int_\alpha^\infty \left(\int_\alpha^\infty  e^{-z (t+u)}\phi(t) \psi(u) du \right)dt \\
-&=\int_\alpha^\infty \left(\int_{t+\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt 
-\end{align*}
-Define $\psi(s)=0$ if $s<\alpha$, thus $\psi(s-t)=0$ if $s<t+\alpha$, 
-\begin{align*}
-\int_\alpha^\infty \left(\int_{t+\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt &=\int_\alpha^\infty \left(\int_{\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt 
-\end{align*}
-Under the assumption that the integral is absolutely convergent, we can exchange the order of integration
-\begin{align*}
-\int_\alpha^\infty \left(\int_{\alpha}^\infty   e^{-z s} \psi(s-t) \phi(t) ds \right)dt &=\int_\alpha^\infty e^{-z s} \left(\int_{\alpha}^\infty    \psi(s-t) \phi(t) dt \right)ds\\
-&=\int_\alpha^\infty e^{-z s} \left(\int_{\alpha}^s    \psi(s-t) \phi(t) dt \right)ds \\
-&=\int_\alpha^\infty e^{-z s} \phi\ast_{t,\alpha}\psi ds 
-\end{align*}
-\textcolor{orange}{See Theorem 5.25 of \cite{diverg-resurg-i}}
-\end{verify}
-\end{proof}
 %
 \begin{remark}
 For $\alpha=0$, the Definition~\label{def:convolution} agrees with the standard deifinition of convolution \cite[Definition~5.12]{diverg-resurg-i}.
@@ -1600,7 +1553,7 @@ In addition, we will denote $\ast_{\zeta,0}$ simply by \begin{draft}$\ast_\zeta$
 \end{remark}
 Notice that, assuming the Taylor expansion of $\phi$ and $\psi$ at $\zeta=\alpha$ are convergent in a disk of radius $R$, then the convolution $\phi\ast_{\zeta,\alpha}\psi$ has a convergent Taylor expansion at $\zeta=\alpha$ in the disk of radius $R$ (when $\alpha=0$, see \cite[Lemma 5.14]{diverg-resurg-i} for a proof).
 
-\begin{revised}On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$, and the Laplace transform is an algebra isomorphism.\end{revised} \begin{todo}Write more if needed, and also make sure it's actually correct. The old text below has mistakes.\end{todo}
+\begin{todo}Move before calculation of Laplace transform of convolution, write more if needed, and also make sure it's actually correct. The old text below has mistakes.\end{todo}
 \begin{old}\par In addition, the convolution product induces a $\C$-algebra structure on the space $\singexp{\sigma}{\Lambda}$, and the Laplace transform is an algebra isomorphism.
 \begin{todo}[actually need $\Omega_0$ in lemma]\end{todo}
 \begin{lemma}
@@ -1689,7 +1642,7 @@ We can show that $\borel_\zeta$ is an algebra homomorphism from $\C\llbracket z^
 \borel_\zeta(\series{\Phi}\series{\Psi})&=\borel_\zeta\left(\sum_{n=0}^\infty\sum_{j=0}^na_jb_{n-j}z^{-n}\right)\\
 &=a_0b_0\delta +\sum_{n=1}^\infty\sum_{j=0}^na_jb_{n-j}\frac{\zeta^{n-1}}{(n-1)!}\\
 &=a_0b_0\delta+a_0\sum_{n=1}^\infty b_{n}\frac{\zeta^{n-1}}{(n-1)!}+b_0\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!}+\sum_{n=1}^\infty\sum_{j=1}^{n-1}a_jb_{n-j}\left[\frac{\zeta^{j-1}}{(j-1)!} \ast_\zeta \frac{\zeta^{n-j-1}}{(n-j-1)!}\right]\\
-&=\left(a_0\delta+\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!}\right)\ast\left(b_0\delta+\sum_{n=1}^\infty b_n\frac{\zeta^{n-1}}{(n-1)!}\right)\\
+&=\left(a_0\delta+\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!}\right)\ast_\zeta\left(b_0\delta+\sum_{n=1}^\infty b_n\frac{\zeta^{n-1}}{(n-1)!}\right)\\
 &=\borel_\zeta\series{\Phi} \ast_\zeta \borel_\zeta\series{\Psi}\,.
 %&=\sum_{n=0}^\infty\sum_{j=0}^na_jb_{n-j}\frac{\zeta^{j-1}}{(j-1)!}\ast\frac{\zeta^{n-j-1}}{(n-j-1)!}\\
 %&= a_0b_0\delta + \sum_{n=1}^\infty\sum_{j=0}^na_jb_{n-j}   \left( \sum_{n=0}^\infty a_n \frac{\zeta^n}{n!}\right)\ast\left(\sum_{n=0}^\infty b_n\frac{\zeta^n}{n!}\right)
@@ -1939,7 +1892,7 @@ In our treatmeant, we will restrict the Borel transform to the space of $1$-Gevr
 \begin{definition}
 For $\nu \in (-\infty, 1)$, the \textit{fractional integral} $\partial^{\nu-1}_{\zeta, \alpha}$ is defined by
 \[ [\partial^{\nu-1}_{\zeta, \alpha} \phi](p) \defeq \frac{1}{\Gamma(1-\nu)} \int_{\zeta =\alpha}^p \big(\zeta(p)-\zeta\big)^{-\nu} \phi\,d\zeta, \]
-where $p$ is any point on the position domain $B$. \begin{todo}[If we switch to $'$, $''$ notation, also convert this.]\end{todo}%\footnote{\textcolor{magenta}{Why highlight this special case of the definition above? Is it important to use $\lambda$ instead of $\nu-1$?} For completeness we also give the \textcolor{magenta}{[redundant] definition} of the fractional integral $\partial_{\zeta_\alpha,0}^{-\lambda}$: 
+where $p$ is any point on the position domain $B$. \begin{todo}[\textbf{V} If we switch to $'$, $''$ notation, also convert this.]\end{todo}%\footnote{\textcolor{magenta}{Why highlight this special case of the definition above? Is it important to use $\lambda$ instead of $\nu-1$?} For completeness we also give the \textcolor{magenta}{[redundant] definition} of the fractional integral $\partial_{\zeta_\alpha,0}^{-\lambda}$: 
 % \begin{equation*}
 %     \partial_{\zeta_\alpha,0}^{-\lambda}\varphi(p)\defeq\frac{1}{\Gamma(\lambda)}\int_{\zeta_\alpha=0}^{p}(\zeta_\alpha(p)-\zeta_\alpha)^{\lambda-1} \varphi \, d\zeta_\alpha.
 % \end{equation*}
