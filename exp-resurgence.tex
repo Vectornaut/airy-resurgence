@@ -2135,7 +2135,7 @@ A function $\iota_a$ with $I_a = \laplace_{\zeta, \alpha}^\theta \iota_a$ is giv
 where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that goes through $f^{-1}([\alpha,\zeta e^{i\theta}])$. Notice that $\mathcal{C}_a^\theta(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \begin{todo}[The thimble $\mathcal{C}_a^\theta$ needs an orientation, but the orientation is arbitrary.]\end{todo}
 \end{lemma}
 \begin{remark}
-In \cite{pham}, Pham describes this formula in a slightly different form, integrating the variation of $\nu/df$, instead of differentiating the integral as we do in equation~\ref{eqn:formula-proof}.
+In \cite{pham}, Pham describes this formula in a slightly different form, integrating the variation of $\nu/df$, instead of differentiating the integral as we do in equation~\eqref{eqn:formula-proof}.
 \end{remark}
 \begin{proof}
 We first recast the integral $I_a$ into the position domain. As $\zeta$ goes rightward from $\alpha$ with angle $\theta$, the start and end points of $\mathcal{C}_a^\theta(\zeta)$ sweep backward along $\mathcal{C}^-_a(\zeta)$ and forward along $\mathcal{C}^+_a(\zeta)$, respectively. Hence, we have
@@ -2145,7 +2145,7 @@ I_a & = \int_{\mathcal{C}_a^\theta} e^{-zf} \nu \\
 \end{align*}
 Noticing that the right-hand side is a Laplace transform, we learn that
 \begin{equation}\label{thimble-difference}
-{\iota}_\alpha(\zeta) = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}.
+{\iota}_\alpha = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}.
 \end{equation}
 \end{proof}
 We will now prove that $I_a$ is Borel regular:
@@ -2309,7 +2309,7 @@ as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$.
 \end{old}
 \end{proof}
 \begin{remark}\label{rmk:1/2-deriv}
-\begin{revised}
+\begin{todo}[\textbf{V} Read through, and remove \texttt{revised} if good]\end{todo}\begin{revised}
 For some applications, it is more convenient to work with $\Phi_a \defeq z^{-1/2} I_a$, whose asymptotic series has integer powers. The argument we use to prove of Theorem~\ref{thm:maxim-proof} can also be used to show that $\Phi_a$ is Borel regular, but the thimble projection formula is trickier in this case. Proposition~\ref{prop:L-int-op} tells us that $\Phi_a = \laplace^\theta_{\zeta, \alpha} \phi_a$ for
 \[\phi_a \defeq \fracderiv{-1/2}{\zeta}{\alpha}\,\iota_a. \]
 To get the thimble projection formula for $\phi_a$, take the $1/2$ fractional integral of both sides:
@@ -2383,19 +2383,19 @@ hence
 \end{proof}
 \end{todo}
 \begin{remark}\label{rmk:Pham formula}
-\begin{todo}[Add critical point index to $\iota$ and $I$?]\end{todo} When $f$ and $\nu$ are polynomials and $X$ is $N$-dimensional, a result of Pham \cite[Equation 2.4, II partie]{pham} allows to write ${\iota}$ explicitly as 
+When $f$ and $\nu$ are polynomials and $X$ is $N$-dimensional, a result of Pham \cite[Equation 2.4, II partie]{pham} gives us an explicit expression for the singularity of the function $\iota_a$ from Lemma~\ref{lem:thimble_proj_formula-proof}. For some coefficients $c_k$ which depend on $f$, $\nu$, and the thimble $\mathcal{C}_a^\theta$, we have
 \begin{equation}\label{eqn:Pham}
-(-1)^{\frac{N(N-1)}{2}}  \sum_{k=0}^\infty c_k\, \delta^{-\frac{N}{2}-k}+ \text{ hol. funct.}
+\iota_a \in (-1)^{\frac{N(N-1)}{2}}  \sum_{k=0}^\infty c_k\, \delta_{\zeta, \alpha}^{(-N/2 - k)} + \mathcal{O}_{\zeta = \alpha},
 \end{equation}
-for some coefficients $c_k$ which depends on $f$ and $\nu$, and with $\delta^{-\ell}$ be defined as
+where the singularities
 \begin{equation*}
-\delta^{-\ell}:=\begin{cases}
-\frac{\zeta^{\ell-1}}{-2\pi i(\ell-1)!}\log(\zeta) + \text{ hol. funct.} & \text{ if } \ell\in\mathbb{N}^*\\
+\delta_{\zeta,\alpha}^{(-\ell)}:=\begin{cases}
+\displaystyle\frac{\zeta_\alpha^{\ell-1}}{-2\pi i(\ell-1)!}\log(\zeta_\alpha)+ \mathcal{O}_{\zeta = \alpha} & \text{ if } \ell\in\mathbb{N}^*\\
 & \\
-\frac{(-\zeta)^{\ell-1}}{2\pi i\, \Gamma(-\ell)}+ \text{ hol. funct.} & \text{ if } \ell\notin \mathbb{N}^* 
+\displaystyle\frac{(-\zeta_\alpha)^{\ell-1}}{2\pi i\, \Gamma(-\ell)}+ \mathcal{O}_{\zeta = \alpha} & \text{ if } \ell\notin \mathbb{N}^* \,.
 \end{cases}
 \end{equation*}
-In particular, if $N=1$, the inverse Laplace transform of $I$ has a fractional power singularity of order $1/2$ at the origin, as we compute explicitly in the proof of Theorem~\ref{thm:maxim-proof}. %as computed in Remark~\ref{rmk:1/2-deriv} the inverse Laplace tranform of $z^{-1/2} I$ is the $1/2$-derivative of ${\iota}$, hence it has \textcolor{orange}{simple singularities (see Corollary~\ref{simple-res-thimble})}. \textcolor{magenta}{We expect this result to hold beyond the polynomial case.} We also expect that equation \eqref{eqn:formula-proof} can be generalized to the $N$-dimensional case replacing the $1/2$-derivative with the $N/2$ one. 
+can be seen as fractional derivatives of the Dirac delta distribution. In particular, if $N=1$, the inverse Laplace transform of the function $I_a$ from Equation~\eqref{exp-int} has a singularity of the form $\zeta_\alpha^{1/2}$, as we compute explicitly in the proof of Theorem~\ref{thm:maxim-proof}. %as computed in Remark~\ref{rmk:1/2-deriv} the inverse Laplace tranform of $z^{-1/2} I$ is the $1/2$-derivative of ${\iota}$, hence it has \textcolor{orange}{simple singularities (see Corollary~\ref{simple-res-thimble})}. \textcolor{magenta}{We expect this result to hold beyond the polynomial case.} We also expect that equation \eqref{eqn:formula-proof} can be generalized to the $N$-dimensional case replacing the $1/2$-derivative with the $N/2$ one. 
 \end{remark}
 \section{Examples}\label{sec:examples}
 %
