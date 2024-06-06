@@ -540,7 +540,7 @@ where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that g
 %\end{align*}
 %\end{verify}
 %\end{remark}
-\begin{draft}Then, the Borel regularity of thimble integrals is established by the following theorem:\end{draft}
+\begin{revised}Once we know $\iota_a$, we can go through the steps of the Borel regularization process and show that we end up with the same function we started with.\end{revised}
 \begin{theorem}\label{thm:maxim}
 If the integral defining $I_a$ is absolutely convergent, then $I_a$ is Borel regular. More explicitly:
 \begin{enumerate}
@@ -1094,7 +1094,7 @@ When $\zeta = 0$ is a branch point, we can still use formula~\eqref{laplace:int}
 %\end{itemize}
 %\color{black}
 \subsubsection{Change of translation chart}\label{sec:change-translation}
-Suppose $\zeta$ is a translation chart on $B$, and $\zeta = \alpha$ is an ordinary point. Let $\zeta_\alpha$ be the translation chart with $\zeta = \alpha + \zeta_\alpha$. The Laplace transforms $\laplace_{\zeta_\alpha, 0}$ and $\laplace_{\zeta, \alpha}$, which both turn functions on $B$ into functions on $T^*_{\zeta = \alpha}B$, are related in the following way.
+\begin{todo}[Change $b$ to $\alpha$?]\end{todo} Suppose $\zeta$ is a translation chart on $B$, and $\zeta = \alpha$ is an ordinary point. Let $\zeta_\alpha$ be the translation chart with $\zeta = \alpha + \zeta_\alpha$. The Laplace transforms $\laplace_{\zeta_\alpha, 0}$ and $\laplace_{\zeta, \alpha}$, which both turn functions on $B$ into functions on $T^*_{\zeta = \alpha}B$, are related in the following way.
 \begin{lemma}\label{translation}
 If the Laplace transform of $\varphi$ is well-defined, then
    \begin{equation}
@@ -1478,9 +1478,10 @@ commutes, where the functions of the variable $z$ belong to the fiber $T^*_{\zet
 %
 \subsubsection*{The Laplace transform as algebra homomorphism}
 The Laplace transform $\laplace_{\zeta,\alpha}$ is defined on the space of holomorphic functions in the position domain, integrable at $\zeta=\alpha$ and exponentially bounded at infinity. In particular, that subspace of holomorphic functions on $B$, it has a $\C$-algebra structure, with product given by the \textit{convolution product}. 
-\begin{definition}\label{def:convolution}
+\begin{old}
+    \begin{definition}%\label{def:convolution}
 Let $\phi,\psi$ be two holomorphic functions on $B$. Choose a translation cooridnate $\zeta$ on $B$ and a base point $\zeta=\alpha$, then the convolution product $\phi\ast_{\zeta,\alpha}\psi$ is an holomorphic function on $B$ defined as
-\begin{equation}\label{eq:convolution_def}
+\begin{equation}%\label{eq:convolution_def}
 [\phi \ast_{\zeta, \alpha} \psi](a) := \int_{\zeta = \alpha}^a \psi\,\mathsf{R}^*\phi\,d\zeta,
 \end{equation}
 where $\mathsf{R}$ is the $180^\circ$ rotation that exchanges $\zeta = 0$ with $a$. In other words, $\mathsf{R}^*\zeta = \zeta(a) - \zeta$.
@@ -1508,43 +1509,109 @@ where $\mathcal{S}'(\zeta)$ is the line segment connecting $\zeta' = \alpha$ to 
 \end{definition}
 \begin{todo}[Show that Laplace transform preserves domain of Laplace transform]\end{todo}
 \begin{draft}On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$. The Laplace transform $\laplace_{\zeta, 0}$ is special, because it is an algebra isomorphism with respect to $\ast_{\zeta, 0}$.\end{draft}
-\begin{prop}
-\begin{todo}[Correct and rewrite!]\end{todo}
-\begin{old}The Laplace transform $\laplace^\theta_{\zeta,\alpha}$ is a homomorphism from the algebra of locally integrable, exponentially bounded holomorphic functions, equipped with the convolution product, to the algebra of analytic functions on the half-plane $\Re(e^{i\theta} z) > 0$, equipped with the usual product.\end{old}
-\begin{todo}[Check: if Laplace transform of convolution is well-defined, then product of Laplace transforms is well-defined]\end{todo}
-\begin{todo}[\textbf{A} \textbf{V} Redo argument with $\ast_{\zeta, \beta}$]\end{todo}
-\begin{draft}
-\begin{align*}
-\laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}] & = \laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,0}[{\psi}]
-\end{align*}
-\end{draft}
+% \begin{prop}
+% \begin{todo}[Correct and rewrite!]\end{todo}
+% \begin{old}The Laplace transform $\laplace^\theta_{\zeta,\alpha}$ is a homomorphism from the algebra of locally integrable, exponentially bounded holomorphic functions, equipped with the convolution product, to the algebra of analytic functions on the half-plane $\Re(e^{i\theta} z) > 0$, equipped with the usual product.\end{old}
+% \begin{todo}[Check: if Laplace transform of convolution is well-defined, then product of Laplace transforms is well-defined]\end{todo}
+% \begin{todo}[\textbf{A} Redo argument with $\ast_{\zeta, \beta}$]\end{todo}
+% \begin{draft}
+% \begin{align*}
+% \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}] & = \laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,0}[{\psi}]
+% \end{align*}
+% \end{draft}
+% \end{prop}
+\end{old}
+\begin{definition}\label{def:convolution}
+Let $\phi,\psi$ be two holomorphic functions on $B$. Choose a translation coordinate $\zeta$ on $B$ and a base point $\zeta=\alpha$, then the convolution product $\phi\ast_{\zeta,\alpha}\psi$ is an holomorphic function on $B$ defined as
+\begin{equation}\label{eq:convolution_def}
+\phi \ast_{\zeta, \alpha} \psi \defeq \int_{\substack{\mathcal{S}'(\zeta)\times\mathcal{S}''(\zeta)\\ \zeta'+\zeta''=\zeta}} \phi' \psi'' d\zeta'
+\end{equation}
+where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=\alpha$ to $\zeta'=\zeta$, and $\mathcal{S}''(\zeta)$ is defined similalrly. \begin{todo}
+    Is it clear the convolution is holomorphic??
+\end{todo}  
+\end{definition}
+On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$. The Laplace transform $\laplace_{\zeta_\alpha, 0}$ is special, because it is an algebra isomorphism with respect to $\ast_{\zeta_\alpha, 0}$.
+\begin{prop}\label{prop:convolution_iso_laplace}
+Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transform $\laplace_{\zeta_\alpha,0}$ is well defined. Then 
+\begin{equation}
+    \laplace_{\zeta_\alpha,0}[\phi\ast_{\zeta_\alpha,0}\psi]=\laplace_{\zeta_\alpha,0}[\phi]\,\laplace_{\zeta_\alpha,0}[\psi]\,.
+\end{equation}
 \end{prop}
 \begin{proof}
-\begin{todo}
-   \textbf{V} fix notation, add $\theta$
-   \end{todo}
-   First we notice that the convolution product can be rewritten by introducing the parameter $s\in [0,1]$
+Notice that the convolution product can be rewritten by introducing the parameter $s\in [0,1]$
    \begin{align*}
-       \phi \ast_{\zeta, \alpha} \psi &= \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}} \phi'\,\psi''\,d\zeta''\\
+       \phi \ast_{\zeta, \alpha} \psi &= \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}} \phi'\,\psi''\,d\zeta'\\
        &=\zeta_\alpha\,\int_0^1 \phi' \psi''\,ds\,,
    \end{align*}
-   where $\zeta'=s\zeta_\alpha+\alpha$ and consequently $\zeta''=\zeta_\alpha (1-s)$. Then, the Laplace transform of $\phi \ast_{\zeta, \alpha} \psi$ reads
-   \begin{align*}
-       \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta, \alpha}{\psi}]&=e^{-z\alpha}\laplace_{\zeta_\alpha,0}[{\phi}\ast_{\zeta, \alpha}{\psi}]\\
-       &=e^{-z\alpha}\int_{\Gamma_{\zeta_\alpha,0}}d\zeta_\alpha\,e^{-z\zeta_\alpha}\zeta_\alpha\, \int_0^1 \phi' \psi''\,ds \\
-       &=e^{-z\alpha}\int_{\Gamma_{\zeta_\alpha,0}}d\zeta_\alpha\, \int_0^1 \zeta_\alpha\,e^{-z\zeta_\alpha(1-s)} e^{-z\zeta_\alpha s} \phi' \psi''\,ds 
+where $\zeta'=s\zeta_\alpha$ and consequently $\zeta''=\zeta_\alpha (1-s)$. 
+
+First, we show that the convolution product $\phi \ast_{\zeta_\alpha,0} \psi$ is in the domain of the Laplace transform $\laplace_{\zeta_\alpha,0}$. Indeed it is uniform of exponential type
+\begin{align*}
+   \big|\phi \ast_{\zeta_\alpha,0} \psi\big|&\leq |\zeta_\alpha|\int_0^1 ds \,|\phi'|\,|\psi''|\\
+   &\lesssim |\zeta_\alpha| \int_0^1 ds\, e^{c |\alpha+s\zeta_\alpha|}\,e^{c'|(1-s)\zeta_\alpha|}\\
+   & \lesssim |\zeta_\alpha|  e^{c'' |\zeta_\alpha|}
+\end{align*}
+where $c''=\max\{c,c'\}$. \begin{todo}
+    How do we check it is locally integrable???
+\end{todo}
+%   
+Then, the Laplace transform of $\phi \ast_{\zeta_\alpha,0} \psi$ reads
+     \begin{align*}
+       \laplace_{\zeta_\alpha,0}[{\phi}\ast_{\zeta_\alpha,0}{\psi}]&=\laplace_{\zeta_\alpha,0}[{\phi}\ast_{\zeta_\alpha,0}{\psi}]\\
+       &=\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha\,e^{-z\zeta_\alpha}\zeta_\alpha\, \int_0^1 \phi' \psi''\,ds \\
+       &=\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha\, \int_0^1 \zeta_\alpha\,e^{-z\zeta_\alpha(1-s)} e^{-z s \zeta_\alpha} \phi' \psi''\,ds 
    \end{align*}
    by exchanging the order of integration we find 
    \begin{align*}
-        &=\int_0^1 ds\,\int_{\Gamma_{\zeta_\alpha,0}}d\zeta_\alpha\,\zeta_\alpha\,e^{-z\zeta_\alpha(1-s)} e^{-z(\zeta_\alpha s+\alpha)} \phi' \psi'' \\
-        &=\int_0^1 ds\,\int_{\Gamma_{\zeta'',0}}d\zeta''\,\frac{\zeta''}{(1-s)^2}\,e^{-z\zeta''} e^{-z(\zeta'' \frac{s}{1-s}+\alpha)} \phi' \psi'' 
+        &=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha\,\zeta_\alpha\,e^{-z\zeta_\alpha(1-s)} e^{-z\zeta_\alpha s} \phi' \psi'' \\
+        &=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta'',0}}d\zeta''\,\frac{\zeta''}{(1-s)^2}\,e^{-z\zeta''} e^{-z\zeta'' \frac{s}{1-s}} \phi' \psi'' 
    \end{align*}
-   Exchanging one more time the order of integration we get
+   Setting $t=\zeta''\frac{s}{1-s}$ we find
     \begin{align*}
-        &=\int_{\Gamma_{\zeta'',0}}d\zeta'' \,e^{-z\zeta''}  \psi'' \,\int_0^1 ds\,\frac{\zeta''}{(1-s)^2}e^{-z(\zeta'' \frac{s}{1-s}+\alpha)} \phi'\\
-        &=\int_{\Gamma_{\zeta'',0}}d\zeta'' \,e^{-z\zeta''}  \psi'' \,\int_{\Gamma_{t,\alpha}} dt\, e^{-zt} \phi\\
+        &=\int_{\mathcal{J}_{\zeta'',0}}d\zeta'' \,e^{-z\zeta''}  \psi''\,\int_0^1 ds\,\frac{\zeta''}{(1-s)^2}e^{-z\zeta'' \frac{s}{1-s}} \phi'\\
+        &=\int_{\mathcal{J}_{\zeta'',0}}d\zeta'' \,e^{-z\zeta''}  \psi'' \,\int_{\mathcal{J}_{t,0}} dt\, e^{-zt} \phi\\
    \end{align*}
-   where we have introduced the coordinate $t=\zeta''\frac{s}{1-s}+\alpha$ which gives the ray $\Gamma_{t,\alpha}$ as $s$ varies in $[0,1]$. \begin{todo}[Check claim: as coordinates on the position domain, $t = \zeta'$. If true, clarify argument.]\end{todo}
+   where as $s$ varies in $[0,1]$ we get that $t$ follows the ray $\mathcal{J}_{t,0}$. 
+\end{proof}
+More generally we can show that the product of two Laplace transforms based at different points is the Laplce transform of the convolution.
+\begin{prop}
+Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transforms $\laplace_{\zeta,\alpha}\phi$ and $\laplace_{\zeta,\beta}\psi$ are well defined. Then 
+\begin{equation}
+    \laplace_{\zeta,\alpha+\beta}[\phi\ast_{\zeta,\alpha+\beta}\psi]=\laplace_{\zeta,\alpha}[\phi]\,\laplace_{\zeta,\beta}[\psi]\,.
+\end{equation}    
+\end{prop}
+\begin{proof}
+\begin{todo}
+   \textbf{V} add $\theta$
+   \end{todo}
+  Notice that the convolution product can be rewritten by introducing the coordinates $\eta'=\zeta'-\beta$ and $\eta''=\zeta''+\beta$
+   \begin{align*}
+       \phi \ast_{\zeta, \alpha+\beta} \psi &= \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}} \phi'\,\psi''\,d\zeta'\\
+       &=\int_{\substack{\mathcal{S}'(\eta) \times \mathcal{S}''(\eta) \\ \eta' + \eta'' = \zeta}} \phi'\,\psi''\,d\eta'\,,
+   \end{align*}
+   where $\mathcal{S}'(\eta)$ is the line segment from $\eta'=\alpha$ to $\eta'=\zeta_\beta$ and simlarly, $\mathcal{S}''(\eta)$ is the line segment from $\eta''=\zeta_\alpha$ to $\eta''=\beta$. \begin{todo}\textbf{V} [explain why this choice of coords is better than $\eta'$ and $\eta''$]\end{todo} Following the argument in the proof of Proposition~\ref{prop:convolution_iso_laplace}, we introduce the parameter $s\in [0,1]$ and we rewrite the convolution  
+    \begin{align*}
+       \phi \ast_{\zeta, \alpha+\beta} \psi
+       &=\int_{\substack{\mathcal{S}'(\eta) \times \mathcal{S}''(\eta) \\ \eta' + \eta'' = \zeta}} \phi'\,\psi''\,d\eta'\\
+       &=\zeta_{\alpha+\beta}\,\int_0^1 \phi' \psi''\,ds\,,
+   \end{align*}
+   where $\eta'=(1-s)\alpha+s\zeta_\beta$ and consequently $\eta''=\beta s+(1-s)\zeta_\alpha$. Then, the Laplace transform of $\phi \ast_{\zeta, \alpha} \psi$ reads
+     \begin{align*}
+       \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]&=e^{-z(\alpha+\beta)}\laplace_{\zeta_{\alpha+\beta},0}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]\\
+       &=e^{-z(\alpha+\beta)}\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\,e^{-z\zeta_{\alpha+\beta}}\zeta_{\alpha+\beta}\, \int_0^1 \phi' \psi''\,ds \\
+       &=e^{-z(\alpha+\beta)}\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\, \int_0^1 \zeta_{\alpha+\beta}\,e^{-z(1-s)\zeta_{\alpha+\beta}} e^{-z s\zeta_{\alpha+\beta}} \phi' \psi''\,ds 
+   \end{align*}
+   by exchanging the order of integration we find 
+   \begin{align*}
+        &=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\,\zeta_{\alpha+\beta}\,e^{-z(\alpha(1-s)+s\zeta_\beta)} e^{-z(\beta s+(1-s)\zeta_\alpha)} \phi' \psi'' \\
+        &=\int_0^1 ds\,\int_{\mathcal{J}_{\eta'',\beta}}d\eta''\,\frac{\eta''}{(1-s)^2}\,e^{-z\eta''} (\eta''-\beta) e^{-z( (\eta''-\beta) \frac{s}{1-s}+\alpha)} \phi' \psi''\,,
+   \end{align*}
+   where in the second step we use $d\zeta_{\alpha+\beta}=d\zeta_\alpha=\frac{d\eta''}{1-s}$ and $\zeta_{\alpha+\beta}=\frac{\eta''-\beta}{1-s}$. Then, exchanging one more time the order of integration we get
+    \begin{align*}
+        &=\int_{\mathcal{J}_{\eta'',0}}d\eta'' \,e^{-z\eta''}  \psi'' \,\int_0^1 ds\,\frac{\eta''-\beta}{(1-s)^2}e^{-z((\eta''-\beta) \frac{s}{1-s}+\alpha)} \phi'\\
+        &=\int_{\mathcal{J}_{\eta'',0}}d\eta'' \,e^{-z\eta''}  \psi'' \,\int_{\mathcal{J}_{t,\alpha}} dt\, e^{-zt} \phi\\
+   \end{align*}
+   where we have introduced the coordinate $t=(\eta''-\beta)\frac{s}{1-s}+\alpha$ which mooves along the ray $\mathcal{J}_{t,\alpha}$ as $s$ varies in $[0,1]$. \begin{todo}[Check claim: as coordinates on the position domain, $t = \eta'$. If true, clarify argument.]\end{todo}
 \end{proof}
 %
 \begin{remark}
