@@ -544,7 +544,7 @@ We depart slightly from traditional Laplace transform methods for solving ODEs. 
 \begin{draft}
 \paragraph{New and old examples}
 %
-\begin{draft}We illustrate our main results with detailed treatments of several examples. Generalizing the classic example of the Airy equation, we find frames of Borel regular solutions for all of the Airy--Lucas equations. Noting that these equations reduce to the modified Borel equation with positive rational coefficients, we also discuss Borel regularity for\end{draft}
+\begin{revised}We illustrate our main results with detailed treatments of several examples. Generalizing the classic example of the Airy equation, we find frames of Borel regular solutions for the Airy--Lucas and generalized Airy equations. Noting that the Airy--Lucas equations reduce to the modified Bessel equation with certain rational values of the parameter, we also find Borel regular solutions of the general modified Bessel equation.\end{revised}
 \begin{todo}[\textbf{A} First mention more classical examples; then talk about Airy-Lucas and cantilever.]\end{todo} We illustrate our main results with detailed treatments of several examples: we will mostly focus on [modified Bessel functions, which are] degree two ODEs that admit a frame of solutions expressed as thimble integrals. \begin{todo}[Transition: many well-known examples reduce to special cases of these\ldots]\end{todo} the Airy--Lucas functions (Section~\ref{example_AL}), the Airy function (Appendix~\ref{airy-appendix}). \begin{todo}[the anharmonic oscillator---see ``A Primer on Resurgent Transseries,'' appendices B--C]\end{todo} On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. \begin{todo}[Mention that some classical integral formulas for modified Bessel functions are actually thimble integrals.]\end{todo} The thimble projection reasoning is the one we use in Lemma~\ref{lem:thimble_proj_formula} and it is crucial for the proof of Theorem~\ref{thm:maxim}. In the Airy example (see Section~\ref{airy-appendix}) we will compute the \textit{thimble projection formula} directly.%, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
 
 Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we will make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}. \begin{todo}The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}).\end{todo} Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}.
@@ -1916,12 +1916,12 @@ for every $n\in\Z_{\geq 0}$.
    
    The result of \emph{(i)} and \emph{(ii)} follow from the properties of the Laplace transform with respect to the convolution product: for every $\tau\in\R_{<0}\cup(0,1)$
     \begin{align*}
-        z^\tau\laplace_{\zeta,0}\phi&=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)}\Big] \laplace_{\zeta,0}\phi\\
-        &=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)} \ast_\zeta \phi\Big] \\
-        &=\laplace_{\zeta,0} \int_0^{\zeta}\frac{(\zeta-\zeta')^{-\tau-1}}{\Gamma(-\tau)} \phi(\zeta') d\zeta'\\
-        &=\laplace_{\zeta,0}\fracderiv{\tau}{\zeta}{0}\phi
-        \end{align*}
-        The result of $(iii)$ follows by repetedly using integration by part and the fact that boundary terms vanish:
+z^\tau\laplace_{\zeta,0}\phi&=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)}\Big] \laplace_{\zeta,0}\phi\\
+&=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)} \ast_\zeta \phi\Big] \\
+&=\laplace_{\zeta,0} \int_{\mathcal{S}'(\zeta)}\frac{(\zeta-\zeta')^{-\tau-1}}{\Gamma(-\tau)} \phi' d\zeta'\\
+&=\laplace_{\zeta,0}\fracderiv{\tau}{\zeta}{0}\phi
+\end{align*}
+\begin{todo}[or: where we use the notation from Definition~\{\ldots\}]\end{todo} where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=0$ to $\zeta' = \zeta$. The result of $(iii)$ follows by repetedly using integration by part and the fact that boundary terms vanish:
 \begin{align*}
     z^n\laplace_{\zeta,0}\phi&=\int_0^\infty e^{-z\zeta} z^n \phi \, d\zeta\\
     &=(-1)^n\int_0^\infty \partial_\zeta^n \big[e^{-z\zeta}\big]  \phi\, d\zeta\\
@@ -2122,28 +2122,28 @@ In \cite{pham}, Pham describes this formula in a slightly different form, integr
 We first recast the integral $I_a$ into the position domain. As $\zeta$ goes rightward from $\alpha$ with angle $\theta$, the start and end points of $\mathcal{C}_a^\theta(\zeta)$ sweep backward along $\mathcal{C}^-_a(\zeta)$ and forward along $\mathcal{C}^+_a(\zeta)$, respectively. Hence, we have
 \begin{align*}
 I_a & = \int_{\mathcal{C}_a^\theta} e^{-zf} \nu \\
-& = \int_{\alpha}^{e^{i\theta} \infty} e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}\,d\zeta.
+& = \int_{\mathcal{J}_{\zeta,\alpha}^\theta}e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}\,d\zeta.
 \end{align*}
 Noticing that the right-hand side is a Laplace transform, we learn that
 \begin{equation}\label{thimble-difference}
-{\iota}_\alpha = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}.
+{\iota}_a = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}.
 \end{equation}
 \end{proof}
-We will now prove that $I_a$ is Borel regular:
+We will now prove that $I_a$ is Borel regular.
 \begin{theorem}[restatement of~\ref{thm:maxim}]\label{thm:maxim-proof}
 If the integral defining $I_a$ is absolutely convergent, then $I_a$ is Borel regular. More explicitly:
 \begin{enumerate}
-\item\label{part-1-prf} The function $I_a$ has an asymptotic expansion $\series{I}_a \defeq \aexp^\theta I_a$, which lies in the space $e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Here, $\theta$ is the direction of the ray $\mathcal{J}^\theta_{\zeta, \alpha}$ that defines the thimble.
+\item\label{part-1-prf} The function $I_a$ has an asymptotic expansion $\series{I}_a \defeq \aexp^\theta I_a$, which lies in the space $e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Here, $\theta$ is the direction of the ray $\mathcal{J}^\theta_{\zeta, \alpha}$ that defines the thimble and $\alpha=f(a)$.
 \item\label{part-2-prf} The Borel transform $\series{\iota}_a \defeq \borel_\zeta \series{I}_a$ converges near $\zeta = \alpha$.
 \item\label{part-3-prf} The sum of $\series{\iota}_a$ can be analytically continued along the ray $\mathcal{J}_{\zeta, \alpha}^\theta$. Its Laplace transform along that ray is well-defined, and equal to $I_a$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-\begin{todo}\textbf{V} [Check that $\alpha$ subscripts have been converted to $a$ for $I$, $\iota$, and $\mathcal{C}$.]\end{todo} Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a$ with $\tfrac{1}{2} \tau^2 = f - f(a)$. Let $\mathcal{C}^-_a$ and $\mathcal{C}^+_a$ be the parts of $\mathcal{C}_a^\theta$ that go from the past ($-e^{-i\theta}\infty$) to $a$ and from $a$ to the future ($+e^{-i\theta}\infty$), respectively. By changing the sign of $\tau$, we can arrange for it to be valued in $(-\infty, 0]$ and $[0,\infty)$ on $\mathcal{C}^-_a$ and $\mathcal{C}^+_a$, respectively. Since $\nu$ is holomorphic, we can express it as a Taylor series
+Since $f$ has non--degenerate critical points, we can find a holomorphic chart $\tau$ around $a$ with $\tfrac{1}{2} \tau^2 = f - \alpha$. Let $\mathcal{C}^-_a$ and $\mathcal{C}^+_a$ be the parts of $\mathcal{C}_a^\theta$ that go from the past ($-e^{-i\theta}\infty$) to $a$ and from $a$ to the future ($+e^{-i\theta}\infty$), respectively. By changing the sign of $\tau$, we can arrange for it to be valued in $(-\infty, 0]$ and $[0,\infty)$ on $\mathcal{C}^-_a$ and $\mathcal{C}^+_a$, respectively. Since $\nu$ is holomorphic, we can express it as a Taylor series
 \[ \nu = \sum_{m \ge 0} b_m^a \tau^m\,d\tau \]
 that converges in some disk $|\tau| < \varepsilon$.
 
-We write $\approx$ to say that two functions are asymptotic at all orders around the base point \begin{todo}[what point?]\end{todo}. By the method of steepest descentz,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).}
+We write $\approx$ to say that two functions are asymptotic to all orders. By the method of steepest descent,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).}
 %%\[ e^{-z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
 \[ e^{z \alpha} I_a \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
 as $z \to \infty$. Plugging in the Taylor series for $\nu$, we get
@@ -2190,7 +2190,7 @@ taking the positive branch of the square root on $\mathcal{C}^+_a$ and the negat
 & = \sum_{n \ge 0} 2 b_{2n}^a [2\zeta_\alpha]^{n - 1/2} \\
 & = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^a \zeta_\alpha^{n - 1/2}
 \end{align*}
-In particular, $\series{\iota}_a$ can be analytically continued along $\mathcal{J}_\alpha^\theta$ and its sum is given by $\iota_a$. %Thus, we can take the Laplace transform of $\phi_j$ and we find
+In particular, $\series{\iota}_a$ can be analytically continued along $\mathcal{J}_{\zeta,\alpha}^\theta$ and its sum is given by $\iota_a$. %Thus, we can take the Laplace transform of $\phi_j$ and we find
 %\begin{align*}
  %   \laplace_{\zeta,\alpha_j}^\theta \phi_j &= \laplace_{\zeta,\alpha_j}^\theta \fracderiv{-1/2}{\zeta}{\alpha_j} \iota_j \\
  %   &= z^{-1/2} \laplace_{\zeta,\alpha_j}^\theta  \iota_j \\
@@ -2290,7 +2290,6 @@ as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$.
 \end{old}
 \end{proof}
 \begin{remark}\label{rmk:1/2-deriv}
-\begin{todo}[\textbf{V} Read through, and remove \texttt{revised} if good]\end{todo}\begin{revised}
 For some applications, it is more convenient to work with $\Phi_a \defeq z^{-1/2} I_a$, whose asymptotic series has integer powers. The argument we use to prove of Theorem~\ref{thm:maxim-proof} can also be used to show that $\Phi_a$ is Borel regular, but the thimble projection formula is trickier in this case. Proposition~\ref{prop:L-int-op} tells us that $\Phi_a = \laplace^\theta_{\zeta, \alpha} \phi_a$ for
 \[\phi_a \defeq \fracderiv{-1/2}{\zeta}{\alpha}\,\iota_a. \]
 To get the thimble projection formula for $\phi_a$, take the $1/2$ fractional integral of both sides:
@@ -2303,7 +2302,6 @@ The second term vanishes because $\mathcal{C}_a^\theta(\alpha)$ is a single poin
 \[ \fracderiv{-1/2}{\zeta}{\alpha} \phi_a = \int_{\mathcal{C}_a^\theta(\zeta)}\nu. \]
 The $1/2$ fractional derivative is a left inverse of the $1/2$ fractional integral. Applying it to both sides, we find that
 \begin{equation}\label{eqn:formula--1/2} \phi_a = \fracderiv{1/2}{\zeta}{\alpha} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right).\end{equation}
-\end{revised}
 \begin{old}
 For some applications, it might be more convenient to study Borel regularity of $\Phi_\alpha=z^{-1/2}I_\alpha$, as its asymptotics will not have fractional power singularities. The proof follows the same argument we use in the proof on Theorem~\ref{thm:maxim-proof} for $I_\alpha$, but there is one subtlety to be aware of when rewriting $\Phi_\alpha$ as the Laplace transform of a function $\phi_\alpha$. Indeed, first notice that \[\phi_\alpha = \fracderiv{-1/2}{\zeta}{\alpha}\,\iota_\alpha \]
 Then, we can take the $1/2$ fractional integral on both sides:
