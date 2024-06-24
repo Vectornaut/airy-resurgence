@@ -2149,7 +2149,6 @@ Since $f$ has non--degenerate critical points, we can find a holomorphic chart $
 that converges in some disk $|\tau| < \varepsilon$.
 
 We write $\approx$ to say that two functions are asymptotic to all orders. By the method of steepest descent,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).}
-%%\[ e^{-z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
 \[ e^{z \alpha} I_a \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
 as $z \to \infty$. Plugging in the Taylor series for $\nu$, we get
 \begin{align*}
@@ -2168,10 +2167,7 @@ To see why, cut the sum off after $N$ terms, and observe that
 \begin{align*}
   \Bigg | \sum_{n= 0}^N(2n-1)!! b_{2n}^a  2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \Bigg | &\leq  2 e^{-\Re (z) \varepsilon^2/2} \sum_{n=0}^N(2n-1)!! b_{2n}^a n|z|^{-n}.
 \end{align*}
-The right-hand side goes to $0$ as $\Re(z)$ grows.
-%Hence,
-%\[ e^{-z\zeta_\alpha} I_\alpha(z) \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^\alpha\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
-The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows \cite[inequality~5]{chiani-dardari-book}, allowing the simpler estimate
+The right-hand side goes to $0$ as $\Re(z)$ grows. The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows \cite[inequality~5]{chiani-dardari-book}, allowing the simpler estimate
 \[ e^{z\alpha} I_a \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^a \,z^{-(n+1/2)}. \]
 Hence, defining the formal series $\series{I}_a$
 \[\series{I}_a \defeq e^{-z\alpha} z^{-1/2}\, \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^a \,z^{-n}\]
@@ -2182,9 +2178,9 @@ Using the properties of the Borel tranform acting on trans-mononials \ref{sec:ac
 \series{\iota}_a & = \sqrt{2\pi} \sum_{n \ge 0} (2n - 1)!! \,b_{2n}^a\,\frac{\zeta_\alpha^{n+\tfrac{1}{2}}}{\Gamma(n+\tfrac{1}{2})} \\
 &= \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \,b_{2n}^a\,\zeta_\alpha^{n+\tfrac{1}{2}}
 \end{align*}
-We know from the definition of $\varepsilon$ that $\left|b_n^a\right| \varepsilon^n \lesssim 1$, thus we deduce that $\series{\iota}$ has a finite radius of convergence. This ends the proof of part~\ref{part-2-prf}. %$|a_{j,n}| \lesssim \left(\tfrac{2}{\varepsilon^2}\right)^n\,n!\,$, showing that $\series{I}_j$ is $1$-Gevrey.
+We know from the definition of $\varepsilon$ that $\left|b_n^a\right| \varepsilon^n \lesssim 1$, thus we deduce that $\series{\iota}$ has a finite radius of convergence. This ends the proof of part~\ref{part-2-prf}.
 
-\begin{todo}[Analytic/position version starts here.]\end{todo} The proof of part~\ref{part-3-prf} relies on the thimble projection formula \eqref{eqn:formula-proof}: we will show that the Taylor expansion of $\iota_a$ at $\zeta=\alpha$ agrees with $\series{\iota}_a$. We can rewrite the Taylor series for $\nu$ as
+The proof of part~\ref{part-3-prf} relies on the thimble projection formula \eqref{eqn:formula-proof}: we will show that the Taylor expansion of $\iota_a$ at $\zeta=\alpha$ agrees with $\series{\iota}_a$. We can rewrite the Taylor series for $\nu$ as
 \begin{align*}
 \nu & = \sum_{n \ge 0} b_n^a [2(f - \alpha)]^{(n - 1)/2}\,df,
 \end{align*}
@@ -2195,104 +2191,7 @@ taking the positive branch of the square root on $\mathcal{C}^+_a$ and the negat
 & = \sum_{n \ge 0} 2 b_{2n}^a [2\zeta_\alpha]^{n - 1/2} \\
 & = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^a \zeta_\alpha^{n - 1/2}
 \end{align*}
-In particular, $\series{\iota}_a$ can be analytically continued along $\mathcal{J}_{\zeta,\alpha}^\theta$ and its sum is given by $\iota_a$. %Thus, we can take the Laplace transform of $\phi_j$ and we find
-%\begin{align*}
- %   \laplace_{\zeta,\alpha_j}^\theta \phi_j &= \laplace_{\zeta,\alpha_j}^\theta \fracderiv{-1/2}{\zeta}{\alpha_j} \iota_j \\
- %   &= z^{-1/2} \laplace_{\zeta,\alpha_j}^\theta  \iota_j \\
- %   &= z^{-1/2} I_j
-%\end{align*}
-
-\begin{old}
-Lemma~\ref{lem:thimble_proj_formula-proof} tells us that
-\begin{align*}
-I_j & = \laplace_{\zeta, \alpha_j}^\theta \iota_j \\
-e^{z\alpha_j} I_j & = \laplace_{\zeta_j, 0}^\theta \iota_j \\
-& = \laplace_{\zeta_j, 0}^\theta \left( \sum_{n = 0}^N 2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2} + \textcolor{orange}{\zeta^{N+1/2} f}\right) \\
-& \color{magenta} = \laplace_{\zeta_j, 0}^\theta \left( \sum_{n = 0}^\infty 2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2} \right).
-%%& = \int_{\mathcal{J}_j^\theta} e^{-z\zeta_j} \iota_j\,d\zeta_j \\
-%%& = \int_{\mathcal{J}_j^\theta} e^{-z\zeta_j} \left( \sum_{n \ge 0} 2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2} \right) d\zeta_j
-\end{align*}
-Over any finite number of terms, we can exchange the sum with the Laplace transform, giving
-\begin{align*}
-e^{z\alpha_j} I_j & = \Delta_n + \sum_{n = 0}^N 2^{n+1/2} b_{2n}^j\,\laplace_{\zeta_j, 0}^\theta \zeta_j^{n - 1/2} \\
-& = \Delta_n + \sum_{n = 0}^N 2^{n+1/2} b_{2n}^j \Gamma(n + \tfrac{1}{2})\,z^{-n - 1/2} \\
-& = \Delta_n + \sum_{n = 0}^N \sqrt{2\pi}\,(2n - 1)!!\,b_{2n}^j\,z^{-n - 1/2},
-\end{align*}
-where
-\[ \Delta_n = \laplace_{\zeta_j, 0}^\theta \left( \sum_{n = N+1}^\infty 2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2} \right). \]
-\begin{verify}
-\begin{align*}
-2^n \Gamma(n + \tfrac{1}{2}) & = \sqrt{\pi}\,(2n - 1)!! \\
-2^{n + 1/2} \Gamma(n + \tfrac{1}{2}) & = \sqrt{2\pi}\,(2n - 1)!!
-\end{align*}
-\end{verify}
-
-\begin{prop}
-Consider a function
-\[ \varphi = \sum_{\kappa \in K} a_\kappa \zeta^\kappa \]
-defined by a power series with real exponents $K \subset (-1, \infty)$, with a positive lower bound on the distances between the exponents. If the series converges throughout the disk $|\zeta| < \varepsilon$, then
-\[ \partial_{\zeta, 0}^{-\nu} \varphi = \sum_{\kappa \in K} \tfrac{\Gamma(\kappa+1)}{\Gamma(\kappa+\nu+1)} \zeta^{\kappa + \nu} \]
-on that disk.
-\end{prop}
-\begin{proof}
-The convergence of the series for $\varphi$ in the disk $|\zeta| < \varepsilon$ implies that for each $\eta \in (0, \varepsilon)$, we have $|a_\kappa| \lesssim \eta^{-\kappa}$ over all $\kappa \in K$. The
-\end{proof}
-\begin{verify}
-Reference for monomials: ``Evaluation of Fractional Integrals and Derivatives of Elementary Functions''
-
-For convenience, think of $K$ as sequence, in increasing order. At any point $\zeta = \rho$ with $|\rho| < \varepsilon$, the series defining $\varphi$ converges, implying that
-\begin{align*}
-& \lim_{\kappa \in K} |a_\kappa \rho^\kappa| = 0 \\
-& \lim_{\kappa \in K} |a_\kappa| |\rho|^\kappa = 0 \\
-& |a_\kappa| |\rho|^\kappa \lesssim 1 \text{ over all } \kappa \in K \\
-& |a_\kappa| \lesssim |\rho|^{-\kappa} \text{ over all } \kappa \in K.
-\end{align*}
-In other words, for every $r \in (0, \varepsilon)$, we have $|a_\kappa| \lesssim r^{-\kappa}$ over all $\kappa in K$.
-
-Hence, on the region $|\zeta| < |\rho|$, we have
-\begin{align*}
-|\varphi| & \le \sum_{\kappa \in K} |a_n| |\zeta|^\kappa \\
-& \lesssim \sum_{\kappa \in K} r^{-\kappa} |\zeta|^\kappa \\
-& = \sum_{\kappa \in K} |\zeta/r|^\kappa.
-\end{align*}
-In the disk $|\zeta| < r$, the ratio $|\zeta/r|$ is smaller than $1$, so increasing its exponent always decreases the value.
-
-Let $c > 0$ be the lower bound on the distances between the exponents. Choose some $\lambda \in (-1, \infty)$ so that $K \subset (\lambda, \infty)$. For each $n \in \mathbb{N}_{\ge 0}$, the $n$th element of $K$ must be greater than $\lambda + nc$, so
-\begin{align*}
-|\varphi| & \lesssim \sum_{n = 0}^\infty |\zeta/r|^{\lambda + nc} \\
-& = |\zeta/r|^\lambda \sum_{n = 0}^\infty (|\zeta/r|^c)^n \\
-& = \frac{|\zeta/r|^\lambda}{1 - |\zeta/r|^c} \\
-& = \frac{1}{|\zeta/\rho| - |\zeta/r|^{1+c}}.
-\end{align*}
-We now see that the series defining $\varphi$ converges absolutely on $|\zeta| < |\rho|$.
-
-The kernel of $\partial_{\zeta, 0}^{\nu-1}$ is $\big(\zeta(p) - \zeta\big)^{\nu-1}$. It has an integrable singularity at $p$, and it is non-singular at $\zeta = 0$.
-\end{verify}
-
-\begin{prop}
-Suppose $f_0, f_1, f_2, \ldots$ is a sequence of holomorphic functions on some connected domain $\Omega$, and the series $\sum_{k=0}^\infty |f_k|$ converges at each point in $\Omega$. Then, for any $\nu > 0$,
-\[ \partial_{\zeta, \alpha}^{-\nu} \left( \sum_{k=0}^\infty f_k \right) = \sum_{k=0}^\infty \partial_{\zeta, \alpha}^{-\nu} f_k \]
-throughout $\Omega$.
-\end{prop}
-\begin{proof}
-Given any point $p \in \Omega$, choose a path $\gamma$ that runs through $\Omega$ from $\zeta = \alpha$ to $p$. Since $\gamma$ is the continous image of a closed interval, it is compact, so $\zeta$ is bounded
-
-Recalling that
-\[ [\partial^{\nu-1}_{\zeta, \alpha} f](p) \defeq \frac{1}{\Gamma(1-\nu)} \int_{\zeta = \alpha}^p \big(\zeta(p)-\zeta\big)^{-\nu} f\,d\zeta, \]
-\textcolor{orange}{[\ldots]}
-\end{proof}
-
-By the steepest descent method,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).} \begin{todo}[define $\approx$]\end{todo}
-%%\[ e^{-z\zeta_\alpha} I_\alpha(z) \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
-\[ e^{z \alpha_j} I_j \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
-as $z \to \infty$ along the ray $e^{-i\theta}\, \R_{> 0}$.
-%%Since the Taylor series for $\nu$ converges in the disk $|\tau| < \varepsilon$, we know that $|b_m^j| \lesssim \varepsilon^{-m}$ over all $m \ge 0$, giving
-%%\[ \left| e^{-z\zeta_j}\;2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2} \right| \lesssim 2^{n+1/2} \varepsilon^{-2n} e^{-\Re(z\zeta_j)} |\zeta_j|^{n - 1/2}. \]
-%%When $z\zeta_j \in \R_{> 0}$, that implies
-%%\begin{align*}
-%%\left| e^{-z\zeta_j}\;2^{n+1/2} b_{2n}^j \zeta_j^{n - 1/2} \right| \lesssim 2^{n+1/2} \varepsilon^{-2n} e^{-|z||\zeta_j|} |\zeta_j|^{n - 1/2}.
-%%\end{align*}
-\end{old}
+In particular, $\series{\iota}_a$ can be analytically continued along $\mathcal{J}_{\zeta,\alpha}^\theta$ and its sum is given by $\iota_a$.
 \end{proof}
 \begin{remark}\label{rmk:1/2-deriv}
 For some applications, it is more convenient to work with $\Phi_a \defeq z^{-1/2} I_a$, whose asymptotic series has integer powers. The argument we use to prove of Theorem~\ref{thm:maxim-proof} can also be used to show that $\Phi_a$ is Borel regular, but the thimble projection formula is trickier in this case. Proposition~\ref{prop:L-int-op} tells us that $\Phi_a = \laplace^\theta_{\zeta, \alpha} \phi_a$ for
