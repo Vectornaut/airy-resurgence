@@ -541,12 +541,20 @@ If the integral defining $I_a$ is absolutely convergent, then $I_a$ is Borel reg
 
 We depart slightly from traditional Laplace transform methods for solving ODEs. One traditionally relates ODEs on the frequency domain to ODEs on the position domain~\cite{braaksma2006laplace,laplace-tfm}, but we find it more natural to relate them to integral equations on the position domain. The good behavior of integral equations and their solutions is central to our proof that certain ODEs have Borel regular solutions.
 %
-\begin{draft}
 \paragraph{New and old examples}
 %
-\begin{revised}We illustrate our main results with detailed treatments of several examples. Generalizing the classic example of the Airy equation, we find frames of Borel regular solutions for the Airy--Lucas and generalized Airy equations. Noting that the Airy--Lucas equations reduce to the modified Bessel equation with certain rational values of the parameter, we also find Borel regular solutions of the general modified Bessel equation.\end{revised}
-\begin{todo}[\textbf{A} First mention more classical examples; then talk about Airy-Lucas and cantilever.]\end{todo} We illustrate our main results with detailed treatments of several examples: we will mostly focus on [modified Bessel functions, which are] degree two ODEs that admit a frame of solutions expressed as thimble integrals. \begin{todo}[Transition: many well-known examples reduce to special cases of these\ldots]\end{todo} the Airy--Lucas functions (Section~\ref{example_AL}), the Airy function (Appendix~\ref{airy-appendix}). \begin{todo}[the anharmonic oscillator---see ``A Primer on Resurgent Transseries,'' appendices B--C]\end{todo} On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. \begin{todo}[Mention that some classical integral formulas for modified Bessel functions are actually thimble integrals.]\end{todo} The thimble projection reasoning is the one we use in Lemma~\ref{lem:thimble_proj_formula} and it is crucial for the proof of Theorem~\ref{thm:maxim}. In the Airy example (see Section~\ref{airy-appendix}) we will compute the \textit{thimble projection formula} directly.%, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
+\begin{revised}We illustrate our main results with detailed treatments of several examples. Generalizing the classic example of the Airy equation (Appendix~\ref{airy-appendix}), we find frames of Borel regular solutions for the Airy--Lucas and generalized Airy equations (Sections \ref{example_AL} and \ref{sec:gen-airy}). Noting that the Airy--Lucas equations reduce to special cases of the modified Bessel equation, we also find Borel regular solutions of the general modified Bessel equation (Section~\ref{sec:mod-bessel-lift}). Similarly, noting that the Airy function is a thimble integral with a third-degree polynomial in the exponent, we show that a general third-degree thimble integral is Borel regular (Section~\ref{sec:deg3}). Finally, as an example of a fourth-order ODE, we solve the equation describing the vibration of a triangular cantilever (Section~\ref{sec:catilever}).
 
+Each of our examples focuses on either a level~1 ODE whose solutions can be expressed as thimble integrals or a thimble integral that satisfies a level~1 ODE. This provides an opportunity to compare different explanations for why each example function is Borel regular.
+
+In the literature on Borel summation, the Airy equation has been discussed many times, using different approaches and conventions. \begin{todo}[\ldots]\end{todo}
+\end{revised}
+
+\begin{old}
+\begin{todo}[\textbf{A} First mention more classical examples; then talk about Airy-Lucas and cantilever.]\end{todo} We illustrate our main results with detailed treatments of several examples: we will mostly focus on [modified Bessel functions, which are] degree two ODEs that admit a frame of solutions expressed as thimble integrals. \begin{todo}[Transition: many well-known examples reduce to special cases of these\ldots]\end{todo} the Airy--Lucas functions (Section~\ref{example_AL}), the Airy function (Appendix~\ref{airy-appendix}). \begin{todo}[the anharmonic oscillator---see ``A Primer on Resurgent Transseries,'' appendices B--C]\end{todo} On the one hand, we explicitly solve the integral equation associated with the ODE, building a frame of analytic solutions which are Laplace transforms. On the other hand, our \textit{thimble projection reasoning} shows how to rewrite explicitly thimble integrals as a Laplace transform and it makes Borel regularity evident directly from explicit computations. \begin{todo}[Mention that some classical integral formulas for modified Bessel functions are actually thimble integrals.]\end{todo} The thimble projection reasoning is the one we use in Lemma~\ref{lem:thimble_proj_formula} and it is crucial for the proof of Theorem~\ref{thm:maxim}. In the Airy example (see Section~\ref{airy-appendix}) we will compute the \textit{thimble projection formula} directly.%, and by numerical check we show $\hat{\phi}\defeq\fracderiv{-1/2}{\zeta}{\alpha}\iota$ is a simple resurgent function (see Section~\ref{apx:eye-res-airy}).
+\end{old}
+
+\begin{draft}
 Among the examples we study, some of them have been discussed many times, using different approaches and conventions. We try to give an idea of how all these different treatments fit together. For instance, for the Airy function we will make a comparison with \cite[Section 2.2]{lectures-Marino}, \cite[Section 6.14]{diverg-resurg-i}, and \cite[Section 2.2]{kawai-takei}. \begin{todo}The anharmonic oscillator was also discussed in (\cite{bender-wu}, \cite[Appendix B]{aniceto2019primer} and \cite[Section 2.5.3]{sternin1995borel}).\end{todo} Other examples haven't been discussed much, as for Airy--Lucas functions \cite[Equation 3.2]{charbonnier22}.
 %
 \paragraph{Links to resurgence}
@@ -2103,7 +2111,7 @@ Since the series $\series{\psi}_\alpha$ lies in $\zeta^{\tau_\alpha-1} \C\{\zeta
 \end{proof}
 \subsection{Borel regularity for thimble integrals}\label{borel-reg-thimble}
 %
-\begin{draft}Recall the setting from Section~\ref{borel-reg:explanatory-power}: let $X$ be a $1$-dimensional complex manifold equipped with a volume form $\nu\in\Gamma(X,\Omega^1)$ and a holomorphic function $f\colon X\to\C$ with non--degenerate critical points. Let $I_a$ be the thimble integral 
+\begin{draft}Recall the setting from Section~\ref{borel-reg:explanatory-power}: let $X$ be a $1$-dimensional complex manifold equipped with a volume form $\nu \in \Omega^{1,0}(X)$ \begin{todo}[this originally said $\Gamma(X,\Omega^1)$, but shouldn't it be either $\Omega^{1,0}(X)$ or $\Gamma\big(X, \Lambda^{1,0} (X)\big)$?]\end{todo} and a holomorphic function $f\colon X\to\C$ with non--degenerate critical points. Let $I_a$ be the thimble integral 
 \begin{equation}\label{exp-int}
 I_a \defeq \int_{\mathcal{C}_a^\theta} e^{-zf} \nu
 \end{equation}
@@ -2302,20 +2310,7 @@ The second term vanishes because $\mathcal{C}_a^\theta(\alpha)$ is a single poin
 \[ \fracderiv{-1/2}{\zeta}{\alpha} \phi_a = \int_{\mathcal{C}_a^\theta(\zeta)}\nu. \]
 The $1/2$ fractional derivative is a left inverse of the $1/2$ fractional integral. Applying it to both sides, we find that
 \begin{equation}\label{eqn:formula--1/2} \phi_a = \fracderiv{1/2}{\zeta}{\alpha} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right).\end{equation}
-\begin{old}
-For some applications, it might be more convenient to study Borel regularity of $\Phi_\alpha=z^{-1/2}I_\alpha$, as its asymptotics will not have fractional power singularities. The proof follows the same argument we use in the proof on Theorem~\ref{thm:maxim-proof} for $I_\alpha$, but there is one subtlety to be aware of when rewriting $\Phi_\alpha$ as the Laplace transform of a function $\phi_\alpha$. Indeed, first notice that \[\phi_\alpha = \fracderiv{-1/2}{\zeta}{\alpha}\,\iota_\alpha \]
-Then, we can take the $1/2$ fractional integral on both sides:
-\begin{align*}
-    \fracderiv{-1/2}{\zeta}{\alpha} \phi_\alpha &= \fracderiv{-1}{\zeta}{\alpha} \, \iota_\alpha \\
-    & = \fracderiv{-1}{\zeta}{\alpha} \partial_\zeta \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right) \\
-    & = \int_{\mathcal{C}_\alpha^\theta(\zeta)}\nu - \int_{\mathcal{C}_\alpha^\theta(\alpha)}\nu.
-\end{align*}
-The second term vanishes because $\mathcal{C}_\alpha^\theta(\alpha)$ is a single point, leaving
-\[ \fracderiv{-1/2}{\zeta}{\alpha} \phi_\alpha = \int_{\mathcal{C}_\alpha^\theta(\zeta)}\nu. \]
-Finally, we apply the $1/2$ derivative of both sides, recalling that it is a left inverse of the $1/2$ integral, and we find
-\begin{equation}\label{eqn:formula--1/2}\phi_\alpha= \fracderiv{1/2}{\zeta}{\alpha} \left( \int_{\mathcal{C}_\alpha^\theta(\zeta)}\nu \right).\end{equation}
 \begin{todo}[This argument works for any function that vanishes at $\alpha$, so maybe we should instead prove it generally in the section on fractional calculus.]\end{todo}
-\end{old}
 \end{remark}
 \begin{remark}
 We can use the $1/2$ derivative formula~\eqref{eqn:formula--1/2} to see that the functions $\phi$ are all resurgent, in the sense of \'{E}calle~\cite[Section~1]{EcalleI}. Let us say $\mathcal{J}_\alpha^\theta(\beta)$ is the straight path from $\zeta = \alpha$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\mathcal{C}_a^\theta(\beta)$ in $X$. This lets us analytically continue $\int_{\mathcal{C}_a^\theta(\zeta)} \nu$ to a star-shaped domain $\Omega_\alpha \subset \C$. Intuitively, $\Omega_\alpha$ is constructed by drawing rays from $\zeta = \alpha$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\infty$ (see Figure~\ref{Fig:slit domain}).
@@ -2649,7 +2644,7 @@ Equations \eqref{resurgent-relation-1} and \eqref{resurgent-realtion-2} are a ma
 \end{align*}
 thus the Stokes constants are respectively $\pm 2i \cos(\pi m/n)$\footnote{If we think of the Laplace transforms of $v_1$ and $v_{-1}$ as a frame of solutions for the Airy--Lucas differential equation, the equations above define the so-called Stokes matrices for the ODE.}. 
 
-It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, because the Stokes constants are \begin{revised}typically\end{revised} the intersection number of \textit{dual pairs of thimbles}, according to Picard--Lefschetz formula. Stokes constants that arise in this way are integers in a suitable normalization \cite[Section 5]{pham}\cite[\begin{todo}Chapter~??\end{todo}]{Arnold}. However, in the Airy--Lucas example, $f$ is not Morse unless $n=3$. Hence, we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on the lift of a path in the position domain. \begin{todo}[I think we should argue we have the action of the permutation which leaves the base unchanged but gives a\ldots]\end{todo}
+It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, because the Stokes constants are \begin{revised}typically\end{revised} the intersection number of \textit{dual pairs of thimbles}, according to Picard--Lefschetz formula. Stokes constants that arise in this way are integers in a suitable normalization \cite[Section 5]{pham}\cite[Chapter~1]{Arnold}. However, in the Airy--Lucas example, $f$ is not Morse unless $n=3$. Hence, we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on the lift of a path in the position domain. \begin{todo}[I think we should argue we have the action of the permutation which leaves the base unchanged but gives a\ldots]\end{todo}
 %
 %\textcolor{DarkCyan}{where the sign must be chosen so that $\pm\zeta$ stays in the left half-plane over the whole integration path (?)}.
 %For $z \in (0, \infty)$, the contour $\gamma_z$ runs \textcolor{magenta}{counterclockwise} around $[1, \infty)$, as shown below\textcolor{DarkCyan}{, so we have to choose the negative sign above (?)}. Let us assume $z \in (0, \infty)$ for the rest of the section. \textcolor{magenta}{[Our conclusions should probably hold whenever $\operatorname{Re}(z) > 0$.]}
@@ -2821,7 +2816,7 @@ K_0^{(1)}(z) = \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\big(\zeta^2 - 
 \end{equation}
 We could get the same result from formula~\eqref{int:k0_cosh} by trigonometric substitution. This is a special case of formula~10.32.8 from \cite{dlmf}.
 %
-\subsection{Generalized Airy}
+\subsection{Generalized Airy}\label{sec:gen-airy}
 %
 In \cite{Reid} and the appendix of \cite{drazin-reid}, Drazin and Reid construct approximate solutions of the Orr--Sommerfield fluid equation using the generalized Airy functions
 \begin{align*}
@@ -2910,7 +2905,7 @@ With an argument analogous to the one in Section~\ref{bessel-regularity-AL}, one
 In Theorem~\ref{thm:maxim-proof}, we proved a $3/2$-derivative formula to compute the Borel transform of the asymptotics of a thimble integral.
 \color{black}
 \end{todo}
-\subsection{Third-degree thimble integrals}
+\subsection{Third-degree thimble integrals}\label{sec:deg3}
 In this section, we consider the thimble integral
 \[ I(z) = \int_{\mathcal{C}} e^{-zg}\,du \]
 defined by a general third-degree polynomial map $g \maps \C \to \C$. By definition, the Lefschetz thimble $\mathcal{C}$ is a connected component of the preimage of a critical value of $g$. After taking various symmetries into account, we will find that there are essentially only two cases, distinguished by whether $g$ has two distinct critical points or a single degenerate one.
@@ -3114,6 +3109,7 @@ i\sqrt{3}\,I(z) & = \frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \frac{1}{\Gamma\b
 %
 \subsection{The triangular cantilever}\label{sec:catilever}
 %
+\subsubsection{Setting}
 A {\em triangular cantilever} is a flexible strip with constant thickness and linearly tapered width, clamped at the broad end so it sticks out horizontally like a diving board.
 \begin{center}
 \begin{tikzpicture}
@@ -3154,16 +3150,55 @@ For the triangular cantilever, $t$ is constant, and $s = \sigma z$ for some cons
 Now, set $\mu = \tfrac{c_2}{c_1} = \tfrac{3}{4} \tfrac{1}{E} \big(\tfrac{\omega}{t}\big)^2$. This example works because the linear density of the beam and the second moment of area about the side-to-side axis are proportional, so they both end up in the $P(\partial/\partial z)$ term.\par
 \end{verify}
 \color{black}
-We are going to look for functions $v$ and points $\zeta = \alpha$ for which the Laplace transform $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:triangular_cantilever}. From Proposition~\ref{prop:L-int-op} we deduce that $\laplace_{\zeta, \alpha} v$ satisfies equation~\eqref{eqn:triangular_cantilever} if and only if $v$ satisfies the integral equation
+\subsubsection{Solving the differential equation}
+We seek functions $v$ and points $\zeta = \alpha$ for which the Laplace transform $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:triangular_cantilever}. From Proposition~\ref{prop:L-int-op} we deduce that $\laplace_{\zeta, \alpha} v$ satisfies equation~\eqref{eqn:triangular_cantilever} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{eqn:position_cantilever}
-    \left[ \big[ \zeta^4 - \omega^2 \big] - 2\fracderiv{-1}{\zeta}{\alpha} \circ \zeta^3 \right] v = 0.
+\left[ \big[ \zeta^4 - \omega^2 \big] - 2\fracderiv{-1}{\zeta}{\alpha} \circ \zeta^3 \right] v = 0.
 \end{equation}
 Observing that
 \[ \tfrac{\partial}{\partial \zeta} \sqrt{\zeta^4 - \omega^2} = \frac{2\zeta^3}{\sqrt{\zeta^4 - \omega^2}}, \]
 we learn that
-\[ v_\text{uni} = \frac{1}{\sqrt{\zeta^4 - \omega^2}} \]
-satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega = 0$. Thus, a single ``universal solution'' in the position domain leads to four linearly independent solutions $V_\alpha = \laplace_{\zeta, \alpha} v_\text{uni}$ of equation~\eqref{eqn:triangular_cantilever}, indexed by the fourth roots of $\omega^2$.
-\begin{todo}\par[Stokes? Thimbles? Mathematica gives solution ${}_0 F_3\big(; \tfrac{1}{2}, \tfrac{3}{4}, \tfrac{3}{4}; \tfrac{1}{16} z^4\big)$.]\end{todo}
+\begin{equation}
+v_\text{uni} = \frac{1}{\sqrt{\zeta^4 - \omega^2}}
+\end{equation}
+satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega^2 = 0$. Thus, a single ``universal solution'' in the position domain leads to four linearly independent solutions $V_\alpha = \laplace_{\zeta, \alpha} v_\text{uni}$ of equation~\eqref{eqn:triangular_cantilever}, indexed by the fourth roots of $\omega^2$.
+\subsubsection{Expressing the solutions as thimble integrals}
+We can now use the thimble projection formula, as written in equation~\eqref{thimble-difference}, to express the solutions found above as thimble integrals. In terms of the Jacobi elliptic function $\operatorname{sd}$, we have
+\begin{equation}\label{eq:cantilever-thimble}
+V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ -z\,2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \right]\;du,  \end{equation}
+where $a$ is a preimage of $\zeta = \alpha$ under the map $\zeta = 2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big)$. \begin{todo}[Show thimble picture.]\end{todo} Since exponent is doubly periodic, with period lattice $L = \tfrac{1}{\sqrt{2}}\Z + i\Z$, we can take the thimble to be a real submanifold of the torus $\C / L$.
+
+To confirm equation~\eqref{eq:cantilever-thimble}, use Jacobi's transformations to rewrite the relationship between $\zeta$ and $u$ in terms of $\operatorname{sn}$.
+\[ \zeta = \omega^{1/2} \operatorname{sn}\big(2i \omega^{1/2} u, i\big). \]
+\begin{verify}
+Jacobi's imaginary transform gives
+\begin{align*}
+-i \operatorname{sn}\big(2i \omega^{1/2} u, \sqrt{1-\sqrt{2}^2}\big) & = \operatorname{sc}(2\omega^{1/2} u, \sqrt{2}) \\
+\operatorname{sn}\big(2i \omega^{1/2} u, i\big) & = i \operatorname{sc}\big(2\omega^{1/2} u,\sqrt{2}\big)
+\end{align*}
+Jacobi's real transform gives
+\begin{align*}
+\frac{1}{2\omega^{1/2}} \operatorname{sc}\big(2\omega^{1/2} u, \tfrac{1}{1/\sqrt{2}}\big) & = \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \\
+i \operatorname{sc}\big(2\omega^{1/2} u, \tfrac{1}{1/\sqrt{2}}\big) & = 2i \omega^{1/2} \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big).
+\end{align*}
+Altogether, we have
+\begin{align*}
+\operatorname{sn}\big(2i \omega^{1/2} u, i\big) & = 2i \omega^{1/2} \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \\
+\omega^{1/2} \operatorname{sn}\big(2i \omega^{1/2} u, i\big) & = 2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big)
+\end{align*}
+\end{verify}
+Knowing that the inverse of $\operatorname{sn}$ is the incomplete elliptic integral
+\begin{equation}
+F(x;k):=\int_0^x \frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}\,,
+\end{equation}
+we learn that
+\begin{align*}
+F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u \\
+\frac{\omega^{-1/2}\;d\zeta}{\sqrt{1 - (\omega^{-1/2} \zeta)^4}} & = 2i \omega^{1/2}\;du \\
+\frac{d\zeta}{2i \omega \sqrt{1 - \omega^{-2} \zeta^4}} & = du \\
+\frac{1}{2}\left[\frac{d\zeta}{\sqrt{\zeta^4 - \omega^2}}\right] & = du.
+\end{align*}
+\begin{todo}[Explain how symmetry of thimble gives $v_\text{uni}$ under thimble projection formula.]\end{todo}
 %\subsection{The anharmonic oscillator}\label{sec:anharmonic_oscillator}
 %
 \appendix
