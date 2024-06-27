@@ -2303,7 +2303,9 @@ One solution is given by the Airy function,
 where $\gamma$ is a path that comes from $\infty$ at $-60^\circ$ and returns to $\infty$ at $60^\circ$.
 
 With the substitution $t = 2uy^{1/2}$, we can rewrite the Airy integral as
-\[ \Ai(y) = y^{1/2}\;\frac{1}{\pi i} \int_{\mathcal{C}^\theta_1} \exp\left[\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du, \]
+\begin{equation}\label{eqn:airy-distillation}
+\Ai(y) = y^{1/2}\;\frac{1}{\pi i} \int_{\mathcal{C}^\theta_1} \exp\left[\tfrac{2}{3}y^{3/2} \left(4u^3 - 3u\right)\right]\,du,
+\end{equation}
 where $\mathcal{C}^\theta_1$ is the contour that passes through the point $u = \tfrac{1}{2}$ and projects to the ray $\mathcal{J}^\theta_{\zeta, 1}$ under the mapping $-\zeta = 4u^3 - 3u$.
 \begin{center}
 \includegraphics[width=6.5cm]{figures/ray_1_ge3.png}
@@ -2344,20 +2346,22 @@ Let us put equation~\eqref{eqn:mod-bessel-AL} in the form $\mathcal{P}\Phi=0$ wi
 \begin{equation}\label{eqn:reg-mod-bessel-AL}
 \left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big({\tfrac{m}{n}}\big)^2 z^{-2} \right] \Phi = 0.
 \end{equation}
-
+%
 \subsubsection{Asymptotic analysis}\label{sec:asympt-AL}
+%
 From the work of Poincar\'{e} and the Ramis Index Theorem, as discussed at the beginning of Section~\ref{sec:new-summability-proof}, we know that equation~\eqref{eqn:reg-mod-bessel-AL} has a frame of formal $1$-Gevrey trans-monomial solutions
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,\series{W}_\alpha \mid \alpha^2 - 1 = 0 \}, \]
-where $\tau_\alpha = 1/2$ and $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket_1$. From \cite[Equations 10.40.2 and 10.17.1]{dlmf}, we learn that $K_{m/n}(z) \sim \left(\tfrac{\pi}{2}\right)^{1/2} e^{-z} z^{-1/2}\,\series{W}_1$, with
+where $\tau_\alpha = 1/2$ and $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket_1$. From \cite[Equations 10.40.2 and 10.17.1]{dlmf}, we learn that $K_{m/n} \sim \left(\tfrac{\pi}{2}\right)^{1/2} e^{-z} z^{-1/2}\,\series{W}_1$, with
 \begin{equation}\label{bessel-asymp-AL}
 \series{W}_1 = 1 - \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_1 \left(\tfrac{1}{2}+\frac{m}{n}\right)_1}{2^1 \cdot 1!}\;z^{-1} + \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_2 \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_2}{2^2 \cdot 2!}\;z^{-2} - \frac{\left(\tfrac{1}{2}+\tfrac{m}{n}\right)_3 \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_3}{2^3 \cdot 3!}\;z^{-3} + \ldots
 \end{equation}
-
+%
 The holomorphic analysis in Section~\ref{big-idea} will give us holomorphic solutions
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,W_\alpha \mid \alpha^2 - 1 = 0 \}, \]
 which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We will see in Section~\ref{bessel-regularity-AL} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$, as required by Theorem~\ref{thm:summability_ODE}.
-%\subsection{Going to the spatial domain}\label{spatial-AL}
+%
 \subsubsection{The big idea}\label{big-idea}
+%
 We are going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel-AL}. We will succeed when $\alpha^2 - 1 = 0$, and we will see that $K_{m/n}$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
 
 By the properties of the Laplace transform laid out in Proposition~\ref{prop:L-int-op}, a function $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel-AL} if and only if $v$ satisfies the integral equation
@@ -2974,19 +2978,11 @@ whose Laplace transform
 must be proportional to $I(z)$.
 
 We can confirm this result, and find the correct normalization, using the thimble projection formula:
-\begin{old}
-\begin{align*}
-\int_{\mathcal{C}} e^{-zu^3}\,du & = e^{i\pi/3} \int_{\mathcal{J}_{\zeta, 0}^\theta} e^{-z\zeta}\,\tfrac{1}{3}\zeta^{-2/3}\,d\zeta \\
-& = \tfrac{1}{3}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3})\,z^{-1/3}.
-\end{align*}
-\end{old}
-\begin{revised}
 \begin{align*}
 \int_{\mathcal{C}} e^{-z(u^3+q)}\,du & = (1 - e^{i\pi/3}) \int_{\mathcal{J}_{\zeta_q, 0}^\theta} e^{-z\zeta}\,\tfrac{1}{3}\zeta_q^{-2/3}\,d\zeta_q \\
 & = e^{-zq}\tfrac{1}{i\sqrt{3}}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3})\,z^{-1/3}.
 \end{align*}
-\end{revised}
-The factor of \begin{revised}$e^{i\pi/3} - 1$\end{revised} \begin{old}$e^{i\pi/3}$\end{old} \begin{todo}[\textbf{V} check]\end{todo} comes from the monodromy of $\zeta_q^{-2/3}$ around $\zeta_q = 0$. 
+The factor of $e^{i\pi/3} - 1$ comes from the monodromy of $\zeta_q^{-2/3}$ around $\zeta_q = 0$. 
 \begin{brainstorm}
 \item namely $v=(\zeta-q)^{-2/3}=\zeta_q^{-2/3}={}_2F_1\left(a,\frac{2}{3};a;1-\zeta_q\right)$, where $\zeta_q=\zeta-q$ and $a\in\C$ is a free parameter.
 \end{brainstorm}
@@ -3013,17 +3009,6 @@ Observing that $(2r)^{2/3} = e^{i(2/3)\pi }\,3/p$, we get
 I(z) & \approx \frac{\sqrt{3}}{i a_3^{1/3}\,3e^{i(2/3)\pi}} \Gamma\big(\tfrac{1}{3}\big)\;z^{-1/3} \\
 & = \frac{1}{i\sqrt{3}} a_3^{-1/3} e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3}\big)\;z^{-1/3}
 \end{align*}
-\begin{old}\begin{align*}
-i\sqrt{3}\,I(z) & = 2\sqrt{\frac{-p}{3}} K_{1/3}\Big(\frac{2ip^{3/2}}{3^{3/2}}z\Big) \\
-&=2\sqrt{\frac{-p}{3}}\left[\frac{\pi}{2\sin(\pi/3)}\Big(I_{-1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)-I_{1/3}\big(\tfrac{2ip^{3/2}}{3^{3/2}}z\big)\Big)\right]\\
-&=\frac{2}{3}\pi ip^{1/2}\left[\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{-1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{2}{3})}-\Big(\frac{ip^{3/2}}{3^{3/2}}z\Big)^{1/3}\sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{4}{3})}\right]\\
-&=\frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{2}{3})}-\frac{2\pi }{3\sqrt{3}} e^{2\pi i/3} z^{1/3} p \sum_{k\geq 0}\frac{(-\tfrac{p^3}{3}z^2)^k}{k!\Gamma(k+\tfrac{4}{3})}
-\end{align*}
-Now we take the limit as $p\to 0$ and we find 
-\begin{align*}
-i\sqrt{3}\,I(z) & = \frac{2\pi}{\sqrt{3}} e^{\pi i/3} z^{-1/3} \frac{1}{\Gamma\big(\tfrac{2}{3}\big)} \\
-& = e^{\pi i/3} \Gamma\big(\tfrac{1}{3}\big) z^{-1/3}
-\end{align*}\end{old}
 \end{verify}
 %
 \subsection{The triangular cantilever}\label{sec:catilever}
@@ -3123,7 +3108,40 @@ F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u \\
 \appendix
 %
 \section{The Airy equation}\label{airy-appendix}
+\begin{draft}
+\subsection{Rewriting as a modified Bessel equation}
+Starting from equation~\eqref{eqn:airy-distillation}, we can distill the most interesting part of the Airy function by writing
+\[ \Ai(y) = \tfrac{1}{\pi\sqrt{3}}\,y^{1/2}\,K\big(\tfrac{2}{3} y^{3/2}\big), \]
+where
+\begin{equation}\label{integral:mod-bessel}
+K(z) = i\sqrt{3} \int_{z^{-1/3}\mathcal{C}_1} \exp\left[z \left(4u^3 - 3u\right)\right]\,du.
+\end{equation}
+and $\mathcal{C}^\theta_1$ is the contour described in Section~\ref{sec:airy}. Saying that $\Ai$ satisfies the Airy equation is equivalent to saying that $K$ satisfies the modified Bessel equation
+\begin{equation}\label{eqn:mod-bessel-1/3}
+\left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{1}{3}\big)^2 + z^2\big]\right] K = 0.
+\end{equation}
+In fact, $K$ is the modified Bessel function $K_{1/3}$~\cite[equation~9.6.1]{dlmf}. Like we did in equation~\eqref{eqn:reg-mod-bessel-AL}, we can rewrite the modified Bessel equation above as 
+\begin{equation}\label{eqn:reg-mod-bessel}
+\left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\tfrac{1}{3}\big)^2 z^{-2} \right] K = 0.
+\end{equation}
 %
+\end{draft}
+%
+\begin{draft}
+\subsection{Asymptotic analysis}%%\label{sec:asympt}
+%
+From the work of Poincar\'{e} and the Ramis Index Theorem, as discussed at the beginning of Section~\ref{sec:new-summability-proof}, we know that equation~\eqref{eqn:reg-mod-bessel} has a frame of formal $1$-Gevrey trans-monomial solutions
+\[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,\series{W}_\alpha \mid \alpha^2 - 1 = 0 \}, \]
+where $\tau_\alpha = 1/2$ and $\series{W}_\alpha\in\C\llbracket z^{-1} \rrbracket_1$. From \cite[Equations 10.40.2 and 10.17.1]{dlmf}, we learn that $K \sim \left(\tfrac{\pi}{2}\right)^{1/2} e^{-z} z^{-1/2}\,\series{W}_1$, with
+\begin{equation}\label{bessel-asymp}
+\series{W}_1 = 1 - \frac{(\tfrac{1}{6})_1 (\tfrac{5}{6})_1}{2^1 \cdot 1!}\;z^{-1} + \frac{(\tfrac{1}{6})_2 (\tfrac{5}{6})_2}{2^2 \cdot 2!}\;z^{-2} - \frac{(\tfrac{1}{6})_3 (\tfrac{5}{6})_3}{2^3 \cdot 3!}\;z^{-3} + \ldots
+\end{equation}
+%
+The holomorphic analysis in Section~\ref{big-idea} will give us holomorphic solutions
+\[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,W_\alpha \mid \alpha^2 - 1 = 0 \}, \]
+which seem analogous to the trans-monomials above. Borel summation makes the analogy precise. We will see in Section~\ref{bessel-regularity-AL} that each $z^{-\tau_\alpha}\,W_\alpha$ is proportional to the Borel sum of $z^{-\tau_\alpha}\,\series{W}_\alpha$, as required by Theorem~\ref{thm:summability_ODE}.
+%
+\end{draft}
 \begin{todo}[If we don't have time to redo this section, let's just drop it for now, since you can recover it from the Airy-Lucas section without too much work.]\end{todo}
 \begin{old}
 \subsubsection{Rewriting as a modified Bessel equation}
