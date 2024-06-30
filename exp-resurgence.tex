@@ -2094,7 +2094,7 @@ We can use the $1/2$ derivative formula~\eqref{eqn:formula--1/2} to see that the
 We will calculate the jump of $\int_{\mathcal{C}_a^\theta(\zeta)}\nu$ across the cut starting at $\zeta = \beta$. Write $\beta$ as $\alpha + re^{i\theta_\beta}$, and let $\beta^+$ and $\beta^-$ be the points we get by infinitesimally increasing or decreasing $\theta_\beta$. The jump is then given by \[\int_{\mathcal{C}_a^\theta(\beta^+)} \nu - \int_{\mathcal{C}_a^\theta(\beta^-)} \nu\] 
 and it turns out to be proportional to $\series{\phi}_\beta$, namely to the germ of analytic functions at $\zeta_\alpha=\beta$. %We will see an example of this behaviour in Appendix~\ref{apx:eye-res-airy}. 
 
-\begin{revised}Initially, the function $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\mathcal{C}^\theta_a(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ to be singular is for something to go wrong with the hotmotopy of $\mathcal{C}^\theta_a(\zeta)$. At a critical point of $f$, the ends of the homotoped path $\mathcal{C}^\theta_a(\zeta)$ come together, telling us that \begin{todo}[\ldots]\end{todo}\end{revised}
+\begin{revised}Initially, the function $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\mathcal{C}^\theta_a(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ to be singular is for something to go wrong with the hotmotopy of $\mathcal{C}^\theta_a(\zeta)$. At a critical point of $f$, the ends of the homotoped path $\mathcal{C}^\theta_a(\zeta)$ come together, telling us that \begin{todo}[\textbf{A} \textbf{V} \ldots]\end{todo}\end{revised}
 \end{remark}
 \begin{todo}
 \begin{corollary}\label{simple-res-thimble}
@@ -2357,27 +2357,49 @@ Comparing the expressions above with the expressions for $v_{\pm 1}$ computed in
 %
 \subsubsection{A flavor of resurgence: the Stokes phenomena in the position domain}\label{resurgence-AL}
 %
-\begin{brainstorm}
-\item Up to now, we've treated the Airy-Lucas functions as separate elements of a frame of solutions. Using the idea of resurgence, we see that they are actually more closely related. You can recover the frame from any one of its elements by studying the analytic continuation in the Borel plane. 
-\end{brainstorm}
-\begin{draft}In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (Section \ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (Section \ref{contour-argument-AL}). In both cases we find\end{draft}
-\begin{align*}
-v_1(\zeta) = i \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)
-\end{align*}
-\begin{revised}The function $v_1$ is singular at $\zeta = 1$, but the hypergeometric factor ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ is analytic at that point, so $v_1$ has the typical form of a \textit{singularity} in the formalism of \'Ecalle's resurgent functions.\end{revised} More precisely, we can consider ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right)$ as a new holomorphic function (analytic continuation of a new germ at the origin), which has a branch cut singularity at $\zeta=-1$. Using equation \cite[15.2.3]{dlmf}, we can compute the analytic continuation of this germ at $\zeta=-1$: 
+\begin{revised}
+So far, we have treated the Airy--Lucas functions as separate elements of a frame of solutions. However, \'{E}calle's theory of {\em resurgence} reveals that these solutions are deeply intertwined. In fact, you can recover the whole frame from any one of its elements by studying the analytic continuation of the corresponding function on the position domain.
+
+\begin{old}In the previous sections, we have seen how to compute the Borel transform of a formal frame of solutions of the modified Bessel equation with parameter $m/n$ (Section \ref{confirmation-borel-regularity}) or equivalently of the asymptotic expansion of thimble integrals $K_{m/n}$ (Section \ref{contour-argument-AL}). In both cases we find\par\end{old}
+As an example, consider the Borel regular solution $e^{-z} V_1$ of the modified Bessel equation~\eqref{eqn:mod-bessel-AL}, which we found by solving an integral equation in Section~\ref{big-idea} and by evaluating a thimble integral in Section~\ref{contour-argument-AL}. This solution arises as the Laplace transform $\laplace^\theta_{\zeta, 1} v_1$ of the function
+%%\[ v_1 = i \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}-\frac{\zeta}{2}\right), \]
+\[ v_1 = i \left(\frac{\zeta_1}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right), \]
+on the position domain. The function $v_1$ is singular at $\zeta = 1$, but the hypergeometric factor ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right)$ is analytic at that point, so $v_1$ has the typical form of a {\em singularity} in the formalism of resurgent functions. We can see ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right)$ as a new holomorphic function, analytically continued from a germ at $\zeta = 1$. This new function has a branch cut singularity at $\zeta=-1$, and we can find the jump across the branch cut $\zeta \in (-\infty, -1]$ using equation~15.2.3 from \cite{dlmf}. Along the branch cut, we have
+\begin{old}
 \begin{align*}
 &{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}+i\varepsilon\right)-{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}-i\varepsilon\right) \\
 &=\frac{2\pi i}{\Gamma\big(\tfrac{1}{2}-\tfrac{m}{n}\big)\Gamma\big(\tfrac{1}{2}+\tfrac{m}{n}\big)} \left(-\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
-&=2 i\cos(\pi m/n) \left(-\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
-&=2\cos(\pi m/n) \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
-&=2\cos(\pi m/n)\, \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} \left(-\frac{\zeta_{1}}{2}\right)^{1/2}\, {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right)
+&=2 i\cos\big(\tfrac{m}{n}\pi\big) \left(-\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
+&=2\cos\big(\tfrac{m}{n}\pi\big) \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
+&=2\cos\big(\tfrac{m}{n}\pi\big)\, \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} \left(-\frac{\zeta_{1}}{2}\right)^{1/2}\, {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right)
 \end{align*}
-Hence, we deduce  
+\end{old}
+\begin{align*}
+&{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}+i\varepsilon\right)-{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}-i\varepsilon\right) \\
+&=\frac{2\pi i}{\Gamma\big(\tfrac{1}{2}-\tfrac{m}{n}\big)\Gamma\big(\tfrac{1}{2}+\tfrac{m}{n}\big)} \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
+&=2i\cos\big(\tfrac{m}{n}\pi\big) \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
+&=2i\cos\big(\tfrac{m}{n}\pi\big)\, \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} \left(-\frac{\zeta_{1}}{2}\right)^{1/2}\, {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right)
+\end{align*}
+Thus, for any point $p$ on the branch cut,
+\begin{draft}
 \begin{equation}\label{resurgent-relation-1}
-    v_1(\zeta+1+i\varepsilon)-v_1(\zeta+1-i\varepsilon)=2i \cos(\pi m/n)  v_{-1}(\zeta)
+v_1(p_+) - v_1(p_-)=2i \cos\big(\tfrac{m}{n}\pi\big)\,v_{-1}(p), \begin{todo}\text{[wrong]}\end{todo}
 \end{equation}
-namely, that \begin{todo}[\end{todo} the germ of the singularity at $\zeta=1$ knows about the germ of the singularity at $\zeta=-1$ \begin{todo}]\end{todo}. \begin{revised}This is an example of the of the \em{resurgence} phenomenon introduced by \'{E}calle \cite{EcalleI,EcalleII,EcalleIII}\footnote{If the reader is interested in resurgence, it may be useful to look at the following review \cite{diverg-resurg-i,Dorigoni,aniceto2019primer}.}.\end{revised} Although we will not discuss more about resurgence, we would like to point out that among the great advantages of resurgence (for instance compared to Borel summability) \begin{todo}[The key here is that we can understand the Stokes phenomenon without completing the Borel summation process---that is, without taking the Laplace transform to go back to the frequency domain.]\end{todo} there are the \textit{formalism of singularities} and the \textit{Alien calculus} which allow to understand the Stokes phenomena working in the position domain. The same phenomena were described by Berry and Howls \cite{Berry_Howls} who noticed that divergent asymptotic expansions of thimble integrals encode the contribution of other critical values. 
+\end{draft}
+\begin{old}
+\begin{equation}\label{resurgent-relation-1}
+    v_1(\zeta+1+i\varepsilon)-v_1(\zeta+1-i\varepsilon)=2i \cos\big(\tfrac{m}{n}\pi\big) v_{-1}(\zeta)
+\end{equation}
+\end{old}
+where $v_1(p_+)$ and $v_1(p_-)$ respectively denote the evaluation of $v_1(p)$ by analytic continuation from from above and below the branch cut. The appearance of the function $v_{-1}$ corresponding to the other Borel regular solution $e^z V_{-1}$ is an example of the {\em resurgence} phenomenon~\cite{EcalleI,EcalleII,EcalleIII}.
 
+Reviews like \cite{diverg-resurg-i,Dorigoni,aniceto2019primer} discuss many details and applications of resurgence. We would like to emphasize one application: through resurgence, we can use calculations in the position domain to understand the Stokes phenomenon in the frequency domain. This lets us skip the last and often trickiest step of Borel summation: using the Laplace transform to map the functions under consideration back into the frequency domain. The {\em formalism of singularities} and the {\em alien calculus} are two of the tools that make this possible. \begin{todo}[The same phenomena were described by Berry and Howls \cite{Berry_Howls} who noticed that divergent asymptotic expansions of thimble integrals encode the contribution of other critical values.]\end{todo}
+\end{revised}
+\begin{old}\par
+Although we will not discuss more about resurgence, we would like to point out that among the great advantages of resurgence (for instance compared to Borel summability) there are the \textit{formalism of singularities} and the \textit{Alien calculus} which allow to understand the Stokes phenomena working in the position domain. The same phenomena were described by Berry and Howls \cite{Berry_Howls} who noticed that divergent asymptotic expansions of thimble integrals encode the contribution of other critical values.
+\end{old}
+
+\begin{draft}
 We can repeat the same reasoning with $v_{-1}$:
 \begin{align*}
     v_{-1}(\zeta)=  \left(\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{1}{2}+\frac{\zeta}{2}\right)
@@ -2391,7 +2413,8 @@ and ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\f
 \end{align*}
 and the analogue of \eqref{resurgent-relation-1} is 
 \begin{equation}\label{resurgent-realtion-2}
-    v_{-1}(\zeta-1+i\varepsilon)-v_{-1}(\zeta-1-i\varepsilon)= -2i\cos(\pi m/n) v_1(\zeta).
+v_{-1}(p_+) - v_1(p_-)=2i \cos\big(\tfrac{m}{n}\pi\big)\,v_{-1}(p),
+%%    v_{-1}(\zeta-1+i\varepsilon)-v_{-1}(\zeta-1-i\varepsilon)= -2i\cos(\pi m/n) v_1(\zeta).
 \end{equation}
 Equations \eqref{resurgent-relation-1} and \eqref{resurgent-realtion-2} are a manifestation of the Stokes phenomena, already in the position domain. Indeed, when we start varying the contour of integration for the Laplace transform, we know that $\laplace_{\zeta,1}^\pi$ and $\laplace_{\zeta,-1}^0$ are not well defined because the contour hits the other singularity (respectively at $\zeta=-1$ and $\zeta=1$). The Stokes phenomenon consists of comparing the Laplace transform below and above the critical direction and it quantifies the jump as a constant (the so-called Stokes constant) times another function. In our example:
 \begin{align*}
@@ -2401,6 +2424,7 @@ Equations \eqref{resurgent-relation-1} and \eqref{resurgent-realtion-2} are a ma
 thus the Stokes constants are respectively $\pm 2i \cos(\pi m/n)$\footnote{If we think of the Laplace transforms of $v_1$ and $v_{-1}$ as a frame of solutions for the Airy--Lucas differential equation, the equations above define the so-called Stokes matrices for the ODE.}. 
 
 It may be surprising that the Stokes constants depend on $\cos(\pi m/n)$, because the Stokes constants are \begin{revised}typically\end{revised} the intersection number of \textit{dual pairs of thimbles}, according to Picard--Lefschetz formula. Stokes constants that arise in this way are integers in a suitable normalization \cite[Section 5]{pham}\cite[Chapter~1]{Arnold}. However, in the Airy--Lucas example, $f$ is not Morse unless $n=3$. Hence, we have to interpret the $\cos(\pi m/n)$ as a consequence of the ambiguity on the lift of a path in the position domain. \begin{todo}[I think we should argue we have the action of the permutation which leaves the base unchanged but gives a\ldots]\end{todo}
+\end{draft}
 %
 %\textcolor{DarkCyan}{where the sign must be chosen so that $\pm\zeta$ stays in the left half-plane over the whole integration path (?)}.
 %For $z \in (0, \infty)$, the contour $\gamma_z$ runs \textcolor{magenta}{counterclockwise} around $[1, \infty)$, as shown below\textcolor{DarkCyan}{, so we have to choose the negative sign above (?)}. Let us assume $z \in (0, \infty)$ for the rest of the section. \textcolor{magenta}{[Our conclusions should probably hold whenever $\operatorname{Re}(z) > 0$.]}
