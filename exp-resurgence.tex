@@ -135,6 +135,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \newtheorem{claim}[definition]{Claim}
 %\newtheorem{exercise}[definition]{Exercise}
 \newtheorem*{notation*}{Notation}
+\newtheorem{notation}{Notation}
 
 % hideable verifications
 \newif\ifshowverify
@@ -852,7 +853,7 @@ Pick a translation parameter $\zeta$ on $B$ and an extended angle $\theta \in \R
 where $z$ is the frequency function and $\mathcal{J}_{\zeta, \alpha}^\theta$ is the ray $\zeta \in \alpha + e^{i\theta} [0, \infty)$. To make sense of this formula, we ask for the following conditions.
 \begin{itemize}
 \item The starting point $\zeta = \alpha$ is in the domain of $\zeta$. Once we have this, we can continue $\zeta$ along the whole ray $\mathcal{J}_{\zeta, \alpha}^\theta$.
-\item The ray $\mathcal{J}_{\zeta, \alpha}^\theta$ avoids the branch points after leaving $\zeta = \textcolor{orange}{\alpha}$.
+\item The ray $\mathcal{J}_{\zeta, \alpha}^\theta$ avoids the branch points after leaving $\zeta = \alpha$.
 \item The integral converges. We ensure this by putting conditions on $\phi$ and $z$.
 \begin{itemize}
 \item With respect to the flat metric, $\phi$ is uniformly of exponential type $\Lambda$ along the ray $\mathcal{J}_{\zeta, \alpha}^\theta$, and is locally integrable throughout the ray.\footnote{Recall that a function $\phi$ is of exponential type $\Lambda$ if for every $\varepsilon>0$, there is a constant $A_\varepsilon$ (which may depends on $\varepsilon$) such that $|\phi|\le A_\varepsilon e^{(\Lambda+\varepsilon)|\zeta|}$. We instead require a uniform constant $A$ such that $|\phi| \le A e^{\Lambda|\zeta|}$.}
@@ -1246,60 +1247,20 @@ commutes, where the functions of the variable $z$ belong to the fiber $T^*_{\zet
 \subsection{The Borel and Laplace transforms as algebra homomorphisms}\label{sec:borel-laplace-homom}
 %
 \subsubsection*{The Laplace transform as algebra homomorphism}
-The Laplace transform $\laplace_{\zeta,\alpha}$ is defined on the space of holomorphic functions in the position domain, integrable at $\zeta=\alpha$ and exponentially bounded at infinity. In particular, that subspace of holomorphic functions on $B$, it has a $\C$-algebra structure, with product given by the \textit{convolution product}. 
-\begin{old}
-    \begin{definition}%\label{def:convolution}
-Let $\phi,\psi$ be two holomorphic functions on $B$. Choose a translation cooridnate $\zeta$ on $B$ and a base point $\zeta=\alpha$, then the convolution product $\phi\ast_{\zeta,\alpha}\psi$ is an holomorphic function on $B$ defined as
-\begin{equation}%\label{eq:convolution_def}
-[\phi \ast_{\zeta, \alpha} \psi](a) := \int_{\zeta = \alpha}^a \psi\,\mathsf{R}^*\phi\,d\zeta,
-\end{equation}
-where $\mathsf{R}$ is the $180^\circ$ rotation that exchanges $\zeta = 0$ with $a$. In other words, $\mathsf{R}^*\zeta = \zeta(a) - \zeta$.
-\begin{brainstorm}
-\item Given a function $f$ on $B$, we will write $f'$ and $f''$ to denote the pullbacks of $f$ to the first and second factors, respectively, of $B \times B$.
-\item For a kernel $k$ on $B \times B$, we the corresponding integral kernel operator would be
-\[ \mathcal{V}\phi = \int_0^\zeta k\,\phi'\,d\zeta' \]
-If we have, for example, $k = (\zeta - \zeta')^\rho$ and $\phi' = (\zeta')^k$, then
-\[ \mathcal{V}\phi = \int_0^\zeta (\zeta - \zeta')^\rho\,(\zeta')^k\,d\zeta' \]
-\item Suppose you have
-\[ \omega = e^\zeta - 1 = \zeta + \tfrac{1}{2!} \zeta^2 + \tfrac{1}{3!} \zeta^3 + \ldots \]
-Then
-\[ \zeta = \log(1 + \omega) = \omega + \tfrac{1}{2} \omega^2 + \tfrac{1}{3} \omega^3 + \ldots \]
-Do you say $\zeta(\omega)$? Or $\omega(\zeta)$? What does $\omega(\zeta + 1)$ mean? Define $f = \zeta + \omega$. What is $f(\omega + 1)$? $f(\zeta) = \zeta + \omega(\zeta)$. So $f(\omega) = \log(1 + \omega) + \omega$, so $f(\zeta) = \zeta + e^\zeta - 1$?
-\[ \int_0^\zeta (\zeta^2 + \zeta'^2)\,d\zeta' \]
-\[ \int_{\zeta=0}^a (\zeta(a)^2 + \zeta^2)\,d\zeta \]
-\[ \int_{\zeta=0}^a (\zeta^2 + \zeta^2)\,d\zeta \]
-\item \begin{todo}\textbf{A} [Draft definition section in this alternate notation]\end{todo} Alternate notation: \textcolor{orange}{[\ldots]} defined as
-\begin{equation}
-    \phi \ast_{\zeta, \alpha} \psi \defeq \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}} \phi'\,\psi''\,d\zeta'',
-\end{equation}
-where $\mathcal{S}'(\zeta)$ is the line segment connecting $\zeta' = \alpha$ to $\zeta' = \zeta$, and $\mathcal{S}''(\zeta)$ is defined similarly \begin{todo}[check]\end{todo}.
-\item Draw diagram
-\end{brainstorm}
-\end{definition}
-\begin{todo}[Show that Laplace transform preserves domain of Laplace transform]\end{todo}
-\begin{draft}On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$. The Laplace transform $\laplace_{\zeta, 0}$ is special, because it is an algebra isomorphism with respect to $\ast_{\zeta, 0}$.\end{draft}
-% \begin{prop}
-% \begin{todo}[Correct and rewrite!]\end{todo}
-% \begin{old}The Laplace transform $\laplace^\theta_{\zeta,\alpha}$ is a homomorphism from the algebra of locally integrable, exponentially bounded holomorphic functions, equipped with the convolution product, to the algebra of analytic functions on the half-plane $\Re(e^{i\theta} z) > 0$, equipped with the usual product.\end{old}
-% \begin{todo}[Check: if Laplace transform of convolution is well-defined, then product of Laplace transforms is well-defined]\end{todo}
-% \begin{todo}[\textbf{A} Redo argument with $\ast_{\zeta, \beta}$]\end{todo}
-% \begin{draft}
-% \begin{align*}
-% \laplace_{\zeta,\alpha}[{\phi}\ast_{\zeta,\alpha}{\psi}] & = \laplace_{\zeta,\alpha}[{\phi}]\,\laplace_{\zeta,0}[{\psi}]
-% \end{align*}
-% \end{draft}
-% \end{prop}
-\end{old}
+The Laplace transform $\laplace_{\zeta,\alpha}$ is defined on the space of holomorphic functions in the position domain which are integrable at $\zeta=\alpha$ and exponentially bounded at infinity. This subspace of holomorphic functions on $B$ has a $\C$-algebra structure, with product given by the \textit{convolution product}. Since we will define the convolution product in terms of an integral along a path in $B \times B$, we must first introduce notation to help us express the integrand.
+\begin{notation}\label{notn:prod}
+The product space $B \times B$ comes with projection maps $\pi', \pi'' \maps B \times B \to B$ onto the first and second factors, respectively. Given a function $\phi$ on $B$, we denote $\phi \circ \pi'$ by $\phi'$ and $\phi \circ \pi''$ by $\phi''$.
+\end{notation}
 \begin{definition}\label{def:convolution}
-\begin{todo}\textbf{A} read through copied definition\end{todo} Let $\phi,\psi$ be two holomorphic functions on $B$. Choose a translation coordinate $\zeta$ on $B$ and a base point $\zeta = \alpha$. The convolution product $\phi\ast_{\zeta,\alpha}\psi$ is a holomorphic function on $B$ defined as
+Let $\phi,\psi$ be two holomorphic functions on $B$. Choose a translation coordinate $\zeta$ on $B$ and a base point $\zeta = \alpha$. The convolution product $\phi\ast_{\zeta,\alpha}\psi$ is the function on $B$ defined by the integral
 \begin{equation}\label{eq:convolution_def}
-\phi \ast_{\zeta, \alpha} \psi \defeq \int_{\substack{\mathcal{S}'(\zeta)\times\mathcal{S}''(\zeta)\\ \zeta'+\zeta''=\zeta}} \phi' \psi'' d\zeta'
+\phi \ast_{\zeta, \alpha} \psi \defeq \int_{\substack{\mathcal{S}'(\zeta)\times\mathcal{S}''(\zeta)\\ \zeta'+\zeta''=\zeta}} \phi' \psi'' d\zeta',
 \end{equation}
-where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=\alpha$ to $\zeta'=\zeta$, and $\mathcal{S}''(\zeta)$ is defined similalrly. Notice that the integrand is a function on $B \times B$. Each function on $B$ appearing in the expression is decorated with $'$ or $''$ to specify whether it should be seen as a function on the first or the second factor of $B \times B$\begin{todo}[Is it clear the convolution is holomorphic??]\end{todo}  
+where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=\alpha$ to $\zeta'=\zeta$, and $\mathcal{S}''(\zeta)$ is the line segment from $\zeta''=\zeta-\alpha$ to $\zeta''=0$. 
 \end{definition}
-On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$. The Laplace transform $\laplace_{\zeta_\alpha, 0}$ is special, because it is an algebra isomorphism with respect to $\ast_{\zeta_\alpha, 0}$.
+The function $\phi \ast_{\zeta, \alpha} \psi$ is holomorphic, as long as it is well-defined. \begin{todo}[Is it clear the convolution is holomorphic?]\end{todo} On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$. The Laplace transform $\laplace_{\zeta_\alpha, 0}$ is special, because it is an algebra isomorphism with respect to $\ast_{\zeta_\alpha, 0}$.
 \begin{prop}\label{prop:convolution_iso_laplace}
-\begin{todo}[Replace $\zeta_\alpha$ with $\zeta$ throughout statement and proof, unless there's some obstacle.]\end{todo} Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transform $\laplace_{\zeta_\alpha,0}$ is well defined. Then 
+\begin{todo}[Replace $\zeta_\alpha$ with $\zeta$ throughout statement and proof, unless there's some obstacle.]\end{todo} Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transform $\laplace_{\zeta_\alpha,0}$ is well defined. Then
 \begin{equation}
     \laplace_{\zeta_\alpha,0}[\phi\ast_{\zeta_\alpha,0}\psi]=\laplace_{\zeta_\alpha,0}[\phi]\,\laplace_{\zeta_\alpha,0}[\psi]\,.
 \end{equation}
@@ -1720,14 +1681,7 @@ along any ray. This, as discussed above, proves the desired result.
 \subsection{Action on fractional derivatives and fractional integrals}\label{sec:frac-diff-laplace}
 In this section, we will consider the action of $\borel_\zeta$ and $\laplace_{\zeta,0}$ with respect to the action of derivatives in both the frequency and position domains, as well as fractional integrals and derivatives $\fracderiv{\lambda}{\zeta}{0}$ in the position domain. This will be useful in Section~\ref{sec:examples}. 
 
-In our treatmeant, we will restrict the Borel transform to the space of $1$-Gevrey series and the Laplace transform to $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ with $\sigma>-1$ and $\Lambda>0$, for some domain $\Omega_\alpha$ as in Figure~\ref{fig:sectorial_domain-pos-fre}. 
-\begin{old}
-\begin{definition}
-For $\nu \in (-\infty, 1)$, the \textit{fractional integral} $\partial^{\nu-1}_{\zeta, \alpha}$ is defined by
-\[ [\partial^{\nu-1}_{\zeta, \alpha} \phi](p) \defeq \frac{1}{\Gamma(1-\nu)} \int_{\zeta =\alpha}^p \big(\zeta(p)-\zeta\big)^{-\nu} \phi\,d\zeta, \]
-where $p$ is any point on the position domain $B$.
-\end{definition}
-\end{old}
+In our treatmeant, we will restrict the Borel transform to the space of $1$-Gevrey series and the Laplace transform to $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ with $\sigma>-1$ and $\Lambda>0$, for some domain $\Omega_\alpha$ as in Figure~\ref{fig:sectorial_domain-pos-fre}.
 \begin{definition}
 For $\nu \in (-\infty, 1)$, the \textit{fractional integral} $\partial^{\nu-1}_{\zeta, \alpha}$ is defined by
 \[ [\partial^{\nu-1}_{\zeta, \alpha} \phi] \defeq \frac{1}{\Gamma(1-\nu)} \int_{\mathcal{S}'(\zeta)} \big(\zeta-\zeta'\big)^{-\nu} \phi' \,d\zeta', \]
@@ -1737,7 +1691,7 @@ where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=\alpha$ to $\zeta'=
 % \end{equation*}
 % }
 \end{definition}
-\begin{todo}[\textbf{A} Explain that we're using the $'$, $''$ notation, and $\zeta - \zeta'$ is an expression for the function $\zeta''$ on the second factor.]\end{todo}
+Here, we are using Notation~\ref{notn:prod} and taking advantage of the fact that $\zeta'' = \zeta - \zeta'$ along our integration path.
 
 The fractional integral obeys the semigroup law \cite[Section  1.3]{mladenov2014advanced}
 \begin{align*}
@@ -1774,14 +1728,15 @@ for every $n\in\Z_{\geq 0}$.
    % &=z^n\laplace_{\zeta,0}\Big[\fracderiv{\lambda}{\zeta}{0}\partial_\zeta^n \phi\Big]
 %\end{align*}
    
-Results \emph{(i)} and \emph{(ii)} follow from the properties of the Laplace transform with respect to the convolution product. For every $\tau\in\R_{<0}\cup(0,1)$
+Results \emph{(i)} and \emph{(ii)} follow from the properties of the Laplace transform with respect to the convolution product. For every $\tau \in (-\infty, 0) \cup (0,1)$,
 \begin{align*}
 z^\tau\laplace_{\zeta,0}\phi&=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)}\Big] \laplace_{\zeta,0}\phi\\
 &=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)} \ast_\zeta \phi\Big] \\
-&=\laplace_{\zeta,0} \int_{\mathcal{S}'(\zeta)}\frac{(\zeta-\zeta')^{-\tau-1}}{\Gamma(-\tau)} \phi' d\zeta'\\
-&=\laplace_{\zeta,0}\fracderiv{\tau}{\zeta}{0}\phi
+&=\laplace_{\zeta,0} \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}}\frac{(\zeta'')^{-\tau-1}}{\Gamma(-\tau)} \phi' d\zeta'\\
+&=\laplace_{\zeta,0} \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}}\frac{(\zeta-\zeta')^{-\tau-1}}{\Gamma(-\tau)} \phi' d\zeta'\\
+&=\laplace_{\zeta,0}\fracderiv{\tau}{\zeta}{0}\phi,
 \end{align*}
-\begin{todo}[or: where we use the notation from Definition~\{\ldots\}]\end{todo} where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=0$ to $\zeta' = \zeta$. The result of $(iii)$ follows by repetedly using integration by part and the fact that boundary terms vanish:
+where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=0$ to $\zeta' = \zeta$, $\mathcal{S}''(\zeta)$ is the line segment from $\zeta''=\zeta$ to $\zeta''=0$, and we are taking advantage of the fact that $\zeta'' = \zeta - \zeta'$ on the integration path. The result of $(iii)$ follows by repetedly using integration by part and the fact that boundary terms vanish:
 \begin{align*}
     z^n\laplace_{\zeta,0}\phi&=\int_0^\infty e^{-z\zeta} z^n \phi \, d\zeta\\
     &=(-1)^n\int_0^\infty \partial_\zeta^n \big[e^{-z\zeta}\big]  \phi\, d\zeta\\
@@ -3695,14 +3650,9 @@ In particular, $\frac{d}{d\zeta}\circ\borel_{\textit{phys}}\left[z^{-1/2}\tilde{
 %&=\frac{\Gamma(1/2)}{\Gamma(3/2)}\zeta^{1/2} \,\, {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{3}{2};-\frac{\zeta}{2}\right)\\
 %&=2 \zeta^{1/2} \,\, {}_2F_1\left(\frac{1}{6},\frac{5}{6};\frac{3}{2};-\frac{\zeta}{2}\right)
 %\end{align*}
-
-
-
 \subsubsection{Integral formula for hypergeometric functions}
-
-In \cite{diverg-resurg-i} the author studies summability and resurgent properties of solutions of the Airy equation. 
-
-He considers the formal power series  
+%
+In \cite{diverg-resurg-i} the author studies summability and resurgent properties of solutions of the Airy equation. He considers the formal power series
 \[\series{\Phi}_{\pm}(z)\defeq \sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{1}{2}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}z^{-n}\]
 such that
 \begin{align*}
@@ -3712,12 +3662,10 @@ such that
 are formal solutions of the Airy equation. Notice that compared to Mari\~{n}o's formal solutions, Sauzin adopts a different change of coordinates $z=\frac{2}{3}y^{3/2}$.  
 
 By looking for solutions of the Borel transformed equation, he wrote the Borel transform of $\series{\Phi}_{\pm}$ as a convolution product:
-
 \begin{align*}
 \hat{\phi}_+(\zeta):=\borel\series{\Phi}_+=\delta+\frac{d}{d\zeta}\hat{\chi}(\zeta)  \qquad \hat{\phi}_-(\zeta):=\borel\series{\Phi}_-=\delta-\frac{d}{d\zeta}\hat{\chi}(-\zeta)
 \end{align*}
  where $\hat{\chi}(\zeta)=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6} \ast_{\zeta} \zeta^{-5/6}$.
-
 %Notice that $\tilde{W}_{1,2}(\tfrac{2}{3}\hbar)=\series{\Phi}_{\pm}(z)$ for $\hbar=z^{-1}$, hence 
 %
 %\begin{align*}
@@ -3727,7 +3675,6 @@ By looking for solutions of the Borel transformed equation, he wrote the Borel t
 %which up to a constant factor for $\delta$, they agree with our results. 
 
 Notice that the function $\hat{\chi}(\zeta)$ is an hypergeometric function:
-
 \begin{align*}
 \hat{\chi}(\zeta)&=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6}\ast \zeta^{-5/6}\\
 &=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}\int_0^{\zeta}(2\zeta'+\zeta'^2)^{-1/6} (\zeta-\zeta')^{-5/6}d\zeta'\\
