@@ -2965,8 +2965,10 @@ F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u \\
 \appendix
 %
 \section{The Airy equation}\label{airy-appendix}
-\begin{draft}
-\subsection{Specializing from the Airy--Lucas examples\begin{todo}[improve title]\end{todo}}
+\subsection{Specializing from the Airy--Lucas examples \begin{todo}[improve title]\end{todo}}
+\begin{revised}
+\subsubsection{Motivation}
+Since the Airy equation is a widely used example in the study of Borel summation and resurgence, we find it useful to repeat the Airy--Lucas example calculations from Sections~\ref{sec:airy}--\ref{example_AL} in this special case, with the parameters set to $n = 3$ and $m = 1$. In particular, this makes it easier to compare our approaches and conventions with others from the literature, as we do in Section~\ref{airy-comparison}.
 \subsubsection{Rewriting as a modified Bessel equation}
 Starting from equation~\eqref{eqn:airy-distillation}, we can distill the most interesting part of the Airy function by writing
 \[ \Ai(y) = \tfrac{1}{\pi\sqrt{3}}\,y^{1/2}\,K\big(\tfrac{2}{3} y^{3/2}\big), \]
@@ -2983,10 +2985,10 @@ In fact, $K$ is the modified Bessel function $K_{1/3}$~\cite[equation~9.6.1]{dlm
 \left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\tfrac{1}{3}\big)^2 z^{-2} \right] K = 0.
 \end{equation}
 %
-\end{draft}
+\end{revised}
 %
-\begin{draft}
 \subsubsection{Asymptotic analysis}%%\label{sec:asympt}
+\begin{revised}
 %
 We know from the formal theory of level~$1$ ODEs that equation~\eqref{eqn:reg-mod-bessel} has a frame of formal $1$-Gevrey trans-monomial solutions
 \[ \{ e^{-\alpha z} z^{-\tau_\alpha}\,\series{W}_\alpha \mid \alpha^2 - 1 = 0 \}, \]
@@ -3002,10 +3004,6 @@ which we will describe in Section~\ref{big-idea-airy}, can be recovered from the
 \subsubsection{The big idea}\label{big-idea-airy}
 %
 As discussed in Section~\ref{big-idea}, a function $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel} if and only if $v$ satisfies the integral equation
-
-%%We are going to look for functions $v_\alpha$ whose Laplace transforms $\laplace_{\zeta, \alpha} v_\alpha$ satisfy equation~\eqref{eqn:reg-mod-bessel-AL}. We will succeed when $\alpha^2 - 1 = 0$, and we will see that $K_{m/n}$ is a scalar multiple of $\laplace_{\zeta, 1} v_1$.
-
-%%By the properties of the Laplace transform laid out in Proposition~\ref{prop:L-int-op}, a function $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:reg-mod-bessel-AL} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{int-eq:spatial-mod-bessel}
 \left[ \big[ \zeta^2 - 1 \big] - \fracderiv{-1}{\zeta}{\alpha} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta}{\alpha} \right] v = 0.
 \end{equation}
@@ -3018,6 +3016,7 @@ obtained by differentiating twice on both sides. Conversely, as shown in Appendi
 emphasizes the regular singularities at the roots of $\zeta^2 - 1$. This will lead us, in Sections~\ref{pos-root}\,--\,\ref{neg-root}, to a solution $v_\alpha \in (\zeta - \alpha)^{1/2}\,\mathcal{O}_{\zeta = \alpha}$ for each root $\alpha$.
 
 As described in Section~\ref{big-idea}, each solution $v_\alpha$ will extend to a function in \begin{todo}[\ldots]\end{todo}
+\end{revised}
 
 %%In Sections \ref{pos-root-AL}\,--\,\ref{neg-root-AL}, we will see this approach succeed. For each root $\alpha$, we will find a solution $v_\alpha$ of equation~\eqref{diff-eq:spatial-mod-bessel-AL} that belongs to $(\zeta - \alpha)^{\tau_\alpha-1}\,\mathcal{O}_{\zeta = \alpha}$ for some constant $\tau_\alpha \in (0, 1)$. We will express $v_\alpha$ explicitly enough to see that it extends to a function in $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$ on any sector $\Omega_\alpha$ that has its tip at $\zeta = \alpha$ and does not touch the other roots (see Figure~\ref{fig:sectorial_domain--with roots P}). We will also be able to see that $v_\alpha$ is uniformly of exponential type $\Lambda$ for any $\Lambda > 0$. It follows by Proposition~\ref{prop:laplace-cont} that for any ray $\mathcal{J}^\theta_{\zeta, \alpha}$ in $\Omega_\alpha$, the Laplace transform $\laplace^\theta_{\zeta, \alpha} v_\alpha$ is a well-defined element of $\dualsingexp{-\tau_\alpha}(\widehat{\Omega}_\alpha^\Lambda)$ that satisfies equation~\eqref{eqn:reg-mod-bessel-AL}. Using the technique from the proof of Lemma~\ref{lem:laplace-bridge}, we can see more precisely that $\laplace^\theta_{\zeta, \alpha} v_\alpha$ belongs to
 %%\[ cz^{-\tau_\alpha} + \dualsingexp{-\tau_\alpha-1}(\widehat{\Omega}_\alpha^\Lambda) \]
@@ -3031,6 +3030,7 @@ As described in Section~\ref{big-idea}, each solution $v_\alpha$ will extend to 
 %
 \subsubsection{Focus on $\zeta = 1$}\label{pos-root}
 %
+\begin{revised}
 Switching to the translation coordinate $\zeta_1$ defined by $\zeta = 1 + \zeta_1$, and then to the rescaled coordinate $\xi_1$ defined by $\zeta_1 = -2\xi_1$, we can rewrite equation~\eqref{diff-eq:spatial-mod-bessel} as the hypergeometric equation
 \begin{equation}%%\label{diff-eq:hypergeom-pos}
 \left[\xi_1 (1 - \xi_1) \big(\tfrac{\partial}{\partial \xi_1}\big)^2 + 3(\tfrac{1}{2} - \xi_1) \tfrac{\partial}{\partial \xi_1} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0,
@@ -3045,9 +3045,11 @@ in the Airy equation case. As discussed in Section~\ref{pos-root-AL}, $v_1$ is h
 for all $\Lambda > 0$. Its Laplace transform can be written as
 \[ \laplace^\theta_{\zeta, 1} v_1 = e^{-z} z^{-1/2}\,W_1, \]
 where $W_1$ is a holomorphic function on $z \notin (-\infty, 0]$ which is bounded outside any constant-radius neighborhood of $z \in (-\infty, 0]$.
+\end{revised}
 %
 \subsubsection{Focus on $\zeta = -1$}\label{neg-root}
 %
+\begin{revised}
 We now switch to the translation coordinate $\zeta_{-1}$ defined by $\zeta = -1 + \zeta_{-1}$. The solution $v_{-1} \in (\zeta+1)^{-1/2}\,\mathcal{O}_{\zeta=-1}$ found in Section~\ref{neg-root-AL} specifies to
 \begin{alignat*}{2}
 v_{-1} &=\;& (1-\xi_1)^{-1/2} &\;{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi_1\big) \\[1mm]
@@ -3058,8 +3060,8 @@ in the Airy equation case. By the same reasoning as before, $v_{-1}$ is holomorp
 for all $\Lambda > 0$. Its Laplace transform can be written as
 \[ \laplace^\theta_{\zeta, -1} v_1 = e^z z^{-1/2}\,W_{-1}, \]
 where $W_{-1}$ is a holomorphic function $z \notin [0, \infty)$ which is bounded outside any constant-radius neighborhood of $z \in [0, \infty)$.
-%
-\begin{old}
+\end{revised}
+\begin{old}\par
 Let us find a germ in $(\zeta+1)^{\tau_{-1}-1}\,\mathcal{O}_{\zeta=-1}$, for some $\tau_{-1} \in (0, 1)$, that satisfies equation~\eqref{diff-eq:spatial-mod-bessel-AL}. In the rescaled coordinate from Section~\ref{pos-root-AL}, this is the point $\xi_1 = 1$. Looking again through Kummer's table of solutions, we find another expression \cite[formula~15.10.14]{dlmf} that represents a germ in $(1-\xi_1)^{-1/2}\,\mathcal{O}_{\xi_1=1}$:
 \begin{alignat*}{2}
 v_{-1} &=\;& (1-\xi_1)^{-1/2} &\;{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; 1-\xi_1\big) \\[1mm]
@@ -3073,7 +3075,8 @@ where $W_{-1}$ is a holomorphic function $z \notin [0, \infty)$ which is bounded
 \end{old}
 %
 \subsubsection{Thimble projection reasoning}\label{contour-argument-airy}
-In Section~\ref{contour-argument}, we specialized the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof} to the case of the Airy--Lucas functions. We now specialize even further, down to the case of the Airy function. \begin{todo}[\ldots]\end{todo}
+\begin{revised}
+In Section~\ref{contour-argument-AL}, we specialized the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof} to the case of the Airy--Lucas functions. We now specialize even further, down to the case of the Airy function. \begin{todo}[\ldots]\end{todo}
 \begin{align*}
 K(z) & = \begin{todo}-\end{todo}i\sqrt{3} \int_{\mathcal{C}^\theta_1} \exp\left[z \left(4u^3 - 3u\right)\right]\,du \\
 & = \frac{i}{\sqrt{3}} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{1}{4u_+^2 - 1}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{1}{4u_-^2 - 1}\,d\zeta \right]
@@ -3112,7 +3115,7 @@ across the branch cut $\mathcal{J}^\theta_{\zeta,1}$. The first term is regular 
 \[ K(z) = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{6},\;\frac{5}{6};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta. \]
 Comparing this expression with the expression for $V_1$ in Section~\ref{pos-root}, we see that
 \[ K(z) = \tfrac{i}{2}\laplace_{\zeta, 1} v_1. \]
-%
+\end{revised}
 \begin{old}\par
 We can also study the Airy-Lucas functions by applying the thimble projection formula to integral~\eqref{integral:mod-bessel-rational-AL}, specializing the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof}. We recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Recall from below equation~\eqref{integral:AL} that the integration contour $\mathcal{C}^\theta_j$ run through the critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$, with its direction determined by the parameter $\theta$. The critical point splits $\mathcal{C}^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\mathcal{C}^\theta_j$ is a preimage of $\mathcal{J}^\theta_{\zeta, \mp 1}$, we get
 \begin{align*}%%\label{integral:mod-bessel-rational-zeta}
@@ -3178,6 +3181,7 @@ Comparing the expressions above with the expressions for $v_{\pm 1}$ computed in
 \end{old}
 %
 \subsection{Thimble projection formula}\label{thimble-proj-airy}
+\begin{revised}
 In Section~\ref{contour-argument-airy}, we specialized the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof} to the case of the Airy function. In this section, as an alternative, we will simply apply Lemma~\ref{lem:thimble_proj_formula-proof}, using trigonometric substitution. The lemma tells us that $K$ is the Laplace transform of
 \[ \kappa_1 = -i\sqrt{3}\,\frac{\partial}{\partial \zeta}\left(\int_{\mathcal{C}_1^\theta(\zeta)} du\right). \]
 Based on the variable $\phi$ from Section~\ref{contour-argument-airy}, we introduce a new variable $\eta$ defined by $\phi = \tfrac{\pi}{3} + i\eta$, with $u = \cos\big(\tfrac{\pi}{3} + i\eta\big)$ and $\zeta = \cos\big(\pi + 3i\eta\big)$. We can lift the thimble $\mathcal{C}^\theta_1$ to the path $\eta \in \R$. Its incoming and outgoing branches lift to $(-\infty, 0]$ and $[0, \infty)$, respectively. Using the variable $\eta$, we calculate:
@@ -3185,7 +3189,7 @@ Based on the variable $\phi$ from Section~\ref{contour-argument-airy}, we introd
 \int_{\mathcal{C}_1^\theta(\zeta)} du & = u \Big|_{\operatorname{start} \mathcal{C}^\theta_1(\zeta)}^{\operatorname{end} \mathcal{C}^\theta_1(\zeta)} \\
 & = u_+ - u_-.
 \end{align*}
-Like in Section~\ref{contour-argument}, the functions $u_-$ and $u_+$ are functions on a neighborhood of $\mathcal{J}_{\zeta, 1}$ in the position domain. They give the values of $u$ after lifting to the incoming and outgoing branches of $\mathcal{C}^\theta_1$, respectively. We define functions $\eta_-$ and $\eta_+$ similarly, by lifting from the position domain to $\eta \in (-\infty, 0]$ and $\eta \in [0, \infty)$. Observing that $\eta_- = -\eta_+$, we can continue the calculation:
+Like in Section~\ref{contour-argument-AL}, the functions $u_-$ and $u_+$ are functions on a neighborhood of $\mathcal{J}_{\zeta, 1}$ in the position domain. They give the values of $u$ after lifting to the incoming and outgoing branches of $\mathcal{C}^\theta_1$, respectively. We define functions $\eta_-$ and $\eta_+$ similarly, by lifting from the position domain to $\eta \in (-\infty, 0]$ and $\eta \in [0, \infty)$. Observing that $\eta_- = -\eta_+$, we can continue the calculation:
 \begin{align*}
 \int_{\mathcal{C}_1^\theta(\zeta)} du & = \cos\big(\tfrac{\pi}{3} + i\eta_+\big) - \cos\big(\tfrac{\pi}{3} + i\eta_-\big) \\
 & = \cos\big(\tfrac{\pi}{3} + i\eta_+\big) - \cos\big(\tfrac{\pi}{3} - i\eta_+\big) \\
@@ -3217,7 +3221,7 @@ It follows, through identity~15.5.4 from \cite{dlmf}, that
 & = -\frac{1}{2} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2}\;{}_2 F_1\left(\frac{1}{6}, \frac{5}{6}; \frac{1}{2}; \frac{1}{2} - \frac{\zeta}{2}\right),
 \end{align*}
 matching the conclusion of Section~\ref{contour-argument-airy}.
-%
+\end{revised}
 \begin{old}\par
 In the Airy-Lucas integral, $f$ is a Chebyshev polynomial, so we can do a thimble projection technique (see Section~\ref{contour-argument-AL}) or apply the thimble projection formula equation~\eqref{eqn:formula-proof} using trigonometric substitution. As an example of how one might reason in the latter case, we look at the Airy function, given by $f = 4u^3-3u$.
 
@@ -3301,8 +3305,6 @@ Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
 \end{align*}
 \end{old}
 %
-\end{draft}
-%
 \begin{old}
 \begin{todo}\par\textbf{[Really old version starts here]}\end{todo}
 \subsubsection{Rewriting as a modified Bessel equation}
@@ -3360,23 +3362,7 @@ In Sections \ref{pos-root}\,--\,\ref{neg-root}, we will see this approach succee
 where $V_\alpha = \laplace_{\zeta_\alpha, 0} v_\alpha$ and $\zeta = \alpha + \zeta_\alpha$. We can see from Section~\ref{sec:reg-decay} that $V_\alpha$ is asymptotic to a scalar multiple of $z^{ - \tau_\alpha}$ at $z = \infty$, so the further decomposition
 \[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} z^{-\tau_\alpha} W_\alpha, \]
 makes $W_\alpha$ is asymptotic to a scalar multiple of $1+O(z^{-1})$ at $z = \infty$.
-%\textcolor{Magenta}{Show that $W_1$ is asymptotic to $\tilde{W}_1$!}
-%\color{Peru}
-%\begin{align*}
-%\left[ \big(\tfrac{\partial}{\partial \zeta}\big)^2 \circ (\zeta - 1)(\zeta + 1) - \tfrac{\partial}{\partial \zeta} \circ \zeta - \big(\tfrac{1}{3}\big)^2 \right] v & = 0
-%\end{align*}
-%\color{Sienna}
-%\begin{align*}
-%\left[ \big[ 2 + 2(2\zeta) \tfrac{\partial}{\partial \zeta} + (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 \big] - \big[ 1 + \zeta \tfrac{\partial}{\partial \zeta} \big] - \big(\tfrac{1}{3}\big)^2 \right] v & = 0 \\
-%\left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v & = 0 \\
-%\left[ (\zeta - 1)(\zeta + 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v & = 0
-%\end{align*}
-%\color{black}
-%%In terms of the coordinate $\zeta_\alpha$ with $\zeta = \alpha + \zeta_\alpha$, this equation is written
-%%\begin{equation}\label{eqn:centered-mod-bessel}
-%%\[ \left[ \big[ \zeta_\alpha (\zeta_\alpha + 2\alpha) + \alpha^2 - 1 \big] + \fracderiv{-1}{\zeta_\alpha}{0} \circ \big[ \zeta_\alpha + \alpha \big] - \big(\tfrac{1}{3}\big)^2 \fracderiv{-2}{\zeta_\alpha}{0} \right] w = 0. \]
-%%\end{equation}
-\subsubsection{Focus on $\zeta = 1$}\label{pos-root}
+\subsubsection{Focus on $\zeta = 1$}%%\label{pos-root}
 Let us find a solution of equation~\eqref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = 1$. Define a new coordinate $\zeta_1$ on $\C$ so that $\zeta = 1 + \zeta_1$. In this coordinate, equation~\eqref{diff-eq:spatial-mod-bessel} looks like
 \begin{equation}%%\label{diff-eq:spatial-mod-bessel-pos}
 \left[\zeta_1(2 + \zeta_1) \big(\tfrac{\partial}{\partial \zeta_1}\big)^2 + 3(1 + \zeta_1) \tfrac{\partial}{\partial \zeta_1} + \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0.
@@ -3391,7 +3377,7 @@ v_1 &=\;& \hphantom{-i\sqrt{2}}\,\xi_1^{-1/2} & {}_2F_1\big(\tfrac{1}{6}, \tfrac
 &=\;& -i\,\left(\frac{\zeta_1}{2}\right)^{-1/2} & {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big)
 \end{alignat*}
 From the argument in Section~\ref{spatial}, we know that $\laplace_{\zeta, 1} v_1$ satisfies equation~\eqref{eqn:reg-mod-bessel}, and can be written as $e^{-z} V_1$, where $V_1 = \laplace_{\zeta_1, 0} v_1$. Since $v_1$ has order $-1/2$, the decomposition $V_1 = z^{1/2} W_1$ makes $W_1$ asymptotic to a scalar multiple of $z^{-1}$ at $z = \infty$.
-\subsubsection{Focus on $\zeta = -1$}\label{neg-root}
+\subsubsection{Focus on $\zeta = -1$}%%\label{neg-root}
 Let us find a solution of equation~\eqref{diff-eq:spatial-mod-bessel} which is slight and locally integrable at $\zeta = -1$. In the rescaled coordinate from Section~\ref{pos-root}, this is the point $\xi_1 = 1$. Looking again through Kummer's table of solutions, we find another expression \cite[formula~15.10.14]{dlmf} which is manifestly slight and locally integrable at $\xi_1 = 1$:
 \begin{alignat*}{2}
 v_{-1} &=\;& (1-\xi_1)^{-1/2} & F\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{1}{2}; 1-\xi_1\big) \\
@@ -3404,7 +3390,7 @@ In this example, $v_1$ and $v_{-1}$ happen to be related by a symmetry: the M\"{
 %If we follow the routine from Section~\ref{pos-root}, rewriting equation~\eqref{diff-eq:spatial-mod-bessel} in the coordinate $\zeta_{-1}$ and then rewriting it again in a more recognizable form, we arrive at the hypergeometric equation
 %\[ \left[\xi_{-1} (1 - \xi_{-1}) \big(\tfrac{\partial}{\partial \xi_{-1}}\big)^2 + 3(\tfrac{1}{2} - \xi_{-1}) \tfrac{\partial}{\partial \xi_{-1}} - \big[1 - \big(\tfrac{1}{3}\big)^2\big]\right] v = 0, \]
 %where $\zeta_{-1} = 2\xi_{-1}$. This is the same as what we get by substituting $\xi_{-1}$ for $\xi_1$ in Section~\ref{pos-root}! In other words, the holomorphic map that pulls $\xi_{-1}$ back to $\xi_1$.
-\subsection{Borel regularity}\label{bessel-regularity}
+\subsection{Borel regularity}%%\label{bessel-regularity}
 Recall that $\tilde{W}_1$ is a formal solution of \eqref{eqn:reg-mod-bessel}
 \begin{equation}
 \tilde{W}_1(z)=\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{(-1)^n}{2^n}z^{-n}.
@@ -3436,7 +3422,7 @@ Similarly, if we consider the formal power series
 \tilde{W}_{-1}(z)=\sum_{n=0}^{\infty}\frac{\left(\frac{1}{6}\right)_n\left(\frac{5}{6}\right)_n}{n!}\frac{1}{2^n}z^{-n}
 \end{equation}
 analogous computations give that $v_{-1}(\zeta_{-1})\propto\borel\left[z^{-1/2}\tilde{W}_{-1}\right](\zeta_{-1})$.
-\subsection{Thimble projection reasoning for the Airy function}\label{contour-argument}
+\subsection{Thimble projection reasoning for the Airy function}%%\label{contour-argument}
 \begin{todo}[Convert to new version]\end{todo} Generalizing from Section~\ref{contour-argument-AL}, we can recast integral~\eqref{integral:mod-bessel} into the $\zeta$ plane by setting $-\zeta = 4u^3 - 3u$. Projecting $z^{-1/3} \mathcal{C}_1$ to a contour \begin{todo}[rephrase in terms of ray]\end{todo} $\mathcal{H}^1_z$ in the $\zeta$ plane and choosing the branch of $u$ that lifts $\mathcal{H}^1_z$ back to $z^{-1/3} \mathcal{C}_1$, we have
 \begin{equation}\label{integral:mod-bessel-zeta}
 K = \frac{i}{\sqrt{3}} \int_{\mathcal{H}^1_z} e^{-z\zeta}\frac{d\zeta}{4u^2 - 1}.
