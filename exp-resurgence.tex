@@ -2219,10 +2219,10 @@ Through a similar calculation, we see that $\borel\big[ e^z z^{-1/2}\,\tilde{W}_
 Looking back at Section~\ref{neg-root-AL}, we recognize this as a scalar multiple of $v_{-1}$.
 %
 \subsubsection{Thimble projection reasoning}\label{contour-argument-AL}
-We can also study the Airy-Lucas functions by applying the thimble projection formula to integral~\eqref{integral:mod-bessel-rational-AL}, specializing the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof}. We recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Recall from below equation~\eqref{integral:AL} that the integration contour $\mathcal{C}^\theta_j$ run through the critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$, with its direction determined by the parameter $\theta$. The critical point splits $\mathcal{C}^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\mathcal{C}^\theta_j$ is a preimage of $\mathcal{J}^\theta_{\zeta, \mp 1}$, we get
+We can also study the Airy-Lucas functions by applying the thimble projection formula to integral~\eqref{integral:mod-bessel-rational-AL}, specializing the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof}. We recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Recall from below equation~\eqref{integral:AL} that the integration contour $\mathcal{C}^\theta_j$ runs through the critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$, with its direction determined by the parameter $\theta$. The critical point splits $\mathcal{C}^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\mathcal{C}^\theta_j$ is a preimage of $\mathcal{J}^\theta_{\zeta, \mp 1}$, we get
 \begin{align*}%%\label{integral:mod-bessel-rational-zeta}
 K^{(j)}_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
-& = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right]
+& = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right],
 \end{align*}
 where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $\mathcal{C}^\theta_j$, respectively. \begin{todo}[Draw the thimble in the $u$ plane?]\end{todo}
 
@@ -2877,7 +2877,7 @@ F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u \\
 \appendix
 %
 \section{The Airy equation}\label{airy-appendix}
-\subsection{Specializing from the Airy--Lucas examples \begin{todo}[improve title]\end{todo}}
+\subsection{Specializing from the Airy--Lucas example}
 \begin{revised}
 \subsubsection{Motivation}
 Since the Airy equation is a widely used example in the study of Borel summation and resurgence, we find it useful to repeat the Airy--Lucas example calculations from Sections~\ref{sec:airy}--\ref{example_AL} in this special case, with the parameters set to $n = 3$ and $m = 1$. In particular, this makes it easier to compare our approaches and conventions with others from the literature, as we do in Section~\ref{airy-comparison}.
@@ -2885,7 +2885,7 @@ Since the Airy equation is a widely used example in the study of Borel summation
 Starting from equation~\eqref{eqn:airy-distillation}, we can distill the most interesting part of the Airy function by writing
 \[ \Ai(y) = \tfrac{1}{\pi\sqrt{3}}\,y^{1/2}\,K\big(\tfrac{2}{3} y^{3/2}\big), \]
 where
-\begin{equation}\label{integral:mod-bessel}
+\begin{equation}\label{integral:mod-bessel-airy}
 K(z) = i\sqrt{3} \int_{\mathcal{C}^\theta_1} \exp\left[z \left(4u^3 - 3u\right)\right]\,du
 \end{equation}
 and $\mathcal{C}^\theta_1$ is the contour described in Section~\ref{sec:airy}. Saying that $\Ai$ satisfies the Airy equation is equivalent to saying that $K$ satisfies the modified Bessel equation
@@ -2974,22 +2974,10 @@ for all $\Lambda > 0$. Its Laplace transform can be written as
 \[ \laplace^\theta_{\zeta, -1} v_1 = e^z z^{-1/2}\,W_{-1}, \]
 where $W_{-1}$ is a holomorphic function $z \notin [0, \infty)$ which is bounded outside any constant-radius neighborhood of $z \in [0, \infty)$.
 \end{revised}
-\begin{old}\par
-Let us find a germ in $(\zeta+1)^{\tau_{-1}-1}\,\mathcal{O}_{\zeta=-1}$, for some $\tau_{-1} \in (0, 1)$, that satisfies equation~\eqref{diff-eq:spatial-mod-bessel-AL}. In the rescaled coordinate from Section~\ref{pos-root-AL}, this is the point $\xi_1 = 1$. Looking again through Kummer's table of solutions, we find another expression \cite[formula~15.10.14]{dlmf} that represents a germ in $(1-\xi_1)^{-1/2}\,\mathcal{O}_{\xi_1=1}$:
-\begin{alignat*}{2}
-v_{-1} &=\;& (1-\xi_1)^{-1/2} &\;{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; 1-\xi_1\big) \\[1mm]
-&=\;& \sqrt{2}\,\zeta_{-1}^{-1/2} &\;{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big),
-\end{alignat*}
-where $\zeta_{-1}$ is the coordinate with $\zeta = -1 + \zeta_{-1}$. By the same reasoning as before, $v_{-1}$ is holomorphic throughout the sector $\Omega_{-1} = \C \smallsetminus \mathcal{J}^0_{\zeta_{-1}, 0}$, and it belongs to the space
-\[ \sqrt{2}\,\zeta_{-1}^{-1/2} + \singexp{1/2}{\Lambda}(\Omega_1) \]
-for all $\Lambda > 0$. It has a well-defined Laplace transform along any ray from $\zeta = -1$ except the one going directly right, and its Laplace transform can be written as
-\[ \laplace^\theta_{\zeta, -1} v_1 = e^z z^{-1/2}\,W_{-1}, \]
-where $W_{-1}$ is a holomorphic function $z \notin [0, \infty)$ which is bounded outside any constant-radius neighborhood of $z \in [0, \infty)$.
-\end{old}
 %
 \subsubsection{Confirmation of Borel regularity}\label{confirmation-borel-regularity-airy}
-\begin{revised}
 %
+\begin{revised}
 We can verify the conclusions of Section~\ref{bessel-regularity-AL} in the Airy case using our explicit expressions for the formal power series $\tilde{W}_\alpha$ and the functions $v_\alpha$. We found in Section~\ref{sec:asympt-airy} that
 \begin{align*}
 \tilde{W}_1 & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{6}\right)_k \left(\tfrac{5}{6}\right)_k}{k!} \left(-\frac{1}{2}\right)^k z^{-k} \\
@@ -3004,40 +2992,23 @@ Looking back at Section~\ref{pos-root}, we recognize this as a scalar multiple o
 Through a similar calculation, we see that $\borel\big[ e^z z^{-1/2}\,\tilde{W}_{-1} \big]$ sums to
 \[ \tfrac{1}{\Gamma(1/2)}\,\zeta_{-1}^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big). \]
 Looking back at Section~\ref{neg-root}, we recognize this as a scalar multiple of $v_{-1}$.
-
 \end{revised}
-\begin{old}
-Just as in Section~\ref{confirmation-borel-regularity}, we compute
-\begin{align*}
-\borel_\zeta \big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big] & = \borel_\zeta \left[ e^{-z} \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{6}\right)_k \left(\tfrac{5}{6}\right)_k}{k!} \left(-\frac{1}{2}\right)^k z^{-k-\frac{1}{2}} \right] \\
-& = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{6}\right)_k \left(\tfrac{5}{6}\right)_k}{k!} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^{k-\frac{1}{2}}}{\Gamma\big(k+\frac{1}{2}\big)} \\
-& = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{6}\right)_k \left(\tfrac{5}{6}\right)_k}{k!} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^{k-\frac{1}{2}}}{\Gamma\big(\frac{1}{2}\big) \left(\frac{1}{2}\right)_k} \\
-& = \frac{\zeta_1^{-\frac{1}{2}}}{\Gamma\big(\frac{1}{2}\big)} \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{6}\right)_k \left(\tfrac{5}{6}\right)_k}{\left(\frac{1}{2}\right)_k} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^k}{k!},
-\end{align*}
-we see that $\borel\big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big]$ sums to
-\[ \tfrac{1}{\Gamma(1/2)}\,\zeta_1^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
-Looking back at Section~\ref{pos-root-AL}, we recognize this as a scalar multiple of $v_1$.
-
-Through a similar calculation, we see that $\borel\big[ e^z z^{-1/2}\,\tilde{W}_{-1} \big]$ sums to
-\[ \tfrac{1}{\Gamma(1/2)}\,\zeta_{-1}^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big). \]
-Looking back at Section~\ref{neg-root-AL}, we recognize this as a scalar multiple of $v_{-1}$.
-\end{old}
 %
 \subsubsection{Thimble projection reasoning}\label{contour-argument-airy}
+%
 \begin{revised}
-In Section~\ref{contour-argument-AL}, we specialized the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof} to the case of the Airy--Lucas functions. We now specialize even further, down to the case of the Airy function. \begin{todo}[\ldots]\end{todo}
-\begin{align*}
-K(z) & = \begin{todo}-\end{todo}i\sqrt{3} \int_{\mathcal{C}^\theta_1} \exp\left[z \left(4u^3 - 3u\right)\right]\,du \\
-& = \frac{i}{\sqrt{3}} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{1}{4u_+^2 - 1}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{1}{4u_-^2 - 1}\,d\zeta \right]
-%% & = \frac{i}{\sqrt{3}} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} \frac{e^{-z\zeta}\,d\zeta}{4u_+^2 - 1} - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} \frac{e^{-z\zeta}\,d\zeta}{4u_-^2 - 1} \right]
-\end{align*}
+In Section~\ref{contour-argument-AL}, we specialized the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof} to the case of the Airy--Lucas functions. We now specialize even further, down to the case of the Airy function. Like in Section~\ref{contour-argument-AL}, we first recast integral~\eqref{integral:mod-bessel-airy} into the $\zeta$ plane by setting $-\zeta = 4u^3 - 3u$, which implies that $-d\zeta = 3(4u^2 - 1)\,du$. Recall from Section~\ref{sec:airy} that the integration contour $\mathcal{C}^\theta_1$ runs through the critical point $u = \tfrac{1}{2}$, with its direction determined by the parameter $\theta$. The critical point splits $\mathcal{C}^\theta_1$ into two pieces: the incoming branch, where the orientation of the thimble runs toward the critical point, and the outgoing branch, where the orientation points away. Recalling that $\mathcal{C}^\theta_1$ is a preimage of $\mathcal{J}^\theta_{\zeta,1}$, we get \begin{todo}[Check sign of first line]\end{todo}
 \begin{verify}
-\begin{align*}%%\label{integral:mod-bessel-rational-zeta}
+\begin{align*}
 K(z) & = \frac{3}{2 \sinh\big(\tfrac{1}{3}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
 & = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right]
 \end{align*}
 \end{verify}
-Recognizing $4u^3 - 3u$ as the Chebyshev polynomial $T_3(u)$, we introduce a new variable $\phi$ with $u = \cos(\phi)$ and $-\zeta = \cos(3\phi)$. On the $\phi$ plane, which is an infinite branched cover of the $u$ plane, we can lift $\mathcal{C}^\theta_1$ to the path $\tfrac{\pi}{3} + i\R$. The incoming and outgoing branches lift to $\tfrac{\pi}{3} - i[0, \infty)$ and $\tfrac{\pi}{3} + i[0, \infty)$, respectively. \begin{todo}[Draw the lifted thimble in the $\phi$ plane?]\end{todo}
+\begin{align*}
+K(z) & = -i\sqrt{3} \int_{\mathcal{C}^\theta_1} \exp\left[z \left(4u^3 - 3u\right)\right]\,du \\
+& = \frac{i}{\sqrt{3}} \left[ \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\frac{1}{4u_+^2 - 1}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\frac{1}{4u_-^2 - 1}\,d\zeta \right],
+\end{align*}
+where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $\mathcal{C}^\theta_j$, respectively. Recognizing $4u^3 - 3u$ as the Chebyshev polynomial $T_3(u)$, we introduce a new variable $\phi$ with $u = \cos(\phi)$ and $-\zeta = \cos(3\phi)$. On the $\phi$ plane, which is an infinite branched cover of the $u$ plane, we can lift $\mathcal{C}^\theta_1$ to the path $\tfrac{\pi}{3} + i\R$. The incoming and outgoing branches lift to $\tfrac{\pi}{3} - i[0, \infty)$ and $\tfrac{\pi}{3} + i[0, \infty)$, respectively. \begin{todo}[Draw the lifted thimble in the $\phi$ plane?]\end{todo}
 
 Recognizing $4u^2 - 1$ as the Chebyshev polynomial $U_2(u)$, we can use identity~15.4.16 from \cite{dlmf} to write the integrand explicitly in terms of $\zeta$:
 \begin{align*}
@@ -3057,7 +3028,7 @@ Just as in Section~\ref{contour-argument-AL}, we simplify the integrand using id
 away from the line $\Re(\zeta) = 0$ and the rays $\mathcal{J}^0_{\zeta,1}$ and $\mathcal{J}^\pi_{\zeta,-1}$.
 
 In the projected thimble integral
-\[ K(z) = \frac{i}{\sqrt{3}} \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\left[\frac{1}{4u_+^2 - 1} - \frac{1}{4u_-^2 - 1}\right]\,d\zeta, \]
+\[ K(z) = \frac{i}{\sqrt{3}} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\left[\frac{1}{4u_+^2 - 1} - \frac{1}{4u_-^2 - 1}\right]\,d\zeta, \]
 we can now see the integrand as the variation of the function
 \[ \frac{1}{4\cos(\phi)^2 - 1} = \frac{1}{2}\;{}_2F_1\left(\frac{2}{3},\;\frac{4}{3};\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{1}{6}\;{}_2F_1\left(\frac{2}{3},\;\frac{4}{3};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \]
 across the branch cut $\mathcal{J}^\theta_{\zeta,1}$. The first term is regular at $\zeta = 1$, so only the second term contributes to the jump. We can write the jump explicitly using identity~15.2.3 from \cite{dlmf}:
@@ -3260,7 +3231,7 @@ Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
 We can distill the most interesting part of the Airy function by writing
 \[ \Ai(y) = \tfrac{1}{\pi\sqrt{3}}\,y^{1/2}\,K\big(\tfrac{2}{3} y^{3/2}\big), \]
 where
-\begin{equation}\label{integral:mod-bessel}
+\begin{equation}%%\label{integral:mod-bessel}
 K(z) = i\sqrt{3} \int_{z^{-1/3}\mathcal{C}_1} \exp\left[z \left(4u^3 - 3u\right)\right]\,du.
 \end{equation}
 and the contour $\mathcal{C}_1$ is represented in Figure \ref{fig:path_Airy}.
