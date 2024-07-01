@@ -3036,71 +3036,9 @@ across the branch cut $\mathcal{J}^\theta_{\zeta,1}$. The first term is regular 
 Comparing this expression with the expression for $V_1$ in Section~\ref{pos-root}, we see that
 \[ K(z) = \tfrac{i}{2}\laplace_{\zeta, 1} v_1. \]
 \end{revised}
-\begin{old}\par
-We can also study the Airy-Lucas functions by applying the thimble projection formula to integral~\eqref{integral:mod-bessel-rational-AL}, specializing the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof}. We recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Recall from below equation~\eqref{integral:AL} that the integration contour $\mathcal{C}^\theta_j$ run through the critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$, with its direction determined by the parameter $\theta$. The critical point splits $\mathcal{C}^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\mathcal{C}^\theta_j$ is a preimage of $\mathcal{J}^\theta_{\zeta, \mp 1}$, we get
-\begin{align*}%%\label{integral:mod-bessel-rational-zeta}
-K^{(j)}_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
-& = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right]
-\end{align*}
-where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $\mathcal{C}^\theta_j$, respectively. \begin{todo}[Draw the thimble in the $u$ plane?]\end{todo}
-
-Since the Chebyshev polynomial $T_n$ is defined by the identity $T_n(\cos(\phi)) = \cos(n\phi)$, we introduce a new variable $\phi$ with $u = \cos(\phi)$ and $-\zeta = \cos(n\phi)$. On the $\phi$ plane, which is an infinite branched cover of the $u$ plane, we can lift $\mathcal{C}^\theta_j$ to the path $\tfrac{j}{n}\pi + i\R$. The incoming and outgoing branches lift to $\tfrac{j}{n}\pi - i[0, \infty)$ and $\tfrac{j}{n}\pi + i[0, \infty)$, respectively. \begin{todo}[Draw the lifted thimble in the $\phi$ plane?]\end{todo}
-
-We can now use identity~15.4.16 from \cite{dlmf} to write the integrand explicitly in terms of $\zeta$:
-\begin{align*}
-\frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} &= \frac{\sin(m\phi)}{\sin(\phi)}\frac{\sin(\phi)}{\sin(n \phi)}\\
-& = \frac{\sin(m\phi)}{\sin(n \phi)}\\
-& = \frac{m}{n}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{3}{2};\;\sin(n \phi)^2\right) \\
-& = \frac{m}{n}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{3}{2};\;1 - \zeta^2\right).
-\end{align*}
-Initially, we only know that this equation holds in the disk $|\phi| < \tfrac{\pi}{2n}$. However, observing that the left-hand side is meromorphic throughout the $\phi$ plane, we can deduce by analytic continuation that the equation holds throughout the $\phi$ plane.
-
-Next, we simplify the integrand using identities 15.8.4 and 15.8.27\;--\;15.8.28 from \cite{dlmf}, which tell us that\begin{align*}
-&{}_2F_1\left(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1 - \zeta^2\right) \\[3mm]
-& =\; \hphantom{+} \frac{\pi}{\Gamma\left(1-\frac{m}{2n}\right) \Gamma\left(1 + \frac{m}{2n}\right)}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{1}{2};\;\zeta^2\right) \\
-& \hphantom{=}\; - \frac{\pi \zeta}{\Gamma\left(\frac{1}{2} - \frac{m}{2n}\right) \Gamma\left(\frac{1}{2} + \frac{m}{2n}\right)}\;{}_2F_1\left(1 - \frac{m}{2n},\;1 + \frac{m}{2n};\;\frac{3}{2};\;\zeta^2\right) \\[3mm]
-& =\; \hphantom{+ \frac{0}{0}}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) + \hphantom{\frac{0}{0}}\;{}_2F_1\left(1-\frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \\
-& \hphantom{=}\; + \frac{1}{2}\;{}_2F_1\left(1-\frac{m}{n},\;1+\frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) - \frac{1}{2}\;{}_2F_1\left(1-\frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \\[3mm]
-& =\; \hphantom{+} \frac{3}{2}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{1}{2}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right)
-\end{align*}
-away from the line $\Re(\zeta) = 0$ and the rays $\mathcal{J}^0_{\zeta,1}$ and $\mathcal{J}^\pi_{\zeta,-1}$.
-
-Returning to the projected thimble integral
-\[ K^{(j)}_{m/n}(z) = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta} \left[ \frac{U_{m-1}(u_+)}{U_{n-1}(u_+)} - \frac{U_{m-1}(u_-)}{U_{n-1}(u_-)} \right] d\zeta, \]
-we can see the integrand as the variation of the function
-\[ \frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} = \frac{3m}{2n}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{m}{2n}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \]
-\begin{verify}
-\begin{align*}
-\frac{m}{2n}\,\frac{2\pi i}{\Gamma\big(1-\tfrac{m}{n}\big)\Gamma\big(1+\tfrac{m}{n}\big)} & = \frac{\pi i}{\Gamma\big(1-\tfrac{m}{n}\big)\Gamma\big(\tfrac{m}{n}\big)} \\
-& = \pi i\,\frac{\sin\big(\pi\tfrac{m}{n}\big)}{\pi} \\
-& = i \sin\big(\pi\tfrac{m}{n}\big) \\
-&= \sinh\big(i\pi\tfrac{m}{n}\big)
-\end{align*}
-\end{verify}
-across the branch cut $\mathcal{J}^\theta_{\zeta, \pm 1}$. When $j$ is odd, only the second term will contribute to the jump, because the first term is regular at $\zeta = 1$. Similarly, when $j$ is even, only the first term will contribute to the jump. We can write the jump explicitly using identity~15.2.3 from \cite{dlmf}. For odd $j$, we have
-\[ K^{(j)}_{m/n}(z) = -\frac{1}{2} \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta} \left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \frac{m}{n},\;\frac{1}{2} + \frac{m}{n};\;\frac{1}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) d\zeta, \]
-and for even $j$, we have
-\[ K^{(j)}_{m/n}(z) = \frac{3}{2} \int_{\mathcal{J}^\theta_{\zeta, -1}} e^{-z\zeta} \left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2} - \frac{m}{n},\;\frac{1}{2} + \frac{m}{n};\;\frac{1}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) d\zeta. \]
-
-Comparing the expressions above with the expressions for $v_{\pm 1}$ computed in Sections~\ref{pos-root-AL}\;--\;\ref{neg-root-AL}, we notice that
-\[ K^{(j)}_{m/n}(z) = \begin{cases}
-\hphantom{-}\frac{i}{2}\laplace_{\zeta, 1} v_1 & j \text{ odd} \\
--\frac{3i}{2}\laplace_{\zeta, -1} v_{-1} & j \text{ even}.
-\end{cases} \]
-\begin{verify}
-\begin{align*}
-\zeta & = 1 + \zeta_1 & -\zeta_1 & = 1 - \zeta \\
-\zeta & = -1 + \zeta_{-1} & \zeta_{-1} & = 1 + \zeta
-\end{align*}
-\begin{align*}
-\left(-\frac{1}{2}+\frac{\zeta}{2}\right)^{-1/2} & = \sqrt{2}\,\zeta_1^{-1/2} \\
-\left(-\frac{1}{2}-\frac{\zeta}{2}\right)^{-1/2} & = \sqrt{2}\,(-\zeta_{-1})^{-1/2} \\
-& = i\sqrt{2}\,\zeta_{-1}^{-1/2}
-\end{align*}
-\end{verify}
-\end{old}
 %
 \subsubsection{Thimble projection formula}\label{thimble-proj-airy}
+%
 \begin{revised}
 In Section~\ref{contour-argument-airy}, we specialized the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof} to the case of the Airy function. In this section, as an alternative, we will simply apply Lemma~\ref{lem:thimble_proj_formula-proof}, using trigonometric substitution. The lemma tells us that $K$ is the Laplace transform of
 \[ \kappa_1 = -i\sqrt{3}\,\frac{\partial}{\partial \zeta}\left(\int_{\mathcal{C}_1^\theta(\zeta)} du\right). \]
@@ -3142,89 +3080,6 @@ It follows, through identity~15.5.4 from \cite{dlmf}, that
 \end{align*}
 matching the conclusion of Section~\ref{contour-argument-airy}.
 \end{revised}
-\begin{old}\par
-In the Airy-Lucas integral, $f$ is a Chebyshev polynomial, so we can do a thimble projection technique (see Section~\ref{contour-argument-AL}) or apply the thimble projection formula equation~\eqref{eqn:formula-proof} using trigonometric substitution. As an example of how one might reason in the latter case, we look at the Airy function, given by $f = 4u^3-3u$.
-
-\textcolor{RoyalBlue}{[\ldots] this time applying the thimble projection formula to the generalized Cardano's formula.}
-
-\textcolor{Peru}{Recall that the roots of $f(u)-\zeta$ can be written explicitly as 
-\begin{align*}
-    u(\zeta)&=\cos\Big(\frac{1}{3}\arccos\zeta-\frac{2\pi k}{3}\Big) \quad k=0,1,2\\
-    &={}_2F_1\Big(-\frac{1}{6},\frac{1}{6};\frac{1}{2};1-\zeta^2\Big)
-\end{align*}}
-\begin{todo}[Add the numerical check to show simple resurgence. For example, maybe graph exponential of the magnitude of function on position domain]\end{todo}
-The thimble $\mathcal{C}_1$ can be parametrized by the path $\theta \mapsto \cosh(\theta - \tfrac{2}{3}\pi i)$. Since $4u^3 - 3u$ is the third Chebyshev polynomial and $\cosh$ is $2\pi$-periodic in the imaginary direction, the start and end points of $\mathcal{C}_1(\zeta)$ are then characterized by
-\begin{align*}
-u & = \cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
-\zeta & = \cosh(3\theta).
-\end{align*}
-It follows that
-\begin{align*}
-\int_{\mathcal{C}_1(\zeta)} \nu & = \int_{\mathcal{C}_1(\zeta)} du \\
-& = u \Big|_{\operatorname{start} \mathcal{C}_1(\zeta)}^{\operatorname{end} \mathcal{C}_1(\zeta)}\\
- & = \cosh(\theta - \tfrac{2}{3}\pi i) - \cosh(-\theta - \tfrac{2}{3}\pi i) \\
-& = \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
-& \quad - \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
-& = 2\sinh(\theta) \sinh(-\tfrac{2}{3}\pi i) \\
-& = -i\sqrt{3}\,\sinh(\theta).
-\end{align*}
-Let $\xi = \tfrac{1}{2}(1 - \zeta)$, and notice that $\xi = -\sinh\big(\tfrac{3}{2} \theta\big)^2$ at the start and end points. The identity~15.4.16 \cite{dlmf}
-\[ \sinh( \theta) = \tfrac{1}{3} \sinh\big( \tfrac{3}{2}\theta\big)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh\big(\tfrac{3}{2}\theta\big)^2\big) \]
-then shows us that
-\[ \frac{i}{\sqrt{3}} \int_{\mathcal{C}_1(\zeta)} \nu = (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
-
-Now we can evaluate the half-integral of $\int_{\mathcal{C}_1} \nu$ using Bateman's fractional integral formula for hypergeometric functions see \cite[Section 4.1]{koornwinder2015fractional}.
-\begin{align*}
-\fracderiv{-1/2}{\zeta}{1} \left( \int_{\mathcal{C}_1(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{1}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_1(\zeta')} \nu \right)\,d\zeta' \\
-& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi  (\xi' - \xi)^{-1/2} \Big[ -{i}{\sqrt{3}}\, (-\xi)^{1/2}\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big) \Big] \,\big( -\,d\xi' \big) \\
-& = -i \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
-& = \frac{i}{2} \sqrt{\pi}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
-\end{align*}
-Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}.
-\begin{align*}
-\fracderiv{3/2}{\zeta}{1} \left( \int_{\mathcal{C}_1(\zeta)} \nu \right) & = \left(-\tfrac{\partial}{\partial \xi}\right)^2 \left[ \frac{i\sqrt{\pi}}{2}\,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& =  \tfrac{i\sqrt{\pi}}{2} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = \tfrac{i\sqrt{\pi}}{2}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
-& = \tfrac{i\sqrt{\pi}}{2}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
-\end{align*}
-%
-For completeness, we repeat the computations for $\hat{\phi}_{-1}$: the thimble $\mathcal{C}_{-1}$ can be parametrized by the path $\theta \mapsto -\cosh(\theta - \tfrac{2}{3}\pi i)$. Hence,
-\begin{align*}
-\int_{\mathcal{C}_{-1}(\zeta)} \nu & = \int_{\mathcal{C}_{-1}(\zeta)} du \\
-& = u \Big|_{\operatorname{start} \mathcal{C}_{-1}(\zeta)}^{\operatorname{end}\mathcal{C}_{-1}(\zeta)}.
-\end{align*}
-The start and end points of $\mathcal{C}_{-1}$ are characterized by
-\begin{align*}
-u & = -\cosh(\mp\theta - \tfrac{2}{3}\pi i) \\
-\zeta & = -\tfrac{2}{3} \cosh(3\theta),
-\end{align*}
-so
-\begin{align*}
-\int_{\mathcal{C}_{-1}(\zeta)} \nu & =- \cosh(\theta - \tfrac{2}{3}\pi i) + \cosh(-\theta - \tfrac{2}{3}\pi i) \\
-& =- \big[\cosh(\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
-& \quad + \big[\cosh(-\theta) \cosh(-\tfrac{2}{3}\pi i) + \sinh(-\theta) \sinh(-\tfrac{2}{3}\pi i)\big] \\
-& = 2\sinh(\theta) \sinh(\tfrac{2}{3}\pi i) \\
-& = i\sqrt{3}\,\sinh(\theta)
-\end{align*}
-Let $\xi = \tfrac{1}{2}(1 + \zeta)$, and notice that $\xi =- \sinh( \theta)^2$ at the start and end points. The identity~15.4.16 in \cite{dlmf}
-\[ \sinh(\theta) = \sinh(\theta)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; -\sinh(\theta)^2\big) \]
-then shows us that
-\[ -\frac{i}{\sqrt{3}} \int_{\mathcal{C}_-(\zeta)} \nu =  (-\xi)^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi\big). \]
-Now we can evaluate the half-integral of $\int_{\mathcal{C}_{-1}} \nu$ using Bateman's fractional integral formula for hypergeometric functions: \begin{align*}
-\fracderiv{-1/2}{\zeta}{-1}\left( \int_{\mathcal{C}_{-1}(\zeta)} \nu \right) & = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_{-1}^\zeta (\zeta - \zeta')^{-1/2} \left( \int_{\mathcal{C}_{-1}(\zeta')} \nu \right)\,d\zeta' \\
-& = \frac{1}{\Gamma\big(\tfrac{1}{2}\big)} \int_0^\xi  (\xi - \xi')^{-1/2} \Big[{i}{\sqrt{3}}\, (-\xi')^{1/2}\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; \tfrac{3}{2}; \xi' \big) \Big] \,\big( \,d\xi' \big) \\
-& =  \frac{\Gamma\big(\tfrac{3}{2}\big)}{\Gamma(2)} (-\xi)\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \\
-& = - \tfrac{\sqrt{\pi}}{2}\,\xi\,{}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big).
-\end{align*}
-Finally, we differentiate twice using 15.5.4 and 15.5.1 from \cite{dlmf}
-\begin{align*}
-\fracderiv{3/2}{\zeta}{-1} \left( \int_{\mathcal{C}_{-1}(\zeta)} \nu \right) & = \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ - \tfrac{\sqrt{\pi}}{2} \,\xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = - \tfrac{\sqrt{\pi}}{2} \left(\tfrac{\partial}{\partial \xi}\right)^2 \left[ \xi\, {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 2; \xi\big) \right] \\
-& = - \tfrac{\sqrt{\pi}}{2}\,\tfrac{\partial}{\partial \xi} \left[ {}_2F_1\big(\tfrac{1}{6}, \tfrac{5}{6}; 1; \xi\big) \right] \\
-& = - \tfrac{\sqrt{\pi}}{2}\,\tfrac{5}{12}\, {}_2F_1\big(\tfrac{7}{6}, \tfrac{11}{6}; 2; \xi\big).
-\end{align*}
-\end{old}
-%
 \begin{old}
 \begin{todo}\par\textbf{[Really old version starts here]}\end{todo}
 \subsubsection{Rewriting as a modified Bessel equation}
