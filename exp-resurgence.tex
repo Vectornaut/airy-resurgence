@@ -1368,13 +1368,11 @@ We can show that $\borel_\zeta$ is an algebra homomorphism from $\C\llbracket z^
 \subsubsection{Formal to analytic}\label{sec:Borel-gevrey}
 %
 If we want to get analytic information from the Borel transform---for example, by doing Borel summation---we should focus on the series whose Borel transforms converge. These series, called {\em $1$-Gevrey} series, form a subspace $\C \llbracket z^{-1} \rrbracket_1$ within $\C \llbracket z^{-1} \rrbracket$. They are characterized by the factorial growth of their coefficients.
-\begin{revised}
 \begin{definition}
 A series
 \[ \sum_{n \ge -1} a_n z^{-n-1} \]
 is {\em $1$-Gevrey} if there is some $A > 0$ with $|a_n| \lesssim A^n n!$ over all $n \ge 0$.
 \end{definition}
-\end{revised}
 \begin{prop}\label{prop:gevrey_to_convergent}
 A series
 \[ \series{\Phi} = \sum_{n \ge -1} a_n z^{-n-1} \]
@@ -2876,9 +2874,17 @@ obtained by differentiating twice on both sides. Conversely, as shown in Appendi
 \[ \left[ (\zeta^2 - 1) \big(\tfrac{\partial}{\partial \zeta}\big)^2 + 3\zeta \tfrac{\partial}{\partial \zeta} + \big[ 1 - \big(\tfrac{1}{3}\big)^2 \big] \right] v = 0 \]
 emphasizes the regular singularities at the roots of $\zeta^2 - 1$. This will lead us, in Sections~\ref{pos-root}\,--\,\ref{neg-root}, to a solution $v_\alpha \in (\zeta - \alpha)^{1/2}\,\mathcal{O}_{\zeta = \alpha}$ for each root $\alpha$.
 
-As described in Section~\ref{big-idea}, each solution $v_\alpha$ will extend to a function in $\singexpalg{-1/2}(\Omega_\alpha)$ on any sector $\Omega_\alpha$ that has its tip at $\zeta = \alpha$ and does not touch the other roots. \begin{todo}[\ldots]\end{todo}
+As described in Section~\ref{big-idea}, each solution $v_\alpha$ will extend to a function in $\singexpalg{-1/2}(\Omega_\alpha)$ on any sector $\Omega_\alpha$ that has its tip at $\zeta = \alpha$ and does not touch the other roots. The arguments of Section~\ref{big-idea} go on to show that $\laplace^\theta_{\zeta, \alpha} v_\alpha$ belongs to
+\[ cz^{-\tau_\alpha} + \dualsingexp{-3/2}(\widehat{\Omega}_\alpha^\Lambda) \]
+for some non-zero constant $c$, confirming the existence part of Theorem~\ref{re:thm:exist_uniq_ODE}. Continuing through Section~\ref{big-idea}, we get the decomposition
+\[ \laplace^\theta_{\zeta, \alpha} v_\alpha = e^{-\alpha z} V_\alpha \]
+for $V_\alpha \defeq \laplace^\theta_{\zeta_\alpha, 0} v_\alpha$ and $\zeta = \alpha + \zeta_\alpha$, and the further decomposition
+\[ \laplace_{\zeta, \alpha} v_\alpha = e^{-\alpha z} z^{-1/2} W_\alpha, \]
+where $W_\alpha$ is a bounded holomorphic function on $\widehat{\Omega}_\alpha^\Lambda$.
+
+The argument from Section~\ref{bessel-regularity-AL} shows that the solutions $e^{-\alpha z} V_\alpha$ are Borel regular. This argument is just as simple in general as it is in the Airy case, so we will not repeat it.
 \end{revised}
-\begin{old}
+\begin{old}\par
 In Sections \ref{pos-root-AL}\,--\,\ref{neg-root-AL}, we will see this approach succeed. For each root $\alpha$, we will find a solution $v_\alpha$ of equation~\eqref{diff-eq:spatial-mod-bessel-AL} that belongs to $(\zeta - \alpha)^{\tau_\alpha-1}\,\mathcal{O}_{\zeta = \alpha}$ for some constant $\tau_\alpha \in (0, 1)$. We will express $v_\alpha$ explicitly enough to see that it extends to a function in $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$ on any sector $\Omega_\alpha$ that has its tip at $\zeta = \alpha$ and does not touch the other roots (see Figure~\ref{fig:sectorial_domain--with roots P}). We will also be able to see that $v_\alpha$ is uniformly of exponential type $\Lambda$ for any $\Lambda > 0$. It follows by Proposition~\ref{prop:laplace-cont} that for any ray $\mathcal{J}^\theta_{\zeta, \alpha}$ in $\Omega_\alpha$, the Laplace transform $\laplace^\theta_{\zeta, \alpha} v_\alpha$ is a well-defined element of $\dualsingexp{-\tau_\alpha}(\widehat{\Omega}_\alpha^\Lambda)$ that satisfies equation~\eqref{eqn:reg-mod-bessel-AL}. Using the technique from the proof of Lemma~\ref{lem:laplace-bridge}, we can see more precisely that $\laplace^\theta_{\zeta, \alpha} v_\alpha$ belongs to
 \[ cz^{-\tau_\alpha} + \dualsingexp{-\tau_\alpha-1}(\widehat{\Omega}_\alpha^\Lambda) \]
 for some non-zero constant $c$, confirming the existence part of Theorem~\ref{re:thm:exist_uniq_ODE}.
