@@ -1210,11 +1210,11 @@ e^{-z\alpha}\{z^{-1}, z^{-2}, z^{-3}, z^{-4}, \ldots \}  \arrow[r,"e^{z\alpha}"]
 commutes, where the functions of $z$ are functions on the fiber $T^*_{\zeta=\alpha}B$. 
 \begin{proof}
 We want to show that 
-\[\borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\big[\zeta^n\big]\right]=\zeta^n.\]
+\[\borel_{\zeta_\alpha}\Big[e^{z\alpha} \laplace_{\zeta,\alpha}\big[\zeta^n\big]\Big]=\zeta^n.\]
 Recall that $\borel_{\zeta_\alpha}$
 is the formal inverse of $\laplace_{\zeta_\alpha,0}$ on the cotangent fibre over $\alpha$. Thus, taking the Borel transform on both side of the identity~\eqref{change-chart} we find
   \begin{align*}
-      \borel_{\zeta_\alpha}\left[e^{z\alpha} \laplace_{\zeta,\alpha}\big[\zeta^n\big]\right]&=\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\big[\zeta^n\big]\\
+      \borel_{\zeta_\alpha}\Big[e^{z\alpha} \laplace_{\zeta,\alpha}\big[\zeta^n\big]\Big]&=\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\big[\zeta^n\big]\\
       &=\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\left[\sum_{k=0}^n{n\choose k}\zeta_\alpha^k \alpha^{n-k}\right]\\
       &=\sum_{k=0}^n{n\choose k} \alpha^{n-k}\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\big[\zeta_\alpha^k \big]\\
       &=\sum_{k=0}^n{n\choose k} \alpha^{n-k}\zeta_\alpha^k\\
@@ -1344,7 +1344,7 @@ Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transforms $\l
 For $\alpha=0$, the Definition~\label{def:convolution} agrees with the standard deifinition of convolution \cite[Definition~5.12]{diverg-resurg-i}.
 In addition, we will denote $\ast_{\zeta,0}$ simply by \begin{draft}$\ast_\zeta$\end{draft} \begin{todo}[Add coordinate to $\ast$ elsewhere too]\end{todo}, following the standard convention.   
 \end{remark}
-Notice that, assuming the Taylor expansion of $\phi$ and $\psi$ at $\zeta=\alpha$ are convergent in a disk of radius $R$, then the convolution $\phi\ast_{\zeta,\alpha}\psi$ has a convergent Taylor expansion at $\zeta=\alpha$ in the disk of radius $R$ (when $\alpha=0$, see \cite[Lemma 5.14]{diverg-resurg-i} for a proof).
+When the Taylor expansions of $\phi$ and $\psi$ around $\zeta=\alpha$ converge in a disk of radius $R$, the Taylor expansion of the convolution $\phi\ast_{\zeta,\alpha}\psi$ around $\zeta=\alpha$ also converges in a disk of radius $R$. This is proven for $\alpha = 0$ in Lemma~5.14 of \cite{diverg-resurg-i}.
 
 \begin{todo}Move before calculation of Laplace transform of convolution, write more if needed, and also make sure it's actually correct. The old text below has mistakes.\end{todo}
 \begin{old}\par In addition, the convolution product induces a $\C$-algebra structure on the space $\singexp{\sigma}{\Lambda}$, and the Laplace transform is an algebra isomorphism.
@@ -1710,16 +1710,25 @@ The Riemann-Liouville fractional derivative is a left inverse of the fractional 
 \begin{align*}
 \fracderiv{\lambda}{\zeta}{0}\,\fracderiv{\mu}{\zeta}{0} & = \fracderiv{\lambda+\mu}{\zeta}{0} & \lambda \in \R \smallsetminus \{0, 1, 2, 3, \ldots\},\quad\mu \in (-\infty, 0).
 \end{align*}
+\begin{revised}
 \begin{prop}\label{prop:L-int-op}
-Let $\phi\in\singexp{\sigma}{\Lambda}(\Omega)$ with $\sigma>-1$ and $\Lambda>0$, then
-\begin{itemize}
-\item[(i)] \emph{[fractional derivative]} for every $\mu\in(0,1)$, $\laplace_{\zeta,0} \big[\fracderiv{\mu}{\zeta}{0} \phi\big] = z^{\mu} \laplace_{\zeta,0} \phi$;
-\item[(ii)] \emph{[fractional integral]} $\laplace_{\zeta,0} \big[\fracderiv{\lambda}{\zeta}{0} \phi\big] = z^{\lambda} \laplace_{\zeta,0} \phi$ for every $\lambda\in\R_{<0}$;
-\item[(iii)] \emph{[derivative]} let $n\in\Z_{>0}$ and assume that $ \phi^{(k)}(0)=0$ for every $k=0,\ldots,n$. Then $\laplace_{\zeta,0} \big[\big(\frac{\partial}{\partial\zeta}\big)^n \phi\big] = z^{n} \laplace_{\zeta,0} \phi$;
-\item[(iv)] $\laplace_{\zeta,0} \big[\zeta^n \phi\big] = \big(-\frac{\partial}{\partial z}\big)^n \laplace_{\zeta,0} \phi$, 
-for every $n\in\Z_{\geq 0}$.
-\end{itemize}
+For any $\phi\in\singexp{\sigma}{\Lambda}(\Omega)$ with $\sigma>-1$ and $\Lambda>0$, we have
+\begin{enumerate}[label=(\roman*)]
+\item\label{res:frac-deriv} \textbf{Fractional derivatives}
+
+$\laplace_{\zeta,0} \big[\fracderiv{\mu}{\zeta}{0} \phi\big] = z^{\mu} \laplace_{\zeta,0} \phi$ for every $\mu\in(0,1)$;
+\item\label{res:frac-int} \textbf{Fractional integrals}
+
+$\laplace_{\zeta,0} \big[\fracderiv{\lambda}{\zeta}{0} \phi\big] = z^{\lambda} \laplace_{\zeta,0} \phi$ for every $\lambda\in(-\infty,0)$;
+\item\label{res:whole-deriv} \textbf{Whole derivatives}
+
+$\laplace_{\zeta,0} \big[\big(\frac{\partial}{\partial\zeta}\big)^n \phi\big] = z^{n} \laplace_{\zeta,0} \phi$ for all $n\in\{1, 2, 3, \ldots\}$, under the condition that $\phi^{(0)}, \phi^{(1)}, \ldots, \phi^{(n)}$ all vanish at $\zeta = 0$;
+\item\label{res:monom-mult} \textbf{Monomial multiplication}
+
+$\laplace_{\zeta,0} \big[\zeta^n \phi\big] = \big(-\frac{\partial}{\partial z}\big)^n \laplace_{\zeta,0} \phi$ for every $n\in\{0,1,2,3,\ldots\}$.
+\end{enumerate}
 \end{prop}
+\end{revised}
 \begin{proof}
 %where in the last step we repetedly use integration by part and the fact that boundary terms vanish. %Then we deduce that   
 %\begin{align*}
@@ -1728,7 +1737,7 @@ for every $n\in\Z_{\geq 0}$.
    % &=z^n\laplace_{\zeta,0}\Big[\fracderiv{\lambda}{\zeta}{0}\partial_\zeta^n \phi\Big]
 %\end{align*}
    
-Results \emph{(i)} and \emph{(ii)} follow from the properties of the Laplace transform with respect to the convolution product. For every $\tau \in (-\infty, 0) \cup (0,1)$,
+Results \ref{res:frac-deriv} and \ref{res:frac-int} follow from the properties of the Laplace transform with respect to the convolution product. For every $\tau \in (-\infty, 0) \cup (0,1)$,
 \begin{align*}
 z^\tau\laplace_{\zeta,0}\phi&=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)}\Big] \laplace_{\zeta,0}\phi\\
 &=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)} \ast_\zeta \phi\Big] \\
@@ -1736,13 +1745,13 @@ z^\tau\laplace_{\zeta,0}\phi&=\laplace_{\zeta,0}\Big[\frac{\zeta^{-\tau-1}}{\Gam
 &=\laplace_{\zeta,0} \int_{\substack{\mathcal{S}'(\zeta) \times \mathcal{S}''(\zeta) \\ \zeta' + \zeta'' = \zeta}}\frac{(\zeta-\zeta')^{-\tau-1}}{\Gamma(-\tau)} \phi' d\zeta'\\
 &=\laplace_{\zeta,0}\fracderiv{\tau}{\zeta}{0}\phi,
 \end{align*}
-where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=0$ to $\zeta' = \zeta$, $\mathcal{S}''(\zeta)$ is the line segment from $\zeta''=\zeta$ to $\zeta''=0$, and we are taking advantage of the fact that $\zeta'' = \zeta - \zeta'$ on the integration path. The result of $(iii)$ follows by repetedly using integration by part and the fact that boundary terms vanish:
+where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=0$ to $\zeta' = \zeta$, $\mathcal{S}''(\zeta)$ is the line segment from $\zeta''=\zeta$ to $\zeta''=0$, and we are taking advantage of the fact that $\zeta'' = \zeta - \zeta'$ on the integration path. Result~\ref{res:whole-deriv} is proven by repeated integration by parts, with the condition on $\phi^{(0)}, \phi^{(1)}, \ldots \phi^{(n)}$ ensuring that the boundary terms vanish:
 \begin{align*}
     z^n\laplace_{\zeta,0}\phi&=\int_0^\infty e^{-z\zeta} z^n \phi \, d\zeta\\
     &=(-1)^n\int_0^\infty \partial_\zeta^n \big[e^{-z\zeta}\big]  \phi\, d\zeta\\
     &=\laplace_{\zeta,0}\big[\partial_\zeta^n \phi\big].
 \end{align*}
-     Finally, the proof of $(iv)$ follows by integration by parts and the fact that $\zeta^n\phi\in\singexp{\sigma}{\Lambda}(\Omega)$.   
+Result~\ref{res:monom-mult} is also proven by repeated integration by parts, with the assumption that $\zeta^n\phi\in\singexp{\sigma}{\Lambda}(\Omega)$ ensuring that the integral converges.
         %from a 2d integration argument, akin to the one in \cite[Theorem~2.39]{laplace-tfm}. This generalizes the Laplace transform's action on derivatives: using differentiation under the integral we prove \emph{ii)} (see also \cite[Theorem~1.34]{laplace-tfm}). Similarly, one can prove \emph{iii)}.  
 \end{proof}
 \begin{lemma}\label{lem:frac-deriv-Borel}
@@ -1769,31 +1778,42 @@ for $n = -1$. If \eqref{frac-diff-laplace} holds for $n = m$, it also holds for 
 Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired result quickly follows. The condition $\mu \in (0, 1)$ saves us from the trouble we would run into if $k-(m+\mu)$ were in $\Z_{\le 0}$. This is how we avoid the initial value corrections that appear in ordinary derivatives of Borel transforms.
 \end{proof}
 We can now prove the properties of the Borel transform analogous to the one of the Laplace transform from Proposition~\ref{prop:L-int-op}.
+\begin{revised}
 \begin{prop}\label{prop:frac-der-int-borel}
-Let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket_1$ %and let $\hat{\phi}$ be the sum of $\borel_\zeta\series{\Phi}$, then %and $\series{\phi}\defeq\borel_\zeta\series{\Phi}$
-\begin{itemize}
-\item[(i)] \emph{[fractional derivative]} $\borel_\zeta\big[ z^\mu \, \series{\Phi}\big]=\fracderiv{\mu}{\zeta}{0}\, \borel_\zeta\series{\Phi}$, for every $\mu\in\R_{> 0}$;
-\item[(ii)] \emph{[fractional integral]} $\borel_\zeta\big[z^\lambda\, \series{\Phi}\big]=\fracderiv{\lambda}{\zeta}{0}\,\borel_\zeta\series{\Phi}$, for every $\lambda\in\R_{<0}$; 
-\item[(iii)] let $k\in\Z_{\ge 0}$ and $\series{\Phi}\in z^{-k-1}\llbracket z^{-1}\rrbracket_1$, then $\borel_\zeta\big[\partial_z^{k} \series{\Phi}\big]=(-\zeta)^k\borel_\zeta\series{\Phi}$.\footnote{This property holds more generally for $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$, without restricting to $1$-Gevrey series.}
-\end{itemize} 
+Let for any $1$-Gevrey series $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket_1$, we have
+\begin{enumerate}[label=(\roman*)]
+\item\label{res:frac-deriv-borel} \textbf{Fractional derivatives}
+
+$\borel_\zeta\big[ z^\mu \, \series{\Phi}\big]=\fracderiv{\mu}{\zeta}{0}\, \borel_\zeta\series{\Phi}$ for every $\mu\in(0, \infty)$;
+\item\label{res:frac-int-borel} \textbf{Fractional integrals}
+
+$\borel_\zeta\big[z^\lambda\, \series{\Phi}\big]=\fracderiv{\lambda}{\zeta}{0}\,\borel_\zeta\series{\Phi}$ for every $\lambda\in(-\infty, 0)$;
+\item\label{res:whole-deriv-borel} \textbf{Whole derivatives} let $k\in\Z_{\ge 0}$ and $\series{\Phi}\in z^{-k-1}\llbracket z^{-1}\rrbracket_1$, then $\borel_\zeta\big[\partial_z^{k} \series{\Phi}\big]=(-\zeta)^k\borel_\zeta\series{\Phi}$.\footnote{This property holds more generally for series in $\C\llbracket z^{-1}\rrbracket$, even ones that are not $1$-Gevrey.}
+\end{enumerate} 
 \end{prop}
 \begin{proof} 
-The proof of $(i)$ follows from Lemma \ref{lem:frac-deriv-Borel}. 
+Result~\ref{res:frac-deriv-borel} follows from Lemma~\ref{lem:frac-deriv-Borel}. 
 
-Then, to prove $(ii)$, first notice that for $\lambda\in\R_{< 0}$  
+To prove result~\ref{res:frac-int-borel}, first notice that for $\lambda \in \R_{< 0}$,
 \[\fracderiv{\lambda}{\zeta}{0}\zeta^{k}=\zeta^{k-\lambda}\frac{k!}{\Gamma(k-\lambda+1)}.\] 
-Hence, if $\series{\Phi}=\sum_{n\geq 0}a_n z^{-n}$ %and $\hat{\phi}$ denotes the sum of $\borel_\zeta\series{\Phi}$
-\[\borel_\zeta \big[z^\lambda \series{\Phi}\big]=\sum_{n\geq 0}a_n\frac{\zeta^{n-\lambda}}{\Gamma(n-\lambda+1)}=\sum_{n\geq 0}a_n\frac{\zeta^{n-\lambda}}{n!}\frac{n!}{\Gamma(n-\lambda+1)}=\sum_{n\geq 0} \frac{a_n}{n!}\,\fracderiv{\lambda}{\zeta}{0}\zeta^n=\fracderiv{\lambda}{\zeta}{0}\series{\Phi}\]
-where in the last step, we use that $\borel_\zeta\series{\Phi}$ is convergent. 
+Then, given a series $\series{\Phi} = \sum_{n\geq 0} a_n z^{-n}$, we compute
+\begin{align*}
+\borel_\zeta \big[z^\lambda \series{\Phi}\big] & = \sum_{n\geq 0}a_n\frac{\zeta^{n-\lambda}}{\Gamma(n-\lambda+1)} \\
+& = \sum_{n\geq 0}a_n\frac{\zeta^{n-\lambda}}{n!}\frac{n!}{\Gamma(n-\lambda+1)} \\
+& = \sum_{n\geq 0} \frac{a_n}{n!}\,\fracderiv{\lambda}{\zeta}{0}\zeta^n \\
+& = \fracderiv{\lambda}{\zeta}{0}\series{\Phi}.
+\end{align*}
+using the fact that $\borel_\zeta\series{\Phi}$ is convergent in the last step.
 
-Finally, $(iii)$ follows from a simple computation: 
+Finally, result~\ref{res:whole-deriv-borel} follows from a simple computation: 
 \begin{align*}
 \borel_\zeta\big[\partial_z^k\series{\Phi}\big]&=\borel_\zeta\left[\sum_{n=k+1}^\infty a_n \frac{(n+k-1)!}{(n-1)!} (-1)^{k} z^{-n-k}\right]\\
 &=(-1)^k \sum_{n=k+1}^\infty a_n \frac{(n+k-1)!}{(n-1)!}\frac{\zeta^{n+k-1}}{(n+k-1)!}\\
 &=(-\zeta)^k\sum_{n=k+1}^\infty a_n \frac{\zeta^{n-1}}{(n-1)!}\\
-&=(-\zeta)^k\borel_\zeta \series{\Phi}
+&=(-\zeta)^k\borel_\zeta \series{\Phi}.
 \end{align*}
 \end{proof}
+\end{revised}
 %
 \section{Proof of main results}\label{sec:proof_main_results}
 %
