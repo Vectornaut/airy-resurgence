@@ -215,23 +215,16 @@ with respect to Borel summation \begin{draft}\textbf{[DRAFT]}\end{draft}}
 \maketitle
 
 \begin{abstract}
-Through Borel summation, one can often reconstruct an analytic solution of a problem from its asymptotic expansion.
-%%can often turn a formal solution of a problem into an analytic one.
-We view the effectiveness of Borel summation as a regularity property of the solution, and we show that the solutions of certain differential equation and integration problems are regular in this sense. By taking a geometric perspective on the Laplace and Borel transforms, we also clarify why ``Borel regular'' solutions are associated with special points on the Borel plane.
+Through Borel summation, one can often reconstruct an analytic solution of a problem from its asymptotic expansion. We view the effectiveness of Borel summation as a regularity property of the solution, and we show that the solutions of certain differential equation and integration problems are regular in this sense. By taking a geometric perspective on the Laplace and Borel transforms, we also clarify why ``Borel regular'' solutions are associated with special points on the Borel plane.
 
 The particular classes of problems we look at are level~1 ODEs and exponential period integrals over one dimensional Lefschetz thimbles. To expand the variety of examples available in the literature, we treat various examples of these problems in detail.
-
-% \textcolor{RoyalBlue}{
-% Borel regularity is a new approach to Borel summability, that present Borel summation as a regularization process and it explains the effectiveness of Borel summability, namely that Borel summation can be used to reconstruct analytic functions from their asymptotics. \textcolor{orange}{[Highlight analytic perspective more?]} Borel regular functions shows up in two classes of examples: as solutions of certain level $1$ ODEs and as integrals over Lefschetz thimbles. In addition, we give a geometric description of the Borel plane.}
 \end{abstract}
 \tableofcontents
 %
-%
-%
 \section{Introduction}
+%
 \subsection{The unreasonable effectiveness of Borel summation}\label{intro:summation}
-%%\subsection{A familiar process: Borel summation}\label{intro:summation}
-You can often find a formal power series %\textcolor{magenta}{[double-check that this matches the $\tau$ from the position domain]}
+You can often find a formal power series \begin{todo}[double-check that this matches the $\tau$ from the position domain]\end{todo}
 \[ \series{\Phi} = \frac{c_0}{z^\tau} + \frac{c_1}{z^{\tau+1}} + \frac{c_2}{z^{\tau+2}} + \frac{c_3}{z^{\tau+3}} + \ldots, \]
 with $\tau \in (0, 1]$, that looks or acts like a solution to a problem whose actual solutions are holomorphic functions of $z$. For example, if you want to understand how the solutions of the holomorphic ordinary differential equation (ODE)
 \begin{equation}
@@ -252,7 +245,7 @@ using the substitution $\tfrac{1}{2} t^2 = 4u^3 - 3u + 1$. Na\"{i}vely integrati
 Once you have the formal solution $\series{\Phi}$, you might try to get an actual solution by applying {\em Borel summation}, which turns a formal power series into a function asymptotic to it. Borel summation works in three steps.
 \begin{enumerate}
 \item Thinking of $z$ as a ``frequency variable,'' we take the Borel transform (also known as formal inverse Laplace transform) of $\series{\Phi}$, producing a formal power series $\series{\phi}$ in a new ``position variable'' $\zeta$.
-\item If $\series{\phi}$ has a positive radius of convergence, we sum it to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. %\textcolor{orange}{[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]}
+\item If $\series{\phi}$ has a positive radius of convergence, we sum it to get a holomorphic function $\hat{\phi}$ on a neighborhood of $\zeta = 0$. Then, by analytic continuation, we expand the domain of $\hat{\phi}$ to a Riemann surface $B$ with a distinguished 1-form $\lambda$---the continuation of $d\zeta$. \begin{todo}[Nikita has a complementary picture where the Borel plane is the cotangent fiber? Ask more about this.]\end{todo}
 \item If $\hat{\phi}$ grows slowly enough along an infinite ray $\zeta \in \alpha + e^{i\theta}(0, \infty)$, its Laplace transform $\hat{\Phi} : = \laplace_{\zeta, \alpha}^\theta \hat{\phi}$ turns out to be a holomorphic function of $z$, well-defined on some sector of the frequency plane. In this case, we say $\series{\Phi}$ is {\em Borel summable}, and we call $\hat{\Phi}$ its {\em Borel sum} at $\alpha$ in the direction $\theta$.
 \end{enumerate}
 \begin{center}
@@ -359,40 +352,7 @@ I = \int_{\mathcal{C}}e^{-zf}\,\nu,
 where $X$ is $1$-dimensional complex manifold; $f \maps X \to \C$ is a holomorphic function with isolated, non-degenerate critical points; $\nu \in \Omega^1(X)$ is holomorphic $1$-form on $X$, and $\mathcal{C}$ is {\em Lefschetz thimble}---a type of contour described in Section~\ref{sec:why_borel_thimble}. Under these conditions, $I$ is a holomorphic function of $z$.
 \end{enumerate}
 These two problems are closely linked. By playing with derivatives of a thimble integral, you can often find a linear ODE that the integral satisfies. Conversely, for many classical ODEs, there are useful bases of thimble integral solutions.
-
-%Notice that our starting point is quite different: we assume $\Phi$ is a holomorphic functions such that it is either a thimble integral or it solves an ODE with irregular singularity at $\infty$. Then we prove $\Phi$ is Borel regular and in both cases, our proves follow the heuristic of the diagram above. We’ll give precise statements in the following section.
-
-       
-
-
-
-%%\item {\em A priori}, we should expect $\hat{\Phi}$ to be different from $\Phi$, because we lose information in passing from $\Phi$ to its asymptotic series.
-%%\item Taking the Borel sum of the asymptotic series of $\Phi$ is a regularization process, because it smooths away some perturbations---the ones that are asymptotic to zero along the given ray. We will call it {\em Borel regularization}.
-%%\item Taking the Borel sum of the asymptotic series of $\Phi$ can be seen as a regularization process, because taking asymptotics erases information. We will call this process {\em Borel regularization}.
-%\begin{itemize}
-%\item We will say $\Phi$ is {\em Borel-regularizable} if it is asymptotic to a Borel-summable power series.
-%\item We will say $\Phi$ is {\em Borel regular} if it is Borel-regularizable and Borel regularization leaves it unchanged.
-%\item We have the following vector space inclusions:
-%\[ \text{Borel regular functions} \subset \text{Borel-regularizable functions} \subset \text{holomorphic functions}. \]
-%\item Borel regular functions have been characterized in the literature before; Watson showed a century ago \textcolor{orange}{[Watson]} that a function $\Phi$ is Borel regular whenever there is a constant $c \in (0, \infty)$ with
-%\[ |\Phi(z)-\sum_{k=0}^Nc_kz^{-k}| \le c^{N+1} N!|z|^{-N} \]
-%over all orders $N$ and all $z$ in a wide enough wedge around infinity. 
 %
-%Nevanlinna's improvement of Watson's theorem (Sokal, ``An improvement of Watson's theorem on Borel summability'') tells us that for a function $\Phi$ with a well-defined inverse Laplace transform $\phi$, the following conditions are equivalent \textcolor{magenta}{[double check]}:
-%\begin{itemize}
-%\item $\Phi$ is Borel regular.
-%\item $\Phi$ is approximated well, in a certain sense (a weak version of being ``Gevrey-asymptotic''), by its asymptotic series.
-%\item $\phi$ grows at most exponentially along the Laplace transform ray.
-%\end{itemize}
-%\item When its domain is restricted to the space of Gevrey power series, Borel summation is invertible. \textcolor{magenta}{[Need to find a good reference for this, because a small change in the statement would mess up our conclusion. Does \texttt{arXiv:2112.08792}, \S A.2 have the statement we want?]} Thus, Borel regularization acts as a projection operator on the space of Borel-regularizable functions.\textcolor{orange}{[Veronica: Do you mean that if $\Phi\sim\series{\Phi}$ and $\series{\Phi}$ is Gevrey and Borel summable, then $\Phi=\laplace\circ\borel\series{\Phi}$ (i.e. it is Borel regular)? P.Ramis proved that if $\Phi$ is Gevrey asymptotic to $\series{\Phi}$, then $\series{\Phi}$ is of Gevrey type. In addition, every Gevrey type series $\series{\Phi}$ is the Gevrey asymptotics of a holomorphic function. When it is defined, the Borel sum of $\series{\Phi}$ is the natural holomorphic function asymptotic to $\series{\Phi}$.]}
-%\item Borel regularity can help explain why Borel summation is so effective at solving certain kinds of problems, like the ones in Section~\ref{intro:summation}.
-%\item The formal solutions of a problem are typically supposed to generalize the actual solutions, in the sense that they include the asymptotic series of the actual solutions.
-%\item In this case, every Borel regular solution can be found by taking the Borel sum of a formal solution.
-%\item \ldots
-%\end{itemize}
-
-
-
 \subsection{Goals and Results}
 %
 We present the results, proofs, and examples in this paper with a few central goals in mind. Our first goal is to discuss Borel summability in a way that carefully separates the analytic and formal sides of the theory. In particular, we highlight results that can be proven in purely analytic ways, like Theorem~\ref{thm:exist_uniq_ODE} for level~1 ODEs and Lemma~\ref{lem:thimble_proj_formula} for thimble integrals.
@@ -633,8 +593,7 @@ When the half-plane extends along the $-\theta$ direction, the sum $\hat{\phi}$ 
 \end{center}
 
 The Watson--Nevanlinna--Sokal characterization of Borel regular functions is totally general, which means it cannot  take advantage of any extra structure provided by the problem you are trying to solve. We take the opposite approach, showing that certain functions are Borel regular just because of the extra structure provided by the problems they solve. 
-
-%%a function $\Phi$ holomorphic in a sectorial neighbourhood $\mathsf{A}_\theta:=\{z\in\C \vert \Re(e^{i\theta}z)\}$ is Borel regular. Indeed let $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket$ be the ``Gevrey-asymptotics'' of $\Phi$ as $\Re(e^{i\theta}z)\to \infty$, then its Borel transform $\hat{\phi}\defeq\borel\series{\Phi}$ is a germ of holomorphic function at the origin and it can be analytically continued in a tubular neighbourhood of the ray $e^{i\theta}[0,\infty)$ with at most exponential growth at infinity. Hence $\Phi$ is Borel-regularizable. In addition, $\series{\phi}$ converges uniformly to a holomorphic function $\phi(\zeta)$ whose Laplace transform coincides with $\Phi(z)$. In particular, we learn that being ``Gevrey-asymptotic'' to a formal series is a sufficient condition for Borel regularity. 
+%
 \subsection{Solving level~$1$ ODEs}\label{sec:history_ODE}
 %
 The study of irregular singular differential equations on complex domains has a long history, and interesting phenoma distinguish irregular singular equations from regular singular ones. Analytic solutions of a linear ODE with an irregular singularity exhibit the Stokes phenomenon: asymptotic behavior that changes sharpy from from direction to the next. Formally, this behavior is captured in a {\em formal integral} solution: an expression
@@ -644,7 +603,6 @@ in which $A$ is a finite set of complex numbers, each $\tau_\alpha$ is a real nu
 Each term of a formal integral is an example of a {\em trans-monomial}---the basic building block of a {\em trans-series}.\footnote{For the full definition of a trans-series, see~\cite{EcalleIII,van-der-hoeven2001complex,costin_transseries,costin_summability}.} The trans-monomials in the spaces $e^{-\alpha z} z^\tau\,\C\llbracket z^{-1} \rrbracket$ are the only ones we will need to consider in this paper. Poincar\'{e}'s method for solving linear level~$1$ ODEs, discussed in Section~\ref{sec:Poincare method}, produces trans-monomial solutions in these spaces. The Poincar\'{e} solutions serve as the terms of a general formal integral. Each Poincar\'{e} solution is the asymptotic expansion of an analytic solution, whose existence is guaranteed---non-constructively---by the Main Asymptotic Existence Theorem (M.A.E.T.).
 
 The Poincar\'{e} solutions and the M.A.E.T. have inspired several other methods for solving linear level~1 ODEs. The ones we will discuss in this section are summarized in the following table. We classify solution methods by two features: whether the solutions they produce are analytic functions or formal series, and whether they solve the original equation on the frequency domain or an equivalent equation in the position domain.
-%\textcolor{RoyalBlue}{Since in this paper we focus on buidling a frame of solutions, without dicussing the Stokes phenomenon, we will describe below the main methods to solve irregular singular ODEs stressing the difference between formal and analytic solutions in either the frequency and the position domain. A summary is given in the following table}
 \begin{center}
 \begin{tabular}{l|l|l}
 & \textbf{Analytic} & \textbf{Formal} \\ \hline
@@ -653,30 +611,23 @@ The Poincar\'{e} solutions and the M.A.E.T. have inspired several other methods 
 & Fixed-point iteration~\cite{reg-sing-volterra} \\
 \end{tabular}
 \end{center}
-
-\subsubsection{The Poincar\'e method and Borel summation}\label{sec:Poincare method}
+%
+\subsubsection{The Poincar\'{e} method and Borel summation}\label{sec:Poincare method}
+%
 An ODE of the form described in Section~\ref{borel-reg:explanatory-power} always has a frame of solutions in the trans-monomial spaces $e^{-\alpha z} z^{\tau_\alpha}\,\C\llbracket z^{-1} \rrbracket$. These solutions can be found systematically, using an algorithm described by Poincar\'{e}~\cite{int-irreg}\cite[Proposition~2.2.7, p.~111]{EcalleIII}. Poincar\'{e} observes \begin{verify}(Section~3)\end{verify} that when $z$ is large, the constant-coefficient equation $P\big(\tfrac{\partial}{\partial z}\big) \Phi = 0$ approximates the equation $\mathcal{P}\Phi = 0$ that we are trying to solve. The solutions of this approximate equation are the exponentials $\{e^{-\alpha z} \colon P(-\alpha) = 0\}$. Poincar\'{e} guesses that each approximate solution $e^{-\alpha z}$ can be turned into an exact solution $e^{-\alpha z} \series{F}_\alpha$ using a formal correction factor $\series{F}_\alpha \in z^{-\tau_\alpha}\,\C\llbracket z^{-1} \rrbracket$. When $\tau_\alpha = Q(-\alpha) / P'(-\alpha)$, the correction factor can be found order by order, starting from any chosen constant term. We will refer to the resulting solutions $e^{-\alpha z} \series{F}_\alpha \in e^{-\alpha z} z^{\tau_\alpha}\,\C\llbracket z^{-1} \rrbracket$ as Poincar\'{e}'s formal solutions.
 
 Although it is not contructive, the M.A.E.T. guarantees the existence of a frame of analytic solutions asymptotic to Poincar\'{e}'s formal ones~\cite[Chapter~14]{balser}. Furthermore, the Ramis Index Theorem tells us that the Borel transform sends Poincar\'{e}'s formal solutions to convergent series on the position domain---the first step toward proving Borel summability~\cite{ramis_index}. This has motivated the development of summability methods, which promote formal solutions to analytic ones~\cite{diverg-resurg--ii,malgrange--fourier,malgrange1995sommation,malgrange92,ramis1991series}. These methods can be applied both within and beyond the world of linear level~1 ODEs.
-
-% \subsubsection{\textcolor{orange}{[M.A.E.T. section]}}
-% Although it is not contructive, the Main Asymptotic Existence Theorem (M.A.E.T.) guarantees the existence of a frame of analytic solutions asymptotic to Poincar\'{e}'s formal ones~\cite[Chapter~14]{balser}. The Ramis Index Theorem shows that the formal solutions are 1-Gevrey series---the first step in proving Borel~summability~\cite{ramis_index}. \textcolor{orange}{[Revise\ldots]} \textcolor{RoyalBlue}{Furthermore, after checking the solution $\series{\Phi}$ is Borel summable, another argument is needed to show that the Borel sum solve the original equation---a priori, the Borel sum is only Gevrey asymptotic to the solution $\series{\Phi}$.}
+%
 \subsubsection{\'{E}calle's theory of resurgence}
+%
 \'{E}calle's theory of resurgence introduced a new perspective on formal solutions, mostly focused on the analysis of the position domain~\cite{EcalleIII,loday-Remy2011}. In a nutshell, resurgence provides information about the analytic continuation of the Borel transform of a divergent series. In particular, it reveals the locations of singularities in the position domain, and it quantifies the Stokes phenomenon in terms of ``Stokes constants'' describing analytic continuation around the singularities.
 
 A series is resurgent if its Borel transform converges to an endlessly analytically continuable function on the position domain. Thus, resurgence creates a bridge between formal and analytic solutions of problems in the position domain.
 
 The formal solutions of a level~$1$ ODE are always resurgent series~\cite[Proposition~2.2.1]{EcalleIII}. \'{E}calle proved this by using formal perturbation theory to solve a corresponding integral equation in the position domain. Using the ``formalism of singularities'' to understand how the singularities of the perturbative solution would propagate from one order of perturbation to the next, \'{E}calle showed that the pertrubation series would converge to an endlessly analytically continuable function. Loday-Richaud and Remy went on to show that this function always has a well-defined Laplace transform, so the corresponding formal solution in the frequency domain is Borel summable~\cite{loday-Remy2011}. Malgrange got similar results by working with differential equations, rather than integral equations, on the position domain~\cite{malgrange--fourier}.
-
-%%One can see this by using formal perturbation theory to solve a corresponding equation on the position domain---either an integral equation, as in the work of Loday-Richaud and Remy~\cite{loday-Remy2011}, or a differential equation, as in the work of Malgrange~\cite{malgrange--fourier}. \'{E}calle's ``formalism of singularities'' describes how the singularities of the perturbative solution propagate from one order of perturbation to the next. This information
-
-%%\'{E}calle's ``formalism of singularities'' can be used to show that Level~1 ODEs are a rich source of resurgent series.
-
-
-%%A resurgent analysis of a differential equation on the frequency domain begins by using formal perturbation theory to solve a corresponding equation on the position domain---either an integral equation, as in the work of Loday-Richaud and Remy~\cite{loday-Remy2011}, or a differential equation, as in the work of Malgrange~\cite{malgrange--fourier}. Ecalle's
-
-%%\textcolor{orange}{[Where does resurgence come in?]}
+%
 \subsubsection{Solving Riemann--Hilbert problems}
+%
 \begin{revised}A level~$1$ ODE can be seen as the coordinate expression of a meromorphic connection on a principal bundle---specifically, the kind of meromorphic connection called an {\em oper}~\cite{BD-opers}. Local solutions of the ODE correspond to local flat sections of the connection. We can therefore use the theory of meromorphic connections to study level~$1$ ODEs. In particular, given an ODE, we can set up a Riemann--Hilbert problem whose solution would encode a frame of analytic solutions of the ODE. \begin{todo}[Add reference]\end{todo}
 
 To formulate the Riemann--Hilbert problem, we fix the asymptotic behvaiour of the frame of solutions at $z = 0$ and $z = \infty$, and we also fix its discontinuities---the Stokes data prescribing how the frame jumps across each Stokes ray. A solution is then given by a piecewise analytic function which is holomorphic away from the Stokes rays and has the prescirbed asymptotics and discontinuities.\end{revised}
@@ -715,14 +666,7 @@ Lefschetz thimbles for $f$ with direction $\theta$ represent classes in the ``ra
 \[ \int_{\mathcal{C}}e^{-zf}\,\nu \]
 computes the pairing between a rapid decay homology class $\mathcal{C}$ and a ``twisted $1$-form'' $e^{-zf}\,\nu$. When all the critical points of $f$ are non-degenerate, Lefschetz thimbles actually form a basis for $H^\theta_N(X,f)$. As $\theta$ varies, the groups $H^\theta_N(X,f)$ fit together into a local system over the circle of directions, which is singular at the direction of each segment connecting a pair of critical values. The monodromy of this local system can be found using the Picard--Lefschetz formula~\cite[Section~1]{Arnold}\cite[Section~3.3, Part II]{pham}.
 
-Like solutions of level~$1$ ODEs, thimble integrals often exhibit the Stokes phenomenon. For one dimensional thimble integrals, the Stokes constants can be interpreted geometrically as intersection numbers for pairs of thimbles~\cite{kontsevich2022analyticity}. More generally, finding the Stokes constants is equivalent to finding the monodromy of the local system $H^\theta_N(X,f)$ (see the recent developement~\cite{kontsevich2024holomorphic}). 
-%%Equivalently, using the Borel regularity result \textcolor{magenta}{[do we really want this theorem, rather than the thimble projection formula?]} Theorem~\ref{thm:maxim}, we can express thimble integrals as Laplace transforms and reconstruct the monodromy of $H^\theta_N(X,f)$ from the associated Stokes constants. The Stokes
-%%\color{BlueViolet}
-%%\begin{itemize}
-%%\item Explain how can be seen in terms of homology (cite Pham).
-%%\item the Stokes constants are intersection number of thimbles, computed with Picard Lefschetz formula.
-%%\end{itemize}
-\color{black}
+Like solutions of level~$1$ ODEs, thimble integrals often exhibit the Stokes phenomenon. For one dimensional thimble integrals, the Stokes constants can be interpreted geometrically as intersection numbers for pairs of thimbles~\cite{kontsevich2022analyticity}. More generally, finding the Stokes constants is equivalent to finding the monodromy of the local system $H^\theta_N(X,f)$ (see the recent developement~\cite{kontsevich2024holomorphic}).
 %
 \subsubsection{Asymptotics of thimble integrals}
 %
@@ -753,7 +697,6 @@ Near each branch point $b$, fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1
 \paragraph{The frequency coordinate}\label{transl-freq}
 %
 Over the complement $B'$ of the branch points, the translation structure gives us a holomorphic map $z \maps T^*B' \to \C$. This map is an isomorphism on every fiber, trivializing $T^*B$ almost globally. Over a branch point $b$ of cone angle $2\pi n$, we get an analogous isomorphism $z \maps T^*_bB^{\otimes n} \to \C$. In both cases, we will call $z$ the {\em frequency coordinate} of $B$.
-%\par\textcolor{RoyalBlue}{The translation structure gives us an isomorphism $z \maps T^*_bB \to \C$ when $b \in B$ is an ordinary point, and an isomorphism $z \maps T^*_bB^{\otimes n} \to \C$ when $b$ is a branch point of cone angle $2\pi n$.}
 \begin{center}
 \phaseSpaceLaplace
 \captionof{figure}{The frequency coordinate $z$ on the cotangent spaces of an ordinary point and a singular point. The singularity shown here has cone angle $6\pi$, like the singularities of the translation surface associated with the Airy function.}
@@ -782,10 +725,9 @@ T^*_bB \arrow[u,"\blankbox^n"] \arrow[r,"w"'] & \C \arrow[u,"\blankbox^n"']
 \end{tikzcd}
 \end{center}
 commute. Here, $\blankbox^n$ represents the $n$th-power map.
-% \subsubsection{Boundary}
-% \textcolor{red}{\textbf{Discuss the visual boundary, citing Lemma~3.1 of Dankwart's thesis \textit{On the large-scale geometry of flat surfaces} for the description of geodesics.}}
-% %
+%
 \subsubsection{The Laplace transform over an ordinary point}\label{laplace:ordinary}
+%
 Pick a translation parameter $\zeta$ on $B$ and an extended angle $\theta \in \R$. The {\em Laplace transform} $\laplace_{\zeta, \alpha}^\theta$ turns a local holomorphic function $\phi$ on $B$ into a local holomorphic function on $T^*_{\zeta = 0} B$. When $\zeta = 0$ is an ordinary point, the Laplace transform is defined by the formula
 \begin{equation}\label{laplace:int}
 \laplace_{\zeta, \alpha}^\theta \phi = \int_{\mathcal{J}_{\zeta, \alpha}^\theta} e^{-z\zeta} \phi\,d\zeta,
@@ -803,17 +745,6 @@ where $z$ is the frequency function and $\mathcal{J}_{\zeta, \alpha}^\theta$ is 
 For any $\sigma > -1$, the conditions on $\phi$ are satisfied by all of the functions in the spaces $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ introduced in \cite{reg-sing-volterra}. Here, the domain $\Omega_\alpha$ must contain the ray $\mathcal{J}_{\zeta, \alpha}^\theta$, and the norm $\|\cdot\|_{\sigma, \Lambda}$ is taken with respect to $\zeta = \alpha$.
 \subsubsection{The Laplace transform over a branch point}
 When $\zeta = 0$ is a branch point, we can still use formula~\eqref{laplace:int} to define $\laplace_{\zeta, \alpha}^\theta \phi$ on $T_{\zeta = 0}^*B$, as long as we take care of a few subtleties. Thanks to the labeling choices we made in Section~\ref{sec:transl}, the extended angle $\theta \in \R$ still picks out a ray $\mathcal{J}_{\zeta, \alpha}^\theta$. The function $z$ is defined on $T_b^*B^{\otimes n}$, where $2\pi n$ is cone angle at $\zeta = 0$, so we pull it back to $T^*_{\zeta = 0} B$ along the $n$th-power map. This amounts to substituting $w_b^n$ for $z$ in formula~\eqref{laplace:int}. The inequality $\Re(e^{i\theta} z) > \Lambda$ cuts out a half-plane in $T_b^*B^{\otimes n}$, which pulls back to $n$ sector-like regions in $T_b^*B$ of angle $\pi/n$. We only define $\laplace_{\zeta, \alpha}^\theta \phi$ on one of them: the one centered around the ray $w_b \in e^{-i\theta/n}[0, \infty)$.
-%\color{gray}
-%\subsection{The geometry of the Borel transform}
-%\begin{itemize}
-  %\item The Borel transform $\borel\textcolor{orange}{_\zeta}$ turns formal power series in $z^{-1}$---which represent functions defined all non-singular cotangent spaces---into formal power series in $\zeta$. It's a formal inverse of the $\laplace_{\zeta, 0}$.
-  %\item Formalizing the change of variable identity that relates $\laplace_{\zeta, \alpha}$ to $\laplace_{\zeta_\alpha, 0}$, we can extend the Borel transform to trans-series, defining $\borel\textcolor{orange}{_\zeta} \maps e^{-\alpha z} \C\llbracket z^{-1} \rrbracket \to \C\llbracket \zeta \rrbracket$ as the formal inverse of $\laplace_{\zeta, \alpha}$.
-  %\begin{itemize}
-   % \item In other words, when $\borel_\zeta$ acts on formal power series, it formally inverts $\laplace_\zeta$ on the cotangent fiber over $0$. \textcolor{magenta}{When it acts on other trans-monomials, it formally inverts $\laplace_\zeta$ on other cotangent fibers. [Not quite\ldots figure out how to make this precise.] }
-  %\end{itemize}
-  %\item consequently, $\borel_{\zeta_\alpha}$ acts on trans-monomials $e^{z\alpha}\C\llbracket z^{-1}\rrbracket$ and it formally inverts $\laplace_{\zeta_\alpha}$ on the cotangent fibre over $0$. 
-%\end{itemize}
-%\color{black}
 \subsubsection{Change of translation chart}\label{sec:change-translation}
 \begin{todo}[Change $b$ to $\alpha$? \textit{V} Did it \textbf{A} Double-check]\end{todo} Suppose $\zeta$ is a translation chart on $B$, and $\zeta = \alpha$ is an ordinary point. Let $\zeta_\alpha$ be the translation chart with $\zeta = \alpha + \zeta_\alpha$. The Laplace transforms $\laplace_{\zeta_\alpha, 0}$ and $\laplace_{\zeta, \alpha}$, which both turn functions on $B$ into functions on $T^*_{\zeta = \alpha}B$, are related in the following way.
 \begin{lemma}\label{translation}
