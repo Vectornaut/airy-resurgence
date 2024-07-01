@@ -2877,7 +2877,7 @@ F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u \\
 \appendix
 %
 \section{The Airy equation}\label{airy-appendix}
-\subsection{Specializing from the Airy--Lucas example}
+\subsection{Specializing from the Airy--Lucas example}\label{sec:spec-to-airy}
 \begin{revised}
 \subsubsection{Motivation}
 Since the Airy equation is a widely used example in the study of Borel summation and resurgence, we find it useful to repeat the Airy--Lucas example calculations from Sections~\ref{sec:airy}--\ref{example_AL} in this special case, with the parameters set to $n = 3$ and $m = 1$. In particular, this makes it easier to compare our approaches and conventions with others from the literature, as we do in Section~\ref{airy-comparison}.
@@ -3154,11 +3154,11 @@ For problems involving a small parameter $\hbar$ rather than a large parameter $
 \end{align*}
 From a combinatorial perspective, this is just the transformation that sends an ordinary generating function to the corresponding exponential generating function.
 
-\begin{todo}[Need a transition here.]\end{todo} In \cite{lectures-Marino}, the author studies the Airy functions as an example of resurgent functions. He starts with the formal trans-monomial solutions of the Airy equation:
+In \cite{lectures-Marino}, Mari\~{n}o studies the Airy functions as an example of resurgent functions. He starts with the formal trans-monomial solutions of the Airy equation:
 
 \begin{align*}
 \series{\Phi}_{\mathrm{Ai}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{-\tfrac{2}{3}x^{3/2}}\tilde{W}_1(x^{-3/2})\\
-\series{\Phi}_{\mathrm{Bi}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{\tfrac{2}{3}x^{3/2}}\tilde{W}_2(x^{-3/2})
+\series{\Phi}_{\mathrm{Bi}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{\tfrac{2}{3}x^{3/2}}\tilde{W}_2(x^{-3/2})\,,
 \end{align*}  
 where 
 \begin{align*}
@@ -3219,16 +3219,16 @@ In particular, $\frac{d}{d\zeta}\circ\borel_{\textit{phys}}\left[z^{-1/2}\tilde{
 %\end{align*}
 \subsubsection{Integral formula for hypergeometric functions}
 %
-In \cite{diverg-resurg-i} the author studies summability and resurgent properties of solutions of the Airy equation. He considers the formal power series
+In \cite{diverg-resurg-i}, Mitschi and Sauzin study summability and resurgent properties of solutions of the Airy equation. They consider the formal power series
 \[\series{\Phi}_{\pm}(z)\defeq \sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{1}{2}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}z^{-n}\]
 such that
 \begin{align*}
 \series{\Phi}_{\mathrm{Ai}}(y)&=\frac{1}{2\sqrt{\pi}}y^{-1/4}e^{-\tfrac{2}{3}y^{3/2}}\series{\Phi}_{+}\left(\tfrac{2}{3}y^{3/2}\right)\\
 \series{\Phi}_{\mathrm{Bi}}(y)&=\frac{1}{2\sqrt{\pi}}y^{-1/4}e^{\tfrac{2}{3}y^{3/2}}\series{\Phi}_{-}\left(\tfrac{2}{3}y^{3/2}\right)
 \end{align*} 
-are formal solutions of the Airy equation. Notice that compared to Mari\~{n}o's formal solutions, Sauzin adopts a different change of coordinates $z=\frac{2}{3}y^{3/2}$.  
+are formal solutions of the Airy equation. Notice that compared to Mari\~{n}o's formal solutions, Mitschi and Sauzin adopt a different change of coordinates $z=\frac{2}{3}y^{3/2}$.  
 
-By looking for solutions of the Borel transformed equation, he wrote the Borel transform of $\series{\Phi}_{\pm}$ as a convolution product:
+Seeking solutions of the Borel-transformed equation, Mitschi and Sauzin write the Borel transform of $\series{\Phi}_{\pm}$ as a convolution product:
 \begin{align*}
 \hat{\phi}_+(\zeta):=\borel\series{\Phi}_+=\delta+\frac{d}{d\zeta}\hat{\chi}(\zeta)  \qquad \hat{\phi}_-(\zeta):=\borel\series{\Phi}_-=\delta-\frac{d}{d\zeta}\hat{\chi}(-\zeta)
 \end{align*}
@@ -3241,50 +3241,45 @@ By looking for solutions of the Borel transformed equation, he wrote the Borel t
 %\end{align*}
 %which up to a constant factor for $\delta$, they agree with our results. 
 
-Notice that the function $\hat{\chi}(\zeta)$ is an hypergeometric function:
+Notice that $\hat{\chi}(\zeta)$ is a hypergeometric function:
 \begin{align*}
-\hat{\chi}(\zeta)&=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6}\ast \zeta^{-5/6}\\
+\hat{\chi}(\zeta)&=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6}\ast_\zeta \zeta^{-5/6}\\
 &=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}\int_0^{\zeta}(2\zeta'+\zeta'^2)^{-1/6} (\zeta-\zeta')^{-5/6}d\zeta'\\
 &=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}\int_0^{1}(\zeta t)^{-1/6}(2+\zeta t)^{-1/6} (\zeta-\zeta t)^{-5/6} \zeta dt\\
 &=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}\int_0^{1} t^{-1/6} 2^{-1/6}(1+\frac{\zeta}{2} t)^{-1/6} (1-t)^{-5/6}d\zeta'\\
 &=\frac{1}{\Gamma(1/6)\Gamma(5/6)}\int_0^{1} t^{-1/6} (1+\frac{\zeta}{2} t)^{-1/6} (1-t)^{-5/6}d\zeta'\\
 &={}_2F_1\left(\frac{1}{6},\frac{5}{6};1;-\frac{\zeta}{2}\right)
 \end{align*}
-where in the last step we use the Euler formula for hypergeometric functions \footnote{The Euler formula is \begin{equation}\label{Euler formula}
+where in the last step we use the Euler formula for hypergeometric functions.\footnote{The Euler formula is \begin{equation}\label{Euler formula}
 {}_{2}F_1\left(a,b;c;x\right)=\frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)}\int_0^1 t^{b-1}(1-t)^{c-b-1}(1-xt)^{-a}dt.
-\end{equation}}. Then, by taking derivatives we recover $\hat{\phi}_{\pm}(\zeta)$: 
-
+\end{equation}} By taking derivatives, we recover $\hat{\phi}_{\pm}(\zeta)$: 
 \begin{align*}
 \hat{\phi}_+(\zeta)&=\delta-\frac{1}{2}\frac{5}{36}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right)=\delta-\frac{2}{3}\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right)\\
 \hat{\phi}_-(\zeta)&=\delta+\frac{1}{2}\frac{5}{36}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right)=\delta+\frac{2}{3}\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right)
 \end{align*} 
 and up to a multiplicative constant they match our computations for $\borel(\tilde{W}_{1,2})$ (see equation~\eqref{Borel-W12}).
-The main advantage of writing Gauss hypergeometric functions as a convolution product relies on \'Ecalle's singularity theory. Indeed $(2\zeta+\zeta^2)^{-1/6}$ extends analytically to the universal cover of $\C\setminus\lbrace 0,-2\rbrace$ and the convolution with $\zeta^{-5/6}$ does not change the set of singularities (see part c of \cite[Section 6.14.5]{diverg-resurg-i}). Furthermore, the author proves that $\hat{\phi}_{\pm}(\zeta)$ are simple resurgent functions (see \cite[Lemma 6.106]{diverg-resurg-i}). %Therefore, from the expression of $\chi(\zeta)$ as a convolution product, the resurgent properties of $\series{\phi}_{\pm}(\zeta)$ are evident.  
-
+The main advantage of writing Gauss hypergeometric functions as a convolution product relies on \'Ecalle's singularity theory. Indeed $(2\zeta+\zeta^2)^{-1/6}$ extends analytically to the universal cover of $\C\setminus\lbrace 0,-2\rbrace$ and the convolution with $\zeta^{-5/6}$ does not change the set of singularities \cite[Section~6.14.5(c)]{diverg-resurg-i}. Furthermore, Mitschi and Sauzin prove that $\hat{\phi}_{\pm}(\zeta)$ are simple resurgent functions \cite[Lemma 6.106]{diverg-resurg-i}. %Therefore, from the expression of $\chi(\zeta)$ as a convolution product, the resurgent properties of $\series{\phi}_{\pm}(\zeta)$ are evident.  
+%
 \subsubsection{Comparison with exact WKB}
-
-Kawai and Takei study the WKB analysis of the Airy--type Schrodinger equation
-
+%
+In \cite{kawai-takei}, Kawai and Takei \begin{revised}carry out an exact\end{revised} WKB analysis of the Airy-type Schr\"{o}dinger equation
 \begin{equation}
 \label{WKB_Airy} 
 \left[\big(\tfrac{d}{dx}\big)^2 - \eta^2 x \right] \psi(x, \eta) = 0 
 \end{equation}
-as $\eta\to\infty$. They define $\psi_B(x, y)$ as the inverse Laplace transform of $\psi(x, \eta)$ with respect to $\eta$. In the coordinate $t=\frac{3}{2}yx^{-3/2}$ they find an explicit formula for $\psi_B(x,y)$ in terms of Gauss hypergeometric functions:
+\begin{revised}in the $\eta \to \infty$ limit\end{revised}. They define $\psi_B(x, y)$ as the inverse Laplace transform of $\psi(x, \eta)$ with respect to $\eta$. In the coordinate $t=\frac{3}{2}yx^{-3/2}$ they find an explicit formula for $\psi_B(x,y)$ in terms of Gauss hypergeometric functions:
 \begin{align*}
 \psi_{+,B}(x,y)&=\frac{1}{x}\phi_+(t)=\frac{\sqrt{3}}{2\sqrt{\pi}}\frac{1}{x}s^{-1/2}\, {}_2F_1\big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};s\big)\\
-\psi_{-,B}(x,y)&=\frac{1}{x}\phi_-(t)=\frac{\sqrt{3}}{2\sqrt{\pi}}\frac{1}{x}(1-s)^{-1/2}\, {}_2F_1\big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};1-s\big)
+\psi_{-,B}(x,y)&=\frac{1}{x}\phi_-(t)=\frac{\sqrt{3}}{2\sqrt{\pi}}\frac{1}{x}(1-s)^{-1/2}\, {}_2F_1\big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};1-s\big)\,,
 \end{align*}
-where $s=t/2+1/2$. 
-The same hypergeometric functions have been computed in Section~\ref{sec:airy} as the Borel transform of the formal solutions of the Airy equation
-
+where $s=t/2+1/2$. \begin{revised}We found the same hypergeometric functions in the position domain while solving the Airy equation
 \begin{equation}
 \label{Airy}
-\left[\big(\tfrac{d}{dw}\big)^2 -  w \right] f(w) = 0.
+\left[\big(\tfrac{d}{dw}\big)^2 -  w \right] f(w) = 0
 \end{equation}
+in Section~\ref{sec:spec-to-airy}. Although the two equations look closely related, and they are equivalent under the change of coordinates $w=x\eta^{2/3}$, they differ in an important way. The Borel transform of $\psi$ is computed with respect to $\frac{2}{3}\eta x^{3/2}$, the conjugate variable of $t$, while the Borel transform of $f(w)$ is computed with respect to $w$.\end{revised} We need to find a different change of coordinates to explain why the Borel transforms of $\psi(x,\eta)$ and $f(w)$ are given by the same hypergeometric function. 
 
-Although the two equations look closely related (they are equivalent by the change of coordinates $w=x\eta^{2/3}$), the Borel transform of $\psi$ is computed with respect to $\frac{2}{3}\eta x^{3/2}$ (which is the conjugate variable of $t$) while the Borel transform of $f(w)$ is computed with respect to $w$. So we need to find a different change of coordinates to explain why the Borel transforms of $\psi(x,\eta)$ and $f(w)$ are given by the same hypergeometric function. 
-
-First of all notice that if $\eta$ and $y$ are conjugate variables under Borel transform, meaning 
+\begin{revised}To do this, first\end{revised} notice that if $\eta$ and $y$ are conjugate variables under Borel transform, meaning 
 \begin{align*}
 \sum_{n\geq 0}a_n\eta^{-n-1}  \overset{\borel}{\longrightarrow} \sum_{n\geq 0}\frac{a_n}{n!} y^{n} 
 \end{align*} 
@@ -3292,7 +3287,7 @@ then $t=\frac{3}{2}yx^{-3/2}$ is the conjugate variable of $q=\frac{2}{3}\eta x^
 \begin{align*}
 \sum_{n\geq 0}a_nq^{-n-1}=\sum_{n\geq 0}a_nx^{-3/2(n+1)}\left(\frac{2}{3}\eta\right)^{-n-1}  \overset{\borel}{\longrightarrow} \sum_{n\geq 0}\frac{a_nx^{-3/2(n+1)}}{n!}\left(\frac{3}{2}\right)^{n+1}  y^{n}=\frac{3}{2}x^{-3/2}\sum_{n\geq 0}\frac{a_n}{n!} t^{n}. 
 \end{align*}
-In addition, $\psi_{B,\pm}(x,y)=\frac{1}{x}\phi_{\pm}(t)$, therefore we expect that $\psi(x,\eta)=x^{1/2}\Phi(q)$. Assume that $\psi(x,y)$ is a solution of \eqref{WKB_Airy}, then $\Phi(q)$ solves 
+In addition, $\psi_{B,\pm}(x,y)=\frac{1}{x}\phi_{\pm}(t)$, therefore we expect that $\psi(x,\eta)=x^{1/2}\Phi(q)$. Assume that $\psi(x,y)$ is a solution of \eqref{WKB_Airy}, then $\Phi(q)$ \begin{revised}satisfies\end{revised}
 \begin{equation}
 \label{eq_Phi}
 \left[\left(\frac{d}{dx}\right)^2+x^{-1}\frac{d}{dx}-\frac{1}{4}x^{-2} - \eta^2 x \right] \Phi(q) = 0
@@ -3320,19 +3315,12 @@ Now, rewrite \eqref{eq_Phi} in the coordinates $q=\frac{2}{3}\eta x^{3/2}$:
 This shows that $\Phi(q)$ satisfies the transformed Airy equation \eqref{eqn:reg-mod-bessel}. 
 
 \begin{remark}
-The change of coordinate $q=\frac{2}{3}\eta x^{3/2}$ is not casual: recall that the WKB ansatz for a Schrodinger type equation is
-
+The new coordinate $q = \frac{2}{3}\eta x^{3/2}$ is carefully chosen. Recall that the WKB ansatz for a Schrodinger type equation is
 \begin{equation}
-\psi(x,\eta)=\exp\left(\int_{x_0}^xS(\eta,x')dx'\right)
-\end{equation} 
- and $S(\eta,x)=\sum_{k\geq -1}S_k(x)\eta^{-k}$. In addition, for the Airy--type Schrodinger equation 
- \begin{align*}
- S_{-1}^2=x
- \end{align*}
-hence, up to a choice of sign for the square root
-\begin{align*}
-q&=\frac{2}{3}\eta x^{3/2}=\eta\int_0^x\sqrt{x'}dx'=\eta\int_{0}^xS_{-1}(x')dx'.
-\end{align*}
+\psi(x,\eta) = \exp\left(\int_{x_0}^xS(\eta,x')dx'\right),
+\end{equation}
+with $S(\eta,x)=\sum_{k\geq -1}S_k(x)\eta^{-k}$. For the Airy-type Schrodinger equation, we have $S_{-1}^2 = x$, so up to a choice of sign for the square root,
+\[ q = \frac{2}{3}\eta x^{3/2}=\eta\int_0^x (x')^{1/2}\;dx' = \eta\int_{0}^x S_{-1}(x')\;dx'. \]
 We expect that the change of coordinates $q=\eta\int_0^{x}S_{-1}(x')dx'$ would explain the analogies between the Borel transform of the WKB solution of a Schrodinger equation and the Borel transform of the associated ODE.  
 \end{remark} 
 
