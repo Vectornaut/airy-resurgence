@@ -472,10 +472,8 @@ The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is Bor
 \end{corollary}
 In many cases, by choosing from among the solutions $\Psi_\alpha$, we can build a frame of Borel-regular solutions of the equation $\mathcal{P}\Phi = 0$.
 
-From an analytic perspective, Theorem~\ref{thm:soln_is_Borel_sum} justifies the ansatz that Poincar\'{e} used to solve the equation $\mathcal{P}\series{\Phi} = 0$. On the other hand, from a formal perspective, one can start from the computation of the Poincar\'{e} solutions and the observation that they are $1$-Gevrey, and then use Theorem~\ref{thm:exist_uniq_ODE} to establish their Borel summability. We do this in Section~\ref{sec:new-summability-proof}.
+From an analytic perspective, Theorem~\ref{thm:soln_is_Borel_sum} justifies the ansatz that Poincar\'{e} used to solve the equation $\mathcal{P}\series{\Phi} = 0$. On the other hand, from a formal perspective, one can start from the computation of the Poincar\'{e} solutions and the observation that \begin{revised}their Borel transforms converge\end{revised}, and then use Theorem~\ref{thm:exist_uniq_ODE} to establish their Borel summability. We do this in Section~\ref{sec:new-summability-proof}.
 \subsubsection{Why does Borel summation work for thimble integrals?}\label{sec:why_borel_thimble}
-%\textcolor{DarkCyan}{Let $X$ be an $N$-dimensional complex manifold, and $f\colon X\to\C$ a proper holomorphic map with non-degenerate critical points.}
-%%Our treatment of thimble integrals will be based on our geometric picture of the Laplace transform, briefly sketched in Section~\ref{sec:other_results}. \textcolor{orange}{[Can you remind me why we discuss the geometric picture here? Is it to justify doing things in a coordinate-independent way?]}
 In Section~\ref{borel-reg:explanatory-power}, we gave the general form of a thimble integral associated with a map $f \maps X \to \C$. The important thing about $\C$ here turns out to be its {\em translation surface} structure, which picks out an atlas of charts related by translations and provides a global sense of direction. The geometry of translation surfaces, described more fully in Section~\ref{sec:transl}, provides a natural setting for the Laplace transform. It will therefore be useful to place thimble integrals in this setting as well.
 
 Given a translation chart $\zeta$ on a translation surface $B$, we write $\mathcal{J}_{\zeta, \alpha}^\theta$ to denote the ray in direction $\theta$ starting at $\zeta = \alpha$. Consider a map $f \maps X \to B$ with a critical value at $\zeta = \alpha$. Each connected component of the preimage $f^{-1}(\mathcal{J}_{\zeta, \alpha}^\theta)$ runs through one of the critical points that $f$ sends to $\zeta = \alpha$. When the complex manifold $X$ is one-dimensional, as it will be throughout this paper, a {\em Lefschetz thimble} is an oriented component of $f^{-1}(\mathcal{J}_{\zeta, \alpha}^\theta)$ that runs through a single, non-degenerate critical point of $f$. A one-dimensional Lefschetz thimble is determined up to orientation by the critical point $a$ that it runs through and the direction $\theta$ of the ray that it projects to, so we will often denote it with a symbol like $\mathcal{C}^\theta_a$. Because, by our definition, a Lefschetz thimble can only run through a single critical point $a$, the ray that it projects to cannot touch any critical value except $f(a)$.
@@ -1369,7 +1367,14 @@ We can show that $\borel_\zeta$ is an algebra homomorphism from $\C\llbracket z^
 %
 \subsubsection{Formal to analytic}\label{sec:Borel-gevrey}
 %
-If we want to get analytic information from the Borel transform---for example, by doing Borel summation---we should focus on the series whose Borel transforms converge. \begin{old}\textcolor{LimeGreen}{These are the {\em $1$-Gevrey} series mentioned in Section~\ref{intro:summation}.}\end{old} Within $\C \llbracket z^{-1} \rrbracket$, the $1$-Gevrey series form a subspace $\C \llbracket z^{-1} \rrbracket_1$. They are characterized by the factorial growth of their coefficients.
+If we want to get analytic information from the Borel transform---for example, by doing Borel summation---we should focus on the series whose Borel transforms converge. These series, called {\em $1$-Gevrey} series, form a subspace $\C \llbracket z^{-1} \rrbracket_1$ within $\C \llbracket z^{-1} \rrbracket$. They are characterized by the factorial growth of their coefficients.
+\begin{revised}
+\begin{definition}
+A series
+\[ \sum_{n \ge -1} a_n z^{-n-1} \]
+is {\em $1$-Gevrey} if there is some $A > 0$ with $|a_n| \lesssim A^n n!$ over all $n \ge 0$.
+\end{definition}
+\end{revised}
 \begin{prop}\label{prop:gevrey_to_convergent}
 A series
 \[ \series{\Phi} = \sum_{n \ge -1} a_n z^{-n-1} \]
@@ -1718,7 +1723,7 @@ Finally, result~\ref{res:whole-deriv-borel} follows from a simple computation:
 \subsection{Borel regularity for ODEs}\label{borel_reg-ODE}
 In Section~\ref{sec:regularity-results}, we show that linear level~1 ODEs of a certain form always have Borel regular solutions, indexed by the characteristic roots of their constant-coefficient parts. These solutions turn out to be asymptotic to the formal series solutions found by Poincar\'{e}.
 
-In Section~\ref{sec:new-summability-proof}, we will look at the same class of ODEs from a more formal perspective, starting from the assumption that Poincar\'{e}'s solutions exist and are $1$-Gevrey. Using the existence and uniqueness results that characterize the Borel regular solutions, we give a new proof that Poincar\'{e}'s solutions are Borel summable.
+In Section~\ref{sec:new-summability-proof}, we will look at the same class of ODEs from a more formal perspective, starting from the assumption that Poincar\'{e}'s solutions exist and their Borel transforms converge. Using the existence and uniqueness results that characterize the Borel regular solutions, we give a new proof that Poincar\'{e}'s solutions are Borel summable.
 %
 \subsubsection{Regularity results}\label{sec:regularity-results}
 Let us recall the setting from Section~\ref{borel-reg:explanatory-power}. Let $\mathcal{P}$ be a linear differential operator of the form 
