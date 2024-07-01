@@ -175,9 +175,23 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \NewEnviron{old}{\iffalse\expandafter\BODY\fi}
 \fi
 
-% more drafting environments
+% hideable draft text
+\newif\ifshowdraft
+\showdrafttrue
+\ifshowdraft
 \newenvironment{draft}{\color{SlateBlue}}{\color{black}}
+\else
+\NewEnviron{draft}{\iffalse\expandafter\BODY\fi}
+\fi
+
+% highlightable revisions
+\newif\ifhighlightrevs
+\highlightrevstrue
+\ifhighlightrevs
 \newenvironment{revised}{\color{DarkBlue}}{\color{black}}
+\else
+\newenvironment{revised}{}{}
+\fi
 
 % colors
 \definecolor{ietocean}{RGB}{0, 30, 140}
