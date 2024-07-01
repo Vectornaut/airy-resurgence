@@ -1291,50 +1291,6 @@ For $\alpha=0$, the Definition~\label{def:convolution} agrees with the standard 
 In addition, we will denote $\ast_{\zeta,0}$ simply by \begin{draft}$\ast_\zeta$\end{draft} \begin{todo}[Add coordinate to $\ast$ elsewhere too]\end{todo}, following the standard convention.   
 \end{remark}
 When the Taylor expansions of $\phi$ and $\psi$ around $\zeta=\alpha$ converge in a disk of radius $R$, the Taylor expansion of the convolution $\phi\ast_{\zeta,\alpha}\psi$ around $\zeta=\alpha$ also converges in a disk of radius $R$. This is proven for $\alpha = 0$ in Lemma~5.14 of \cite{diverg-resurg-i}.
-
-\begin{todo}Move before calculation of Laplace transform of convolution, write more if needed, and also make sure it's actually correct. The old text below has mistakes.\end{todo}
-\begin{old}\par In addition, the convolution product induces a $\C$-algebra structure on the space $\singexp{\sigma}{\Lambda}$, and the Laplace transform is an algebra isomorphism.
-\begin{todo}[actually need $\Omega_0$ in lemma]\end{todo}
-\begin{lemma}
-If $\Omega_0$ is star-shaped around $\zeta = 0$, then for any $\sigma > -1$ and $\Lambda > 0$, the space $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ is closed \begin{todo}[no; revise]\end{todo} under the convolution product $\ast_{\zeta, \alpha}$.
-\textcolor{RoyalBlue}{Let $\phi,\psi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ with $\sigma>-1$ and $\Lambda>0$, then $\phi\ast_{\zeta,\alpha}\psi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$.}
-\end{lemma}
-\begin{proof}
-Suppose $\Omega_\alpha$ is star-shaped around $\zeta = \alpha$. The convolution integral
-\[ [\phi \ast_{\zeta, \alpha} \psi](a) = \int_{\zeta = \alpha}^a \psi\,\mathsf{R}^*\phi\,|d\zeta| \]
-can then always be evaluated along the path $\zeta = (1-t)\,\alpha + t\,\zeta(a)$ parameterized by $t \in (0, 1)$.
-
-For any $\phi, \psi \in \singexp{\sigma}{\Lambda}(\Omega_\alpha)$, we have
-\begin{align*}
-\big| [\phi \ast_{\zeta, \alpha} \psi](a) \big| & = \left| \int_{\zeta = \alpha}^a \psi\,\mathsf{R}^*\phi\,d\zeta \right| \\
-& \le \int_{\zeta = \alpha}^a |\psi|\,|\mathsf{R}^*\phi|\,|d\zeta| \\
-& \le \int_{\zeta = \alpha}^a \Big( |\zeta - \alpha|^\sigma e^{\Lambda|\zeta - \alpha|}\,\|\psi\|_{\sigma, \Lambda} \Big)\,\Big( |\zeta(a) - \zeta|^\sigma e^{\Lambda|\zeta(a) - \zeta|}\,\|\phi\|_{\sigma, \Lambda} \Big)\,|d\zeta|.
-\end{align*}
-Using the shorthand $\delta \defeq |\zeta(a) - \alpha|$, we compute
-\begin{align*}
-\big| [\phi \ast_{\zeta, \alpha} \psi](a) \big| & \le \int_{\zeta = \alpha}^a \Big( [\delta t]^\sigma e^{\Lambda\delta t}\,\|\psi\|_{\sigma, \Lambda} \Big)\,\Big( [\delta(1-t)]^\sigma e^{\Lambda\delta(1-t)}\,\|\phi\|_{\sigma, \Lambda} \Big)\,dt \\
-& = \int_{\zeta = \alpha}^a \Big( [\delta t]^\sigma e^{\Lambda\delta t}\,\|\psi\|_{\sigma, \Lambda} \Big)\,\Big( [\delta(1-t)]^\sigma e^{\Lambda\delta(1-t)}\,\|\phi\|_{\sigma, \Lambda} \Big)\,d\zeta
-\end{align*}
-\begin{todo}[\ldots]\end{todo}
-\end{proof}
-\begin{verify}
-\begin{proof}
-    \begin{align*}
-    |\series{\phi}\ast\series{\psi}|&=\left|\int_0^\zeta\series{\phi}(\zeta-\zeta')\series{\psi}(\zeta')\, d\zeta'\right|\\
-        &\le \int_0^\zeta |\series{\phi}(\zeta-\zeta')||\series{\psi}(\zeta')|\, d\zeta'\\
-        &\le ||\series{\psi}||_{\sigma,\Lambda} \int_0^\zeta\series{\phi}(\zeta-\zeta')|\zeta'|^{\sigma}e^{\Lambda|\zeta'|}\, d\zeta'\\
-        &\le ||\series{\psi}||_{\sigma,\Lambda}  \int_0^\zeta\series{\phi}(\zeta-\zeta')|-\zeta+\zeta+\zeta'|^{\sigma}e^{\Lambda|\zeta-\zeta+\zeta'|}\, d\zeta'\\
-        &\le ||\series{\psi}||_{\sigma,\Lambda}  \int_0^\zeta\series{\phi}(\zeta-\zeta')(|\zeta|+|-\zeta+\zeta'|)^{\sigma}e^{\Lambda(|\zeta|+|-\zeta+\zeta'|)}\, d\zeta'\\
-        &\le ||\series{\psi}||_{\sigma,\Lambda} |\zeta|^{\sigma}e^{\Lambda|\zeta|} \int_0^\zeta\series{\phi}(\zeta-\zeta')|\zeta-\zeta'|^{\sigma}e^{\Lambda|\zeta-\zeta'|}\, d\zeta'\\
-        &\le |\zeta|^{\sigma}e^{\Lambda|\zeta|} ||\series{\psi}||_{\sigma,\Lambda} ||\series{\phi}||_{\sigma,\Lambda}. 
-    \end{align*}
-\end{proof}
-\end{verify}
-\begin{corollary}
-For any $\sigma > -1$ and $\Lambda > 0$, the Laplace transform 
-\[ \laplace_{\zeta,\alpha}^\theta\colon\singexp{\sigma}{\Lambda}(\Omega_\alpha) \to \dualsingexp{\sigma}(\widehat{\Omega}_\alpha^\Lambda) \]
-is a $\C$-algebra isomomorphism, with inverse defined in Proposition~\ref{prop:inverse_laplace_analytic}. 
-\end{corollary}\end{old}
 %
 \subsubsection*{The Borel transform as algebra isomomrphism}
 %
@@ -1524,10 +1480,6 @@ where $\mathcal{O}_{\zeta = \alpha}$ is the algebra of germs of holomorphic func
 
 To study this subspace, it will be helpful to work on the universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$. On a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ that touches $\zeta = 0$, a function has an ordinary Taylor expansion around $\zeta = 0$ if and only if it descends and extends to a holomorphic function on a neighborhood of $\zeta = 0$ in $\C$. Thus, once again, we can see the subspace of $\singexp{\sigma}{\Lambda}(\Upsilon)$ where the $\rho$-shifted Taylor series exists as the intersection
 \[ \zeta^\rho\,\mathcal{O}_{\zeta = 0} \cap \singexp{\sigma}{\Lambda}(\Upsilon). \]
-\begin{brainstorm}
-\item \begin{todo}[Find right phrasing]\end{todo} Our arguments in \cite{reg-sing-volterra} took place on the complex plane, but they work just as well on appropriate covers of punctured complex planes. The universal covering $\pi \maps \widetilde{\C^\times} \to \C^\times$ is a convenient setting for the following result.
-\end{brainstorm}
-
 \begin{lemma}\label{lem:shifted_holo_closed}
 Consider a simply connected open set $\Upsilon \subset \widetilde{\C^\times}$ which touches $\zeta = 0$ and is star-shaped around $\zeta = 0$. Suppose that $\pi \maps \Upsilon \to \C^\times$ overlaps itself at the edges: it is two-to-one over a simply connected open set $\Upsilon_\Delta \subset \C^\times$ which is star-shaped around $\zeta = 0$, and it is one-to-one everywhere else.
 \begin{center}
@@ -1573,7 +1525,7 @@ Taking the Laplace transform of both sides, we learn that
 \[ \Phi = \frac{a_0}{z^{\rho+1}} + \frac{a_1}{z^{\rho+2}} + \ldots + \frac{a_{n-1}}{z^{\rho+n}} + E_n, \]
 where $E_n = \laplace_{\zeta, 0}^\theta \varepsilon_n$. To show that $\Phi$ is asymptotic to $\series{\Phi}$, we just need to prove that $|z^{\rho+n} E_n| \to 0$ as $|z| \to \infty$ along every ray.
 
-Because of the conditions we put on $\Omega$, we can apply Proposition~\ref{prop:laplace-cont}, which tells us that $E_n$ lies in $\dualsingexp{-\rho-n-1}(\widehat{\Omega}_0^\Lambda)$. This means that $|E_n| \lesssim \Delta^{-\rho-n-1}$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. Noting that \begin{draft}$|z|/\Delta$ goes to a constant limit as $z \to \infty$ along any ray \begin{todo}[check]\end{todo}\end{draft},\footnote{The constant limit is not uniform over all rays, so we are showing that $\Phi$ is asymptotic, but not necessarily uniformly asymptotic, to $\series{\Phi}$.} we deduce that
+Because of the conditions we put on $\Omega$, we can apply Proposition~\ref{prop:laplace-cont}, which tells us that $E_n$ lies in $\dualsingexp{-\rho-n-1}(\widehat{\Omega}_0^\Lambda)$. This means that $|E_n| \lesssim \Delta^{-\rho-n-1}$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. Noting that \begin{revised}$|z|/\Delta$ goes to a constant limit as $z \to \infty$ along any ray \begin{todo}[check]\end{todo}\end{revised},\footnote{The constant limit is not uniform over all rays, so we are showing that $\Phi$ is asymptotic, but not necessarily uniformly asymptotic, to $\series{\Phi}$.} we deduce that
 \begin{align*}
 |z^{\rho+n} E_n| & \lesssim |z|^{\rho+n} \Delta^{-\rho-n-1} \\
 & = \big(|z|/\Delta\big)^{\rho+n} \Delta^{-1} \\
@@ -1816,9 +1768,6 @@ of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on an
 \[ \singexpalg{\tau_\alpha}(\Omega_\alpha) \to e^{-\alpha z} \dualsingexp{-\tau_\alpha-1}(\widehat{\Omega}_\alpha^\bullet). \]
 With $\Psi_\alpha = \laplace^\theta_{\zeta, \alpha} \psi_\alpha$, the desired result follows.
 \end{proof}
-\begin{old}
-\textcolor{orange}{[\ldots]} Our arguments in \cite{reg-sing-volterra} took place on $\C$, but they work just as well on a covering of $\C$ which is branched at the roots of $P(-\zeta)$. Let us use the covering $\pi \maps \widetilde{B}_{P(-\zeta)} \to \C$ built by puncturing $\C$ at the roots of $P(-\zeta)$, taking the universal cover, and then gluing the roots back in as infinite-order branch points.
-\end{old}
 \begin{todo}[Add flavor text]\end{todo}
 \begin{theorem}[restatement of \ref{thm:soln_is_Borel_sum}]\label{re:thm:soln_is_Borel_sum}
 The analytic solution $\Psi_\alpha$ from Theorem~\ref{thm:exist_uniq_ODE} is the Borel sum of a formal trans-monomial solution $\series{\Psi}_\alpha \in e^{-\alpha z} z^{-\tau_\alpha}\,\C \llbracket z^{-1} \rrbracket$ of the equation $\mathcal{P}\series{\Phi} = 0$.
