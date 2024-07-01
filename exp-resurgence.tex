@@ -1867,7 +1867,7 @@ Choose a root $-\alpha$ of $P$. Choose an open sector $\Omega_\alpha$ which has 
 After rescaling by a constant, Theorem~4 of \cite{reg-sing-volterra} tells us that the equation $\hat{\mathcal{P}}_\alpha \psi_\alpha = 0$ has a unique solution $\psi_\alpha$ in the affine subspace
 \[ \frac{\zeta^{\tau_\alpha-1}}{\Gamma(\tau_\alpha)} + \singexpalg{\tau_\alpha}(\Omega_\alpha) \]
 of the space $\singexpalg{\tau_\alpha-1}(\Omega_\alpha)$. The same is true on any smaller sector created by shaving a sector off each edge of $\Omega_\alpha$. By Theorem~\ref{translation} and the results of Section~\ref{sec:reg-decay}, the Laplace transform $\laplace^\theta_{\zeta, \alpha}$ is a left-invertible map
-\[ \singexpalg{\tau_\alpha}(\Omega_\alpha) \to e^{-\alpha z} \dualsingexp{-\tau_\alpha-1}(\widehat{\Omega}_\alpha^{\textcolor{LimeGreen}{\bullet}}). \]
+\[ \singexpalg{\tau_\alpha}(\Omega_\alpha) \to e^{-\alpha z} \dualsingexp{-\tau_\alpha-1}(\widehat{\Omega}_\alpha^\bullet). \]
 With $\Psi_\alpha = \laplace^\theta_{\zeta, \alpha} \psi_\alpha$, the desired result follows.
 \end{proof}
 \begin{old}
@@ -1938,17 +1938,17 @@ Since the series $\series{\psi}_\alpha$ lies in $\zeta^{\tau_\alpha-1} \C\{\zeta
 \end{proof}
 \subsection{Borel regularity for thimble integrals}\label{borel-reg-thimble}
 %
-\begin{draft}Recall the setting from Section~\ref{borel-reg:explanatory-power}: let $X$ be a $1$-dimensional complex manifold equipped with a volume form $\nu \in \Omega^{1,0}(X)$ \begin{todo}[this originally said $\Gamma(X,\Omega^1)$, but shouldn't it be either $\Omega^{1,0}(X)$ or $\Gamma\big(X, \Lambda^{1,0} (X)\big)$?]\end{todo} and a holomorphic function $f\colon X\to\C$ with non--degenerate critical points. Let $I_a$ be the thimble integral 
+\begin{revised}Let us recall the setting from Section~\ref{borel-reg:explanatory-power}. Let $X$ be a $1$-dimensional complex manifold equipped with a volume form $\nu \in \Omega^{1,0}(X)$ and a holomorphic function $f\colon X\to\C$ with non--degenerate critical points. Let $I_a$ be the thimble integral 
 \begin{equation}\label{exp-int}
 I_a \defeq \int_{\mathcal{C}_a^\theta} e^{-zf} \nu
 \end{equation}
-where $\mathcal{C}_a^\theta$ is the thimble through the critical point $a$. Let $\alpha$ be the associated critical value, $f(a)$. In this section, we will prove that thimble integrals of the form \eqref{exp-int} are Borel regular. The first step will be to rewrite $I_a$ as the Laplace transform of a function $\iota_a$ which is explicitly given by the well-known formula that we will call the \textit{thimble projection formula}.\end{draft}
+where $\mathcal{C}_a^\theta$ is the thimble through the critical point $a$. Let $\alpha$ be the associated critical value, $f(a)$. In this section, we will prove that thimble integrals of the form \eqref{exp-int} are Borel regular. The first step is to rewrite $I_a$ as the Laplace transform of a function $\iota_a$, which is given explicitly by the well-known formula that we will call the \textit{thimble projection formula}.\end{revised}
 \begin{lemma}[adapted from {\cite[Section~3.3]{pham}}]\label{lem:thimble_proj_formula-proof}
 A function $\iota_a$ with $I_a = \laplace_{\zeta, \alpha}^\theta \iota_a$ is given by the {\em thimble projection formula}
 \begin{equation}\label{eqn:formula-proof}
     \iota_a = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right),
 \end{equation}
-where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that goes through $f^{-1}([\alpha,\zeta e^{i\theta}])$. Notice that $\mathcal{C}_a^\theta(\zeta)$ starts and ends in $f^{-1}(\zeta)$. \begin{todo}[The thimble $\mathcal{C}_a^\theta$ needs an orientation, but the orientation is arbitrary.]\end{todo}
+where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that goes through $f^{-1}([\alpha,\zeta e^{i\theta}])$. Notice that $\mathcal{C}_a^\theta(\zeta)$ starts and ends in $f^{-1}(\zeta)$.
 \end{lemma}
 \begin{remark}
 In \cite{pham}, Pham describes this formula in a slightly different form, integrating the variation of $\nu/df$, instead of differentiating the integral as we do in equation~\eqref{eqn:formula-proof}.
@@ -2028,9 +2028,9 @@ For some applications, it is more convenient to work with $\Phi_a \defeq z^{-1/2
 \[\phi_a \defeq \fracderiv{-1/2}{\zeta}{\alpha}\,\iota_a. \]
 To get the thimble projection formula for $\phi_a$, take the $1/2$ fractional integral of both sides:
 \begin{align*}
-    \fracderiv{-1/2}{\zeta}{\alpha} \phi_a & = \fracderiv{-1}{\zeta}{\alpha} \, \iota_a \\
-    & = \fracderiv{-1}{\zeta}{\alpha} \partial_\zeta \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right) \\
-    & = \int_{\mathcal{C}_a^\theta(\zeta)}\nu - \int_{\mathcal{C}_a^\theta(\alpha)}\nu.
+\fracderiv{-1/2}{\zeta}{\alpha} \phi_a & = \fracderiv{-1}{\zeta}{\alpha} \, \iota_a \\
+& = \fracderiv{-1}{\zeta}{\alpha} \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right) \\
+& = \int_{\mathcal{C}_a^\theta(\zeta)}\nu - \int_{\mathcal{C}_a^\theta(\alpha)}\nu.
 \end{align*}
 The second term vanishes because $\mathcal{C}_a^\theta(\alpha)$ is a single point, leaving
 \[ \fracderiv{-1/2}{\zeta}{\alpha} \phi_a = \int_{\mathcal{C}_a^\theta(\zeta)}\nu. \]
@@ -2039,7 +2039,10 @@ The $1/2$ fractional derivative is a left inverse of the $1/2$ fractional integr
 \begin{todo}[This argument works for any function that vanishes at $\alpha$, so maybe we should instead prove it generally in the section on fractional calculus.]\end{todo}
 \end{remark}
 \begin{remark}
+\begin{revised}We can use the thimble projection formula to show that each function $\iota_\alpha$ is resurgent, in the sense of \'{E}calle~\cite[Section~1]{EcalleI}. Let $\mathcal{J}_\alpha(\beta)$ be the straight path from $\zeta = \alpha$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\mathcal{C}_a^\theta(\beta)$ in $X$. This lets us analytically continue $\int_{\mathcal{C}_a^\theta(\zeta)} \nu$ to a star-shaped domain $\Omega_\alpha \subset \C$. Intuitively, $\Omega_\alpha$ is constructed by drawing rays from $\zeta = \alpha$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\zeta = \infty$, as shown in Figure~\ref{Fig:slit domain}.\end{revised}
+\begin{old}\par
 We can use the $1/2$ derivative formula~\eqref{eqn:formula--1/2} to see that the functions $\phi$ are all resurgent, in the sense of \'{E}calle~\cite[Section~1]{EcalleI}. Let us say $\mathcal{J}_\alpha^\theta(\beta)$ is the straight path from $\zeta = \alpha$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\mathcal{C}_a^\theta(\beta)$ in $X$. This lets us analytically continue $\int_{\mathcal{C}_a^\theta(\zeta)} \nu$ to a star-shaped domain $\Omega_\alpha \subset \C$. Intuitively, $\Omega_\alpha$ is constructed by drawing rays from $\zeta = \alpha$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\infty$ (see Figure~\ref{Fig:slit domain}).
+\end{old}
 \begin{center}
 \begin{tikzpicture}
 \newcommand{\spill}{4}
@@ -2060,12 +2063,13 @@ We can use the $1/2$ derivative formula~\eqref{eqn:formula--1/2} to see that the
 \end{tikzpicture}
 \captionof{figure}{The domain $\Omega_\alpha$}\label{Fig:slit domain}
 \end{center}
-
-
-We will calculate the jump of $\int_{\mathcal{C}_a^\theta(\zeta)}\nu$ across the cut starting at $\zeta = \beta$. Write $\beta$ as $\alpha + re^{i\theta_\beta}$, and let $\beta^+$ and $\beta^-$ be the points we get by infinitesimally increasing or decreasing $\theta_\beta$. The jump is then given by \[\int_{\mathcal{C}_a^\theta(\beta^+)} \nu - \int_{\mathcal{C}_a^\theta(\beta^-)} \nu\] 
+\begin{revised}Initially, the function $\int_{\mathcal{C}_a(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\mathcal{C}_a(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ to become singular is for something to go wrong with the hotmotopy of $\mathcal{C}_a(\zeta)$, which can only happen at the critical values of $f$. Therefore, $\mathcal{C}_a(\zeta)$ is endlessly analytically continuable away from the critical values of $f$. Resurgent functions have resurgent derivatives \begin{todo}[check]\end{todo}, so $\iota_\alpha$ is resurgent too.\end{revised}
+\begin{old}\par
+\begin{todo}[Incorporate this additional work]\end{todo} We will calculate the jump of $\int_{\mathcal{C}_a^\theta(\zeta)}\nu$ across the cut starting at $\zeta = \beta$. Write $\beta$ as $\alpha + re^{i\theta_\beta}$, and let $\beta^+$ and $\beta^-$ be the values we get by infinitesimally increasing or decreasing $\theta_\beta$. The jump is then given by \[\int_{\mathcal{C}_a^\theta(\beta^+)} \nu - \int_{\mathcal{C}_a^\theta(\beta^-)} \nu\] 
 and it turns out to be proportional to $\series{\phi}_\beta$, namely to the germ of analytic functions at $\zeta_\alpha=\beta$. %We will see an example of this behaviour in Appendix~\ref{apx:eye-res-airy}. 
 
-\begin{revised}Initially, the function $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\mathcal{C}^\theta_a(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ to be singular is for something to go wrong with the hotmotopy of $\mathcal{C}^\theta_a(\zeta)$. At a critical point of $f$, the ends of the homotoped path $\mathcal{C}^\theta_a(\zeta)$ come together, telling us that \begin{todo}[\textbf{A} \textbf{V} \ldots]\end{todo}\end{revised}
+\begin{todo}[This paragraph is marked as revised]\end{todo} Initially, the function $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ is only defined for $\zeta$ on the ray $[\alpha, \infty)$, but it can be analytically continued to points off the ray by homotopy of the path $\mathcal{C}^\theta_a(\zeta)$. Since $\nu$ is holomorphic, the only way for $\int_{\mathcal{C}^\theta_a(\zeta)} \nu$ to be singular is for something to go wrong with the hotmotopy of $\mathcal{C}^\theta_a(\zeta)$. At a critical point of $f$, the ends of the homotoped path $\mathcal{C}^\theta_a(\zeta)$ come together, telling us that \begin{todo}[\textbf{A} \textbf{V} \ldots]\end{todo}
+\end{old}
 \end{remark}
 \begin{todo}
 \begin{corollary}\label{simple-res-thimble}
