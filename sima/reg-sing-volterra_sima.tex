@@ -85,6 +85,7 @@
 
 % drafting environments
 \newenvironment{brainstorm}{\color{violet}\begin{itemize}}{\end{itemize}\color{black}}
+\newenvironment{todo}{\color{violet}}{\color{black}}
 
 % hideable verifications
 \newif\ifshowverify
@@ -97,13 +98,31 @@
 
 % revision highlighting
 \newif\ifhighlightrevs
-\highlightrevsfalse
+\highlightrevstrue 
 \ifhighlightrevs
-\newenvironment{rev}{\color{revred}}{\color{black}}
-\newcommand{\revtext}[1]{\textcolor{revred}{#1}}
+\newenvironment{rev}{\color{ietocean}}{\color{black}}
+\newcommand{\revtext}[1]{\textcolor{ietocean}{#1}}
+\newenvironment{revtwo}{\color{revred}}{\color{black}}
+\newcommand{\revtwotext}[1]{\textcolor{revred}{#1}}
 \else
 \newenvironment{rev}{}{}
 \newcommand{\revtext}[1]{#1}
+\newenvironment{revtwo}{}{}
+\newcommand{\revtwotext}[1]{#1}
+\fi
+
+% notation change highlighting
+\newif\ifhighlightnewnotation
+\highlightnewnotationtrue
+\ifhighlightnewnotation
+\newenvironment{newnot}{\color{orange}}{\color{black}}
+\newcommand{\newnottext}[1]{\textcolor{orange}{#1}}
+\newenvironment{oldnot}{\color{cyan}}{\color{black}}
+\newcommand{\oldnottext}[1]{\textcolor{cyan}{#1}}
+\else
+\newenvironment{newnot}{}{}
+\newenvironment{oldnot}{}{}
+\newcommand{\newnottext}[1]{#1}
 \fi
 
 % colors
@@ -137,11 +156,13 @@ The inverse Laplace transform can turn a linear differential equation on a compl
 \subsection{Motivation}\label{sec:motivation}
 \begin{rev}An ordinary differential equation with an irregular singularity at infinity comes with a special family of formal solutions: ``normal series'' characterized by their formal asymptotics at infinity~\cite{int-irreg}. These series are typicaly divergent, but they can be ``resummed'' to produce analytic solutions~\cite{loday1994stokes,diverg-resurg--ii,loday-Remy2011,malgrange1995sommation,ramis1991series}. The results of this paper are motivated by the desire to find the same analytic solutions more directly, without the use of formal series. We do this in Section~\ref{sec:example} for a certain class of level~$1$ ODEs, using new Laplace transform methods tailored to the special properties of the analytic solutions that we seek. In~\cite{borel_reg}, we show that these solutions match the ones obtained through resummation. Since the Laplace transform methods we use may be of wider interest, we describe them here in a general and self-contained way.\end{rev}
 
-In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. \begin{verify}[Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.]\end{verify} Through identities like
+In its most basic form, the Laplace transform $\laplace$ turns exponential-type functions of a real ``position'' variable $\zeta$ into holomorphic functions of a complex ``frequency'' variable $z$. It is the integral transform defined by the equation
+\[ \laplace \varphi := \int_{\Gamma_\zeta} e^{-z\zeta} \varphi\;d\zeta\,, \]
+where $\Gamma_\zeta$ is the ray $\zeta \in (0, \infty)$. \begin{verify}[Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.]\end{verify} Through identities like
 \begin{align*}
 \frac{\partial}{\partial z} \laplace \varphi & = \laplace(-\zeta\varphi) \\
-\laplace k\;\laplace \varphi & = \laplace(k * \varphi) \\
-z^{-\nu} \laplace \varphi & = \laplace\,\partial^{-\nu} \varphi,
+\laplace \psi\;\laplace\varphi & = \laplace(\psi * \varphi) \\
+z^{-\nu} \laplace \varphi & = \laplace\,\partial^{-\nu} \varphi\,,
 \end{align*}
 where $\partial^{-\nu}$ is the Riemann-Liouville fractional integral of order $\nu \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on linear differential equations.
 
@@ -151,11 +172,16 @@ Some differential equations pull back to Volterra equations with real-analytic k
 \end{equation}
 given by polynomials $P$, $Q$ and a holomorphic function $R(z^{-1})$ satisfying some extra conditions. A function of the form $\Phi = \laplace \varphi$ satisfies this equation if and only if $\varphi$ satisfies the integral equation
 \begin{equation}\label{eqn:intro-use-dict}
-\big[ P(-\zeta)+\partial^{-1}\circ Q(-\zeta)+\partial^{-2}\circ R(\partial^{-1}) \big] \varphi = 0.
+\big[ P(-\zeta)+\partial^{-1}\circ Q(-\zeta)+\partial^{-2}\circ R(\partial^{-1}) \big] \varphi = 0\,.
 \end{equation}
 The integral operator remains well-defined if we make $\zeta$ a complex coordinate and seek solutions $\varphi$ which extend holomorphically into the complex position domain.
 
-Equation~\eqref{eqn:intro-level-1} can be solved by resumming normal series, as described earlier. Each resummed solution is characterized by its $e^{-\alpha z} z^{-\tau_\alpha}$ asymptotics, where $-\alpha$ is a root of $P$ and $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$ is real and positive. To obtain this solution analytically through Laplace transform methods, we must take the Laplace transform $\laplace_{\zeta,\alpha}$ that uses $\zeta = \alpha$ in place of the traditional $\zeta = 0$ as the integration base point. Equation~\eqref{eqn:intro-use-dict} then comes out based at $\zeta = \alpha$ as well. We seek a solution $\psi_\alpha$ which
+Equation~\eqref{eqn:intro-level-1} can be solved by resumming normal series, as described earlier. Each resummed solution is characterized by its $e^{-\alpha z} z^{-\tau_\alpha}$ asymptotics, where $-\alpha$ is a root of $P$ and $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$ is real and positive. To obtain this solution analytically through Laplace transform methods, we must take the Laplace transform $\laplace_{\zeta,\alpha}$ that uses $\zeta = \alpha$ in place of the traditional $\zeta = 0$ as the integration base point. This version of the Laplace transform is defined in Section~\ref{sec:definition_Laplace}. A function of the form $\Phi = \laplace_{\zeta, \alpha} \varphi$ satisfies equation~\eqref{eqn:intro-level-1} if and only if $\varphi$ satisfies the integral equation
+%%use the Laplace transform based at $\zeta = \alpha$, equation~\eqref{eqn:intro-use-dict} then comes out based at $\zeta = \alpha$ as well:
+\[ \big[ P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ R(\partial_{\zeta,\alpha}^{-1}) \big] \varphi = 0\,, \]
+where $\partial^{-1}_{\zeta, \alpha}$ is integration with base point $\zeta = \alpha$:
+\[ [\partial^{-1}_{\zeta, \alpha} \varphi](a) := \int_{\zeta = \alpha}^a \varphi\;d\zeta\,. \]
+We seek a solution $\psi_\alpha$ which
 \begin{itemize}
 \item has an $O\big((\zeta - \alpha)^{\tau_\alpha-1}\big)$ singularity at $\zeta = \alpha$; and
 \item is of exponential type, meaning that it is $O\big(e^{\Lambda|\zeta|}\big)$ for some $\Lambda \in \R$ as $\zeta$ grows.
@@ -174,8 +200,14 @@ For simplicity, we use $\C$ as the position domain throughout this article. In t
 From now on, we will carefully respect the distinction between points and coordinates. A point is a location in space, while a coordinate is a function on space. For example, the position coordinates $\zeta$ and $\zeta_\alpha$ are functions on the position domain, just like the integral equation solutions $\psi_\alpha$. A coordinate, like $\zeta$, can be evaluated at a point $b$, yielding a number $\beta := \zeta(b)$. Conversely, the point $b$ can be described as the place where $\zeta = \beta$.
 \subsubsection{Integration}
 When we integrate, the integrand will always be either a 1-form, like $\varphi\,d\zeta$, or a density, like $|\varphi\,d\zeta|$~\cite[Section~1.8]{local-viewpoint}. On a simply connected domain, all integration paths are equivalent, so we will typically specify an integral by its start and end points. These points may be given directly, as in the expression $\int_b^a \varphi\,d\zeta$, or described in terms of coordinates, as in the equivalent expression $\int_{\zeta = \beta}^a \varphi\,d\zeta$. In the integral
-\[ \int_{\zeta = \beta}^a \big(\zeta(a) - \zeta\big)^{-1/2} \varphi\,d\zeta, \]
+\[ \int_{\zeta = \beta}^a \big(\zeta(a) - \zeta\big)^{-1/2} \varphi\,d\zeta\,, \]
 notice that $\zeta(a)$ is a number, which stays constant throughout the integration, while $\zeta$ is a function, whose value changes along the integration path.
+
+\begin{revtwo}
+Sometimes, in expressions like
+\[ \int_{\zeta(a') = \beta}^a w(a, a')\,\varphi(a')\,d\zeta(a')\,, \]
+it is useful to give a name $a'$ to the point moving along the integration path. In this case, all of the functions and differential forms whose values change along the integration path are explicitly evaluated at $a'$.
+\end{revtwo}
 \subsubsection{Plugging into formal expressions}
 Plugging a function $\varphi$ into a formal polynomial or power series $P$ gives a new function $P(\varphi)$. The correspondence between operators on the position and frequency domains will lead to expressions of this kind. In Section~\ref{sec:motivation}, for example, we saw that the differential operator $P\big(\tfrac{\partial}{\partial z}\big)$ on the frequency domain corresponds to multiplication by the function $P(-\zeta)$ on the position domain.\end{rev}
 \subsection{Notation}
@@ -213,7 +245,15 @@ Let $\holo(\domain)$ be the space of holomorphic functions on $\domain$.
 A {\em holomorphic Volterra operator} on $\domain$ is a linear operator
 \[\genvolterra\colon\holo(\domain)\to\holo(\domain) \]
 defined by an integral
+\begin{oldnot}
 \[ [\genvolterra\,\varphi](a) = \int_{\zeta = 0}^a \genker(a, \cdot)\,\varphi\;d\zeta \]
+\end{oldnot}
+\begin{newnot}\begin{todo}[Possibility: use moving point to write kernel with both arguments]\end{todo}
+\[ [\genvolterra\,\varphi](a) = \int_{\zeta(a') = 0}^a \genker(a, a')\,\varphi(a')\;d\zeta(a') \]
+\end{newnot}
+\begin{newnot}\begin{todo}[Possibility: ``integration along $\zeta''$ with $\zeta'$ fixed]\end{todo}
+\[ \genvolterra\,\varphi = \int_{0}^{\zeta} \genker\,\varphi''\;d\zeta''\Big|_{\zeta' = \zeta} \]
+\end{newnot}
 in which the {\em kernel} $w$ is a holomorphic function on $\Omega^2$.
 \end{definition}
 \begin{definition}
@@ -221,7 +261,9 @@ A holomorphic Volterra operator is {\em separable} if its kernel factors as a pr
 \end{definition}
 For the prototype operator $\hardpart$, we will suppose that the kernel $\hardker$ can be written as a ratio
 \[ \hardker(a, a') = - \frac{q(a')}{p(a)}, \]
-for some $p, q \in \mathcal{H}(\Omega)$.\end{rev}
+for some $p, q \in \mathcal{H}(\Omega)$. \end{rev}\begin{revtwo}Explicitly,
+\[ \big[\hardpart \varphi\big](a) = - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\varphi\;d\zeta\,. \]
+\end{revtwo}
 
 For the purposes of this paper, $\hardpart$ has a {\em regular singularity} at $\zeta=0$ if the following condition holds.
 \begin{conditions}
@@ -258,7 +300,14 @@ at $\zeta = 0$.
 \end{conditions}
 \subsubsection{The perturbed operator}\label{setting:perturbed}
 
-We now perturb $\hardpart$ to a more general operator $\volterra=\hardpart +\softpart$. \revtext{The perturbation $\softpart$ will be non-separable,}\footnote{Unless $\softpart$ is zero, of course.} but it will have a regularizing effect, as we will show in Proposition \ref{prop:smoothing}. To get the smoothing effect, we will require the kernel $\softker$ of $\softpart$ to vanish to some order $\gamma > 0$ on the diagonal in $\domain^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
+We now perturb $\hardpart$ to a more general operator $\volterra = \hardpart +\softpart$. \begin{revtwo}The perturbation
+\begin{oldnot}
+\[ [\softpart\,\varphi](a) := \int_{\zeta = 0}^a \softker(a, \cdot)\,\varphi\;d\zeta \]
+\end{oldnot}
+\begin{newnot}
+\[ [\softpart\,\varphi](a) := \int_{\zeta(a') = 0}^a \softker(a, a')\,\varphi(a')\;d\zeta(a') \]
+\end{newnot}
+will be non-separable,\end{revtwo}\footnote{Unless $\softpart$ is zero, of course.} but it will have a regularizing effect, as we will show in Proposition \ref{prop:smoothing}. To get the smoothing effect, we will require \revtwotext{the kernel $\softker$} to vanish to some order $\gamma > 0$ on the diagonal in $\domain^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
 
 Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We will allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we will not allow any sharper singularity. We will also put an exponential bound \revtext{on the growth of $\softker$ away from the diagonal}, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we will require:
 \begin{conditions}
@@ -273,7 +322,10 @@ Like $\hardker$, the combined kernel $k = \hardker + \softker$ of $\volterra$ gr
 \subsection{Main results}\label{sec:results}
 We want to show that when $\volterra$ is a regular singular Volterra operator of the kind described in Section~\ref{setting:perturbed}, the equation $f = \volterra f$ has a unique solution of a certain form. For the prototypical operator $\hardpart$ described in Section~\ref{setting:basic}, this solution can be written explicitly.
 \begin{theorem}\label{thm:basic_volterra}
-Suppose $\hardpart$ satisfies {\em Condition \eqref{cond:sing}}. Then the equation
+\begin{revtwo}Suppose the operator%%$\hardpart$
+\[ \big[\hardpart \varphi\big](a) := - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\varphi\;d\zeta \]
+\end{revtwo}
+satisfies {\em Condition \eqref{cond:sing}}. Then the equation
 \begin{equation}\label{eq:hardpart}
 f = \hardpart f    
 \end{equation}
@@ -285,9 +337,15 @@ Changing the base point $b \in \domain$ \revtext{only} multiplies $f_0$ by a non
 \end{theorem}
 We will prove this result in Section~\ref{sec:construction}.
 
-The solution $\solproto$ from Theorem~\ref{thm:basic_volterra} has, at worst, a mild power-law singularity at $\zeta = 0$. \revtext{When $\hardpart$ is especially regular, $\solproto$ also grows at most exponentially as $|\zeta| \to \infty$.} The function spaces defined in Section~\ref{fn-spaces} express both of these regularity properties.
+The solution $\solproto$ from Theorem~\ref{thm:basic_volterra} has, at worst, a mild power-law singularity at $\zeta = 0$. \revtext{When $\hardpart$ is especially regular, $\solproto$ also grows at most exponentially as $|\zeta| \to \infty$.} The function spaces defined in Section~\ref{fn-spaces} express both of these regularity properties. \begin{revtwo}We will state our results in terms of the spaces $\singexpalg{\sigma}(\domain)$, which are defined as unions of normed spaces. Every function $f \in \singexpalg{\sigma}(\domain)$ has a finite norm
+\[ \|f\|_{\sigma,\Lambda} := \sup_\Omega |\zeta|^{-\sigma} e^{-\Lambda|\zeta|}\,|f| \]
+for some $\Lambda \in \R$.
+\end{revtwo}
 \begin{theorem}\label{thm:proto-growth}
-Suppose $\hardpart$ satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
+\begin{revtwo}Suppose the operator%%$\hardpart$
+\[ \big[\hardpart \varphi\big](a) := - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\varphi\;d\zeta \]
+\end{revtwo}
+satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
 
 Suppose $\hardpart$ also satisfies {\em Condition~\eqref{cond:diag-basic}}. Then $f_0$ belongs to the space $\singexpalg{\tau-1}(\domain)$ defined in Section~\ref{fn-spaces}.
 \end{theorem}
@@ -298,7 +356,15 @@ When $\hardpart$ also satisfies Condition~\eqref{cond:reg-p}, we can get a bette
 
 \revtext{The perturbed equation $f = \volterra f$ is more complicated, but its regular singularity at $\zeta = 0$ is essentially the same.} We might therefore \revtext{expect a solution} that looks like $\solproto$ near the singularity, differing only by a less singular perturbation. If we strengthen the constraints on $\hardpart$ a little more, this expectation is fulfilled.
 \begin{theorem}\label{thm:general_volterra}
-Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:diag-basic}, and $\softpart$ satisfies {\em Condition~\eqref{cond:eps-lambda}}. Then the equation
+Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:diag-basic}, and \begin{revtwo}the perturbation
+\begin{oldnot}
+\[ [\softpart\,\varphi](a) := \int_{\zeta = 0}^a \softker(a, \cdot)\,\varphi\;d\zeta \]
+\end{oldnot}
+\begin{newnot}
+\[ [\softpart\,\varphi](a) := \int_{\zeta(a') = 0}^a \softker(a, a')\,\varphi(a')\;d\zeta(a') \]
+\end{newnot}
+\end{revtwo}
+satisfies {\em Condition~\eqref{cond:eps-lambda}}. Then the equation
 \[ f = \volterra f \]
 has a unique solution $f$ in the affine subspace
 \[ f_0 + \singexpalg{\tau-1+\gamma}(\Omega) \]
@@ -557,22 +623,43 @@ We assume $\gamma > 0$, but this result holds even under the weaker assumption t
 \end{rmk}
 \begin{proof}[Proof of Proposition~\ref{prop:smoothing}]
 For any function $f\in\singexp{\sigma}{\Lambda}(\domain)$,
+\begin{oldnot}
 \begin{align*}
 |\zeta(a)|^{-(\sigma+\gamma)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
 &\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |f| \, |d\zeta| \\
 &\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \|f\|_{\sigma,\Lambda} \, |d\zeta| 
 \end{align*}
-By Condition~\eqref{cond:eps-lambda},
+\end{oldnot}
+\begin{newnot}
 \begin{align*}
-\int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| &\lesssim \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\gamma}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
+|\zeta(a)|^{-(\sigma+\gamma)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
+&\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |f(a')| \, |d\zeta(a')| \\
+&\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \|f\|_{\sigma,\Lambda} \, |d\zeta(a')|
+\end{align*}
+\end{newnot}
+By Condition~\eqref{cond:eps-lambda}, \begin{todo}[notation updated]\end{todo}
+\begin{newnot}
+\begin{align*}
+\int_{\zeta=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| &\lesssim \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\gamma}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
 &\lesssim |\zeta(a)|^{\gamma+\sigma} \int_{0}^1 (1-t)^\gamma e^{\lambda_\Delta |\zeta(a)|(1-t)} t^{\sigma}\, e^{\Lambda|\zeta(a)| t}\;dt\\
 &\lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,  \int_{0}^1 (1-t)^\gamma  t^{\sigma}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)| t}\;dt\\
 &\lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)|}\int_{0}^1 (1-t)^\gamma  t^{\sigma}\;dt.
 \end{align*}
+\end{newnot}
 The last step takes advantage of the assumption that $\Lambda \ge \lambda_\Delta$. \revtext{The integral on the last line is Euler's beta integral~\cite[equation~5.12.1]{dlmf}, so}
+\begin{oldnot}
 \[ \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}. \]
+\end{oldnot}
+\begin{newnot}
+\[ \int_{\zeta(a')=0}^a |\softker(a, a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| \lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}. \]
+\end{newnot}
 \revtext{Since $\gamma > 0$ and $\sigma > -1$,} the gamma functions are well-defined.\footnote{We could even weaken the constraint on $\gamma$, allowing any $\gamma > -1$.} Rearranging to get
+\begin{oldnot}
 \[ |\zeta(a)|^{-(\gamma+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \lesssim \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}, \]
+\end{oldnot}
+\begin{newnot}
+\[ |\zeta(a)|^{-(\gamma+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| \lesssim \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}, \]    
+\end{newnot}
 we conclude that $|\zeta(a)|^{-\sigma-\gamma} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert$ is uniformly bounded in $\domain$. 
 \end{proof}
 \begin{corollary}\label{cor:pertub_f0}
@@ -641,19 +728,32 @@ over all $a \in \far$ and $a' \in \domain$. This simplifies to the desired resul
 \end{proof}
 \subsubsection{First steps toward showing that $\volterra$ is a contraction}\label{first-steps}
 The first steps of our calculation are the same throughout $\domain$. For each $a \in \domain$, we have
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_0^a |k(a, \cdot)\,\varphi\;d\zeta| \]
+\begin{oldnot}
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta = 0}^a |k(a,\cdot)\,\varphi\;d\zeta| \]
+\end{oldnot}
+\begin{newnot}
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta(a') = 0}^a |k(a, a')\,\varphi(a')\;d\zeta(a')| \]
+\end{newnot}
 for any choice of integration path. The norm on $\singexp{\rho-1}{\Lambda}(\domain)$ is designed to give the bound $|\varphi| \le |\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}$, so
+\begin{oldnot}
 \begin{align*}
-|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_0^a |k(a, \cdot)|\,|\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}\;|d\zeta| \\
-& = \|\varphi\|_{\rho-1, \Lambda}  \int_0^a |k(a, \cdot)|\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta = 0}^a |k(a,\cdot)|\,|\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}\;|d\zeta| \\
+& = \|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta = 0}^a |k(a, \cdot)|\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|
 \end{align*}
+\end{oldnot}
+\begin{newnot}
+\begin{align*}
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta(a') = 0}^a |k(a, a')|\,|\zeta(a')|^{\rho-1}\,e^{\Lambda |\zeta(a')|}\,\|\varphi\|_{\rho-1, \Lambda}\;|d\zeta(a')| \\
+& = \|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta(a') = 0}^a |k(a, a')|\,\left|\frac{\zeta(a')}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta(a')|)}\;|d\zeta(a')|
+\end{align*}
+\end{newnot}
 What we do next depends on whether $a$ is in $\near$ or $\far$.
 \subsubsection{Near the origin}\label{near-bound}
 Suppose that $a \in \near$. Then inequality~\eqref{near-limit} gives
 \begin{align*}
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le
-\|\varphi\|_{\rho-1, \Lambda}  \int_0^a \frac{\sigma}{|\zeta(a)|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta| \\
-& \le \sigma \|\varphi\|_{\rho-1, \Lambda}  \int_0^a \left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;\left|\frac{d\zeta}{\zeta(a)}\right|
+\|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta = 0}^a \frac{\sigma}{|\zeta(a)|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta| \\
+& \le \sigma \|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta = 0}^a \left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;\left|\frac{d\zeta}{\zeta(a)}\right|
 \end{align*}
 for any integration path that stays within $\near$. \revtext{Noting} that $\near$ is \revtext{star-shaped by construction, we} use the straight path $\zeta = t \zeta(a)$, with $t \in (0, 1]$:
 \begin{align*}
@@ -666,7 +766,7 @@ Since we set $\sigma < \rho$, this brings us halfway to proving Proposition~\ref
 Going back to the end of Section~\ref{first-steps}, suppose that $a \in \far$. Choose some $\lambda > \lambda_\Delta$. By Proposition~\ref{prop:whole-ker-far-bound} from Section~\ref{sec:bounds on k}, \revtext{there is some $M\in\R_{>0}$} for which
 \revtext{\[ |k(a, a')| \le M e^{\lambda |\zeta(a) - \zeta(a')|} \]}
 \revtext{for all $a \in \far$ and $a' \in \Omega$.} \revtext{This bound implies that}
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le \|\varphi\|_{\rho-1, \Lambda} \int_0^a M e^{\lambda |\zeta(a) - \zeta|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|. \]
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le \|\varphi\|_{\rho-1, \Lambda} \int_{\zeta = 0}^a M e^{\lambda |\zeta(a) - \zeta|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|. \]
 \revtext{We} again use the straight integration path $\zeta = t \zeta(a)$, with $t \in (0, 1]$. Along this path, $|\zeta(a) - \zeta| = |\zeta(a)| - |\zeta|$, allowing us to combine the exponential factors in our bound:
 \begin{align*}
 |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \|\varphi\|_{\rho-1, \Lambda} \int_0^1 M e^{\lambda |\zeta(a)|(1 - t)}\,t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
@@ -768,7 +868,7 @@ Similarly, an operator $\softpart^\alpha$ with kernel $\softker^\alpha$ now sati
 \[ |\softker^\alpha(a,a')| \lesssim \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)-\alpha|} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|}\]
 over all $a, a' \in \domain_\alpha$.
 \subsection{The Laplace transform}
-\subsubsection{Definition}
+\subsubsection{Definition}\label{sec:definition_Laplace}
 Let $\domain_\alpha$ be a simply connected open subset of $\C$ that touches but does not contain \revtext{$\zeta=\alpha$. Let} $\Gamma_{\zeta, \alpha}^\theta$ be the ray \revtext{in the position domain} that leaves $\zeta=\alpha$ at angle $\theta$\revtext{, and let $\Pi^{-\theta}_\Lambda$ be the half-plane $\Re(z e^{i\theta}) > \Lambda$ in the frequency domain.} When $\domain_\alpha$ contains $\Gamma_{\zeta, \alpha}^\theta$, \revtext{the Laplace transform
 \[ \laplace_{\zeta, \alpha}^{\theta} \maps \singexp{\sigma}{\Lambda}(\domain_\alpha) \to \holo(\Pi^{-\theta}_\Lambda) \]
 is defined for all $\sigma > -1$ and $\Lambda \in \R$. Its action on a function $\varphi$ is given by the formula
@@ -827,7 +927,12 @@ If $\psi_\alpha$ satisfies the equation $\hat{\mathcal{P}}_\alpha\psi_\alpha=0$,
 \end{rmk}
 \revtext{\begin{rmk}\label{rmk:use-dict-explicit}
 To write $\hat{\mathcal{P}}_\alpha$ more explicitly, let $p := P(-\zeta)$ and $q := Q(-\zeta)$, noting that $\zeta = \alpha$ is a root of $p$. Then
+\begin{oldnot}
 \[ \big[\hat{\mathcal{P}}_\alpha\varphi\big](a) = \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta, \]
+\end{oldnot}
+\begin{newnot}
+\[ \big[\hat{\mathcal{P}}_\alpha\varphi\big](a) = \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta(a')=\alpha}^a k_R(a, a') \, \varphi(a') \, d\zeta(a'), \]
+\end{newnot}
 where
 \[ k_R(a,a') := \sum_{j=0}^\infty \frac{R_{j}}{(j+1)!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} . \]
 \end{rmk}}
@@ -850,11 +955,23 @@ of the space $\singexpalg{\tau_\alpha-1}(\domain_\alpha)$.
 \end{theorem}
 \begin{proof}
 \revtext{To apply Proposition~\ref{prop:alt-general_volterra}, we must rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting} under the reinterpretation from Section~\ref{sec:notation_alpha}. When $\hat{\mathcal{P}}_\alpha$ is written as in Remark~\ref{rmk:use-dict-explicit}, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
-\[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta = 0. \]}
+\begin{oldnot}
+\[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta = 0. \]
+\end{oldnot}
+\begin{newnot}
+\[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta(a')=\alpha}^a k_R(a, a') \, \varphi(a') \, d\zeta(a') = 0. \]
+\end{newnot}}
 Isolating $p\,\varphi$ on the left and dividing both sides by $p$ yields the equivalent equation
-\begin{equation}\label{eqn:divided}
+\begin{oldnot}
+\begin{equation}%%\label{eqn:divided}
 \varphi(a) = -\int_{\zeta=\alpha}^a \frac{q}{p(a)} \, \varphi \; d\zeta - \int_{\zeta=\alpha}^a \frac{k_R(a,\cdot)}{p(a)} \, \varphi \, d\zeta.
 \end{equation}
+\end{oldnot}
+\begin{newnot}
+\begin{equation}\label{eqn:divided}
+\varphi(a) = -\int_{\zeta(a')=\alpha}^a \frac{q(a')}{p(a)} \, \varphi(a') \; d\zeta(a') - \int_{\zeta(a')=\alpha}^a \frac{k_R(a, a')}{p(a)} \, \varphi(a') \, d\zeta(a').
+\end{equation}
+\end{newnot}
 Let $\hardpart^\alpha$ be the Volterra operator with kernel
 \[ \hardker^\alpha(a,a') = -\frac{q(a')}{p(a)}, \]
 and let $\softpart^\alpha$ be the Volterra operator with kernel
