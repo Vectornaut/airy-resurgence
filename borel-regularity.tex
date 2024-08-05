@@ -168,7 +168,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % hideable old text
 \newif\ifshowold
-\showoldfalse
+\showoldtrue
 \ifshowold
 \newenvironment{old}{\color{RoyalBlue}}{\color{black}}
 \else
@@ -186,7 +186,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % highlightable revisions
 \newif\ifhighlightrevs
-\highlightrevsfalse
+\highlightrevstrue
 \ifhighlightrevs
 \newenvironment{revised}{\color{DarkBlue}}{\color{black}}
 \else
@@ -1017,9 +1017,16 @@ The product space $B \times B$ comes with projection maps $\pi', \pi'' \maps B \
 \end{notation}
 \begin{definition}\label{def:convolution}
 Let $\phi,\psi$ be two holomorphic functions on $B$. Choose a translation coordinate $\zeta$ on $B$ and a base point $\zeta = \alpha$. The convolution product $\phi\ast_{\zeta,\alpha}\psi$ is the function on $B$ defined by the integral
-\begin{equation}\label{eq:convolution_def}
+\begin{revised}
+\begin{equation}%%\label{eq:convolution_def}
+\phi \ast_{\zeta, \alpha} \psi \defeq \int_{\substack{\mathcal{S}(\zeta)\times\mathcal{S}'(\zeta)\\ \zeta(a)+\zeta(a')=\zeta}} \phi(a)\,\psi(a')\,d\zeta(a),
+\end{equation}
+\end{revised}
+\begin{old}
+\begin{equation}%%\label{eq:convolution_def}
 \phi \ast_{\zeta, \alpha} \psi \defeq \int_{\substack{\mathcal{S}'(\zeta)\times\mathcal{S}''(\zeta)\\ \zeta'+\zeta''=\zeta}} \phi' \psi'' d\zeta',
 \end{equation}
+\end{old}
 where $\mathcal{S}'(\zeta)$ is the line segment from $\zeta'=\alpha$ to $\zeta'=\zeta$, and $\mathcal{S}''(\zeta)$ is the line segment from $\zeta''=\zeta-\alpha$ to $\zeta''=0$. 
 \end{definition}
 The function $\phi \ast_{\zeta, \alpha} \psi$ is holomorphic, as long as it is well-defined. \begin{todo}[Is it clear the convolution is holomorphic?]\end{todo} On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$. The Laplace transform $\laplace_{\zeta_\alpha, 0}$ is special, because it is an algebra isomorphism with respect to $\ast_{\zeta_\alpha, 0}$.
