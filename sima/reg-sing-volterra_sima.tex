@@ -253,15 +253,9 @@ Let $\holo(\domain)$ be the space of holomorphic functions on $\domain$.
 A {\em holomorphic Volterra operator} on $\domain$ is a linear operator
 \[\genvolterra\colon\holo(\domain)\to\holo(\domain) \]
 defined by an integral
-\begin{oldnot}
-\[ [\genvolterra\,\varphi](a) = \int_{\zeta = 0}^a \genker(a, \cdot)\,\varphi\;d\zeta \]
-\end{oldnot}
-\begin{newnot}\begin{todo}[Possibility: use moving point to write kernel with both arguments]\end{todo}
+\begin{revtwo}
 \[ [\genvolterra\,\varphi](a) = \int_{\zeta(a') = 0}^a \genker(a, a')\,\varphi(a')\;d\zeta(a') \]
-\end{newnot}
-\begin{newnot}\begin{todo}[Possibility: ``integration along $\zeta''$ with $\zeta'$ fixed]\end{todo}
-\[ \genvolterra\,\varphi = \int_{0}^{\zeta} \genker\,\varphi''\;d\zeta''\Big|_{\zeta' = \zeta} \]
-\end{newnot}
+\end{revtwo}
 in which the {\em kernel} $w$ is a holomorphic function on $\Omega^2$.
 \end{definition}
 \begin{definition}
@@ -309,12 +303,7 @@ at $\zeta = 0$.
 \subsubsection{The perturbed operator}\label{setting:perturbed}
 
 We now perturb $\hardpart$ to a more general operator $\volterra = \hardpart +\softpart$. \begin{revtwo}The perturbation
-\begin{oldnot}
-\[ [\softpart\,\varphi](a) := \int_{\zeta = 0}^a \softker(a, \cdot)\,\varphi\;d\zeta \]
-\end{oldnot}
-\begin{newnot}
 \[ [\softpart\,\varphi](a) := \int_{\zeta(a') = 0}^a \softker(a, a')\,\varphi(a')\;d\zeta(a') \]
-\end{newnot}
 will be non-separable,\end{revtwo}\footnote{Unless $\softpart$ is zero, of course.} but it will have a regularizing effect, as we will show in Proposition \ref{prop:smoothing}. To get the smoothing effect, we will require \revtwotext{the kernel $\softker$} to vanish to some order $\gamma > 0$ on the diagonal in $\domain^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
 
 Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We will allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we will not allow any sharper singularity. We will also put an exponential bound \revtext{on the growth of $\softker$ away from the diagonal}, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we will require:
@@ -331,7 +320,7 @@ Like $\hardker$, the combined kernel $k = \hardker + \softker$ of $\volterra$ gr
 We want to show that when $\volterra$ is a regular singular Volterra operator of the kind described in Section~\ref{setting:perturbed}, the equation $f = \volterra f$ has a unique solution of a certain form. For the prototypical operator $\hardpart$ described in Section~\ref{setting:basic}, this solution can be written explicitly.
 \begin{theorem}\label{thm:basic_volterra}
 \begin{revtwo}Suppose the operator%%$\hardpart$
-\[ \big[\hardpart \varphi\big](a) := - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\varphi\;d\zeta \]
+\[ \big[\hardpart \varphi\big](a) := - \int_{\zeta(a')=0}^{a} \frac{q(a')}{p(a)}\,\varphi(a')\;d\zeta(a') \]
 \end{revtwo}
 satisfies {\em Condition \eqref{cond:sing}}. Then the equation
 \begin{equation}\label{eq:hardpart}
@@ -350,8 +339,8 @@ The solution $\solproto$ from Theorem~\ref{thm:basic_volterra} has, at worst, a 
 for some $\Lambda \in \R$.
 \end{revtwo}
 \begin{theorem}\label{thm:proto-growth}
-\begin{revtwo}Suppose the operator%%$\hardpart$
-\[ \big[\hardpart \varphi\big](a) := - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\varphi\;d\zeta \]
+\begin{revtwo}Suppose the operator
+\[ \big[\hardpart \varphi\big](a) := - \int_{\zeta(a')=0}^{a} \frac{q(a')}{p(a)}\,\varphi(a')\;d\zeta(a') \]
 \end{revtwo}
 satisfies {\em Condition~\eqref{cond:sing}}. Then, on a small enough neighborhood of $\zeta = 0$, we have $|\solproto| \lesssim |\zeta|^{\tau-1}$.
 
@@ -365,12 +354,7 @@ When $\hardpart$ also satisfies Condition~\eqref{cond:reg-p}, we can get a bette
 \revtext{The perturbed equation $f = \volterra f$ is more complicated, but its regular singularity at $\zeta = 0$ is essentially the same.} We might therefore \revtext{expect a solution} that looks like $\solproto$ near the singularity, differing only by a less singular perturbation. If we strengthen the constraints on $\hardpart$ a little more, this expectation is fulfilled.
 \begin{theorem}\label{thm:general_volterra}
 Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond:diag-basic}, and \begin{revtwo}the perturbation
-\begin{oldnot}
-\[ [\softpart\,\varphi](a) := \int_{\zeta = 0}^a \softker(a, \cdot)\,\varphi\;d\zeta \]
-\end{oldnot}
-\begin{newnot}
 \[ [\softpart\,\varphi](a) := \int_{\zeta(a') = 0}^a \softker(a, a')\,\varphi(a')\;d\zeta(a') \]
-\end{newnot}
 \end{revtwo}
 satisfies {\em Condition~\eqref{cond:eps-lambda}}. Then the equation
 \[ f = \volterra f \]
@@ -631,43 +615,31 @@ We assume $\gamma > 0$, but this result holds even under the weaker assumption t
 \end{rmk}
 \begin{proof}[Proof of Proposition~\ref{prop:smoothing}]
 For any function $f\in\singexp{\sigma}{\Lambda}(\domain)$,
-\begin{oldnot}
+\begin{revtwo}
 \begin{align*}
-|\zeta(a)|^{-(\sigma+\gamma)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
-&\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |f| \, |d\zeta| \\
-&\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \|f\|_{\sigma,\Lambda} \, |d\zeta| 
+& |\zeta(a)|^{-(\sigma+\gamma)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert \\
+& \qquad \leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |f(a')| \, |d\zeta(a')| \\
+& \qquad \leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \|f\|_{\sigma,\Lambda} \, |d\zeta(a')|\,.
 \end{align*}
-\end{oldnot}
-\begin{newnot}
+\end{revtwo}
+By Condition~\eqref{cond:eps-lambda},
+\begin{revtwo}
 \begin{align*}
-|\zeta(a)|^{-(\sigma+\gamma)} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert
-&\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |f(a')| \, |d\zeta(a')| \\
-&\leq |\zeta(a)|^{-(\sigma+\gamma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \|f\|_{\sigma,\Lambda} \, |d\zeta(a')|
+& \int_{\zeta(a')=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| \\
+& \qquad \lesssim \int_{\zeta(a')=0}^a \frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta(a')|} |\zeta(a')|^{\sigma}\, e^{\Lambda|\zeta(a')|}\;|d\zeta(a')|\\
+& \qquad \lesssim |\zeta(a)|^{\gamma+\sigma} \int_{0}^1 (1-t)^\gamma e^{\lambda_\Delta |\zeta(a)|(1-t)} t^{\sigma}\, e^{\Lambda|\zeta(a)| t}\;dt\\
+& \qquad \lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,  \int_{0}^1 (1-t)^\gamma  t^{\sigma}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)| t}\;dt\\
+& \qquad \lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)|}\int_{0}^1 (1-t)^\gamma  t^{\sigma}\;dt.
 \end{align*}
-\end{newnot}
-By Condition~\eqref{cond:eps-lambda}, \begin{todo}[notation updated]\end{todo}
-\begin{newnot}
-\begin{align*}
-\int_{\zeta=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| &\lesssim \int_{\zeta=0}^a \frac{|\zeta(a)-\zeta|^\gamma}{|\zeta(a)|} e^{\lambda_\Delta |\zeta(a)-\zeta|} |\zeta|^{\sigma}\, e^{\Lambda|\zeta|}\;|d\zeta|\\
-&\lesssim |\zeta(a)|^{\gamma+\sigma} \int_{0}^1 (1-t)^\gamma e^{\lambda_\Delta |\zeta(a)|(1-t)} t^{\sigma}\, e^{\Lambda|\zeta(a)| t}\;dt\\
-&\lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,  \int_{0}^1 (1-t)^\gamma  t^{\sigma}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)| t}\;dt\\
-&\lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\lambda_\Delta |\zeta(a)|}\,e^{(\Lambda-\lambda_\Delta)|\zeta(a)|}\int_{0}^1 (1-t)^\gamma  t^{\sigma}\;dt.
-\end{align*}
-\end{newnot}
+\end{revtwo}
 The last step takes advantage of the assumption that $\Lambda \ge \lambda_\Delta$. \revtext{The integral on the last line is Euler's beta integral~\cite[equation~5.12.1]{dlmf}, so}
-\begin{oldnot}
-\[ \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}. \]
-\end{oldnot}
-\begin{newnot}
-\[ \int_{\zeta(a')=0}^a |\softker(a, a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| \lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}. \]
-\end{newnot}
+\begin{revtwo}
+\[ \int_{\zeta(a')=0}^a |\softker(a, a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| \lesssim |\zeta(a)|^{\gamma+\sigma}\, e^{\Lambda |\zeta(a)|} \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}\,. \]
+\end{revtwo}
 \revtext{Since $\gamma > 0$ and $\sigma > -1$,} the gamma functions are well-defined.\footnote{We could even weaken the constraint on $\gamma$, allowing any $\gamma > -1$.} Rearranging to get
-\begin{oldnot}
-\[ |\zeta(a)|^{-(\gamma+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta=0}^a |\softker(a,\cdot)|\, |\zeta|^{\sigma}\, e^{\Lambda |\zeta|} \, |d\zeta| \lesssim \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}, \]
-\end{oldnot}
-\begin{newnot}
-\[ |\zeta(a)|^{-(\gamma+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| \lesssim \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}, \]    
-\end{newnot}
+\begin{revtwo}
+\[ |\zeta(a)|^{-(\gamma+\sigma)}\, e^{-\Lambda |\zeta(a)|} \int_{\zeta(a')=0}^a |\softker(a,a')|\, |\zeta(a')|^{\sigma}\, e^{\Lambda |\zeta(a')|} \, |d\zeta(a')| \lesssim \frac{\Gamma(\gamma+1)\Gamma(\sigma+1)}{\Gamma(\sigma+\gamma+2)}\,, \]    
+\end{revtwo}
 we conclude that $|\zeta(a)|^{-\sigma-\gamma} \, e^{-\Lambda |\zeta(a)|} \, \Big \vert \big[ \softpart f\big](a)\Big\vert$ is uniformly bounded in $\domain$. 
 \end{proof}
 \begin{corollary}\label{cor:pertub_f0}
@@ -736,36 +708,28 @@ over all $a \in \far$ and $a' \in \domain$. This simplifies to the desired resul
 \end{proof}
 \subsubsection{First steps toward showing that $\volterra$ is a contraction}\label{first-steps}
 The first steps of our calculation are the same throughout $\domain$. For each $a \in \domain$, we have
-\begin{oldnot}
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta = 0}^a |k(a,\cdot)\,\varphi\;d\zeta| \]
-\end{oldnot}
-\begin{newnot}
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta(a') = 0}^a |k(a, a')\,\varphi(a')\;d\zeta(a')| \]
-\end{newnot}
+\begin{revtwo}
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,\big|[\volterra\varphi](a)\big| \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta(a') = 0}^a |k(a, a')\,\varphi(a')\;d\zeta(a')| \]
+\end{revtwo}
 for any choice of integration path. The norm on $\singexp{\rho-1}{\Lambda}(\domain)$ is designed to give the bound $|\varphi| \le |\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}$, so
-\begin{oldnot}
+\begin{revtwo}
 \begin{align*}
-|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta = 0}^a |k(a,\cdot)|\,|\zeta|^{\rho-1}\,e^{\Lambda |\zeta|}\,\|\varphi\|_{\rho-1, \Lambda}\;|d\zeta| \\
-& = \|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta = 0}^a |k(a, \cdot)|\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|
+&|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,\big|[\volterra\varphi](a)\big| \\
+& \qquad \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta(a') = 0}^a |k(a, a')|\,|\zeta(a')|^{\rho-1}\,e^{\Lambda |\zeta(a')|}\,\|\varphi\|_{\rho-1, \Lambda}\;|d\zeta(a')| \\
+& \qquad = \|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta(a') = 0}^a |k(a, a')|\,\left|\frac{\zeta(a')}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta(a')|)}\;|d\zeta(a')|
 \end{align*}
-\end{oldnot}
-\begin{newnot}
-\begin{align*}
-|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}  \int_{\zeta(a') = 0}^a |k(a, a')|\,|\zeta(a')|^{\rho-1}\,e^{\Lambda |\zeta(a')|}\,\|\varphi\|_{\rho-1, \Lambda}\;|d\zeta(a')| \\
-& = \|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta(a') = 0}^a |k(a, a')|\,\left|\frac{\zeta(a')}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta(a')|)}\;|d\zeta(a')|
-\end{align*}
-\end{newnot}
+\end{revtwo}
 What we do next depends on whether $a$ is in $\near$ or $\far$.
 \subsubsection{Near the origin}\label{near-bound}
 Suppose that $a \in \near$. Then inequality~\eqref{near-limit} gives
 \begin{align*}
-|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,\big|[\volterra\varphi](a)\big| & \le
 \|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta = 0}^a \frac{\sigma}{|\zeta(a)|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta| \\
 & \le \sigma \|\varphi\|_{\rho-1, \Lambda}  \int_{\zeta = 0}^a \left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;\left|\frac{d\zeta}{\zeta(a)}\right|
 \end{align*}
 for any integration path that stays within $\near$. \revtext{Noting} that $\near$ is \revtext{star-shaped by construction, we} use the straight path $\zeta = t \zeta(a)$, with $t \in (0, 1]$:
 \begin{align*}
-|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,\big|[\volterra\varphi](a)\big| & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
 & \le \sigma \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\;dt \\
 & = \frac{\sigma}{\rho} \|\varphi\|_{\rho-1, \Lambda}.
 \end{align*}
@@ -774,14 +738,14 @@ Since we set $\sigma < \rho$, this brings us halfway to proving Proposition~\ref
 Going back to the end of Section~\ref{first-steps}, suppose that $a \in \far$. Choose some $\lambda > \lambda_\Delta$. By Proposition~\ref{prop:whole-ker-far-bound} from Section~\ref{sec:bounds on k}, \revtext{there is some $M\in\R_{>0}$} for which
 \revtext{\[ |k(a, a')| \le M e^{\lambda |\zeta(a) - \zeta(a')|} \]}
 \revtext{for all $a \in \far$ and $a' \in \Omega$.} \revtext{This bound implies that}
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le \|\varphi\|_{\rho-1, \Lambda} \int_{\zeta = 0}^a M e^{\lambda |\zeta(a) - \zeta|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|. \]
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,\big|[\volterra\varphi](a)\big| \le \|\varphi\|_{\rho-1, \Lambda} \int_{\zeta = 0}^a M e^{\lambda |\zeta(a) - \zeta|}\,\left|\frac{\zeta}{\zeta(a)}\right|^{\rho-1}\,e^{-\Lambda(|\zeta(a)| - |\zeta|)}\;|d\zeta|. \]
 \revtext{We} again use the straight integration path $\zeta = t \zeta(a)$, with $t \in (0, 1]$. Along this path, $|\zeta(a) - \zeta| = |\zeta(a)| - |\zeta|$, allowing us to combine the exponential factors in our bound:
 \begin{align*}
-|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| & \le \|\varphi\|_{\rho-1, \Lambda} \int_0^1 M e^{\lambda |\zeta(a)|(1 - t)}\,t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
+|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,\big|[\volterra\varphi](a)\big| & \le \|\varphi\|_{\rho-1, \Lambda} \int_0^1 M e^{\lambda |\zeta(a)|(1 - t)}\,t^{\rho-1}\,e^{-\Lambda |\zeta(a)|(1 - t)}\;dt \\
 & \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)|\zeta(a)|(1 - t)}\;dt.
 \end{align*}
 \revtext{Set $\Lambda > \lambda$, so} the exponential factor shrinks as $|\zeta(a)|$ grows. \revtext{Since $|\zeta(a)| \ge \delta$ for all $a \in \far$, we then have the uniform bound}
-\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt. \]
+\[ |\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,\big|[\volterra\varphi](a)\big| \le M \|\varphi\|_{\rho-1, \Lambda} \int_0^1 t^{\rho-1}\,e^{-(\Lambda - \lambda)\delta(1 - t)}\;dt. \]
 over all $a \in \far$.
 
 We can make this bound less than one, as required to show that $\volterra$ is a contraction, by increasing $\Lambda$. To see this in the trickiest case, where $\rho < 1$, \revtext{consider} the beginning and end of the integration path separately. At the beginning of the path---for $t \in \big(0, \tfrac{1}{5}\big]$, say---we use a worst-case estimate on the exponential factor:
@@ -935,12 +899,9 @@ If $\psi_\alpha$ satisfies the equation $\hat{\mathcal{P}}_\alpha\psi_\alpha=0$,
 \end{rmk}
 \revtext{\begin{rmk}\label{rmk:use-dict-explicit}
 To write $\hat{\mathcal{P}}_\alpha$ more explicitly, let $p := P(-\zeta)$ and $q := Q(-\zeta)$, noting that $\zeta = \alpha$ is a root of $p$. Then
-\begin{oldnot}
-\[ \big[\hat{\mathcal{P}}_\alpha\varphi\big](a) = \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta, \]
-\end{oldnot}
-\begin{newnot}
+\begin{revtwo}
 \[ \big[\hat{\mathcal{P}}_\alpha\varphi\big](a) = \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta(a')=\alpha}^a k_R(a, a') \, \varphi(a') \, d\zeta(a'), \]
-\end{newnot}
+\end{revtwo}
 where
 \[ k_R(a,a') := \sum_{j=0}^\infty \frac{R_{j}}{(j+1)!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} . \]
 \end{rmk}}
@@ -963,23 +924,15 @@ of the space $\singexpalg{\tau_\alpha-1}(\domain_\alpha)$.
 \end{theorem}
 \begin{proof}
 \revtext{To apply Proposition~\ref{prop:alt-general_volterra}, we must rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting} under the reinterpretation from Section~\ref{sec:notation_alpha}. When $\hat{\mathcal{P}}_\alpha$ is written as in Remark~\ref{rmk:use-dict-explicit}, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
-\begin{oldnot}
-\[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta=\alpha}^a k_R(a,\cdot) \, \varphi \, d\zeta = 0. \]
-\end{oldnot}
-\begin{newnot}
+\begin{revtwo}
 \[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta(a')=\alpha}^a k_R(a, a') \, \varphi(a') \, d\zeta(a') = 0. \]
-\end{newnot}}
+\end{revtwo}}
 Isolating $p\,\varphi$ on the left and dividing both sides by $p$ yields the equivalent equation
-\begin{oldnot}
-\begin{equation}%%\label{eqn:divided}
-\varphi(a) = -\int_{\zeta=\alpha}^a \frac{q}{p(a)} \, \varphi \; d\zeta - \int_{\zeta=\alpha}^a \frac{k_R(a,\cdot)}{p(a)} \, \varphi \, d\zeta.
-\end{equation}
-\end{oldnot}
-\begin{newnot}
+\begin{revtwo}
 \begin{equation}\label{eqn:divided}
 \varphi(a) = -\int_{\zeta(a')=\alpha}^a \frac{q(a')}{p(a)} \, \varphi(a') \; d\zeta(a') - \int_{\zeta(a')=\alpha}^a \frac{k_R(a, a')}{p(a)} \, \varphi(a') \, d\zeta(a').
 \end{equation}
-\end{newnot}
+\end{revtwo}
 Let $\hardpart^\alpha$ be the Volterra operator with kernel
 \[ \hardker^\alpha(a,a') = -\frac{q(a')}{p(a)}, \]
 and let $\softpart^\alpha$ be the Volterra operator with kernel
