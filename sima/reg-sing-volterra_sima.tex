@@ -160,7 +160,7 @@ where $\Gamma_\zeta$ is the ray $\zeta \in (0, \infty)$.
 \begin{verify}[Suppose the magnitude of the Laplace transform integrand is Riemann-integrable on $(0, \infty)$. Write $z$ in terms of its real and imaginary parts as $x + iy$. Since the integrand is holomorphic with respect to $z$, the operator $\frac{\partial}{\partial\overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial x}\right)$ annihilates it. Using the comparison version of Leibniz's rule for improper integrals (Theorem~11.10 of A First Course in Real Analysis, by Protter and Morrey) with $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$, we see that $\frac{\partial}{\partial\overline{z}}$ annihilates the whole integral.]\end{verify} Through identities like
 \begin{align*}
 \frac{\partial}{\partial z} \laplace \varphi & = \laplace(-\zeta\varphi) \\
-\laplace \psi\;\laplace\varphi & = \laplace(\psi * \varphi) \\
+\laplace \revtwotext{\psi}\;\laplace\varphi & = \laplace(\revtwotext{\psi} * \varphi) \\
 z^{-\nu} \laplace \varphi & = \laplace\,\partial^{-\nu} \varphi\,,
 \end{align*}
 where $\partial^{-\nu}$ is the Riemann-Liouville fractional integral of order $\nu \in (0, \infty)$, the Laplace transform pulls differential operators on the frequency domain back to Volterra integral operators on the position domain. The favorable regularity properties and comprehensive theory of Volterra equations can thus be brought to bear on linear differential equations.
@@ -178,7 +178,7 @@ The integral operator remains well-defined if we make $\zeta$ a complex coordina
 Equation~\eqref{eqn:intro-level-1} can be solved by resumming normal series, as described earlier. Each resummed solution is characterized by its $e^{-\alpha z} z^{-\tau_\alpha}$ asymptotics, where $-\alpha$ is a root of $P$ and $\tau_\alpha = Q(-\alpha)/P'(-\alpha)$ is real and positive. To obtain this solution analytically through Laplace transform methods, we must take the Laplace transform $\laplace_{\zeta,\alpha}$ that uses $\zeta = \alpha$ in place of the traditional $\zeta = 0$ as the integration base point. \begin{revtwo}
 Explicitly,
 \[ \laplace_{\zeta,\alpha} \varphi := \int_{\Gamma_{\zeta,\alpha}} e^{-z\zeta} \varphi\;d\zeta\,, \]
-where $\Gamma_{\zeta,\alpha}$ is the ray $\zeta \in (\alpha, \infty)$.    
+where $\Gamma_{\zeta,\alpha}$ is the ray $\zeta \in \alpha + (0, \infty)$.    
 This version of the Laplace transform is defined in Section~\ref{sec:definition_Laplace}. A function of the form $\Phi = \laplace_{\zeta, \alpha} \varphi$ satisfies equation~\eqref{eqn:intro-level-1} if and only if $\varphi$ satisfies the integral equation
 %%use the Laplace transform based at $\zeta = \alpha$, equation~\eqref{eqn:intro-use-dict} then comes out based at $\zeta = \alpha$ as well:
 \[ \big[ P(-\zeta)+\partial_{\zeta,\alpha}^{-1}\circ Q(-\zeta)+\partial_{\zeta,\alpha}^{-2}\circ R(\partial_{\zeta,\alpha}^{-1}) \big] \varphi = 0\,, \]
@@ -209,7 +209,7 @@ notice that $\zeta(a)$ is a number, which stays constant throughout the integrat
 
 \begin{revtwo}
 Sometimes, in expressions like
-\[ \int_{\zeta(a') = \beta}^a w(a, a')\,\varphi(a')\,d\zeta(a')\,, \]
+\[ \int_{\zeta(a') = \beta}^a w(a, a')\,\varphi(a')\;d\zeta(a')\,, \]
 it is useful to give a name $a'$ to the point moving along the integration path. In this case, all of the functions and differential forms whose values change along the integration path are explicitly evaluated at $a'$.
 \end{revtwo}
 \subsubsection{Plugging into formal expressions}
@@ -260,7 +260,7 @@ A holomorphic Volterra operator is {\em separable} if its kernel factors as a pr
 For the prototype operator $\hardpart$, we will suppose that the kernel $\hardker$ can be written as a ratio
 \[ \hardker(a, a') = - \frac{q(a')}{p(a)}, \]
 for some $p, q \in \mathcal{H}(\Omega)$. \begin{revtwo}Explicitly,
-\[ \big[\hardpart \varphi\big](a) = - \int_{\zeta=0}^{a} \frac{q}{p(a)}\,\varphi\;d\zeta\,. \]
+\[ \big[\hardpart \varphi\big](a) = - \int_{\zeta(a')=0}^{a} \frac{q(a')}{p(a)}\,\varphi(a')\;d\zeta(a')\,. \]
 \end{revtwo}
 
 For the purposes of this paper, $\hardpart$ has a {\em regular singularity} at $\zeta=0$ if the following condition holds.
@@ -353,8 +353,8 @@ Suppose $\hardpart$ satisfies {\em Conditions \eqref{cond:sing}} and \eqref{cond
 \[ [\softpart\,\varphi](a) := \int_{\zeta(a') = 0}^a \softker(a, a')\,\varphi(a')\;d\zeta(a') \]
 \end{revtwo}
 satisfies {\em Condition~\eqref{cond:eps-lambda}}. Then the equation
-\[ f = \volterra f \]
-has a unique solution $f$ in the affine subspace
+\[ f = \volterra f, \]
+\revtwotext{where $\volterra = \hardpart + \softpart$,} has a unique solution $f$ in the affine subspace
 \[ f_0 + \singexpalg{\tau-1+\gamma}(\Omega) \]
 of the space $\singexpalg{\tau-1}(\Omega)$ defined in Section~\ref{fn-spaces}. Here, $f_0$ is the prototype solution \eqref{eqn:test_solution} from Theorems \ref{thm:basic_volterra}--\ref{thm:proto-growth}, which belongs to the space $\singexpalg{\tau-1}(\domain)$.
 \end{theorem}
@@ -606,7 +606,7 @@ Under {\em Condition~\eqref{cond:eps-lambda}}, the operator $\softpart$ maps
 continuously for all $\Lambda\geq \lambda_{\Delta}$ and $\sigma>-1$.
 \end{proposition}
 \begin{rmk}
-We assume $\gamma > 0$, but this result holds even under the weaker assumption that $\gamma > -1$. We will take advantage of this in Section~\ref{sec:L-int-op}
+We assume $\gamma > 0$, but this result holds even under the weaker assumption that $\gamma > -1$. We will take advantage of this in Section~\ref{sec:L-int-op}.
 \end{rmk}
 \begin{proof}[Proof of Proposition~\ref{prop:smoothing}]
 For any function $f\in\singexp{\sigma}{\Lambda}(\domain)$,
@@ -754,7 +754,7 @@ At the end of the path, we instead use a worst-case estimate on $t^{\rho-1}$:
 & = \max\{(1/5)^{\rho-1}, 1\} \frac{1}{(\Lambda - \lambda)\delta}\left[ 1 - e^{-\tfrac{4}{5}(\Lambda - \lambda)\delta} \right] \\
 & \le \max\{(1/5)^{\rho-1}, 1\} \frac{1}{(\Lambda - \lambda)\delta}.
 \end{align*}
-In summary, the beginning of the integral is bounded by a decaying exponential function of $(\Lambda - \lambda)\delta$, and the end of the integral is bounded by a reciprocal function of $(\Lambda - \lambda)\delta$. That means we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,|[\volterra\varphi](a)|$ as small as we want over all $a \in \far$. This completes our proof of Proposition~\ref{prop:get-contraction}.
+In summary, the beginning of the integral is bounded by a decaying exponential function of $(\Lambda - \lambda)\delta$, and the end of the integral is bounded by a reciprocal function of $(\Lambda - \lambda)\delta$. That means we can make $|\zeta(a)|^{-(\rho-1)}\,e^{-\Lambda|\zeta(a)|}\,\big|[\volterra\varphi](a)\big|$ as small as we want over all $a \in \far$. This completes our proof of Proposition~\ref{prop:get-contraction}.
 \subsection{Existence and uniqueness of a fixed point \\ \textit{(proof of Lemma~\ref{lem:perturbed_volterra} and Theorem~\ref{thm:general_volterra})}}\label{sec:existence and uniqueness}
 \begin{proof}[Proof of Lemma~\ref{lem:perturbed_volterra}]
 Choose $\Lambda \in \R$ large enough that $\singexp{\rho-1}{\Lambda}(\Omega)$ contains $g$ and is contracted by $\volterra$. Proposition~\ref{prop:get-contraction} and Definition~\ref{def:exp-top} guarantee that this is possible. The affine map $f \mapsto \volterra f + g$ is a contraction of $\singexp{\rho-1}{\Lambda}(\Omega)$, and thus has a unique fixed point in $\singexp{\rho-1}{\Lambda}(\Omega)$ by the contraction mapping theorem.
@@ -812,7 +812,7 @@ where
 \[ R(z^{-1}) = \sum_{j=0}^\infty R_j z^{-j} \]
 converges in the region $|z| > A$.
 \end{enumerate}
-Equations of the form $\mathcal{P}\Phi = 0$ are a sub-class of what Ecalle calls {\em level~1} differential equations~\cite[Section~2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. In an upcoming paper \cite{borel_reg}, we will study various examples of such equations using Laplace transform methods, with the help of our existence and uniqueness result Theorem~\ref{thm:general_volterra}. 
+Equations of the form $\mathcal{P}\Phi = 0$ are a sub-class of what Ecalle calls {\em level~1} differential equations~\cite[Section~2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}. In~\cite{borel_reg}, we study various examples of such equations using Laplace transform methods, with the help of our existence and uniqueness result Theorem~\ref{thm:general_volterra}. 
 \subsection{Notation}\label{sec:notation_alpha}
 So far, we have studied a Volterra equation with a regular singularity at $\zeta = 0$. When we use Laplace transform methods to solve a level~1 differential equation $\mathcal{P}\Phi = 0$ in the frequency domain, we will end up with several Volterra equations $\hat{\mathcal{P}}_\alpha \varphi = 0$ in the position domain, each with a regular singularity at a different root $\zeta = \alpha$ of the polynomial $P(-\zeta)$.
 
@@ -895,7 +895,7 @@ For the Laplace transform to be well-defined, $\domain_\alpha$ must contain the 
 \begin{rmk}\label{rmk:use-dict-explicit}
 To write $\hat{\mathcal{P}}_\alpha$ more explicitly, let $p := P(-\zeta)$ and $q := Q(-\zeta)$, noting that $\zeta = \alpha$ is a root of $p$. Then
 \begin{revtwo}
-\[ \big[\hat{\mathcal{P}}_\alpha\varphi\big](a) = \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta(a')=\alpha}^a k_R(a, a') \, \varphi(a') \, d\zeta(a'), \]
+\[ \big[\hat{\mathcal{P}}_\alpha\varphi\big](a) = \big[ p\, \varphi \big](a) + \int_{\zeta(a')=\alpha}^a q(a') \, \varphi(a') \; d\zeta(a') + \int_{\zeta(a')=\alpha}^a k_R(a, a') \, \varphi(a') \, d\zeta(a'), \]
 \end{revtwo}
 where
 \[ k_R(a,a') := \sum_{j=0}^\infty \frac{R_{j}}{(j+1)!} \, \big(\zeta(a)-\zeta(a')\big)^{j+1} . \]
@@ -920,7 +920,7 @@ of the space $\singexpalg{\tau_\alpha-1}(\domain_\alpha)$.
 \begin{proof}
 To apply Proposition~\ref{prop:alt-general_volterra}, we must rewrite the equation $\hat{\mathcal{P}}_{\alpha}\varphi = 0$ in the form $\varphi = \volterra^\alpha \varphi$, where $\volterra^\alpha$ is a Volterra operator of the kind described in Section~\ref{setting} under the reinterpretation from Section~\ref{sec:notation_alpha}. When $\hat{\mathcal{P}}_\alpha$ is written as in Remark~\ref{rmk:use-dict-explicit}, the equation $\hat{\mathcal{P}}_{\alpha} \varphi = 0$ becomes
 \begin{revtwo}
-\[ \big[ p\, \varphi \big](a) + \int_{\zeta=\alpha}^a q \, \varphi \; d\zeta + \int_{\zeta(a')=\alpha}^a k_R(a, a') \, \varphi(a') \, d\zeta(a') = 0. \]
+\[ \big[ p\, \varphi \big](a) + \int_{\zeta(a')=\alpha}^a q(a') \, \varphi(a') \; d\zeta(a') + \int_{\zeta(a')=\alpha}^a k_R(a, a') \, \varphi(a') \, d\zeta(a') = 0. \]
 \end{revtwo}
 Isolating $p\,\varphi$ on the left and dividing both sides by $p$ yields the equivalent equation
 \begin{revtwo}
