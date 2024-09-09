@@ -484,16 +484,9 @@ If the integral defining $I_a$ is absolutely convergent, then $I_a$ is Borel reg
 \item\label{part-3} The sum of $\series{\iota}_a$ can be analytically continued along the ray $\mathcal{J}_{\zeta, \alpha}^\theta$. Its Laplace transform along that ray is well-defined, and equal to $I_a$.
 \end{enumerate}
 \end{theorem}
-\begin{draft}
-This result confirms the expectations that thimble integrals are equal to the Borel resummation of its asymptotics~\cite[Section~2]{dunne-unsal}. Although the same result is conjectured to hold in higher dimensions, our proof might not straighfowardly generalize, hence we leave the discussion to future works.
-
-Notice also that an alternative proof can be done using Nevanlinna's theorem~\cite{nevanlinna}, but it will require an accurate control of the asymptotics of $I_a$, which should be uniform and 1-Gevrey in a large enough sector. Instead, our approach avoids the analysis of the asymptotics by working in the position domain. In fact, we use that $I_a$ can be regarded as a Laplace trasnform.  
-\end{draft}
-\begin{revised}
 For one-dimensional thimbles, this result confirms the expectation that evaluating a thimble integral should be equivalent to taking the Borel sum of its asymptotic series~\cite[Section~2]{dunne-unsal}. Confirming this expectation in higher dimensions would be an interesting topic for future work, since our argument may not generalize straightforwardly.
 
 As an alternative to our argument, Theorem~\ref{thm:maxim} could be deduced from Nevanlinna's theorem~\cite{nevanlinna}. However, that would require a careful asymptotic analysis of $I_a$: one would have to show that its asymptotic series is $1$-Gevrey and uniformly asymptotic to it on a large enough sector. We avoid this asymptotic analysis by working in the position domain and recasting $I_a$ as a Laplace transform integral.
-\end{revised}
 %
 \subsubsection{Other results}\label{sec:other_results}
 %
@@ -518,7 +511,9 @@ In the literature on Borel summation, the Airy equation has been discussed many 
 %
 \paragraph{Links to resurgence}
 %
-The examples we study all involve {\em resurgent functions} in the position domain. \begin{todo}[Say a tiny bit about what resurgence does or is good for.]\end{todo} The theory of resurgence has been applied extensively to linear ODEs \cite{loday1994stokes,diverg-resurg--ii}, and it has yielded results about non-linear ODEs as well~\cite{costin-PI,costin_kruskal,diverg-resurg-iii,schiappa-PI}. Geometric arguments show that when a thimble integral has a holomorphic Morse function in the exponent, as we have in at least some of our examples, the corresponding function on the position domain is always resurgent~\cite{Maxim_slide_ERC}\cite[Section 6.2]{kontsevich2022analyticity}. Conjecturally, this property extends to more general thimble integrals---perhaps even infinite-dimensional ones \cite[examples~5--6]{Maxim_slide_ERC}. The linear ODEs and $1$-dimensional thimble integrals that we study provide toy examples of how resurgent functions arise and behave. \begin{revised}As a concrete example, in Section~\ref{resurgence-AL}, we use resurgence to find the Stokes constants of the Airy--Lucas equations.\end{revised}
+The examples we study all involve {\em resurgent functions} in the position domain. \begin{draft}
+    The theory of resurgence introduced by \'Ecalle~\cite{EcalleI,EcalleII,EcalleIII}
+\end{draft} \begin{todo}[Say a tiny bit about what resurgence does or is good for.]\end{todo} The theory of resurgence has been applied extensively to linear ODEs \cite{loday1994stokes,diverg-resurg--ii}, and it has yielded results about non-linear ODEs as well~\cite{costin-PI,costin_kruskal,diverg-resurg-iii,schiappa-PI}. Geometric arguments show that when a thimble integral has a holomorphic Morse function in the exponent, as we have in at least some of our examples, the corresponding function on the position domain is always resurgent~\cite{Maxim_slide_ERC}\cite[Section 6.2]{kontsevich2022analyticity}. Conjecturally, this property extends to more general thimble integrals---perhaps even infinite-dimensional ones \cite[examples~5--6]{Maxim_slide_ERC}. The linear ODEs and $1$-dimensional thimble integrals that we study provide toy examples of how resurgent functions arise and behave. \begin{revised}As a concrete example, in Section~\ref{resurgence-AL}, we use resurgence to find the Stokes constants of the Airy--Lucas equations.\end{revised}
 %
 \subsection{Organization of the paper}\label{sec:org}
 %
@@ -860,9 +855,10 @@ The boundary of $\widehat{\Omega}_\alpha^{\varepsilon/2, \Lambda'}$ forms a path
 \newcommand{\spread}{55.5}
 \pgfmathsetmacro{\peakdis}{\dis / cos(\spread)}
 
-%%\newcommand{\pathdis}{1.5625}
-%%\newcommand{\pathoffset}{0.375}
 \newcommand{\pathspread}{35}
+\newcommand{\angmarkrad}{1}
+\newcommand{\distmarkrad}{2.5}
+\pgfmathsetmacro{\bdrydist}{\distmarkrad*sin(\pathspread-\spread)}
 
 \begin{fiber}
 % the region
@@ -874,21 +870,25 @@ The boundary of $\widehat{\Omega}_\alpha^{\varepsilon/2, \Lambda'}$ forms a path
 % the construction lines
 \begin{scope}[pwbeige!80!black]
 \draw (\peakdis, 0) +(-\phase-\spread-90:1.5*\rshade) -- +(0, 0) -- +(-\phase+\spread+90:1.5*\rshade);
+\draw[shorten <=0.3mm, shorten >=0.4mm] (\peakdis, 0) ++(\phase+\spread+90:\angmarkrad) arc[start angle=\phase+\spread+90, delta angle=\pathspread-\spread, radius=\angmarkrad] node [midway, circle, inner sep=1, anchor=-90+0.5*\spread+0.5*\pathspread)] {$\tfrac{\varepsilon}{2}$};
+%%\draw (\peakdis, 0) ++(-\phase-\spread-90:\angmarkrad) arc [start angle=\phase-\spread-90, delta angle=\spread-\pathspread, radius=\angmarkrad] node[midway, circle, inner sep=1, anchor=90-0.5*\spread-0.5*\pathspread] {$\tfrac{\varepsilon}{2}$};
+\draw[shorten >=0.3mm] (\peakdis, 0) ++(\phase+\pathspread+90:\distmarkrad) -- ++(\phase+\spread:\bdrydist) node[midway, circle, inner sep=0, anchor=-90+\spread] {$t \sin(\tfrac{\varepsilon}{2})$};
 \end{scope}
 
 % the path
 \draw[very thick] (\peakdis, 0) +(-\phase-\pathspread-90:\rshade) -- +(0, 0) -- +(-\phase+\pathspread+90:\rshade);
-%%\draw[very thick] (-\phase-\pathspread:\pathdis) +(-\phase-\pathspread-90:\rshade) -- +(0, 0) arc (-\phase-\pathspread:-\phase+\pathspread:\pathdis) -- ++(-\phase+\pathspread+90:\rshade);
+\draw (\peakdis, 0) ++(\phase+\pathspread+90:0.5*\distmarkrad) node[anchor=180+\pathspread] {$t$};
+\draw (\peakdis, 0) ++(\phase+\pathspread+90:\distmarkrad) +(\pathspread:1mm) -- +(180+\pathspread:1mm);
 
 % coordinate label
 \node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$z$};
 \end{fiber}
 \end{tikzpicture}
-\captionof{figure}{The thick, black line is the path $\mathcal{C}$.}\label{fig:ref-path}
+\captionof{figure}{The thick black line is the path $\mathcal{C}$.}\label{fig:ref-path}
 \end{center}
-\begin{old}Parameterize $\mathcal{C}$ using the arc length parameter $t$ which is zero at the midpoint of the circular arc part of $\mathcal{C}$.\end{old} \begin{revised}The path $\mathcal{C}$ is made of two rays, which meet at an angle of $\pi - \Theta + \varepsilon/2$. Parameterize it using the arc length parameter $t$ which is zero where the rays meet. Along $\mathcal{C}$, the distance $\Delta$ to the boundary of $\widehat{\Omega}_\alpha^\Lambda$ satisfies the estimate
-\[ \Delta \ge \sin(\varepsilon/2)\,|t|\,. \]
-On $\Omega_\alpha^\varepsilon \times \mathcal{C}$, we have
+\begin{old}Parameterize $\mathcal{C}$ using the arc length parameter $t$ which is zero at the midpoint of the circular arc part of $\mathcal{C}$.\end{old} \begin{revised}The path $\mathcal{C}$ is made of two rays, which meet at an angle of $\pi - \Theta + \varepsilon$. Parameterize it using the arc length parameter $t$ which is zero where the rays meet. Along $\mathcal{C}$, the distance $\Delta$ to the boundary of $\widehat{\Omega}_\alpha^\Lambda$ satisfies the estimate
+\[ \Delta \ge \sin(\varepsilon/2)\,|t|\,, \]
+as shown in Figure~\ref{fig:ref-path}. On $\Omega_\alpha^\varepsilon \times \mathcal{C}$, we have
 \[ \Re(z\zeta_\alpha) \le |\zeta_\alpha| \big(\Lambda' - \sin(\varepsilon/2)\,|t|\big)\,. \]
 \begin{todo}[Justify bound and add pictures.]\end{todo}\end{revised}
 
@@ -1054,12 +1054,12 @@ where $\zeta'=s\zeta_\alpha$ and consequently $\zeta''=\zeta_\alpha (1-s)$.
 \end{old}
 \begin{revised}
 \begin{align*}
-\phi \ast_{\zeta_\alpha,0} \psi &= \int_{\substack{\mathcal{S}(\zeta_\alpha) \times \mathcal{S}'(\zeta_\alpha) \\ \zeta_\alpha(a) + \zeta(a') = \zeta_\alpha}} \phi(a)\,\psi(a')\,d\zeta_\alpha(a)\\
+\phi \ast_{\zeta_\alpha,0} \psi &= \int_{\substack{\mathcal{S}(\zeta_\alpha) \times \mathcal{S}'(\zeta_\alpha) \\ \zeta_\alpha(a) + \zeta_\alpha(a') = \zeta_\alpha}} \phi(a)\,\psi(a')\,d\zeta_\alpha(a)\\
 &=\zeta_\alpha\,\int_0^1 \phi(a)\,\psi(a')\,ds\,,
 \end{align*}
 where $\zeta_\alpha(a)=s\zeta_\alpha$ and consequently $\zeta_\alpha(a')=(1-s) \zeta_\alpha$.  
 \end{revised}
-First, we show that the convolution product $\phi \ast_{\zeta_\alpha,0} \psi$ is in the domain of the Laplace transform $\laplace_{\zeta_\alpha,0}$. It is uniformly of exponential type $c'' := \max\{c, c'\}$, because
+First, we show that the convolution product $\phi \ast_{\zeta_\alpha,0} \psi$ is in the domain of the Laplace transform $\laplace_{\zeta_\alpha,0}$. \begin{todo}[Right now, we're only assuming that $\phi$ and $\psi$ have well-defined Laplace transforms, which doesn't imply that they're uniformly of exponential type]\end{todo} It is uniformly of exponential type $c'' := \max\{c, c'\}$, because
 \begin{old}
 \begin{align*}
    \big|\phi \ast_{\zeta_\alpha,0} \psi\big|&\leq |\zeta_\alpha|\int_0^1 ds \,|\phi'|\,|\psi''|\\
@@ -1092,7 +1092,7 @@ Then, the Laplace transform of $\phi \ast_{\zeta_\alpha,0} \psi$ reads
        &=\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha\, \int_0^1 \zeta_\alpha\,e^{-z\zeta_\alpha(1-s)} e^{-z s \zeta_\alpha} \phi(a) \psi(a')\,ds 
    \end{align*}      
    \end{revised}
-   by exchanging the order of integration we find
+   by exchanging the order of integration we find \begin{todo}[recalling that $\zeta_\alpha(a') = (1-s)\zeta_\alpha$ on the integration path that defines the convolution]\end{todo}
    \begin{old}
    \begin{align*}
         &=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha\,\zeta_\alpha\,e^{-z\zeta_\alpha(1-s)} e^{-z\zeta_\alpha s} \phi' \psi'' \\
@@ -1163,38 +1163,39 @@ Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transforms $\l
         &=\int_{\mathcal{J}_{\eta'',\beta}}d\eta'' \,e^{-z\eta''}  \psi'' \,\int_{\mathcal{J}_{t,\alpha}} dt\, e^{-zt} \phi\\
    \end{align*}
    where we have introduced the coordinate $t=(\eta''-\beta)\frac{s}{1-s}+\alpha$ which mooves along the ray $\mathcal{J}_{t,\alpha}$ as $s$ varies in $[0,1]$. \begin{todo}[Check claim: as coordinates on the position domain, $t = \eta'$. If true, clarify argument.]\end{todo}
-   \end{old}
-   \begin{revised}
-     Notice that the convolution product can be rewritten by introducing the coordinates $\eta(a)=\zeta(a)-\beta$ and $\eta(a')=\zeta(a')+\beta$
-   \begin{align*}
-       \phi \ast_{\zeta, \alpha+\beta} \psi &= \int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\\
-       &=\int_{\substack{\mathcal{S}(\eta) \times \mathcal{S}'(\eta) \\ \eta(a) + \eta(a') = \zeta}} \phi(a)\,\psi(a')\,d\eta(a)\,,
-   \end{align*}
-   where $\mathcal{S}(\eta)$ is the line segment from $\eta(a)=\alpha$ to $\eta(a)=\zeta_\beta$ and simlarly, $\mathcal{S}'(\eta)$ is the line segment from $\eta(a')=\zeta_\alpha$ to $\eta(a')=\beta$. The coordinate $\eta$ would simplify the computations by showing the dependence on the base point of the Laplace transforms $\laplace_{\zeta,\alpha}[\phi]$ and $\laplace_{\zeta,\beta}[\psi]$.  
+\end{old}
+\begin{revised}
+The convolution product can be rewritten by introducing the coordinates $\zeta_\beta$ and $\zeta_{-\beta}$:
+\begin{align*}
+\phi \ast_{\zeta, \alpha+\beta} \psi &= \int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\\
+&=\int_{\substack{\mathcal{S}(\zeta_{\beta}) \times \mathcal{S}'(\zeta_{-\beta}) \\ \zeta_{\beta}(a) + \zeta_{-\beta}(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\,,
+\end{align*}
+where $\mathcal{S}(\zeta_{\beta})$ is the line segment from $\zeta_\beta(a)=\alpha$ to $\zeta_\beta(a)=\zeta_\beta$ and simlarly, $\mathcal{S}'(\zeta_{-\beta})$ is the line segment from $\zeta_{-\beta}(a')=\zeta_\alpha$ to $\zeta_{-\beta}(a')=\beta$. This change of coordinates simplifies our computations by showing how the convolution product depends on the base points of the Laplace transforms $\laplace_{\zeta,\alpha}[\phi]$ and $\laplace_{\zeta,\beta}[\psi]$.  
    
    Following the argument in the proof of Proposition~\ref{prop:convolution_iso_laplace}, we introduce the parameter $s\in [0,1]$ and we rewrite the convolution  
-    \begin{align*}
-       \phi \ast_{\zeta, \alpha+\beta} \psi
-       &=\int_{\substack{\mathcal{S}(\eta) \times \mathcal{S}'(\eta) \\ \eta(a) + \eta(a') = \zeta}} \phi(a)\,\psi(a')\,d\eta(a)\\
-       &=\zeta_{\alpha+\beta}\,\int_0^1 \phi(a) \psi(a')\,ds\,,
-   \end{align*}
-   \begin{todo}[\textbf{A} Does this expression change when $\theta \neq 0$?]\end{todo} where $\eta(a)=(1-s)\alpha+s\zeta_\beta$ and consequently $\eta(a')=\beta s+(1-s)\zeta_\alpha$. Then, the Laplace transform of $\phi \ast_{\zeta, \alpha} \psi$ reads
-     \begin{align*}
-       \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]&=e^{-z(\alpha+\beta)}\laplace_{\zeta_{\alpha+\beta},0}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]\\
-       &=e^{-z(\alpha+\beta)}\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\,e^{-z\zeta_{\alpha+\beta}}\zeta_{\alpha+\beta}\, \int_0^1 \phi(a) \psi(a')\,ds \\
-       &=e^{-z(\alpha+\beta)}\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\, \int_0^1 \zeta_{\alpha+\beta}\,e^{-z(1-s)\zeta_{\alpha+\beta}} e^{-z s\zeta_{\alpha+\beta}} \phi(a) \psi(a')\,ds 
-   \end{align*}
-   by exchanging the order of integration we find 
-   \begin{align*}
+\begin{align*}
+    \phi \ast_{\zeta, \alpha+\beta} \psi
+    &=\int_{\substack{\mathcal{S}(\zeta_\beta) \times \mathcal{S}'(\zeta_{-\beta}) \\ \zeta_\beta(a) + \zeta_{-\beta}(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\\
+    &=\zeta_{\alpha+\beta}\,\int_0^1 \phi(a) \psi(a')\,ds\,,
+\end{align*}
+\begin{todo}[\textbf{A} Does this expression change when $\theta \neq 0$?]\end{todo} where $\zeta_\beta(a)=(1-s)\alpha+s\zeta_\beta$ and consequently $\zeta_{-\beta}(a')=\beta s+(1-s)\zeta_\alpha$. Then, the Laplace transform of $\phi \ast_{\zeta, \alpha} \psi$ reads
+\begin{align*}
+    \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]&=e^{-z(\alpha+\beta)}\laplace_{\zeta_{\alpha+\beta},0}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]\\
+    &=e^{-z(\alpha+\beta)}\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\,e^{-z\zeta_{\alpha+\beta}}\zeta_{\alpha+\beta}\, \int_0^1 \phi(a)\,\psi(a')\,ds \\
+    &=e^{-z(\alpha+\beta)}\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\, \int_0^1 \zeta_{\alpha+\beta}\,e^{-z(1-s)\zeta_{\alpha+\beta}} e^{-z s\zeta_{\alpha+\beta}} \phi(a)\, \psi(a')\,ds\,.
+\end{align*}
+By exchanging the order of integration we find 
+\begin{align*}
         &=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\,\zeta_{\alpha+\beta}\,e^{-z(\alpha(1-s)+s\zeta_\beta)} e^{-z(\beta s+(1-s)\zeta_\alpha)} \phi(a) \psi(a') \\
-        &=\int_0^1 ds\,\int_{\mathcal{J}_{\eta,\beta}}\frac{d\eta(a')}{(1-s)^2}\,e^{-z\eta(a')} (\eta(a')-\beta) e^{-z( (\eta(a')-\beta) \frac{s}{1-s}+\alpha)} \phi(a) \psi(a')\,,
+        &=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta,\beta}}\frac{d\zeta(a')}{(1-s)^2}\,e^{-z\zeta_{-\beta}(a')} (\zeta_{-\beta}(a')-\beta) e^{-z( (\zeta_{-\beta}(a')-\beta) \frac{s}{1-s}+\alpha)} \phi(a) \psi(a')\,,
    \end{align*}
-   where in the second step we use $d\zeta_{\alpha+\beta}=d\zeta_\alpha=\frac{d\eta(a')}{1-s}$ and $\zeta_{\alpha+\beta}=\frac{\eta(a')-\beta}{1-s}$. Then, exchanging one more time the order of integration we get
+   where in the second step we use $d\zeta_{\alpha+\beta}=d\zeta_\alpha=\frac{d\zeta_{-\beta}(a')}{1-s}$ and $\zeta_{\alpha+\beta}=\frac{\zeta_{-\beta}(a')-\beta}{1-s}$ \begin{todo}[this comes from the expression for $\zeta_{-\beta}(a')$ above, by subtracting $\beta$ from both sides and then rearranging]\end{todo}. Then, exchanging one more time the order of integration we get
     \begin{align*}
-        &=\int_{\mathcal{J}_{\eta,\beta}}d\eta(a') \,e^{-z\eta(a')}  \psi(a') \,\int_0^1 ds\,\frac{\eta(a')-\beta}{(1-s)^2}e^{-z((\eta(a')-\beta) \frac{s}{1-s}+\alpha)} \phi(a)\\
-        &=\int_{\mathcal{J}_{\eta,\beta}}d\eta(a') \,e^{-z\eta(a')}  \psi(a') \,\int_{\mathcal{J}_{\eta,\alpha}} d\eta(a)\, e^{-z\eta(a)} \phi(a)\\
+        &=\int_{\mathcal{J}_{\eta,\beta}}d\zeta(a') \,e^{-z\zeta_{-\beta}(a')}  \psi(a') \,\int_0^1 ds\,\frac{\zeta_{-\beta}(a')-\beta}{(1-s)^2}e^{-z((\zeta_{-\beta}(a')-\beta) \frac{s}{1-s}+\alpha)} \phi(a)\\
+        &=\int_{\mathcal{J}_{\zeta,\beta}}d\zeta(a') \,e^{-z\zeta_{-\beta}(a')}  \psi(a') \,\int_{\mathcal{J}_{\zeta,\alpha}} d\zeta(a)\, e^{-z\zeta_\beta(a)} \phi(a)\\
+         &=\int_{\mathcal{J}_{\zeta,\beta}}d\zeta(a') \,e^{-z\zeta(a')}  \psi(a') \,\int_{\mathcal{J}_{\zeta,\alpha}} d\zeta(a)\, e^{-z\zeta(a)} \phi(a)
    \end{align*}
-   where on the integration path we have $\eta(a)=(\eta(a')-\beta)\frac{s}{1-s}+\alpha$ which mooves along the ray $\mathcal{J}_{\eta,\alpha}$ as $s$ varies in $[0,1]$.   
+   where on the integration path we have $\zeta(a)=(\zeta_{-\beta}(a')-\beta)\frac{s}{1-s}+\alpha$ which mooves along the ray $\mathcal{J}_{\zeta,\alpha}$ as $s$ varies in $[0,1]$.   
    \end{revised}
 \end{proof}
 %
@@ -2683,7 +2684,7 @@ satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega^2
 We can now use the thimble projection formula, as written in equation~\eqref{thimble-difference}, to express the solutions found above as thimble integrals. In terms of the Jacobi elliptic function $\operatorname{sd}$, we have
 \begin{equation}\label{eq:cantilever-thimble}
 V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ -z\,2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \right]\;du,  \end{equation}
-where $a$ is a preimage of $\zeta = \alpha$ under the map $\zeta = 2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big)$. \begin{todo}[Show thimble picture.]\end{todo} Since exponent is doubly periodic, with period lattice $L = \tfrac{1}{\sqrt{2}}\Z + i\Z$, we can take the thimble to be a real submanifold of the torus $\C / L$.
+where $a$ is a preimage of $\zeta = \alpha$ under the map $\zeta = 2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big)$. \begin{todo}[\textbf{A} Show thimble picture.]\end{todo} Since exponent is doubly periodic, with period lattice $L = \tfrac{1}{\sqrt{2}}\Z + i\Z$, we can take the thimble to be a real submanifold of the torus $\C / L$.
 
 To confirm equation~\eqref{eq:cantilever-thimble}, use Jacobi's transformations to rewrite the relationship between $\zeta$ and $u$ in terms of $\operatorname{sn}$.
 \[ \zeta = \omega^{1/2} \operatorname{sn}\big(2i \omega^{1/2} u, i\big). \]
@@ -2715,7 +2716,7 @@ F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u \\
 \frac{d\zeta}{2i \omega \sqrt{1 - \omega^{-2} \zeta^4}} & = du \\
 \frac{1}{2}\left[\frac{d\zeta}{\sqrt{\zeta^4 - \omega^2}}\right] & = du.
 \end{align*}
-\begin{todo}[Explain how symmetry of thimble gives $v_\text{uni}$ under thimble projection formula.]\end{todo}
+\begin{todo}[Note that this presents $V_\alpha$ as the Laplace transform of $v_\text{uni}$.]\end{todo} \begin{todo}[Explain how symmetry of thimble gives $v_\text{uni}$ under thimble projection formula.]\end{todo}
 %\subsection{The anharmonic oscillator}\label{sec:anharmonic_oscillator}
 %
 \appendix
