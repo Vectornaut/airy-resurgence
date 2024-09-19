@@ -1,4 +1,4 @@
-\documentclass[review]{siamart220329}
+\documentclass[final]{siamart220329}
 
 \usepackage{url}
 \usepackage[hmargin=1.5in]{geometry}
@@ -32,8 +32,9 @@
 \newsiamremark{rmk}{Remark}
 
 % list formatting
+\setlist[itemize]{topsep=3mm, itemsep=1.8mm, parsep=1.2mm}
 \newlist{conditions}{itemize}{1}
-\setlist[conditions]{leftmargin=26mm, rightmargin=12mm}
+\setlist[conditions]{leftmargin=26mm, rightmargin=12mm, topsep=2.5mm, itemsep=1.8mm, parsep=1.2mm}
 \makeatletter
 % hat tip TeX.SE user31729
 %   https://tex.stackexchange.com/a/328393/6934
@@ -228,8 +229,10 @@ Take a simply connected open set $\domain \subset \C$ that touches but does not 
 \cond{star}\label{cond:star} The set $\domain$ is star-shaped around $\zeta = 0$. In other words, for any $a \in \domain$, a straight path from $\zeta = 0$ to $a$ stays in $\domain$. Since $\domain$ does not contain $\zeta = 0$, we will always omit that starting point from the path.
 \end{conditions}
 For the applications we have in mind, $\domain$ typically resembles the set pictured below.
+\vspace{2mm}
+
 \begin{center}
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.92]
 \newcommand{\spill}{4}
 \fill[ietcoast!33, bezier bounding box, path fading=radial edge]
   (-\spill, -\spill) (\spill, \spill)
@@ -780,7 +783,9 @@ we rewrite the homogeneous equation we are trying to solve as an inhomogeneous e
 Since we know that $\solproto$ is in $\singexpalg{\tau-1}(\domain)$, Proposition~\ref{prop:smoothing} shows that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\tau-1+\gamma}(\domain)$. Since $\tau+\gamma > \tau$, and we have made all the necessary assumptions about $\volterra$, Lemma~\ref{lem:perturbed_volterra} guarantees that equation~\eqref{eqn:equiv-inhomog} has a unique solution $\solptb$ in $\singexpalg{\tau-1+\gamma}(\Omega)$. Equivalently, equation~\eqref{eqn:orig-homog} has a unique solution $f$ in $f_0 + \singexpalg{\tau-1+\gamma}(\domain)$.
 \end{proof}
 \begin{proof}[Proof of Corollary~\ref{cor:expand_uniq}]
-First, suppose $\rho \in (\tau, \tau+\gamma)$. In this case, the inclusion $\singexpalg{\tau-1+\gamma}(\Omega) \hookrightarrow \singexpalg{\rho-1}(\Omega)$ given by Proposition~\ref{prop:inclus-lt-pow-alg} shows that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\rho-1}(\Omega)$. Lemma~\ref{lem:perturbed_volterra} then guarantees that equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found in $\singexpalg{\tau-1+\gamma}(\Omega)$.
+First, suppose $\rho \in (\tau, \tau+\gamma)$. In this case, the inclusion
+\[\singexpalg{\tau-1+\gamma}(\Omega) \hookrightarrow \singexpalg{\rho-1}(\Omega)\]
+given by Proposition~\ref{prop:inclus-lt-pow-alg} shows that the inhomogeneous term $\softpart\solproto$ is in $\singexpalg{\rho-1}(\Omega)$. Lemma~\ref{lem:perturbed_volterra} then guarantees that equation~\eqref{eqn:equiv-inhomog} has a unique solution in $\singexpalg{\rho-1}(\Omega)$---which must be the solution we already found in $\singexpalg{\tau-1+\gamma}(\Omega)$.
 
 On the other hand, suppose $\rho > \tau+\gamma$. In this case, Proposition~\ref{prop:inclus-lt-pow-alg} gives an inclusion $\singexpalg{\rho-1}(\Omega) \hookrightarrow \singexpalg{\tau-1+\gamma}(\Omega)$. Under this inclusion, any solution of equation~\eqref{eqn:equiv-inhomog} that we might find in $\singexpalg{\rho-1}(\Omega)$ must match the unique solution we found in $\singexpalg{\tau-1+\gamma}(\Omega)$.
 \end{proof}
@@ -961,10 +966,13 @@ It follows that
 -\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} & = \sum_{-\beta \in \roots} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} \\
 & = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,(\zeta(a) - \beta)} + \frac{Q\big(-\zeta(a')\big)}{P'(-\alpha)\,(\zeta(a) - \alpha)}.
 \end{align*}
-Now we expand $Q$ around $-\alpha$, using the decomposition $Q(-\zeta) = Q(-\alpha)+(\zeta-\alpha)\,Q_\alpha(-\zeta)$ to split up the last term of the expression above:
-\begin{equation}\label{eqn:split-numerator}
--\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} = \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} + \frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)} + \frac{Q(-\alpha)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}.
-\end{equation}
+Now we expand $Q$ around $-\alpha$, using the decomposition
+\[ Q(-\zeta) = Q(-\alpha)+(\zeta-\alpha)\,Q_\alpha(-\zeta) \]
+to split up the last term of the expression above:
+\begin{multline}\label{eqn:split-numerator}
+-\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)} = \\
+\sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)} + \frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)} + \frac{Q(-\alpha)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}.    
+\end{multline}
 First, we want to show that $-q/p-\tau_\alpha/(\zeta-\alpha)$ is bounded on a neighborhood of $\zeta = \alpha$ in $\domain_\alpha$. It follows from equation~\eqref{eqn:split-numerator} that
 \begin{align*}
 -\frac{Q(-\zeta)}{P(-\zeta)} & =
@@ -979,8 +987,9 @@ Next, we want to show that for any $\sigma > \tau_\alpha$, the bound
 \[ |\zeta(a) - \alpha| \left|\frac{q(a')}{p(a)}\right| < \sigma \]
 holds when $a$ and $a'$ are close enough to $\zeta = \alpha$. Taking the absolute value of both sides of equation~\eqref{eqn:split-numerator}, and using the assumption that $\tau_\alpha$ is real and positive, we see that
 \begin{align*}
-\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}\right| + \left|\frac{\tau_\alpha}{\zeta(a) - \alpha}\right| \\
-|\zeta(a) - \alpha|\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)}\right| + \tau_\alpha\,.
+\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \\ & \hspace{-15mm} \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{(\zeta(a') - \alpha)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)\,\big(\zeta(a) - \alpha\big)}\right| + \left|\frac{\tau_\alpha}{\zeta(a) - \alpha}\right| \\
+|\zeta(a) - \alpha|\left|\frac{Q\big(-\zeta(a')\big)}{P\big(-\zeta(a)\big)}\right| & \le \\
+& \hspace{-15mm} \sum_{\substack{-\beta \in \roots \\ \beta \neq \alpha}} \left|\frac{Q\big(-\zeta(a')\big)\,\big(\zeta(a) - \alpha\big)}{P'(-\beta)\,\big(\zeta(a) - \beta\big)}\right| + \left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)}\right| + \tau_\alpha\,.
 \end{align*}
 By bringing $\zeta(a')$ closer to $\alpha$, we can make the middle term
 \[\left|\frac{\big(\zeta(a') - \alpha\big)\,Q_\alpha\big(-\zeta(a')\big)}{P'(-\alpha)}\right|\]

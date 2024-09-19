@@ -1,4 +1,3 @@
-%%
 %% This is file `siamart220329.cls', based on article.cls
 %% Revision of siam macros for use with LaTeX 2e
 %% 
