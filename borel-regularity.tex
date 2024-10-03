@@ -177,7 +177,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % hideable draft text
 \newif\ifshowdraft
-\showdraftfalse
+\showdrafttrue
 \ifshowdraft
 \newenvironment{draft}{\color{SlateBlue}}{\color{black}}
 \else
@@ -1056,9 +1056,9 @@ where $\mathcal{S}(\zeta)$ is the line segment from $\zeta(a)=\alpha$ to $\zeta(
 The function $\phi \ast_{\zeta, \alpha} \psi$ is holomorphic, as long as it is well-defined. \begin{todo}[Is it clear the convolution is holomorphic?]\end{todo} On a domain $\Omega_\alpha$ which is star-shaped around $\zeta = \alpha$, the convolution product $\ast_{\zeta, \alpha}$ induces a $\C$-algebra structure on $\singexp{\sigma}{\Lambda}(\Omega_\alpha)$. The Laplace transform $\laplace_{\zeta_\alpha, 0}$ is special, because it is an algebra isomorphism with respect to $\ast_{\zeta_\alpha, 0}$.
 \begin{prop}\label{prop:convolution_iso_laplace}
 \begin{todo}[Replace $\zeta_\alpha$ with $\zeta$ throughout statement and proof, unless there's some obstacle.]\end{todo} Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transform $\laplace_{\zeta_\alpha,0}$ is well defined. Then
-\begin{equation}
-    \laplace_{\zeta_\alpha,0}[\phi\ast_{\zeta_\alpha,0}\psi]=\laplace_{\zeta_\alpha,0}[\phi]\,\laplace_{\zeta_\alpha,0}[\psi]\,.
-\end{equation}
+\begin{equation*}
+\laplace_{\zeta_\alpha,0}[\phi\ast_{\zeta_\alpha,0}\psi]=\laplace_{\zeta_\alpha,0}[\phi]\,\laplace_{\zeta_\alpha,0}[\psi]\,.
+\end{equation*}
 \end{prop}
 \begin{proof}
 \begin{todo}Check whether anything would change for non-zero $\theta$.\end{todo} Notice that the convolution product can be rewritten by introducing the parameter $s\in [0,1]$
@@ -1105,20 +1105,49 @@ where as $s$ varies in $[0,1]$ we get that $a$ follows the ray $\mathcal{J}_{\ze
 More generally we can show that the product of two Laplace transforms based at different points is the Laplace transform of the convolution.
 \begin{prop}
 Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transforms $\laplace_{\zeta,\alpha}\phi$ and $\laplace_{\zeta,\beta}\psi$ are well defined. Then 
-\begin{equation}
-    \laplace_{\zeta,\alpha+\beta}[\phi\ast_{\zeta,\alpha+\beta}\psi]=\laplace_{\zeta,\alpha}[\phi]\,\laplace_{\zeta,\beta}[\psi]\,.
+\begin{equation}\label{eqn:gen-laplace-convol}
+\laplace_{\zeta,\alpha+\beta}[\phi \ast_{\zeta,\alpha+\beta} \psi] = \laplace_{\zeta,\alpha}[\phi]\,\laplace_{\zeta,\beta}[\psi]\,.
 \end{equation}    
 \end{prop}
 \begin{proof}
 \begin{todo}
 [\textbf{V} add $\theta$, or explain that it's missing, Fix proof] [\textbf{A} read through proof]
 \end{todo}
+\begin{draft}
+The left-hand side of equation~\eqref{eqn:gen-laplace-convol} expands to
+\[ \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}] = \int_{\mathcal{J}_{\zeta, \alpha+\beta}} d\zeta\,e^{-z\zeta}\int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}}  \phi(a)\,\psi(a')\, d\zeta(a)\,. \]
+In the convolution integral, $a$ follows the straight path $\mathcal{S}(\zeta)$ where $\zeta(a)$ runs from $\alpha+\beta$ to $\zeta$, while $a'$ follows the straight path $\mathcal{S}'(\zeta)$ where $\zeta(a')$ runs from $\zeta - (\alpha + \beta)$ to $0$.
+
+The convolution and Laplace integrals can be combined into an integral over a real two-dimensional wedge $\mathcal{N}$ within the complex three-dimensional space $B^3$:
+\[ \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}] = \int_\mathcal{M} e^{-z\zeta}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta\,. \]
+The coordinates $\zeta(a)$, $\zeta(a')$, $\zeta$ parameterize $B^3$, and the real wedge $\mathcal{N}$ lies within the complex surface cut out by the equation equation $\zeta(a) + \zeta(a') = \zeta$. Thus, on $\mathcal{N}$, we have the identity
+\begin{align*}
+d\zeta(a) + d\zeta(a') & = d\zeta \\
+d\zeta(a) \wedge \big[d\zeta(a) + d\zeta(a')\big] & = d\zeta(a) \wedge d\zeta \\
+d\zeta(a) \wedge d\zeta(a') & = d\zeta(a) \wedge d\zeta\,,
+\end{align*}
+which we can substitute into the integral above to get
+\begin{align*}
+\laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}] & = \int_\mathcal{M} e^{-z[\zeta(a) + \zeta(a')]}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta(a') \\
+& = \int_\mathcal{M} \left[ e^{-z\zeta(a)}\,\phi(a)\,d\zeta(a) \right] \wedge \left[ e^{z\zeta(a')}\,\psi(a')\,d\zeta(a') \right]\,.
+\end{align*}
+\begin{todo}Now we need to explain why the grid lines can be projected to $\mathcal{J}_{\zeta(a), \alpha}$ and $\mathcal{J}_{\zeta(a'), \beta}$. Something seems off here. The tip of the wedge $\mathcal{N}$ should be at $\zeta = \alpha + \beta$, since that's the beginning of the ray $\mathcal{J}_{\zeta, \alpha + \beta}$. At that point, though, according to our definitions, $\mathcal{S}(\zeta)$ should consist of the point $\zeta(a) = \alpha + \beta$, and $\mathcal{S}'(\zeta)$ should consist of the point $\zeta(a') = 0$.
+
+In my drawings, I assumed that the tip of the wedge $\mathcal{N}$ would be at the point where $\zeta(a) = \alpha$, $\zeta(a') = \beta$, and $\zeta = \alpha + \beta$. Now I'm skeptical about that. Is that point even in $\mathcal{N}$? If so, what distinguishes it from all the other points on the line $\zeta(a) + \zeta(a') = \alpha + \beta$? Since $\alpha$ and $\beta$ can vary without changing the left-hand side of equation~\eqref{eqn:gen-laplace-convol}, we must need to make a choice somewhere\ldots
+
+Maybe me actually need to change the statement? I think the argument might wrap up neatly if the convolution on the left-hand side were $\phi \ast_{\zeta_\alpha, \beta} \psi$ instead.
+\end{todo}
+\begin{align*}
+\laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}] & = \int_{?} e^{-z\zeta(a)}\,\phi(a)\,d\zeta(a) \int_{?} e^{z\zeta(a')}\,\psi(a')\,d\zeta(a')
+\end{align*}
+\end{draft}
+
 \color{violet}
 In the convolution integral, $a$ and $a'$ move so that $\zeta(a)$ runs from $\alpha+\beta$ to $\zeta$ while $\zeta(a')$ goes from $\zeta_{\alpha+\beta}$ to $0$.
 
 
 \begin{align*}
-    \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]&=\int_{\mathcal{J}_{\zeta,\alpha+\beta}}d\zeta\,e^{-z\zeta}\int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}}  \phi(a)\, \psi(a')\, d\zeta(a)
+\laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]&=\int_{\mathcal{J}_{\zeta,\alpha+\beta}}d\zeta\,e^{-z\zeta}\int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}}  \phi(a)\, \psi(a')\, d\zeta(a)
 \end{align*}
 
 Equivalently, $a$ and $a'$ move so that $\zeta_{\textcolor{magenta}{\alpha}}(a)$ runs from $\zeta_{\alpha+\beta}$ to $0$ while $\zeta_{\textcolor{magenta}{\beta}}(a')$ goes from $\zeta$ to $0$. In particular, we introduce the parameter $s\in [0,1]$ so that $\zeta(a)=(1-s)(\alpha+\beta)+s\zeta-\beta$ and $\zeta(a')=(1-s)\zeta+\beta$. 
@@ -1130,8 +1159,8 @@ The convolution product can be rewritten by introducing the coordinates $\zeta_\
 &=\int_{\substack{\mathcal{S}(\zeta_{\beta}) \times \mathcal{S}'(\zeta_{-\beta}) \\ \zeta_{\beta}(a) + \zeta_{-\beta}(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\,,
 \end{align*}
 where $\mathcal{S}(\zeta_{\beta})$ is the line segment from $\zeta_\beta(a)=\alpha$ to $\zeta_\beta(a)=\zeta_\beta$ and similarly, $\mathcal{S}'(\zeta_{-\beta})$ is the line segment from $\zeta_{-\beta}(a')=\zeta_\alpha$ to $\zeta_{-\beta}(a')=\beta$. This change of coordinates simplifies our computations by showing how the convolution product depends on the base points of the Laplace transforms $\laplace_{\zeta,\alpha}[\phi]$ and $\laplace_{\zeta,\beta}[\psi]$.  
-   
-   Following the argument in the proof of Proposition~\ref{prop:convolution_iso_laplace}, we introduce the parameter $s\in [0,1]$ and we rewrite the convolution  
+
+Following the argument in the proof of Proposition~\ref{prop:convolution_iso_laplace}, we introduce the parameter $s\in [0,1]$ and we rewrite the convolution  
 \begin{align*}
     \phi \ast_{\zeta, \alpha+\beta} \psi
     &=\int_{\substack{\mathcal{S}(\zeta_\beta) \times \mathcal{S}'(\zeta_{-\beta}) \\ \zeta_\beta(a) + \zeta_{-\beta}(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\\
