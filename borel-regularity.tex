@@ -1055,30 +1055,37 @@ where $\mathcal{S}(\zeta)$ is the line segment from $\zeta(a)=\alpha$ to $\zeta(
 \end{definition}
 \color{Turquoise}
 \begin{definition}\label{def:convolution}
-Let $\phi\in\singexpalg{\sigma}(\Omega_\alpha),\psi\in\singexpalg{\sigma'}(\Omega_\beta)$ . Choose a translation coordinate $\zeta$ on $B$ and a base point $\zeta = \gamma$. The convolution product $\phi\ast_{\zeta,\gamma}\psi$ is the function on $B$ defined by the integral
+Choose $\phi \in \singexpalg{\sigma}(\Omega_\alpha),\psi \in \singexpalg{\sigma'}(\Omega_\beta)$ \begin{todo}[refine]\end{todo}. Choose a translation coordinate $\zeta$ on $B$. The convolution product $\phi \ast_{\zeta, \alpha, \beta} \psi$ is the function on $B$ defined by the integral
 \begin{equation}%%\label{eq:convolution_def}
-\phi \ast_{\zeta, \gamma} \psi \defeq \int_{\substack{\mathcal{S}(\zeta_\alpha)\times\mathcal{S}'(\zeta_\beta)\\ \zeta_\alpha(a)+\zeta_\beta(a')=\zeta}} \phi(a)\,\psi(a')\,d\zeta(a),
+\phi \ast_{\zeta, \alpha, \beta} \psi \defeq \int_{\mathcal{S}_{\zeta, \alpha, \beta}} \phi(a)\,\psi(a')\,d\zeta(a)\,,
 \end{equation}
-where $\mathcal{S}(\zeta_\alpha)$ is the line segment from $\zeta_\alpha(a)=\gamma$ to $\zeta_\alpha(a)=\zeta$, and $\mathcal{S}'(\zeta_\beta)$ is the line segment from $\zeta_\beta(a')=\zeta-\gamma$ to $\zeta_\beta(a')=0$.
+where $\mathcal{S}_{\zeta, \alpha, \beta}$ is the path $[0, 1] \to B^2$ given by
+\begin{align*}
+\zeta_\alpha(a) & = t\zeta_{\alpha+\beta} \\
+\zeta_\beta(a') & = (1-t)\zeta_{\alpha+\beta}
+\end{align*}
+in terms of the standard coordinate $t$ on $[0, 1]$.
+
+
+%%line segment in $B^2$ where $\zeta_\alpha(a)$ goes from $0$ to $\zeta_{\alpha + \beta}$ and $\zeta_\beta(a')$ goes from $\zeta_{\alpha + \beta}$ to $0$ with $\zeta(a) + \zeta(a') = \zeta$ at all times.
+
+%%where $\mathcal{S}(\zeta_\alpha)$ is the line segment from $\zeta_\alpha(a)=0$ to $\zeta_\alpha(a) = \zeta_{\alpha + \beta}$, and $\mathcal{S}'(\zeta_\beta)$ is the line segment from $\zeta_\beta(a') = \zeta_{\alpha + \beta}$ to $\zeta_\beta(a') = 0$.
 \end{definition}
 \color{black}
 \begin{revised}
 \begin{lemma}
-Take $\phi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ and $\psi\in\singexp{\sigma'}{\Lambda'}(\Omega_\beta)$, with $\sigma,\sigma'\in (-1,\infty)$. The convolution $\phi\ast_{\zeta,\alpha+\beta}\psi$ belongs to $\singexp{\sigma''}{\Lambda''}(\Omega_{\alpha+\beta})$, where $\Lambda'' = \Lambda + \Lambda'$ and $\sigma'' = 1 + \sigma + \sigma'$.  \end{lemma}    
+Take $\phi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ and $\psi\in\singexp{\sigma'}{\Lambda'}(\Omega_\beta)$, with $\sigma,\sigma'\in (-1,\infty)$. The convolution $\phi\ast_{\zeta,\alpha,\beta}\psi$ belongs to $\singexp{\sigma''}{\Lambda''}(\Omega_{\alpha+\beta})$, where $\Lambda'' = \Lambda + \Lambda'$ and $\sigma'' = 1+\sigma+\sigma'$.  \end{lemma}    
 \begin{proof}
 \begin{align*}
-\left|\phi\ast_{\zeta,\alpha}\psi\right|&\le\int_{\substack{\mathcal{S}(\zeta)\times\mathcal{S}'(\zeta)\\ \zeta(a)+\zeta(a')=\zeta}} |\phi(a)|\,|\psi(a')|\,|d\zeta(a)| \\
-& = \int_{\substack{\mathcal{S}(\zeta_\alpha)\times\mathcal{S}'(\zeta)\\ \zeta_\alpha(a)+\zeta(a')=\zeta_\alpha}} |\phi(a)|\,|\psi(a')|\,|d\zeta_\alpha(a)|\,,
+\left|\phi\ast_{\zeta,\alpha,\beta}\psi\right|&\le\int_{\mathcal{S}_{\zeta,\alpha,\beta}} |\phi(a)|\,|\psi(a')|\,|d\zeta(a)| \\
+& = \int_0^1|\phi(a)|\,|\psi(a')|\,|\zeta_{\alpha+\beta}| dt\,,
 \end{align*}
-where $\mathcal{S}(\zeta_\alpha)$ is the line segment from $\zeta_\alpha(a)=0$ to $\zeta_\alpha(a)=\zeta_\alpha$, and $\mathcal{S}'(\zeta)$ is the line segment from $\zeta(a')=\zeta_\alpha$ to $\zeta(a')=0$. We introduce the variable $s\in[0,1]$ such that $\zeta_\alpha(a)=s\zeta_\alpha$ and $\zeta_\alpha(a')=(1-s)\zeta_\alpha$:
-\begin{align*}
-  \int_{\substack{\mathcal{S}(\zeta_\alpha)\times\mathcal{S}'(\zeta)\\ \zeta_\alpha(a)+\zeta(a')=\zeta_\alpha}} |\phi(a)|\,|\psi(a')|\,|d\zeta_\alpha(a)|&= |\zeta_\alpha|\int_0^1 |\phi(a)|\,|\psi(a')|\, ds\,.
-\end{align*}
+where we use $d\zeta(a)=d\zeta_\alpha(a)=d(t\zeta_{\alpha+\beta})=\zeta_{\alpha+\beta}\,dt$. 
 Since $\phi$ and $\psi$ have bounded norms,
 \begin{align*}
-|\zeta_\alpha|\int_0^1 |\phi(a)|\,|\psi(a')|\, ds&\le \|\phi\|_{\sigma,\Lambda} \|\psi\|_{\sigma',\Lambda'} |\zeta_\alpha|^{1+\sigma+\sigma'}\int_0^1  |s|^{\sigma}e^{\Lambda s |\zeta_\alpha|}\,|1-s|^{\sigma'}e^{\Lambda' (1-s)|\zeta_\alpha|}\,ds\\
-&\lesssim |\zeta_\alpha| ^{1+\sigma+\sigma'} e^{(\Lambda+\Lambda')|\zeta_\alpha|}\int_0^1  s^{\sigma}\,(1-s)^{\sigma'}\,ds\\
-&=\lesssim |\zeta_\alpha| ^{1+\sigma+\sigma'} e^{(\Lambda+\Lambda')|\zeta_\alpha|}\,.
+|\zeta_{\alpha+\beta}|\int_0^1 |\phi(a)|\,|\psi(a')|\, dt&\le \|\phi\|_{\sigma,\Lambda} \|\psi\|_{\sigma',\Lambda'} |\zeta_{\alpha+\beta}|^{1+\sigma+\sigma'}\int_0^1  |t|^{\sigma}e^{\Lambda t |\zeta_{\alpha+\beta}|}\,|1-t|^{\sigma'}e^{\Lambda' (1-t)|\zeta_{\alpha+\beta}|}\,dt\\
+&\lesssim |\zeta_{\alpha+\beta}| ^{1+\sigma+\sigma'} e^{(\Lambda+\Lambda')|\zeta_{\alpha+\beta}|}\int_0^1  t^{\sigma}\,(1-t)^{\sigma'}\,dt\\
+&\lesssim |\zeta_{\alpha+\beta}| ^{1+\sigma+\sigma'} e^{(\Lambda+\Lambda')|\zeta_{\alpha+\beta}|}\,.
 \end{align*}
 \end{proof}
 \end{revised}
