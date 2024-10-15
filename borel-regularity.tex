@@ -800,8 +800,6 @@ we get the desired result.
 %
 \subsubsection{Regularity and decay properties}\label{sec:reg-decay}
 %
-%% \textcolor{orange}{[Revise]} Let $\Omega_\beta \subset B$ be an open, simply connected set that touches but does not contain $\zeta = \beta$, as shown \textcolor{RoyalBlue}{(see Figure \ref{Fig:domain})}. Suppose $\Omega_\beta$ contains the ray $\mathcal{J}_{\zeta, \beta}^\theta$. In \cite{reg-sing-volterra} we introduce the function space $\singexp{\sigma}{\Lambda}(\Omega_\beta)$ of holomorphic functions on $\Omega_\beta$ which are uniformly of exponential type $\Lambda$ and blow up like $|\zeta - \beta|^\sigma$ as $\zeta$ approaches $\beta$. When $\sigma>-1$, the singularity at $\zeta = \beta$ is integrable. Hence, the Laplace transform $\laplace_{\zeta, \beta}^\theta$ turns elements of $\singexp{\sigma}{\Lambda}(\Omega_\beta)$ into well-defined holomorphic functions on the half-plane $\Re(e^{i\theta} z) > \Lambda$ in the cotangent space $T_{\zeta = \beta}^*B$~\cite[Section  5.6]{diverg-resurg-i}.
-%%
 Suppose $\Omega_\alpha$ is an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. For any $\Lambda \in \R$, let $\widehat{\Omega}_\alpha^\Lambda$ be the union of the half-planes $\Re(e^{i\theta} z) > \Lambda$ over all angles $\theta$ in the opening of $\Omega_\alpha$.
 \begin{center}
 \begin{tikzpicture}
@@ -1053,9 +1051,8 @@ The Laplace transform $\laplace_{\zeta,\alpha}$ is defined on the space of holom
 % \end{equation}
 % where $\mathcal{S}(\zeta)$ is the line segment from $\zeta(a)=\alpha$ to $\zeta(a)=\zeta$, and $\mathcal{S}'(\zeta)$ is the line segment from $\zeta(a')=\zeta-\alpha$ to $\zeta(a')=0$.
 % \end{definition}
-\color{Turquoise}
 \begin{definition}\label{def:convolution}
-Choose $\phi \in \singexpalg{\sigma}(\Omega_\alpha),\psi \in \singexpalg{\sigma'}(\Omega_\beta)$ \begin{todo}[refine]\end{todo}. Choose a translation coordinate $\zeta$ on $B$. The convolution product $\phi \ast_{\zeta, \alpha, \beta} \psi$ is the function on $B$ defined by the integral
+Choose a translation coordinate $\zeta$ on $B$. Let $\Omega_\alpha \subset B$ be an open set with the point $\zeta = \alpha$ on its boundary, and let $\Omega_\beta \subset B$ be an open set with $\zeta = \beta$ on its boundary. For any $\phi \in \singexpalg{\sigma}(\Omega_\alpha)$ and $\psi \in \singexpalg{\sigma'}(\Omega_\beta)$, the convolution product $\phi \ast_{\zeta, \alpha, \beta} \psi$ is the function on $B$ defined by the integral
 \begin{equation}%%\label{eq:convolution_def}
 \phi \ast_{\zeta, \alpha, \beta} \psi \defeq \int_{\mathcal{S}_{\zeta, \alpha, \beta}} \phi(a)\,\psi(a')\,d\zeta(a)\,,
 \end{equation}
@@ -1066,17 +1063,12 @@ where $\mathcal{S}_{\zeta, \alpha, \beta}$ is the path $[0, 1] \to B^2$ given by
 \end{align*}
 in terms of the standard coordinate $t$ on $[0, 1]$.
 \end{definition}
-\color{black}
 \begin{notation*}
  When $\alpha=\beta$ we denote $\ast_{\zeta,\alpha,\beta}$ simply by $\ast_{\zeta,\alpha}$. For $\alpha=\beta=0$, Definition~\ref{def:convolution} agrees with the standard definition of convolution \cite[Definition~5.12]{diverg-resurg-i}, so we will denote $\ast_{\zeta,0}$ simply by $\ast_\zeta$. \begin{todo}[Make sure we've added the coordinate to $\ast$ everywhere else too.]\end{todo}   
 \end{notation*}
-
-%%line segment in $B^2$ where $\zeta_\alpha(a)$ goes from $0$ to $\zeta_{\alpha + \beta}$ and $\zeta_\beta(a')$ goes from $\zeta_{\alpha + \beta}$ to $0$ with $\zeta(a) + \zeta(a') = \zeta$ at all times.
-
-%%where $\mathcal{S}(\zeta_\alpha)$ is the line segment from $\zeta_\alpha(a)=0$ to $\zeta_\alpha(a) = \zeta_{\alpha + \beta}$, and $\mathcal{S}'(\zeta_\beta)$ is the line segment from $\zeta_\beta(a') = \zeta_{\alpha + \beta}$ to $\zeta_\beta(a') = 0$.
-\begin{revised}
 \begin{lemma}
-Take $\phi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ and $\psi\in\singexp{\sigma'}{\Lambda'}(\Omega_\beta)$, with $\sigma,\sigma'\in (-1,\infty)$. The convolution $\phi\ast_{\zeta,\alpha,\beta}\psi$ belongs to $\singexp{\sigma''}{\Lambda''}(\Omega_{\alpha+\beta})$, where $\Lambda'' = \Lambda + \Lambda'$ and $\sigma'' = 1+\sigma+\sigma'$.  \end{lemma}    
+Take $\phi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ and $\psi\in\singexp{\sigma'}{\Lambda'}(\Omega_\beta)$, with $\sigma,\sigma'\in (-1,\infty)$. The convolution $\phi\ast_{\zeta,\alpha,\beta}\psi$ belongs to $\singexp{\sigma''}{\Lambda''}(\Omega_{\alpha+\beta})$, where $\Lambda'' = \Lambda + \Lambda'$ and $\sigma'' = 1+\sigma+\sigma'$.
+\end{lemma}    
 \begin{proof}
 \begin{align*}
 \left|\phi\ast_{\zeta,\alpha,\beta}\psi\right|&\le\int_{\mathcal{S}_{\zeta,\alpha,\beta}} |\phi(a)|\,|\psi(a')|\,|d\zeta(a)| \\
@@ -1091,89 +1083,17 @@ Since $\phi$ and $\psi$ have bounded norms,
 &\lesssim |\zeta_{\alpha+\beta}| ^{1+\sigma+\sigma'} e^{(\Lambda+\Lambda')|\zeta_{\alpha+\beta}|}\,.
 \end{align*}
 \end{proof}
-\end{revised}
-\begin{old}
-The function $\phi \ast_{\zeta, \alpha} \psi$ is holomorphic, as long as it is well-defined.\end{old} 
-% \begin{prop}\label{prop:convolution_iso_laplace}
-% For any two functions $\phi \in \singexpalg{\sigma}(\Omega)$ and $\psi \in \singexpalg{\sigma'}(\Omega)$, with $\sigma, \sigma' \in (-1, \infty)$, we have
-% \begin{equation}\label{eqn:laplace-convol1}
-% \laplace_{\zeta,0}[\phi\ast_{\zeta,0}\psi]=\laplace_{\zeta,0}[\phi]\,\laplace_{\zeta,0}[\psi]\,.
-% \end{equation}
-% \begin{todo}
-% Add assumption that the Laplace transform of the convolution is well defined. I think we could simply assume $\phi,\psi$ being of exponential type.    
-% \end{todo}
-% \end{prop}
-% \begin{proof}
-% \begin{revised}
-% The left-hand side of equation~\eqref{eqn:laplace-convol1} expands to
-% \[ \laplace_{\zeta,0}[{\phi}\ast_{\zeta, 0}{\psi}] = \int_{\mathcal{J}_{\zeta, 0}} d\zeta\,e^{-z\zeta}\int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}}  \phi(a)\,\psi(a')\, d\zeta(a)\,. \]
-% In the convolution integral, $a$ follows the straight path $\mathcal{S}(\zeta)$ where $\zeta(a)$ runs from $0$ to $\zeta$, while $a'$ follows the straight path $\mathcal{S}'(\zeta)$ where $\zeta(a')$ runs from $\zeta$ to $0$.
-
-% The convolution and Laplace integrals can be combined into an integral over a real two-dimensional wedge $\mathcal{N}$ within the complex three-dimensional space $B^3$:
-% \[ \laplace_{\zeta,0}[{\phi}\ast_{\zeta, 0}{\psi}] = \int_\mathcal{N} e^{-z\zeta}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta\,. \]
-% The coordinates $\zeta(a)$, $\zeta(a')$, $\zeta$ parameterize $B^3$, and the real wedge $\mathcal{N}$ lies within the complex surface cut out by the equation equation $\zeta(a) + \zeta(a') = \zeta$. Thus, on $\mathcal{N}$, we have the identity
-% \begin{align*}
-% d\zeta(a) + d\zeta(a') & = d\zeta \\
-% d\zeta(a) \wedge \big[d\zeta(a) + d\zeta(a')\big] & = d\zeta(a) \wedge d\zeta\\
-% d\zeta(a) \wedge d\zeta(a') & = d\zeta(a) \wedge d\zeta\,,
-% \end{align*}
-% which we can substitute into the integral above to get
-% \begin{align*}
-% \laplace_{\zeta,0}[{\phi}\ast_{\zeta,0}{\psi}] & = \int_\mathcal{N} e^{-z[\zeta(a) + \zeta(a')]}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta(a') \\
-% & = \int_\mathcal{N} \left[ e^{-z\zeta(a)}\,\phi(a)\,d\zeta(a) \right] \wedge \left[ e^{-z\zeta(a')}\,\psi(a')\,d\zeta(a') \right]\,.
-% \end{align*}
-
-% By construction, the range of $\zeta$ on $\mathcal{N}$ is $[0, \infty)$. From the definitions of the paths $\mathcal{S}(\zeta)$ and $\mathcal{S}'(\zeta)$, it follows that the ranges of $\zeta(a)$ and $\zeta(a')$ on $\mathcal{N}$ are also both $[0, \infty)$. In fact, projection onto the $a$ and $a'$ factors of $B^3$ identifies $\mathcal{N}$ with $\mathcal{J}_{\zeta(a), 0} \times \mathcal{J}_{\zeta(a'), 0} \subset B^2$. We can therefore factorize the integral above using Fubini's theorem, yielding the desired identity:
-% \begin{align*}
-% \laplace_{\zeta,0}[{\phi}\ast_{\zeta,0}{\psi}] & = \left[ \int_{\mathcal{J}_{\zeta(a), 0}} e^{-z\zeta(a)}\,\phi(a)\,d\zeta(a) \right] \left[ \int_{\mathcal{J}_{\zeta(a'), 0}} e^{-z\zeta(a')}\,\psi(a')\,d\zeta(a') \right]\,.
-% \end{align*}
-% \end{revised}
-% \begin{old}
-% \begin{todo}Check whether anything would change for non-zero $\theta$.\end{todo} Notice that the convolution product can be rewritten by introducing the parameter $s\in [0,1]$
-% \begin{align*}
-% \phi \ast_{\zeta_\alpha,0} \psi &= \int_{\substack{\mathcal{S}(\zeta_\alpha) \times \mathcal{S}'(\zeta_\alpha) \\ \zeta_\alpha(a) + \zeta_\alpha(a') = \zeta_\alpha}} \phi(a)\,\psi(a')\,d\zeta_\alpha(a)\\
-% &=\zeta_\alpha\,\int_0^1 \phi(a)\,\psi(a')\,ds\,,
-% \end{align*}
-% where $\zeta_\alpha(a)=s\zeta_\alpha$ and consequently $\zeta_\alpha(a')=(1-s) \zeta_\alpha$.  
-% First, we show that the convolution product $\phi \ast_{\zeta_\alpha,0} \psi$ is in the domain of the Laplace transform $\laplace_{\zeta_\alpha,0}$. \begin{todo}[Right now, we're only assuming that $\phi$ and $\psi$ have well-defined Laplace transforms, which doesn't imply that they're uniformly of exponential type]\end{todo} It is uniformly of exponential type $c'' := \max\{c, c'\}$, because
-% \begin{align*}
-% \big|\phi \ast_{\zeta_\alpha,0} \psi\big|&\leq |\zeta_\alpha|\int_0^1 ds \,|\phi(a)|\,|\psi(a')|\\
-% &\lesssim |\zeta_\alpha| \int_0^1 ds\, e^{c |\alpha+s\zeta_\alpha|}\,e^{c'|(1-s)\zeta_\alpha|}\\
-% & \lesssim |\zeta_\alpha|  e^{c'' |\zeta_\alpha|}\,.
-% \end{align*}    
-% Note that if $\phi$ and $\psi$ have integrable singularities at $\zeta_\alpha = 0$, the product $\phi(a)\,\psi(a')$ has both singularities, but in different positions---one at $s = 0$, and the other at $s = 1$. This guarantees that $\phi(a)\,\psi(a')$ is integrable over the interval $s \in [0, 1]$.
-% %   
-% Then, the Laplace transform of $\phi \ast_{\zeta_\alpha,0} \psi$ reads
-% \begin{align*}
-% \laplace_{\zeta_\alpha,0}[{\phi}\ast_{\zeta_\alpha,0}{\psi}]&=\laplace_{\zeta_\alpha,0}[{\phi}\ast_{\zeta_\alpha,0}{\psi}]\\
-% &=\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha\,e^{-z\zeta_\alpha}\zeta_\alpha\, \int_0^1 \phi(a) \psi(a')\,ds \\
-% &=\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha\, \int_0^1 \zeta_\alpha\,e^{-z\zeta_\alpha(1-s)} e^{-z s \zeta_\alpha} \phi(a) \psi(a')\,ds 
-% \end{align*}      
-% by exchanging the order of integration we find \begin{todo}[recalling that $\zeta_\alpha(a') = (1-s)\zeta_\alpha$ on the integration path that defines the convolution]\end{todo}
-% \begin{align*}
-% &=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha\,\zeta_\alpha\,e^{-z\zeta_\alpha(1-s)} e^{-z\zeta_\alpha s} \phi(a) \psi(a') \\
-% &=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha(a')\,\frac{\zeta_\alpha(a')}{(1-s)^2}\,e^{-z\zeta_\alpha(a')} e^{-z\zeta_\alpha(a') \frac{s}{1-s}} \phi(a)\,\psi(a') 
-% \end{align*}    
-% Using that $\zeta_\alpha(a)=\zeta_\alpha(a')\frac{s}{1-s}$ holds on the integration contour, we find
-% \begin{align*}
-% &=\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha(a') \,e^{-z\zeta_\alpha(a')}  \psi(a')\,\int_0^1 ds\,\frac{\zeta_\alpha(a')}{(1-s)^2}e^{-z\zeta_\alpha(a') \frac{s}{1-s}} \phi(a)\\
-% &=\int_{\mathcal{J}_{\zeta_\alpha,0}}d\zeta_\alpha(a') \,e^{-z\zeta_\alpha(a')}  \psi(a') \,\int_{\mathcal{J}_{\zeta_\alpha,0}} d\zeta_\alpha(a)\, e^{-z\zeta_\alpha(a)} \phi(a)\\
-% \end{align*} 
-% where as $s$ varies in $[0,1]$ we get that $a$ follows the ray $\mathcal{J}_{\zeta_\alpha,0}$ \begin{todo}[check this statement]\end{todo}.
-% \end{old}
-% \end{proof}
-We can show that the product of two Laplace transforms based at different points is the Laplace transform of the convolution.
+The product of two Laplace transforms based at different points is the Laplace transform of the convolution.
 \begin{prop}
-Take $\phi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ and $\psi\in\singexp{\sigma'}{\Lambda'}(\Omega_\beta)$, with $\sigma,\sigma'\in (-1,\infty)$.\begin{old}Let $\phi,\psi$ be two holomorphic functions on $B$ whose Laplace transforms $\laplace_{\zeta,\alpha}\phi$ and $\laplace_{\zeta,\beta}\psi$ are well defined.\end{old} Then 
+For any $\phi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ and $\psi\in\singexp{\sigma'}{\Lambda'}(\Omega_\beta)$ with $\sigma,\sigma'\in (-1,\infty)$, we have
 \begin{equation}\label{eqn:gen-laplace-convol}
-\laplace_{\zeta,\alpha+\beta}[\phi \ast_{\zeta,\alpha,\beta} \psi] = \laplace_{\zeta,\alpha}[\phi]\,\laplace_{\zeta,\beta}[\psi]\,.
+\laplace^\theta_{\zeta,\alpha+\beta}[\phi \ast_{\zeta,\alpha,\beta} \psi] = \laplace^\theta_{\zeta,\alpha}[\phi]\,\laplace^\theta_{\zeta,\beta}[\psi]\,.
 \end{equation}    
 \end{prop}
+More generally, this proposition holds for any holomorphic functions $\phi$ and $\psi$ for which the convolution and all of the Laplace transforms in equation~\eqref{eqn:gen-laplace-convol} are well-defined.
 \begin{proof}
-\begin{todo}
-[\textbf{V} add $\theta$, or explain that it's missing, Fix proof] [\textbf{A} read through proof]
-\end{todo}
-\begin{revised}
+For simplicity, we will write out the proof for $\theta = 0$. The proof for general $\theta$ is analogous.
+
 The left-hand side of equation~\eqref{eqn:gen-laplace-convol} expands to
 \begin{align*}
 \laplace_{\zeta,\alpha,\beta}[\phi \ast_{\zeta,\alpha, \beta} \psi] &= \int_{\mathcal{J}_{\zeta, \alpha+\beta}} d\zeta\,e^{-z\zeta}\int_{\mathcal{S}_{\zeta,\alpha,\beta}} \phi(a)\,\psi(a')\, d\zeta(a)\,.
@@ -1182,7 +1102,7 @@ where $\mathcal{S}_{\zeta, \alpha, \beta}$ is the path described in Definition~\
 \begin{equation}\label{eq:slice-plane}
 \zeta_\alpha(a) + \zeta_\beta(a') = \zeta_{\alpha+\beta}
 \end{equation}
-holds, and the coordinates $\zeta_\alpha(a)$ and $\zeta_\beta(a')$ have the same argument as $\zeta_{\alpha+\beta}$. In particular, over the ray $\mathcal{J}_{\zeta, \alpha+\beta}$, the coordinates $\zeta_\alpha(a)$, $\zeta_\beta(a')$ and $\zeta_{\alpha+\beta}$ are all real and non-negative. The point where $\mathcal{S}_{\zeta, \alpha, \beta}$ starts has $\zeta_\alpha(a) = 0$, and the point where $\mathcal{S}_{\zeta, \alpha, \beta}$ ends has $\zeta_\beta(a') = 0$.
+holds, and the coordinates $\zeta_\alpha(a)$ and $\zeta_\beta(a')$ have the same argument as $\zeta_{\alpha+\beta}$. In particular, over the ray $\mathcal{J}_{\zeta, \alpha+\beta}$, the coordinates $\zeta_\alpha(a)$, $\zeta_\beta(a')$ and $\zeta_{\alpha+\beta}$ are all real and non-negative.\footnote{For general $\theta$, we have the condition that $\zeta_\alpha(a)$, $\zeta_\beta(a')$ and $\zeta_{\alpha+\beta}$ all lie on the ray $e^{i\theta}[0, \infty)$.} The point where $\mathcal{S}_{\zeta, \alpha, \beta}$ starts has $\zeta_\alpha(a) = 0$, and the point where $\mathcal{S}_{\zeta, \alpha, \beta}$ ends has $\zeta_\beta(a') = 0$.
 
 The convolution and Laplace integrals can be combined into an integral over a real two-dimensional wedge $\mathcal{N}_{\zeta, \alpha, \beta}$ within the complex three-dimensional space $B^3$:
 \[ \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha,\beta}{\psi}] = \int_{\mathcal{N}_{\zeta, \alpha, \beta}} e^{-z\zeta}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta\,. \]
@@ -1205,84 +1125,8 @@ We can substitute the last identity into the integral over $\mathcal{N}_{\zeta, 
 \end{align*}
 Thinking of $\mathcal{N}_{\zeta, \alpha, \beta}$ as the graph of $\zeta_\alpha(a) + \zeta_\beta(a')$ over the quadrant $\mathcal{J}_{\zeta, \alpha} \times \mathcal{J}_{\zeta, \beta}$, we can use Fubini's theorem to express the integral as the product
 \[ \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha,\beta}{\psi}] = \left[ \int_{\mathcal{J}_{\zeta, \alpha}} e^{-z\zeta}\,\phi\,d\zeta \right] \left[ \int_{\mathcal{J}_{\zeta,\beta}} e^{-z\zeta}\,\psi\,d\zeta \right]. \]
-\end{revised}
-\begin{draft}
-The left-hand side of equation~\eqref{eqn:gen-laplace-convol} expands to
-\[ \laplace_{\zeta,\alpha+\beta}[\phi \ast_{\zeta, \alpha+\beta} \psi] = \int_{\mathcal{J}_{\zeta, \alpha+\beta}} d\zeta\,e^{-z\zeta}\int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}}  \phi(a)\,\psi(a')\, d\zeta(a)\,. \]
-In the convolution integral, $a$ follows the straight path $\mathcal{S}(\zeta)$ where $\zeta(a)$ runs from $\alpha+\beta$ to $\zeta$, while $a'$ follows the straight path $\mathcal{S}'(\zeta)$ where $\zeta(a')$ runs from $\zeta - (\alpha + \beta)$ to $0$.
-
-The convolution and Laplace integrals can be combined into an integral over a real two-dimensional wedge $\mathcal{N}$ within the complex three-dimensional space $B^3$:
-\[ \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}] = \int_\mathcal{N} e^{-z\zeta}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta\,. \]
-The coordinates $\zeta(a)$, $\zeta(a')$, $\zeta$ parameterize $B^3$, and the real wedge $\mathcal{N}$ lies within the complex surface cut out by the equation equation $\zeta(a) + \zeta(a') = \zeta$. Thus, on $\mathcal{N}$, we have the identity
-\begin{align*}
-d\zeta(a) + d\zeta(a') & = d\zeta \\
-d\zeta(a) \wedge \big[d\zeta(a) + d\zeta(a')\big] & = d\zeta(a) \wedge d\zeta \\
-d\zeta(a) \wedge d\zeta(a') & = d\zeta(a) \wedge d\zeta\,,
-\end{align*}
-which we can substitute into the integral above to get
-\begin{align*}
-\laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}] & = \int_\mathcal{N} e^{-z[\zeta(a) + \zeta(a')]}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta(a') \\
-& = \int_\mathcal{N} \left[ e^{-z\zeta(a)}\,\phi(a)\,d\zeta(a) \right] \wedge \left[ e^{z\zeta(a')}\,\psi(a')\,d\zeta(a') \right]\,.
-\end{align*}
-\begin{todo}Now we need to explain why the grid lines can be projected to $\mathcal{J}_{\zeta(a), \alpha}$ and $\mathcal{J}_{\zeta(a'), \beta}$. Something seems off here. The tip of the wedge $\mathcal{N}$ should be at $\zeta = \alpha + \beta$, since that's the beginning of the ray $\mathcal{J}_{\zeta, \alpha + \beta}$. At that point, though, according to our definitions, $\mathcal{S}(\zeta)$ should consist of the point $\zeta(a) = \alpha + \beta$, and $\mathcal{S}'(\zeta)$ should consist of the point $\zeta(a') = 0$.
-
-In my drawings, I assumed that the tip of the wedge $\mathcal{N}$ would be at the point where $\zeta(a) = \alpha$, $\zeta(a') = \beta$, and $\zeta = \alpha + \beta$. Now I'm skeptical about that. Is that point even in $\mathcal{N}$? If so, what distinguishes it from all the other points on the line $\zeta(a) + \zeta(a') = \alpha + \beta$? Since $\alpha$ and $\beta$ can vary without changing the left-hand side of equation~\eqref{eqn:gen-laplace-convol}, we must need to make a choice somewhere\ldots
-
-Maybe we need to change the statement to
-\[ \laplace_{\zeta,\alpha+\beta}[\phi \ast_{\zeta_\alpha, \beta} \psi] = \laplace_{\zeta,\alpha}[\phi]\,\laplace_{\zeta,\beta}[\psi]\,. \]
-I think the argument might wrap up neatly in that case.
-\end{todo}
-\begin{align*}
-\laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}] & = \int_{?} e^{-z\zeta(a)}\,\phi(a)\,d\zeta(a) \int_{?} e^{z\zeta(a')}\,\psi(a')\,d\zeta(a')
-\end{align*}
-\end{draft}
-
-\color{violet}
-In the convolution integral, $a$ and $a'$ move so that $\zeta(a)$ runs from $\alpha+\beta$ to $\zeta$ while $\zeta(a')$ goes from $\zeta_{\alpha+\beta}$ to $0$.
-
-
-\begin{align*}
-\laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]&=\int_{\mathcal{J}_{\zeta,\alpha+\beta}}d\zeta\,e^{-z\zeta}\int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}}  \phi(a)\, \psi(a')\, d\zeta(a)
-\end{align*}
-
-Equivalently, $a$ and $a'$ move so that $\zeta_{\textcolor{magenta}{\alpha}}(a)$ runs from $\zeta_{\alpha+\beta}$ to $0$ while $\zeta_{\textcolor{magenta}{\beta}}(a')$ goes from $\zeta$ to $0$. In particular, we introduce the parameter $s\in [0,1]$ so that $\zeta(a)=(1-s)(\alpha+\beta)+s\zeta-\beta$ and $\zeta(a')=(1-s)\zeta+\beta$. 
-\color{black}
-\begin{revised}
-The convolution product can be rewritten by introducing the coordinates $\zeta_\beta$ and $\zeta_{-\beta}$:
-\begin{align*}
-\phi \ast_{\zeta, \alpha+\beta} \psi &= \int_{\substack{\mathcal{S}(\zeta) \times \mathcal{S}'(\zeta) \\ \zeta(a) + \zeta(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\\
-&=\int_{\substack{\mathcal{S}(\zeta_{\beta}) \times \mathcal{S}'(\zeta_{-\beta}) \\ \zeta_{\beta}(a) + \zeta_{-\beta}(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\,,
-\end{align*}
-where $\mathcal{S}(\zeta_{\beta})$ is the line segment from $\zeta_\beta(a)=\alpha$ to $\zeta_\beta(a)=\zeta_\beta$ and similarly, $\mathcal{S}'(\zeta_{-\beta})$ is the line segment from $\zeta_{-\beta}(a')=\zeta_\alpha$ to $\zeta_{-\beta}(a')=\beta$. This change of coordinates simplifies our computations by showing how the convolution product depends on the base points of the Laplace transforms $\laplace_{\zeta,\alpha}[\phi]$ and $\laplace_{\zeta,\beta}[\psi]$.  
-
-Following the argument in the proof of Proposition~\ref{prop:convolution_iso_laplace}, we introduce the parameter $s\in [0,1]$ and we rewrite the convolution  
-\begin{align*}
-    \phi \ast_{\zeta, \alpha+\beta} \psi
-    &=\int_{\substack{\mathcal{S}(\zeta_\beta) \times \mathcal{S}'(\zeta_{-\beta}) \\ \zeta_\beta(a) + \zeta_{-\beta}(a') = \zeta}} \phi(a)\,\psi(a')\,d\zeta(a)\\
-    &=\zeta_{\alpha+\beta}\,\int_0^1 \phi(a)\,\psi(a')\,ds\,,
-\end{align*}
-\begin{todo}[\textbf{A} Does this expression change when $\theta \neq 0$?]\end{todo} where $\zeta_\beta(a)=(1-s)\alpha+s\zeta_\beta$ and consequently $\zeta_{-\beta}(a')=\beta s+(1-s)\zeta_\alpha$. Then, the Laplace transform of $\phi \ast_{\zeta, \alpha} \psi$ reads
-\begin{align*}
-    \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]&=e^{-z(\alpha+\beta)}\laplace_{\zeta_{\alpha+\beta},0}[{\phi}\ast_{\zeta, \alpha+\beta}{\psi}]\\
-    &=e^{-z(\alpha+\beta)}\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\,e^{-z\zeta_{\alpha+\beta}}\zeta_{\alpha+\beta}\, \int_0^1 \phi(a)\,\psi(a')\,ds \\
-    &=e^{-z(\alpha+\beta)}\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\, \int_0^1 \zeta_{\alpha+\beta}\,e^{-z(1-s)\zeta_{\alpha+\beta}} e^{-z s\zeta_{\alpha+\beta}} \phi(a)\, \psi(a')\,ds\,.
-\end{align*}
-By exchanging the order of integration we find 
-\begin{align*}
-&=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta_{\alpha+\beta},0}}d\zeta_{\alpha+\beta}\,\zeta_{\alpha+\beta}\,e^{-z(\beta s+(1-s)\zeta_\alpha)} e^{-z(\alpha(1-s)+s\zeta_\beta)}\phi(a)\,\psi(a') \\
-&=\int_0^1 ds\,\int_{\mathcal{J}_{\zeta,0}}\frac{d\zeta(a')}{(1-s)^2}\,e^{-z\zeta_{-\beta}(a')} (\zeta_{-\beta}(a')-\beta) e^{-z( (\zeta_{-\beta}(a')-\beta) \frac{s}{1-s}+\alpha)} \phi(a)\,\psi(a')\,,
-\end{align*}
-where in the second step we use $d\zeta_{\alpha+\beta}=d\zeta_\alpha=\frac{d\zeta_{-\beta}(a')}{1-s}$ and $\zeta_{\alpha+\beta}=\frac{\zeta_{-\beta}(a')-\beta}{1-s}$ \begin{todo}[this comes from the expression for $\zeta_{-\beta}(a')$ above, by subtracting $\beta$ from both sides and then rearranging]\end{todo}. Then, exchanging one more time the order of integration we get
-\begin{align*}
-&=\int_{\mathcal{J}_{\zeta,0}}d\zeta(a') \,e^{-z\zeta_{-\beta}(a')}  \psi(a') \,\int_0^1 ds\,\frac{\zeta_{-\beta}(a')-\beta}{(1-s)^2}e^{-z((\zeta_{-\beta}(a')-\beta) \frac{s}{1-s}+\alpha)} \phi(a)\\
-&=\int_{\mathcal{J}_{\zeta,0}}d\zeta(a') \,e^{-z\zeta(a')}  \psi(a') \,\int_0^1 ds\,\frac{\zeta_{-\beta}(a')-\beta}{(1-s)^2}e^{-z((\zeta_{-\beta}(a')-\beta) \frac{s}{1-s}+\alpha+\beta)} \phi(a)\\
-&=\int_{\mathcal{J}_{\zeta,0}}d\zeta(a') \,e^{-z\zeta(a')}  \psi(a') \,\int_{\mathcal{J}_{\zeta,\alpha+\beta}} d\zeta(a)\, e^{-z\zeta(a)} \phi(a)
-\end{align*}
-where on the integration path we have $\zeta(a)=(\zeta_{-\beta}(a')-\beta)\frac{s}{1-s}+\alpha+\beta$ which moves $a$ \begin{todo}(?)\end{todo} along the ray $\mathcal{J}_{\zeta,\alpha+\beta}$ as $s$ varies in $[0,1]$.
-\end{revised}
 \end{proof}
 %
-
 \begin{corollary}\label{prop:convolution_iso_laplace}
 For any two functions $\phi \in \singexpalg{\sigma}(\Omega)$ and $\psi \in \singexpalg{\sigma'}(\Omega)$, with $\sigma, \sigma' \in (-1, \infty)$, we have
 \begin{equation}\label{eqn:laplace-convol1}
@@ -1323,15 +1167,17 @@ in other words, $\delta$ is the unit for the convolution.
 \end{definition}
 Notice that from equation~\eqref{eq: convolution_formal} and the definition of the convolution with $\delta$, we deduce the convolution product is commutative with unit $\delta$.
 
-Similarly, we can extend the definition of $\ast$ to a different coordinate $\zeta_\alpha$ on $B$, the convolution product will be denoted by $\ast_{\zeta_\alpha,0}$ and the definition will be analogous of equation~\eqref{eq: convolution_formal}
+\begin{old}
+Similarly, we can extend the definition of $\ast$ to a different coordinate $\zeta_\alpha$ on $B$, the convolution product will be denoted by $\ast_{\zeta_\alpha}$ and the definition will be analogous of equation~\eqref{eq: convolution_formal}
 \begin{equation}
 \frac{\zeta_\alpha^m}{m!} \ast_{\zeta_\alpha} \frac{\zeta_\alpha^n}{n!} \defeq \frac{\zeta_\alpha^{m+n+1}}{(m+n+1)!} \,.
 \end{equation}
-Then, the unit for $\ast_{\zeta_\alpha,0}$ will be denoted by $\delta$, namely \[\delta\ast_{\zeta_\alpha,0}\frac{\zeta_\alpha^n}{n!}\defeq\frac{\zeta_\alpha^n}{n!}\,.\]
+Then, the unit for $\ast_{\zeta_\alpha}$ will be denoted by $\delta$, namely \[\delta\ast_{\zeta_\alpha} \frac{\zeta_\alpha^n}{n!}\defeq\frac{\zeta_\alpha^n}{n!}\,.\]
+\end{old}
 We can show that $\borel_\zeta$ is an algebra homomorphism from $\C\llbracket z^{-1}\rrbracket$ endowed with the Cauchy product to $\C\delta+\C\llbracket\zeta\rrbracket$ endowed with the convolution product.
 \begin{prop}
-    Let $z$ be a coordinate on the cotangent fiber over $\zeta=0$, and $\series{\Phi},\series{\Psi}\in\C\llbracket z^{-1}\rrbracket$. The Borel transform $\borel_\zeta$ is an algebra homomorphism, namely
-    \[\borel_\zeta(\series{\Phi}\series{\Psi})=\borel_\zeta\series{\Phi} \ast_\zeta \borel_\zeta\series{\Psi}.\]
+Let $z$ be a coordinate on the cotangent fiber over $\zeta=0$, and $\series{\Phi},\series{\Psi}\in\C\llbracket z^{-1}\rrbracket$. The Borel transform $\borel_\zeta$ is an algebra homomorphism, namely
+\[\borel_\zeta(\series{\Phi}\series{\Psi})=\borel_\zeta\series{\Phi} \ast_\zeta \borel_\zeta\series{\Psi}.\]
 \end{prop}
 \begin{proof}
     We assume $\series{\Phi}=\sum_{n=0}^\infty a_nz^{-n}$ and $\series{\Psi}=\sum_{n=0}^\infty b_nz^{-n}$. Then,
@@ -1343,7 +1189,7 @@ We can show that $\borel_\zeta$ is an algebra homomorphism from $\C\llbracket z^
 &=\borel_\zeta\series{\Phi} \ast_\zeta \borel_\zeta\series{\Psi}\,.
 \end{align*}
 \end{proof}
-\begin{todo}[Maybe shorten to a reminder that $z$ is an almost-global coordinate on cotangent spaces, so this also works in other fibers.]\end{todo} Similarly, $\borel_{\zeta_\alpha}$ is an algebra homomorphism from $\C\llbracket z^{-1}\rrbracket$ endowed with the Cauchy product to $\C\delta+\C\llbracket\zeta_\alpha\rrbracket$ endowed with the convolution product $\ast_{\zeta_\alpha,0}$, where $z$ is a coordinate on $T^*_{\zeta=\alpha}B$. %We can further generalize this result to transseries: 
+Similarly, $\borel_{\zeta_\alpha}$ is an algebra homomorphism from $\C\llbracket z^{-1}\rrbracket$ endowed with the Cauchy product to $\C\delta+\C\llbracket\zeta_\alpha\rrbracket$ endowed with the convolution product $\ast_{\zeta_\alpha}$, where $z$ is a coordinate on $T^*_{\zeta=\alpha}B$. %We can further generalize this result to transseries: 
 % \begin{prop}
 %     The Borel transform $\borel_\zeta$ induces an algebra homomorphism 
 %     \[\borel_\zeta\colon e^{-\alpha z}\C\llbracket z^{-1}\rrbracket\to \C\delta_\alpha+\C\llbracket\zeta_\alpha\rrbracket\]
@@ -1383,7 +1229,7 @@ we see that $\series{\phi}$ converges if and only if there is some $A > 0$ with 
 
 The space of $1$-Gevrey series is closed under the Cauchy product. In addition, 
 \[\borel_\zeta\colon\C\llbracket z^{-1}\rrbracket_1\to\C\delta + \C\{\zeta\}\]
-extends to an algebra homomorphism, where $\C\{\zeta\}$ is endowed with the convolution product defined in Definition~\ref{def:convolution_formal}. In fact, we deduce that the Borel transform induces an algebra homomorphism on $1$-Gevrey series. Similarly, if $z$ is coordinate on the fiber over $\zeta=\alpha$, the Borel transform $\borel_{\zeta_\alpha}$ induces an isomorphism between $\C\llbracket z^{-1}\rrbracket_1$ endowed with the Cauchy product, and $\C\delta+\C\{\zeta_\alpha\}$ endowed with the convolution $\ast_{\zeta_\alpha,0}$.
+extends to an algebra homomorphism, where $\C\{\zeta\}$ is endowed with the convolution product defined in Definition~\ref{def:convolution_formal}. In fact, we deduce that the Borel transform induces an algebra homomorphism on $1$-Gevrey series. Similarly, if $z$ is coordinate on the fiber over $\zeta=\alpha$, the Borel transform $\borel_{\zeta_\alpha}$ induces an isomorphism between $\C\llbracket z^{-1}\rrbracket_1$ endowed with the Cauchy product, and $\C\delta+\C\{\zeta_\alpha\}$ endowed with the convolution $\ast_{\zeta_\alpha}$.
 \begin{verify}
 \subsubsection{Compatibility of the convolution product with the geometry}\label{sec:convolution-compatible}
 The convolution product is compatible with the change of translation chart: if $\series{\Phi}, \series{\Psi}\in \C \llbracket z^{-1} \rrbracket_1$ be series on $T^*_{\zeta=b}B$ and let $\series{\psi}:=\borel_{\zeta_b}\series{\Psi}$ and $\series{\phi}:=\borel_{\zeta_b}\series{\Phi}$
@@ -1419,7 +1265,7 @@ hence,  \[\partial_{\zeta_b,0}^{-\lambda}\big[\borel_{\zeta_b}\Phi\big]=\borel_{
 %
 \subsubsection{Analytic to formal}
 %
-Consider an open set $\Omega \subset \C$ that touches but does not contain $\zeta = 0$. The spaces $\singexp{\sigma}{\Lambda}(\Omega)$ from \cite{reg-sing-volterra} are convenient for analytic discussions of the Laplace transform, as we saw in Section~\ref{sec:reg-decay}. To study Borel summation, however, we also need to take shifted Taylor expansions around $\zeta = 0$, turning holomorphic functions $\phi \in \singexp{\sigma}{\Lambda}(\Omega)$ into convergent power series $\series{\phi} \in \zeta^\rho \C\{\zeta\}$ with $\rho \ge \sigma$. The following discussion, leading up to Lemma~\ref{lem:shifted_holo_closed}, will help us stay within a subspace of $\singexp{\sigma}{\Lambda}(\Omega)$ where the shifted Taylor series exists.
+Consider an open set $\Omega \subset \C$ that touches but does not contain $\zeta = 0$.\footnote{We say that a subset of a topological space {\em touches} the points in its closure. This is a way of expressing the nearness relation associated with the topology~\cite[Chapter~5, Definition~2.11]{joshi1983gen-top}.} The spaces $\singexp{\sigma}{\Lambda}(\Omega)$ from \cite{reg-sing-volterra} are convenient for analytic discussions of the Laplace transform, as we saw in Section~\ref{sec:reg-decay}. To study Borel summation, however, we also need to take shifted Taylor expansions around $\zeta = 0$, turning holomorphic functions $\phi \in \singexp{\sigma}{\Lambda}(\Omega)$ into convergent power series $\series{\phi} \in \zeta^\rho \C\{\zeta\}$ with $\rho \ge \sigma$. The following discussion, leading up to Lemma~\ref{lem:shifted_holo_closed}, will help us stay within a subspace of $\singexp{\sigma}{\Lambda}(\Omega)$ where the shifted Taylor series exists.
 
 If a function on $\Omega$ has an ordinary Taylor expansion in $\C\{\zeta\}$, summing the series extends the function to a neighborhood of $\zeta = 0$. The subspace of $\singexp{\sigma}{\Lambda}(\Omega)$ where the ordinary Taylor series exists can thus be seen as the intersection
 \[ \mathcal{O}_{\zeta = \alpha} \cap \singexp{\sigma}{\Lambda}(\Omega), \]
@@ -1457,7 +1303,7 @@ is bounded. A function in $\singexp{\sigma}{\Lambda}(\Upsilon)$ descends and ext
 
 Taylor expansion and summation form a two-way link between holomorphic functions and formal power series. For regular enough functions, the formal Laplace transform preserves a one-way vestige of this link: it turns Taylor expansions on the position domain into asymptotic expansions on the frequency domain.
 \begin{lemma}\label{lem:laplace-bridge}
-Let $\Omega$ be an open sector with $\zeta = 0$ at its tip, and an opening angle of $\pi$ or less. Take some $\rho \in (-1,\infty)$. If $\varphi \in \singexp{\rho}{\Lambda}(\Omega)$ is the sum of a power series $\series{\varphi} \in \zeta^\rho\,\C\{\zeta\}$, then its Laplace transform $\Phi = \laplace_{\zeta, 0}^\theta \varphi$ is asymptotic to the formal Laplace transform $\series{\Phi} = \laplace_{\zeta, 0} \series{\varphi}$. \begin{todo}[Clarify domain of $\Phi$]\end{todo}
+Let $\Omega$ be an open sector with $\zeta = 0$ at its tip, and an opening angle of $\pi$ or less. Take some $\rho \in (-1,\infty)$. If $\varphi \in \singexp{\rho}{\Lambda}(\Omega)$ is the sum of a power series $\series{\varphi} \in \zeta^\rho\,\C\{\zeta\}$, then its Laplace transform $\Phi = \laplace_{\zeta, 0}^\theta \varphi$ is asymptotic to the formal Laplace transform $\series{\Phi} = \laplace_{\zeta, 0}^\theta \series{\varphi}$ on the domain $\widehat{\Omega}_0^\Lambda$ defined in Section~\ref{sec:reg-decay}. \begin{todo}[Switch from $\rho$ to $\sigma$?]\end{todo}
 \end{lemma}
 \begin{remark}
 This result is similar to Theorem~5.20 of~\cite{diverg-resurg-i}. It is weaker in that it does not establish Gevrey asymptoticity, but stronger in that it can be applied to functions with fractionally shifted Taylor expansions.
@@ -1467,13 +1313,13 @@ By adding points within the disk around $\zeta = 0$ where $\series{\varphi}$ con
 \[ \series{\varphi} = a_0 \frac{\zeta^\rho}{\Gamma(\rho+1)} + a_1 \frac{\zeta^{\rho+1}}{\Gamma(\rho+2)} + a_2 \frac{\zeta^{\rho+2}}{\Gamma(\rho+3)} + a_3 \frac{\zeta^{\rho+3}}{\Gamma(\rho+4)} + \ldots, \]
 observing that
 \[ \series{\Phi} = \frac{a_0}{z^{\rho+1}} + \frac{a_1}{z^{\rho+2}} + \frac{a_2}{z^{\rho+3}} + \frac{a_3}{z^{\rho+4}} + \ldots. \]
-For each $n \in \Z_{\ge 0}$, define the tail sum $\varepsilon_n \in \singexp{\sigma+n}{\Lambda}(\Upsilon)$ by the equation
+For each $n \in \Z_{\ge 0}$, define the tail sum $\varepsilon_n \in \singexp{\rho+n}{\Lambda}(\Upsilon)$ by the equation
 \[ \varphi = a_0 \frac{\zeta^\rho}{\Gamma(\rho+1)} + a_1 \frac{\zeta^{\rho+1}}{\Gamma(\rho+2)} + \ldots + a_{n-1} \frac{\zeta^{\rho+n-1}}{\Gamma(\rho+n)} + \varepsilon_n. \]
 Taking the Laplace transform of both sides, we learn that
 \[ \Phi = \frac{a_0}{z^{\rho+1}} + \frac{a_1}{z^{\rho+2}} + \ldots + \frac{a_{n-1}}{z^{\rho+n}} + E_n, \]
 where $E_n = \laplace_{\zeta, 0}^\theta \varepsilon_n$. To show that $\Phi$ is asymptotic to $\series{\Phi}$, we just need to prove that $|z^{\rho+n} E_n| \to 0$ as $|z| \to \infty$ along every ray.
 
-Because of the conditions we put on $\Omega$, we can apply Proposition~\ref{prop:laplace-cont}, which tells us that $E_n$ lies in $\dualsingexp{-\rho-n-1}(\widehat{\Omega}_0^\Lambda)$. This means that $|E_n| \lesssim \Delta^{-\rho-n-1}$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. Noting that \begin{revised}$|z|/\Delta$ goes to a constant limit as $z \to \infty$ along any ray \begin{todo}[check; specify domain of ray]\end{todo}\end{revised},\footnote{The constant limit is not uniform over all rays, so we are showing that $\Phi$ is asymptotic, but not necessarily uniformly asymptotic, to $\series{\Phi}$.} we deduce that
+Because of the conditions we put on $\Omega$, we can apply Proposition~\ref{prop:laplace-cont}, which tells us that $E_n$ lies in $\dualsingexp{-\rho-n-1}(\widehat{\Omega}_0^\Lambda)$. This means that $|E_n| \lesssim \Delta^{-\rho-n-1}$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_0^\Lambda$. Noting that \begin{revised}$|z|/\Delta$ goes to a constant limit as $z \to \infty$ along any ray \begin{todo}[check; specify domain of ray]\end{todo}\end{revised},\footnote{The constant limit is not uniform over all rays, so we are showing that $\Phi$ is asymptotic, but not necessarily uniformly asymptotic, to $\series{\Phi}$.} we deduce that
 \begin{align*}
 |z^{\rho+n} E_n| & \lesssim |z|^{\rho+n} \Delta^{-\rho-n-1} \\
 & = \big(|z|/\Delta\big)^{\rho+n} \Delta^{-1} \\
@@ -1590,11 +1436,11 @@ Results \ref{res:frac-deriv} and \ref{res:frac-int} follow from the properties o
 \begin{align*}
 z^\tau\laplace_{\zeta,0}\phi&=\laplace_{\zeta,0}\left[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)}\right] \laplace_{\zeta,0}\phi\\
 &=\laplace_{\zeta,0}\left[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)} \ast_\zeta \phi\right] \\
-&=\laplace_{\zeta,0} \int_{\mathcal{S}(\zeta)}\frac{\big(\zeta-\zeta(a)\big)^{-\tau-1}}{\Gamma(-\tau)} \phi(a)\,d\zeta(a)\\
-&=\laplace_{\zeta,0} \int_{\mathcal{S}(\zeta) }\frac{\big(\zeta-\zeta(a)\big)^{-\tau-1}}{\Gamma(-\tau)} \phi(a)\,d\zeta(a)\\
-&=\laplace_{\zeta,0}\fracderiv{\tau}{\zeta}{0}\phi,
+&=\laplace_{\zeta,0} \int_{\mathcal{S}_{\zeta,0,0}}\frac{\big(\zeta-\zeta(a)\big)^{-\tau-1}}{\Gamma(-\tau)} \phi(a)\,d\zeta(a)\\
+&=\laplace_{\zeta,0} \int_{\mathcal{S}_{\zeta,0,0} }\frac{\big(\zeta-\zeta(a)\big)^{-\tau-1}}{\Gamma(-\tau)} \phi(a)\,d\zeta(a)\\
+&=\laplace_{\zeta,0}\big[\fracderiv{\tau}{\zeta}{0}\phi\big],
 \end{align*}
-where $\mathcal{S}(\zeta)$ is the line segment from $\zeta(a)=0$ to $\zeta(a) = \zeta$. Result~\ref{res:whole-deriv} is proven by repeated integration by parts, with the condition on $\phi^{(0)}, \phi^{(1)}, \ldots \phi^{(n)}$ ensuring that the boundary terms vanish:
+where $\mathcal{S}_{\zeta,0,0}$ is the line segment from $\zeta(a)=0$ to $\zeta(a) = \zeta$. Result~\ref{res:whole-deriv} is proven by repeated integration by parts, with the condition on $\phi^{(0)}, \phi^{(1)}, \ldots \phi^{(n)}$ ensuring that the boundary terms vanish:
 \begin{align*}
     z^n\laplace_{\zeta,0}\phi&=\int_0^\infty e^{-z\zeta} z^n \phi \, d\zeta\\
     &=(-1)^n\int_0^\infty \partial_\zeta^n \big[e^{-z\zeta}\big]  \phi\, d\zeta\\
