@@ -1617,7 +1617,7 @@ where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that g
 \begin{remark}
 In \cite{pham}, Pham describes this formula in a slightly different form, integrating the variation of $\nu/df$, instead of differentiating the integral as we do in equation~\eqref{eqn:formula-proof}.
 \end{remark}
-\begin{proof}
+\begin{proof}[Proof of Lemma~\ref{lem:thimble_proj_formula-proof}]
 We first recast the integral $I_a$ into the position domain. As $\zeta$ goes rightward from $\alpha$ with angle $\theta$, the start and end points of $\mathcal{C}_a^\theta(\zeta)$ sweep backward along $\mathcal{C}^-_a(\zeta)$ and forward along $\mathcal{C}^+_a(\zeta)$, respectively. Hence, we have
 \begin{align*}
 I_a & = \int_{\mathcal{C}_a^\theta} e^{-zf} \nu \\
@@ -1702,7 +1702,7 @@ The $1/2$ fractional derivative is a left inverse of the $1/2$ fractional integr
 \begin{equation}\label{eqn:formula--1/2} \phi_a = \fracderiv{1/2}{\zeta}{\alpha} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right).\end{equation}
 \end{remark}
 \begin{remark}
-\begin{revised}We can use the thimble projection formula to show that each function $\iota_\alpha$ is resurgent, in the sense of \'{E}calle~\cite[Section~1]{EcalleI}. Let $\mathcal{J}_\alpha(\beta)$ be the straight path from $\zeta = \alpha$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\mathcal{C}_a^\theta(\beta)$ in $X$. This lets us analytically continue $\int_{\mathcal{C}_a^\theta(\zeta)} \nu$ to a star-shaped domain $\Omega_\alpha \subset \C$. Intuitively, $\Omega_\alpha$ is constructed by drawing rays from $\zeta = \alpha$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\zeta = \infty$, as shown in Figure~\ref{Fig:slit domain}.\end{revised}
+We can use the thimble projection formula to show that each function $\iota_\alpha$ is resurgent, in the sense of \'{E}calle~\cite[Section~1]{EcalleI}. Let $\mathcal{J}_\alpha(\beta)$ be the straight path from $\zeta = \alpha$ to $\zeta = \beta$ in $\C$. As long as this path avoids the critical values of $f$, it lifts uniquely along $f$ to a path $\mathcal{C}_a^\theta(\beta)$ in $X$. This lets us analytically continue $\int_{\mathcal{C}_a^\theta(\zeta)} \nu$ to a star-shaped domain $\Omega_\alpha \subset \C$. Intuitively, $\Omega_\alpha$ is constructed by drawing rays from $\zeta = \alpha$ through all of the other critical values, and then cutting $\C$ along the parts of those rays that go from the other critical values to $\zeta = \infty$, as shown in Figure~\ref{Fig:slit domain}.
 \begin{center}
 \begin{tikzpicture}
 \newcommand{\spill}{4}
@@ -2495,7 +2495,7 @@ The vertical displacement of a vibrating beam is annihilated by the operator
 \[ \big(\tfrac{\partial}{\partial z}\big)^2 \circ EI_\text{roll} \circ \big(\tfrac{\partial}{\partial z}\big)^2 + m \big(\tfrac{\partial}{\partial t}\big)^2, \]
 as described in equation~12.58 of \cite{genta2009vibration}. Here, $m$ is the mass per unit length, $E$ is the elastic modulus, and $I_\text{roll}$ is the second moment of area about the axis the beam ``rolls'' around as it vibrates. We can write the displacement as $\cos(\omega t)$ times a time-independent envelope, which is annihilated by the operator
 \[ \mathcal{P} = \big(\tfrac{\partial}{\partial z}\big)^2 \circ EI_\text{roll} \circ \big(\tfrac{\partial}{\partial z}\big)^2 - m\omega^2. \]
-We are assuming the cantilever has a rectangular cross-section with half-width $s$ and half-thickness $t$, so its second moment of area about the side-to-side axis is $\tfrac{4}{3}st^3$, mass per unit length isproportional to $st$, giving
+We are assuming the cantilever has a rectangular cross-section with half-width $s$ and half-thickness $t$, so its second moment of area about the side-to-side axis is $\tfrac{4}{3}st^3$, mass per unit length is proportional to $st$, giving
 \[ \mathcal{P} = \big(\tfrac{\partial}{\partial z}\big)^2 \circ \tfrac{4}{3}Et^3 s \circ \big(\tfrac{\partial}{\partial z}\big)^2 - t\omega^2 s. \]
 For the triangular cantilever, $t$ is constant, and $s = \sigma z$ for some constant $\sigma$. Letting $c_1 = \tfrac{4}{3}\sigma Et^3$ and $c_2 = t\sigma\omega^2$, we have
 \begin{align*}
@@ -2508,7 +2508,7 @@ For the triangular cantilever, $t$ is constant, and $s = \sigma z$ for some cons
 Now, set $\mu = \tfrac{c_2}{c_1} = \tfrac{3}{4} \tfrac{1}{E} \big(\tfrac{\omega}{t}\big)^2$. This example works because the linear density of the beam and the second moment of area about the side-to-side axis are proportional, so they both end up in the $P(\partial/\partial z)$ term.\par
 \end{verify}
 \color{black}
-\subsubsection{Solving the differential equation}
+\subsubsection{Solving the differential equation}\label{sec:solve-cantilever-eqn}
 We seek functions $v$ and points $\zeta = \alpha$ for which the Laplace transform $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:triangular_cantilever}. From Proposition~\ref{prop:L-int-op} we deduce that $\laplace_{\zeta, \alpha} v$ satisfies equation~\eqref{eqn:triangular_cantilever} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{eqn:position_cantilever}
 \left[ \big[ \zeta^4 - \omega^2 \big] - 2\fracderiv{-1}{\zeta}{\alpha} \circ \zeta^3 \right] v = 0.
@@ -2521,7 +2521,11 @@ v_\text{uni} = \frac{1}{\sqrt{\zeta^4 - \omega^2}}
 \end{equation}
 satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega^2 = 0$. Thus, a single ``universal solution'' in the position domain leads to four linearly independent solutions $V_\alpha = \laplace_{\zeta, \alpha} v_\text{uni}$ of equation~\eqref{eqn:triangular_cantilever}, indexed by the fourth roots of $\omega^2$.
 \subsubsection{Expressing the solutions as thimble integrals}
-We can now use the thimble projection formula, as written in equation~\eqref{thimble-difference}, to express the solutions found above as thimble integrals. In terms of the Jacobi elliptic function $\operatorname{sd}$, we have
+If we had a thimble integral expression for $V_\alpha$, we could use the thimble projection formula, as written in equation~\eqref{thimble-difference}, to find $v_\text{uni}$. Since we found $v_\text{uni}$ in Section~\ref{sec:solve-cantilever-eqn}, we can work backwards from equation~\eqref{thimble-difference} to guess a thimble integral expression for $V_\alpha$. \begin{todo}[Do the argument in reverse, starting with the expression that looks like $v_\text{uni}$]\end{todo}
+
+Suppose $V_\alpha$ can be expressed as a thimble integral.
+
+\begin{todo}[The narrative here doesn't seem to make sense. Rewrite]\end{todo} \begin{old}We can now use the thimble projection formula, as written in equation~\eqref{thimble-difference}, to express the solutions found above as thimble integrals. In terms of the Jacobi elliptic function $\operatorname{sd}$, we have
 \begin{equation}\label{eq:cantilever-thimble}
 V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ -z\,2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \right]\;du,  \end{equation}
 where $a$ is a preimage of $\zeta = \alpha$ under the map $\zeta = 2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big)$. \begin{todo}[\textbf{A} Show thimble picture.]\end{todo} Since exponent is doubly periodic, with period lattice $L = \tfrac{1}{\sqrt{2}}\Z + i\Z$, we can take the thimble to be a real submanifold of the torus $\C / L$.
@@ -2556,6 +2560,7 @@ F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u \\
 \frac{d\zeta}{2i \omega \sqrt{1 - \omega^{-2} \zeta^4}} & = du \\
 \frac{1}{2}\left[\frac{d\zeta}{\sqrt{\zeta^4 - \omega^2}}\right] & = du.
 \end{align*}
+\end{old}
 \begin{todo}[Note that this presents $V_\alpha$ as the Laplace transform of $v_\text{uni}$.]\end{todo} \begin{todo}[Explain how symmetry of thimble gives $v_\text{uni}$ under thimble projection formula.]\end{todo}
 %\subsection{The anharmonic oscillator}\label{sec:anharmonic_oscillator}
 %
