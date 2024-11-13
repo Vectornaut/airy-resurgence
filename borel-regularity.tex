@@ -835,7 +835,7 @@ Given some $\phi \in \singexp{\sigma-1}{\Lambda}(\Omega_\alpha)$, we compute
 & \le \int_{\mathcal{J}_{\zeta_\alpha,0}^\theta} e^{-\Re(z\zeta_\alpha)} |\zeta_\alpha|^{\sigma-1} e^{\Lambda |\zeta_\alpha|} \|\phi\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
 & \le \int_{\mathcal{J}_{\zeta_\alpha,0}^\theta} e^{(\Lambda - c_{z, \theta}|z|)|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|\phi\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha|,
 \end{align*}
-where $c_{z, \theta}$ is the cosine of $\arg(z) + \theta$. When $|z|$ is large and $c_{z, \theta}$ is positive, the integrand shrinks exponentially as $|\zeta|$ grows. This shows that for each angle $\theta$ in the opening of $\Omega_\alpha$, the integral defining $\laplace_{\zeta_\alpha, 0}^\theta \phi$ converges in some region of $\widehat{\Omega}_\alpha^\Lambda$. It also shows that for different angles $\theta$, the functions $\laplace_{\zeta_\alpha, 0}^\theta \phi$ match where their domains overlap. We can therefore glue these functions together into one big Laplace transform of $\phi$, defined at large values of $|z|$ across the whole opening angle of $\widehat{\Omega}_\alpha^\Lambda$.
+where $c_{z, \theta} = \cos\big(\arg(z) + \theta\big)$. When $|z|$ is large and $c_{z, \theta}$ is positive, the integrand shrinks exponentially as $|\zeta_\alpha|$ grows. This shows that for each angle $\theta$ in the opening of $\Omega_\alpha$, the integral defining $\laplace_{\zeta_\alpha, 0}^\theta \phi$ converges in some region of $\widehat{\Omega}_\alpha^\Lambda$. It also shows that for different angles $\theta$, the functions $\laplace_{\zeta_\alpha, 0}^\theta \phi$ match where their domains overlap. We can therefore glue these functions together into one big Laplace transform of $\phi$, defined at large values of $|z|$ across the whole opening angle of $\widehat{\Omega}_\alpha^\Lambda$.
 
 We can now simplify the calculation of $\laplace_{\zeta_\alpha, 0}^\theta \phi$ by looking at $\arg(z)$ and using the closest angle $\theta$ in the opening of $\Omega_\alpha$. This keeps $\Lambda - c_{z, \theta}|z|$ equal to $\Delta$, the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. It follows that
 \begin{align*}
@@ -849,7 +849,7 @@ In terms of the metric on $\dualsingexp{-\sigma}(\widehat{\Omega}_\alpha^\Lambda
 which is what we wanted to show.
 \end{proof}
 \begin{prop}\label{prop:inverse_laplace_analytic}
-Let $\Omega_\alpha$ be an open sector with tip $\zeta = \alpha$ and opening angle $\Theta \le \pi$, and let $\Lambda' = \Lambda / \cos(\Theta)$.\textcolor{red}{Who is $\Lambda$? Add assumption on $\sigma$} Under the conditions of Proposition~\ref{prop:laplace-cont}, for any $\varepsilon \in (0, \tfrac{\Theta}{2})$, the Laplace transform
+Let $\Omega_\alpha$ be an open sector with tip $\zeta = \alpha$ and opening angle $\Theta \le \pi$. Choose some $\sigma > 0$ and $\Lambda \ge 0$, and let $\Lambda' = \Lambda / \cos(\Theta)$. Under the conditions of Proposition~\ref{prop:laplace-cont}, for any $\varepsilon \in (0, \tfrac{\Theta}{2})$, the Laplace transform
 \[ \laplace_{\zeta_\alpha, 0}^\theta \maps \singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}(\widehat{\Omega}_\alpha^\Lambda) \]
 has a continuous left inverse
 \[ \left(\laplace_{\zeta_\alpha, 0}^\theta\right)^{-1} \maps \dualsingexp{-\sigma}(\widehat{\Omega}_\alpha^\Lambda) \to \singexp{\sigma-1}{\Lambda'}(\Omega_\alpha^\varepsilon), \]
@@ -903,7 +903,7 @@ Parameterize $\mathcal{C}$ using the arc length parameter $t$ which is zero at t
 \[ \Delta \ge \sin(\varepsilon/2)\,|t|\,, \]
 as shown in Figure~\ref{fig:ref-path}. On $\Omega_\alpha^\varepsilon \times \mathcal{C}$, we have
 \[ \Re(z\zeta_\alpha) \le |\zeta_\alpha| \big(\Lambda' - \sin(\varepsilon/2)\,|t|\big)\,. \]
-\begin{todo}[Justify bounds in words.]\end{todo}
+\begin{todo}[Justify bounds in words: Fix a value of the coordinate $\zeta_\alpha$ representing a point in $\Omega_\alpha^\varepsilon$, and look at the half-plane $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$, as shown in Figure~\ref{fig:bound-real-part}. The curve $\mathcal{C}$ lies entirely outside this half-plane, so we have $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) \le \Lambda'$ throughout it. Each of the rays that make up $\mathcal{C}$ makes an angle of at least $\varepsilon/2$ with the boundary line $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) = \Lambda'$. Therefore, as we move along the curve $\mathcal{C}$, the distance to the boundary of the half-plane $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$ increases at rate $\sin(\tfrac{\varepsilon}{2})$ with respect to the arc length parameter $t$.]\end{todo}
 \begin{center}
 \begin{tikzpicture}
 \setfiberscale{2.5}
@@ -948,7 +948,7 @@ as shown in Figure~\ref{fig:ref-path}. On $\Omega_\alpha^\varepsilon \times \mat
 \draw[out=-100, in=110, shorten >=0.5mm, -stealth] (1.1, 2.8) node[anchor=south, inner sep=0.5] {$t \sin(\tfrac{\varepsilon}{2})$} to (dist-anchor);
 \end{scope}
 \end{tikzpicture}
-\captionof{figure}{\begin{todo}[\ldots] Mention that the phase of $\zeta_\alpha$ has been chosen to bring the line $\Re\big(z\tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) = \Lambda'$ as close as possible to $\mathcal{C}$.\end{todo}}
+\captionof{figure}{\begin{todo}[\ldots] Polish figure: label half-plane $(>)$ instead of boundary $(=)$. Mention that the phase of $\zeta_\alpha$ has been chosen to bring the line $\Re\big(z\tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) = \Lambda'$ as close as possible to $\mathcal{C}$. Maybe add some figure copies (without the extra label stuff) where the angle of the half-plane varies.\end{todo}}\label{fig:bound-real-part}
 \end{center}
 
 The inverse Laplace transform is given by the formula
@@ -1343,13 +1343,13 @@ Taking the Laplace transform of both sides, we learn that
 \[ \Phi = \frac{a_0}{z^{\rho+1}} + \frac{a_1}{z^{\rho+2}} + \ldots + \frac{a_{n-1}}{z^{\rho+n}} + E_n, \]
 where $E_n = \laplace_{\zeta, 0}^\theta \varepsilon_n$. To show that $\Phi$ is asymptotic to $\series{\Phi}$, we just need to prove that $|z^{\rho+n} E_n| \to 0$ as $|z| \to \infty$ along every ray.
 
-Because of the conditions we put on $\Omega$, we can apply Proposition~\ref{prop:laplace-cont}, which tells us that $E_n$ lies in $\dualsingexp{-\rho-n-1}(\widehat{\Omega}_0^\Lambda)$. This means that $|E_n| \lesssim \Delta^{-\rho-n-1}$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_0^\Lambda$. \begin{revised}Observe that $\widehat{\Omega}_0^\Lambda$ is a union of half-planes, the distance to the boundary of each half-plane increases linearly along any ray that intersects the half-plane, and $\Delta$ is the infimum of these distances. From this, we can deduce that $|z|/\Delta$ goes to a constant limit as $z \to \infty$ along any ray that intersects $\widehat{\Omega}_0^\Lambda$.\end{revised}\footnote{The constant limit is not uniform over all rays, so we are showing that $\Phi$ is asymptotic, but not necessarily uniformly asymptotic, to $\series{\Phi}$.} We then reason that
+Because of the conditions we put on $\Omega$, we can apply Proposition~\ref{prop:laplace-cont}, which tells us that $E_n$ lies in $\dualsingexp{-\rho-n-1}(\widehat{\Omega}_0^\Lambda)$. This means that $|E_n| \lesssim \Delta^{-\rho-n-1}$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_0^\Lambda$. Observe that $\widehat{\Omega}_0^\Lambda$ is a union of half-planes, the distance to the boundary of each half-plane increases linearly along any ray that intersects the half-plane, and $\Delta$ is the infimum of these distances. From this, we can deduce that $|z|/\Delta$ goes to a constant limit as $z \to \infty$ along any ray that intersects $\widehat{\Omega}_0^\Lambda$.\footnote{The constant limit is not uniform over all rays, so we are showing that $\Phi$ is asymptotic, but not necessarily uniformly asymptotic, to $\series{\Phi}$.} We then reason that
 \begin{align*}
 |z^{\rho+n} E_n| & \lesssim |z|^{\rho+n} \Delta^{-\rho-n-1} \\
 & = \big(|z|/\Delta\big)^{\rho+n} \Delta^{-1} \\
 & \lesssim \Delta^{-1}
 \end{align*}
-along any ray \begin{revised}that intersects $\widehat{\Omega}_0^\Lambda$\end{revised}. This, as discussed above, proves the desired result.
+along any ray that intersects $\widehat{\Omega}_0^\Lambda$. This, as discussed above, proves the desired result.
 \end{proof}
 \color{black}
 
@@ -1658,7 +1658,7 @@ A function $\iota_a$ with $I_a = \laplace_{\zeta, \alpha}^\theta \iota_a$ is giv
 \begin{equation}\label{eqn:formula-proof}
 \iota_a = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right),
 \end{equation}
-where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that goes through $f^{-1}([\alpha,\zeta e^{i\theta}])$. Notice that $\mathcal{C}_a^\theta(\zeta)$ starts and ends in $f^{-1}(\zeta)$.
+where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that goes through $f^{-1}\big([\alpha,\zeta e^{i\theta}]\big)$. Notice that $\mathcal{C}_a^\theta(\zeta)$ starts and ends in $f^{-1}(\zeta)$.
 \end{lemma}
 \begin{remark}
 In \cite{pham}, Pham describes this formula in a slightly different form, integrating the variation of $\nu/df$, instead of differentiating the integral as we do in equation~\eqref{eqn:formula-proof}.
@@ -2567,24 +2567,65 @@ v_\text{uni} = \frac{1}{\sqrt{\zeta^4 - \omega^2}}
 \end{equation}
 satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega^2 = 0$. Thus, a single ``universal solution'' in the position domain leads to four linearly independent solutions $V_\alpha = \laplace_{\zeta, \alpha} v_\text{uni}$ of equation~\eqref{eqn:triangular_cantilever}, indexed by the fourth roots of $\omega^2$.
 \subsubsection{Expressing the solutions as thimble integrals}
-If we had a thimble integral expression for $V_\alpha$, we could use the thimble projection formula, as written in equation~\eqref{eqn:formula-proof}, to find $v_\text{uni}$. Since we found $v_\text{uni}$ in Section~\ref{sec:solve-cantilever-eqn}, we can work backwards from equation~\eqref{thimble-difference} to guess a thimble integral expression for $V_\alpha$. \begin{todo}[Do the argument in reverse, starting with the expression that looks like $v_\text{uni}$]\end{todo}
+If we had a thimble integral expression for $V_\alpha$, we could use the thimble projection formula, as written in equation~\eqref{eqn:formula-proof}, to find $v_\text{uni}$. Since we found $v_\text{uni}$ in Section~\ref{sec:solve-cantilever-eqn}, we can work backwards from equation~\eqref{thimble-difference} to guess a thimble integral expression for $V_\alpha$.
 \begin{revised}
+We hope to express $V_\alpha$ in the form
+\[ \int_{\mathcal{C}_a^\theta}e^{-z f} du, \]
+where $f$ is a holomorphic function on $\C$, $u$ is the standard coordinate on $\C$, $a$ is a critical point of $f$ with $f(a) = \alpha$, and $\mathcal{C}_a^\theta$ is the component of $f^{-1}\big(\alpha + e^{i\theta}[0, \infty)\big)$ that runs through $a$. We know from equation~\eqref{thimble-difference} that this thimble integral will evaluate to $V_\alpha$ as long as
+\begin{equation}\label{eqn:cantilever-thimble-difference}
+\frac{1}{\sqrt{\zeta^4-\omega^2}} = \left[\frac{du}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)},
+\end{equation}
+where $\mathcal{C}_a^\theta(\zeta)$ is the part of $\mathcal{C}_a^\theta$ that goes through $f^{-1}\big([\alpha,\zeta e^{i\theta}]\big)$. Recognizing the left-hand side, $v_\text{uni}$, as the integrand of an elliptic integral, we guess that
+\[ f = 2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big)\,, \]
+since the Jacobi elliptic function $\operatorname{sd}$ is the inverse of an incomplete elliptic integral. To confirm that this equation~\eqref{eqn:cantilever-thimble-difference} holds for this guess, we first use Jacobi's transformations to rewrite $f$ in terms of $\operatorname{sn}$:
+\[ f = \omega^{1/2} \operatorname{sn}\big(2i \omega^{1/2} u, i\big)\,. \]
+In terms of the incomplete elliptic integral
+\[ F(x; k) := \int_0^x \frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}\,, \]
+we then have
+\begin{align*}
+F(\omega^{-1/2} f; i) & = 2i \omega^{1/2} u \\
+\frac{\omega^{-1/2}\;df}{\sqrt{1 - (\omega^{-1/2} f)^4}} & = 2i \omega^{1/2}\;du \\
+\frac{1}{2i \omega \sqrt{1 - \omega^{-2} f^4}} & = \frac{du}{df}\,.
+\end{align*}
+We can simplify this to
+\[ \frac{1}{2}\left[\frac{1}{\sqrt{f^4 - \omega^2}}\right] = \frac{du}{df} \]
+by taking the branch of $\sqrt{f^4 - \omega^2}$ that evaluates to $i\omega$ when $f = 0$. By definition, $f\big(\operatorname{end} \mathcal{C}_a^\theta(\zeta)\big) = \zeta$
+so we have
+\begin{equation}\label{eqn:cantilever-endpoint}
+\frac{1}{2}\left[\frac{1}{\sqrt{\zeta^4 - \omega^2}}\right] = \left.\frac{du}{df}\right|_{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}\,,
+\end{equation}
+with the branch of the square root determined by analytic continuation along $\mathcal{C}_a^\theta$ from $a$.
+
+From our formula for $f$ in terms of $\operatorname{sd}$, we can see that $f$ is odd at $a$ with respect to $u$, implying that
+\[ \left.\frac{du}{df}\right|_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)} = -\left.\frac{du}{df}\right|_{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}\,. \]
+We can therefore rewrite equation~\eqref{eqn:cantilever-endpoint} as
+\[ \frac{1}{\sqrt{\zeta^4-\omega^2}} = \left[\frac{du}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}\,, \]
+confirming that our guess for $f$ satisfies equation~\eqref{eqn:cantilever-thimble-difference}. It follows that
+\[ V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ -z\,2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \right]\;du. \]
+
+%%Knowing that the inverse of $\operatorname{sn}$ is the incomplete elliptic integral
+%%\begin{equation}
+%%F(x;k):=\int_0^x \frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}\,,
+%%\end{equation}
+\end{revised}
+
+\begin{draft}
 Equation~\eqref{eqn:formula-proof} becomes
 \[ \frac{1}{\sqrt{\zeta^4-\omega^2}} = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\,du \right). \]
 \[ \frac{d\zeta}{\sqrt{\zeta^4-\omega^2}} = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\,du \right)d\zeta. \]
 \[ \frac{d\zeta}{\sqrt{\zeta^4-\omega^2}} = d\Big[ \left( \int_{\mathcal{C}_a^\theta(\zeta)}\,du \right)\Big]. \]
 If we guess that $\operatorname{start} \mathcal{C}_a^\theta(\zeta) = -\operatorname{end} \mathcal{C}_a^\theta(\zeta)$, we can rewrite the equation above as
 \[ \frac{1}{2}\left[\frac{d\zeta}{\sqrt{\zeta^4 - \omega^2}}\right] = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\,du \right). \]
-\end{revised}
+\end{draft}
 
-\begin{revised}
+\begin{draft}
 We assume that $V_\alpha$ has the following expression 
 \[\int_{\mathcal{C}_a^\theta}e^{-z f} du\]
 for unknown function $f$, and $\mathcal{C}_a^\theta:=f^{-1}\big((\alpha,e^{i\theta}\infty)\big)$ with $f(a)=\alpha$. Then, for $\zeta=f$ equation~\eqref{thimble-difference} becomes
-\[ \frac{1}{\sqrt{\zeta^4-\omega^2}} = \left[\frac{du}{df}\right]_{\mathrm{start}\, \mathcal{C}_a^\theta(\zeta)}^{\mathrm{end}\, \mathcal{C}_a^\theta(\zeta)}. \]
+\[ \frac{1}{\sqrt{\zeta^4-\omega^2}} = \left[\frac{du}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}. \]
 Let us guess that $f$ maps the real $u$ axis into the real $\zeta$ axis, so $f$ is equivariant with respect to conjugation and the path $\mathcal{C}_a^\theta$ is symmetric with respect to conjugation. Then we can rewrite the equation above as
 \begin{align*}
-\frac{1}{2} \left[ \frac{1}{\sqrt{\zeta^4 - \omega^2}} \right] & = \frac{du}{df} \\
+\frac{1}{2} \left[ \frac{1}{\sqrt{\zeta^4 - \omega^2}} \right] & = \left.\frac{du}{df}\right|_{\operatorname{end} \mathcal{C}_a^\theta(\zeta)} \\
 \frac{1}{2} \left[ \frac{df}{\sqrt{\zeta^4 - \omega^2}} \right] & = du \\
 \frac{1}{2} \left[ \frac{f^* d\zeta}{\sqrt{\zeta^4 - \omega^2}} \right] & = du
 \end{align*}
@@ -2594,17 +2635,11 @@ Let us guess that $f$ maps the real $u$ axis into the real $\zeta$ axis, so $f$ 
 \frac{\omega^{-1/2}}{\sqrt{1 - (\omega^{-1/2} \zeta)^4}} & = 2i \omega^{1/2}\;\frac{du}{df} \\
 F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u\,,
 \end{align*}
-% \begin{align*}
-% \frac{1}{\sqrt{\zeta^4-\omega^2}}&=2 \frac{du}{df}\\
-% \frac{1}{\sqrt{1 - \omega^{-2} \zeta^4}} &= 2i\omega^{1/2}\bigg[\frac{du}{df}\bigg]_{\mathrm{start}\, \mathcal{C}_a^\theta(\zeta)}^{\mathrm{end}\, \mathcal{C}_a^\theta(\zeta)} \\
-% \frac{1}{\sqrt{1 - (\omega^{-1/2} \zeta)^4}} & = 2i\omega^{1/2}\bigg[\frac{du}{df}\bigg]_{\mathrm{start}\, \mathcal{C}_a^\theta(\zeta)}^{\mathrm{end}\, \mathcal{C}_a^\theta(\zeta)}\\ 
-% \frac{\partial}{\partial\zeta}\Big[F(\omega^{-1/2} \zeta; i)\Big] &= \bigg[\frac{du}{df}\bigg]_{\mathrm{start}\, \mathcal{C}_a^\theta(\zeta)}^{\mathrm{end}\, \mathcal{C}_a^\theta(\zeta)}
-% \end{align*}
 where the function $F$ is the inverse of the elliptic sin function $\operatorname{sn}$
 \begin{equation}
 F(x;k):=\int_0^x \frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}\,.
 \end{equation}
-\end{revised}
+\end{draft}
 %Suppose $V_\alpha$ can be expressed as a thimble integral.
 
 \begin{todo}[The narrative here doesn't seem to make sense. Rewrite]\end{todo} \begin{old}We can now use the thimble projection formula, as written in equation~\eqref{thimble-difference}, to express the solutions found above as thimble integrals. In terms of the Jacobi elliptic function $\operatorname{sd}$, we have
