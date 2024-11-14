@@ -138,7 +138,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % hideable verifications
 \newif\ifshowverify
-\showverifyfalse
+\showverifytrue
 \ifshowverify
 \newenvironment{verify}{\color{ForestGreen}}{\color{black}}
 \else
@@ -489,10 +489,10 @@ As an alternative to our argument, Theorem~\ref{thm:maxim} could be deduced from
 %
 \paragraph{New perspectives on the Laplace transform}
 %
-For Borel summation to work as described in Theorems~\ref{thm:soln_is_Borel_sum} and~\ref{thm:maxim}, one usually needs to take the Laplace and Borel transforms using a particular position coordinate and integration base point. To explain this aspect of Borel regularity, we introduce a geometric picture of the Laplace and Borel transforms, generalizing the position domain from the complex plane to a translation surface $B$. Each translation chart $\zeta$ gives a different version of the Laplace transform, whose associated frequency domain is the cotangent space $T^*_{\zeta = 0} B$. The frequency coordinate $z$ is a canonical coordinate on $T^*_{\zeta = 0}B$, or on $T^*_{\zeta = 0}B^{\otimes n}$ if $\zeta = 0$ is a singularity with cone angle $2\pi n$. The details of this picture are discussed in Sections \ref{sec:geometry_laplace} and \ref{sec:geometry_borel}.
+For Borel summation to work as described in Theorems~\ref{thm:soln_is_Borel_sum} and~\ref{thm:maxim}, one usually needs to take the Laplace and Borel transforms using a particular position coordinate and integration base point. To explain this aspect of Borel regularity, we introduce a geometric picture of the Laplace and Borel transforms, generalizing the position domain from the complex plane to a translation surface $B$. Each translation chart $\zeta$ gives a different version of the Laplace transform, whose associated frequency domain is the cotangent space $T^*_{\zeta = 0} B$. The frequency coordinate $z$ is a canonical coordinate on $T^*_{\zeta = 0}B$, or on $T^*_{\zeta = 0}B^{\otimes n}$ if $\zeta = 0$ is a singularity with cone angle $2\pi n$, as illustrated in Figure~\ref{fig:geometric-picture-intro}. The details of this perspective are discussed in Sections \ref{sec:geometry_laplace} and \ref{sec:geometry_borel}.
 \begin{center}
 \phaseSpaceLaplace
-\captionof{figure}{The frequency coordinate $z$ on the cotangent spaces of an ordinary point and a singular point. The singularity shown here has cone angle $6\pi$, like the singularities of the translation surface associated with the Airy function.}
+\captionof{figure}{The frequency coordinate $z$ on the cotangent spaces of an ordinary point and a singular point. The singularity shown here has cone angle $6\pi$, like the singularities of the translation surface associated with the Airy function.}\label{fig:geometric-picture-intro}
 \end{center}
 
 We depart slightly from traditional Laplace transform methods for solving ODEs. One traditionally relates ODEs on the frequency domain to ODEs on the position domain~\cite{braaksma2006laplace,laplace-tfm}, but we find it more natural to relate them to integral equations on the position domain. The good behavior of integral equations and their solutions is central to our proof that certain ODEs have Borel regular solutions.
@@ -697,10 +697,10 @@ Near each branch point $b$, fix a coordinate $\omega_b$ with $\zeta_b = \tfrac{1
 %
 \paragraph{The frequency coordinate}\label{transl-freq}
 %
-Over the complement $B'$ of the branch points, the translation structure gives us a holomorphic map $z \maps T^*B' \to \C$. This map is an isomorphism on every fiber, trivializing $T^*B$ almost globally. Over a branch point $b$ of cone angle $2\pi n$, we get an analogous isomorphism $z \maps T^*_bB^{\otimes n} \to \C$. In both cases, we will call $z$ the {\em frequency coordinate} of $B$.
+Over the complement $B'$ of the branch points, the translation structure gives us a holomorphic map $z \maps T^*B' \to \C$. This map is an isomorphism on every fiber, trivializing $T^*B$ almost globally. Over a branch point $b$ of cone angle $2\pi n$, we get an analogous isomorphism $z \maps T^*_bB^{\otimes n} \to \C$. In both cases, we will call $z$ the {\em frequency coordinate} of $B$. Both cases are illustrated in Figure~\ref{fig:geometric-picture} below.
 \begin{center}
 \phaseSpaceLaplace
-\captionof{figure}{The frequency coordinate $z$ on the cotangent spaces of an ordinary point and a singular point. The singularity shown here has cone angle $6\pi$, like the singularities of the translation surface associated with the Airy function.}
+\captionof{figure}{The frequency coordinate $z$ on the cotangent spaces of an ordinary point and a singular point. The singularity shown here has cone angle $6\pi$, like the singularities of the translation surface associated with the Airy function.}\label{fig:geometric-picture}
 \end{center}
 
 At an ordinary point, we can define $z$ simply as the map
@@ -1182,7 +1182,7 @@ In addition, on both $\C\llbracket\zeta\rrbracket$ and $\C\llbracket z^{-1}\rrbr
 
 To see the Borel transform as an algebra isomorphism, we must use a different product on $\C\llbracket\zeta\rrbracket$: the convolution product for formal power series. Let $\zeta$ be a coordinate on $B$. For any integers $m, n$,%%Let $\series{\phi}=\sum_{n=0}^\infty a_n\frac{\zeta^n}{n!}\,, \series{\psi}=\sum_{n=0}^\infty b_n\frac{\zeta^n}{n!}\in\C\llbracket\zeta\rrbracket$, then 
 \begin{equation}\label{eq: convolution_formal}
-\frac{\zeta^m}{m!} \ast_{\zeta} \frac{\zeta^n}{n!} = \frac{\zeta^{m+n+1}}{(m+n+1)!} \,.
+\frac{\zeta^m}{m!} \ast_\zeta \frac{\zeta^n}{n!} = \frac{\zeta^{m+n+1}}{(m+n+1)!} \,.
 \end{equation}
 \begin{verify}
 \begin{align*}
@@ -1195,8 +1195,8 @@ We extend the convolution product $\ast_\zeta$ by countable linearity to the who
 \begin{align*}
    \left( \sum_{n=0}^\infty a_n \frac{\zeta^n}{n!}\right)\ast_\zeta\left(\sum_{n=0}^\infty b_n\frac{\zeta^n}{n!}\right)=\sum_{n=0}^\infty\sum_{j=0}^na_jb_{n-j}\left[\frac{\zeta^j}{j!}\ast_\zeta\frac{\zeta^{n-j}}{(n-j)!}\right]=\sum_{n=0}^\infty\sum_{j=0}^na_jb_{n-j}\frac{\zeta^{n+1}}{(n+1)!}\,.
 \end{align*}
-Furthermore, we define the convolution product of $\delta$ with monomials: \[\delta\ast_{\zeta}\frac{\zeta^n}{n!}\defeq\frac{\zeta^n}{n!}\,,\]
-\[\frac{\zeta^n}{n!}\ast_{\zeta}\delta\defeq\frac{\zeta^n}{n!}\,,\]
+Furthermore, we define the convolution product of $\delta$ with monomials: \[\delta\ast_\zeta\frac{\zeta^n}{n!}\defeq\frac{\zeta^n}{n!}\,,\]
+\[\frac{\zeta^n}{n!}\ast_\zeta\delta\defeq\frac{\zeta^n}{n!}\,,\]
 in other words, $\delta$ is the unit for the convolution. 
 \end{definition}
 Notice that from equation~\eqref{eq: convolution_formal} and the definition of the convolution with $\delta$, we deduce the convolution product is commutative with unit $\delta$.
@@ -1259,6 +1259,9 @@ The space of $1$-Gevrey series is closed under the Cauchy product. In addition,
 extends to an algebra homomorphism, where $\C\{\zeta\}$ is endowed with the convolution product defined in Definition~\ref{def:convolution_formal}. In fact, we deduce that the Borel transform induces an algebra homomorphism on $1$-Gevrey series. Similarly, if $z$ is coordinate on the fiber over $\zeta=\alpha$, the Borel transform $\borel_{\zeta_\alpha}$ induces an isomorphism between $\C\llbracket z^{-1}\rrbracket_1$ endowed with the Cauchy product, and $\C\delta+\C\{\zeta_\alpha\}$ endowed with the convolution $\ast_{\zeta_\alpha}$.
 \begin{verify}
 \subsubsection{Compatibility of the convolution product with the geometry}\label{sec:convolution-compatible}
+\begin{brainstorm}
+\item It's probably not worth updating the convolutions to new notation.
+\end{brainstorm}
 The convolution product is compatible with the change of translation chart: if $\series{\Phi}, \series{\Psi}\in \C \llbracket z^{-1} \rrbracket_1$ be series on $T^*_{\zeta=b}B$ and let $\series{\psi}:=\borel_{\zeta_b}\series{\Psi}$ and $\series{\phi}:=\borel_{\zeta_b}\series{\Phi}$
 \[\borel_{\zeta_b}(\series{\Psi}\series{\Phi})=\hat{\psi}\ast \hat{\phi}=\int_{0}^{\zeta_b}\hat{\psi}(\zeta_b-\zeta')\hat{\phi}(\zeta')d\zeta'\]
 Furthermore, we can extend the previous definition to trans-series: let $\series{\Phi}, \series{\Psi}\in e^{-z\alpha}\C \llbracket z^{-1} \rrbracket_1$ be series on $T^*_{\zeta=0} B$, we define \[\borel_{\zeta}(\series{\Psi}\series{\Phi})=:\series{\psi}\ast_\alpha\series{\phi}.\]
@@ -1280,7 +1283,6 @@ We first assume $\Phi=\laplace_{\zeta,\alpha}\phi$ for $\phi\in\singexpalg{\sigm
     \borel_\zeta(z^{-\lambda}{\Phi})=\borel_\zeta(z^{-\lambda}\laplace_{\zeta,\alpha}\phi)&=\borel_\zeta(\laplace_{\zeta,\alpha}\partial_{\zeta,\alpha}^{-\lambda}\phi)=\partial_{\zeta,\alpha}^{-\lambda}\phi=\frac{1}{\Gamma(\lambda)}\int_{\alpha}^\zeta (\zeta-t)^{\lambda-1}\phi(t)dt=\borel_\zeta (z^{-\lambda})\ast_\alpha\phi
 \end{align*}
 where we use the identity $\laplace_{\zeta, \alpha}\,\fracderiv{-\lambda}{\zeta}{\alpha} \varphi = z^{-\lambda} \laplace_{\zeta, \alpha} \varphi$, that generalizes properties $(i)$ and $(ii)$ in Proposition~\ref{prop:L-int-op}. Hence \[\borel_\zeta (z^{-\lambda})\ast_\alpha\borel_\zeta{\Phi}=\fracderiv{-\lambda}{\zeta}{\alpha}\big[\borel_\zeta\Phi\big].\]
-%However, if we consider a different fiber on $T^*B$, we have to modify the definition of convolution product in order to generalize properties (i) and (ii): indeed assuming $\series{\Phi}=\laplace_{\zeta_\alpha,0}\phi$ we have for every $\lambda\in (0,\infty)$
 Then, we study the case when $\Phi$ and $z$ are functions on the fiber over $\zeta=b$, and we assume $\Phi=\laplace_{\zeta_b,0}\phi$ for $\phi\in\singexpalg{\sigma}(\Omega_b)$. For every $\lambda\in (-1,\infty)$
 \begin{multline*}
     \borel_{\zeta_b}\big[z^{-\lambda}\Phi\big]=\borel_{\zeta_b}\big[z^{-\lambda}\laplace_{\zeta_b,0}\phi\big]=\borel_{\zeta_b}\big[\laplace_{\zeta_b,0}\partial_{\zeta_b,0}^{-\lambda}\phi\big]=\partial_{\zeta_b,0}^{-\lambda}\phi=\frac{1}{\Gamma(\lambda)}\int_{0}^{\zeta_b} (\zeta_b-t)^{\lambda-1}\phi(t)dt\\
@@ -1354,48 +1356,6 @@ Because of the conditions we put on $\Omega$, we can apply Proposition~\ref{prop
 \end{align*}
 along any ray that intersects $\widehat{\Omega}_0^\Lambda$. This, as discussed above, proves the desired result.
 \end{proof}
-\color{black}
-
-%The space of $1$-Gevrey formal series is a $\C$-algebra with unit $1$, thus in order to prove that $\borel_\zeta$ is an algebra homomorphism between $\C\llbracket z^{-1}\rrbracket_1$ and $\C\lbrace\zeta\rbrace$ we should endow $\C\lbrace\zeta\rbrace$ with the convolution product and with the formal unit $\delta\defeq\borel_\zeta 1$. 
-
-%Let $\series{\Phi}, \series{\Psi}\in \C \llbracket z^{-1} \rrbracket_1$ (where we assume they are series on the fiber over $\zeta=0$), then 
-%\[\borel_\zeta(\series{\Psi}\series{\Phi})=:\series{\psi}\ast\series{\phi}.\]
-%In addition, as proved in \cite[Definition 5.12 and Lemma 5.14]{diverg-resurg-i}, the convolution product $\ast$ can be explicitly characterized as \textcolor{orange}{[maybe just define it on holomorphic functions first, and then extend to all formal series by linearity via Taylor series]}
-%\[
- %   \series{\psi}\ast\series{\phi}=\int_0^{\zeta}d\zeta' \series{\psi}(\zeta-\zeta')\series{\phi}(\zeta').
-%\]
-%\begin{lemma}
-%The convolution product induces an algebra structure on the space $\singexp{\sigma}{\Lambda}(\Omega)$.
-%\end{lemma}
-%\begin{proof}
-%    Let $\series{\phi},\series{\psi}\in\singexp{\sigma}{\Lambda}(\Omega)$, then a simple computation shows $\series{\phi}\ast\series{\psi}\in\singexp{\sigma}{\Lambda}(\Omega)$.
-%\begin{verify}
- %   \begin{align*}
-  %      | \series{\phi}\ast\series{\psi}|&=\left|\int_0^\zeta\series{\phi}(\zeta-\zeta')\series{\psi}(\zeta')\, d\zeta'\right|\\
-   %     &\le \int_0^\zeta |\series{\phi}(\zeta-\zeta')||\series{\psi}(\zeta')|\, d\zeta'\\
-    %    &\le ||\series{\psi}||_{\sigma,\Lambda} \int_0^\zeta\series{\phi}(\zeta-\zeta')|\zeta'|^{\sigma}e^{\Lambda|\zeta'|}\, d\zeta'\\
-    %    &\le ||\series{\psi}||_{\sigma,\Lambda} |\zeta|^{\sigma}e^{\Lambda|\zeta|} \int_0^\zeta\series{\phi}(\zeta-\zeta')|\zeta-\zeta'|^{\sigma}e^{\Lambda|\zeta-\zeta'|}\, d\zeta'\\
-    %    &\le |\zeta|^{\sigma}e^{\Lambda|\zeta|} ||\series{\psi}||_{\sigma,\Lambda} ||\series{\phi}||_{\sigma,\Lambda}. 
-    %\end{align*}
-%\end{verify}
-%\end{proof}
-%We deduce that also the Laplace transform is a $\C$-algebra homomorphism from $\singexp{\sigma}{\Lambda}(\Omega)$ to the space of holomorphic functions on $H_\theta$.  
-%\begin{prop}
- %   Let $\sigma>-1$, $\Lambda>0$ and $\theta\in [0,2\pi)$. Then the Laplace transform $\laplace_{\zeta,0}^\theta$ is $\C$-algebra homomorphism from $\singexp{\sigma}{\Lambda}(\Omega)$ to $\mathcal{O}(H_\theta)$. 
-%\end{prop}
-%\begin{proof}
-%First of all, from the properties of $\laplace_{\zeta,0}^\theta$ we know that if $\phi, \psi\in\singexp{\sigma}{\Lambda}(\Omega)$, then
-%\[\laplace_{\zeta,0}^\theta\big[{\phi}\ast{\psi}\big]=\laplace_{\zeta,0}^\theta\big[{\phi}\big]\laplace_{\zeta,0}^\theta\big[{\psi}\big],\]
-%see for instance \cite[Theorem 2.39]{laplace-tfm}. Then we should prove that $\delta$ is a unit: from its definition and the fact that $\borel_\zeta$ is the formal inverse of $\laplace_{\zeta,0}$, we deduce that 
- %   \[
-%\laplace_{\zeta,0}^\theta\big[\delta\big]:=\laplace_{\zeta,0}^\theta\big[\borel_\zeta(1)\big]=1.
- %   \]
-%Thus, $\delta$ behaves as a Dirac delta distribution acting on $\singexpalg{\sigma}(\Omega)$. Then, if ${\phi}\in\singexp{\sigma}{\Lambda}(\Omega)$
-  %   \begin{align*}
-%\big[\delta\ast\phi\big](p)&=\int_0^{\zeta(p)} \delta(\zeta(p)-\zeta)\phi(\zeta) \, d\zeta=\phi(p)
- %   \end{align*}
-%\end{proof}
-%
 %
 \subsection{Action on fractional derivatives and fractional integrals}\label{sec:frac-diff-laplace}
 In this section, we will consider the action of $\borel_\zeta$ and $\laplace_{\zeta,0}$ with respect to the action of derivatives in both the frequency and position domains, as well as fractional integrals and derivatives $\fracderiv{\lambda}{\zeta}{0}$ in the position domain. This will be useful in Section~\ref{sec:examples}. 
@@ -2334,7 +2294,6 @@ With an argument analogous to the one in Section~\ref{bessel-regularity-AL}, one
 \begin{todo}
 \subsubsection{Thimble projection formula}
 In Theorem~\ref{thm:maxim-proof}, we proved a $3/2$-derivative formula to compute the Borel transform of the asymptotics of a thimble integral.
-\color{black}
 \end{todo}
 \subsection{Third-degree thimble integrals}\label{sec:deg3}
 In this section, we consider the thimble integral
@@ -2556,7 +2515,6 @@ For the triangular cantilever, $t$ is constant, and $s = \sigma z$ for some cons
 \end{align*}
 Now, set $\mu = \tfrac{c_2}{c_1} = \tfrac{3}{4} \tfrac{1}{E} \big(\tfrac{\omega}{t}\big)^2$. This example works because the linear density of the beam and the second moment of area about the side-to-side axis are proportional, so they both end up in the $P(\partial/\partial z)$ term.\par
 \end{verify}
-\color{black}
 \subsubsection{Solving the differential equation}\label{sec:solve-cantilever-eqn}
 We seek functions $v$ and points $\zeta = \alpha$ for which the Laplace transform $\laplace_{\zeta, \alpha} v$ satisfies the differential equation~\eqref{eqn:triangular_cantilever}. From Proposition~\ref{prop:L-int-op} we deduce that $\laplace_{\zeta, \alpha} v$ satisfies equation~\eqref{eqn:triangular_cantilever} if and only if $v$ satisfies the integral equation
 \begin{equation}\label{eqn:position_cantilever}
@@ -2889,14 +2847,7 @@ Seeking solutions of the Borel-transformed equation, Mitschi and Sauzin write th
 \begin{align*}
 \hat{\phi}_+(\zeta):=\borel\series{\Phi}_+=\delta+\frac{d}{d\zeta}\hat{\chi}(\zeta)  \qquad \hat{\phi}_-(\zeta):=\borel\series{\Phi}_-=\delta-\frac{d}{d\zeta}\hat{\chi}(-\zeta)
 \end{align*}
- where $\hat{\chi}(\zeta)=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6} \ast_{\zeta} \zeta^{-5/6}$.
-%Notice that $\tilde{W}_{1,2}(\tfrac{2}{3}\hbar)=\series{\Phi}_{\pm}(z)$ for $\hbar=z^{-1}$, hence 
-%
-%\begin{align*}
-%\series{\phi}_{+}(\zeta)&=\borel\tilde{W}_{1}(\tfrac{2}{3}\zeta)=\frac{1}{2\pi}\delta-\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right) \\
-%\series{\phi}_{-}(\zeta)&=\borel\tilde{W}_{2}(\tfrac{2}{3}\zeta)=\frac{1}{2\pi}\delta+\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right) 
-%\end{align*}
-%which up to a constant factor for $\delta$, they agree with our results. 
+ where $\hat{\chi}(\zeta)=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6} \ast_\zeta \zeta^{-5/6}$.
 
 Notice that $\hat{\chi}(\zeta)$ is a hypergeometric function:
 \begin{align*}
