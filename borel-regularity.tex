@@ -902,8 +902,10 @@ The boundary of $\widehat{\Omega}_\alpha^\Lambda$ consists of two rays connected
 Parameterize $\mathcal{C}$ using the arc length parameter $t$ which is zero at the midpoint of the circular arc part of $\mathcal{C}$. The path $\mathcal{C}$ is made of two rays, which meet at an angle of $\pi - \Theta + \varepsilon$. Parameterize it using the arc length parameter $t$ which is zero where the rays meet. Along $\mathcal{C}$, the distance $\Delta$ to the boundary of $\widehat{\Omega}_\alpha^\Lambda$ satisfies the estimate
 \[ \Delta \ge \sin(\varepsilon/2)\,|t|\,, \]
 as shown in Figure~\ref{fig:ref-path}. On $\Omega_\alpha^\varepsilon \times \mathcal{C}$, we have
-\[ \Re(z\zeta_\alpha) \le |\zeta_\alpha| \big(\Lambda' - \sin(\varepsilon/2)\,|t|\big)\,. \]
-\begin{todo}[Justify bounds in words: Fix a value of the coordinate $\zeta_\alpha$ representing a point in $\Omega_\alpha^\varepsilon$, and look at the half-plane $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$, as shown in Figure~\ref{fig:bound-real-part}. The curve $\mathcal{C}$ lies entirely outside this half-plane, so we have $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) \le \Lambda'$ throughout it. Each of the rays that make up $\mathcal{C}$ makes an angle of at least $\varepsilon/2$ with the boundary line $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) = \Lambda'$. Therefore, as we move along the curve $\mathcal{C}$, the distance to the boundary of the half-plane $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$ increases at rate $\sin(\tfrac{\varepsilon}{2})$ with respect to the arc length parameter $t$.]\end{todo}
+\begin{equation}\label{eqn:inverse-laplace-exp-bound}
+\Re(z\zeta_\alpha) \le |\zeta_\alpha| \big(\Lambda' - \sin(\varepsilon/2)\,|t|\big)\,.
+\end{equation}
+\begin{revised}To see why this bound holds, fix a value of the coordinate $\zeta_\alpha$ representing a point in $\Omega_\alpha^\varepsilon$. Consider the half-plane $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$, illustrated in Figure~\ref{fig:bound-real-part} for an extreme value of $\zeta_\alpha$.\end{revised}
 \begin{center}
 \begin{tikzpicture}
 \setfiberscale{2.5}
@@ -944,12 +946,13 @@ as shown in Figure~\ref{fig:ref-path}. On $\Omega_\alpha^\varepsilon \times \mat
 
 % point at node boundary
 \begin{scope}[pwbeige!80!black]
-\draw[out=165, in=30, -stealth] (3.0, 1.8) node[anchor=west, inner sep=1] {$\Re\big(z\tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) = \Lambda'$} to (1.9, 1.6);
+\draw[out=170, in=25] (3.0, 1.8) node[anchor=west, inner sep=1] {$\Re\big(z\tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$} to (2.1, 1.7);
 \draw[out=-100, in=110, shorten >=0.5mm, -stealth] (1.1, 2.8) node[anchor=south, inner sep=0.5] {$t \sin(\tfrac{\varepsilon}{2})$} to (dist-anchor);
 \end{scope}
 \end{tikzpicture}
-\captionof{figure}{\begin{todo}[\ldots] Polish figure: label half-plane $(>)$ instead of boundary $(=)$. Mention that the phase of $\zeta_\alpha$ has been chosen to bring the line $\Re\big(z\tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) = \Lambda'$ as close as possible to $\mathcal{C}$. Maybe add some figure copies (without the extra label stuff) where the angle of the half-plane varies.\end{todo}}\label{fig:bound-real-part}
+\captionof{figure}{\begin{revised}For this figure, we have chosen a value of $\zeta_\alpha$ representing a point on the boundary of the sector $\Omega_\alpha^\varepsilon$. This is a worst-case scenario for inequality~\eqref{eqn:inverse-laplace-exp-bound}, since our assumptions actually require $\zeta_\alpha$ to represent a point inside $\Omega_\alpha^\varepsilon$.\end{revised} \begin{todo}[Add $\zeta$ sector picture]\end{todo}}\label{fig:bound-real-part}
 \end{center}
+\begin{revised}By construction, the curve $\mathcal{C}$ lies entirely outside this half-plane, which means that $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) \le \Lambda'$ throughout $\mathcal{C}$. In fact, each of the rays that make up $\mathcal{C}$ makes an angle of at least $\varepsilon/2$ with the boundary line $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) = \Lambda'$. Therefore, as we move outward along $\mathcal{C}$, our distance to the boundary of the half-plane $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$ increases at a rate of at least $\sin(\tfrac{\varepsilon}{2})$ with respect to the arc length parameter $t$.\end{revised}
 
 The inverse Laplace transform is given by the formula
 \[ \big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi = \frac{1}{2 \pi i} \int_{\mathcal{C}} e^{z\zeta_\alpha} \Phi\,dz. \]
