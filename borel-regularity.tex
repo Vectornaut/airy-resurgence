@@ -2570,11 +2570,9 @@ v_\text{uni} = \frac{1}{\sqrt{\zeta^4 - \omega^2}}
 \end{equation}
 satisfies equation~\eqref{eqn:position_cantilever} whenever $\alpha^4 - \omega^2 = 0$. Thus, a single ``universal solution'' in the position domain leads to four linearly independent solutions $V_\alpha = \laplace_{\zeta, \alpha} v_\text{uni}$ of equation~\eqref{eqn:triangular_cantilever}, indexed by the fourth roots of $\omega^2$.
 \subsubsection{Expressing the solutions as thimble integrals}
-If we had a thimble integral expression for $V_\alpha$, we could use the thimble projection formula, as written in equation~\eqref{eqn:formula-proof}, to find $v_\text{uni}$. Since we found $v_\text{uni}$ in Section~\ref{sec:solve-cantilever-eqn}, we can work backwards from equation~\eqref{thimble-difference} to guess a thimble integral expression for $V_\alpha$.
-\begin{revised}
-We hope to express $V_\alpha$ in the form
+If we had a thimble integral expression for $V_\alpha$, we could use the thimble projection formula, as written in equation~\eqref{eqn:formula-proof}, to find $v_\text{uni}$. Since we found $v_\text{uni}$ in Section~\ref{sec:solve-cantilever-eqn}, we can work backwards from equation~\eqref{thimble-difference} to guess a thimble integral expression for $V_\alpha$. We hope to express $V_\alpha$ in the form
 \[ \int_{\mathcal{C}_a^\theta}e^{-z f} du, \]
-where $f$ is a holomorphic function on $\C$, $u$ is the standard coordinate on $\C$, $a$ is a critical point of $f$ with $f(a) = \alpha$, and $\mathcal{C}_a^\theta$ is the component of $f^{-1}\big(\alpha + e^{i\theta}[0, \infty)\big)$ that runs through $a$. We know from equation~\eqref{thimble-difference} that this thimble integral will evaluate to $V_\alpha$ as long as
+where the function $f$ is a holomorphic function on $\C$, the function $u$ is the standard coordinate on $\C$, the point $a$ is a critical point of $f$ with $f(a) = \alpha$, and the path $\mathcal{C}_a^\theta$ is the component of $f^{-1}\big(\alpha + e^{i\theta}[0, \infty)\big)$ that runs through $a$. We know from equation~\eqref{thimble-difference} that this thimble integral will evaluate to $V_\alpha$ as long as
 \begin{equation}\label{eqn:cantilever-thimble-difference}
 \frac{1}{\sqrt{\zeta^4-\omega^2}} = \left[\frac{du}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)},
 \end{equation}
@@ -2604,85 +2602,8 @@ From our formula for $f$ in terms of $\operatorname{sd}$, we can see that $f$ is
 We can therefore rewrite equation~\eqref{eqn:cantilever-endpoint} as
 \[ \frac{1}{\sqrt{\zeta^4-\omega^2}} = \left[\frac{du}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}\,, \]
 confirming that our guess for $f$ satisfies equation~\eqref{eqn:cantilever-thimble-difference}. It follows that
-\[ V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ -z\,2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \right]\;du. \]
-
-%%Knowing that the inverse of $\operatorname{sn}$ is the incomplete elliptic integral
-%%\begin{equation}
-%%F(x;k):=\int_0^x \frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}\,,
-%%\end{equation}
-\end{revised}
-
-\begin{draft}
-Equation~\eqref{eqn:formula-proof} becomes
-\[ \frac{1}{\sqrt{\zeta^4-\omega^2}} = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\,du \right). \]
-\[ \frac{d\zeta}{\sqrt{\zeta^4-\omega^2}} = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\,du \right)d\zeta. \]
-\[ \frac{d\zeta}{\sqrt{\zeta^4-\omega^2}} = d\Big[ \left( \int_{\mathcal{C}_a^\theta(\zeta)}\,du \right)\Big]. \]
-If we guess that $\operatorname{start} \mathcal{C}_a^\theta(\zeta) = -\operatorname{end} \mathcal{C}_a^\theta(\zeta)$, we can rewrite the equation above as
-\[ \frac{1}{2}\left[\frac{d\zeta}{\sqrt{\zeta^4 - \omega^2}}\right] = \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\,du \right). \]
-\end{draft}
-
-\begin{draft}
-We assume that $V_\alpha$ has the following expression 
-\[\int_{\mathcal{C}_a^\theta}e^{-z f} du\]
-for unknown function $f$, and $\mathcal{C}_a^\theta:=f^{-1}\big((\alpha,e^{i\theta}\infty)\big)$ with $f(a)=\alpha$. Then, for $\zeta=f$ equation~\eqref{thimble-difference} becomes
-\[ \frac{1}{\sqrt{\zeta^4-\omega^2}} = \left[\frac{du}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}. \]
-Let us guess that $f$ maps the real $u$ axis into the real $\zeta$ axis, so $f$ is equivariant with respect to conjugation and the path $\mathcal{C}_a^\theta$ is symmetric with respect to conjugation. Then we can rewrite the equation above as
-\begin{align*}
-\frac{1}{2} \left[ \frac{1}{\sqrt{\zeta^4 - \omega^2}} \right] & = \left.\frac{du}{df}\right|_{\operatorname{end} \mathcal{C}_a^\theta(\zeta)} \\
-\frac{1}{2} \left[ \frac{df}{\sqrt{\zeta^4 - \omega^2}} \right] & = du \\
-\frac{1}{2} \left[ \frac{f^* d\zeta}{\sqrt{\zeta^4 - \omega^2}} \right] & = du
-\end{align*}
-\begin{align*}
-\frac{1}{2} \left[ \frac{1}{\sqrt{\zeta^4 - \omega^2}} \right] & = \frac{du}{df} \\
-\frac{1}{2i \omega \sqrt{1 - \omega^{-2} \zeta^4}} & = \frac{du}{df} \\
-\frac{\omega^{-1/2}}{\sqrt{1 - (\omega^{-1/2} \zeta)^4}} & = 2i \omega^{1/2}\;\frac{du}{df} \\
-F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u\,,
-\end{align*}
-where the function $F$ is the inverse of the elliptic sin function $\operatorname{sn}$
-\begin{equation}
-F(x;k):=\int_0^x \frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}\,.
-\end{equation}
-\end{draft}
-%Suppose $V_\alpha$ can be expressed as a thimble integral.
-
-\begin{todo}[The narrative here doesn't seem to make sense. Rewrite]\end{todo} \begin{old}We can now use the thimble projection formula, as written in equation~\eqref{thimble-difference}, to express the solutions found above as thimble integrals. In terms of the Jacobi elliptic function $\operatorname{sd}$, we have
-\begin{equation}\label{eq:cantilever-thimble}
-V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ -z\,2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \right]\;du,  \end{equation}
-where $a$ is a preimage of $\zeta = \alpha$ under the map $\zeta = 2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big)$. \begin{todo}[\textbf{A} Show thimble picture.]\end{todo} Since exponent is doubly periodic, with period lattice $L = \tfrac{1}{\sqrt{2}}\Z + i\Z$, we can take the thimble to be a real submanifold of the torus $\C / L$.
-
-To confirm equation~\eqref{eq:cantilever-thimble}, use Jacobi's transformations to rewrite the relationship between $\zeta$ and $u$ in terms of $\operatorname{sn}$.
-\[ \zeta = \omega^{1/2} \operatorname{sn}\big(2i \omega^{1/2} u, i\big). \]
-\begin{verify}
-Jacobi's imaginary transform gives
-\begin{align*}
--i \operatorname{sn}\big(2i \omega^{1/2} u, \sqrt{1-\sqrt{2}^2}\big) & = \operatorname{sc}(2\omega^{1/2} u, \sqrt{2}) \\
-\operatorname{sn}\big(2i \omega^{1/2} u, i\big) & = i \operatorname{sc}\big(2\omega^{1/2} u,\sqrt{2}\big)
-\end{align*}
-Jacobi's real transform gives
-\begin{align*}
-\frac{1}{2\omega^{1/2}} \operatorname{sc}\big(2\omega^{1/2} u, \tfrac{1}{1/\sqrt{2}}\big) & = \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \\
-i \operatorname{sc}\big(2\omega^{1/2} u, \tfrac{1}{1/\sqrt{2}}\big) & = 2i \omega^{1/2} \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big).
-\end{align*}
-Altogether, we have
-\begin{align*}
-\operatorname{sn}\big(2i \omega^{1/2} u, i\big) & = 2i \omega^{1/2} \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \\
-\omega^{1/2} \operatorname{sn}\big(2i \omega^{1/2} u, i\big) & = 2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big)
-\end{align*}
-\end{verify}
-Knowing that the inverse of $\operatorname{sn}$ is the incomplete elliptic integral
-\begin{equation}
-F(x;k):=\int_0^x \frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}\,,
-\end{equation}
-we learn that
-\begin{align*}
-F(\omega^{-1/2} \zeta; i) & = 2i \omega^{1/2} u \\
-\frac{\omega^{-1/2}\;d\zeta}{\sqrt{1 - (\omega^{-1/2} \zeta)^4}} & = 2i \omega^{1/2}\;du \\
-\frac{d\zeta}{2i \omega \sqrt{1 - \omega^{-2} \zeta^4}} & = du \\
-\frac{1}{2}\left[\frac{d\zeta}{\sqrt{\zeta^4 - \omega^2}}\right] & = du.
-\end{align*}
-\end{old}
-\begin{todo}[Note that this presents $V_\alpha$ as the Laplace transform of $v_\text{uni}$.]\end{todo} \begin{todo}[Explain how symmetry of thimble gives $v_\text{uni}$ under thimble projection formula.]\end{todo}
-%\subsection{The anharmonic oscillator}\label{sec:anharmonic_oscillator}
+\[ V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ -z\,2i\omega \operatorname{sd}\big(u, \tfrac{1}{\sqrt{2}}\big) \right]\;du\,. \]
+Since the exponent is doubly periodic, with period lattice $L = \tfrac{1}{\sqrt{2}}\Z + i\Z$, we can take the thimble to be a real submanifold of the torus $\C / L$.
 %
 \appendix
 %
