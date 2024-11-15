@@ -877,7 +877,6 @@ The boundary of $\widehat{\Omega}_\alpha^\Lambda$ consists of two rays connected
 \begin{scope}[pwbeige!80!black]
 \draw (\peakdis, 0) +(-\phase-\spread-90:1.5*\rshade) -- +(0, 0) -- +(-\phase+\spread+90:1.5*\rshade);
 \draw[shorten <=0.3mm, shorten >=0.4mm] (\peakdis, 0) ++(\phase+\spread+90:\angmarkrad) arc[start angle=\phase+\spread+90, delta angle=\pathspread-\spread, radius=\angmarkrad] node [midway, circle, inner sep=1, anchor=-90+0.5*\spread+0.5*\pathspread)] {$\tfrac{\varepsilon}{2}$};
-%%\draw (\peakdis, 0) ++(-\phase-\spread-90:\angmarkrad) arc [start angle=\phase-\spread-90, delta angle=\spread-\pathspread, radius=\angmarkrad] node[midway, circle, inner sep=1, anchor=90-0.5*\spread-0.5*\pathspread] {$\tfrac{\varepsilon}{2}$};
 \draw[shorten >=0.3mm] (\peakdis, 0) ++(\phase+\pathspread+90:\distmarkrad) -- ++(\phase+\spread:\bdrydist) node[midway, circle, inner sep=0, anchor=-90+\spread] {$t \sin(\tfrac{\varepsilon}{2})$};
 \end{scope}
 
@@ -913,6 +912,29 @@ To see why this bound holds, fix a value of the coordinate $\zeta_\alpha$ repres
 \newcommand{\distmarkrad}{2.5}
 \pgfmathsetmacro{\bdrydist}{\distmarkrad*sin(\pathspread-\spread)}
 
+\pgfmathsetmacro{\sectorshave}{2*(\spread - \pathspread)}
+\pgfmathsetmacro{\shavedspread}{\spread - \sectorshave}
+
+\begin{fiber}
+\fill[pwbeige!30, draw=pwbeige!60] (0, 0) -- (\phase-\shavedspread:1.5*\rshade) -- (\phase+\shavedspread:1.5*\rshade) -- cycle;
+
+% the construction lines
+\begin{scope}[pwbeige!80!black]
+\draw (\phase-\spread:1.5*\rshade) -- (0, 0) -- (\phase+\spread:1.5*\rshade);
+\draw[shorten <=0.3mm, shorten >=0.3mm] (\phase+\shavedspread:\angmarkrad) arc[start angle=\phase+\shavedspread, delta angle=\sectorshave, radius=\angmarkrad] node [midway, circle, inner sep=1, anchor=-180+0.5*\spread+0.5*\pathspread)] {$\varepsilon$};
+\draw[shorten <=0.3mm, shorten >=0.3mm] (\phase-\shavedspread:\angmarkrad) arc[start angle=\phase-\shavedspread, delta angle=-\sectorshave, radius=\angmarkrad] node [midway, circle, inner sep=1, anchor=-180-0.5*\spread-0.5*\pathspread)] {$\varepsilon$};
+\end{scope}
+
+% chosen point
+\fill (\phase-\shavedspread:1.7) circle (1.25*\dotsize);
+
+\genfibercontent
+\node[anchor=-11, inner sep=2mm] at (0,0) {$\zeta = \alpha$};
+\node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$\zeta$};
+\end{fiber}
+
+\begin{scope}[shift={(6.5, 0)}] % frequency domain
+
 \begin{fiber}[shade, phase=\phase+2*\pathspread-\spread, dis=\peakdis]
 
 % grid lines and stuff
@@ -929,7 +951,6 @@ To see why this bound holds, fix a value of the coordinate $\zeta_\alpha$ repres
 
 % the path
 \draw[very thick] (\peakdis, 0) +(-\phase-\pathspread-90:\rshade) -- +(0, 0) -- +(-\phase+\pathspread+90:\rshade);
-%%\draw (\peakdis, 0) ++(\phase+\pathspread+90:0.75*\distmarkrad) node[anchor=180+\pathspread] {$t$};
 \draw (\peakdis, 0) ++(\phase+\pathspread+90:0.7*\distmarkrad) node[circle, inner sep=0.5, fill=pwbeige!10] {$t$};
 \draw (\peakdis, 0) ++(\phase+\pathspread+90:\distmarkrad) +(\pathspread:1mm) -- +(180+\pathspread:1mm);
 
@@ -937,13 +958,15 @@ To see why this bound holds, fix a value of the coordinate $\zeta_\alpha$ repres
 \node[anchor=north west, inner sep=2mm] at (-\rfiber, \rfiber) {$z$};
 \end{fiber}
 
-% point at node boundary
+% outside labels
 \begin{scope}[pwbeige!80!black]
-\draw[out=170, in=25] (3.0, 1.8) node[anchor=west, inner sep=1] {$\Re\big(z\tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$} to (2.1, 1.7);
-\draw[out=-100, in=110, shorten >=0.5mm, -stealth] (1.1, 2.8) node[anchor=south, inner sep=0.5] {$t \sin(\tfrac{\varepsilon}{2})$} to (dist-anchor);
+\draw[out=-55, in=90] (1.7, 3.2) node[anchor=-35, inner sep=1] {$\Re\big(z\tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$} to (2.1, 1.9);
+\draw[out=-15, in=105, shorten >=0.5mm, -stealth] (0.6, 2.9) node[anchor=east, inner sep=2] {$t \sin(\tfrac{\varepsilon}{2})$} to (dist-anchor);
 \end{scope}
+
+\end{scope} % frequency domain
 \end{tikzpicture}
-\captionof{figure}{For this figure, we have chosen a value of $\zeta_\alpha$ representing a point on the boundary of the sector $\Omega_\alpha^\varepsilon$. This is a worst-case scenario for inequality~\eqref{eqn:inverse-laplace-exp-bound}, since our assumptions actually require $\zeta_\alpha$ to represent a point inside $\Omega_\alpha^\varepsilon$. \begin{todo}[Add $\zeta$ sector picture]\end{todo}}\label{fig:bound-real-part}
+\captionof{figure}{For this figure, we have chosen a value of $\zeta_\alpha$ representing a point on the boundary of the sector $\Omega_\alpha^\varepsilon$. This is a worst-case scenario for inequality~\eqref{eqn:inverse-laplace-exp-bound}, since our assumptions require $\zeta_\alpha$ to represent a point inside $\Omega_\alpha^\varepsilon$. \begin{todo}[Add $\zeta$ sector picture]\end{todo}}\label{fig:bound-real-part}
 \end{center}
 By construction, the curve $\mathcal{C}$ lies entirely outside this half-plane, which means that $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) \le \Lambda'$ throughout $\mathcal{C}$. In fact, each of the rays that make up $\mathcal{C}$ makes an angle of at least $\varepsilon/2$ with the boundary line $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) = \Lambda'$. Therefore, as we move outward along $\mathcal{C}$, our distance to the boundary of the half-plane $\Re\big(z \tfrac{\zeta_\alpha}{|\zeta_\alpha|}\big) > \Lambda'$ increases at a rate of at least $\sin(\tfrac{\varepsilon}{2})$ with respect to the arc length parameter $t$.
 
