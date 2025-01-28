@@ -29,14 +29,15 @@
 
 \setcounter{tocdepth}{2}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
-\newtheorem{rmk}{Remark}
+
 \theoremstyle{plain}
-\newtheorem{proposition}{Proposition}
-\newtheorem{lemma}{Lemma}
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{rmk}[theorem]{Remark}
 
 % list formatting
 \setlist[itemize]{topsep=3mm, itemsep=1.8mm, parsep=1.2mm}
@@ -224,14 +225,14 @@ it is useful to give a name $a'$ to the point moving along the integration path.
 Plugging a function $\varphi$ into a formal polynomial or power series $P$ gives a new function $P(\varphi)$. The correspondence between operators on the position and frequency domains will lead to expressions of this kind. In Section~\ref{sec:motivation}, for example, we saw that the differential operator $P\big(\tfrac{\partial}{\partial z}\big)$ on the frequency domain corresponds to multiplication by the function $P(-\zeta)$ on the position domain.
 \subsection{Notation}
 \subsubsection{Uniform bounds}
-Given a complex-valued function $\varphi$ and a non-negative, real-valued function $\omega$, we will write $|\varphi| \lesssim \omega$ to say that $|\varphi|$ is bounded by a constant multiple of $\omega$. Unless we say otherwise, the bound holds throughout the domain where both functions are defined. If the bound involves an explicit variable, we will say that it holds over all values of the variable. For example, we will write ``$|R_j| \lesssim \lambda^j$ over all $j \in \{0, 1, 2, \ldots\}$'' to mean ``there is a constant $M$ such that for all $j \in \{0, 1, 2, \ldots\}$, the inequality $|R_j| \le M \lambda^j$ holds.''
+Given a complex-valued function $\varphi$ and a nonnegative, real-valued function $\omega$, we will write $|\varphi| \lesssim \omega$ to say that $|\varphi|$ is bounded by a constant multiple of $\omega$. Unless we say otherwise, the bound holds throughout the domain where both functions are defined. If the bound involves an explicit variable, we will say that it holds over all values of the variable. For example, we will write ``$|R_j| \lesssim \lambda^j$ over all $j \in \{0, 1, 2, \ldots\}$'' to mean ``there is a constant $M$ such that for all $j \in \{0, 1, 2, \ldots\}$, the inequality $|R_j| \le M \lambda^j$ holds.''
 \subsubsection{Boundary points}
 We will say that a subset of a topological space {\em touches} the points in its closure. This is a way of expressing the nearness relation associated with the topology~\cite[Chapter~5, Definition~2.11]{joshi1983gen-top}. If $\Omega \subset \C$ touches the point $p \in \C$, we define a neighborhood of $p$ in $\Omega$ to be $U \cap \Omega$ for some open neighborhood $U \subset \C$ of $p$. This agrees with the usual definition of a neighborhood when $p$ is an element of $\Omega$.
 \subsection{Setting}\label{setting}
 \subsubsection{The domain}\label{setting:domain}
 Throughout this paper, as described in Section~\ref{sec:motivation}, the position variable $\zeta$ will be the standard coordinate on $\C$. 
 
-Take a simply connected open set $\domain \subset \C$ that touches but does not contain $\zeta = 0$, and satisfies the following condition.
+Take a simply connected open set $\domain \subset \C$ that touches but does not contain $\zeta = 0$ and that satisfies the following condition.
 \begin{conditions}
 \cond{star}\label{cond:star} The set $\domain$ is star-shaped around $\zeta = 0$. In other words, for any $a \in \domain$, a straight path from $\zeta = 0$ to $a$ stays in $\domain$. Since $\domain$ does not contain $\zeta = 0$, we will always omit that starting point from the path.
 \end{conditions}
@@ -302,7 +303,7 @@ then setting $\delta=\frac{\log(\sigma/c)}{2\lambda_\Delta}$, we deduce that for
 We will occasionally mention an optional condition on $p$ that allows us to state our main results more explicitly.
 \begin{conditions}
 \condconst{reg-p}{B, \epsilon}\label{cond:reg-p}
-For some non-zero constant $B$ and some $\epsilon > 0$,
+For some nonzero constant $B$ and some $\epsilon > 0$,
 \[ p \in B\zeta + O\big(|\zeta|^{1 + \epsilon}\big) \]
 at $\zeta = 0$.
 \end{conditions}
@@ -310,9 +311,9 @@ at $\zeta = 0$.
 
 We now perturb $\hardpart$ to a more general operator $\volterra = \hardpart +\softpart$. \begin{revtwo}The perturbation
 \[ [\softpart\,\varphi](a) := \int_{\zeta(a') = 0}^a \softker(a, a')\,\varphi(a')\;d\zeta(a') \]
-will be non-separable,\end{revtwo}\footnote{Unless $\softpart$ is zero, of course.} but it will have a regularizing effect, as we will show in Proposition \ref{prop:smoothing}. To get the smoothing effect, we will require \revtwotext{the kernel $\softker$} to vanish to some order $\gamma > 0$ on the diagonal in $\domain^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
+will be nonseparable,\end{revtwo}\footnote{Unless $\softpart$ is zero, of course.} but it will have a regularizing effect, as we will show in Proposition \ref{prop:smoothing}. To get the smoothing effect, we will require \revtwotext{the kernel $\softker$} to vanish to some order $\gamma > 0$ on the diagonal in $\domain^2$. This requirement, combined with two others, will be made precise in Condition~\eqref{cond:eps-lambda}.
 
-Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We will allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we will not allow any sharper singularity. We will also put an exponential bound on the growth of $\softker$ away from the diagonal, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we will require:
+Since $\softpart$ is a holomorphic Volterra operator, $\softker$ is a holomorphic function on $\domain^2$. We will allow $\softker(a, a')$ to have a simple pole at $\zeta(a) = 0$, like $\hardker(a, a')$ does, but we will not allow any sharper singularity. We will also put an exponential bound on the growth of $\softker$ away from the diagonal, mimicking Condition~\eqref{cond:diag-basic} on $\hardker$. Altogether, we will require the following:
 \begin{conditions}
 \condconst{diag$_\star$}{\gamma, \lambda_\Delta}\label{cond:eps-lambda} There is a constant $\gamma > 0$ for which
 \[ |\softker(a, a')| \lesssim\frac{|\zeta(a)-\zeta(a')|^\gamma}{|\zeta(a)|}\,e^{\lambda_\Delta|\zeta(a)-\zeta(a')|}\]
@@ -336,7 +337,7 @@ has the {\em prototype solution}
 \begin{equation}\label{eqn:test_solution}
 \solproto(a) = \frac{1}{p(a)} \exp\left(-\int_{b}^{a}\frac{q}{p}\;d\zeta\right).
 \end{equation}
-Changing the base point $b \in \domain$ only multiplies $f_0$ by a non-zero constant.
+Changing the base point $b \in \domain$ only multiplies $f_0$ by a nonzero constant.
 \end{theorem}
 We will prove this result in Section~\ref{sec:construction}.
 
@@ -379,7 +380,7 @@ has a unique solution $f$ in the space $\singexpalg{\rho-1}(\Omega)$.
 \end{lemma}
 We will prove Lemma~\ref{lem:perturbed_volterra} in Sections \ref{sec:V is a contraction}--\ref{sec:existence and uniqueness}, using the contraction mapping theorem. The heart of the argument is Proposition~\ref{prop:get-contraction}, which shows us how to find relevant subspaces where $\volterra$ is a contraction.
 
-We will reduce Theorem~\ref{thm:general_volterra} to Lemma~\ref{lem:perturbed_volterra} in Section~\ref{sec:existence and uniqueness}, by rewriting the homogeneous equation $f = \volterra f$ in the subspace $f_0 + \singexpalg{\tau-1+\gamma}(\Omega)$ as an inhomogeneous equation in a more regular space. To show that the inhomogeneous term, $\softpart f_0$, is regular enough, we will use Proposition~\ref{prop:smoothing} from Section~\ref{sec:image under soft_part} to prove that $\softpart$ improves on the regularity ascribed by Theorem~\ref{thm:proto-growth} to the prototype solution $f_0$.
+We will reduce Theorem~\ref{thm:general_volterra} to Lemma~\ref{lem:perturbed_volterra} in Section~\ref{sec:existence and uniqueness}, by rewriting the homogeneous equation $f = \volterra f$ in the subspace $f_0 + \singexpalg{\tau-1+\gamma}(\Omega)$ as an inhomogeneous equation in a more regular space. To show that the inhomogeneous term $\softpart f_0$ is regular enough, we will use Proposition~\ref{prop:smoothing} from Section~\ref{sec:image under soft_part} to prove that $\softpart$ improves on the regularity ascribed by Theorem~\ref{thm:proto-growth} to the prototype solution $f_0$.
 \begin{rmk}
 When $\hardpart$ also satisfies Condition~\eqref{cond:reg-p}, Theorem~\ref{thm:general_volterra} can be restated to give a unique solution in the affine subspace
 \[ \zeta^{\tau-1} + \singexpalg{\rho-1}(\domain) \]
@@ -476,7 +477,7 @@ For any $\Lambda'' < \Lambda'$, the inclusions
 & \singexpalg{\sigma}(\domain)
 \end{tikzcd}
 \end{center}
-automatically commute, because as non-topological linear maps they are all inclusions between subspaces of $\holo(\domain)$. The existence of the desired continuous inclusion $\singexpalg{\sigma'}(\Omega)\hookrightarrow \singexpalg{\sigma}(\Omega)$ then follows from the universal property of the limit topology.
+automatically commute, because as nontopological linear maps they are all inclusions between subspaces of $\holo(\domain)$. The existence of the desired continuous inclusion $\singexpalg{\sigma'}(\Omega)\hookrightarrow \singexpalg{\sigma}(\Omega)$ then follows from the universal property of the limit topology.
 \end{proof}
 \section{Solving holomorphic Volterra equations}\label{sec:proof_main_results}
 \subsection{Overview}
@@ -514,7 +515,7 @@ whenever $|\zeta| < \delta$. To use this bound, we rewrite the integral in the d
 \end{align*}
 Exponentiating both sides shows that
 \[ \chi(a) = \left(\frac{\zeta(a)}{\zeta(b)}\right)^\tau \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau}{\zeta} \right)\;d\zeta\right]. \]
-Recalling that a change of base point just multiplies $\solproto$ by a non-zero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. The exponential factor in the formula above is then bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ whenever $|\zeta(a)| < \delta$. Since $\tau$ is positive, this is enough to show that $\lim_{\zeta \to 0} \chi = 0$. It follows, as discussed above, that $\hardpart \solproto = \solproto$.
+Recalling that a change of base point just multiplies $\solproto$ by a nonzero constant, choose the base point $b \in \Omega$ so that $|\zeta(b)| = \delta/2$. The exponential factor in the formula above is then bounded between $\exp\big({-\tfrac{3}{2}C\delta}\big)$ and $\exp\big(\tfrac{3}{2}C\delta\big)$ whenever $|\zeta(a)| < \delta$. Since $\tau$ is positive, this is enough to show that $\lim_{\zeta \to 0} \chi = 0$. It follows, as discussed above, that $\hardpart \solproto = \solproto$.
 \end{proof}
 \subsubsection{Regularity}\label{sec:asymptotics}
 Theorem~\ref{thm:proto-growth} comprises two results with different conditions. We will prove them separately as Propositions \ref{prop:asymptotic at zero} and \ref{prop:asymptotic at infinity}.
@@ -570,7 +571,7 @@ over all $a \in \domain$ with $|\zeta(a)| \ge \delta$. Using both of the bounds 
 over all $a \in \domain$ with $|\zeta(a)| \ge \delta$. Setting $\lambda_0 = \lambda_\Delta + c_\Delta$, we have $|\solproto| \lesssim |\zeta|^{-1} e^{\lambda_0|\zeta|}$ over the region $|\zeta| \ge \delta$. Since we are assuming $\tau$ is real and positive, $|\zeta|^\tau$ cannot get arbitrarily close to zero on the region $|\zeta| > \delta$. It follows that $|\solproto| \lesssim |\zeta|^{\tau-1} e^{\lambda_0|\zeta|}$ over the region $|\zeta| \ge \delta$. Combining this with our earlier argument on the region $|\zeta| < \delta$, we get the desired result.
 \end{proof}
 \begin{proposition}\label{prop:better-proto-estimate}
-Suppose $\hardpart$ satisfies {\em Conditions~\eqref{cond:reg-p}} and \eqref{cond:sing}. Then there is some $M\in\C$ for which,
+Suppose $\hardpart$ satisfies {\em Conditions~\eqref{cond:reg-p}} and \eqref{cond:sing}. Then there is some $M\in\C$ for which
 \[ \solproto \in M\zeta^{\tau-1} + O(|\zeta|^{\tau-1+\epsilon'}) \]
 at $\zeta = 0$, where $\epsilon'=\min\{\epsilon, 1\}$.
 \end{proposition}
@@ -819,7 +820,7 @@ Let $\mathcal{P}$ be a linear differential operator of the form
 where
 \begin{enumerate}
 \item[$\bullet$] $P$ is a monic degree-$d$ polynomial whose roots are all simple; 
-\item[$\bullet$] $Q$ is a degree-$(d-1)$ polynomial that is non-zero at every root of $P$;
+\item[$\bullet$] $Q$ is a degree-$(d-1)$ polynomial that is nonzero at every root of $P$;
 \item[$\bullet$] $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. In particular, the power series
 \[ R(z^{-1}) = \sum_{j=0}^\infty R_j z^{-j} \]
 converges in the region $|z| > A$.
@@ -862,7 +863,7 @@ for each $a \in \domain_\alpha$. It obeys the semigroup law \cite[Section~1.3]{m
 \begin{align*}
 \fracderiv{-\mu}{\zeta}{\alpha}\,\fracderiv{-\nu}{\zeta}{\alpha} & = \fracderiv{-\mu-\nu}{\zeta}{\alpha} & \mu, \nu \in (0, \infty),
 \end{align*}
-and agrees with ordinary repeated integration when $\nu$ is an integer \cite[equation~35]{mladenov2014advanced}.
+and agrees with ordinary repeated integration when $\nu$ is an integer \cite[equation~(35)]{mladenov2014advanced}.
 
 Fractional integration has a smoothing effect: it reduces the sharpness of any power-law singularity at $\zeta = \alpha$.
 \begin{proposition}\label{prop:frac-int-smoothing}
