@@ -181,11 +181,11 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 % highlightable revisions
 \newif\ifhighlightrevs
-\highlightrevsfalse
+\highlightrevstrue
 \ifhighlightrevs
-%%\newenvironment{revised}{\color{OrangeRed}}{\color{black}}
+\newenvironment{revised}{\color{OrangeRed}}{\color{black}}
 \else
-%%\newenvironment{revised}{}{}
+\newenvironment{revised}{}{}
 \fi
 
 % colors
@@ -231,7 +231,7 @@ with $\tau \in (0, 1]$, that looks or acts like a solution to a problem whose ac
 \begin{equation}
 \left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big(\tfrac{1}{3}\big)^2 z^{-2} \right] \Phi= 0. \label{eqn:bessel_rescaled_ex}
 \end{equation}
-behave near $z = \infty$, you might start by looking for formal {\em trans-monomial} solutions $e^{-\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above.\footnote{Trans-mononials can be of different kind, for example fractional powers of $z$ can appear at the exponent. In this paper we will only deal with trans-monomial of the form $e^{-\alpha z}$, for some $\alpha\in\C$.} Setting $\alpha = -1$ and $\tau = \tfrac{1}{2}$ gives a well-behaved recurrence relation for $\series{\Phi}$, which produces the solution 
+behave near $z = \infty$, you might start by looking for formal {\em trans-monomial} solutions $e^{-\alpha z}\,\series{\Phi}$, where $\series{\Phi}$ is a formal power series of the kind above.\footnote{Trans-mononials can be of different \begin{revised}kinds:\end{revised} for example\begin{revised},\end{revised} fractional powers of $z$ can appear \begin{revised}in\end{revised} the \begin{revised}exponential\end{revised}. In this paper\begin{revised}, however,\end{revised} we will only deal with \begin{revised}trans-monomials\end{revised} of the form \begin{revised}$e^{-\alpha z}\,\series{\Phi}$ for $\alpha \in \C$\end{revised}.} Setting $\alpha = -1$ and $\tau = \tfrac{1}{2}$ gives a well-behaved recurrence relation for $\series{\Phi}$, which produces the solution 
 \begin{equation}
 e^{z} \left[ \frac{(-1)!!}{z^{1/2}} + \frac{5}{72} \cdot \frac{1!!}{z^{3/2}} + \frac{385}{31104} \cdot \frac{3!!}{z^{5/2}} + \frac{17017}{6718464} \cdot \frac{5!!}{z^{7/2}} + \ldots \right] \label{series:bessel_ex}
 \end{equation}
@@ -305,7 +305,7 @@ The Borel summation process is summarized in the following diagram:
 \end{tikzcd}
 \end{center}
 
-You can not be sure {\em a priori} that $\hat{\Phi}$ solves your original problem, even if you know that $\series{\Phi}$ is the asymptotic expansion of an actual solution. After all, $\series{\Phi}$ is asymptotic to many functions; Borel summation simply picks one of them. In many cases, however, Borel summation picks correctly, delivering an actual solution to your problem. Borel recognized this phenomenon as a key motivation for the study of divergent series \cite{borel-memoire,borel-lecons}, and much has been said about it since (Section~\ref{sec:historical-context}); the question of how it happens is the starting point for this paper.
+You \begin{revised}cannot\end{revised} be sure {\em a priori} that $\hat{\Phi}$ solves your original problem, even if you know that $\series{\Phi}$ is the asymptotic expansion of an actual solution. After all, $\series{\Phi}$ is asymptotic to many functions; Borel summation simply picks one of them. In many cases, however, Borel summation picks correctly, delivering an actual solution to your problem. Borel recognized this phenomenon as a key motivation for the study of divergent series \cite{borel-memoire,borel-lecons}, and much has been said about it since (Section~\ref{sec:historical-context}); the question of how it happens is the starting point for this paper.
 %
 \subsection{A new perspective: Borel regularity}
 %
@@ -338,7 +338,7 @@ The idea of Borel regularity can help us understand why Borel summation is so ef
 
 The central goal of this paper is to explain, from this perspective, why Borel summation works well for the two kinds of problems exemplified in Section~\ref{intro:summation}.
 \begin{enumerate}
-\item Solving a level~$1$ linear ODE \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}.\footnote{Calling a linear ODE {\em level~$1$} is an short way of saying that it has ``a single level, equal to $1$, at infinity.'' That means a certain Newton polygon associated with its singularity at infinity has exactly one positive-slope side, which has slope~$1$. In general, the {\em levels} of a linear ODE at a given singularity are the slopes of the positive-slope sides of the associated Newton polygon~\cite[Proposition~3.3.14]{diverg-resurg--ii}.} Equation~\eqref{eqn:bessel_rescaled_ex} is an example. More generally, we will consider equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form 
+\item Solving a level~$1$ linear ODE \cite[Section 2.1]{EcalleIII}\cite[Section~5.2.2.1]{diverg-resurg-iii}.\footnote{Calling a linear ODE {\em level~$1$} is \begin{revised}a short\end{revised} way of saying that it has ``a single level, equal to $1$, at infinity.'' That means a certain Newton polygon associated with its singularity at infinity has exactly one positive-slope side, which has slope~$1$. In general, the {\em levels} of a linear ODE at a given singularity are the slopes of the positive-slope sides of the associated Newton polygon~\cite[Proposition~3.3.14]{diverg-resurg--ii}.} Equation~\eqref{eqn:bessel_rescaled_ex} is an example. More generally, we will consider equations of the form $\mathcal{P} \Phi = 0$ given by a differential operator of the form 
 \[ \mathcal{P} = P\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z} Q\big(\tfrac{\partial}{\partial z}\big) + \frac{1}{z^2} R(z^{-1}), \]
 where $P$ is a monic degree-$d$ polynomial, $Q$ is a degree-$(d-1)$ polynomial that is non-zero at every root of $P$, and $R(z^{-1})$ is holomorphic in some disk $|z| > A$ around $z = \infty$. We will restrict our attention to the case where the roots of $P$ are simple (see Section \ref{borel_reg-ODE}), and to the solutions associated with roots $-\alpha$ where $\tau_\alpha:=\frac{Q(-\alpha)}{P'(-\alpha)}$ is real and positive (see Theorem~\ref{thm:exist_uniq_ODE}).
 
@@ -627,7 +627,7 @@ The formal solutions of a level~$1$ ODE are always resurgent series~\cite[Propos
 %
 \subsubsection{Solving Riemann--Hilbert problems}
 %
-A level~$1$ ODE can be seen as the coordinate expression of a meromorphic connection on a principal bundle---specifically, the kind of meromorphic connection called an {\em oper}~\cite{BD-opers}. Local solutions of the ODE correspond to local flat sections of the connection. We can therefore use the theory of meromorphic connections to study level~$1$ ODEs. In particular, given an ODE, we can set up a classical Riemann--Hilbert problem whose solution would encode a frame of analytic solutions of the ODE~\cite[Section~3.2]{Dubrovin-Heun}.
+A level~$1$ ODE can be seen as the coordinate expression of a meromorphic connection on a principal bundle---specifically, the kind of meromorphic connection called an {\em oper}~\cite{BD-opers}. Local solutions of the ODE correspond to local flat sections of the connection. We can therefore use the theory of meromorphic connections to study level~$1$ ODEs. In particular, given an ODE, we can set up a \begin{revised}generalized\end{revised} Riemann--Hilbert problem whose solution would encode a frame of analytic solutions of the ODE~\cite[Section~3.2]{Dubrovin-Heun}.
 
 To formulate the Riemann--Hilbert problem, we fix the asymptotic behaviour of the frame of solutions at $z = 0$ and $z = \infty$, and we also fix its discontinuities---the Stokes data prescribing how the frame jumps across each Stokes ray. A solution is then given by a piecewise analytic function which is holomorphic away from the Stokes rays and has the prescribed asymptotics and discontinuities.
 
@@ -647,7 +647,7 @@ Thimble integrals have been studied from different perspectives: in physics, the
 \subsubsection{Thimble integrals in physics}
 In wave optics, a thimble integral can arise when we add up the secondary waves emanating from all the points along a wavefront~\cite{Fenyes-ihes-lecture}. For example, the Airy integral approximates the sum of the secondary waves coming from a wavefront with an inflection point~\cite{rainbows+glories}. The formalism of wave optics can also be applied to the scattering of quantum particles---for example, in the ``nuclear optical model''~\cite{nuclear-optical, nuclear-mie}. Knoll and Schaeffer's use of thimble integrals to describe nuclear scattering eigenstates~\cite{semiclass-scat} inspired Voros to find the energy eigenstates of the quartic oscillator by resumming the asymptotic series of thimble integrals~\cite{quartic-return}. 
 
-In the path integral picture of quantum mechanics, which draws inspiration from wave optics, infinite-dimensional thimble integrals are supposed to give the expectation values of observable quantities. In this context, the integral's formal asymptotic expansion is often better-defined than the integral itself, so physicists use Borel summation, resurgence, and related techniques to assign the integral a value. For instance, in the two-dimensional, $\mathcal{N}=2$ supersymmetric QFTs given by Landau--Ginzburg theories, Cecotti and Vafa showed that instantons can be computed using Picard--Lefschetz formulas. Indeed, the so-called wall-crossing phenomenon is equivalent to Stokes phenomenon for thimble integrals~\cite{Cecotti:1992rm}. Similarly, in complex Chern--Simons theory, the path integral can be studied by decomposing it into thimble integrals and then arguing as in finite dimension~\cite{gukov-marino-purtrov-resurgence,Witten}. Other examples can be found in~\cite{costin_kruskal,Garoufalidis--CS,GTM--CS,GGM,dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua,Berry_Howls,Berry1991,Howls97,Howls,pham1988resurgence,Unsal--resurgence-gauge}.
+In the path integral picture of quantum mechanics, which draws inspiration from wave optics, infinite-dimensional thimble integrals are supposed to give the expectation values of observable quantities. In this context, the integral's formal asymptotic expansion is often better-defined than the integral itself, so physicists use Borel summation, resurgence, and related techniques to assign the integral a value. For instance, in the two-dimensional, $\mathcal{N}=2$ supersymmetric QFTs given by Landau--Ginzburg theories, Cecotti and Vafa showed that instantons can be computed using Picard--Lefschetz formulas. Indeed, the so-called wall-crossing phenomenon is equivalent to \begin{revised}the\end{revised} Stokes phenomenon for thimble integrals~\cite{Cecotti:1992rm}. Similarly, in complex Chern--Simons theory, the path integral can be studied by decomposing it into thimble integrals and then arguing as in finite dimension~\cite{gukov-marino-purtrov-resurgence,Witten}. Other examples can be found in~\cite{costin_kruskal,Garoufalidis--CS,GTM--CS,GGM,dunne-unsal2,dunne-unsal,Fauvet_Menous_Queva,Tanizaki:2014tua,Berry_Howls,Berry1991,Howls97,Howls,pham1988resurgence,Unsal--resurgence-gauge}.
 %
 \subsubsection{Thimble integrals in geometry}
 Thimble integrals can be used to explore the geometry of complex manifolds, and even to represent elements of a homology group. To see how this works, we first recall how the one-dimensional definition of a Lefschetz thimble arises from the general definition. Suppose that $f \maps X \to B$ is a holomorphic map from an $N$-dimensional complex manifold $X$ to a translation surface $B$. Consider a translation chart $\zeta$ on $B$ and a non-degenerate critical point $a \in X$ that $f$ sends to $\zeta = \alpha$. Near $a$, we can always find coordinates $t_1, \ldots, t_N$ on $X$ with
@@ -2488,7 +2488,7 @@ From our formula for $f$ in terms of $\operatorname{sd}$, we can see that $f$ is
 We can therefore rewrite equation~\eqref{eqn:cantilever-endpoint} as
 \[ \frac{1}{\sqrt{\zeta^4-\omega^2}} = \left[\frac{du}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}\,, \]
 confirming that our guess for $f$ satisfies equation~\eqref{eqn:cantilever-thimble-difference}. It follows that
-\[ V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ -zi\varepsilon \operatorname{sd}\big(4\varepsilon u, \tfrac{1}{\sqrt{2}}\big) \right]\;du\,, \]
+\[ V_\alpha = \int_{\mathcal{C}_a^\theta} \exp\left[ \begin{revised}-z\,i\varepsilon\end{revised} \operatorname{sd}\big(4\varepsilon u, \tfrac{1}{\sqrt{2}}\big) \right]\;du\,, \]
 where $\varepsilon = (\omega/2)^{1/2}$ is the convenience constant we introduced earlier. The exponent is doubly periodic, with period lattice~\cite[table~22.4.1]{dlmf}
 \[ L = \varepsilon^{-1} K\big(\tfrac{1}{\sqrt{2}}\big)\big[\Z + \tfrac{1}{2}(1 + i)\,\Z\big]\,, \]
 where $K$ is the complete elliptic integral~\cite[formula~19.2.8]{dlmf}
@@ -2825,14 +2825,14 @@ Now, rewrite \eqref{eq_Phi} in the coordinates $q=\frac{2}{3}\eta x^{3/2}$:
 This shows that $\Phi(q)$ satisfies the transformed Airy equation \eqref{eqn:reg-mod-bessel}. 
 
 \begin{remark}
-The new coordinate $q = \frac{2}{3}\eta x^{3/2}$ is carefully chosen. Recall that the WKB Ansatz for a Schr\"{o}dinger type equation is
+The new coordinate $q = \frac{2}{3}\eta x^{3/2}$ is carefully chosen. Recall that the WKB Ansatz for a \begin{revised}Schr\"{o}dinger\end{revised} equation is
 \begin{equation}
-\psi(x,\eta) = \exp\left(\int_{x_0}^xS(\eta,x')dx'\right),
+\psi(x,\eta) = \exp\left(\int_{x_0}^xS(\eta,x')\begin{revised}\;dx'\end{revised}\right),
 \end{equation}
-with $S(\eta,x)=\sum_{k\geq -1}S_k(x)\eta^{-k}$. For the Airy-type Schr\"odinger equation, we have $S_{-1}^2 = x$, so up to a choice of sign for the square root,
+with $S(\eta,x)=\sum_{k\geq -1} S_k(x)\,\eta^{-k}$. For the Airy-type Schr\"odinger equation, we have $S_{-1}^2 = x$, so up to a choice of sign for the square root,
 \[ q = \frac{2}{3}\eta x^{3/2}=\eta\int_0^x (x')^{1/2}\;dx' = \eta\int_{0}^x S_{-1}(x')\;dx'. \]
 We expect that the change of coordinates $q=\eta\int_0^{x}S_{-1}(x')\;dx'$ would explain the analogies between the Borel transform of the WKB solution of a Schr\"{o}dinger equation and the Borel transform of the associated ODE.  
-\end{remark} 
+\end{remark}
 %
 \section{Order shifting for integro-differential equations}\label{shifting}
 For a differential equation with a regular singularity at $\zeta = 0$, the Frobenius method typically gives a convergent power series solution in $\zeta^\rho\,\C\{\zeta\}$ for some $\rho \in \R$, which sums to a germ in $\zeta^\rho\,\mathcal{O}_{\zeta=0}$. When $\rho$ is a non-integer greater than $-1$, we can do a nice trick in this space of germs: we can pass back and forth between differential and integral equations without worrying about boundary conditions.
