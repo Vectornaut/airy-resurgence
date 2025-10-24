@@ -6,14 +6,14 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[square,numbers,sort,compress]{natbib}
-\usepackage{stmaryrd} %% needed for mapsto arrows in commutative diagrams
-\usepackage[scr=boondoxo, scrscaled=1.05]{mathalpha} %% hat tip https://tex.stackexchange.com/a/247819
+\usepackage{stmaryrd} % needed for mapsto arrows in commutative diagrams
+\usepackage[scr=boondoxo, scrscaled=1.05]{mathalpha} % hat tip https://tex.stackexchange.com/a/247819
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage[margin=1cm]{caption}
 \usepackage{enumitem}
 \usepackage[svgnames]{xcolor} %% for revisions
-\usepackage{xparse} %% for squiggly underlines
+\usepackage{xparse} %% for squiggly underlines (keep to be safe)
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{rotating} % for \isoarrow
@@ -48,7 +48,6 @@
 
 % convenience aliases
 \newcommand{\maps}{\colon}
-\newcommand{\acts}{\mathbin{\raisebox{\depth}{\rotatebox{-90}{$\circlearrowright$}}}}
 
 % symbology
 \newcommand{\Z}{\mathbb{Z}}
@@ -62,30 +61,18 @@
 \newcommand{\volterra}{\mathcal{V}}
 \newcommand{\hardpart}{\mathcal{V}_0}
 \newcommand{\softpart}{\mathcal{V}_\star}
-%%\newcommand{\kerwhole}{k}
 \newcommand{\hardker}{k_0}
-%%\newcommand{\softker}{k_\star}
 \newcommand{\solwhole}{f}
 \newcommand{\solproto}{f_0}
 \newcommand{\solptb}{f_\star}
 \newcommand{\fmlsolwhole}{\series{f}}
 \newcommand{\fmlsolproto}{\series{f}_0}
 \newcommand{\fmlsolptb}{\series{f}_\star}
-%%\newcommand{\roots}{\mathfrak{B}}
 \DeclareMathOperator{\var}{var}
-
-%% for the figure
-% colors
-\definecolor{smoked}{RGB}{216, 212, 204}
-\definecolor{mauve}{RGB}{200, 55, 171}
-\definecolor{apricot}{RGB}{250, 144, 4}
-\definecolor{sky}{RGB}{66, 169, 244}
-\definecolor{plum}{RGB}{76, 0, 102}
 
 \newcommand{\series}[1]{\tilde{#1}}
 \newcommand{\fracderiv}[3]{\partial^{#1}_{#2, #3}}
 \newcommand{\blankbox}{{\fboxsep 0pt \colorbox{lightgray}{\phantom{$h$}}}}
-\newcommand{\laplacepde}{\mathcal{D}}
 \newcommand{\van}{\mathfrak{m}}
 \DeclareMathOperator{\Ai}{Ai}
 \usetikzlibrary{matrix,shapes,arrows,decorations.pathmorphing}
@@ -104,17 +91,10 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
                      \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
                      =}
-\newcommand*{\defeqin}{\mathrel{\vcenter{\lineskiplimit0pt\baselineskip0.5ex
-                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
-                     =}                     
-
-%%\let\Re\relax
-%%\DeclareMathOperator{\Re}{Re}
 
 \newcommand{\laplace}{\mathcal{L}}
 \newcommand{\borel}{\mathcal{B}}
 \newcommand{\aexp}{\mathrm{\ae}}
-\newcommand{\deriv}[3]{\partial^{#1}_{#2 \text{ from } #3}}
 
 % theorem environments
 \theoremstyle{definition}
@@ -125,9 +105,6 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \newtheorem{prop}[definition]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[definition]{Lemma}
-%\newtheorem{conjecture}[definition]{Conjecture}
-\newtheorem{claim}[definition]{Claim}
-%\newtheorem{exercise}[definition]{Exercise}
 \newtheorem*{notation*}{Notation}
 \newtheorem{notation}{Notation}
 
@@ -140,45 +117,6 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \NewEnviron{verify}{\iffalse\expandafter\BODY\fi}
 \fi
 
-% hideable notes for unstable references
-\newif\ifshowunstable
-\showunstablefalse
-\ifshowunstable
-\newenvironment{unstable}{\color{YellowGreen}}{\color{black}}
-\else
-\NewEnviron{unstable}{\iffalse\expandafter\BODY\fi}
-\fi
-\newcommand{\citesection}[1]{\begin{unstable}\texttt{#1}\end{unstable}}
-
-% hideable to-do notes and brainstorming
-\newif\ifshowtodo
-\showtodofalse
-\ifshowtodo
-\newenvironment{todo}{\color{Coral}}{\color{black}}
-\newenvironment{brainstorm}{\color{BlueViolet}\begin{itemize}}{\end{itemize}\color{black}}
-\else
-\NewEnviron{todo}{\iffalse\expandafter\BODY\fi}
-\NewEnviron{brainstorm}{\iffalse\expandafter\BODY\fi}
-\fi
-
-% hideable old text
-\newif\ifshowold
-\showoldfalse
-\ifshowold
-%%\newenvironment{old}{\color{RoyalBlue}}{\color{black}}
-\else
-%%\NewEnviron{old}{\iffalse\expandafter\BODY\fi}
-\fi
-
-% hideable draft text
-\newif\ifshowdraft
-\showdraftfalse
-\ifshowdraft
-%%\newenvironment{draft}{\color{SlateBlue}}{\color{black}}
-\else
-%%\NewEnviron{draft}{\iffalse\expandafter\BODY\fi}
-\fi
-
 % highlightable revisions
 \newif\ifhighlightrevs
 \highlightrevstrue
@@ -189,9 +127,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \fi
 
 % colors
-\definecolor{ietocean}{RGB}{0, 30, 140}
 \definecolor{ietcoast}{RGB}{0, 150, 173}
-\definecolor{ietlagoon}{RGB}{0, 216, 180}
 
 % pretty prince hyperref must always be the last thing in the preamble, always
 \usepackage{hyperref}
@@ -203,6 +139,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 }
 
 \setcounter{tocdepth}{2}
+
 % === phase space laplace ===
 \include{figures/phase-space-laplace.tex}
 
@@ -1183,7 +1120,7 @@ In fact, since $\borel_\zeta$ is defined as the formal inverse of $\laplace_{\ze
 
 In addition, on both $\C\llbracket\zeta\rrbracket$ and $\C\llbracket z^{-1}\rrbracket$ there is the natural product given by the Cauchy product of formal power series. However, the Borel transform does not extend to a $\C$-algebra isomorphism, because $\borel_\zeta\big(\series{\Phi}\series{\Psi}\big)$ is different from the Cauchy product $(\borel_\zeta \series{\Phi})(\borel_\zeta \series{\Psi})$.
 
-To see the Borel transform as an algebra isomorphism, we must use a different product on $\C\llbracket\zeta\rrbracket$: the convolution product for formal power series. Let $\zeta$ be a coordinate on $B$. For any integers $m, n$,%%Let $\series{\phi}=\sum_{n=0}^\infty a_n\frac{\zeta^n}{n!}\,, \series{\psi}=\sum_{n=0}^\infty b_n\frac{\zeta^n}{n!}\in\C\llbracket\zeta\rrbracket$, then 
+To see the Borel transform as an algebra isomorphism, we must use a different product on $\C\llbracket\zeta\rrbracket$: the convolution product for formal power series. Let $\zeta$ be a coordinate on $B$. For any integers $m, n$,
 \begin{equation}\label{eq: convolution_formal}
 \frac{\zeta^m}{m!} \ast_\zeta \frac{\zeta^n}{n!} = \frac{\zeta^{m+n+1}}{(m+n+1)!} \,.
 \end{equation}
@@ -1252,9 +1189,9 @@ The space of $1$-Gevrey series is closed under the Cauchy product. In addition,
 extends to an algebra homomorphism, where $\C\{\zeta\}$ is endowed with the convolution product defined in Definition~\ref{def:convolution_formal}. In fact, we deduce that the Borel transform induces an algebra homomorphism on $1$-Gevrey series. Similarly, if $z$ is coordinate on the fiber over $\zeta=\alpha$, the Borel transform $\borel_{\zeta_\alpha}$ induces an isomorphism between $\C\llbracket z^{-1}\rrbracket_1$ endowed with the Cauchy product, and $\C\delta+\C\{\zeta_\alpha\}$ endowed with the convolution $\ast_{\zeta_\alpha}$.
 \begin{verify}
 \subsubsection{Compatibility of the convolution product with the geometry}\label{sec:convolution-compatible}
-\begin{brainstorm}
+\begin{itemize}
 \item It's probably not worth updating the convolutions to new notation.
-\end{brainstorm}
+\end{itemize}
 The convolution product is compatible with the change of translation chart: if $\series{\Phi}, \series{\Psi}\in \C \llbracket z^{-1} \rrbracket_1$ be series on $T^*_{\zeta=b}B$ and let $\series{\psi}:=\borel_{\zeta_b}\series{\Psi}$ and $\series{\phi}:=\borel_{\zeta_b}\series{\Phi}$
 \[\borel_{\zeta_b}(\series{\Psi}\series{\Phi})=\hat{\psi}\ast \hat{\phi}=\int_{0}^{\zeta_b}\hat{\psi}(\zeta_b-\zeta')\hat{\phi}(\zeta')d\zeta'\]
 Furthermore, we can extend the previous definition to trans-series: let $\series{\Phi}, \series{\Psi}\in e^{-z\alpha}\C \llbracket z^{-1} \rrbracket_1$ be series on $T^*_{\zeta=0} B$, we define \[\borel_{\zeta}(\series{\Psi}\series{\Phi})=:\series{\psi}\ast_\alpha\series{\phi}.\]
@@ -1552,7 +1489,7 @@ The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto
 \end{align*}
 we get a sequence of functions that converges in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ to a solution $f_*$.
 
-In \citesection{sec:construction} Section~3.2.1 of \cite{reg-sing-volterra}, we rewrite the prototype solution in the form
+In Section~3.2.1 of \cite{reg-sing-volterra}, we rewrite the prototype solution in the form
 \[ \solproto(a) = \frac{1}{p(a)} \left(\frac{\zeta_\alpha(a)}{\zeta_\alpha(b)}\right)^{\tau_\alpha} \exp\left[-\int_b^a \left( \frac{q}{p} + \frac{\tau_\alpha}{\zeta_\alpha} \right)\;d\zeta_\alpha\right], \]
 which shows that it represents a germ in $\zeta_\alpha^{\tau_\alpha-1}\,\mathcal{O}_{\zeta = \alpha}$. By working with Taylor series, we can show that $\softpart^\alpha$ maps
 \[ \zeta_\alpha^{\tau_\alpha-1}\,\mathcal{O}_{\zeta=\alpha} \to \zeta^{\tau_\alpha}\,\mathcal{O}_{\zeta=\alpha} \]
@@ -1774,7 +1711,6 @@ Saying that $\widehat{\Ai}^{(j)}_{n, m-1}$ satisfies the Airy-Lucas equation is 
 \begin{equation}\label{eqn:mod-bessel-AL}
 \left[z^2 \big(\tfrac{\partial}{\partial z}\big)^2 + z \tfrac{\partial}{\partial z} - \big[\big(\tfrac{m}{n} \big)^2 + z^2\big]\right] \Phi = 0.
 \end{equation}
-%%[DROPPED] In fact, as we will see in Section~\ref{contour-argument-AL}, $K$ is the modified Bessel function $K_{{m/n}}$.
 Let us put equation~\eqref{eqn:mod-bessel-AL} in the form $\mathcal{P}\Phi=0$ with $\mathcal{P}$ as in equation~\eqref{eqn:operator-P}:
 \begin{equation}\label{eqn:reg-mod-bessel-AL}
 \left[ \big[ \big(\tfrac{\partial}{\partial z}\big)^2 - 1 \big] + z^{-1} \tfrac{\partial}{\partial z} - \big({\tfrac{m}{n}}\big)^2 z^{-2} \right] \Phi = 0.
@@ -1891,7 +1827,7 @@ Looking back at Section~\ref{neg-root-AL}, we recognize this as a scalar multipl
 %
 \subsubsection{Thimble projection reasoning}\label{contour-argument-AL}
 We can also study the Airy-Lucas functions by applying the thimble projection formula to integral~\eqref{integral:mod-bessel-rational-AL}, specializing the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof}. We recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Recall from below equation~\eqref{integral:AL} that the integration contour $\mathcal{C}^\theta_j$ runs through the critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$, with its direction determined by the parameter $\theta$. The critical point splits $\mathcal{C}^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\mathcal{C}^\theta_j$ is a preimage of $\mathcal{J}^\theta_{\zeta, \mp 1}$, we get
-\begin{align*}%%\label{integral:mod-bessel-rational-zeta}
+\begin{align*}
 K^{(j)}_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
 & = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right],
 \end{align*}
@@ -2661,7 +2597,6 @@ Like in Section~\ref{contour-argument-AL}, the functions $u_-$ and $u_+$ are fun
 \end{align*}
 \end{verify}
 Identity 15.4.16 from \cite{dlmf} implies that
-%% \[ \sinh(\eta_+) = \tfrac{1}{3} \sinh(3\eta_+)\;{}_2 F_1\left(\frac{1}{3}, \frac{2}{3}; \frac{3}{2}; \sin(3\eta_+)^2\right) \]
 \[ \sinh(\eta_+) = \frac{2}{3} \sinh\big(\tfrac{3}{2}\eta_+\big)\;{}_2 F_1\left(\frac{1}{6}, \frac{5}{6}; \frac{3}{2}; -\sinh\big(\tfrac{3}{2}\eta_+\big)^2\right). \]
 Noticing that $\tfrac{1}{2}(1 - \zeta) = -\sinh\big(\tfrac{3}{2}\eta_+\big)^2$, we conclude that
 \[ \int_{\mathcal{C}_1^\theta(\zeta)} du = \frac{2i}{\sqrt{3}} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{1/2}\;{}_2 F_1\left(\frac{1}{6}, \frac{5}{6}; \frac{3}{2}; \frac{1}{2} - \frac{\zeta}{2}\right), \]
