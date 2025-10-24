@@ -1,14 +1,16 @@
-\documentclass{article}
+\RequirePackage{ifpdf}
+\ifpdf % We are running pdfTeX in pdf mode
+\documentclass[pdftex]{sigma}
+\else
+\documentclass{sigma}
+\fi
 
 \usepackage{url}
 \usepackage[hmargin=1.5in]{geometry}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
 \usepackage[square,numbers,sort,compress]{natbib}
 \usepackage{stmaryrd} % needed for mapsto arrows in commutative diagrams
 \usepackage[scr=boondoxo, scrscaled=1.05]{mathalpha} % hat tip https://tex.stackexchange.com/a/247819
-\usepackage{graphicx}
+%\usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage[margin=1cm]{caption}
 \usepackage{enumitem}
@@ -17,7 +19,6 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{rotating} % for \isoarrow
-\usepackage{environ} % to hide verifications and stuff
 
 \let\Re\relax
 \DeclareMathOperator{\Re}{Re}
@@ -96,50 +97,94 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \newcommand{\borel}{\mathcal{B}}
 \newcommand{\aexp}{\mathrm{\ae}}
 
-% theorem environments
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{remark}[definition]{Remark}
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{prop}[definition]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{lemma}[definition]{Lemma}
-\newtheorem*{notation*}{Notation}
-\newtheorem{notation}{Notation}
+% % theorem environments
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}[section]
+% \newtheorem{remark}[definition]{Remark}
+%\theoremstyle{plain}
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{prop}[definition]{Proposition}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{lemma}[definition]{Lemma}
+% \newtheorem*{notation*}{Notation}
+% \newtheorem{notation}{Notation}
+\renewcommand{\PaperNumber}{103}
 
 % colors
 \definecolor{ietcoast}{RGB}{0, 150, 173}
 
 % pretty prince hyperref must always be the last thing in the preamble, always
-\usepackage{hyperref}
-\hypersetup{
-  colorlinks,
-  linkcolor={ietcoast},
-  citecolor={ietcoast},
-  urlcolor={ietcoast}
-}
+% \usepackage{hyperref}
+% \hypersetup{
+%   colorlinks,
+%   linkcolor={ietcoast},
+%   citecolor={ietcoast},
+%   urlcolor={ietcoast}
+% }
 
-\setcounter{tocdepth}{2}
+\numberwithin{equation}{section}
+
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Corollary}[Theorem]{Corollary}
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Proposition}[Theorem]{Proposition}
+ { \theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Note}[Theorem]{Note}
+\newtheorem{Example}[Theorem]{Example}
+\newtheorem{Remark}[Theorem]{Remark} }
+\newtheorem*{notation*}{Notation}
+\newtheorem{notation}{Notation}
+
+%\setcounter{tocdepth}{2}
 
 % === phase space laplace ===
 \include{figures/phase-space-laplace.tex}
 
-\title{The regularity of ODEs and thimble integrals \\
-with respect to Borel summation}
-\author{Veronica Fantini and Aaron Fenyes}
-\date{}
-
 \begin{document}
 
-\maketitle
+\FirstPageHeading
 
-\begin{abstract}
-Through Borel summation, one can often reconstruct an analytic solution of a problem from its asymptotic expansion. We view the effectiveness of Borel summation as a regularity property of the solution, and we show that the solutions of certain differential equation and integration problems are regular in this sense. By taking a geometric perspective on the Laplace and Borel transforms, we also clarify why ``Borel regular'' solutions are associated with special points on the Borel plane.
+\ShortArticleName{The regularity of ODEs and thimble integrals with respect to Borel summation}
 
-The particular classes of problems we look at are level~$1$ ODEs and exponential period integrals over one-dimensional Lefschetz thimbles. To expand the variety of examples available in the literature, we treat various examples of these problems in detail.
-\end{abstract}
-\tableofcontents
+\ArticleName{The regularity of ODEs and thimble integrals with respect to Borel summation}
+
+% Names of the authors for the title of the paper
+\Author{Veronica FANTINI~$^{\rm a}$ and Aaron FENYES~$^{\rm b}$}
+
+\AuthorNameForHeading{V.~Fantini and A.~Fenyes}
+
+
+
+\Address{$^{\rm a)}$~Laboratoire Mathématique d'Orsay, France} % Address of First Author
+\EmailD{\href{mailto:veronica.fantini@universite-paris-saclay.fr}{veronica.fantini@universite-paris-saclay.fr}} % E-mail address of First Author
+\URLaddressD{\url{https://sites.google.com/view/vfantini/home-page}} %URL address of First Author
+
+% Address of Second Author
+\Address{$^{\rm b)}$~Address of Second Author, Country}
+\EmailD{\href{mailto:email@address}{email@address}} % E-mail address of Second Author
+
+% In the case of the same organization, please use the following standard
+%\Author{First Names LASTNAME and Second COAUTHOR}
+%\AuthoqNameForHeading{F.N. Lastname and S. Coauthor}
+%\Address{Address of Author(s), Country}
+%\Email{\href{mailto:email@address}{email1@address}, \href{mailto:email@address}{email2@address}}
+%\URLaddress{\url{URL1}, \url{URL2})
+
+\ArticleDates{Received ???, in final form ????; Published online ????}
+
+
+
+\Abstract{Through Borel summation, one can often reconstruct an analytic solution of a problem from its asymptotic expansion. We view the effectiveness of Borel summation as a regularity property of the solution, and we show that the solutions of certain differential equation and integration problems are regular in this sense. By taking a geometric perspective on the Laplace and Borel transforms, we also clarify why ``Borel regular'' solutions are associated with special points on the Borel plane.
+
+The particular classes of problems we look at are level~$1$ ODEs and exponential period integrals over one-dimensional Lefschetz thimbles. To expand the variety of examples available in the literature, we treat various examples of these problems in detail.}
+
+\Keywords{Borel summation; Laplace transform; Borel transform; resurgence; translation surfaces; thimble integrals; ordinary differential equations; irregular singularities; divergent series; asymptotics; Stokes phenomena; Stokes constants; Airy function; Airy-Lucas function; generalized Airy function; modified Bessel equation; triangular cantilever}
+%Please type here List of Keywords for your article separated by semicolon.
+
+\Classification{30B10; 30B40; 34M03; 40G10} % e.g. 35A30; 81Q05
+% For 2020 Mathematics Subject Classification see https://mathscinet.ams.org/mathscinet/msc/msc2020.html
+
 %
 \section{Introduction}
 %
@@ -568,20 +613,22 @@ Over the complement $B'$ of the branch points, the translation structure gives u
 \end{center}
 
 At an ordinary point, we can define $z$ simply as the map
-\begin{align*}
+\begin{equation*}
+\begin{split}
 z \maps T^*_bB & \to \C \\
 \lambda\big|_b & \mapsto 1.
-\end{align*}
+\end{split}
+\end{equation*}
 To generalize $z$ to branch points, though, we need a more sophisticated definition. Recall that $T^*_bB = \van_b / \van_b^2$, where $\van_b$ is the ideal of holomorphic functions that vanish at $b$. Observing that $(f + \van_b)^n$ lies within $f^n + \van_b^{n+1}$ for any $f \in \van_b$, we can identify $T^*_bB^{\otimes n}$ with $\van_b^n / \van_b^{n+1}$ for $n \ge 1$. When $b$ is an ordinary point, the translation parameter $\zeta_b$ that vanishes at $b$ represents a nonzero element of $\van_b / \van_b^2$: the cotangent vector $\lambda\big|_b$. In general, $\zeta_b$ represents a nonzero element of $\van_b^n / \van_b^{n+1}$, where $2\pi n$ is the cone angle at $b$. We define $z$ as the isomorphism
-\begin{align*}
+\begin{equation*}\begin{split}
 z \maps \van_b^n / \van_b^{n+1} & \to \C \\
 \zeta_b + \van^{n+1} & \mapsto 1.
-\end{align*}
+\end{split}\end{equation*}
 When $b$ is a branch point, the coordinate $\omega_b$ we fixed in ``A sense of direction'' gives us an isomorphism
-\begin{align*}
+\begin{equation*}\begin{split}
 w_b \maps T^*_bB & \to \C \\
 \omega_b + \van^2 & \mapsto 1
-\end{align*}
+\end{split}\end{equation*}
 that makes the diagram
 \begin{center}
 \begin{tikzcd}
@@ -629,12 +676,12 @@ If the Laplace transform of $\varphi$ is well-defined, then
 \end{lemma}
 \begin{proof}
 With a change of variable in the integral that defines the Laplace transform, we see that
-\begin{align*}
+\begin{equation*}\begin{split}
 \laplace_{\zeta, \alpha} \varphi & = \int_{\mathcal{J}_{\zeta,\alpha}} e^{-z \zeta}\,\varphi\;d\zeta \\
 & = \int_{\mathcal{J}_{\zeta_\alpha,0}} e^{-z(\alpha + \zeta_\alpha)}\,\varphi\;d\zeta_\alpha \\
 & = e^{-z\alpha } \int_{\mathcal{J}_{\zeta_\alpha,0}} e^{-z\zeta_\alpha}\,\varphi\;d\zeta_\alpha \\
 & = e^{-z\alpha } \laplace_{\zeta_\alpha, 0} \varphi.
-\end{align*}
+\end{split}\end{equation*}
 \end{proof}
 We now consider a rescaling of the translation structure of $B$, expanding displacements by a factor of $\mu \in (0, \infty)$. The coordinate $\xi = \mu\zeta$ is a chart for the new translation structure. The corresponding frequency coordinate $x \maps T^*B \to B$ is given by $d\xi \mapsto 1$, so $x = \mu^{-1} z$. 
 \begin{lemma}
@@ -643,11 +690,11 @@ Let $\varphi\in\singexp{\sigma}{\Lambda}(\Omega)$ with $\sigma>-1$ and for some 
 \end{lemma}
 \begin{proof}
     From the computation 
-    \begin{align*}
+    \begin{equation*}\begin{split}
 \laplace_{\xi, 0} \varphi & = \int_{\mathcal{J}_{\xi, 0}} e^{-x\xi}\,\varphi\;d\xi \\
 & = \int_{\mathcal{J}_{\zeta, 0}} e^{-z \zeta}\,\varphi\;\mu\,d\zeta \\
 & = \mu\,\laplace_{\zeta, 0} \varphi
-\end{align*}
+\end{split}\end{equation*}
 we get the desired result. 
 \end{proof}
 %
@@ -689,30 +736,30 @@ Let $\dualsingexp{\sigma}(\widehat{\Omega}_\alpha^\Lambda)$ be the space of holo
 \end{definition}
 To make statements about $\dualsingexp{\sigma}(\widehat{\Omega}_\alpha^\Lambda)$ that hold when $\Lambda$ is large enough, it is helpful to have a space that encompasses $\dualsingexp{\sigma}(\widehat{\Omega}_\alpha^\Lambda)$ for all $\Lambda$. Since restriction gives an inclusion $\dualsingexp{\sigma}(\widehat{\Omega}_\alpha^\Lambda) \hookrightarrow \dualsingexp{\sigma}(\widehat{\Omega}_\alpha^{\Lambda'})$ whenever $\Lambda < \Lambda'$, we can define a colimit space $\dualsingexp{\sigma}(\widehat{\Omega}_\alpha^\bullet)$ that all of the spaces $\dualsingexp{\sigma}(\widehat{\Omega}_\alpha^\Lambda)$ include into.
 %
-\begin{prop}[Following~\cite{sternin1995borel}]\label{prop:laplace-cont}
+\begin{Proposition}[Following~\cite{sternin1995borel}]\label{prop:laplace-cont}
 Let $\Omega_\alpha$ be an open sector with $\zeta = \alpha$ at its tip, and an opening angle of $\pi$ or less. For any $\sigma > 0$ and $\Lambda \ge 0$, and any angle $\theta$ in the opening of $\Omega_\alpha$, the Laplace transform $\laplace_{\zeta_\alpha, 0}^\theta$ is a continuous map $\singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}(\widehat{\Omega}_\alpha^\Lambda)$, with a norm of at most $\Gamma(\sigma)$.
-\end{prop}
+\end{Proposition}
 \begin{proof}
 Given some $\phi \in \singexp{\sigma-1}{\Lambda}(\Omega_\alpha)$, we compute
-\begin{align*}
+\begin{equation*}\begin{split}
 |\laplace_{\zeta_\alpha, 0}^\theta \phi| & = \left| \int_{\mathcal{J}_{\zeta_\alpha, 0}^\theta} e^{-z\zeta_\alpha} \phi\,d\zeta_\alpha \right| \\
 & \le \int_{\mathcal{J}_{\zeta_\alpha,0}^\theta} e^{-\Re(z\zeta_\alpha)} |\zeta_\alpha|^{\sigma-1} e^{\Lambda |\zeta_\alpha|} \|\phi\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
 & \le \int_{\mathcal{J}_{\zeta_\alpha,0}^\theta} e^{(\Lambda - c_{z, \theta}|z|)|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|\phi\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha|,
-\end{align*}
+\end{split}\end{equation*}
 where $c_{z, \theta} = \cos\big(\arg(z) + \theta\big)$. When $|z|$ is large and $c_{z, \theta}$ is positive, the integrand shrinks exponentially as $|\zeta_\alpha|$ grows. This shows that for each angle $\theta$ in the opening of $\Omega_\alpha$, the integral defining $\laplace_{\zeta_\alpha, 0}^\theta \phi$ converges in some region of $\widehat{\Omega}_\alpha^\Lambda$. It also shows that for different angles $\theta$, the functions $\laplace_{\zeta_\alpha, 0}^\theta \phi$ match where their domains overlap. We can therefore glue these functions together into one big Laplace transform of $\phi$, defined at large values of $|z|$ across the whole opening angle of $\widehat{\Omega}_\alpha^\Lambda$.
 
 We can now simplify the calculation of $\laplace_{\zeta_\alpha, 0}^\theta \phi$ by looking at $\arg(z)$ and using the closest angle $\theta$ in the opening of $\Omega_\alpha$. This keeps $\Lambda - c_{z, \theta}|z|$ equal to $\Delta$, the distance to the boundary of $\widehat{\Omega}_\alpha^\Lambda$. It follows that
-\begin{align*}
+\begin{equation*}\begin{split}
 |\laplace_{\zeta_\alpha, 0}^\theta \phi| & \le \int_{\mathcal{J}_{\zeta_\alpha, 0}^{\arg(z)}} e^{-\Delta|\zeta_\alpha|} |\zeta_\alpha|^{\sigma-1} \|\phi\|_{\sigma-1, \Lambda}\,|d\zeta_\alpha| \\
 & = \int_0^\infty e^{-\Delta t} t^{\sigma-1} \|\phi\|_{\sigma-1, \Lambda}\,dt.
-\end{align*}
+\end{split}\end{equation*}
 The integral on the last line converges throughout $\widehat{\Omega}_\alpha^\Lambda$. We can evaluate it by observing that it is a Laplace transform integral, with the roles of position and frequency played by $t$ and $\Delta$ respectively:
 \[ |\laplace_{\zeta_\alpha, 0}^\theta \phi| \le \Gamma(\sigma) \Delta^{-\sigma} \|\phi\|_{\sigma-1, \Lambda}. \]
 In terms of the metric on $\dualsingexp{-\sigma}(\widehat{\Omega}_\alpha^\Lambda)$ defined above, this bound says that
 \[ \|\laplace_{\zeta_\alpha, 0}^\theta \phi\|_{-\sigma, \Lambda} \le \Gamma(\sigma) \|\phi\|_{\sigma-1, \Lambda}, \]
 which is what we wanted to show.
 \end{proof}
-\begin{prop}\label{prop:inverse_laplace_analytic}
+\begin{Proposition}\label{prop:inverse_laplace_analytic}
 Let $\Omega_\alpha$ be an open sector with tip $\zeta = \alpha$ and opening angle $\Theta \le \pi$. Choose some $\sigma > 0$ and $\Lambda \ge 0$, and let $\Lambda' = \Lambda / \cos(\Theta)$. Under the conditions of Proposition~\ref{prop:laplace-cont}, for any $\varepsilon \in (0, \tfrac{\Theta}{2})$, the Laplace transform
 \[ \laplace_{\zeta_\alpha, 0}^\theta \maps \singexp{\sigma-1}{\Lambda}(\Omega_\alpha) \to \dualsingexp{-\sigma}(\widehat{\Omega}_\alpha^\Lambda) \]
 has a continuous left inverse
@@ -720,7 +767,7 @@ has a continuous left inverse
 with a norm of at most
 \[ \frac{\Gamma(1-\sigma)}{\pi\,\sin(\varepsilon/2)}. \]
 Here, $\Omega_\alpha^\varepsilon \subset \Omega_\alpha$ is the open sector created by cutting a sector of angle $\varepsilon$ off each edge of $\Omega_\alpha$.
-\end{prop}
+\end{Proposition}
 \begin{proof}
 The boundary of $\widehat{\Omega}_\alpha^\Lambda$ consists of two rays connected by a circular arc. Extend the rays until they meet, forming the boundary of a sector with opening angle $\pi - \Theta$. Expand that sector by angle $\varepsilon/2$ on both sides. The edges of the expanded sector form a path $\mathcal{C}$ within $\widehat{\Omega}_\alpha^\Lambda$, as shown in Figure~\ref{fig:ref-path}.
 \begin{center}
@@ -844,16 +891,16 @@ By construction, the curve $\mathcal{C}$ lies entirely outside this half-plane, 
 The inverse Laplace transform is given by the formula
 \[ \big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi = \frac{1}{2 \pi i} \int_{\mathcal{C}} e^{z\zeta_\alpha} \Phi\,dz. \]
 When $\Phi$ is in $\dualsingexp{-\sigma}(\widehat{\Omega}_\alpha^\Lambda)$, we have the bound
-\begin{align*}
+\begin{equation*}\begin{split}
 \left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi\right| & \le \frac{1}{2 \pi} \int_{\mathcal{C}} e^{\Re(z\zeta_\alpha)} \Delta^{-\sigma} \|\Phi\|_{\sigma, \Lambda}\,dz \\
 & \le \frac{1}{2 \pi} \int_{-\infty}^\infty e^{|\zeta_\alpha| \left(\Lambda' - \sin(\varepsilon/2)\,|t|\right)} \big(\sin(\varepsilon/2)\,|t|\big)^{-\sigma} \|\Phi\|_{\sigma, \Lambda}\,dt \\
 & = e^{|\zeta_\alpha| \Lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{1}{2 \pi} \int_{-\infty}^\infty e^{-|\zeta_\alpha| \sin(\varepsilon/2)\,|t|} \big(\sin(\varepsilon/2)\,|t|\big)^{-\sigma}\,dt,
-\end{align*}
+\end{split}\end{equation*}
 which we can rewrite as
-\begin{align*}
+\begin{equation*}\begin{split}
 \left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi\right| & \le e^{|\zeta_\alpha| \Lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{1}{2 \pi} \int_{-\infty}^\infty e^{-|\zeta_\alpha| \,|s|}\,|s|^{-\sigma}\,\frac{ds}{\sin(\varepsilon/2)} \\
 & = e^{|\zeta_\alpha| \Lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{1}{\pi\,\sin(\varepsilon/2)} \int_0^\infty e^{-|\zeta_\alpha|s}\,s^{-\sigma}\,ds
-\end{align*}
+\end{split}\end{equation*}
 using the new parameter $s = \sin(\varepsilon/2)\,t$. Recognizing the integral in the last line as a Laplace transform integral, with the roles of position and frequency played by $s$ and $|\zeta_\alpha|$ respectively, we have
 \[ \left|\big(\laplace_{\zeta_\alpha, 0}^\theta\big)^{-1} \Phi\right| \le e^{|\zeta_\alpha| \lambda'} \|\Phi\|_{\sigma, \Lambda}\,\frac{\Gamma(1-\sigma)}{\pi\,\sin(\varepsilon/2)} |\zeta_\alpha|^{\sigma-1}, \]
 which is what we wanted to show.
@@ -872,16 +919,16 @@ On each cotangent space, we can define a formal inverse of the Laplace transform
 \end{tikzcd}
 \end{center}
 and it extends to formal power series by countable linearity:
-\begin{align*}
+\begin{equation*}\begin{split}
 \borel_\zeta \maps z^{-1} \C \llbracket z^{-1} \rrbracket & \to \C \llbracket \zeta \rrbracket \\
 \sum_{n \ge 0} a_n z^{-n-1} & \mapsto \sum_{n \ge 0} a_n \frac{\zeta^n}{n!}.
-\end{align*}
+\end{split}\end{equation*}
 This definition extends straightforwardly to fractional powers of $z$. Observing that   
 \[\laplace_{\zeta,0}[\zeta^\sigma]=\Gamma(\sigma+1)z^{-\sigma-1}\]
 for every $\sigma \in \R \setminus \Z_{\leq 0}$, we define 
-\begin{align*}
+\begin{equation*}\begin{split}
 \borel_\zeta[z^{-\sigma-1}] \defeq \frac{\zeta^{\sigma}}{\Gamma(\sigma+1)}.
-\end{align*}
+\end{split}\end{equation*}
 Then, for any $\sigma \in \R \setminus \Z_{\leq 0}$, we can extend by countable linearity to the space $z^{-\sigma}\C\llbracket z^{-1}\rrbracket$ of ``fractionally shifted'' formal power series.
 
 On a different fiber of $T_{\zeta=\alpha}^*B$, the Borel transform $\borel_{\zeta_\alpha}$ in the translated coordinate $\zeta_\alpha$ is defined on monomials as the inverse of the Laplace transform $\laplace_{\zeta_\alpha,0}$
@@ -901,11 +948,11 @@ On each ordinary monomial within a trans-monomial, $\borel_\zeta$ acts as the fo
 The action of $\borel_\zeta$ extends to all of $e^{-z\alpha} \C\llbracket z^{-1} \rrbracket$ by countable linearity.
 \end{definition}
 From this definition, and identity~\eqref{change-chart}, we deduce that
-\begin{align*}
+\begin{equation*}\begin{split}
 e^{-z\alpha}\laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-z\alpha} z^{-n-1}\big] & = e^{-z\alpha} z^{-n-1} \\
 \laplace_{\zeta_\alpha,0}\borel_\zeta\big[e^{-z\alpha} z^{-n-1}\big] & = z^{-n-1} \\
 \borel_{\zeta}\big[e^{-z\alpha}z^{-n-1}\big] & = \frac{\zeta_\alpha^n}{n!}.
-\end{align*}
+\end{split}\end{equation*}
 In other words, the diagram 
 \begin{center}
 \begin{tikzcd}[every arrow/.append style={shift left}]
@@ -934,13 +981,13 @@ We want to show that
 \[\borel_{\zeta_\alpha}\Big[e^{z\alpha} \laplace_{\zeta,\alpha}\big[\zeta^n\big]\Big]=\zeta^n.\]
 Recall that $\borel_{\zeta_\alpha}$
 is the formal inverse of $\laplace_{\zeta_\alpha,0}$ on the cotangent fibre over $\alpha$. Thus, taking the Borel transform on both side of the identity~\eqref{change-chart} we find
-  \begin{align*}
+  \begin{equation*}\begin{split}
       \borel_{\zeta_\alpha}\Big[e^{z\alpha} \laplace_{\zeta,\alpha}\big[\zeta^n\big]\Big]&=\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\big[\zeta^n\big]\\
       &=\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\left[\sum_{k=0}^n{n\choose k}\zeta_\alpha^k \alpha^{n-k}\right]\\
       &=\sum_{k=0}^n{n\choose k} \alpha^{n-k}\borel_{\zeta_\alpha}\laplace_{\zeta_\alpha,0}\big[\zeta_\alpha^k \big]\\
       &=\sum_{k=0}^n{n\choose k} \alpha^{n-k}\zeta_\alpha^k\\
       &=\zeta^n.
-  \end{align*}
+  \end{split}\end{equation*}
 \end{proof}
 %
 \subsubsection{Action on translations in the frequency domain}
@@ -968,10 +1015,10 @@ Choose a translation coordinate $\zeta$ on $B$. Let $\Omega_\alpha \subset B$ be
 \phi \ast_{\zeta, \alpha, \beta} \psi \defeq \int_{\mathcal{S}_{\zeta, \alpha, \beta}} \phi(a)\,\psi(a')\,d\zeta(a)\,,
 \end{equation}
 where $\mathcal{S}_{\zeta, \alpha, \beta}$ is the path $[0, 1] \to B^2$ given by
-\begin{align*}
+\begin{equation*}\begin{split}
 \zeta_\alpha(a) & = t\zeta_{\alpha+\beta} \\
 \zeta_\beta(a') & = (1-t)\zeta_{\alpha+\beta}
-\end{align*}
+\end{split}\end{equation*}
 in terms of the standard coordinate $t$ on $[0, 1]$.
 \end{definition}
 \begin{notation*}
@@ -982,33 +1029,33 @@ Take $\phi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ and $\psi\in\singexp{\sig
 \end{lemma}    
 \begin{proof}
 From Definition~\ref{def:convolution}, we get the bound
-\begin{align*}
+\begin{equation*}\begin{split}
 \left|\phi\ast_{\zeta,\alpha,\beta}\psi\right|&\le\int_{\mathcal{S}_{\zeta,\alpha,\beta}} |\phi(a)|\,|\psi(a')|\,|d\zeta(a)| \\
 & = \int_0^1|\phi(a)|\,|\psi(a')|\,|\zeta_{\alpha+\beta}|\,dt\,,
-\end{align*}
+\end{split}\end{equation*}
 using the fact that $d\zeta(a)=d\zeta_\alpha(a)=d(t\zeta_{\alpha+\beta})=\zeta_{\alpha+\beta}\,dt$ in the second step. We can then bound the right-hand side in terms of the norms of $\phi$ and $\psi$:
-\begin{align*}
+\begin{equation*}\begin{split}
 |\zeta_{\alpha+\beta}|\int_0^1 |\phi(a)|\,|\psi(a')|\,dt &\le \|\phi\|_{\sigma,\Lambda} \|\psi\|_{\sigma',\Lambda'} |\zeta_{\alpha+\beta}|\int_0^1  |\zeta_\alpha(a)|^{\sigma}e^{\Lambda  |\zeta_{\alpha}(a)|}\,|\zeta_\beta(a')|^{\sigma'}e^{\Lambda' |\zeta_{\beta}(a')|}\,dt\\
 &= \|\phi\|_{\sigma,\Lambda} \|\psi\|_{\sigma',\Lambda'} |\zeta_{\alpha+\beta}|^{1+\sigma+\sigma'}\int_0^1  |t|^{\sigma}e^{\Lambda t |\zeta_{\alpha+\beta}|}\,|1-t|^{\sigma'}e^{\Lambda' (1-t)|\zeta_{\alpha+\beta}|}\,dt\\
 &\lesssim |\zeta_{\alpha+\beta}| ^{1+\sigma+\sigma'} e^{(\Lambda+\Lambda')|\zeta_{\alpha+\beta}|}\int_0^1  t^{\sigma}\,(1-t)^{\sigma'}\,dt\\
 &\lesssim |\zeta_{\alpha+\beta}| ^{1+\sigma+\sigma'} e^{(\Lambda+\Lambda')|\zeta_{\alpha+\beta}|}\,.
-\end{align*}
+\end{split}\end{equation*}
 \end{proof}
 The product of two Laplace transforms based at different points is the Laplace transform of a convolution.
-\begin{prop}
+\begin{Proposition}
 For any $\phi\in\singexp{\sigma}{\Lambda}(\Omega_\alpha)$ and $\psi\in\singexp{\sigma'}{\Lambda'}(\Omega_\beta)$ with $\sigma,\sigma'\in (-1,\infty)$, we have
 \begin{equation}\label{eqn:gen-laplace-convol}
 \laplace^\theta_{\zeta,\alpha+\beta}[\phi \ast_{\zeta,\alpha,\beta} \psi] = \laplace^\theta_{\zeta,\alpha}[\phi]\,\laplace^\theta_{\zeta,\beta}[\psi]\,.
 \end{equation}    
-\end{prop}
+\end{Proposition}
 More generally, this proposition holds for any holomorphic functions $\phi$ and $\psi$ for which the convolution and all of the Laplace transforms in equation~\eqref{eqn:gen-laplace-convol} are well-defined.
 \begin{proof}
 For simplicity, we will write out the proof for $\theta = 0$. The proof for general $\theta$ is analogous.
 
 The left-hand side of equation~\eqref{eqn:gen-laplace-convol} expands to
-\begin{align*}
+\begin{equation*}\begin{split}
 \laplace_{\zeta,\alpha,\beta}[\phi \ast_{\zeta,\alpha, \beta} \psi] &= \int_{\mathcal{J}_{\zeta, \alpha+\beta}} d\zeta\,e^{-z\zeta}\int_{\mathcal{S}_{\zeta,\alpha,\beta}} \phi(a)\,\psi(a')\, d\zeta(a)\,.
-\end{align*}
+\end{split}\end{equation*}
 where $\mathcal{S}_{\zeta, \alpha, \beta}$ is the path described in Definition~\ref{def:convolution}. On this path, the equation
 \begin{equation}\label{eq:slice-plane}
 \zeta_\alpha(a) + \zeta_\beta(a') = \zeta_{\alpha+\beta}
@@ -1018,22 +1065,22 @@ holds, and the coordinates $\zeta_\alpha(a)$ and $\zeta_\beta(a')$ have the same
 The convolution and Laplace integrals can be combined into an integral over a real two-dimensional wedge $\mathcal{N}_{\zeta, \alpha, \beta}$ within the complex three-dimensional space $B^3$:
 \[ \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha,\beta}{\psi}] = \int_{\mathcal{N}_{\zeta, \alpha, \beta}} e^{-z\zeta}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta\,. \]
 The coordinates $\zeta_\alpha(a)$, $\zeta_\beta(a')$, $\zeta_{\alpha+\beta}$ parameterize $B^3$, and the real wedge $\mathcal{N}_{\zeta, \alpha, \beta}$ is cut out by equation~\eqref{eq:slice-plane} and the conditions
-\begin{align*}
+\begin{equation*}\begin{split}
 a & \in \mathcal{J}_{\zeta, \alpha} \\
 a' & \in \mathcal{J}_{\zeta, \beta} \\
 \zeta_{\alpha+\beta} & \in [0, \infty)\,.
-\end{align*}
+\end{split}\end{equation*}
 Equation~\eqref{eq:slice-plane} can be rewritten as $\zeta(a) + \zeta(a') = \zeta$, which implies the identities
-\begin{align*}
+\begin{equation*}\begin{split}
 d\zeta(a) + d\zeta(a') & = d\zeta \\
 d\zeta(a) \wedge \big[d\zeta(a) + d\zeta(a')\big] & = d\zeta(a) \wedge d\zeta \\
 d\zeta(a) \wedge d\zeta(a') & = d\zeta(a) \wedge d\zeta\,.
-\end{align*}
+\end{split}\end{equation*}
 We can substitute the last identity into the integral over $\mathcal{N}_{\zeta, \alpha, \beta}$ to get
-\begin{align*}
+\begin{equation*}\begin{split}
 \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha,\beta}{\psi}] & = \int_{\mathcal{N}_{\zeta, \alpha, \beta}} e^{-z[\zeta(a) + \zeta(a')]}\,\phi(a)\, \psi(a')\,d\zeta(a) \wedge d\zeta(a') \\
 & = \int_{\mathcal{N}_{\zeta, \alpha, \beta}} \left[ e^{-z\zeta(a)}\,\phi(a)\,d\zeta(a) \right] \wedge \left[ e^{z\zeta(a')}\,\psi(a')\,d\zeta(a') \right].
-\end{align*}
+\end{split}\end{equation*}
 Thinking of $\mathcal{N}_{\zeta, \alpha, \beta}$ as the graph of $\zeta_\alpha(a) + \zeta_\beta(a')$ over the quadrant $\mathcal{J}_{\zeta, \alpha} \times \mathcal{J}_{\zeta, \beta}$, we can use Fubini's theorem to express the integral as the product
 \[ \laplace_{\zeta,\alpha+\beta}[{\phi}\ast_{\zeta, \alpha,\beta}{\psi}] = \left[ \int_{\mathcal{J}_{\zeta, \alpha}} e^{-z\zeta}\,\phi\,d\zeta \right] \left[ \int_{\mathcal{J}_{\zeta,\beta}} e^{-z\zeta}\,\psi\,d\zeta \right]. \]
 \end{proof}
@@ -1063,9 +1110,9 @@ To see the Borel transform as an algebra isomorphism, we must use a different pr
 \end{equation}
 \begin{definition}\label{def:convolution_formal}
 We extend the convolution product $\ast_\zeta$ by countable linearity to the whole ring of formal power series $\C\llbracket\zeta\rrbracket$:
-\begin{align*}
+\begin{equation*}
    \left( \sum_{n=0}^\infty a_n \frac{\zeta^n}{n!}\right)\ast_\zeta\left(\sum_{n=0}^\infty b_n\frac{\zeta^n}{n!}\right)=\sum_{n=0}^\infty\sum_{j=0}^na_jb_{n-j}\left[\frac{\zeta^j}{j!}\ast_\zeta\frac{\zeta^{n-j}}{(n-j)!}\right]=\sum_{n=0}^\infty\sum_{j=0}^na_jb_{n-j}\frac{\zeta^{n+1}}{(n+1)!}\,.
-\end{align*}
+\end{equation*}
 Furthermore, we define the convolution product of $\delta$ with monomials: \[\delta\ast_\zeta\frac{\zeta^n}{n!}\defeq\frac{\zeta^n}{n!}\,,\]
 \[\frac{\zeta^n}{n!}\ast_\zeta\delta\defeq\frac{\zeta^n}{n!}\,,\]
 in other words, $\delta$ is the unit for the convolution. 
@@ -1073,19 +1120,22 @@ in other words, $\delta$ is the unit for the convolution.
 Notice that from equation~\eqref{eq: convolution_formal} and the definition of the convolution with $\delta$, we deduce the convolution product is commutative with unit $\delta$.
 
 We can show that $\borel_\zeta$ is an algebra homomorphism from $\C\llbracket z^{-1}\rrbracket$ endowed with the Cauchy product to $\C\delta+\C\llbracket\zeta\rrbracket$ endowed with the convolution product.
-\begin{prop}
+\begin{Proposition}
 Let $z$ be a coordinate on the cotangent fiber over $\zeta=0$, and $\series{\Phi},\series{\Psi}\in\C\llbracket z^{-1}\rrbracket$. The Borel transform $\borel_\zeta$ is an algebra homomorphism, namely
 \[\borel_\zeta(\series{\Phi}\series{\Psi})=\borel_\zeta\series{\Phi} \ast_\zeta \borel_\zeta\series{\Psi}.\]
-\end{prop}
+\end{Proposition}
 \begin{proof}
     We assume $\series{\Phi}=\sum_{n=0}^\infty a_nz^{-n}$ and $\series{\Psi}=\sum_{n=0}^\infty b_nz^{-n}$. Then,
-    \begin{align*}
+    \begin{equation*}
+    \begin{split}
 \borel_\zeta(\series{\Phi}\series{\Psi})&=\borel_\zeta\left(\sum_{n=0}^\infty\sum_{j=0}^na_jb_{n-j}z^{-n}\right)\\
 &=a_0b_0\delta +\sum_{n=1}^\infty\sum_{j=0}^na_jb_{n-j}\frac{\zeta^{n-1}}{(n-1)!}\\
-&=a_0b_0\delta+a_0\sum_{n=1}^\infty b_{n}\frac{\zeta^{n-1}}{(n-1)!}+b_0\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!}+\sum_{n=1}^\infty\sum_{j=1}^{n-1}a_jb_{n-j}\left[\frac{\zeta^{j-1}}{(j-1)!} \ast_\zeta \frac{\zeta^{n-j-1}}{(n-j-1)!}\right]\\
+&=a_0b_0\delta+a_0\sum_{n=1}^\infty b_{n}\frac{\zeta^{n-1}}{(n-1)!}+b_0\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!}+\\
+&\quad +\sum_{n=1}^\infty\sum_{j=1}^{n-1}a_jb_{n-j}\left[\frac{\zeta^{j-1}}{(j-1)!} \ast_\zeta \frac{\zeta^{n-j-1}}{(n-j-1)!}\right]\\
 &=\left(a_0\delta+\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!}\right)\ast_\zeta\left(b_0\delta+\sum_{n=1}^\infty b_n\frac{\zeta^{n-1}}{(n-1)!}\right)\\
 &=\borel_\zeta\series{\Phi} \ast_\zeta \borel_\zeta\series{\Psi}\,.
-\end{align*}
+\end{split}
+\end{equation*}
 \end{proof}
 Similarly, $\borel_{\zeta_\alpha}$ is an algebra homomorphism from $\C\llbracket z^{-1}\rrbracket$ endowed with the Cauchy product to $\C\delta+\C\llbracket\zeta_\alpha\rrbracket$ endowed with the convolution product $\ast_{\zeta_\alpha}$, where $z$ is a coordinate on $T^*_{\zeta=\alpha}B$.
 %
@@ -1104,11 +1154,11 @@ A series
 \[ \sum_{n \ge -1} a_n z^{-n-1} \]
 is {\em $1$-Gevrey} if there is some $A > 0$ with $|a_n| \lesssim A^n n!$ over all $n \ge 0$.
 \end{definition}
-\begin{prop}\label{prop:gevrey_to_convergent}
+\begin{Proposition}\label{prop:gevrey_to_convergent}
 A series
 \[ \series{\Phi} = \sum_{n \ge -1} a_n z^{-n-1} \]
 is $1$-Gevrey if and only if its Borel transform $\series{\phi} = \borel_\zeta \series{\Phi}$ is convergent.
-\end{prop}
+\end{Proposition}
 \begin{proof}
 From the expression
 \[ \series{\phi} = a_{-1} \delta + \sum_{n \ge 0} a_n \frac{\zeta^n}{n!}, \]
@@ -1176,11 +1226,11 @@ Taking the Laplace transform of both sides, we learn that
 where $E_n = \laplace_{\zeta, 0}^\theta \varepsilon_n$. To show that $\Phi$ is asymptotic to $\series{\Phi}$, we just need to prove that $|z^{\rho+n} E_n| \to 0$ as $|z| \to \infty$ along every ray.
 
 Because of the conditions we put on $\Omega$, we can apply Proposition~\ref{prop:laplace-cont}, which tells us that $E_n$ lies in $\dualsingexp{-\rho-n-1}(\widehat{\Omega}_0^\Lambda)$. This means that $|E_n| \lesssim \Delta^{-\rho-n-1}$, where $\Delta$ is the distance to the boundary of $\widehat{\Omega}_0^\Lambda$. Observe that $\widehat{\Omega}_0^\Lambda$ is a union of half-planes, the distance to the boundary of each half-plane increases linearly along any ray that intersects the half-plane, and $\Delta$ is the infimum of these distances. From this, we can deduce that $|z|/\Delta$ goes to a constant limit as $z \to \infty$ along any ray that intersects $\widehat{\Omega}_0^\Lambda$.\footnote{The constant limit is not uniform over all rays, so we are showing that $\Phi$ is asymptotic, but not necessarily uniformly asymptotic, to $\series{\Phi}$.} We then reason that
-\begin{align*}
+\begin{equation*}\begin{split}
 |z^{\rho+n} E_n| & \lesssim |z|^{\rho+n} \Delta^{-\rho-n-1} \\
 & = \big(|z|/\Delta\big)^{\rho+n} \Delta^{-1} \\
 & \lesssim \Delta^{-1}
-\end{align*}
+\end{split}\end{equation*}
 along any ray that intersects $\widehat{\Omega}_0^\Lambda$. This, as discussed above, proves the desired result.
 \end{proof}
 %
@@ -1194,9 +1244,9 @@ For $\nu \in (-\infty, 1)$, the \textit{fractional integral} $\partial^{\nu-1}_{
 where $\mathcal{S}_{\zeta,\alpha}$ is the line segment from $\zeta(a)=\alpha$ to $\zeta(a)=\zeta$.
 \end{definition}
 The fractional integral obeys the semigroup law \cite[Section  1.3]{mladenov2014advanced}
-\begin{align*}
+\begin{equation*}\begin{split}
 \fracderiv{\lambda}{\zeta}{\alpha}\,\fracderiv{\mu}{\zeta}{\alpha} & = \fracderiv{\lambda+\mu}{\zeta}{\alpha} \qquad \lambda, \mu \in (-\infty, 0),
-\end{align*}
+\end{split}\end{equation*}
 and agrees with ordinary repeated integration when $\nu$ is an integer~\cite[equation~35]{mladenov2014advanced}.
 
 For $\mu \in (0, 1)$ and integers $n \ge 0$, fractional derivatives $\fracderiv{n+\mu}{\zeta}{0}$ are defined by composing $\fracderiv{\mu-1}{\zeta}{0}$ with powers of $\tfrac{\partial}{\partial \zeta}$. However, $\fracderiv{\mu-1}{\zeta}{0}$ and $\tfrac{\partial}{\partial \zeta}$ do not commute~\cite[equation~54]{mladenov2014advanced}. Various ordering conventions give various definitions of $\fracderiv{n+\mu}{\zeta}{0} \phi$, which differ by operators that act on the germ of $\phi$ at zero~\cite[Section 1.3]{mladenov2014advanced}\cite{podlubny}. We will use the {\em Riemann-Liouville} convention.
@@ -1207,10 +1257,10 @@ For $\mu \in (0, 1)$ and integers $n \ge 0$, the {\em Riemann-Liouville fraction
 The symbol $\fracderiv{\mu}{\zeta}{0}$ is now defined for any $\mu \in \R \smallsetminus \{0, 1, 2, 3, \ldots\}$. It denotes a fractional integral when $\mu$ is negative, and a fractional derivative when $\mu$ is a positive non-integer.
 
 The Riemann-Liouville fractional derivative is a left inverse of the fractional integral, in the sense that $\fracderiv{\lambda}{\zeta}{ 0}\,\fracderiv{-\lambda}{\zeta}{0}$ is the identity for all $\lambda \in (0, \infty)$. This extends the semigroup law:
-\begin{align*}
+\begin{equation*}\begin{split}
 \fracderiv{\lambda}{\zeta}{0}\,\fracderiv{\mu}{\zeta}{0} & = \fracderiv{\lambda+\mu}{\zeta}{0} & \lambda \in \R \smallsetminus \{0, 1, 2, 3, \ldots\},\quad\mu \in (-\infty, 0).
-\end{align*}
-\begin{prop}\label{prop:L-int-op}
+\end{split}\end{equation*}
+\begin{Proposition}\label{prop:L-int-op}
 For any $\phi\in\singexp{\sigma}{\Lambda}(\Omega)$ with $\sigma>-1$ and $\Lambda>0$, we have
 \begin{enumerate}[label=(\roman*)]
 \item\label{res:frac-deriv} \textbf{Fractional derivatives}
@@ -1226,22 +1276,22 @@ $\laplace_{\zeta,0} \big[\big(\frac{\partial}{\partial\zeta}\big)^n \phi\big] = 
 
 $\laplace_{\zeta,0} \big[\zeta^n \phi\big] = \big(-\frac{\partial}{\partial z}\big)^n \laplace_{\zeta,0} \phi$ for every $n\in\{0,1,2,3,\ldots\}$.
 \end{enumerate}
-\end{prop}
+\end{Proposition}
 \begin{proof}
 Results \ref{res:frac-deriv} and \ref{res:frac-int} follow from the properties of the Laplace transform with respect to the convolution product. For every $\tau \in (-\infty, 0) \cup (0,1)$,
-\begin{align*}
+\begin{equation*}\begin{split}
 z^\tau\laplace_{\zeta,0}\phi&=\laplace_{\zeta,0}\left[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)}\right] \laplace_{\zeta,0}\phi\\
 &=\laplace_{\zeta,0}\left[\frac{\zeta^{-\tau-1}}{\Gamma(-\tau)} \ast_\zeta \phi\right] \\
 &=\laplace_{\zeta,0} \int_{\mathcal{S}_{\zeta,0}}\frac{\big(\zeta-\zeta(a)\big)^{-\tau-1}}{\Gamma(-\tau)} \phi(a)\,d\zeta(a)\\
 &=\laplace_{\zeta,0} \int_{\mathcal{S}_{\zeta,0} }\frac{\big(\zeta-\zeta(a)\big)^{-\tau-1}}{\Gamma(-\tau)} \phi(a)\,d\zeta(a)\\
 &=\laplace_{\zeta,0}\big[\fracderiv{\tau}{\zeta}{0}\phi\big],
-\end{align*}
+\end{split}\end{equation*}
 where $\mathcal{S}_{\zeta,0}$ is the line segment from $\zeta(a)=0$ to $\zeta(a) = \zeta$. Result~\ref{res:whole-deriv} is proven by repeated integration by parts, with the condition on $\phi^{(0)}, \phi^{(1)}, \ldots \phi^{(n)}$ ensuring that the boundary terms vanish:
-\begin{align*}
+\begin{equation*}\begin{split}
     z^n\laplace_{\zeta,0}\phi&=\int_0^\infty e^{-z\zeta} z^n \phi \, d\zeta\\
     &=(-1)^n\int_0^\infty \partial_\zeta^n \big[e^{-z\zeta}\big]  \phi\, d\zeta\\
     &=\laplace_{\zeta,0}\big[\partial_\zeta^n \phi\big].
-\end{align*}
+\end{split}\end{equation*}
 Result~\ref{res:monom-mult} is also proven by repeated integration by parts, with the assumption that $\zeta^n\phi\in\singexp{\sigma}{\Lambda}(\Omega)$ ensuring that the integral converges.
 \end{proof}
 \begin{lemma}\label{lem:frac-deriv-Borel}
@@ -1250,25 +1300,25 @@ For any non-integer $\mu \in (0, \infty)$ and any integer $k \ge 0$,
 \end{lemma}
 \begin{proof}
 Because every operation in the statement maps monomials to monomials, we do not need to distinguish carefully between formal and analytic arguments. Using a mostly analytic argument, we will show that for any $\mu \in (0, 1)$ and any integer $n \ge 0$, the claim holds with $\mu = n + \alpha$. First, evaluate
-\begin{align*}
+\begin{equation*}\begin{split}
 \partial^{\mu-1}_{\zeta,0} \borel_\zeta \big[z^{-(k+1)}\big] & = \frac{1}{\Gamma(1-\mu)} \int_0^\zeta \big(\zeta-\zeta(a)\big)^{-\mu} \frac{\zeta(a)^k}{\Gamma(k+1)}\,d\zeta(a) \\
 & = \frac{1}{\Gamma(1-\mu)\,\Gamma(k+1)} \int_0^1 (\zeta-\zeta t)^{-\mu}\,(\zeta t)^k\,\zeta\,dt \\
 & = \frac{\zeta^{k-(\mu-1)}}{\Gamma(1-\mu)\,\Gamma(k+1)} \int_0^1 (1-t)^{-\mu}\,t^k\,dt \\
 & = \frac{\zeta^{k-(\mu-1)}}{\Gamma\big(k-(\mu-1)+1\big)}
-\end{align*}
+\end{split}\end{equation*}
 by reducing the integral to Euler's beta function~\cite[identity 5.12.1]{dlmf}. This establishes that
 \begin{equation}\label{frac-diff-laplace}
 \big(\tfrac{\partial}{\partial \zeta}\big)^{n+1}\,\partial^{\mu-1}_{\zeta,0} \borel_\zeta \big[z^{-(k+1)}\big] = \frac{\zeta^{k-(n+\mu)}}{\Gamma\big(k-(n+\mu)+1\big)}
 \end{equation}
 for $n = -1$. If \eqref{frac-diff-laplace} holds for $n = m$, it also holds for $n = m+1$, because
-\begin{align*}
+\begin{equation*}\begin{split}
 \tfrac{\partial}{\partial \zeta} \big(\tfrac{\partial}{\partial \zeta}\big)^{m+1}\,\partial^{\mu-1}_{\zeta,0} \borel_\zeta \big[z^{-(k+1)}\big] & = \frac{\partial}{\partial \zeta} \left( \frac{\zeta^{k-(m+\mu)}}{\big(k-(m+\mu)\big)\,\Gamma\big(k-(m+\mu)\big)} \right) \\
 & = \frac{\zeta^{k-(m+1+\mu)}}{\Gamma\big(k-(m+\mu)\big)}
-\end{align*}
+\end{split}\end{equation*}
 Hence, \eqref{frac-diff-laplace} holds for all $n \ge -1$, and the desired result quickly follows. The condition $\mu \in (0, 1)$ saves us from the trouble we would run into if $k-(m+\mu)$ were in $\Z_{\le 0}$. This is how we avoid the initial value corrections that appear in ordinary derivatives of Borel transforms.
 \end{proof}
 We can now prove the properties of the Borel transform analogous to the one of the Laplace transform from Proposition~\ref{prop:L-int-op}.
-\begin{prop}\label{prop:frac-der-int-borel}
+\begin{Proposition}\label{prop:frac-der-int-borel}
 For any $1$-Gevrey series $\series{\Phi}\in\C\llbracket z^{-1}\rrbracket_1$, we have
 \begin{enumerate}[label=(\roman*)]
 \item\label{res:frac-deriv-borel} \textbf{Fractional derivatives}
@@ -1281,28 +1331,28 @@ $\borel_\zeta\big[z^\lambda\, \series{\Phi}\big]=\fracderiv{\lambda}{\zeta}{0}\,
 
 $\borel_\zeta\big[\partial_z^{k} \series{\Phi}\big]=(-\zeta)^k\borel_\zeta\series{\Phi}$ for all $k\in\{0, 1, 2, 3, \ldots\}$, under the condition that $\series{\Phi}\in z^{-k-1}\llbracket z^{-1}\rrbracket_1$.\footnote{This property holds for all series in $\C\llbracket z^{-1}\rrbracket$, even ones that are not $1$-Gevrey.}
 \end{enumerate} 
-\end{prop}
+\end{Proposition}
 \begin{proof} 
 Result~\ref{res:frac-deriv-borel} follows from Lemma~\ref{lem:frac-deriv-Borel}. 
 
 To prove result~\ref{res:frac-int-borel}, first notice that for $\lambda \in \R_{< 0}$,
 \[\fracderiv{\lambda}{\zeta}{0}\zeta^{k}=\zeta^{k-\lambda}\frac{k!}{\Gamma(k-\lambda+1)}.\] 
 Then, given a series $\series{\Phi} = \sum_{n\geq 0} a_n z^{-n}$, we compute
-\begin{align*}
+\begin{equation*}\begin{split}
 \borel_\zeta \big[z^\lambda \series{\Phi}\big] & = \sum_{n\geq 0}a_n\frac{\zeta^{n-\lambda}}{\Gamma(n-\lambda+1)} \\
 & = \sum_{n\geq 0}a_n\frac{\zeta^{n-\lambda}}{n!}\frac{n!}{\Gamma(n-\lambda+1)} \\
 & = \sum_{n\geq 0} \frac{a_n}{n!}\,\fracderiv{\lambda}{\zeta}{0}\zeta^n \\
 & = \fracderiv{\lambda}{\zeta}{0}\series{\Phi}.
-\end{align*}
+\end{split}\end{equation*}
 using the fact that $\borel_\zeta\series{\Phi}$ is convergent in the last step.
 
 Finally, result~\ref{res:whole-deriv-borel} follows from a simple computation: 
-\begin{align*}
+\begin{equation*}\begin{split}
 \borel_\zeta\big[\partial_z^k\series{\Phi}\big]&=\borel_\zeta\left[\sum_{n=k+1}^\infty a_n \frac{(n+k-1)!}{(n-1)!} (-1)^{k} z^{-n-k}\right]\\
 &=(-1)^k \sum_{n=k+1}^\infty a_n \frac{(n+k-1)!}{(n-1)!}\frac{\zeta^{n+k-1}}{(n+k-1)!}\\
 &=(-\zeta)^k\sum_{n=k+1}^\infty a_n \frac{\zeta^{n-1}}{(n-1)!}\\
 &=(-\zeta)^k\borel_\zeta \series{\Phi}.
-\end{align*}
+\end{split}\end{equation*}
 \end{proof}
 %
 \section{Proof of main results}\label{sec:proof_main_results}
@@ -1377,13 +1427,13 @@ lies in the space $\singexpalg{\tau_\alpha - 1}(\Upsilon)$ and satisfies the equ
 \solptb = \softpart^\alpha \solproto + \volterra^\alpha \solptb
 \end{equation}
 The central idea of the proof is to show that $\softpart^\alpha$ maps $\solproto$, and in fact all of $\singexpalg{\tau_\alpha - 1}(\Upsilon)$, into $\singexpalg{\tau_\alpha}(\Upsilon)$, and that $\volterra^\alpha$ is a contraction of $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ when $\Lambda$ is large enough. It follows, by the contraction mapping theorem, that equation~\eqref{eqn:inhomog-volterra} has a unique solution $\solptb$ in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$. More explicitly, we can solve equation~\eqref{eqn:inhomog-volterra} by fixed-point iteration. Defining
-\begin{align*}
+\begin{equation*}\begin{split}
 \solptb^{(0)} & = \softpart^\alpha \solproto \\
 \solptb^{(1)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(0)} \\
 \solptb^{(2)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(1)} \\
 \solptb^{(3)} & = \softpart^\alpha \solproto + \volterra^\alpha \solptb^{(2)} \\
 & \;\;\vdots
-\end{align*}
+\end{split}\end{equation*}
 we get a sequence of functions that converges in $\singexp{\tau_\alpha}{\Lambda}(\Upsilon)$ to a solution $f_*$.
 
 In Section~3.2.1 of \cite{reg-sing-volterra}, we rewrite the prototype solution in the form
@@ -1436,10 +1486,10 @@ In \cite{pham}, Pham describes this formula in a slightly different form, integr
 \end{remark}
 \begin{proof}[Proof of Lemma~\ref{lem:thimble_proj_formula-proof}]
 We first recast the integral $I_a$ into the position domain. As $\zeta$ goes rightward from $\alpha$ with angle $\theta$, the start and end points of $\mathcal{C}_a^\theta(\zeta)$ sweep backward along $\mathcal{C}^-_a(\zeta)$ and forward along $\mathcal{C}^+_a(\zeta)$, respectively. Hence, we have
-\begin{align*}
+\begin{equation*}\begin{split}
 I_a & = \int_{\mathcal{C}_a^\theta} e^{-zf} \nu \\
 & = \int_{\mathcal{J}_{\zeta,\alpha}^\theta}e^{-z\zeta} \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}\,d\zeta.
-\end{align*}
+\end{split}\end{equation*}
 Noticing that the right-hand side is a Laplace transform, we learn that
 \begin{equation}\label{thimble-difference}
 {\iota}_a = \left[\frac{\nu}{df}\right]_{\operatorname{start} \mathcal{C}_a^\theta(\zeta)}^{\operatorname{end} \mathcal{C}_a^\theta(\zeta)}.
@@ -1462,22 +1512,28 @@ that converges in some disk $|\tau| < \varepsilon$.
 We write $\approx$ to say that two functions are asymptotic to all orders. By the method of steepest descent,\footnote{The details can be found in \cite{miller2006applied}: follow the proof of Proposition~2.1 in through equation~(2.9).}
 \[ e^{z \alpha} I_a \approx \int_{\tau \in [-\varepsilon, \varepsilon]} e^{-z\tau^2/2} \nu \]
 as $z \to \infty$. Plugging in the Taylor series for $\nu$, we get
-\begin{align*}
+\begin{equation*}
+\begin{split}
 e^{z \alpha} I_a & \approx \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{m \ge 0} b_m^a \tau^m\,d\tau \\
 & = \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \sum_{n \ge 0} b_{2n}^a \tau^{2n}\,d\tau.
-\end{align*}
+\end{split}
+\end{equation*}
 Applying the dominated convergence theorem on the right-hand side, we deduce that\footnote{Notice that the sum over $k$ is empty when $n = 0$. Following convention, we extend the double factorial to all odd integers by its recurrence relation, giving $(-1)!! = 1$.}
-\begin{align*}
+\begin{equation*}
+\begin{split}
 e^{z \alpha} I_a & \approx \sum_{n \ge 0} b_{2n}^a \int_{-\varepsilon}^\varepsilon e^{-z\tau^2/2} \tau^{2n}\,d\tau \\
 & = \sum_{n \ge 0} (2n-1)!!\,b_{2n}^a \left[ \sqrt{2\pi}\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big) - 2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \right].
-\end{align*}
+\end{split}
+\end{equation*}
 
 The annoying $e^{-z\varepsilon^2/2}$ correction terms are crucial for the convergence of the sum, but we can get rid of them and still have a formal series asymptotic to $e^{-z \alpha} I_a$. In other words,
 \[ e^{z \alpha} I_a \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\,b_{2n}^a\,z^{-(n+1/2)} \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big). \]
 To see why, cut the sum off after $N$ terms, and observe that
-\begin{align*}
+\begin{equation*}
+\begin{split}
   \Bigg | \sum_{n= 0}^N(2n-1)!! b_{2n}^a  2e^{-z\varepsilon^2/2} \sum_{\substack{k \in \mathbb{N}_+ \\ k \le n}} \frac{\varepsilon^{2k-1}}{(2k-1)!!} z^{-n+k-1} \Bigg | &\leq  2 e^{-\Re (z) \varepsilon^2/2} \sum_{n=0}^N(2n-1)!! b_{2n}^a n|z|^{-n}.
-\end{align*}
+  \end{split}
+\end{equation*}
 The right-hand side goes to $0$ as $\Re(z)$ grows. The differences $1 - \operatorname{erf}\big(\varepsilon \sqrt{z/2}\big)$ shrink exponentially as $z$ grows \cite[inequality~5]{chiani-dardari-book}, allowing the simpler estimate
 \[ e^{z\alpha} I_a \sim \sqrt{2\pi} \sum_{n \ge 0} (2n-1)!!\, b_{2n}^a \,z^{-(n+1/2)}. \]
 Hence, defining the formal series $\series{I}_a$
@@ -1485,34 +1541,36 @@ Hence, defining the formal series $\series{I}_a$
 we get $\series{I}_a \in e^{-z\alpha}z^{-1/2}\C\llbracket z^{-1}\rrbracket$. This ends the proof of part \ref{part-1-prf}.
 
 Using the properties of the Borel transform acting on trans-mononials \ref{sec:action_transseries} we get 
-\begin{align*}
+\begin{equation*}
+\begin{split}
 \series{\iota}_a & = \sqrt{2\pi} \sum_{n \ge 0} (2n - 1)!! \,b_{2n}^a\,\frac{\zeta_\alpha^{n+\tfrac{1}{2}}}{\Gamma(n+\tfrac{1}{2})} \\
 &= \sqrt{2\pi} \sum_{n \ge 0} \frac{2^n}{\sqrt{\pi}} \,b_{2n}^a\,\zeta_\alpha^{n+\tfrac{1}{2}}
-\end{align*}
+\end{split}
+\end{equation*}
 We know from the definition of $\varepsilon$ that $\left|b_n^a\right| \varepsilon^n \lesssim 1$, thus we deduce that $\series{\iota}$ has a finite radius of convergence. This ends the proof of part~\ref{part-2-prf}.
 
 The proof of part~\ref{part-3-prf} relies on the thimble projection formula \eqref{eqn:formula-proof}: we will show that the Taylor expansion of $\iota_a$ at $\zeta=\alpha$ agrees with $\series{\iota}_a$. We can rewrite the Taylor series for $\nu$ as
-\begin{align*}
+\begin{equation*}\begin{split}
 \nu & = \sum_{n \ge 0} b_n^a [2(f - \alpha)]^{(n - 1)/2}\,df,
-\end{align*}
+\end{split}\end{equation*}
 taking the positive branch of the square root on $\mathcal{C}^+_a$ and the negative branch on $\mathcal{C}^-_a$. Plugging this into our expression for $\iota_a$ (in Lemma~\ref{lem:thimble_proj_formula-proof}), we learn that
-\begin{align*}
+\begin{equation*}\begin{split}
 \iota_a & = \left[ \sum_{m \ge 0} b_m^a [2(f - \alpha)]^{(m - 1)/2} \right]_{\operatorname{start} \mathcal{C}_a(\zeta)}^{\operatorname{end} \mathcal{C}_a(\zeta)} \\
 & = \sum_{m \ge 0} b_m^a \Big( [2\zeta_\alpha]^{(m - 1)/2} - (-1)^{m-1}[2\zeta_\alpha]^{(m - 1)/2} \Big) \\
 & = \sum_{n \ge 0} 2 b_{2n}^a [2\zeta_\alpha]^{n - 1/2} \\
 & = \sum_{n \ge 0} 2^{n+1/2} b_{2n}^a \zeta_\alpha^{n - 1/2}
-\end{align*}
-In particular, $\series{\iota}_a$ can be analytically continued along $\mathcal{J}_{\zeta,\alpha}^\theta$ and its sum is given by $\iota_a$.
+\end{split}\end{equation*}
+In particular, $\series{\iota}_a$ can be analytically continued along $\mathcal{J}_{\zeta,\alpha}^\theta$ and its sum is given by~$\iota_a$.
 \end{proof}
 \begin{remark}\label{rmk:1/2-deriv}
 For some applications, it is more convenient to work with $\Phi_a \defeq z^{-1/2} I_a$, whose asymptotic series has integer powers. The argument we use to prove of Theorem~\ref{thm:maxim-proof} can also be used to show that $\Phi_a$ is Borel regular, but the thimble projection formula is trickier in this case. Proposition~\ref{prop:L-int-op} tells us that $\Phi_a = \laplace^\theta_{\zeta, \alpha} \phi_a$ for
 \[\phi_a \defeq \fracderiv{-1/2}{\zeta}{\alpha}\,\iota_a. \]
 To get the thimble projection formula for $\phi_a$, take the $1/2$ fractional integral of both sides:
-\begin{align*}
+\begin{equation*}\begin{split}
 \fracderiv{-1/2}{\zeta}{\alpha} \phi_a & = \fracderiv{-1}{\zeta}{\alpha} \, \iota_a \\
 & = \fracderiv{-1}{\zeta}{\alpha} \frac{\partial}{\partial \zeta} \left( \int_{\mathcal{C}_a^\theta(\zeta)}\nu \right) \\
 & = \int_{\mathcal{C}_a^\theta(\zeta)}\nu - \int_{\mathcal{C}_a^\theta(\alpha)}\nu.
-\end{align*}
+\end{split}\end{equation*}
 The second term vanishes because $\mathcal{C}_a^\theta(\alpha)$ is a single point, leaving
 \[ \fracderiv{-1/2}{\zeta}{\alpha} \phi_a = \int_{\mathcal{C}_a^\theta(\zeta)}\nu. \]
 The $1/2$ fractional derivative is a left inverse of the $1/2$ fractional integral. Applying it to both sides, we find that
@@ -1703,17 +1761,17 @@ also turns formal trans-monomial solutions of equation~\eqref{eqn:reg-mod-bessel
 \subsubsection{Confirmation of Borel regularity}\label{confirmation-borel-regularity}
 %
 We can verify the conclusions of Section~\ref{bessel-regularity-AL} using our explicit expressions for the formal power series $\tilde{W}_\alpha$ and the functions $v_\alpha$. We found in Section~\ref{sec:asympt-AL} that
-\begin{align*}
+\begin{equation*}\begin{split}
 \tilde{W}_1 & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(-\frac{1}{2}\right)^k z^{-k} \\
 \tilde{W}_{-1} & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(\frac{1}{2}\right)^k z^{-k}.
-\end{align*}
+\end{split}\end{equation*}
 Computing
-\begin{align*}
+\begin{equation*}\begin{split}
 \borel_\zeta \big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big] & = \borel_\zeta \left[ e^{-z} \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(-\frac{1}{2}\right)^k z^{-k-\frac{1}{2}} \right] \\
 & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^{k-\frac{1}{2}}}{\Gamma\big(k+\frac{1}{2}\big)} \\
 & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{k!} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^{k-\frac{1}{2}}}{\Gamma\big(\frac{1}{2}\big) \left(\frac{1}{2}\right)_k} \\
 & = \frac{\zeta_1^{-\frac{1}{2}}}{\Gamma\big(\frac{1}{2}\big)} \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{2}-\tfrac{m}{n}\right)_k \left(\tfrac{1}{2}+\tfrac{m}{n}\right)_k}{\left(\frac{1}{2}\right)_k} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^k}{k!},
-\end{align*}
+\end{split}\end{equation*}
 we see that $\borel\big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big]$ sums to
 \[ \tfrac{1}{\Gamma(1/2)}\,\zeta_1^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\tfrac{m}{n}, \tfrac{1}{2}+\tfrac{m}{n}; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_1\big). \]
 Looking back at Section~\ref{pos-root-AL}, we recognize this as a scalar multiple of $v_1$.
@@ -1724,31 +1782,31 @@ Looking back at Section~\ref{neg-root-AL}, we recognize this as a scalar multipl
 %
 \subsubsection{Thimble projection reasoning}\label{contour-argument-AL}
 We can also study the Airy-Lucas functions by applying the thimble projection formula to integral~\eqref{integral:mod-bessel-rational-AL}, specializing the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof}. We recast integral~\eqref{integral:mod-bessel-rational-AL} into the $\zeta$ plane by setting $-\zeta = T_n(u)$, which implies that $-d\zeta = n U_{n-1}(u)\,du$. Recall from below equation~\eqref{integral:AL} that the integration contour $\mathcal{C}^\theta_j$ runs through the critical point $u = \cos\big(\tfrac{j}{n}\pi\big)$, with its direction determined by the parameter $\theta$. The critical point splits $\mathcal{C}^\theta_j$ into two pieces: the {\em incoming} branch, where the orientation of the thimble runs toward the critical point, and the {\em outgoing} branch, where the orientation points away. Recalling that $\mathcal{C}^\theta_j$ is a preimage of $\mathcal{J}^\theta_{\zeta, \mp 1}$, we get
-\begin{align*}
+\begin{equation*}\begin{split}
 K^{(j)}_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
 & = -\frac{1}{2\sinh\big(\tfrac{m}{n}\,i\pi\big)} \left[ \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_+)}{U_{n-1}(u_+)}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta}\,\frac{U_{m-1}(u_-)}{U_{n-1}(u_-)}\,d\zeta \right],
-\end{align*}
+\end{split}\end{equation*}
 where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $\mathcal{C}^\theta_j$, respectively.
 
 Since the Chebyshev polynomial $T_n$ is defined by the identity $T_n(\cos(\phi)) = \cos(n\phi)$, we introduce a new variable $\phi$ with $u = \cos(\phi)$ and $-\zeta = \cos(n\phi)$. On the $\phi$ plane, which is an infinite branched cover of the $u$ plane, we can lift $\mathcal{C}^\theta_j$ to the path $\tfrac{j}{n}\pi + i\R$. The incoming and outgoing branches lift to $\tfrac{j}{n}\pi - i[0, \infty)$ and $\tfrac{j}{n}\pi + i[0, \infty)$, respectively.
 
 We can now use identity~15.4.16 from \cite{dlmf} to write the integrand explicitly in terms of $\zeta$:
-\begin{align*}
+\begin{equation*}\begin{split}
 \frac{U_{m-1}(\cos(\phi))}{U_{n-1}(\cos(\phi))} &= \frac{\sin(m\phi)}{\sin(\phi)}\frac{\sin(\phi)}{\sin(n \phi)}\\
 & = \frac{\sin(m\phi)}{\sin(n \phi)}\\
 & = \frac{m}{n}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{3}{2};\;\sin(n \phi)^2\right) \\
 & = \frac{m}{n}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{3}{2};\;1 - \zeta^2\right).
-\end{align*}
+\end{split}\end{equation*}
 Initially, we only know that this equation holds in the disk $|\phi| < \tfrac{\pi}{2n}$. However, observing that the left-hand side is meromorphic throughout the $\phi$ plane, we can deduce by analytic continuation that the equation holds throughout the $\phi$ plane.
 
-Next, we simplify the integrand using identities 15.8.4 and 15.8.27\;--\;15.8.28 from \cite{dlmf}, which tell us that\begin{align*}
+Next, we simplify the integrand using identities 15.8.4 and 15.8.27\;--\;15.8.28 from \cite{dlmf}, which tell us that\begin{equation*}\begin{split}
 &{}_2F_1\left(\frac{1}{2} - \frac{m}{2n}, \frac{1}{2} + \frac{m}{2n}; \frac{3}{2}; 1 - \zeta^2\right) \\[3mm]
 & =\; \hphantom{+} \frac{\pi}{\Gamma\left(1-\frac{m}{2n}\right) \Gamma\left(1 + \frac{m}{2n}\right)}\;{}_2F_1\left(\frac{1}{2} - \frac{m}{2n},\;\frac{1}{2} + \frac{m}{2n};\;\frac{1}{2};\;\zeta^2\right) \\
 & \hphantom{=}\; - \frac{\pi \zeta}{\Gamma\left(\frac{1}{2} - \frac{m}{2n}\right) \Gamma\left(\frac{1}{2} + \frac{m}{2n}\right)}\;{}_2F_1\left(1 - \frac{m}{2n},\;1 + \frac{m}{2n};\;\frac{3}{2};\;\zeta^2\right) \\[3mm]
 & =\; \hphantom{+ \frac{0}{0}}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) + \hphantom{\frac{0}{0}}\;{}_2F_1\left(1-\frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \\
 & \hphantom{=}\; + \frac{1}{2}\;{}_2F_1\left(1-\frac{m}{n},\;1+\frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) - \frac{1}{2}\;{}_2F_1\left(1-\frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \\[3mm]
 & =\; \hphantom{+} \frac{3}{2}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{1}{2}\;{}_2F_1\left(1 - \frac{m}{n},\;1 + \frac{m}{n};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right)
-\end{align*}
+\end{split}\end{equation*}
 away from the line $\Re(\zeta) = 0$ and the rays $\mathcal{J}^0_{\zeta,1}$ and $\mathcal{J}^\pi_{\zeta,-1}$.
 
 Returning to the projected thimble integral
@@ -1775,14 +1833,14 @@ As an example, consider the Borel regular solution $e^{-z} V_1$ of the modified 
 \[ v_1 = \left(-\frac{\zeta_1}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right), \]
 on the position domain, with $\zeta=1+\zeta_1$ as before. The function $v_1$ is singular at $\zeta = 1$, but the hypergeometric factor ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right)$ is analytic at that point, so $v_1$ has the typical form of a {\em singularity} in the formalism of resurgent functions~\cite[Section~2]{sauzin2021variations}. We can see ${}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right)$ as a new holomorphic function, analytically continued from a germ at $\zeta = 1$. This new function has a branch cut singularity at $\zeta=-1$, and we can find its jump across the branch cut $\zeta \in (-\infty, -1]$ using equation~15.2.3 from \cite{dlmf}. Along the branch cut, we have
 
-\begin{align*}
+\begin{equation*}\begin{split}
 &{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}+i\varepsilon\right)-{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}-i\varepsilon\right) \\
 &=\frac{2\pi i}{\Gamma\big(\tfrac{1}{2}-\tfrac{m}{n}\big)\Gamma\big(\tfrac{1}{2}+\tfrac{m}{n}\big)} \left(-\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
 &=2i\cos\big(\tfrac{m}{n}\pi\big) \left(-\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
 &=2\cos\big(\tfrac{m}{n}\pi\big) \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
 &=2\cos\big(\tfrac{m}{n}\pi\big)\, \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} \left(-\frac{\zeta_{1}}{2}\right)^{1/2}\, {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right) \\
 &=\left(-\frac{\zeta_{1}}{2}\right)^{1/2}\,2\cos\big(\tfrac{m}{n}\pi\big)\,v_{-1}\;.
-\end{align*}
+\end{split}\end{equation*}
 Multiplying both sides by $(-\zeta_1/2)^{-1/2}$ reveals a formula for the jump of $v_1$ across the branch cut. For any point $p$ on the branch cut,
 \begin{equation}\label{eqn:resurg-rel-1}
 v_1(p_-) - v_1(p_+) = 2\cos\big(\tfrac{m}{n}\pi\big)\,v_{-1}(p),
@@ -1794,14 +1852,14 @@ Reviews like \cite{diverg-resurg-i,Dorigoni,aniceto2019primer} discuss many deta
 To compute the Stokes constants for the Airy--Lucas functions, we first repeat the calculation above for
 \[ v_{-1} = \left(\frac{\zeta_{-1}}{2}\right)^{-1/2} {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}\right). \]
 We find that
-\begin{align*}
+\begin{equation*}\begin{split}
 &{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}+i\varepsilon\right)-{}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};\frac{\zeta_{-1}}{2}-i\varepsilon\right) \\
 &=\frac{2\pi i}{\Gamma\big(\tfrac{1}{2}-\tfrac{m}{n}\big)\Gamma\big(\tfrac{1}{2}+\tfrac{m}{n}\big)} \left(\frac{\zeta_1}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right) \\
 &=2i\cos\big(\tfrac{m}{n}\pi\big) \left(\frac{\zeta_1}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right) \\
 &=-2\cos\big(\tfrac{m}{n}\pi\big) \left(-\frac{\zeta_1}{2}\right)^{-1/2} {}_2F_1\left(\frac{m}{n},-\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right) \\
 &=-2\cos\big(\tfrac{m}{n}\pi\big)\,\left(-\frac{\zeta_{1}}{2}\right)^{-1/2} \left(\frac{\zeta_{-1}}{2}\right)^{1/2}\, {}_2F_1\left(\frac{1}{2}-\frac{m}{n},\frac{1}{2}+\frac{m}{n};\frac{1}{2};-\frac{\zeta_1}{2}\right) \\
 &=\left(\frac{\zeta_{-1}}{2}\right)^{1/2}\,(-2)\cos\big(\tfrac{m}{n}\pi\big)\,v_1\;.
-\end{align*}
+\end{split}\end{equation*}
 Multiplying both sides by $(\zeta_{-1}/2)^{-1/2}$ gives the jump formula
 \begin{equation}\label{eqn:resurg-rel-2}
 v_{-1}(p_+) - v_{-1}(p_-) = -2\cos\big(\tfrac{m}{n}\pi\big)\,v_1(p)
@@ -1809,10 +1867,10 @@ v_{-1}(p_+) - v_{-1}(p_-) = -2\cos\big(\tfrac{m}{n}\pi\big)\,v_1(p)
 for any point $p$ on the branch cut $\zeta \in [1, \infty)$, where again $v_{-1}(p_+)$ and $v_{-1}(p_-)$ denote evaluation by analytic continuation from $\Im(\zeta) > 0$ and $\Im(\zeta) < 0$.
 
 Equations~\eqref{eqn:resurg-rel-1} and~\eqref{eqn:resurg-rel-2} are a manifestation of the Stokes phenomenon in the position domain. When we vary the direction of integration for the Laplace transform, we expect discontinuities at $\laplace^\pi_{\zeta,1}$ and $\laplace^0_{\zeta,-1}$, because each of the contours $\mathcal{J}^\pi_{\zeta,1}$ and $\mathcal{J}^0_{\zeta,-1}$ hits a singularity other than its starting point. The Stokes constant for each critical direction relates the results of the Laplace transforms on either side. In our example,
-\begin{align*}
+\begin{equation*}\begin{split}
 \laplace_{\zeta,1}^{\pi+\varepsilon} v_1 - \hphantom{{}_{-}}\laplace_{\zeta,1}^{\pi-\varepsilon} v_1 & = \hphantom{-}2\cos\big(\tfrac{m}{n}\pi\big) \, e^{-z}\, \laplace_{\zeta,-1}^{\pi} v_{-1} \\
 \laplace_{\zeta,-1}^{\varepsilon} v_{-1} - \laplace_{\zeta,-1}^{-\varepsilon} v_{-1} & = -2\cos\big(\tfrac{m}{n}\pi\big) \, e^z \, \laplace_{\zeta,1} v_{1}\;.
-\end{align*}
+\end{split}\end{equation*}
 so the stokes constants for the directions $\pi$ and $0$ are $2\cos\big(\tfrac{m}{n}\pi\big)$ and $-2\cos\big(\tfrac{m}{n}\pi\big)$, respectively.
 
 Because the Airy--Lucas functions can always be expressed as thimble integrals, it may seem surprising that the Stokes constants are not always integers. For thimble integrals given by Morse functions, the Stokes constants are the intersection numbers of \textit{dual pairs of thimbles}, according to Picard--Lefschetz formula~\cite[Section 5]{pham}\cite[Chapter~1]{Arnold}. However, the functions $T_n(u)$ defining the Airy--Lucas thimble integrals~\eqref{integral:mod-bessel-rational-AL} are only Morse in the Airy case $n = 3$ and the degenerate limit $n \to \infty$ that we will discuss in Section~\ref{sec:bessel-0}. In the other cases, we speculate that the Stokes constants are non-integer because there are multiple thimbles over each critical value.
@@ -1827,17 +1885,17 @@ The ODE reasoning of Sections \ref{big-idea}\;--\;\ref{confirmation-borel-regula
 
 Equation~\eqref{eqn:mod-bessel} has a basis of formal solutions \[ e^{-z} z^{-1/2}\,\series{W}_1 \quad \text{and} \quad e^z z^{-1/2}\,\series{W}_{-1}, \]
 given by
-\begin{align*}
+\begin{equation*}\begin{split}
 \series{W}_{\mu,1} & = 1 - \frac{\left(\tfrac{1}{2}-\mu\right)\left(\frac{1}{2}+\mu\right)}{2 \cdot 1!} z^{-1} + \frac{\left(\tfrac{1}{2}-\mu\right)_2\left(\frac{1}{2}+\mu\right)_2}{2^2 \cdot 2!} z^{-2} - \frac{\left(\tfrac{1}{2}-\mu\right)_3\left(\frac{1}{2}+\mu\right)_3}{2^3 \cdot 3!} z^{-3} + \ldots \\
 \series{W}_{\mu,-1} & = 1 + \frac{\left(\tfrac{1}{2}-\mu\right)\left(\frac{1}{2}+\mu\right)}{2 \cdot 1!} z^{-1} + \frac{\left(\tfrac{1}{2}-\mu\right)_2\left(\frac{1}{2}+\mu\right)_2}{2^2 \cdot 2!} z^{-2}+ \frac{\left(\tfrac{1}{2}-\mu\right)_3\left(\frac{1}{2}+\mu\right)_3}{2^3 \cdot 3!} z^{-3} + \ldots
-\end{align*}   
+\end{split}\end{equation*}   
 \item[]  \textbf{Frame of analytic solutions}
 
 Equation~\eqref{eqn:mod-bessel} also has a basis of analytic solutions $\laplace^\theta_{\zeta, 1} v_1$ and $\laplace^\theta_{\zeta, -1} v_{-1}$, which are the Laplace transforms of the functions
-\begin{align*}
+\begin{equation*}\begin{split}
 v_1 & = -i\sqrt{2}\,\zeta_{1}^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\mu, \tfrac{1}{2}+\mu; \tfrac{1}{2}; -\tfrac{1}{2}\zeta_{1}\big)\\
 v_{-1} & = \hphantom{-i}\sqrt{2}\,\zeta_{-1}^{-1/2}\,{}_2F_1\big(\tfrac{1}{2}-\mu, \tfrac{1}{2}+\mu; \tfrac{1}{2}; \tfrac{1}{2}\zeta_{-1}\big)
-\end{align*}
+\end{split}\end{equation*}
 along the directions $\theta \neq \pi$ and $\theta \neq 0$, respectively.
 \item[] \textbf{Borel regularity}
 
@@ -1850,16 +1908,16 @@ On the other hand, the thimble projection reasoning of Section~\ref{contour-argu
 Formula~\eqref{integral:mod-bessel-rational-AL} expresses the modified Bessel function $K_{m/n}$ as an exponential integral on a finite cover of $\C$. Lifting to a countable cover reveals this formula as a special case of a general integral formula for modified Bessel functions.
 
 Setting $u = \cosh(t/n)$ and recalling that
-\begin{align*}
+\begin{equation*}\begin{split}
 \cosh(n\tau) & = T_n(\cosh(\tau)) \\
 \sinh(m\tau) & = U_{m-1}(\cosh(\tau)) \sinh(\tau),
-\end{align*}
+\end{split}\end{equation*}
 we can rewrite formula~\eqref{integral:mod-bessel-rational-AL} as
-\begin{align}
+\begin{equation}\begin{split}
 \notag K^{(j)}_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_\gamma \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
 \notag & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z \cosh(t)\right]\,U_{m-1}(\cosh(t/n))\,\sinh(t/n)\,d(t/n) \\
 \label{integral:mod-bessel-lifted} & = \frac{1}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z \cosh(t)\right]\,\sinh\big(\tfrac{m}{n}\,t\big)\,dt,
-\end{align}
+\end{split}\end{equation}
 using the path $\mathcal{C}^\theta_j$ described below.
 \begin{center}
 \begin{tabular}{l|l|l}
@@ -1883,10 +1941,10 @@ for $|\theta| < \tfrac{\pi}{2}$. This formula can be deduced, with a lot of fina
 We can now apply the thimble projection formula, using the same reasoning as in Section~\ref{contour-argument-AL}. We first recast the integral into the $\zeta$ plane by setting $-\zeta = \cosh(t)$. This gives us the expression
 \[ K^{(j)}_\mu(z) = -\frac{1}{2\sinh(\mu i\pi)} \int_{\mathcal{J}^\theta_{\zeta, \mp 1}} e^{-z\zeta} \left[ \frac{\sinh(\mu t_+)}{\sinh(t_+)} - \frac{\sinh(\mu t_-)}{\sinh(t_-)} \right] d\zeta, \]
 where $t_-$ and $t_+$ are the lifts to the incoming and outgoing branches of $\mathcal{C}^\theta_j$. We then use identity~15.4.16 from \cite{dlmf} to write the integral explicitly in terms of $\zeta$:
-\begin{align*}
+\begin{equation*}\begin{split}
 \frac{\sinh(\mu t)}{\sinh(t)} & = \mu\;{}_2F_1\left(\frac{1}{2} - \frac{\mu}{2},\;\frac{1}{2} + \frac{\mu}{2};\;\frac{3}{2};\;-\sinh(t)^2\right) \\
 & = \mu\;{}_2F_1\left(\frac{1}{2} - \frac{\mu}{2},\;\frac{1}{2} + \frac{\mu}{2};\;\frac{3}{2};\;1 - \zeta^2\right).
-\end{align*}
+\end{split}\end{equation*}
 Like before, we can deduce by analytic continuation that this identity holds throughout the $t$ plane.
 
 Using formula~15.8.4 from \cite{dlmf}, followed by formulas 15.8.27 and 15.8.28 from the same source, we can repeat the arguments of Section~\ref{contour-argument-AL}, eventually rewriting the integrand as the variation of the function
@@ -1905,15 +1963,15 @@ and for even $j$, we get
 When $\mu$ goes to $0$, formula~\eqref{int:mod-bessel-gen} becomes
 \[ K_0^{(j)}(z) = \frac{1}{2\pi i} \int_{\mathcal{C}_j^\theta} \exp\left[z \cosh(t)\right]\,t\,dt. \]
 Let us compute $K^{(1)}_{0}(z)$ using the contour $\mathcal{C}_1^0$, which runs rightward along the line $\Im(t) = \pi$. In the translated coordinate $w$ defined by $t = w + i\pi$, the integral becomes
-\begin{align*}
+\begin{equation*}\begin{split}
 K_0^{(1)}(z) & = \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[z \cosh(w + i\pi)\right]\,(w + i\pi)\,dw \\
 & = \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,w\,dw + \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,i\pi\,dw.
-\end{align*}
+\end{split}\end{equation*}
 The first integrand is odd with respect to $w = 0$, so it vanishes, leaving
-\begin{align}
+\begin{equation}\begin{split}
 K_0^{(1)}(z) & = \frac{1}{2} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,dw \notag \\
 & = \int_0^\infty \exp\left[-z \cosh(w)\right]\,dw. \label{int:k0_cosh}
-\end{align}
+\end{split}\end{equation}
 This is a special case of formula~10.32.9 from \cite{dlmf}. Rolling the $t$ plane up into a cylinder, parameterized by the coordinate $s = e^t$, we can express $K_0^{(1)}(z)$ as an exponential period:
 \[ K_0^{(1)}(z) = \int_{\mathcal{J}^0_{s, 1}} \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s}. \]
 
@@ -1928,11 +1986,11 @@ We could get the same result from formula~\eqref{int:k0_cosh} by trigonometric s
 \subsection{Generalized Airy}\label{sec:gen-airy}
 %
 In \cite{Reid} and the appendix of \cite{drazin-reid}, Drazin and Reid construct approximate solutions of the Orr--Sommerfield fluid equation using the generalized Airy functions
-\begin{align*}
+\begin{equation*}\begin{split}
 \mathrm{A}_k(y,p) & = \frac{1}{2\pi i}\int_{\mathscr{a}_k} \exp\big[yt-\tfrac{t^3}{3}\big]\,\frac{dt}{t^p} & & p \in \C\hphantom{{}_{\le 0}},\quad k \in \{1,2,3\} \\
 \mathrm{B}_0(y,p) & = \frac{1}{2\pi i}\int_{\mathscr{b}_0} \exp\big[yt-\tfrac{t^3}{3}\big]\,\frac{dt}{t^p} & & p \in \Z \\
 \mathrm{B}_k(y,p) & = \hphantom{\frac{1}{2\pi i}} \int_{\mathscr{b}_k} \exp\big[yt-\tfrac{t^3}{3}\big]\,\frac{dt}{t^p}, & & p \in \Z_{\le 0},\quad k \in \{1,2,3\}
-\end{align*}
+\end{split}\end{equation*}
 which are defined by integrals along the contours $\mathscr{a}_k, \mathscr{b}_0, \mathscr{b}_k$ shown in Figure~\ref{fig:path-generalized-Airy}~\cite{drazin-reid}\cite[Section 9.13(ii)]{dlmf}.
 \begin{figure}[ht]
 \center
@@ -2005,19 +2063,19 @@ defined by an arbitrary holomorphic map $f \maps X \to \C$ and an arbitrary $1$-
 For any $c \in \C$, the translation action $f \mapsto f + c$ on maps corresponds to the action
 \[ J(z) \mapsto e^{-cz} J(z) \]
 on integrals. This is because
-\begin{align*}
+\begin{equation*}\begin{split}
 \int_\mathcal{C} e^{-z(f + c)}\,\nu & = e^{-cz} \int_\mathcal{C} e^{-zf}\,\nu \\
 & = e^{-cz} J(z).
-\end{align*}
+\end{split}\end{equation*}
 \item[] \textbf{Scaling-rotations}
 
 For any $r \in \C^\times$, the scaling-rotation action $f \mapsto rf$ corresponds to the action
 \[ J(z) \mapsto J(rz) \]
 on integrals. This is because
-\begin{align*}
+\begin{equation*}\begin{split}
 \int_\mathcal{C} e^{-z(rf)}\,\nu & = \int_\mathcal{C} e^{-(rz)f}\,\nu \\
 & = J(rz).
-\end{align*}
+\end{split}\end{equation*}
 \end{itemize}
 Next, we specialize to the case where $X$ is the complex plane and $\nu = du$, where $u$ is the standard coordinate. The affine group of $\C$ now acts on $f$ by pre-composition as well. To make sure that $\mathcal{C}$ remains a Lefschetz thimble, we act on it simultaneously by the inverse of whatever we precompose with $f$.
 \begin{itemize}
@@ -2030,20 +2088,20 @@ For any $c \in \C$, pulling $f$ back along the translation $\mathsf{T}_c^* u = u
 For any $s \in \C^\times$, the scaling-rotation action $\mathsf{M}_s^* u = s^{-1} u$ corresponds to the action
 \[ J(z) \mapsto s J(z) \]
 on integrals. This is because
-\begin{align*}
+\begin{equation*}\begin{split}
 \int_{\mathsf{M}_{1/s} \mathcal{C}} e^{-z \mathsf{M}_s^* f}\,du & = \int_\mathcal{C} e^{-zf}\,\mathsf{M}_{1/s}^* du \\
 & = \int_\mathcal{C} e^{-zf}\,s\,du \\
 & = s J(z).
-\end{align*}
+\end{split}\end{equation*}
 \end{itemize}
 \subsubsection{Reduction of the integral}
 We now return to our original thimble integral $I(z)$, defined by the third-degree polynomial map
 \[ g = a_3 u^3 + a_2 u^2 + a_1 u + a_0, \]
 and use the group actions from Section~\ref{sec:int-symm} to reduce it to its two essential cases. We first put $g$ in depressed form by scaling the leading coefficient to $1$ and translating the mean of the critical points to $0$.\footnote{The coefficients of the depressed form are related to the original coefficients as follows:
-\begin{align*}
+\begin{equation*}\begin{split}
 p & = \frac{a_1}{a_3} - \frac{1}{3} \left(\frac{a_2}{a_3}\right)^2 \\
 q & = \frac{a_0}{a_3} - \frac{1}{3} \left(\frac{a_1}{a_3}\right)\left(\frac{a_2}{a_3}\right) + \frac{2}{27} \left(\frac{a_2}{a_3}\right)^3.
-\end{align*}} We then also translate the mean of the critical values to $0$.
+\end{split}\end{equation*}} We then also translate the mean of the critical values to $0$.
 \begin{center}
 \begin{tabular}{c|c|c}
 \textbf{Symmetry} & \textbf{Resulting polynomial} & \textbf{Resulting integral} \\[2mm]
@@ -2089,10 +2147,10 @@ whose Laplace transform
 must be proportional to $I(z)$.
 
 We can confirm this result, and find the correct normalization, using the thimble projection formula:
-\begin{align*}
+\begin{equation*}\begin{split}
 \int_{\mathcal{C}} e^{-z(u^3+q)}\,du & = (1 - e^{i\pi/3}) \int_{\mathcal{J}_{\zeta_q, 0}^\theta} e^{-z\zeta}\,\tfrac{1}{3}\zeta_q^{-2/3}\,d\zeta_q \\
 & = e^{-zq}\tfrac{1}{i\sqrt{3}}\,e^{i\pi/3}\,\Gamma\big(\tfrac{1}{3})\,z^{-1/3}.
-\end{align*}
+\end{split}\end{equation*}
 The factor of $e^{i\pi/3} - 1$ comes from the monodromy of $\zeta_q^{-2/3}$ around $\zeta_q = 0$.
 \end{itemize}
 \subsubsection{Coalescence of critical values}
@@ -2268,10 +2326,10 @@ where $W_{-1}$ is a holomorphic function on the slit plane $z \notin [0, \infty)
 \subsubsection{Confirmation of Borel regularity}\label{confirmation-borel-regularity-airy}
 %
 We can verify the conclusions of Section~\ref{bessel-regularity-AL} in the Airy case using our explicit expressions for the formal power series $\tilde{W}_\alpha$ and the functions $v_\alpha$. We found in Section~\ref{sec:asympt-airy} that
-\begin{align*}
+\begin{equation*}\begin{split}
 \tilde{W}_1 & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{6}\right)_k \left(\tfrac{5}{6}\right)_k}{k!} \left(-\frac{1}{2}\right)^k z^{-k} \\
 \tilde{W}_{-1} & = \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{6}\right)_k \left(\tfrac{5}{6}\right)_k}{k!} \left(\frac{1}{2}\right)^k z^{-k}.
-\end{align*}
+\end{split}\end{equation*}
 Repeating the computation in Section~\ref{confirmation-borel-regularity}, we find that
 \[ \borel_\zeta \big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big] = \frac{\zeta_1^{-\frac{1}{2}}}{\Gamma\big(\frac{1}{2}\big)} \sum_{k = 0}^{\infty} \frac{\left(\tfrac{1}{6}\right)_k \left(\tfrac{5}{6}\right)_k}{\left(\frac{1}{2}\right)_k} \left(-\frac{1}{2}\right)^k \frac{\zeta_1^k}{k!}, \]
 making it apparent that $\borel\big[ e^{-z} z^{-1/2}\,\tilde{W}_1 \big]$ sums to
@@ -2285,27 +2343,27 @@ Looking back at Section~\ref{neg-root}, we recognize this as a scalar multiple o
 \subsubsection{Thimble projection reasoning}\label{contour-argument-airy}
 %
 In Section~\ref{contour-argument-AL}, we specialized the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof} to the case of the Airy--Lucas functions. We now specialize even further, down to the case of the Airy function. Like in Section~\ref{contour-argument-AL}, we first recast integral~\eqref{integral:mod-bessel-airy} into the $\zeta$ plane by setting $-\zeta = 4u^3 - 3u$, which implies that $-d\zeta = 3(4u^2 - 1)\,du$. Recall from Section~\ref{sec:airy} that the integration contour $\mathcal{C}^\theta_1$ runs through the critical point $u = \tfrac{1}{2}$, with its direction determined by the parameter $\theta$. The critical point splits $\mathcal{C}^\theta_1$ into two pieces: the incoming branch, where the orientation of the thimble runs toward the critical point, and the outgoing branch, where the orientation points away. Recalling that $\mathcal{C}^\theta_1$ is a preimage of $\mathcal{J}^\theta_{\zeta,1}$, we get 
-\begin{align*}
+\begin{equation*}\begin{split}
 K(z) & = -i\sqrt{3} \int_{\mathcal{C}^\theta_1} \exp\left[z \left(4u^3 - 3u\right)\right]\,du \\
 & = \frac{i}{\sqrt{3}} \left[ \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\frac{1}{4u_+^2 - 1}\,d\zeta - \int_{\mathcal{J}^\theta_{\zeta, 1}} e^{-z\zeta}\,\frac{1}{4u_-^2 - 1}\,d\zeta \right],
-\end{align*}
+\end{split}\end{equation*}
 where $u_-$ and $u_+$ are the lifts to the incoming and outgoing branches of $\mathcal{C}^\theta_j$, respectively. Recognizing $4u^3 - 3u$ as the Chebyshev polynomial $T_3(u)$, we introduce a new variable $\phi$ with $u = \cos(\phi)$ and $-\zeta = \cos(3\phi)$. On the $\phi$ plane, which is an infinite branched cover of the $u$ plane, we can lift $\mathcal{C}^\theta_1$ to the path $\tfrac{\pi}{3} + i\R$. The incoming and outgoing branches lift to $\tfrac{\pi}{3} - i[0, \infty)$ and $\tfrac{\pi}{3} + i[0, \infty)$, respectively.
 
 Recognizing $4u^2 - 1$ as the Chebyshev polynomial $U_2(u)$, we can use identity~15.4.16 from \cite{dlmf} to write the integrand explicitly in terms of $\zeta$:
-\begin{align*}
+\begin{equation*}\begin{split}
 \frac{1}{4 \cos(\phi)^2 - 1} & = \frac{1}{U_2(\cos(\phi))} \\
 & = \frac{\sin(\phi)}{\sin(3\phi)} \\
 & = \frac{1}{3}\;{}_2F_1\left(\frac{1}{3},\;\frac{2}{3};\;\frac{3}{2};\;\sin(n \phi)^2\right) \\
 & = \frac{1}{3}\;{}_2F_1\left(\frac{1}{3},\;\frac{2}{3};\;\frac{3}{2};\;1 - \zeta^2\right).
-\end{align*}
-Just as in Section~\ref{contour-argument-AL}, we simplify the integrand using identities 15.8.4 and 15.8.27\;--\;15.8.28 from \cite{dlmf}, which tell us that\begin{align*}
+\end{split}\end{equation*}
+Just as in Section~\ref{contour-argument-AL}, we simplify the integrand using identities 15.8.4 and 15.8.27\;--\;15.8.28 from \cite{dlmf}, which tell us that\begin{equation*}\begin{split}
 &{}_2F_1\left(\frac{1}{3},\;\frac{2}{3}; \frac{3}{2}; 1 - \zeta^2\right) \\[3mm]
 & =\; \hphantom{+} \frac{\pi}{\Gamma\left(\frac{1}{3}\right) \Gamma\left(\frac{2}{3}\right)}\;{}_2F_1\left(\frac{1}{3},\;\frac{2}{3};\;\frac{1}{2};\;\zeta^2\right) \\
 & \hphantom{=}\; - \frac{\pi \zeta}{\Gamma\left(\frac{1}{3}\right) \Gamma\left(\frac{2}{3}\right)}\;{}_2F_1\left(\frac{1}{3},\;\frac{2}{3};\;\frac{3}{2};\;\zeta^2\right) \\[3mm]
 & =\; \hphantom{+ \frac{0}{0}}\;{}_2F_1\left(\frac{2}{3},\;\frac{4}{3};\;\frac{3}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) + \hphantom{\frac{0}{0}}\;{}_2F_1\left(\frac{2}{3},\;\frac{4}{3};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \\
 & \hphantom{=}\; + \frac{1}{2}\;{}_2F_1\left(\frac{2}{3},\;\frac{4}{3};\;\frac{3}{2};\;\frac{1}{2} - \frac{\zeta}{2}\right) - \frac{1}{2}\;{}_2F_1\left(\frac{2}{3},\;\frac{4}{3};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right) \\[3mm]
 & =\; \hphantom{+} \frac{3}{2}\;{}_2F_1\left(\frac{2}{3},\;\frac{4}{3};\;\frac{3}{2};\frac{1}{2} - \frac{\zeta}{2}\right) + \frac{1}{2}\;{}_2F_1\left(\frac{2}{3},\;\frac{4}{3};\;\frac{3}{2};\;\frac{1}{2} + \frac{\zeta}{2}\right)
-\end{align*}
+\end{split}\end{equation*}
 away from the line $\Re(\zeta) = 0$ and the rays $\mathcal{J}^0_{\zeta,1}$ and $\mathcal{J}^\pi_{\zeta,-1}$.
 
 In the projected thimble integral
@@ -2322,28 +2380,28 @@ Comparing this expression with the expression for $V_1$ in Section~\ref{pos-root
 In Section~\ref{contour-argument-airy}, we specialized the reasoning behind Lemma~\ref{lem:thimble_proj_formula-proof} to the case of the Airy function. In this section, as an alternative, we will simply apply Lemma~\ref{lem:thimble_proj_formula-proof}, using trigonometric substitution. The lemma tells us that $K$ is the Laplace transform of
 \[ \kappa_1 = -i\sqrt{3}\,\frac{\partial}{\partial \zeta}\left(\int_{\mathcal{C}_1^\theta(\zeta)} du\right). \]
 Based on the variable $\phi$ from Section~\ref{contour-argument-airy}, we introduce a new variable $\eta$ defined by $\phi = \tfrac{\pi}{3} + i\eta$, with $u = \cos\big(\tfrac{\pi}{3} + i\eta\big)$ and $\zeta = \cos\big(\pi + 3i\eta\big)$. We can lift the thimble $\mathcal{C}^\theta_1$ to the path $\eta \in \R$. Its incoming and outgoing branches lift to $(-\infty, 0]$ and $[0, \infty)$, respectively. Using the variable $\eta$, we calculate:
-\begin{align*}
+\begin{equation*}\begin{split}
 \int_{\mathcal{C}_1^\theta(\zeta)} du & = u \Big|_{\operatorname{start} \mathcal{C}^\theta_1(\zeta)}^{\operatorname{end} \mathcal{C}^\theta_1(\zeta)} \\
 & = u_+ - u_-.
-\end{align*}
+\end{split}\end{equation*}
 Like in Section~\ref{contour-argument-AL}, the functions $u_-$ and $u_+$ are functions on a neighborhood of $\mathcal{J}_{\zeta, 1}$ in the position domain. They give the values of $u$ after lifting to the incoming and outgoing branches of $\mathcal{C}^\theta_1$, respectively. We define functions $\eta_-$ and $\eta_+$ similarly, by lifting from the position domain to $\eta \in (-\infty, 0]$ and $\eta \in [0, \infty)$. Observing that $\eta_- = -\eta_+$, we can continue the calculation:
-\begin{align*}
+\begin{equation*}\begin{split}
 \int_{\mathcal{C}_1^\theta(\zeta)} du & = \cos\big(\tfrac{\pi}{3} + i\eta_+\big) - \cos\big(\tfrac{\pi}{3} + i\eta_-\big) \\
 & = \cos\big(\tfrac{\pi}{3} + i\eta_+\big) - \cos\big(\tfrac{\pi}{3} - i\eta_+\big) \\
 & = \big[\cos\big(\tfrac{\pi}{3}\big) \cos(i\eta_+) - \sin\big(\tfrac{\pi}{3}\big) \sin(i\eta_+)\big] \\
 & \qquad - \big[\cos\big(\tfrac{\pi}{3}\big) \cos(-i\eta_+) - \sin\big(\tfrac{\pi}{3}\big) \sin(-i\eta_+)\big] \\
 & = -2 \sin\big(\tfrac{\pi}{3}\big) \sin(-i\eta_+) \\
 & = i\sqrt{3}\,\sinh(\eta_+).
-\end{align*}
+\end{split}\end{equation*}
 Identity 15.4.16 from \cite{dlmf} implies that
 \[ \sinh(\eta_+) = \frac{2}{3} \sinh\big(\tfrac{3}{2}\eta_+\big)\;{}_2 F_1\left(\frac{1}{6}, \frac{5}{6}; \frac{3}{2}; -\sinh\big(\tfrac{3}{2}\eta_+\big)^2\right). \]
 Noticing that $\tfrac{1}{2}(1 - \zeta) = -\sinh\big(\tfrac{3}{2}\eta_+\big)^2$, we conclude that
 \[ \int_{\mathcal{C}_1^\theta(\zeta)} du = \frac{2i}{\sqrt{3}} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{1/2}\;{}_2 F_1\left(\frac{1}{6}, \frac{5}{6}; \frac{3}{2}; \frac{1}{2} - \frac{\zeta}{2}\right), \]
 It follows, through identity~15.5.4 from \cite{dlmf}, that
-\begin{align*}
+\begin{equation*}\begin{split}
 \kappa_1 & = 2\,\frac{\partial}{\partial \zeta} \left[ \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{1/2}\;{}_2 F_1\left(\frac{1}{6}, \frac{5}{6}; \frac{3}{2}; \frac{1}{2} - \frac{\zeta}{2}\right) \right] \\
 & = -\frac{1}{2} \left(-\frac{1}{2} + \frac{\zeta}{2}\right)^{-1/2}\;{}_2 F_1\left(\frac{1}{6}, \frac{5}{6}; \frac{1}{2}; \frac{1}{2} - \frac{\zeta}{2}\right),
-\end{align*}
+\end{split}\end{equation*}
 matching the conclusion of Section~\ref{contour-argument-airy}.
 %
 \subsection{Comparison with other treatments of the Airy equation}\label{airy-comparison}
@@ -2351,42 +2409,42 @@ matching the conclusion of Section~\ref{contour-argument-airy}.
 \subsubsection{Other conventions for the Borel transform}
 %
 Physicists often use a different version of the Borel transform:
-\begin{align*}
+\begin{equation*}\begin{split}
 \borel_{\textit{phys}} \maps \C \llbracket z^{-1} \rrbracket & \to \C \llbracket \zeta \rrbracket \\
 z^{-n} & \mapsto \frac{\zeta^n}{n!}.
-\end{align*}
+\end{split}\end{equation*}
 This version avoids sending $1$ to the convolution unit $\delta$, at the cost of no longer mapping multiplication to convolution or inverting the formal Laplace transform. It is related to the mathematician's Borel transform by the identity $\borel_\textit{phys}(f) = \borel(z^{-1} f)$.
 
 For problems involving a small parameter $\hbar$ rather than a large parameter $z$, physicists also define
-\begin{align*}
+\begin{equation*}\begin{split}
 \borel_{\textit{phys}} \maps \C \llbracket \hbar \rrbracket & \to \C \llbracket \zeta \rrbracket \\
 \hbar^n & \mapsto \frac{\zeta^n}{n!}.
-\end{align*}
+\end{split}\end{equation*}
 From a combinatorial perspective, this is just the transformation that sends an ordinary generating function to the corresponding exponential generating function.
 
 In \cite{lectures-Marino}, Mari\~{n}o studies the Airy functions as an example of resurgent functions. He starts with the formal trans-monomial solutions of the Airy equation:
 
-\begin{align*}
+\begin{equation*}\begin{split}
 \series{\Phi}_{\mathrm{Ai}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{-\tfrac{2}{3}x^{3/2}}\tilde{W}_1(x^{-3/2})\\
 \series{\Phi}_{\mathrm{Bi}}(x)&=\frac{1}{2\sqrt{\pi}}x^{-1/4}e^{\tfrac{2}{3}x^{3/2}}\tilde{W}_2(x^{-3/2})\,,
-\end{align*}  
+\end{split}\end{equation*}  
 where 
-\begin{align*}
+\begin{equation*}\begin{split}
 \tilde{W}_{1,2}(\hbar)=\sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\hbar^n.
-\end{align*}
+\end{split}\end{equation*}
 By applying the two versions $\borel_{\textit{phys}}$ and $\borel$ of the Borel transform, we get
-\begin{align*}
+\begin{equation*}\begin{split}
 w_{1,2}(\zeta)&\defeq\borel_{\textit{phys}}(\tilde{W}_{1,2})(\zeta)\\
 &=\sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^n}{n!}\\
 &={}_2F_1\left(\frac{1}{6},\frac{5}{6};1;\mp\frac{3}{4}\zeta\right) 
-\end{align*}
+\end{split}\end{equation*}
 and
-\begin{align*}
+\begin{equation*}\begin{split}
 \borel(\tilde{W}_{1,2})(\zeta)&=\frac{1}{2\pi}\delta+\sum_{n=1}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}\frac{\zeta^{n-1}}{(n-1)!}\\
 &=\frac{1}{2\pi}\delta+\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n+1}\frac{\Gamma(n+1+\frac{5}{6})\Gamma(n+1+\frac{1}{6})}{(n+1)!}\frac{\zeta^{n}}{n!}\\
 &=\frac{1}{2\pi}\delta\mp\frac{3}{4}\sum_{n=0}^{\infty} \frac{1}{2\pi}\left(\mp\frac{3}{4}\right)^{n}\frac{\Gamma(n+\frac{11}{6})\Gamma(n+\frac{7}{6})}{\Gamma(n+2)}\frac{\zeta^{n}}{n!}\\
 &=\frac{1}{2\pi}\delta\mp\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)\,.
-\end{align*}
+\end{split}\end{equation*}
 Comparing the two solutions, we notice that up to the factor of $\delta$,
 \begin{equation}\label{Borel-W12}
 \borel(\tilde{W}_{1,2})(\zeta)-\frac{1}{2\pi}\delta=\mp \frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\mp\frac{3}{4}\zeta\right)=\frac{d}{d\zeta}\borel_{\textit{phys}}(\tilde{W}_{1,2})(\zeta)\,.
@@ -2403,34 +2461,34 @@ In particular, $\frac{d}{d\zeta}\circ\borel_{\textit{phys}}\left[z^{-1/2}\tilde{
 In \cite{diverg-resurg-i}, Mitschi and Sauzin study summability and resurgent properties of solutions of the Airy equation. They consider the formal power series
 \[\series{\Phi}_{\pm}(z)\defeq \sum_{n=0}^{\infty}\frac{1}{2\pi}\left(\mp\frac{1}{2}\right)^{n}\frac{\Gamma(n+\frac{5}{6})\Gamma(n+\frac{1}{6})}{n!}z^{-n}\]
 such that
-\begin{align*}
+\begin{equation*}\begin{split}
 \series{\Phi}_{\mathrm{Ai}}(y)&=\frac{1}{2\sqrt{\pi}}y^{-1/4}e^{-\tfrac{2}{3}y^{3/2}}\series{\Phi}_{+}\left(\tfrac{2}{3}y^{3/2}\right)\\
 \series{\Phi}_{\mathrm{Bi}}(y)&=\frac{1}{2\sqrt{\pi}}y^{-1/4}e^{\tfrac{2}{3}y^{3/2}}\series{\Phi}_{-}\left(\tfrac{2}{3}y^{3/2}\right)
-\end{align*} 
+\end{split}\end{equation*} 
 are formal solutions of the Airy equation. Notice that compared to Mari\~{n}o's formal solutions, Mitschi and Sauzin adopt a different change of coordinates $z=\frac{2}{3}y^{3/2}$.  
 
 Seeking solutions of the Borel-transformed equation, Mitschi and Sauzin write the Borel transform of $\series{\Phi}_{\pm}$ as a convolution product:
-\begin{align*}
+\begin{equation*}\begin{split}
 \hat{\phi}_+(\zeta):=\borel\series{\Phi}_+=\delta+\frac{d}{d\zeta}\hat{\chi}(\zeta)  \qquad \hat{\phi}_-(\zeta):=\borel\series{\Phi}_-=\delta-\frac{d}{d\zeta}\hat{\chi}(-\zeta)
-\end{align*}
+\end{split}\end{equation*}
  where $\hat{\chi}(\zeta)=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6} \ast_\zeta \zeta^{-5/6}$.
 
 Notice that $\hat{\chi}(\zeta)$ is a hypergeometric function:
-\begin{align*}
+\begin{equation*}\begin{split}
 \hat{\chi}(\zeta)&=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}(2\zeta+\zeta^2)^{-1/6}\ast_\zeta \zeta^{-5/6}\\
 &=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}\int_0^{\zeta}(2\zeta'+\zeta'^2)^{-1/6} (\zeta-\zeta')^{-5/6}d\zeta'\\
 &=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}\int_0^{1}(\zeta t)^{-1/6}(2+\zeta t)^{-1/6} (\zeta-\zeta t)^{-5/6} \zeta dt\\
 &=\frac{2^{1/6}}{\Gamma(1/6)\Gamma(5/6)}\int_0^{1} t^{-1/6} 2^{-1/6}(1+\frac{\zeta}{2} t)^{-1/6} (1-t)^{-5/6}d\zeta'\\
 &=\frac{1}{\Gamma(1/6)\Gamma(5/6)}\int_0^{1} t^{-1/6} (1+\frac{\zeta}{2} t)^{-1/6} (1-t)^{-5/6}d\zeta'\\
 &={}_2F_1\left(\frac{1}{6},\frac{5}{6};1;-\frac{\zeta}{2}\right)
-\end{align*}
+\end{split}\end{equation*}
 where in the last step we use the Euler formula for hypergeometric functions.\footnote{The Euler formula is \begin{equation}\label{Euler formula}
 {}_{2}F_1\left(a,b;c;x\right)=\frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)}\int_0^1 t^{b-1}(1-t)^{c-b-1}(1-xt)^{-a}dt.
 \end{equation}} By taking derivatives, we recover $\hat{\phi}_{\pm}(\zeta)$: 
-\begin{align*}
+\begin{equation*}\begin{split}
 \hat{\phi}_+(\zeta)&=\delta-\frac{1}{2}\frac{5}{36}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right)=\delta-\frac{2}{3}\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;-\frac{\zeta}{2}\right)\\
 \hat{\phi}_-(\zeta)&=\delta+\frac{1}{2}\frac{5}{36}\,\, {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right)=\delta+\frac{2}{3}\frac{5}{48} {}_2F_1\left(\frac{7}{6},\frac{11}{6};2;\frac{\zeta}{2}\right)
-\end{align*} 
+\end{split}\end{equation*} 
 and up to a multiplicative constant they match our computations for $\borel(\tilde{W}_{1,2})$ (see equation~\eqref{Borel-W12}).
 The main advantage of writing Gauss hypergeometric functions as a convolution product relies on \'Ecalle's singularity theory. Indeed $(2\zeta+\zeta^2)^{-1/6}$ extends analytically to the universal cover of $\C\setminus\lbrace 0,-2\rbrace$ and the convolution with $\zeta^{-5/6}$ does not change the set of singularities \cite[Section~6.14.5(c)]{diverg-resurg-i}. Furthermore, Mitschi and Sauzin prove that $\hat{\phi}_{\pm}(\zeta)$ are simple resurgent functions \cite[Lemma 6.106]{diverg-resurg-i}.
 %
@@ -2442,10 +2500,10 @@ In \cite{kawai-takei}, Kawai and Takei carry out an exact WKB analysis of the Ai
 \left[\big(\tfrac{d}{dx}\big)^2 - \eta^2 x \right] \psi(x, \eta) = 0 
 \end{equation}
 in the $\eta \to \infty$ limit. They define $\psi_B(x, y)$ as the inverse Laplace transform of $\psi(x, \eta)$ with respect to $\eta$. In the coordinate $t=\frac{3}{2}yx^{-3/2}$ they find an explicit formula for $\psi_B(x,y)$ in terms of Gauss hypergeometric functions:
-\begin{align*}
+\begin{equation*}\begin{split}
 \psi_{+,B}(x,y)&=\frac{1}{x}\phi_+(t)=\frac{\sqrt{3}}{2\sqrt{\pi}}\frac{1}{x}s^{-1/2}\, {}_2F_1\big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};s\big)\\
 \psi_{-,B}(x,y)&=\frac{1}{x}\phi_-(t)=\frac{\sqrt{3}}{2\sqrt{\pi}}\frac{1}{x}(1-s)^{-1/2}\, {}_2F_1\big(\tfrac{1}{6},\tfrac{5}{6};\tfrac{1}{2};1-s\big)\,,
-\end{align*}
+\end{split}\end{equation*}
 where $s=t/2+1/2$. We found the same hypergeometric functions in the position domain while solving the Airy equation
 \begin{equation}
 \label{Airy}
@@ -2454,13 +2512,13 @@ where $s=t/2+1/2$. We found the same hypergeometric functions in the position do
 in Section~\ref{sec:spec-to-airy}. Although the two equations look closely related, and they are equivalent under the change of coordinates $w=x\eta^{2/3}$, they differ in an important way. The Borel transform of $\psi$ is computed with respect to $\frac{2}{3}\eta x^{3/2}$, the conjugate variable of $t$, while the Borel transform of $f(w)$ is computed with respect to $w$. We need to find a different change of coordinates to explain why the Borel transforms of $\psi(x,\eta)$ and $f(w)$ are given by the same hypergeometric function. 
 
 To do this, first notice that if $\eta$ and $y$ are conjugate variables under Borel transform, meaning 
-\begin{align*}
+\begin{equation*}\begin{split}
 \sum_{n\geq 0}a_n\eta^{-n-1}  \overset{\borel}{\longrightarrow} \sum_{n\geq 0}\frac{a_n}{n!} y^{n} 
-\end{align*} 
+\end{split}\end{equation*} 
 then $t=\frac{3}{2}yx^{-3/2}$ is the conjugate variable of $q=\frac{2}{3}\eta x^{3/2}$ up to correction by a factor of $\frac{3}{2}x^{-3/2}$
-\begin{align*}
+\begin{equation*}\begin{split}
 \sum_{n\geq 0}a_nq^{-n-1}=\sum_{n\geq 0}a_nx^{-3/2(n+1)}\left(\frac{2}{3}\eta\right)^{-n-1}  \overset{\borel}{\longrightarrow} \sum_{n\geq 0}\frac{a_nx^{-3/2(n+1)}}{n!}\left(\frac{3}{2}\right)^{n+1}  y^{n}=\frac{3}{2}x^{-3/2}\sum_{n\geq 0}\frac{a_n}{n!} t^{n}. 
-\end{align*}
+\end{split}\end{equation*}
 In addition, $\psi_{B,\pm}(x,y)=\frac{1}{x}\phi_{\pm}(t)$, therefore we expect that $\psi(x,\eta)=x^{1/2}\Phi(q)$. Assume that $\psi(x,y)$ is a solution of \eqref{WKB_Airy}, then $\Phi(q)$ satisfies
 \begin{equation}
 \label{eq_Phi}
@@ -2468,23 +2526,23 @@ In addition, $\psi_{B,\pm}(x,y)=\frac{1}{x}\phi_{\pm}(t)$, therefore we expect t
 \end{equation}
 
 \begin{proof}
-\begin{align*}
+\begin{equation*}\begin{split}
 &\left[\big(\tfrac{d}{dx}\big)^2 - \eta^2 x \right] \psi(x, \eta) = 0\\
 &\left[\big(\tfrac{d}{dx}\big)^2 - \eta^2 x \right] x^{1/2}\Phi(q) = 0\\
 &\frac{d}{dx}\left[\tfrac{1}{2}x^{-1/2}\Phi+x^{1/2}\tfrac{d}{dx}\Phi\right]-\eta^2x^{3/2}\Phi=0\\
 &-\tfrac{1}{4}x^{-3/2}\Phi+\tfrac{1}{2}x^{-1/2}\tfrac{d}{dx}\Phi+\tfrac{1}{2}x^{-1/2}\tfrac{d}{dx}\Phi+x^{1/2}\left(\tfrac{d}{dx}\right)^2\Phi-\eta^2x^{3/2}\Phi=0\\
 &\left[x^{1/2}\big(\tfrac{d}{dx}\big)^2+x^{-1/2}\tfrac{d}{dx}-\tfrac{1}{4}x^{-3/2}-\eta^2x^{3/2}\right]\Phi=0\\
 &\left[\big(\tfrac{d}{dx}\big)^2+x^{-1}\tfrac{d}{dx}-\tfrac{1}{4}x^{-2}-\eta^2x\right]\Phi=0
-\end{align*}
+\end{split}\end{equation*}
 \end{proof}
 Now, rewrite \eqref{eq_Phi} in the coordinates $q=\frac{2}{3}\eta x^{3/2}$: 
-\begin{align*}
+\begin{equation*}\begin{split}
 &\left[\big(\tfrac{d}{dx}\big)^2+x^{-1}\tfrac{d}{dx}-\tfrac{1}{4}x^{-2}-\eta^2x\right]\Phi=0\\
 &\left[\eta^2x\big(\tfrac{d}{dq}\big)^2+\frac{1}{2}\eta x^{-1/2}\tfrac{d}{dq}+x^{-1}\cdot\, \eta\,  x^{1/2}\tfrac{d}{dq}-\tfrac{1}{4}x^{-2}-\eta^2x\right]\Phi=0\\
 &\left[\eta^2x\big(\tfrac{d}{dq}\big)^2+\tfrac{3}{2}\eta x^{-1/2}\tfrac{d}{dq}-\tfrac{1}{4}x^{-2}-\eta^2x\right]\Phi=0\\
 &\left[\big(\tfrac{d}{dq}\big)^2+\tfrac{3}{2}\eta^{-1} x^{-3/2}\tfrac{d}{dq}-\tfrac{1}{4}\eta^{-2}x^{-3}-1\right]\Phi=0\\
 &\left[\big(\tfrac{d}{dq}\big)^2+q^{-1}\tfrac{d}{dq}-\tfrac{1}{9}q^{-2}-1\right]\Phi=0.
-\end{align*}
+\end{split}\end{equation*}
 This shows that $\Phi(q)$ satisfies the transformed Airy equation \eqref{eqn:reg-mod-bessel}. 
 
 \begin{remark}
@@ -2499,13 +2557,13 @@ We expect that the change of coordinates $q=\eta\int_0^{x}S_{-1}(x')\;dx'$ would
 %
 \section{Order shifting for integro-differential equations}\label{shifting}
 For a differential equation with a regular singularity at $\zeta = 0$, the Frobenius method typically gives a convergent power series solution in $\zeta^\rho\,\C\{\zeta\}$ for some $\rho \in \R$, which sums to a germ in $\zeta^\rho\,\mathcal{O}_{\zeta=0}$. When $\rho$ is a non-integer greater than $-1$, we can do a nice trick in this space of germs: we can pass back and forth between differential and integral equations without worrying about boundary conditions.
-\begin{prop}\label{prop:shifting}
+\begin{Proposition}\label{prop:shifting}
 Consider a germ $\phi \in \zeta^\rho\,\mathcal{O}_{\zeta=0}$. When $\rho$ is a non-integer greater than~$-1$,
 \[ \left[ \sum_{k = 0}^n \big(\tfrac{\partial}{\partial \zeta}\big)^k \circ h_k + \sum_{k = 1}^m \fracderiv{-k}{\zeta}{0} \circ h_{-k} \right] \phi = 0, \]
 if and only if
 \[ \left[ \sum_{k = 1}^n \big(\tfrac{\partial}{\partial \zeta}\big)^{k-1} \circ h_k + \sum_{k = 0}^m \fracderiv{-k-1}{\zeta}{0} \circ h_{-k} \right] \phi = 0, \]
 assuming that the coefficients $h_n, \ldots, h_{-m}$ are in $\mathcal{O}_{\zeta=0}$.
-\end{prop}
+\end{Proposition}
 \begin{proof}
 The reverse implication holds without any special condition on $\phi$, because $\tfrac{\partial}{\partial \zeta}\;\fracderiv{-1}{\zeta}{0}$ acts as the identity on functions which are locally integrable at $\zeta = 0$.
 

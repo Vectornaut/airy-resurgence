@@ -59,7 +59,7 @@ v1.7 Document class for ``Symmetry, Integrability and Geometry: Methods and Appl
 \newcommand{\theArticleName}{Article name}
 \newcommand{\Volume}{{\bf **}}
 \newcommand{\Paper}{Paper}
-\newcommand{\PaperNumber}{???}
+\newcommand{\PaperNumber}{***}
 \newcommand{\PublicationYear}{202*}
 
 
