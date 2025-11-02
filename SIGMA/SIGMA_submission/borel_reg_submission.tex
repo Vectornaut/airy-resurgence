@@ -6,7 +6,6 @@
 \fi
 
 \usepackage{url}
-\usepackage[hmargin=1.5in]{geometry}
 \usepackage[square,numbers,sort,compress]{natbib}
 \usepackage{stmaryrd} % needed for mapsto arrows in commutative diagrams
 \usepackage[scr=boondoxo, scrscaled=1.05]{mathalpha} % hat tip https://tex.stackexchange.com/a/247819
@@ -97,6 +96,10 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \newcommand{\borel}{\mathcal{B}}
 \newcommand{\aexp}{\mathrm{\ae}}
 
+% acrobat color magic, courtesy of Tex.SE user prettygully
+% http://tex.stackexchange.com/a/9266/6934
+\pdfpageattr{/Group <</S /Transparency /I true /CS /DeviceRGB>>}
+
 % % theorem environments
 % \theoremstyle{definition}
 % \newtheorem{definition}{Definition}[section]
@@ -108,7 +111,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 % \newtheorem{lemma}[definition]{Lemma}
 % \newtheorem*{notation*}{Notation}
 % \newtheorem{notation}{Notation}
-\renewcommand{\PaperNumber}{103}
+\renewcommand{\PaperNumber}{***}
 
 % colors
 \definecolor{ietcoast}{RGB}{0, 150, 173}
@@ -137,8 +140,6 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 \newtheorem{notation}{Notation}
 
 %\setcounter{tocdepth}{2}
-
-% === phase space laplace ===
 \include{figures/phase-space-laplace.tex}
 
 \begin{document}
@@ -173,11 +174,7 @@ to path={([yshift=#1]\tikztostart.east) -- ([yshift=#1]\tikztotarget.west) \tikz
 
 \ArticleDates{Received ???, in final form ????; Published online ????}
 
-
-
-\Abstract{Through Borel summation, one can often reconstruct an analytic solution of a problem from its asymptotic expansion. We view the effectiveness of Borel summation as a regularity property of the solution, and we show that the solutions of certain differential equation and integration problems are regular in this sense. By taking a geometric perspective on the Laplace and Borel transforms, we also clarify why ``Borel regular'' solutions are associated with special points on the Borel plane.
-
-The particular classes of problems we look at are level~$1$ ODEs and exponential period integrals over one-dimensional Lefschetz thimbles. To expand the variety of examples available in the literature, we treat various examples of these problems in detail.}
+\Abstract{Through Borel summation, one can often reconstruct an analytic solution of a problem from its asymptotic expansion. We view the effectiveness of Borel summation as a regularity property of the solution, and we show that the solutions of certain differential equation and integration problems are regular in this sense. By taking a geometric perspective on the Laplace and Borel transforms, we also clarify why ``Borel regular'' solutions are associated with special points on the Borel plane. The particular classes of problems we look at are level~$1$ ODEs and exponential period integrals over one-dimensional Lefschetz thimbles. To expand the variety of examples available in the literature, we treat various examples of these problems in detail.}
 
 \Keywords{Borel summation; Laplace transform; Borel transform; resurgence; translation surfaces; thimble integrals; ordinary differential equations; irregular singularities; divergent series; asymptotics; Stokes phenomena; Stokes constants; Airy function; Airy-Lucas function; generalized Airy function; modified Bessel equation; triangular cantilever}
 %Please type here List of Keywords for your article separated by semicolon.
@@ -328,9 +325,7 @@ We state our main results in Sections~\ref{sec:why_borel_ODE}--\ref{sec:why_bore
 %
 \subsubsection{Why does Borel summation work for solutions of level $1$ ODEs?}\label{sec:why_borel_ODE}
 %
-Consider a linear level~$1$ differential operator $\mathcal{P}$ of the form described in~Section~\ref{borel-reg:explanatory-power}. This operator will always have an irregular singularity at $z = \infty$.
-%
-We can find holomorphic solutions of the equation $\mathcal{P}\Phi = 0$ by taking the Borel sums of formal trans-monomial solutions. However, this only works when there is a coincidence between the exponential factor $e^{-\alpha z}$ in the formal solution, the base point $\zeta = \alpha$ we use for Borel summation, and the characteristic equation $P(-\alpha) = 0$. Why?
+Consider a linear level~$1$ differential operator $\mathcal{P}$ of the form described in~Section~\ref{borel-reg:explanatory-power}. This operator will always have an irregular singularity at $z = \infty$. We can find holomorphic solutions of the equation $\mathcal{P}\Phi = 0$ by taking the Borel sums of formal trans-monomial solutions. However, this only works when there is a coincidence between the exponential factor $e^{-\alpha z}$ in the formal solution, the base point $\zeta = \alpha$ we use for Borel summation, and the characteristic equation $P(-\alpha) = 0$. Why?
 
 A first clue is the observation that every solution we get from Borel summation is, by definition, the Laplace transform $\Phi = \laplace_{\zeta,\alpha}^\theta \phi$ of a function $\phi$ on the position domain. In fact, the differential equation $\mathcal{P}\Phi = 0$ is equivalent to an integral equation $\hat{\mathcal{P}}_\alpha \phi = 0$.
 
@@ -384,7 +379,7 @@ Once we know $\iota_a$, we can go through the steps of the Borel regularization 
 \begin{theorem}[also \ref{thm:maxim-proof}]\label{thm:maxim}
 If the integral defining $I_a$ is absolutely convergent, then $I_a$ is Borel regular. More explicitly:
 \begin{enumerate}
-\item\label{part-1} The function $I_a$ has an asymptotic expansion $\series{I}_a \defeq \aexp^{-\theta} I_a$, which lies in the space $e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Here, $\theta$ is the direction of the ray $\mathcal{J}^\theta_{\zeta, \alpha}$ that defines the thimble.
+\item\label{part-1} The function $I_a$ has an asymptotic expansion $\series{I}_a \defeq \aexp^{-\theta} I_a$, which lies in the space $e^{-z \alpha} z^{-\frac{1}{2}} \C\llbracket z^{-1}\rrbracket$. Here, $\theta$ is the direction of the ray $\mathcal{J}^\theta_{\zeta, \alpha}$ that defines the thimble.
 \item\label{part-2} The Borel transform $\series{\iota}_a \defeq \borel_\zeta \series{I}_a$ converges near $\zeta = \alpha$.
 \item\label{part-3} The sum of $\series{\iota}_a$ can be analytically continued along the ray $\mathcal{J}_{\zeta, \alpha}^\theta$. Its Laplace transform along that ray is well-defined, and equal to $I_a$.
 \end{enumerate}
@@ -534,7 +529,7 @@ A series is resurgent if its Borel transform converges to an endlessly analytica
 
 The formal solutions of a level~$1$ ODE are always resurgent series~\cite[Proposition~2.2.1]{EcalleIII}. \'{E}calle proved this by using formal perturbation theory to solve a corresponding integral equation in the position domain. Using the ``formalism of singularities'' to understand how the singularities of the perturbative solution would propagate from one order of perturbation to the next, \'{E}calle showed that the perturbation series would converge to an endlessly analytically continuable function. Loday-Richaud and Remy went on to show that this function always has a well-defined Laplace transform, so the corresponding formal solution in the frequency domain is Borel summable~\cite{loday-Remy2011}. Malgrange got similar results by working with differential equations, rather than integral equations, on the position domain~\cite{malgrange--fourier}.
 
-\'{E}calle's theory not only shed light on Borel summation, but also generalized it. \'{E}calle introduced generalized resummation methods that use ``well-behaved averages'' to handle infinite sequences of singularities along the summation axis~\cite{EcalleI,Écalle-dulac,menous-mould,menous_phdthesis}.
+\'{E}calle's theory not only shed light on Borel summation, but also generalized it. \'{E}calle introduced generalized resummation methods that use ``well-behaved averages'' to handle infinite sequences of singularities along the summation axis~\cite{EcalleI,ecalle-dulac,menous-mould,menous_phdthesis}.
 %
 \subsubsection{Solving Riemann--Hilbert problems}
 %
@@ -1123,8 +1118,8 @@ Let $z$ be a coordinate on the cotangent fiber over $\zeta=0$, and $\series{\Phi
     \begin{split}
 \borel_\zeta(\series{\Phi}\series{\Psi})&=\borel_\zeta\left(\sum_{n=0}^\infty\sum_{j=0}^na_jb_{n-j}z^{-n}\right)\\
 &=a_0b_0\delta +\sum_{n=1}^\infty\sum_{j=0}^na_jb_{n-j}\frac{\zeta^{n-1}}{(n-1)!}\\
-&=a_0b_0\delta+a_0\sum_{n=1}^\infty b_{n}\frac{\zeta^{n-1}}{(n-1)!}+b_0\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!}+\\
-&\quad +\sum_{n=1}^\infty\sum_{j=1}^{n-1}a_jb_{n-j}\left[\frac{\zeta^{j-1}}{(j-1)!} \ast_\zeta \frac{\zeta^{n-j-1}}{(n-j-1)!}\right]\\
+&=a_0b_0\delta+a_0\sum_{n=1}^\infty b_{n}\frac{\zeta^{n-1}}{(n-1)!}+b_0\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!} \\
+&\qquad + \sum_{n=1}^\infty\sum_{j=1}^{n-1}a_jb_{n-j}\left[\frac{\zeta^{j-1}}{(j-1)!} \ast_\zeta \frac{\zeta^{n-j-1}}{(n-j-1)!}\right]\\
 &=\left(a_0\delta+\sum_{n=1}^\infty a_n\frac{\zeta^{n-1}}{(n-1)!}\right)\ast_\zeta\left(b_0\delta+\sum_{n=1}^\infty b_n\frac{\zeta^{n-1}}{(n-1)!}\right)\\
 &=\borel_\zeta\series{\Phi} \ast_\zeta \borel_\zeta\series{\Psi}\,.
 \end{split}
@@ -1492,7 +1487,7 @@ We will now prove that $I_a$ is Borel regular.
 \begin{theorem}[restatement of~\ref{thm:maxim}]\label{thm:maxim-proof}
 If the integral defining $I_a$ is absolutely convergent, then $I_a$ is Borel regular. More explicitly:
 \begin{enumerate}
-\item\label{part-1-prf} The function $I_a$ has an asymptotic expansion $\series{I}_a \defeq \aexp^{-\theta} I_a$, which lies in the space $e^{-z \alpha} z^{-1/2} \C\llbracket z^{-1}\rrbracket$. Here, $\theta$ is the direction of the ray $\mathcal{J}^\theta_{\zeta, \alpha}$ that defines the thimble and $\alpha=f(a)$.
+\item\label{part-1-prf} The function $I_a$ has an asymptotic expansion $\series{I}_a \defeq \aexp^{-\theta} I_a$, which lies in the space $e^{-z \alpha} z^{-\frac{1}{2}} \C\llbracket z^{-1}\rrbracket$. Here, $\theta$ is the direction of the ray $\mathcal{J}^\theta_{\zeta, \alpha}$ that defines the thimble and $\alpha=f(a)$.
 \item\label{part-2-prf} The Borel transform $\series{\iota}_a \defeq \borel_\zeta \series{I}_a$ converges near $\zeta = \alpha$.
 \item\label{part-3-prf} The sum of $\series{\iota}_a$ can be analytically continued along the ray $\mathcal{J}_{\zeta, \alpha}^\theta$. Its Laplace transform along that ray is well-defined, and equal to $I_a$.
 \end{enumerate}
@@ -1649,7 +1644,7 @@ where $\mathcal{C}^\theta_j$ is the contour that passes through the point $u = \
 \captionof{figure}{The integration contours $\mathcal{C}^{\pi/8}_1, \ldots, \mathcal{C}^{\pi/8}_4$ for the Airy--Lucas functions with $n=5$. The dark and light thimbles are the preimages of the rays $\mathcal{J}^{\pi/8}_{\zeta, 1}$ and $\mathcal{J}^{\pi/8}_{\zeta, -1}$, respectively.}\label{fig:thimble_n_5}
 \end{center}
 \subsubsection{Rewriting as a modified Bessel $\frac{m}{n}$ equation}
-We can distil the most interesting parts of the Airy-Lucas function by writing
+We can distill the most interesting parts of the Airy-Lucas function by writing
 \[ \widehat{\Ai}^{(j)}_{n, m-1}(y) = \frac{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)}{n\pi} \left\{\begin{array}{ll}i & j \text{ odd} \\ 1 & j \text{ even}\end{array}\right\}\,y^{{m/2}}\,K^{(j)}_{m/n}\big(\tfrac{2}{n} y^{n/2}\big), \]
 where
 \begin{equation}\label{integral:mod-bessel-rational-AL}
@@ -1906,11 +1901,11 @@ Setting $u = \cosh(t/n)$ and recalling that
 \sinh(m\tau) & = U_{m-1}(\cosh(\tau)) \sinh(\tau),
 \end{split}\end{equation*}
 we can rewrite formula~\eqref{integral:mod-bessel-rational-AL} as
-\begin{equation}\begin{split}
+\begin{flalign}
 \notag K^{(j)}_{m/n}(z) & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_\gamma \exp\left[z T_n(u)\right]\,U_{m-1}(u)\,du \\
 \notag & = \frac{n}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z \cosh(t)\right]\,U_{m-1}(\cosh(t/n))\,\sinh(t/n)\,d(t/n) \\
 \label{integral:mod-bessel-lifted} & = \frac{1}{2 \sinh\big(\tfrac{m}{n}\,i\pi\big)} \int_{\mathcal{C}^\theta_j} \exp\left[z \cosh(t)\right]\,\sinh\big(\tfrac{m}{n}\,t\big)\,dt,
-\end{split}\end{equation}
+\end{flalign}
 using the path $\mathcal{C}^\theta_j$ described below.
 \begin{center}
 \begin{tabular}{l|l|l}
@@ -1961,10 +1956,10 @@ K_0^{(1)}(z) & = \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[z \cosh(w + i\
 & = \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,w\,dw + \frac{1}{2\pi i} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,i\pi\,dw.
 \end{split}\end{equation*}
 The first integrand is odd with respect to $w = 0$, so it vanishes, leaving
-\begin{equation}\begin{split}
+\begin{flalign}
 K_0^{(1)}(z) & = \frac{1}{2} \int_{-\infty}^\infty \exp\left[-z \cosh(w)\right]\,dw \notag \\
 & = \int_0^\infty \exp\left[-z \cosh(w)\right]\,dw. \label{int:k0_cosh}
-\end{split}\end{equation}
+\end{flalign}
 This is a special case of formula~10.32.9 from \cite{dlmf}. Rolling the $t$ plane up into a cylinder, parameterized by the coordinate $s = e^t$, we can express $K_0^{(1)}(z)$ as an exponential period:
 \[ K_0^{(1)}(z) = \int_{\mathcal{J}^0_{s, 1}} \exp\left[-z\,\tfrac{1}{2}\left(s + \tfrac{1}{s}\right)\right]\,\frac{ds}{s}. \]
 
